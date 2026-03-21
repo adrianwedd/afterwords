@@ -111,7 +111,50 @@ VOICES = {
         "Hello, my name is Obi. I talk like this. Hello, my name is Obi. I shit like "
         "this. That is it, that is it.",
     ),
+    "snape": (
+        os.path.join(_VOICES_DIR, "snape-ref.wav"),
+        "There will be no foolish wand waving or silly incantations in this class. "
+        "As such, I don't expect many of you to appreciate the subtle science and "
+        "exact art that is potion making.",
+    ),
+    "loki": (
+        os.path.join(_VOICES_DIR, "loki-ref.wav"),
+        "Is not this simpler? Is this not your natural state? It's the unspoken "
+        "truth of humanity that you crave subjugation.",
+    ),
+    "spock": (
+        os.path.join(_VOICES_DIR, "spock-ref.wav"),
+        "The most curious creature, Captain. Its trilling seems to have a "
+        "tranquilizing effect on the human nervous system. Fortunately, of "
+        "course, I am immune to its",
+    ),
+    "bardem": (
+        os.path.join(_VOICES_DIR, "bardem-ref.wav"),
+        "Let's not negotiate like a contract. I came over here with no subterfuge "
+        "and presented my best offer. Now I hope you will discuss it and give me "
+        "the pleasure to take you with me to Oviedo.",
+    ),
+    "depp": (
+        os.path.join(_VOICES_DIR, "depp-ref.wav"),
+        "In a mirror and you see the back of it, you like it? I might get a little "
+        "tinge of excitement. I see. There's got to be some part of your body that "
+        "you like. Your shoes? That's not a part of your body.",
+    ),
 }
+
+# Auto-discover voices from JSON profiles created by clone-voice.sh
+import glob as _glob
+import json as _json
+for _profile in _glob.glob(os.path.join(_VOICES_DIR, "*.json")):
+    try:
+        _p = _json.loads(open(_profile).read())
+        _name = os.path.splitext(os.path.basename(_profile))[0].replace("-profile", "")
+        _ref = os.path.join(_VOICES_DIR, f"{_name}-ref.wav")
+        if _name not in VOICES and os.path.exists(_ref) and _p.get("reference_text"):
+            VOICES[_name] = (_ref, _p["reference_text"])
+    except Exception:
+        pass
+
 DEFAULT_VOICE = "galadriel"
 
 # Pre-loaded model — avoids 30s cold start per request
@@ -193,6 +236,8 @@ def synthesize(
     """Generate speech from text using cloned voice, return WAV audio."""
     if not text.strip():
         return JSONResponse({"error": "text is empty"}, status_code=400)
+    if len(text) > 5000:
+        return JSONResponse({"error": "text too long (max 5000 chars)"}, status_code=400)
 
     if not _ready:
         return JSONResponse({"error": "server warming up, try again shortly"}, status_code=503)
@@ -251,22 +296,25 @@ def synthesize(
         )
     except Exception as exc:
         log.error("synthesis failed: %s", exc, exc_info=True)
-        return JSONResponse({"error": str(exc)}, status_code=500)
+        return JSONResponse({"error": "synthesis failed"}, status_code=500)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="SPARK TTS server (MLX)")
+    parser = argparse.ArgumentParser(description="Afterwords TTS server (MLX)")
     parser.add_argument("--port", type=int, default=7860)
-    parser.add_argument("--host", default="0.0.0.0")
+    parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--no-warmup", action="store_true", help="Skip warmup synthesis")
     args = parser.parse_args()
 
-    for vname, (vpath, _) in VOICES.items():
-        if not os.path.exists(vpath):
-            log.error("Reference audio not found for %s: %s", vname, vpath)
-            raise SystemExit(1)
+    missing = [v for v, (p, _) in VOICES.items() if not os.path.exists(p)]
+    for vname in missing:
+        log.warning("Reference audio not found for '%s' — skipping", vname)
+        del VOICES[vname]
+    if not VOICES:
+        log.error("No voices available — add ref WAVs to voices/")
+        raise SystemExit(1)
 
-    log.info("SPARK TTS server starting on %s:%d", args.host, args.port)
+    log.info("Afterwords TTS server starting on %s:%d", args.host, args.port)
     log.info("Model: %s", MODEL_ID)
     log.info("Voices: %s (default: %s)", ", ".join(VOICES), DEFAULT_VOICE)
 

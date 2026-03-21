@@ -44,8 +44,8 @@ Edit `DEFAULT_VOICE` in `server.py` and restart:
 DEFAULT_VOICE = "galadriel"  # ← your preferred voice
 
 # Restart:
-launchctl unload ~/Library/LaunchAgents/com.claude-voice.tts-server.plist
-launchctl load ~/Library/LaunchAgents/com.claude-voice.tts-server.plist
+launchctl unload ~/Library/LaunchAgents/com.afterwords.tts-server.plist
+launchctl load ~/Library/LaunchAgents/com.afterwords.tts-server.plist
 ```
 
 Or request a specific voice per-request:
@@ -122,13 +122,12 @@ qwen3-tts-server/
 ├── setup.sh              ← one-command setup
 ├── clone-voice.sh        ← add more voices from YouTube
 ├── server.py             ← multi-voice TTS server
-├── tts.py                ← CLI tool (standalone, no server)
 ├── voices/
 │   ├── galadriel-ref.wav ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav  ← (Scarlett Johansson, Her)
 │   ├── avasarala-ref.wav ← (Shohreh Aghdashloo, The Expanse)
 │   ├── vesper-ref.wav    ← (Eva Green, Casino Royale)
-│   └── ...               ← 12 voices included
+│   └── ...               ← 17 voices included
 └── README.md
 
 ~/.claude/
@@ -139,7 +138,7 @@ qwen3-tts-server/
     └── strip-markdown.py ← clean text for TTS
 
 ~/Library/LaunchAgents/
-└── com.claude-voice.tts-server.plist  ← auto-start on login
+└── com.afterwords.tts-server.plist  ← auto-start on login
 ```
 
 ## Included Voices
@@ -156,6 +155,11 @@ qwen3-tts-server/
 | claudia | Claudia Black, *Dragon Age* | Australian, husky |
 | eartha | Eartha Kitt, interview | Passionate purr |
 | tilda | Tilda Swinton, interview | Crisp, dry wit |
+| snape | Alan Rickman, *Harry Potter* | Velvet menace, slow burn |
+| loki | Tom Hiddleston, *Avengers* | Theatrical, commanding |
+| spock | Leonard Nimoy, *Star Trek* | Measured, logical deadpan |
+| bardem | Javier Bardem, *Vicky Cristina Barcelona* | Warm, seductive Spanish |
+| depp | Johnny Depp, interview | Languid, charming |
 | vixen | Original reference | Children's poem reader |
 | obi | Direct recording | 7-year-old Australian |
 
@@ -163,7 +167,7 @@ qwen3-tts-server/
 
 | Symptom | Fix |
 |---------|-----|
-| No voice after Claude responds | `curl localhost:7860/health` — if dead: `launchctl load ~/Library/LaunchAgents/com.claude-voice.tts-server.plist` |
+| No voice after Claude responds | `curl localhost:7860/health` — if dead: `launchctl load ~/Library/LaunchAgents/com.afterwords.tts-server.plist` |
 | "warming up" 503 | Wait ~30s after restart for model load + warmup |
 | Voice sounds wrong/garbled | Re-clone with a better reference clip; verify transcript accuracy |
 | 40+ seconds per request | Restart the server (model may be reloading per-request) |

@@ -5,6 +5,7 @@ __pycache__/
 *.m4a
 *.DS_Store
 voices/*-ref.wav
+voices/*.json
 tts.py
 AB.m4a
 vixen-*.wav

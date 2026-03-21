@@ -341,10 +341,10 @@ while true; do
     ENCODED=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$LINE" 2>/dev/null) || continue
     STAMP=$(date +%Y%m%d-%H%M%S)
 
-    # Per-project voice: .claude-voice file in cwd, else server default
+    # Per-project voice: .afterwords file in cwd, else server default
     VOICE=""
-    if [ -f ".claude-voice" ]; then
-        VOICE=$(head -1 .claude-voice 2>/dev/null | tr -d '[:space:]')
+    if [ -f ".afterwords" ]; then
+        VOICE=$(head -1 .afterwords 2>/dev/null | tr -d '[:space:]')
     fi
     if [ -z "$VOICE" ]; then
         VOICE=$(curl -s --max-time 2 "${TTS_URL%/synthesize}/health" 2>/dev/null \
@@ -422,7 +422,7 @@ echo
 # ── Step 6: launchd service ────────────────────────────────────────
 info "Setting up auto-start service..."
 
-PLIST_NAME="com.claude-voice.tts-server"
+PLIST_NAME="com.afterwords.tts-server"
 PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
 VENV_PYTHON="${SCRIPT_DIR}/.venv/bin/python3"
 
