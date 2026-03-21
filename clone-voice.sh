@@ -14,13 +14,16 @@ cd "$SCRIPT_DIR"
 source .venv/bin/activate 2>/dev/null || { echo "Run setup.sh first"; exit 1; }
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[0;33m'
-CYAN='\033[0;36m'; BOLD='\033[1m'; NC='\033[0m'
+CYAN='\033[0;36m'; DIM='\033[2m'; BOLD='\033[1m'; NC='\033[0m'
 
-info()  { echo -e "${CYAN}▸${NC} $*"; }
-ok()    { echo -e "${GREEN}✓${NC} $*"; }
-warn()  { echo -e "${YELLOW}⚠${NC} $*"; }
-fail()  { echo -e "${RED}✗${NC} $*"; exit 1; }
-ask()   { echo -en "${BOLD}$*${NC} "; }
+info()  { echo -e "  ${CYAN}▸${NC} $*"; }
+ok()    { echo -e "  ${GREEN}✓${NC} $*"; }
+warn()  { echo -e "  ${YELLOW}⚠${NC} $*"; }
+fail()  { echo -e "  ${RED}✗${NC} $*"; exit 1; }
+ask()   { echo -en "  ${BOLD}$*${NC} "; }
+rule()  { echo -e "${DIM}  ─────────────────────────────────────────${NC}"; }
+
+_T0=$(date +%s)
 
 YT_URL="${1:-}"
 VOICE_NAME="${2:-}"
@@ -162,9 +165,13 @@ else
     warn "Server not responding at localhost:7860. Start it with: python server.py"
 fi
 
+_ELAPSED=$(( $(date +%s) - _T0 ))
 echo
-echo -e "${GREEN}━━━ Voice cloned ━━━${NC}"
+rule
 echo
-echo -e "  To use: ${CYAN}curl \"http://localhost:7860/synthesize?text=Hello&voice=${VOICE_NAME}\"${NC}"
-echo -e "  To make default: edit ${CYAN}DEFAULT_VOICE${NC} in server.py and restart"
+echo -e "  ${GREEN}${BOLD}✓ ${VOICE_NAME} cloned${NC}  ${DIM}(${_ELAPSED}s)${NC}"
+echo
+echo -e "  ${DIM}use now${NC}        echo \"${VOICE_NAME}\" > .afterwords"
+echo -e "  ${DIM}make default${NC}   edit DEFAULT_VOICE in server.py"
+echo -e "  ${DIM}test${NC}           curl \"localhost:7860/synthesize?text=Hello&voice=${VOICE_NAME}\" -o test.wav && afplay test.wav"
 echo

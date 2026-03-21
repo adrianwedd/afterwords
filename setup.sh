@@ -11,15 +11,17 @@
 #
 set -euo pipefail
 
-# ── Colours ────────────────────────────────────────────────────────
+# ── Colours & output helpers ────────────────────────────────────────
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[0;33m'
-CYAN='\033[0;36m'; BOLD='\033[1m'; NC='\033[0m'
+CYAN='\033[0;36m'; DIM='\033[2m'; BOLD='\033[1m'; NC='\033[0m'
 
-info()  { echo -e "${CYAN}▸${NC} $*"; }
-ok()    { echo -e "${GREEN}✓${NC} $*"; }
-warn()  { echo -e "${YELLOW}⚠${NC} $*"; }
-fail()  { echo -e "${RED}✗${NC} $*"; exit 1; }
-ask()   { echo -en "${BOLD}$*${NC} "; }
+info()  { echo -e "  ${CYAN}▸${NC} $*"; }
+ok()    { echo -e "  ${GREEN}✓${NC} $*"; }
+warn()  { echo -e "  ${YELLOW}⚠${NC} $*"; }
+fail()  { echo -e "  ${RED}✗${NC} $*"; exit 1; }
+ask()   { echo -en "  ${BOLD}$*${NC} "; }
+step()  { echo; echo -e "${BOLD}$1${NC}  ${DIM}$2${NC}"; }
+rule()  { echo -e "${DIM}  ─────────────────────────────────────────${NC}"; }
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
@@ -29,11 +31,13 @@ TMPFILES=()
 cleanup() { rm -f "${TMPFILES[@]}" 2>/dev/null; }
 trap cleanup EXIT
 
+# ── Timing ─────────────────────────────────────────────────────────
+_T0=$(date +%s)
+
 # ── Step 0: Preflight checks ──────────────────────────────────────
 echo
-echo -e "${BOLD}Voice Cloning Setup for Claude Code${NC}"
-echo -e "Gives Claude a cloned voice from a YouTube clip."
-echo
+echo -e "  ${BOLD}afterwords${NC}  ${DIM}— give Claude Code a voice${NC}"
+rule
 
 # Apple Silicon check (allow Rosetta — MLX still works via arm64 Python)
 ARCH=$(sysctl -n machdep.cpu.brand_string 2>/dev/null || uname -m)
@@ -99,10 +103,7 @@ if ! command -v lame &>/dev/null; then
     fi
 fi
 
-echo
-
-# ── Step 1: Python virtual environment ─────────────────────────────
-info "Setting up Python environment..."
+step "1/5" "Python environment"
 if [ -d ".venv" ]; then
     # Verify venv is functional
     if ! ".venv/bin/python3" -c "pass" 2>/dev/null; then
@@ -124,7 +125,7 @@ pip install --quiet mlx-audio soundfile fastapi uvicorn noisereduce faster-whisp
 ok "Python packages installed"
 echo
 
-# ── Step 2: Voice source ──────────────────────────────────────────
+step "2/5" "Voice source"
 mkdir -p voices
 
 if [ -z "$(ls voices/*-ref.wav 2>/dev/null)" ]; then
@@ -221,8 +222,7 @@ else
 fi
 echo
 
-# ── Step 3: Server check ──────────────────────────────────────────
-info "Checking server voice registry..."
+step "3/5" "Server check"
 VOICE_FILES=$(ls voices/*-ref.wav 2>/dev/null | wc -l | tr -d ' ')
 ok "${VOICE_FILES} voice file(s) in voices/"
 if grep -q "^VOICES = {" server.py 2>/dev/null; then
@@ -232,8 +232,7 @@ else
 fi
 echo
 
-# ── Step 4: Claude Code hooks ─────────────────────────────────────
-info "Setting up Claude Code voice hook..."
+step "4/5" "Claude Code hooks"
 
 HOOKS_DIR="$HOME/.claude/hooks"
 mkdir -p "$HOOKS_DIR"
@@ -375,7 +374,7 @@ chmod +x "$HOOKS_DIR/tts-worker.sh"
 
 ok "Hook scripts installed (backups saved as *.bak)"
 
-# ── Step 5: Wire into Claude Code settings ─────────────────────────
+# Wire into Claude Code settings
 SETTINGS="$HOME/.claude/settings.json"
 mkdir -p "$HOME/.claude"
 
@@ -419,8 +418,7 @@ SETTINGSEOF
 fi
 echo
 
-# ── Step 6: launchd service ────────────────────────────────────────
-info "Setting up auto-start service..."
+step "5/5" "Auto-start service"
 
 PLIST_NAME="com.afterwords.tts-server"
 PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
@@ -475,16 +473,20 @@ else
     echo -e "  Check: ${CYAN}curl http://localhost:7860/health${NC}"
     echo -e "  Logs:  ${CYAN}tail -f /tmp/claude-tts-server.log${NC}"
 fi
+_ELAPSED=$(( $(date +%s) - _T0 ))
 echo
-echo -e "  ${BOLD}TTS Server:${NC}    http://localhost:7860"
-echo -e "  ${BOLD}Test:${NC}          curl \"http://localhost:7860/synthesize?text=Hello\" -o test.wav && afplay test.wav"
-echo -e "  ${BOLD}Logs:${NC}          tail -f /tmp/claude-tts-server.log"
-echo -e "  ${BOLD}Archives:${NC}      ls ~/.claude/tts-archive/"
+rule
+echo
+echo -e "  ${GREEN}${BOLD}✓ afterwords is ready${NC}  ${DIM}(${_ELAPSED}s)${NC}"
+echo
+echo -e "  ${DIM}server${NC}      http://localhost:7860"
+echo -e "  ${DIM}logs${NC}        tail -f /tmp/claude-tts-server.log"
+echo -e "  ${DIM}archives${NC}    ls ~/.claude/tts-archive/"
 echo
 echo -e "  Claude Code will now ${BOLD}speak every response${NC}."
-echo -e "  Pair with ${CYAN}/voice${NC} (hold Space to dictate) for full voice conversations."
+echo -e "  Pair with ${CYAN}/voice${NC} for full voice conversations."
 echo
-echo -e "  To add more voices:  ${CYAN}bash clone-voice.sh${NC}"
-echo -e "  To change the voice: edit ${CYAN}DEFAULT_VOICE${NC} in server.py and restart"
-echo -e "  To stop the voice:   ${CYAN}launchctl unload ~/Library/LaunchAgents/${PLIST_NAME}.plist${NC}"
+echo -e "  ${DIM}add voices${NC}     bash clone-voice.sh"
+echo -e "  ${DIM}per-project${NC}    echo \"snape\" > .afterwords"
+echo -e "  ${DIM}stop voice${NC}     launchctl unload ~/Library/LaunchAgents/${PLIST_NAME}.plist"
 echo

@@ -314,15 +314,15 @@ def main():
         log.error("No voices available — add ref WAVs to voices/")
         raise SystemExit(1)
 
-    log.info("Afterwords TTS server starting on %s:%d", args.host, args.port)
-    log.info("Model: %s", MODEL_ID)
-    log.info("Voices: %s (default: %s)", ", ".join(VOICES), DEFAULT_VOICE)
+    log.info("afterwords starting on %s:%d", args.host, args.port)
+    log.info("model: %s", MODEL_ID)
+    log.info("voices: %d loaded (default: %s)", len(VOICES), DEFAULT_VOICE)
 
     global _ready
     if not args.no_warmup:
         _warmup()
     _ready = True
-    log.info("Server ready — accepting requests")
+    log.info("ready — %d voices, accepting requests", len(VOICES))
 
     import uvicorn
     uvicorn.run(app, host=args.host, port=args.port)
