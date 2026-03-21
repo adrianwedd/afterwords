@@ -11,7 +11,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
-source .venv/bin/activate 2>/dev/null || { echo "Run setup.sh first"; exit 1; }
+source .venv/bin/activate 2>/dev/null || { echo -e "\033[0;31m✗\033[0m Run setup.sh first"; exit 1; }
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[0;33m'
 CYAN='\033[0;36m'; DIM='\033[2m'; BOLD='\033[1m'; NC='\033[0m'
@@ -114,6 +114,8 @@ print(" ".join(seg.text.strip() for seg in segments))
 PYEOF
 ) || fail "Transcription failed"
 
+[ -z "$(echo "$REF_TEXT" | tr -d '[:space:]')" ] && fail "Transcript is empty — the clip may not contain speech. Try a different segment."
+
 if ! $AUTO_YES; then
     echo
     echo -e "  ${BOLD}Transcript:${NC}"
@@ -148,7 +150,8 @@ if curl -s --max-time 120 \
     FSIZE=$(stat -f%z "$TEST_WAV" 2>/dev/null || echo 0)
     if [ "$FSIZE" -gt 1000 ]; then
         ok "Synthesis works!"
-        afplay "$TEST_WAV" 2>/dev/null &
+        afplay "$TEST_WAV" 2>/dev/null
+
     elif [ "$FSIZE" -gt 0 ]; then
         # Might be a JSON error response
         BODY=$(cat "$TEST_WAV" 2>/dev/null)
@@ -156,13 +159,13 @@ if curl -s --max-time 120 \
             ERR=$(echo "$BODY" | jq -r '.error')
             warn "Server returned error: ${ERR}"
         else
-            warn "Server returned small file (${FSIZE} bytes). Voice may need adding to VOICES in server.py."
+            warn "Server returned small file. Restart the server to pick up new voices."
         fi
     else
         warn "Server returned empty response."
     fi
 else
-    warn "Server not responding at localhost:7860. Start it with: python server.py"
+    warn "Server not responding. Restart: launchctl unload ~/Library/LaunchAgents/com.afterwords.tts-server.plist && launchctl load ~/Library/LaunchAgents/com.afterwords.tts-server.plist"
 fi
 
 _ELAPSED=$(( $(date +%s) - _T0 ))
@@ -172,6 +175,6 @@ echo
 echo -e "  ${GREEN}${BOLD}✓ ${VOICE_NAME} cloned${NC}  ${DIM}(${_ELAPSED}s)${NC}"
 echo
 echo -e "  ${DIM}use now${NC}        echo \"${VOICE_NAME}\" > .afterwords"
-echo -e "  ${DIM}make default${NC}   edit DEFAULT_VOICE in server.py"
+echo -e "  ${DIM}make default${NC}   edit DEFAULT_VOICE in server.py + restart"
 echo -e "  ${DIM}test${NC}           curl \"localhost:7860/synthesize?text=Hello&voice=${VOICE_NAME}\" -o test.wav && afplay test.wav"
 echo

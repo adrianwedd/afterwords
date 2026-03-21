@@ -1,7 +1,7 @@
-"""Qwen3-TTS MLX server for SPARK robot.
+"""Afterwords — local voice-cloning TTS server for Claude Code.
 
-Runs on M1.local:7860, serves WAV audio over HTTP.
-Used for VIXEN persona voice (cloned from reference audio).
+Zero-shot voice cloning via Qwen3-TTS on Apple Silicon (MLX).
+Serves WAV audio over HTTP. Auto-discovers voices from voices/ directory.
 
 Usage:
     source .venv/bin/activate
@@ -33,7 +33,7 @@ warnings.filterwarnings("ignore", message=".*incorrect regex pattern.*")
 logging.getLogger("transformers.modeling_utils").setLevel(logging.ERROR)
 logging.getLogger("transformers.tokenization_utils_base").setLevel(logging.ERROR)
 
-app = FastAPI(title="SPARK TTS (MLX)")
+app = FastAPI(title="Afterwords TTS")
 
 MODEL_ID = "mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit"
 _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")

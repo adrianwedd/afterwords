@@ -37,22 +37,29 @@ The script downloads the audio, extracts a 15-second segment, denoises it, trans
 
 ## Switching Voices
 
-Edit `DEFAULT_VOICE` in `server.py` and restart:
+**Per-project** — drop a `.afterwords` file in any repo:
 
 ```bash
-# In server.py, change:
-DEFAULT_VOICE = "galadriel"  # ← your preferred voice
+echo "snape" > .afterwords     # this project uses Snape
+echo "galadriel" > .afterwords # this one uses Galadriel
+```
 
-# Restart:
+The hook reads this before each synthesis. No server restart needed.
+
+**Global default** — edit `DEFAULT_VOICE` in `server.py` and restart:
+
+```bash
 launchctl unload ~/Library/LaunchAgents/com.afterwords.tts-server.plist
 launchctl load ~/Library/LaunchAgents/com.afterwords.tts-server.plist
 ```
 
-Or request a specific voice per-request:
+**Per-request:**
 
 ```bash
 curl "http://localhost:7860/synthesize?text=Hello&voice=samantha" -o hello.wav
 ```
+
+Newly cloned voices are auto-discovered on server restart — no code edits needed to register them. Voice reference files are created during setup (not shipped in the repo).
 
 ## Architecture
 
@@ -62,7 +69,7 @@ curl "http://localhost:7860/synthesize?text=Hello&voice=samantha" -o hello.wav
 │                                                             │
 │  ┌─────────────────────────┐                                │
 │  │  Qwen3-TTS Server       │  ← MLX 8-bit, ~6 GB peak      │
-│  │  localhost:7860          │  ← 12 voice profiles           │
+│  │  localhost:7860          │  ← 17 voice profiles           │
 │  │  /synthesize?text=...    │  ← ~20s per sentence           │
 │  └─────────┬───────────────┘                                │
 │            │                                                │
@@ -106,7 +113,7 @@ Claude Code's [Stop hook](https://docs.anthropic.com/en/docs/claude-code/hooks) 
 
 ### The Queue
 
-Fast Claude conversations generate responses faster than TTS can synthesise. The worker processes a queue (max 10 entries), trimming oldest entries when it overflows. Each response is also archived as MP3 in `~/.claude/tts-archive/`.
+Fast Claude conversations generate responses faster than TTS can synthesise. The worker processes a queue (max 10 entries), trimming oldest entries when it overflows. Each response is also archived as MP3 in `~/.claude/tts-archive/` (requires `lame`).
 
 ## Requirements
 
@@ -173,13 +180,33 @@ qwen3-tts-server/
 | 40+ seconds per request | Restart the server (model may be reloading per-request) |
 | `/voice` not working | Enable with `/voice` command in Claude Code; requires Claude.ai account |
 | Hook not firing | Open `/hooks` in Claude Code to verify; or restart session |
+| New voice not available | Restart the server — voices are discovered on startup |
+| Port 7860 already in use | Another instance is running, or another app uses the port |
+| Model download fails | Check network; retry `python server.py` manually |
+| MP3 archives missing | Install `lame` via `brew install lame` |
+
+## Stopping / Uninstalling
+
+```bash
+# Stop the TTS server
+launchctl unload ~/Library/LaunchAgents/com.afterwords.tts-server.plist
+
+# Remove the auto-start service
+rm ~/Library/LaunchAgents/com.afterwords.tts-server.plist
+
+# Remove the Claude Code hook (edit settings.json, remove the Stop hook entry)
+# Or simply delete the hook scripts:
+rm ~/.claude/hooks/tts-hook.sh ~/.claude/hooks/tts-worker.sh ~/.claude/hooks/strip-markdown.py
+```
+
+Setup is safe to re-run if anything breaks.
 
 ## Performance
 
 On 8 GB M1 MacBook Air:
 - Model load: ~5s (cached) / ~5 min (first run, downloading 1.5 GB)
 - Warmup synthesis: ~15s
-- Per request: ~15s fixed overhead + ~0.5x real-time (~20s for a 2-sentence response)
+- Per request: ~15s fixed overhead + ~0.5x real-time (~20s typical)
 - Peak memory: ~6 GB
 - Adding voices: zero extra memory (each is just a 700 KB WAV)
 

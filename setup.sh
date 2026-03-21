@@ -121,7 +121,7 @@ fi
 
 source .venv/bin/activate
 pip install --quiet --upgrade pip
-pip install --quiet mlx-audio soundfile fastapi uvicorn noisereduce faster-whisper
+pip install --quiet -r requirements.txt
 ok "Python packages installed"
 echo
 
@@ -452,7 +452,7 @@ launchctl load "$PLIST_PATH"
 ok "TTS server will auto-start on login"
 echo
 
-# ── Step 7: Verify ────────────────────────────────────────────────
+# ── Verify ────────────────────────────────────────────────────────
 info "Waiting for server..."
 SERVER_OK=false
 for i in $(seq 1 60); do
@@ -487,6 +487,6 @@ echo -e "  Claude Code will now ${BOLD}speak every response${NC}."
 echo -e "  Pair with ${CYAN}/voice${NC} for full voice conversations."
 echo
 echo -e "  ${DIM}add voices${NC}     bash clone-voice.sh"
-echo -e "  ${DIM}per-project${NC}    echo \"snape\" > .afterwords"
+echo -e "  ${DIM}per-project${NC}    echo \"snape\" > .afterwords  ${DIM}(override voice per repo)${NC}"
 echo -e "  ${DIM}stop voice${NC}     launchctl unload ~/Library/LaunchAgents/${PLIST_NAME}.plist"
 echo
