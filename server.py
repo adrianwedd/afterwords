@@ -320,7 +320,12 @@ def main():
 
     global _ready
     if not args.no_warmup:
-        _warmup()
+        try:
+            _warmup()
+        except Exception as exc:
+            log.error("Failed to load model: %s", exc)
+            log.error("Check your network connection — first run downloads ~1.5 GB")
+            raise SystemExit(1)
     _ready = True
     log.info("ready — %d voices, accepting requests", len(VOICES))
 
