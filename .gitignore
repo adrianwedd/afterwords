@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+*.wav
+*.m4a
+*.DS_Store
+voices/*-ref.wav
+tts.py
+AB.m4a
+vixen-*.wav
+vixen-*.txt
+vixen-*.m4a

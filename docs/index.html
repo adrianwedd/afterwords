@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afterwords — Give Claude Code a Voice</title>
+  <meta name="description" content="Clone any voice from a 15-second YouTube clip and hear Claude Code speak every response. Runs locally on an 8 GB M1 Mac. No cloud. No subscription.">
+  <meta property="og:title" content="Afterwords — Give Claude Code a Voice">
+  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 17 voices included. No cloud dependency.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://adrianwedd.github.io/afterwords/">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://adrianwedd.github.io/afterwords/">
+  <style>
+    :root {
+      --surface: #1a181c;
+      --surface-alt: #24212a;
+      --surface-raised: #2e2a34;
+      --text: #e2ddd8;
+      --text-muted: #968e96;
+      --accent: #c48b6e;
+      --accent-hover: #d49e82;
+      --accent-dim: rgba(196, 139, 110, 0.12);
+      --border: #3d3844;
+      --sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
+      --max-w: 680px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--surface);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 1.0625rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--accent-dim); color: var(--text); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.25rem; }
+
+    /* ── Hero ──────────────────────────────────── */
+    .hero {
+      padding: 5rem 0 2.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 1.75rem;
+      line-height: 1.6;
+    }
+    .hero-cta {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.6rem 1.5rem;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .hero-cta:hover { background: var(--accent); color: var(--surface); }
+    .hero-badges {
+      display: flex;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    /* ── Article ───────────────────────────────── */
+    main { padding-bottom: 3rem; }
+    article h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 3rem 0 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    article h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 2rem 0 0.5rem;
+    }
+    article p { margin-bottom: 1rem; color: var(--text); }
+    article a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    article a:hover { border-bottom-color: var(--accent); }
+    article strong { color: var(--text); font-weight: 600; }
+    article em { color: var(--text-muted); }
+
+    /* ── Code ──────────────────────────────────── */
+    pre {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      margin: 1rem 0 1.25rem;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      position: relative;
+      cursor: pointer;
+    }
+    code { font-family: var(--mono); font-size: 0.85em; }
+    p code, li code {
+      background: var(--surface-alt);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+      font-size: 0.8em;
+    }
+    pre:hover::after {
+      content: 'click to copy';
+      position: absolute;
+      top: 0.4rem;
+      right: 0.6rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Voice Gallery ─────────────────────────── */
+    .gallery-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin: 2rem 0 0.6rem;
+    }
+    .voice-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .voice-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .voice-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-dim);
+    }
+    .voice-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 0.1rem;
+    }
+    .voice-source {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .voice-card audio { width: 100%; height: 28px; }
+
+    /* ── Callout ───────────────────────────────── */
+    .callout {
+      background: var(--accent-dim);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: 0.75rem 1rem;
+      margin: 1.25rem 0;
+      font-size: 0.95rem;
+    }
+    .callout strong { color: var(--accent); }
+
+    /* ── Architecture ──────────────────────────── */
+    .arch {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.25rem 0;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* ── Table ─────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.25rem;
+      font-size: 0.9rem;
+    }
+    th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text);
+      padding: 0.5rem 0.6rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+    td {
+      padding: 0.4rem 0.6rem;
+      border-bottom: 1px solid var(--surface-alt);
+      color: var(--text-muted);
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* ── Footer ────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0 2.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── Separator ─────────────────────────────── */
+    .sep {
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.4;
+      margin: 2.5rem 0 0.75rem;
+    }
+
+    /* ── Animations ────────────────────────────── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero h1, .hero .subtitle, .hero-cta, .hero-badges {
+      animation: fadeIn 0.5s ease-out both;
+    }
+    .hero .subtitle { animation-delay: 0.08s; }
+    .hero-cta { animation-delay: 0.14s; }
+    .hero-badges { animation-delay: 0.2s; }
+
+    @media (max-width: 500px) {
+      .voice-gallery { grid-template-columns: 1fr; }
+      .hero-badges { gap: 0.75rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header class="hero">
+    <div class="hero-eyebrow">Open Source &middot; Apple Silicon &middot; Zero Cloud</div>
+    <h1>Give Claude Code a Voice</h1>
+    <p class="subtitle">Clone any voice from a 15-second YouTube clip. Hear Claude speak every response. No API key, no subscription, nothing leaves your machine.</p>
+    <a href="https://github.com/adrianwedd/afterwords" class="hero-cta">View on GitHub</a>
+    <div class="hero-badges">
+      <span>Apple Silicon M1+</span>
+      <span>~6 GB peak RAM</span>
+      <span>~20s per sentence</span>
+      <span>17 voices included</span>
+    </div>
+  </header>
+
+  <main>
+  <article>
+    <p>Claude Code has <a href="https://docs.anthropic.com/en/docs/claude-code/voice-dictation"><code>/voice</code></a> &mdash; hold Space to dictate. But it&rsquo;s input only. You can talk to Claude; Claude can&rsquo;t talk back.</p>
+
+    <p>This adds the other half: <strong>text-to-speech output</strong> using a local voice-cloning server. <code>/voice</code> for input + this for output = voice conversations with Claude Code.</p>
+
+    <div class="sep"></div>
+    <h2>Setup</h2>
+
+<pre><code>git clone https://github.com/adrianwedd/afterwords.git
+cd afterwords
+bash setup.sh</code></pre>
+
+    <p>Checks your hardware, installs dependencies, walks you through cloning a voice from YouTube, wires the Claude Code hook, starts the server. Five minutes.</p>
+
+    <div class="sep"></div>
+    <h2>Hear the Voices</h2>
+
+    <p>17 voices cloned from 15-second clips. Each says <em>&ldquo;You&rsquo;re absolutely right. Your Claude Code session could sound like me.&rdquo;</em> &mdash; generated on an 8 GB M1.</p>
+
+    <div class="gallery-label">Female</div>
+    <div class="voice-gallery">
+      <div class="voice-card">
+        <div class="voice-name">Galadriel</div>
+        <div class="voice-source">Cate Blanchett, LOTR</div>
+        <audio controls preload="none" src="audio/galadriel.mp3" aria-label="Galadriel voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Samantha</div>
+        <div class="voice-source">Scarlett Johansson, Her</div>
+        <audio controls preload="none" src="audio/samantha.mp3" aria-label="Samantha voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Avasarala</div>
+        <div class="voice-source">Shohreh Aghdashloo, The Expanse</div>
+        <audio controls preload="none" src="audio/avasarala.mp3" aria-label="Avasarala voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Vesper</div>
+        <div class="voice-source">Eva Green, Casino Royale</div>
+        <audio controls preload="none" src="audio/vesper.mp3" aria-label="Vesper voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Marla</div>
+        <div class="voice-source">Helena Bonham Carter, Fight Club</div>
+        <audio controls preload="none" src="audio/marla.mp3" aria-label="Marla voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Claudia</div>
+        <div class="voice-source">Claudia Black, Dragon Age</div>
+        <audio controls preload="none" src="audio/claudia.mp3" aria-label="Claudia voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Aurora</div>
+        <div class="voice-source">AURORA, Shower Thoughts</div>
+        <audio controls preload="none" src="audio/aurora.mp3" aria-label="Aurora voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Audrey</div>
+        <div class="voice-source">Audrey Hepburn, 1961</div>
+        <audio controls preload="none" src="audio/audrey.mp3" aria-label="Audrey voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Eartha</div>
+        <div class="voice-source">Eartha Kitt, interview</div>
+        <audio controls preload="none" src="audio/eartha.mp3" aria-label="Eartha voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Tilda</div>
+        <div class="voice-source">Tilda Swinton, interview</div>
+        <audio controls preload="none" src="audio/tilda.mp3" aria-label="Tilda voice sample"></audio>
+      </div>
+    </div>
+
+    <div class="gallery-label">Male</div>
+    <div class="voice-gallery">
+      <div class="voice-card">
+        <div class="voice-name">Snape</div>
+        <div class="voice-source">Alan Rickman, Harry Potter</div>
+        <audio controls preload="none" src="audio/snape.mp3" aria-label="Snape voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Loki</div>
+        <div class="voice-source">Tom Hiddleston, Avengers</div>
+        <audio controls preload="none" src="audio/loki.mp3" aria-label="Loki voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Spock</div>
+        <div class="voice-source">Leonard Nimoy, Wrath of Khan</div>
+        <audio controls preload="none" src="audio/spock.mp3" aria-label="Spock voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Nimoy</div>
+        <div class="voice-source">Leonard Nimoy, Boston documentary</div>
+        <audio controls preload="none" src="audio/nimoy.mp3" aria-label="Nimoy voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Bardem</div>
+        <div class="voice-source">Javier Bardem, Vicky Cristina Barcelona</div>
+        <audio controls preload="none" src="audio/bardem.mp3" aria-label="Bardem voice sample"></audio>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Depp</div>
+        <div class="voice-source">Johnny Depp, interview</div>
+        <audio controls preload="none" src="audio/depp.mp3" aria-label="Depp voice sample"></audio>
+      </div>
+    </div>
+
+    <p style="margin-top:1rem;">Add your own:</p>
+<pre><code>bash clone-voice.sh "https://youtube.com/watch?v=..." myvoice 30</code></pre>
+
+    <div class="sep"></div>
+    <h2>How It Works</h2>
+
+    <div class="arch">You speak  ──▸  /voice (hold Space)  ──▸  text prompt
+Claude responds  ──▸  Stop hook  ──▸  TTS server  ──▸  speaker</div>
+
+    <p><a href="https://docs.anthropic.com/en/docs/claude-code/voice-dictation"><code>/voice</code></a> handles input. This project handles output. Together: voice conversations.</p>
+
+    <p>The server uses <a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (0.6B, 8-bit) on <a href="https://github.com/ml-explore/mlx">MLX</a>. Zero-shot voice cloning &mdash; no training. 15-second reference + transcript = cloned voice.</p>
+
+    <div class="callout">
+      <strong>Why local?</strong> Nothing leaves your machine. No API key, no rate limits, no bill. The voice is yours.
+    </div>
+
+    <div class="sep"></div>
+    <h2>Per-Project Voices</h2>
+
+    <p>The global hook uses your default voice. But you can set a different voice per project &mdash; drop a <code>.afterwords</code> file in any repo:</p>
+
+<pre><code># .afterwords (in your project root)
+snape</code></pre>
+
+    <p>The hook reads this file before each synthesis. No server restart needed &mdash; just switch projects and the voice follows. Works with Claude Code&rsquo;s <a href="https://docs.anthropic.com/en/docs/claude-code/settings">settings hierarchy</a>: project overrides global.</p>
+
+<pre><code># Different voice per project
+echo "galadriel" > ~/work/frontend/.afterwords
+echo "snape"     > ~/work/backend/.afterwords
+echo "loki"      > ~/fun/side-project/.afterwords</code></pre>
+
+    <div class="sep"></div>
+    <h2>Performance</h2>
+
+    <table>
+      <tr><th>Metric</th><th>8 GB M1</th></tr>
+      <tr><td>Model load</td><td>~5s cached</td></tr>
+      <tr><td>Per sentence</td><td>~20s</td></tr>
+      <tr><td>Peak memory</td><td>~6 GB</td></tr>
+      <tr><td>Adding a voice</td><td>Zero extra RAM</td></tr>
+      <tr><td>Voices</td><td>16 included, unlimited custom</td></tr>
+    </table>
+
+    <div class="sep"></div>
+    <h2>Requirements</h2>
+
+    <table>
+      <tr><th>What</th><th>Why</th></tr>
+      <tr><td>Apple Silicon Mac (M1+)</td><td>MLX needs Metal GPU</td></tr>
+      <tr><td>8 GB+ RAM</td><td>Model peaks at ~6 GB</td></tr>
+      <tr><td>Python 3.11+</td><td>MLX + FastAPI</td></tr>
+      <tr><td>~2 GB disk</td><td>Model weights + venv</td></tr>
+    </table>
+
+    <p>The setup script installs everything else.</p>
+
+    <div class="sep"></div>
+    <h2>Credits</h2>
+
+    <p><a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (Alibaba, Apache 2.0) &middot; <a href="https://github.com/Blaizzy/mlx-audio">mlx-audio</a> &middot; <a href="https://github.com/ml-explore/mlx">MLX</a> (Apple) &middot; <a href="https://docs.anthropic.com/en/docs/claude-code/">Claude Code</a> (Anthropic)</p>
+
+    <p>Originally built for <a href="https://spark.wedd.au">SPARK</a>, a robot with an inner life. Full tutorial: <a href="https://adrianwedd.com/blog/voice-cloning-qwen3-tts-mlx/">Voice Cloning with Qwen3-TTS</a>.</p>
+
+  </article>
+  </main>
+
+  <footer>
+    <p><a href="https://adrianwedd.com">Adrian Wedd</a> &middot; <a href="https://github.com/adrianwedd/afterwords">GitHub</a> &middot; MIT</p>
+  </footer>
+</div>
+
+<script>
+document.querySelectorAll('pre').forEach(pre => {
+  pre.addEventListener('click', () => {
+    const code = pre.querySelector('code') || pre;
+    navigator.clipboard.writeText(code.textContent.trim()).then(() => {
+      const el = document.createElement('span');
+      el.textContent = 'copied';
+      el.style.cssText = 'position:absolute;top:0.4rem;right:0.6rem;font-family:var(--mono);font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;';
+      pre.appendChild(el);
+      setTimeout(() => el.remove(), 1200);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
