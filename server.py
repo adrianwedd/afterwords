@@ -42,12 +42,6 @@ _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")
 # Adding voices costs zero extra memory — the model is loaded once,
 # each voice is just a ~700KB WAV + transcript string.
 VOICES = {
-    "vixen": (
-        os.path.join(_VOICES_DIR, "vixen-ref.wav"),
-        "My Mummy's Hair for Faith Evelyn. My mummy's hair is chocolate brown with "
-        "twinkly silver gloss. It's seldom neat and tidy and it smells like fairy floss. "
-        "When wild wind blows it flaps about the way a flag.",
-    ),
     "galadriel": (
         os.path.join(_VOICES_DIR, "galadriel-ref.wav"),
         "The world is changed. I feel it in the water. I feel it in the earth. "
@@ -105,11 +99,6 @@ VOICES = {
         "And beyond accepting that he wanted someone ancient, which I was very happy to "
         "take on the chin. We had no idea. I think if we'd known it was going to be so "
         "awesome, we would have been like that.",
-    ),
-    "obi": (
-        os.path.join(_VOICES_DIR, "obi-ref.wav"),
-        "Hello, my name is Obi. I talk like this. Hello, my name is Obi. I shit like "
-        "this. That is it, that is it.",
     ),
     "snape": (
         os.path.join(_VOICES_DIR, "snape-ref.wav"),

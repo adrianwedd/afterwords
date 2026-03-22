@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)**
 
-Clone any voice from a 15-second YouTube clip, run it locally on your Mac, and hear Claude Code speak every response. 16 voices included.
+Clone any voice from a 15-second YouTube clip, run it locally on your Mac, and hear Claude Code speak every response. 15 voices included.
 
 ## Why
 
@@ -71,7 +71,7 @@ Newly cloned voices are auto-discovered on server restart — no code edits need
 │                                                             │
 │  ┌─────────────────────────┐                                │
 │  │  Qwen3-TTS Server       │  ← MLX 8-bit, ~6 GB peak      │
-│  │  localhost:7860          │  ← 17 voice profiles           │
+│  │  localhost:7860          │  ← 15 voice profiles           │
 │  │  /synthesize?text=...    │  ← ~20s per sentence           │
 │  └─────────┬───────────────┘                                │
 │            │                                                │
@@ -136,7 +136,7 @@ qwen3-tts-server/
 │   ├── samantha-ref.wav  ← (Scarlett Johansson, Her)
 │   ├── avasarala-ref.wav ← (Shohreh Aghdashloo, The Expanse)
 │   ├── vesper-ref.wav    ← (Eva Green, Casino Royale)
-│   └── ...               ← 17 voices included
+│   └── ...               ← 15 voices included
 └── README.md
 
 ~/.claude/
@@ -169,8 +169,6 @@ qwen3-tts-server/
 | spock | Leonard Nimoy, *Star Trek* | Measured, logical deadpan |
 | bardem | Javier Bardem, *Vicky Cristina Barcelona* | Warm, seductive Spanish |
 | depp | Johnny Depp, interview | Languid, charming |
-| vixen | Original reference | Children's poem reader |
-| obi | Direct recording | 7-year-old Australian |
 
 ## Troubleshooting
 
