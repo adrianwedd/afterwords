@@ -33,7 +33,7 @@ AUTO_YES=false
 
 # Temp file cleanup
 TMPFILES=()
-cleanup() { rm -f "${TMPFILES[@]}" 2>/dev/null; }
+cleanup() { rm -rf "${TMPFILES[@]}" 2>/dev/null; }
 trap cleanup EXIT
 
 echo
@@ -58,18 +58,31 @@ VOICE_NAME=$(echo "${VOICE_NAME:-voice}" | tr '[:upper:]' '[:lower:]' | sed 's/[
 
 # Download
 info "Downloading audio..."
-TMP_SRC="/tmp/clone-source-$$.wav"
-TMPFILES+=("$TMP_SRC")
-if ! yt-dlp -x --audio-format wav -o "$TMP_SRC" "$YT_URL" 2>&1 | tail -5; then
+TMP_DL_DIR=$(mktemp -d)
+TMP_SRC="$TMP_DL_DIR/source.wav"
+TMPFILES+=("$TMP_DL_DIR")
+if ! yt-dlp -x --audio-format wav -o "$TMP_DL_DIR/source.%(ext)s" "$YT_URL" 2>&1 | tail -5; then
     fail "Download failed. Check the URL is valid and not private/age-restricted."
 fi
-DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$TMP_SRC" | cut -d. -f1)
-ok "Downloaded (${DURATION}s)"
+# yt-dlp may leave intermediate files; find the final wav
+[ -f "$TMP_SRC" ] || TMP_SRC=$(find "$TMP_DL_DIR" -name '*.wav' -print -quit)
+[ -f "$TMP_SRC" ] || fail "Download produced no audio file. Check the URL."
+DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$TMP_SRC" 2>/dev/null | cut -d. -f1)
+[[ "$DURATION" =~ ^[0-9]+$ ]] || DURATION="unknown"
+if [[ "$DURATION" == "unknown" ]]; then
+    ok "Downloaded"
+else
+    ok "Downloaded (${DURATION}s)"
+fi
 
 # Get start time
 if [ -z "$START_S" ]; then
     echo
-    echo -e "  Clip is ${BOLD}${DURATION}s${NC} long. We need a 15-second segment."
+    if [[ "$DURATION" == "unknown" ]]; then
+        echo -e "  We need a 15-second segment."
+    else
+        echo -e "  Clip is ${BOLD}${DURATION}s${NC} long. We need a 15-second segment."
+    fi
     echo -e "  Choose a section with ${BOLD}clear speech from one person${NC}."
     echo
     ask "Start time in seconds (default: 0):"
