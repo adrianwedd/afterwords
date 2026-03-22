@@ -1,6 +1,8 @@
 # Afterwords — Give Claude Code a Voice
 
-Give Claude Code a voice. Clone any voice from a 15-second YouTube clip, run it locally on your Mac, and hear Claude speak every response.
+**[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)**
+
+Clone any voice from a 15-second YouTube clip, run it locally on your Mac, and hear Claude Code speak every response. 16 voices included.
 
 ## Why
 
