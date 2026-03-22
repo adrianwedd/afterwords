@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200">
+  <title>Afterwords OG Image</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #0c0a0e;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .card {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+    }
+
+    /* ── Layered background ──────────────────── */
+    .bg-grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    .bg-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 75% 55%, rgba(232, 151, 107, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 40%, rgba(120, 80, 160, 0.04) 0%, transparent 60%);
+    }
+
+    /* ── Soundwave visualization ─────────────── */
+    canvas {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 1200px;
+      height: 280px;
+      opacity: 0.6;
+    }
+
+    /* ── Content ─────────────────────────────── */
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding: 72px 80px;
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #e8976b;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #e8976b;
+      box-shadow: 0 0 12px rgba(232, 151, 107, 0.5);
+    }
+
+    h1 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 86px;
+      font-weight: 400;
+      color: #e8e4ec;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 24px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: #e8976b;
+    }
+
+    .subtitle {
+      font-size: 22px;
+      font-weight: 300;
+      color: #9a9198;
+      line-height: 1.5;
+      max-width: 600px;
+    }
+
+    /* ── Stats bar ───────────────────────────── */
+    .stats {
+      position: absolute;
+      bottom: 64px;
+      left: 80px;
+      right: 80px;
+      display: flex;
+      gap: 48px;
+      z-index: 3;
+    }
+
+    .stat {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .stat-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 500;
+      color: #e8e4ec;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      font-weight: 400;
+      color: #6b6470;
+    }
+
+    /* ── GitHub badge ─────────────────────────── */
+    .badge {
+      position: absolute;
+      top: 64px;
+      right: 80px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: #9a9198;
+      padding: 10px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      background: rgba(26, 22, 32, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    .badge svg {
+      opacity: 0.7;
+    }
+
+    /* ── Decorative border ────────────────────── */
+    .border-frame {
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 4px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Corner accents ──────────────────────── */
+    .corner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      z-index: 4;
+    }
+    .corner::before, .corner::after {
+      content: '';
+      position: absolute;
+      background: rgba(232, 151, 107, 0.25);
+    }
+    .corner::before { width: 24px; height: 1px; }
+    .corner::after { width: 1px; height: 24px; }
+    .corner.tl { top: 16px; left: 16px; }
+    .corner.tl::before { top: 0; left: 0; }
+    .corner.tl::after { top: 0; left: 0; }
+    .corner.tr { top: 16px; right: 16px; }
+    .corner.tr::before { top: 0; right: 0; }
+    .corner.tr::after { top: 0; right: 0; }
+    .corner.bl { bottom: 16px; left: 16px; }
+    .corner.bl::before { bottom: 0; left: 0; }
+    .corner.bl::after { bottom: 0; left: 0; }
+    .corner.br { bottom: 16px; right: 16px; }
+    .corner.br::before { bottom: 0; right: 0; }
+    .corner.br::after { bottom: 0; right: 0; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="bg-grain"></div>
+    <div class="bg-gradient"></div>
+    <div class="border-frame"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <canvas id="wave" width="2400" height="560"></canvas>
+
+    <div class="badge">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+      </svg>
+      Open Source
+    </div>
+
+    <div class="content">
+      <div class="eyebrow">
+        <span class="dot"></span>
+        Local Voice-Cloning TTS for Apple Silicon
+      </div>
+      <h1>Give your code<br>a <em>voice</em></h1>
+      <p class="subtitle">Clone any voice from a 15-second clip. No cloud. No subscription. Just your Mac.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-value">16</span>
+        <span class="stat-label">voices included</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">~6 GB</span>
+        <span class="stat-label">peak memory</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">0</span>
+        <span class="stat-label">cloud calls</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">Qwen3-TTS</span>
+        <span class="stat-label">via MLX</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Static soundwave — frozen frame for screenshot
+    const canvas = document.getElementById('wave');
+    const ctx = canvas.getContext('2d');
+    const w = 1200, h = 280;
+    const dpr = 2;
+
+    ctx.scale(dpr, dpr);
+
+    const cols = Math.floor(w / 3);
+    const cy = h * 0.45;
+    const maxAmp = h * 0.32;
+    const time = 2.4; // frozen at an aesthetically pleasing moment
+
+    for (let i = 0; i < cols; i++) {
+      const x = (i / cols) * w;
+      const t = time * 0.4;
+      const wave1 = Math.sin(i * 0.04 + t) * 0.5;
+      const wave2 = Math.sin(i * 0.02 - t * 0.7) * 0.3;
+      const wave3 = Math.sin(i * 0.07 + t * 1.3) * 0.2;
+      const envelope = Math.sin((i / cols) * Math.PI);
+      const amp = (wave1 + wave2 + wave3) * envelope * maxAmp;
+
+      const alpha = 0.10 + Math.abs(amp / maxAmp) * 0.25;
+      ctx.fillStyle = `rgba(232, 151, 107, ${alpha})`;
+      const barH = Math.max(1, Math.abs(amp));
+      ctx.fillRect(x, cy - barH, 1.5, barH * 2);
+    }
+
+    // Add a subtle glow line at the center of the wave
+    const gradient = ctx.createLinearGradient(0, cy, w, cy);
+    gradient.addColorStop(0, 'rgba(232, 151, 107, 0)');
+    gradient.addColorStop(0.2, 'rgba(232, 151, 107, 0.06)');
+    gradient.addColorStop(0.5, 'rgba(232, 151, 107, 0.1)');
+    gradient.addColorStop(0.8, 'rgba(232, 151, 107, 0.06)');
+    gradient.addColorStop(1, 'rgba(232, 151, 107, 0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, cy - 0.5, w, 1);
+  </script>
+</body>
+</html>
