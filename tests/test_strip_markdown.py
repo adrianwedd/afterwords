@@ -61,6 +61,24 @@ def test_link_keeps_text():
     assert strip_markdown("[click here](http://example.com)") == "click here"
 
 
+def test_image_stripped():
+    assert strip_markdown("![alt text](http://example.com/img.png)") == "alt text"
+
+
+def test_blockquote_stripped():
+    result = strip_markdown("> quoted text")
+    assert "quoted text" in result
+    assert ">" not in result
+
+
+def test_strikethrough_stripped():
+    assert strip_markdown("~~deleted~~ kept") == "deleted kept"
+
+
+def test_bold_italic_triple_asterisk():
+    assert strip_markdown("***bold italic*** text") == "bold italic text"
+
+
 def test_table_removed():
     text = "before\n| Name | Value |\n|---|---|\n| a | b |\nafter"
     result = strip_markdown(text)
@@ -104,6 +122,8 @@ Features:
 - Zero-shot cloning
 - Real-time synthesis
 
+> Note: this is ***experimental*** and ~~may change~~ at any time.
+
 For more details, see the [README](https://github.com/adrianwedd/afterwords)."""
 
     result = strip_markdown(text)
@@ -122,6 +142,14 @@ For more details, see the [README](https://github.com/adrianwedd/afterwords)."""
     # Bullet list markers stripped, content preserved
     assert "Zero-shot cloning" in result
     assert result.count("- ") == 0  # no bullet markers remain
+    # Blockquote stripped
+    assert ">" not in result
+    assert "experimental" in result
+    # Bold-italic (triple asterisk) stripped
+    assert "***" not in result
+    # Strikethrough stripped
+    assert "~~" not in result
+    assert "may change" in result
     # Link text preserved, URL removed
     assert "README" in result
     assert "github.com" not in result

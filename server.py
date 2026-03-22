@@ -10,10 +10,14 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import glob
 import io
+import json
 import logging
 import os
+import threading
 import time
+import warnings
 
 import soundfile as sf
 from fastapi import FastAPI, Query
@@ -27,7 +31,6 @@ logging.basicConfig(
 log = logging.getLogger("tts")
 
 # Suppress known harmless warnings from mlx-audio model loading
-import warnings
 warnings.filterwarnings("ignore", message=".*model of type.*qwen3_tts.*")
 warnings.filterwarnings("ignore", message=".*incorrect regex pattern.*")
 logging.getLogger("transformers.modeling_utils").setLevel(logging.ERROR)
@@ -132,12 +135,13 @@ VOICES = {
 }
 
 # Auto-discover voices from JSON profiles created by clone-voice.sh
-import glob as _glob
-import json as _json
-for _profile in _glob.glob(os.path.join(_VOICES_DIR, "*.json")):
+for _profile in glob.glob(os.path.join(_VOICES_DIR, "*.json")):
     try:
-        _p = _json.loads(open(_profile).read())
-        _name = os.path.splitext(os.path.basename(_profile))[0].replace("-profile", "")
+        with open(_profile) as _f:
+            _p = json.load(_f)
+        _name = os.path.splitext(os.path.basename(_profile))[0]
+        if _name.endswith("-profile"):
+            _name = _name[:-8]
         _ref = os.path.join(_VOICES_DIR, f"{_name}-ref.wav")
         if _name not in VOICES and os.path.exists(_ref) and _p.get("reference_text"):
             VOICES[_name] = (_ref, _p["reference_text"])
@@ -147,12 +151,10 @@ for _profile in _glob.glob(os.path.join(_VOICES_DIR, "*.json")):
 DEFAULT_VOICE = "galadriel"
 
 # Pre-loaded model — avoids 30s cold start per request
-import threading
-
 _model = None
 _model_lock = threading.Lock()
 _synth_lock = threading.Lock()  # serialise synthesis — MLX/Metal is not thread-safe
-_ready = False
+_ready = threading.Event()
 
 
 def _get_model():
@@ -182,7 +184,11 @@ def _resolve_voice(voice: str) -> tuple[str, str] | None:
 def _warmup():
     """Pre-load model + generate a tiny warmup to prime MLX caches."""
     model = _get_model()
-    ref_audio, ref_text = _resolve_voice(DEFAULT_VOICE)
+    resolved = _resolve_voice(DEFAULT_VOICE)
+    if resolved is None:
+        log.warning("Default voice '%s' not available — skipping warmup", DEFAULT_VOICE)
+        return
+    ref_audio, ref_text = resolved
     log.info("Warming up with %s voice...", DEFAULT_VOICE)
     t0 = time.time()
     try:
@@ -211,7 +217,7 @@ def health():
         "model": MODEL_ID,
         "backend": "mlx",
         "model_loaded": _model is not None,
-        "ready": _ready,
+        "ready": _ready.is_set(),
         "voices": sorted(VOICES.keys()),
         "default_voice": DEFAULT_VOICE,
     }
@@ -228,7 +234,7 @@ def synthesize(
     if len(text) > 5000:
         return JSONResponse({"error": "text too long (max 5000 chars)"}, status_code=400)
 
-    if not _ready:
+    if not _ready.is_set():
         return JSONResponse({"error": "server warming up, try again shortly"}, status_code=503)
 
     resolved = _resolve_voice(voice)
@@ -259,10 +265,11 @@ def synthesize(
                 file_prefix="out",
                 verbose=False,
             )
-            wav_path = os.path.join(tmpdir, "out_000.wav")
-            if not os.path.exists(wav_path):
+            wav_files = sorted(glob.glob(os.path.join(tmpdir, "out_*.wav")))
+            if not wav_files:
                 log.error("TTS generated no output file")
                 return JSONResponse({"error": "generation produced no audio"}, status_code=500)
+            wav_path = wav_files[0]
             data, sr = sf.read(wav_path)
 
         elapsed = time.time() - t0
@@ -295,6 +302,7 @@ def main():
     parser.add_argument("--no-warmup", action="store_true", help="Skip warmup synthesis")
     args = parser.parse_args()
 
+    global DEFAULT_VOICE
     missing = [v for v, (p, _) in VOICES.items() if not os.path.exists(p)]
     for vname in missing:
         log.warning("Reference audio not found for '%s' — skipping", vname)
@@ -302,12 +310,14 @@ def main():
     if not VOICES:
         log.error("No voices available — add ref WAVs to voices/")
         raise SystemExit(1)
+    if DEFAULT_VOICE not in VOICES:
+        DEFAULT_VOICE = next(iter(VOICES))
+        log.warning("Default voice pruned — using '%s'", DEFAULT_VOICE)
 
     log.info("afterwords starting on %s:%d", args.host, args.port)
     log.info("model: %s", MODEL_ID)
     log.info("voices: %d loaded (default: %s)", len(VOICES), DEFAULT_VOICE)
 
-    global _ready
     if not args.no_warmup:
         try:
             _warmup()
@@ -315,7 +325,7 @@ def main():
             log.error("Failed to load model: %s", exc)
             log.error("Check your network connection — first run downloads ~1.5 GB")
             raise SystemExit(1)
-    _ready = True
+    _ready.set()
     log.info("ready — %d voices, accepting requests", len(VOICES))
 
     import uvicorn

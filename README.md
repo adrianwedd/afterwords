@@ -144,9 +144,11 @@ Fast Claude conversations generate responses faster than TTS can synthesise. The
 
 ```
 afterwords/
-├── setup.sh              ← one-command setup
+├── setup.sh              ← one-command setup (detects/installs Claude Code)
 ├── clone-voice.sh        ← add more voices from YouTube
 ├── server.py             ← multi-voice TTS server
+├── strip_markdown.py     ← text cleaner for TTS (also used by hooks)
+├── tests/                ← pytest suite (26 tests, no GPU needed)
 ├── voices/
 │   ├── galadriel-ref.wav ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav  ← (Scarlett Johansson, Her)

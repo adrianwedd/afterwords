@@ -62,11 +62,13 @@ def test_synthesize_not_ready(client):
 
 
 def test_synthesize_default_voice(client, sample_voice):
-    # Temporarily set testvoice as default so the test has a valid default
-    original = server.DEFAULT_VOICE
-    server.DEFAULT_VOICE = sample_voice
+    # FastAPI captures Query(DEFAULT_VOICE) at import time, so we test
+    # that omitting voice uses a valid default (not that we can swap it).
+    # Register the actual default voice so the request succeeds.
+    default = server.DEFAULT_VOICE
+    if default not in server.VOICES:
+        server.VOICES[default] = server.VOICES[sample_voice]
     r = client.get("/synthesize", params={"text": "Hello"})
-    server.DEFAULT_VOICE = original
     assert r.status_code == 200
     assert r.headers["content-type"] == "audio/wav"
 
