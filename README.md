@@ -1,12 +1,8 @@
-# Afterwords — Give Claude Code a Voice
+# Afterwords — Local Voice-Cloning TTS Server
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)**
 
-Clone any voice from a 15-second YouTube clip, run it locally on your Mac, and hear Claude Code speak every response. 15 voices included.
-
-## Why
-
-Claude Code has [`/voice`](https://docs.anthropic.com/en/docs/claude-code/voice-dictation) — hold Space to dictate prompts. But it's input only. Claude can hear you; you can't hear Claude. This project adds the missing half: **text-to-speech output** via a local voice-cloning server. Together, `/voice` input + TTS output = full voice conversations with Claude Code.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 15 voices included.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -18,14 +14,34 @@ cd afterwords
 bash setup.sh
 ```
 
-The setup script:
-1. Checks prerequisites (Apple Silicon, 8 GB+ RAM, Python 3.11+)
-2. Creates a Python venv and installs dependencies
-3. Walks you through cloning a voice from a YouTube clip
-4. Installs a Claude Code Stop hook that speaks every response
-5. Sets up a launchd service so the server auto-starts on login
+The setup script checks prerequisites, creates a venv, walks you through cloning a voice from YouTube, and starts the server. If Claude Code is detected (or you choose to install it), the script also wires up a Stop hook so Claude speaks every response.
 
-After setup, open Claude Code and try `/voice` — dictate a prompt, hear the response.
+For a server-only install with no Claude Code integration:
+
+```bash
+bash setup.sh --server-only
+```
+
+## With Claude Code
+
+Claude Code has [`/voice`](https://docs.anthropic.com/en/docs/claude-code/voice-dictation) — hold Space to dictate prompts. But it's input only. Claude can hear you; you can't hear Claude. This project adds the missing half: **text-to-speech output**. Together, `/voice` input + TTS output = full voice conversations with Claude Code.
+
+If Claude Code isn't installed, setup will offer to install it (requires Node.js; setup installs that too if needed via Homebrew).
+
+## Without Claude Code
+
+The TTS server is a plain HTTP API. Use it from any tool, script, or application:
+
+```bash
+# Synthesize speech
+curl "http://localhost:7860/synthesize?text=Hello+world&voice=galadriel" -o hello.wav
+afplay hello.wav
+
+# List available voices
+curl http://localhost:7860/health | jq .voices
+```
+
+Integrate with Cursor, Windsurf, shell scripts, web apps — anything that can make an HTTP request.
 
 ## Adding More Voices
 
@@ -121,13 +137,13 @@ Fast Claude conversations generate responses faster than TTS can synthesise. The
 
 - Apple Silicon Mac (M1/M2/M3/M4), 8 GB+ RAM
 - Python 3.11+
-- Claude Code with a Claude.ai account (for `/voice` input)
 - ~2 GB disk (model weights + venv)
+- Claude Code (optional — for automatic TTS on responses; setup offers to install it)
 
 ## File Map
 
 ```
-qwen3-tts-server/
+afterwords/
 ├── setup.sh              ← one-command setup
 ├── clone-voice.sh        ← add more voices from YouTube
 ├── server.py             ← multi-voice TTS server
@@ -139,7 +155,7 @@ qwen3-tts-server/
 │   └── ...               ← 15 voices included
 └── README.md
 
-~/.claude/
+~/.claude/                    ← only with Claude Code integration
 ├── settings.json         ← Stop hook registered here
 └── hooks/
     ├── tts-hook.sh       ← queue response for TTS
@@ -184,6 +200,21 @@ qwen3-tts-server/
 | Port 7860 already in use | Another instance is running, or another app uses the port |
 | Model download fails | Check network; retry `python server.py` manually |
 | MP3 archives missing | Install `lame` via `brew install lame` |
+
+## Testing
+
+```bash
+pip install pytest httpx
+pytest
+```
+
+Tests cover the server API (endpoint validation, error handling, voice resolution) and the strip-markdown text transform (every regex pattern, plus a golden test with a realistic Claude response). The server tests mock the ML model — no GPU or model download needed.
+
+Run a single test:
+
+```bash
+pytest tests/test_strip_markdown.py::test_inline_code_keeps_content
+```
 
 ## Stopping / Uninstalling
 
