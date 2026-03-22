@@ -6,7 +6,7 @@
   <title>Afterwords — Local Voice-Cloning TTS</title>
   <meta name="description" content="Clone any voice from a 15-second YouTube clip and hear Claude Code speak every response. Runs locally on Apple Silicon. No cloud. No subscription.">
   <meta property="og:title" content="Afterwords — Local Voice-Cloning TTS">
-  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 15 voices included. No cloud dependency.">
+  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 16 voices included. No cloud dependency.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://adrianwedd.github.io/afterwords/">
   <meta name="twitter:card" content="summary">
@@ -226,14 +226,14 @@
     /* ── Voice Gallery ─────────────────────────── */
     .voice-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.1rem;
     }
     .voice-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1.1rem 1.2rem 1rem;
+      padding: 1.25rem 1.3rem 1.15rem;
       transition: border-color 0.3s, background 0.3s, transform 0.3s var(--ease-out-expo);
       cursor: default;
       position: relative;
@@ -262,10 +262,11 @@
       margin-bottom: 0.15rem;
     }
     .voice-source {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 300;
       color: var(--text-dim);
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.75rem;
+      min-height: 2.4em;
     }
     .voice-wave {
       width: 100%;
@@ -531,7 +532,7 @@
         <a href="#voices" class="btn-ghost">Hear the voices</a>
       </div>
       <div class="hero-stats">
-        <div><div class="stat-value">15</div><div class="stat-label">Voices included</div></div>
+        <div><div class="stat-value">16</div><div class="stat-label">Voices included</div></div>
         <div><div class="stat-value">~6 GB</div><div class="stat-label">Peak memory</div></div>
         <div><div class="stat-value">~20s</div><div class="stat-label">Per sentence</div></div>
         <div><div class="stat-value">0</div><div class="stat-label">Cloud calls</div></div>
@@ -558,8 +559,8 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
 
     <section id="voices" class="reveal">
       <div class="section-label">Voice Gallery</div>
-      <div class="section-title">15 voices, cloned from 15-second clips</div>
-      <p class="section-desc">Each sample was generated locally on an 8 GB M1 from a 15-second reference clip. Hit play to hear them.</p>
+      <div class="section-title">16 voices, each cloned from a 15-second clip</div>
+      <p class="section-desc">Each says <em>&ldquo;You are absolutely right. Your Claude Code session could sound like me.&rdquo;</em> &mdash; generated locally on an 8 GB M1.</p>
 
       <div class="voice-gallery">
         <div class="voice-card reveal"><div class="voice-card-inner">
@@ -609,6 +610,12 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
           <div class="voice-source">Cate Blanchett, LOTR</div>
           <div class="voice-wave"><canvas></canvas></div>
           <audio controls preload="none" src="audio/galadriel.mp3" aria-label="Galadriel voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Picard</div>
+          <div class="voice-source">Patrick Stewart, Star Trek</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/picard.mp3" aria-label="Picard voice sample"></audio>
         </div></div>
         <div class="voice-card reveal"><div class="voice-card-inner">
           <div class="voice-name">Loki</div>
