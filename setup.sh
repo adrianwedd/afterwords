@@ -1,15 +1,24 @@
 #!/usr/bin/env bash
 #
-# Voice Cloning Setup for Claude Code
+# Afterwords — local voice-cloning TTS server
 #
-# Gives Claude Code a cloned voice using Qwen3-TTS on Apple Silicon.
-# Downloads a YouTube clip, extracts a 15-second reference, sets up
-# the TTS server, and wires it into Claude Code as a Stop hook.
+# Zero-shot voice cloning via Qwen3-TTS on Apple Silicon.
+# Works standalone as an HTTP API, or integrates with Claude Code
+# for automatic text-to-speech on every response.
 #
 # Requirements: Apple Silicon Mac (M1+), 8 GB+ RAM, Python 3.11+
-# Usage: bash setup.sh
+# Usage: bash setup.sh              # full setup (detects Claude Code)
+#        bash setup.sh --server-only # server + voices only, no hooks
 #
 set -euo pipefail
+
+# ── Flags ─────────────────────────────────────────────────────────
+SERVER_ONLY=false
+for arg in "$@"; do
+    case "$arg" in
+        --server-only) SERVER_ONLY=true ;;
+    esac
+done
 
 # ── Colours & output helpers ────────────────────────────────────────
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[0;33m'
@@ -28,7 +37,7 @@ cd "$SCRIPT_DIR"
 
 # Temp file cleanup on any exit
 TMPFILES=()
-cleanup() { rm -f "${TMPFILES[@]}" 2>/dev/null; }
+cleanup() { rm -rf "${TMPFILES[@]}" 2>/dev/null; }
 trap cleanup EXIT
 
 # ── Timing ─────────────────────────────────────────────────────────
@@ -36,7 +45,7 @@ _T0=$(date +%s)
 
 # ── Step 0: Preflight checks ──────────────────────────────────────
 echo
-echo -e "  ${BOLD}afterwords${NC}  ${DIM}— give Claude Code a voice${NC}"
+echo -e "  ${BOLD}afterwords${NC}  ${DIM}— local voice-cloning TTS server${NC}"
 rule
 
 # Apple Silicon check (allow Rosetta — MLX still works via arm64 Python)
@@ -88,8 +97,13 @@ ok "jq"
 
 # yt-dlp check
 if ! command -v yt-dlp &>/dev/null; then
-    warn "yt-dlp not found — installing via pip..."
-    pip3 install --user yt-dlp 2>/dev/null || pip install yt-dlp
+    if command -v brew &>/dev/null; then
+        warn "yt-dlp not found — installing via Homebrew..."
+        brew install yt-dlp
+    else
+        warn "yt-dlp not found — installing via pip..."
+        pip3 install --user yt-dlp 2>/dev/null || pip3 install yt-dlp
+    fi
 fi
 ok "yt-dlp"
 
@@ -103,7 +117,63 @@ if ! command -v lame &>/dev/null; then
     fi
 fi
 
-step "1/5" "Python environment"
+# ── Claude Code detection ────────────────────────────────────────
+HAS_CLAUDE=false
+if $SERVER_ONLY; then
+    info "Server-only mode — skipping Claude Code integration"
+elif command -v claude &>/dev/null; then
+    HAS_CLAUDE=true
+    ok "Claude Code detected"
+else
+    echo
+    echo -e "  ${BOLD}Claude Code not found.${NC}"
+    echo -e "  Afterwords works best with Claude Code — it speaks every response."
+    echo -e "  Without it, you get a standalone TTS API at localhost:7860."
+    echo
+    ask "Install Claude Code? [Y/n]:"
+    read -r INSTALL_CLAUDE
+    INSTALL_CLAUDE="${INSTALL_CLAUDE:-Y}"
+    if [[ "$INSTALL_CLAUDE" =~ ^[Yy] ]]; then
+        # Need Node.js / npm
+        if ! command -v npm &>/dev/null; then
+            if command -v brew &>/dev/null; then
+                info "Installing Node.js via Homebrew..."
+                brew install node
+            else
+                warn "npm not found and Homebrew not available."
+                warn "Install Node.js from https://nodejs.org then re-run setup."
+                info "Continuing in server-only mode."
+            fi
+        fi
+        if command -v npm &>/dev/null; then
+            info "Installing Claude Code..."
+            if npm install -g @anthropic-ai/claude-code 2>&1 | tail -3; then
+                if command -v claude &>/dev/null; then
+                    HAS_CLAUDE=true
+                    ok "Claude Code installed"
+                else
+                    warn "Claude Code installed but 'claude' not on PATH."
+                    warn "You may need to restart your terminal. Continuing in server-only mode."
+                fi
+            else
+                warn "Claude Code installation failed. Continuing in server-only mode."
+            fi
+        fi
+    else
+        info "Skipping Claude Code — setting up server only"
+    fi
+fi
+
+if $HAS_CLAUDE; then
+    TOTAL_STEPS=5
+else
+    TOTAL_STEPS=4
+fi
+STEP=0
+
+next_step() { STEP=$((STEP + 1)); step "${STEP}/${TOTAL_STEPS}" "$1"; }
+
+next_step "Python environment"
 if [ -d ".venv" ]; then
     # Verify venv is functional
     if ! ".venv/bin/python3" -c "pass" 2>/dev/null; then
@@ -125,10 +195,10 @@ pip install --quiet -r requirements.txt
 ok "Python packages installed"
 echo
 
-step "2/5" "Voice source"
+next_step "Voice source"
 mkdir -p voices
 
-if [ -z "$(ls voices/*-ref.wav 2>/dev/null)" ]; then
+if [ -z "$(find voices -maxdepth 1 -name '*-ref.wav' -print -quit 2>/dev/null)" ]; then
     info "No voice profiles found. Let's create one."
     echo
     echo -e "  You need a ${BOLD}YouTube URL${NC} with someone speaking."
@@ -140,16 +210,25 @@ if [ -z "$(ls voices/*-ref.wav 2>/dev/null)" ]; then
     read -r YT_URL
     [ -z "$YT_URL" ] && fail "No URL provided"
 
-    TMP_SRC="/tmp/voice-setup-source-$$.wav"
-    TMPFILES+=("$TMP_SRC")
+    TMP_DL_DIR=$(mktemp -d)
+    TMP_SRC="$TMP_DL_DIR/source.wav"
+    TMPFILES+=("$TMP_DL_DIR")
 
     info "Downloading audio..."
-    if ! yt-dlp -x --audio-format wav -o "$TMP_SRC" "$YT_URL" 2>&1 | tail -5; then
+    if ! yt-dlp -x --audio-format wav -o "$TMP_DL_DIR/source.%(ext)s" "$YT_URL" 2>&1 | tail -5; then
         fail "Download failed. Check the URL and try again."
     fi
+    # yt-dlp may leave intermediate files; find the final wav
+    [ -f "$TMP_SRC" ] || TMP_SRC=$(find "$TMP_DL_DIR" -name '*.wav' -print -quit)
+    [ -f "$TMP_SRC" ] || fail "Download produced no audio file. Check the URL."
 
-    DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$TMP_SRC" | cut -d. -f1)
-    info "Clip duration: ${DURATION}s"
+    DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$TMP_SRC" 2>/dev/null | cut -d. -f1)
+    [[ "$DURATION" =~ ^[0-9]+$ ]] || DURATION="unknown"
+    if [[ "$DURATION" == "unknown" ]]; then
+        info "Clip duration: unknown"
+    else
+        info "Clip duration: ${DURATION}s"
+    fi
     echo
     echo -e "  We need a ${BOLD}15-second${NC} segment with clear speech from one person."
     ask "Start time in seconds (default: 0):"
@@ -216,13 +295,13 @@ else
     ok "Voice profiles found:"
     for f in voices/*.json; do
         [ -f "$f" ] || continue
-        name=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['name'])" "$f" 2>/dev/null || basename "$f" .json)
+        name=$(python3 -c "import json,sys; f=open(sys.argv[1]); print(json.load(f)['name']); f.close()" "$f" 2>/dev/null || basename "$f" .json)
         echo -e "    ${CYAN}${name}${NC}"
     done
 fi
 echo
 
-step "3/5" "Server check"
+next_step "Server check"
 VOICE_FILES=$(ls voices/*-ref.wav 2>/dev/null | wc -l | tr -d ' ')
 ok "${VOICE_FILES} voice file(s) in voices/"
 if grep -q "^VOICES = {" server.py 2>/dev/null; then
@@ -232,7 +311,8 @@ else
 fi
 echo
 
-step "4/5" "Claude Code hooks"
+if $HAS_CLAUDE; then
+next_step "Claude Code hooks"
 
 HOOKS_DIR="$HOME/.claude/hooks"
 mkdir -p "$HOOKS_DIR"
@@ -245,20 +325,7 @@ for hookfile in strip-markdown.py tts-hook.sh tts-worker.sh; do
 done
 
 # Strip-markdown helper
-cat > "$HOOKS_DIR/strip-markdown.py" <<'PYEOF'
-"""Strip markdown formatting from stdin for cleaner TTS."""
-import re, sys
-text = sys.stdin.read()
-text = re.sub(r'```[\s\S]*?```', '', text)
-text = re.sub(r'`[^`]+`', '', text)
-text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
-text = re.sub(r'^#{1,6}\s+', '', text, flags=re.M)
-text = re.sub(r'^\s*[-*]\s+', '', text, flags=re.M)
-text = re.sub(r'\*{1,2}([^*]+)\*{1,2}', r'\1', text)
-text = re.sub(r'\n{2,}', '. ', text)
-text = re.sub(r'\s+', ' ', text).strip()
-print(text[:1000])
-PYEOF
+cp "$SCRIPT_DIR/strip_markdown.py" "$HOOKS_DIR/strip-markdown.py"
 
 # TTS hook (fires on Stop event)
 cat > "$HOOKS_DIR/tts-hook.sh" <<'HOOKEOF'
@@ -272,7 +339,8 @@ TEXT=$(jq -r '.last_assistant_message // empty' 2>/dev/null \
     | python3 "$HOME/.claude/hooks/strip-markdown.py" 2>/dev/null)
 [ -z "$TEXT" ] && exit 0
 
-echo "$TEXT" >> "$QUEUE"
+# Encode CWD with text so worker can find per-project .afterwords
+printf '%s\t%s\n' "$PWD" "$TEXT" >> "$QUEUE"
 
 if [ -f "$WORKER_PID" ]; then
     EXISTING=$(cat "$WORKER_PID" 2>/dev/null)
@@ -320,8 +388,8 @@ while true; do
     [ -f "$QUEUE" ] || break
     [ -s "$QUEUE" ] || break
 
-    LINE=$(head -1 "$QUEUE" 2>/dev/null)
-    [ -z "$LINE" ] && break
+    RAW_LINE=$(head -1 "$QUEUE" 2>/dev/null)
+    [ -z "$RAW_LINE" ] && break
 
     REMAINING=$(tail -n +2 "$QUEUE" 2>/dev/null)
     if [ -n "$REMAINING" ]; then
@@ -337,17 +405,22 @@ while true; do
         fi
     fi
 
+    # Queue format: CWD<tab>TEXT (tab-separated)
+    PROJECT_DIR=$(printf '%s' "$RAW_LINE" | cut -f1)
+    LINE=$(printf '%s' "$RAW_LINE" | cut -f2-)
+    [ -z "$LINE" ] && continue
+
     ENCODED=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$LINE" 2>/dev/null) || continue
     STAMP=$(date +%Y%m%d-%H%M%S)
 
-    # Per-project voice: .afterwords file in cwd, else server default
+    # Per-project voice: .afterwords file in project dir, else server default
     VOICE=""
-    if [ -f ".afterwords" ]; then
-        VOICE=$(head -1 .afterwords 2>/dev/null | tr -d '[:space:]')
+    if [ -n "$PROJECT_DIR" ] && [ -f "$PROJECT_DIR/.afterwords" ]; then
+        VOICE=$(head -1 "$PROJECT_DIR/.afterwords" 2>/dev/null | tr -d '[:space:]')
     fi
     if [ -z "$VOICE" ]; then
         VOICE=$(curl -s --max-time 2 "${TTS_URL%/synthesize}/health" 2>/dev/null \
-            | python3 -c "import sys,json; print(json.load(sys.stdin).get('default_voice','claude'))" 2>/dev/null || echo "claude")
+            | python3 -c "import sys,json; print(json.load(sys.stdin).get('default_voice',''))" 2>/dev/null || true)
     fi
     VOICE_PARAM=""
     [ -n "$VOICE" ] && VOICE_PARAM="&voice=${VOICE}"
@@ -380,21 +453,31 @@ mkdir -p "$HOME/.claude"
 
 HOOK_CMD="bash ~/.claude/hooks/tts-hook.sh"
 
+HOOK_ENTRY="{\"type\": \"command\", \"command\": \"$HOOK_CMD\", \"timeout\": 120, \"async\": true}"
+HOOK_GROUP="{\"hooks\": [$HOOK_ENTRY]}"
+
 if [ -f "$SETTINGS" ]; then
     if jq -e ".hooks.Stop[]?.hooks[]? | select(.command == \"$HOOK_CMD\")" "$SETTINGS" &>/dev/null; then
         ok "TTS hook already configured in settings.json"
-    elif jq -e '.hooks.Stop' "$SETTINGS" &>/dev/null; then
+    elif jq -e '.hooks.Stop | type == "array" and length > 0 and .[0].hooks' "$SETTINGS" &>/dev/null; then
         info "Appending TTS hook to existing Stop hooks..."
         TMPF=$(mktemp)
         TMPFILES+=("$TMPF")
-        jq ".hooks.Stop[0].hooks += [{\"type\": \"command\", \"command\": \"$HOOK_CMD\", \"timeout\": 120, \"async\": true}]" "$SETTINGS" > "$TMPF" \
+        jq ".hooks.Stop[0].hooks += [$HOOK_ENTRY]" "$SETTINGS" > "$TMPF" \
             && mv "$TMPF" "$SETTINGS"
         ok "TTS hook appended to existing Stop hooks"
-    else
-        info "Adding Stop hook to settings.json..."
+    elif jq -e '.hooks' "$SETTINGS" &>/dev/null; then
+        info "Adding Stop hook group to settings.json..."
         TMPF=$(mktemp)
         TMPFILES+=("$TMPF")
-        jq ".hooks.Stop = [{\"hooks\": [{\"type\": \"command\", \"command\": \"$HOOK_CMD\", \"timeout\": 120, \"async\": true}]}]" "$SETTINGS" > "$TMPF" \
+        jq ".hooks.Stop = [$HOOK_GROUP]" "$SETTINGS" > "$TMPF" \
+            && mv "$TMPF" "$SETTINGS"
+        ok "Stop hook added"
+    else
+        info "Adding hooks to settings.json..."
+        TMPF=$(mktemp)
+        TMPFILES+=("$TMPF")
+        jq ". + {\"hooks\": {\"Stop\": [$HOOK_GROUP]}}" "$SETTINGS" > "$TMPF" \
             && mv "$TMPF" "$SETTINGS"
         ok "Stop hook added"
     fi
@@ -417,8 +500,9 @@ SETTINGSEOF
     ok "settings.json created"
 fi
 echo
+fi  # end HAS_CLAUDE hooks block
 
-step "5/5" "Auto-start service"
+next_step "Auto-start service"
 
 PLIST_NAME="com.afterwords.tts-server"
 PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
@@ -481,12 +565,23 @@ echo -e "  ${GREEN}${BOLD}✓ afterwords is ready${NC}  ${DIM}(${_ELAPSED}s)${NC
 echo
 echo -e "  ${DIM}server${NC}      http://localhost:7860"
 echo -e "  ${DIM}logs${NC}        tail -f /tmp/claude-tts-server.log"
-echo -e "  ${DIM}archives${NC}    ls ~/.claude/tts-archive/"
+echo -e "  ${DIM}add voices${NC}  bash clone-voice.sh"
 echo
-echo -e "  Claude Code will now ${BOLD}speak every response${NC}."
-echo -e "  Pair with ${CYAN}/voice${NC} for full voice conversations."
-echo
-echo -e "  ${DIM}add voices${NC}     bash clone-voice.sh"
-echo -e "  ${DIM}per-project${NC}    echo \"snape\" > .afterwords  ${DIM}(override voice per repo)${NC}"
-echo -e "  ${DIM}stop voice${NC}     launchctl unload ~/Library/LaunchAgents/${PLIST_NAME}.plist"
+if $HAS_CLAUDE; then
+    echo -e "  Claude Code will now ${BOLD}speak every response${NC}."
+    echo -e "  Pair with ${CYAN}/voice${NC} for full voice conversations."
+    echo
+    echo -e "  ${DIM}archives${NC}      ls ~/.claude/tts-archive/"
+    echo -e "  ${DIM}per-project${NC}    echo \"snape\" > .afterwords  ${DIM}(override voice per repo)${NC}"
+    echo -e "  ${DIM}stop voice${NC}     launchctl unload ~/Library/LaunchAgents/${PLIST_NAME}.plist"
+else
+    echo -e "  ${BOLD}TTS API ready.${NC} Use from any tool or script:"
+    echo
+    echo -e "  ${DIM}synthesize${NC}    curl \"localhost:7860/synthesize?text=Hello&voice=galadriel\" -o out.wav"
+    echo -e "  ${DIM}play it${NC}       afplay out.wav"
+    echo -e "  ${DIM}list voices${NC}   curl localhost:7860/health"
+    echo -e "  ${DIM}stop server${NC}   launchctl unload ~/Library/LaunchAgents/${PLIST_NAME}.plist"
+    echo
+    echo -e "  ${DIM}To add Claude Code integration later: re-run${NC} ${CYAN}bash setup.sh${NC}"
+fi
 echo
