@@ -3,469 +3,811 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Afterwords — Give Claude Code a Voice</title>
-  <meta name="description" content="Clone any voice from a 15-second YouTube clip and hear Claude Code speak every response. Runs locally on an 8 GB M1 Mac. No cloud. No subscription.">
-  <meta property="og:title" content="Afterwords — Give Claude Code a Voice">
+  <title>Afterwords — Local Voice-Cloning TTS</title>
+  <meta name="description" content="Clone any voice from a 15-second YouTube clip and hear Claude Code speak every response. Runs locally on Apple Silicon. No cloud. No subscription.">
+  <meta property="og:title" content="Afterwords — Local Voice-Cloning TTS">
   <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 15 voices included. No cloud dependency.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://adrianwedd.github.io/afterwords/">
   <meta name="twitter:card" content="summary">
   <link rel="canonical" href="https://adrianwedd.github.io/afterwords/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --surface: #1a181c;
-      --surface-alt: #24212a;
-      --surface-raised: #2e2a34;
-      --text: #e2ddd8;
-      --text-muted: #968e96;
-      --accent: #c48b6e;
-      --accent-hover: #d49e82;
-      --accent-dim: rgba(196, 139, 110, 0.12);
-      --border: #3d3844;
-      --sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
-      --max-w: 680px;
+      --bg: #0c0a0e;
+      --bg-elevated: #151218;
+      --bg-card: #1a1620;
+      --bg-card-hover: #201c28;
+      --text: #e8e4ec;
+      --text-secondary: #9a9198;
+      --text-dim: #6b6470;
+      --accent: #e8976b;
+      --accent-glow: rgba(232, 151, 107, 0.15);
+      --accent-bright: #f0a87e;
+      --wave: #e8976b;
+      --wave-dim: rgba(232, 151, 107, 0.08);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(232, 151, 107, 0.25);
+      --display: 'Instrument Serif', Georgia, serif;
+      --body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', 'SF Mono', monospace;
+      --max-w: 800px;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--sans);
-      background: var(--surface);
+      font-family: var(--body);
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.75;
       font-size: 1.0625rem;
+      font-weight: 300;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    ::selection { background: var(--accent-dim); color: var(--text); }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    ::selection { background: var(--accent-glow); color: var(--accent-bright); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.25rem; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── Reveal animation ─────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* ── Hero ──────────────────────────────────── */
     .hero {
-      padding: 5rem 0 2.5rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 2.5rem;
+      position: relative;
+      padding: 6rem 0 4rem;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
     .hero-eyebrow {
       font-family: var(--mono);
       font-size: 0.7rem;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.2em;
       color: var(--accent);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: heroFade 0.8s 0.2s var(--ease-out-expo) forwards;
     }
     .hero h1 {
-      font-size: clamp(1.75rem, 4.5vw, 2.75rem);
-      font-weight: 700;
+      font-family: var(--display);
+      font-size: clamp(2.6rem, 7vw, 4.5rem);
+      font-weight: 400;
       color: var(--text);
-      line-height: 1.15;
+      line-height: 1.1;
       letter-spacing: -0.02em;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      animation: heroFade 0.8s 0.35s var(--ease-out-expo) forwards;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
     }
     .hero .subtitle {
-      font-size: 1.05rem;
-      color: var(--text-muted);
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--text-secondary);
       max-width: 520px;
-      margin-bottom: 1.75rem;
-      line-height: 1.6;
+      margin-bottom: 2rem;
+      line-height: 1.65;
+      opacity: 0;
+      animation: heroFade 0.8s 0.5s var(--ease-out-expo) forwards;
     }
-    .hero-cta {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 0.6rem 1.5rem;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background 0.15s, color 0.15s;
-    }
-    .hero-cta:hover { background: var(--accent); color: var(--surface); }
-    .hero-badges {
+    .hero-actions {
       display: flex;
-      gap: 1.25rem;
-      margin-top: 1.5rem;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--text-muted);
+      gap: 1rem;
+      align-items: center;
       flex-wrap: wrap;
+      opacity: 0;
+      animation: heroFade 0.8s 0.65s var(--ease-out-expo) forwards;
     }
-
-    /* ── Article ───────────────────────────────── */
-    main { padding-bottom: 3rem; }
-    article h2 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--text);
-      margin: 3rem 0 0.75rem;
-      letter-spacing: -0.01em;
-    }
-    article h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
-      margin: 2rem 0 0.5rem;
-    }
-    article p { margin-bottom: 1rem; color: var(--text); }
-    article a {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.15s;
-    }
-    article a:hover { border-bottom-color: var(--accent); }
-    article strong { color: var(--text); font-weight: 600; }
-    article em { color: var(--text-muted); }
-
-    /* ── Code ──────────────────────────────────── */
-    pre {
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1rem 1.25rem;
-      overflow-x: auto;
-      margin: 1rem 0 1.25rem;
-      font-size: 0.8rem;
-      line-height: 1.6;
-      position: relative;
-      cursor: pointer;
-    }
-    code { font-family: var(--mono); font-size: 0.85em; }
-    p code, li code {
-      background: var(--surface-alt);
-      padding: 0.1em 0.35em;
-      border-radius: 3px;
-      font-size: 0.8em;
-    }
-    pre:hover::after {
-      content: 'click to copy';
-      position: absolute;
-      top: 0.4rem;
-      right: 0.6rem;
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       font-family: var(--mono);
-      font-size: 0.6rem;
-      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 0.7rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      padding: 0.65rem 1.4rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text-dim); }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+      animation: heroFade 0.8s 0.8s var(--ease-out-expo) forwards;
+    }
+    .stat-value {
+      font-family: var(--display);
+      font-size: 1.9rem;
+      color: var(--text);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 400;
+      color: var(--text-dim);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
+      margin-top: 0.35rem;
+    }
+
+    @keyframes heroFade {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Section styling ──────────────────────── */
+    section { padding: 4rem 0; }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin-bottom: 2rem;
     }
 
     /* ── Voice Gallery ─────────────────────────── */
-    .gallery-label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin: 2rem 0 0.6rem;
-    }
     .voice-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-      gap: 0.75rem;
-      margin-bottom: 0.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1rem;
     }
     .voice-card {
-      background: var(--surface-alt);
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      border-radius: 12px;
+      padding: 1.1rem 1.2rem 1rem;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s var(--ease-out-expo);
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+    .voice-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, var(--accent-glow), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
     }
     .voice-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent-dim);
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
     }
+    .voice-card:hover::before { opacity: 1; }
+    .voice-card-inner { position: relative; z-index: 1; }
     .voice-name {
-      font-weight: 600;
-      font-size: 0.9rem;
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 1.25rem;
       color: var(--text);
-      margin-bottom: 0.1rem;
+      margin-bottom: 0.15rem;
     }
     .voice-source {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      margin-bottom: 0.7rem;
     }
-    .voice-card audio { width: 100%; height: 28px; }
+    .voice-wave {
+      width: 100%;
+      height: 32px;
+      margin-bottom: 0.5rem;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .voice-wave canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .voice-card audio { width: 100%; height: 32px; border-radius: 4px; }
+
+    /* ── Code blocks ──────────────────────────── */
+    pre {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem 1.3rem;
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      font-size: 0.85rem;
+      line-height: 1.65;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    pre:hover { border-color: rgba(255, 255, 255, 0.1); }
+    code { font-family: var(--mono); font-size: 0.85em; }
+    p code {
+      background: var(--bg-elevated);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.8em;
+      color: var(--accent-bright);
+    }
+    pre .copy-hint {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.8rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    pre:hover .copy-hint { opacity: 1; }
+
+    /* ── Architecture diagram ─────────────────── */
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 2rem 0;
+      padding: 2rem 1rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .arch-node {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg-card);
+      white-space: nowrap;
+    }
+    .arch-arrow {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      padding: 0 0.6rem;
+    }
 
     /* ── Callout ───────────────────────────────── */
     .callout {
-      background: var(--accent-dim);
+      background: var(--wave-dim);
       border-left: 2px solid var(--accent);
-      border-radius: 0 6px 6px 0;
-      padding: 0.75rem 1rem;
-      margin: 1.25rem 0;
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
       font-size: 0.95rem;
     }
     .callout strong { color: var(--accent); }
 
-    /* ── Architecture ──────────────────────────── */
-    .arch {
-      background: var(--surface-alt);
+    /* ── Tables ────────────────────────────────── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .info-cell {
+      background: var(--bg-elevated);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin: 1.25rem 0;
+      border-radius: 10px;
+      padding: 1rem 1.15rem;
+    }
+    .info-cell-label {
       font-family: var(--mono);
-      font-size: 0.75rem;
-      line-height: 1.5;
-      color: var(--text-muted);
-      overflow-x: auto;
-      white-space: pre;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 0.25rem;
+    }
+    .info-cell-value {
+      font-family: var(--display);
+      font-size: 1.35rem;
+      color: var(--text);
     }
 
-    /* ── Table ─────────────────────────────────── */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0 1.25rem;
-      font-size: 0.9rem;
+    /* ── API Reference ─────────────────────────── */
+    .endpoint {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s;
     }
-    th {
-      text-align: left;
-      font-weight: 600;
+    .endpoint:hover { border-color: rgba(255, 255, 255, 0.1); }
+    .endpoint-method {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      margin-right: 0.6rem;
+      vertical-align: middle;
+    }
+    .endpoint-path {
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      font-weight: 500;
       color: var(--text);
-      padding: 0.5rem 0.6rem;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.85rem;
+      vertical-align: middle;
     }
-    td {
-      padding: 0.4rem 0.6rem;
-      border-bottom: 1px solid var(--surface-alt);
-      color: var(--text-muted);
+    .endpoint-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin: 0.75rem 0 0;
+      line-height: 1.6;
     }
-    tr:last-child td { border-bottom: none; }
+    .endpoint-params {
+      margin-top: 1rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.85rem;
+    }
+    .param-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: baseline;
+      padding: 0.3rem 0;
+    }
+    .param-name {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent-bright);
+      min-width: 80px;
+      flex-shrink: 0;
+    }
+    .param-meta {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    .param-meta em {
+      color: var(--text-secondary);
+      font-style: normal;
+    }
+    .response-codes {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .response-code {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .response-code.success { border-color: rgba(120, 200, 140, 0.3); color: #8cd49a; }
+    .response-code.error { border-color: rgba(200, 120, 120, 0.2); color: var(--text-dim); }
+
+    /* ── Links & prose ─────────────────────────── */
+    article p { margin-bottom: 1rem; }
+    article a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    article a:hover { border-bottom-color: var(--accent); }
+    article strong { color: var(--text); font-weight: 500; }
+
+    /* ── Divider ───────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 1rem 0;
+    }
 
     /* ── Footer ────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 1.5rem 0 2.5rem;
+      padding: 2rem 0 3rem;
       text-align: center;
-      color: var(--text-muted);
+      color: var(--text-dim);
       font-size: 0.8rem;
     }
-    footer a { color: var(--accent); text-decoration: none; }
+    footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
 
-    /* ── Separator ─────────────────────────────── */
-    .sep {
-      width: 32px;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.4;
-      margin: 2.5rem 0 0.75rem;
+    /* ── Responsive ────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero { min-height: auto; padding: 4rem 0 3rem; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      .voice-gallery { grid-template-columns: 1fr 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .arch-flow { flex-direction: column; gap: 0.5rem; }
+      .arch-arrow { transform: rotate(90deg); padding: 0.3rem 0; }
     }
-
-    /* ── Animations ────────────────────────────── */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .hero h1, .hero .subtitle, .hero-cta, .hero-badges {
-      animation: fadeIn 0.5s ease-out both;
-    }
-    .hero .subtitle { animation-delay: 0.08s; }
-    .hero-cta { animation-delay: 0.14s; }
-    .hero-badges { animation-delay: 0.2s; }
-
-    @media (max-width: 500px) {
+    @media (max-width: 400px) {
       .voice-gallery { grid-template-columns: 1fr; }
-      .hero-badges { gap: 0.75rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
       }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <header class="hero">
-    <div class="hero-eyebrow">Open Source &middot; Apple Silicon &middot; Zero Cloud</div>
-    <h1>Give Claude Code a Voice</h1>
-    <p class="subtitle">Clone any voice from a 15-second YouTube clip. Hear Claude speak every response. No API key, no subscription, nothing leaves your machine.</p>
-    <a href="https://github.com/adrianwedd/afterwords" class="hero-cta">View on GitHub</a>
-    <div class="hero-badges">
-      <span>Apple Silicon M1+</span>
-      <span>~6 GB peak RAM</span>
-      <span>~20s per sentence</span>
-      <span>15 voices included</span>
+<div class="hero">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Open Source &middot; Apple Silicon &middot; Zero Cloud</div>
+      <h1>Give your code<br>a <em>voice</em></h1>
+      <p class="subtitle">Clone any voice from a 15-second YouTube clip. Run it locally on your Mac. Hear Claude Code speak every response &mdash; or use the API from anything.</p>
+      <div class="hero-actions">
+        <a href="https://github.com/adrianwedd/afterwords" class="btn-primary">View on GitHub</a>
+        <a href="#voices" class="btn-ghost">Hear the voices</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-value">15</div><div class="stat-label">Voices included</div></div>
+        <div><div class="stat-value">~6 GB</div><div class="stat-label">Peak memory</div></div>
+        <div><div class="stat-value">~20s</div><div class="stat-label">Per sentence</div></div>
+        <div><div class="stat-value">0</div><div class="stat-label">Cloud calls</div></div>
+      </div>
     </div>
-  </header>
+  </div>
+</div>
 
+<div class="container">
   <main>
   <article>
-    <p>Claude Code has <a href="https://docs.anthropic.com/en/docs/claude-code/voice-dictation"><code>/voice</code></a> &mdash; hold Space to dictate. But it&rsquo;s input only. You can talk to Claude; Claude can&rsquo;t talk back.</p>
 
-    <p>This adds the other half: <strong>text-to-speech output</strong> using a local voice-cloning server. <code>/voice</code> for input + this for output = voice conversations with Claude Code.</p>
-
-    <div class="sep"></div>
-    <h2>Setup</h2>
-
+    <section class="reveal">
+      <div class="section-label">Setup</div>
+      <div class="section-title">Five minutes to your first voice</div>
+      <p class="section-desc">The setup script checks your hardware, installs dependencies, walks you through cloning a voice from YouTube, and starts the server.</p>
 <pre><code>git clone https://github.com/adrianwedd/afterwords.git
 cd afterwords
-bash setup.sh</code></pre>
+bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
+      <p>If Claude Code is installed, setup wires a Stop hook so every response is spoken aloud. Without it, you get a standalone TTS API at <code>localhost:7860</code>.</p>
+    </section>
 
-    <p>Checks your hardware, installs dependencies, walks you through cloning a voice from YouTube, wires the Claude Code hook, starts the server. Five minutes.</p>
+    <div class="divider"></div>
 
-    <div class="sep"></div>
-    <h2>Hear the Voices</h2>
+    <section id="voices" class="reveal">
+      <div class="section-label">Voice Gallery</div>
+      <div class="section-title">15 voices, cloned from 15-second clips</div>
+      <p class="section-desc">Each sample was generated locally on an 8 GB M1 from a 15-second reference clip. Hit play to hear them.</p>
 
-    <p>15 voices cloned from 15-second clips. Each says <em>&ldquo;You&rsquo;re absolutely right. Your Claude Code session could sound like me.&rdquo;</em> &mdash; generated on an 8 GB M1.</p>
-
-    <div class="gallery-label">Female</div>
-    <div class="voice-gallery">
-      <div class="voice-card">
-        <div class="voice-name">Galadriel</div>
-        <div class="voice-source">Cate Blanchett, LOTR</div>
-        <audio controls preload="none" src="audio/galadriel.mp3" aria-label="Galadriel voice sample"></audio>
+      <div class="voice-gallery">
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Audrey</div>
+          <div class="voice-source">Audrey Hepburn, 1961</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/audrey.mp3" aria-label="Audrey voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Aurora</div>
+          <div class="voice-source">AURORA, Shower Thoughts</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/aurora.mp3" aria-label="Aurora voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Avasarala</div>
+          <div class="voice-source">Shohreh Aghdashloo, The Expanse</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/avasarala.mp3" aria-label="Avasarala voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Bardem</div>
+          <div class="voice-source">Javier Bardem, Vicky Cristina Barcelona</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/bardem.mp3" aria-label="Bardem voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Claudia</div>
+          <div class="voice-source">Claudia Black, Dragon Age</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/claudia.mp3" aria-label="Claudia voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Depp</div>
+          <div class="voice-source">Johnny Depp, interview</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/depp.mp3" aria-label="Depp voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Eartha</div>
+          <div class="voice-source">Eartha Kitt, interview</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/eartha.mp3" aria-label="Eartha voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Galadriel</div>
+          <div class="voice-source">Cate Blanchett, LOTR</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/galadriel.mp3" aria-label="Galadriel voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Loki</div>
+          <div class="voice-source">Tom Hiddleston, Avengers</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/loki.mp3" aria-label="Loki voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Marla</div>
+          <div class="voice-source">Helena Bonham Carter, Fight Club</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/marla.mp3" aria-label="Marla voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Samantha</div>
+          <div class="voice-source">Scarlett Johansson, Her</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/samantha.mp3" aria-label="Samantha voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Snape</div>
+          <div class="voice-source">Alan Rickman, Harry Potter</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/snape.mp3" aria-label="Snape voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Spock</div>
+          <div class="voice-source">Leonard Nimoy, Star Trek</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/spock.mp3" aria-label="Spock voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Tilda</div>
+          <div class="voice-source">Tilda Swinton, interview</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/tilda.mp3" aria-label="Tilda voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Vesper</div>
+          <div class="voice-source">Eva Green, Casino Royale</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/vesper.mp3" aria-label="Vesper voice sample"></audio>
+        </div></div>
       </div>
-      <div class="voice-card">
-        <div class="voice-name">Samantha</div>
-        <div class="voice-source">Scarlett Johansson, Her</div>
-        <audio controls preload="none" src="audio/samantha.mp3" aria-label="Samantha voice sample"></audio>
-      </div>
-      <div class="voice-card">
-        <div class="voice-name">Avasarala</div>
-        <div class="voice-source">Shohreh Aghdashloo, The Expanse</div>
-        <audio controls preload="none" src="audio/avasarala.mp3" aria-label="Avasarala voice sample"></audio>
-      </div>
-      <div class="voice-card">
-        <div class="voice-name">Vesper</div>
-        <div class="voice-source">Eva Green, Casino Royale</div>
-        <audio controls preload="none" src="audio/vesper.mp3" aria-label="Vesper voice sample"></audio>
-      </div>
-      <div class="voice-card">
-        <div class="voice-name">Marla</div>
-        <div class="voice-source">Helena Bonham Carter, Fight Club</div>
-        <audio controls preload="none" src="audio/marla.mp3" aria-label="Marla voice sample"></audio>
-      </div>
-      <div class="voice-card">
-        <div class="voice-name">Claudia</div>
-        <div class="voice-source">Claudia Black, Dragon Age</div>
-        <audio controls preload="none" src="audio/claudia.mp3" aria-label="Claudia voice sample"></audio>
-      </div>
-      <div class="voice-card">
-        <div class="voice-name">Aurora</div>
-        <div class="voice-source">AURORA, Shower Thoughts</div>
-        <audio controls preload="none" src="audio/aurora.mp3" aria-label="Aurora voice sample"></audio>
-      </div>
-      <div class="voice-card">
-        <div class="voice-name">Audrey</div>
-        <div class="voice-source">Audrey Hepburn, 1961</div>
-        <audio controls preload="none" src="audio/audrey.mp3" aria-label="Audrey voice sample"></audio>
-      </div>
-      <div class="voice-card">
-        <div class="voice-name">Eartha</div>
-        <div class="voice-source">Eartha Kitt, interview</div>
-        <audio controls preload="none" src="audio/eartha.mp3" aria-label="Eartha voice sample"></audio>
-      </div>
-      <div class="voice-card">
-        <div class="voice-name">Tilda</div>
-        <div class="voice-source">Tilda Swinton, interview</div>
-        <audio controls preload="none" src="audio/tilda.mp3" aria-label="Tilda voice sample"></audio>
-      </div>
-    </div>
 
-    <div class="gallery-label">Male</div>
-    <div class="voice-gallery">
-      <div class="voice-card">
-        <div class="voice-name">Snape</div>
-        <div class="voice-source">Alan Rickman, Harry Potter</div>
-        <audio controls preload="none" src="audio/snape.mp3" aria-label="Snape voice sample"></audio>
+      <p style="margin-top:1.5rem;">Add your own:</p>
+<pre><code>bash clone-voice.sh "https://youtube.com/watch?v=..." myvoice 30</code><span class="copy-hint">click to copy</span></pre>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="reveal">
+      <div class="section-label">How It Works</div>
+      <div class="section-title">Input meets output</div>
+
+      <div class="arch-flow">
+        <div class="arch-node">You speak</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node">/voice</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node">Claude responds</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node">Stop hook</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node" style="border-color: var(--border-hover); color: var(--accent);">TTS server</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node">Speaker</div>
       </div>
-      <div class="voice-card">
-        <div class="voice-name">Loki</div>
-        <div class="voice-source">Tom Hiddleston, Avengers</div>
-        <audio controls preload="none" src="audio/loki.mp3" aria-label="Loki voice sample"></audio>
+
+      <p><a href="https://docs.anthropic.com/en/docs/claude-code/voice-dictation"><code>/voice</code></a> handles input. This project handles output. Together: voice conversations.</p>
+      <p>The server uses <a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (0.6B, 8-bit) on <a href="https://github.com/ml-explore/mlx">MLX</a>. Zero-shot voice cloning &mdash; no training. A 15-second reference + transcript = cloned voice.</p>
+
+      <div class="callout">
+        <strong>Why local?</strong> Nothing leaves your machine. No API key, no rate limits, no bill. The voice is yours.
       </div>
-      <div class="voice-card">
-        <div class="voice-name">Spock</div>
-        <div class="voice-source">Leonard Nimoy, Star Trek</div>
-        <audio controls preload="none" src="audio/spock.mp3" aria-label="Spock voice sample"></audio>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="reveal">
+      <div class="section-label">API Reference</div>
+      <div class="section-title">A plain HTTP interface</div>
+      <p class="section-desc">The server runs on <code>localhost:7860</code>. No authentication. Use it from curl, scripts, other editors, web apps &mdash; anything that speaks HTTP.</p>
+
+      <div class="endpoint reveal">
+        <div>
+          <span class="endpoint-method">GET</span>
+          <span class="endpoint-path">/health</span>
+        </div>
+        <p class="endpoint-desc">Server status, loaded voices, and readiness.</p>
+<pre><code>curl localhost:7860/health | jq .</code><span class="copy-hint">click to copy</span></pre>
+<pre><code>{
+  "status": "ok",
+  "model": "mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit",
+  "backend": "mlx",
+  "model_loaded": true,
+  "ready": true,
+  "voices": ["audrey", "aurora", "avasarala", "bardem", ...],
+  "default_voice": "galadriel"
+}</code></pre>
+        <div class="response-codes">
+          <span class="response-code success">200 OK</span>
+        </div>
       </div>
-      <div class="voice-card">
-        <div class="voice-name">Bardem</div>
-        <div class="voice-source">Javier Bardem, Vicky Cristina Barcelona</div>
-        <audio controls preload="none" src="audio/bardem.mp3" aria-label="Bardem voice sample"></audio>
+
+      <div class="endpoint reveal">
+        <div>
+          <span class="endpoint-method">GET</span>
+          <span class="endpoint-path">/synthesize</span>
+        </div>
+        <p class="endpoint-desc">Generate speech from text. Returns 16-bit PCM WAV audio.</p>
+        <div class="endpoint-params">
+          <div class="param-row">
+            <span class="param-name">text</span>
+            <span class="param-meta"><em>required</em> &mdash; string, max 5000 chars</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">voice</span>
+            <span class="param-meta"><em>optional</em> &mdash; defaults to <code>galadriel</code>. Any name from /health</span>
+          </div>
+        </div>
+<pre><code># Synthesize and play
+curl "localhost:7860/synthesize?text=Hello+world&voice=snape" -o out.wav
+afplay out.wav
+
+# Pipe directly to speaker (macOS)
+curl -s "localhost:7860/synthesize?text=Testing" | afplay -</code><span class="copy-hint">click to copy</span></pre>
+        <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Response includes timing headers: <code>X-Synthesis-Time</code>, <code>X-Duration</code>, <code>X-Sample-Rate</code>.</p>
+        <div class="response-codes">
+          <span class="response-code success">200 audio/wav</span>
+          <span class="response-code error">400 unknown voice</span>
+          <span class="response-code error">400 text empty / too long</span>
+          <span class="response-code error">503 warming up</span>
+        </div>
       </div>
-      <div class="voice-card">
-        <div class="voice-name">Depp</div>
-        <div class="voice-source">Johnny Depp, interview</div>
-        <audio controls preload="none" src="audio/depp.mp3" aria-label="Depp voice sample"></audio>
+
+      <div class="endpoint reveal">
+        <div>
+          <span class="endpoint-method">CLI</span>
+          <span class="endpoint-path">clone-voice.sh</span>
+        </div>
+        <p class="endpoint-desc">Clone a new voice from a YouTube clip. The server auto-discovers new voices on restart.</p>
+<pre><code># Interactive
+bash clone-voice.sh
+
+# Non-interactive (URL, name, start-second)
+bash clone-voice.sh "https://youtube.com/watch?v=..." mycustomvoice 30
+
+# Fully automated (skip transcript confirmation)
+bash clone-voice.sh "https://youtube.com/watch?v=..." mycustomvoice 30 --yes</code><span class="copy-hint">click to copy</span></pre>
+        <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Each voice is a 700 KB WAV + JSON profile in <code>voices/</code>. Adding voices costs zero extra memory.</p>
       </div>
-    </div>
+    </section>
 
-    <p style="margin-top:1rem;">Add your own:</p>
-<pre><code>bash clone-voice.sh "https://youtube.com/watch?v=..." myvoice 30</code></pre>
+    <div class="divider"></div>
 
-    <div class="sep"></div>
-    <h2>How It Works</h2>
-
-    <div class="arch">You speak  ──▸  /voice (hold Space)  ──▸  text prompt
-Claude responds  ──▸  Stop hook  ──▸  TTS server  ──▸  speaker</div>
-
-    <p><a href="https://docs.anthropic.com/en/docs/claude-code/voice-dictation"><code>/voice</code></a> handles input. This project handles output. Together: voice conversations.</p>
-
-    <p>The server uses <a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (0.6B, 8-bit) on <a href="https://github.com/ml-explore/mlx">MLX</a>. Zero-shot voice cloning &mdash; no training. 15-second reference + transcript = cloned voice.</p>
-
-    <div class="callout">
-      <strong>Why local?</strong> Nothing leaves your machine. No API key, no rate limits, no bill. The voice is yours.
-    </div>
-
-    <div class="sep"></div>
-    <h2>Per-Project Voices</h2>
-
-    <p>The global hook uses your default voice. But you can set a different voice per project &mdash; drop a <code>.afterwords</code> file in any repo:</p>
-
-<pre><code># .afterwords (in your project root)
-snape</code></pre>
-
-    <p>The hook reads this file before each synthesis. No server restart needed &mdash; just switch projects and the voice follows. Works with Claude Code&rsquo;s <a href="https://docs.anthropic.com/en/docs/claude-code/settings">settings hierarchy</a>: project overrides global.</p>
-
-<pre><code># Different voice per project
-echo "galadriel" > ~/work/frontend/.afterwords
+    <section class="reveal">
+      <div class="section-label">Per-Project</div>
+      <div class="section-title">Different voice, different repo</div>
+      <p>Drop a <code>.afterwords</code> file in any project root. The hook reads it before each synthesis &mdash; no server restart.</p>
+<pre><code>echo "galadriel" > ~/work/frontend/.afterwords
 echo "snape"     > ~/work/backend/.afterwords
-echo "loki"      > ~/fun/side-project/.afterwords</code></pre>
+echo "loki"      > ~/fun/side-project/.afterwords</code><span class="copy-hint">click to copy</span></pre>
+    </section>
 
-    <div class="sep"></div>
-    <h2>Performance</h2>
+    <div class="divider"></div>
 
-    <table>
-      <tr><th>Metric</th><th>8 GB M1</th></tr>
-      <tr><td>Model load</td><td>~5s cached</td></tr>
-      <tr><td>Per sentence</td><td>~20s</td></tr>
-      <tr><td>Peak memory</td><td>~6 GB</td></tr>
-      <tr><td>Adding a voice</td><td>Zero extra RAM</td></tr>
-      <tr><td>Voices</td><td>15 included, unlimited custom</td></tr>
-    </table>
+    <section class="reveal">
+      <div class="section-label">Performance</div>
+      <div class="section-title">On an 8 GB M1</div>
+      <div class="info-grid">
+        <div class="info-cell"><div class="info-cell-label">Model load</div><div class="info-cell-value">~5s cached</div></div>
+        <div class="info-cell"><div class="info-cell-label">Per sentence</div><div class="info-cell-value">~20s</div></div>
+        <div class="info-cell"><div class="info-cell-label">Peak memory</div><div class="info-cell-value">~6 GB</div></div>
+        <div class="info-cell"><div class="info-cell-label">Adding a voice</div><div class="info-cell-value">0 extra RAM</div></div>
+      </div>
+    </section>
 
-    <div class="sep"></div>
-    <h2>Requirements</h2>
+    <div class="divider"></div>
 
-    <table>
-      <tr><th>What</th><th>Why</th></tr>
-      <tr><td>Apple Silicon Mac (M1+)</td><td>MLX needs Metal GPU</td></tr>
-      <tr><td>8 GB+ RAM</td><td>Model peaks at ~6 GB</td></tr>
-      <tr><td>Python 3.11+</td><td>MLX + FastAPI</td></tr>
-      <tr><td>~2 GB disk</td><td>Model weights + venv</td></tr>
-    </table>
+    <section class="reveal">
+      <div class="section-label">Requirements</div>
+      <div class="section-title">What you need</div>
+      <div class="info-grid">
+        <div class="info-cell"><div class="info-cell-label">Hardware</div><div class="info-cell-value">Apple Silicon M1+</div></div>
+        <div class="info-cell"><div class="info-cell-label">Memory</div><div class="info-cell-value">8 GB+ RAM</div></div>
+        <div class="info-cell"><div class="info-cell-label">Python</div><div class="info-cell-value">3.11+</div></div>
+        <div class="info-cell"><div class="info-cell-label">Disk</div><div class="info-cell-value">~2 GB</div></div>
+      </div>
+      <p>The setup script installs everything else. Claude Code is optional &mdash; use <code>--server-only</code> for the API without hooks.</p>
+    </section>
 
-    <p>The setup script installs everything else.</p>
+    <div class="divider"></div>
 
-    <div class="sep"></div>
-    <h2>Credits</h2>
-
-    <p><a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (Alibaba, Apache 2.0) &middot; <a href="https://github.com/Blaizzy/mlx-audio">mlx-audio</a> &middot; <a href="https://github.com/ml-explore/mlx">MLX</a> (Apple) &middot; <a href="https://docs.anthropic.com/en/docs/claude-code/">Claude Code</a> (Anthropic)</p>
-
-    <p>Originally built for <a href="https://spark.wedd.au">SPARK</a>, a robot with an inner life. Full tutorial: <a href="https://adrianwedd.com/blog/voice-cloning-qwen3-tts-mlx/">Voice Cloning with Qwen3-TTS</a>.</p>
+    <section class="reveal">
+      <div class="section-label">Credits</div>
+      <p><a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (Alibaba, Apache 2.0) &middot; <a href="https://github.com/Blaizzy/mlx-audio">mlx-audio</a> &middot; <a href="https://github.com/ml-explore/mlx">MLX</a> (Apple) &middot; <a href="https://docs.anthropic.com/en/docs/claude-code/">Claude Code</a> (Anthropic)</p>
+      <p>Originally built for <a href="https://spark.wedd.au">SPARK</a>, a robot with an inner life. Full tutorial: <a href="https://adrianwedd.com/blog/voice-cloning-qwen3-tts-mlx/">Voice Cloning with Qwen3-TTS</a>.</p>
+    </section>
 
   </article>
   </main>
@@ -476,15 +818,152 @@ echo "loki"      > ~/fun/side-project/.afterwords</code></pre>
 </div>
 
 <script>
+// ── Hero soundwave canvas ────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h, cols, time = 0, raf;
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.clientWidth;
+    h = canvas.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.scale(dpr, dpr);
+    cols = Math.floor(w / 3);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    const cy = h * 0.55;
+    const maxAmp = h * 0.25;
+
+    for (let i = 0; i < cols; i++) {
+      const x = (i / cols) * w;
+      const t = time * 0.4;
+      // layered sine waves for organic movement
+      const wave1 = Math.sin(i * 0.04 + t) * 0.5;
+      const wave2 = Math.sin(i * 0.02 - t * 0.7) * 0.3;
+      const wave3 = Math.sin(i * 0.07 + t * 1.3) * 0.2;
+      const envelope = Math.sin((i / cols) * Math.PI); // fade at edges
+      const amp = (wave1 + wave2 + wave3) * envelope * maxAmp;
+
+      const alpha = 0.12 + Math.abs(amp / maxAmp) * 0.18;
+      ctx.fillStyle = `rgba(232, 151, 107, ${alpha})`;
+      const barH = Math.max(1, Math.abs(amp));
+      ctx.fillRect(x, cy - barH, 1.5, barH * 2);
+    }
+    time += 0.016;
+    raf = requestAnimationFrame(draw);
+  }
+
+  resize();
+  draw();
+  window.addEventListener('resize', () => { resize(); });
+})();
+
+// ── Voice card waveform canvases ─────────────────────────────────
+document.querySelectorAll('.voice-card').forEach(card => {
+  const canvas = card.querySelector('.voice-wave canvas');
+  const audio = card.querySelector('audio');
+  if (!canvas || !audio) return;
+
+  const ctx = canvas.getContext('2d');
+  let animId = null;
+
+  function sizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    return { w: rect.width, h: rect.height };
+  }
+
+  // draw idle waveform
+  function drawIdle() {
+    const { w, h } = sizeCanvas();
+    ctx.clearRect(0, 0, w, h);
+    const bars = Math.floor(w / 3);
+    for (let i = 0; i < bars; i++) {
+      const x = (i / bars) * w;
+      const amp = (Math.sin(i * 0.3) * 0.3 + Math.sin(i * 0.17) * 0.2 + 0.5) * h * 0.35;
+      ctx.fillStyle = 'rgba(232, 151, 107, 0.15)';
+      ctx.fillRect(x, (h - amp) / 2, 1.5, amp);
+    }
+  }
+
+  // animated waveform during playback
+  function drawPlaying() {
+    const { w, h } = sizeCanvas();
+    const bars = Math.floor(w / 3);
+    const t = performance.now() * 0.003;
+
+    ctx.clearRect(0, 0, w, h);
+    for (let i = 0; i < bars; i++) {
+      const x = (i / bars) * w;
+      const wave = Math.sin(i * 0.15 + t * 2) * 0.4
+                 + Math.sin(i * 0.08 - t * 1.5) * 0.3
+                 + Math.sin(i * 0.22 + t * 3) * 0.3;
+      const amp = (0.3 + Math.abs(wave) * 0.7) * h * 0.7;
+      const alpha = 0.25 + Math.abs(wave) * 0.4;
+      ctx.fillStyle = `rgba(232, 151, 107, ${alpha})`;
+      ctx.fillRect(x, (h - amp) / 2, 1.5, amp);
+    }
+    animId = requestAnimationFrame(drawPlaying);
+  }
+
+  drawIdle();
+
+  audio.addEventListener('play', () => {
+    if (animId) cancelAnimationFrame(animId);
+    drawPlaying();
+  });
+  audio.addEventListener('pause', () => {
+    if (animId) { cancelAnimationFrame(animId); animId = null; }
+    drawIdle();
+  });
+  audio.addEventListener('ended', () => {
+    if (animId) { cancelAnimationFrame(animId); animId = null; }
+    drawIdle();
+  });
+});
+
+// ── Scroll reveal (IntersectionObserver) ─────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      // stagger reveals within the same observation batch
+      const delay = entry.target.closest('.voice-gallery')
+        ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 40
+        : 0;
+      setTimeout(() => entry.target.classList.add('visible'), delay);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Click to copy ────────────────────────────────────────────────
 document.querySelectorAll('pre').forEach(pre => {
   pre.addEventListener('click', () => {
-    const code = pre.querySelector('code') || pre;
+    const code = pre.querySelector('code');
+    if (!code) return;
     navigator.clipboard.writeText(code.textContent.trim()).then(() => {
-      const el = document.createElement('span');
-      el.textContent = 'copied';
-      el.style.cssText = 'position:absolute;top:0.4rem;right:0.6rem;font-family:var(--mono);font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;';
-      pre.appendChild(el);
-      setTimeout(() => el.remove(), 1200);
+      const hint = pre.querySelector('.copy-hint');
+      if (hint) {
+        hint.textContent = 'copied';
+        hint.style.color = 'var(--accent)';
+        hint.style.opacity = '1';
+        setTimeout(() => {
+          hint.textContent = 'click to copy';
+          hint.style.color = '';
+          hint.style.opacity = '';
+        }, 1500);
+      }
     });
   });
 });
