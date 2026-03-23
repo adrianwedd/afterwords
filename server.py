@@ -296,7 +296,7 @@ def synthesize(
 def main():
     parser = argparse.ArgumentParser(description="Afterwords TTS server (MLX)")
     parser.add_argument("--port", type=int, default=7860)
-    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--host", default="0.0.0.0")
     parser.add_argument("--no-warmup", action="store_true", help="Skip warmup synthesis")
     args = parser.parse_args()
 
