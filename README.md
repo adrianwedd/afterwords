@@ -67,8 +67,7 @@ The hook reads this before each synthesis. No server restart needed.
 **Global default** — edit `DEFAULT_VOICE` in `server.py` and restart:
 
 ```bash
-launchctl unload ~/Library/LaunchAgents/com.afterwords.tts-server.plist
-launchctl load ~/Library/LaunchAgents/com.afterwords.tts-server.plist
+afterwords restart
 ```
 
 **Per-request:**
@@ -145,6 +144,7 @@ Fast Claude conversations generate responses faster than TTS can synthesise. The
 ```
 afterwords/
 ├── setup.sh              ← one-command setup (detects/installs Claude Code)
+├── afterwords.sh         ← CLI for server management (symlinked to PATH)
 ├── clone-voice.sh        ← add more voices from YouTube
 ├── server.py             ← multi-voice TTS server
 ├── strip_markdown.py     ← text cleaner for TTS (also used by hooks)
@@ -192,7 +192,7 @@ afterwords/
 
 | Symptom | Fix |
 |---------|-----|
-| No voice after Claude responds | `curl localhost:7860/health` — if dead: `launchctl load ~/Library/LaunchAgents/com.afterwords.tts-server.plist` |
+| No voice after Claude responds | `afterwords status` — if dead: `afterwords start` |
 | "warming up" 503 | Wait ~30s after restart for model load + warmup |
 | Voice sounds wrong/garbled | Re-clone with a better reference clip; verify transcript accuracy |
 | 40+ seconds per request | Restart the server (model may be reloading per-request) |
@@ -218,21 +218,28 @@ Run a single test:
 pytest tests/test_strip_markdown.py::test_inline_code_keeps_content
 ```
 
-## Stopping / Uninstalling
+## Managing the Server
 
 ```bash
-# Stop the TTS server
-launchctl unload ~/Library/LaunchAgents/com.afterwords.tts-server.plist
-
-# Remove the auto-start service
-rm ~/Library/LaunchAgents/com.afterwords.tts-server.plist
-
-# Remove the Claude Code hook (edit settings.json, remove the Stop hook entry)
-# Or simply delete the hook scripts:
-rm ~/.claude/hooks/tts-hook.sh ~/.claude/hooks/tts-worker.sh ~/.claude/hooks/strip-markdown.py
+afterwords start       # start the TTS server
+afterwords stop        # stop the TTS server
+afterwords restart     # restart after config changes
+afterwords status      # show health, PID, loaded voices
+afterwords logs        # tail the server log
+afterwords voices      # list available voices
+afterwords clone       # clone a new voice from YouTube
+afterwords uninstall   # remove service and optionally hooks
 ```
 
-Setup is safe to re-run if anything breaks.
+The `afterwords` command is added to your PATH during setup. It wraps launchd service management, health checks, and voice operations into a single interface.
+
+## Uninstalling
+
+```bash
+afterwords uninstall
+```
+
+This removes the launchd service and offers to remove Claude Code hooks. Voice profiles and server code remain in the repo directory. Setup is safe to re-run if anything breaks.
 
 ## Performance
 

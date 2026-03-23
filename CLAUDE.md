@@ -17,17 +17,23 @@ bash setup.sh
 # Setup — server only, no Claude Code hooks
 bash setup.sh --server-only
 
-# Run server manually
+# Server management (CLI — symlinked to PATH by setup.sh)
+afterwords start       # start via launchd
+afterwords stop        # stop server
+afterwords restart     # restart
+afterwords status      # health, PID, loaded voices
+afterwords logs        # tail server log
+afterwords voices      # list voices (--demo to play samples)
+afterwords clone       # clone a voice from YouTube
+afterwords uninstall   # remove service + optionally hooks
+
+# Run server manually (without launchd)
 source .venv/bin/activate
 python server.py [--port 7860]
 
-# Clone a new voice
+# Clone a new voice (standalone, or via CLI above)
 bash clone-voice.sh
 bash clone-voice.sh "https://youtube.com/watch?v=..." voicename 30
-
-# Server management via launchd
-launchctl load ~/Library/LaunchAgents/com.afterwords.tts-server.plist
-launchctl unload ~/Library/LaunchAgents/com.afterwords.tts-server.plist
 
 # Test endpoints
 curl localhost:7860/health
@@ -61,4 +67,5 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
 - Model peaks at ~6 GB unified memory; no room for concurrent models on 8 GB machines
 - Voice reference files (`.wav`) and profiles (`.json`) are tracked in git — shipped with the repo for the demo site and default server voices
 - `setup.sh` conditionally installs hooks into `~/.claude/` (only when Claude Code is present) and a launchd plist (always)
+- `afterwords.sh` is a pure-bash CLI wrapper (no venv needed) symlinked to `/usr/local/bin/afterwords` by setup.sh — handles start/stop/restart/status/logs/voices/clone/uninstall
 - Shell scripts use macOS-specific tools throughout (afplay, mkdir-based locking, launchd)

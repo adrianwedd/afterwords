@@ -37,7 +37,7 @@ cd "$SCRIPT_DIR"
 
 # Temp file cleanup on any exit
 TMPFILES=()
-cleanup() { rm -rf "${TMPFILES[@]}" 2>/dev/null; }
+cleanup() { [ ${#TMPFILES[@]} -gt 0 ] && rm -rf "${TMPFILES[@]}" 2>/dev/null; true; }
 trap cleanup EXIT
 
 # ── Timing ─────────────────────────────────────────────────────────
@@ -534,6 +534,25 @@ PLISTEOF
 launchctl unload "$PLIST_PATH" 2>/dev/null || true
 launchctl load "$PLIST_PATH"
 ok "TTS server will auto-start on login"
+
+# Install CLI to PATH
+CLI_SCRIPT="${SCRIPT_DIR}/afterwords.sh"
+CLI_LINK="/usr/local/bin/afterwords"
+if [ -f "$CLI_SCRIPT" ]; then
+    if [ -L "$CLI_LINK" ] && [ "$(readlink "$CLI_LINK")" = "$CLI_SCRIPT" ]; then
+        ok "CLI already on PATH: ${CYAN}afterwords${NC}"
+    else
+        info "Adding ${CYAN}afterwords${NC} command to PATH..."
+        if ln -sf "$CLI_SCRIPT" "$CLI_LINK" 2>/dev/null; then
+            ok "CLI installed: ${CYAN}afterwords${NC}"
+        elif sudo ln -sf "$CLI_SCRIPT" "$CLI_LINK" 2>/dev/null; then
+            ok "CLI installed: ${CYAN}afterwords${NC} (sudo)"
+        else
+            warn "Could not symlink to ${CLI_LINK}"
+            info "Add manually: ${DIM}ln -s ${CLI_SCRIPT} ${CLI_LINK}${NC}"
+        fi
+    fi
+fi
 echo
 
 # ── Verify ────────────────────────────────────────────────────────
@@ -563,9 +582,9 @@ rule
 echo
 echo -e "  ${GREEN}${BOLD}✓ afterwords is ready${NC}  ${DIM}(${_ELAPSED}s)${NC}"
 echo
-echo -e "  ${DIM}server${NC}      http://localhost:7860"
-echo -e "  ${DIM}logs${NC}        tail -f /tmp/claude-tts-server.log"
-echo -e "  ${DIM}add voices${NC}  bash clone-voice.sh"
+echo -e "  ${DIM}status${NC}      afterwords status"
+echo -e "  ${DIM}logs${NC}        afterwords logs"
+echo -e "  ${DIM}add voices${NC}  afterwords clone"
 echo
 if $HAS_CLAUDE; then
     echo -e "  Claude Code will now ${BOLD}speak every response${NC}."
@@ -573,14 +592,14 @@ if $HAS_CLAUDE; then
     echo
     echo -e "  ${DIM}archives${NC}      ls ~/.claude/tts-archive/"
     echo -e "  ${DIM}per-project${NC}    echo \"snape\" > .afterwords  ${DIM}(override voice per repo)${NC}"
-    echo -e "  ${DIM}stop voice${NC}     launchctl unload ~/Library/LaunchAgents/${PLIST_NAME}.plist"
+    echo -e "  ${DIM}stop voice${NC}     afterwords stop"
 else
     echo -e "  ${BOLD}TTS API ready.${NC} Use from any tool or script:"
     echo
     echo -e "  ${DIM}synthesize${NC}    curl \"localhost:7860/synthesize?text=Hello&voice=galadriel\" -o out.wav"
     echo -e "  ${DIM}play it${NC}       afplay out.wav"
-    echo -e "  ${DIM}list voices${NC}   curl localhost:7860/health"
-    echo -e "  ${DIM}stop server${NC}   launchctl unload ~/Library/LaunchAgents/${PLIST_NAME}.plist"
+    echo -e "  ${DIM}voices${NC}        afterwords voices"
+    echo -e "  ${DIM}stop server${NC}   afterwords stop"
     echo
     echo -e "  ${DIM}To add Claude Code integration later: re-run${NC} ${CYAN}bash setup.sh${NC}"
 fi

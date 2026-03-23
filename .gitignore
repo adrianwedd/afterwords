@@ -5,3 +5,6 @@ __pycache__/
 *.m4a
 *.DS_Store
 !voices/*.wav
+
+# Afterwords TTS voice override
+.afterwords
