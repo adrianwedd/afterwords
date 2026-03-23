@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)**
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 15 voices included.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 18 voices included.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -154,7 +154,7 @@ afterwords/
 │   ├── samantha-ref.wav  ← (Scarlett Johansson, Her)
 │   ├── avasarala-ref.wav ← (Shohreh Aghdashloo, The Expanse)
 │   ├── vesper-ref.wav    ← (Eva Green, Casino Royale)
-│   └── ...               ← 15 voices included
+│   └── ...               ← 18 voices included
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration
@@ -187,6 +187,9 @@ afterwords/
 | spock | Leonard Nimoy, *Star Trek* | Measured, logical deadpan |
 | bardem | Javier Bardem, *Vicky Cristina Barcelona* | Warm, seductive Spanish |
 | depp | Johnny Depp, interview | Languid, charming |
+| data | Brent Spiner, *Star Trek TNG* | Precise, android curiosity |
+| picard | Patrick Stewart, *Star Trek* | Authoritative, measured |
+| ronan | Ronan Keating, interview | Soft Irish, reflective |
 
 ## Troubleshooting
 

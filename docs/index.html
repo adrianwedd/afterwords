@@ -6,7 +6,7 @@
   <title>Afterwords — Local Voice-Cloning TTS</title>
   <meta name="description" content="Clone any voice from a 15-second YouTube clip and hear Claude Code speak every response. Runs locally on Apple Silicon. No cloud. No subscription.">
   <meta property="og:title" content="Afterwords — Local Voice-Cloning TTS">
-  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 16 voices included. No cloud dependency.">
+  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 18 voices included. No cloud dependency.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://adrianwedd.github.io/afterwords/">
   <meta property="og:image" content="https://adrianwedd.github.io/afterwords/og-image.png">
@@ -536,7 +536,7 @@
         <a href="#voices" class="btn-ghost">Hear the voices</a>
       </div>
       <div class="hero-stats">
-        <div><div class="stat-value">16</div><div class="stat-label">Voices included</div></div>
+        <div><div class="stat-value">18</div><div class="stat-label">Voices included</div></div>
         <div><div class="stat-value">~6 GB</div><div class="stat-label">Peak memory</div></div>
         <div><div class="stat-value">~20s</div><div class="stat-label">Per sentence</div></div>
         <div><div class="stat-value">0</div><div class="stat-label">Cloud calls</div></div>
@@ -556,14 +556,14 @@
 <pre><code>git clone https://github.com/adrianwedd/afterwords.git
 cd afterwords
 bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
-      <p>If Claude Code is installed, setup wires a Stop hook so every response is spoken aloud. Without it, you get a standalone TTS API at <code>localhost:7860</code>.</p>
+      <p>Setup installs the <code>afterwords</code> command to your PATH and starts the server. If Claude Code is installed, it also wires a Stop hook so every response is spoken aloud. Without it, you get a standalone TTS API at <code>localhost:7860</code>.</p>
     </section>
 
     <div class="divider"></div>
 
     <section id="voices" class="reveal">
       <div class="section-label">Voice Gallery</div>
-      <div class="section-title">16 voices, each cloned from a 15-second clip</div>
+      <div class="section-title">18 voices, each cloned from a 15-second clip</div>
       <p class="section-desc">Each says <em>&ldquo;You are absolutely right. Your Claude Code session could sound like me.&rdquo;</em> &mdash; generated locally on an 8 GB M1.</p>
 
       <div class="voice-gallery">
@@ -598,6 +598,12 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
           <audio controls preload="none" src="audio/claudia.mp3" aria-label="Claudia voice sample"></audio>
         </div></div>
         <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Data</div>
+          <div class="voice-source">Brent Spiner, Star Trek TNG</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/data.mp3" aria-label="Data voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
           <div class="voice-name">Depp</div>
           <div class="voice-source">Johnny Depp, interview</div>
           <div class="voice-wave"><canvas></canvas></div>
@@ -616,12 +622,6 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
           <audio controls preload="none" src="audio/galadriel.mp3" aria-label="Galadriel voice sample"></audio>
         </div></div>
         <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Picard</div>
-          <div class="voice-source">Patrick Stewart, Star Trek</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/picard.mp3" aria-label="Picard voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
           <div class="voice-name">Loki</div>
           <div class="voice-source">Tom Hiddleston, Avengers</div>
           <div class="voice-wave"><canvas></canvas></div>
@@ -632,6 +632,18 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
           <div class="voice-source">Helena Bonham Carter, Fight Club</div>
           <div class="voice-wave"><canvas></canvas></div>
           <audio controls preload="none" src="audio/marla.mp3" aria-label="Marla voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Picard</div>
+          <div class="voice-source">Patrick Stewart, Star Trek</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/picard.mp3" aria-label="Picard voice sample"></audio>
+        </div></div>
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Ronan</div>
+          <div class="voice-source">Ronan Keating, interview</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/ronan.mp3" aria-label="Ronan voice sample"></audio>
         </div></div>
         <div class="voice-card reveal"><div class="voice-card-inner">
           <div class="voice-name">Samantha</div>
@@ -666,7 +678,7 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
       </div>
 
       <p style="margin-top:1.5rem;">Add your own:</p>
-<pre><code>bash clone-voice.sh "https://youtube.com/watch?v=..." myvoice 30</code><span class="copy-hint">click to copy</span></pre>
+<pre><code>afterwords clone "https://youtube.com/watch?v=..." myvoice 30</code><span class="copy-hint">click to copy</span></pre>
     </section>
 
     <div class="divider"></div>
@@ -719,7 +731,7 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
   "ready": true,
   "voices": ["audrey", "aurora", "avasarala", "bardem", ...],
   "default_voice": "galadriel"
-}</code></pre>
+}</code><span class="copy-hint">click to copy</span></pre>
         <div class="response-codes">
           <span class="response-code success">200 OK</span>
         </div>
@@ -752,6 +764,7 @@ curl -s "localhost:7860/synthesize?text=Testing" | afplay -</code><span class="c
           <span class="response-code success">200 audio/wav</span>
           <span class="response-code error">400 unknown voice</span>
           <span class="response-code error">400 text empty / too long</span>
+          <span class="response-code error">500 synthesis failed</span>
           <span class="response-code error">503 warming up</span>
         </div>
       </div>
@@ -759,17 +772,17 @@ curl -s "localhost:7860/synthesize?text=Testing" | afplay -</code><span class="c
       <div class="endpoint reveal">
         <div>
           <span class="endpoint-method">CLI</span>
-          <span class="endpoint-path">clone-voice.sh</span>
+          <span class="endpoint-path">afterwords clone</span>
         </div>
-        <p class="endpoint-desc">Clone a new voice from a YouTube clip. The server auto-discovers new voices on restart.</p>
-<pre><code># Interactive
-bash clone-voice.sh
+        <p class="endpoint-desc">Clone a new voice from a YouTube clip. Restart the server to load it.</p>
+<pre><code># Interactive (prompts for URL and name)
+afterwords clone
 
 # Non-interactive (URL, name, start-second)
-bash clone-voice.sh "https://youtube.com/watch?v=..." mycustomvoice 30
+afterwords clone "https://youtube.com/watch?v=..." mycustomvoice 30
 
 # Fully automated (skip transcript confirmation)
-bash clone-voice.sh "https://youtube.com/watch?v=..." mycustomvoice 30 --yes</code><span class="copy-hint">click to copy</span></pre>
+afterwords clone "https://youtube.com/watch?v=..." mycustomvoice 30 --yes</code><span class="copy-hint">click to copy</span></pre>
         <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Each voice is a 700 KB WAV + JSON profile in <code>voices/</code>. Adding voices costs zero extra memory.</p>
       </div>
     </section>
@@ -783,6 +796,25 @@ bash clone-voice.sh "https://youtube.com/watch?v=..." mycustomvoice 30 --yes</co
 <pre><code>echo "galadriel" > ~/work/frontend/.afterwords
 echo "snape"     > ~/work/backend/.afterwords
 echo "loki"      > ~/fun/side-project/.afterwords</code><span class="copy-hint">click to copy</span></pre>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="reveal">
+      <div class="section-label">Managing the Server</div>
+      <div class="section-title">One command for everything</div>
+      <p class="section-desc">The <code>afterwords</code> CLI is added to your PATH during setup. It wraps launchd, health checks, and voice management into a single tool.</p>
+<pre><code>afterwords start       # start the server (auto-starts on login)
+afterwords stop        # stop the server
+afterwords restart     # restart after adding voices
+afterwords status      # show health, model, loaded voices
+afterwords logs        # tail the server log
+afterwords voices      # list available voices
+afterwords clone       # clone a new voice from YouTube
+afterwords uninstall   # remove service and optionally hooks</code><span class="copy-hint">click to copy</span></pre>
+      <p>The server runs on <code>localhost:7860</code> and auto-starts on login via macOS launchd. If you prefer to run it manually:</p>
+<pre><code>source .venv/bin/activate
+python server.py</code><span class="copy-hint">click to copy</span></pre>
     </section>
 
     <div class="divider"></div>
@@ -809,7 +841,7 @@ echo "loki"      > ~/fun/side-project/.afterwords</code><span class="copy-hint">
         <div class="info-cell"><div class="info-cell-label">Python</div><div class="info-cell-value">3.11+</div></div>
         <div class="info-cell"><div class="info-cell-label">Disk</div><div class="info-cell-value">~2 GB</div></div>
       </div>
-      <p>The setup script installs everything else. Claude Code is optional &mdash; use <code>--server-only</code> for the API without hooks.</p>
+      <p>The setup script installs everything else. Claude Code is optional &mdash; use <code>bash setup.sh --server-only</code> for the API without hooks. Either way, you get the <code>afterwords</code> CLI for managing the server.</p>
     </section>
 
     <div class="divider"></div>
