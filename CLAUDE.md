@@ -59,6 +59,6 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
 
 - All synthesis is serialized — MLX Metal crashes on concurrent GPU access
 - Model peaks at ~6 GB unified memory; no room for concurrent models on 8 GB machines
-- Voice reference files (`.wav`) and profiles (`.json`) are gitignored — created locally during setup
+- Voice reference files (`.wav`) and profiles (`.json`) are tracked in git — shipped with the repo for the demo site and default server voices
 - `setup.sh` conditionally installs hooks into `~/.claude/` (only when Claude Code is present) and a launchd plist (always)
 - Shell scripts use macOS-specific tools throughout (afplay, mkdir-based locking, launchd)

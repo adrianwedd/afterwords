@@ -47,8 +47,7 @@ _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")
 VOICES = {
     "galadriel": (
         os.path.join(_VOICES_DIR, "galadriel-ref.wav"),
-        "The world is changed. I feel it in the water. I feel it in the earth. "
-        "I smell it in the air.",
+        "The world is changed. I feel it in the water. I feel it in the earth.",
     ),
     "samantha": (
         os.path.join(_VOICES_DIR, "samantha-ref.wav"),
@@ -76,7 +75,7 @@ VOICES = {
         os.path.join(_VOICES_DIR, "avasarala-ref.wav"),
         "And please let them know that if they can't, I will rain hellfire down on "
         "them all. I will freeze their assets, cancel their contracts, cripple their "
-        "business. And I have the power to do it,",
+        "business. And I have the power",
     ),
     "vesper": (
         os.path.join(_VOICES_DIR, "vesper-ref.wav"),
@@ -107,24 +106,23 @@ VOICES = {
         os.path.join(_VOICES_DIR, "snape-ref.wav"),
         "There will be no foolish wand waving or silly incantations in this class. "
         "As such, I don't expect many of you to appreciate the subtle science and "
-        "exact art that is potion making.",
+        "exact art that is",
     ),
     "loki": (
         os.path.join(_VOICES_DIR, "loki-ref.wav"),
         "Is not this simpler? Is this not your natural state? It's the unspoken "
-        "truth of humanity that you crave subjugation.",
+        "truth of humanity that you",
     ),
     "spock": (
         os.path.join(_VOICES_DIR, "spock-ref.wav"),
-        "The most curious creature, Captain. Its trilling seems to have a "
+        "Yes, sir. The most curious creature, Captain. Its trilling seems to have a "
         "tranquilizing effect on the human nervous system. Fortunately, of "
-        "course, I am immune to its",
+        "course, I am immune",
     ),
     "bardem": (
         os.path.join(_VOICES_DIR, "bardem-ref.wav"),
-        "Let's not negotiate like a contract. I came over here with no subterfuge "
-        "and presented my best offer. Now I hope you will discuss it and give me "
-        "the pleasure to take you with me to Oviedo.",
+        "Do you think that sounds pretty? Well, maybe not the way I'm "
+        "pronouncing it, of course, but",
     ),
     "depp": (
         os.path.join(_VOICES_DIR, "depp-ref.wav"),
