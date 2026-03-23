@@ -8,3 +8,19 @@ __pycache__/
 
 # Afterwords TTS voice override
 .afterwords
+
+# Doctor Who companion voices (local only)
+voices/amy-pond*
+voices/bill-potts*
+voices/clara-oswald*
+voices/donna-noble*
+voices/k9*
+voices/leela*
+voices/martha-jones*
+voices/nyssa-of-traken*
+voices/river-song*
+voices/romana*
+voices/rose-tyler*
+voices/sarah-jane-smith*
+voices/tegan-jovanka*
+voices/yasmin-khan*
