@@ -1,6 +1,6 @@
 # Afterwords — Local Voice-Cloning TTS Server
 
-**[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)**
+**[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
 Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 18 voices included.
 
