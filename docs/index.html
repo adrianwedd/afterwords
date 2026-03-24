@@ -796,6 +796,14 @@ afterwords clone "https://youtube.com/watch?v=..." mycustomvoice 30 --yes</code>
 <pre><code>echo "galadriel" > ~/work/frontend/.afterwords
 echo "snape"     > ~/work/backend/.afterwords
 echo "loki"      > ~/fun/side-project/.afterwords</code><span class="copy-hint">click to copy</span></pre>
+
+      <p style="margin-top:1.5rem;">If your project uses multiple agents, map each one to its own voice:</p>
+<pre><code># .afterwords — agent-to-voice mapping
+default: data
+clara-oswald: clara-oswald
+donna-noble: donna-noble
+k9: k9</code><span class="copy-hint">click to copy</span></pre>
+      <p>When Claude Code spawns a subagent, the hook reads its <code>agent_type</code> and looks up the matching voice. Falls back to <code>default:</code> if no match.</p>
     </section>
 
     <div class="divider"></div>

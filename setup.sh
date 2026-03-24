@@ -335,12 +335,23 @@ QUEUE="/tmp/claude-tts-queue.txt"
 WORKER_PID="/tmp/claude-tts-worker.pid"
 WORKER="$HOME/.claude/hooks/tts-worker.sh"
 
-TEXT=$(jq -r '.last_assistant_message // empty' 2>/dev/null \
+# Read stdin once (hook payload JSON)
+INPUT=$(cat)
+
+TEXT=$(printf '%s' "$INPUT" | jq -r '.last_assistant_message // empty' 2>/dev/null \
     | python3 "$HOME/.claude/hooks/strip-markdown.py" 2>/dev/null)
 [ -z "$TEXT" ] && exit 0
 
-# Encode CWD with text so worker can find per-project .afterwords
-printf '%s\t%s\n' "$PWD" "$TEXT" >> "$QUEUE"
+# Agent type (empty for main conversation, e.g. "clara-oswald" for subagents)
+AGENT=$(printf '%s' "$INPUT" | jq -r '.agent_type // empty' 2>/dev/null)
+
+# Skip built-in subagent types (their output goes to the parent, not the user)
+case "$AGENT" in
+    Explore|Plan|general-purpose) exit 0 ;;
+esac
+
+# Queue format: CWD<tab>AGENT<tab>TEXT
+printf '%s\t%s\t%s\n' "$PWD" "$AGENT" "$TEXT" >> "$QUEUE"
 
 if [ -f "$WORKER_PID" ]; then
     EXISTING=$(cat "$WORKER_PID" 2>/dev/null)
@@ -405,18 +416,30 @@ while true; do
         fi
     fi
 
-    # Queue format: CWD<tab>TEXT (tab-separated)
+    # Queue format: CWD<tab>AGENT<tab>TEXT (tab-separated)
     PROJECT_DIR=$(printf '%s' "$RAW_LINE" | cut -f1)
-    LINE=$(printf '%s' "$RAW_LINE" | cut -f2-)
+    AGENT=$(printf '%s' "$RAW_LINE" | cut -f2)
+    LINE=$(printf '%s' "$RAW_LINE" | cut -f3-)
     [ -z "$LINE" ] && continue
 
     ENCODED=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$LINE" 2>/dev/null) || continue
     STAMP=$(date +%Y%m%d-%H%M%S)
 
-    # Per-project voice: .afterwords file in project dir, else server default
+    # Resolve voice: .afterwords mapping → .afterwords single → server default
     VOICE=""
-    if [ -n "$PROJECT_DIR" ] && [ -f "$PROJECT_DIR/.afterwords" ]; then
-        VOICE=$(head -1 "$PROJECT_DIR/.afterwords" 2>/dev/null | tr -d '[:space:]')
+    AW_FILE="$PROJECT_DIR/.afterwords"
+    if [ -n "$PROJECT_DIR" ] && [ -f "$AW_FILE" ]; then
+        if grep -q ':' "$AW_FILE" 2>/dev/null; then
+            # Mapping mode: agent-name: voice-name (one per line)
+            if [ -n "$AGENT" ]; then
+                VOICE=$(grep "^${AGENT}:" "$AW_FILE" 2>/dev/null | head -1 | cut -d: -f2- | tr -d '[:space:]')
+            fi
+            # Fall back to default: entry
+            [ -z "$VOICE" ] && VOICE=$(grep "^default:" "$AW_FILE" 2>/dev/null | head -1 | cut -d: -f2- | tr -d '[:space:]')
+        else
+            # Legacy mode: first non-empty line is the voice name
+            VOICE=$(head -1 "$AW_FILE" 2>/dev/null | tr -d '[:space:]')
+        fi
     fi
     if [ -z "$VOICE" ]; then
         VOICE=$(curl -s --max-time 2 "${TTS_URL%/synthesize}/health" 2>/dev/null \

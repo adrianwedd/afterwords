@@ -62,6 +62,19 @@ echo "snape" > .afterwords     # this project uses Snape
 echo "galadriel" > .afterwords # this one uses Galadriel
 ```
 
+**Per-agent** — map agent names to voices (one per line):
+
+```
+# .afterwords
+default: data
+clara-oswald: clara-oswald
+donna-noble: donna-noble
+k9: k9
+Explore: spock
+```
+
+When Claude Code spawns a subagent, the hook reads its `agent_type` and looks up the voice from the mapping. If no match is found, it falls back to `default:`, then to the server's default voice. Built-in subagent types (Explore, Plan, general-purpose) are silently skipped.
+
 The hook reads this before each synthesis. No server restart needed.
 
 **Global default** — edit `DEFAULT_VOICE` in `server.py` and restart:
