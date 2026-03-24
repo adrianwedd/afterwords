@@ -33,7 +33,7 @@ AUTO_YES=false
 
 # Temp file cleanup
 TMPFILES=()
-cleanup() { rm -rf "${TMPFILES[@]}" 2>/dev/null; }
+cleanup() { [ ${#TMPFILES[@]} -gt 0 ] && rm -rf "${TMPFILES[@]}" 2>/dev/null; true; }
 trap cleanup EXIT
 
 echo
@@ -75,6 +75,87 @@ else
     ok "Downloaded (${DURATION}s)"
 fi
 
+# Energy analysis — show expressiveness heatmap to help pick the best segment
+if [ -z "$START_S" ] && [[ "$DURATION" =~ ^[0-9]+$ ]] && [ "$DURATION" -gt 15 ]; then
+    echo
+    echo -e "  ${BOLD}Energy map${NC} ${DIM}(louder = more expressive, pick the brightest solo section)${NC}"
+    echo
+    python3 - "$TMP_SRC" "$DURATION" <<'PYEOF'
+import sys, soundfile as sf, numpy as np
+
+data, sr = sf.read(sys.argv[1])
+if data.ndim > 1:
+    data = data.mean(axis=1)
+duration = int(sys.argv[2])
+
+# 2-second windows
+window = sr * 2
+energies = []
+for i in range(0, len(data) - window, window):
+    rms = np.sqrt(np.mean(data[i:i+window]**2))
+    energies.append(rms)
+
+if not energies:
+    sys.exit(0)
+
+max_e = max(energies)
+if max_e == 0:
+    sys.exit(0)
+
+# ANSI colours: dim → cyan → green → yellow → bright
+levels = [
+    ('\033[2m', '░'),      # very quiet
+    ('\033[0;36m', '▒'),   # quiet
+    ('\033[0;32m', '▓'),   # moderate
+    ('\033[0;33m', '█'),   # loud
+    ('\033[1;33m', '█'),   # very loud
+]
+
+# Find peak regions for recommendation
+peak_threshold = max_e * 0.7
+peak_starts = []
+for i, e in enumerate(energies):
+    if e >= peak_threshold:
+        sec = i * 2
+        if not peak_starts or sec - peak_starts[-1] > 10:
+            peak_starts.append(sec)
+
+# Print heatmap in rows of 30 bars (60 seconds per row)
+bars_per_row = 30
+for row_start in range(0, len(energies), bars_per_row):
+    row = energies[row_start:row_start + bars_per_row]
+    sec_start = row_start * 2
+    sec_end = min(sec_start + bars_per_row * 2, duration)
+
+    # Time label
+    line = f'  \033[2m{sec_start:4d}s\033[0m '
+
+    # Energy bars
+    for e in row:
+        norm = e / max_e
+        if norm < 0.15:
+            col, ch = levels[0]
+        elif norm < 0.35:
+            col, ch = levels[1]
+        elif norm < 0.55:
+            col, ch = levels[2]
+        elif norm < 0.75:
+            col, ch = levels[3]
+        else:
+            col, ch = levels[4]
+        line += f'{col}{ch}\033[0m'
+
+    line += f' \033[2m{sec_end}s\033[0m'
+    print(line)
+
+# Suggest peaks
+if peak_starts:
+    suggestions = ', '.join(f'{s}s' for s in peak_starts[:5])
+    print(f'\n  \033[0;33m★\033[0m Expressive peaks at: \033[1m{suggestions}\033[0m')
+PYEOF
+    echo
+fi
+
 # Get start time
 if [ -z "$START_S" ]; then
     echo
@@ -111,27 +192,49 @@ print(f"  {len(reduced)/sr:.1f}s, RMS={np.sqrt(np.mean(reduced**2)):.4f}")
 PYEOF
 ok "Reference saved: voices/${VOICE_NAME}-ref.wav"
 
-# Transcribe
+# Transcribe with word-level timestamps
 info "Transcribing..."
-REF_TEXT=$(python3 - "voices/${VOICE_NAME}-ref.wav" <<'PYEOF'
-import sys
+TRANSCRIPT_OUTPUT=$(python3 - "voices/${VOICE_NAME}-ref.wav" <<'PYEOF'
+import sys, json
 try:
     from faster_whisper import WhisperModel
 except ImportError:
     import subprocess
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--quiet", "faster-whisper"])
     from faster_whisper import WhisperModel
+
 model = WhisperModel("base.en", compute_type="int8")
-segments, _ = model.transcribe(sys.argv[1])
-print(" ".join(seg.text.strip() for seg in segments))
+segments, _ = model.transcribe(sys.argv[1], word_timestamps=True)
+
+words = []
+full_text = []
+for seg in segments:
+    for w in seg.words:
+        words.append({"start": w.start, "end": w.end, "word": w.word.strip(), "conf": w.probability})
+        full_text.append(w.word.strip())
+
+# Print timestamped words for display
+for w in words:
+    conf_indicator = "" if w["conf"] > 0.8 else " ?"
+    print(f'  \033[2m[{w["start"]:5.1f}s]\033[0m {w["word"]}{conf_indicator}', end='')
+print()
+
+# Print separator then full text for capture
+print("---FULLTEXT---")
+print(" ".join(full_text))
 PYEOF
 ) || fail "Transcription failed"
+
+# Split output: timestamped display (already printed) and full text
+REF_TEXT=$(echo "$TRANSCRIPT_OUTPUT" | sed -n '/---FULLTEXT---/,$ p' | tail -1)
+# Show the timestamped words
+echo "$TRANSCRIPT_OUTPUT" | sed '/---FULLTEXT---/,$ d'
 
 [ -z "$(echo "$REF_TEXT" | tr -d '[:space:]')" ] && fail "Transcript is empty — the clip may not contain speech. Try a different segment."
 
 if ! $AUTO_YES; then
     echo
-    echo -e "  ${BOLD}Transcript:${NC}"
+    echo -e "  ${BOLD}Full transcript:${NC}"
     echo -e "  ${CYAN}${REF_TEXT}${NC}"
     echo
     echo -e "  ${YELLOW}Verify this matches what you hear!${NC} Wrong transcripts = garbled voice."
@@ -158,7 +261,7 @@ info "Testing synthesis..."
 TEST_WAV="/tmp/clone-test-$$.wav"
 TMPFILES+=("$TEST_WAV")
 if curl -s --max-time 120 \
-    "http://localhost:7860/synthesize?text=Hello.+I+am+${VOICE_NAME}.&voice=${VOICE_NAME}" \
+    "http://127.0.0.1:7860/synthesize?text=Hello.+I+am+${VOICE_NAME}.&voice=${VOICE_NAME}" \
     -o "$TEST_WAV" 2>/dev/null; then
     FSIZE=$(stat -f%z "$TEST_WAV" 2>/dev/null || echo 0)
     if [ "$FSIZE" -gt 1000 ]; then
