@@ -373,7 +373,7 @@ set -uo pipefail
 QUEUE="/tmp/claude-tts-queue.txt"
 PIDFILE="/tmp/claude-tts-worker.pid"
 LOCKDIR="/tmp/claude-tts-worker.lock"
-TTS_URL="http://localhost:7860/synthesize"
+TTS_URL="http://127.0.0.1:7860/synthesize"
 ARCHIVE_DIR="$HOME/.claude/tts-archive"
 MAX_QUEUE=10
 
@@ -582,7 +582,7 @@ echo
 info "Waiting for server..."
 SERVER_OK=false
 for i in $(seq 1 60); do
-    if curl -s --max-time 2 http://localhost:7860/health | jq -e '.ready == true' &>/dev/null; then
+    if curl -s --max-time 2 http://127.0.0.1:7860/health | jq -e '.ready == true' &>/dev/null; then
         SERVER_OK=true
         break
     fi
@@ -596,7 +596,7 @@ else
     echo -e "${BOLD}${YELLOW}━━━ Setup Partially Complete ━━━${NC}"
     echo
     echo -e "  ${YELLOW}The TTS server is still starting (model download may be in progress).${NC}"
-    echo -e "  Check: ${CYAN}curl http://localhost:7860/health${NC}"
+    echo -e "  Check: ${CYAN}curl http://127.0.0.1:7860/health${NC}"
     echo -e "  Logs:  ${CYAN}tail -f /tmp/claude-tts-server.log${NC}"
 fi
 _ELAPSED=$(( $(date +%s) - _T0 ))

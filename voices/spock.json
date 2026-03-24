@@ -1,5 +1,7 @@
 {
   "name": "spock",
+  "source_url": "https://www.youtube.com/watch?v=fHAOWLhrxhQ",
   "reference_audio": "spock-ref.wav",
-  "reference_text": "Yes, sir. The most curious creature, Captain. Its trilling seems to have a  tranquilizing effect on the human nervous system. Fortunately, of  course, I am immune"
+  "reference_text": "Space, the final frontier. These are the continuing voyages of the Starship Enterprise.",
+  "segment_start_s": 491
 }
