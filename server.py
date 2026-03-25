@@ -19,9 +19,11 @@ import threading
 import time
 import warnings
 
+import numpy as np
 import soundfile as sf
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, File, Form, Query, UploadFile
 from fastapi.responses import JSONResponse, Response
+from pydantic import BaseModel
 
 logging.basicConfig(
     level=logging.INFO,
@@ -153,6 +155,45 @@ _model = None
 _model_lock = threading.Lock()
 _synth_lock = threading.Lock()  # serialise synthesis — MLX/Metal is not thread-safe
 _ready = threading.Event()
+_clone_enabled = False
+
+# Voice metadata registry: name → {emotion, duration_s, confidence, session_id}
+_voice_metadata: dict[str, dict] = {}
+
+
+def _register_voice(
+    name: str,
+    ref_audio: str,
+    ref_text: str,
+    emotion_tag: str = "neutral",
+    metadata: dict | None = None,
+):
+    """Thread-safe runtime voice registration."""
+    with _model_lock:
+        VOICES[name] = (ref_audio, ref_text)
+        _voice_metadata[name] = {
+            "emotion": emotion_tag,
+            "session_id": name.rsplit("-", 1)[0] if "-" in name else name,
+            **(metadata or {}),
+        }
+
+
+def _unregister_session(session_id: str):
+    """Remove all voice palette entries and files for a session."""
+    with _model_lock:
+        to_remove = [k for k in VOICES if k.startswith(f"{session_id}-")]
+        for name in to_remove:
+            del VOICES[name]
+            _voice_metadata.pop(name, None)
+        # Also delete files
+        for name in to_remove:
+            for ext in ("-ref.wav", ".json"):
+                path = os.path.join(_VOICES_DIR, f"{name}{ext}")
+                if os.path.exists(path):
+                    try:
+                        os.remove(path)
+                    except OSError:
+                        pass
 
 
 def _get_model():
@@ -172,8 +213,39 @@ def _get_model():
         return _model
 
 
-def _resolve_voice(voice: str) -> tuple[str, str] | None:
-    """Return (ref_audio_path, ref_text) for a voice name, or None if unknown."""
+def _resolve_voice(voice: str, emotion: str | None = None) -> tuple[str, str] | None:
+    """Return (ref_audio_path, ref_text) for a voice name.
+
+    If emotion is specified and voice looks like a session ID (no exact match),
+    find the best matching palette entry for that session.
+    """
+    # Exact match first
+    if voice in VOICES:
+        if emotion is None:
+            return VOICES[voice]
+        # Check if this exact voice has the right emotion
+        meta = _voice_metadata.get(voice, {})
+        if meta.get("emotion") == emotion:
+            return VOICES[voice]
+
+    # Session palette lookup: find entries matching session_id prefix
+    if emotion:
+        candidates = []
+        for name, meta in _voice_metadata.items():
+            if name.startswith(f"{voice}-") and meta.get("session_id", "").startswith(voice):
+                if meta.get("emotion") == emotion:
+                    candidates.append((name, meta))
+        if candidates:
+            best = max(candidates, key=lambda x: (x[1].get("duration_s", 0), x[1].get("confidence", 0)))
+            return VOICES.get(best[0])
+
+        # No emotion match — fall back to best quality entry for this session
+        all_session = [(n, m) for n, m in _voice_metadata.items() if n.startswith(f"{voice}-")]
+        if all_session:
+            best = max(all_session, key=lambda x: (x[1].get("duration_s", 0), x[1].get("confidence", 0)))
+            return VOICES.get(best[0])
+
+    # Direct lookup (no session prefix matching)
     if voice in VOICES:
         return VOICES[voice]
     return None
@@ -221,27 +293,9 @@ def health():
     }
 
 
-@app.get("/synthesize")
-def synthesize(
-    text: str = Query(..., description="Text to speak"),
-    voice: str = Query(DEFAULT_VOICE, description=f"Voice name ({', '.join(VOICES)})"),
-):
-    """Generate speech from text using cloned voice, return WAV audio."""
-    if not text.strip():
-        return JSONResponse({"error": "text is empty"}, status_code=400)
-    if len(text) > 5000:
-        return JSONResponse({"error": "text too long (max 5000 chars)"}, status_code=400)
-
-    if not _ready.is_set():
-        return JSONResponse({"error": "server warming up, try again shortly"}, status_code=503)
-
-    resolved = _resolve_voice(voice)
-    if resolved is None:
-        return JSONResponse(
-            {"error": f"unknown voice: {voice}", "available": sorted(VOICES.keys())},
-            status_code=400)
-
-    log.info("synthesize: %d chars, voice=%s", len(text), voice)
+def _synthesize_audio(text: str, resolved: tuple[str, str], voice_label: str) -> Response:
+    """Core synthesis logic shared by GET and POST /synthesize."""
+    log.info("synthesize: %d chars, voice=%s", len(text), voice_label)
 
     try:
         import tempfile
@@ -293,14 +347,218 @@ def synthesize(
         return JSONResponse({"error": "synthesis failed"}, status_code=500)
 
 
+@app.get("/synthesize")
+def synthesize(
+    text: str = Query(..., description="Text to speak"),
+    voice: str = Query(DEFAULT_VOICE, description=f"Voice name ({', '.join(VOICES)})"),
+):
+    """Generate speech from text using cloned voice, return WAV audio."""
+    if not text.strip():
+        return JSONResponse({"error": "text is empty"}, status_code=400)
+    if len(text) > 5000:
+        return JSONResponse({"error": "text too long (max 5000 chars)"}, status_code=400)
+
+    if not _ready.is_set():
+        return JSONResponse({"error": "server warming up, try again shortly"}, status_code=503)
+
+    resolved = _resolve_voice(voice)
+    if resolved is None:
+        return JSONResponse(
+            {"error": f"unknown voice: {voice}", "available": sorted(VOICES.keys())},
+            status_code=400)
+
+    return _synthesize_audio(text, resolved, voice)
+
+
+class SynthesizeRequest(BaseModel):
+    text: str
+    voice: str
+    emotion: str | None = None
+
+
+@app.post("/synthesize")
+def synthesize_post(body: SynthesizeRequest):
+    """POST version of /synthesize — accepts JSON body for sensitive text."""
+    if not _clone_enabled:
+        return JSONResponse({"error": "clone not enabled (start with --allow-clone)"}, status_code=404)
+    if not body.text.strip():
+        return JSONResponse({"error": "text is empty"}, status_code=400)
+    if len(body.text) > 5000:
+        return JSONResponse({"error": "text too long (max 5000 chars)"}, status_code=400)
+    if not _ready.is_set():
+        return JSONResponse({"error": "server warming up, try again shortly"}, status_code=503)
+
+    resolved = _resolve_voice(body.voice, emotion=body.emotion)
+    if resolved is None:
+        return JSONResponse(
+            {"error": f"unknown voice: {body.voice}", "available": sorted(VOICES.keys())},
+            status_code=400)
+
+    return _synthesize_audio(body.text, resolved, body.voice)
+
+
+@app.post("/clone")
+async def clone_voice_endpoint(
+    audio: UploadFile = File(...),
+    session_id: str = Form(...),
+    emotion: str = Form("neutral"),
+    transcript: str | None = Form(None),
+):
+    """Create a voice profile from raw audio. Denoises, optionally transcribes, registers."""
+    if not _clone_enabled:
+        return JSONResponse({"error": "clone not enabled (start with --allow-clone)"}, status_code=404)
+
+    audio_bytes = await audio.read()
+    if len(audio_bytes) < 1000:
+        return JSONResponse({"error": "audio too short"}, status_code=400)
+
+    # Count existing entries for this session to get sequence number
+    existing = [k for k in VOICES if k.startswith(f"{session_id}-")]
+    seq = len(existing) + 1
+    voice_name = f"{session_id}-{seq:03d}"
+
+    try:
+        import tempfile
+
+        import noisereduce as nr
+
+        # Save uploaded audio to temp file
+        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp_in:
+            tmp_in.write(audio_bytes)
+            tmp_in_path = tmp_in.name
+
+        # Denoise (under synth lock — noisereduce may use Metal)
+        with _synth_lock:
+            data, sr_in = sf.read(tmp_in_path)
+            if data.ndim > 1:
+                data = data.mean(axis=1)
+            reduced = nr.reduce_noise(y=data, sr=sr_in, stationary=True, prop_decrease=0.7)
+            peak = np.max(np.abs(reduced))
+            if peak > 0:
+                reduced = reduced * (0.9 / peak)
+
+        duration_s = len(reduced) / sr_in
+        if duration_s < 1.0:
+            os.unlink(tmp_in_path)
+            return JSONResponse({"error": "audio too short after processing (< 1s)"}, status_code=400)
+
+        # Determine quality from duration
+        if duration_s < 5:
+            quality = "rough"
+        elif duration_s < 15:
+            quality = "developing"
+        else:
+            quality = "good"
+
+        # Transcribe if not provided
+        transcript_confidence = 0.0
+        if not transcript:
+            try:
+                from faster_whisper import WhisperModel
+
+                whisper = WhisperModel("base.en", compute_type="int8")
+                segments, _ = whisper.transcribe(tmp_in_path)
+                words = []
+                for seg in segments:
+                    for w in seg.words or []:
+                        words.append(w.word.strip())
+                transcript = " ".join(words)
+                transcript_confidence = 0.8
+            except Exception as e:
+                log.warning("Transcription failed, using empty transcript: %s", e)
+                transcript = ""
+        else:
+            transcript_confidence = 0.9
+
+        # Save denoised audio to voices/ (atomic: write temp, rename)
+        ref_path = os.path.join(_VOICES_DIR, f"{voice_name}-ref.wav")
+        tmp_ref = ref_path + ".tmp"
+        sf.write(tmp_ref, reduced, sr_in, format="WAV", subtype="PCM_16")
+        os.rename(tmp_ref, ref_path)
+
+        # Save profile JSON
+        profile_path = os.path.join(_VOICES_DIR, f"{voice_name}.json")
+        tmp_profile = profile_path + ".tmp"
+        with open(tmp_profile, "w") as f:
+            json.dump(
+                {
+                    "name": voice_name,
+                    "session_id": session_id,
+                    "emotion": emotion,
+                    "reference_audio": f"{voice_name}-ref.wav",
+                    "reference_text": transcript,
+                    "quality": quality,
+                    "duration_s": round(duration_s, 1),
+                    "transcript_confidence": round(transcript_confidence, 2),
+                    "sequence": seq,
+                },
+                f,
+                indent=2,
+            )
+        os.rename(tmp_profile, profile_path)
+
+        # Register in runtime
+        _register_voice(
+            voice_name,
+            ref_path,
+            transcript,
+            emotion,
+            {"quality": quality, "duration_s": duration_s, "confidence": transcript_confidence},
+        )
+
+        # Cleanup temp input
+        os.unlink(tmp_in_path)
+
+        log.info(
+            "cloned: %s (session=%s, emotion=%s, quality=%s, %.1fs)",
+            voice_name,
+            session_id,
+            emotion,
+            quality,
+            duration_s,
+        )
+
+        return {
+            "voice": voice_name,
+            "emotion": emotion,
+            "quality": quality,
+            "transcript_confidence": round(transcript_confidence, 2),
+            "duration_s": round(duration_s, 1),
+            "sequence": seq,
+        }
+    except Exception as exc:
+        log.error("clone failed: %s", exc, exc_info=True)
+        return JSONResponse({"error": f"clone failed: {exc}"}, status_code=500)
+
+
+@app.delete("/session/{session_id}")
+def delete_session(session_id: str):
+    """Remove all voice palette entries and files for a session."""
+    if not _clone_enabled:
+        return JSONResponse({"error": "clone not enabled (start with --allow-clone)"}, status_code=404)
+    _unregister_session(session_id)
+    log.info("session cleaned up: %s", session_id)
+    return {"status": "ok", "session_id": session_id}
+
+
 def main():
     parser = argparse.ArgumentParser(description="Afterwords TTS server (MLX)")
     parser.add_argument("--port", type=int, default=7860)
     parser.add_argument("--host", default="0.0.0.0")
     parser.add_argument("--no-warmup", action="store_true", help="Skip warmup synthesis")
+    parser.add_argument(
+        "--allow-clone",
+        action="store_true",
+        help="Enable /clone, POST /synthesize, DELETE /session (binds to 127.0.0.1)",
+    )
     args = parser.parse_args()
 
-    global DEFAULT_VOICE
+    global DEFAULT_VOICE, _clone_enabled
+    if args.allow_clone:
+        _clone_enabled = True
+        if args.host == "0.0.0.0":
+            args.host = "127.0.0.1"
+            log.info("--allow-clone: binding to 127.0.0.1 for security")
     missing = [v for v, (p, _) in VOICES.items() if not os.path.exists(p)]
     for vname in missing:
         log.warning("Reference audio not found for '%s' — skipping", vname)
