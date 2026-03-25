@@ -200,6 +200,7 @@ afterwords/
 | Voice | Source | Character |
 |-------|--------|-----------|
 | galadriel | Cate Blanchett, *LOTR* | Ethereal, ancient, otherworldly |
+| han-solo | Harrison Ford, *Star Wars* | Sardonic, roguish confidence |
 | samantha | Scarlett Johansson, *Her* | Warm, introspective AI |
 | aurora | AURORA, *Shower Thoughts* | Dreamy, Norwegian, whimsical |
 | audrey | Audrey Hepburn, 1961 | Elegant, transatlantic |
