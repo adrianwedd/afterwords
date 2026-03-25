@@ -59,8 +59,7 @@ VOICES = {
     "aurora": (
         os.path.join(_VOICES_DIR, "aurora-ref.wav"),
         "There is one thing I always think about when I shower, it is the fact that "
-        "your body is constantly always touching something. You know? And when you are "
-        "lying in bed and you feel that your body is touching the bed, and the",
+        "your body is constantly always touching something. You know?",
     ),
     "audrey": (
         os.path.join(_VOICES_DIR, "audrey-ref.wav"),
@@ -75,9 +74,8 @@ VOICES = {
     ),
     "avasarala": (
         os.path.join(_VOICES_DIR, "avasarala-ref.wav"),
-        "And please let them know that if they can't, I will rain hellfire down on "
-        "them all. I will freeze their assets, cancel their contracts, cripple their "
-        "business. And I have the power",
+        "And please let them know that if they can't, I will rain hellfire "
+        "down on them all.",
     ),
     "vesper": (
         os.path.join(_VOICES_DIR, "vesper-ref.wav"),
@@ -88,8 +86,8 @@ VOICES = {
     "claudia": (
         os.path.join(_VOICES_DIR, "claudia-ref.wav"),
         "I play Morrigan in Dragon Age Inquisition. I love voice work because I can "
-        "usually turn up without having bathed, except on days like this when there's "
-        "cameras in the room. It's extremely playful, and it allows actors to be",
+        "usually turn up without having bathed, except on days like this when "
+        "there's cameras in the room.",
     ),
     "eartha": (
         os.path.join(_VOICES_DIR, "eartha-ref.wav"),
@@ -106,25 +104,21 @@ VOICES = {
     ),
     "snape": (
         os.path.join(_VOICES_DIR, "snape-ref.wav"),
-        "There will be no foolish wand waving or silly incantations in this class. "
-        "As such, I don't expect many of you to appreciate the subtle science and "
-        "exact art that is",
+        "There will be no foolish wand waving or silly incantations in this class.",
     ),
     "loki": (
         os.path.join(_VOICES_DIR, "loki-ref.wav"),
-        "Is not this simpler? Is this not your natural state? It's the unspoken "
-        "truth of humanity that you",
+        "Is not this simpler? Is this not your natural state?",
     ),
     "spock": (
         os.path.join(_VOICES_DIR, "spock-ref.wav"),
-        "Yes, sir. The most curious creature, Captain. Its trilling seems to have a "
-        "tranquilizing effect on the human nervous system. Fortunately, of "
-        "course, I am immune",
+        "Space, the final frontier. These are the continuing voyages of "
+        "the Starship Enterprise.",
     ),
     "bardem": (
         os.path.join(_VOICES_DIR, "bardem-ref.wav"),
-        "Do you think that sounds pretty? Well, maybe not the way I'm "
-        "pronouncing it, of course, but",
+        "What's the most you ever lost on a coin toss? The most you ever "
+        "lost on a coin toss? You need to call it. I can't call it for you.",
     ),
     "depp": (
         os.path.join(_VOICES_DIR, "depp-ref.wav"),
