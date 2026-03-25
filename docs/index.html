@@ -6,7 +6,7 @@
   <title>Afterwords — Local Voice-Cloning TTS</title>
   <meta name="description" content="Clone any voice from a 15-second YouTube clip and hear Claude Code speak every response. Runs locally on Apple Silicon. No cloud. No subscription.">
   <meta property="og:title" content="Afterwords — Local Voice-Cloning TTS">
-  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 19 voices included. No cloud dependency.">
+  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 20 voices included. No cloud dependency.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://adrianwedd.github.io/afterwords/">
   <meta property="og:image" content="https://adrianwedd.github.io/afterwords/og-image.png">
@@ -536,7 +536,7 @@
         <a href="#voices" class="btn-ghost">Hear the voices</a>
       </div>
       <div class="hero-stats">
-        <div><div class="stat-value">19</div><div class="stat-label">Voices included</div></div>
+        <div><div class="stat-value">20</div><div class="stat-label">Voices included</div></div>
         <div><div class="stat-value">~6 GB</div><div class="stat-label">Peak memory</div></div>
         <div><div class="stat-value">~20s</div><div class="stat-label">Per sentence</div></div>
         <div><div class="stat-value">0</div><div class="stat-label">Cloud calls</div></div>
@@ -563,10 +563,16 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
 
     <section id="voices" class="reveal">
       <div class="section-label">Voice Gallery</div>
-      <div class="section-title">19 voices, each cloned from a 15-second clip</div>
+      <div class="section-title">20 voices, each cloned from a 15-second clip</div>
       <p class="section-desc">Each says <em>&ldquo;You are absolutely right. Your Claude Code session could sound like me.&rdquo;</em> &mdash; generated locally on an 8 GB M1.</p>
 
       <div class="voice-gallery">
+        <div class="voice-card reveal"><div class="voice-card-inner">
+          <div class="voice-name">Attenborough</div>
+          <div class="voice-source">David Attenborough, BBC Earth</div>
+          <div class="voice-wave"><canvas></canvas></div>
+          <audio controls preload="none" src="audio/attenborough.mp3" aria-label="Attenborough voice sample"></audio>
+        </div></div>
         <div class="voice-card reveal"><div class="voice-card-inner">
           <div class="voice-name">Audrey</div>
           <div class="voice-source">Audrey Hepburn, 1961</div>
