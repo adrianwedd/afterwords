@@ -1,0 +1,23 @@
+{
+  "skill_name": "afterwords",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "say 'the spice must flow' in a dramatic voice",
+      "expected_output": "Should synthesize text using a dramatic voice (e.g. galadriel, picard) and play it via afplay",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "what voices do I have available on my TTS server?",
+      "expected_output": "Should query localhost:7860/health and list all available voices",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "set up this project to use the river-song voice by default, and clara-oswald for the Explore agent",
+      "expected_output": "Should create/edit .afterwords file with default: river-song and Explore: clara-oswald",
+      "files": []
+    }
+  ]
+}

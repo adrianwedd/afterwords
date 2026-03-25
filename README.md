@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 18 voices included.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 33 voices included (18 shipped + 15 Doctor Who companions).
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -89,7 +89,19 @@ afterwords restart
 curl "http://localhost:7860/synthesize?text=Hello&voice=samantha" -o hello.wav
 ```
 
-Newly cloned voices are auto-discovered on server restart — no code edits needed to register them. Voice reference files are created during setup (not shipped in the repo).
+Newly cloned voices are auto-discovered on server restart — no code edits needed to register them.
+
+## Claude Code Skill
+
+A Claude Code skill is included in `skill/` that enables natural-language TTS commands:
+
+```
+"say 'the spice must flow' in a dramatic voice"
+"what voices are available?"
+"set this project to use river-song"
+```
+
+The skill handles voice selection, server health checks, synthesis, and playback. Install it by pointing Claude Code at the `skill/SKILL.md` file or adding it as a plugin.
 
 ## Architecture
 
@@ -162,12 +174,14 @@ afterwords/
 ├── server.py             ← multi-voice TTS server
 ├── strip_markdown.py     ← text cleaner for TTS (also used by hooks)
 ├── tests/                ← pytest suite (26 tests, no GPU needed)
+├── skill/                ← Claude Code skill for natural-language TTS
+│   ├── SKILL.md          ← skill instructions
+│   └── scripts/speak.sh  ← synthesize + play helper
 ├── voices/
 │   ├── galadriel-ref.wav ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav  ← (Scarlett Johansson, Her)
-│   ├── avasarala-ref.wav ← (Shohreh Aghdashloo, The Expanse)
-│   ├── vesper-ref.wav    ← (Eva Green, Casino Royale)
-│   └── ...               ← 18 voices included
+│   ├── amy-pond-ref.wav  ← (Karen Gillan, Doctor Who)
+│   └── ...               ← 33 voices (18 shipped + 15 companions)
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration
@@ -203,6 +217,26 @@ afterwords/
 | data | Brent Spiner, *Star Trek TNG* | Precise, android curiosity |
 | picard | Patrick Stewart, *Star Trek* | Authoritative, measured |
 | ronan | Ronan Keating, interview | Soft Irish, reflective |
+
+### Doctor Who Companion Voices
+
+| Voice | Actor | Character |
+|-------|-------|-----------|
+| the-doctor | Tom Baker, *Day of the Doctor* | Warm, enigmatic Curator |
+| amy-pond | Karen Gillan, *Angels Take Manhattan* | Fierce, emotional farewell |
+| bill-potts | Pearl Mackie, *Twice Upon a Time* | Warm, defiant |
+| clara-oswald | Jenna Coleman, *The Name of the Doctor* | Quick, clever |
+| donna-noble | Catherine Tate, *Turn Left* | Bold, heartfelt |
+| k9 | John Leeson, *Doctor Who* | Robotic, clipped |
+| leela | Louise Jameson, Big Finish | Direct, warrior's clarity |
+| martha-jones | Freema Agyeman, *Last of the Time Lords* | Confident, commanding |
+| nyssa-of-traken | Sarah Sutton, *Terminus* | Gentle, precise |
+| river-song | Alex Kingston, *Husbands of River Song* | Theatrical, knowing |
+| romana | Lalla Ward, Big Finish | Regal, intellectual |
+| rose-tyler | Billie Piper, *Parting of the Ways* | Ethereal, powerful |
+| sarah-jane-smith | Elisabeth Sladen, *School Reunion* | Warm, investigative |
+| tegan-jovanka | Janet Fielding, *Resurrection of the Daleks* | Blunt, emotional |
+| yasmin-khan | Mandip Gill, *Power of the Doctor* | Quiet, heartfelt |
 
 ## Troubleshooting
 

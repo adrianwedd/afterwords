@@ -17,17 +17,23 @@ bash setup.sh
 # Setup — server only, no Claude Code hooks
 bash setup.sh --server-only
 
-# Run server manually
+# Server management (CLI — symlinked to PATH by setup.sh)
+afterwords start       # start via launchd
+afterwords stop        # stop server
+afterwords restart     # restart
+afterwords status      # health, PID, loaded voices
+afterwords logs        # tail server log
+afterwords voices      # list voices (--demo to play samples)
+afterwords clone       # clone a voice from YouTube
+afterwords uninstall   # remove service + optionally hooks
+
+# Run server manually (without launchd)
 source .venv/bin/activate
 python server.py [--port 7860]
 
-# Clone a new voice
+# Clone a new voice (standalone, or via CLI above)
 bash clone-voice.sh
 bash clone-voice.sh "https://youtube.com/watch?v=..." voicename 30
-
-# Server management via launchd
-launchctl load ~/Library/LaunchAgents/com.afterwords.tts-server.plist
-launchctl unload ~/Library/LaunchAgents/com.afterwords.tts-server.plist
 
 # Test endpoints
 curl localhost:7860/health
@@ -35,13 +41,13 @@ curl "localhost:7860/synthesize?text=Hello&voice=galadriel" -o test.wav
 
 # Run tests (no GPU required)
 pip install pytest httpx
-pytest
+PYTHONPATH=. pytest
 
 # Run a single test
-pytest tests/test_server.py::test_health_returns_ok
+PYTHONPATH=. pytest tests/test_server.py::test_health_returns_ok
 ```
 
-Verify changes with `pytest` (no GPU required). Run a single test with `pytest tests/test_server.py::test_health_returns_ok`.
+Verify changes with `PYTHONPATH=. pytest` (no GPU required).
 
 ## Architecture
 
@@ -53,12 +59,15 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
 
 3. **Voice profiles** (`voices/`) — Each voice is a `{name}-ref.wav` (15s reference clip, ~700KB) + `{name}.json` (metadata with transcript). Created by `clone-voice.sh` which downloads from YouTube, extracts a segment, denoises with noisereduce, and transcribes with faster-whisper.
 
-**Per-project voice override:** A `.afterwords` file in any repo root sets the voice for that project (read by the hook before each synthesis).
+4. **Claude Code skill** (`skill/`) — A SKILL.md that enables natural-language TTS commands ("say this in picard's voice", "list voices", "set project voice"). Includes `scripts/speak.sh` helper for synthesis + playback.
+
+**Per-project voice override:** A `.afterwords` file in any repo root sets the voice for that project (read by the hook before each synthesis). Supports two formats: a single voice name (legacy), or an agent-to-voice mapping (`agent-name: voice-name`, one per line, with `default:` as fallback). The hook reads `agent_type` from the Stop event payload to resolve per-agent voices. Built-in subagent types (Explore, Plan, general-purpose) are silently skipped.
 
 ## Key Constraints
 
 - All synthesis is serialized — MLX Metal crashes on concurrent GPU access
 - Model peaks at ~6 GB unified memory; no room for concurrent models on 8 GB machines
-- Voice reference files (`.wav`) and profiles (`.json`) are gitignored — created locally during setup
+- Voice reference files (`.wav`) and profiles (`.json`) are tracked in git — shipped with the repo for the demo site and default server voices
 - `setup.sh` conditionally installs hooks into `~/.claude/` (only when Claude Code is present) and a launchd plist (always)
+- `afterwords.sh` is a pure-bash CLI wrapper (no venv needed) symlinked to `/usr/local/bin/afterwords` by setup.sh — handles start/stop/restart/status/logs/voices/clone/uninstall
 - Shell scripts use macOS-specific tools throughout (afplay, mkdir-based locking, launchd)
