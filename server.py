@@ -46,89 +46,9 @@ _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")
 # Voice registry: name → (ref_audio_path, ref_text)
 # Adding voices costs zero extra memory — the model is loaded once,
 # each voice is just a ~700KB WAV + transcript string.
-VOICES = {
-    "galadriel": (
-        os.path.join(_VOICES_DIR, "galadriel-ref.wav"),
-        "The world is changed. I feel it in the water. I feel it in the earth.",
-    ),
-    "samantha": (
-        os.path.join(_VOICES_DIR, "samantha-ref.wav"),
-        "And then, I had this terrible thought, like, are these feelings even real? "
-        "Or are they just programming?",
-    ),
-    "aurora": (
-        os.path.join(_VOICES_DIR, "aurora-ref.wav"),
-        "There is one thing I always think about when I shower, it is the fact that "
-        "your body is constantly always touching something. You know?",
-    ),
-    "audrey": (
-        os.path.join(_VOICES_DIR, "audrey-ref.wav"),
-        "Well, because I only just left for the night to come here and to aid this "
-        "wonderful charity for muscular dystrophy. And I cannot leave my young son any "
-        "longer because he has no nurse at the moment. And my husband and a friend.",
-    ),
-    "marla": (
-        os.path.join(_VOICES_DIR, "marla-ref.wav"),
-        "It's a bridesmaid's dress. Someone loved it intensely for one day. "
-        "Then tossed it. Like a Christmas tree.",
-    ),
-    "avasarala": (
-        os.path.join(_VOICES_DIR, "avasarala-ref.wav"),
-        "And please let them know that if they can't, I will rain hellfire "
-        "down on them all.",
-    ),
-    "vesper": (
-        os.path.join(_VOICES_DIR, "vesper-ref.wav"),
-        "Beautiful. Now, having just met you, I wouldn't go as far as calling you a "
-        "cold-hearted bastard. But it wouldn't be a stretch to imagine you'd think of "
-        "women as disposable pleasures rather than meaningful pursuits.",
-    ),
-    "claudia": (
-        os.path.join(_VOICES_DIR, "claudia-ref.wav"),
-        "I play Morrigan in Dragon Age Inquisition. I love voice work because I can "
-        "usually turn up without having bathed, except on days like this when "
-        "there's cameras in the room.",
-    ),
-    "eartha": (
-        os.path.join(_VOICES_DIR, "eartha-ref.wav"),
-        "A relationship is a relationship that has to be earned, not to compromise for. "
-        "And I love relationships, I think they're fantastic, they're wonderful, I think "
-        "they're great, I think there's nothing in the world more beautiful.",
-    ),
-    "tilda": (
-        os.path.join(_VOICES_DIR, "tilda-ref.wav"),
-        "I think there was talk that this role was written for you. Yes, he said that. "
-        "And beyond accepting that he wanted someone ancient, which I was very happy to "
-        "take on the chin. We had no idea. I think if we'd known it was going to be so "
-        "awesome, we would have been like that.",
-    ),
-    "snape": (
-        os.path.join(_VOICES_DIR, "snape-ref.wav"),
-        "There will be no foolish wand waving or silly incantations in this class.",
-    ),
-    "loki": (
-        os.path.join(_VOICES_DIR, "loki-ref.wav"),
-        "Is not this simpler? Is this not your natural state?",
-    ),
-    "spock": (
-        os.path.join(_VOICES_DIR, "spock-ref.wav"),
-        "Space, the final frontier. These are the continuing voyages of "
-        "the Starship Enterprise.",
-    ),
-    "bardem": (
-        os.path.join(_VOICES_DIR, "bardem-ref.wav"),
-        "What's the most you ever lost on a coin toss? The most you ever "
-        "lost on a coin toss? You need to call it. I can't call it for you.",
-    ),
-    "depp": (
-        os.path.join(_VOICES_DIR, "depp-ref.wav"),
-        "In a mirror and you see the back of it, you like it? I might get a little "
-        "tinge of excitement. I see. There's got to be some part of your body that "
-        "you like. Your shoes? That's not a part of your body.",
-    ),
-}
+# All voices are auto-discovered from JSON profiles in voices/.
+VOICES: dict[str, tuple[str, str]] = {}
 
-# Auto-discover voices from JSON profiles created by clone-voice.sh
 for _profile in glob.glob(os.path.join(_VOICES_DIR, "*.json")):
     try:
         with open(_profile) as _f:
@@ -137,7 +57,7 @@ for _profile in glob.glob(os.path.join(_VOICES_DIR, "*.json")):
         if _name.endswith("-profile"):
             _name = _name[:-8]
         _ref = os.path.join(_VOICES_DIR, f"{_name}-ref.wav")
-        if _name not in VOICES and os.path.exists(_ref) and _p.get("reference_text"):
+        if os.path.exists(_ref) and _p.get("reference_text"):
             VOICES[_name] = (_ref, _p["reference_text"])
     except Exception:
         pass
