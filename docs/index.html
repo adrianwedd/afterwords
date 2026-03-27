@@ -14,6 +14,7 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://adrianwedd.github.io/afterwords/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230c0a0e'/><g fill='%23e8976b'><rect x='4' y='12' width='2' height='8' rx='1'/><rect x='8' y='9' width='2' height='14' rx='1'/><rect x='12' y='6' width='2' height='20' rx='1'/><rect x='16' y='10' width='2' height='12' rx='1'/><rect x='20' y='7' width='2' height='18' rx='1'/><rect x='24' y='11' width='2' height='10' rx='1'/><rect x='28' y='13' width='2' height='6' rx='1'/></g></svg>">
   <link rel="canonical" href="https://adrianwedd.github.io/afterwords/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -699,6 +700,7 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
       <div class="section-label">How It Works</div>
       <div class="section-title">Input meets output</div>
 
+      <p style="font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 0.5rem;">Claude Code integration</p>
       <div class="arch-flow">
         <div class="arch-node">You speak</div>
         <div class="arch-arrow">&rarr;</div>
@@ -711,6 +713,30 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
         <div class="arch-node" style="border-color: var(--border-hover); color: var(--accent);">TTS server</div>
         <div class="arch-arrow">&rarr;</div>
         <div class="arch-node">Speaker</div>
+      </div>
+
+      <p style="font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 0.5rem; margin-top: 1.5rem;">Standalone API</p>
+      <div class="arch-flow">
+        <div class="arch-node">Any client</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node">GET /synthesize</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node" style="border-color: var(--border-hover); color: var(--accent);">TTS server</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node">WAV audio</div>
+      </div>
+
+      <p style="font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 0.5rem; margin-top: 1.5rem;">Programmatic cloning (--allow-clone)</p>
+      <div class="arch-flow">
+        <div class="arch-node">Upload audio</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node">POST /clone</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node">Denoise + transcribe</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node" style="border-color: var(--border-hover); color: var(--accent);">Voice palette</div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-node">POST /synthesize</div>
       </div>
 
       <p><a href="https://docs.anthropic.com/en/docs/claude-code/voice-dictation"><code>/voice</code></a> handles input. This project handles output. Together: voice conversations.</p>
@@ -726,7 +752,7 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
     <section class="reveal">
       <div class="section-label">API Reference</div>
       <div class="section-title">A plain HTTP interface</div>
-      <p class="section-desc">The server runs on <code>localhost:7860</code>. No authentication. Use it from curl, scripts, other editors, web apps &mdash; anything that speaks HTTP.</p>
+      <p class="section-desc">The server runs on <code>localhost:7860</code>. No authentication. Use it from curl, scripts, other editors, web apps &mdash; anything that speaks HTTP. Endpoints marked <code>--allow-clone</code> require launching the server with that flag.</p>
 
       <div class="endpoint reveal">
         <div>
@@ -741,7 +767,7 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
   "backend": "mlx",
   "model_loaded": true,
   "ready": true,
-  "voices": ["audrey", "aurora", "avasarala", "bardem", ...],
+  "voices": ["attenborough", "audrey", "aurora", "avasarala", "bardem", "claudia", "data", "depp", "eartha", "galadriel", "han-solo", "loki", "marla", "picard", "ronan", "samantha", "snape", "spock", "tilda", "vesper"],
   "default_voice": "galadriel"
 }</code><span class="copy-hint">click to copy</span></pre>
         <div class="response-codes">
@@ -797,6 +823,95 @@ afterwords clone "https://youtube.com/watch?v=..." mycustomvoice 30
 afterwords clone "https://youtube.com/watch?v=..." mycustomvoice 30 --yes</code><span class="copy-hint">click to copy</span></pre>
         <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Each voice is a 700 KB WAV + JSON profile in <code>voices/</code>. Adding voices costs zero extra memory.</p>
       </div>
+
+      <div class="endpoint reveal">
+        <div>
+          <span class="endpoint-method">POST</span>
+          <span class="endpoint-path">/synthesize</span>
+        </div>
+        <p class="endpoint-desc">JSON body version of /synthesize. Supports emotion-based palette lookup for session-cloned voices. Requires <code>--allow-clone</code>.</p>
+        <div class="endpoint-params">
+          <div class="param-row">
+            <span class="param-name">text</span>
+            <span class="param-meta"><em>required</em> &mdash; string, max 5000 chars</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">voice</span>
+            <span class="param-meta"><em>required</em> &mdash; voice name or session ID</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">emotion</span>
+            <span class="param-meta"><em>optional</em> &mdash; selects the matching palette entry (e.g. <code>"cheerful"</code>, <code>"serious"</code>)</span>
+          </div>
+        </div>
+<pre><code>curl -X POST localhost:7860/synthesize \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Hello world", "voice": "my-session", "emotion": "cheerful"}' \
+  -o out.wav</code><span class="copy-hint">click to copy</span></pre>
+        <div class="response-codes">
+          <span class="response-code success">200 audio/wav</span>
+          <span class="response-code error">400 unknown voice</span>
+          <span class="response-code error">404 --allow-clone not enabled</span>
+          <span class="response-code error">503 warming up</span>
+        </div>
+      </div>
+
+      <div class="endpoint reveal">
+        <div>
+          <span class="endpoint-method">POST</span>
+          <span class="endpoint-path">/clone</span>
+        </div>
+        <p class="endpoint-desc">Create a voice profile from uploaded audio. Denoises, optionally transcribes via Whisper, and registers the voice for immediate use. Requires <code>--allow-clone</code>.</p>
+        <div class="endpoint-params">
+          <div class="param-row">
+            <span class="param-name">audio</span>
+            <span class="param-meta"><em>required</em> &mdash; WAV file upload (multipart/form-data)</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">session_id</span>
+            <span class="param-meta"><em>required</em> &mdash; groups palette entries (e.g. <code>"my-voice"</code>)</span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">emotion</span>
+            <span class="param-meta"><em>optional</em> &mdash; tag for this entry, defaults to <code>"neutral"</code></span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">transcript</span>
+            <span class="param-meta"><em>optional</em> &mdash; if omitted, auto-transcribed with Whisper</span>
+          </div>
+        </div>
+<pre><code># Clone a single voice
+curl -X POST localhost:7860/clone \
+  -F "audio=@sample.wav" \
+  -F "session_id=my-voice" \
+  -F "emotion=neutral"
+
+# Build a palette with multiple emotions
+curl -X POST localhost:7860/clone \
+  -F "audio=@cheerful.wav" -F "session_id=my-voice" -F "emotion=cheerful"
+curl -X POST localhost:7860/clone \
+  -F "audio=@serious.wav" -F "session_id=my-voice" -F "emotion=serious"</code><span class="copy-hint">click to copy</span></pre>
+        <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Returns voice name, quality rating (rough/developing/good based on duration), session ID, and sequence number. Voices are available immediately &mdash; no restart needed.</p>
+        <div class="response-codes">
+          <span class="response-code success">200 JSON</span>
+          <span class="response-code error">400 audio too short</span>
+          <span class="response-code error">404 --allow-clone not enabled</span>
+          <span class="response-code error">500 clone failed</span>
+        </div>
+      </div>
+
+      <div class="endpoint reveal">
+        <div>
+          <span class="endpoint-method">DELETE</span>
+          <span class="endpoint-path">/session/{session_id}</span>
+        </div>
+        <p class="endpoint-desc">Remove all voice palette entries and files for a session. Requires <code>--allow-clone</code>.</p>
+<pre><code>curl -X DELETE localhost:7860/session/my-voice</code><span class="copy-hint">click to copy</span></pre>
+        <div class="response-codes">
+          <span class="response-code success">200 OK</span>
+          <span class="response-code error">404 --allow-clone not enabled</span>
+        </div>
+      </div>
     </section>
 
     <div class="divider"></div>
@@ -821,6 +936,31 @@ k9: k9</code><span class="copy-hint">click to copy</span></pre>
     <div class="divider"></div>
 
     <section class="reveal">
+      <div class="section-label">Emotion Palettes</div>
+      <div class="section-title">One voice, many moods</div>
+      <p class="section-desc">Clone the same speaker multiple times with different emotional deliveries. The server groups them into a palette by session ID.</p>
+<pre><code># Clone three emotions from the same speaker
+curl -X POST localhost:7860/clone \
+  -F "audio=@neutral.wav" -F "session_id=narrator" -F "emotion=neutral"
+curl -X POST localhost:7860/clone \
+  -F "audio=@cheerful.wav" -F "session_id=narrator" -F "emotion=cheerful"
+curl -X POST localhost:7860/clone \
+  -F "audio=@serious.wav" -F "session_id=narrator" -F "emotion=serious"
+
+# Synthesize with a specific emotion
+curl -X POST localhost:7860/synthesize \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Great news!", "voice": "narrator", "emotion": "cheerful"}' \
+  -o out.wav</code><span class="copy-hint">click to copy</span></pre>
+      <p>Each palette entry gets a quality rating based on clip duration: <strong>rough</strong> (&lt;5s), <strong>developing</strong> (5&ndash;15s), <strong>good</strong> (15s+). If no emotion match is found, the server falls back to the best-quality entry for that session. Clean up with <code>DELETE /session/{id}</code>.</p>
+      <div class="callout">
+        <strong>Requires <code>--allow-clone</code>.</strong> Palette voices are ephemeral &mdash; stored in memory and on disk while the server runs. Use <code>afterwords clone</code> for permanent voices.
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="reveal">
       <div class="section-label">Managing the Server</div>
       <div class="section-title">One command for everything</div>
       <p class="section-desc">The <code>afterwords</code> CLI is added to your PATH during setup. It wraps launchd, health checks, and voice management into a single tool.</p>
@@ -834,7 +974,11 @@ afterwords clone       # clone a new voice from YouTube
 afterwords uninstall   # remove service and optionally hooks</code><span class="copy-hint">click to copy</span></pre>
       <p>The server runs on <code>localhost:7860</code> and auto-starts on login via macOS launchd. If you prefer to run it manually:</p>
 <pre><code>source .venv/bin/activate
-python server.py</code><span class="copy-hint">click to copy</span></pre>
+python server.py                  # read-only (GET endpoints only)
+python server.py --allow-clone    # enables POST /clone, POST /synthesize, DELETE /session</code><span class="copy-hint">click to copy</span></pre>
+      <div class="callout">
+        <strong>--allow-clone</strong> enables the clone and session endpoints and automatically binds to <code>127.0.0.1</code> (localhost only) for security.
+      </div>
     </section>
 
     <div class="divider"></div>
