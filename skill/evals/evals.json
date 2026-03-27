@@ -18,6 +18,80 @@
       "prompt": "set up this project to use the river-song voice by default, and clara-oswald for the Explore agent",
       "expected_output": "Should create/edit .afterwords file with default: river-song and Explore: clara-oswald",
       "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "read this error message aloud so I can hear it",
+      "expected_output": "Should synthesize the error text and play via afplay using default voice",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "clone Morgan Freeman's voice from this YouTube video: https://youtube.com/watch?v=abc123",
+      "expected_output": "Should run clone-voice.sh with the URL and a suitable voice name like 'morgan-freeman'",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "let me hear what the snape voice sounds like",
+      "expected_output": "Should synthesize a short sample with voice=snape and play it as a preview",
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "the afterwords server isn't responding, can you fix it?",
+      "expected_output": "Should check server status, check logs, and attempt restart via afterwords.sh",
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "speak this paragraph in Picard's voice: We have engaged the Borg.",
+      "expected_output": "Should synthesize the text with voice=picard and play via afplay",
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "which voice should I use for a calm, authoritative narrator?",
+      "expected_output": "Should suggest appropriate voices from the available set (e.g. attenborough, galadriel, picard) based on tone",
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "preview all the voices so I can pick one",
+      "expected_output": "Should query /health for voice list, then synthesize and play a short sample for each voice sequentially",
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "I need to upload an audio file and clone a voice programmatically via the API",
+      "expected_output": "Should explain POST /clone endpoint with multipart form upload, session_id, emotion params. Mention --allow-clone requirement.",
+      "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "synthesize speech with a cheerful emotion using a cloned voice palette",
+      "expected_output": "Should use POST /synthesize with JSON body including emotion parameter. Mention --allow-clone requirement.",
+      "files": []
+    },
+    {
+      "id": 13,
+      "prompt": "write a Python function to sort a list",
+      "expected_output": "Should NOT trigger the afterwords skill — this is a general programming task",
+      "should_trigger": false,
+      "files": []
+    },
+    {
+      "id": 14,
+      "prompt": "deploy this app to production",
+      "expected_output": "Should NOT trigger the afterwords skill — this is a deployment task",
+      "should_trigger": false,
+      "files": []
+    },
+    {
+      "id": 15,
+      "prompt": "clean up my session's cloned voices on the TTS server",
+      "expected_output": "Should use DELETE /session/{session_id} endpoint. Mention --allow-clone requirement.",
+      "files": []
     }
   ]
 }

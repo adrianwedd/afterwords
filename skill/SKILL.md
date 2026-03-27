@@ -1,6 +1,6 @@
 ---
 name: afterwords
-description: "Local voice-cloning TTS for Claude Code on Apple Silicon. Use this skill whenever the user wants to speak text aloud, synthesize speech, play audio of text, hear something in a character voice, list or preview available voices, clone a new voice from YouTube, check TTS server status, set a per-project voice, or configure agent-to-voice mappings. Also use when the user mentions 'afterwords', 'TTS', 'text to speech', 'voice clone', 'speak this', 'say this', 'read aloud', or asks about available character voices."
+description: "Local voice-cloning TTS on Apple Silicon. Trigger when the user wants to: speak/say/read text aloud, synthesize speech, hear a voice sample, list or preview voices, clone a voice from YouTube or audio, check or fix TTS server issues, set a per-project voice (.afterwords file), configure agent-to-voice mappings, use the emotion palette API, or programmatically clone via POST /clone. Keywords: afterwords, TTS, text-to-speech, voice clone, speak this, say this, read aloud, voice preview. Do NOT trigger for: general audio editing, music, speech-to-text/transcription, or unrelated server tasks."
 ---
 
 # Afterwords — Local Voice-Cloning TTS
@@ -99,6 +99,53 @@ If the server doesn't respond:
 3. Restart: `bash <repo>/afterwords.sh restart`
 4. If launchd issues: `launchctl unload ~/Library/LaunchAgents/com.afterwords.tts-server.plist && launchctl load ~/Library/LaunchAgents/com.afterwords.tts-server.plist`
 
+## Voice preview
+
+To preview a voice, synthesize a short sample and play it:
+
+```bash
+bash <repo>/skill/scripts/speak.sh "You are absolutely right. Your Claude Code session could sound like me." snape
+```
+
+To preview all voices, query `/health` for the voice list and loop through:
+
+```bash
+for voice in $(curl -s localhost:7860/health | python3 -c "import sys,json; print(' '.join(sorted(json.load(sys.stdin)['voices'])))"); do
+  echo "Playing: $voice"
+  bash <repo>/skill/scripts/speak.sh "Hello, I am $voice." "$voice"
+done
+```
+
+When a user asks to "hear" or "preview" a voice, synthesize a characteristic line and play it. Suggest voices based on the user's tone preference (authoritative: picard, attenborough, galadriel; playful: loki, depp; warm: eartha, samantha; robotic: data, k9; sci-fi: spock, han-solo).
+
+## Programmatic cloning (--allow-clone)
+
+When the server is started with `--allow-clone`, three additional endpoints are available. These are for programmatic/API-based cloning — distinct from the CLI `clone-voice.sh` which creates permanent voices.
+
+**POST /clone** — Upload audio to create a session voice:
+```bash
+curl -X POST localhost:7860/clone \
+  -F "audio=@sample.wav" \
+  -F "session_id=my-voice" \
+  -F "emotion=neutral"
+```
+Parameters: `audio` (WAV upload, required), `session_id` (required), `emotion` (optional, default "neutral"), `transcript` (optional, auto-transcribed if omitted).
+
+**POST /synthesize** — JSON body with emotion support:
+```bash
+curl -X POST localhost:7860/synthesize \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Hello", "voice": "my-voice", "emotion": "cheerful"}'
+```
+The `emotion` parameter selects a matching palette entry for the given session. Falls back to the best-quality entry if no match.
+
+**DELETE /session/{session_id}** — Clean up session voices:
+```bash
+curl -X DELETE localhost:7860/session/my-voice
+```
+
+Session voices are ephemeral. Use `clone-voice.sh` for permanent voices that persist across server restarts.
+
 ## Constraints
 
 - Apple Silicon Mac only (M1+), macOS, 8GB+ RAM
@@ -106,3 +153,4 @@ If the server doesn't respond:
 - All synthesis is serialised (one request at a time) — MLX Metal crashes on concurrent GPU access
 - Max text length: 5000 characters per request
 - Audio output: 24kHz mono WAV (PCM_16)
+- `--allow-clone` endpoints require the server to be started with that flag (auto-binds to 127.0.0.1 for security)
