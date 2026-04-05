@@ -12,6 +12,7 @@
 #   logs       Tail the server log
 #   voices     List available voices
 #   clone      Clone a new voice from YouTube
+#   codex-hook Manage the repo-local Codex CLI watcher
 #   uninstall  Remove the launchd service and optionally Claude Code hooks
 #
 set -uo pipefail
@@ -32,6 +33,9 @@ PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
 LOG_FILE="/tmp/claude-tts-server.log"
 PORT=7860
 HEALTH_URL="http://localhost:${PORT}/health"
+CODEX_WATCH_PID="/tmp/codex-tts-watch.pid"
+CODEX_WATCH_LOG="/tmp/codex-tts-watch.log"
+CODEX_WATCH_SCRIPT_REL=".claude/hooks/codex-tts-watch.sh"
 
 # Resolve the repo directory (where server.py lives)
 if [ -L "${BASH_SOURCE[0]}" ]; then
@@ -328,6 +332,73 @@ cmd_clone() {
     fi
 }
 
+cmd_codex_hook() {
+    local subcommand="${1:-status}"
+    local watcher="${REPO_DIR}/${CODEX_WATCH_SCRIPT_REL}"
+    local pid=""
+
+    case "$subcommand" in
+        start)
+            [ -f "$watcher" ] || fail "Watcher script not found at ${watcher}"
+            [ -n "${CODEX_THREAD_ID:-}" ] || fail "CODEX_THREAD_ID is not set. Run inside Codex CLI or export it first."
+
+            if [ -f "$CODEX_WATCH_PID" ]; then
+                pid=$(cat "$CODEX_WATCH_PID" 2>/dev/null)
+                if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+                    ok "Codex watcher already running (PID ${pid})"
+                    info "Thread: ${DIM}${CODEX_THREAD_ID}${NC}"
+                    info "Log: ${DIM}${CODEX_WATCH_LOG}${NC}"
+                    return 0
+                fi
+                rm -f "$CODEX_WATCH_PID"
+            fi
+
+            nohup env CODEX_THREAD_ID="$CODEX_THREAD_ID" PROJECT_DIR="$REPO_DIR" \
+                bash "$watcher" >"$CODEX_WATCH_LOG" 2>&1 &
+            pid=$!
+            echo "$pid" > "$CODEX_WATCH_PID"
+            ok "Codex watcher started (PID ${pid})"
+            info "Thread: ${DIM}${CODEX_THREAD_ID}${NC}"
+            info "Log: ${DIM}${CODEX_WATCH_LOG}${NC}"
+            ;;
+        stop)
+            if [ ! -f "$CODEX_WATCH_PID" ]; then
+                ok "Codex watcher is not running"
+                return 0
+            fi
+
+            pid=$(cat "$CODEX_WATCH_PID" 2>/dev/null)
+            if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+                kill "$pid" 2>/dev/null || true
+                sleep 1
+                if kill -0 "$pid" 2>/dev/null; then
+                    kill -9 "$pid" 2>/dev/null || true
+                fi
+                ok "Codex watcher stopped"
+            else
+                ok "Codex watcher was not running"
+            fi
+            rm -f "$CODEX_WATCH_PID"
+            ;;
+        status)
+            if [ -f "$CODEX_WATCH_PID" ]; then
+                pid=$(cat "$CODEX_WATCH_PID" 2>/dev/null)
+                if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+                    ok "Codex watcher running (PID ${pid})"
+                else
+                    warn "Codex watcher pid file exists but process is not running"
+                fi
+            else
+                warn "Codex watcher is not running"
+            fi
+            info "Log: ${DIM}${CODEX_WATCH_LOG}${NC}"
+            ;;
+        *)
+            fail "Unknown codex-hook subcommand: ${subcommand}. Use start, stop, or status."
+            ;;
+    esac
+}
+
 cmd_uninstall() {
     echo
     echo -e "  ${BOLD}afterwords${NC}  ${DIM}— uninstall${NC}"
@@ -408,15 +479,18 @@ cmd_help() {
     echo -e "    ${CYAN}logs${NC}        Tail the server log"
     echo -e "    ${CYAN}voices${NC}      List available voices"
     echo -e "    ${CYAN}clone${NC}       Clone a new voice from YouTube"
+    echo -e "    ${CYAN}codex-hook${NC}  Start or stop the Codex CLI watcher"
     echo -e "    ${CYAN}uninstall${NC}   Remove the service and optionally hooks"
     echo
     echo -e "  ${BOLD}Options:${NC}"
     echo -e "    ${DIM}voices --demo${NC}    Play a sample of each voice"
     echo -e "    ${DIM}clone URL NAME [START] [--yes]${NC}"
+    echo -e "    ${DIM}codex-hook start${NC}"
     echo
     echo -e "  ${BOLD}Examples:${NC}"
     echo -e "    ${DIM}afterwords start${NC}"
     echo -e "    ${DIM}afterwords voices --demo${NC}"
+    echo -e "    ${DIM}afterwords codex-hook start${NC}"
     echo -e "    ${DIM}afterwords clone \"https://youtube.com/watch?v=...\" gandalf 45${NC}"
     echo
 }
@@ -434,6 +508,7 @@ case "$COMMAND" in
     logs)      cmd_logs "$@" ;;
     voices)    cmd_voices "$@" ;;
     clone)     cmd_clone "$@" ;;
+    codex-hook) cmd_codex_hook "$@" ;;
     uninstall) cmd_uninstall "$@" ;;
     help|--help|-h)  cmd_help ;;
     *)
