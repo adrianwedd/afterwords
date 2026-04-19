@@ -240,14 +240,40 @@ def _warmup():
 
 @app.get("/health")
 def health():
+    # Compute voice counts per backend for observability.
+    counts: dict[str, int] = {}
+    for profile in VOICES.values():
+        counts[profile.backend] = counts.get(profile.backend, 0) + 1
+
+    loaded_backends = {}
+    for bname in backends.names():
+        b = backends.get(bname)
+        loaded_backends[bname] = {
+            "loaded": True,  # post-startup, all registered backends are loaded (D6)
+            "voice_count": counts.get(bname, 0),
+            "sample_rate": b.sample_rate,
+            "display_name": b.display_name,
+        }
+
+    # Default backend's model id — preserves legacy `model` field semantics.
+    default_profile = VOICES.get(DEFAULT_VOICE)
+    default_backend_name = default_profile.backend if default_profile else "qwen3-0.6b"
+    try:
+        default_model_id = getattr(
+            backends.get(default_backend_name), "model_id", default_backend_name
+        )
+    except KeyError:
+        default_model_id = default_backend_name
+
     return {
         "status": "ok",
-        "model": MODEL_ID,
-        "backend": "mlx",
-        "model_loaded": _model is not None,
+        "model": default_model_id,   # unchanged semantics — default backend's underlying model
+        "backend": "mlx",             # unchanged — literal runtime tag
+        "model_loaded": _ready.is_set(),
         "ready": _ready.is_set(),
         "voices": sorted(VOICES.keys()),
         "default_voice": DEFAULT_VOICE,
+        "loaded_backends": loaded_backends,
     }
 
 
