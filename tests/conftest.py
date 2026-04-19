@@ -88,9 +88,16 @@ class FakeBackend:
 # ── Autouse fixture: seed a fresh registry with FakeBackend for each test ──
 
 @pytest.fixture(autouse=True)
-def _fake_backend_registry():
-    """Replace the real backends with a single FakeBackend named 'fake' AND aliases
-    for every real backend the server or voice profiles might expect."""
+def _fake_backend_registry(request):
+    """Replace the real backends with FakeBackend aliases — unless the test is integration.
+
+    Integration tests manage the registry themselves.
+    """
+    if request.node.get_closest_marker("integration"):
+        # Integration tests manage the registry themselves.
+        yield
+        return
+
     backends.reset_for_tests()
     fake = FakeBackend()
     backends.register(fake)
