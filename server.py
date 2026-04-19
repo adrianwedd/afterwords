@@ -152,36 +152,56 @@ _synth_lock = threading.Lock()  # serialise synthesis — MLX/Metal is not threa
 _ready = threading.Event()
 _clone_enabled = False
 
-# Voice metadata registry: name → {emotion, duration_s, confidence, session_id}
-_voice_metadata: dict[str, dict] = {}
-
-
 def _register_voice(
     name: str,
+    backend_name: str,
     ref_audio: str,
-    ref_text: str,
-    emotion_tag: str = "neutral",
+    ref_text: str | None,
+    prepared: PreparedVoice,
+    emotion: str = "neutral",
     metadata: dict | None = None,
 ):
-    """Thread-safe runtime voice registration."""
+    """Thread-safe runtime voice registration. Builds a VoiceProfile."""
+    meta = metadata or {}
+    profile = VoiceProfile(
+        name=name,
+        backend=backend_name,
+        ref_audio=ref_audio,
+        ref_text=ref_text,
+        session_id=meta.get("session_id") or (name.rsplit("-", 1)[0] if "-" in name else name),
+        emotion=emotion,
+        quality=meta.get("quality"),
+        duration_s=meta.get("duration_s"),
+        confidence=meta.get("confidence"),
+        sequence=meta.get("sequence"),
+        extras=_read_only(meta.get("extras", {})),
+        prepared=prepared,
+    )
     with _model_lock:
-        VOICES[name] = (ref_audio, ref_text)
-        _voice_metadata[name] = {
-            "emotion": emotion_tag,
-            "session_id": name.rsplit("-", 1)[0] if "-" in name else name,
-            **(metadata or {}),
-        }
+        VOICES[name] = profile
 
 
 def _unregister_session(session_id: str):
-    """Remove all voice palette entries and files for a session."""
+    """Remove all voice profiles for a session + their files + any backend cleanup artifacts."""
     with _model_lock:
-        to_remove = [k for k in VOICES if k.startswith(f"{session_id}-")]
+        to_remove = [
+            name for name, profile in VOICES.items()
+            if profile.session_id == session_id
+        ]
         for name in to_remove:
-            del VOICES[name]
-            _voice_metadata.pop(name, None)
-        # Also delete files
-        for name in to_remove:
+            profile = VOICES.pop(name)
+            # Delete backend-created temp artifacts (resampled refs, cached embeddings).
+            for path in profile.prepared.cleanup_paths:
+                try:
+                    os.remove(path)
+                except OSError:
+                    pass
+            if profile.prepared.owns_temp_audio:
+                try:
+                    os.remove(profile.prepared.ref_audio_path)
+                except OSError:
+                    pass
+            # Delete the checked-in voice assets (unchanged behaviour).
             for ext in ("-ref.wav", ".json"):
                 path = os.path.join(_VOICES_DIR, f"{name}{ext}")
                 if os.path.exists(path):
