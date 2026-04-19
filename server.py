@@ -24,6 +24,33 @@ import soundfile as sf
 from fastapi import FastAPI, File, Form, Query, UploadFile
 from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel
+from dataclasses import dataclass, field
+from types import MappingProxyType
+from typing import Mapping
+
+import backends
+from backends.base import PreparedVoice, RefTextPolicy, _read_only
+
+
+@dataclass(frozen=True)
+class VoiceProfile:
+    name: str
+    backend: str
+    ref_audio: str
+    ref_text: str | None
+    session_id: str | None
+    emotion: str
+    quality: str | None
+    duration_s: float | None
+    confidence: float | None
+    sequence: int | None
+    extras: Mapping[str, object]
+    prepared: PreparedVoice
+
+    def __post_init__(self):
+        if not isinstance(self.extras, MappingProxyType):
+            object.__setattr__(self, "extras", _read_only(self.extras))
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -47,20 +74,74 @@ _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")
 # Adding voices costs zero extra memory — the model is loaded once,
 # each voice is just a ~700KB WAV + transcript string.
 # All voices are auto-discovered from JSON profiles in voices/.
-VOICES: dict[str, tuple[str, str]] = {}
+VOICES: dict[str, VoiceProfile] = {}
 
-for _profile in glob.glob(os.path.join(_VOICES_DIR, "*.json")):
-    try:
-        with open(_profile) as _f:
-            _p = json.load(_f)
-        _name = os.path.splitext(os.path.basename(_profile))[0]
-        if _name.endswith("-profile"):
-            _name = _name[:-8]
-        _ref = os.path.join(_VOICES_DIR, f"{_name}-ref.wav")
-        if os.path.exists(_ref) and _p.get("reference_text"):
-            VOICES[_name] = (_ref, _p["reference_text"])
-    except Exception:
-        pass
+def _load_voice_profiles() -> None:
+    """Walk voices/*.json and populate VOICES. Called after backends are loaded."""
+    for profile_path in glob.glob(os.path.join(_VOICES_DIR, "*.json")):
+        try:
+            with open(profile_path) as f:
+                p = json.load(f)
+        except Exception as exc:
+            log.warning("voice profile unreadable: %s: %s", profile_path, exc)
+            continue
+
+        stem = os.path.splitext(os.path.basename(profile_path))[0]
+        if stem.endswith("-profile"):
+            stem = stem[:-8]
+        name = p.get("name") or stem
+        backend_name = p.get("backend", "qwen3-0.6b")
+
+        try:
+            backend = backends.get(backend_name)
+        except KeyError:
+            log.warning(
+                "voice %r references unregistered backend %r — skipping",
+                name, backend_name,
+            )
+            continue
+
+        ref_rel = p.get("reference_audio", f"{stem}-ref.wav")
+        ref_audio = os.path.join(_VOICES_DIR, ref_rel)
+        if not os.path.exists(ref_audio):
+            log.warning("voice %r missing ref audio %s — skipping", name, ref_audio)
+            continue
+
+        ref_text = p.get("reference_text") or None
+        if backend.ref_text_policy == RefTextPolicy.REQUIRED and not ref_text:
+            log.warning(
+                "voice %r: backend %r REQUIRES ref_text but profile has none — skipping",
+                name, backend_name,
+            )
+            continue
+
+        extras = p.get("synthesis_extras", {}) or {}
+        try:
+            backend.validate_extras(extras)
+        except ValueError as exc:
+            log.warning("voice %r: invalid extras: %s — skipping", name, exc)
+            continue
+
+        try:
+            prepared = backend.prepare_voice(ref_audio, ref_text, extras)
+        except Exception as exc:
+            log.warning("voice %r: prepare_voice failed: %s — skipping", name, exc)
+            continue
+
+        VOICES[name] = VoiceProfile(
+            name=name,
+            backend=backend_name,
+            ref_audio=ref_audio,
+            ref_text=ref_text,
+            session_id=p.get("session_id"),
+            emotion=p.get("emotion", "neutral"),
+            quality=p.get("quality"),
+            duration_s=p.get("duration_s"),
+            confidence=p.get("transcript_confidence"),
+            sequence=p.get("sequence"),
+            extras=_read_only(extras),
+            prepared=prepared,
+        )
 
 DEFAULT_VOICE = "galadriel"
 
