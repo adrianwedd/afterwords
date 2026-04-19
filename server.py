@@ -279,58 +279,48 @@ def health():
     }
 
 
-def _synthesize_audio(text: str, resolved: tuple[str, str], voice_label: str) -> Response:
-    """Core synthesis logic shared by GET and POST /synthesize."""
-    log.info("synthesize: %d chars, voice=%s", len(text), voice_label)
-
+def _synthesize_audio(text: str, profile: VoiceProfile) -> Response:
+    """Core synthesis — dispatches to the voice's pinned backend."""
+    log.info("synthesize: %d chars, voice=%s, backend=%s",
+             len(text), profile.name, profile.backend)
     try:
-        import tempfile
-        model = _get_model()
-        t0 = time.time()
-
-        ref_audio, ref_text = resolved
-
-        # Serialise — MLX Metal backend crashes on concurrent access
-        with _synth_lock, tempfile.TemporaryDirectory() as tmpdir:
-            from mlx_audio.tts.generate import generate_audio
-            generate_audio(
-                text=text,
-                model=model,  # pre-loaded nn.Module, not string — skips reload
-                ref_audio=ref_audio,
-                ref_text=ref_text,
-                lang_code="en",
-                output_path=tmpdir,
-                file_prefix="out",
-                verbose=False,
-            )
-            wav_files = sorted(glob.glob(os.path.join(tmpdir, "out_*.wav")))
-            if not wav_files:
-                log.error("TTS generated no output file")
-                return JSONResponse({"error": "generation produced no audio"}, status_code=500)
-            wav_path = wav_files[0]
-            data, sr = sf.read(wav_path)
-
-        elapsed = time.time() - t0
-        duration = len(data) / sr
-
-        buf = io.BytesIO()
-        sf.write(buf, data, sr, format="WAV", subtype="PCM_16")
-        buf.seek(0)
-
-        log.info("done: %.1fs audio in %.1fs (RTF=%.2fx)", duration, elapsed, elapsed / duration if duration > 0 else 0)
-
-        return Response(
-            content=buf.read(),
-            media_type="audio/wav",
-            headers={
-                "X-Synthesis-Time": f"{elapsed:.3f}",
-                "X-Duration": f"{duration:.3f}",
-                "X-Sample-Rate": str(sr),
-            },
+        backend = backends.get(profile.backend)
+    except KeyError:
+        log.error("voice %r references unknown backend %r at dispatch time",
+                  profile.name, profile.backend)
+        return JSONResponse(
+            {"error": f"backend not loaded: {profile.backend}"},
+            status_code=500,
         )
+
+    t0 = time.time()
+    try:
+        with _synth_lock:
+            data, sr = backend.synthesize(text, profile.prepared)
     except Exception as exc:
         log.error("synthesis failed: %s", exc, exc_info=True)
         return JSONResponse({"error": "synthesis failed"}, status_code=500)
+
+    elapsed = time.time() - t0
+    duration = len(data) / sr if sr else 0
+
+    buf = io.BytesIO()
+    sf.write(buf, data, sr, format="WAV", subtype="PCM_16")
+    buf.seek(0)
+    log.info(
+        "done: %.1fs audio in %.1fs (RTF=%.2fx)",
+        duration, elapsed, elapsed / duration if duration > 0 else 0,
+    )
+    return Response(
+        content=buf.read(),
+        media_type="audio/wav",
+        headers={
+            "X-Synthesis-Time": f"{elapsed:.3f}",
+            "X-Duration": f"{duration:.3f}",
+            "X-Sample-Rate": str(sr),
+            "X-Backend": profile.backend,
+        },
+    )
 
 
 @app.get("/synthesize")
@@ -347,13 +337,13 @@ def synthesize(
     if not _ready.is_set():
         return JSONResponse({"error": "server warming up, try again shortly"}, status_code=503)
 
-    resolved = _resolve_voice(voice)
-    if resolved is None:
+    profile = _resolve_voice(voice)
+    if profile is None:
         return JSONResponse(
             {"error": f"unknown voice: {voice}", "available": sorted(VOICES.keys())},
             status_code=400)
 
-    return _synthesize_audio(text, resolved, voice)
+    return _synthesize_audio(text, profile)
 
 
 class SynthesizeRequest(BaseModel):
@@ -374,13 +364,13 @@ def synthesize_post(body: SynthesizeRequest):
     if not _ready.is_set():
         return JSONResponse({"error": "server warming up, try again shortly"}, status_code=503)
 
-    resolved = _resolve_voice(body.voice, emotion=body.emotion)
-    if resolved is None:
+    profile = _resolve_voice(body.voice, emotion=body.emotion)
+    if profile is None:
         return JSONResponse(
             {"error": f"unknown voice: {body.voice}", "available": sorted(VOICES.keys())},
             status_code=400)
 
-    return _synthesize_audio(body.text, resolved, body.voice)
+    return _synthesize_audio(body.text, profile)
 
 
 @app.post("/clone")
