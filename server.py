@@ -208,42 +208,33 @@ def _get_model():
         return _model
 
 
-def _resolve_voice(voice: str, emotion: str | None = None) -> tuple[str, str] | None:
-    """Return (ref_audio_path, ref_text) for a voice name.
-
-    If emotion is specified and voice looks like a session ID (no exact match),
-    find the best matching palette entry for that session.
-    """
+def _resolve_voice(voice: str, emotion: str | None = None) -> VoiceProfile | None:
+    """Return VoiceProfile for a voice name, honouring session palettes + emotion fallback."""
     # Exact match first
     if voice in VOICES:
-        if emotion is None:
-            return VOICES[voice]
-        # Check if this exact voice has the right emotion
-        meta = _voice_metadata.get(voice, {})
-        if meta.get("emotion") == emotion:
-            return VOICES[voice]
+        profile = VOICES[voice]
+        if emotion is None or profile.emotion == emotion:
+            return profile
 
-    # Session palette lookup: find entries matching session_id prefix
+    # Session palette lookup — match by VoiceProfile.session_id field
     if emotion:
-        candidates = []
-        for name, meta in _voice_metadata.items():
-            if name.startswith(f"{voice}-") and meta.get("session_id", "").startswith(voice):
-                if meta.get("emotion") == emotion:
-                    candidates.append((name, meta))
+        candidates = [
+            p for p in VOICES.values()
+            if p.session_id == voice and p.emotion == emotion
+        ]
         if candidates:
-            best = max(candidates, key=lambda x: (x[1].get("duration_s", 0), x[1].get("confidence", 0)))
-            return VOICES.get(best[0])
+            return max(
+                candidates,
+                key=lambda p: (p.duration_s or 0, p.confidence or 0),
+            )
+        session_entries = [p for p in VOICES.values() if p.session_id == voice]
+        if session_entries:
+            return max(
+                session_entries,
+                key=lambda p: (p.duration_s or 0, p.confidence or 0),
+            )
 
-        # No emotion match — fall back to best quality entry for this session
-        all_session = [(n, m) for n, m in _voice_metadata.items() if n.startswith(f"{voice}-")]
-        if all_session:
-            best = max(all_session, key=lambda x: (x[1].get("duration_s", 0), x[1].get("confidence", 0)))
-            return VOICES.get(best[0])
-
-    # Direct lookup (no session prefix matching)
-    if voice in VOICES:
-        return VOICES[voice]
-    return None
+    return VOICES.get(voice)
 
 
 def _warmup():
