@@ -214,6 +214,23 @@ import sys, json
 for v in json.load(sys.stdin).get('voices', []):
     print(f'    \033[0;36m{v}\033[0m')
 "
+        echo
+        info "Backends:"
+        echo "$HEALTH_JSON" | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+lb = data.get('loaded_backends', {})
+if not lb:
+    print('    \033[2m(loaded_backends not reported)\033[0m')
+else:
+    for name in sorted(lb.keys()):
+        b = lb[name]
+        loaded = b.get('loaded', False)
+        vc = b.get('voice_count', 0)
+        sr = b.get('sample_rate', '?')
+        mark = '\033[0;32m✓\033[0m' if loaded else '\033[0;33m⚠\033[0m'
+        print(f'    {mark} \033[0;36m{name:<15}\033[0m \033[2m{vc} voices, {sr} Hz\033[0m')
+"
     else
         warn "Server running but /health not responding (still warming up?)"
     fi
@@ -245,18 +262,31 @@ cmd_voices() {
     rule
     echo
 
+    export REPO_DIR
+
     # Try live server first
     if health_check; then
         local default_voice
         default_voice=$(echo "$HEALTH_JSON" | python3 -c "import sys,json; print(json.load(sys.stdin).get('default_voice', ''))")
 
         echo "$HEALTH_JSON" | python3 -c "
-import sys, json
+import sys, json, os, glob
 data = json.load(sys.stdin)
 default = data.get('default_voice', '')
+voices_dir = os.path.join(os.environ.get('REPO_DIR', '.'), 'voices')
+# Map each voice name → backend by reading voices/*.json (fall back to qwen3-0.6b default)
+backends_by_voice = {}
+for jf in glob.glob(os.path.join(voices_dir, '*.json')):
+    try:
+        with open(jf) as f:
+            p = json.load(f)
+        backends_by_voice[p.get('name') or os.path.basename(jf)[:-5]] = p.get('backend', 'qwen3-0.6b')
+    except Exception:
+        pass
 for v in data.get('voices', []):
+    b = backends_by_voice.get(v, 'qwen3-0.6b')
     marker = ' (default)' if v == default else ''
-    print(f'    \033[0;36m{v}\033[0m\033[2m{marker}\033[0m')
+    print(f'    \033[0;36m{v:<30}\033[0m \033[2m{b}{marker}\033[0m')
 "
     else
         # Fallback: read voice profiles from disk
@@ -265,9 +295,11 @@ for v in data.get('voices', []):
         local count=0
         for f in "$REPO_DIR"/voices/*.json; do
             [ -f "$f" ] || continue
-            local name
-            name=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['name'])" "$f" 2>/dev/null || basename "$f" .json)
-            echo -e "    ${CYAN}${name}${NC}"
+            local info_line
+            info_line=$(python3 -c "import json,sys; p=json.load(open(sys.argv[1])); print(f\"{p.get('name', '?')}|{p.get('backend', 'qwen3-0.6b')}\")" "$f" 2>/dev/null || echo "$(basename "$f" .json)|?")
+            local name="${info_line%|*}"
+            local backend="${info_line##*|}"
+            printf "    \033[0;36m%-30s\033[0m \033[2m%s\033[0m\n" "$name" "$backend"
             count=$((count + 1))
         done
         if [ "$count" -eq 0 ]; then
