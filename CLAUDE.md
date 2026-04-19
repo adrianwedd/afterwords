@@ -53,7 +53,7 @@ Verify changes with `pytest` (no GPU required). Run a single test with `pytest t
 
 The server (server.py) and voice cloning (clone-voice.sh) are fully independent of Claude Code. The Claude Code integration is an optional layer installed by setup.sh when Claude Code is detected.
 
-1. **server.py** — FastAPI/Uvicorn TTS server on `localhost:7860`. Lazy-loads the Qwen3-TTS model once (`_model_lock`), serializes all synthesis through `_synth_lock` (MLX Metal is not thread-safe). Voices are hardcoded defaults + auto-discovered JSON profiles from `voices/`. Two endpoints: `GET /health` and `GET /synthesize`.
+1. **server.py** — FastAPI/Uvicorn TTS server on `localhost:7860`. Preloads four cloning backends via `backends.register_all()` at startup, serializes all synthesis through `_synth_lock` (MLX Metal is not thread-safe across backends). Voice profiles pin to a backend via the `backend` JSON field; dispatch is `backend = backends.get(profile.backend); backend.synthesize(text, profile.prepared)`. Voices are hardcoded defaults + auto-discovered JSON profiles from `voices/`. Two endpoints: `GET /health` and `GET /synthesize`.
 
 2. **Claude Code hooks** (`~/.claude/hooks/`, optional) — `tts-hook.sh` fires on Stop events, extracts response text, passes through `strip-markdown.py`, and queues for synthesis. `tts-worker.sh` processes the queue (max 10 items) with `mkdir`-based locking (no `flock` on macOS), plays WAV via `afplay`, archives as MP3. Only installed when Claude Code is present.
 
@@ -63,10 +63,23 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
 
 4. **Claude Code skill** (`skill/`) — A SKILL.md that enables natural-language TTS commands ("say this in picard's voice", "list voices", "set project voice"). Includes `scripts/speak.sh` helper for synthesis + playback.
 
+## Backends
+
+The `backends/` package exposes a `Backend` Protocol (in `backends/base.py`) and a registry (`backends/__init__.py`). Each backend is a single Python file implementing `load / validate_extras / prepare_voice / synthesize`. Registered shipped backends:
+
+| Name | Size | Sample rate | ref_text policy |
+|------|------|-------------|-----------------|
+| `qwen3-0.6b` | 0.6B | 24 kHz | REQUIRED |
+| `qwen3-1.7b` | 1.7B | 24 kHz | REQUIRED |
+| `chatterbox` | 0.8B (fp16) | 24 kHz | OPTIONAL |
+| `voxcpm-1.5` | 2B (bf16) | 44.1 kHz | OPTIONAL |
+
+Adding a backend: create `backends/newmodel.py` implementing the Backend protocol, then add one line to `register_all()` in `backends/__init__.py`. The registry CLI (`python -m backends list | max-sample-rate | slug <name>`) is used by `clone-voice.sh` to stay backend-aware.
+
 ## Key Constraints
 
-- All synthesis is serialized — MLX Metal crashes on concurrent GPU access
-- Model peaks at ~6 GB unified memory; no room for concurrent models on 8 GB machines
+- Four cloning backends (Qwen3 0.6B + 1.7B, Chatterbox fp16, VoxCPM 1.5) preload at boot (~10 GB total). Requires 16 GB+ unified memory; designed for 32 GB.
+- All synthesis is serialized through `_synth_lock` — MLX Metal is single-GPU, regardless of backend
 - Voice reference files (`.wav`) and profiles (`.json`) are tracked in git — shipped with the repo for the demo site and default server voices
 - `setup.sh` conditionally installs hooks into `~/.claude/` (only when Claude Code is present) and a launchd plist (always)
 - `afterwords.sh` is a pure-bash CLI wrapper (no venv needed) symlinked to `/usr/local/bin/afterwords` by setup.sh — handles start/stop/restart/status/logs/voices/clone/uninstall
