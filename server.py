@@ -487,6 +487,10 @@ async def clone_voice_endpoint(
         # REQUIRED-policy backends need a transcript.
         if backend_obj.ref_text_policy == RefTextPolicy.REQUIRED and not transcript:
             os.unlink(tmp_in_path)
+            try:
+                os.unlink(ref_path)
+            except OSError:
+                pass
             return JSONResponse(
                 {"error": f"backend {backend} requires ref_text; transcription failed"},
                 status_code=400,
@@ -499,6 +503,10 @@ async def clone_voice_endpoint(
                 backend_obj.validate_extras(extras)
             except ValueError as exc:
                 os.unlink(tmp_in_path)
+                try:
+                    os.unlink(ref_path)
+                except OSError:
+                    pass
                 return JSONResponse(
                     {"error": f"invalid extras for backend {backend}: {exc}"},
                     status_code=400,
@@ -508,6 +516,10 @@ async def clone_voice_endpoint(
             except Exception as exc:
                 log.error("prepare_voice failed: %s", exc, exc_info=True)
                 os.unlink(tmp_in_path)
+                try:
+                    os.unlink(ref_path)
+                except OSError:
+                    pass
                 return JSONResponse(
                     {"error": f"prepare_voice failed: {exc}"},
                     status_code=500,
@@ -566,6 +578,17 @@ async def clone_voice_endpoint(
         }
     except Exception as exc:
         log.error("clone failed: %s", exc, exc_info=True)
+        # Best-effort cleanup of any artifacts created before the failure.
+        try:
+            if 'tmp_in_path' in locals():
+                os.unlink(tmp_in_path)
+        except OSError:
+            pass
+        try:
+            if 'ref_path' in locals():
+                os.unlink(ref_path)
+        except OSError:
+            pass
         return JSONResponse({"error": f"clone failed: {exc}"}, status_code=500)
 
 
