@@ -76,9 +76,9 @@ def test_synthesize_default_voice(client, sample_voice):
 def test_resolve_voice_known(sample_voice):
     result = server._resolve_voice(sample_voice)
     assert result is not None
-    path, text = result
-    assert isinstance(path, str)
-    assert isinstance(text, str)
+    assert isinstance(result.ref_audio, str)
+    assert isinstance(result.ref_text, str)
+    assert result.backend == "fake"
 
 
 def test_resolve_voice_unknown():
@@ -178,11 +178,25 @@ def test_post_synthesize_disabled_by_default(client):
 # --- DELETE /session tests ---
 
 
-def test_delete_session(client):
+def test_delete_session(client, tmp_path):
     """DELETE /session removes palette entries."""
+    import backends as _backends
+    _backend = _backends.get("fake")
+    wav_a = str(tmp_path / "a.wav")
+    wav_b = str(tmp_path / "b.wav")
+    # Write minimal WAV stubs so _register_voice doesn't error on missing files.
+    import struct as _struct
+    for p in (wav_a, wav_b):
+        with open(p, "wb") as _f:
+            sr = 24000
+            _f.write(b"RIFF" + _struct.pack("<I", 36) + b"WAVE" + b"fmt " +
+                     _struct.pack("<IHHIIHH", 16, 1, 1, sr, sr * 2, 2, 16) +
+                     b"data" + _struct.pack("<I", 0))
+    prep_a = _backend.prepare_voice(wav_a, "text", {})
+    prep_b = _backend.prepare_voice(wav_b, "text", {})
     server._clone_enabled = True
-    server._register_voice("viewer-xyz-001", "/tmp/a.wav", "text", "neutral")
-    server._register_voice("viewer-xyz-002", "/tmp/b.wav", "text", "sad")
+    server._register_voice("viewer-xyz-001", "fake", wav_a, "text", prep_a, "neutral")
+    server._register_voice("viewer-xyz-002", "fake", wav_b, "text", prep_b, "sad")
     r = client.delete("/session/viewer-xyz")
     assert r.status_code == 200
     assert "viewer-xyz-001" not in server.VOICES
@@ -201,16 +215,61 @@ def test_delete_session_idempotent(client):
 # --- Voice palette selection ---
 
 
-def test_resolve_voice_with_emotion():
+def test_resolve_voice_with_emotion(tmp_path):
     """_resolve_voice selects best palette entry by emotion."""
+    import backends as _backends
+    import struct as _struct
+    _backend = _backends.get("fake")
+    wav_a = str(tmp_path / "s1-a.wav")
+    wav_b = str(tmp_path / "s1-b.wav")
+    for p in (wav_a, wav_b):
+        with open(p, "wb") as _f:
+            sr = 24000
+            _f.write(b"RIFF" + _struct.pack("<I", 36) + b"WAVE" + b"fmt " +
+                     _struct.pack("<IHHIIHH", 16, 1, 1, sr, sr * 2, 2, 16) +
+                     b"data" + _struct.pack("<I", 0))
+    prep_a = _backend.prepare_voice(wav_a, "hi", {})
+    prep_b = _backend.prepare_voice(wav_b, "sad", {})
     server._register_voice(
-        "viewer-s1-001", "/tmp/a.wav", "hi", "neutral", {"duration_s": 5, "confidence": 0.8}
+        "viewer-s1-001", "fake", wav_a, "hi", prep_a, "neutral",
+        {"session_id": "viewer-s1", "duration_s": 5, "confidence": 0.8},
     )
     server._register_voice(
-        "viewer-s1-002", "/tmp/b.wav", "sad", "vulnerable", {"duration_s": 10, "confidence": 0.9}
+        "viewer-s1-002", "fake", wav_b, "sad", prep_b, "vulnerable",
+        {"session_id": "viewer-s1", "duration_s": 10, "confidence": 0.9},
     )
     result = server._resolve_voice("viewer-s1", emotion="vulnerable")
     assert result is not None
-    assert result[0] == "/tmp/b.wav"
+    assert result.ref_audio == wav_b
     # Cleanup
     server._unregister_session("viewer-s1")
+
+
+def test_health_includes_loaded_backends(client):
+    resp = client.get("/health")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["backend"] == "mlx"  # legacy field unchanged
+    assert "loaded_backends" in body
+    assert set(body["loaded_backends"].keys()) >= {
+        "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5",
+    }
+    for name, info in body["loaded_backends"].items():
+        assert info["loaded"] is True
+        assert isinstance(info["voice_count"], int)
+        assert isinstance(info["sample_rate"], int)
+
+
+def test_health_preserves_legacy_fields(client):
+    resp = client.get("/health")
+    body = resp.json()
+    for key in ("status", "model", "backend", "model_loaded", "ready", "voices", "default_voice"):
+        assert key in body
+
+
+def test_synthesize_unknown_voice_returns_400(client):
+    resp = client.get("/synthesize?text=hi&voice=nonexistent-voice-zzzz")
+    assert resp.status_code == 400
+    body = resp.json()
+    assert "unknown voice" in body["error"]
+    assert isinstance(body["available"], list)
