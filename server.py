@@ -191,22 +191,6 @@ def _unregister_session(session_id: str):
                         pass
 
 
-def _get_model():
-    """Get or load the TTS model (lazy singleton)."""
-    global _model
-    if _model is not None:
-        return _model
-
-    with _model_lock:
-        if _model is not None:
-            return _model
-        log.info("Loading model %s ...", MODEL_ID)
-        t0 = time.time()
-        from mlx_audio.tts import load_model
-        _model = load_model(MODEL_ID)
-        log.info("Model loaded in %.1fs", time.time() - t0)
-        return _model
-
 
 def _resolve_voice(voice: str, emotion: str | None = None) -> VoiceProfile | None:
     """Return VoiceProfile for a voice name, honouring session palettes + emotion fallback."""
@@ -238,32 +222,20 @@ def _resolve_voice(voice: str, emotion: str | None = None) -> VoiceProfile | Non
 
 
 def _warmup():
-    """Pre-load model + generate a tiny warmup to prime MLX caches."""
-    model = _get_model()
-    resolved = _resolve_voice(DEFAULT_VOICE)
-    if resolved is None:
-        log.warning("Default voice '%s' not available — skipping warmup", DEFAULT_VOICE)
+    """Prime MLX caches by generating a tiny synth against the default voice."""
+    profile = VOICES.get(DEFAULT_VOICE)
+    if profile is None:
+        log.warning("default voice '%s' not loaded — skipping warmup", DEFAULT_VOICE)
         return
-    ref_audio, ref_text = resolved
-    log.info("Warming up with %s voice...", DEFAULT_VOICE)
+    backend = backends.get(profile.backend)
+    log.info("warming up with %s (backend=%s)...", DEFAULT_VOICE, profile.backend)
     t0 = time.time()
     try:
-        import tempfile
-        with tempfile.TemporaryDirectory() as tmpdir:
-            from mlx_audio.tts.generate import generate_audio
-            generate_audio(
-                text="Hello.",
-                model=model,
-                ref_audio=ref_audio,
-                ref_text=ref_text,
-                lang_code="en",
-                output_path=tmpdir,
-                file_prefix="warmup",
-                verbose=False,
-            )
-        log.info("Warmup done in %.1fs", time.time() - t0)
+        with _synth_lock:
+            backend.synthesize("Hello.", profile.prepared)
+        log.info("warmup done in %.1fs", time.time() - t0)
     except Exception as exc:
-        log.warning("Warmup failed (non-fatal): %s", exc)
+        log.warning("warmup failed (non-fatal): %s", exc)
 
 
 @app.get("/health")
@@ -535,7 +507,28 @@ def main():
         if args.host == "0.0.0.0":
             args.host = "127.0.0.1"
             log.info("--allow-clone: binding to 127.0.0.1 for security")
-    missing = [v for v, (p, _) in VOICES.items() if not os.path.exists(p)]
+    # 1. Register all backends.
+    backends.register_all()
+    log.info("registered backends: %s", backends.names())
+
+    # 2. Load all backend weights (unconditional preload, per design D6).
+    #    Sequential + logged — takes 60-180s cold; operator visibility matters.
+    for bname in backends.names():
+        b = backends.get(bname)
+        t0 = time.time()
+        log.info("loading backend %s (%s)...", bname, b.display_name)
+        try:
+            b.load()
+        except Exception as exc:
+            log.error("backend %s failed to load: %s", bname, exc, exc_info=True)
+            raise SystemExit(1)
+        log.info("backend %s loaded in %.1fs", bname, time.time() - t0)
+
+    # 3. Walk voices/*.json — profile loader calls prepare_voice() (can need loaded weights).
+    _load_voice_profiles()
+
+    # 4. Prune voices whose ref audio vanished between load attempts (defensive).
+    missing = [v for v, p in VOICES.items() if not os.path.exists(p.ref_audio)]
     for vname in missing:
         log.warning("Reference audio not found for '%s' — skipping", vname)
         del VOICES[vname]
@@ -547,16 +540,14 @@ def main():
         log.warning("Default voice pruned — using '%s'", DEFAULT_VOICE)
 
     log.info("afterwords starting on %s:%d", args.host, args.port)
-    log.info("model: %s", MODEL_ID)
     log.info("voices: %d loaded (default: %s)", len(VOICES), DEFAULT_VOICE)
 
+    # 5. Warmup (skippable via --no-warmup; does NOT skip backend loads — those are mandatory per D6).
     if not args.no_warmup:
         try:
             _warmup()
         except Exception as exc:
-            log.error("Failed to load model: %s", exc)
-            log.error("Check your network connection — first run downloads ~1.5 GB")
-            raise SystemExit(1)
+            log.warning("warmup encountered an error: %s", exc)
     _ready.set()
     log.info("ready — %d voices, accepting requests", len(VOICES))
 
