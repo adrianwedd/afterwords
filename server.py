@@ -397,6 +397,7 @@ async def clone_voice_endpoint(
     session_id: str = Form(...),
     emotion: str = Form("neutral"),
     transcript: str | None = Form(None),
+    backend: str = Form("qwen3-1.7b"),
 ):
     """Create a voice profile from raw audio. Denoises, optionally transcribes, registers."""
     if not _clone_enabled:
@@ -406,22 +407,24 @@ async def clone_voice_endpoint(
     if len(audio_bytes) < 1000:
         return JSONResponse({"error": "audio too short"}, status_code=400)
 
-    # Count existing entries for this session to get sequence number
-    existing = [k for k in VOICES if k.startswith(f"{session_id}-")]
-    seq = len(existing) + 1
-    voice_name = f"{session_id}-{seq:03d}"
+    try:
+        backend_obj = backends.get(backend)
+    except KeyError:
+        return JSONResponse(
+            {"error": f"unknown backend: {backend}", "available": backends.names()},
+            status_code=400,
+        )
 
     try:
         import tempfile
-
         import noisereduce as nr
 
-        # Save uploaded audio to temp file
+        # Save uploaded audio to temp file.
         with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp_in:
             tmp_in.write(audio_bytes)
             tmp_in_path = tmp_in.name
 
-        # Denoise (under synth lock — noisereduce may use Metal)
+        # --- Phase 1: denoise under _synth_lock (noisereduce may touch Metal) ---
         with _synth_lock:
             data, sr_in = sf.read(tmp_in_path)
             if data.ndim > 1:
@@ -430,26 +433,31 @@ async def clone_voice_endpoint(
             peak = np.max(np.abs(reduced))
             if peak > 0:
                 reduced = reduced * (0.9 / peak)
+        # --- lock released ---
 
         duration_s = len(reduced) / sr_in
         if duration_s < 1.0:
             os.unlink(tmp_in_path)
-            return JSONResponse({"error": "audio too short after processing (< 1s)"}, status_code=400)
+            return JSONResponse(
+                {"error": "audio too short after processing (< 1s)"},
+                status_code=400,
+            )
 
-        # Determine quality from duration
-        if duration_s < 5:
-            quality = "rough"
-        elif duration_s < 15:
-            quality = "developing"
-        else:
-            quality = "good"
+        quality = "rough" if duration_s < 5 else "developing" if duration_s < 15 else "good"
 
-        # Transcribe if not provided
+        # --- Phase 2: CPU-only work (no lock) — write WAV + transcribe ---
+        ref_path = os.path.join(_VOICES_DIR, f"{session_id}-{len([k for k in VOICES if k.startswith(f'{session_id}-')]) + 1:03d}-ref.wav")
+        voice_name = os.path.basename(ref_path)[:-len("-ref.wav")]
+        seq = int(voice_name.rsplit("-", 1)[-1])
+
+        tmp_ref = ref_path + ".tmp"
+        sf.write(tmp_ref, reduced, sr_in, format="WAV", subtype="PCM_16")
+        os.rename(tmp_ref, ref_path)
+
         transcript_confidence = 0.0
         if not transcript:
             try:
                 from faster_whisper import WhisperModel
-
                 whisper = WhisperModel("base.en", compute_type="int8")
                 segments, _ = whisper.transcribe(tmp_in_path)
                 words = []
@@ -458,62 +466,86 @@ async def clone_voice_endpoint(
                         words.append(w.word.strip())
                 transcript = " ".join(words)
                 transcript_confidence = 0.8
-            except Exception as e:
-                log.warning("Transcription failed, using empty transcript: %s", e)
+            except Exception as exc:
+                log.warning("transcription failed, using empty transcript: %s", exc)
                 transcript = ""
         else:
             transcript_confidence = 0.9
 
-        # Save denoised audio to voices/ (atomic: write temp, rename)
-        ref_path = os.path.join(_VOICES_DIR, f"{voice_name}-ref.wav")
-        tmp_ref = ref_path + ".tmp"
-        sf.write(tmp_ref, reduced, sr_in, format="WAV", subtype="PCM_16")
-        os.rename(tmp_ref, ref_path)
+        # REQUIRED-policy backends need a transcript.
+        if backend_obj.ref_text_policy == RefTextPolicy.REQUIRED and not transcript:
+            os.unlink(tmp_in_path)
+            return JSONResponse(
+                {"error": f"backend {backend} requires ref_text; transcription failed"},
+                status_code=400,
+            )
 
-        # Save profile JSON
+        # --- Phase 3: validate_extras + prepare_voice under _synth_lock (both may touch Metal) ---
+        extras: dict = {}
+        with _synth_lock:
+            try:
+                backend_obj.validate_extras(extras)
+            except ValueError as exc:
+                os.unlink(tmp_in_path)
+                return JSONResponse(
+                    {"error": f"invalid extras for backend {backend}: {exc}"},
+                    status_code=400,
+                )
+            try:
+                prepared = backend_obj.prepare_voice(ref_path, transcript or None, extras)
+            except Exception as exc:
+                log.error("prepare_voice failed: %s", exc, exc_info=True)
+                os.unlink(tmp_in_path)
+                return JSONResponse(
+                    {"error": f"prepare_voice failed: {exc}"},
+                    status_code=500,
+                )
+        # --- lock released ---
+
+        # Save profile JSON with backend field.
         profile_path = os.path.join(_VOICES_DIR, f"{voice_name}.json")
         tmp_profile = profile_path + ".tmp"
         with open(tmp_profile, "w") as f:
-            json.dump(
-                {
-                    "name": voice_name,
-                    "session_id": session_id,
-                    "emotion": emotion,
-                    "reference_audio": f"{voice_name}-ref.wav",
-                    "reference_text": transcript,
-                    "quality": quality,
-                    "duration_s": round(duration_s, 1),
-                    "transcript_confidence": round(transcript_confidence, 2),
-                    "sequence": seq,
-                },
-                f,
-                indent=2,
-            )
+            json.dump({
+                "name": voice_name,
+                "backend": backend,
+                "session_id": session_id,
+                "emotion": emotion,
+                "reference_audio": os.path.basename(ref_path),
+                "reference_text": transcript,
+                "quality": quality,
+                "duration_s": round(duration_s, 1),
+                "transcript_confidence": round(transcript_confidence, 2),
+                "sequence": seq,
+            }, f, indent=2)
         os.rename(tmp_profile, profile_path)
 
-        # Register in runtime
+        # Register in runtime registry.
         _register_voice(
             voice_name,
-            ref_path,
-            transcript,
-            emotion,
-            {"quality": quality, "duration_s": duration_s, "confidence": transcript_confidence},
+            backend_name=backend,
+            ref_audio=ref_path,
+            ref_text=transcript or None,
+            prepared=prepared,
+            emotion=emotion,
+            metadata={
+                "session_id": session_id,
+                "quality": quality,
+                "duration_s": duration_s,
+                "confidence": transcript_confidence,
+                "sequence": seq,
+            },
         )
 
-        # Cleanup temp input
         os.unlink(tmp_in_path)
-
         log.info(
-            "cloned: %s (session=%s, emotion=%s, quality=%s, %.1fs)",
-            voice_name,
-            session_id,
-            emotion,
-            quality,
-            duration_s,
+            "cloned: %s (backend=%s, session=%s, emotion=%s, quality=%s, %.1fs)",
+            voice_name, backend, session_id, emotion, quality, duration_s,
         )
 
         return {
             "voice": voice_name,
+            "backend": backend,
             "emotion": emotion,
             "quality": quality,
             "transcript_confidence": round(transcript_confidence, 2),
