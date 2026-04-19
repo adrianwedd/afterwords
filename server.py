@@ -24,7 +24,7 @@ import soundfile as sf
 from fastapi import FastAPI, File, Form, Query, UploadFile
 from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from types import MappingProxyType
 from typing import Mapping
 
@@ -67,7 +67,6 @@ logging.getLogger("transformers.tokenization_utils_base").setLevel(logging.ERROR
 
 app = FastAPI(title="Afterwords TTS")
 
-MODEL_ID = "mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit"
 _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")
 
 # Voice registry: name → (ref_audio_path, ref_text)
@@ -145,8 +144,7 @@ def _load_voice_profiles() -> None:
 
 DEFAULT_VOICE = "galadriel"
 
-# Pre-loaded model — avoids 30s cold start per request
-_model = None
+# Locks for thread-safe VOICES access and serialised synthesis.
 _model_lock = threading.Lock()
 _synth_lock = threading.Lock()  # serialise synthesis — MLX/Metal is not thread-safe
 _ready = threading.Event()

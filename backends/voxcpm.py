@@ -16,7 +16,7 @@ log = logging.getLogger("backends.voxcpm")
 
 MODEL_ID = "mlx-community/VoxCPM1.5"
 NATIVE_SR = 44100
-_ALLOWED_EXTRAS = {"cfg_value", "inference_timesteps", "style_prompt"}
+_ALLOWED_EXTRAS = {"cfg_value", "inference_timesteps"}
 
 
 def _resample_cpu(audio: np.ndarray, in_sr: int, out_sr: int) -> np.ndarray:
