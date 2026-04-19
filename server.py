@@ -214,31 +214,32 @@ def _unregister_session(session_id: str):
 
 def _resolve_voice(voice: str, emotion: str | None = None) -> VoiceProfile | None:
     """Return VoiceProfile for a voice name, honouring session palettes + emotion fallback."""
-    # Exact match first
-    if voice in VOICES:
-        profile = VOICES[voice]
-        if emotion is None or profile.emotion == emotion:
-            return profile
+    with _model_lock:
+        # Exact match first
+        if voice in VOICES:
+            profile = VOICES[voice]
+            if emotion is None or profile.emotion == emotion:
+                return profile
 
-    # Session palette lookup — match by VoiceProfile.session_id field
-    if emotion:
-        candidates = [
-            p for p in VOICES.values()
-            if p.session_id == voice and p.emotion == emotion
-        ]
-        if candidates:
-            return max(
-                candidates,
-                key=lambda p: (p.duration_s or 0, p.confidence or 0),
-            )
-        session_entries = [p for p in VOICES.values() if p.session_id == voice]
-        if session_entries:
-            return max(
-                session_entries,
-                key=lambda p: (p.duration_s or 0, p.confidence or 0),
-            )
+        # Session palette lookup — match by VoiceProfile.session_id field
+        if emotion:
+            candidates = [
+                p for p in VOICES.values()
+                if p.session_id == voice and p.emotion == emotion
+            ]
+            if candidates:
+                return max(
+                    candidates,
+                    key=lambda p: (p.duration_s or 0, p.confidence or 0),
+                )
+            session_entries = [p for p in VOICES.values() if p.session_id == voice]
+            if session_entries:
+                return max(
+                    session_entries,
+                    key=lambda p: (p.duration_s or 0, p.confidence or 0),
+                )
 
-    return VOICES.get(voice)
+        return VOICES.get(voice)
 
 
 def _warmup():
@@ -445,10 +446,21 @@ async def clone_voice_endpoint(
 
         quality = "rough" if duration_s < 5 else "developing" if duration_s < 15 else "good"
 
-        # --- Phase 2: CPU-only work (no lock) — write WAV + transcribe ---
-        ref_path = os.path.join(_VOICES_DIR, f"{session_id}-{len([k for k in VOICES if k.startswith(f'{session_id}-')]) + 1:03d}-ref.wav")
-        voice_name = os.path.basename(ref_path)[:-len("-ref.wav")]
-        seq = int(voice_name.rsplit("-", 1)[-1])
+        # --- Phase 2: CPU-only work (no lock for heavy work) — write WAV + transcribe ---
+        # Compute seq + reserve ref_path under _model_lock so concurrent clones for the same
+        # session_id don't collide. We reserve by touching an empty file before releasing the lock.
+        with _model_lock:
+            seq = len([k for k in VOICES if k.startswith(f'{session_id}-')]) + 1
+            ref_path = os.path.join(_VOICES_DIR, f"{session_id}-{seq:03d}-ref.wav")
+            # Bump seq while the chosen ref_path already exists on disk (e.g. from a failed
+            # clone that didn't clean up). Rare but cheap.
+            while os.path.exists(ref_path):
+                seq += 1
+                ref_path = os.path.join(_VOICES_DIR, f"{session_id}-{seq:03d}-ref.wav")
+            voice_name = os.path.basename(ref_path)[:-len("-ref.wav")]
+            # Reserve the path so a concurrent clone won't pick the same seq.
+            open(ref_path, "wb").close()
+        # Lock released — heavy CPU work (sf.write, whisper) runs unlocked.
 
         tmp_ref = ref_path + ".tmp"
         sf.write(tmp_ref, reduced, sr_in, format="WAV", subtype="PCM_16")
