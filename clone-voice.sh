@@ -31,6 +31,39 @@ START_S="${3:-}"
 AUTO_YES=false
 [[ "${4:-}" == "--yes" ]] && AUTO_YES=true
 
+# Parse --backend and --all-backends from any argument position
+BACKEND_NAME=""
+ALL_BACKENDS=false
+for arg in "$@"; do
+    case "$arg" in
+        --backend=*) BACKEND_NAME="${arg#--backend=}" ;;
+        --all-backends) ALL_BACKENDS=true ;;
+    esac
+done
+# Also accept `--backend NAME` split form
+args=("$@")
+for ((i=0; i<${#args[@]}; i++)); do
+    if [ "${args[i]}" = "--backend" ] && [ $((i+1)) -lt ${#args[@]} ]; then
+        BACKEND_NAME="${args[i+1]}"
+    fi
+done
+
+# Query registry via Python (registry lives in backends/__main__.py)
+if ! AVAILABLE_BACKENDS=$(python3 -m backends list 2>/dev/null); then
+    fail "Could not query backends — is the venv active and backends/ present?"
+fi
+MAX_SR=$(python3 -m backends max-sample-rate 2>/dev/null || echo 24000)
+
+# Default backend
+[ -z "$BACKEND_NAME" ] && BACKEND_NAME="qwen3-1.7b"
+
+# Validate chosen backend (unless --all-backends, which uses all registered)
+if [ "$ALL_BACKENDS" = false ]; then
+    if ! echo "$AVAILABLE_BACKENDS" | grep -qx "$BACKEND_NAME"; then
+        fail "Unknown backend: $BACKEND_NAME. Available: $(echo "$AVAILABLE_BACKENDS" | tr '\n' ' ')"
+    fi
+fi
+
 # Temp file cleanup
 TMPFILES=()
 cleanup() { [ ${#TMPFILES[@]} -gt 0 ] && rm -rf "${TMPFILES[@]}" 2>/dev/null; true; }
@@ -176,7 +209,7 @@ START_S="${START_S:-0}"
 info "Extracting ${START_S}s → $((START_S + 15))s..."
 TMP_SEG="/tmp/clone-segment-$$.wav"
 TMPFILES+=("$TMP_SEG")
-ffmpeg -y -i "$TMP_SRC" -ss "$START_S" -t 15 -ar 24000 -ac 1 "$TMP_SEG" 2>/dev/null
+ffmpeg -y -i "$TMP_SRC" -ss "$START_S" -t 15 -ar "$MAX_SR" -ac 1 "$TMP_SEG" 2>/dev/null
 
 info "Denoising..."
 mkdir -p voices
@@ -245,15 +278,61 @@ else
     echo -e "  Transcript: ${CYAN}${REF_TEXT}${NC}"
 fi
 
-# Save profile (safe JSON serialisation via Python — no shell interpolation)
-python3 - "$VOICE_NAME" "$YT_URL" "$REF_TEXT" "$START_S" <<'PYEOF'
+# Save profile(s). If --all-backends, emit one JSON per registered backend (same ref WAV).
+if [ "$ALL_BACKENDS" = true ]; then
+    DEFAULT_BACKEND="qwen3-1.7b"
+    # Default-backend profile uses the plain voice_name
+    python3 - "$VOICE_NAME" "$YT_URL" "$REF_TEXT" "$START_S" "$DEFAULT_BACKEND" <<'PYEOF'
 import json, sys
-name, url, text, start = sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4])
+name, url, text, start, backend = sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4]), sys.argv[5]
 with open(f"voices/{name}.json", "w") as f:
-    json.dump({"name": name, "source_url": url, "reference_audio": f"{name}-ref.wav",
-               "reference_text": text, "segment_start_s": start}, f, indent=2)
+    json.dump({
+        "name": name,
+        "backend": backend,
+        "source_url": url,
+        "reference_audio": f"{name}-ref.wav",
+        "reference_text": text,
+        "segment_start_s": start,
+    }, f, indent=2)
 PYEOF
-ok "Profile saved: voices/${VOICE_NAME}.json"
+    ok "Profile saved: voices/${VOICE_NAME}.json (backend: $DEFAULT_BACKEND)"
+
+    # Slugged profiles for the other backends — share the same ref WAV
+    while IFS= read -r _b; do
+        [ "$_b" = "$DEFAULT_BACKEND" ] && continue
+        _slug=$(python3 -m backends slug "$_b")
+        _alt_name="${VOICE_NAME}-${_slug}"
+        python3 - "$VOICE_NAME" "$_alt_name" "$YT_URL" "$REF_TEXT" "$START_S" "$_b" <<'PYEOF'
+import json, sys
+voice_name, alt_name, url, text, start, backend = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], int(sys.argv[5]), sys.argv[6]
+with open(f"voices/{alt_name}.json", "w") as f:
+    json.dump({
+        "name": alt_name,
+        "backend": backend,
+        "source_url": url,
+        "reference_audio": f"{voice_name}-ref.wav",
+        "reference_text": text,
+        "segment_start_s": start,
+    }, f, indent=2)
+PYEOF
+        ok "Profile saved: voices/${_alt_name}.json (backend: $_b)"
+    done <<< "$AVAILABLE_BACKENDS"
+else
+    python3 - "$VOICE_NAME" "$YT_URL" "$REF_TEXT" "$START_S" "$BACKEND_NAME" <<'PYEOF'
+import json, sys
+name, url, text, start, backend = sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4]), sys.argv[5]
+with open(f"voices/{name}.json", "w") as f:
+    json.dump({
+        "name": name,
+        "backend": backend,
+        "source_url": url,
+        "reference_audio": f"{name}-ref.wav",
+        "reference_text": text,
+        "segment_start_s": start,
+    }, f, indent=2)
+PYEOF
+    ok "Profile saved: voices/${VOICE_NAME}.json (backend: $BACKEND_NAME)"
+fi
 
 # Test
 echo
