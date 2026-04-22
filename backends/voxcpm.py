@@ -39,6 +39,7 @@ def _resample_cpu(audio: np.ndarray, in_sr: int, out_sr: int) -> np.ndarray:
 class VoxCPMBackend(BackendBase):
     name = "voxcpm-1.5"
     display_name = "VoxCPM 1.5"
+    model_id = MODEL_ID
     sample_rate = NATIVE_SR
     ref_text_policy = RefTextPolicy.OPTIONAL
     supported_langs = ("en", "zh")

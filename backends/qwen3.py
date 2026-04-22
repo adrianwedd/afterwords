@@ -5,7 +5,6 @@ import glob
 import logging
 import os
 import tempfile
-from dataclasses import dataclass
 from typing import Mapping
 
 import numpy as np

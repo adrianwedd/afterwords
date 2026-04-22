@@ -20,6 +20,7 @@ MODEL_ID = "mlx-community/chatterbox-fp16"
 class ChatterboxBackend(BackendBase):
     name = "chatterbox"
     display_name = "Chatterbox (fp16, multilingual)"
+    model_id = MODEL_ID
     sample_rate = 24000
     ref_text_policy = RefTextPolicy.OPTIONAL
     supported_langs = ("en", "es", "fr", "de", "it", "pt", "zh", "ja", "ko")

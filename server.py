@@ -259,23 +259,23 @@ def _warmup():
 
 @app.get("/health")
 def health():
-    # Compute voice counts per backend for observability.
-    counts: dict[str, int] = {}
-    for profile in VOICES.values():
-        counts[profile.backend] = counts.get(profile.backend, 0) + 1
+    with _model_lock:
+        voice_names = sorted(VOICES.keys())
+        backend_counts: dict[str, int] = {}
+        for profile in VOICES.values():
+            backend_counts[profile.backend] = backend_counts.get(profile.backend, 0) + 1
+        default_profile = VOICES.get(DEFAULT_VOICE)
 
     loaded_backends = {}
     for bname in backends.names():
         b = backends.get(bname)
         loaded_backends[bname] = {
-            "loaded": True,  # post-startup, all registered backends are loaded (D6)
-            "voice_count": counts.get(bname, 0),
+            "loaded": True,
+            "voice_count": backend_counts.get(bname, 0),
             "sample_rate": b.sample_rate,
             "display_name": b.display_name,
         }
 
-    # Default backend's model id — preserves legacy `model` field semantics.
-    default_profile = VOICES.get(DEFAULT_VOICE)
     default_backend_name = default_profile.backend if default_profile else "qwen3-0.6b"
     try:
         default_model_id = getattr(
@@ -286,11 +286,11 @@ def health():
 
     return {
         "status": "ok",
-        "model": default_model_id,   # unchanged semantics — default backend's underlying model
-        "backend": "mlx",             # unchanged — literal runtime tag
+        "model": default_model_id,
+        "backend": "mlx",
         "model_loaded": _ready.is_set(),
         "ready": _ready.is_set(),
-        "voices": sorted(VOICES.keys()),
+        "voices": voice_names,
         "default_voice": DEFAULT_VOICE,
         "loaded_backends": loaded_backends,
     }
