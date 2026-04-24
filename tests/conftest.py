@@ -1,12 +1,17 @@
 """Shared fixtures and custom test runner UX for Afterwords."""
+from __future__ import annotations
+
 import os
 import struct
 import time
-from unittest.mock import MagicMock, patch
+from types import MappingProxyType
+from typing import Mapping
 
+import numpy as np
 import pytest
 
-import server
+import backends
+from backends.base import Backend, PreparedVoice, RefTextPolicy, _read_only
 
 
 # ── Colours ───────────────────────────────────────────────────────
@@ -17,63 +22,148 @@ BOLD = "\033[1m"
 NC = "\033[0m"
 
 
-# ── Fixtures ──────────────────────────────────────────────────────
+# ── WAV helper ─────────────────────────────────────────────────────
 
 def _make_wav(path: str) -> None:
-    """Write a tiny valid 16-bit PCM WAV file (0.01s of silence)."""
+    """Write a tiny valid 16-bit PCM WAV file (0.01s of silence) at 24 kHz."""
     sr = 24000
-    n_samples = 240  # 0.01s
-    data_size = n_samples * 2  # 16-bit = 2 bytes per sample
+    n_samples = 240
+    data_size = n_samples * 2
     with open(path, "wb") as f:
-        # RIFF header
         f.write(b"RIFF")
         f.write(struct.pack("<I", 36 + data_size))
         f.write(b"WAVE")
-        # fmt chunk
         f.write(b"fmt ")
-        f.write(struct.pack("<I", 16))       # chunk size
-        f.write(struct.pack("<H", 1))        # PCM
-        f.write(struct.pack("<H", 1))        # mono
-        f.write(struct.pack("<I", sr))       # sample rate
-        f.write(struct.pack("<I", sr * 2))   # byte rate
-        f.write(struct.pack("<H", 2))        # block align
-        f.write(struct.pack("<H", 16))       # bits per sample
-        # data chunk
+        f.write(struct.pack("<I", 16))
+        f.write(struct.pack("<H", 1))
+        f.write(struct.pack("<H", 1))
+        f.write(struct.pack("<I", sr))
+        f.write(struct.pack("<I", sr * 2))
+        f.write(struct.pack("<H", 2))
+        f.write(struct.pack("<H", 16))
         f.write(b"data")
         f.write(struct.pack("<I", data_size))
         f.write(b"\x00" * data_size)
 
 
-def _fake_generate_audio(**kwargs):
-    """Mock for mlx_audio generate_audio — writes out_0.wav to output_path."""
-    output_path = kwargs.get("output_path", "/tmp")
-    prefix = kwargs.get("file_prefix", "out")
-    _make_wav(os.path.join(output_path, f"{prefix}_0.wav"))
+# ── Fake backend: zero model loads, returns fake audio ─────────────
 
+class FakeBackend:
+    """Standin backend for tests. Returns 0.1s of silent float32 audio at 24 kHz."""
+    name = "fake"
+    display_name = "Fake Backend (tests)"
+    sample_rate = 24000
+    ref_text_policy = RefTextPolicy.OPTIONAL
+    supported_langs = ("en",)
+
+    def load(self) -> None:
+        pass
+
+    def validate_extras(self, extras: Mapping[str, object]) -> None:
+        # Accept anything — tests pass varied extras.
+        pass
+
+    def prepare_voice(
+        self,
+        ref_audio_path: str,
+        ref_text: str | None,
+        extras: Mapping[str, object],
+    ) -> PreparedVoice:
+        return PreparedVoice(
+            ref_audio_path=ref_audio_path,
+            ref_text=ref_text,
+            extras=_read_only(dict(extras)),
+        )
+
+    def synthesize(
+        self,
+        text: str,
+        prepared: PreparedVoice,
+        lang: str,
+    ) -> tuple[np.ndarray, int]:
+        if lang not in self.supported_langs:
+            raise ValueError(
+                f"fake does not support lang={lang!r}; supported: {self.supported_langs}"
+            )
+        # Return 100ms of silence at our sample rate
+        audio = np.zeros(self.sample_rate // 10, dtype=np.float32)
+        return audio, self.sample_rate
+
+
+# ── Autouse fixture: seed a fresh registry with FakeBackend for each test ──
+
+@pytest.fixture(autouse=True)
+def _fake_backend_registry(request):
+    """Replace the real backends with FakeBackend aliases — unless the test is integration.
+
+    Integration tests manage the registry themselves.
+    """
+    if request.node.get_closest_marker("integration"):
+        # Integration tests manage the registry themselves.
+        yield
+        return
+
+    backends.reset_for_tests()
+    fake = FakeBackend()
+    backends.register(fake)
+
+    # Register aliases so VoiceProfile.backend values like "qwen3-0.6b" resolve to the FakeBackend.
+    # We do this by creating lightweight delegate instances that share the FakeBackend's methods
+    # but advertise different names.
+    for alias in ("qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5"):
+        delegate = FakeBackend()
+        delegate.name = alias
+        delegate.display_name = f"{alias} (test-fake)"
+        backends.register(delegate)
+    yield
+    backends.reset_for_tests()
+
+
+# ── Voice profile fixture ──────────────────────────────────────────
 
 @pytest.fixture
 def sample_voice(tmp_path):
-    """Register a temporary test voice in server.VOICES."""
+    """Register a temporary test voice (as a VoiceProfile) in server.VOICES."""
+    import server
+
     wav_path = str(tmp_path / "testvoice-ref.wav")
     _make_wav(wav_path)
-    server.VOICES["testvoice"] = (wav_path, "This is a test voice reference.")
+    backend = backends.get("fake")
+    prepared = backend.prepare_voice(wav_path, "Test reference.", {})
+    profile = server.VoiceProfile(
+        name="testvoice",
+        backend="fake",
+        ref_audio=wav_path,
+        ref_text="Test reference.",
+        session_id=None,
+        emotion="neutral",
+        quality=None,
+        duration_s=None,
+        confidence=None,
+        sequence=None,
+        extras=_read_only({}),
+        prepared=prepared,
+    )
+    server.VOICES["testvoice"] = profile
     yield "testvoice"
     server.VOICES.pop("testvoice", None)
 
 
+# ── Ready + client fixtures ────────────────────────────────────────
+
 @pytest.fixture
-def mock_model(sample_voice):
-    """Patch model loading and audio generation. Sets server to ready."""
-    with patch("server._get_model", return_value=MagicMock()), \
-         patch("mlx_audio.tts.generate.generate_audio", side_effect=_fake_generate_audio):
-        server._ready.set()
-        yield
-        server._ready.clear()
+def ready_server():
+    """Mark server as warmed up."""
+    import server
+    server._ready.set()
+    yield
+    server._ready.clear()
 
 
 @pytest.fixture
-def client(mock_model):
-    """FastAPI TestClient with mocked model."""
+def client(ready_server):
+    """FastAPI TestClient — uses the FakeBackend registry from _fake_backend_registry autouse."""
+    import server
     from starlette.testclient import TestClient
     return TestClient(server.app)
 

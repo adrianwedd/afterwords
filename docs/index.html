@@ -6,7 +6,7 @@
   <title>Afterwords — Local Voice-Cloning TTS</title>
   <meta name="description" content="Clone any voice from a 15-second YouTube clip and hear Claude Code speak every response. Runs locally on Apple Silicon. No cloud. No subscription.">
   <meta property="og:title" content="Afterwords — Local Voice-Cloning TTS">
-  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 20 voices included. No cloud dependency.">
+  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 20 voices, 4 backends. No cloud dependency.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://adrianwedd.github.io/afterwords/">
   <meta property="og:image" content="https://adrianwedd.github.io/afterwords/og-image.png">
@@ -502,6 +502,55 @@
     footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--accent); }
 
+    /* ── Backend Comparison ──────────────────────── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.1rem;
+      margin-top: 1rem;
+    }
+    .compare-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.3rem 1.15rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .compare-card:hover { border-color: var(--border-hover); }
+    .backend-tabs {
+      display: flex;
+      gap: 0;
+      margin: 0.75rem 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .backend-tabs button {
+      flex: 1;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      background: transparent;
+      color: var(--text-secondary);
+      border: none;
+      padding: 0.5rem 0.4rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      border-right: 1px solid var(--border);
+    }
+    .backend-tabs button:last-child { border-right: none; }
+    .backend-tabs button:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+    .backend-tabs button[aria-selected="true"] {
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .backend-tabs button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+    .compare-card [role="tabpanel"] { outline: none; }
+    .compare-card audio { width: 100%; height: 32px; border-radius: 4px; }
+
     /* ── Responsive ────────────────────────────── */
     @media (max-width: 600px) {
       .hero { min-height: auto; padding: 4rem 0 3rem; }
@@ -538,8 +587,8 @@
       </div>
       <div class="hero-stats">
         <div><div class="stat-value">20</div><div class="stat-label">Voices included</div></div>
-        <div><div class="stat-value">~6 GB</div><div class="stat-label">Peak memory</div></div>
-        <div><div class="stat-value">~20s</div><div class="stat-label">Per sentence</div></div>
+        <div><div class="stat-value">4</div><div class="stat-label">Backends</div></div>
+        <div><div class="stat-value">~10 GB</div><div class="stat-label">Peak memory</div></div>
         <div><div class="stat-value">0</div><div class="stat-label">Cloud calls</div></div>
       </div>
     </div>
@@ -564,8 +613,8 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
 
     <section id="voices" class="reveal">
       <div class="section-label">Voice Gallery</div>
-      <div class="section-title">20 voices, each cloned from a 15-second clip</div>
-      <p class="section-desc">Each says <em>&ldquo;You are absolutely right. Your Claude Code session could sound like me.&rdquo;</em> &mdash; generated locally on an 8 GB M1.</p>
+      <div class="section-title">20 voices on Qwen3 0.6B &mdash; see backend comparison below for flagship voices on all 4 models</div>
+      <p class="section-desc">Each says <em>&ldquo;You are absolutely right. Your Claude Code session could sound like me.&rdquo;</em> &mdash; generated locally on a 32 GB M1.</p>
 
       <div class="voice-gallery">
         <div class="voice-card reveal"><div class="voice-card-inner">
@@ -697,6 +746,58 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
     <div class="divider"></div>
 
     <section class="reveal">
+      <div class="section-label">Backend Comparison</div>
+      <div class="section-title">Same voice, four backends</div>
+      <p class="section-desc">Three flagship voices, each synthesized by all four backends. Click a tab to hear how the same 15-second reference sounds across Qwen3 0.6B, Qwen3 1.7B, Chatterbox, and VoxCPM 1.5.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card" data-voice="picard" data-urls='{"qwen3-0.6b":"audio/comparison/picard-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/picard-qwen3-17b.mp3","chatterbox":"audio/comparison/picard-chatterbox.mp3","voxcpm-1.5":"audio/comparison/picard-voxcpm-15.mp3"}'>
+          <div class="voice-name">Picard</div>
+          <div class="voice-source">Patrick Stewart, Star Trek</div>
+          <div role="tablist" class="backend-tabs" aria-label="Backends for Picard">
+            <button role="tab" id="picard-tab-0" aria-selected="true"  aria-controls="picard-panel" tabindex="0"  data-backend="qwen3-0.6b">Qwen3 0.6B</button>
+            <button role="tab" id="picard-tab-1" aria-selected="false" aria-controls="picard-panel" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
+            <button role="tab" id="picard-tab-2" aria-selected="false" aria-controls="picard-panel" tabindex="-1" data-backend="chatterbox">Chatterbox</button>
+            <button role="tab" id="picard-tab-3" aria-selected="false" aria-controls="picard-panel" tabindex="-1" data-backend="voxcpm-1.5">VoxCPM</button>
+          </div>
+          <div role="tabpanel" id="picard-panel" aria-labelledby="picard-tab-0" tabindex="0">
+            <audio controls preload="none" src="audio/comparison/picard-qwen3-06b.mp3" aria-label="Picard synthesized"></audio>
+          </div>
+        </div>
+
+        <div class="compare-card" data-voice="galadriel" data-urls='{"qwen3-0.6b":"audio/comparison/galadriel-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/galadriel-qwen3-17b.mp3","chatterbox":"audio/comparison/galadriel-chatterbox.mp3","voxcpm-1.5":"audio/comparison/galadriel-voxcpm-15.mp3"}'>
+          <div class="voice-name">Galadriel</div>
+          <div class="voice-source">Cate Blanchett, LOTR</div>
+          <div role="tablist" class="backend-tabs" aria-label="Backends for Galadriel">
+            <button role="tab" id="galadriel-tab-0" aria-selected="true"  aria-controls="galadriel-panel" tabindex="0"  data-backend="qwen3-0.6b">Qwen3 0.6B</button>
+            <button role="tab" id="galadriel-tab-1" aria-selected="false" aria-controls="galadriel-panel" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
+            <button role="tab" id="galadriel-tab-2" aria-selected="false" aria-controls="galadriel-panel" tabindex="-1" data-backend="chatterbox">Chatterbox</button>
+            <button role="tab" id="galadriel-tab-3" aria-selected="false" aria-controls="galadriel-panel" tabindex="-1" data-backend="voxcpm-1.5">VoxCPM</button>
+          </div>
+          <div role="tabpanel" id="galadriel-panel" aria-labelledby="galadriel-tab-0" tabindex="0">
+            <audio controls preload="none" src="audio/comparison/galadriel-qwen3-06b.mp3" aria-label="Galadriel synthesized"></audio>
+          </div>
+        </div>
+
+        <div class="compare-card" data-voice="attenborough" data-urls='{"qwen3-0.6b":"audio/comparison/attenborough-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/attenborough-qwen3-17b.mp3","chatterbox":"audio/comparison/attenborough-chatterbox.mp3","voxcpm-1.5":"audio/comparison/attenborough-voxcpm-15.mp3"}'>
+          <div class="voice-name">Attenborough</div>
+          <div class="voice-source">David Attenborough, BBC Earth</div>
+          <div role="tablist" class="backend-tabs" aria-label="Backends for Attenborough">
+            <button role="tab" id="attenborough-tab-0" aria-selected="true"  aria-controls="attenborough-panel" tabindex="0"  data-backend="qwen3-0.6b">Qwen3 0.6B</button>
+            <button role="tab" id="attenborough-tab-1" aria-selected="false" aria-controls="attenborough-panel" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
+            <button role="tab" id="attenborough-tab-2" aria-selected="false" aria-controls="attenborough-panel" tabindex="-1" data-backend="chatterbox">Chatterbox</button>
+            <button role="tab" id="attenborough-tab-3" aria-selected="false" aria-controls="attenborough-panel" tabindex="-1" data-backend="voxcpm-1.5">VoxCPM</button>
+          </div>
+          <div role="tabpanel" id="attenborough-panel" aria-labelledby="attenborough-tab-0" tabindex="0">
+            <audio controls preload="none" src="audio/comparison/attenborough-qwen3-06b.mp3" aria-label="Attenborough synthesized"></audio>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="reveal">
       <div class="section-label">How It Works</div>
       <div class="section-title">Input meets output</div>
 
@@ -740,7 +841,7 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
       </div>
 
       <p><a href="https://docs.anthropic.com/en/docs/claude-code/voice-dictation"><code>/voice</code></a> handles input. This project handles output. Together: voice conversations.</p>
-      <p>The server uses <a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (0.6B, 8-bit) on <a href="https://github.com/ml-explore/mlx">MLX</a>. Zero-shot voice cloning &mdash; no training. A 15-second reference + transcript = cloned voice.</p>
+      <p>The server ships four MLX backends: <a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (0.6B and 1.7B, 8-bit), <a href="https://huggingface.co/mlx-community/chatterbox-fp16">Chatterbox</a> (fp16, multilingual), and <a href="https://huggingface.co/mlx-community/VoxCPM1.5">VoxCPM 1.5</a> (44.1 kHz). Zero-shot voice cloning &mdash; no training. A 15-second reference + transcript = cloned voice on every backend.</p>
 
       <div class="callout">
         <strong>Why local?</strong> Nothing leaves your machine. No API key, no rate limits, no bill. The voice is yours.
@@ -767,8 +868,14 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
   "backend": "mlx",
   "model_loaded": true,
   "ready": true,
-  "voices": ["attenborough", "audrey", "aurora", "avasarala", "bardem", "claudia", "data", "depp", "eartha", "galadriel", "han-solo", "loki", "marla", "picard", "ronan", "samantha", "snape", "spock", "tilda", "vesper"],
-  "default_voice": "galadriel"
+  "voices": ["attenborough", "attenborough-chatterbox", "attenborough-qwen3-17b", "attenborough-voxcpm-15", "audrey", "..."],
+  "default_voice": "galadriel",
+  "loaded_backends": {
+    "qwen3-0.6b":  {"loaded": true, "voice_count": 20, "sample_rate": 24000, "display_name": "Qwen3-TTS 0.6B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
+    "qwen3-1.7b":  {"loaded": true, "voice_count": 3,  "sample_rate": 24000, "display_name": "Qwen3-TTS 1.7B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
+    "chatterbox":  {"loaded": true, "voice_count": 3,  "sample_rate": 24000, "display_name": "Chatterbox (fp16, multilingual)", "supported_langs": ["en","es","fr","de","it","pt","zh","ja","ko"]},
+    "voxcpm-1.5":  {"loaded": true, "voice_count": 3,  "sample_rate": 44100, "display_name": "VoxCPM 1.5", "supported_langs": ["en","zh"]}
+  }
 }</code><span class="copy-hint">click to copy</span></pre>
         <div class="response-codes">
           <span class="response-code success">200 OK</span>
@@ -812,7 +919,7 @@ curl -s "localhost:7860/synthesize?text=Testing" | afplay -</code><span class="c
           <span class="endpoint-method">CLI</span>
           <span class="endpoint-path">afterwords clone</span>
         </div>
-        <p class="endpoint-desc">Clone a new voice from a YouTube clip. Restart the server to load it.</p>
+        <p class="endpoint-desc">Clone a new voice from a YouTube clip. Run <code>afterwords reload</code> to load it (no restart needed).</p>
 <pre><code># Interactive (prompts for URL and name)
 afterwords clone
 
@@ -970,6 +1077,7 @@ afterwords restart     # restart after adding voices
 afterwords status      # show health, model, loaded voices
 afterwords logs        # tail the server log
 afterwords voices      # list available voices
+afterwords reload      # pick up new voices without restart
 afterwords clone       # clone a new voice from YouTube
 afterwords uninstall   # remove service and optionally hooks</code><span class="copy-hint">click to copy</span></pre>
       <p>The server runs on <code>localhost:7860</code> and auto-starts on login via macOS launchd. If you prefer to run it manually:</p>
@@ -985,11 +1093,13 @@ python server.py --allow-clone    # enables POST /clone, POST /synthesize, DELET
 
     <section class="reveal">
       <div class="section-label">Performance</div>
-      <div class="section-title">On an 8 GB M1</div>
+      <div class="section-title">On a 32 GB Apple Silicon Mac</div>
       <div class="info-grid">
-        <div class="info-cell"><div class="info-cell-label">Model load</div><div class="info-cell-value">~5s cached</div></div>
-        <div class="info-cell"><div class="info-cell-label">Per sentence</div><div class="info-cell-value">~20s</div></div>
-        <div class="info-cell"><div class="info-cell-label">Peak memory</div><div class="info-cell-value">~6 GB</div></div>
+        <div class="info-cell"><div class="info-cell-label">Qwen3 0.6B</div><div class="info-cell-value">~20s / sentence</div></div>
+        <div class="info-cell"><div class="info-cell-label">Qwen3 1.7B</div><div class="info-cell-value">~35s / sentence</div></div>
+        <div class="info-cell"><div class="info-cell-label">Chatterbox</div><div class="info-cell-value">~25s / sentence</div></div>
+        <div class="info-cell"><div class="info-cell-label">VoxCPM 1.5</div><div class="info-cell-value">~30s / sentence</div></div>
+        <div class="info-cell"><div class="info-cell-label">Peak memory</div><div class="info-cell-value">~10 GB (all 4 loaded)</div></div>
         <div class="info-cell"><div class="info-cell-label">Adding a voice</div><div class="info-cell-value">0 extra RAM</div></div>
       </div>
     </section>
@@ -1001,7 +1111,7 @@ python server.py --allow-clone    # enables POST /clone, POST /synthesize, DELET
       <div class="section-title">What you need</div>
       <div class="info-grid">
         <div class="info-cell"><div class="info-cell-label">Hardware</div><div class="info-cell-value">Apple Silicon M1+</div></div>
-        <div class="info-cell"><div class="info-cell-label">Memory</div><div class="info-cell-value">8 GB+ RAM</div></div>
+        <div class="info-cell"><div class="info-cell-label">Memory</div><div class="info-cell-value">32 GB+ RAM</div></div>
         <div class="info-cell"><div class="info-cell-label">Python</div><div class="info-cell-value">3.11+</div></div>
         <div class="info-cell"><div class="info-cell-label">Disk</div><div class="info-cell-value">~2 GB</div></div>
       </div>
@@ -1012,7 +1122,7 @@ python server.py --allow-clone    # enables POST /clone, POST /synthesize, DELET
 
     <section class="reveal">
       <div class="section-label">Credits</div>
-      <p><a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (Alibaba, Apache 2.0) &middot; <a href="https://github.com/Blaizzy/mlx-audio">mlx-audio</a> &middot; <a href="https://github.com/ml-explore/mlx">MLX</a> (Apple) &middot; <a href="https://docs.anthropic.com/en/docs/claude-code/">Claude Code</a> (Anthropic)</p>
+      <p><a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (Alibaba) &middot; <a href="https://huggingface.co/mlx-community/chatterbox-fp16">Chatterbox</a> (mlx-community) &middot; <a href="https://huggingface.co/mlx-community/VoxCPM1.5">VoxCPM</a> (mlx-community) &middot; <a href="https://github.com/Blaizzy/mlx-audio">mlx-audio</a> &middot; <a href="https://github.com/ml-explore/mlx">MLX</a> (Apple) &middot; <a href="https://docs.anthropic.com/en/docs/claude-code/">Claude Code</a> (Anthropic)</p>
       <p>Originally built for <a href="https://spark.wedd.au">SPARK</a>, a robot with an inner life. Full tutorial: <a href="https://adrianwedd.com/blog/voice-cloning-qwen3-tts-mlx/">Voice Cloning with Qwen3-TTS</a>.</p>
     </section>
 
@@ -1171,6 +1281,51 @@ document.querySelectorAll('pre').forEach(pre => {
           hint.style.opacity = '';
         }, 1500);
       }
+    });
+  });
+});
+
+// ── Backend Comparison tabs ──────────────────────────────────────
+document.querySelectorAll('.compare-card').forEach(card => {
+  const tablist = card.querySelector('[role="tablist"]');
+  const tabs = Array.from(card.querySelectorAll('[role="tab"]'));
+  const panel = card.querySelector('[role="tabpanel"]');
+  const audio = card.querySelector('audio');
+  if (!tablist || !panel || !audio) return;
+
+  let urls = {};
+  try { urls = JSON.parse(card.getAttribute('data-urls') || '{}'); } catch (e) { return; }
+
+  function activate(idx) {
+    tabs.forEach((t, i) => {
+      const on = i === idx;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.setAttribute('tabindex', on ? '0' : '-1');
+      if (on) {
+        panel.setAttribute('aria-labelledby', t.id);
+        const backend = t.getAttribute('data-backend');
+        const url = urls[backend];
+        if (url && audio.src !== new URL(url, location.href).href) {
+          audio.pause();
+          audio.src = url;
+          audio.load();
+        }
+      }
+    });
+  }
+
+  tabs.forEach((tab, idx) => {
+    tab.addEventListener('click', () => { activate(idx); tab.focus(); });
+    tab.addEventListener('keydown', (e) => {
+      let next = idx;
+      if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
+      else return;
+      e.preventDefault();
+      activate(next);
+      tabs[next].focus();
     });
   });
 });

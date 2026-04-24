@@ -6,7 +6,7 @@
 # Works standalone as an HTTP API, or integrates with Claude Code
 # for automatic text-to-speech on every response.
 #
-# Requirements: Apple Silicon Mac (M1+), 8 GB+ RAM, Python 3.11+
+# Requirements: Apple Silicon Mac (M1+), 16 GB+ RAM (32 GB recommended for all 4 backends), Python 3.11+
 # Usage: bash setup.sh              # full setup (detects Claude Code)
 #        bash setup.sh --server-only # server + voices only, no hooks
 #
@@ -62,8 +62,11 @@ if ! [[ "$RAM_BYTES" =~ ^[0-9]+$ ]]; then
     RAM_GB="?"
 else
     RAM_GB=$((RAM_BYTES / 1073741824))
-    if [[ "$RAM_GB" -lt 8 ]]; then
-        fail "Need 8 GB+ RAM. Detected: ${RAM_GB} GB"
+    if [[ "$RAM_GB" -lt 16 ]]; then
+        fail "Need 16 GB+ RAM (32 GB recommended for all 4 backends). Detected: ${RAM_GB} GB"
+    fi
+    if [[ "$RAM_GB" -lt 32 ]]; then
+        warn "${RAM_GB} GB RAM detected — 32 GB recommended for all 4 backends. Some backends may fail to load."
     fi
 fi
 ok "${RAM_GB} GB RAM"

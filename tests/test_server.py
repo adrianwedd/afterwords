@@ -4,6 +4,9 @@ All tests use a mocked ML model — no GPU, no model download,
 no network access. The mock generates a tiny valid WAV file
 to exercise the full synthesis response path.
 """
+import json
+import os
+
 import server
 
 
@@ -76,9 +79,9 @@ def test_synthesize_default_voice(client, sample_voice):
 def test_resolve_voice_known(sample_voice):
     result = server._resolve_voice(sample_voice)
     assert result is not None
-    path, text = result
-    assert isinstance(path, str)
-    assert isinstance(text, str)
+    assert isinstance(result.ref_audio, str)
+    assert isinstance(result.ref_text, str)
+    assert result.backend == "fake"
 
 
 def test_resolve_voice_unknown():
@@ -178,11 +181,25 @@ def test_post_synthesize_disabled_by_default(client):
 # --- DELETE /session tests ---
 
 
-def test_delete_session(client):
+def test_delete_session(client, tmp_path):
     """DELETE /session removes palette entries."""
+    import backends as _backends
+    _backend = _backends.get("fake")
+    wav_a = str(tmp_path / "a.wav")
+    wav_b = str(tmp_path / "b.wav")
+    # Write minimal WAV stubs so _register_voice doesn't error on missing files.
+    import struct as _struct
+    for p in (wav_a, wav_b):
+        with open(p, "wb") as _f:
+            sr = 24000
+            _f.write(b"RIFF" + _struct.pack("<I", 36) + b"WAVE" + b"fmt " +
+                     _struct.pack("<IHHIIHH", 16, 1, 1, sr, sr * 2, 2, 16) +
+                     b"data" + _struct.pack("<I", 0))
+    prep_a = _backend.prepare_voice(wav_a, "text", {})
+    prep_b = _backend.prepare_voice(wav_b, "text", {})
     server._clone_enabled = True
-    server._register_voice("viewer-xyz-001", "/tmp/a.wav", "text", "neutral")
-    server._register_voice("viewer-xyz-002", "/tmp/b.wav", "text", "sad")
+    server._register_voice("viewer-xyz-001", "fake", wav_a, "text", prep_a, "neutral")
+    server._register_voice("viewer-xyz-002", "fake", wav_b, "text", prep_b, "sad")
     r = client.delete("/session/viewer-xyz")
     assert r.status_code == 200
     assert "viewer-xyz-001" not in server.VOICES
@@ -201,16 +218,322 @@ def test_delete_session_idempotent(client):
 # --- Voice palette selection ---
 
 
-def test_resolve_voice_with_emotion():
+def test_resolve_voice_with_emotion(tmp_path):
     """_resolve_voice selects best palette entry by emotion."""
+    import backends as _backends
+    import struct as _struct
+    _backend = _backends.get("fake")
+    wav_a = str(tmp_path / "s1-a.wav")
+    wav_b = str(tmp_path / "s1-b.wav")
+    for p in (wav_a, wav_b):
+        with open(p, "wb") as _f:
+            sr = 24000
+            _f.write(b"RIFF" + _struct.pack("<I", 36) + b"WAVE" + b"fmt " +
+                     _struct.pack("<IHHIIHH", 16, 1, 1, sr, sr * 2, 2, 16) +
+                     b"data" + _struct.pack("<I", 0))
+    prep_a = _backend.prepare_voice(wav_a, "hi", {})
+    prep_b = _backend.prepare_voice(wav_b, "sad", {})
     server._register_voice(
-        "viewer-s1-001", "/tmp/a.wav", "hi", "neutral", {"duration_s": 5, "confidence": 0.8}
+        "viewer-s1-001", "fake", wav_a, "hi", prep_a, "neutral",
+        {"session_id": "viewer-s1", "duration_s": 5, "confidence": 0.8},
     )
     server._register_voice(
-        "viewer-s1-002", "/tmp/b.wav", "sad", "vulnerable", {"duration_s": 10, "confidence": 0.9}
+        "viewer-s1-002", "fake", wav_b, "sad", prep_b, "vulnerable",
+        {"session_id": "viewer-s1", "duration_s": 10, "confidence": 0.9},
     )
     result = server._resolve_voice("viewer-s1", emotion="vulnerable")
     assert result is not None
-    assert result[0] == "/tmp/b.wav"
+    assert result.ref_audio == wav_b
     # Cleanup
     server._unregister_session("viewer-s1")
+
+
+def test_health_includes_loaded_backends(client):
+    resp = client.get("/health")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["backend"] == "mlx"  # legacy field unchanged
+    assert "loaded_backends" in body
+    assert set(body["loaded_backends"].keys()) >= {
+        "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5",
+    }
+    for name, info in body["loaded_backends"].items():
+        assert info["loaded"] is True
+        assert isinstance(info["voice_count"], int)
+        assert isinstance(info["sample_rate"], int)
+
+
+def test_health_preserves_legacy_fields(client):
+    resp = client.get("/health")
+    body = resp.json()
+    for key in ("status", "model", "backend", "model_loaded", "ready", "voices", "default_voice"):
+        assert key in body
+
+
+def test_synthesize_unknown_voice_returns_400(client):
+    resp = client.get("/synthesize?text=hi&voice=nonexistent-voice-zzzz")
+    assert resp.status_code == 400
+    body = resp.json()
+    assert "unknown voice" in body["error"]
+    assert isinstance(body["available"], list)
+
+
+def test_health_exposes_supported_langs(client):
+    resp = client.get("/health")
+    assert resp.status_code == 200
+    body = resp.json()
+    for name, info in body["loaded_backends"].items():
+        assert "supported_langs" in info, f"backend {name!r} missing supported_langs"
+        assert isinstance(info["supported_langs"], list)
+        assert all(isinstance(x, str) for x in info["supported_langs"])
+
+
+def test_synthesize_unsupported_lang_returns_400(client, sample_voice):
+    """GET /synthesize?lang=fr against an en-only voice must return 400."""
+    r = client.get("/synthesize", params={"text": "Bonjour", "voice": sample_voice, "lang": "fr"})
+    assert r.status_code == 400
+    body = r.json()
+    assert "supported_langs" in body
+    assert "en" in body["supported_langs"]
+    assert "fr" not in body["supported_langs"]
+
+
+def test_post_synthesize_accepts_lang(client, sample_voice):
+    """POST /synthesize with lang=en against an en voice should succeed."""
+    server._clone_enabled = True
+    try:
+        r = client.post("/synthesize", json={"text": "Hello", "voice": sample_voice, "lang": "en"})
+        assert r.status_code == 200
+        assert r.headers["content-type"] == "audio/wav"
+    finally:
+        server._clone_enabled = False
+
+
+def test_cleanup_current_voices_deletes_tracked_paths(tmp_path):
+    """_cleanup_current_voices must delete cleanup_paths + owned_temp_audio for all VOICES."""
+    import tempfile as _tempfile
+    tmp_cleanup = os.path.join(_tempfile.gettempdir(), "test-cleanup-xyz.bin")
+    tmp_owned = os.path.join(_tempfile.gettempdir(), "test-owned-xyz.wav")
+    safe_file = str(tmp_path / "safe.wav")
+    for p in (tmp_cleanup, tmp_owned, safe_file):
+        with open(p, "wb") as f:
+            f.write(b"x")
+
+    prep = server.PreparedVoice(
+        ref_audio_path=tmp_owned,
+        ref_text=None,
+        extras={},
+        owns_temp_audio=True,
+        cleanup_paths=(tmp_cleanup,),
+    )
+    profile = server.VoiceProfile(
+        name="cleaner", backend="fake", ref_audio=tmp_owned, ref_text=None,
+        session_id=None, emotion="neutral", quality=None, duration_s=None,
+        confidence=None, sequence=None, extras={}, prepared=prep,
+    )
+    server.VOICES["cleaner"] = profile
+    try:
+        server._cleanup_current_voices()
+        assert not os.path.exists(tmp_cleanup), "cleanup_paths entry not deleted"
+        assert not os.path.exists(tmp_owned), "owns_temp_audio ref not deleted"
+        assert os.path.exists(safe_file), "file outside tempdir must NOT be touched"
+    finally:
+        server.VOICES.pop("cleaner", None)
+        for p in (tmp_cleanup, tmp_owned, safe_file):
+            try:
+                os.remove(p)
+            except OSError:
+                pass
+
+
+def test_sweep_orphaned_temp_files_deletes_voxcpm_refs():
+    """_sweep_orphaned_temp_files must delete files matching voxcpm-ref-*.wav."""
+    import tempfile as _tempfile
+    stale = os.path.join(_tempfile.gettempdir(), "voxcpm-ref-deadbeef.wav")
+    unrelated = os.path.join(_tempfile.gettempdir(), "not-voxcpm-xyz.wav")
+    for p in (stale, unrelated):
+        with open(p, "wb") as f:
+            f.write(b"x")
+    try:
+        server._sweep_orphaned_temp_files()
+        assert not os.path.exists(stale), "stale voxcpm-ref-*.wav not swept"
+        assert os.path.exists(unrelated), "unrelated file must NOT be swept"
+    finally:
+        for p in (stale, unrelated):
+            try:
+                os.remove(p)
+            except OSError:
+                pass
+
+
+def _write_profile_json(dir_path, name, backend="fake", ref_text="hello"):
+    """Write a profile JSON + ref WAV to dir_path. Returns (json_path, wav_path)."""
+    import soundfile as sf
+    import numpy as np
+    wav = os.path.join(dir_path, f"{name}-ref.wav")
+    sf.write(wav, np.zeros(24000, dtype=np.float32), 24000)
+    j = os.path.join(dir_path, f"{name}.json")
+    with open(j, "w") as f:
+        json.dump({
+            "name": name,
+            "backend": backend,
+            "reference_audio": f"{name}-ref.wav",
+            "reference_text": ref_text,
+        }, f)
+    return j, wav
+
+
+def test_reload_disabled_without_allow_clone(client):
+    server._clone_enabled = False
+    r = client.post("/reload")
+    assert r.status_code == 404
+
+
+def test_reload_adds_new_voice_from_disk(client, tmp_path, monkeypatch):
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+    try:
+        _write_profile_json(str(tmp_path), "alpha", backend="fake")
+        r = client.post("/reload")
+        assert r.status_code == 200
+        body = r.json()
+        assert "alpha" in body["reloaded"]
+        assert body["errors"] == []
+        assert "alpha" in server.VOICES
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
+def test_reload_is_add_only_keeps_deleted_voices(client, tmp_path, monkeypatch):
+    """If a JSON is deleted from disk, the voice stays in VOICES (add-only)."""
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+    try:
+        j1, _ = _write_profile_json(str(tmp_path), "keeper", backend="fake")
+        r = client.post("/reload")
+        assert "keeper" in server.VOICES
+        os.remove(j1)
+        r = client.post("/reload")
+        assert r.status_code == 200
+        assert "keeper" in server.VOICES
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
+def test_reload_updates_changed_voice(client, tmp_path, monkeypatch):
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+    try:
+        _write_profile_json(str(tmp_path), "updater", backend="fake", ref_text="before")
+        r = client.post("/reload")
+        assert server.VOICES["updater"].ref_text == "before"
+        _write_profile_json(str(tmp_path), "updater", backend="fake", ref_text="after")
+        r = client.post("/reload")
+        assert r.status_code == 200
+        assert server.VOICES["updater"].ref_text == "after"
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
+def test_reload_malformed_json_logs_and_skips(client, tmp_path, monkeypatch):
+    """Malformed JSON is logged and skipped via _build_voice_profile returning None;
+    reload still succeeds with 200 for the other good profiles."""
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+    try:
+        _write_profile_json(str(tmp_path), "good", backend="fake")
+        with open(os.path.join(str(tmp_path), "bad.json"), "w") as f:
+            f.write("{not valid json")
+        r = client.post("/reload")
+        assert r.status_code == 200
+        assert "good" in server.VOICES
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
+def test_reload_abort_when_prepare_voice_raises(client, tmp_path, monkeypatch):
+    """If prepare_voice raises, reload aborts atomically — existing VOICES unmutated."""
+    import backends as _backends
+    import soundfile as sf, numpy as np
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+
+    pre_wav = str(tmp_path / "pre-ref.wav")
+    sf.write(pre_wav, np.zeros(24000, dtype=np.float32), 24000)
+    backend = _backends.get("fake")
+    prep = backend.prepare_voice(pre_wav, "pre text", {})
+    server.VOICES["pre"] = server.VoiceProfile(
+        name="pre", backend="fake", ref_audio=pre_wav, ref_text="pre text",
+        session_id=None, emotion="neutral", quality=None, duration_s=None,
+        confidence=None, sequence=None, extras={}, prepared=prep,
+    )
+
+    original = backend.prepare_voice
+    def failing_prepare(ref, txt, extras):
+        if ref.endswith("boom-ref.wav"):
+            raise RuntimeError("simulated prepare failure")
+        return original(ref, txt, extras)
+    monkeypatch.setattr(backend, "prepare_voice", failing_prepare)
+
+    try:
+        _write_profile_json(str(tmp_path), "ok_one", backend="fake")
+        _write_profile_json(str(tmp_path), "boom", backend="fake")
+        r = client.post("/reload")
+        assert r.status_code == 500
+        body = r.json()
+        assert body["status"] == "failed"
+        assert len(body["errors"]) >= 1
+        assert "pre" in server.VOICES         # pre-existing voice NOT mutated
+        assert "ok_one" not in server.VOICES  # atomic abort — no mutation
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
+def test_reload_abort_cleans_tracked_temps(client, tmp_path, monkeypatch):
+    """When reload aborts, temp files from profiles built before the failure must be deleted."""
+    import backends as _backends
+    import tempfile as _tempfile
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+
+    sentinel = os.path.join(_tempfile.gettempdir(), "reload-abort-sentinel.tmp")
+    with open(sentinel, "wb") as f:
+        f.write(b"x")
+
+    backend = _backends.get("fake")
+    from backends.base import PreparedVoice, _read_only
+
+    def prepare_with_sentinel(ref, txt, extras):
+        if "succeed" in ref:
+            return PreparedVoice(
+                ref_audio_path=ref, ref_text=txt, extras=_read_only(dict(extras)),
+                cleanup_paths=(sentinel,),
+            )
+        raise RuntimeError("boom")
+
+    monkeypatch.setattr(backend, "prepare_voice", prepare_with_sentinel)
+
+    try:
+        _write_profile_json(str(tmp_path), "succeed", backend="fake")
+        _write_profile_json(str(tmp_path), "fail", backend="fake")
+        r = client.post("/reload")
+        assert r.status_code == 500
+        assert not os.path.exists(sentinel), "rollback did not clean tracked cleanup_paths"
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+        try:
+            os.remove(sentinel)
+        except OSError:
+            pass
