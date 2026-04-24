@@ -43,7 +43,7 @@ def test_backend_loads_and_synthesizes_short_clip(registered, backend_name):
     b.load()
     b.validate_extras({})
     prepared = b.prepare_voice(SHORT_REF, SHORT_REF_TEXT, {})
-    audio, sr = b.synthesize("Hello.", prepared)
+    audio, sr = b.synthesize("Hello.", prepared, lang="en")
     assert isinstance(audio, np.ndarray)
     assert audio.ndim == 1
     assert sr == b.sample_rate
