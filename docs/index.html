@@ -502,6 +502,55 @@
     footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--accent); }
 
+    /* ── Backend Comparison ──────────────────────── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.1rem;
+      margin-top: 1rem;
+    }
+    .compare-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.3rem 1.15rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .compare-card:hover { border-color: var(--border-hover); }
+    .backend-tabs {
+      display: flex;
+      gap: 0;
+      margin: 0.75rem 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .backend-tabs button {
+      flex: 1;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      background: transparent;
+      color: var(--text-secondary);
+      border: none;
+      padding: 0.5rem 0.4rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      border-right: 1px solid var(--border);
+    }
+    .backend-tabs button:last-child { border-right: none; }
+    .backend-tabs button:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+    .backend-tabs button[aria-selected="true"] {
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .backend-tabs button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+    .compare-card [role="tabpanel"] { outline: none; }
+    .compare-card audio { width: 100%; height: 32px; border-radius: 4px; }
+
     /* ── Responsive ────────────────────────────── */
     @media (max-width: 600px) {
       .hero { min-height: auto; padding: 4rem 0 3rem; }
@@ -692,6 +741,58 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
 
       <p style="margin-top:1.5rem;">Add your own:</p>
 <pre><code>afterwords clone "https://youtube.com/watch?v=..." myvoice 30</code><span class="copy-hint">click to copy</span></pre>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="reveal">
+      <div class="section-label">Backend Comparison</div>
+      <div class="section-title">Same voice, four backends</div>
+      <p class="section-desc">Three flagship voices, each synthesized by all four backends. Click a tab to hear how the same 15-second reference sounds across Qwen3 0.6B, Qwen3 1.7B, Chatterbox, and VoxCPM 1.5.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card" data-voice="picard" data-urls='{"qwen3-0.6b":"audio/comparison/picard-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/picard-qwen3-17b.mp3","chatterbox":"audio/comparison/picard-chatterbox.mp3","voxcpm-1.5":"audio/comparison/picard-voxcpm-15.mp3"}'>
+          <div class="voice-name">Picard</div>
+          <div class="voice-source">Patrick Stewart, Star Trek</div>
+          <div role="tablist" class="backend-tabs" aria-label="Backends for Picard">
+            <button role="tab" id="picard-tab-0" aria-selected="true"  aria-controls="picard-panel" tabindex="0"  data-backend="qwen3-0.6b">Qwen3 0.6B</button>
+            <button role="tab" id="picard-tab-1" aria-selected="false" aria-controls="picard-panel" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
+            <button role="tab" id="picard-tab-2" aria-selected="false" aria-controls="picard-panel" tabindex="-1" data-backend="chatterbox">Chatterbox</button>
+            <button role="tab" id="picard-tab-3" aria-selected="false" aria-controls="picard-panel" tabindex="-1" data-backend="voxcpm-1.5">VoxCPM</button>
+          </div>
+          <div role="tabpanel" id="picard-panel" aria-labelledby="picard-tab-0" tabindex="0">
+            <audio controls preload="none" src="audio/comparison/picard-qwen3-06b.mp3" aria-label="Picard synthesized"></audio>
+          </div>
+        </div>
+
+        <div class="compare-card" data-voice="galadriel" data-urls='{"qwen3-0.6b":"audio/comparison/galadriel-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/galadriel-qwen3-17b.mp3","chatterbox":"audio/comparison/galadriel-chatterbox.mp3","voxcpm-1.5":"audio/comparison/galadriel-voxcpm-15.mp3"}'>
+          <div class="voice-name">Galadriel</div>
+          <div class="voice-source">Cate Blanchett, LOTR</div>
+          <div role="tablist" class="backend-tabs" aria-label="Backends for Galadriel">
+            <button role="tab" id="galadriel-tab-0" aria-selected="true"  aria-controls="galadriel-panel" tabindex="0"  data-backend="qwen3-0.6b">Qwen3 0.6B</button>
+            <button role="tab" id="galadriel-tab-1" aria-selected="false" aria-controls="galadriel-panel" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
+            <button role="tab" id="galadriel-tab-2" aria-selected="false" aria-controls="galadriel-panel" tabindex="-1" data-backend="chatterbox">Chatterbox</button>
+            <button role="tab" id="galadriel-tab-3" aria-selected="false" aria-controls="galadriel-panel" tabindex="-1" data-backend="voxcpm-1.5">VoxCPM</button>
+          </div>
+          <div role="tabpanel" id="galadriel-panel" aria-labelledby="galadriel-tab-0" tabindex="0">
+            <audio controls preload="none" src="audio/comparison/galadriel-qwen3-06b.mp3" aria-label="Galadriel synthesized"></audio>
+          </div>
+        </div>
+
+        <div class="compare-card" data-voice="attenborough" data-urls='{"qwen3-0.6b":"audio/comparison/attenborough-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/attenborough-qwen3-17b.mp3","chatterbox":"audio/comparison/attenborough-chatterbox.mp3","voxcpm-1.5":"audio/comparison/attenborough-voxcpm-15.mp3"}'>
+          <div class="voice-name">Attenborough</div>
+          <div class="voice-source">David Attenborough, BBC Earth</div>
+          <div role="tablist" class="backend-tabs" aria-label="Backends for Attenborough">
+            <button role="tab" id="attenborough-tab-0" aria-selected="true"  aria-controls="attenborough-panel" tabindex="0"  data-backend="qwen3-0.6b">Qwen3 0.6B</button>
+            <button role="tab" id="attenborough-tab-1" aria-selected="false" aria-controls="attenborough-panel" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
+            <button role="tab" id="attenborough-tab-2" aria-selected="false" aria-controls="attenborough-panel" tabindex="-1" data-backend="chatterbox">Chatterbox</button>
+            <button role="tab" id="attenborough-tab-3" aria-selected="false" aria-controls="attenborough-panel" tabindex="-1" data-backend="voxcpm-1.5">VoxCPM</button>
+          </div>
+          <div role="tabpanel" id="attenborough-panel" aria-labelledby="attenborough-tab-0" tabindex="0">
+            <audio controls preload="none" src="audio/comparison/attenborough-qwen3-06b.mp3" aria-label="Attenborough synthesized"></audio>
+          </div>
+        </div>
+      </div>
     </section>
 
     <div class="divider"></div>
@@ -1180,6 +1281,51 @@ document.querySelectorAll('pre').forEach(pre => {
           hint.style.opacity = '';
         }, 1500);
       }
+    });
+  });
+});
+
+// ── Backend Comparison tabs ──────────────────────────────────────
+document.querySelectorAll('.compare-card').forEach(card => {
+  const tablist = card.querySelector('[role="tablist"]');
+  const tabs = Array.from(card.querySelectorAll('[role="tab"]'));
+  const panel = card.querySelector('[role="tabpanel"]');
+  const audio = card.querySelector('audio');
+  if (!tablist || !panel || !audio) return;
+
+  let urls = {};
+  try { urls = JSON.parse(card.getAttribute('data-urls') || '{}'); } catch (e) { return; }
+
+  function activate(idx) {
+    tabs.forEach((t, i) => {
+      const on = i === idx;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.setAttribute('tabindex', on ? '0' : '-1');
+      if (on) {
+        panel.setAttribute('aria-labelledby', t.id);
+        const backend = t.getAttribute('data-backend');
+        const url = urls[backend];
+        if (url && audio.src !== new URL(url, location.href).href) {
+          audio.pause();
+          audio.src = url;
+          audio.load();
+        }
+      }
+    });
+  }
+
+  tabs.forEach((tab, idx) => {
+    tab.addEventListener('click', () => { activate(idx); tab.focus(); });
+    tab.addEventListener('keydown', (e) => {
+      let next = idx;
+      if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
+      else return;
+      e.preventDefault();
+      activate(next);
+      tabs[next].focus();
     });
   });
 });
