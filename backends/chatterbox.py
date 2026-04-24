@@ -58,9 +58,14 @@ class ChatterboxBackend(BackendBase):
         self,
         text: str,
         prepared: PreparedVoice,
+        lang: str,
     ) -> tuple[np.ndarray, int]:
         if self._model is None:
             raise RuntimeError("ChatterboxBackend.synthesize called before load()")
+        if lang not in self.supported_langs:
+            raise ValueError(
+                f"chatterbox does not support lang={lang!r}; supported: {self.supported_langs}"
+            )
         from mlx_audio.tts.generate import generate_audio
         with tempfile.TemporaryDirectory() as tmpdir:
             kwargs = dict(
