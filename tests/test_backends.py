@@ -86,3 +86,13 @@ def test_prepared_voice_wraps_plain_dict():
     # __post_init__ should have wrapped in MappingProxyType
     from types import MappingProxyType
     assert isinstance(pv.extras, MappingProxyType)
+
+
+def test_backend_synthesize_requires_lang():
+    """Backend.synthesize must take `lang` as a required parameter (no default on Protocol)."""
+    import inspect
+    sig = inspect.signature(Backend.synthesize)
+    params = sig.parameters
+    assert "lang" in params, "Backend.synthesize missing `lang` parameter"
+    assert params["lang"].default is inspect.Parameter.empty, \
+        "Backend.synthesize.lang must be required (no default on Protocol)"

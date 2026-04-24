@@ -55,6 +55,7 @@ class Backend(Protocol):
         self,
         text: str,
         prepared: PreparedVoice,
+        lang: str,
     ) -> tuple[np.ndarray, int]: ...
 
 
