@@ -65,7 +65,46 @@ warnings.filterwarnings("ignore", message=".*incorrect regex pattern.*")
 logging.getLogger("transformers.modeling_utils").setLevel(logging.ERROR)
 logging.getLogger("transformers.tokenization_utils_base").setLevel(logging.ERROR)
 
-app = FastAPI(title="Afterwords TTS")
+import tempfile
+from contextlib import asynccontextmanager
+
+
+def _cleanup_current_voices():
+    """Delete cleanup_paths + owned temp audio for all currently-loaded voices.
+    Called during shutdown only — never inline during reload (see Item 3 design)."""
+    for profile in VOICES.values():
+        for path in profile.prepared.cleanup_paths:
+            try:
+                os.remove(path)
+            except OSError:
+                pass
+        if (profile.prepared.owns_temp_audio
+                and profile.prepared.ref_audio_path.startswith(tempfile.gettempdir())):
+            try:
+                os.remove(profile.prepared.ref_audio_path)
+            except OSError:
+                pass
+
+
+def _sweep_orphaned_temp_files():
+    """Delete VoxCPM-resample temp files from any prior crashed run. Best-effort.
+    MUST run before _load_voice_profiles to avoid deleting fresh temps."""
+    for path in glob.glob(os.path.join(tempfile.gettempdir(), "voxcpm-ref-*.wav")):
+        try:
+            os.remove(path)
+        except OSError:
+            pass
+
+
+@asynccontextmanager
+async def lifespan(app):
+    # startup body runs after main()'s sync setup — no-op here
+    yield
+    # shutdown body
+    _cleanup_current_voices()
+
+
+app = FastAPI(title="Afterwords TTS", lifespan=lifespan)
 
 _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")
 
@@ -75,72 +114,82 @@ _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")
 # All voices are auto-discovered from JSON profiles in voices/.
 VOICES: dict[str, VoiceProfile] = {}
 
+
+def _build_voice_profile(profile_path: str) -> VoiceProfile | None:
+    """Build a single VoiceProfile from a JSON path. Returns None if the profile
+    should be skipped (missing ref, invalid extras, etc.) — logs the reason.
+    Raises if `prepare_voice()` itself fails — callers decide recovery policy."""
+    try:
+        with open(profile_path) as f:
+            p = json.load(f)
+    except Exception as exc:
+        log.warning("voice profile unreadable: %s: %s", profile_path, exc)
+        return None
+
+    stem = os.path.splitext(os.path.basename(profile_path))[0]
+    if stem.endswith("-profile"):
+        stem = stem[:-8]
+    name = p.get("name") or stem
+    backend_name = p.get("backend", "qwen3-0.6b")
+
+    try:
+        backend = backends.get(backend_name)
+    except KeyError:
+        log.warning(
+            "voice %r references unregistered backend %r — skipping",
+            name, backend_name,
+        )
+        return None
+
+    ref_rel = p.get("reference_audio", f"{stem}-ref.wav")
+    ref_audio = os.path.join(_VOICES_DIR, ref_rel)
+    if not os.path.exists(ref_audio):
+        log.warning("voice %r missing ref audio %s — skipping", name, ref_audio)
+        return None
+
+    ref_text = p.get("reference_text") or None
+    if backend.ref_text_policy == RefTextPolicy.REQUIRED and not ref_text:
+        log.warning(
+            "voice %r: backend %r REQUIRES ref_text but profile has none — skipping",
+            name, backend_name,
+        )
+        return None
+
+    extras = p.get("synthesis_extras", {}) or {}
+    try:
+        backend.validate_extras(extras)
+    except ValueError as exc:
+        log.warning("voice %r: invalid extras: %s — skipping", name, exc)
+        return None
+
+    prepared = backend.prepare_voice(ref_audio, ref_text, extras)
+
+    return VoiceProfile(
+        name=name,
+        backend=backend_name,
+        ref_audio=ref_audio,
+        ref_text=ref_text,
+        session_id=p.get("session_id"),
+        emotion=p.get("emotion", "neutral"),
+        quality=p.get("quality"),
+        duration_s=p.get("duration_s"),
+        confidence=p.get("transcript_confidence"),
+        sequence=p.get("sequence"),
+        extras=_read_only(extras),
+        prepared=prepared,
+    )
+
+
 def _load_voice_profiles() -> None:
     """Walk voices/*.json and populate VOICES. Called after backends are loaded."""
     for profile_path in glob.glob(os.path.join(_VOICES_DIR, "*.json")):
         try:
-            with open(profile_path) as f:
-                p = json.load(f)
+            profile = _build_voice_profile(profile_path)
         except Exception as exc:
-            log.warning("voice profile unreadable: %s: %s", profile_path, exc)
+            log.warning("voice profile %s: prepare_voice failed: %s", profile_path, exc)
             continue
-
-        stem = os.path.splitext(os.path.basename(profile_path))[0]
-        if stem.endswith("-profile"):
-            stem = stem[:-8]
-        name = p.get("name") or stem
-        backend_name = p.get("backend", "qwen3-0.6b")
-
-        try:
-            backend = backends.get(backend_name)
-        except KeyError:
-            log.warning(
-                "voice %r references unregistered backend %r — skipping",
-                name, backend_name,
-            )
-            continue
-
-        ref_rel = p.get("reference_audio", f"{stem}-ref.wav")
-        ref_audio = os.path.join(_VOICES_DIR, ref_rel)
-        if not os.path.exists(ref_audio):
-            log.warning("voice %r missing ref audio %s — skipping", name, ref_audio)
-            continue
-
-        ref_text = p.get("reference_text") or None
-        if backend.ref_text_policy == RefTextPolicy.REQUIRED and not ref_text:
-            log.warning(
-                "voice %r: backend %r REQUIRES ref_text but profile has none — skipping",
-                name, backend_name,
-            )
-            continue
-
-        extras = p.get("synthesis_extras", {}) or {}
-        try:
-            backend.validate_extras(extras)
-        except ValueError as exc:
-            log.warning("voice %r: invalid extras: %s — skipping", name, exc)
-            continue
-
-        try:
-            prepared = backend.prepare_voice(ref_audio, ref_text, extras)
-        except Exception as exc:
-            log.warning("voice %r: prepare_voice failed: %s — skipping", name, exc)
-            continue
-
-        VOICES[name] = VoiceProfile(
-            name=name,
-            backend=backend_name,
-            ref_audio=ref_audio,
-            ref_text=ref_text,
-            session_id=p.get("session_id"),
-            emotion=p.get("emotion", "neutral"),
-            quality=p.get("quality"),
-            duration_s=p.get("duration_s"),
-            confidence=p.get("transcript_confidence"),
-            sequence=p.get("sequence"),
-            extras=_read_only(extras),
-            prepared=prepared,
-        )
+        if profile is not None:
+            VOICES[profile.name] = profile
 
 DEFAULT_VOICE = "galadriel"
 
@@ -644,6 +693,9 @@ def main():
             log.error("backend %s failed to load: %s", bname, exc, exc_info=True)
             raise SystemExit(1)
         log.info("backend %s loaded in %.1fs", bname, time.time() - t0)
+
+    # Clean up any VoxCPM temp files orphaned by a previous crashed run.
+    _sweep_orphaned_temp_files()
 
     # 3. Walk voices/*.json — profile loader calls prepare_voice() (can need loaded weights).
     _load_voice_profiles()

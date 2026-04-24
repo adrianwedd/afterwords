@@ -4,6 +4,8 @@ All tests use a mocked ML model — no GPU, no model download,
 no network access. The mock generates a tiny valid WAV file
 to exercise the full synthesis response path.
 """
+import os
+
 import server
 
 
@@ -304,3 +306,60 @@ def test_post_synthesize_accepts_lang(client, sample_voice):
         assert r.headers["content-type"] == "audio/wav"
     finally:
         server._clone_enabled = False
+
+
+def test_cleanup_current_voices_deletes_tracked_paths(tmp_path):
+    """_cleanup_current_voices must delete cleanup_paths + owned_temp_audio for all VOICES."""
+    import tempfile as _tempfile
+    tmp_cleanup = os.path.join(_tempfile.gettempdir(), "test-cleanup-xyz.bin")
+    tmp_owned = os.path.join(_tempfile.gettempdir(), "test-owned-xyz.wav")
+    safe_file = str(tmp_path / "safe.wav")
+    for p in (tmp_cleanup, tmp_owned, safe_file):
+        with open(p, "wb") as f:
+            f.write(b"x")
+
+    prep = server.PreparedVoice(
+        ref_audio_path=tmp_owned,
+        ref_text=None,
+        extras={},
+        owns_temp_audio=True,
+        cleanup_paths=(tmp_cleanup,),
+    )
+    profile = server.VoiceProfile(
+        name="cleaner", backend="fake", ref_audio=tmp_owned, ref_text=None,
+        session_id=None, emotion="neutral", quality=None, duration_s=None,
+        confidence=None, sequence=None, extras={}, prepared=prep,
+    )
+    server.VOICES["cleaner"] = profile
+    try:
+        server._cleanup_current_voices()
+        assert not os.path.exists(tmp_cleanup), "cleanup_paths entry not deleted"
+        assert not os.path.exists(tmp_owned), "owns_temp_audio ref not deleted"
+        assert os.path.exists(safe_file), "file outside tempdir must NOT be touched"
+    finally:
+        server.VOICES.pop("cleaner", None)
+        for p in (tmp_cleanup, tmp_owned, safe_file):
+            try:
+                os.remove(p)
+            except OSError:
+                pass
+
+
+def test_sweep_orphaned_temp_files_deletes_voxcpm_refs():
+    """_sweep_orphaned_temp_files must delete files matching voxcpm-ref-*.wav."""
+    import tempfile as _tempfile
+    stale = os.path.join(_tempfile.gettempdir(), "voxcpm-ref-deadbeef.wav")
+    unrelated = os.path.join(_tempfile.gettempdir(), "not-voxcpm-xyz.wav")
+    for p in (stale, unrelated):
+        with open(p, "wb") as f:
+            f.write(b"x")
+    try:
+        server._sweep_orphaned_temp_files()
+        assert not os.path.exists(stale), "stale voxcpm-ref-*.wav not swept"
+        assert os.path.exists(unrelated), "unrelated file must NOT be swept"
+    finally:
+        for p in (stale, unrelated):
+            try:
+                os.remove(p)
+            except OSError:
+                pass
