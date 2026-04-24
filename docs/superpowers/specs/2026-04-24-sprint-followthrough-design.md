@@ -1,16 +1,16 @@
-# Multi-Backend Follow-through Sprint — Design Spec
+# Multi-Backend Follow-through Sprint — Design Spec (Revision 3)
 
 **Date:** 2026-04-24
+**Revision:** 3 (addresses pass-2 reviewer findings)
 **Scope:** Four items completing the multi-backend TTS story: re-clone flagship voices, demo site comparison, hot-reload endpoint, multilingual groundwork.
-**Status:** Brainstormed, reviewed by Codex + Gemini + Hermes, revised to address findings.
-**Target duration:** 24-hour sprint (phase A parallelizable, phase B sequential).
+**Target duration:** 24-hour sprint.
 **Tracks:** GH #6, #7, #8, #9.
 
 ---
 
 ## Context
 
-Multi-backend TTS infrastructure shipped in commit `d7dfabc` (22 commits on `feat/multi-backend-tts` → fast-forward merged to main). The `Backend` protocol + registry is in place; all 4 backends (Qwen3 0.6B, Qwen3 1.7B, Chatterbox fp16, VoxCPM 1.5) preload at startup. `_synth_lock` serializes synthesis; `_model_lock` protects VOICES dict.
+Multi-backend TTS infrastructure shipped in commit `d7dfabc` (22 commits, fast-forward merged to main). The `Backend` protocol + registry is in place; all 4 backends (Qwen3 0.6B, Qwen3 1.7B, Chatterbox fp16, VoxCPM 1.5) preload at startup. `_synth_lock` serializes synthesis; `_model_lock` protects VOICES dict.
 
 This sprint delivers the follow-through: cloning flagship voices onto all backends, showcasing the result on the demo site, adding a `/reload` endpoint for iterative voice development, and extending the Backend protocol to accept a `lang` parameter (groundwork for future routing).
 
@@ -19,8 +19,9 @@ This sprint delivers the follow-through: cloning flagship voices onto all backen
 - **No translation.** The `lang` parameter is advertised and enforced, but callers must provide text in the target language.
 - **No automatic voice-family routing across backends.** If a caller asks for `galadriel` in Chinese and `galadriel` is on a backend that only supports English, the request returns 400 — it does not automatically swap to `galadriel-voxcpm-15`. A follow-up spec will add voice-family grouping.
 - **No deletion on reload.** `/reload` is add-only — removing a voice still requires restart or `DELETE /session/{id}`.
-- **No re-download from YouTube for flagship voices.** We reuse the existing 15s ref WAVs and their transcripts verbatim. This avoids transcription drift and source-URL rot.
-- **No new backend.** The four existing backends remain the set. Adding a backend is a separate spec.
+- **No re-download from YouTube for flagship voices.** We reuse the existing 15s ref WAVs and their transcripts verbatim.
+- **No new backend.** The four existing backends remain the set.
+- **No multi-worker Uvicorn when clone-enabled.** `--allow-clone` implies single-process (locks are in-memory).
 
 ---
 
@@ -28,15 +29,15 @@ This sprint delivers the follow-through: cloning flagship voices onto all backen
 
 ### Goal
 
-Produce per-backend voice profiles for `picard`, `galadriel`, `attenborough`, sharing each voice's existing 15s ref WAV. Total: 3 voices × 4 backends = 12 profiles.
+Produce per-backend voice profiles for `picard`, `galadriel`, `attenborough`, sharing each voice's existing 15s ref WAV. Total coverage: 3 voices × 4 backends = 12 profiles (3 existing + 9 new).
 
 ### Approach
 
-A throwaway script at `scripts/reclone-flagship.py` (committed for reproducibility, but not part of the long-term tooling). It walks a hardcoded list of flagship voice names, reads each existing `voices/{name}.json`, and writes per-backend slugged profiles:
+A throwaway script at `scripts/reclone-flagship.py` (committed for reproducibility). Reads each existing `voices/{name}.json`, writes per-backend slugged profiles. Idempotent: skips profiles that already exist unless `--force` is passed.
 
 ```
 voices/
-  picard.json                      (existing — still points to qwen3-0.6b default)
+  picard.json                      (existing — backend defaults to qwen3-0.6b at load time)
   picard-qwen3-17b.json            (new — backend: "qwen3-1.7b")
   picard-chatterbox.json           (new — backend: "chatterbox")
   picard-voxcpm-15.json            (new — backend: "voxcpm-1.5")
@@ -44,7 +45,7 @@ voices/
   # ... same pattern for galadriel, attenborough
 ```
 
-Each new JSON contains:
+Each new JSON:
 
 ```json
 {
@@ -57,26 +58,29 @@ Each new JSON contains:
 }
 ```
 
-**Verified prerequisites (from review):**
-- All three flagship JSONs already contain populated `reference_text` (Qwen3's `REQUIRED` policy is satisfied).
-- Slug mapping matches `backends.slug()`: `qwen3-0.6b` → `qwen3-06b`, `qwen3-1.7b` → `qwen3-17b`, `voxcpm-1.5` → `voxcpm-15`, `chatterbox` → `chatterbox`.
+**Idempotency contract:**
+- Default: if output path already exists, skip and log `"[skip] picard-qwen3-17b.json already exists"`.
+- `--force` flag: overwrite unconditionally.
+- Script exits 0 even when every output was skipped — idempotent re-runs are OK.
 
-**Why a script, not a `--from-ref` flag on `clone-voice.sh`:** YAGNI. This is a one-time operation for 3 voices × 4 backends. Adding permanent surface area to `clone-voice.sh` for a one-off isn't worth the maintenance cost.
+**Verified prerequisites:**
+- All three flagship JSONs contain populated `reference_text` (Qwen3's `REQUIRED` policy is satisfied).
+- Slug mapping matches `backends.slug()`: `qwen3-0.6b` → `qwen3-06b`, `qwen3-1.7b` → `qwen3-17b`, `voxcpm-1.5` → `voxcpm-15`, `chatterbox` → `chatterbox`.
+- `session_id: null` vs missing key is equivalent after `json.load()` (verified at `server.py:135`).
 
 ### Demo audio generation
 
-After re-clone, a small bash script (`scripts/gen-comparison-audio.sh`) calls `GET /synthesize` for each of the 12 profiles with the canonical demo sentence ("You are absolutely right. Your Claude Code session could sound like me."), pipes through `lame`, and saves MP3s to `docs/audio/comparison/{voice}-{backend-slug}.mp3`.
+After re-clone, `scripts/gen-comparison-audio.sh` calls `GET /synthesize` for each of the 12 profiles with the canonical demo sentence, pipes through `lame`, saves MP3s to `docs/audio/comparison/{voice}-{backend-slug}.mp3`.
 
-Example filenames:
-- `docs/audio/comparison/picard-qwen3-06b.mp3`
-- `docs/audio/comparison/picard-qwen3-17b.mp3`
-- `docs/audio/comparison/picard-chatterbox.mp3`
-- `docs/audio/comparison/picard-voxcpm-15.mp3`
-- ... (same pattern for galadriel, attenborough)
+Filenames (12 total):
+- `docs/audio/comparison/picard-qwen3-06b.mp3`, `picard-qwen3-17b.mp3`, `picard-chatterbox.mp3`, `picard-voxcpm-15.mp3`
+- Same pattern for `galadriel`, `attenborough`
+
+Script is idempotent: skips MP3s that already exist unless `--force`.
 
 ### Repo size
 
-12 MP3s × ~700 KB each = ~8.4 MB added. No Git LFS (matches current convention — existing `docs/audio/*.mp3` are committed directly).
+12 MP3s × ~700 KB = ~8.4 MB added. No Git LFS (matches current convention).
 
 ---
 
@@ -84,11 +88,11 @@ Example filenames:
 
 ### Goal
 
-Add a "Backend Comparison" section to `docs/index.html` between the existing Voice Gallery and How It Works, where visitors can A/B the same voice across all four backends. Update site copy throughout to reflect the multi-backend reality.
+Add a "Backend Comparison" section to `docs/index.html` between the existing Voice Gallery and How It Works. Update site copy throughout to reflect the multi-backend reality.
 
 ### Component — accessible tab interface
 
-Using the ARIA Tabs pattern (not toggle buttons — fixed from initial aria-pressed design per reviewer feedback):
+Uses the WAI-ARIA Tabs pattern correctly (no `aria-pressed`; proper tab/tablist/tabpanel relationship).
 
 ```html
 <div class="backend-compare-card">
@@ -96,13 +100,13 @@ Using the ARIA Tabs pattern (not toggle buttons — fixed from initial aria-pres
   <div class="voice-source">Patrick Stewart, Star Trek</div>
 
   <div role="tablist" aria-label="Backends for Picard">
-    <button role="tab" aria-selected="true"  aria-controls="picard-panel" id="picard-tab-0" tabindex="0">Qwen3 0.6B</button>
-    <button role="tab" aria-selected="false" aria-controls="picard-panel" id="picard-tab-1" tabindex="-1">Qwen3 1.7B</button>
-    <button role="tab" aria-selected="false" aria-controls="picard-panel" id="picard-tab-2" tabindex="-1">Chatterbox</button>
-    <button role="tab" aria-selected="false" aria-controls="picard-panel" id="picard-tab-3" tabindex="-1">VoxCPM</button>
+    <button role="tab" id="picard-tab-0" aria-selected="true"  aria-controls="picard-panel" tabindex="0">Qwen3 0.6B</button>
+    <button role="tab" id="picard-tab-1" aria-selected="false" aria-controls="picard-panel" tabindex="-1">Qwen3 1.7B</button>
+    <button role="tab" id="picard-tab-2" aria-selected="false" aria-controls="picard-panel" tabindex="-1">Chatterbox</button>
+    <button role="tab" id="picard-tab-3" aria-selected="false" aria-controls="picard-panel" tabindex="-1">VoxCPM</button>
   </div>
 
-  <div role="tabpanel" id="picard-panel" aria-labelledby="picard-tab-0">
+  <div role="tabpanel" id="picard-panel" aria-labelledby="picard-tab-0" tabindex="0">
     <div class="voice-wave"><canvas></canvas></div>
     <audio controls preload="none" src="audio/comparison/picard-qwen3-06b.mp3"
            aria-label="Picard synthesized by Qwen3 0.6B"></audio>
@@ -112,29 +116,40 @@ Using the ARIA Tabs pattern (not toggle buttons — fixed from initial aria-pres
 
 ### JavaScript wiring
 
-One `initBackendTabs(card)` function attached to each `.backend-compare-card`:
+On tab activation (click / Enter / Space / arrow-key navigation):
 
-- Click or Enter/Space on a tab: set that tab's `aria-selected="true"` + `tabindex="0"`, all others `aria-selected="false"` + `tabindex="-1"`, swap `audio.src` to the new URL, reset playback, redraw idle waveform.
-- Arrow Left/Right on a focused tab: move focus (and selection) to prev/next tab, wrapping at ends.
-- Home / End: move to first / last tab.
+1. Set `aria-selected="true"` + `tabindex="0"` on the new tab; `false` + `-1` on all siblings.
+2. **Update tabpanel's `aria-labelledby` to reference the newly selected tab's id** (fixes the stale-label bug Codex flagged).
+3. Swap `<audio>.src` to the new URL (from a `data-backend-urls` attribute on the card).
+4. Reset playback, redraw idle waveform.
 
-The audio URL mapping is a `data-backend-urls` attribute on the card: `{"qwen3-0.6b": "audio/comparison/picard-qwen3-06b.mp3", ...}`. One source of truth per card, no string interpolation at click time.
+Keyboard navigation on a focused tab:
+- `ArrowLeft` / `ArrowRight` → previous/next tab (wraps at ends), with focus + selection.
+- `Home` / `End` → first / last tab.
 
-### Content updates (coordinated — flagged by Codex)
+### Content updates (coordinated — eleven locations, no longer undercounting)
 
-Eight places where the site still says single-backend / 8 GB M1 / ~6 GB:
+| # | Location | Current | New |
+|---|---|---|---|
+| 1 | OG meta `L9` | "20 voices included" | "23 voices, 4 backends" |
+| 2 | Hero stats `L540-543` | "20 voices" / "~6 GB peak" | "23 voices, 4 backends" / "~10 GB peak" |
+| 3 | Voice gallery narration `L568` | "generated locally on an 8 GB M1" | "generated locally on a 32 GB M1" |
+| 4 | Voice gallery section title `L567` | "20 voices, each cloned from a 15-second clip" | "20 voices on Qwen3 0.6B — see backend comparison below for flagships" |
+| 5 | "How It Works" copy `L743` | "uses Qwen3-TTS (0.6B, 8-bit) on MLX" | "ships four MLX backends: Qwen3 0.6B/1.7B, Chatterbox, VoxCPM" |
+| 6 | `/health` example body `L764-772` | single-backend JSON | new JSON with `loaded_backends` block (including `supported_langs` from Item 4) |
+| 7 | Clone CLI note `L815` | "Restart the server to load it." | "Run `afterwords reload` to load it (no restart needed)." |
+| 8 | CLI command list `L967-978` | omits `afterwords reload` | add `afterwords reload      # pick up new voices without restart` |
+| 9 | Performance section title `L988` | "On an 8 GB M1" | "On a 32 GB Apple Silicon Mac" |
+| 10 | Performance info-grid `L990-993` | single-backend figures | per-backend table (see below) |
+| 11 | Requirements info-grid `L1004` | "8 GB+ RAM" | "32 GB+ RAM (16 GB minimum)" |
 
-| Location | Current | New |
-|---|---|---|
-| Hero stats `L540-543` | "20 voices" / "~6 GB" | "23 voices, 4 backends" / "~10 GB peak" |
-| Voice gallery narration `L568` | "generated locally on an 8 GB M1" | "generated locally on a 32 GB M1" |
-| Performance section title `L987-988` | "On an 8 GB M1" | "On a 32 GB Apple Silicon Mac" |
-| Performance info-grid `L990-993` | single-backend figures | per-backend table (see below) |
-| Requirements info-grid `L1004` | "8 GB+ RAM" | "32 GB+ RAM (16 GB minimum)" |
-| `/health` example body `L764-772` | single-backend JSON | new JSON with `loaded_backends` block |
-| Credits section `L1015` | Qwen3 only | add Chatterbox (mlx-community) + VoxCPM (mlx-community) |
+Plus two cross-project docs that this spec **identifies but does NOT change** (will be handled by a follow-up doc-sync task, tracked as part of this item but executed last):
 
-**Performance info-grid new form** (per-backend summary):
+- `CLAUDE.md` memory-constraints block: already says "32 GB" as of commit `ade5936` — verify consistent.
+- `AGENTS.md` (if present) — audit for `8 GB` references.
+- `README.md` — audit for `8 GB+ RAM` / single-backend copy.
+
+**Performance info-grid new form:**
 
 | Backend | Per-sentence | Model size |
 |---|---|---|
@@ -143,11 +158,11 @@ Eight places where the site still says single-backend / 8 GB M1 / ~6 GB:
 | Chatterbox | ~25s | 0.8 B × fp16 |
 | VoxCPM 1.5 | ~30s | 2 B × bf16 |
 
-(Exact timings confirmed during sprint via a small benchmark run on the demo sentence.)
+(Exact timings confirmed during the sprint via a small benchmark run on the demo sentence. If benchmarking reveals significantly different numbers, we update this table before merging.)
 
 ### What does NOT change
 
-- The existing 20-voice gallery stays exactly as-is (single backend, existing audio files).
+- The existing 20-voice gallery stays as-is.
 - All existing `docs/audio/*.mp3` files remain.
 - OG image, favicon, fonts, color tokens, overall layout — unchanged.
 
@@ -157,7 +172,7 @@ Eight places where the site still says single-backend / 8 GB M1 / ~6 GB:
 
 ### Goal
 
-Enable iterative voice development: after adding or editing voice JSONs on disk, call `POST /reload` (or `afterwords reload`) to pick up the changes without restarting the server.
+Enable iterative voice development: after adding a voice JSON on disk, call `POST /reload` (or `afterwords reload`) to pick up the change without restarting the server.
 
 ### API
 
@@ -166,131 +181,110 @@ POST /reload
   Response: 200 OK
   {
     "status": "ok",
-    "added":   ["new-voice-1"],
-    "updated": ["changed-voice-1", "changed-voice-2"],
-    "skipped": 19,
-    "errors":  []
+    "reloaded": ["voice-name-1", "voice-name-2"],
+    "errors":   []
+  }
+
+  OR on atomic failure: 500
+  {
+    "status": "failed",
+    "errors": [{"file": "voices/bogus.json", "error": "..."}]
   }
 ```
 
-Gated by `--allow-clone` (returns 404 when not enabled, same as `/clone`).
+Gated by `--allow-clone` (returns 404 when not enabled). Simplified response schema: no `added`/`updated`/`skipped` distinction — `reloaded` is the list of voice names present in VOICES after a successful reload. The always-re-register model makes the fine-grained distinction noise; operators mostly want "did it work, and what do I have now."
 
-### Change detection — always re-register
+### Behavior — always re-register, add-or-update (never remove)
 
-Per reviewer feedback (Hermes YAGNI, Codex clock-domain bug, Gemini mtime granularity), the original `_registered_at`-vs-`mtime` comparison was both buggy and over-engineered. Instead: **always re-register every profile found on disk.**
+On `POST /reload`:
 
-Rationale:
-- 3 of 4 backends' `prepare_voice()` is <1 ms (pure Python path handling).
-- VoxCPM's `prepare_voice()` resamples the ref WAV (~2s per voice, at most a handful of VoxCPM voices in any realistic setup).
-- Total reload time for ~25 voices: well under 10 seconds. Worth the simplicity.
+1. Under `_synth_lock`: walk `voices/*.json`, build a new `VoiceProfile` for each file on disk (same logic as startup `_load_voice_profiles`). Collect per-profile errors in a list.
+2. **Atomic on error:** if the errors list is non-empty, abort — return 500 with `errors[]`, do NOT mutate VOICES.
+3. Otherwise, under `_model_lock`: for each successfully built profile, `VOICES[profile.name] = profile`. **Voices in VOICES whose JSON is absent from disk are NOT removed** (honors decision 3A — add-only with respect to deletion).
+4. Return 200 with the list of voice names present in VOICES after the merge.
 
-The "added / updated / skipped" counts in the response are derived from the diff between the pre-reload VOICES dict and the post-reload result:
-- **added:** name not in VOICES before, now is.
-- **updated:** name in VOICES before, backend field or reference_text differs in new profile.
-- **skipped:** name in VOICES, profile JSON content is identical (stringwise JSON comparison).
+Rationale for always-re-register:
+- 3 of 4 backends' `prepare_voice()` is <1 ms (pure Python).
+- VoxCPM resample is ~2s × at most a handful of VoxCPM voices. Total reload time <10s.
+- Eliminates clock-domain bugs, mtime-granularity bugs, and the `_content_differs` field-count debate entirely.
 
 ### Locking — explicit order
 
 **Acquisition order: `_synth_lock` first, then `_model_lock`.**
 
-This matches `POST /clone`'s Phase 1 → Phase 2 sequence and prevents deadlock. Any code path that acquires `_model_lock` first and then `_synth_lock` would deadlock against `/clone` or `/reload`. This is now a documented invariant.
+Matches `POST /clone` Phase 1 → Phase 2. Any path that takes them in the opposite order is a deadlock bug. Documented in a module-level comment in `server.py`.
+
+### Cleanup — no inline deletion (Option 3, addresses Codex's race)
+
+**Retired profiles are NOT cleaned up during reload.** Their `cleanup_paths` + `owns_temp_audio` files are left on disk until server shutdown.
+
+Rationale:
+- The `_resolve_voice` → `_synthesize_audio` lock gap (`server.py:215` → `server.py:315`) means a synth can hold a profile reference between releasing `_model_lock` and acquiring `_synth_lock`. Any inline cleanup during that window risks deleting files an in-flight synth will soon read.
+- Deferred-by-one-reload-cycle (revision 2's approach) is still racy — two rapid reloads can clean the first's retired profiles while a synth is still in the lock-acquisition gap.
+- Refcount-based cleanup works but adds complexity.
+- Inline cleanup at shutdown is simple and **race-free**: the FastAPI shutdown hook runs after all in-flight requests drain.
+
+**Leak bound:** VoxCPM resamples ~1 MB per voice. Worst case: every VoxCPM voice replaced on every reload across a long-running server. Operator-level mitigation: restart the server periodically; files land in `/tmp` which the OS may reap.
+
+On shutdown:
 
 ```python
-@app.post("/reload")
-def reload_voices():
-    if not _clone_enabled:
-        return JSONResponse({"error": "..."}, status_code=404)
-
-    new_profiles: list[VoiceProfile] = []
-    errors: list[dict] = []
-
-    # Read + validate + prepare — under _synth_lock for backends that touch Metal.
-    with _synth_lock:
-        for profile_path in glob.glob(os.path.join(_VOICES_DIR, "*.json")):
-            try:
-                profile = _build_voice_profile(profile_path)  # same logic as _load_voice_profiles
-                if profile is not None:
-                    new_profiles.append(profile)
-            except Exception as exc:
-                errors.append({"file": profile_path, "error": str(exc)})
-
-    # Diff + mutate VOICES + schedule deferred cleanup — under _model_lock.
-    with _model_lock:
-        old_voices = dict(VOICES)  # snapshot for diff
-        new_voices_map = {p.name: p for p in new_profiles}
-
-        # Process the retired-from-previous-reload buffer first (safe to clean now).
-        _drain_retired_cleanup()
-
-        # Newly retired = profiles in old_voices but replaced (same name, different content)
-        newly_retired = [
-            old_voices[name] for name in old_voices
-            if name in new_voices_map and _content_differs(old_voices[name], new_voices_map[name])
-        ]
-
-        # Apply diff
-        added   = [n for n in new_voices_map if n not in old_voices]
-        updated = [n for n in new_voices_map if n in old_voices and _content_differs(old_voices[n], new_voices_map[n])]
-        skipped = len(old_voices) - len(updated)
-
-        # Install new profiles
-        for profile in new_profiles:
-            VOICES[profile.name] = profile
-
-        # Park newly retired for next-reload cleanup
-        _retired_profiles_buffer.extend(newly_retired)
-
-    return {"status": "ok", "added": added, "updated": updated, "skipped": skipped, "errors": errors}
-```
-
-`_content_differs(old, new)` compares `backend`, `ref_audio`, `ref_text`, `extras` — ignores `prepared` (which is rebuilt every reload).
-
-### Cleanup — deferred by one reload cycle (Codex's critical fix)
-
-The biggest bug the reviewers caught: `_resolve_voice()` returns a `VoiceProfile` under `_model_lock`, releases the lock, then `_synthesize_audio()` later uses `prepared.ref_audio_path` under `_synth_lock`. If `/reload` deletes a replaced profile's temp files during that window, the in-flight synth fails.
-
-**Solution:** never delete in the same reload that retires a profile. Maintain a module-level buffer:
-
-```python
-_retired_profiles_buffer: list[VoiceProfile] = []
-
-def _drain_retired_cleanup():
-    """Delete cleanup_paths + owned temp audio for profiles retired on the PREVIOUS reload.
-    Called at the top of each /reload, under _model_lock. Safe because any in-flight
-    synth that resolved a profile before the previous reload has long since completed."""
-    global _retired_profiles_buffer
-    for profile in _retired_profiles_buffer:
+@app.on_event("shutdown")
+def cleanup_retired():
+    # Walk ALL current VOICES + any known temp-file patterns and delete
+    for profile in VOICES.values():
         for path in profile.prepared.cleanup_paths:
             try: os.remove(path)
             except OSError: pass
-        if profile.prepared.owns_temp_audio:
+        if profile.prepared.owns_temp_audio and profile.prepared.ref_audio_path.startswith(tempfile.gettempdir()):
             try: os.remove(profile.prepared.ref_audio_path)
             except OSError: pass
-    _retired_profiles_buffer = []
 ```
 
-At server shutdown (FastAPI shutdown event), drain the buffer one more time.
-
-**Edge case — `owns_temp_audio` safety:** only VoxCPM-resampled refs have `owns_temp_audio=True`, and those live in `/tmp` (a different directory from `voices/`). Static flagship WAVs are never `owns_temp_audio`. So the cleanup logic cannot accidentally delete checked-in voice assets.
+(The `startswith(tempfile.gettempdir())` guard is belt-and-braces safety — never delete anything outside the tmp dir, even if `owns_temp_audio` is somehow true for a voices/ path.)
 
 ### CLI
 
-`afterwords reload` — new function in `afterwords.sh` calling `curl -s -X POST http://localhost:7860/reload` and pretty-printing the JSON response (including the `errors[]` array). Wired in the big case statement around `afterwords.sh:541`.
+New `reload` case in `afterwords.sh`'s command dispatcher (around `afterwords.sh:541`):
 
-### Tests (using FakeBackend)
+```bash
+reload)
+    cmd_reload "$@"
+    ;;
+```
 
-- **test_reload_adds_new_voice** — write a new profile JSON to tmp `_VOICES_DIR`, POST /reload, assert `added` contains the new name.
-- **test_reload_updates_changed_voice** — modify an existing profile's `reference_text`, POST /reload, assert `updated` contains the name.
-- **test_reload_skips_unchanged** — POST /reload twice with no disk changes, assert second response has `added=[]`, `updated=[]`, `skipped=N`.
-- **test_reload_is_add_only** — delete a profile JSON from disk, POST /reload, assert the voice is still in VOICES.
-- **test_reload_gathers_errors** — write invalid JSON, POST /reload, assert the response has `errors[]` entry with filename, other profiles still loaded, response is still 200.
+```bash
+cmd_reload() {
+    local response
+    response=$(curl -s -X POST http://localhost:7860/reload) || {
+        err "Server not responding on localhost:7860"
+        return 1
+    }
+    echo "$response" | jq .
+}
+```
+
+Help text updated to include `reload  # pick up new voices without restart`.
+
+### Tests (FakeBackend-based; no real model loads)
+
+- **test_reload_picks_up_new_voice** — write a new profile JSON to tmp `_VOICES_DIR`, POST /reload, assert voice in `reloaded[]` and `VOICES`.
+- **test_reload_add_only_keeps_deleted_voices** — delete a profile JSON from disk, POST /reload, assert the voice is still in VOICES (honors decision 3A).
+- **test_reload_atomic_on_error** — write one valid profile and one malformed JSON, POST /reload, assert 500 with errors[], VOICES unchanged from pre-reload state.
+- **test_reload_updates_changed_voice** — modify an existing profile's `reference_text`, POST /reload, assert profile rebuilt (verify `prepared.ref_text` matches new value).
 - **test_reload_disabled_without_allow_clone** — POST /reload without `--allow-clone`, assert 404.
-- **test_reload_cleanup_deferred** — register a VoxCPM voice (owns_temp_audio=True), swap via reload, assert temp file still exists immediately after, then run a second reload and assert temp file is now gone.
-- **test_reload_cleanup_on_shutdown** — FastAPI shutdown event drains the retired buffer.
+- **test_reload_concurrent_with_synth** — spawn a synthesize in a thread, call /reload while it's in flight, assert synthesize completes without error. Verifies the lock order.
+- **test_lock_order_invariant** — document test (calls `/reload` and `/clone` in sequence with small sleeps) that would deadlock if acquisition order were wrong.
+- **test_shutdown_drains_cleanup_paths** — register a profile with non-empty `cleanup_paths`, trigger FastAPI shutdown event, assert paths are deleted (or gone from disk).
 
 ### Observability
 
-Log each reload at INFO: `"/reload: added=%d, updated=%d, skipped=%d, errors=%d"`. Log each added/updated name at DEBUG.
+Log at INFO on each reload:
+```
+/reload: 23 voices loaded, 0 errors, 3.2s
+```
+
+No Prometheus counters in this sprint — out of scope.
 
 ---
 
@@ -298,7 +292,7 @@ Log each reload at INFO: `"/reload: added=%d, updated=%d, skipped=%d, errors=%d"
 
 ### Goal
 
-Wire the existing `supported_langs` metadata into the actual synthesis path so the API can accept a `lang` parameter and fail gracefully when a voice's backend doesn't support the requested language. This is **groundwork only** — no cross-backend routing.
+Wire the existing `supported_langs` metadata into the actual synthesis path so the API can accept a `lang` parameter and fail gracefully when a voice's backend doesn't support the requested language. **Groundwork only** — no cross-backend routing, no translation.
 
 ### Protocol change
 
@@ -311,38 +305,45 @@ class Backend(Protocol):
         self,
         text: str,
         prepared: PreparedVoice,
-        lang: str = "en",                    # NEW — default preserves current behaviour
+        lang: str,                           # NEW — REQUIRED, no default on Protocol
     ) -> tuple[np.ndarray, int]: ...
 ```
 
-Default value `"en"` means existing callers (server dispatch) remain source-compatible during transition.
+**No default on the Protocol** (addresses Hermes' runtime-trap concern). Each backend must explicitly accept `lang`. A conformance test calls every registered backend with `lang="en"` to catch any implementation that forgot to add the parameter.
 
 ### Per-backend implementation
 
 **Qwen3** (`backends/qwen3.py`):
 ```python
-def synthesize(self, text, prepared, lang="en"):
+def synthesize(self, text, prepared, lang):
     if lang not in self.supported_langs:
         raise ValueError(f"qwen3 does not support lang={lang!r}; supported: {self.supported_langs}")
-    # currently: lang_code="en" hardcoded at line 82 — fix to pass lang
-    generate_audio(..., lang_code=lang, ...)
+    generate_audio(..., lang_code=lang, ...)  # currently hardcoded "en"
 ```
 
 **Chatterbox** (`backends/chatterbox.py`):
-- Investigation task: does mlx-audio's chatterbox-fp16 generator accept a language kwarg? If yes, forward. If no, accept only `"en"` and raise for others even if `supported_langs` advertises more (and reduce `supported_langs` accordingly).
+- Investigation task (Task T9 in the plan): does mlx-audio's `generate_audio` accept a language kwarg for chatterbox-fp16?
+- If yes, forward.
+- If no, restrict `supported_langs = ("en",)` and raise for anything else.
+- Current behavior (no `lang` passed) becomes `lang="en"` → same output.
 
 **VoxCPM** (`backends/voxcpm.py`):
 - Same investigation. VoxCPM 1.5 is bilingual en/zh per model card.
-
-The investigation may reveal that Chatterbox or VoxCPM need their `supported_langs` tuple pruned. That's fine — we'd rather advertise less than lie about capability.
+- If mlx-audio doesn't pipe a lang through, restrict `supported_langs = ("en",)` (pessimistic) and note the model-card discrepancy in the code comment.
 
 ### Server dispatch
 
+Current (`server.py:313-316`):
 ```python
-# server.py _synthesize_audio — currently dispatches without lang
+with _synth_lock:
+    data, sr = backend.synthesize(text, profile.prepared)
+```
+
+New:
+```python
 with _synth_lock:
     try:
-        data, sr = backend.synthesize(text, profile.prepared, lang=lang)
+        data, sr = backend.synthesize(text, profile.prepared, lang)
     except ValueError as exc:
         return JSONResponse(
             {"error": str(exc),
@@ -353,11 +354,9 @@ with _synth_lock:
 ```
 
 `GET /synthesize` gains `lang: str = Query("en")`.
-`POST /synthesize` body schema gains `lang: str = "en"`.
+`POST /synthesize` body schema gains `lang: str = "en"` (default at the HTTP layer, not the Protocol layer).
 
 ### `/health` exposure
-
-Each entry in `loaded_backends` gains `supported_langs`:
 
 ```json
 "loaded_backends": {
@@ -373,34 +372,37 @@ Each entry in `loaded_backends` gains `supported_langs`:
 
 ### What this does NOT include (deferred)
 
-- Voice-family grouping for static voices (needed for future routing).
-- Automatic fallback ("ask for galadriel in zh, get galadriel-voxcpm-15 automatically").
+- Voice-family grouping for static voices.
+- Automatic fallback ("galadriel in zh → galadriel-voxcpm-15 automatically").
 - Translation.
 
-These go into a follow-up spec, `2026-04-25-multilingual-routing-design.md`, which this groundwork enables.
+Follow-up spec (`2026-04-25-multilingual-routing-design.md`) will add voice-family grouping built on this groundwork.
 
 ### Tests
 
-- Extend `FakeBackend` in `tests/conftest.py` to accept a `_supported_langs` override so tests can register a fake with `("en", "zh")` or `("en",)`.
+- Extend `FakeBackend` to accept a `_supported_langs` override so tests can register fakes with `("en","zh")` vs `("en",)`.
 - **test_synthesize_lang_default_english** — GET /synthesize without lang, assert 200.
 - **test_synthesize_unsupported_lang_returns_400** — GET /synthesize?lang=fr against an en-only voice, assert 400 with `supported_langs` in response.
-- **test_health_exposes_supported_langs** — GET /health, assert each backend entry has `supported_langs` list.
-- **test_backend_synthesize_signature** — introspect `Backend.synthesize` signature, assert `lang` kwarg present.
-- Integration tests updated to pass `lang="en"` explicitly (backward compat check).
+- **test_health_exposes_supported_langs** — GET /health, assert each backend entry has `supported_langs: list[str]`.
+- **test_backend_synthesize_signature** — introspect `Backend.synthesize` signature, assert `lang` is a required parameter (no default on Protocol).
+- **test_all_backends_accept_lang_keyword** — conformance test: for each registered backend, call `b.synthesize(text, prepared, lang="en")` with fake inputs, assert no TypeError (catches implementations that forgot the kwarg).
+- Integration tests updated to pass `lang="en"` explicitly.
 
 ---
 
 ## Implementation order
 
-Per Gemini's recommendation, prioritize the "engine" work before assets:
+Per pass-2 reviewer sequencing recommendations:
 
-**Phase A — Parallelizable backend work:**
-1. Item 3 (hot-reload) — largest surface area, highest value for iterative dev.
-2. Item 4 (multilingual groundwork) — protocol change, isolated to backends/ + dispatch.
+**Phase A — Backend work (Item 4 precedes Item 3 because Item 3's /health example in Item 2 depends on Item 4):**
+1. **Item 4 (multilingual groundwork)** — protocol change, 4 backends, server dispatch, `/health`.
+2. **Item 3 (hot-reload)** — `/reload` endpoint, `afterwords reload` CLI, shutdown cleanup.
 
-**Phase B — Sequential showcase work (depends on A being green):**
-3. Item 1 (re-clone) — runs against a server with all backends loaded; output is inputs for Item 2.
-4. Item 2 (demo site) — consumes Item 1's audio; also consumes Item 4's `/health` shape.
+**Phase B — Showcase work (sequential, depends on A):**
+3. **Item 1 (re-clone)** — runs against server with all backends loaded; produces 9 new JSONs + 12 MP3s.
+4. **Item 2 (demo site)** — consumes Item 1's audio and Item 4's `/health` shape.
+
+Phase A items 1 and 2 can be worked in parallel on separate branches if desired; they touch different files mostly. Item 2 references the `/health` response which includes `supported_langs` — that field must exist before the demo-site example body is written.
 
 ---
 
@@ -408,37 +410,47 @@ Per Gemini's recommendation, prioritize the "engine" work before assets:
 
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
-| mlx-audio's Chatterbox/VoxCPM don't accept a lang kwarg | Medium | Item 4 scope shrinks | Investigate during Item 4; if no lang plumbing exists, prune `supported_langs` and raise for non-English. Honest is better than broken. |
-| Reclone script produces invalid JSON or wrong slug | Low | Item 1 blocks Item 2 | Unit test the slug mapping against `backends.slug()`; manually verify one voice loads before generating all twelve. |
-| Deferred cleanup of retired profiles leaks temp files across many rapid reloads | Low | Disk bloat | Buffer size is bounded — at most one generation's worth. Worst case ~ a few MB; drains on shutdown. |
-| Demo site tablist a11y misses a screen-reader edge case | Low | Reduced UX | Follow WAI-ARIA Tabs pattern exactly; test with VoiceOver before committing. |
-| Codex's in-flight-synthesis race occurs despite deferred cleanup (e.g., synthesis takes >2 reload cycles) | Very low | Request 500s | In practice synth takes ~20-35s, reloads are manual. Operator-initiated races are unlikely to be this close. Document the invariant. |
+| mlx-audio Chatterbox/VoxCPM don't accept a `lang` kwarg | Medium | Item 4 scope shrinks | Investigate in Task T9. If no plumbing, restrict `supported_langs` to `("en",)` and document. |
+| Reload-vs-in-flight-synth race still triggers despite Option-3 cleanup choice | Very low | Request 500s | We never delete inline; only shutdown drains. The race class is eliminated at the cost of a bounded temp-file leak. |
+| Reclone script produces invalid JSON / wrong slug | Low | Item 1 blocks Item 2 | Unit-test slug mapping against `backends.slug()`; verify one profile loads before generating all twelve. |
+| Chatterbox/VoxCPM currently pass no language — adding `lang="en"` changes their call signature to mlx-audio | Low | Silent behavior change | Verify at implement time that mlx-audio doesn't misbehave when a kwarg it doesn't expect is forwarded; if it does, branch per-backend. |
+| Tab switching loses focus state when screen reader is active | Low | A11y regression | Test with macOS VoiceOver before committing; keyboard-only nav test as acceptance. |
+| Uvicorn multi-worker setup invalidates lock semantics | Very low | Inconsistent VOICES across workers | Documented: `--allow-clone` is single-worker only. |
+
+---
+
+## Open questions documented but NOT resolved in this spec
+
+These are explicitly out of scope for this sprint; follow-up work may address them:
+
+- Rate limiting on `/reload` (protection against rapid-fire reloads).
+- Multi-process Uvicorn support for clone-enabled mode.
+- Prometheus / observability metrics.
+- Translation (lang implies source language match; no translation layer).
+- Voice-family grouping for static voices (blocks future auto-routing).
 
 ---
 
 ## Acceptance criteria
 
-- [ ] `scripts/reclone-flagship.py` writes 9 new profiles (3 voices × 3 non-default backends) that load cleanly at server startup.
-- [ ] `scripts/gen-comparison-audio.sh` produces 12 MP3 files under `docs/audio/comparison/`.
-- [ ] Demo site has a working "Backend Comparison" section with three cards, keyboard-navigable tabs, `role="tablist"` + `aria-selected`, swapping audio sources correctly.
-- [ ] All seven copy locations flagged in Item 2 are updated to reflect multi-backend reality.
-- [ ] `POST /reload` under `--allow-clone` picks up new + changed profiles without restart; `afterwords reload` CLI works.
-- [ ] Deferred cleanup test passes (retired profile's temp file survives the reload that retires it, is deleted by the next).
+- [ ] `scripts/reclone-flagship.py` writes 9 new profiles (3 voices × 3 non-default backends). Idempotent: re-run does nothing without `--force`. All 9 profiles load cleanly at server startup.
+- [ ] `scripts/gen-comparison-audio.sh` produces 12 MP3 files under `docs/audio/comparison/`. Idempotent likewise.
+- [ ] Demo site has a working "Backend Comparison" section with three cards, keyboard-navigable tabs per the WAI-ARIA Tabs pattern, correct `aria-selected` on tabs, correct `aria-labelledby` on tabpanel (updates on tab switch).
+- [ ] All **eleven** copy locations in the Item 2 table are updated.
+- [ ] `CLAUDE.md` / `AGENTS.md` / `README.md` audited; any residual "8 GB" or single-backend copy updated.
+- [ ] `POST /reload` under `--allow-clone` rebuilds VOICES atomically (500 + unchanged VOICES on any error; 200 + new VOICES on success). `afterwords reload` CLI prints the JSON response.
+- [ ] No inline deletion during reload; shutdown cleanup drains cleanup_paths for current VOICES.
 - [ ] `GET /synthesize?lang=zh` against an en-only voice returns 400 with `supported_langs` in the error body.
-- [ ] `/health.loaded_backends[*].supported_langs` populated for all four backends.
-- [ ] 61 existing tests still pass; new tests added for reload + multilingual; total passing test count increases.
+- [ ] `/health.loaded_backends[*].supported_langs` is a list of strings for all four backends.
+- [ ] `Backend.synthesize` Protocol signature requires `lang` (no default on Protocol). Conformance test `test_all_backends_accept_lang_keyword` passes.
+- [ ] Existing test suite still green (was 61 passing, 4 integration-gated); new tests added to reach total of at least 75 passing.
 - [ ] No TODO/FIXME/HACK comments introduced.
 
 ---
 
 ## Review log
 
-- **Brainstorm:** 2026-04-24, four items scoped.
-- **Reviewer pass 1:** Codex + Gemini + Hermes, all flagged design-has-issues. Primary findings:
-  - Item 4 static-voice `session_id=None` collision (all three)
-  - Item 4 backends don't actually accept `lang` (Codex, Hermes)
-  - Item 3 `_registered_at` vs mtime clock-domain bug (Codex)
-  - Item 3 reload cleanup vs in-flight synthesis race (Codex)
-  - Item 2 `aria-pressed` is the wrong ARIA state (Gemini, Codex)
-  - Item 2 site copy inconsistency not limited to hero (Codex)
-- **Revisions applied:** this spec. Item 4 de-scoped to groundwork; Item 3 cleanup deferred by one reload cycle; Item 2 switched to proper tablist + coordinated copy updates; Item 1 uses one-off script instead of `--from-ref` flag.
+- **Pass 1 (brainstorm round 1):** Codex + Gemini + Hermes all flagged design-has-issues. Core findings: Item 4 session_id collision, backends don't accept `lang`, Item 3 clock-domain bug, Item 3 reload-vs-synth race, Item 2 `aria-pressed` wrong, copy inconsistency beyond hero.
+- **Revision 2** applied: de-scoped Item 4 to groundwork; deferred-cleanup buffer for Item 3; proper tablist pattern; 7-location copy audit.
+- **Pass 2 (spec review):** Codex → needs-major-revision; Gemini → ready-with-minor; Hermes → needs-minor-revision. Key findings: deferred-buffer STILL racy due to `_resolve_voice`/`_synthesize_audio` lock gap; `_content_differs` underspecified; copy audit missed 4 additional sites; `aria-labelledby` stale after tab switch; Protocol `lang` default is runtime-trappy; `afterwords reload` command slot doesn't exist yet; several open semantic questions (atomic reload? idempotency?).
+- **Revision 3 (this document)** applied: cleanup moved to shutdown-only (Option 3, race-free); reload made atomic with simplified `reloaded[]` response; copy audit expanded to 11 locations + cross-project docs; `aria-labelledby` updates on tab switch; Protocol `lang` is REQUIRED (no default); reclone script idempotency spec'd; implementation order swapped (Item 4 before Item 3 in Phase A).
