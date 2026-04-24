@@ -283,3 +283,24 @@ def test_health_exposes_supported_langs(client):
         assert "supported_langs" in info, f"backend {name!r} missing supported_langs"
         assert isinstance(info["supported_langs"], list)
         assert all(isinstance(x, str) for x in info["supported_langs"])
+
+
+def test_synthesize_unsupported_lang_returns_400(client, sample_voice):
+    """GET /synthesize?lang=fr against an en-only voice must return 400."""
+    r = client.get("/synthesize", params={"text": "Bonjour", "voice": sample_voice, "lang": "fr"})
+    assert r.status_code == 400
+    body = r.json()
+    assert "supported_langs" in body
+    assert "en" in body["supported_langs"]
+    assert "fr" not in body["supported_langs"]
+
+
+def test_post_synthesize_accepts_lang(client, sample_voice):
+    """POST /synthesize with lang=en against an en voice should succeed."""
+    server._clone_enabled = True
+    try:
+        r = client.post("/synthesize", json={"text": "Hello", "voice": sample_voice, "lang": "en"})
+        assert r.status_code == 200
+        assert r.headers["content-type"] == "audio/wav"
+    finally:
+        server._clone_enabled = False

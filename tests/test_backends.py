@@ -96,3 +96,12 @@ def test_backend_synthesize_requires_lang():
     assert "lang" in params, "Backend.synthesize missing `lang` parameter"
     assert params["lang"].default is inspect.Parameter.empty, \
         "Backend.synthesize.lang must be required (no default on Protocol)"
+
+
+def test_all_registered_backends_accept_lang_keyword():
+    """Every registered backend's synthesize must accept `lang`. Catches implementations that forgot the kwarg."""
+    import inspect
+    for name in backends.names():
+        b = backends.get(name)
+        sig = inspect.signature(b.synthesize)
+        assert "lang" in sig.parameters, f"backend {name!r} missing lang kwarg"
