@@ -251,7 +251,7 @@ def _warmup():
     t0 = time.time()
     try:
         with _synth_lock:
-            backend.synthesize("Hello.", profile.prepared)
+            backend.synthesize("Hello.", profile.prepared, lang="en")
         log.info("warmup done in %.1fs", time.time() - t0)
     except Exception as exc:
         log.warning("warmup failed (non-fatal): %s", exc)
@@ -296,7 +296,7 @@ def health():
     }
 
 
-def _synthesize_audio(text: str, profile: VoiceProfile) -> Response:
+def _synthesize_audio(text: str, profile: VoiceProfile, lang: str) -> Response:
     """Core synthesis — dispatches to the voice's pinned backend."""
     log.info("synthesize: %d chars, voice=%s, backend=%s",
              len(text), profile.name, profile.backend)
@@ -313,7 +313,14 @@ def _synthesize_audio(text: str, profile: VoiceProfile) -> Response:
     t0 = time.time()
     try:
         with _synth_lock:
-            data, sr = backend.synthesize(text, profile.prepared)
+            data, sr = backend.synthesize(text, profile.prepared, lang)
+    except ValueError as exc:
+        return JSONResponse(
+            {"error": str(exc),
+             "voice_backend": profile.backend,
+             "supported_langs": list(backend.supported_langs)},
+            status_code=400,
+        )
     except Exception as exc:
         log.error("synthesis failed: %s", exc, exc_info=True)
         return JSONResponse({"error": "synthesis failed"}, status_code=500)
@@ -343,7 +350,8 @@ def _synthesize_audio(text: str, profile: VoiceProfile) -> Response:
 @app.get("/synthesize")
 def synthesize(
     text: str = Query(..., description="Text to speak"),
-    voice: str = Query(DEFAULT_VOICE, description=f"Voice name ({', '.join(VOICES)})"),
+    voice: str = Query(DEFAULT_VOICE, description="Voice name"),
+    lang: str = Query("en", description="BCP-47 language code; must be supported by the voice's backend"),
 ):
     """Generate speech from text using cloned voice, return WAV audio."""
     if not text.strip():
@@ -360,13 +368,14 @@ def synthesize(
             {"error": f"unknown voice: {voice}", "available": sorted(VOICES.keys())},
             status_code=400)
 
-    return _synthesize_audio(text, profile)
+    return _synthesize_audio(text, profile, lang)
 
 
 class SynthesizeRequest(BaseModel):
     text: str
     voice: str
     emotion: str | None = None
+    lang: str = "en"
 
 
 @app.post("/synthesize")
@@ -387,7 +396,7 @@ def synthesize_post(body: SynthesizeRequest):
             {"error": f"unknown voice: {body.voice}", "available": sorted(VOICES.keys())},
             status_code=400)
 
-    return _synthesize_audio(body.text, profile)
+    return _synthesize_audio(body.text, profile, body.lang)
 
 
 @app.post("/clone")

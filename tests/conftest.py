@@ -79,7 +79,12 @@ class FakeBackend:
         self,
         text: str,
         prepared: PreparedVoice,
+        lang: str,
     ) -> tuple[np.ndarray, int]:
+        if lang not in self.supported_langs:
+            raise ValueError(
+                f"fake does not support lang={lang!r}; supported: {self.supported_langs}"
+            )
         # Return 100ms of silence at our sample rate
         audio = np.zeros(self.sample_rate // 10, dtype=np.float32)
         return audio, self.sample_rate
