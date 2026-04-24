@@ -99,7 +99,14 @@ def test_backend_synthesize_requires_lang():
 
 
 def test_all_registered_backends_accept_lang_keyword():
-    """Every registered backend's synthesize must accept `lang`. Catches implementations that forgot the kwarg."""
+    """Every registered backend's synthesize must accept `lang`.
+
+    Distinct from `test_backend_synthesize_requires_lang` (which inspects the Protocol).
+    Python's `@runtime_checkable` Protocol only checks attribute existence, not signature
+    compatibility — a concrete class with `synthesize(self, text, prepared)` (no `lang`)
+    would pass `isinstance(x, Backend)`. This test inspects each instance's bound method
+    signature to catch that class of bug.
+    """
     import inspect
     for name in backends.names():
         b = backends.get(name)
