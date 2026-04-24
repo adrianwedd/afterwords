@@ -1,7 +1,7 @@
-# Multi-Backend Follow-through Sprint — Design Spec (Revision 3)
+# Multi-Backend Follow-through Sprint — Design Spec (Revision 4)
 
 **Date:** 2026-04-24
-**Revision:** 3 (addresses pass-2 reviewer findings)
+**Revision:** 4 (addresses pass-3 reviewer findings)
 **Scope:** Four items completing the multi-backend TTS story: re-clone flagship voices, demo site comparison, hot-reload endpoint, multilingual groundwork.
 **Target duration:** 24-hour sprint.
 **Tracks:** GH #6, #7, #8, #9.
@@ -131,8 +131,8 @@ Keyboard navigation on a focused tab:
 
 | # | Location | Current | New |
 |---|---|---|---|
-| 1 | OG meta `L9` | "20 voices included" | "23 voices, 4 backends" |
-| 2 | Hero stats `L540-543` | "20 voices" / "~6 GB peak" | "23 voices, 4 backends" / "~10 GB peak" |
+| 1 | OG meta `L9` | "20 voices included" | "20 voices, 4 backends" |
+| 2 | Hero stats `L540-543` | "20 voices" / "~6 GB peak" | "20 voices, 4 backends" / "~10 GB peak" |
 | 3 | Voice gallery narration `L568` | "generated locally on an 8 GB M1" | "generated locally on a 32 GB M1" |
 | 4 | Voice gallery section title `L567` | "20 voices, each cloned from a 15-second clip" | "20 voices on Qwen3 0.6B — see backend comparison below for flagships" |
 | 5 | "How It Works" copy `L743` | "uses Qwen3-TTS (0.6B, 8-bit) on MLX" | "ships four MLX backends: Qwen3 0.6B/1.7B, Chatterbox, VoxCPM" |
@@ -198,8 +198,10 @@ Gated by `--allow-clone` (returns 404 when not enabled). Simplified response sch
 
 On `POST /reload`:
 
-1. Under `_synth_lock`: walk `voices/*.json`, build a new `VoiceProfile` for each file on disk (same logic as startup `_load_voice_profiles`). Collect per-profile errors in a list.
-2. **Atomic on error:** if the errors list is non-empty, abort — return 500 with `errors[]`, do NOT mutate VOICES.
+1. Under `_synth_lock`: walk `voices/*.json`, build a new `VoiceProfile` for each file on disk (same logic as startup `_load_voice_profiles`). Collect per-profile errors in a list. **Track `cleanup_paths` and `ref_audio_path` of every profile built during the walk** — these are candidates for rollback cleanup if we abort.
+2. **Atomic on error:** if the errors list is non-empty, abort:
+   - **Rollback cleanup:** before returning, delete every tracked `cleanup_paths` entry and any `owns_temp_audio=True` `ref_audio_path` written during THIS walk. This prevents VoxCPM temp-file leaks when a later profile fails after an earlier one succeeded. (Addresses the pass-3 side-effect-leak finding.)
+   - Return 500 with `errors[]`. Do NOT mutate VOICES.
 3. Otherwise, under `_model_lock`: for each successfully built profile, `VOICES[profile.name] = profile`. **Voices in VOICES whose JSON is absent from disk are NOT removed** (honors decision 3A — add-only with respect to deletion).
 4. Return 200 with the list of voice names present in VOICES after the merge.
 
@@ -219,19 +221,32 @@ Matches `POST /clone` Phase 1 → Phase 2. Any path that takes them in the oppos
 **Retired profiles are NOT cleaned up during reload.** Their `cleanup_paths` + `owns_temp_audio` files are left on disk until server shutdown.
 
 Rationale:
-- The `_resolve_voice` → `_synthesize_audio` lock gap (`server.py:215` → `server.py:315`) means a synth can hold a profile reference between releasing `_model_lock` and acquiring `_synth_lock`. Any inline cleanup during that window risks deleting files an in-flight synth will soon read.
+- The `_resolve_voice` → `_synthesize_audio` lock gap means a synth can hold a profile reference between releasing `_model_lock` and acquiring `_synth_lock`. Any inline cleanup during that window risks deleting files an in-flight synth will soon read.
 - Deferred-by-one-reload-cycle (revision 2's approach) is still racy — two rapid reloads can clean the first's retired profiles while a synth is still in the lock-acquisition gap.
 - Refcount-based cleanup works but adds complexity.
-- Inline cleanup at shutdown is simple and **race-free**: the FastAPI shutdown hook runs after all in-flight requests drain.
+- Inline cleanup at shutdown is simple and **race-free**: the shutdown phase runs after all in-flight requests drain.
 
 **Leak bound:** VoxCPM resamples ~1 MB per voice. Worst case: every VoxCPM voice replaced on every reload across a long-running server. Operator-level mitigation: restart the server periodically; files land in `/tmp` which the OS may reap.
 
-On shutdown:
+### Lifecycle hooks — lifespan context manager (not `on_event`)
+
+FastAPI deprecated `@app.on_event("shutdown")` in favor of lifespan context managers. The server currently has **no** lifecycle hook at all — the entire startup happens in `main()`. This sprint introduces a lifespan:
 
 ```python
-@app.on_event("shutdown")
-def cleanup_retired():
-    # Walk ALL current VOICES + any known temp-file patterns and delete
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # startup
+    _sweep_orphaned_temp_files()          # NEW: handle crash recovery
+    yield
+    # shutdown
+    _cleanup_current_voices()
+
+app = FastAPI(title="Afterwords TTS", lifespan=lifespan)
+
+def _cleanup_current_voices():
+    """Delete cleanup_paths + owned temp audio for all currently-loaded voices."""
     for profile in VOICES.values():
         for path in profile.prepared.cleanup_paths:
             try: os.remove(path)
@@ -239,9 +254,18 @@ def cleanup_retired():
         if profile.prepared.owns_temp_audio and profile.prepared.ref_audio_path.startswith(tempfile.gettempdir()):
             try: os.remove(profile.prepared.ref_audio_path)
             except OSError: pass
+
+def _sweep_orphaned_temp_files():
+    """Delete VoxCPM-resample temp files from any prior crashed run. Best-effort."""
+    import glob
+    for path in glob.glob(os.path.join(tempfile.gettempdir(), "voxcpm-ref-*.wav")):
+        try: os.remove(path)
+        except OSError: pass
 ```
 
-(The `startswith(tempfile.gettempdir())` guard is belt-and-braces safety — never delete anything outside the tmp dir, even if `owns_temp_audio` is somehow true for a voices/ path.)
+The `startswith(tempfile.gettempdir())` guard is belt-and-braces safety — never delete anything outside the tmp dir. The sweep pattern `voxcpm-ref-*.wav` matches the naming convention in `backends/voxcpm.py` (`voxcpm-ref-{uuid}.wav`).
+
+**Note:** the current `main()` still does backend registration and model loading before `uvicorn.run(app)`. The lifespan is additive — startup ordering (register → load → walk voices → warmup) stays unchanged; the sweep happens before those steps. Alternatively, the sweep runs inside `main()` before `uvicorn.run()` — either is fine. Spec chooses the lifespan placement so it sits alongside shutdown cleanup.
 
 ### CLI
 
@@ -275,7 +299,9 @@ Help text updated to include `reload  # pick up new voices without restart`.
 - **test_reload_disabled_without_allow_clone** — POST /reload without `--allow-clone`, assert 404.
 - **test_reload_concurrent_with_synth** — spawn a synthesize in a thread, call /reload while it's in flight, assert synthesize completes without error. Verifies the lock order.
 - **test_lock_order_invariant** — document test (calls `/reload` and `/clone` in sequence with small sleeps) that would deadlock if acquisition order were wrong.
-- **test_shutdown_drains_cleanup_paths** — register a profile with non-empty `cleanup_paths`, trigger FastAPI shutdown event, assert paths are deleted (or gone from disk).
+- **test_cleanup_current_voices_deletes_paths** — unit test the standalone `_cleanup_current_voices()` function directly (not via FastAPI lifespan). Register a profile with non-empty `cleanup_paths` + `owns_temp_audio=True` ref in a tempdir, call `_cleanup_current_voices()`, assert paths are gone. This avoids the FastAPI-lifespan-under-TestClient fragility flagged by pass-3 reviewers. If desired, a second test (`test_shutdown_lifespan_fires_cleanup`) can use `with TestClient(app) as client:` context to verify the lifespan wiring end-to-end, but the standalone unit test is the primary coverage.
+- **test_sweep_orphaned_temp_files_deletes_stale** — write a file matching `voxcpm-ref-*.wav` in tempdir, call `_sweep_orphaned_temp_files()`, assert it's gone.
+- **test_reload_abort_cleans_tracked_temps** — set up a mix of valid and invalid profile JSONs including one VoxCPM profile that succeeds at prepare then a later profile that fails; POST /reload; assert the VoxCPM temp file from the succeeded-but-rolled-back profile is deleted (rollback cleanup).
 
 ### Observability
 
@@ -333,13 +359,19 @@ def synthesize(self, text, prepared, lang):
 
 ### Server dispatch
 
-Current (`server.py:313-316`):
+**All three backend.synthesize() call sites** must be updated to pass `lang`:
+
+1. `_synthesize_audio` at `server.py:313-316` (the main dispatch).
+2. `_warmup` at `server.py:253` — calls `backend.synthesize("Hello.", profile.prepared)` at startup. Must pass `lang="en"` explicitly; warmup text is always English.
+3. Any other calls introduced by new code this sprint (e.g. tests) must pass `lang` explicitly.
+
+Current `_synthesize_audio` (`server.py:313-316`):
 ```python
 with _synth_lock:
     data, sr = backend.synthesize(text, profile.prepared)
 ```
 
-New:
+New `_synthesize_audio`:
 ```python
 with _synth_lock:
     try:
@@ -353,8 +385,29 @@ with _synth_lock:
         )
 ```
 
-`GET /synthesize` gains `lang: str = Query("en")`.
-`POST /synthesize` body schema gains `lang: str = "en"` (default at the HTTP layer, not the Protocol layer).
+New `_warmup`:
+```python
+with _synth_lock:
+    backend.synthesize("Hello.", profile.prepared, lang="en")
+```
+
+**HTTP layer defaults `lang="en"`:**
+- `GET /synthesize` gains `lang: str = Query("en", description="BCP-47 language code; must be supported by the voice's backend")`.
+- `POST /synthesize` body — the `SynthesizeRequest` Pydantic model gains `lang: str = "en"`:
+
+```python
+class SynthesizeRequest(BaseModel):
+    text: str
+    voice: str
+    emotion: str | None = None
+    lang: str = "en"        # NEW
+```
+
+Both endpoint handlers pass `body.lang` / query `lang` through to `_synthesize_audio(text, profile, lang)`.
+
+### Qwen3 behavior equivalence check (pass-3 verification task)
+
+The spec changes `generate_audio(..., lang_code="en", ...)` (currently hardcoded) to `generate_audio(..., lang_code=lang, ...)`. When `lang="en"`, these must produce identical output. Before merging Item 4, run a spot check: synthesize the demo sentence with the current hardcoded code and with the new `lang_code=lang` call using `lang="en"`, confirm the output WAVs are bit-identical or at least audibly identical. If they differ, the change in the kwarg expression is the root cause and we adjust accordingly.
 
 ### `/health` exposure
 
@@ -380,13 +433,17 @@ Follow-up spec (`2026-04-25-multilingual-routing-design.md`) will add voice-fami
 
 ### Tests
 
-- Extend `FakeBackend` to accept a `_supported_langs` override so tests can register fakes with `("en","zh")` vs `("en",)`.
+- **Update `FakeBackend.synthesize()` signature to accept `lang`** (required).
+  Current: `def synthesize(self, text, prepared)` at `tests/conftest.py:78`.
+  New: `def synthesize(self, text, prepared, lang)`. Every test that calls `.synthesize()` positionally must also pass `lang="en"` (most don't — FakeBackend is mostly used via the server's dispatch path, which the spec already updates).
+- Extend `FakeBackend` to accept a `_supported_langs` override so tests can register fakes with `("en","zh")` vs `("en",)` (class-level attribute, set per-test via monkeypatch or subclass).
 - **test_synthesize_lang_default_english** — GET /synthesize without lang, assert 200.
 - **test_synthesize_unsupported_lang_returns_400** — GET /synthesize?lang=fr against an en-only voice, assert 400 with `supported_langs` in response.
+- **test_post_synthesize_accepts_lang** — POST /synthesize with `{"lang": "zh"}` against a zh-capable voice.
 - **test_health_exposes_supported_langs** — GET /health, assert each backend entry has `supported_langs: list[str]`.
 - **test_backend_synthesize_signature** — introspect `Backend.synthesize` signature, assert `lang` is a required parameter (no default on Protocol).
-- **test_all_backends_accept_lang_keyword** — conformance test: for each registered backend, call `b.synthesize(text, prepared, lang="en")` with fake inputs, assert no TypeError (catches implementations that forgot the kwarg).
-- Integration tests updated to pass `lang="en"` explicitly.
+- **test_all_backends_accept_lang_keyword** — conformance test: for each registered backend (including fakes via aliases), call `b.synthesize(text, prepared, lang="en")` with fake inputs, assert no TypeError (catches implementations that forgot the kwarg).
+- Integration tests (`tests/test_backends_integration.py:46`) updated to pass `lang="en"` explicitly.
 
 ---
 
@@ -452,5 +509,7 @@ These are explicitly out of scope for this sprint; follow-up work may address th
 
 - **Pass 1 (brainstorm round 1):** Codex + Gemini + Hermes all flagged design-has-issues. Core findings: Item 4 session_id collision, backends don't accept `lang`, Item 3 clock-domain bug, Item 3 reload-vs-synth race, Item 2 `aria-pressed` wrong, copy inconsistency beyond hero.
 - **Revision 2** applied: de-scoped Item 4 to groundwork; deferred-cleanup buffer for Item 3; proper tablist pattern; 7-location copy audit.
-- **Pass 2 (spec review):** Codex → needs-major-revision; Gemini → ready-with-minor; Hermes → needs-minor-revision. Key findings: deferred-buffer STILL racy due to `_resolve_voice`/`_synthesize_audio` lock gap; `_content_differs` underspecified; copy audit missed 4 additional sites; `aria-labelledby` stale after tab switch; Protocol `lang` default is runtime-trappy; `afterwords reload` command slot doesn't exist yet; several open semantic questions (atomic reload? idempotency?).
-- **Revision 3 (this document)** applied: cleanup moved to shutdown-only (Option 3, race-free); reload made atomic with simplified `reloaded[]` response; copy audit expanded to 11 locations + cross-project docs; `aria-labelledby` updates on tab switch; Protocol `lang` is REQUIRED (no default); reclone script idempotency spec'd; implementation order swapped (Item 4 before Item 3 in Phase A).
+- **Pass 2 (spec review):** Codex → needs-major-revision; Gemini → ready-with-minor; Hermes → needs-minor-revision. Key findings: deferred-buffer STILL racy due to `_resolve_voice`/`_synthesize_audio` lock gap; `_content_differs` underspecified; copy audit missed 4 additional sites; `aria-labelledby` stale after tab switch; Protocol `lang` default is runtime-trappy; `afterwords reload` command slot doesn't exist yet; several open semantic questions.
+- **Revision 3** applied: cleanup moved to shutdown-only (Option 3, race-free); reload made atomic with simplified `reloaded[]` response; copy audit expanded to 11 locations + cross-project docs; `aria-labelledby` updates on tab switch; Protocol `lang` is REQUIRED (no default); reclone script idempotency spec'd; implementation order swapped (Item 4 before Item 3 in Phase A).
+- **Pass 3 (spec review):** Codex → needs-major-revision; Gemini → ready-to-plan; Hermes → needs-minor-revision. Key findings: `_warmup()` call site missed when making `lang` required; VoxCPM temp-file leak on atomic-abort reload (succeeded profiles' temps never cleaned); `@app.on_event("shutdown")` deprecated — use lifespan; startup sweep missing for crash-orphaned temp files; `FakeBackend.synthesize()` signature must be updated (not just extended for `_supported_langs`); `SynthesizeRequest` Pydantic model needs `lang` field; voice count framing ("23 voices" vs. actual count).
+- **Revision 4 (this document)** applied: atomic reload tracks cleanup_paths from all profiles built during the walk and deletes them on abort; `on_event` → `@asynccontextmanager`-based `lifespan`; startup sweep added for `voxcpm-ref-*.wav`; `_warmup()` call site updated to pass `lang="en"`; `FakeBackend.synthesize()` signature change called out explicitly; `SynthesizeRequest` model shown with new `lang` field; voice counts corrected to "20 voices, 4 backends"; lang_code equivalence verification step added for Qwen3.
