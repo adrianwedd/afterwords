@@ -107,10 +107,10 @@ The skill handles voice selection, server health checks, synthesis, and playback
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  Your Mac (Apple Silicon, 8 GB+)                            │
+│  Your Mac (Apple Silicon, 16 GB+)                          │
 │                                                             │
 │  ┌─────────────────────────┐                                │
-│  │  Qwen3-TTS Server       │  ← MLX 8-bit, ~6 GB peak      │
+│  │  Multi-Backend TTS      │  ← Four MLX backends, ~10 GB   │
 │  │  localhost:7860          │  ← 15 voice profiles           │
 │  │  /synthesize?text=...    │  ← ~20s per sentence           │
 │  └─────────┬───────────────┘                                │
@@ -133,7 +133,7 @@ The skill handles voice selection, server health checks, synthesis, and playback
 
 ### Voice Cloning (Zero-Shot)
 
-No training or fine-tuning. [Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) Base extracts a speaker embedding from a 15-second reference clip and generates new speech in that voice. The model runs on [MLX](https://github.com/ml-explore/mlx) — Apple's ML framework that fits the 0.6B model in 6 GB of unified memory.
+No training or fine-tuning. Four MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3 (0.6B & 1.7B), Chatterbox (0.8B), and VoxCPM (2B). They run on [MLX](https://github.com/ml-explore/mlx) — Apple's ML framework — and preload at startup (~10 GB total).
 
 ### The Server
 
@@ -159,7 +159,7 @@ Fast Claude conversations generate responses faster than TTS can synthesise. The
 
 ## Requirements
 
-- Apple Silicon Mac (M1/M2/M3/M4), 8 GB+ RAM
+- Apple Silicon Mac (M1/M2/M3/M4), 16 GB+ RAM (32 GB recommended)
 - Python 3.11+
 - ~2 GB disk (model weights + venv)
 - Claude Code (optional — for automatic TTS on responses; setup offers to install it)
@@ -295,11 +295,11 @@ This removes the launchd service and offers to remove Claude Code hooks. Voice p
 
 ## Performance
 
-On 8 GB M1 MacBook Air:
-- Model load: ~5s (cached) / ~5 min (first run, downloading 1.5 GB)
-- Warmup synthesis: ~15s
+On 32 GB M3 Max (four backends preloaded):
+- Startup: ~2 min (backend load + warmup)
+- Model load: ~5s (cached) / ~5 min (first run, downloading ~3 GB)
 - Per request: ~15s fixed overhead + ~0.5x real-time (~20s typical)
-- Peak memory: ~6 GB
+- Peak memory: ~10 GB (all four backends)
 - Adding voices: zero extra memory (each is just a 700 KB WAV)
 
 ## Credits
