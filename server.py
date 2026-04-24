@@ -15,9 +15,11 @@ import io
 import json
 import logging
 import os
+import tempfile
 import threading
 import time
 import warnings
+from contextlib import asynccontextmanager
 
 import numpy as np
 import soundfile as sf
@@ -64,10 +66,6 @@ warnings.filterwarnings("ignore", message=".*model of type.*qwen3_tts.*")
 warnings.filterwarnings("ignore", message=".*incorrect regex pattern.*")
 logging.getLogger("transformers.modeling_utils").setLevel(logging.ERROR)
 logging.getLogger("transformers.tokenization_utils_base").setLevel(logging.ERROR)
-
-import tempfile
-from contextlib import asynccontextmanager
-
 
 def _cleanup_current_voices():
     """Delete cleanup_paths + owned temp audio for all currently-loaded voices.
