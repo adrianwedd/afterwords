@@ -68,9 +68,14 @@ class Qwen3Backend(BackendBase):
         self,
         text: str,
         prepared: PreparedVoice,
+        lang: str,
     ) -> tuple[np.ndarray, int]:
         if self._model is None:
             raise RuntimeError("Qwen3Backend.synthesize called before load()")
+        if lang not in self.supported_langs:
+            raise ValueError(
+                f"qwen3 does not support lang={lang!r}; supported: {self.supported_langs}"
+            )
         from mlx_audio.tts.generate import generate_audio
         with tempfile.TemporaryDirectory() as tmpdir:
             generate_audio(
@@ -78,7 +83,7 @@ class Qwen3Backend(BackendBase):
                 model=self._model,
                 ref_audio=prepared.ref_audio_path,
                 ref_text=prepared.ref_text,
-                lang_code="en",
+                lang_code=lang,
                 output_path=tmpdir,
                 file_prefix="out",
                 verbose=False,
