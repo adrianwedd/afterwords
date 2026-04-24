@@ -472,7 +472,6 @@ async def clone_voice_endpoint(
         )
 
     try:
-        import tempfile
         import noisereduce as nr
 
         # Save uploaded audio to temp file.
