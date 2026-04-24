@@ -113,9 +113,23 @@ class VoxCPMBackend(BackendBase):
         for k in ("cfg_value", "inference_timesteps"):
             if k in prepared.extras:
                 kwargs[k] = prepared.extras[k]
-        audio = self._model.generate(**kwargs)
-        if hasattr(audio, "tolist"):
-            audio = np.asarray(audio.tolist(), dtype=np.float32)
+        result = self._model.generate(**kwargs)
+        # mlx-audio's VoxCPM.generate() yields GenerationResult objects
+        # (dataclass with .audio = mx.array). Older revisions returned a
+        # single array directly — handle both shapes.
+        import types
+        if isinstance(result, types.GeneratorType):
+            chunks = []
+            for gr in result:
+                arr = np.asarray(gr.audio.tolist() if hasattr(gr.audio, "tolist") else gr.audio, dtype=np.float32)
+                chunks.append(arr.reshape(-1))
+            if not chunks:
+                raise RuntimeError("VoxCPM produced no audio chunks")
+            audio = np.concatenate(chunks)
+        elif hasattr(result, "audio"):
+            audio = np.asarray(result.audio.tolist() if hasattr(result.audio, "tolist") else result.audio, dtype=np.float32)
+        elif hasattr(result, "tolist"):
+            audio = np.asarray(result.tolist(), dtype=np.float32)
         else:
-            audio = np.asarray(audio, dtype=np.float32)
+            audio = np.asarray(result, dtype=np.float32)
         return audio.reshape(-1), NATIVE_SR
