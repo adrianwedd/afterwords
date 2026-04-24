@@ -657,6 +657,62 @@ def delete_session(session_id: str):
     return {"status": "ok", "session_id": session_id}
 
 
+@app.post("/reload")
+def reload_voices():
+    """Re-walk voices/*.json and merge additions/updates into VOICES.
+    Add-only: voices whose JSON is absent from disk are NOT removed.
+    Atomic on error: if any profile's prepare_voice() raises, abort + rollback temps."""
+    if not _clone_enabled:
+        return JSONResponse({"error": "clone not enabled (start with --allow-clone)"}, status_code=404)
+
+    t0 = time.time()
+    new_profiles: list[VoiceProfile] = []
+    tracked_cleanup_paths: list[str] = []
+    tracked_owned_refs: list[str] = []
+    errors: list[dict] = []
+
+    # Phase 1: walk + build under _synth_lock (prepare_voice may touch Metal)
+    with _synth_lock:
+        for profile_path in sorted(glob.glob(os.path.join(_VOICES_DIR, "*.json"))):
+            try:
+                profile = _build_voice_profile(profile_path)
+            except Exception as exc:
+                errors.append({"file": profile_path, "error": str(exc)})
+                continue
+            if profile is None:
+                # _build_voice_profile already logged + skipped (unreadable, missing ref, etc.)
+                continue
+            new_profiles.append(profile)
+            tracked_cleanup_paths.extend(profile.prepared.cleanup_paths)
+            if profile.prepared.owns_temp_audio:
+                tracked_owned_refs.append(profile.prepared.ref_audio_path)
+
+    # Phase 2: abort-on-error — rollback temp files built during this walk
+    if errors:
+        for p in tracked_cleanup_paths:
+            try:
+                os.remove(p)
+            except OSError:
+                pass
+        for p in tracked_owned_refs:
+            if p.startswith(tempfile.gettempdir()):
+                try:
+                    os.remove(p)
+                except OSError:
+                    pass
+        log.warning("/reload aborted: %d errors, %.1fs", len(errors), time.time() - t0)
+        return JSONResponse({"status": "failed", "errors": errors}, status_code=500)
+
+    # Phase 3: commit — merge under _model_lock (never removes absent voices)
+    with _model_lock:
+        for profile in new_profiles:
+            VOICES[profile.name] = profile
+        reloaded = sorted(VOICES.keys())
+
+    log.info("/reload: %d voices loaded, 0 errors, %.1fs", len(reloaded), time.time() - t0)
+    return {"status": "ok", "reloaded": reloaded, "errors": []}
+
+
 def main():
     parser = argparse.ArgumentParser(description="Afterwords TTS server (MLX)")
     parser.add_argument("--port", type=int, default=7860)
