@@ -24,17 +24,14 @@ FORCE=false
 SENTENCE="You are absolutely right. Your Claude Code session could sound like me."
 
 VOICES=("picard" "galadriel" "attenborough")
-# Each backend -> its filename slug (used by reclone-flagship.py).
-declare -A BACKEND_SLUG=(
-    ["qwen3-0.6b"]="qwen3-06b"
-    ["qwen3-1.7b"]="qwen3-17b"
-    ["chatterbox"]="chatterbox"
-    ["voxcpm-1.5"]="voxcpm-15"
-)
+# Parallel arrays: BACKENDS[i] -> SLUGS[i]. macOS bash 3.2 lacks associative arrays.
+BACKENDS=("qwen3-0.6b" "qwen3-1.7b" "chatterbox" "voxcpm-1.5")
+SLUGS=("qwen3-06b"    "qwen3-17b"   "chatterbox" "voxcpm-15")
 
 for voice in "${VOICES[@]}"; do
-    for backend in "${!BACKEND_SLUG[@]}"; do
-        slug="${BACKEND_SLUG[$backend]}"
+    for i in "${!BACKENDS[@]}"; do
+        backend="${BACKENDS[$i]}"
+        slug="${SLUGS[$i]}"
         # Default-backend profile uses the raw voice name; others use voice-slug
         if [[ "$backend" == "qwen3-0.6b" ]]; then
             voice_name="$voice"
