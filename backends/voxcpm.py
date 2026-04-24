@@ -94,10 +94,16 @@ class VoxCPMBackend(BackendBase):
         self,
         text: str,
         prepared: PreparedVoice,
+        lang: str,
     ) -> tuple[np.ndarray, int]:
         if self._model is None:
             raise RuntimeError("VoxCPMBackend.synthesize called before load()")
-        # mlx-audio's VoxCPM backend: forward relevant extras.
+        if lang not in self.supported_langs:
+            raise ValueError(
+                f"voxcpm-1.5 does not support lang={lang!r}; supported: {self.supported_langs}"
+            )
+        # lang is validated above but not forwarded — mlx-audio's VoxCPM generate()
+        # doesn't expose a lang kwarg; behavior is preserved.
         kwargs = dict(
             text=text,
             reference_wav_path=prepared.ref_audio_path,
