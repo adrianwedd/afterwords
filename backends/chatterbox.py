@@ -66,6 +66,8 @@ class ChatterboxBackend(BackendBase):
             raise ValueError(
                 f"chatterbox does not support lang={lang!r}; supported: {self.supported_langs}"
             )
+        # lang is validated above but not forwarded — mlx-audio's chatterbox-fp16
+        # generator doesn't expose a lang_code kwarg; behavior is preserved.
         from mlx_audio.tts.generate import generate_audio
         with tempfile.TemporaryDirectory() as tmpdir:
             kwargs = dict(
