@@ -273,3 +273,13 @@ def test_synthesize_unknown_voice_returns_400(client):
     body = resp.json()
     assert "unknown voice" in body["error"]
     assert isinstance(body["available"], list)
+
+
+def test_health_exposes_supported_langs(client):
+    resp = client.get("/health")
+    assert resp.status_code == 200
+    body = resp.json()
+    for name, info in body["loaded_backends"].items():
+        assert "supported_langs" in info, f"backend {name!r} missing supported_langs"
+        assert isinstance(info["supported_langs"], list)
+        assert all(isinstance(x, str) for x in info["supported_langs"])

@@ -274,6 +274,7 @@ def health():
             "voice_count": backend_counts.get(bname, 0),
             "sample_rate": b.sample_rate,
             "display_name": b.display_name,
+            "supported_langs": list(b.supported_langs),
         }
 
     default_backend_name = default_profile.backend if default_profile else "qwen3-0.6b"
