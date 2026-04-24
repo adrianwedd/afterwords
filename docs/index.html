@@ -6,7 +6,7 @@
   <title>Afterwords — Local Voice-Cloning TTS</title>
   <meta name="description" content="Clone any voice from a 15-second YouTube clip and hear Claude Code speak every response. Runs locally on Apple Silicon. No cloud. No subscription.">
   <meta property="og:title" content="Afterwords — Local Voice-Cloning TTS">
-  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 20 voices included. No cloud dependency.">
+  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 20 voices, 4 backends. No cloud dependency.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://adrianwedd.github.io/afterwords/">
   <meta property="og:image" content="https://adrianwedd.github.io/afterwords/og-image.png">
@@ -538,8 +538,8 @@
       </div>
       <div class="hero-stats">
         <div><div class="stat-value">20</div><div class="stat-label">Voices included</div></div>
-        <div><div class="stat-value">~6 GB</div><div class="stat-label">Peak memory</div></div>
-        <div><div class="stat-value">~20s</div><div class="stat-label">Per sentence</div></div>
+        <div><div class="stat-value">4</div><div class="stat-label">Backends</div></div>
+        <div><div class="stat-value">~10 GB</div><div class="stat-label">Peak memory</div></div>
         <div><div class="stat-value">0</div><div class="stat-label">Cloud calls</div></div>
       </div>
     </div>
@@ -564,8 +564,8 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
 
     <section id="voices" class="reveal">
       <div class="section-label">Voice Gallery</div>
-      <div class="section-title">20 voices, each cloned from a 15-second clip</div>
-      <p class="section-desc">Each says <em>&ldquo;You are absolutely right. Your Claude Code session could sound like me.&rdquo;</em> &mdash; generated locally on an 8 GB M1.</p>
+      <div class="section-title">20 voices on Qwen3 0.6B &mdash; see backend comparison below for flagship voices on all 4 models</div>
+      <p class="section-desc">Each says <em>&ldquo;You are absolutely right. Your Claude Code session could sound like me.&rdquo;</em> &mdash; generated locally on a 32 GB M1.</p>
 
       <div class="voice-gallery">
         <div class="voice-card reveal"><div class="voice-card-inner">
@@ -740,7 +740,7 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
       </div>
 
       <p><a href="https://docs.anthropic.com/en/docs/claude-code/voice-dictation"><code>/voice</code></a> handles input. This project handles output. Together: voice conversations.</p>
-      <p>The server uses <a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (0.6B, 8-bit) on <a href="https://github.com/ml-explore/mlx">MLX</a>. Zero-shot voice cloning &mdash; no training. A 15-second reference + transcript = cloned voice.</p>
+      <p>The server ships four MLX backends: <a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (0.6B and 1.7B, 8-bit), <a href="https://huggingface.co/mlx-community/chatterbox-fp16">Chatterbox</a> (fp16, multilingual), and <a href="https://huggingface.co/mlx-community/VoxCPM1.5">VoxCPM 1.5</a> (44.1 kHz). Zero-shot voice cloning &mdash; no training. A 15-second reference + transcript = cloned voice on every backend.</p>
 
       <div class="callout">
         <strong>Why local?</strong> Nothing leaves your machine. No API key, no rate limits, no bill. The voice is yours.
@@ -767,8 +767,14 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
   "backend": "mlx",
   "model_loaded": true,
   "ready": true,
-  "voices": ["attenborough", "audrey", "aurora", "avasarala", "bardem", "claudia", "data", "depp", "eartha", "galadriel", "han-solo", "loki", "marla", "picard", "ronan", "samantha", "snape", "spock", "tilda", "vesper"],
-  "default_voice": "galadriel"
+  "voices": ["attenborough", "attenborough-chatterbox", "attenborough-qwen3-17b", "attenborough-voxcpm-15", "audrey", "..."],
+  "default_voice": "galadriel",
+  "loaded_backends": {
+    "qwen3-0.6b":  {"loaded": true, "voice_count": 20, "sample_rate": 24000, "display_name": "Qwen3-TTS 0.6B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
+    "qwen3-1.7b":  {"loaded": true, "voice_count": 3,  "sample_rate": 24000, "display_name": "Qwen3-TTS 1.7B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
+    "chatterbox":  {"loaded": true, "voice_count": 3,  "sample_rate": 24000, "display_name": "Chatterbox (fp16, multilingual)", "supported_langs": ["en","es","fr","de","it","pt","zh","ja","ko"]},
+    "voxcpm-1.5":  {"loaded": true, "voice_count": 3,  "sample_rate": 44100, "display_name": "VoxCPM 1.5", "supported_langs": ["en","zh"]}
+  }
 }</code><span class="copy-hint">click to copy</span></pre>
         <div class="response-codes">
           <span class="response-code success">200 OK</span>
@@ -812,7 +818,7 @@ curl -s "localhost:7860/synthesize?text=Testing" | afplay -</code><span class="c
           <span class="endpoint-method">CLI</span>
           <span class="endpoint-path">afterwords clone</span>
         </div>
-        <p class="endpoint-desc">Clone a new voice from a YouTube clip. Restart the server to load it.</p>
+        <p class="endpoint-desc">Clone a new voice from a YouTube clip. Run <code>afterwords reload</code> to load it (no restart needed).</p>
 <pre><code># Interactive (prompts for URL and name)
 afterwords clone
 
@@ -970,6 +976,7 @@ afterwords restart     # restart after adding voices
 afterwords status      # show health, model, loaded voices
 afterwords logs        # tail the server log
 afterwords voices      # list available voices
+afterwords reload      # pick up new voices without restart
 afterwords clone       # clone a new voice from YouTube
 afterwords uninstall   # remove service and optionally hooks</code><span class="copy-hint">click to copy</span></pre>
       <p>The server runs on <code>localhost:7860</code> and auto-starts on login via macOS launchd. If you prefer to run it manually:</p>
@@ -985,11 +992,13 @@ python server.py --allow-clone    # enables POST /clone, POST /synthesize, DELET
 
     <section class="reveal">
       <div class="section-label">Performance</div>
-      <div class="section-title">On an 8 GB M1</div>
+      <div class="section-title">On a 32 GB Apple Silicon Mac</div>
       <div class="info-grid">
-        <div class="info-cell"><div class="info-cell-label">Model load</div><div class="info-cell-value">~5s cached</div></div>
-        <div class="info-cell"><div class="info-cell-label">Per sentence</div><div class="info-cell-value">~20s</div></div>
-        <div class="info-cell"><div class="info-cell-label">Peak memory</div><div class="info-cell-value">~6 GB</div></div>
+        <div class="info-cell"><div class="info-cell-label">Qwen3 0.6B</div><div class="info-cell-value">~20s / sentence</div></div>
+        <div class="info-cell"><div class="info-cell-label">Qwen3 1.7B</div><div class="info-cell-value">~35s / sentence</div></div>
+        <div class="info-cell"><div class="info-cell-label">Chatterbox</div><div class="info-cell-value">~25s / sentence</div></div>
+        <div class="info-cell"><div class="info-cell-label">VoxCPM 1.5</div><div class="info-cell-value">~30s / sentence</div></div>
+        <div class="info-cell"><div class="info-cell-label">Peak memory</div><div class="info-cell-value">~10 GB (all 4 loaded)</div></div>
         <div class="info-cell"><div class="info-cell-label">Adding a voice</div><div class="info-cell-value">0 extra RAM</div></div>
       </div>
     </section>
@@ -1001,7 +1010,7 @@ python server.py --allow-clone    # enables POST /clone, POST /synthesize, DELET
       <div class="section-title">What you need</div>
       <div class="info-grid">
         <div class="info-cell"><div class="info-cell-label">Hardware</div><div class="info-cell-value">Apple Silicon M1+</div></div>
-        <div class="info-cell"><div class="info-cell-label">Memory</div><div class="info-cell-value">8 GB+ RAM</div></div>
+        <div class="info-cell"><div class="info-cell-label">Memory</div><div class="info-cell-value">32 GB+ RAM</div></div>
         <div class="info-cell"><div class="info-cell-label">Python</div><div class="info-cell-value">3.11+</div></div>
         <div class="info-cell"><div class="info-cell-label">Disk</div><div class="info-cell-value">~2 GB</div></div>
       </div>
@@ -1012,7 +1021,7 @@ python server.py --allow-clone    # enables POST /clone, POST /synthesize, DELET
 
     <section class="reveal">
       <div class="section-label">Credits</div>
-      <p><a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (Alibaba, Apache 2.0) &middot; <a href="https://github.com/Blaizzy/mlx-audio">mlx-audio</a> &middot; <a href="https://github.com/ml-explore/mlx">MLX</a> (Apple) &middot; <a href="https://docs.anthropic.com/en/docs/claude-code/">Claude Code</a> (Anthropic)</p>
+      <p><a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (Alibaba) &middot; <a href="https://huggingface.co/mlx-community/chatterbox-fp16">Chatterbox</a> (mlx-community) &middot; <a href="https://huggingface.co/mlx-community/VoxCPM1.5">VoxCPM</a> (mlx-community) &middot; <a href="https://github.com/Blaizzy/mlx-audio">mlx-audio</a> &middot; <a href="https://github.com/ml-explore/mlx">MLX</a> (Apple) &middot; <a href="https://docs.anthropic.com/en/docs/claude-code/">Claude Code</a> (Anthropic)</p>
       <p>Originally built for <a href="https://spark.wedd.au">SPARK</a>, a robot with an inner life. Full tutorial: <a href="https://adrianwedd.com/blog/voice-cloning-qwen3-tts-mlx/">Voice Cloning with Qwen3-TTS</a>.</p>
     </section>
 
