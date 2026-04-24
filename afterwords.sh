@@ -349,6 +349,18 @@ for v in data.get('voices', []):
     fi
 }
 
+cmd_reload() {
+    local response
+    if ! response=$(curl -s -X POST http://localhost:7860/reload); then
+        fail "Server not responding on localhost:7860"
+    fi
+    if command -v jq >/dev/null 2>&1; then
+        echo "$response" | jq .
+    else
+        echo "$response"
+    fi
+}
+
 cmd_clone() {
     if [ ! -f "$REPO_DIR/clone-voice.sh" ]; then
         fail "clone-voice.sh not found in ${REPO_DIR}"
@@ -510,6 +522,7 @@ cmd_help() {
     echo -e "    ${CYAN}status${NC}      Show server status and loaded voices"
     echo -e "    ${CYAN}logs${NC}        Tail the server log"
     echo -e "    ${CYAN}voices${NC}      List available voices"
+    echo -e "    ${CYAN}reload${NC}      Reload voices from disk without restarting"
     echo -e "    ${CYAN}clone${NC}       Clone a new voice from YouTube"
     echo -e "    ${CYAN}codex-hook${NC}  Start or stop the Codex CLI watcher"
     echo -e "    ${CYAN}uninstall${NC}   Remove the service and optionally hooks"
@@ -539,6 +552,7 @@ case "$COMMAND" in
     status)    cmd_status "$@" ;;
     logs)      cmd_logs "$@" ;;
     voices)    cmd_voices "$@" ;;
+    reload)    cmd_reload "$@" ;;
     clone)     cmd_clone "$@" ;;
     codex-hook) cmd_codex_hook "$@" ;;
     uninstall) cmd_uninstall "$@" ;;
