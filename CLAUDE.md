@@ -40,7 +40,7 @@ curl localhost:7860/health
 curl "localhost:7860/synthesize?text=Hello&voice=galadriel" -o test.wav
 
 # Run tests (no GPU required)
-pip install pytest httpx
+pip install -r requirements-dev.txt
 pytest
 
 # Run a single test
