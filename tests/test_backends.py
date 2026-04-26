@@ -112,3 +112,63 @@ def test_all_registered_backends_accept_lang_keyword():
         b = backends.get(name)
         sig = inspect.signature(b.synthesize)
         assert "lang" in sig.parameters, f"backend {name!r} missing lang kwarg"
+
+
+def test_voxcpm_synthesize_handles_generator_output():
+    """Regression: mlx-audio's VoxCPM.generate() yields GenerationResult objects
+    (dataclass with .audio = mx.array). Earlier code passed the generator directly
+    to np.asarray which raised TypeError. Mock the model to verify the generator
+    branch concatenates chunk audio correctly without loading mlx-audio."""
+    import sys
+    from types import SimpleNamespace
+    import numpy as np
+    from backends.voxcpm import VoxCPMBackend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = VoxCPMBackend()
+    # Stub the model — yields two GenerationResult-shaped objects.
+    chunk_a = SimpleNamespace(audio=np.full(100, 0.1, dtype=np.float32))
+    chunk_b = SimpleNamespace(audio=np.full(150, 0.2, dtype=np.float32))
+
+    class _StubModel:
+        def generate(self, **kwargs):
+            yield chunk_a
+            yield chunk_b
+
+    backend._model = _StubModel()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/test.wav",
+        ref_text="ref",
+        extras=_read_only({}),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+    assert sr == 44100  # NATIVE_SR
+    assert audio.shape == (250,)
+    assert audio.dtype == np.float32
+    # First 100 samples from chunk_a, next 150 from chunk_b
+    assert np.allclose(audio[:100], 0.1)
+    assert np.allclose(audio[100:], 0.2)
+
+
+def test_voxcpm_synthesize_raises_on_empty_generator():
+    """If generate() yields nothing, surface a clear error rather than
+    returning an empty array silently."""
+    import pytest as _pytest
+    from backends.voxcpm import VoxCPMBackend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = VoxCPMBackend()
+
+    class _EmptyModel:
+        def generate(self, **kwargs):
+            return (x for x in ())  # empty generator (real GeneratorType)
+
+    backend._model = _EmptyModel()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/test.wav",
+        ref_text="ref",
+        extras=_read_only({}),
+    )
+    with _pytest.raises(RuntimeError, match="no audio chunks"):
+        backend.synthesize("hello", prepared, lang="en")
