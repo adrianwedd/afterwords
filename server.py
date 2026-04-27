@@ -48,6 +48,7 @@ class VoiceProfile:
     sequence: int | None
     extras: Mapping[str, object]
     prepared: PreparedVoice
+    family: str | None = None
 
     def __post_init__(self):
         if not isinstance(self.extras, MappingProxyType):
@@ -162,6 +163,8 @@ def _build_voice_profile(profile_path: str) -> VoiceProfile | None:
 
     prepared = backend.prepare_voice(ref_audio, ref_text, extras)
 
+    family = p.get("family") or None  # normalize "" / missing to None
+
     return VoiceProfile(
         name=name,
         backend=backend_name,
@@ -175,6 +178,7 @@ def _build_voice_profile(profile_path: str) -> VoiceProfile | None:
         sequence=p.get("sequence"),
         extras=_read_only(extras),
         prepared=prepared,
+        family=family,
     )
 
 
@@ -206,7 +210,8 @@ def _register_voice(
     emotion: str = "neutral",
     metadata: dict | None = None,
 ):
-    """Thread-safe runtime voice registration. Builds a VoiceProfile."""
+    """Thread-safe runtime voice registration. Builds a VoiceProfile.
+    Session-cloned voices have family=None (no cross-backend routing target)."""
     meta = metadata or {}
     profile = VoiceProfile(
         name=name,
@@ -221,6 +226,7 @@ def _register_voice(
         sequence=meta.get("sequence"),
         extras=_read_only(meta.get("extras", {})),
         prepared=prepared,
+        family=meta.get("family") or None,
     )
     with _model_lock:
         VOICES[name] = profile
@@ -287,6 +293,45 @@ def _resolve_voice(voice: str, emotion: str | None = None) -> VoiceProfile | Non
         return VOICES.get(voice)
 
 
+def _route_for_lang(profile: VoiceProfile, lang: str) -> VoiceProfile:
+    """If `profile`'s backend supports `lang`, return profile unchanged.
+    Otherwise, find the best voice in the same family on a backend that supports
+    `lang`. Voices with family=None are never re-routed and never selected as a
+    routing target. Raises ValueError if no candidate exists.
+
+    Tiebreaker: (duration_s or 0, confidence or 0, name) — name is the stable
+    final sort so that initial-load (unsorted glob) and reload (sorted glob)
+    select the same candidate when other metadata is None."""
+    backend = backends.get(profile.backend)
+    if lang in backend.supported_langs:
+        return profile
+    if profile.family is None:
+        raise ValueError(
+            f"{profile.backend} does not support lang={lang!r}; "
+            f"supported: {backend.supported_langs}"
+        )
+    with _model_lock:
+        candidates = [
+            p for p in VOICES.values()
+            if p.family == profile.family
+            and lang in backends.get(p.backend).supported_langs
+        ]
+    if not candidates:
+        raise ValueError(
+            f"no voice in family {profile.family!r} supports lang={lang!r}; "
+            f"original backend {profile.backend} supports {backend.supported_langs}"
+        )
+    best = max(
+        candidates,
+        key=lambda p: (p.duration_s or 0, p.confidence or 0, p.name),
+    )
+    log.info(
+        "/synthesize: routed family=%s lang=%s: %s -> %s (backend %s)",
+        profile.family, lang, profile.name, best.name, best.backend,
+    )
+    return best
+
+
 def _warmup():
     """Prime MLX caches by generating a tiny synth against the default voice."""
     profile = VOICES.get(DEFAULT_VOICE)
@@ -345,9 +390,31 @@ def health():
 
 
 def _synthesize_audio(text: str, profile: VoiceProfile, lang: str) -> Response:
-    """Core synthesis — dispatches to the voice's pinned backend."""
-    log.info("synthesize: %d chars, voice=%s, backend=%s",
-             len(text), profile.name, profile.backend)
+    """Core synthesis — dispatches to the voice's pinned backend.
+    If the voice's backend doesn't support `lang`, attempts cross-backend
+    family routing (see `_route_for_lang`)."""
+    log.info("synthesize: %d chars, voice=%s, backend=%s, lang=%s",
+             len(text), profile.name, profile.backend, lang)
+
+    # Route across backends within the voice family if needed.
+    try:
+        profile = _route_for_lang(profile, lang)
+    except ValueError as exc:
+        # No backend in this family supports the requested lang.
+        try:
+            backend_for_err = backends.get(profile.backend)
+            supported = list(backend_for_err.supported_langs)
+        except KeyError:
+            supported = []
+        return JSONResponse(
+            {"error": str(exc),
+             "voice_backend": profile.backend,
+             "supported_langs": supported},
+            status_code=400,
+        )
+
+    # Re-fetch backend after potential routing — X-Backend header and any
+    # subsequent error metadata must reflect the routed backend.
     try:
         backend = backends.get(profile.backend)
     except KeyError:
