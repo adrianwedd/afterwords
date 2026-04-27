@@ -537,3 +537,82 @@ def test_reload_abort_cleans_tracked_temps(client, tmp_path, monkeypatch):
             os.remove(sentinel)
         except OSError:
             pass
+
+
+# ──────────── Voice-family lang routing tests ────────────
+
+def _make_voice_in_voices(name, family, supported_langs, backend_alias="fake"):
+    """Inject a fake VoiceProfile into server.VOICES with a specific family + lang capability.
+    Hijacks the existing FakeBackend alias for `backend_alias` to advertise `supported_langs`."""
+    import backends as _backends
+    b = _backends.get(backend_alias)
+    # Override supported_langs on this specific FakeBackend instance.
+    b.supported_langs = tuple(supported_langs)
+    prep = b.prepare_voice("/tmp/x.wav", "ref text", {})
+    profile = server.VoiceProfile(
+        name=name, backend=backend_alias, ref_audio="/tmp/x.wav", ref_text="ref text",
+        session_id=None, emotion="neutral", quality=None, duration_s=None,
+        confidence=None, sequence=None, extras={}, prepared=prep,
+        family=family,
+    )
+    server.VOICES[name] = profile
+
+
+def test_lang_routing_swaps_within_family(client):
+    """Request lang=zh against an en-only voice routes to a zh-capable family member."""
+    server.VOICES.clear()
+    _make_voice_in_voices("alpha-en", family="alpha", supported_langs=("en",), backend_alias="qwen3-0.6b")
+    _make_voice_in_voices("alpha-zh", family="alpha", supported_langs=("en", "zh"), backend_alias="voxcpm-1.5")
+    try:
+        r = client.get("/synthesize", params={"text": "Ni hao", "voice": "alpha-en", "lang": "zh"})
+        assert r.status_code == 200, r.text
+        assert r.headers["content-type"] == "audio/wav"
+        # X-Backend reports the routed backend
+        assert r.headers.get("x-backend") == "voxcpm-1.5"
+    finally:
+        server.VOICES.clear()
+
+
+def test_lang_routing_no_family_match_returns_400(client):
+    """No voice in the family supports the requested lang → 400."""
+    server.VOICES.clear()
+    _make_voice_in_voices("alpha-en", family="alpha", supported_langs=("en",), backend_alias="qwen3-0.6b")
+    try:
+        r = client.get("/synthesize", params={"text": "Bonjour", "voice": "alpha-en", "lang": "fr"})
+        assert r.status_code == 400
+        body = r.json()
+        assert "supported_langs" in body
+        # The message should call out the family
+        assert "alpha" in body["error"]
+    finally:
+        server.VOICES.clear()
+
+
+def test_lang_routing_ignores_voice_with_no_family(client):
+    """family=None → no routing; unsupported lang returns 400 with original-backend message."""
+    server.VOICES.clear()
+    _make_voice_in_voices("loner", family=None, supported_langs=("en",), backend_alias="qwen3-0.6b")
+    # Also register a zh-capable family member that would route IF loner had a family.
+    _make_voice_in_voices("zh-helper", family="other", supported_langs=("en", "zh"), backend_alias="voxcpm-1.5")
+    try:
+        r = client.get("/synthesize", params={"text": "Hi", "voice": "loner", "lang": "zh"})
+        assert r.status_code == 400
+        body = r.json()
+        # Must NOT include the "family" message
+        assert "family" not in body["error"]
+        assert body["voice_backend"] == "qwen3-0.6b"
+    finally:
+        server.VOICES.clear()
+
+
+def test_lang_routing_unchanged_when_lang_supported(client):
+    """If the resolved voice already supports the requested lang, no routing occurs."""
+    server.VOICES.clear()
+    _make_voice_in_voices("alpha-en", family="alpha", supported_langs=("en", "zh"), backend_alias="qwen3-0.6b")
+    _make_voice_in_voices("alpha-other", family="alpha", supported_langs=("en", "zh"), backend_alias="voxcpm-1.5")
+    try:
+        r = client.get("/synthesize", params={"text": "hi", "voice": "alpha-en", "lang": "en"})
+        assert r.status_code == 200
+        assert r.headers.get("x-backend") == "qwen3-0.6b"  # original, not routed
+    finally:
+        server.VOICES.clear()
