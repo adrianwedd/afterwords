@@ -2,6 +2,7 @@
   "name": "data",
   "source_url": "https://www.youtube.com/watch?v=5PdVkA3HYYY",
   "reference_audio": "data-ref.wav",
-  "reference_text": "I have asked myself that many times, as I have struggled to be more human. Until I realized, it is the struggle itself that is most important. We must strive to be more than we are, Lal.",
-  "segment_start_s": 24
+  "reference_text": "I have asked myself that many times, as I have struggled to be more human. Until I realized, it is the struggle itself that is most important. We must strive to be more.",
+  "segment_start_s": 24,
+  "notes": "Reference trimmed via ffmpeg silenceremove (was 15.0s with 2.9s mid-silence; now 10.6s dense). Transcript trimmed to remove phantom sentence not in audio."
 }
