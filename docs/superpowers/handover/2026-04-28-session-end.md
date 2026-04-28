@@ -4,7 +4,7 @@
 
 ## TL;DR
 
-7 PRs landed on `main` today (#10 → #17). Repo is green: 82 tests passing, 4 backends loaded, 50+ voices, demo site live at https://adrianwedd.github.io/afterwords/. The big technical story today was multi-backend follow-through (hot-reload, multilingual groundwork, voice-family routing) plus an embarrassing-but-fixed VoxCPM cloning bug discovered during operator audition. Three concrete follow-ups remain — all in **issue #14** and the listening side of **issue #5**.
+**14 PRs** landed on `main` today (#10 → #23). Repo is green: 82 tests passing, 4 backends loaded, 51 voices (added Ace), demo site live. Today's technical story was multi-backend follow-through (hot-reload, multilingual groundwork, voice-family routing) plus a series of operator-audition discoveries: VoxCPM was secretly never cloning (fixed), the demo was secretly misrepresenting backend cloning quality (fixed), Stop hook didn't fire for subagents (fixed), and two voices had transcript drift (attenborough + data, fixed). Three concrete follow-ups remain in **issues #5, #14, #24**.
 
 ## What shipped today
 
@@ -17,6 +17,12 @@
 | #15 | Pulled non-cloning backends from demo comparison after operator listen-test revealed VoxCPM/Chatterbox weren't cloning |
 | #16 | Real VoxCPM cloning fix: kwarg rename + `mx.array` load. Cloning now engages the reference |
 | #17 | Comprehensive docs sweep (README/CLAUDE/AGENTS/site) to reflect everything above |
+| #18 | First handover doc (this file's first version) |
+| #19 | Fix attenborough transcript — phantom "The sloth's technique..." not in audio |
+| #20 | Handover doc addendum: --allow-clone trap, transcript-drift trap |
+| #21 | **setup.sh registers SubagentStop too** — was the reason per-agent .afterwords mappings silently bypassed TTS for years |
+| #22 | New `ace` voice + fixed `data` reference (silence-trim + transcript truncation) |
+| #23 | Re-cloned `ace` from in-character source (Power of the Doctor) instead of actor interview |
 
 ## What's queued (in priority order)
 
@@ -35,6 +41,9 @@ Today's `tests/test_backends_integration.py` only asserts `audio.size > sr * 0.1
 
 ### 4. Voxtral TTS backend (Issue #5)
 Surprise finding today: `mlx-audio` already ships a `voxtral_tts` model directory. Issue #5's "pending MLX port" framing was stale. Adding it as an Afterwords backend is the standard one-file pattern. **Do first**: inspect `mlx_audio/tts/models/voxtral_tts/voxtral_tts.py` for the actual HuggingFace `MODEL_ID` and confirm what model family it is — "Voxtral" is also Mistral's STT model name, so there's some risk this is mis-labelled.
+
+### 4b. Voice-audit tool (Issue #24)
+File flagged tonight. Add a `scripts/audit-voice-transcripts.py` (or `afterwords audit` CLI) that re-runs Whisper on every `voices/*-ref.wav`, diffs against the JSON `reference_text`, and flags drift. Two voices (attenborough, data) were caught this session via the operator's ear; the next ten will be caught by the tool. Acceptance criteria in the issue.
 
 ### 5. Other latent backends to audition
 The local `mlx-audio` package has 16 cloning-capable backends (signature inspection — they take `ref_audio` or `audio_prompt`). Most plausible additions for variety/quality: **IndexTTS** (Bilibili, broadcast-quality cloning), **Sesame CSM** (1B, conversational, Apache 2.0), **Spark-TTS** (LLM-driven cloning), **F5-TTS** (flow-matching, multilingual). Add only after #1-#4 above; resist the temptation to keep adding backends without first verifying cloning quality.
@@ -69,7 +78,10 @@ cd docs && python3 -m http.server 8765                         # local preview o
 - **VoxCPM `prepare_voice` writes a temp WAV to `tempfile.gettempdir()`.** Server's lifespan shutdown deletes them; startup `_sweep_orphaned_temp_files()` cleans crash-orphans. If something restarts mid-sweep, you can get the "Error opening voxcpm-ref-*.wav" error we hit earlier today — fix is a clean restart.
 - **mlx-audio kwargs differ per model.** Don't assume "ref_audio" is universal. VoxCPM uses `ref_audio` as an mx.array (not path), Chatterbox accepts `ref_audio` as path-or-array via the wrapper, Qwen3 uses `lang_code=lang`. Always read the actual model's `generate()` signature before integrating.
 - **`afterwords reload` returns 404 on the launchd-managed server** because that server runs without `--allow-clone`. Restart picks up voice JSON changes without the flag; if you want hot reload, add `--allow-clone` to `~/Library/LaunchAgents/com.afterwords.tts-server.plist` args.
-- **Reference transcripts can drift from reference audio.** `clone-voice.sh` populates `reference_text` from Whisper at clone time, but if a clip gets re-trimmed later (or the source had a longer subtitle than the audio segment), the JSON transcript can claim content the WAV doesn't contain. This degrades cloning conditioning (especially for Qwen3 REQUIRED-policy backends — model is told the reference contains text it doesn't). Fixed in PR #19 for attenborough; audit the rest of `voices/*.json` if cloning quality seems weak. Quick check: `python3 -c "from faster_whisper import WhisperModel; m=WhisperModel('base.en'); s,_=m.transcribe('voices/NAME-ref.wav'); print(' '.join(x.text for x in s))"` and diff against the JSON.
+- **Reference transcripts can drift from reference audio.** `clone-voice.sh` populates `reference_text` from Whisper at clone time and DOES transcribe the saved 15s WAV (not the source) — so the script itself isn't the source of drift. But manual edits to fix Whisper mishearings (e.g. correcting to canonical show dialogue) can introduce phantom text the audio doesn't contain. Hit twice this session: attenborough (PR #19, "...sloth's technique is to give them time" wasn't in audio) and data (PR #22, "...than we are, Lal" wasn't in audio). Both degraded Qwen3 cloning (REQUIRED ref_text policy → model conditions on misaligned transcript). Fix in flight as Issue #24 (voice-audit tool). Until then, when editing a transcript by hand, listen to the WAV first.
+- **Reference WAV silence gaps degrade cloning** even when transcript is correct. Data had a 2.9s mid-silence + 1.2s gap (Brent Spiner's dramatic pauses) — gave only ~10s of dense speech in a 15s window. Fixed in PR #22 by `ffmpeg -af silenceremove`. If a clone sounds weak, check the WAV for dead air before reclone-from-scratch.
+- **In-character vs interview source matters for the Doctor Who voice family.** PR #23 reverted ace from a Sophie Aldred interview to a Power of the Doctor 2022 in-character clip. Other Doctor Who companions follow the same pattern. Sticking to in-character keeps the "this voice = this character" cue working.
+- **clone-voice.sh `--yes` must be ARG4 specifically.** The script reads `${4:-}` for the --yes check. If you put `--backend NAME` before `--yes`, the --yes gets buried and the script blocks at the transcript-confirmation prompt. Either order args as `URL NAME START --yes` then `--backend NAME` after, or skip --yes and ack manually.
 
 ## Reading order for next session
 
