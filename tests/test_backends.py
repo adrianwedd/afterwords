@@ -114,12 +114,20 @@ def test_all_registered_backends_accept_lang_keyword():
         assert "lang" in sig.parameters, f"backend {name!r} missing lang kwarg"
 
 
-def test_voxcpm_synthesize_handles_generator_output():
+def _write_silence_wav(tmp_path):
+    """Helper: write a tiny 44.1 kHz silent WAV. Returns its path."""
+    import soundfile as sf
+    import numpy as np
+    p = str(tmp_path / "ref.wav")
+    sf.write(p, np.zeros(4410, dtype=np.float32), 44100)
+    return p
+
+
+def test_voxcpm_synthesize_handles_generator_output(tmp_path):
     """Regression: mlx-audio's VoxCPM.generate() yields GenerationResult objects
     (dataclass with .audio = mx.array). Earlier code passed the generator directly
     to np.asarray which raised TypeError. Mock the model to verify the generator
     branch concatenates chunk audio correctly without loading mlx-audio."""
-    import sys
     from types import SimpleNamespace
     import numpy as np
     from backends.voxcpm import VoxCPMBackend
@@ -137,7 +145,7 @@ def test_voxcpm_synthesize_handles_generator_output():
 
     backend._model = _StubModel()
     prepared = PreparedVoice(
-        ref_audio_path="/tmp/test.wav",
+        ref_audio_path=_write_silence_wav(tmp_path),
         ref_text="ref",
         extras=_read_only({}),
     )
@@ -151,7 +159,7 @@ def test_voxcpm_synthesize_handles_generator_output():
     assert np.allclose(audio[100:], 0.2)
 
 
-def test_voxcpm_synthesize_raises_on_empty_generator():
+def test_voxcpm_synthesize_raises_on_empty_generator(tmp_path):
     """If generate() yields nothing, surface a clear error rather than
     returning an empty array silently."""
     import pytest as _pytest
@@ -166,9 +174,50 @@ def test_voxcpm_synthesize_raises_on_empty_generator():
 
     backend._model = _EmptyModel()
     prepared = PreparedVoice(
-        ref_audio_path="/tmp/test.wav",
+        ref_audio_path=_write_silence_wav(tmp_path),
         ref_text="ref",
         extras=_read_only({}),
     )
     with _pytest.raises(RuntimeError, match="no audio chunks"):
         backend.synthesize("hello", prepared, lang="en")
+
+
+def test_voxcpm_synthesize_passes_mxarray_ref_audio_to_model(tmp_path):
+    """Regression for the kwarg-rename + mx.array conversion bug.
+
+    When BOTH ref_audio and ref_text are provided, voxcpm.py must:
+    - call generate() with kwarg names ref_audio (not reference_wav_path)
+      and ref_text (not prompt_text)
+    - pass ref_audio as an mx.array (the model's _encode_prompt_audio
+      expects a tensor, not a string path)
+    """
+    from types import SimpleNamespace
+    import numpy as np
+    import mlx.core as mx
+    from backends.voxcpm import VoxCPMBackend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = VoxCPMBackend()
+    captured_kwargs = {}
+
+    class _CapturingModel:
+        def generate(self, **kwargs):
+            captured_kwargs.update(kwargs)
+            yield SimpleNamespace(audio=np.zeros(10, dtype=np.float32))
+
+    backend._model = _CapturingModel()
+    prepared = PreparedVoice(
+        ref_audio_path=_write_silence_wav(tmp_path),
+        ref_text="reference text",
+        extras=_read_only({}),
+    )
+    backend.synthesize("hello", prepared, lang="en")
+
+    assert "ref_audio" in captured_kwargs, "must pass ref_audio (not reference_wav_path)"
+    assert "ref_text" in captured_kwargs, "must pass ref_text (not prompt_text)"
+    assert captured_kwargs["ref_text"] == "reference text"
+    # ref_audio must be an mx.array of shape (T,), not a path string.
+    ref = captured_kwargs["ref_audio"]
+    assert isinstance(ref, mx.array), f"ref_audio must be mx.array, got {type(ref).__name__}"
+    assert ref.ndim == 1, f"ref_audio must be 1-D, got shape {ref.shape}"
+    assert ref.shape[0] > 0
