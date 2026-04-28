@@ -893,17 +893,25 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
             <span class="param-name">voice</span>
             <span class="param-meta"><em>optional</em> &mdash; defaults to <code>galadriel</code>. Any name from /health</span>
           </div>
+          <div class="param-row">
+            <span class="param-name">lang</span>
+            <span class="param-meta"><em>optional</em> &mdash; BCP-47 language code, defaults to <code>en</code>. Must be in the voice's backend's <code>supported_langs</code> (see /health). If unsupported and the voice declares a <code>family</code>, the server auto-routes to a same-family voice on a backend that supports it.</span>
+          </div>
         </div>
 <pre><code># Synthesize and play
 curl "localhost:7860/synthesize?text=Hello+world&voice=snape" -o out.wav
 afplay out.wav
 
+# Non-English (the voice's backend must support the lang, or its family must)
+curl "localhost:7860/synthesize?text=Ni+hao&voice=galadriel&lang=zh" -o hi.wav
+
 # Pipe directly to speaker (macOS)
 curl -s "localhost:7860/synthesize?text=Testing" | afplay -</code><span class="copy-hint">click to copy</span></pre>
-        <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Response includes timing headers: <code>X-Synthesis-Time</code>, <code>X-Duration</code>, <code>X-Sample-Rate</code>.</p>
+        <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Response includes timing headers: <code>X-Synthesis-Time</code>, <code>X-Duration</code>, <code>X-Sample-Rate</code>, <code>X-Backend</code> (the actual backend that synthesized — may differ from the voice's pinned backend if family-routing kicked in).</p>
         <div class="response-codes">
           <span class="response-code success">200 audio/wav</span>
           <span class="response-code error">400 unknown voice</span>
+          <span class="response-code error">400 lang not supported</span>
           <span class="response-code error">400 text empty / too long</span>
           <span class="response-code error">500 synthesis failed</span>
           <span class="response-code error">503 warming up</span>
@@ -1005,10 +1013,29 @@ curl -X POST localhost:7860/clone \
 
       <div class="endpoint reveal">
         <div>
+          <span class="endpoint-method">POST</span>
+          <span class="endpoint-path">/reload</span>
+        </div>
+        <p class="endpoint-desc">Rescan <code>voices/*.json</code> and merge new or changed profiles into the live registry &mdash; no restart, no synthesis interruption. Add-only and atomic: if any profile fails to validate, no changes commit. Requires <code>--allow-clone</code>.</p>
+<pre><code># After cloning a new voice or editing voices/*.json:
+curl -X POST localhost:7860/reload | jq .
+
+# Or via the CLI wrapper:
+afterwords reload</code><span class="copy-hint">click to copy</span></pre>
+        <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Returns <code>{"status":"ok","reloaded":[names...],"errors":[]}</code> on success or <code>{"status":"failed","errors":[{file, error}]}</code> on atomic abort. Voices removed from disk are NOT dropped &mdash; use <code>DELETE /session/{id}</code> for that.</p>
+        <div class="response-codes">
+          <span class="response-code success">200 OK</span>
+          <span class="response-code error">404 --allow-clone not enabled</span>
+          <span class="response-code error">500 atomic abort (errors[] populated)</span>
+        </div>
+      </div>
+
+      <div class="endpoint reveal">
+        <div>
           <span class="endpoint-method">DELETE</span>
           <span class="endpoint-path">/session/{session_id}</span>
         </div>
-        <p class="endpoint-desc">Remove all voice palette entries and files for a session. Requires <code>--allow-clone</code>.</p>
+        <p class="endpoint-desc">Remove all voice palette entries and files for a session. Also cleans up any backend temp files (e.g. VoxCPM resampled refs). Requires <code>--allow-clone</code>.</p>
 <pre><code>curl -X DELETE localhost:7860/session/my-voice</code><span class="copy-hint">click to copy</span></pre>
         <div class="response-codes">
           <span class="response-code success">200 OK</span>
