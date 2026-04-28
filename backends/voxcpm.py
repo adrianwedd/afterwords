@@ -104,12 +104,26 @@ class VoxCPMBackend(BackendBase):
             )
         # lang is validated above but not forwarded — mlx-audio's VoxCPM generate()
         # doesn't expose a lang kwarg; behavior is preserved.
+        # VoxCPM enters voice-cloning mode only when BOTH ref_audio (mx.array,
+        # already at NATIVE_SR) AND ref_text are passed. Earlier code passed
+        # the file path, which silently fell back to the default voice. Load
+        # the prepared (already-resampled to 44.1kHz) WAV into mx.array shape (T,).
+        import mlx.core as mx
+        ref_data, ref_sr = sf.read(prepared.ref_audio_path)
+        if ref_data.ndim > 1:
+            ref_data = ref_data.mean(axis=1)
+        if ref_sr != NATIVE_SR:
+            # prepare_voice should have already resampled; this is belt+braces.
+            from .voxcpm import _resample_cpu  # self-import for clarity
+            ref_data = _resample_cpu(ref_data.astype(np.float32), ref_sr, NATIVE_SR)
+        ref_array = mx.array(ref_data.astype(np.float32))
+
         kwargs = dict(
             text=text,
-            reference_wav_path=prepared.ref_audio_path,
+            ref_audio=ref_array,
         )
         if prepared.ref_text:
-            kwargs["prompt_text"] = prepared.ref_text
+            kwargs["ref_text"] = prepared.ref_text
         for k in ("cfg_value", "inference_timesteps"):
             if k in prepared.extras:
                 kwargs[k] = prepared.extras[k]
