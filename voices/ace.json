@@ -1,9 +1,9 @@
 {
   "name": "ace",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=Tx_kNogrY7U",
+  "source_url": "https://www.youtube.com/watch?v=jC6HaSsf7p4",
   "reference_audio": "ace-ref.wav",
-  "reference_text": "in this very trendy magazine called The Face, and I took the magazine to the costume designer and I said you know how about this and he said yeah we can do that nice. So we went round together basically and I said yeah I'll have that one and I'll have that.",
-  "segment_start_s": 240,
-  "notes": "Sophie Aldred (Ace, Doctor Who) \u2014 interview clip at 4:00, recounting Ace's costume design choices."
+  "reference_text": "I think I might have slightly overestimated myself here, Professor. Although\u2014",
+  "segment_start_s": 90,
+  "notes": "Ace (Sophie Aldred) \u2014 Power of the Doctor 2022, volcano scene with Holo-Doctor. 8s of dense in-character solo speech (90-98s in source, 2s leading trimmed)."
 }
