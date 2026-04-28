@@ -361,6 +361,19 @@ cmd_reload() {
     fi
 }
 
+cmd_audit() {
+    local script="${REPO_DIR}/scripts/audit-voice-transcripts.py"
+    if [ ! -f "$script" ]; then
+        fail "audit-voice-transcripts.py not found"
+    fi
+    if [ ! -d "${REPO_DIR}/.venv" ]; then
+        fail "venv missing — run setup.sh first"
+    fi
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+    python3 "$script" "$@"
+}
+
 cmd_clone() {
     if [ ! -f "$REPO_DIR/clone-voice.sh" ]; then
         fail "clone-voice.sh not found in ${REPO_DIR}"
@@ -524,6 +537,7 @@ cmd_help() {
     echo -e "    ${CYAN}voices${NC}      List available voices"
     echo -e "    ${CYAN}reload${NC}      Reload voices from disk without restarting"
     echo -e "    ${CYAN}clone${NC}       Clone a new voice from YouTube"
+    echo -e "    ${CYAN}audit${NC}       Audit voice profiles for transcript-vs-audio drift"
     echo -e "    ${CYAN}codex-hook${NC}  Start or stop the Codex CLI watcher"
     echo -e "    ${CYAN}uninstall${NC}   Remove the service and optionally hooks"
     echo
@@ -554,6 +568,7 @@ case "$COMMAND" in
     voices)    cmd_voices "$@" ;;
     reload)    cmd_reload "$@" ;;
     clone)     cmd_clone "$@" ;;
+    audit)     cmd_audit "$@" ;;
     codex-hook) cmd_codex_hook "$@" ;;
     uninstall) cmd_uninstall "$@" ;;
     help|--help|-h)  cmd_help ;;

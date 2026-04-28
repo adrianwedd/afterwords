@@ -53,6 +53,18 @@ bash clone-voice.sh "https://youtube.com/watch?v=..." galadriel 30
 
 The script downloads the audio, extracts a 15-second segment, denoises it, transcribes with Whisper, and saves a voice profile. Each voice is just a 700 KB WAV file — adding voices costs zero extra memory.
 
+### Auditing voice profiles
+
+If you hand-edit a `voices/*.json` `reference_text` after cloning (e.g. to correct Whisper mishearings), you can drift the transcript away from what the trimmed audio actually says — which degrades cloning fidelity. The audit tool re-transcribes every reference WAV and flags drift:
+
+```bash
+afterwords audit               # report only
+afterwords audit --fix         # overwrite reference_text with fresh Whisper output for flagged voices
+afterwords audit --voice picard
+```
+
+Flags raised: phantom canonical text (transcript materially longer than what's heard), mid-word truncation, mid-clip silence gaps ≥1.5s, and impossible char/sec ratios. Exits non-zero when any voice is flagged, so it's safe to wire into CI.
+
 ## Switching Voices
 
 **Per-project** — drop a `.afterwords` file in any repo:
