@@ -1,0 +1,9 @@
+{
+  "name": "ace",
+  "backend": "qwen3-0.6b",
+  "source_url": "https://www.youtube.com/watch?v=Tx_kNogrY7U",
+  "reference_audio": "ace-ref.wav",
+  "reference_text": "in this very trendy magazine called The Face, and I took the magazine to the costume designer and I said you know how about this and he said yeah we can do that nice. So we went round together basically and I said yeah I'll have that one and I'll have that.",
+  "segment_start_s": 240,
+  "notes": "Sophie Aldred (Ace, Doctor Who) \u2014 interview clip at 4:00, recounting Ace's costume design choices."
+}
