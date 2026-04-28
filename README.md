@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 33 voices included (18 shipped + 15 Doctor Who companions).
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across four MLX backends (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5).
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -89,7 +89,29 @@ afterwords restart
 curl "http://localhost:7860/synthesize?text=Hello&voice=samantha" -o hello.wav
 ```
 
-Newly cloned voices are auto-discovered on server restart — no code edits needed to register them.
+**Newly cloned voices** are auto-discovered on server restart, OR pick them up without a restart:
+
+```bash
+afterwords reload   # rescans voices/, adds new profiles, no synthesis interruption
+```
+
+`reload` is add-only and atomic — if any new profile fails validation, the whole reload aborts and the previous voice set stays intact.
+
+## Languages
+
+The four backends advertise different language support. Ask `/health` to see what each one offers:
+
+```bash
+curl -s localhost:7860/health | jq '.loaded_backends | to_entries[] | {backend: .key, langs: .value.supported_langs}'
+```
+
+Pass `lang=` on a synthesis request when you want a non-English language:
+
+```bash
+curl "http://localhost:7860/synthesize?text=Ni+hao&voice=galadriel&lang=zh" -o hello-zh.wav
+```
+
+If the voice's backend doesn't support the requested language, and the voice belongs to a *family* (e.g. `picard`, `picard-voxcpm-15` etc. all have `family: picard` in their JSON), the server auto-routes to a same-family voice on a backend that does support it. If no family member supports the language, you get a clean 400 with the list of supported languages.
 
 ## Claude Code Skill
 
@@ -111,8 +133,8 @@ The skill handles voice selection, server health checks, synthesis, and playback
 │                                                             │
 │  ┌─────────────────────────┐                                │
 │  │  Multi-Backend TTS      │  ← Four MLX backends, ~10 GB   │
-│  │  localhost:7860          │  ← 15 voice profiles           │
-│  │  /synthesize?text=...    │  ← ~20s per sentence           │
+│  │  localhost:7860          │  ← 50+ voice profiles          │
+│  │  /synthesize?text=...    │  ← ~20s per sentence (Qwen3)   │
 │  └─────────┬───────────────┘                                │
 │            │                                                │
 │  ┌─────────┴───────────────┐  ┌──────────────────────────┐  │
@@ -133,20 +155,40 @@ The skill handles voice selection, server health checks, synthesis, and playback
 
 ### Voice Cloning (Zero-Shot)
 
-No training or fine-tuning. Four MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3 (0.6B & 1.7B), Chatterbox (0.8B), and VoxCPM (2B). They run on [MLX](https://github.com/ml-explore/mlx) — Apple's ML framework — and preload at startup (~10 GB total).
+No training or fine-tuning. Four MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), and VoxCPM 1.5 (ModelBest, en/zh). They run on [MLX](https://github.com/ml-explore/mlx) — Apple's ML framework — and preload at startup (~10 GB total).
+
+Voice profiles pin to a specific backend via the `backend` JSON field. The shipped flagship voices (picard, galadriel, attenborough) have per-backend variants so you can compare clone fidelity across models — Qwen3 sizes are the most reliable cloners in the current stack; see the [demo site](https://adrianwedd.github.io/afterwords/) for audible comparison.
 
 ### The Server
 
-FastAPI + Uvicorn serving WAV audio over HTTP. The model loads once at startup; each voice is a reference WAV + transcript string. All synthesis serialised via a threading lock (MLX Metal crashes on concurrent GPU access).
+FastAPI + Uvicorn serving WAV audio over HTTP. Backends load once at startup; each voice is a reference WAV + transcript string. All synthesis serialised via `_synth_lock` (MLX Metal is single-GPU regardless of backend). VOICES dict mutation is guarded by a separate `_model_lock`. Lock-acquisition order is always `_synth_lock` → `_model_lock` to avoid deadlock.
 
 ```
-GET /health
-  → {"status":"ok", "ready":true, "voices":["galadriel","samantha",...]}
+GET  /health
+       → {"status":"ok", "ready":true, "voices":[...],
+          "loaded_backends": {"qwen3-0.6b": {"loaded":true, "voice_count":..., "supported_langs":[...]}, ...}}
 
-GET /synthesize?text=Hello&voice=galadriel
-  → audio/wav (16-bit PCM)
-  → 400 if voice unknown (returns available voices)
-  → 503 if warming up
+GET  /synthesize?text=Hello&voice=galadriel&lang=en
+       → audio/wav (16-bit PCM)
+       → X-Backend, X-Synthesis-Time, X-Duration headers
+       → 400 if voice unknown OR lang unsupported (returns supported_langs)
+       → 503 if warming up
+
+POST /synthesize          (--allow-clone only)
+       Body: {"text":..., "voice":..., "emotion":..., "lang":"en"}
+       → audio/wav, same status codes as GET
+
+POST /clone               (--allow-clone only)
+       multipart: audio file, session_id, emotion, transcript?, backend?
+       → JSON {voice, backend, emotion, quality, sequence, ...}
+
+POST /reload              (--allow-clone only)
+       → JSON {status, reloaded:[names], errors:[]} on success (200)
+       → JSON {status:"failed", errors:[...]}        on abort   (500)
+       Add-only, atomic — if any voice fails to prepare, no changes committed.
+
+DELETE /session/{id}      (--allow-clone only)
+       → removes all voices for that session, cleans up temp files
 ```
 
 ### The Hook
@@ -173,7 +215,12 @@ afterwords/
 ├── clone-voice.sh        ← add more voices from YouTube
 ├── server.py             ← multi-voice TTS server
 ├── strip_markdown.py     ← text cleaner for TTS (also used by hooks)
-├── tests/                ← pytest suite (26 tests, no GPU needed)
+├── tests/                ← pytest suite (82+ tests, no GPU needed)
+├── backends/             ← Backend Protocol + 4 concrete backends + registry CLI
+├── scripts/              ← reclone-flagship.py, gen-comparison-audio.sh
+├── docs/                 ← demo site (deployed to GitHub Pages)
+├── requirements.txt      ← runtime deps
+├── requirements-dev.txt  ← test deps (pytest>=9.0.3, httpx)
 ├── skill/                ← Claude Code skill for natural-language TTS
 │   ├── SKILL.md          ← skill instructions
 │   └── scripts/speak.sh  ← synthesize + play helper
@@ -181,7 +228,7 @@ afterwords/
 │   ├── galadriel-ref.wav ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav  ← (Scarlett Johansson, Her)
 │   ├── amy-pond-ref.wav  ← (Karen Gillan, Doctor Who)
-│   └── ...               ← 33 voices (18 shipped + 15 companions)
+│   └── ...               ← 50+ voices total; 3 flagships have per-backend variants
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration
@@ -258,16 +305,18 @@ afterwords/
 ## Testing
 
 ```bash
-pip install pytest httpx
+pip install -r requirements-dev.txt
 pytest
 ```
 
-Tests cover the server API (endpoint validation, error handling, voice resolution) and the strip-markdown text transform (every regex pattern, plus a golden test with a realistic Claude response). The server tests mock the ML model — no GPU or model download needed.
+Tests cover the server API (endpoint validation, error handling, voice resolution, hot-reload atomicity, lang routing across backend families), backend protocol conformance, the strip-markdown text transform, and lifecycle helpers (`_cleanup_current_voices`, `_sweep_orphaned_temp_files`). 82+ tests pass without loading any real model — a `FakeBackend` fixture stands in. Real-model integration tests are opt-in via `pytest -m integration`.
 
 Run a single test:
 
 ```bash
 pytest tests/test_strip_markdown.py::test_inline_code_keeps_content
+pytest tests/test_server.py -k reload         # all reload tests
+pytest tests/test_server.py -k routing        # all family-routing tests
 ```
 
 ## Managing the Server
@@ -279,6 +328,7 @@ afterwords restart     # restart after config changes
 afterwords status      # show health, PID, loaded voices
 afterwords logs        # tail the server log
 afterwords voices      # list available voices
+afterwords reload      # pick up new voices without restarting (no synth interruption)
 afterwords clone       # clone a new voice from YouTube
 afterwords uninstall   # remove service and optionally hooks
 ```

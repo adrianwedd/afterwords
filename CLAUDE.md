@@ -53,7 +53,7 @@ Verify changes with `pytest` (no GPU required). Run a single test with `pytest t
 
 The server (server.py) and voice cloning (clone-voice.sh) are fully independent of Claude Code. The Claude Code integration is an optional layer installed by setup.sh when Claude Code is detected.
 
-1. **server.py** — FastAPI/Uvicorn TTS server on `localhost:7860`. Preloads four cloning backends via `backends.register_all()` at startup, serializes all synthesis through `_synth_lock` (MLX Metal is not thread-safe across backends). Voice profiles pin to a backend via the `backend` JSON field; dispatch is `backend = backends.get(profile.backend); backend.synthesize(text, profile.prepared)`. Voices are hardcoded defaults + auto-discovered JSON profiles from `voices/`. Two endpoints: `GET /health` and `GET /synthesize`.
+1. **server.py** — FastAPI/Uvicorn TTS server on `localhost:7860`. Preloads four cloning backends via `backends.register_all()` at startup, serializes all synthesis through `_synth_lock` (MLX Metal is not thread-safe across backends). Voice profiles pin to a backend via the `backend` JSON field; dispatch is `backend = backends.get(profile.backend); backend.synthesize(text, profile.prepared, lang)`. Voices are auto-discovered JSON profiles from `voices/`. Endpoints: `GET /health` (always available; exposes `loaded_backends[*].supported_langs`), `GET /synthesize?text=...&voice=...&lang=en` (always), and four endpoints gated by `--allow-clone`: `POST /synthesize` (JSON body with optional `emotion` + `lang`), `POST /clone` (multipart audio upload), `POST /reload` (rescan `voices/*.json`, atomic add-only — see Hot-reload), `DELETE /session/{id}` (remove cloned-session voices + temp files). Lifespan context manager handles shutdown cleanup; `_sweep_orphaned_temp_files()` runs at startup before profile load to clear VoxCPM resampled refs from a prior crashed run.
 
 2. **Claude Code hooks** (`~/.claude/hooks/`, optional) — `tts-hook.sh` fires on Stop events, extracts response text, passes through `strip-markdown.py`, and queues for synthesis. `tts-worker.sh` processes the queue (max 10 items) with `mkdir`-based locking (no `flock` on macOS), plays WAV via `afplay`, archives as MP3. Only installed when Claude Code is present.
 
@@ -74,7 +74,22 @@ The `backends/` package exposes a `Backend` Protocol (in `backends/base.py`) and
 | `chatterbox` | 0.8B (fp16) | 24 kHz | OPTIONAL |
 | `voxcpm-1.5` | 2B (bf16) | 44.1 kHz | OPTIONAL |
 
+Each backend has a `supported_langs: tuple[str, ...]` advertising what BCP-47 codes it accepts. Backend.synthesize takes a required `lang: str` parameter and raises `ValueError` for unsupported codes — server maps that to HTTP 400 with `voice_backend` + `supported_langs` in the body.
+
 Adding a backend: create `backends/newmodel.py` implementing the Backend protocol, then add one line to `register_all()` in `backends/__init__.py`. The registry CLI (`python -m backends list | max-sample-rate | slug <name>`) is used by `clone-voice.sh` to stay backend-aware.
+
+## Voice-family routing
+
+Voice profiles can declare an optional `family: str` field (e.g. `"family": "picard"` on `picard.json`, `picard-qwen3-17b.json`, etc.). When a caller asks for a lang the voice's backend doesn't support, the server auto-routes to a same-family voice on a backend that does. The lookup runs under `_model_lock` to avoid racing with `/reload` Phase 3. Tiebreaker is `(duration_s or 0, confidence or 0, name)` for deterministic selection across `/reload` cycles. Voices with `family=None` (most gallery voices, all session-cloned voices) are never routed and never used as routing targets.
+
+## Hot-reload
+
+`POST /reload` (gated by `--allow-clone`) re-walks `voices/*.json` in three phases:
+1. Build new VoiceProfile per JSON under `_synth_lock` (prepare_voice may touch Metal). Track every profile's cleanup_paths + owns_temp_audio for rollback.
+2. **Atomic abort** — if any prepare_voice raises, delete every tracked temp file and return 500 with errors[]. VOICES is unchanged.
+3. **Add-only commit** under `_model_lock`: `VOICES[name] = profile` for each successful build. Voices whose JSON disappeared from disk are NOT removed (use `DELETE /session/{id}` or restart).
+
+CLI: `afterwords reload` curls the endpoint and pretty-prints the response.
 
 ## Key Constraints
 
