@@ -482,37 +482,53 @@ HOOK_CMD="bash ~/.claude/hooks/tts-hook.sh"
 HOOK_ENTRY="{\"type\": \"command\", \"command\": \"$HOOK_CMD\", \"timeout\": 120, \"async\": true}"
 HOOK_GROUP="{\"hooks\": [$HOOK_ENTRY]}"
 
-if [ -f "$SETTINGS" ]; then
-    if jq -e ".hooks.Stop[]?.hooks[]? | select(.command == \"$HOOK_CMD\")" "$SETTINGS" &>/dev/null; then
-        ok "TTS hook already configured in settings.json"
-    elif jq -e '.hooks.Stop | type == "array" and length > 0 and .[0].hooks' "$SETTINGS" &>/dev/null; then
-        info "Appending TTS hook to existing Stop hooks..."
+# Register the TTS hook on BOTH Stop (main conversation) and SubagentStop
+# (subagent completion) so per-agent .afterwords mappings actually fire.
+register_hook_event() {
+    local EVT="$1"
+    if jq -e ".hooks.${EVT}[]?.hooks[]? | select(.command == \"$HOOK_CMD\")" "$SETTINGS" &>/dev/null; then
+        ok "TTS hook already configured for ${EVT}"
+    elif jq -e ".hooks.${EVT} | type == \"array\" and length > 0 and .[0].hooks" "$SETTINGS" &>/dev/null; then
+        info "Appending TTS hook to existing ${EVT} hooks..."
         TMPF=$(mktemp)
         TMPFILES+=("$TMPF")
-        jq ".hooks.Stop[0].hooks += [$HOOK_ENTRY]" "$SETTINGS" > "$TMPF" \
+        jq ".hooks.${EVT}[0].hooks += [$HOOK_ENTRY]" "$SETTINGS" > "$TMPF" \
             && mv "$TMPF" "$SETTINGS"
-        ok "TTS hook appended to existing Stop hooks"
+        ok "TTS hook appended to existing ${EVT} hooks"
     elif jq -e '.hooks' "$SETTINGS" &>/dev/null; then
-        info "Adding Stop hook group to settings.json..."
+        info "Adding ${EVT} hook group to settings.json..."
         TMPF=$(mktemp)
         TMPFILES+=("$TMPF")
-        jq ".hooks.Stop = [$HOOK_GROUP]" "$SETTINGS" > "$TMPF" \
+        jq ".hooks.${EVT} = [$HOOK_GROUP]" "$SETTINGS" > "$TMPF" \
             && mv "$TMPF" "$SETTINGS"
-        ok "Stop hook added"
+        ok "${EVT} hook added"
     else
         info "Adding hooks to settings.json..."
         TMPF=$(mktemp)
         TMPFILES+=("$TMPF")
-        jq ". + {\"hooks\": {\"Stop\": [$HOOK_GROUP]}}" "$SETTINGS" > "$TMPF" \
+        jq ". + {\"hooks\": {\"${EVT}\": [$HOOK_GROUP]}}" "$SETTINGS" > "$TMPF" \
             && mv "$TMPF" "$SETTINGS"
-        ok "Stop hook added"
+        ok "${EVT} hook added"
     fi
+}
+
+if [ -f "$SETTINGS" ]; then
+    register_hook_event Stop
+    register_hook_event SubagentStop
 else
-    info "Creating settings.json with Stop hook..."
+    info "Creating settings.json with Stop + SubagentStop hooks..."
     cat > "$SETTINGS" <<SETTINGSEOF
 {
   "hooks": {
     "Stop": [{
+      "hooks": [{
+        "type": "command",
+        "command": "$HOOK_CMD",
+        "timeout": 120,
+        "async": true
+      }]
+    }],
+    "SubagentStop": [{
       "hooks": [{
         "type": "command",
         "command": "$HOOK_CMD",
