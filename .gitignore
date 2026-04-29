@@ -17,6 +17,13 @@ voices/vixen*
 qa-run.txt
 *-output.log
 pytest-output.log
+setup-output*.log
+
+# Claude Code runtime locks (created by /loop / scheduled tasks)
+.claude/scheduled_tasks.lock
 
 # Skill eval workspace (generated during testing)
 skill/*-workspace/
+
+# Voice WAV backups produced by trim-silence-gaps.py
+voices/*.wav.bak

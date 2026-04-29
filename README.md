@@ -43,6 +43,14 @@ curl http://localhost:7860/health | jq .voices
 
 Integrate with Cursor, Windsurf, shell scripts, web apps — anything that can make an HTTP request.
 
+For CLIs without native completion hooks (e.g. Hermes), use the bundled wrapper to speak any text via the server in one call:
+
+```bash
+bash scripts/hermes-tts.sh "Hello from Hermes" picard   # voice arg is optional
+```
+
+The wrapper checks the server, encodes the text, fetches the WAV, trims the leading 100 ms of model artifact, and plays via `afplay`. Same flow Claude Code's hook uses, just invoked manually.
+
 ## Adding More Voices
 
 ```bash
