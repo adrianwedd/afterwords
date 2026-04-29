@@ -672,4 +672,43 @@ if command -v codex &>/dev/null; then
     fi
 fi
 
+# ── Gemini CLI discovery (manual config; gemini hooks migrate is buggy) ────
+if command -v gemini &>/dev/null && $HAS_CLAUDE; then
+    GEMINI_HOOK_DEST="$HOME/.claude/hooks/gemini-tts-hook.sh"
+    GEMINI_SETTINGS="$HOME/.gemini/settings.json"
+    echo
+    rule
+    echo
+    echo -e "  ${BOLD}Gemini CLI detected.${NC}"
+    if [ ! -f "$GEMINI_HOOK_DEST" ]; then
+        cp "$SCRIPT_DIR/.claude/hooks/gemini-tts-hook.sh" "$GEMINI_HOOK_DEST" 2>/dev/null && \
+            chmod +x "$GEMINI_HOOK_DEST" 2>/dev/null
+        ok "installed gemini-tts-hook.sh adapter to ~/.claude/hooks/"
+    fi
+    echo
+    echo -e "  Gemini's hook payload differs from Claude's, and ${CYAN}gemini hooks migrate${NC} has a"
+    echo -e "  silent-write bug when run from \$HOME. Add this snippet to ${DIM}${GEMINI_SETTINGS}${NC}"
+    echo -e "  manually (merging with any existing keys):"
+    echo
+    cat <<'GEMINI_SNIPPET'
+    {
+      "hooks": {
+        "AfterAgent": [
+          {
+            "hooks": [
+              {
+                "type": "command",
+                "command": "bash ~/.claude/hooks/gemini-tts-hook.sh",
+                "timeout": 120000
+              }
+            ]
+          }
+        ]
+      }
+    }
+GEMINI_SNIPPET
+    echo
+    echo -e "  Test: ${CYAN}gemini -p \"say hi\"${NC} — should speak the response via afterwords."
+fi
+
 echo
