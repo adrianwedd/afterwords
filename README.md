@@ -42,6 +42,37 @@ The watcher needs `ripgrep` (`brew install ripgrep`) to locate the session file.
 
 Trade-offs vs Claude Code: this depends on Codex's local session file format and on `$CODEX_THREAD_ID` being exported, both undocumented contracts that may shift between Codex versions. For non-interactive Codex (`codex exec`), prefer wrapping with `--output-last-message <FILE>` and feeding the file to `/synthesize` directly — cleaner and version-stable.
 
+## With Gemini CLI
+
+Gemini CLI ships hook support, including a `gemini hooks migrate --from-claude` subcommand. Tempting — but in our testing it has a silent-write bug: when run from `$HOME` it reports success but leaves `~/.gemini/settings.json` unchanged (it writes via `setValue("Workspace", ...)` which is read-only when cwd == home). Even when the migrate succeeds elsewhere, the resulting config wouldn't work for TTS because the **payload schema differs**: Claude sends `last_assistant_message`, Gemini sends `prompt_response`.
+
+So we ship a small adapter instead. `setup.sh` installs `~/.claude/hooks/gemini-tts-hook.sh` (it normalises `prompt_response` → the existing Claude tts-hook + worker chain) and prints the JSON snippet to add to `~/.gemini/settings.json`:
+
+```json
+{
+  "hooks": {
+    "AfterAgent": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/gemini-tts-hook.sh",
+            "timeout": 120000
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Two things to know:
+
+- Gemini fires `AfterAgent` (analogue of Claude's `Stop`); there's no clean `SubagentStop` analogue, so per-agent voice mapping via `.afterwords` is Claude-only for now.
+- The adapter reuses Claude's TTS queue (`/tmp/claude-tts-queue.txt`) and worker, so a single Afterwords worker drains both Claude and Gemini sessions. No coordination needed.
+
+Test: `gemini -p "say hi"` should speak the response via Afterwords using your default voice.
+
 ## Without Claude Code
 
 The TTS server is a plain HTTP API. Use it from any tool, script, or application:
