@@ -209,7 +209,9 @@ Claude Code's [Stop hook](https://docs.anthropic.com/en/docs/claude-code/hooks) 
 
 ### The Queue
 
-Fast Claude conversations generate responses faster than TTS can synthesise. The worker processes a queue (max 10 entries), trimming oldest entries when it overflows. Each response is also archived as MP3 in `~/.claude/tts-archive/` (requires `lame`).
+Fast Claude conversations generate responses faster than TTS can synthesise. The worker processes a queue (max 10 entries), trimming oldest entries when it overflows. Each response is archived as an MP3 plus a sidecar TXT file in `~/.claude/tts-archive/` (requires `lame`), so archived speech can be audited later with `python scripts/audit-archive.py`.
+
+> **Privacy note:** the sidecar `.txt` files contain the exact text spoken by Claude — including code snippets, file paths, and anything else that appeared in a response. They persist indefinitely on local disk and are never uploaded anywhere. Clean periodically with `rm ~/.claude/tts-archive/*.txt` (or both `*.txt` and `*.mp3` to wipe the whole archive). If you'd rather not archive at all, remove the `lame ... && printf ...` block from `~/.claude/hooks/tts-worker.sh`.
 
 ## Requirements
 
@@ -229,7 +231,7 @@ afterwords/
 ├── strip_markdown.py     ← text cleaner for TTS (also used by hooks)
 ├── tests/                ← pytest suite (82+ tests, no GPU needed)
 ├── backends/             ← Backend Protocol + 4 concrete backends + registry CLI
-├── scripts/              ← reclone-flagship.py, gen-comparison-audio.sh
+├── scripts/              ← reclone-flagship.py, gen-comparison-audio.sh, audit-voice-transcripts.py, audit-archive.py
 ├── docs/                 ← demo site (deployed to GitHub Pages)
 ├── requirements.txt      ← runtime deps
 ├── requirements-dev.txt  ← test deps (pytest>=9.0.3, httpx)
