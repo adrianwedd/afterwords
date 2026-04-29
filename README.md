@@ -28,6 +28,20 @@ Claude Code has [`/voice`](https://docs.anthropic.com/en/docs/claude-code/voice-
 
 If Claude Code isn't installed, setup will offer to install it (requires Node.js; setup installs that too if needed via Homebrew).
 
+## With Codex CLI
+
+Codex CLI (`@openai/codex`) doesn't expose a Stop-hook event the way Claude Code does, so the integration uses a watcher instead: `tail -F` on the active session JSONL under `~/.codex/sessions`, extract final assistant answers, queue them for synthesis. Inside an interactive Codex session (where `$CODEX_THREAD_ID` is set):
+
+```bash
+afterwords codex-hook start    # daemon follows this session, speaks final answers
+afterwords codex-hook status   # check
+afterwords codex-hook stop
+```
+
+The watcher needs `ripgrep` (`brew install ripgrep`) to locate the session file. Setup auto-detects Codex and prints these commands when it finishes; you don't have to memorize them.
+
+Trade-offs vs Claude Code: this depends on Codex's local session file format and on `$CODEX_THREAD_ID` being exported, both undocumented contracts that may shift between Codex versions. For non-interactive Codex (`codex exec`), prefer wrapping with `--output-last-message <FILE>` and feeding the file to `/synthesize` directly — cleaner and version-stable.
+
 ## Without Claude Code
 
 The TTS server is a plain HTTP API. Use it from any tool, script, or application:

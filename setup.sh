@@ -648,4 +648,28 @@ else
     echo
     echo -e "  ${DIM}To add Claude Code integration later: re-run${NC} ${CYAN}bash setup.sh${NC}"
 fi
+
+# ── Codex CLI discovery (optional, per-session) ─────────────────
+if command -v codex &>/dev/null; then
+    echo
+    rule
+    echo
+    echo -e "  ${BOLD}Codex CLI detected.${NC}"
+    echo -e "  Afterwords ships a watcher that speaks final Codex responses."
+    echo
+    if [ -n "${CODEX_THREAD_ID:-}" ]; then
+        echo -e "  Inside this Codex session, run:"
+        echo -e "    ${CYAN}afterwords codex-hook start${NC}"
+    else
+        echo -e "  Inside an interactive Codex session (where ${DIM}\$CODEX_THREAD_ID${NC} is set), run:"
+        echo -e "    ${CYAN}afterwords codex-hook start${NC}"
+        echo -e "  Then ${CYAN}afterwords codex-hook status${NC} to verify, ${CYAN}stop${NC} to quiet."
+    fi
+    # Validate Codex-specific dependency: ripgrep
+    if ! command -v rg &>/dev/null; then
+        echo
+        warn "ripgrep (rg) not found — required by the Codex watcher. Install via ${CYAN}brew install ripgrep${NC}."
+    fi
+fi
+
 echo
