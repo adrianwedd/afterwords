@@ -53,7 +53,7 @@ while true; do
     [ -z "$LINE" ] && continue
 
     ENCODED=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$LINE" 2>/dev/null) || continue
-    STAMP=$(date +%Y%m%d-%H%M%S)
+    STAMP=$(date +%Y%m%d-%H%M%S)-$$-$RANDOM
 
     VOICE=""
     AW_FILE="$PROJECT_DIR/.afterwords"
@@ -85,7 +85,10 @@ while true; do
                 mv "$TRIMMED" "$WAVFILE"
             fi
             rm -f "$TRIMMED"
-            lame --quiet -V 2 "$WAVFILE" "$ARCHIVE_DIR/${VOICE:-default}-${STAMP}.mp3" 2>/dev/null
+            ARCHIVE_BASE="$ARCHIVE_DIR/${VOICE:-default}-${STAMP}"
+            if lame --quiet -V 2 "$WAVFILE" "$ARCHIVE_BASE.mp3" 2>/dev/null; then
+                printf '%s\n' "$LINE" > "$ARCHIVE_BASE.txt"
+            fi
             afplay "$WAVFILE" 2>/dev/null
         fi
     fi
