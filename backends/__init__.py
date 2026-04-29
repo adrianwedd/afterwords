@@ -31,11 +31,13 @@ def register_all() -> None:
     from .qwen3 import Qwen3Backend
     from .chatterbox import ChatterboxBackend
     from .voxcpm import VoxCPMBackend
+    from .voxtral import VoxtralBackend
 
     register(Qwen3Backend(size="0.6B"))
     register(Qwen3Backend(size="1.7B"))
     register(ChatterboxBackend())
     register(VoxCPMBackend())
+    register(VoxtralBackend())
 
 
 def reset_for_tests() -> None:

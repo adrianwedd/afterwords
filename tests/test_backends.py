@@ -14,10 +14,10 @@ def _clean_registry():
     backends.reset_for_tests()
 
 
-def test_register_all_populates_four_backends():
+def test_register_all_populates_shipped_backends():
     backends.register_all()
     assert set(backends.names()) == {
-        "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5",
+        "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
     }
 
 
@@ -69,6 +69,7 @@ def test_slug_strips_dots():
     assert backends.slug("voxcpm-1.5") == "voxcpm-15"
     assert backends.slug("qwen3-0.6b") == "qwen3-06b"
     assert backends.slug("chatterbox") == "chatterbox"
+    assert backends.slug("voxtral") == "voxtral"
 
 
 def test_prepared_voice_extras_are_readonly():
@@ -221,3 +222,119 @@ def test_voxcpm_synthesize_passes_mxarray_ref_audio_to_model(tmp_path):
     assert isinstance(ref, mx.array), f"ref_audio must be mx.array, got {type(ref).__name__}"
     assert ref.ndim == 1, f"ref_audio must be 1-D, got shape {ref.shape}"
     assert ref.shape[0] > 0
+
+
+def test_voxtral_prepare_ignores_ref_text_and_preserves_extras():
+    from backends.voxtral import VoxtralBackend
+    from backends.base import RefTextPolicy
+
+    backend = VoxtralBackend()
+    assert backend.ref_text_policy is RefTextPolicy.IGNORED
+
+    prepared = backend.prepare_voice(
+        "/tmp/ref.wav",
+        "not used by voxtral",
+        {"voice": "fr_female", "temperature": 0.7},
+    )
+
+    assert prepared.ref_audio_path == "/tmp/ref.wav"
+    assert prepared.ref_text is None
+    assert prepared.extras["voice"] == "fr_female"
+    assert prepared.extras["temperature"] == 0.7
+
+
+def test_voxtral_validate_extras_rejects_unknown_and_invalid_voice():
+    from backends.voxtral import VoxtralBackend
+
+    backend = VoxtralBackend()
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.validate_extras({"cfg_value": 2.0})
+    with pytest.raises(ValueError, match="voice must be one of"):
+        backend.validate_extras({"voice": "picard"})
+
+
+def test_voxtral_synthesize_uses_language_default_voice():
+    from types import SimpleNamespace
+    import numpy as np
+    from backends.voxtral import VoxtralBackend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = VoxtralBackend()
+    captured_kwargs = {}
+
+    class _CapturingModel:
+        def generate(self, **kwargs):
+            captured_kwargs.update(kwargs)
+            yield SimpleNamespace(
+                audio=np.full(10, 0.25, dtype=np.float32),
+                sample_rate=24000,
+            )
+
+    backend._model = _CapturingModel()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    audio, sr = backend.synthesize("bonjour", prepared, lang="fr")
+
+    assert sr == 24000
+    assert captured_kwargs["voice"] == "fr_male"
+    assert captured_kwargs["text"] == "bonjour"
+    assert captured_kwargs["verbose"] is False
+    assert audio.shape == (10,)
+    assert np.allclose(audio, 0.25)
+
+
+def test_voxtral_synthesize_uses_voice_extra_and_concatenates_chunks():
+    from types import SimpleNamespace
+    import numpy as np
+    from backends.voxtral import VoxtralBackend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = VoxtralBackend()
+    captured_kwargs = {}
+
+    class _CapturingModel:
+        def generate(self, **kwargs):
+            captured_kwargs.update(kwargs)
+            yield SimpleNamespace(audio=np.full(4, 0.1, dtype=np.float32))
+            yield SimpleNamespace(audio=np.full(6, 0.2, dtype=np.float32))
+
+    backend._model = _CapturingModel()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({"voice": "hi_female", "max_tokens": 32}),
+    )
+
+    audio, sr = backend.synthesize("namaste", prepared, lang="hi")
+
+    assert sr == 24000
+    assert captured_kwargs["voice"] == "hi_female"
+    assert captured_kwargs["max_tokens"] == 32
+    assert audio.shape == (10,)
+    assert np.allclose(audio[:4], 0.1)
+    assert np.allclose(audio[4:], 0.2)
+
+
+def test_voxtral_synthesize_raises_on_empty_generator():
+    from backends.voxtral import VoxtralBackend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = VoxtralBackend()
+
+    class _EmptyModel:
+        def generate(self, **kwargs):
+            return (x for x in ())
+
+    backend._model = _EmptyModel()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(RuntimeError, match="no audio chunks"):
+        backend.synthesize("hello", prepared, lang="en")
