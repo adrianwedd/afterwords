@@ -19,7 +19,7 @@ def test_register_all_populates_shipped_backends():
     assert set(backends.names()) == {
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
         "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits", "xtts-v2",
-        "indextts-2", "neutts-air",
+        "indextts-2", "neutts-air", "spark-tts",
     }
 
 
@@ -532,6 +532,109 @@ def test_neutts_air_synthesize_rejects_unsupported_lang_and_empty_output():
 
     with pytest.raises(ValueError, match="does not support lang='fr'"):
         backend.synthesize("bonjour", prepared, lang="fr")
+    with pytest.raises(RuntimeError, match="produced no output"):
+        backend.synthesize("hello", prepared, lang="en")
+
+
+def test_spark_tts_metadata():
+    from backends.spark_tts import SparkTTSBackend
+
+    backend = SparkTTSBackend()
+
+    assert backend.name == "spark-tts"
+    assert backend.display_name == "Spark-TTS-0.5B (CC-BY-NC-SA 4.0 weights)"
+    assert backend.sample_rate == 24000
+    assert backend.ref_text_policy is RefTextPolicy.OPTIONAL
+    assert backend.supported_langs == ("en", "zh")
+
+
+def test_spark_tts_prepare_voice_allows_optional_ref_text():
+    from backends.spark_tts import SparkTTSBackend
+
+    backend = SparkTTSBackend()
+    prepared = backend.prepare_voice(
+        "/tmp/ref.wav",
+        "  ",
+        {"temperature": 0.7, "top_k": 40, "top_p": 0.9},
+    )
+
+    assert prepared.ref_audio_path == "/tmp/ref.wav"
+    assert prepared.ref_text is None
+    assert prepared.extras["temperature"] == 0.7
+    assert prepared.extras["top_k"] == 40
+    assert prepared.extras["top_p"] == 0.9
+
+
+def test_spark_tts_validate_extras_rejects_unknown_and_invalid_values():
+    from backends.spark_tts import SparkTTSBackend
+
+    backend = SparkTTSBackend()
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.validate_extras({"speed": 1.1})
+    with pytest.raises(ValueError, match="top_k must be an integer"):
+        backend.validate_extras({"top_k": 12.5})
+    with pytest.raises(ValueError, match="temperature must be > 0"):
+        backend.validate_extras({"temperature": 0})
+
+
+def test_spark_tts_synthesize_calls_inference_with_prompt_and_sampling_extras():
+    import numpy as np
+    from pathlib import Path
+    from backends.spark_tts import SparkTTSBackend
+
+    backend = SparkTTSBackend()
+    captured_kwargs = {}
+
+    class _SparkTTS:
+        sample_rate = 24000
+
+        def inference(self, **kwargs):
+            captured_kwargs.update(kwargs)
+            return np.array([[0.1, -0.2]], dtype=np.float64)
+
+    backend._model = _SparkTTS()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text="reference transcript",
+        extras=_read_only({"temperature": 0.65, "top_k": 25, "top_p": 0.85}),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+
+    assert sr == 24000
+    assert audio.dtype == np.float32
+    assert np.allclose(audio, [0.1, -0.2])
+    assert captured_kwargs == {
+        "text": "hello",
+        "prompt_speech_path": Path("/tmp/ref.wav"),
+        "prompt_text": "reference transcript",
+        "temperature": 0.65,
+        "top_k": 25,
+        "top_p": 0.85,
+    }
+
+
+def test_spark_tts_synthesize_rejects_unsupported_lang_and_empty_output():
+    import numpy as np
+    from backends.spark_tts import SparkTTSBackend
+
+    backend = SparkTTSBackend()
+
+    class _SparkTTS:
+        sample_rate = 24000
+
+        def inference(self, **kwargs):
+            return np.array([], dtype=np.float32)
+
+    backend._model = _SparkTTS()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(ValueError, match="does not support lang='ja'"):
+        backend.synthesize("konnichiwa", prepared, lang="ja")
     with pytest.raises(RuntimeError, match="produced no output"):
         backend.synthesize("hello", prepared, lang="en")
 
