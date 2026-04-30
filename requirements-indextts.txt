@@ -1,0 +1,13 @@
+# Optional IndexTTS-2 backend dependencies.
+#
+# Install these only if you plan to use backend=indextts-2 voice profiles:
+#   pip install -r requirements-indextts.txt
+#
+# Download weights separately; the backend does not auto-download IndexTTS-2
+# checkpoints:
+#   huggingface-cli download IndexTeam/IndexTTS-2 \
+#     --local-dir backends/extras/indextts-2/checkpoints
+#
+# IndexTTS-2 uses LicenseRef-Bilibili-IndexTTS, which includes usage
+# restrictions. Review the upstream license before production or commercial use.
+git+https://github.com/index-tts/index-tts.git
