@@ -1,0 +1,25 @@
+# Optional SV2TTS / Real-Time Voice Cloning backend dependencies.
+#
+# Install these only if you plan to use backend=sv2tts voice profiles:
+#   pip install -r requirements-sv2tts.txt
+#
+# The upstream project is source-layout oriented and its demo CLI may download
+# default models. This backend does not download anything. Clone source and
+# place checkpoints manually:
+#   git clone https://github.com/CorentinJ/Real-Time-Voice-Cloning.git \
+#     backends/extras/sv2tts/Real-Time-Voice-Cloning
+#   mkdir -p backends/extras/sv2tts/saved_models/default
+#   # place encoder.pt, synthesizer.pt, vocoder.pt in that directory
+#
+# Override paths with SV2TTS_REPO_DIR, SV2TTS_ENCODER_PATH,
+# SV2TTS_SYNTHESIZER_PATH, SV2TTS_VOCODER_PATH, and SV2TTS_ENCODER_DEVICE.
+torch>=2.1
+librosa>=0.10
+soundfile>=0.12
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+tqdm>=4.66
+inflect>=7
+unidecode>=1.3
+webrtcvad-wheels>=2.0.14

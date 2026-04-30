@@ -20,7 +20,7 @@ def test_register_all_populates_shipped_backends():
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
         "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits", "xtts-v2",
         "indextts-2", "neutts-air", "spark-tts", "dia2", "yourtts",
-        "firered-tts-2",
+        "firered-tts-2", "sv2tts",
     }
 
 
@@ -967,6 +967,146 @@ def test_firered_tts_2_synthesize_rejects_unsupported_lang_and_empty_output():
 
     with pytest.raises(ValueError, match="does not support lang='es'"):
         backend.synthesize("hola", prepared, lang="es")
+    with pytest.raises(RuntimeError, match="produced no output"):
+        backend.synthesize("hello", prepared, lang="en")
+
+
+def test_sv2tts_metadata():
+    from backends.sv2tts import SV2TTSBackend
+
+    backend = SV2TTSBackend()
+
+    assert backend.name == "sv2tts"
+    assert backend.display_name == "SV2TTS (Real-Time Voice Cloning, open source)"
+    assert backend.sample_rate == 22050
+    assert backend.ref_text_policy is RefTextPolicy.OPTIONAL
+    assert backend.supported_langs == ("en",)
+
+
+def test_sv2tts_validate_extras_rejects_unknown_and_invalid_values():
+    from backends.sv2tts import SV2TTSBackend
+
+    backend = SV2TTSBackend()
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.validate_extras({"speed": 1.1})
+    with pytest.raises(ValueError, match="vocoder_target must be an integer"):
+        backend.validate_extras({"vocoder_target": 1200.5})
+    with pytest.raises(ValueError, match="vocoder_overlap must be > 0"):
+        backend.validate_extras({"vocoder_overlap": 0})
+    with pytest.raises(ValueError, match="vocoder_batched must be boolean"):
+        backend.validate_extras({"vocoder_batched": "yes"})
+
+
+def test_sv2tts_prepare_voice_embeds_reference_and_preserves_optional_text():
+    import numpy as np
+    from backends.sv2tts import SV2TTSBackend
+
+    backend = SV2TTSBackend()
+    captured = {}
+
+    class _Encoder:
+        def preprocess_wav(self, path):
+            captured["path"] = path
+            return np.array([0.1, 0.2], dtype=np.float32)
+
+        def embed_utterance(self, wav):
+            captured["wav"] = wav
+            return np.array([0.3, 0.4], dtype=np.float64)
+
+    backend._encoder = _Encoder()
+    prepared = backend.prepare_voice(
+        "/tmp/ref.wav",
+        "  reference transcript  ",
+        {"vocoder_target": 4000},
+    )
+
+    assert captured["path"] == "/tmp/ref.wav"
+    assert np.allclose(captured["wav"], [0.1, 0.2])
+    assert prepared.ref_audio_path == "/tmp/ref.wav"
+    assert prepared.ref_text == "reference transcript"
+    assert prepared.extras["vocoder_target"] == 4000
+    assert prepared.extras["speaker_embedding"].dtype == np.float32
+    assert np.allclose(prepared.extras["speaker_embedding"], [0.3, 0.4])
+
+
+def test_sv2tts_synthesize_calls_synthesizer_and_vocoder_with_embedding_and_extras():
+    import numpy as np
+    from backends.sv2tts import SV2TTSBackend
+
+    backend = SV2TTSBackend()
+    captured = {}
+
+    class _Synthesizer:
+        def synthesize_spectrograms(self, texts, embeds):
+            captured["texts"] = texts
+            captured["embeds"] = embeds
+            return [np.ones((80, 4), dtype=np.float32)]
+
+    class _Vocoder:
+        def infer_waveform(self, mel, **kwargs):
+            captured["mel"] = mel
+            captured["vocoder_kwargs"] = kwargs
+            return np.array([[0.1, -0.2]], dtype=np.float64)
+
+    backend._synthesizer = _Synthesizer()
+    backend._vocoder = _Vocoder()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({
+            "speaker_embedding": np.array([0.3, 0.4], dtype=np.float64),
+            "vocoder_target": 4000,
+            "vocoder_overlap": 400,
+            "vocoder_batched": False,
+        }),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+
+    assert sr == 22050
+    assert audio.dtype == np.float32
+    assert np.allclose(audio, [0.1, -0.2])
+    assert captured["texts"] == ["hello"]
+    assert captured["embeds"][0].dtype == np.float32
+    assert np.allclose(captured["embeds"][0], [0.3, 0.4])
+    assert captured["mel"].shape == (80, 4)
+    assert captured["vocoder_kwargs"]["batched"] is False
+    assert captured["vocoder_kwargs"]["target"] == 4000
+    assert captured["vocoder_kwargs"]["overlap"] == 400
+    assert callable(captured["vocoder_kwargs"]["progress_callback"])
+
+
+def test_sv2tts_synthesize_rejects_unsupported_lang_missing_embedding_and_empty_output():
+    import numpy as np
+    from backends.sv2tts import SV2TTSBackend
+
+    backend = SV2TTSBackend()
+
+    class _Synthesizer:
+        def synthesize_spectrograms(self, texts, embeds):
+            return [np.ones((80, 4), dtype=np.float32)]
+
+    class _Vocoder:
+        def infer_waveform(self, mel, **kwargs):
+            return np.array([], dtype=np.float32)
+
+    backend._synthesizer = _Synthesizer()
+    backend._vocoder = _Vocoder()
+    prepared_without_embedding = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({"speaker_embedding": np.array([0.3, 0.4], dtype=np.float32)}),
+    )
+
+    with pytest.raises(ValueError, match="does not support lang='fr'"):
+        backend.synthesize("bonjour", prepared, lang="fr")
+    with pytest.raises(RuntimeError, match="missing speaker_embedding"):
+        backend.synthesize("hello", prepared_without_embedding, lang="en")
     with pytest.raises(RuntimeError, match="produced no output"):
         backend.synthesize("hello", prepared, lang="en")
 
