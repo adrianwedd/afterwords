@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across MLX backends (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5, Voxtral) plus optional OpenVoice v2 and F5-TTS.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across MLX backends (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5, Voxtral) plus optional OpenVoice v2, F5-TTS, and CosyVoice2.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -220,7 +220,17 @@ The skill handles voice selection, server health checks, synthesis, and playback
 
 ### Voice Cloning (Zero-Shot)
 
-No training or fine-tuning. The default MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), VoxCPM 1.5 (ModelBest, en/zh), and Voxtral 4B (preset voices). OpenVoice v2 is available as an optional PyTorch/MeloTTS backend for zero-shot multilingual cloning in en/es/fr/zh/ja/ko. F5-TTS is available as an optional PyTorch backend using the flow-matching DiT `F5TTS_v1_Base` model for en/zh; its default pretrained weights are CC-BY-NC 4.0 and are not for commercial use.
+No training or fine-tuning. The default MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), VoxCPM 1.5 (ModelBest, en/zh), and Voxtral 4B (preset voices). OpenVoice v2 is available as an optional PyTorch/MeloTTS backend for zero-shot multilingual cloning in en/es/fr/zh/ja/ko. F5-TTS is available as an optional PyTorch backend using the flow-matching DiT `F5TTS_v1_Base` model for en/zh; its default pretrained weights are CC-BY-NC 4.0 and are not for commercial use. CosyVoice2-0.5B is available as an optional Apache-2.0 PyTorch backend for multilingual zero-shot cloning.
+
+| Backend | License | Languages | Sample rate | Reference text |
+|---------|---------|-----------|-------------|----------------|
+| `qwen3-0.6b`, `qwen3-1.7b` | model-dependent | en/zh/ja/ko/es/fr/de/it/pt/ru | 24 kHz | required |
+| `chatterbox` | model-dependent | en/es/fr/de/it/pt/zh/ja/ko | 24 kHz | optional |
+| `voxcpm-1.5` | model-dependent | en/zh | 44.1 kHz | optional |
+| `voxtral` | model-dependent | preset voices | 24 kHz | ignored |
+| `openvoice-v2` | MIT | en/es/fr/zh/ja/ko | 22.05 kHz | optional |
+| `f5-tts` | CC-BY-NC default weights | en/zh | 24 kHz | required |
+| `cosyvoice2` | Apache-2.0 | en/zh/ja/ko/de/es/fr/it/ru | 24 kHz | required |
 
 Voice profiles pin to a specific backend via the `backend` JSON field. The shipped flagship voices (picard, galadriel, attenborough) have per-backend variants so you can compare clone fidelity across models — Qwen3 sizes are the most reliable cloners in the current stack; see the [demo site](https://adrianwedd.github.io/afterwords/) for audible comparison.
 
@@ -234,7 +244,7 @@ GET  /health
           "loaded_backends": {"qwen3-0.6b": {"loaded":true, "voice_count":..., "supported_langs":[...]}, ...}}
 
        Current backend ids:
-       qwen3-0.6b, qwen3-1.7b, chatterbox, voxcpm-1.5, voxtral, openvoice-v2, f5-tts
+       qwen3-0.6b, qwen3-1.7b, chatterbox, voxcpm-1.5, voxtral, openvoice-v2, f5-tts, cosyvoice2
 
 GET  /synthesize?text=Hello&voice=galadriel&lang=en
        → audio/wav (16-bit PCM)
@@ -286,7 +296,7 @@ afterwords/
 ├── server.py             ← multi-voice TTS server
 ├── strip_markdown.py     ← text cleaner for TTS (also used by hooks)
 ├── tests/                ← pytest suite (82+ tests, no GPU needed)
-├── backends/             ← Backend Protocol + 4 concrete backends + registry CLI
+├── backends/             ← Backend Protocol + concrete backends + registry CLI
 ├── scripts/              ← reclone-flagship.py, gen-comparison-audio.sh, audit-voice-transcripts.py, audit-archive.py
 ├── docs/                 ← demo site (deployed to GitHub Pages)
 ├── requirements.txt      ← runtime deps
