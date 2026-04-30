@@ -18,7 +18,7 @@ def test_register_all_populates_shipped_backends():
     backends.register_all()
     assert set(backends.names()) == {
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
-        "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits",
+        "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits", "xtts-v2",
     }
 
 
@@ -749,3 +749,101 @@ def test_cosyvoice2_synthesize_uses_zero_shot_api_and_concatenates_chunks():
     assert np.allclose(audio, [0.1, 0.2, -0.1])
     assert captured["args"] == ("hello", "reference text", "/tmp/ref.wav")
     assert captured["kwargs"] == {"stream": False, "speed": 1.2, "text_frontend": False}
+
+
+def test_xtts_v2_metadata():
+    from backends.xtts_v2 import XTTSv2Backend
+
+    backend = XTTSv2Backend()
+
+    assert backend.name == "xtts-v2"
+    assert backend.display_name == "XTTS v2 (CPML, non-commercial)"
+    assert backend.sample_rate == 24000
+    assert backend.ref_text_policy is RefTextPolicy.OPTIONAL
+    assert backend.supported_langs == (
+        "en", "es", "fr", "de", "it", "pt", "pl", "tr", "ru",
+        "nl", "cs", "ar", "zh", "hu", "ko", "ja", "hi",
+    )
+
+
+def test_xtts_v2_prepare_voice_allows_missing_ref_text_and_rejects_extras():
+    from backends.xtts_v2 import XTTSv2Backend
+
+    backend = XTTSv2Backend()
+
+    prepared = backend.prepare_voice("/tmp/ref.wav", "  ", {})
+    assert prepared.ref_audio_path == "/tmp/ref.wav"
+    assert prepared.ref_text is None
+
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.prepare_voice("/tmp/ref.wav", None, {"speed": 1.1})
+
+
+def test_xtts_v2_synthesize_raises_before_load():
+    from backends.xtts_v2 import XTTSv2Backend
+
+    backend = XTTSv2Backend()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(RuntimeError, match="called before load"):
+        backend.synthesize("hello", prepared, lang="en")
+
+
+def test_xtts_v2_synthesize_rejects_unsupported_language():
+    from backends.xtts_v2 import XTTSv2Backend
+
+    backend = XTTSv2Backend()
+    backend._model = object()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(ValueError, match="does not support lang='yue'"):
+        backend.synthesize("nei hou", prepared, lang="yue")
+
+
+def test_xtts_v2_synthesize_uses_coqui_api_and_returns_float32_audio():
+    import numpy as np
+    from backends.xtts_v2 import XTTSv2Backend
+
+    backend = XTTSv2Backend()
+    captured_kwargs = {}
+
+    class _Tensorish:
+        def detach(self):
+            return self
+
+        def cpu(self):
+            return self
+
+        def numpy(self):
+            return np.array([[0.2, -0.4]], dtype=np.float64)
+
+    class _XTTSModel:
+        def tts(self, **kwargs):
+            captured_kwargs.update(kwargs)
+            return _Tensorish()
+
+    backend._model = _XTTSModel()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+
+    assert sr == 24000
+    assert audio.dtype == np.float32
+    assert np.allclose(audio, [0.2, -0.4])
+    assert captured_kwargs == {
+        "text": "hello",
+        "speaker_wav": "/tmp/ref.wav",
+        "language": "en",
+    }

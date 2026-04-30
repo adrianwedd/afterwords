@@ -1,0 +1,11 @@
+# Optional XTTS v2 backend dependencies.
+#
+# Install these only if you plan to use backend=xtts-v2 voice profiles:
+#   pip install -r requirements-xtts.txt
+#
+# XTTS v2 weights are licensed under the Coqui Public Model License (CPML),
+# which restricts use to non-commercial purposes.
+# Coqui TTS v0.22+ supports Python 3.11+ and the XTTS v2 API used here.
+TTS>=0.22
+torch>=2.1
+torchaudio>=2.1
