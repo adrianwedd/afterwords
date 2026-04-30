@@ -35,6 +35,7 @@ def register_all() -> None:
     from .openvoice_v2 import OpenVoiceV2Backend
     from .f5_tts import F5TTSBackend
     from .cosyvoice2 import CosyVoice2Backend
+    from .gpt_sovits import GPTSoVITSBackend
 
     register(Qwen3Backend(size="0.6B"))
     register(Qwen3Backend(size="1.7B"))
@@ -44,6 +45,7 @@ def register_all() -> None:
     register(OpenVoiceV2Backend())
     register(F5TTSBackend())
     register(CosyVoice2Backend())
+    register(GPTSoVITSBackend())
 
 
 def reset_for_tests() -> None:

@@ -1,0 +1,17 @@
+# Optional GPT-SoVITS backend dependencies.
+#
+# Install these only if you plan to use backend=gpt-sovits voice profiles:
+#   pip install -r requirements-gpt-sovits.txt
+#
+# Clone the GPT-SoVITS source separately; the backend adds this default path
+# to PYTHONPATH when it exists, or set GPT_SOVITS_REPO_DIR:
+#   git clone https://github.com/RVC-Boss/GPT-SoVITS.git \
+#     backends/extras/gpt-sovits/GPT-SoVITS
+#
+# Download and configure weights separately; this requirements file and backend
+# do not auto-download them:
+#   huggingface-cli download lj1995/GPT-SoVITS
+#
+# GPT-SoVITS upstream code is MIT licensed. Check the license of any
+# third-party fine-tuned weights you configure.
+-r https://raw.githubusercontent.com/RVC-Boss/GPT-SoVITS/main/requirements.txt
