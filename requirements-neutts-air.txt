@@ -1,0 +1,7 @@
+# Optional NeuTTS Air backend dependencies.
+# Install espeak-ng separately on macOS: brew install espeak-ng
+# For faster GGUF CPU inference on Apple Silicon, rebuild llama-cpp-python with
+# Accelerate as described by Neuphonic:
+# CMAKE_ARGS="-DGGML_METAL=OFF -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=Apple" \
+#   pip install "neutts[llama]" --force-reinstall --no-cache-dir
+neutts[llama,onnx]>=1.2.1,<1.3
