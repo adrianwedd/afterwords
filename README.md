@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across MLX backends (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5, Voxtral) plus optional OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, and XTTS v2.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across MLX backends (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5, Voxtral) plus optional OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, and IndexTTS-2.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -220,7 +220,7 @@ The skill handles voice selection, server health checks, synthesis, and playback
 
 ### Voice Cloning (Zero-Shot)
 
-No training or fine-tuning. The default MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), VoxCPM 1.5 (ModelBest, en/zh), and Voxtral 4B (preset voices). OpenVoice v2 is available as an optional PyTorch/MeloTTS backend for zero-shot multilingual cloning in en/es/fr/zh/ja/ko. F5-TTS is available as an optional PyTorch backend using the flow-matching DiT `F5TTS_v1_Base` model for en/zh; its default pretrained weights are CC-BY-NC 4.0 and are not for commercial use. CosyVoice2-0.5B is available as an optional Apache-2.0 PyTorch backend for multilingual zero-shot cloning. GPT-SoVITS is available as an optional MIT-licensed PyTorch backend for few-shot cloning in en/zh/ja/ko/yue. XTTS v2 is available as an optional Coqui TTS backend for 17-language zero-shot cloning; its CPML weights are non-commercial only.
+No training or fine-tuning. The default MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), VoxCPM 1.5 (ModelBest, en/zh), and Voxtral 4B (preset voices). OpenVoice v2 is available as an optional PyTorch/MeloTTS backend for zero-shot multilingual cloning in en/es/fr/zh/ja/ko. F5-TTS is available as an optional PyTorch backend using the flow-matching DiT `F5TTS_v1_Base` model for en/zh; its default pretrained weights are CC-BY-NC 4.0 and are not for commercial use. CosyVoice2-0.5B is available as an optional Apache-2.0 PyTorch backend for multilingual zero-shot cloning. GPT-SoVITS is available as an optional MIT-licensed PyTorch backend for few-shot cloning in en/zh/ja/ko/yue. XTTS v2 is available as an optional Coqui TTS backend for 17-language zero-shot cloning; its CPML weights are non-commercial only. IndexTTS-2 is available as an optional PyTorch backend for expressive en/zh zero-shot cloning with emotion controls; its bilibili model license includes usage restrictions.
 
 | Backend | License | Languages | Sample rate | Reference text |
 |---------|---------|-----------|-------------|----------------|
@@ -233,6 +233,7 @@ No training or fine-tuning. The default MLX-based backends extract speaker embed
 | `cosyvoice2` | Apache-2.0 | en/zh/ja/ko/de/es/fr/it/ru | 24 kHz | required |
 | `gpt-sovits` | MIT | en/zh/ja/ko/yue | 32 kHz | required |
 | `xtts-v2` | CPML, non-commercial only | en/es/fr/de/it/pt/pl/tr/ru/nl/cs/ar/zh/hu/ko/ja/hi | 24 kHz | optional |
+| `indextts-2` | LicenseRef-Bilibili-IndexTTS | en/zh | 22.05 kHz | optional |
 
 Voice profiles pin to a specific backend via the `backend` JSON field. The shipped flagship voices (picard, galadriel, attenborough) have per-backend variants so you can compare clone fidelity across models — Qwen3 sizes are the most reliable cloners in the current stack; see the [demo site](https://adrianwedd.github.io/afterwords/) for audible comparison.
 

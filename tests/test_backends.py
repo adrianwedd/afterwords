@@ -19,6 +19,7 @@ def test_register_all_populates_shipped_backends():
     assert set(backends.names()) == {
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
         "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits", "xtts-v2",
+        "indextts-2",
     }
 
 
@@ -318,6 +319,117 @@ def test_voxtral_synthesize_uses_voice_extra_and_concatenates_chunks():
     assert audio.shape == (10,)
     assert np.allclose(audio[:4], 0.1)
     assert np.allclose(audio[4:], 0.2)
+
+
+def test_indextts2_prepare_voice_allows_optional_ref_text():
+    from backends.indextts_2 import IndexTTS2Backend
+    from backends.base import RefTextPolicy
+
+    backend = IndexTTS2Backend()
+    assert backend.ref_text_policy is RefTextPolicy.OPTIONAL
+
+    prepared = backend.prepare_voice(
+        "/tmp/ref.wav",
+        "  ",
+        {"emo_alpha": 0.4, "use_emo_text": True, "emo_text": "calm"},
+    )
+
+    assert prepared.ref_audio_path == "/tmp/ref.wav"
+    assert prepared.ref_text is None
+    assert prepared.extras["emo_alpha"] == 0.4
+    assert prepared.extras["use_emo_text"] is True
+
+
+def test_indextts2_validate_extras_rejects_unknown_and_invalid_emotion_vector():
+    from backends.indextts_2 import IndexTTS2Backend
+
+    backend = IndexTTS2Backend()
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.validate_extras({"speed": 1.1})
+    with pytest.raises(ValueError, match="emo_vector must be a sequence of 8"):
+        backend.validate_extras({"emo_vector": [0.1, 0.2]})
+    with pytest.raises(ValueError, match="emo_alpha must be between 0 and 1"):
+        backend.validate_extras({"emo_alpha": 1.5})
+
+
+def test_indextts2_synthesize_passes_emotion_and_duration_controls():
+    import numpy as np
+    from backends.indextts_2 import IndexTTS2Backend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = IndexTTS2Backend()
+    captured_kwargs = {}
+
+    class _CapturingModel:
+        def infer(self, **kwargs):
+            captured_kwargs.update(kwargs)
+            return 22050, np.full(12, 1000, dtype=np.int16)
+
+    backend._model = _CapturingModel()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({
+            "emo_audio_prompt": "/tmp/emo.wav",
+            "emo_alpha": 0.7,
+            "max_mel_tokens": 600,
+            "max_text_tokens_per_segment": 80,
+            "top_p": 0.75,
+        }),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+
+    assert sr == 22050
+    assert audio.dtype == np.float32
+    assert audio.shape == (12,)
+    assert np.allclose(audio, np.full(12, 1000 / 32767, dtype=np.float32))
+    assert captured_kwargs["spk_audio_prompt"] == "/tmp/ref.wav"
+    assert captured_kwargs["text"] == "hello"
+    assert captured_kwargs["output_path"] is None
+    assert captured_kwargs["emo_audio_prompt"] == "/tmp/emo.wav"
+    assert captured_kwargs["emo_alpha"] == 0.7
+    assert captured_kwargs["max_mel_tokens"] == 600
+    assert captured_kwargs["max_text_tokens_per_segment"] == 80
+    assert captured_kwargs["top_p"] == 0.75
+
+
+def test_indextts2_synthesize_rejects_unsupported_lang():
+    from backends.indextts_2 import IndexTTS2Backend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = IndexTTS2Backend()
+    backend._model = object()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(ValueError, match="does not support lang='ja'"):
+        backend.synthesize("hello", prepared, lang="ja")
+
+
+def test_indextts2_synthesize_raises_on_empty_output():
+    import numpy as np
+    from backends.indextts_2 import IndexTTS2Backend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = IndexTTS2Backend()
+
+    class _EmptyModel:
+        def infer(self, **kwargs):
+            return 22050, np.array([], dtype=np.float32)
+
+    backend._model = _EmptyModel()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(RuntimeError, match="produced no output"):
+        backend.synthesize("hello", prepared, lang="en")
 
 
 def test_gpt_sovits_requires_reference_text():
