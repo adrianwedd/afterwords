@@ -18,6 +18,7 @@ def test_register_all_populates_shipped_backends():
     backends.register_all()
     assert set(backends.names()) == {
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
+        "openvoice-v2",
     }
 
 
@@ -338,3 +339,128 @@ def test_voxtral_synthesize_raises_on_empty_generator():
 
     with pytest.raises(RuntimeError, match="no audio chunks"):
         backend.synthesize("hello", prepared, lang="en")
+
+
+def test_openvoice_v2_metadata():
+    from backends.openvoice_v2 import OpenVoiceV2Backend
+
+    backend = OpenVoiceV2Backend()
+
+    assert backend.name == "openvoice-v2"
+    assert backend.display_name == "OpenVoice v2"
+    assert backend.sample_rate == 22050
+    assert backend.ref_text_policy is RefTextPolicy.OPTIONAL
+    assert backend.supported_langs == ("en", "es", "fr", "zh", "ja", "ko")
+
+
+def test_openvoice_v2_prepare_voice_extracts_target_se(tmp_path):
+    from backends.openvoice_v2 import OpenVoiceV2Backend
+
+    backend = OpenVoiceV2Backend()
+    backend._tone_color_converter = object()
+
+    class _Extractor:
+        def get_se(self, ref_audio_path, converter, target_dir, vad):
+            assert ref_audio_path == "/tmp/ref.wav"
+            assert converter is backend._tone_color_converter
+            assert vad is True
+            assert tmp_path.exists()
+            return "target-se", "ref"
+
+    backend._se_extractor = _Extractor()
+
+    prepared = backend.prepare_voice("/tmp/ref.wav", "reference text", {})
+
+    assert prepared.ref_audio_path == "/tmp/ref.wav"
+    assert prepared.ref_text == "reference text"
+    assert prepared.extras["target_se"] == "target-se"
+
+
+def test_openvoice_v2_synthesize_raises_before_load():
+    from backends.openvoice_v2 import OpenVoiceV2Backend
+
+    backend = OpenVoiceV2Backend()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(RuntimeError, match="called before load"):
+        backend.synthesize("hello", prepared, lang="en")
+
+
+def test_openvoice_v2_synthesize_rejects_unsupported_language():
+    from backends.openvoice_v2 import OpenVoiceV2Backend
+
+    backend = OpenVoiceV2Backend()
+    backend._tone_color_converter = object()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({"target_se": "target-se"}),
+    )
+
+    with pytest.raises(ValueError, match="does not support lang='de'"):
+        backend.synthesize("hallo", prepared, lang="de")
+
+
+def test_openvoice_v2_synthesize_uses_melo_and_converter(tmp_path):
+    import numpy as np
+    from types import SimpleNamespace
+    from backends.openvoice_v2 import OpenVoiceV2Backend
+
+    backend = OpenVoiceV2Backend()
+    checkpoint_dir = tmp_path / "checkpoints_v2"
+    se_dir = checkpoint_dir / "base_speakers" / "ses"
+    se_dir.mkdir(parents=True)
+    (se_dir / "en-newest.pth").write_bytes(b"stub")
+    backend._checkpoint_dir = str(checkpoint_dir)
+    backend._device = "cpu"
+
+    captured_tts = {}
+    captured_convert = {}
+
+    class _Torch:
+        def load(self, path, map_location):
+            assert path == str(se_dir / "en-newest.pth")
+            assert map_location == "cpu"
+            return "source-se"
+
+    class _TTSModel:
+        hps = SimpleNamespace(data=SimpleNamespace(spk2id={"EN-Newest": 7}))
+
+        def tts_to_file(self, text, speaker_id, output_path, speed):
+            captured_tts.update(
+                text=text,
+                speaker_id=speaker_id,
+                output_path=output_path,
+                speed=speed,
+            )
+            with open(output_path, "wb") as f:
+                f.write(b"RIFF")
+
+    class _Converter:
+        def convert(self, **kwargs):
+            captured_convert.update(kwargs)
+            return np.array([0.1, -0.2], dtype=np.float32)
+
+    backend._torch = _Torch()
+    backend._tone_color_converter = _Converter()
+    backend._tts_models["EN_NEWEST"] = _TTSModel()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({"target_se": "target-se", "speed": 1.2, "tau": 0.4}),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+
+    assert sr == 22050
+    assert np.allclose(audio, [0.1, -0.2])
+    assert captured_tts["text"] == "hello"
+    assert captured_tts["speaker_id"] == 7
+    assert captured_tts["speed"] == 1.2
+    assert captured_convert["src_se"] == "source-se"
+    assert captured_convert["tgt_se"] == "target-se"
+    assert captured_convert["tau"] == 0.4

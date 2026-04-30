@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across four MLX backends (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5).
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across MLX backends (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5, Voxtral) plus optional OpenVoice v2.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -164,7 +164,7 @@ afterwords reload   # rescans voices/, adds new profiles, no synthesis interrupt
 
 ## Languages
 
-The four backends advertise different language support. Ask `/health` to see what each one offers:
+The backends advertise different language support. Ask `/health` to see what each one offers:
 
 ```bash
 curl -s localhost:7860/health | jq '.loaded_backends | to_entries[] | {backend: .key, langs: .value.supported_langs}'
@@ -197,7 +197,7 @@ The skill handles voice selection, server health checks, synthesis, and playback
 │  Your Mac (Apple Silicon, 16 GB+)                          │
 │                                                             │
 │  ┌─────────────────────────┐                                │
-│  │  Multi-Backend TTS      │  ← Four MLX backends, ~10 GB   │
+│  │  Multi-Backend TTS      │  ← MLX + optional OpenVoice     │
 │  │  localhost:7860          │  ← 50+ voice profiles          │
 │  │  /synthesize?text=...    │  ← ~20s per sentence (Qwen3)   │
 │  └─────────┬───────────────┘                                │
@@ -220,7 +220,7 @@ The skill handles voice selection, server health checks, synthesis, and playback
 
 ### Voice Cloning (Zero-Shot)
 
-No training or fine-tuning. Four MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), and VoxCPM 1.5 (ModelBest, en/zh). They run on [MLX](https://github.com/ml-explore/mlx) — Apple's ML framework — and preload at startup (~10 GB total).
+No training or fine-tuning. The default MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), VoxCPM 1.5 (ModelBest, en/zh), and Voxtral 4B (preset voices). OpenVoice v2 is available as an optional PyTorch/MeloTTS backend for zero-shot multilingual cloning in en/es/fr/zh/ja/ko.
 
 Voice profiles pin to a specific backend via the `backend` JSON field. The shipped flagship voices (picard, galadriel, attenborough) have per-backend variants so you can compare clone fidelity across models — Qwen3 sizes are the most reliable cloners in the current stack; see the [demo site](https://adrianwedd.github.io/afterwords/) for audible comparison.
 
@@ -232,6 +232,9 @@ FastAPI + Uvicorn serving WAV audio over HTTP. Backends load once at startup; ea
 GET  /health
        → {"status":"ok", "ready":true, "voices":[...],
           "loaded_backends": {"qwen3-0.6b": {"loaded":true, "voice_count":..., "supported_langs":[...]}, ...}}
+
+       Current backend ids:
+       qwen3-0.6b, qwen3-1.7b, chatterbox, voxcpm-1.5, voxtral, openvoice-v2
 
 GET  /synthesize?text=Hello&voice=galadriel&lang=en
        → audio/wav (16-bit PCM)
@@ -423,6 +426,7 @@ On 32 GB M3 Max (four backends preloaded):
 
 - [Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) by Alibaba (Apache 2.0)
 - [mlx-audio](https://github.com/Blaizzy/mlx-audio) by Blaizzy
+- [OpenVoice](https://github.com/myshell-ai/OpenVoice) and [MeloTTS](https://github.com/myshell-ai/MeloTTS) by MyShell (MIT)
 - [MLX](https://github.com/ml-explore/mlx) by Apple
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code/) by Anthropic
 - Voice reference clips used under fair use for personal voice synthesis research

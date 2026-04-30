@@ -5,3 +5,6 @@ python-multipart>=0.0.18,<1.0
 uvicorn>=0.42,<1.0
 noisereduce>=3.0,<4.0
 faster-whisper>=1.0,<2.0
+
+# OpenVoice v2 is optional because it brings PyTorch/MeloTTS dependencies that
+# can conflict with the default MLX-only install. See requirements-openvoice.txt.
