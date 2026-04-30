@@ -1,0 +1,15 @@
+# Optional OpenVoice v2 backend dependencies.
+#
+# Install these only if you plan to use backend=openvoice-v2 voice profiles:
+#   pip install -r requirements-openvoice.txt
+#   python -m unidic download
+#   huggingface-cli download myshell-ai/OpenVoiceV2 \
+#     --local-dir backends/extras/openvoice-v2/checkpoints_v2
+#
+# The upstream OpenVoice package pins older numpy/librosa/faster-whisper
+# versions in setup.py; keep this isolated from requirements.txt so the default
+# Afterwords install remains MLX-only.
+torch>=2.1
+huggingface_hub>=0.23
+git+https://github.com/myshell-ai/OpenVoice.git
+git+https://github.com/myshell-ai/MeloTTS.git

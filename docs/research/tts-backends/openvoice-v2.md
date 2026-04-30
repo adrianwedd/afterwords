@@ -3,21 +3,22 @@
 **Repo:** https://github.com/myshell-ai/OpenVoice
 **License:** MIT
 **Size:** 0.5B, 2.0 GB
-**Sample rate:** 24000
-**Languages:** multilingual
-**Apple Silicon path:** PyTorch+MPS — Note: OpenVoice essentially acts as a timbre filter applied over a base TTS model (like MeloTTS).
+**Sample rate:** 22050 (converter `checkpoints_v2/converter/config.json`)
+**Languages:** English, Spanish, French, Chinese, Japanese, Korean (native v2 support)
+**Apple Silicon path:** PyTorch+MPS/CPU — OpenVoice v2 acts as a tone-color converter applied over a base MeloTTS utterance.
 
 ### Install
 ```bash
 git clone https://github.com/myshell-ai/OpenVoice.git
 cd OpenVoice
 pip install -r requirements.txt
-pip install melo-tts
+pip install git+https://github.com/myshell-ai/MeloTTS.git
+python -m unidic download
 ```
 
 ### Model download
 ```bash
-huggingface-cli download myshell-ai/OpenVoiceV2
+huggingface-cli download myshell-ai/OpenVoiceV2 --local-dir checkpoints_v2
 ```
 Disk: 2.0 GB
 
@@ -47,10 +48,10 @@ tone_color_converter.convert('base.wav', base_se, target_se, 'output.wav')
 from backends.base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
 
 class OpenVoiceV2Backend(BackendBase):
-    name = "openvoice_v2"
-    sample_rate = 24000
-    ref_text_policy = RefTextPolicy.IGNORED
-    supported_langs = ("multilingual",)
+    name = "openvoice-v2"
+    sample_rate = 22050
+    ref_text_policy = RefTextPolicy.OPTIONAL
+    supported_langs = ("en", "es", "fr", "zh", "ja", "ko")
 
     def load(self): ...
     def prepare_voice(self, ref_audio_path, ref_text, extras): ...
@@ -58,6 +59,8 @@ class OpenVoiceV2Backend(BackendBase):
 ```
 
 ### Notes for afterwords integration
-- OpenVoice's architecture separates style/prosody (handled by a base TTS engine like MeloTTS) from tone color (handled by the converter). Thus, `load` must instantiate *two* models. `prepare_voice` should execute `se_extractor.get_se` to pull the reference audio's tone color embedding. In `synthesize`, you will first generate the raw audio using the base TTS and its default speaker embedding, then pass that output through the converter applying the cached target tone color. Ensure intermediate `base.wav` files are either written to memory buffers (like `io.BytesIO`) or temporary files to avoid disk IO bottlenecks.
+- OpenVoice's architecture separates text/prosody (MeloTTS) from tone color (OpenVoice converter). `load` should instantiate the converter from `checkpoints_v2/converter`, while MeloTTS language models can be cached lazily per language to avoid loading every language at server startup. `prepare_voice` should execute `se_extractor.get_se` to pull the reference audio's tone color embedding. In `synthesize`, generate a temporary base utterance with MeloTTS, load the matching `checkpoints_v2/base_speakers/ses/{speaker}.pth` source embedding, then pass the base WAV through `ToneColorConverter.convert(...)` with the cached target embedding.
+- Upstream v2 demo language codes are `EN_NEWEST`, `EN`, `ES`, `FR`, `ZH`, `JP`, and `KR`; Afterwords should expose normal request language tags: `en`, `es`, `fr`, `zh`, `ja`, `ko`.
+- The reference transcript is not required by upstream OpenVoice v2 extraction, so Afterwords should advertise `RefTextPolicy.OPTIONAL`.
 
 ---

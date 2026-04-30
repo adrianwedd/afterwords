@@ -32,12 +32,14 @@ def register_all() -> None:
     from .chatterbox import ChatterboxBackend
     from .voxcpm import VoxCPMBackend
     from .voxtral import VoxtralBackend
+    from .openvoice_v2 import OpenVoiceV2Backend
 
     register(Qwen3Backend(size="0.6B"))
     register(Qwen3Backend(size="1.7B"))
     register(ChatterboxBackend())
     register(VoxCPMBackend())
     register(VoxtralBackend())
+    register(OpenVoiceV2Backend())
 
 
 def reset_for_tests() -> None:
