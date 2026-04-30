@@ -18,7 +18,7 @@ def test_register_all_populates_shipped_backends():
     backends.register_all()
     assert set(backends.names()) == {
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
-        "openvoice-v2", "f5-tts", "cosyvoice2",
+        "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits",
     }
 
 
@@ -318,6 +318,102 @@ def test_voxtral_synthesize_uses_voice_extra_and_concatenates_chunks():
     assert audio.shape == (10,)
     assert np.allclose(audio[:4], 0.1)
     assert np.allclose(audio[4:], 0.2)
+
+
+def test_gpt_sovits_requires_reference_text():
+    from backends.gpt_sovits import GPTSoVITSBackend
+
+    backend = GPTSoVITSBackend()
+    with pytest.raises(ValueError, match="requires reference_text"):
+        backend.prepare_voice("/tmp/ref.wav", "  ", {})
+
+
+def test_gpt_sovits_validate_extras_rejects_unknown_and_invalid_lang():
+    from backends.gpt_sovits import GPTSoVITSBackend
+
+    backend = GPTSoVITSBackend()
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.validate_extras({"cfg_value": 2.0})
+    with pytest.raises(ValueError, match="prompt_language must be one of"):
+        backend.validate_extras({"prompt_language": "de"})
+
+
+def test_gpt_sovits_synthesize_calls_upstream_api_and_concatenates_chunks():
+    import numpy as np
+    from backends.gpt_sovits import GPTSoVITSBackend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = GPTSoVITSBackend()
+    captured_kwargs = {}
+
+    def _fake_get_tts_wav(**kwargs):
+        captured_kwargs.update(kwargs)
+        yield 32000, np.full(4, 0.1, dtype=np.float32)
+        yield 32000, np.full(6, 0.2, dtype=np.float32)
+
+    backend._get_tts_wav = _fake_get_tts_wav
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text="reference transcript",
+        extras=_read_only({"prompt_language": "en", "top_k": 15, "speed": 1.1}),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="zh")
+
+    assert sr == 32000
+    assert captured_kwargs == {
+        "ref_wav_path": "/tmp/ref.wav",
+        "prompt_text": "reference transcript",
+        "prompt_language": "en",
+        "text": "hello",
+        "text_language": "zh",
+        "top_k": 15,
+        "speed": 1.1,
+    }
+    assert audio.shape == (10,)
+    assert np.allclose(audio[:4], 0.1)
+    assert np.allclose(audio[4:], 0.2)
+
+
+def test_gpt_sovits_synthesize_accepts_mapping_chunks():
+    import numpy as np
+    from backends.gpt_sovits import GPTSoVITSBackend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = GPTSoVITSBackend()
+
+    def _fake_get_tts_wav(**kwargs):
+        yield {"audio": np.full(3, 0.25, dtype=np.float32), "sample_rate": 48000}
+
+    backend._get_tts_wav = _fake_get_tts_wav
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text="reference transcript",
+        extras=_read_only({}),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+
+    assert sr == 48000
+    assert audio.dtype == np.float32
+    assert audio.shape == (3,)
+    assert np.allclose(audio, 0.25)
+
+
+def test_gpt_sovits_synthesize_raises_on_empty_generator():
+    from backends.gpt_sovits import GPTSoVITSBackend
+    from backends.base import PreparedVoice, _read_only
+
+    backend = GPTSoVITSBackend()
+    backend._get_tts_wav = lambda **kwargs: (x for x in ())
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text="reference transcript",
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(RuntimeError, match="produced no output"):
+        backend.synthesize("hello", prepared, lang="en")
 
 
 def test_voxtral_synthesize_raises_on_empty_generator():

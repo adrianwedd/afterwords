@@ -4,8 +4,8 @@
 **License:** MIT
 **Size:** 2.0 GB
 **Sample rate:** 32000
-**Languages:** multilingual
-**Apple Silicon path:** PyTorch+MPS — Note: Native support via macOS environments; the community has created specialized single-click installers, but the programmatic API runs cleanly on M5.
+**Languages:** en, zh, ja, ko, yue
+**Apple Silicon path:** PyTorch+MPS or CPU via upstream `install.sh --device <MPS|CPU>`; upstream currently lists tested Apple Silicon environments for Python 3.9/PyTorch 2.5.1 and Python 3.11/PyTorch 2.7.0.
 
 ### Install
 ```bash
@@ -22,7 +22,9 @@ Disk: 2.0 GB
 
 ### Python API for cloning
 ```python
-from GPT_SoVITS.inference import get_tts_wav
+# Current upstream exposes this from inference_webui.py; some packaged
+# integrations may wrap it as GPT_SoVITS.inference.get_tts_wav.
+from GPT_SoVITS.inference_webui import get_tts_wav
 
 # API wrapper assumes configurations are pointed to weights correctly
 audio_generator = get_tts_wav(
@@ -41,10 +43,10 @@ audio_data = next(audio_generator)
 from backends.base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
 
 class GPTSoVITSBackend(BackendBase):
-    name = "gpt_sovits"
+    name = "gpt-sovits"
     sample_rate = 32000
     ref_text_policy = RefTextPolicy.REQUIRED
-    supported_langs = ("multilingual",)
+    supported_langs = ("en", "zh", "ja", "ko", "yue")
 
     def load(self): ...
     def prepare_voice(self, ref_audio_path, ref_text, extras): ...
