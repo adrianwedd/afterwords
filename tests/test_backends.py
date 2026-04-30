@@ -18,7 +18,7 @@ def test_register_all_populates_shipped_backends():
     backends.register_all()
     assert set(backends.names()) == {
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
-        "openvoice-v2",
+        "openvoice-v2", "f5-tts",
     }
 
 
@@ -464,3 +464,100 @@ def test_openvoice_v2_synthesize_uses_melo_and_converter(tmp_path):
     assert captured_convert["src_se"] == "source-se"
     assert captured_convert["tgt_se"] == "target-se"
     assert captured_convert["tau"] == 0.4
+
+
+def test_f5_tts_metadata():
+    from backends.f5_tts import F5TTSBackend
+
+    backend = F5TTSBackend()
+
+    assert backend.name == "f5-tts"
+    assert backend.display_name == "F5-TTS v1 Base (DiT, CC-BY-NC)"
+    assert backend.sample_rate == 24000
+    assert backend.ref_text_policy is RefTextPolicy.REQUIRED
+    assert backend.supported_langs == ("en", "zh")
+
+
+def test_f5_tts_prepare_voice_requires_ref_text():
+    from backends.f5_tts import F5TTSBackend
+
+    backend = F5TTSBackend()
+
+    with pytest.raises(ValueError, match="requires reference_text"):
+        backend.prepare_voice("/tmp/ref.wav", "", {})
+
+
+def test_f5_tts_validate_extras_rejects_unknown_and_invalid_values():
+    from backends.f5_tts import F5TTSBackend
+
+    backend = F5TTSBackend()
+
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.validate_extras({"emotion": "happy"})
+    with pytest.raises(ValueError, match="nfe_step must be > 0"):
+        backend.validate_extras({"nfe_step": 0})
+    with pytest.raises(ValueError, match="speed must be > 0"):
+        backend.validate_extras({"speed": -1})
+    with pytest.raises(ValueError, match="seed must be an integer"):
+        backend.validate_extras({"seed": 1.5})
+
+
+def test_f5_tts_synthesize_raises_before_load():
+    from backends.f5_tts import F5TTSBackend
+
+    backend = F5TTSBackend()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text="reference text",
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(RuntimeError, match="called before load"):
+        backend.synthesize("hello", prepared, lang="en")
+
+
+def test_f5_tts_synthesize_rejects_unsupported_language():
+    from backends.f5_tts import F5TTSBackend
+
+    backend = F5TTSBackend()
+    backend._model = object()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text="reference text",
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(ValueError, match="does not support lang='fr'"):
+        backend.synthesize("bonjour", prepared, lang="fr")
+
+
+def test_f5_tts_synthesize_uses_f5_api_and_generation_extras():
+    import numpy as np
+    from backends.f5_tts import F5TTSBackend
+
+    backend = F5TTSBackend()
+    captured_kwargs = {}
+
+    class _F5Model:
+        def infer(self, **kwargs):
+            captured_kwargs.update(kwargs)
+            return np.array([0.3, -0.1], dtype=np.float32), 24000, "spectrogram"
+
+    backend._model = _F5Model()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text="reference text",
+        extras=_read_only({"nfe_step": 16, "speed": 1.1, "seed": 123}),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+
+    assert sr == 24000
+    assert np.allclose(audio, [0.3, -0.1])
+    assert captured_kwargs["ref_file"] == "/tmp/ref.wav"
+    assert captured_kwargs["ref_text"] == "reference text"
+    assert captured_kwargs["gen_text"] == "hello"
+    assert captured_kwargs["nfe_step"] == 16
+    assert captured_kwargs["speed"] == 1.1
+    assert captured_kwargs["seed"] == 123
+    assert captured_kwargs["progress"] is None
