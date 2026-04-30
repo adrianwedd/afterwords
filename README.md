@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across MLX backends (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5, Voxtral) plus optional OpenVoice v2, F5-TTS, CosyVoice2, and GPT-SoVITS.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across MLX backends (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5, Voxtral) plus optional OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, and XTTS v2.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -220,7 +220,7 @@ The skill handles voice selection, server health checks, synthesis, and playback
 
 ### Voice Cloning (Zero-Shot)
 
-No training or fine-tuning. The default MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), VoxCPM 1.5 (ModelBest, en/zh), and Voxtral 4B (preset voices). OpenVoice v2 is available as an optional PyTorch/MeloTTS backend for zero-shot multilingual cloning in en/es/fr/zh/ja/ko. F5-TTS is available as an optional PyTorch backend using the flow-matching DiT `F5TTS_v1_Base` model for en/zh; its default pretrained weights are CC-BY-NC 4.0 and are not for commercial use. CosyVoice2-0.5B is available as an optional Apache-2.0 PyTorch backend for multilingual zero-shot cloning. GPT-SoVITS is available as an optional MIT-licensed PyTorch backend for few-shot cloning in en/zh/ja/ko/yue.
+No training or fine-tuning. The default MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), VoxCPM 1.5 (ModelBest, en/zh), and Voxtral 4B (preset voices). OpenVoice v2 is available as an optional PyTorch/MeloTTS backend for zero-shot multilingual cloning in en/es/fr/zh/ja/ko. F5-TTS is available as an optional PyTorch backend using the flow-matching DiT `F5TTS_v1_Base` model for en/zh; its default pretrained weights are CC-BY-NC 4.0 and are not for commercial use. CosyVoice2-0.5B is available as an optional Apache-2.0 PyTorch backend for multilingual zero-shot cloning. GPT-SoVITS is available as an optional MIT-licensed PyTorch backend for few-shot cloning in en/zh/ja/ko/yue. XTTS v2 is available as an optional Coqui TTS backend for 17-language zero-shot cloning; its CPML weights are non-commercial only.
 
 | Backend | License | Languages | Sample rate | Reference text |
 |---------|---------|-----------|-------------|----------------|
@@ -232,6 +232,7 @@ No training or fine-tuning. The default MLX-based backends extract speaker embed
 | `f5-tts` | CC-BY-NC default weights | en/zh | 24 kHz | required |
 | `cosyvoice2` | Apache-2.0 | en/zh/ja/ko/de/es/fr/it/ru | 24 kHz | required |
 | `gpt-sovits` | MIT | en/zh/ja/ko/yue | 32 kHz | required |
+| `xtts-v2` | CPML, non-commercial only | en/es/fr/de/it/pt/pl/tr/ru/nl/cs/ar/zh/hu/ko/ja/hi | 24 kHz | optional |
 
 Voice profiles pin to a specific backend via the `backend` JSON field. The shipped flagship voices (picard, galadriel, attenborough) have per-backend variants so you can compare clone fidelity across models — Qwen3 sizes are the most reliable cloners in the current stack; see the [demo site](https://adrianwedd.github.io/afterwords/) for audible comparison.
 
@@ -438,6 +439,7 @@ On 32 GB M3 Max (four backends preloaded):
 - [Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) by Alibaba (Apache 2.0)
 - [mlx-audio](https://github.com/Blaizzy/mlx-audio) by Blaizzy
 - [OpenVoice](https://github.com/myshell-ai/OpenVoice) and [MeloTTS](https://github.com/myshell-ai/MeloTTS) by MyShell (MIT)
+- [Coqui TTS / XTTS v2](https://github.com/coqui-ai/TTS) by Coqui (code MPL-2.0; XTTS v2 weights CPML, non-commercial only)
 - [MLX](https://github.com/ml-explore/mlx) by Apple
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code/) by Anthropic
 - Voice reference clips used under fair use for personal voice synthesis research
