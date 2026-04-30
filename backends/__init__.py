@@ -40,6 +40,7 @@ def register_all() -> None:
     from .indextts_2 import IndexTTS2Backend
     from .neutts_air import NeuTTSAirBackend
     from .spark_tts import SparkTTSBackend
+    from .dia2 import Dia2Backend
 
     register(Qwen3Backend(size="0.6B"))
     register(Qwen3Backend(size="1.7B"))
@@ -54,6 +55,7 @@ def register_all() -> None:
     register(IndexTTS2Backend())
     register(NeuTTSAirBackend())
     register(SparkTTSBackend())
+    register(Dia2Backend())
 
 
 def reset_for_tests() -> None:
