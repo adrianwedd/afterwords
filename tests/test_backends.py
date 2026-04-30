@@ -18,7 +18,7 @@ def test_register_all_populates_shipped_backends():
     backends.register_all()
     assert set(backends.names()) == {
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
-        "openvoice-v2", "f5-tts",
+        "openvoice-v2", "f5-tts", "cosyvoice2",
     }
 
 
@@ -561,3 +561,95 @@ def test_f5_tts_synthesize_uses_f5_api_and_generation_extras():
     assert captured_kwargs["speed"] == 1.1
     assert captured_kwargs["seed"] == 123
     assert captured_kwargs["progress"] is None
+
+
+def test_cosyvoice2_metadata():
+    from backends.cosyvoice2 import CosyVoice2Backend
+
+    backend = CosyVoice2Backend()
+
+    assert backend.name == "cosyvoice2"
+    assert backend.display_name == "CosyVoice2-0.5B (Apache-2.0)"
+    assert backend.sample_rate == 24000
+    assert backend.ref_text_policy is RefTextPolicy.REQUIRED
+    assert backend.supported_langs == ("en", "zh", "ja", "ko", "de", "es", "fr", "it", "ru")
+
+
+def test_cosyvoice2_prepare_voice_requires_ref_text():
+    from backends.cosyvoice2 import CosyVoice2Backend
+
+    backend = CosyVoice2Backend()
+
+    with pytest.raises(ValueError, match="requires reference_text"):
+        backend.prepare_voice("/tmp/ref.wav", "  ", {})
+
+
+def test_cosyvoice2_validate_extras_rejects_unknown_and_invalid_values():
+    from backends.cosyvoice2 import CosyVoice2Backend
+
+    backend = CosyVoice2Backend()
+
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.validate_extras({"emotion": "happy"})
+    with pytest.raises(ValueError, match="speed must be > 0"):
+        backend.validate_extras({"speed": 0})
+    with pytest.raises(ValueError, match="text_frontend must be boolean"):
+        backend.validate_extras({"text_frontend": "yes"})
+
+
+def test_cosyvoice2_synthesize_raises_before_load():
+    from backends.cosyvoice2 import CosyVoice2Backend
+
+    backend = CosyVoice2Backend()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text="reference text",
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(RuntimeError, match="called before load"):
+        backend.synthesize("hello", prepared, lang="en")
+
+
+def test_cosyvoice2_synthesize_uses_zero_shot_api_and_concatenates_chunks():
+    import numpy as np
+    from backends.cosyvoice2 import CosyVoice2Backend
+
+    backend = CosyVoice2Backend()
+    captured = {}
+
+    class _Tensorish:
+        def __init__(self, values):
+            self.values = np.asarray(values, dtype=np.float32)
+
+        def detach(self):
+            return self
+
+        def cpu(self):
+            return self
+
+        def numpy(self):
+            return self.values
+
+    class _CosyModel:
+        sample_rate = 24000
+
+        def inference_zero_shot(self, *args, **kwargs):
+            captured["args"] = args
+            captured["kwargs"] = kwargs
+            yield {"tts_speech": _Tensorish([[0.1, 0.2]])}
+            yield {"tts_speech": _Tensorish([[-0.1]])}
+
+    backend._model = _CosyModel()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text="reference text",
+        extras=_read_only({"speed": 1.2, "text_frontend": False}),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+
+    assert sr == 24000
+    assert np.allclose(audio, [0.1, 0.2, -0.1])
+    assert captured["args"] == ("hello", "reference text", "/tmp/ref.wav")
+    assert captured["kwargs"] == {"stream": False, "speed": 1.2, "text_frontend": False}
