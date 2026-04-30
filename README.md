@@ -40,6 +40,8 @@ afterwords codex-hook stop
 
 The watcher needs `ripgrep` (`brew install ripgrep`) to locate the session file. Setup auto-detects Codex and prints these commands when it finishes; you don't have to memorize them.
 
+For watcher debugging, run `afterwords codex-hook status`; it reports stale pid files and shows the tail of `/tmp/codex-tts-watch.log` when the watcher is not running. `afterwords codex-hook start --diagnose` prints the thread id, session file it would watch, hook path, and sample event detection without starting the daemon. The most common startup failures are `$CODEX_THREAD_ID` not being exported, or Codex not having created the first session event yet, so no `~/.codex/sessions/.../rollout-*.jsonl` file matches the thread id.
+
 Trade-offs vs Claude Code: this depends on Codex's local session file format and on `$CODEX_THREAD_ID` being exported, both undocumented contracts that may shift between Codex versions. For non-interactive Codex (`codex exec`), prefer wrapping with `--output-last-message <FILE>` and feeding the file to `/synthesize` directly — cleaner and version-stable.
 
 ## With Gemini CLI
