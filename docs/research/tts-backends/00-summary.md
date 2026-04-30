@@ -25,7 +25,7 @@ NotebookLM deep research over 60 sources from arXiv, HuggingFace, project repos,
 | [OpenVoice v2](openvoice-v2.md) | MIT | — | — | multi | Tone-color + style decoupled |
 | [FireRedTTS-2](firered-tts-2.md) | Open Source | 1.5B | — | multi | Long conversational |
 | [SV2TTS](sv2tts.md) | Open Source | — | — | en | Classic 5-second cloning |
-| [MockingBird](mockingbird.md) | Open Source | — | — | multi | Chinese-focused SV2TTS extension |
+| [MockingBird](mockingbird.md) | Open Source | <0.5 GB | 22k | zh/en | Chinese-focused SV2TTS extension |
 | [GPT-SoVITS](gpt-sovits.md) | Open Source | — | — | multi | High community traction |
 | [SoproTTS](soprotts.md) | Open Source | — | — | multi | — |
 | [NeuTTS Air](neutts-air.md) | Proprietary | 0.75B | 24k | en | On-device CoreML |
