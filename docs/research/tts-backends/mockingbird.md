@@ -4,14 +4,16 @@
 **License:** Open Source
 **Size:** <0.5 GB
 **Sample rate:** 22050
-**Languages:** multilingual
-**Apple Silicon path:** PyTorch+MPS — Note: Same architectural constraints as SV2TTS; focus on Mandarin compatibility.
+**Languages:** zh/en (multilingual toolkit; Chinese strongest)
+**Apple Silicon path:** PyTorch+MPS fallback — same architectural constraints as SV2TTS; focus on Mandarin compatibility.
+**Reference text policy:** OPTIONAL
 
 ### Install
 ```bash
 git clone https://github.com/babysor/MockingBird.git
 cd MockingBird
 pip install -r requirements.txt
+pip install cn2an
 ```
 
 ### Model download
@@ -43,8 +45,8 @@ from backends.base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
 class MockingBirdBackend(BackendBase):
     name = "mockingbird"
     sample_rate = 22050
-    ref_text_policy = RefTextPolicy.IGNORED
-    supported_langs = ("multilingual",)
+    ref_text_policy = RefTextPolicy.OPTIONAL
+    supported_langs = ("zh", "en")
 
     def load(self): ...
     def prepare_voice(self, ref_audio_path, ref_text, extras): ...
@@ -52,6 +54,9 @@ class MockingBirdBackend(BackendBase):
 ```
 
 ### Notes for afterwords integration
-- MockingBird operates on identical logic to SV2TTS but integrates language-specific grapheme-to-phoneme parsing specifically suited to Chinese datasets. The main implementation difference from SV2TTS for your `afterwords` backend is the front-end text normalization. Ensure your text handling in `synthesize` successfully supports the localized tokenizer required by the MockingBird synthesizer, and similarly watch out for WaveRNN generation speeds on MPS.
+- MockingBird operates on the same encoder + Tacotron synthesizer + WaveRNN vocoder shape as SV2TTS, but its tooling and pretrained ecosystem are Chinese-focused.
+- Keep source and checkpoint paths separate from SV2TTS because both projects expose top-level `encoder`, `synthesizer`, and `vocoder` modules.
+- Do not trigger upstream demo downloads from the backend. Require local source under `backends/extras/mockingbird/MockingBird` and local checkpoint files under `backends/extras/mockingbird/saved_models/default`.
+- `cn2an` is useful for Chinese number normalization, but the backend should still delegate text handling to the upstream synthesizer rather than doing ad hoc normalization in Afterwords.
 
 ---

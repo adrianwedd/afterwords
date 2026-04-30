@@ -44,6 +44,7 @@ def register_all() -> None:
     from .yourtts import YourTTSBackend
     from .firered_tts_2 import FireRedTTS2Backend
     from .sv2tts import SV2TTSBackend
+    from .mockingbird import MockingBirdBackend
 
     register(Qwen3Backend(size="0.6B"))
     register(Qwen3Backend(size="1.7B"))
@@ -62,6 +63,7 @@ def register_all() -> None:
     register(YourTTSBackend())
     register(FireRedTTS2Backend())
     register(SV2TTSBackend())
+    register(MockingBirdBackend())
 
 
 def reset_for_tests() -> None:

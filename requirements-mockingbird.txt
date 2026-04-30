@@ -1,0 +1,27 @@
+# Optional MockingBird backend dependencies.
+#
+# Install these only if you plan to use backend=mockingbird voice profiles:
+#   pip install -r requirements-mockingbird.txt
+#
+# The upstream project is source-layout oriented and its demo scripts may
+# download default models. This backend does not download anything. Clone source
+# and place checkpoints manually:
+#   git clone https://github.com/babysor/MockingBird.git \
+#     backends/extras/mockingbird/MockingBird
+#   mkdir -p backends/extras/mockingbird/saved_models/default
+#   # place encoder.pt, synthesizer.pt, vocoder.pt in that directory
+#
+# Override paths with MOCKINGBIRD_REPO_DIR, MOCKINGBIRD_ENCODER_PATH,
+# MOCKINGBIRD_SYNTHESIZER_PATH, MOCKINGBIRD_VOCODER_PATH, and
+# MOCKINGBIRD_ENCODER_DEVICE.
+torch>=2.1
+librosa>=0.10
+soundfile>=0.12
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+tqdm>=4.66
+inflect>=7
+unidecode>=1.3
+webrtcvad-wheels>=2.0.14
+cn2an>=0.5
