@@ -1,0 +1,12 @@
+# Optional F5-TTS backend dependencies.
+#
+# Install these only if you plan to use backend=f5-tts voice profiles:
+#   pip install -r requirements-f5tts.txt
+#
+# F5-TTS code is MIT licensed, but the default SWivid/F5-TTS pretrained
+# F5TTS_v1_Base weights are CC-BY-NC 4.0 and block commercial use.
+# Keep this isolated from requirements.txt so the default Afterwords install
+# remains MLX-only.
+torch>=2.0
+torchaudio>=2.0
+f5-tts>=1.1.20

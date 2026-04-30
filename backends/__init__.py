@@ -33,6 +33,7 @@ def register_all() -> None:
     from .voxcpm import VoxCPMBackend
     from .voxtral import VoxtralBackend
     from .openvoice_v2 import OpenVoiceV2Backend
+    from .f5_tts import F5TTSBackend
 
     register(Qwen3Backend(size="0.6B"))
     register(Qwen3Backend(size="1.7B"))
@@ -40,6 +41,7 @@ def register_all() -> None:
     register(VoxCPMBackend())
     register(VoxtralBackend())
     register(OpenVoiceV2Backend())
+    register(F5TTSBackend())
 
 
 def reset_for_tests() -> None:
