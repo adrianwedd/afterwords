@@ -31,10 +31,10 @@ tts.tts_to_file("This is a test sentence.", speaker_wav="reference.wav", languag
 from backends.base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
 
 class YourTTSBackend(BackendBase):
-    name = "your_tts"
+    name = "yourtts"
     sample_rate = 16000
-    ref_text_policy = RefTextPolicy.IGNORED
-    supported_langs = ("en", "fr", "pt")
+    ref_text_policy = RefTextPolicy.OPTIONAL
+    supported_langs = ("en", "fr", "pt-BR")
 
     def load(self): ...
     def prepare_voice(self, ref_audio_path, ref_text, extras): ...

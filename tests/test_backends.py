@@ -19,7 +19,7 @@ def test_register_all_populates_shipped_backends():
     assert set(backends.names()) == {
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
         "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits", "xtts-v2",
-        "indextts-2", "neutts-air", "spark-tts", "dia2",
+        "indextts-2", "neutts-air", "spark-tts", "dia2", "yourtts",
     }
 
 
@@ -782,6 +782,92 @@ def test_dia2_synthesize_rejects_unsupported_lang_and_empty_output():
 
     with pytest.raises(ValueError, match="does not support lang='fr'"):
         backend.synthesize("bonjour", prepared, lang="fr")
+    with pytest.raises(RuntimeError, match="produced no output"):
+        backend.synthesize("hello", prepared, lang="en")
+
+
+def test_yourtts_metadata():
+    from backends.yourtts import YourTTSBackend
+
+    backend = YourTTSBackend()
+
+    assert backend.name == "yourtts"
+    assert backend.display_name == "YourTTS (Coqui VITS, open source)"
+    assert backend.sample_rate == 16000
+    assert backend.ref_text_policy is RefTextPolicy.OPTIONAL
+    assert backend.supported_langs == ("en", "fr", "pt-BR")
+
+
+def test_yourtts_prepare_voice_allows_optional_ref_text():
+    from backends.yourtts import YourTTSBackend
+
+    backend = YourTTSBackend()
+    prepared = backend.prepare_voice("/tmp/ref.wav", "  reference transcript  ", {})
+
+    assert prepared.ref_audio_path == "/tmp/ref.wav"
+    assert prepared.ref_text == "reference transcript"
+    assert prepared.extras == {}
+
+
+def test_yourtts_rejects_unknown_extras():
+    from backends.yourtts import YourTTSBackend
+
+    backend = YourTTSBackend()
+
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.validate_extras({"temperature": 0.8})
+
+
+def test_yourtts_synthesize_calls_coqui_tts_with_language_mapping():
+    import numpy as np
+    from backends.yourtts import YourTTSBackend
+
+    backend = YourTTSBackend()
+    captured_kwargs = {}
+
+    class _YourTTS:
+        def tts(self, **kwargs):
+            captured_kwargs.update(kwargs)
+            return np.array([[0.1, -0.2]], dtype=np.float64)
+
+    backend._model = _YourTTS()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    audio, sr = backend.synthesize("bonjour", prepared, lang="fr")
+
+    assert sr == 16000
+    assert audio.dtype == np.float32
+    assert np.allclose(audio, [0.1, -0.2])
+    assert captured_kwargs == {
+        "text": "bonjour",
+        "speaker_wav": "/tmp/ref.wav",
+        "language": "fr-fr",
+    }
+
+
+def test_yourtts_synthesize_rejects_unsupported_lang_and_empty_output():
+    import numpy as np
+    from backends.yourtts import YourTTSBackend
+
+    backend = YourTTSBackend()
+
+    class _YourTTS:
+        def tts(self, **kwargs):
+            return np.array([], dtype=np.float32)
+
+    backend._model = _YourTTS()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(ValueError, match="does not support lang='pt'"):
+        backend.synthesize("ola", prepared, lang="pt")
     with pytest.raises(RuntimeError, match="produced no output"):
         backend.synthesize("hello", prepared, lang="en")
 

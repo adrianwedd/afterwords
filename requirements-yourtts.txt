@@ -1,0 +1,10 @@
+# Optional YourTTS backend dependencies.
+#
+# Install these only if you plan to use backend=yourtts voice profiles:
+#   pip install -r requirements-yourtts.txt
+#
+# YourTTS uses the same Coqui TTS package family as XTTS v2; this file mirrors
+# requirements-xtts.txt so either optional backend can be installed on its own.
+TTS>=0.22
+torch>=2.1
+torchaudio>=2.1
