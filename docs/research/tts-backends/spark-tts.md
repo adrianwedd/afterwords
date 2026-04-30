@@ -1,33 +1,36 @@
 ## Spark-TTS
 
-**Repo:** https://github.com/Spark-TTS/Spark-TTS
-**License:** Open Source
+**Repo:** https://github.com/SparkAudio/Spark-TTS
+**License:** Code is Apache-2.0; `SparkAudio/Spark-TTS-0.5B` weights are CC-BY-NC-SA 4.0, non-commercial
 **Size:** 0.5B, 2.0 GB
 **Sample rate:** 24000
-**Languages:** multilingual
-**Apple Silicon path:** PyTorch+MPS — Note: Model architecture leverages a decoupled token approach which translates nicely to standard PyTorch MPS ops.
+**Languages:** en/zh, with cross-lingual and code-switching cloning examples upstream
+**Apple Silicon path:** PyTorch+MPS via `SPARK_TTS_DEVICE=mps`; upstream primarily documents Linux/CUDA, so expect occasional `PYTORCH_ENABLE_MPS_FALLBACK=1` use on Apple Silicon.
 
 ### Install
 ```bash
-git clone https://github.com/Spark-TTS/Spark-TTS.git
+git clone https://github.com/SparkAudio/Spark-TTS.git
 cd Spark-TTS
 pip install -r requirements.txt
 ```
 
 ### Model download
 ```bash
-huggingface-cli download Spark-TTS/Spark-TTS-0.5B
+huggingface-cli download SparkAudio/Spark-TTS-0.5B
 ```
 Disk: 2.0 GB
 
 ### Python API for cloning
 ```python
-from sparktts import SparkTTS
+from pathlib import Path
+import torch
+from cli.SparkTTS import SparkTTS
 
-model = SparkTTS.from_pretrained("Spark-TTS/Spark-TTS-0.5B").to("mps")
-wav_out = model.generate(
+model = SparkTTS(Path("pretrained_models/Spark-TTS-0.5B"), device=torch.device("mps"))
+wav_out = model.inference(
     text="This is a test sentence.",
-    prompt_audio="reference.wav"
+    prompt_speech_path=Path("reference.wav"),
+    prompt_text=None,
 )
 ```
 
@@ -37,10 +40,10 @@ wav_out = model.generate(
 from backends.base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
 
 class SparkTTSBackend(BackendBase):
-    name = "spark_tts"
+    name = "spark-tts"
     sample_rate = 24000
     ref_text_policy = RefTextPolicy.OPTIONAL
-    supported_langs = ("multilingual",)
+    supported_langs = ("en", "zh")
 
     def load(self): ...
     def prepare_voice(self, ref_audio_path, ref_text, extras): ...

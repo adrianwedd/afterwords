@@ -1,0 +1,28 @@
+# Optional Spark-TTS backend dependencies.
+#
+# Install these only if you plan to use backend=spark-tts voice profiles:
+#   pip install -r requirements-spark-tts.txt
+#
+# Clone the Spark-TTS source separately; the backend adds this default path to
+# PYTHONPATH when it exists, or set SPARK_TTS_REPO_DIR:
+#   git clone https://github.com/SparkAudio/Spark-TTS.git \
+#     backends/extras/spark-tts/Spark-TTS
+#
+# Download weights separately; the backend does not auto-download them:
+#   huggingface-cli download SparkAudio/Spark-TTS-0.5B \
+#     --local-dir backends/extras/spark-tts/Spark-TTS-0.5B
+#
+# Spark-TTS code is Apache-2.0. Spark-TTS-0.5B weights are CC-BY-NC-SA 4.0
+# and non-commercial per the Hugging Face model card.
+einops==0.8.1
+einx==0.3.0
+numpy==2.2.3
+omegaconf==2.3.0
+packaging==24.2
+safetensors==0.5.2
+soundfile==0.12.1
+soxr==0.5.0.post1
+torch==2.5.1
+torchaudio==2.5.1
+tqdm==4.66.5
+transformers==4.46.2
