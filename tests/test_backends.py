@@ -19,7 +19,7 @@ def test_register_all_populates_shipped_backends():
     assert set(backends.names()) == {
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
         "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits", "xtts-v2",
-        "indextts-2", "neutts-air", "spark-tts",
+        "indextts-2", "neutts-air", "spark-tts", "dia2",
     }
 
 
@@ -635,6 +635,153 @@ def test_spark_tts_synthesize_rejects_unsupported_lang_and_empty_output():
 
     with pytest.raises(ValueError, match="does not support lang='ja'"):
         backend.synthesize("konnichiwa", prepared, lang="ja")
+    with pytest.raises(RuntimeError, match="produced no output"):
+        backend.synthesize("hello", prepared, lang="en")
+
+
+def test_dia2_metadata():
+    from backends.dia2 import Dia2Backend
+
+    backend = Dia2Backend()
+
+    assert backend.name == "dia2"
+    assert backend.display_name == "Dia2 (Nari Labs Apache-2.0)"
+    assert backend.sample_rate == 44000
+    assert backend.ref_text_policy is RefTextPolicy.OPTIONAL
+    assert backend.supported_langs == ("en",)
+
+
+def test_dia2_prepare_voice_allows_optional_ref_text():
+    from backends.dia2 import Dia2Backend
+
+    backend = Dia2Backend()
+    prepared = backend.prepare_voice(
+        "/tmp/ref.wav",
+        "  reference transcript  ",
+        {"temperature": 0.7, "top_k": 40, "cfg_scale": 3.0},
+    )
+
+    assert prepared.ref_audio_path == "/tmp/ref.wav"
+    assert prepared.ref_text == "reference transcript"
+    assert prepared.extras["temperature"] == 0.7
+    assert prepared.extras["top_k"] == 40
+    assert prepared.extras["cfg_scale"] == 3.0
+
+
+def test_dia2_validate_extras_rejects_unknown_and_invalid_values():
+    from backends.dia2 import Dia2Backend
+
+    backend = Dia2Backend()
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.validate_extras({"speed": 1.1})
+    with pytest.raises(ValueError, match="top_k must be an integer"):
+        backend.validate_extras({"top_k": 12.5})
+    with pytest.raises(ValueError, match="temperature must be > 0"):
+        backend.validate_extras({"temperature": 0})
+    with pytest.raises(ValueError, match="use_cuda_graph must be boolean"):
+        backend.validate_extras({"use_cuda_graph": "yes"})
+
+
+def test_dia2_synthesize_builds_dialogue_script_and_config():
+    import numpy as np
+    from backends.dia2 import Dia2Backend
+
+    backend = Dia2Backend()
+    captured = {}
+
+    class _SamplingConfig:
+        def __init__(self, **kwargs):
+            self.kwargs = kwargs
+
+    class _PrefixConfig:
+        def __init__(self, **kwargs):
+            self.kwargs = kwargs
+
+    class _GenerationConfig:
+        def __init__(self, **kwargs):
+            self.kwargs = kwargs
+
+    class _Dia2:
+        def generate(self, script, **kwargs):
+            captured["script"] = script
+            captured.update(kwargs)
+            return type(
+                "Result",
+                (),
+                {"waveform": np.array([[0.1, -0.2]], dtype=np.float64), "sample_rate": 44000},
+            )()
+
+    backend._model = _Dia2()
+    backend._SamplingConfig = _SamplingConfig
+    backend._PrefixConfig = _PrefixConfig
+    backend._GenerationConfig = _GenerationConfig
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({
+            "text_temperature": 0.55,
+            "text_top_k": 35,
+            "audio_temperature": 0.75,
+            "audio_top_k": 45,
+            "cfg_scale": 4.0,
+            "cfg_filter_k": 60,
+            "initial_padding": 3,
+            "use_cuda_graph": True,
+            "include_prefix": False,
+        }),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+
+    assert sr == 44000
+    assert audio.dtype == np.float32
+    assert np.allclose(audio, [0.1, -0.2])
+    assert captured["script"] == "[S1] hello"
+    assert captured["prefix_speaker_1"] == "/tmp/ref.wav"
+    assert captured["include_prefix"] is False
+    config = captured["config"]
+    assert config.kwargs["text"].kwargs == {"temperature": 0.55, "top_k": 35}
+    assert config.kwargs["audio"].kwargs == {"temperature": 0.75, "top_k": 45}
+    assert config.kwargs["cfg_scale"] == 4.0
+    assert config.kwargs["cfg_filter_k"] == 60
+    assert config.kwargs["initial_padding"] == 3
+    assert config.kwargs["use_cuda_graph"] is True
+
+
+def test_dia2_synthesize_rejects_unsupported_lang_and_empty_output():
+    import numpy as np
+    from backends.dia2 import Dia2Backend
+
+    backend = Dia2Backend()
+
+    class _SamplingConfig:
+        def __init__(self, **kwargs):
+            pass
+
+    class _PrefixConfig:
+        def __init__(self, **kwargs):
+            pass
+
+    class _GenerationConfig:
+        def __init__(self, **kwargs):
+            pass
+
+    class _Dia2:
+        def generate(self, script, **kwargs):
+            return type("Result", (), {"waveform": np.array([], dtype=np.float32)})()
+
+    backend._model = _Dia2()
+    backend._SamplingConfig = _SamplingConfig
+    backend._PrefixConfig = _PrefixConfig
+    backend._GenerationConfig = _GenerationConfig
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(ValueError, match="does not support lang='fr'"):
+        backend.synthesize("bonjour", prepared, lang="fr")
     with pytest.raises(RuntimeError, match="produced no output"):
         backend.synthesize("hello", prepared, lang="en")
 

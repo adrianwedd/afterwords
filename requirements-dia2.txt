@@ -1,0 +1,12 @@
+# Optional Dia2 backend dependencies.
+# Upstream currently recommends uv/CUDA, but this file keeps Afterwords' optional
+# backend install pattern consistent.
+git+https://github.com/nari-labs/dia2.git
+torch>=2.8.0
+numpy>=2.1.0,<3.0
+transformers>=4.55.3
+safetensors==0.5.3
+huggingface-hub>=0.24.7
+sphn>=0.2.0
+soundfile>=0.12.1
+whisper-timestamped>=1.14.2
