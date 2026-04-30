@@ -393,10 +393,27 @@ cmd_codex_hook() {
     local subcommand="${1:-status}"
     local watcher="${REPO_DIR}/${CODEX_WATCH_SCRIPT_REL}"
     local pid=""
+    local diagnose=""
+
+    codex_watch_log_tail() {
+        if [ -s "$CODEX_WATCH_LOG" ]; then
+            info "Recent watcher log:"
+            tail -20 "$CODEX_WATCH_LOG" | sed 's/^/    /'
+        else
+            warn "Watcher log is empty: ${CODEX_WATCH_LOG}"
+        fi
+    }
 
     case "$subcommand" in
         start)
+            diagnose="${2:-}"
             [ -f "$watcher" ] || fail "Watcher script not found at ${watcher}"
+            if [ "$diagnose" = "--diagnose" ]; then
+                CODEX_THREAD_ID="${CODEX_THREAD_ID:-}" PROJECT_DIR="$REPO_DIR" CODEX_WATCH_LOG="$CODEX_WATCH_LOG" \
+                    bash "$watcher" --diagnose
+                return $?
+            fi
+            [ -z "$diagnose" ] || fail "Unknown codex-hook start option: ${diagnose}. Use --diagnose."
             [ -n "${CODEX_THREAD_ID:-}" ] || fail "CODEX_THREAD_ID is not set. Run inside Codex CLI or export it first."
 
             if [ -f "$CODEX_WATCH_PID" ]; then
@@ -410,9 +427,17 @@ cmd_codex_hook() {
                 rm -f "$CODEX_WATCH_PID"
             fi
 
-            nohup env CODEX_THREAD_ID="$CODEX_THREAD_ID" PROJECT_DIR="$REPO_DIR" \
-                bash "$watcher" >"$CODEX_WATCH_LOG" 2>&1 &
+            : > "$CODEX_WATCH_LOG"
+            nohup env CODEX_THREAD_ID="$CODEX_THREAD_ID" PROJECT_DIR="$REPO_DIR" CODEX_WATCH_LOG="$CODEX_WATCH_LOG" \
+                bash "$watcher" >>"$CODEX_WATCH_LOG" 2>&1 &
             pid=$!
+            sleep 0.5
+            if ! kill -0 "$pid" 2>/dev/null; then
+                wait "$pid" 2>/dev/null
+                rm -f "$CODEX_WATCH_PID"
+                codex_watch_log_tail
+                fail "Codex watcher failed to start"
+            fi
             echo "$pid" > "$CODEX_WATCH_PID"
             ok "Codex watcher started (PID ${pid})"
             info "Thread: ${DIM}${CODEX_THREAD_ID}${NC}"
@@ -444,9 +469,11 @@ cmd_codex_hook() {
                     ok "Codex watcher running (PID ${pid})"
                 else
                     warn "Codex watcher pid file exists but process is not running"
+                    codex_watch_log_tail
                 fi
             else
                 warn "Codex watcher is not running"
+                codex_watch_log_tail
             fi
             info "Log: ${DIM}${CODEX_WATCH_LOG}${NC}"
             ;;
@@ -544,7 +571,7 @@ cmd_help() {
     echo -e "  ${BOLD}Options:${NC}"
     echo -e "    ${DIM}voices --demo${NC}    Play a sample of each voice"
     echo -e "    ${DIM}clone URL NAME [START] [--yes]${NC}"
-    echo -e "    ${DIM}codex-hook start${NC}"
+    echo -e "    ${DIM}codex-hook start [--diagnose]${NC}"
     echo
     echo -e "  ${BOLD}Examples:${NC}"
     echo -e "    ${DIM}afterwords start${NC}"
