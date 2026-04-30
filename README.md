@@ -220,7 +220,7 @@ The skill handles voice selection, server health checks, synthesis, and playback
 
 ### Voice Cloning (Zero-Shot)
 
-No training or fine-tuning. The default MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), VoxCPM 1.5 (ModelBest, en/zh), and Voxtral 4B (preset voices). OpenVoice v2 is available as an optional PyTorch/MeloTTS backend for zero-shot multilingual cloning in en/es/fr/zh/ja/ko. F5-TTS is available as an optional PyTorch backend using the flow-matching DiT `F5TTS_v1_Base` model for en/zh; its default pretrained weights are CC-BY-NC 4.0 and are not for commercial use. CosyVoice2-0.5B is available as an optional Apache-2.0 PyTorch backend for multilingual zero-shot cloning. GPT-SoVITS is available as an optional MIT-licensed PyTorch backend for few-shot cloning in en/zh/ja/ko/yue. XTTS v2 is available as an optional Coqui TTS backend for 17-language zero-shot cloning; its CPML weights are non-commercial only. IndexTTS-2 is available as an optional PyTorch backend for expressive en/zh zero-shot cloning with emotion controls; its bilibili model license includes usage restrictions. NeuTTS Air is available as an optional Apache-2.0 CPU-first backend for English zero-shot cloning via Neuphonic's `neutts` package. Spark-TTS is available as an optional LLM+BiCodec PyTorch backend for en/zh zero-shot cloning and code-switching; its published 0.5B weights are CC-BY-NC-SA 4.0 and non-commercial. Dia2 is available as an optional Apache-2.0 PyTorch backend for English dialogue-oriented voice conditioning with `[S1]`/`[S2]` speaker tags and nonverbal cues. YourTTS is available as an optional open-source Coqui VITS backend for lightweight en/fr/pt-BR zero-shot cloning at 16 kHz.
+No training or fine-tuning. The default MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), VoxCPM 1.5 (ModelBest, en/zh), and Voxtral 4B (preset voices). OpenVoice v2 is available as an optional PyTorch/MeloTTS backend for zero-shot multilingual cloning in en/es/fr/zh/ja/ko. F5-TTS is available as an optional PyTorch backend using the flow-matching DiT `F5TTS_v1_Base` model for en/zh; its default pretrained weights are CC-BY-NC 4.0 and are not for commercial use. CosyVoice2-0.5B is available as an optional Apache-2.0 PyTorch backend for multilingual zero-shot cloning. GPT-SoVITS is available as an optional MIT-licensed PyTorch backend for few-shot cloning in en/zh/ja/ko/yue. XTTS v2 is available as an optional Coqui TTS backend for 17-language zero-shot cloning; its CPML weights are non-commercial only. IndexTTS-2 is available as an optional PyTorch backend for expressive en/zh zero-shot cloning with emotion controls; its bilibili model license includes usage restrictions. NeuTTS Air is available as an optional Apache-2.0 CPU-first backend for English zero-shot cloning via Neuphonic's `neutts` package. Spark-TTS is available as an optional LLM+BiCodec PyTorch backend for en/zh zero-shot cloning and code-switching; its published 0.5B weights are CC-BY-NC-SA 4.0 and non-commercial. Dia2 is available as an optional Apache-2.0 PyTorch backend for English dialogue-oriented voice conditioning with `[S1]`/`[S2]` speaker tags and nonverbal cues. YourTTS is available as an optional open-source Coqui VITS backend for lightweight en/fr/pt-BR zero-shot cloning at 16 kHz. FireRedTTS-2 is available as an optional Apache-2.0 PyTorch backend for long conversational and podcast-style multilingual zero-shot cloning.
 
 | Backend | License | Languages | Sample rate | Reference text |
 |---------|---------|-----------|-------------|----------------|
@@ -238,6 +238,7 @@ No training or fine-tuning. The default MLX-based backends extract speaker embed
 | `spark-tts` | Apache-2.0 code; CC-BY-NC-SA 4.0 weights | en/zh | 24 kHz | optional |
 | `dia2` | Apache-2.0 | en | 44 kHz | optional |
 | `yourtts` | Open source | en/fr/pt-BR | 16 kHz | optional |
+| `firered-tts-2` | Apache-2.0 | en/zh/ja/ko/fr/de/ru | 24 kHz | optional |
 
 Voice profiles pin to a specific backend via the `backend` JSON field. The shipped flagship voices (picard, galadriel, attenborough) have per-backend variants so you can compare clone fidelity across models — Qwen3 sizes are the most reliable cloners in the current stack; see the [demo site](https://adrianwedd.github.io/afterwords/) for audible comparison.
 
@@ -252,7 +253,7 @@ GET  /health
 
        Current backend ids:
        qwen3-0.6b, qwen3-1.7b, chatterbox, voxcpm-1.5, voxtral, openvoice-v2, f5-tts, cosyvoice2,
-       gpt-sovits, xtts-v2, indextts-2, neutts-air, spark-tts, dia2, yourtts
+       gpt-sovits, xtts-v2, indextts-2, neutts-air, spark-tts, dia2, yourtts, firered-tts-2
 
 GET  /synthesize?text=Hello&voice=galadriel&lang=en
        → audio/wav (16-bit PCM)

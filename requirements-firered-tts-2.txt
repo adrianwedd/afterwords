@@ -1,0 +1,24 @@
+# Optional FireRedTTS-2 backend dependencies.
+#
+# Install these only if you plan to use backend=firered-tts-2 voice profiles:
+#   pip install -r requirements-firered-tts-2.txt
+#
+# Download weights separately; the backend does not auto-download them:
+#   git lfs install
+#   git clone https://huggingface.co/FireRedTeam/FireRedTTS2 \
+#     backends/extras/firered-tts-2/FireRedTTS2
+#
+# FireRedTTS-2 code and weights are Apache-2.0. Upstream is CUDA-first; set
+# FIRERED_TTS_2_DEVICE=mps/cpu/cuda to override device selection.
+git+https://github.com/FireRedTeam/FireRedTTS2.git
+torch>=2.7.1
+torchaudio>=2.7.1
+torchvision>=0.22.1
+torchtune
+torchao
+transformers
+einops
+librosa
+optuna
+accelerate
+tensorboard

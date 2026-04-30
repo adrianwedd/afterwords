@@ -1,46 +1,53 @@
 ## FireRedTTS-2
 
-**Repo:** https://github.com/FireRedTeam/FireRedTTS
-**License:** Open Source
-**Size:** 1.5B, 3.0 GB
+**Repo:** https://github.com/FireRedTeam/FireRedTTS2
+**License:** Apache-2.0
+**Size:** 1.5B, ~3.0 GB
 **Sample rate:** 24000
-**Languages:** multilingual
-**Apple Silicon path:** PyTorch+MPS — Note: Handles long conversational generation well; entirely viable on M5 given enough context buffer.
+**Languages:** en, zh, ja, ko, fr, de, ru
+**Apple Silicon path:** PyTorch+MPS — upstream is CUDA-first, but the backend enables MPS fallback and allows `FIRERED_TTS_2_DEVICE=mps/cpu/cuda`.
 
 ### Install
 ```bash
-git clone https://github.com/FireRedTeam/FireRedTTS.git
-cd FireRedTTS
-pip install -r requirements.txt torch torchaudio
+git clone https://github.com/FireRedTeam/FireRedTTS2.git
+cd FireRedTTS2
+pip install -e .
+pip install -r requirements.txt torch torchaudio torchvision
 ```
 
 ### Model download
 ```bash
-huggingface-cli download FireRedTeam/FireRedTTS-2
+git lfs install
+git clone https://huggingface.co/FireRedTeam/FireRedTTS2 pretrained_models/FireRedTTS2
 ```
 Disk: 3.0 GB
 
 ### Python API for cloning
 ```python
-from fireredtts import FireRedTTS
+from fireredtts2.fireredtts2 import FireRedTTS2
 
-model = FireRedTTS.from_pretrained("FireRedTeam/FireRedTTS-2").to("mps")
-audio = model.synthesize(
+model = FireRedTTS2(
+    pretrained_dir="./pretrained_models/FireRedTTS2",
+    gen_type="monologue",
+    device="mps",
+)
+audio = model.generate_monologue(
     text="This is a test sentence.",
-    ref_audio="reference.wav"
+    prompt_wav="reference.wav",
+    prompt_text=None,
 )
 ```
 
 ### Backend protocol skeleton
 ```python
-# backends/fireredtts_2.py
+# backends/firered_tts_2.py
 from backends.base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
 
 class FireRedTTS2Backend(BackendBase):
-    name = "fireredtts_2"
+    name = "firered-tts-2"
     sample_rate = 24000
     ref_text_policy = RefTextPolicy.OPTIONAL
-    supported_langs = ("multilingual",)
+    supported_langs = ("en", "zh", "ja", "ko", "fr", "de", "ru")
 
     def load(self): ...
     def prepare_voice(self, ref_audio_path, ref_text, extras): ...
