@@ -1,0 +1,18 @@
+# Optional SoproTTS backend dependencies.
+#
+# Install these only if you plan to use backend=soprotts voice profiles:
+#   pip install -r requirements-soprotts.txt
+#
+# The backend uses the upstream PyPI package and downloads the default model
+# from Hugging Face on first load. Override the repo id with SOPROTTS_MODEL and
+# the torch device with SOPROTTS_DEVICE. Upstream's current Mac guidance is CPU.
+sopro>=1.5.0
+torch>=2.1
+torchaudio>=2.1
+soundfile>=0.12.1
+numpy>=1.23
+transformers>=4.46.0
+huggingface_hub>=0.23
+safetensors>=0.4.3
+sentencepiece>=0.1.99
+tqdm>=4.66

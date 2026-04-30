@@ -1,31 +1,34 @@
 ## SoproTTS
 
-**Repo:** https://github.com/SoproTTS/sopro-tts
-**License:** Open Source
+**Repo:** https://github.com/samuel-vitorino/sopro
+**License:** Apache-2.0
 **Size:** 0.135B, 0.6 GB
 **Sample rate:** 24000
-**Languages:** multilingual
-**Apple Silicon path:** PyTorch+MPS — Note: Highly optimized for minimal hardware; runs ~20x real-time on M-series chips.
+**Languages:** en
+**Apple Silicon path:** PyTorch CPU by default. Upstream reports ~20x real-time on a base M3 CPU; set `SOPROTTS_DEVICE` to opt into another torch device.
+
+### Verification note
+The original research stub pointed to `SoproTTS/sopro-tts` and claimed multilingual support. That appears stale. The real upstream is `samuel-vitorino/sopro`; its README currently describes Sopro as a lightweight English TTS model with zero-shot voice cloning, not a multilingual model.
 
 ### Install
 ```bash
-pip install soprotts torch torchaudio
+pip install sopro torch torchaudio
 ```
 
 ### Model download
 ```bash
-huggingface-cli download SoproTTS/sopro-tts-1.5
+huggingface-cli download samuel-vitorino/sopro
 ```
 Disk: 0.6 GB
 
 ### Python API for cloning
 ```python
-from soprotts import SoproTTS
+from sopro import SoproTTS
 
-model = SoproTTS.from_pretrained("SoproTTS/sopro-tts-1.5").to("mps")
+model = SoproTTS.from_pretrained("samuel-vitorino/sopro", device="cpu")
 audio = model.synthesize(
     text="This is a test sentence.",
-    ref_audio="reference.wav"
+    ref_audio_path="reference.wav"
 )
 ```
 
@@ -35,10 +38,10 @@ audio = model.synthesize(
 from backends.base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
 
 class SoproTTSBackend(BackendBase):
-    name = "sopro_tts"
+    name = "soprotts"
     sample_rate = 24000
-    ref_text_policy = RefTextPolicy.IGNORED
-    supported_langs = ("multilingual",)
+    ref_text_policy = RefTextPolicy.OPTIONAL
+    supported_langs = ("en",)
 
     def load(self): ...
     def prepare_voice(self, ref_audio_path, ref_text, extras): ...
@@ -46,6 +49,9 @@ class SoproTTSBackend(BackendBase):
 ```
 
 ### Notes for afterwords integration
-- SoproTTS is uniquely small (only 135M parameters) and heavily optimized for zero-shot tasks without taking up massive GPU bandwidth. It operates flawlessly out-of-the-box on MPS, and `ref_text` is generally ignored. Its behavior is exceptionally stable, but because it relies strictly on acoustic prompt extraction, make sure the sample provided in `prepare_voice` is tightly cropped around active speech, as its lighter attention span might become confused by excessive dead air.
+- SoproTTS is small (135M parameters) and optimized for zero-shot cloning with a 3-12 second reference audio clip.
+- The upstream package exposes `SoproTTS.from_pretrained("samuel-vitorino/sopro", device=...)`, `prepare_reference(ref_audio_path=...)`, and `synthesize(text, ref=...)` / `synthesize(text, ref_audio_path=...)`.
+- `ref_text` is optional for Afterwords metadata consistency but is not used by the upstream synthesis API.
+- Generation is currently English-only per upstream docs. Do not advertise multilingual routing until upstream ships and documents multilingual support.
 
 ---
