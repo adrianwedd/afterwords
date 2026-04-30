@@ -1,34 +1,42 @@
 ## NeuTTS Air
 
-**Repo:** Proprietary (Neuphonic SDK/CLI)
-**License:** Proprietary
-**Size:** 0.748B, 1.5 GB
+**Repo:** https://github.com/neuphonic/neutts
+**Model:** https://huggingface.co/neuphonic/neutts-air
+**License:** Apache-2.0 for NeuTTS Air model weights; the `neutts` package also
+ships NeuTTS Nano models under the NeuTTS Open License 1.0.
+**Size:** ~0.7B params / 1.5 GB BF16; Q4/Q8 GGUF quantizations are available.
 **Sample rate:** 24000
 **Languages:** en-only
-**Apple Silicon path:** CPU-only — Note: This is an on-device embedded engine packaged with compiled libraries specifically optimized to run without cloud reliance or heavy GPU scaffolding.
+**Apple Silicon path:** CPU-first GGUF via `llama-cpp-python` + NeuCodec. This is
+not CoreML; upstream recommends Apple Accelerate builds for `llama-cpp-python`.
 
 ### Install
 ```bash
-# Requires an SDK license and proprietary wheel file from Neuphonic
-pip install neuphonic-air-sdk
+# Requires espeak-ng as a system dependency.
+brew install espeak-ng
+
+pip install "neutts[llama,onnx]"
 ```
 
 ### Model download
 ```bash
-# Provided securely via SDK initialization or authenticated endpoint
-neuphonic download --model air-0.7b
+# No separate SDK-authenticated download step. The neutts package downloads from
+# Hugging Face on first load unless model files are already cached.
 ```
 Disk: 1.5 GB
 
 ### Python API for cloning
 ```python
-from neuphonic import NeuTTS
+from neutts import NeuTTS
 
-model = NeuTTS(model_name="air-0.7b")
-audio = model.synthesize(
-    text="This is a test sentence.",
-    ref_audio="reference.wav"
+tts = NeuTTS(
+    backbone_repo="neuphonic/neutts-air-q4-gguf",
+    backbone_device="cpu",
+    codec_repo="neuphonic/neucodec-onnx-decoder",
+    codec_device="cpu",
 )
+ref_codes = tts.encode_reference("reference.wav")
+audio = tts.infer("This is a test sentence.", ref_codes, "reference transcript")
 ```
 
 ### Backend protocol skeleton
@@ -37,9 +45,9 @@ audio = model.synthesize(
 from backends.base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
 
 class NeuTTSAirBackend(BackendBase):
-    name = "neutts_air"
+    name = "neutts-air"
     sample_rate = 24000
-    ref_text_policy = RefTextPolicy.IGNORED
+    ref_text_policy = RefTextPolicy.OPTIONAL
     supported_langs = ("en",)
 
     def load(self): ...
@@ -48,4 +56,12 @@ class NeuTTSAirBackend(BackendBase):
 ```
 
 ### Notes for afterwords integration
-- As a proprietary model running highly compressed CoreML or specialized CPU operations, NeuTTS Air sidesteps standard PyTorch/MPS bottlenecks completely. Its integration will likely be the most stable of the bunch for the M5 due to its specialized environment. The main quirk here is managing the SDK authentication logic (if required) within the `load` function, and verifying that threading models inside afterwords don't conflict with Neuphonic's compiled C++ bindings execution lock.
+- NeuTTS Air is open-weight and local; no Neuphonic SDK authentication is
+  required.
+- Upstream expects reference audio plus reference text. Afterwords can treat the
+  transcript as optional for profile compatibility, but quality is best when it
+  is present.
+- Pre-encode references in `prepare_voice()` with `encode_reference()` so normal
+  synthesis only calls `infer(text, ref_codes, ref_text)`.
+- Keep imports lazy in `load()` because `neutts` pulls in Torch, Transformers,
+  llama-cpp-python, phonemizer, and codec dependencies.

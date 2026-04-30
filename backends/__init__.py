@@ -38,6 +38,7 @@ def register_all() -> None:
     from .gpt_sovits import GPTSoVITSBackend
     from .xtts_v2 import XTTSv2Backend
     from .indextts_2 import IndexTTS2Backend
+    from .neutts_air import NeuTTSAirBackend
 
     register(Qwen3Backend(size="0.6B"))
     register(Qwen3Backend(size="1.7B"))
@@ -50,6 +51,7 @@ def register_all() -> None:
     register(GPTSoVITSBackend())
     register(XTTSv2Backend())
     register(IndexTTS2Backend())
+    register(NeuTTSAirBackend())
 
 
 def reset_for_tests() -> None:

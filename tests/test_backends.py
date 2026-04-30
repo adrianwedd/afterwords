@@ -19,7 +19,7 @@ def test_register_all_populates_shipped_backends():
     assert set(backends.names()) == {
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
         "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits", "xtts-v2",
-        "indextts-2",
+        "indextts-2", "neutts-air",
     }
 
 
@@ -428,6 +428,110 @@ def test_indextts2_synthesize_raises_on_empty_output():
         extras=_read_only({}),
     )
 
+    with pytest.raises(RuntimeError, match="produced no output"):
+        backend.synthesize("hello", prepared, lang="en")
+
+
+def test_neutts_air_metadata():
+    from backends.neutts_air import NeuTTSAirBackend
+
+    backend = NeuTTSAirBackend()
+
+    assert backend.name == "neutts-air"
+    assert backend.display_name == "NeuTTS Air (Apache-2.0)"
+    assert backend.sample_rate == 24000
+    assert backend.ref_text_policy is RefTextPolicy.OPTIONAL
+    assert backend.supported_langs == ("en",)
+
+
+def test_neutts_air_prepare_voice_preencodes_reference_when_loaded():
+    import numpy as np
+    from backends.neutts_air import NeuTTSAirBackend
+
+    backend = NeuTTSAirBackend()
+
+    class _NeuTTS:
+        def encode_reference(self, ref_audio_path):
+            assert ref_audio_path == "/tmp/ref.wav"
+            return np.array([1, 2, 3], dtype=np.int64)
+
+    backend._model = _NeuTTS()
+
+    prepared = backend.prepare_voice("/tmp/ref.wav", " reference text ", {})
+
+    assert prepared.ref_audio_path == "/tmp/ref.wav"
+    assert prepared.ref_text == "reference text"
+    assert np.array_equal(prepared.extras["ref_codes"], np.array([1, 2, 3]))
+
+
+def test_neutts_air_rejects_unknown_extras():
+    from backends.neutts_air import NeuTTSAirBackend
+
+    backend = NeuTTSAirBackend()
+
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.validate_extras({"temperature": 0.8})
+
+
+def test_neutts_air_synthesize_uses_preencoded_reference():
+    import numpy as np
+    from backends.neutts_air import NeuTTSAirBackend
+
+    backend = NeuTTSAirBackend()
+    captured = {}
+
+    class _NeuTTS:
+        def encode_reference(self, ref_audio_path):
+            raise AssertionError("preencoded ref_codes should be reused")
+
+        def infer(self, text, ref_codes, ref_text):
+            captured["text"] = text
+            captured["ref_codes"] = ref_codes
+            captured["ref_text"] = ref_text
+            return np.array([[0.1, -0.2]], dtype=np.float64)
+
+    ref_codes = np.array([4, 5, 6], dtype=np.int64)
+    backend._model = _NeuTTS()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text="reference text",
+        extras=_read_only({"ref_codes": ref_codes}),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+
+    assert sr == 24000
+    assert audio.dtype == np.float32
+    assert np.allclose(audio, [0.1, -0.2])
+    assert captured == {
+        "text": "hello",
+        "ref_codes": ref_codes,
+        "ref_text": "reference text",
+    }
+
+
+def test_neutts_air_synthesize_rejects_unsupported_lang_and_empty_output():
+    import numpy as np
+    from backends.neutts_air import NeuTTSAirBackend
+
+    backend = NeuTTSAirBackend()
+
+    class _NeuTTS:
+        def encode_reference(self, ref_audio_path):
+            return [1]
+
+        def infer(self, text, ref_codes, ref_text):
+            return np.array([], dtype=np.float32)
+
+    backend._model = _NeuTTS()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(ValueError, match="does not support lang='fr'"):
+        backend.synthesize("bonjour", prepared, lang="fr")
     with pytest.raises(RuntimeError, match="produced no output"):
         backend.synthesize("hello", prepared, lang="en")
 
