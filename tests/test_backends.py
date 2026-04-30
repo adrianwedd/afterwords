@@ -20,6 +20,7 @@ def test_register_all_populates_shipped_backends():
         "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
         "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits", "xtts-v2",
         "indextts-2", "neutts-air", "spark-tts", "dia2", "yourtts",
+        "firered-tts-2",
     }
 
 
@@ -868,6 +869,104 @@ def test_yourtts_synthesize_rejects_unsupported_lang_and_empty_output():
 
     with pytest.raises(ValueError, match="does not support lang='pt'"):
         backend.synthesize("ola", prepared, lang="pt")
+    with pytest.raises(RuntimeError, match="produced no output"):
+        backend.synthesize("hello", prepared, lang="en")
+
+
+def test_firered_tts_2_metadata():
+    from backends.firered_tts_2 import FireRedTTS2Backend
+
+    backend = FireRedTTS2Backend()
+
+    assert backend.name == "firered-tts-2"
+    assert backend.display_name == "FireRedTTS-2 (Apache-2.0)"
+    assert backend.sample_rate == 24000
+    assert backend.ref_text_policy is RefTextPolicy.OPTIONAL
+    assert backend.supported_langs == ("en", "zh", "ja", "ko", "fr", "de", "ru")
+
+
+def test_firered_tts_2_prepare_voice_allows_optional_ref_text():
+    from backends.firered_tts_2 import FireRedTTS2Backend
+
+    backend = FireRedTTS2Backend()
+    prepared = backend.prepare_voice(
+        "/tmp/ref.wav",
+        "  reference transcript  ",
+        {"temperature": 0.8, "top_k": 30},
+    )
+
+    assert prepared.ref_audio_path == "/tmp/ref.wav"
+    assert prepared.ref_text == "reference transcript"
+    assert prepared.extras["temperature"] == 0.8
+    assert prepared.extras["top_k"] == 30
+
+
+def test_firered_tts_2_validate_extras_rejects_unknown_and_invalid_values():
+    from backends.firered_tts_2 import FireRedTTS2Backend
+
+    backend = FireRedTTS2Backend()
+    with pytest.raises(ValueError, match="does not accept extras"):
+        backend.validate_extras({"speed": 1.1})
+    with pytest.raises(ValueError, match="top_k must be an integer"):
+        backend.validate_extras({"top_k": 12.5})
+    with pytest.raises(ValueError, match="temperature must be > 0"):
+        backend.validate_extras({"temperature": 0})
+    with pytest.raises(ValueError, match="either topk or top_k"):
+        backend.validate_extras({"topk": 30, "top_k": 30})
+
+
+def test_firered_tts_2_synthesize_calls_monologue_with_prompt_and_sampling():
+    import numpy as np
+    from backends.firered_tts_2 import FireRedTTS2Backend
+
+    backend = FireRedTTS2Backend()
+    captured_kwargs = {}
+
+    class _FireRedTTS2:
+        def generate_monologue(self, **kwargs):
+            captured_kwargs.update(kwargs)
+            return np.array([[0.1, -0.2]], dtype=np.float64)
+
+    backend._model = _FireRedTTS2()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text="reference transcript",
+        extras=_read_only({"temperature": 0.75, "top_k": 25}),
+    )
+
+    audio, sr = backend.synthesize("hello", prepared, lang="en")
+
+    assert sr == 24000
+    assert audio.dtype == np.float32
+    assert np.allclose(audio, [0.1, -0.2])
+    assert captured_kwargs == {
+        "text": "hello",
+        "prompt_wav": "/tmp/ref.wav",
+        "prompt_text": "reference transcript",
+        "temperature": 0.75,
+        "topk": 25,
+    }
+
+
+def test_firered_tts_2_synthesize_rejects_unsupported_lang_and_empty_output():
+    import numpy as np
+    from backends.firered_tts_2 import FireRedTTS2Backend
+
+    backend = FireRedTTS2Backend()
+
+    class _FireRedTTS2:
+        def generate_monologue(self, **kwargs):
+            return np.array([], dtype=np.float32)
+
+    backend._model = _FireRedTTS2()
+    prepared = PreparedVoice(
+        ref_audio_path="/tmp/ref.wav",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+
+    with pytest.raises(ValueError, match="does not support lang='es'"):
+        backend.synthesize("hola", prepared, lang="es")
     with pytest.raises(RuntimeError, match="produced no output"):
         backend.synthesize("hello", prepared, lang="en")
 

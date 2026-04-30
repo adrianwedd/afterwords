@@ -42,6 +42,7 @@ def register_all() -> None:
     from .spark_tts import SparkTTSBackend
     from .dia2 import Dia2Backend
     from .yourtts import YourTTSBackend
+    from .firered_tts_2 import FireRedTTS2Backend
 
     register(Qwen3Backend(size="0.6B"))
     register(Qwen3Backend(size="1.7B"))
@@ -58,6 +59,7 @@ def register_all() -> None:
     register(SparkTTSBackend())
     register(Dia2Backend())
     register(YourTTSBackend())
+    register(FireRedTTS2Backend())
 
 
 def reset_for_tests() -> None:
