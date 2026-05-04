@@ -1,1 +1,6 @@
-seven-of-nine
+default: seven-of-nine
+feature-dev:code-reviewer: spock
+feature-dev:code-architect: picard
+feature-dev:code-explorer: attenborough
+superpowers:code-reviewer: spock
+natalie-ws25: vixen

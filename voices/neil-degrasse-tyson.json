@@ -1,0 +1,8 @@
+{
+  "name": "neil-degrasse-tyson",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=9D05ej8u-gU",
+  "reference_audio": "neil-degrasse-tyson-ref.wav",
+  "reference_text": "What's the astounding fact? The most astounding fact is the knowledge that the atoms that comprise life on Earth, the atoms that make up the human body.",
+  "segment_start_s": 8
+}

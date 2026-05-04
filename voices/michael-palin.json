@@ -1,0 +1,8 @@
+{
+  "name": "michael-palin",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=tvHi3pjD9SM",
+  "reference_audio": "michael-palin-ref.wav",
+  "reference_text": "Filius Fogg left from here 116 years ago in October 1872. He set off with head high clear eye never hurried always calm but then of course he was fictional. I've actually got to do it.",
+  "segment_start_s": 0
+}

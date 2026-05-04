@@ -1,0 +1,8 @@
+{
+  "name": "sherlock",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=0aZOOcTt0E4",
+  "reference_audio": "sherlock-ref.wav",
+  "reference_text": "What have we got? We know this footprint is Henry found them so did the tour guide but we all heard something",
+  "segment_start_s": 0
+}

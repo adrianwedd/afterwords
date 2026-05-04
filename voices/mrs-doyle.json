@@ -1,0 +1,8 @@
+{
+  "name": "mrs-doyle",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=ja9RIXyAbRw",
+  "reference_audio": "mrs-doyle-ref.wav",
+  "reference_text": "It's a little trap, just a teeny tiny bit. A little bit of sherry hurts anyone as the day Ireland doesn't win the Eurovision Song Contest. Go on. No, no, no, really, I should. Ah, go on, go on.",
+  "segment_start_s": 0
+}

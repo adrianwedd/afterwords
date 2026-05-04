@@ -1,0 +1,8 @@
+{
+  "name": "q-tng",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=-UqNIOc8rgc",
+  "reference_audio": "q-tng-ref.wav",
+  "reference_text": "The trial never ended, Captain. We never reached a verdict. But now we have. You're guilty. Guilty of what? Being inferior. Seven years ago.",
+  "segment_start_s": 30
+}

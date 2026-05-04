@@ -1,0 +1,8 @@
+{
+  "name": "francis-urquhart",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=k_JDjhq_FHM",
+  "reference_audio": "francis-urquhart-ref.wav",
+  "reference_text": "Besides, I think we should leave it to Patrick to make the first move, eh? Good morning, good morning. Sorry about this. But they know about this.",
+  "segment_start_s": 0
+}

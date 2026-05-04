@@ -1,0 +1,8 @@
+{
+  "name": "gareth-keenan",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=XZMqOMtl5C0",
+  "reference_audio": "gareth-keenan-ref.wav",
+  "reference_text": "three o 'clock today. Three o 'clock today please. All right then we'll say no I'm done. All right. Okay see ya. There's Keenan. Who's that?",
+  "segment_start_s": 5
+}

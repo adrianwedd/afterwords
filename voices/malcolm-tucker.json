@@ -1,0 +1,8 @@
+{
+  "name": "malcolm-tucker",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=jGg0TYQ9edM",
+  "reference_audio": "malcolm-tucker-ref.wav",
+  "reference_text": "If you lie to this inquiry, it may result in a criminal prosecution. Sorry, please don't insult my intelligence by acting as if you're all so naive that you don't know how this all works. Everybody...",
+  "segment_start_s": 5
+}

@@ -1,0 +1,8 @@
+{
+  "name": "father-ted",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=9-ZEVBHXBew",
+  "reference_audio": "father-ted-ref.wav",
+  "reference_text": "What are you doing? What are you doing?",
+  "segment_start_s": 12
+}

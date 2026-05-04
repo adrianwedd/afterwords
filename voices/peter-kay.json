@@ -1,0 +1,8 @@
+{
+  "name": "peter-kay",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=7PlzOz37IzU",
+  "reference_audio": "peter-kay-ref.wav",
+  "reference_text": "I mean that's fantastic. At 19 December, she's still in her ward and control flat, she loves it there, she's got her red rope hanging from her ceiling, it front room still, for an emergent horses, she only pulled it once and she had a wasp in the front room flat and in there.",
+  "segment_start_s": 0
+}

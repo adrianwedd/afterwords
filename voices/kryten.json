@@ -1,0 +1,8 @@
+{
+  "name": "kryten",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=jMi2a6m90f8",
+  "reference_audio": "kryten-ref.wav",
+  "reference_text": "And what was Zed Shift's most important duty? Well, we had a lot of important duties on the ship, but I guess our most vital responsibility was making sure the vending machines didn't rather front -size crunchy bars. Can you ever envisage a situation where...",
+  "segment_start_s": 60
+}

@@ -1,0 +1,8 @@
+{
+  "name": "victor-meldrew",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=ZqLT3PmOKtQ",
+  "reference_audio": "victor-meldrew-ref.wav",
+  "reference_text": "That's all I need, the end of a perfect day. 72 hours of non-stop madness, misery and mayhem beyond all belief. Thank you very much.",
+  "segment_start_s": 40
+}

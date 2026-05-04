@@ -1,0 +1,8 @@
+{
+  "name": "carl-sagan",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=pV2e3e5MAYI",
+  "reference_audio": "carl-sagan-ref.wav",
+  "reference_text": "forever will be. Our contemplations of the cosmos stirs. There is a tingling in the spine that catch in the voice of faint sensation as if a distant memory of",
+  "segment_start_s": 5
+}

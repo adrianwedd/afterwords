@@ -1,0 +1,8 @@
+{
+  "name": "alan-partridge",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=YsIs0jm5Tpk",
+  "reference_audio": "alan-partridge-ref.wav",
+  "reference_text": "I was testing with five champs, not the five champs, you come here to get away from the champs. Oh, back to your counsellors, counsellors, counsellors, counsellors, counsellors, counsellors. I knew I was in trouble.",
+  "segment_start_s": 10
+}

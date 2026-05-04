@@ -1,0 +1,8 @@
+{
+  "name": "lee-mack",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=c0MiIcHbSnM",
+  "reference_audio": "lee-mack-ref.wav",
+  "reference_text": "I'd just like to tell you a true story about this, this is what it's like living in London out there, in fact it's the same everywhere really. What I hate is the hard sell, you know you get the hard sell right? I've got it the other day, you know when people ring you up and say you know, do you want to combine the gas with the electric right? I know it's fake, oh that sounds dangerous.",
+  "segment_start_s": 0
+}

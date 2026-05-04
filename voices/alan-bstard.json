@@ -1,0 +1,8 @@
+{
+  "name": "alan-bstard",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=l9CO65EmNGs",
+  "reference_audio": "alan-bstard-ref.wav",
+  "reference_text": "We hear an awful lot of lefty -winging about the NHS waiting lists. Well, the answer is simple, shut down the health service. The answer is no more waiting lists. You see, in the good old days.",
+  "segment_start_s": 15
+}

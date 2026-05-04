@@ -1,0 +1,8 @@
+{
+  "name": "mark-steel",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=WNTGgCCchXE",
+  "reference_audio": "mark-steel-ref.wav",
+  "reference_text": "I don't know people. The lady who did the unmade bed. Tracy Anner, she's amazing. She's amazing. We've got the Turner Contemporary. You've got TSL yet. He wrote very famous poem in. Wrote part of the wasteland that the band stand there. Dreamland. Dreamland. You can still see the big.",
+  "segment_start_s": 15
+}

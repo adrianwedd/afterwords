@@ -1,0 +1,8 @@
+{
+  "name": "dr-cox",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=vN71Vt5XOnE",
+  "reference_audio": "dr-cox-ref.wav",
+  "reference_text": "Fine. I'm going to go ahead and tell you how it ends. Dr. Phil says, and how is that working out for you? I'm going to make the fat lady cry. All right. I'm sure you're wondering why I",
+  "segment_start_s": 2
+}

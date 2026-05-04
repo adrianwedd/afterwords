@@ -1,0 +1,8 @@
+{
+  "name": "bob-mortimer",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=6jONuC6I784",
+  "reference_audio": "bob-mortimer-ref.wav",
+  "reference_text": "I know I'm that urine pine, I'm a bad dentist. No, because even very, very, very good dentists sometimes get someone else to do their teeth.",
+  "segment_start_s": 20
+}

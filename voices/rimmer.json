@@ -1,0 +1,8 @@
+{
+  "name": "rimmer",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=jMi2a6m90f8",
+  "reference_audio": "rimmer-ref.wav",
+  "reference_text": "Who would you say that is the person who thinks of him most fondly? I do. And are there no others who've shared moments of intimacy with him? Only one, but she's got a puncture. Objection!",
+  "segment_start_s": 30
+}

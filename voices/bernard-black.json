@@ -1,0 +1,8 @@
+{
+  "name": "bernard-black",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=dK4r2GqbfXU",
+  "reference_audio": "bernard-black-ref.wav",
+  "reference_text": "Now, you know, they teach you to try to become a person, really, because, you know, children are very often protected now in lots of ways. We're very nervous about them, you know, people go, don't go outside!",
+  "segment_start_s": 0
+}
