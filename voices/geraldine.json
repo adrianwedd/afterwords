@@ -3,6 +3,6 @@
   "backend": "qwen3-1.7b",
   "source_url": "https://www.youtube.com/watch?v=mVmzuMKluso",
   "reference_audio": "geraldine-ref.wav",
-  "reference_text": "Greetings as we enter the second month of isolation. I am speaking to you from the vicarage, where I have been very busy tidying. Those of you who were with me last Sunday will know that this room was crud -",
-  "segment_start_s": 10
+  "reference_text": "tidying. Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling. And now, voila, just the one left. So that was very thorough tidying by me there.",
+  "segment_start_s": 20
 }

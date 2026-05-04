@@ -3,6 +3,6 @@
   "backend": "qwen3-1.7b",
   "source_url": "https://www.youtube.com/watch?v=UG6jri4OdaQ",
   "reference_audio": "edina-monsoon-ref.wav",
-  "reference_text": "hands on a certain white powder, because it's the only thing that'll make time in an isolated French cottage bearable. During a game of doubles ping pong, she slips away to indulge. Who's back, is this?",
+  "reference_text": "hands on a certain white powder, because it's the only thing that'll make time in an isolated French cottage bearable. During a game of doubles ping pong, she slips away to indulge. Whose bag is this?",
   "segment_start_s": 600
 }
