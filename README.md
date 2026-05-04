@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across MLX backends (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5, Voxtral) plus optional OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, and SoproTTS.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across **6 verified backends** (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5, Voxtral, SoproTTS) plus **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -222,28 +222,34 @@ The skill handles voice selection, server health checks, synthesis, and playback
 
 ### Voice Cloning (Zero-Shot)
 
-No training or fine-tuning. The default MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), VoxCPM 1.5 (ModelBest, en/zh), and Voxtral 4B (preset voices). OpenVoice v2 is available as an optional PyTorch/MeloTTS backend for zero-shot multilingual cloning in en/es/fr/zh/ja/ko. F5-TTS is available as an optional PyTorch backend using the flow-matching DiT `F5TTS_v1_Base` model for en/zh; its default pretrained weights are CC-BY-NC 4.0 and are not for commercial use. CosyVoice2-0.5B is available as an optional Apache-2.0 PyTorch backend for multilingual zero-shot cloning. GPT-SoVITS is available as an optional MIT-licensed PyTorch backend for few-shot cloning in en/zh/ja/ko/yue. XTTS v2 is available as an optional Coqui TTS backend for 17-language zero-shot cloning; its CPML weights are non-commercial only. IndexTTS-2 is available as an optional PyTorch backend for expressive en/zh zero-shot cloning with emotion controls; its bilibili model license includes usage restrictions. NeuTTS Air is available as an optional Apache-2.0 CPU-first backend for English zero-shot cloning via Neuphonic's `neutts` package. Spark-TTS is available as an optional LLM+BiCodec PyTorch backend for en/zh zero-shot cloning and code-switching; its published 0.5B weights are CC-BY-NC-SA 4.0 and non-commercial. Dia2 is available as an optional Apache-2.0 PyTorch backend for English dialogue-oriented voice conditioning with `[S1]`/`[S2]` speaker tags and nonverbal cues. YourTTS is available as an optional open-source Coqui VITS backend for lightweight en/fr/pt-BR zero-shot cloning at 16 kHz. FireRedTTS-2 is available as an optional Apache-2.0 PyTorch backend for long conversational and podcast-style multilingual zero-shot cloning. SV2TTS is available as an optional open-source PyTorch backend using the classic Real-Time Voice Cloning encoder + Tacotron + WaveRNN pipeline for English 5-second cloning. MockingBird is available as an optional open-source PyTorch backend using a Chinese-focused SV2TTS-derived encoder + Tacotron + WaveRNN pipeline. SoproTTS is available as an optional Apache-2.0 CPU-friendly backend for lightweight English zero-shot cloning.
+No training or fine-tuning. The default MLX-based backends extract speaker embeddings from 15-second reference clips and generate new speech in that voice: Qwen3-TTS 0.6B & 1.7B (Alibaba, multilingual), Chatterbox fp16 (Resemble AI, multilingual), VoxCPM 1.5 (ModelBest, en/zh), and Voxtral 4B (preset voices). SoproTTS is a verified optional CPU-friendly backend for lightweight English zero-shot cloning.
 
-| Backend | License | Languages | Sample rate | Reference text |
-|---------|---------|-----------|-------------|----------------|
-| `qwen3-0.6b`, `qwen3-1.7b` | model-dependent | en/zh/ja/ko/es/fr/de/it/pt/ru | 24 kHz | required |
-| `chatterbox` | model-dependent | en/es/fr/de/it/pt/zh/ja/ko | 24 kHz | optional |
-| `voxcpm-1.5` | model-dependent | en/zh | 44.1 kHz | optional |
-| `voxtral` | model-dependent | preset voices | 24 kHz | ignored |
-| `openvoice-v2` | MIT | en/es/fr/zh/ja/ko | 22.05 kHz | optional |
-| `f5-tts` | CC-BY-NC default weights | en/zh | 24 kHz | required |
-| `cosyvoice2` | Apache-2.0 | en/zh/ja/ko/de/es/fr/it/ru | 24 kHz | required |
-| `gpt-sovits` | MIT | en/zh/ja/ko/yue | 32 kHz | required |
-| `xtts-v2` | CPML, non-commercial only | en/es/fr/de/it/pt/pl/tr/ru/nl/cs/ar/zh/hu/ko/ja/hi | 24 kHz | optional |
-| `indextts-2` | LicenseRef-Bilibili-IndexTTS | en/zh | 22.05 kHz | optional |
-| `neutts-air` | Apache-2.0 | en | 24 kHz | optional |
-| `spark-tts` | Apache-2.0 code; CC-BY-NC-SA 4.0 weights | en/zh | 24 kHz | optional |
-| `dia2` | Apache-2.0 | en | 44 kHz | optional |
-| `yourtts` | Open source | en/fr/pt-BR | 16 kHz | optional |
-| `firered-tts-2` | Apache-2.0 | en/zh/ja/ko/fr/de/ru | 24 kHz | optional |
-| `sv2tts` | Open source | en | 22.05 kHz | optional |
-| `mockingbird` | Open source | zh/en | 22.05 kHz | optional |
-| `soprotts` | Apache-2.0 | en | 24 kHz | optional |
+The following optional backends have working code but currently have installation issues on Apple Silicon (dep-resolution errors, missing build deps, or source repos not bundled). Each is tracked in the issue tracker. OpenVoice v2 is a PyTorch/MeloTTS backend for zero-shot multilingual cloning in en/es/fr/zh/ja/ko. F5-TTS is a PyTorch backend using the flow-matching DiT `F5TTS_v1_Base` model for en/zh; its default pretrained weights are CC-BY-NC 4.0 and are not for commercial use. CosyVoice2-0.5B is an Apache-2.0 PyTorch backend for multilingual zero-shot cloning. GPT-SoVITS is an MIT-licensed PyTorch backend for few-shot cloning in en/zh/ja/ko/yue. XTTS v2 is a Coqui TTS backend for 17-language zero-shot cloning; its CPML weights are non-commercial only. IndexTTS-2 is a PyTorch backend for expressive en/zh zero-shot cloning with emotion controls. NeuTTS Air is an Apache-2.0 CPU-first backend for English zero-shot cloning via Neuphonic's `neutts` package. Spark-TTS is an LLM+BiCodec PyTorch backend for en/zh zero-shot cloning; its published 0.5B weights are CC-BY-NC-SA 4.0 and non-commercial. Dia2 is an Apache-2.0 PyTorch backend for English dialogue-oriented voice conditioning with `[S1]`/`[S2]` speaker tags. YourTTS is an open-source Coqui VITS backend for lightweight en/fr/pt-BR zero-shot cloning at 16 kHz. FireRedTTS-2 is an Apache-2.0 PyTorch backend for long conversational and podcast-style multilingual zero-shot cloning. SV2TTS is an open-source PyTorch backend using the classic Real-Time Voice Cloning encoder + Tacotron + WaveRNN pipeline for English. MockingBird is an open-source Chinese-focused SV2TTS-derived backend.
+
+#### Backend Status
+
+**Verified** backends clone voices end-to-end on Apple Silicon (tested). **Scaffolded** backends have working code but known installation issues — see linked issues for status.
+
+| Backend | Status | License | Languages | Sample rate | Reference text |
+|---------|--------|---------|-----------|-------------|----------------|
+| `qwen3-0.6b`, `qwen3-1.7b` | ✅ verified | model-dependent | en/zh/ja/ko/es/fr/de/it/pt/ru | 24 kHz | required |
+| `chatterbox` | ✅ verified | model-dependent | en/es/fr/de/it/pt/zh/ja/ko | 24 kHz | optional |
+| `voxcpm-1.5` | ✅ verified | model-dependent | en/zh | 44.1 kHz | optional |
+| `voxtral` | ✅ verified | model-dependent | preset voices | 24 kHz | ignored |
+| `soprotts` | ✅ verified | Apache-2.0 | en | 24 kHz | optional |
+| `openvoice-v2` | 🔧 scaffolded | MIT | en/es/fr/zh/ja/ko | 22.05 kHz | optional |
+| `f5-tts` | 🔧 scaffolded | CC-BY-NC default weights | en/zh | 24 kHz | required |
+| `cosyvoice2` | 🔧 scaffolded | Apache-2.0 | en/zh/ja/ko/de/es/fr/it/ru | 24 kHz | required |
+| `gpt-sovits` | 🔧 scaffolded | MIT | en/zh/ja/ko/yue | 32 kHz | required |
+| `xtts-v2` | 🔧 scaffolded | CPML, non-commercial only | en/es/fr/de/it/pt/pl/tr/ru/nl/cs/ar/zh/hu/ko/ja/hi | 24 kHz | optional |
+| `indextts-2` | 🔧 scaffolded | LicenseRef-Bilibili-IndexTTS | en/zh | 22.05 kHz | optional |
+| `neutts-air` | 🔧 scaffolded | Apache-2.0 | en | 24 kHz | optional |
+| `spark-tts` | 🔧 scaffolded | Apache-2.0 code; CC-BY-NC-SA 4.0 weights | en/zh | 24 kHz | optional |
+| `dia2` | 🔧 scaffolded | Apache-2.0 | en | 44 kHz | optional |
+| `yourtts` | 🔧 scaffolded | Open source | en/fr/pt-BR | 16 kHz | optional |
+| `firered-tts-2` | 🔧 scaffolded | Apache-2.0 | en/zh/ja/ko/fr/de/ru | 24 kHz | optional |
+| `sv2tts` | 🔧 scaffolded | Open source | en | 22.05 kHz | optional |
+| `mockingbird` | 🔧 scaffolded | Open source | zh/en | 22.05 kHz | optional |
 
 Voice profiles pin to a specific backend via the `backend` JSON field. The shipped flagship voices (picard, galadriel, attenborough) have per-backend variants so you can compare clone fidelity across models — Qwen3 sizes are the most reliable cloners in the current stack; see the [demo site](https://adrianwedd.github.io/afterwords/) for audible comparison.
 
