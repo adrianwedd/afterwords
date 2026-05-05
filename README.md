@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 50+ voices included across **6 verified backends** (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5, Voxtral, SoproTTS) plus **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 110+ voices included across **6 verified backends** (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM 1.5, Voxtral, SoproTTS) plus **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -200,7 +200,7 @@ The skill handles voice selection, server health checks, synthesis, and playback
 │                                                             │
 │  ┌─────────────────────────┐                                │
 │  │  Multi-Backend TTS      │  ← MLX + optional OpenVoice     │
-│  │  localhost:7860          │  ← 50+ voice profiles          │
+│  │  localhost:7860          │  ← 110+ voice profiles         │
 │  │  /synthesize?text=...    │  ← ~20s per sentence (Qwen3)   │
 │  └─────────┬───────────────┘                                │
 │            │                                                │
@@ -329,7 +329,7 @@ afterwords/
 │   ├── galadriel-ref.wav ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav  ← (Scarlett Johansson, Her)
 │   ├── amy-pond-ref.wav  ← (Karen Gillan, Doctor Who)
-│   └── ...               ← 50+ voices total; 3 flagships have per-backend variants
+│   └── ...               ← 110+ voices total; 3 flagships have per-backend variants
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration
@@ -387,6 +387,8 @@ afterwords/
 | sarah-jane-smith | Elisabeth Sladen, *School Reunion* | Warm, investigative |
 | tegan-jovanka | Janet Fielding, *Resurrection of the Daleks* | Blunt, emotional |
 | yasmin-khan | Mandip Gill, *Power of the Doctor* | Quiet, heartfelt |
+
+The full gallery includes 110+ voices spanning British comedy (Blackadder, Alan Partridge, Basil Fawlty, Malcolm Tucker, Father Ted, Geraldine, Patsy & Edina, Bernard Black…), American drama (Frasier, Columbo, Saul Goodman, Harvey Specter…), science communicators (Carl Sagan, Feynman, Brian Cox, Neil deGrasse Tyson…), and more. Run `afterwords voices --demo` to browse and hear samples.
 
 ## Troubleshooting
 

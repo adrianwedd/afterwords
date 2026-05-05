@@ -6,7 +6,7 @@
   <title>Afterwords — Local Voice-Cloning TTS</title>
   <meta name="description" content="Clone any voice from a 15-second YouTube clip and hear Claude Code speak every response. Runs locally on Apple Silicon. No cloud. No subscription.">
   <meta property="og:title" content="Afterwords — Local Voice-Cloning TTS">
-  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 20 voices, 4 backends. No cloud dependency.">
+  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon. 110+ voices, 6 backends. No cloud dependency.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://adrianwedd.github.io/afterwords/">
   <meta property="og:image" content="https://adrianwedd.github.io/afterwords/og-image.png">
@@ -613,7 +613,7 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
 
     <section id="voices" class="reveal">
       <div class="section-label">Voice Gallery</div>
-      <div class="section-title">20 voices on Qwen3 0.6B &mdash; see backend comparison below for flagship voices on all 4 models</div>
+      <div class="section-title">20 demo clips from the 110+ voice gallery &mdash; see backend comparison below for flagship voices across all 6 models</div>
       <p class="section-desc">Each says <em>&ldquo;You are absolutely right. Your Claude Code session could sound like me.&rdquo;</em> &mdash; generated locally on a 32 GB M1.</p>
 
       <div class="voice-gallery">
@@ -867,10 +867,12 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
   "voices": ["attenborough", "attenborough-chatterbox", "attenborough-qwen3-17b", "attenborough-voxcpm-15", "audrey", "..."],
   "default_voice": "galadriel",
   "loaded_backends": {
-    "qwen3-0.6b":  {"loaded": true, "voice_count": 20, "sample_rate": 24000, "display_name": "Qwen3-TTS 0.6B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
-    "qwen3-1.7b":  {"loaded": true, "voice_count": 3,  "sample_rate": 24000, "display_name": "Qwen3-TTS 1.7B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
+    "qwen3-0.6b":  {"loaded": true, "voice_count": 45, "sample_rate": 24000, "display_name": "Qwen3-TTS 0.6B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
+    "qwen3-1.7b":  {"loaded": true, "voice_count": 61, "sample_rate": 24000, "display_name": "Qwen3-TTS 1.7B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
     "chatterbox":  {"loaded": true, "voice_count": 3,  "sample_rate": 24000, "display_name": "Chatterbox (fp16, multilingual)", "supported_langs": ["en","es","fr","de","it","pt","zh","ja","ko"]},
-    "voxcpm-1.5":  {"loaded": true, "voice_count": 3,  "sample_rate": 44100, "display_name": "VoxCPM 1.5", "supported_langs": ["en","zh"]}
+    "voxcpm-1.5":  {"loaded": true, "voice_count": 3,  "sample_rate": 44100, "display_name": "VoxCPM 1.5", "supported_langs": ["en","zh"]},
+    "voxtral":     {"loaded": true, "voice_count": 0,  "sample_rate": 24000, "display_name": "Voxtral 4B", "supported_langs": ["en","fr","de","es","it","pt","nl","ru","zh","ja","ko","ar","hi"]},
+    "soprotts":    {"loaded": true, "voice_count": 0,  "sample_rate": 24000, "display_name": "SoproTTS", "supported_langs": ["en"]}
   }
 }</code><span class="copy-hint">click to copy</span></pre>
         <div class="response-codes">

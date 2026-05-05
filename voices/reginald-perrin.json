@@ -1,8 +1,0 @@
-{
-  "name": "reginald-perrin",
-  "backend": "qwen3-1.7b",
-  "source_url": "https://www.youtube.com/watch?v=ebilr8wsC0w",
-  "reference_audio": "reginald-perrin-ref.wav",
-  "reference_text": "It didn't. Is that wise? No. As your speech coming along, Mr. Frank, I'm going to put you up to any good news, thank you. I'm sure you're going to give a wonderful report. Yes, I'm going to be vague. Not that anybody listens to it, of course. I often have the impression that everyone listens to a single word, I say.",
-  "segment_start_s": 300
-}
