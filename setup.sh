@@ -321,7 +321,7 @@ HOOKS_DIR="$HOME/.claude/hooks"
 mkdir -p "$HOOKS_DIR"
 
 # Back up existing hooks if present
-for hookfile in strip-markdown.py tts-hook.sh tts-worker.sh; do
+for hookfile in strip-markdown.py chunk-text.py tts-hook.sh tts-worker.sh; do
     if [ -f "$HOOKS_DIR/$hookfile" ]; then
         cp "$HOOKS_DIR/$hookfile" "$HOOKS_DIR/$hookfile.bak"
     fi
@@ -329,6 +329,9 @@ done
 
 # Strip-markdown helper
 cp "$SCRIPT_DIR/strip_markdown.py" "$HOOKS_DIR/strip-markdown.py"
+
+# Chunk-text helper (sentence splitter for chunked TTS)
+cp "$SCRIPT_DIR/chunk_text.py" "$HOOKS_DIR/chunk-text.py"
 
 # TTS hook (fires on Stop event)
 cat > "$HOOKS_DIR/tts-hook.sh" <<'HOOKEOF'
@@ -425,7 +428,6 @@ while true; do
     LINE=$(printf '%s' "$RAW_LINE" | cut -f3-)
     [ -z "$LINE" ] && continue
 
-    ENCODED=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$LINE" 2>/dev/null) || continue
     STAMP=$(date +%Y%m%d-%H%M%S)-$$-$RANDOM
 
     # Resolve voice: .afterwords mapping → .afterwords single → server default
@@ -451,23 +453,72 @@ while true; do
     VOICE_PARAM=""
     [ -n "$VOICE" ] && VOICE_PARAM="&voice=${VOICE}"
 
-    WAVFILE="/tmp/claude-tts-$$.wav"
-    if curl -s --max-time 90 "${TTS_URL}?text=${ENCODED}${VOICE_PARAM}" -o "$WAVFILE" 2>/dev/null; then
-        FILESIZE=$(stat -f%z "$WAVFILE" 2>/dev/null || echo 0)
-        if [ "$FILESIZE" -gt 1000 ]; then
-            TRIMMED="/tmp/claude-tts-trimmed-$$.wav"
-            if ffmpeg -y -ss 0.1 -i "$WAVFILE" -c copy "$TRIMMED" 2>/dev/null; then
-                mv "$TRIMMED" "$WAVFILE"
+    # Archive: full response text sidecar (written once; chunk audio archived per-chunk below).
+    ARCHIVE_BASE="$ARCHIVE_DIR/${VOICE:-default}-${STAMP}"
+    printf '%s\n' "$LINE" > "${ARCHIVE_BASE}.txt"
+
+    # Split into sentence-boundary chunks and pipeline: synth-N → play-N → synth-N+1.
+    # Latency-to-first-audio drops from ~30s (full blob) to ~2s (first chunk).
+    CHUNK_SCRIPT="$HOME/.claude/hooks/chunk-text.py"
+    CHUNK_DIR="/tmp/claude-tts-chunks-$$"
+    mkdir -p "$CHUNK_DIR"
+
+    # Collect chunks into numbered text files (Bash 3.2-compatible; no mapfile).
+    NCHUNKS=0
+    while IFS= read -r CHUNK; do
+        [ -z "$CHUNK" ] && continue
+        NCHUNKS=$((NCHUNKS + 1))
+        printf '%s' "$CHUNK" > "${CHUNK_DIR}/${NCHUNKS}.txt"
+    done < <([ -f "$CHUNK_SCRIPT" ] && python3 "$CHUNK_SCRIPT" <<< "$LINE" 2>/dev/null \
+             || printf '%s\n' "$LINE")
+
+    PREV_WAV=""
+    SYNTH_PID=""
+    CHUNK_I=1
+    while [ "$CHUNK_I" -le "$NCHUNKS" ]; do
+        CHUNK=$(cat "${CHUNK_DIR}/${CHUNK_I}.txt")
+        CURR_WAV="${CHUNK_DIR}/${CHUNK_I}.wav"
+        ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$CHUNK" 2>/dev/null) || { CHUNK_I=$((CHUNK_I+1)); continue; }
+
+        # Wait for previous background synth; then play previous chunk.
+        if [ -n "$SYNTH_PID" ]; then
+            wait "$SYNTH_PID"
+            SYNTH_PID=""
+            if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
+                FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
+                if [ "$FILESIZE" -gt 1000 ]; then
+                    TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
+                    ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
+                        && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
+                    lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c$((CHUNK_I-1)).mp3" 2>/dev/null || true
+                    afplay "$PREV_WAV" 2>/dev/null
+                fi
+                rm -f "$PREV_WAV"
             fi
-            rm -f "$TRIMMED"
-            ARCHIVE_BASE="$ARCHIVE_DIR/${VOICE:-default}-${STAMP}"
-            if lame --quiet -V 2 "$WAVFILE" "$ARCHIVE_BASE.mp3" 2>/dev/null; then
-                printf '%s\n' "$LINE" > "$ARCHIVE_BASE.txt"
-            fi
-            afplay "$WAVFILE" 2>/dev/null
         fi
+
+        # Start synth for current chunk in background.
+        curl -s --max-time 60 "${TTS_URL}?text=${ENC}${VOICE_PARAM}" -o "$CURR_WAV" 2>/dev/null &
+        SYNTH_PID=$!
+        PREV_WAV="$CURR_WAV"
+        CHUNK_I=$((CHUNK_I + 1))
+    done
+
+    # Play the last chunk.
+    [ -n "$SYNTH_PID" ] && wait "$SYNTH_PID"
+    if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
+        FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
+        if [ "$FILESIZE" -gt 1000 ]; then
+            TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
+            ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
+                && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
+            lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c${NCHUNKS}.mp3" 2>/dev/null || true
+            afplay "$PREV_WAV" 2>/dev/null
+        fi
+        rm -f "$PREV_WAV"
     fi
-    rm -f "$WAVFILE"
+
+    rm -rf "$CHUNK_DIR"
 done
 
 rm -f "$QUEUE" "$QUEUE.tmp"

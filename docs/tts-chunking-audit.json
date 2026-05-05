@@ -1,0 +1,53 @@
+{
+  "generated": "2026-05-05",
+  "note": "Structural pairing audit only (no Whisper transcription). Full text samples excluded.",
+  "summary": {
+    "total": 3326,
+    "ok": 2205,
+    "flagged": 1121,
+    "by_length": {
+      "short": {
+        "total": 1643,
+        "ok": 522,
+        "flagged": 1121
+      },
+      "medium": {
+        "total": 1081,
+        "ok": 1081,
+        "flagged": 0
+      },
+      "long": {
+        "total": 602,
+        "ok": 602,
+        "flagged": 0
+      }
+    },
+    "by_pattern": {
+      "plain": {
+        "total": 1390,
+        "ok": 269,
+        "flagged": 1121
+      },
+      "digits": {
+        "total": 1667,
+        "ok": 1667,
+        "flagged": 0
+      },
+      "all_caps": {
+        "total": 1099,
+        "ok": 1099,
+        "flagged": 0
+      },
+      "em_dash": {
+        "total": 1289,
+        "ok": 1289,
+        "flagged": 0
+      },
+      "urls": {
+        "total": 76,
+        "ok": 76,
+        "flagged": 0
+      }
+    }
+  }
+}

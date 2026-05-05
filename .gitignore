@@ -15,6 +15,7 @@ voices/vixen*
 
 # QA artefacts
 qa-run.txt
+docs/*-audit.json
 *-output.log
 pytest-output.log
 setup-output*.log
