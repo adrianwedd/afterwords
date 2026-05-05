@@ -84,5 +84,6 @@ log "watching ${SESSION_FILE} for thread ${THREAD_ID}"
 tail -n 0 -F "$SESSION_FILE" | while IFS= read -r line; do
     summary=$(printf '%s\n' "$line" | describe_event)
     log "event ${summary}"
-    printf '%s\n' "$line" | PROJECT_DIR="$PROJECT_DIR" bash "$HOOK"
+    AGENT=$(printf '%s\n' "$line" | python3 "${REPO_DIR}/codex_session_hook.py" --agent-type 2>/dev/null || true)
+    printf '%s\n' "$line" | PROJECT_DIR="$PROJECT_DIR" CODEX_THREAD_ID="$THREAD_ID" AGENT_TYPE="$AGENT" bash "$HOOK"
 done
