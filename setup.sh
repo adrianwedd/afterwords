@@ -480,26 +480,26 @@ while true; do
         CURR_WAV="${CHUNK_DIR}/${CHUNK_I}.wav"
         ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$CHUNK" 2>/dev/null) || { CHUNK_I=$((CHUNK_I+1)); continue; }
 
-        # Wait for previous background synth; then play previous chunk.
-        if [ -n "$SYNTH_PID" ]; then
-            wait "$SYNTH_PID"
-            SYNTH_PID=""
-            if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
-                FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
-                if [ "$FILESIZE" -gt 1000 ]; then
-                    TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
-                    ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
-                        && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
-                    lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c$((CHUNK_I-1)).mp3" 2>/dev/null || true
-                    afplay "$PREV_WAV" 2>/dev/null
-                fi
-                rm -f "$PREV_WAV"
-            fi
-        fi
+        # Wait for previous synth to finish (so PREV_WAV is fully written).
+        [ -n "$SYNTH_PID" ] && { wait "$SYNTH_PID"; SYNTH_PID=""; }
 
-        # Start synth for current chunk in background.
+        # Start current synth in background BEFORE playing previous chunk —
+        # this is the overlap: synth(N+1) runs while afplay plays chunk(N).
         curl -s --max-time 60 "${TTS_URL}?text=${ENC}${VOICE_PARAM}" -o "$CURR_WAV" 2>/dev/null &
         SYNTH_PID=$!
+
+        if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
+            FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
+            if [ "$FILESIZE" -gt 1000 ]; then
+                TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
+                ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
+                    && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
+                lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c$((CHUNK_I-1)).mp3" 2>/dev/null || true
+                afplay "$PREV_WAV" 2>/dev/null
+            fi
+            rm -f "$PREV_WAV"
+        fi
+
         PREV_WAV="$CURR_WAV"
         CHUNK_I=$((CHUNK_I + 1))
     done
