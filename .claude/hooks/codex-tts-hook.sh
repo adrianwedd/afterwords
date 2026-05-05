@@ -23,11 +23,13 @@ PROJECT_DIR="${PROJECT_DIR:-$PWD}"
 AGENT="${AGENT_TYPE:-}"
 
 mkdir -p "$QUEUEDIR"
-ITEM="${QUEUEDIR}/$(date +%Y%m%d%H%M%S%3N)-${RANDOM}.json"
+# Timestamp: seconds + random suffix (date +%3N is GNU-only, not available on macOS bash 3.2)
+ITEM="${QUEUEDIR}/$(date +%s)-${RANDOM}.json"
+ITEM_TMP="${ITEM}.tmp"
 python3 -c "
 import json, sys
 print(json.dumps({'project_dir': sys.argv[1], 'agent': sys.argv[2], 'text': sys.argv[3]}))
-" "$PROJECT_DIR" "$AGENT" "$TEXT" > "$ITEM"
+" "$PROJECT_DIR" "$AGENT" "$TEXT" > "$ITEM_TMP" && mv "$ITEM_TMP" "$ITEM"
 
 if [ -f "$WORKER_PID" ]; then
     EXISTING=$(cat "$WORKER_PID" 2>/dev/null)

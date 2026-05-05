@@ -32,37 +32,33 @@ echo $$ > "$PIDFILE"
 trap 'rm -f "$PIDFILE"; rm -rf "$LOCKDIR"' EXIT
 
 while true; do
-    # Prune excess items (keep newest MAX_QUEUE).
-    mapfile -t ALL_ITEMS < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
-    TOTAL="${#ALL_ITEMS[@]}"
-    if [ "$TOTAL" -gt "$MAX_QUEUE" ]; then
-        for OLD in "${ALL_ITEMS[@]:$MAX_QUEUE}"; do
-            rm -f "$OLD"
-        done
-    fi
+    # Prune excess items (keep newest MAX_QUEUE). Bash 3.2-compatible: no mapfile.
+    COUNT=0
+    while IFS= read -r EXCESS; do
+        COUNT=$((COUNT + 1))
+        [ "$COUNT" -gt "$MAX_QUEUE" ] && rm -f "$EXCESS"
+    done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
 
-    # Claim oldest unclaimed item atomically.
+    # Claim oldest unclaimed item atomically via mv.
     ITEM=""
-    for CANDIDATE in $(ls -1t "$QUEUEDIR"/*.json 2>/dev/null | tail -r); do
+    while IFS= read -r CANDIDATE; do
         CLAIMED="${CANDIDATE%.json}.claimed"
         if mv "$CANDIDATE" "$CLAIMED" 2>/dev/null; then
             ITEM="$CLAIMED"
             break
         fi
-    done
+    done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null | tail -r 2>/dev/null || ls -1 "$QUEUEDIR"/*.json 2>/dev/null | sort)
     [ -z "$ITEM" ] && break
 
-    # Parse JSON item.
+    # Parse JSON item. Use NUL-delimited output to survive newlines in fields.
     PARSED=$(python3 -c "
 import json, sys
 d = json.load(open(sys.argv[1]))
-print(d.get('project_dir',''))
-print(d.get('agent',''))
-print(d.get('text',''))
+sys.stdout.write(d.get('project_dir','') + '\x00' + d.get('agent','') + '\x00' + d.get('text','') + '\x00')
 " "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
-    PROJECT_DIR=$(printf '%s' "$PARSED" | sed -n '1p')
-    AGENT=$(printf '%s' "$PARSED" | sed -n '2p')
-    TEXT=$(printf '%s' "$PARSED" | sed -n '3,$p')
+    PROJECT_DIR=$(printf '%s' "$PARSED" | cut -d $'\x00' -f1)
+    AGENT=$(printf '%s' "$PARSED" | cut -d $'\x00' -f2)
+    TEXT=$(printf '%s' "$PARSED" | cut -d $'\x00' -f3)
     rm -f "$ITEM"
     [ -z "$TEXT" ] && continue
 
