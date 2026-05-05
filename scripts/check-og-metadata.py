@@ -41,6 +41,10 @@ def gallery_voice_count() -> int:
     return len(list(GALLERY.glob("*.mp3")))
 
 
+def repo_voice_count() -> int:
+    return len(list((REPO / "voices").glob("*.json")))
+
+
 def main() -> int:
     if not INDEX.exists():
         print(f"error: {INDEX} not found", file=sys.stderr)
@@ -55,20 +59,31 @@ def main() -> int:
         if tag not in meta or not meta[tag].strip():
             issues.append(f"missing or empty meta: {tag}")
 
-    # 2. Voice count claim in og:description matches gallery
+    # 2. Voice count claim in og:description is consistent with voices/*.json.
+    # og:description may use an approximate "N+" form (e.g. "110+ voices") meaning
+    # "at least N". An exact "N voices" means exactly N. We always compare against
+    # the voice profile count (voices/*.json), not the demo gallery (docs/audio/*.mp3),
+    # since the OG headline advertises the full library, not just the curated demos.
     desc = meta.get("og:description", "")
-    actual_count = gallery_voice_count()
-    claim_match = re.search(r"(\d+)\s+voices?", desc, re.IGNORECASE)
+    actual_count = repo_voice_count()
+    claim_match = re.search(r"(\d+)(\+)?\s+voices?", desc, re.IGNORECASE)
     if claim_match:
         claimed = int(claim_match.group(1))
-        if claimed != actual_count:
-            issues.append(
-                f"og:description claims {claimed} voices but docs/audio/ has {actual_count}"
-            )
+        is_approx = claim_match.group(2) == "+"
+        if is_approx:
+            if actual_count < claimed:
+                issues.append(
+                    f"og:description claims {claimed}+ voices but voices/ only has {actual_count}"
+                )
+        else:
+            if claimed != actual_count:
+                issues.append(
+                    f"og:description claims {claimed} voices but voices/ has {actual_count}"
+                )
     else:
         issues.append(
             "og:description doesn't mention a voice count — "
-            "add 'N voices' so this drift check stays meaningful"
+            "add 'N voices' or 'N+ voices' so this drift check stays meaningful"
         )
 
     # 3. Canonical URL
@@ -109,7 +124,8 @@ def main() -> int:
         print("    bash scripts/fb-reindex.sh", file=sys.stderr)
         return 1
 
-    print(f"✓ OG metadata clean — {actual_count} voices, all required tags present")
+    demo_count = gallery_voice_count()
+    print(f"✓ OG metadata clean — {actual_count} voice profiles, {demo_count} demo clips, all required tags present")
     return 0
 
 

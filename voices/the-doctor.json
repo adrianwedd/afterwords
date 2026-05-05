@@ -3,5 +3,6 @@
   "source_url": "https://www.youtube.com/watch?v=1cbQVfVfSrI",
   "reference_audio": "the-doctor-ref.wav",
   "reference_text": "It's all one title. Gallifrey falls no more. Now, what would you think that means? It's entirely up to you. Your choice.",
-  "segment_start_s": 156
+  "segment_start_s": 156,
+  "notes": "silence-spliced: 1.6s gap at 1.5-3.1s and 2.6s gap at 6.1-8.7s removed; three speech segments retained (8.6s total)"
 }

@@ -1,5 +1,6 @@
 {
   "name": "gulley",
   "reference_audio": "gulley-ref.wav",
-  "reference_text": "Thank you very much for surprising me with that. That's just, yeah, impressive. I don't know what to say, but other than thank you so much."
+  "reference_text": "Thank you very much for surprising me with that. That's just, yeah, impressive. I don't know what to say, but other than thank you so much.",
+  "notes": "silence-spliced: 1.6s gap at 5.9-7.5s removed; both speech segments retained (13.4s total)"
 }

@@ -3,5 +3,6 @@
   "source_url": "https://www.youtube.com/watch?v=KezLI_Zx5uY",
   "reference_audio": "clara-oswald-ref.wav",
   "reference_text": "Run, you clever boy, and remember. Run, you clever boy, and remember. Merry Christmas, Doctor. Hello. You stupid old man.",
+  "notes": "silence-spliced: 1.9s gap at 15.5-17.4s removed via ffmpeg atrim+concat; both speech segments retained",
   "segment_start_s": 0
 }
