@@ -5,6 +5,7 @@
 #
 # YourTTS uses the same Coqui TTS package family as XTTS v2; this file mirrors
 # requirements-xtts.txt so either optional backend can be installed on its own.
+# See requirements-xtts.txt for macOS/Apple Silicon build notes.
 TTS>=0.22
 torch>=2.1
 torchaudio>=2.1

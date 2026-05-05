@@ -8,5 +8,10 @@
 # Keep this isolated from requirements.txt so the default Afterwords install
 # remains MLX-only.
 torch>=2.8.0
-torchaudio>=2.0
+torchaudio>=2.8.0
+# f5-tts requires torchcodec but does not pin it; 0.11.x matches torch 2.8.
+# FFmpeg symbol mismatch on macOS: if you have Homebrew ffmpeg, set
+#   export DYLD_FALLBACK_LIBRARY_PATH="$(python -c 'import torchcodec; import pathlib; print(pathlib.Path(torchcodec.__file__).parent)')"
+# before importing to ensure torchcodec's bundled FFmpeg takes precedence.
+torchcodec>=0.11.0,<0.12.0
 f5-tts>=1.1.20

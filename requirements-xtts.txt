@@ -6,6 +6,9 @@
 # XTTS v2 weights are licensed under the Coqui Public Model License (CPML),
 # which restricts use to non-commercial purposes.
 # Coqui TTS v0.22+ supports Python 3.11+ and the XTTS v2 API used here.
+# TTS 0.22 ships source-only on macOS; the C++ monotonic_align extension causes
+# build timeouts on Apple Silicon. Work around with:
+#   pip install Cython && pip install TTS --no-build-isolation
 TTS>=0.22
 torch>=2.1
 torchaudio>=2.1

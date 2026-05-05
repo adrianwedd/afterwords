@@ -11,12 +11,14 @@
 # FireRedTTS-2 code and weights are Apache-2.0. Upstream is CUDA-first; set
 # FIRERED_TTS_2_DEVICE=mps/cpu/cuda to override device selection.
 git+https://github.com/FireRedTeam/FireRedTTS2.git
-torch>=2.7.1
-torchaudio>=2.7.1
+torch>=2.8.0
+torchaudio>=2.8.0
 torchvision>=0.22.1
-torchtune
-torchao
-transformers
+# torchtune and torchao have macOS arm64 wheels; set FIRERED_TTS_2_DEVICE=mps
+# for Metal acceleration. Backend defaults to MPS → CPU via PYTORCH_ENABLE_MPS_FALLBACK.
+torchtune>=0.6.0
+torchao>=0.10.0
+transformers>=4.48.0
 einops
 librosa
 optuna
