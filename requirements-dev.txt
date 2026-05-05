@@ -3,3 +3,11 @@
 # Install: pip install -r requirements-dev.txt
 pytest>=9.0.3,<10.0
 httpx>=0.28,<1.0
+
+# Required to import conftest.py, backends/, and server.py in CI (no MLX/torch).
+numpy>=1.26,<3
+soundfile>=0.12
+fastapi>=0.115
+pydantic>=2.0
+starlette>=0.40
+uvicorn>=0.30
