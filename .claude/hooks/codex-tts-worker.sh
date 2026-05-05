@@ -50,17 +50,18 @@ while true; do
     done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null | tail -r 2>/dev/null || ls -1 "$QUEUEDIR"/*.json 2>/dev/null | sort)
     [ -z "$ITEM" ] && break
 
-    # Parse JSON item. Use NUL-delimited output to survive newlines in fields.
-    PARSED=$(python3 -c "
-import json, sys
+    # Parse JSON item. Use shlex.quote to emit a safe eval block — handles
+    # newlines and special chars in text without shell delimiter tricks.
+    ITEM_EVAL=$(python3 -c "
+import json, sys, shlex
 d = json.load(open(sys.argv[1]))
-sys.stdout.write(d.get('project_dir','') + '\x00' + d.get('agent','') + '\x00' + d.get('text','') + '\x00')
+print('PROJECT_DIR=' + shlex.quote(d.get('project_dir','')))
+print('AGENT=' + shlex.quote(d.get('agent','')))
+print('TEXT=' + shlex.quote(d.get('text','')))
 " "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
-    PROJECT_DIR=$(printf '%s' "$PARSED" | cut -d $'\x00' -f1)
-    AGENT=$(printf '%s' "$PARSED" | cut -d $'\x00' -f2)
-    TEXT=$(printf '%s' "$PARSED" | cut -d $'\x00' -f3)
+    eval "$ITEM_EVAL"
     rm -f "$ITEM"
-    [ -z "$TEXT" ] && continue
+    [ -z "${TEXT:-}" ] && continue
 
     ENCODED=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$TEXT" 2>/dev/null) || continue
     STAMP=$(date +%Y%m%d-%H%M%S)-$$-$RANDOM
