@@ -1,5 +1,8 @@
 {
   "name": "samantha",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=f9Hg1x-Ctlw",
   "reference_audio": "samantha-ref.wav",
-  "reference_text": "And then, I had this terrible thought, like, are these feelings even real?  Or are they just programming?"
+  "reference_text": "first artificially intelligent operating system. OS 1. We'd like to ask you a few basic questions before the operating system is initiated. This will help create an OS to best fit your needs. Are you social or anti -social?",
+  "segment_start_s": 15
 }

@@ -10,6 +10,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import glob
 import io
 import json
@@ -199,6 +200,20 @@ DEFAULT_VOICE = "galadriel"
 _model_lock = threading.Lock()
 _synth_lock = threading.Lock()  # serialise synthesis — MLX/Metal is not thread-safe
 _ready = threading.Event()
+# Dedicated single thread for all MLX/Metal operations.
+# MLX stream IDs are globally incrementing and thread-local: the thread that loads the
+# model creates streams 0, 1, 2, … and subsequent calls from OTHER threads fail with
+# "There is no Stream(gpu, N) in current thread". Pinning all GPU work to one thread
+# ensures stream IDs are always valid without any per-call stream seeding.
+_ml_executor: concurrent.futures.ThreadPoolExecutor | None = None
+
+
+def _run_in_ml_thread(fn, *args, **kwargs):
+    """Execute fn(*args, **kwargs) in the dedicated MLX thread, blocking until done.
+    Falls back to direct call when executor is not initialised (tests / dev mode)."""
+    if _ml_executor is None:
+        return fn(*args, **kwargs)
+    return _ml_executor.submit(fn, *args, **kwargs).result()
 _clone_enabled = False
 
 def _register_voice(
@@ -343,7 +358,7 @@ def _warmup():
     t0 = time.time()
     try:
         with _synth_lock:
-            backend.synthesize("Hello.", profile.prepared, lang="en")
+            _run_in_ml_thread(backend.synthesize, "Hello.", profile.prepared, lang="en")
         log.info("warmup done in %.1fs", time.time() - t0)
     except Exception as exc:
         log.warning("warmup failed (non-fatal): %s", exc)
@@ -428,7 +443,7 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str) -> Response:
     t0 = time.time()
     try:
         with _synth_lock:
-            data, sr = backend.synthesize(text, profile.prepared, lang)
+            data, sr = _run_in_ml_thread(backend.synthesize, text, profile.prepared, lang)
     except ValueError as exc:
         return JSONResponse(
             {"error": str(exc),
@@ -617,24 +632,23 @@ async def clone_voice_endpoint(
                 status_code=400,
             )
 
-        # --- Phase 3: validate_extras + prepare_voice under _synth_lock (both may touch Metal) ---
+        # --- Phase 3: validate_extras + prepare_voice in the MLX thread (both may touch Metal) ---
         extras: dict = {}
-        with _synth_lock:
+        try:
+            backend_obj.validate_extras(extras)
+        except ValueError as exc:
+            os.unlink(tmp_in_path)
             try:
-                backend_obj.validate_extras(extras)
-            except ValueError as exc:
-                os.unlink(tmp_in_path)
-                try:
-                    os.unlink(ref_path)
-                except OSError:
-                    pass
-                return JSONResponse(
-                    {"error": f"invalid extras for backend {backend}: {exc}"},
-                    status_code=400,
-                )
-            try:
-                prepared = backend_obj.prepare_voice(ref_path, transcript or None, extras)
-            except Exception as exc:
+                os.unlink(ref_path)
+            except OSError:
+                pass
+            return JSONResponse(
+                {"error": f"invalid extras for backend {backend}: {exc}"},
+                status_code=400,
+            )
+        try:
+            prepared = _run_in_ml_thread(backend_obj.prepare_voice, ref_path, transcript or None, extras)
+        except Exception as exc:
                 log.error("prepare_voice failed: %s", exc, exc_info=True)
                 os.unlink(tmp_in_path)
                 try:
@@ -737,8 +751,8 @@ def reload_voices():
     tracked_owned_refs: list[str] = []
     errors: list[dict] = []
 
-    # Phase 1: walk + build under _synth_lock (prepare_voice may touch Metal)
-    with _synth_lock:
+    # Phase 1: walk + build in the MLX thread (prepare_voice may touch Metal)
+    def _build_all_profiles():
         for profile_path in sorted(glob.glob(os.path.join(_VOICES_DIR, "*.json"))):
             try:
                 profile = _build_voice_profile(profile_path)
@@ -752,6 +766,8 @@ def reload_voices():
             tracked_cleanup_paths.extend(profile.prepared.cleanup_paths)
             if profile.prepared.owns_temp_audio:
                 tracked_owned_refs.append(profile.prepared.ref_audio_path)
+
+    _run_in_ml_thread(_build_all_profiles)
 
     # Phase 2: abort-on-error — rollback temp files built during this walk
     if errors:
@@ -791,24 +807,34 @@ def main():
     )
     args = parser.parse_args()
 
-    global DEFAULT_VOICE, _clone_enabled
+    global DEFAULT_VOICE, _clone_enabled, _ml_executor
     if args.allow_clone:
         _clone_enabled = True
         if args.host == "0.0.0.0":
             args.host = "127.0.0.1"
             log.info("--allow-clone: binding to 127.0.0.1 for security")
+
+    # Spin up the dedicated MLX thread BEFORE any backend loading so that all Metal
+    # stream IDs (0, 1, 2, …) are created in the same thread that will later run synthesis.
+    _ml_executor = concurrent.futures.ThreadPoolExecutor(
+        max_workers=1, thread_name_prefix="mlx"
+    )
+
     # 1. Register all backends.
     backends.register_all()
     log.info("registered backends: %s", backends.names())
 
-    # 2. Load all backend weights (unconditional preload, per design D6).
+    # 2. Load all backend weights in the MLX thread (unconditional preload, per design D6).
     #    Sequential + logged — takes 60-180s cold; operator visibility matters.
+    def _load_backend(b):
+        b.load()
+
     for bname in backends.names():
         b = backends.get(bname)
         t0 = time.time()
         log.info("loading backend %s (%s)...", bname, b.display_name)
         try:
-            b.load()
+            _run_in_ml_thread(_load_backend, b)
         except Exception as exc:
             log.error("backend %s failed to load: %s", bname, exc, exc_info=True)
             raise SystemExit(1)
@@ -817,8 +843,8 @@ def main():
     # Clean up any VoxCPM temp files orphaned by a previous crashed run.
     _sweep_orphaned_temp_files()
 
-    # 3. Walk voices/*.json — profile loader calls prepare_voice() (can need loaded weights).
-    _load_voice_profiles()
+    # 3. Walk voices/*.json — prepare_voice() calls may touch Metal, so run in the MLX thread.
+    _run_in_ml_thread(_load_voice_profiles)
 
     # 4. Prune voices whose ref audio vanished between load attempts (defensive).
     missing = [v for v, p in VOICES.items() if not os.path.exists(p.ref_audio)]

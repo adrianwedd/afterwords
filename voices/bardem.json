@@ -1,7 +1,8 @@
 {
   "name": "bardem",
-  "source_url": "https://www.youtube.com/watch?v=BqMdQBox15s",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=ZY0DG8rUnCA",
   "reference_audio": "bardem-ref.wav",
-  "reference_text": "What's the most you ever lost on a coin toss? The most you ever lost on a coin toss? You need to call it. I can't call it for you. It wouldn't be fair. Yes, you did. You've been putting it up your whole life. You just didn't know it.",
-  "segment_start_s": 164
+  "reference_text": "What's the most you ever lost on a coin toss? Sarah? The most you ever lost.",
+  "segment_start_s": 155
 }

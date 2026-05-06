@@ -69,12 +69,25 @@ class VoxtralBackend(BackendBase):
     def __init__(self):
         super().__init__()
         self._model = None
+        self._unavailable_reason: str | None = None
 
     def load(self) -> None:
         def _do():
-            from mlx_audio.tts import load_model
+            try:
+                from mlx_audio.tts import load_model
+            except ImportError as exc:
+                self._unavailable_reason = (
+                    f"optional dependencies are not installed: {exc}; "
+                    "install mlx-audio and mistral-common[audio]"
+                )
+                log.warning("Voxtral unavailable: %s", self._unavailable_reason)
+                return
             log.info("loading %s ...", MODEL_ID)
-            self._model = load_model(MODEL_ID)
+            try:
+                self._model = load_model(MODEL_ID)
+            except (RuntimeError, Exception) as exc:
+                self._unavailable_reason = str(exc)
+                log.warning("Voxtral unavailable: %s", self._unavailable_reason)
         self._ensure_loaded(_do)
 
     def validate_extras(self, extras: Mapping[str, object]) -> None:
@@ -109,6 +122,8 @@ class VoxtralBackend(BackendBase):
         prepared: PreparedVoice,
         lang: str,
     ) -> tuple[np.ndarray, int]:
+        if self._unavailable_reason:
+            raise RuntimeError(f"Voxtral is unavailable: {self._unavailable_reason}")
         if self._model is None:
             raise RuntimeError("VoxtralBackend.synthesize called before load()")
         if lang not in self.supported_langs:

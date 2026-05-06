@@ -1,7 +1,8 @@
 {
   "name": "depp",
-  "source_url": "https://www.youtube.com/watch?v=5qpwD2QLusM",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=2GGMHmBgIEg",
   "reference_audio": "depp-ref.wav",
-  "reference_text": "Me, I'm dishonest. And a dishonest man you can always trust to be dishonest. Honestly, it's the honest ones you want to watch out for. Because you can never predict when they're going to do something incredibly stupid.",
-  "segment_start_s": 6
+  "reference_text": "this dock stays off limits to civilians. It's a fine goal to be sure, but it seems to me that a ship like that makes this one here a bit superfluous really. Oh the dauntless is the power in these waters true enough but there's no",
+  "segment_start_s": 30
 }

@@ -1,4 +1,5 @@
-mlx-audio>=0.4,<1.0
+# 0.4.1+ broke Qwen3-1.7B ICL (generates EOS on first token); pin below regression.
+mlx-audio>=0.4,<0.4.1
 soundfile>=0.13,<1.0
 fastapi>=0.135,<1.0
 python-multipart>=0.0.18,<1.0
