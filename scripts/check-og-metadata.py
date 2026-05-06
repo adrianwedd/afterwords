@@ -16,6 +16,7 @@ Checks performed:
 from __future__ import annotations
 
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -42,6 +43,21 @@ def gallery_voice_count() -> int:
 
 
 def repo_voice_count() -> int:
+    """Count git-tracked voice profiles so CI and local agree (ignores gitignored files)."""
+    try:
+        result = subprocess.run(
+            ["git", "ls-files", "voices/*.json"],
+            cwd=REPO,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        lines = [l for l in result.stdout.splitlines() if l.strip()]
+        if lines:
+            return len(lines)
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        pass
+    # Fallback for non-git environments (downloaded tarballs).
     return len(list((REPO / "voices").glob("*.json")))
 
 
