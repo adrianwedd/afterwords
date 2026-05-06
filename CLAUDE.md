@@ -45,9 +45,14 @@ pytest
 
 # Run a single test
 pytest tests/test_server.py::test_health_returns_ok
+
+# If pytest fails with "bad interpreter" after brew upgrade, recreate the venv:
+bash setup.sh --server-only
 ```
 
 Verify changes with `pytest` (no GPU required). Run a single test with `pytest tests/test_server.py::test_health_returns_ok`.
+
+**Note:** Homebrew Python minor-version upgrades (e.g. 3.14.3 → 3.14.4) break the `.venv` symlink. If you see `bad interpreter: .venv/bin/python3.14: no such file or directory`, run `bash setup.sh --server-only` to recreate the venv.
 
 ## Architecture
 
