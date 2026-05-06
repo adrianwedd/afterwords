@@ -1,6 +1,6 @@
 {
   "name": "seven-of-nine-picard",
-  "backend": "qwen3-1.7b",
+  "backend": "qwen3-0.6b",
   "source_url": "https://youtube.com/watch?v=LzTn1mG0xk4",
   "reference_audio": "seven-of-nine-picard-ref.wav",
   "reference_text": "The USS Boyager, she made her name farther out than any of those other relics had ever gone. I was reborn there. She was my home.",

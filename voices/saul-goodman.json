@@ -1,6 +1,6 @@
 {
   "name": "saul-goodman",
-  "backend": "qwen3-1.7b",
+  "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=pPd67CEL54E",
   "segment_start_s": 2,
   "reference_text": "Oh, hello. I was just working on a multi-million dollar lawsuit for one of my clients. I know what you're thinking. Yeah, a lawsuit sounds good, Saul, but who can you call?",

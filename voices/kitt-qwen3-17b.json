@@ -1,0 +1,9 @@
+{
+  "name": "kitt-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "kitt-ref.wav",
+  "reference_text": "an action-filled NBC television series, Knight Rider. I must say that I'm truly delighted to meet all of you today. Filming a television series is a demanding and challenging",
+  "family": "kitt",
+  "source_url": "https://www.youtube.com/watch?v=jiZXnHAffuA",
+  "segment_start_s": 5
+}

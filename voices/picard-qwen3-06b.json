@@ -1,0 +1,9 @@
+{
+  "name": "picard-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "picard-ref.wav",
+  "reference_text": "With the first link the chain is forged. The first speech censured, the first thought forbidden, the first freedom denied, chains us all irrevocably.",
+  "family": "picard",
+  "source_url": "https://www.youtube.com/watch?v=K5Po40kvI9c",
+  "segment_start_s": 57
+}

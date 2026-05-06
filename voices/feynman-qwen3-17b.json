@@ -1,0 +1,9 @@
+{
+  "name": "feynman-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "feynman-ref.wav",
+  "reference_text": "I lose a great deal of pleasure out of that, and I think people lose a lot of pleasure who find the science dull. In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination.",
+  "family": "feynman",
+  "source_url": "https://www.youtube.com/watch?v=P1ww1IXRfTA",
+  "segment_start_s": 30
+}

@@ -1,6 +1,6 @@
 {
   "name": "geraldine",
-  "backend": "qwen3-1.7b",
+  "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=mVmzuMKluso",
   "reference_audio": "geraldine-ref.wav",
   "reference_text": "tidying. Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling. And now, voila, just the one left. So that was very thorough tidying by me there.",

@@ -1,0 +1,9 @@
+{
+  "name": "martha-jones-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "martha-jones-ref.wav",
+  "reference_text": "I told a story. That's all. No weapons, just words. I did just what the doctor said. I went across the continents all on my own And everywhere I went I found the people and I told them my story He has saved your lives so many times",
+  "family": "martha-jones",
+  "source_url": "https://www.youtube.com/watch?v=XK-XRLM7K5Y",
+  "segment_start_s": 0
+}

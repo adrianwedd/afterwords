@@ -1,0 +1,10 @@
+{
+  "name": "tilda-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "tilda-ref.wav",
+  "reference_text": "How can you have lived for so long and still not get it, this self-obsession, the waste of living?",
+  "family": "tilda",
+  "source_url": "https://www.youtube.com/watch?v=Gvu87DwV3nY",
+  "segment_start_s": 108,
+  "notes": "Reference re-trimmed via ffmpeg silenceremove (now 11.2s dense). Transcript refreshed from Whisper."
+}

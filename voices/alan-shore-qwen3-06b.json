@@ -1,0 +1,9 @@
+{
+  "name": "alan-shore-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "alan-shore-ref.wav",
+  "reference_text": "expected the American people to rise up. Well, they didn't. Then, when the Abu Ghraib torture thing surfaced, and it was revealed that our government participated in rendition, a practice of torture.",
+  "family": "alan-shore",
+  "source_url": "https://www.youtube.com/watch?v=qd5vRphPqnk",
+  "segment_start_s": 12
+}

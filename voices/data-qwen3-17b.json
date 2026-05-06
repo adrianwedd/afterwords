@@ -1,0 +1,10 @@
+{
+  "name": "data-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "data-ref.wav",
+  "reference_text": "I have asked myself that many times, as I have struggled to be more human. Until I realized, it is the struggle itself that is most important. We must strive to be more.",
+  "family": "data",
+  "source_url": "https://www.youtube.com/watch?v=5PdVkA3HYYY",
+  "segment_start_s": 24,
+  "notes": "Reference trimmed via ffmpeg silenceremove (was 15.0s with 2.9s mid-silence; now 10.6s dense). Transcript trimmed to remove phantom sentence not in audio."
+}

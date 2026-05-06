@@ -1,0 +1,9 @@
+{
+  "name": "trigger-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "trigger-ref.wav",
+  "reference_text": "Councillor Murray. See, that's me. Unless you've cleared that up. I'm glad you cleared that up. If you have a look at that meat, shouldn't you? All right.",
+  "family": "trigger",
+  "source_url": "https://www.youtube.com/watch?v=56yN2zHtofM",
+  "segment_start_s": 20
+}

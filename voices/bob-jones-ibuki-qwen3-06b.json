@@ -1,0 +1,7 @@
+{
+  "name": "bob-jones-ibuki-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "bob-jones-ibuki-ref.wav",
+  "reference_text": "The Kata Sanshin is designed basically for one-pointedness, bringing timing, coordination, aggression and channeling everything into one-point, which of course in time builds up the self-confidence of the martial artist. The important thing is with the heavy breathing, which is very similar to yoga breathing, but it's called ibuki, the breathing from Japan, is done very aggressively from the diaphragm.",
+  "family": "bob-jones-ibuki"
+}

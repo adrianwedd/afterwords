@@ -1,0 +1,9 @@
+{
+  "name": "hyacinth-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "hyacinth-ref.wav",
+  "reference_text": "I wish to place a large order, a very important order. I have the new vicar calling this afternoon for tea and light refreshments. So how soon can you deliver? Yes, I know it's Saturday and I'm very happy that you're busy.",
+  "family": "hyacinth",
+  "source_url": "https://www.youtube.com/watch?v=16VJza_gZAo",
+  "segment_start_s": 10
+}

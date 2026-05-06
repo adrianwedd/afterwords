@@ -1,0 +1,10 @@
+{
+  "name": "amy-pond-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "amy-pond-ref.wav",
+  "reference_text": "That you'll be safe, cared for and protected, but this isn't the time for lies, what you're going to be Melody.",
+  "family": "amy-pond",
+  "source_url": "https://www.youtube.com/watch?v=h5kHvADpA3s",
+  "segment_start_s": 5,
+  "notes": "Reference re-trimmed via ffmpeg silenceremove (now 8.8s dense). Transcript refreshed from Whisper."
+}

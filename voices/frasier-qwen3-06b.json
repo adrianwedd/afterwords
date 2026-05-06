@@ -1,0 +1,9 @@
+{
+  "name": "frasier-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "frasier-ref.wav",
+  "reference_text": "It may be the gulfs will wash us down It may be we shall touch the happy Isles and though we are not now that strength which in old days moved earth and heaven",
+  "family": "frasier",
+  "source_url": "https://www.youtube.com/watch?v=JaiMmxH-ERw",
+  "segment_start_s": 0
+}

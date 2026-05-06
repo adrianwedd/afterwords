@@ -1,0 +1,9 @@
+{
+  "name": "patsy-stone-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "patsy-stone-ref.wav",
+  "reference_text": "You're not in this get to you, eh? No, of course not. A little bit of bolly. Yeah, just a smidge. Oh! Oh, these are days. Yes, really. Anything in them? Not much, darling, no. MP in drug craze sex ro -",
+  "family": "patsy-stone",
+  "source_url": "https://www.youtube.com/watch?v=ZtXDMXvD_xU",
+  "segment_start_s": 5
+}

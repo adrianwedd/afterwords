@@ -1,0 +1,9 @@
+{
+  "name": "brian-cox-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "brian-cox-ref.wav",
+  "reference_text": "We're back in the 19th century. Engineers were concerned with the efficiency of steam engines. How hot should the fire be? What substance should you boil in the steam engine? Should it be water? Should it be something else?",
+  "family": "brian-cox",
+  "source_url": "https://www.youtube.com/watch?v=uQSoaiubuA0",
+  "segment_start_s": 0
+}

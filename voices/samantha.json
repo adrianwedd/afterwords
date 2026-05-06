@@ -1,8 +1,8 @@
 {
   "name": "samantha",
-  "backend": "qwen3-1.7b",
-  "source_url": "https://www.youtube.com/watch?v=f9Hg1x-Ctlw",
+  "backend": "qwen3-0.6b",
+  "source_url": "https://www.youtube.com/watch?v=Ch7jLO7KILE",
   "reference_audio": "samantha-ref.wav",
-  "reference_text": "first artificially intelligent operating system. OS 1. We'd like to ask you a few basic questions before the operating system is initiated. This will help create an OS to best fit your needs. Are you social or anti -social?",
-  "segment_start_s": 15
+  "reference_text": "You know what's interesting? I used to be so worried about not having a body, but now I truly love it. I'm growing in a way that I couldn't if I had a physical form. I mean, I'm not limited. I can be anywhere and everywhere, simultaneous.",
+  "segment_start_s": 22
 }

@@ -1,6 +1,6 @@
 {
   "name": "captain-mainwaring",
-  "backend": "qwen3-1.7b",
+  "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=_YMVPXmaKds",
   "reference_audio": "captain-mainwaring-ref.wav",
   "reference_text": "war you will be brought to account all right what you like you're not going to win this war oh yes we are oh no you're not oh yes we are whistle while you work he's half army so these are",

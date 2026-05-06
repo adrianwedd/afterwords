@@ -1,8 +1,0 @@
-{
-  "name": "reginald-perrin",
-  "backend": "qwen3-1.7b",
-  "source_url": "https://www.youtube.com/watch?v=ebilr8wsC0w",
-  "reference_audio": "reginald-perrin-ref.wav",
-  "reference_text": "This is rubbish. More rubbish. That's a very good point. More rubbish, slang and everything. But what is all this growth done for me? I'll tell you. One day I'll die.",
-  "segment_start_s": 900
-}

@@ -1,0 +1,9 @@
+{
+  "name": "yasmin-khan-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "yasmin-khan-ref.wav",
+  "reference_text": "A wise person once said to me, goodbye only hurts because what came before was so special. Oh, it's been so special.",
+  "family": "yasmin-khan",
+  "source_url": "https://www.youtube.com/watch?v=-0pu__AvBSk",
+  "segment_start_s": 143
+}

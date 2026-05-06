@@ -1,8 +1,8 @@
 {
   "name": "rod-serling",
-  "backend": "qwen3-1.7b",
+  "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=NIsm97HL0EU",
   "reference_audio": "rod-serling-ref.wav",
-  "reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
+  "reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner \u2014 a strange intersection in a shadow land called the Twilight Zone.",
   "segment_start_s": 30
 }

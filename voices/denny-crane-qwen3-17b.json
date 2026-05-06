@@ -1,0 +1,9 @@
+{
+  "name": "denny-crane-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "denny-crane-ref.wav",
+  "reference_text": "I feel like a busy one. So if you're gonna shoot me, let's do it. I have plans.",
+  "family": "denny-crane",
+  "source_url": "https://www.youtube.com/watch?v=Hfc7l1vz2jU",
+  "segment_start_s": 3
+}

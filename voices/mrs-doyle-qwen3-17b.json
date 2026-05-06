@@ -1,0 +1,9 @@
+{
+  "name": "mrs-doyle-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "mrs-doyle-ref.wav",
+  "reference_text": "It's a little drop, just a daily tiny bit. Daily is a bit of a sherry-cork to anyone as the day Ireland doesn't win the Eurovision Song Contest. Go on. No, no, no, really, actually. Ah, go on, go on, go on.",
+  "family": "mrs-doyle",
+  "source_url": "https://www.youtube.com/watch?v=ja9RIXyAbRw",
+  "segment_start_s": 0
+}

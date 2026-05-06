@@ -1,0 +1,9 @@
+{
+  "name": "jack-dee-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "jack-dee-ref.wav",
+  "reference_text": "just to help them see it, because, no, okay, forget it then, you know, I don't know. What was the problem? Why were you late? You went to the wrong Apollo? Which one? Oxford? Manchester? Oh, fucks sake.",
+  "family": "jack-dee",
+  "source_url": "https://www.youtube.com/watch?v=LW60m5gwQPY",
+  "segment_start_s": 60
+}

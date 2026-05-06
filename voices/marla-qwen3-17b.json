@@ -1,0 +1,7 @@
+{
+  "name": "marla-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "marla-ref.wav",
+  "reference_text": "It's a bridesmaid's dress. Someone loved it intensely for one day.  Then tossed it. Like a Christmas tree.",
+  "family": "marla"
+}

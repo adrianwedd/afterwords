@@ -1,0 +1,7 @@
+{
+  "name": "bob-jones-sanchin-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "bob-jones-sanchin-tensho-ref.wav",
+  "reference_text": "Tensho now in contrast to Sanchin, which is the power guitar, and getting everything sent into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision. It also is full of fluidity, once again designed to",
+  "family": "bob-jones-sanchin"
+}

@@ -1,6 +1,6 @@
 {
   "name": "avasarala",
-  "backend": "qwen3-1.7b",
+  "backend": "qwen3-0.6b",
   "source_url": "https://youtube.com/watch?v=cmRQXpbeA-0",
   "reference_audio": "avasarala-ref.wav",
   "reference_text": "I sent you to that planet to be my eyes and ears and now large ruins that were supposed to be inert are shooting out lightning. And there is nothing but radio silence from you.",

@@ -1,8 +1,0 @@
-{
-  "name": "marvin",
-  "backend": "qwen3-1.7b",
-  "source_url": "https://www.youtube.com/watch?v=iCUoZmZNFoY",
-  "reference_audio": "marvin-ref.wav",
-  "reference_text": "Tiny circles for a few hundred years more, until my power cells give out.",
-  "segment_start_s": 90
-}

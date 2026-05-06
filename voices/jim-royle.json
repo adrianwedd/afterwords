@@ -1,8 +1,8 @@
 {
   "name": "jim-royle",
-  "backend": "qwen3-1.7b",
+  "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=pUQhN-S-jwM",
   "reference_audio": "jim-royle-ref.wav",
-  "reference_text": "Kiss my arse. Equalize in my arse. Plepidation's my arse. What led you to my arse? Have a good time, my arse. Feast my arse.",
+  "reference_text": "Kiss my arse. Equaliser my arse. Preparation's my arse. Commuted my arse. Have a good time, my arse. Beast my arse.",
   "segment_start_s": 30
 }

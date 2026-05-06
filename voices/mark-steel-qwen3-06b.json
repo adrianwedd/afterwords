@@ -1,0 +1,9 @@
+{
+  "name": "mark-steel-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "mark-steel-ref.wav",
+  "reference_text": "There are no people. The lady who did the unmade bed. Tracey Ann, NCMN. She's amazing. She's policy. We've got the Turner Contemporary. You've got T.S. Eliot, he wrote a very famous poem. Wrote part of the Wasteland at the bandstand there. Dreamland. Dreamland. You can still see the big...",
+  "family": "mark-steel",
+  "source_url": "https://www.youtube.com/watch?v=WNTGgCCchXE",
+  "segment_start_s": 15
+}

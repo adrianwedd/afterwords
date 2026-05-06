@@ -1,8 +1,8 @@
 {
   "name": "peter-kay",
-  "backend": "qwen3-1.7b",
+  "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=7PlzOz37IzU",
   "reference_audio": "peter-kay-ref.wav",
-  "reference_text": "I mean, that's fantastic. At 90 in December, she's still in her warden control flat. She loves it there. She's got a red rope hanging from a ceiling at front room still for emergencies. She only pulled it once when she had a wasp in the front room.",
+  "reference_text": "I mean, that's fantastic. At 19 December, she's still in a warden control flat. She loves it there. She's got a red rope hanging from a ceiling in front room still for emergencies. She only pulled it once, but she had a wasp in the front room flying around.",
   "segment_start_s": 0
 }

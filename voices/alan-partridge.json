@@ -1,8 +1,8 @@
 {
   "name": "alan-partridge",
-  "backend": "qwen3-1.7b",
+  "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=YsIs0jm5Tpk",
   "reference_audio": "alan-partridge-ref.wav",
-  "reference_text": "I was testing with five champs, not the five champs, you come here to get away from the champs. Oh, back to your counsellors, counsellors, counsellors, counsellors, counsellors, counsellors. I knew I was in trouble.",
+  "reference_text": "I'm chatting with five chaps. Fights chaps? Not fight chaps. You're coming here to get away from the chaps. Oh, back to your council houses. Council houses, council houses, council houses, council houses. I knew I was in trouble.",
   "segment_start_s": 10
 }

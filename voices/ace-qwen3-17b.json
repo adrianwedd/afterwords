@@ -1,0 +1,10 @@
+{
+  "name": "ace-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "ace-ref.wav",
+  "reference_text": "I think I might have slightly overestimated myself here, Professor. Although\u2014",
+  "family": "ace",
+  "source_url": "https://www.youtube.com/watch?v=jC6HaSsf7p4",
+  "segment_start_s": 90,
+  "notes": "Ace (Sophie Aldred) \u2014 Power of the Doctor 2022, volcano scene with Holo-Doctor. 8s of dense in-character solo speech (90-98s in source, 2s leading trimmed)."
+}

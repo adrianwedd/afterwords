@@ -1,0 +1,9 @@
+{
+  "name": "tegan-jovanka-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "tegan-jovanka-ref.wav",
+  "reference_text": "I'm not coming with you. I'm tired of it. A lot of good people have died today. It's just that I don't think I can go on. If you stop enjoying it, give it up. It's stopped being fun, Doctor. I'm sorry.",
+  "family": "tegan-jovanka",
+  "source_url": "https://www.youtube.com/watch?v=xtxVjN1aisY",
+  "segment_start_s": 5
+}

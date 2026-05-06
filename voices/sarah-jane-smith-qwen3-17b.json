@@ -1,0 +1,10 @@
+{
+  "name": "sarah-jane-smith-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "sarah-jane-smith-ref.wav",
+  "reference_text": "I can't do this anymore. Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you and found a life of my own. Some things are worth getting your heart broken for.",
+  "family": "sarah-jane-smith",
+  "source_url": "https://www.youtube.com/watch?v=ypXgt6HJ9qk",
+  "segment_start_s": 63,
+  "notes": "Reference re-trimmed via ffmpeg silenceremove (now 13.7s dense). Transcript refreshed from Whisper."
+}

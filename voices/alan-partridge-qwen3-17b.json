@@ -1,0 +1,9 @@
+{
+  "name": "alan-partridge-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "alan-partridge-ref.wav",
+  "reference_text": "I'm chatting with five chaps. Fights chaps? Not fight chaps. You're coming here to get away from the chaps. Oh, back to your council houses. Council houses, council houses, council houses, council houses. I knew I was in trouble.",
+  "family": "alan-partridge",
+  "source_url": "https://www.youtube.com/watch?v=YsIs0jm5Tpk",
+  "segment_start_s": 10
+}

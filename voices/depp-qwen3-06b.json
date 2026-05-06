@@ -1,0 +1,9 @@
+{
+  "name": "depp-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "depp-ref.wav",
+  "reference_text": "this dock stays off limits to civilians. It's a fine goal to be sure, but it seems to me that a ship like that makes this one here a bit superfluous really. Oh the dauntless is the power in these waters true enough but there's no",
+  "family": "depp",
+  "source_url": "https://www.youtube.com/watch?v=2GGMHmBgIEg",
+  "segment_start_s": 30
+}

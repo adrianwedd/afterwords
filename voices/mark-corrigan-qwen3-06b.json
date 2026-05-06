@@ -1,0 +1,9 @@
+{
+  "name": "mark-corrigan-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "mark-corrigan-ref.wav",
+  "reference_text": "You can stop smoking your drugs, I'm making tea and toast for Sophie, I'm putting on Radio 4. Everything's normal. I'm not really high on drugs, so you can stop talking your nonsense on my time. What's the problem, man? Can't we just chill? No, you can't. You've been chilling long enough.",
+  "family": "mark-corrigan",
+  "source_url": "https://www.youtube.com/watch?v=LvkT9NBBc-4",
+  "segment_start_s": 0
+}

@@ -1,8 +1,8 @@
 {
   "name": "jackie-chiles",
-  "backend": "qwen3-1.7b",
+  "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=PeAHBiUgoD8",
   "segment_start_s": 5,
-  "reference_text": "put a balm on? Let a doctor put a balm. Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it. A lawyer. Who told you to have a lawyer? I didn't tell you to have a lawyer. Who told you to put the cheese on? Did I tell you to put the cheese on? I didn't tell you to put the cheese on.",
+  "reference_text": "Who told you to put a bomb on? Let a doctor put a bomb. Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it. A power? Who told you to have a power? I didn't tell you to have a power. Who told you to put the cheese on? Did I tell you to put the cheese on? I didn't tell you to put the cheese on.",
   "reference_audio": "jackie-chiles-ref.wav"
 }

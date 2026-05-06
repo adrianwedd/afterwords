@@ -1,0 +1,9 @@
+{
+  "name": "spock-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "spock-ref.wav",
+  "reference_text": "Space, the final frontier. These are the continuing voyages of the Starship Enterprise.",
+  "family": "spock",
+  "source_url": "https://www.youtube.com/watch?v=fHAOWLhrxhQ",
+  "segment_start_s": 491
+}

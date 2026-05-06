@@ -1,0 +1,9 @@
+{
+  "name": "del-boy-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "del-boy-ref.wav",
+  "reference_text": "And then you announce that you've changed your mind about having a chaffee and then you go late night shopping at family planning. Cassandra and I discussed it and our initial reaction was, quite naturally, to hold back until the financial climate was more conducive to starting.",
+  "family": "del-boy",
+  "source_url": "https://www.youtube.com/watch?v=Bc3eNzOx5-g",
+  "segment_start_s": 90
+}

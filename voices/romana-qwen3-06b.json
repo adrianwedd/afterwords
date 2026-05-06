@@ -1,0 +1,9 @@
+{
+  "name": "romana-qwen3-06b",
+  "backend": "qwen3-0.6b",
+  "reference_audio": "romana-ref.wav",
+  "reference_text": "My name is Romanadvoratrelundar. I once worked in the Bureau of Ancient Records. Doctor, I don't want to spend the rest of my life on Gallifrey. After all this, my destiny is here. In this place.",
+  "family": "romana",
+  "source_url": "https://www.youtube.com/watch?v=EqNodelUomc",
+  "segment_start_s": 12
+}

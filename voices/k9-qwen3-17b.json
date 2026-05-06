@@ -1,0 +1,9 @@
+{
+  "name": "k9-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "k9-ref.wav",
+  "reference_text": "Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded. Oh, I was just getting onto that. What? Negative.",
+  "family": "k9",
+  "source_url": "https://www.youtube.com/watch?v=0L2oWjsSA_Y",
+  "segment_start_s": 35
+}
