@@ -201,9 +201,12 @@ def pytest_report_teststatus(report, config):
     return "", "", ""
 
 
+_skipped = 0
+
+
 def pytest_runtest_logreport(report):
     """Print styled per-test results."""
-    global _current_group, _passed, _failed
+    global _current_group, _passed, _failed, _skipped
     if report.when != "call":
         return
 
@@ -218,11 +221,13 @@ def pytest_runtest_logreport(report):
     if report.passed:
         print(f"  {GREEN}\u2713{NC} {name}")
         _passed += 1
+    elif report.skipped:
+        _skipped += 1
     else:
         print(f"  {RED}\u2717{NC} {name}")
         _failed += 1
         if report.longreprtext:
-            for line in report.longreprtext.strip().splitlines()[:5]:
+            for line in report.longreprtext.strip().splitlines():
                 print(f"      {line}")
 
 
@@ -231,10 +236,11 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     import time as _time
     elapsed = _time.time() - _start_time
     print(f"\n  {DIM}{'─' * 41}{NC}")
+    skip_note = f", {_skipped} skipped" if _skipped else ""
     if _failed:
-        print(f"  {RED}\u2717 {_failed} failed, {_passed} passed{NC}  ({elapsed:.1f}s)")
+        print(f"  {RED}\u2717 {_failed} failed, {_passed} passed{skip_note}{NC}  ({elapsed:.1f}s)")
     else:
-        print(f"  {GREEN}\u2713 {_passed} passed{NC}  ({elapsed:.1f}s)")
+        print(f"  {GREEN}\u2713 {_passed} passed{skip_note}{NC}  ({elapsed:.1f}s)")
     print()
 
 
