@@ -132,6 +132,7 @@ def test_voxcpm_synthesize_handles_generator_output(tmp_path):
     (dataclass with .audio = mx.array). Earlier code passed the generator directly
     to np.asarray which raised TypeError. Mock the model to verify the generator
     branch concatenates chunk audio correctly without loading mlx-audio."""
+    pytest.importorskip("mlx.core")
     from types import SimpleNamespace
     import numpy as np
     from backends.voxcpm import VoxCPMBackend
@@ -166,6 +167,7 @@ def test_voxcpm_synthesize_handles_generator_output(tmp_path):
 def test_voxcpm_synthesize_raises_on_empty_generator(tmp_path):
     """If generate() yields nothing, surface a clear error rather than
     returning an empty array silently."""
+    pytest.importorskip("mlx.core")
     import pytest as _pytest
     from backends.voxcpm import VoxCPMBackend
     from backends.base import PreparedVoice, _read_only
@@ -195,9 +197,9 @@ def test_voxcpm_synthesize_passes_mxarray_ref_audio_to_model(tmp_path):
     - pass ref_audio as an mx.array (the model's _encode_prompt_audio
       expects a tensor, not a string path)
     """
+    mx = pytest.importorskip("mlx.core")
     from types import SimpleNamespace
     import numpy as np
-    import mlx.core as mx
     from backends.voxcpm import VoxCPMBackend
     from backends.base import PreparedVoice, _read_only
 
