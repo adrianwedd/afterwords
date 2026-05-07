@@ -18,6 +18,17 @@ VENV="$REPO_DIR/.venv/bin/python3"
 TRANSCRIBE="$REPO_DIR/scripts/transcribe.py"
 OUT_DIR="$REPO_DIR/transcripts/youtube"
 TMPDIR_BASE="$(mktemp -d /tmp/yt-transcribe-XXXXXX)"
+SAFE_ENV=(
+  env -i
+  # Use a fixed tool search path so caller-controlled PATH cannot shadow tools.
+  # /opt/homebrew comes first for Apple Silicon precedence.
+  "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+  "HOME=$HOME"
+  "USER=${USER:-}"
+  "LANG=${LANG:-C}"
+  "LC_ALL=${LC_ALL:-C}"
+  "TMPDIR=${TMPDIR:-/tmp}"
+)
 
 mkdir -p "$OUT_DIR"
 
@@ -32,15 +43,27 @@ run_with_timeout() {
   local timeout_seconds="$1"
   shift
 
-  "$@" &
-  local cmd_pid=$!
+  local cmd_pid
+  if command -v setsid >/dev/null 2>&1; then
+    setsid "$@" &
+    cmd_pid=$!
+  else
+    python3 - "$@" <<'PY' &
+import os
+import sys
+
+os.setsid()
+os.execvp(sys.argv[1], sys.argv[1:])
+PY
+    cmd_pid=$!
+  fi
   local elapsed=0
 
   while kill -0 "$cmd_pid" 2>/dev/null; do
     if (( elapsed >= timeout_seconds )); then
-      kill "$cmd_pid" 2>/dev/null || true
+      kill -TERM -- "-$cmd_pid" 2>/dev/null || true
       sleep 1
-      kill -9 "$cmd_pid" 2>/dev/null || true
+      kill -KILL -- "-$cmd_pid" 2>/dev/null || true
       wait "$cmd_pid" 2>/dev/null || true
       return 124
     fi
@@ -86,7 +109,7 @@ process_video() {
   rm -f "$TMP_OUT"
 
   # Download audio
-  if ! run_with_timeout 300 yt-dlp \
+  if ! run_with_timeout 300 "${SAFE_ENV[@]}" yt-dlp \
       --quiet \
       -x --audio-format wav --audio-quality 0 \
       --no-playlist \
@@ -105,13 +128,13 @@ process_video() {
 
   # Normalize to 16kHz mono
   local NORM_FILE="$WORK_DIR/norm.wav"
-  if ! run_with_timeout 300 ffmpeg -y -i "$AUDIO_FILE" -ar 16000 -ac 1 "$NORM_FILE" -loglevel error 2>&1; then
+  if ! run_with_timeout 300 "${SAFE_ENV[@]}" ffmpeg -y -i "$AUDIO_FILE" -ar 16000 -ac 1 "$NORM_FILE" -loglevel error 2>&1; then
     echo "  [FAIL] $VID — ffmpeg normalize failed"
     return 1
   fi
 
   # Transcribe
-  if run_with_timeout 300 "$VENV" "$TRANSCRIBE" "$NORM_FILE" \
+  if run_with_timeout 300 "${SAFE_ENV[@]}" "$VENV" "$TRANSCRIBE" "$NORM_FILE" \
       --backend parakeet \
       --out "$TMP_OUT" \
       --stats 2>&1; then
@@ -122,6 +145,7 @@ process_video() {
     fi
     fsync_file "$TMP_OUT"
     mv -f "$TMP_OUT" "$OUT_FILE"
+    fsync_file "$OUT_DIR" || echo "  WARNING: dir fsync failed (non-fatal)" >&2
     echo "  [ok]   $VID → $OUT_FILE"
   else
     echo "  [FAIL] $VID — transcription failed"

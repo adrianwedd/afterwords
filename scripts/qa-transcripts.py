@@ -16,6 +16,7 @@ import argparse
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
 import tempfile
@@ -117,13 +118,12 @@ GEMINI_PROMPT_TEMPLATE = """You are QA-ing an AI-generated audio narration (prod
 
 1. Identify every factual claim in the transcript that contradicts or is unsupported by the source: wrong stats, wrong dates, wrong names, invented details, misattributed quotes, inflated or deflated numbers, confabulated context, or anything the source simply doesn't say.
 
-2. For each issue, output:
-   ISSUE at ~Xs: "[exact words from transcript]"
-   SOURCE SAYS: [what the source actually says, or "not mentioned"]
-   REPLACEMENT: "[a corrected sentence or phrase, in the same narrative style, that can be synthesised in place of the erroneous segment]"
+2. Return only a JSON object in this shape:
+   {{"status":"clean","issues":[]}}
+   or:
+   {{"status":"issues","issues":[{{"timestamp_seconds":12.3,"transcript":"exact words from transcript","source_says":"what the source actually says, or not mentioned","replacement":"corrected sentence or phrase in the same narrative style"}}]}}
 
-3. If the transcript is factually clean relative to the source, output exactly:
-   CLEAN
+3. If the transcript is factually clean relative to the source, use status "clean" and an empty issues array.
 
 Be strict. NLM often invents plausible-sounding details. Flag anything that can't be verified in the source.
 """
@@ -136,8 +136,22 @@ def validate_video_id(video_id: str) -> str:
 
 
 def minimal_env(extra: tuple[str, ...] = ()) -> dict[str, str]:
-    keep = {"PATH", "HOME", "USER", "TMPDIR", "LANG", "LC_ALL", *extra}
-    return {k: v for k, v in os.environ.items() if k in keep and v}
+    # PATH is hardcoded to prevent caller-controlled PATH from shadowing tools.
+    # /opt/homebrew first since this repo is Apple Silicon-only (per CLAUDE.md).
+    # HOME is inherited because `gh` and `gemini` look up auth/config under it
+    # (~/.config/gh, ~/.gemini). Threat model: same-user local dev shell. Do
+    # NOT run this script in untrusted CI without overriding HOME to a sandbox.
+    env = {
+        "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin",
+        "HOME": os.environ.get("HOME", ""),
+        "LANG": os.environ.get("LANG", "C"),
+        "LC_ALL": os.environ.get("LC_ALL", "C"),
+    }
+    for key in extra:
+        val = os.environ.get(key)
+        if val:
+            env[key] = val
+    return {k: v for k, v in env.items() if v}
 
 
 def sanitize_prompt_content(value: str, limit: int | None = None) -> str:
@@ -163,15 +177,119 @@ def atomic_write_text(path: Path, text: str) -> None:
         os.fsync(tmp.fileno())
         tmp_path = Path(tmp.name)
     os.replace(tmp_path, path)
+    try:
+        dir_fd = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(dir_fd)
+        finally:
+            os.close(dir_fd)
+    except OSError as e:
+        print(f"WARNING: could not fsync directory {path.parent}: {e}", file=sys.stderr)
 
 
-def validate_gemini_response(output: str) -> str:
+def run_with_timeout(args: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[str]:
+    p = subprocess.Popen(
+        args,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        env=env,
+        start_new_session=True,
+    )
+    try:
+        stdout, stderr = p.communicate(timeout=300)
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(os.getpgid(p.pid), signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        p.wait()
+        raise
+    return subprocess.CompletedProcess(args, p.returncode, stdout, stderr)
+
+
+def extract_gemini_text(output: str) -> str:
+    """Extract model text from Gemini CLI JSON output."""
     text = output.strip()
-    if text == "CLEAN":
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError:
         return text
-    if "ISSUE at ~" in text and "SOURCE SAYS:" in text and "REPLACEMENT:" in text:
-        return text
-    raise ValueError("Gemini response failed validation")
+    if isinstance(payload, str):
+        return payload.strip()
+    if not isinstance(payload, dict):
+        raise ValueError("Gemini JSON output had unexpected top-level type")
+    for key in ("response", "text", "output", "content", "result"):
+        value = payload.get(key)
+        if isinstance(value, str):
+            return value.strip()
+    candidates = payload.get("candidates")
+    if isinstance(candidates, list) and candidates:
+        content = candidates[0].get("content") if isinstance(candidates[0], dict) else None
+        parts = content.get("parts") if isinstance(content, dict) else None
+        if isinstance(parts, list):
+            joined = "".join(part.get("text", "") for part in parts if isinstance(part, dict))
+            if joined.strip():
+                return joined.strip()
+    raise ValueError("Gemini JSON output did not contain model text")
+
+
+def parse_model_json(text: str) -> object:
+    """Parse a JSON-only model response, allowing fenced JSON as a fallback."""
+    stripped = text.strip()
+    match = re.match(r"\A```(?:json)?\s*(.*?)\s*```\s*\Z", stripped, re.DOTALL)
+    if match:
+        stripped = match.group(1).strip()
+    return json.loads(stripped)
+
+
+# LLM output is treated as untrusted. We validate structure but cannot prevent
+# semantic prompt injection -- downstream consumers must treat the output as
+# content from an untrusted source.
+def validate_gemini_response(output: str) -> str:
+    model_text = extract_gemini_text(output)
+    try:
+        payload = parse_model_json(model_text)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Gemini response was not valid JSON: {e}") from e
+    if not isinstance(payload, dict):
+        raise ValueError("Gemini response JSON must be an object")
+    status = payload.get("status")
+    issues = payload.get("issues")
+    if status == "clean" and issues == []:
+        return "CLEAN"
+    if status != "issues" or not isinstance(issues, list) or not issues:
+        raise ValueError("Gemini response failed QA JSON validation")
+
+    lines: list[str] = []
+    for i, issue in enumerate(issues):
+        if not isinstance(issue, dict):
+            raise ValueError(f"Gemini issue {i} must be an object")
+        timestamp = issue.get("timestamp_seconds")
+        transcript = issue.get("transcript")
+        source_says = issue.get("source_says")
+        replacement = issue.get("replacement")
+        if not isinstance(timestamp, (int, float)) or timestamp < 0:
+            raise ValueError(f"Gemini issue {i} has invalid timestamp_seconds")
+        if not all(isinstance(v, str) and v.strip() for v in (transcript, source_says, replacement)):
+            raise ValueError(f"Gemini issue {i} is missing required text fields")
+        for field_name, value in (
+            ("transcript", transcript),
+            ("source_says", source_says),
+            ("replacement", replacement),
+        ):
+            if re.search(r"[\n\r\f\v\x85  ]", value):
+                raise ValueError(f"Gemini issue {i} field {field_name} must be single-line")
+        lines.extend(
+            [
+                f"ISSUE at ~{timestamp:g}s: \"{transcript.strip()}\"",
+                f"SOURCE SAYS: {source_says.strip()}",
+                f"REPLACEMENT: \"{replacement.strip()}\"",
+                "",
+            ]
+        )
+    body = "\n".join(lines).strip()
+    return body
 
 
 def load_titles() -> dict[str, str]:
@@ -237,11 +355,8 @@ def run_qa(video_id: str, title: str) -> str:
         transcript_text=sanitize_prompt_content(transcript_text),
     )
 
-    result = subprocess.run(
-        ["gemini", "--model", GEMINI_MODEL, "-p", prompt],
-        capture_output=True,
-        text=True,
-        timeout=300,
+    result = run_with_timeout(
+        ["gemini", "--model", GEMINI_MODEL, "--output-format", "json", "-p", prompt],
         env=minimal_env(("GEMINI_API_KEY", "GOOGLE_API_KEY")),
     )
     output = result.stdout.strip()

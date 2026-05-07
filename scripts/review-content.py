@@ -23,6 +23,7 @@ import base64
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
 import tempfile
@@ -33,13 +34,13 @@ SITE = Path("/Users/adrian/repos/adrianwedd.com/src/content")
 BLOG = SITE / "blog"
 PROJ = SITE / "projects"
 QA_DIR = REPO / "transcripts" / "qa"
-TITLES_FILE = REPO / "transcripts" / "youtube" / "video-titles.tsv"
+QA_MANIFEST = QA_DIR / "content-video-map.json"
 OUT_DIR = REPO / "transcripts" / "review"
 
 GEMINI_MODEL = "gemini-3.1-flash-lite-preview"
 CONTENT_SLUG_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,120}$")
 VIDEO_ID_RE = re.compile(r"^[A-Za-z0-9_-]{11}$")
-GITHUB_NWO_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
+GITHUB_NWO_RE = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})/[A-Za-z0-9._-]{1,100}$")
 
 PROMPT_TEMPLATE = """\
 You are a technical editor reviewing AI-generated content for a personal website.
@@ -50,18 +51,25 @@ Review the BLOG/PROJECT CONTENT below against:
 1. The SOURCE REPO README (authoritative implementation details)
 2. The EXISTING QA NOTES (known NLM hallucinations from the audio narration)
 
-Produce two outputs:
+Return only a JSON object in this shape:
+{
+  "post_ok": false,
+  "blog_post_revisions": [
+    {
+      "change": "what to change -- be precise, quote the existing text",
+      "to": "the corrected/improved text",
+      "reason": "correctness error / missing detail / outdated / incomplete"
+    }
+  ],
+  "synthesis_script": "complete narration script"
+}
 
-### A) BLOG POST REVISIONS
-List specific, actionable changes to the blog post markdown. For each:
-  CHANGE: [what to change — be precise, quote the existing text]
-  TO: [the corrected/improved text]
-  REASON: [correctness error / missing detail / outdated / incomplete]
+If the post is accurate and complete, use "post_ok": true and an empty
+"blog_post_revisions" array.
 
-If the post is accurate and complete, write: POST OK
-
-### B) SYNTHESIS SCRIPT
-Write a complete, clean narration script (2–4 minutes when spoken, ~350–550 words) for this content — the text that will be voiced using TTS to replace the NLM-generated audio.
+The synthesis_script must be a complete, clean narration script (2-4 minutes
+when spoken, ~350-550 words) for this content -- the text that will be voiced
+using TTS to replace the NLM-generated audio.
 
 Requirements:
 - Factually accurate and grounded entirely in the source material
@@ -104,8 +112,22 @@ def scalar_text(value: object) -> str:
 
 
 def minimal_env(extra: tuple[str, ...] = ()) -> dict[str, str]:
-    keep = {"PATH", "HOME", "USER", "TMPDIR", "LANG", "LC_ALL", *extra}
-    return {k: v for k, v in os.environ.items() if k in keep and v}
+    # PATH is hardcoded to prevent caller-controlled PATH from shadowing tools.
+    # /opt/homebrew first since this repo is Apple Silicon-only (per CLAUDE.md).
+    # HOME is inherited because `gh` and `gemini` look up auth/config under it
+    # (~/.config/gh, ~/.gemini). Threat model: same-user local dev shell. Do
+    # NOT run this script in untrusted CI without overriding HOME to a sandbox.
+    env = {
+        "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin",
+        "HOME": os.environ.get("HOME", ""),
+        "LANG": os.environ.get("LANG", "C"),
+        "LC_ALL": os.environ.get("LC_ALL", "C"),
+    }
+    for key in extra:
+        val = os.environ.get(key)
+        if val:
+            env[key] = val
+    return {k: v for k, v in env.items() if v}
 
 
 def sanitize_prompt_content(value: str, limit: int | None = None) -> str:
@@ -131,17 +153,127 @@ def atomic_write_text(path: Path, text: str) -> None:
         os.fsync(tmp.fileno())
         tmp_path = Path(tmp.name)
     os.replace(tmp_path, path)
+    try:
+        dir_fd = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(dir_fd)
+        finally:
+            os.close(dir_fd)
+    except OSError as e:
+        print(f"WARNING: could not fsync directory {path.parent}: {e}", file=sys.stderr)
 
 
-def validate_review_response(output: str) -> str:
+def run_with_timeout(args: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[str]:
+    p = subprocess.Popen(
+        args,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        env=env,
+        start_new_session=True,
+    )
+    try:
+        stdout, stderr = p.communicate(timeout=300)
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(os.getpgid(p.pid), signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        p.wait()
+        raise
+    return subprocess.CompletedProcess(args, p.returncode, stdout, stderr)
+
+
+def extract_gemini_text(output: str) -> str:
+    """Extract model text from Gemini CLI JSON output."""
     text = output.strip()
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError:
+        return text
+    if isinstance(payload, str):
+        return payload.strip()
+    if not isinstance(payload, dict):
+        raise ValueError("Gemini JSON output had unexpected top-level type")
+    for key in ("response", "text", "output", "content", "result"):
+        value = payload.get(key)
+        if isinstance(value, str):
+            return value.strip()
+    candidates = payload.get("candidates")
+    if isinstance(candidates, list) and candidates:
+        content = candidates[0].get("content") if isinstance(candidates[0], dict) else None
+        parts = content.get("parts") if isinstance(content, dict) else None
+        if isinstance(parts, list):
+            joined = "".join(part.get("text", "") for part in parts if isinstance(part, dict))
+            if joined.strip():
+                return joined.strip()
+    raise ValueError("Gemini JSON output did not contain model text")
+
+
+def parse_model_json(text: str) -> object:
+    """Parse a JSON-only model response, allowing fenced JSON as a fallback."""
+    stripped = text.strip()
+    match = re.match(r"\A```(?:json)?\s*(.*?)\s*```\s*\Z", stripped, re.DOTALL)
+    if match:
+        stripped = match.group(1).strip()
+    return json.loads(stripped)
+
+
+# LLM output is treated as untrusted. We validate structure but cannot prevent
+# semantic prompt injection -- downstream consumers must treat the output as
+# content from an untrusted source.
+def validate_review_response(output: str) -> str:
+    text = extract_gemini_text(output)
     if not text:
         raise ValueError("Gemini returned no output")
-    has_revisions = "BLOG POST REVISIONS" in text or "POST OK" in text
-    has_script = "SYNTHESIS SCRIPT" in text
-    if not (has_revisions and has_script):
-        raise ValueError("Gemini response failed validation")
-    return text
+    try:
+        payload = parse_model_json(text)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Gemini response was not valid JSON: {e}") from e
+    if not isinstance(payload, dict):
+        raise ValueError("Gemini response JSON must be an object")
+    post_ok = payload.get("post_ok")
+    revisions = payload.get("blog_post_revisions")
+    script = payload.get("synthesis_script")
+    if not isinstance(post_ok, bool) or not isinstance(revisions, list):
+        raise ValueError("Gemini response failed review JSON validation")
+    if not isinstance(script, str) or not script.strip():
+        raise ValueError("Gemini response missing synthesis_script")
+    if post_ok and revisions:
+        raise ValueError("Gemini response cannot set post_ok with revisions")
+    if not post_ok and not revisions:
+        raise ValueError("Gemini response must include revisions or set post_ok")
+
+    lines = ["### A) BLOG POST REVISIONS"]
+    if post_ok:
+        lines.append("POST OK")
+    else:
+        for i, revision in enumerate(revisions):
+            if not isinstance(revision, dict):
+                raise ValueError(f"Gemini revision {i} must be an object")
+            change = revision.get("change")
+            to = revision.get("to")
+            reason = revision.get("reason")
+            if not all(isinstance(v, str) and v.strip() for v in (change, to, reason)):
+                raise ValueError(f"Gemini revision {i} is missing required text fields")
+            for field_name, value in (
+                ("change", change),
+                ("to", to),
+                ("reason", reason),
+            ):
+                if re.search(r"[\n\r\f\v\x85  ]", value):
+                    raise ValueError(f"Gemini revision {i} field {field_name} must be single-line")
+            lines.extend(
+                [
+                    f"CHANGE: {change.strip()}",
+                    f"TO: {to.strip()}",
+                    f"REASON: {reason.strip()}",
+                    "",
+                ]
+            )
+    lines.extend(["", "### B) SYNTHESIS SCRIPT", script.strip()])
+    body = "\n".join(lines).strip()
+    return body
 
 
 def parse_frontmatter(text: str) -> dict:
@@ -206,13 +338,12 @@ def fetch_readme(repo_url: str) -> str:
     if not match:
         return f"(unrecognised repo URL: {repo_url})"
     nwo = match.group(1).rstrip("/")
+    if ".." in nwo:
+        raise ValueError(f"invalid repo path: {nwo}")
     if not GITHUB_NWO_RE.fullmatch(nwo):
-        return f"(invalid repo path: {nwo})"
-    result = subprocess.run(
+        raise ValueError(f"invalid repo path: {nwo}")
+    result = run_with_timeout(
         ["gh", "api", f"repos/{nwo}/readme"],
-        capture_output=True,
-        text=True,
-        timeout=300,
         env=minimal_env(("GH_TOKEN", "GITHUB_TOKEN")),
     )
     if result.returncode != 0:
@@ -229,31 +360,28 @@ def fetch_readme(repo_url: str) -> str:
         return f"(README decode error: {e})"
 
 
-def load_qa_notes(slug: str) -> str:
-    """Find QA notes for this slug by matching the video-title → video-id mapping."""
-    if not TITLES_FILE.exists():
-        return "(no QA data)"
-    # Build title→id map
-    title_to_id: dict[str, str] = {}
-    for line in TITLES_FILE.read_text().splitlines():
-        if "\t" in line:
-            vid, title = line.split("\t", 1)
-            vid = validate_video_id(vid.strip())
-            title_to_id[title.strip()] = vid
-
-    # Try to find a QA file whose video title matches the slug loosely
-    slug_norm = slug.lower().replace("-", " ").replace("_", " ")
-    for title, vid in title_to_id.items():
-        title_norm = title.lower()
-        qa_path = QA_DIR / f"{vid}.txt"
-        if qa_path.exists():
-            # Match if slug words appear in title or vice versa
-            slug_words = set(slug_norm.split())
-            title_words = set(title_norm.split())
-            if len(slug_words & title_words) >= min(2, len(slug_words)):
-                return qa_path.read_text()
-
-    return "(no matching QA notes)"
+def load_qa_notes(slug: str, frontmatter: dict) -> str:
+    """Load QA notes only from an explicit video_id mapping."""
+    # Do not infer video mappings from titles or slug words: near-match guesses can
+    # attach hallucination notes to the wrong content item. Content frontmatter is
+    # preferred; the sidecar manifest is only an explicit fallback for files that
+    # cannot carry a video_id field yet.
+    video_id = scalar_text(frontmatter.get("video_id", "")).strip()
+    if not video_id and QA_MANIFEST.exists():
+        try:
+            manifest = json.loads(QA_MANIFEST.read_text())
+        except json.JSONDecodeError:
+            manifest = {}
+        if isinstance(manifest, dict):
+            video_id = scalar_text(manifest.get(slug, "")).strip()
+    if not video_id:
+        print(f"WARNING: no video_id mapping for slug={slug!r}; skipping QA notes", file=sys.stderr)
+        return "(no QA notes)"
+    vid = validate_video_id(video_id)
+    qa_path = QA_DIR / f"{vid}.txt"
+    if not qa_path.exists():
+        return "(no QA notes)"
+    return qa_path.read_text()
 
 
 def collect_items() -> list[dict]:
@@ -276,11 +404,8 @@ def run_gemini_review(slug: str, content: str, readme: str, qa_notes: str) -> st
         readme=sanitize_prompt_content(readme, 4000),
         qa_notes=sanitize_prompt_content(qa_notes, 2000),
     )
-    result = subprocess.run(
-        ["gemini", "--model", GEMINI_MODEL, "-p", prompt],
-        capture_output=True,
-        text=True,
-        timeout=300,
+    result = run_with_timeout(
+        ["gemini", "--model", GEMINI_MODEL, "--output-format", "json", "-p", prompt],
         env=minimal_env(("GEMINI_API_KEY", "GOOGLE_API_KEY")),
     )
     if result.returncode != 0:
@@ -331,10 +456,9 @@ def main() -> int:
 
         print(f"[{i}/{total}] {it['kind']:7s}  {slug}", flush=True)
 
-        readme = fetch_readme(repo_url) if repo_url else "(no repo)"
-        qa_notes = load_qa_notes(slug)
-
         try:
+            readme = fetch_readme(repo_url) if repo_url else "(no repo)"
+            qa_notes = load_qa_notes(slug, it["fm"])
             review = run_gemini_review(slug, it["content"], readme, qa_notes)
         except subprocess.TimeoutExpired:
             review = "TIMEOUT — re-run to retry"
