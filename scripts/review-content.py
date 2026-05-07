@@ -261,7 +261,7 @@ def validate_review_response(output: str) -> str:
                 ("to", to),
                 ("reason", reason),
             ):
-                if re.search(r"[\n\r\f\v\x85  ]", value):
+                if re.search(r"[\n\r\f\v\x85  ]", value):
                     raise ValueError(f"Gemini revision {i} field {field_name} must be single-line")
             lines.extend(
                 [
