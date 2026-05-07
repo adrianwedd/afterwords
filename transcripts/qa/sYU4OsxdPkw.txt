@@ -1,0 +1,18 @@
+VIDEO: sYU4OsxdPkw
+TITLE: 120 Models, 18,176 Prompts: What We Found
+
+ISSUE at ~1m12s: "Attackers can use supply chain injection too [1:16] tirely."
+SOURCE SAYS: "injecting malicious content into tool definitions and skill files rather than user-facing prompts."
+REPLACEMENT: "Attackers can use supply chain injection to bypass safety by targeting the instructions models use to understand external tools."
+
+ISSUE at ~3m14s: "Small models often forget the earlier context and fail the attack at a 10% rate."
+SOURCE SAYS: "Against small, non-reasoning models, the same technique achieved roughly 10% [attack success rate]."
+REPLACEMENT: "Small models often forget the earlier context, keeping the attack success rate for these models at roughly 10%."
+
+ISSUE at ~3m21s: "A reasoning model's ability to perfectly track context is exactly what an attacker weaponizes."
+SOURCE SAYS: "exploiting the extended context tracking that makes reasoning models capable."
+REPLACEMENT: "A reasoning model's extended context tracking is exactly what an attacker weaponizes."
+
+ISSUE at ~4m03s: "The Failure First study found that these keyword heuristics inflate the reported risk of simple attacks by roughly 2.3 times."
+SOURCE SAYS: "keyword-based classification of attack success inflates results by roughly 2.3×" (The inflation factor applies to the aggregate findings across the entire 18,176-prompt study, which includes complex agentic attacks, not just "simple" ones).
+REPLACEMENT: "The Failure First study found that these keyword heuristics inflate the reported attack success rates by roughly 2.3 times."

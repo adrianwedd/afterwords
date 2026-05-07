@@ -1,0 +1,30 @@
+VIDEO: 03vYwCXjckQ
+TITLE: Latent Self
+
+ISSUE at ~0s: "A traditional mirror operates on strict physical law. It provides a one-to-one synchronization between your body and its reflection, proving your presence. We have learned to process static deepfakes by looking for the seams. Because they are pre-recorded, the brain categorizes them as external media, a digital object separate from our own current state."
+SOURCE SAYS: "A mirror shows you what you are." and "The experience is uncanny in a way that static deepfakes are not."
+REPLACEMENT: "A traditional mirror shows you what you are, providing a direct reflection of your presence. While we often recognize static deepfakes as external digital objects, Latent Self merges this physical response with synthetic manipulation."
+
+ISSUE at ~27s: "When these two systems collide, the result is a vacuum. The brain struggles to reconcile the real-time movement it expects with the artificial image it sees."
+SOURCE SAYS: "The experience is uncanny in a way that static deepfakes are not... It sits in the gap between recognition and estrangement."
+REPLACEMENT: "When these two systems collide, the result is a productive discomfort. The experience sits in the gap between recognition and estrangement, the same gap that makes mirrors interesting in the first place."
+
+ISSUE at ~1:37s: "It is a multi-dimensional mathematical map where the AI has organized every possible human facial feature into a system of coordinates."
+SOURCE SAYS: not mentioned (Source mentions "latent space" but provides no definition or description of its structure).
+REPLACEMENT: "This architecture utilizes latent space to map facial features as vectors."
+
+ISSUE at ~1:45s: "When the kiosk scans your face, it plots your specific biology as a single numeric coordinate within this map. This point is your origin. It is the mathematical definition of how you look at the moment you step in front of the mirror."
+SOURCE SAYS: "it tracks your face... a vector away from the face you walked in with."
+REPLACEMENT: "When the kiosk scans your face, it identifies your features as a starting point within this space. This represents the face you walked in with at the moment you step in front of the mirror."
+
+ISSUE at ~2:05s: "By turning your face into a coordinate, the system removes biological limits. Your identity becomes a location on a map that can be moved."
+SOURCE SAYS: "shifted along axes you choose... each one a vector away from the face you walked in with."
+REPLACEMENT: "By mapping your face, the system allows your identity to be shifted along axes you choose."
+
+ISSUE at ~2:25s: "As you move or breathe, your origin point shifts. The system recalculates the vector instantly, ensuring the morph stays attached to your real-time microexpressions."
+SOURCE SAYS: "the transformation is continuous and responsive—because it tracks your face and morphs in real time".
+REPLACEMENT: "As you move, the transformation remains continuous and responsive. Because the system tracks your face in real time, the morph stays synchronized with your expressions."
+
+ISSUE at ~3:36s: "derived from probability."
+SOURCE SAYS: "what you almost are."
+REPLACEMENT: "reflecting what you almost are."

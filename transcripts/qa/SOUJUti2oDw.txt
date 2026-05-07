@@ -1,0 +1,30 @@
+VIDEO: SOUJUti2oDw
+TITLE: The Robot That Refuses to Give Orders
+
+ISSUE at ~0:15: "an odd ADHD profile"
+SOURCE SAYS: "an AuDHD (ADHD + ASD comorbid) profile"
+REPLACEMENT: "an AuDHD profile"
+
+ISSUE at ~0:20: "Take a look at this animated diagram of a neurological pathway. For a child with pathological demand avoidance, a standard verbal command, the rigid shape entering the pathway, does not process as a simple instruction."
+SOURCE SAYS: Not mentioned. The source is a blog post and does not describe any animated diagrams or "rigid shapes" in pathways.
+REPLACEMENT: "For a child with pathological demand avoidance, a standard verbal command does not process as a simple instruction."
+
+ISSUE at ~0:50: "The standard tech tools they are handed only escalate the anxiety by relentlessly trying to enforce compliance."
+SOURCE SAYS: The source refers to "The standard parenting 'operating system'" and the "dense fog of clinical terms," but does not mention "standard tech tools" escalating anxiety in this context.
+REPLACEMENT: "The standard parenting frameworks they are handed only escalate the friction by relentlessly trying to enforce compliance."
+
+ISSUE at ~1:04: "adapts to child the's unique operating system"
+SOURCE SAYS: "adapts to the human" / "child's AuDHD profile"
+REPLACEMENT: "adapts to the child's unique operating system"
+
+ISSUE at ~3:24: "This diagram breaks down the core AI engine driving those quiet moments."
+SOURCE SAYS: Not mentioned. The source describes a "Three-Brain architecture" in text, not a specific diagram.
+REPLACEMENT: "This architecture breaks down the core AI engine driving those quiet moments."
+
+ISSUE at ~4:12: "as an error code to be overridden and fixed."
+SOURCE SAYS: Not mentioned. The source says it treats neurodivergence as a different operating system and rejects the idea of "fixing" behavior, but never uses the "error code" metaphor.
+REPLACEMENT: "as a behavioral problem to be overridden and fixed."
+
+ISSUE at ~4:16: "The SPARC project"
+SOURCE SAYS: "The SPARK project"
+REPLACEMENT: "The SPARK project"

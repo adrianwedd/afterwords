@@ -1,0 +1,3767 @@
+[
+  {
+    "word": "Organizations",
+    "start": 0.16,
+    "end": 0.96
+  },
+  {
+    "word": "across",
+    "start": 0.96,
+    "end": 1.36
+  },
+  {
+    "word": "the",
+    "start": 1.36,
+    "end": 1.52
+  },
+  {
+    "word": "board",
+    "start": 1.52,
+    "end": 1.84
+  },
+  {
+    "word": "are",
+    "start": 1.84,
+    "end": 2.0
+  },
+  {
+    "word": "buying",
+    "start": 2.0,
+    "end": 2.48
+  },
+  {
+    "word": "AI",
+    "start": 2.48,
+    "end": 2.88
+  },
+  {
+    "word": "models.",
+    "start": 2.88,
+    "end": 3.52
+  },
+  {
+    "word": "They",
+    "start": 3.52,
+    "end": 3.68
+  },
+  {
+    "word": "are",
+    "start": 3.68,
+    "end": 3.84
+  },
+  {
+    "word": "running",
+    "start": 3.84,
+    "end": 4.16
+  },
+  {
+    "word": "pilots,",
+    "start": 4.16,
+    "end": 4.88
+  },
+  {
+    "word": "launching",
+    "start": 4.88,
+    "end": 5.36
+  },
+  {
+    "word": "integrations,",
+    "start": 5.36,
+    "end": 6.24
+  },
+  {
+    "word": "and",
+    "start": 6.24,
+    "end": 6.4
+  },
+  {
+    "word": "waiting",
+    "start": 6.4,
+    "end": 6.72
+  },
+  {
+    "word": "for",
+    "start": 6.72,
+    "end": 6.88
+  },
+  {
+    "word": "the",
+    "start": 6.88,
+    "end": 6.96
+  },
+  {
+    "word": "promised",
+    "start": 6.96,
+    "end": 7.44
+  },
+  {
+    "word": "productivity",
+    "start": 7.44,
+    "end": 8.0
+  },
+  {
+    "word": "dividend.",
+    "start": 8.0,
+    "end": 8.96
+  },
+  {
+    "word": "For",
+    "start": 8.96,
+    "end": 9.28
+  },
+  {
+    "word": "most,",
+    "start": 9.28,
+    "end": 9.68
+  },
+  {
+    "word": "that",
+    "start": 9.68,
+    "end": 9.92
+  },
+  {
+    "word": "dividend",
+    "start": 9.92,
+    "end": 10.48
+  },
+  {
+    "word": "has",
+    "start": 10.48,
+    "end": 10.64
+  },
+  {
+    "word": "not",
+    "start": 10.64,
+    "end": 10.88
+  },
+  {
+    "word": "arrived",
+    "start": 10.88,
+    "end": 11.2
+  },
+  {
+    "word": "on",
+    "start": 11.2,
+    "end": 11.44
+  },
+  {
+    "word": "schedule.",
+    "start": 11.44,
+    "end": 12.24
+  },
+  {
+    "word": "This",
+    "start": 12.24,
+    "end": 12.48
+  },
+  {
+    "word": "delay",
+    "start": 12.48,
+    "end": 12.96
+  },
+  {
+    "word": "is",
+    "start": 12.96,
+    "end": 13.12
+  },
+  {
+    "word": "explained",
+    "start": 13.12,
+    "end": 13.52
+  },
+  {
+    "word": "by",
+    "start": 13.52,
+    "end": 13.68
+  },
+  {
+    "word": "the",
+    "start": 13.68,
+    "end": 13.84
+  },
+  {
+    "word": "productivity",
+    "start": 13.84,
+    "end": 14.48
+  },
+  {
+    "word": "J-curve.",
+    "start": 14.48,
+    "end": 15.44
+  },
+  {
+    "word": "Output",
+    "start": 15.44,
+    "end": 16.0
+  },
+  {
+    "word": "drops",
+    "start": 16.0,
+    "end": 16.4
+  },
+  {
+    "word": "below",
+    "start": 16.4,
+    "end": 16.72
+  },
+  {
+    "word": "the",
+    "start": 16.72,
+    "end": 16.88
+  },
+  {
+    "word": "baseline",
+    "start": 16.88,
+    "end": 17.52
+  },
+  {
+    "word": "before",
+    "start": 17.52,
+    "end": 17.76
+  },
+  {
+    "word": "accelerating.",
+    "start": 17.76,
+    "end": 18.88
+  },
+  {
+    "word": "This",
+    "start": 18.88,
+    "end": 19.2
+  },
+  {
+    "word": "trough",
+    "start": 19.2,
+    "end": 19.68
+  },
+  {
+    "word": "represents",
+    "start": 19.68,
+    "end": 20.08
+  },
+  {
+    "word": "heavy",
+    "start": 20.08,
+    "end": 20.48
+  },
+  {
+    "word": "expenditure",
+    "start": 20.48,
+    "end": 21.04
+  },
+  {
+    "word": "on",
+    "start": 21.04,
+    "end": 21.2
+  },
+  {
+    "word": "invisible",
+    "start": 21.2,
+    "end": 21.84
+  },
+  {
+    "word": "work.",
+    "start": 21.84,
+    "end": 22.32
+  },
+  {
+    "word": "Economists",
+    "start": 22.32,
+    "end": 23.04
+  },
+  {
+    "word": "call",
+    "start": 23.04,
+    "end": 23.2
+  },
+  {
+    "word": "this",
+    "start": 23.2,
+    "end": 23.44
+  },
+  {
+    "word": "intangible",
+    "start": 23.44,
+    "end": 24.16
+  },
+  {
+    "word": "capital,",
+    "start": 24.16,
+    "end": 24.8
+  },
+  {
+    "word": "redesigned",
+    "start": 24.8,
+    "end": 25.52
+  },
+  {
+    "word": "processes,",
+    "start": 25.52,
+    "end": 26.16
+  },
+  {
+    "word": "data",
+    "start": 26.16,
+    "end": 26.48
+  },
+  {
+    "word": "governance,",
+    "start": 26.48,
+    "end": 27.12
+  },
+  {
+    "word": "and",
+    "start": 27.12,
+    "end": 27.28
+  },
+  {
+    "word": "operational",
+    "start": 27.28,
+    "end": 27.84
+  },
+  {
+    "word": "discipline.",
+    "start": 27.84,
+    "end": 28.72
+  },
+  {
+    "word": "Productivity",
+    "start": 28.72,
+    "end": 29.52
+  },
+  {
+    "word": "arrives",
+    "start": 29.52,
+    "end": 30.0
+  },
+  {
+    "word": "only",
+    "start": 30.0,
+    "end": 30.16
+  },
+  {
+    "word": "when",
+    "start": 30.16,
+    "end": 30.4
+  },
+  {
+    "word": "an",
+    "start": 30.4,
+    "end": 30.56
+  },
+  {
+    "word": "organization",
+    "start": 30.56,
+    "end": 31.12
+  },
+  {
+    "word": "builds",
+    "start": 31.12,
+    "end": 31.44
+  },
+  {
+    "word": "the",
+    "start": 31.44,
+    "end": 31.6
+  },
+  {
+    "word": "expensive,",
+    "start": 31.6,
+    "end": 32.32
+  },
+  {
+    "word": "invisible",
+    "start": 32.32,
+    "end": 32.88
+  },
+  {
+    "word": "workflow",
+    "start": 32.88,
+    "end": 33.36
+  },
+  {
+    "word": "infrastructure",
+    "start": 33.36,
+    "end": 34.08
+  },
+  {
+    "word": "required",
+    "start": 34.08,
+    "end": 34.56
+  },
+  {
+    "word": "to",
+    "start": 34.56,
+    "end": 34.72
+  },
+  {
+    "word": "support",
+    "start": 34.72,
+    "end": 34.96
+  },
+  {
+    "word": "the",
+    "start": 34.96,
+    "end": 35.2
+  },
+  {
+    "word": "tool.",
+    "start": 35.2,
+    "end": 35.92
+  },
+  {
+    "word": "This",
+    "start": 35.92,
+    "end": 36.16
+  },
+  {
+    "word": "same",
+    "start": 36.16,
+    "end": 36.4
+  },
+  {
+    "word": "economic",
+    "start": 36.4,
+    "end": 36.96
+  },
+  {
+    "word": "phenomenon",
+    "start": 36.96,
+    "end": 37.6
+  },
+  {
+    "word": "applies",
+    "start": 37.6,
+    "end": 38.0
+  },
+  {
+    "word": "to",
+    "start": 38.0,
+    "end": 38.08
+  },
+  {
+    "word": "how",
+    "start": 38.08,
+    "end": 38.24
+  },
+  {
+    "word": "organizations",
+    "start": 38.24,
+    "end": 38.96
+  },
+  {
+    "word": "treat",
+    "start": 38.96,
+    "end": 39.2
+  },
+  {
+    "word": "AI",
+    "start": 39.2,
+    "end": 39.6
+  },
+  {
+    "word": "safety.",
+    "start": 39.6,
+    "end": 40.4
+  },
+  {
+    "word": "Right",
+    "start": 40.4,
+    "end": 40.64
+  },
+  {
+    "word": "now,",
+    "start": 40.64,
+    "end": 40.96
+  },
+  {
+    "word": "safety",
+    "start": 40.96,
+    "end": 41.36
+  },
+  {
+    "word": "budgets",
+    "start": 41.36,
+    "end": 41.76
+  },
+  {
+    "word": "are",
+    "start": 41.76,
+    "end": 41.92
+  },
+  {
+    "word": "typically",
+    "start": 41.92,
+    "end": 42.24
+  },
+  {
+    "word": "structured",
+    "start": 42.24,
+    "end": 42.64
+  },
+  {
+    "word": "as",
+    "start": 42.64,
+    "end": 42.8
+  },
+  {
+    "word": "short-term",
+    "start": 42.8,
+    "end": 43.36
+  },
+  {
+    "word": "pilots,",
+    "start": 43.36,
+    "end": 44.0
+  },
+  {
+    "word": "a",
+    "start": 44.0,
+    "end": 44.24
+  },
+  {
+    "word": "one-off",
+    "start": 44.24,
+    "end": 44.64
+  },
+  {
+    "word": "red",
+    "start": 44.64,
+    "end": 44.88
+  },
+  {
+    "word": "team",
+    "start": 44.88,
+    "end": 45.2
+  },
+  {
+    "word": "exercise,",
+    "start": 45.2,
+    "end": 45.76
+  },
+  {
+    "word": "a",
+    "start": 45.76,
+    "end": 45.84
+  },
+  {
+    "word": "brief",
+    "start": 45.84,
+    "end": 46.24
+  },
+  {
+    "word": "policy",
+    "start": 46.24,
+    "end": 46.64
+  },
+  {
+    "word": "sprint,",
+    "start": 46.64,
+    "end": 47.2
+  },
+  {
+    "word": "or",
+    "start": 47.2,
+    "end": 47.44
+  },
+  {
+    "word": "a",
+    "start": 47.44,
+    "end": 47.52
+  },
+  {
+    "word": "governance",
+    "start": 47.52,
+    "end": 48.0
+  },
+  {
+    "word": "workshop.",
+    "start": 48.0,
+    "end": 48.8
+  },
+  {
+    "word": "These",
+    "start": 48.8,
+    "end": 48.96
+  },
+  {
+    "word": "are",
+    "start": 48.96,
+    "end": 49.12
+  },
+  {
+    "word": "treated",
+    "start": 49.12,
+    "end": 49.44
+  },
+  {
+    "word": "as",
+    "start": 49.44,
+    "end": 49.6
+  },
+  {
+    "word": "discretionary",
+    "start": 49.6,
+    "end": 50.32
+  },
+  {
+    "word": "costs",
+    "start": 50.32,
+    "end": 50.8
+  },
+  {
+    "word": "rather",
+    "start": 50.8,
+    "end": 51.12
+  },
+  {
+    "word": "than",
+    "start": 51.12,
+    "end": 51.28
+  },
+  {
+    "word": "long-term",
+    "start": 51.28,
+    "end": 51.84
+  },
+  {
+    "word": "capital",
+    "start": 51.84,
+    "end": 52.24
+  },
+  {
+    "word": "formation.",
+    "start": 52.24,
+    "end": 53.04
+  },
+  {
+    "word": "Because",
+    "start": 53.04,
+    "end": 53.36
+  },
+  {
+    "word": "organizations",
+    "start": 53.36,
+    "end": 54.24
+  },
+  {
+    "word": "demand",
+    "start": 54.24,
+    "end": 54.64
+  },
+  {
+    "word": "rapid",
+    "start": 54.64,
+    "end": 55.04
+  },
+  {
+    "word": "reassurance",
+    "start": 55.04,
+    "end": 55.76
+  },
+  {
+    "word": "to",
+    "start": 55.76,
+    "end": 55.92
+  },
+  {
+    "word": "keep",
+    "start": 55.92,
+    "end": 56.08
+  },
+  {
+    "word": "deployment",
+    "start": 56.08,
+    "end": 56.64
+  },
+  {
+    "word": "schedules",
+    "start": 56.64,
+    "end": 57.04
+  },
+  {
+    "word": "on",
+    "start": 57.04,
+    "end": 57.28
+  },
+  {
+    "word": "track,",
+    "start": 57.28,
+    "end": 57.92
+  },
+  {
+    "word": "safety",
+    "start": 57.92,
+    "end": 58.48
+  },
+  {
+    "word": "work",
+    "start": 58.48,
+    "end": 58.72
+  },
+  {
+    "word": "that",
+    "start": 58.72,
+    "end": 58.88
+  },
+  {
+    "word": "should",
+    "start": 58.88,
+    "end": 59.12
+  },
+  {
+    "word": "take",
+    "start": 59.12,
+    "end": 59.28
+  },
+  {
+    "word": "years",
+    "start": 59.28,
+    "end": 59.52
+  },
+  {
+    "word": "to",
+    "start": 59.52,
+    "end": 59.6
+  },
+  {
+    "word": "mature",
+    "start": 59.6,
+    "end": 59.84
+  },
+  {
+    "word": "is",
+    "start": 60.44,
+    "end": 60.6
+  },
+  {
+    "word": "evaluated",
+    "start": 60.6,
+    "end": 61.24
+  },
+  {
+    "word": "on",
+    "start": 61.24,
+    "end": 61.4
+  },
+  {
+    "word": "a",
+    "start": 61.4,
+    "end": 61.56
+  },
+  {
+    "word": "quarterly",
+    "start": 61.56,
+    "end": 62.2
+  },
+  {
+    "word": "basis.",
+    "start": 62.2,
+    "end": 62.92
+  },
+  {
+    "word": "Avoiding",
+    "start": 62.92,
+    "end": 63.48
+  },
+  {
+    "word": "the",
+    "start": 63.48,
+    "end": 63.64
+  },
+  {
+    "word": "safety",
+    "start": 63.64,
+    "end": 64.04
+  },
+  {
+    "word": "trough",
+    "start": 64.04,
+    "end": 64.6
+  },
+  {
+    "word": "leads",
+    "start": 64.6,
+    "end": 64.84
+  },
+  {
+    "word": "to",
+    "start": 64.84,
+    "end": 64.92
+  },
+  {
+    "word": "risk",
+    "start": 64.92,
+    "end": 65.32
+  },
+  {
+    "word": "blindness.",
+    "start": 65.32,
+    "end": 66.28
+  },
+  {
+    "word": "The",
+    "start": 66.28,
+    "end": 66.52
+  },
+  {
+    "word": "result",
+    "start": 66.52,
+    "end": 66.92
+  },
+  {
+    "word": "is",
+    "start": 66.92,
+    "end": 67.08
+  },
+  {
+    "word": "a",
+    "start": 67.08,
+    "end": 67.16
+  },
+  {
+    "word": "brittle",
+    "start": 67.16,
+    "end": 67.48
+  },
+  {
+    "word": "deployment,",
+    "start": 67.64,
+    "end": 68.28
+  },
+  {
+    "word": "prone",
+    "start": 68.28,
+    "end": 68.6
+  },
+  {
+    "word": "to",
+    "start": 68.6,
+    "end": 68.84
+  },
+  {
+    "word": "agentic",
+    "start": 68.84,
+    "end": 69.48
+  },
+  {
+    "word": "failure",
+    "start": 69.48,
+    "end": 69.88
+  },
+  {
+    "word": "and",
+    "start": 69.88,
+    "end": 70.04
+  },
+  {
+    "word": "public",
+    "start": 70.04,
+    "end": 70.36
+  },
+  {
+    "word": "harm.",
+    "start": 70.36,
+    "end": 71.24
+  },
+  {
+    "word": "AI",
+    "start": 71.24,
+    "end": 71.72
+  },
+  {
+    "word": "safety",
+    "start": 71.72,
+    "end": 72.2
+  },
+  {
+    "word": "is",
+    "start": 72.2,
+    "end": 72.36
+  },
+  {
+    "word": "an",
+    "start": 72.36,
+    "end": 72.52
+  },
+  {
+    "word": "economic",
+    "start": 72.52,
+    "end": 73.0
+  },
+  {
+    "word": "category.",
+    "start": 73.0,
+    "end": 73.96
+  },
+  {
+    "word": "Ignoring",
+    "start": 73.96,
+    "end": 74.52
+  },
+  {
+    "word": "the",
+    "start": 74.52,
+    "end": 74.68
+  },
+  {
+    "word": "capital",
+    "start": 74.68,
+    "end": 75.08
+  },
+  {
+    "word": "cost",
+    "start": 75.08,
+    "end": 75.4
+  },
+  {
+    "word": "of",
+    "start": 75.4,
+    "end": 75.48
+  },
+  {
+    "word": "safety",
+    "start": 75.48,
+    "end": 75.88
+  },
+  {
+    "word": "during",
+    "start": 75.88,
+    "end": 76.12
+  },
+  {
+    "word": "the",
+    "start": 76.12,
+    "end": 76.28
+  },
+  {
+    "word": "trough",
+    "start": 76.28,
+    "end": 76.84
+  },
+  {
+    "word": "guarantees",
+    "start": 76.84,
+    "end": 77.48
+  },
+  {
+    "word": "a",
+    "start": 77.48,
+    "end": 77.64
+  },
+  {
+    "word": "brittle,",
+    "start": 77.64,
+    "end": 78.2
+  },
+  {
+    "word": "unsafe",
+    "start": 78.2,
+    "end": 79.08
+  },
+  {
+    "word": "system.",
+    "start": 79.08,
+    "end": 79.72
+  },
+  {
+    "word": "The",
+    "start": 79.72,
+    "end": 79.96
+  },
+  {
+    "word": "industry",
+    "start": 79.96,
+    "end": 80.44
+  },
+  {
+    "word": "currently",
+    "start": 80.44,
+    "end": 80.92
+  },
+  {
+    "word": "operates",
+    "start": 80.92,
+    "end": 81.32
+  },
+  {
+    "word": "on",
+    "start": 81.32,
+    "end": 81.48
+  },
+  {
+    "word": "a",
+    "start": 81.48,
+    "end": 81.64
+  },
+  {
+    "word": "technical",
+    "start": 81.64,
+    "end": 82.04
+  },
+  {
+    "word": "misconception,",
+    "start": 82.04,
+    "end": 83.16
+  },
+  {
+    "word": "the",
+    "start": 83.16,
+    "end": 83.32
+  },
+  {
+    "word": "belief",
+    "start": 83.32,
+    "end": 83.64
+  },
+  {
+    "word": "that",
+    "start": 83.64,
+    "end": 83.88
+  },
+  {
+    "word": "procuring",
+    "start": 83.88,
+    "end": 84.36
+  },
+  {
+    "word": "an",
+    "start": 84.36,
+    "end": 84.52
+  },
+  {
+    "word": "aligned",
+    "start": 84.52,
+    "end": 85.0
+  },
+  {
+    "word": "model",
+    "start": 85.0,
+    "end": 85.4
+  },
+  {
+    "word": "is",
+    "start": 85.4,
+    "end": 85.56
+  },
+  {
+    "word": "identical",
+    "start": 85.56,
+    "end": 86.04
+  },
+  {
+    "word": "to",
+    "start": 86.04,
+    "end": 86.28
+  },
+  {
+    "word": "deploying",
+    "start": 86.28,
+    "end": 86.76
+  },
+  {
+    "word": "a",
+    "start": 86.76,
+    "end": 87.0
+  },
+  {
+    "word": "safe",
+    "start": 87.0,
+    "end": 87.48
+  },
+  {
+    "word": "system.",
+    "start": 87.48,
+    "end": 88.12
+  },
+  {
+    "word": "To",
+    "start": 88.12,
+    "end": 88.44
+  },
+  {
+    "word": "understand",
+    "start": 88.44,
+    "end": 88.68
+  },
+  {
+    "word": "why",
+    "start": 88.92,
+    "end": 89.16
+  },
+  {
+    "word": "this",
+    "start": 89.16,
+    "end": 89.4
+  },
+  {
+    "word": "distinction",
+    "start": 89.4,
+    "end": 89.88
+  },
+  {
+    "word": "matters,",
+    "start": 89.88,
+    "end": 90.6
+  },
+  {
+    "word": "we",
+    "start": 90.6,
+    "end": 90.76
+  },
+  {
+    "word": "must",
+    "start": 90.76,
+    "end": 91.0
+  },
+  {
+    "word": "look",
+    "start": 91.0,
+    "end": 91.24
+  },
+  {
+    "word": "at",
+    "start": 91.24,
+    "end": 91.4
+  },
+  {
+    "word": "this",
+    "start": 91.4,
+    "end": 91.56
+  },
+  {
+    "word": "comparative",
+    "start": 91.56,
+    "end": 92.12
+  },
+  {
+    "word": "framework",
+    "start": 92.12,
+    "end": 92.68
+  },
+  {
+    "word": "and",
+    "start": 92.68,
+    "end": 92.84
+  },
+  {
+    "word": "trace",
+    "start": 92.84,
+    "end": 93.24
+  },
+  {
+    "word": "where",
+    "start": 93.24,
+    "end": 93.48
+  },
+  {
+    "word": "safety",
+    "start": 93.48,
+    "end": 93.96
+  },
+  {
+    "word": "costs",
+    "start": 93.96,
+    "end": 94.44
+  },
+  {
+    "word": "live.",
+    "start": 94.44,
+    "end": 95.16
+  },
+  {
+    "word": "The",
+    "start": 95.16,
+    "end": 95.4
+  },
+  {
+    "word": "first",
+    "start": 95.4,
+    "end": 95.64
+  },
+  {
+    "word": "claim",
+    "start": 95.64,
+    "end": 96.04
+  },
+  {
+    "word": "is",
+    "start": 96.04,
+    "end": 96.28
+  },
+  {
+    "word": "behavioral",
+    "start": 96.28,
+    "end": 97.08
+  },
+  {
+    "word": "alignment.",
+    "start": 97.08,
+    "end": 98.04
+  },
+  {
+    "word": "This",
+    "start": 98.04,
+    "end": 98.28
+  },
+  {
+    "word": "upstream",
+    "start": 98.28,
+    "end": 98.92
+  },
+  {
+    "word": "bet",
+    "start": 98.92,
+    "end": 99.08
+  },
+  {
+    "word": "involves",
+    "start": 99.24,
+    "end": 99.56
+  },
+  {
+    "word": "model",
+    "start": 99.56,
+    "end": 99.96
+  },
+  {
+    "word": "training,",
+    "start": 99.96,
+    "end": 100.44
+  },
+  {
+    "word": "tuning,",
+    "start": 100.44,
+    "end": 101.0
+  },
+  {
+    "word": "and",
+    "start": 101.0,
+    "end": 101.24
+  },
+  {
+    "word": "running",
+    "start": 101.24,
+    "end": 101.56
+  },
+  {
+    "word": "evaluations",
+    "start": 101.56,
+    "end": 102.28
+  },
+  {
+    "word": "inside",
+    "start": 102.28,
+    "end": 102.68
+  },
+  {
+    "word": "the",
+    "start": 102.68,
+    "end": 102.76
+  },
+  {
+    "word": "vendor's",
+    "start": 102.84,
+    "end": 103.24
+  },
+  {
+    "word": "isolated",
+    "start": 103.24,
+    "end": 103.88
+  },
+  {
+    "word": "model.",
+    "start": 103.88,
+    "end": 104.52
+  },
+  {
+    "word": "This",
+    "start": 104.52,
+    "end": 104.76
+  },
+  {
+    "word": "approach",
+    "start": 104.76,
+    "end": 105.16
+  },
+  {
+    "word": "fits",
+    "start": 105.16,
+    "end": 105.48
+  },
+  {
+    "word": "the",
+    "start": 105.48,
+    "end": 105.56
+  },
+  {
+    "word": "vendor",
+    "start": 105.64,
+    "end": 105.96
+  },
+  {
+    "word": "sales",
+    "start": 105.96,
+    "end": 106.28
+  },
+  {
+    "word": "narrative.",
+    "start": 106.28,
+    "end": 106.92
+  },
+  {
+    "word": "It",
+    "start": 106.92,
+    "end": 107.16
+  },
+  {
+    "word": "allows",
+    "start": 107.16,
+    "end": 107.48
+  },
+  {
+    "word": "the",
+    "start": 107.48,
+    "end": 107.56
+  },
+  {
+    "word": "buyer",
+    "start": 107.56,
+    "end": 107.96
+  },
+  {
+    "word": "to",
+    "start": 107.96,
+    "end": 108.04
+  },
+  {
+    "word": "treat",
+    "start": 108.04,
+    "end": 108.36
+  },
+  {
+    "word": "safety",
+    "start": 108.36,
+    "end": 108.76
+  },
+  {
+    "word": "as",
+    "start": 108.76,
+    "end": 108.92
+  },
+  {
+    "word": "a",
+    "start": 108.92,
+    "end": 109.08
+  },
+  {
+    "word": "procurement",
+    "start": 109.08,
+    "end": 109.56
+  },
+  {
+    "word": "checklist.",
+    "start": 109.56,
+    "end": 110.44
+  },
+  {
+    "word": "Contrast",
+    "start": 110.44,
+    "end": 111.0
+  },
+  {
+    "word": "this",
+    "start": 111.0,
+    "end": 111.24
+  },
+  {
+    "word": "with",
+    "start": 111.24,
+    "end": 111.48
+  },
+  {
+    "word": "architectural",
+    "start": 111.48,
+    "end": 112.2
+  },
+  {
+    "word": "safety.",
+    "start": 112.2,
+    "end": 113.08
+  },
+  {
+    "word": "Architecture",
+    "start": 113.08,
+    "end": 113.8
+  },
+  {
+    "word": "requires",
+    "start": 113.8,
+    "end": 114.28
+  },
+  {
+    "word": "verifiable",
+    "start": 114.44,
+    "end": 115.36
+  },
+  {
+    "word": "boundaries,",
+    "start": 115.36,
+    "end": 116.24
+  },
+  {
+    "word": "runtime",
+    "start": 116.24,
+    "end": 116.8
+  },
+  {
+    "word": "monitors,",
+    "start": 116.8,
+    "end": 117.6
+  },
+  {
+    "word": "hard",
+    "start": 117.6,
+    "end": 117.92
+  },
+  {
+    "word": "permission",
+    "start": 117.92,
+    "end": 118.48
+  },
+  {
+    "word": "systems,",
+    "start": 118.48,
+    "end": 119.2
+  },
+  {
+    "word": "and",
+    "start": 119.2,
+    "end": 119.44
+  },
+  {
+    "word": "owners",
+    "start": 119.44,
+    "end": 119.84
+  },
+  {
+    "word": "with",
+    "start": 119.84,
+    "end": 120.0
+  },
+  {
+    "word": "authority",
+    "start": 120.0,
+    "end": 120.48
+  },
+  {
+    "word": "to",
+    "start": 120.48,
+    "end": 120.64
+  },
+  {
+    "word": "block",
+    "start": 120.64,
+    "end": 121.04
+  },
+  {
+    "word": "release.",
+    "start": 121.04,
+    "end": 122.0
+  },
+  {
+    "word": "Organizations",
+    "start": 122.0,
+    "end": 122.88
+  },
+  {
+    "word": "avoid",
+    "start": 122.88,
+    "end": 123.36
+  },
+  {
+    "word": "this",
+    "start": 123.36,
+    "end": 123.52
+  },
+  {
+    "word": "path",
+    "start": 123.52,
+    "end": 124.0
+  },
+  {
+    "word": "because",
+    "start": 124.0,
+    "end": 124.24
+  },
+  {
+    "word": "it",
+    "start": 124.24,
+    "end": 124.4
+  },
+  {
+    "word": "changes",
+    "start": 124.4,
+    "end": 124.8
+  },
+  {
+    "word": "the",
+    "start": 124.8,
+    "end": 124.96
+  },
+  {
+    "word": "operating",
+    "start": 124.96,
+    "end": 125.52
+  },
+  {
+    "word": "model,",
+    "start": 125.52,
+    "end": 126.08
+  },
+  {
+    "word": "slows",
+    "start": 126.08,
+    "end": 126.48
+  },
+  {
+    "word": "down",
+    "start": 126.48,
+    "end": 126.72
+  },
+  {
+    "word": "velocity,",
+    "start": 126.88,
+    "end": 127.52
+  },
+  {
+    "word": "and",
+    "start": 127.52,
+    "end": 127.68
+  },
+  {
+    "word": "is",
+    "start": 127.68,
+    "end": 127.84
+  },
+  {
+    "word": "expensive",
+    "start": 127.84,
+    "end": 128.4
+  },
+  {
+    "word": "to",
+    "start": 128.4,
+    "end": 128.56
+  },
+  {
+    "word": "implement.",
+    "start": 128.56,
+    "end": 129.52
+  },
+  {
+    "word": "The",
+    "start": 129.52,
+    "end": 129.68
+  },
+  {
+    "word": "market",
+    "start": 129.68,
+    "end": 130.24
+  },
+  {
+    "word": "rationally",
+    "start": 130.24,
+    "end": 130.8
+  },
+  {
+    "word": "chooses",
+    "start": 130.8,
+    "end": 131.28
+  },
+  {
+    "word": "the",
+    "start": 131.28,
+    "end": 131.44
+  },
+  {
+    "word": "cheaper",
+    "start": 131.44,
+    "end": 131.92
+  },
+  {
+    "word": "illusion",
+    "start": 131.92,
+    "end": 132.48
+  },
+  {
+    "word": "of",
+    "start": 132.48,
+    "end": 132.72
+  },
+  {
+    "word": "behavioral",
+    "start": 132.72,
+    "end": 133.36
+  },
+  {
+    "word": "safety.",
+    "start": 133.36,
+    "end": 134.32
+  },
+  {
+    "word": "Businesses",
+    "start": 134.32,
+    "end": 134.96
+  },
+  {
+    "word": "reap",
+    "start": 134.96,
+    "end": 135.28
+  },
+  {
+    "word": "the",
+    "start": 135.28,
+    "end": 135.36
+  },
+  {
+    "word": "upside",
+    "start": 135.36,
+    "end": 135.76
+  },
+  {
+    "word": "of",
+    "start": 135.76,
+    "end": 135.92
+  },
+  {
+    "word": "AI",
+    "start": 135.92,
+    "end": 136.4
+  },
+  {
+    "word": "while",
+    "start": 136.4,
+    "end": 136.72
+  },
+  {
+    "word": "bypassing",
+    "start": 136.72,
+    "end": 137.36
+  },
+  {
+    "word": "the",
+    "start": 137.36,
+    "end": 137.52
+  },
+  {
+    "word": "necessary",
+    "start": 137.52,
+    "end": 138.08
+  },
+  {
+    "word": "architectural",
+    "start": 138.08,
+    "end": 138.96
+  },
+  {
+    "word": "costs.",
+    "start": 138.96,
+    "end": 140.0
+  },
+  {
+    "word": "Data",
+    "start": 140.0,
+    "end": 140.48
+  },
+  {
+    "word": "from",
+    "start": 140.48,
+    "end": 140.64
+  },
+  {
+    "word": "a",
+    "start": 140.64,
+    "end": 140.8
+  },
+  {
+    "word": "recent",
+    "start": 140.8,
+    "end": 141.12
+  },
+  {
+    "word": "evaluation",
+    "start": 141.12,
+    "end": 141.84
+  },
+  {
+    "word": "of",
+    "start": 141.84,
+    "end": 142.08
+  },
+  {
+    "word": "120",
+    "start": 142.32,
+    "end": 142.96
+  },
+  {
+    "word": "models",
+    "start": 142.96,
+    "end": 143.52
+  },
+  {
+    "word": "against",
+    "start": 143.52,
+    "end": 143.84
+  },
+  {
+    "word": "over",
+    "start": 143.84,
+    "end": 144.08
+  },
+  {
+    "word": "18,000",
+    "start": 144.24,
+    "end": 145.04
+  },
+  {
+    "word": "prompts",
+    "start": 145.04,
+    "end": 145.76
+  },
+  {
+    "word": "shows",
+    "start": 145.76,
+    "end": 146.16
+  },
+  {
+    "word": "exactly",
+    "start": 146.16,
+    "end": 146.8
+  },
+  {
+    "word": "where",
+    "start": 146.8,
+    "end": 147.04
+  },
+  {
+    "word": "systems",
+    "start": 147.04,
+    "end": 147.6
+  },
+  {
+    "word": "actually",
+    "start": 147.6,
+    "end": 147.92
+  },
+  {
+    "word": "break",
+    "start": 147.92,
+    "end": 148.56
+  },
+  {
+    "word": "down.",
+    "start": 148.56,
+    "end": 149.2
+  },
+  {
+    "word": "Critical",
+    "start": 149.2,
+    "end": 149.76
+  },
+  {
+    "word": "failures",
+    "start": 149.76,
+    "end": 150.32
+  },
+  {
+    "word": "cluster",
+    "start": 150.32,
+    "end": 150.8
+  },
+  {
+    "word": "at",
+    "start": 150.8,
+    "end": 150.96
+  },
+  {
+    "word": "the",
+    "start": 150.96,
+    "end": 151.12
+  },
+  {
+    "word": "edges",
+    "start": 151.2,
+    "end": 151.44
+  },
+  {
+    "word": "of",
+    "start": 151.44,
+    "end": 151.6
+  },
+  {
+    "word": "deployment,",
+    "start": 151.6,
+    "end": 152.56
+  },
+  {
+    "word": "specifically",
+    "start": 152.56,
+    "end": 153.2
+  },
+  {
+    "word": "when",
+    "start": 153.2,
+    "end": 153.44
+  },
+  {
+    "word": "tool",
+    "start": 153.44,
+    "end": 153.84
+  },
+  {
+    "word": "definitions",
+    "start": 153.84,
+    "end": 154.4
+  },
+  {
+    "word": "are",
+    "start": 154.4,
+    "end": 154.56
+  },
+  {
+    "word": "used",
+    "start": 154.56,
+    "end": 154.8
+  },
+  {
+    "word": "as",
+    "start": 154.8,
+    "end": 155.04
+  },
+  {
+    "word": "instructions",
+    "start": 155.04,
+    "end": 155.84
+  },
+  {
+    "word": "or",
+    "start": 155.84,
+    "end": 156.08
+  },
+  {
+    "word": "during",
+    "start": 156.08,
+    "end": 156.4
+  },
+  {
+    "word": "multi-turn",
+    "start": 156.4,
+    "end": 157.28
+  },
+  {
+    "word": "reasoning",
+    "start": 157.28,
+    "end": 157.68
+  },
+  {
+    "word": "escalations.",
+    "start": 157.76,
+    "end": 159.12
+  },
+  {
+    "word": "These",
+    "start": 159.12,
+    "end": 159.44
+  },
+  {
+    "word": "vulnerable",
+    "start": 159.44,
+    "end": 160.0
+  },
+  {
+    "word": "edges",
+    "start": 160.08,
+    "end": 160.48
+  },
+  {
+    "word": "remain",
+    "start": 160.48,
+    "end": 160.8
+  },
+  {
+    "word": "undefended",
+    "start": 160.8,
+    "end": 161.6
+  },
+  {
+    "word": "because",
+    "start": 161.6,
+    "end": 161.84
+  },
+  {
+    "word": "of",
+    "start": 161.84,
+    "end": 161.92
+  },
+  {
+    "word": "a",
+    "start": 161.92,
+    "end": 162.0
+  },
+  {
+    "word": "broken",
+    "start": 162.0,
+    "end": 162.4
+  },
+  {
+    "word": "price",
+    "start": 162.4,
+    "end": 162.72
+  },
+  {
+    "word": "signal,",
+    "start": 162.72,
+    "end": 163.44
+  },
+  {
+    "word": "the",
+    "start": 163.44,
+    "end": 163.68
+  },
+  {
+    "word": "concept",
+    "start": 163.68,
+    "end": 164.0
+  },
+  {
+    "word": "of",
+    "start": 164.0,
+    "end": 164.24
+  },
+  {
+    "word": "an",
+    "start": 164.24,
+    "end": 164.4
+  },
+  {
+    "word": "externality.",
+    "start": 164.4,
+    "end": 165.68
+  },
+  {
+    "word": "When",
+    "start": 165.68,
+    "end": 166.0
+  },
+  {
+    "word": "a",
+    "start": 166.0,
+    "end": 166.16
+  },
+  {
+    "word": "factory",
+    "start": 166.16,
+    "end": 166.56
+  },
+  {
+    "word": "can",
+    "start": 166.56,
+    "end": 166.72
+  },
+  {
+    "word": "dump",
+    "start": 166.72,
+    "end": 167.04
+  },
+  {
+    "word": "waste",
+    "start": 167.04,
+    "end": 167.36
+  },
+  {
+    "word": "into",
+    "start": 167.36,
+    "end": 167.6
+  },
+  {
+    "word": "a",
+    "start": 167.6,
+    "end": 167.68
+  },
+  {
+    "word": "river",
+    "start": 167.68,
+    "end": 168.0
+  },
+  {
+    "word": "for",
+    "start": 168.0,
+    "end": 168.16
+  },
+  {
+    "word": "free,",
+    "start": 168.16,
+    "end": 168.72
+  },
+  {
+    "word": "it",
+    "start": 168.72,
+    "end": 168.88
+  },
+  {
+    "word": "underinvests",
+    "start": 168.88,
+    "end": 169.6
+  },
+  {
+    "word": "in",
+    "start": 169.6,
+    "end": 169.68
+  },
+  {
+    "word": "fil.tration",
+    "start": 169.68,
+    "end": 170.76
+  },
+  {
+    "word": "Unsafe",
+    "start": 171.08,
+    "end": 171.8
+  },
+  {
+    "word": "AI",
+    "start": 171.8,
+    "end": 172.28
+  },
+  {
+    "word": "operates",
+    "start": 172.28,
+    "end": 172.76
+  },
+  {
+    "word": "on",
+    "start": 172.76,
+    "end": 172.92
+  },
+  {
+    "word": "the",
+    "start": 172.92,
+    "end": 173.0
+  },
+  {
+    "word": "same",
+    "start": 173.0,
+    "end": 173.16
+  },
+  {
+    "word": "logic.",
+    "start": 173.16,
+    "end": 173.88
+  },
+  {
+    "word": "When",
+    "start": 173.88,
+    "end": 174.12
+  },
+  {
+    "word": "an",
+    "start": 174.12,
+    "end": 174.36
+  },
+  {
+    "word": "AI",
+    "start": 174.36,
+    "end": 174.92
+  },
+  {
+    "word": "system",
+    "start": 174.92,
+    "end": 175.16
+  },
+  {
+    "word": "enables",
+    "start": 175.16,
+    "end": 175.8
+  },
+  {
+    "word": "fraud,",
+    "start": 175.8,
+    "end": 176.44
+  },
+  {
+    "word": "automates",
+    "start": 176.44,
+    "end": 176.92
+  },
+  {
+    "word": "a",
+    "start": 176.92,
+    "end": 177.08
+  },
+  {
+    "word": "discriminatory",
+    "start": 177.08,
+    "end": 177.88
+  },
+  {
+    "word": "decision,",
+    "start": 177.88,
+    "end": 178.6
+  },
+  {
+    "word": "or",
+    "start": 178.6,
+    "end": 178.76
+  },
+  {
+    "word": "leaks",
+    "start": 178.76,
+    "end": 179.24
+  },
+  {
+    "word": "sensitive",
+    "start": 179.24,
+    "end": 179.72
+  },
+  {
+    "word": "data,",
+    "start": 179.72,
+    "end": 180.36
+  },
+  {
+    "word": "the",
+    "start": 180.36,
+    "end": 180.52
+  },
+  {
+    "word": "financial",
+    "start": 180.52,
+    "end": 181.08
+  },
+  {
+    "word": "cost",
+    "start": 181.08,
+    "end": 181.4
+  },
+  {
+    "word": "rarely",
+    "start": 181.4,
+    "end": 181.88
+  },
+  {
+    "word": "lands",
+    "start": 181.88,
+    "end": 182.2
+  },
+  {
+    "word": "on",
+    "start": 182.2,
+    "end": 182.36
+  },
+  {
+    "word": "the",
+    "start": 182.36,
+    "end": 182.52
+  },
+  {
+    "word": "organization",
+    "start": 182.52,
+    "end": 183.24
+  },
+  {
+    "word": "that",
+    "start": 183.24,
+    "end": 183.48
+  },
+  {
+    "word": "underfunded",
+    "start": 183.48,
+    "end": 184.2
+  },
+  {
+    "word": "the",
+    "start": 184.2,
+    "end": 184.28
+  },
+  {
+    "word": "safety",
+    "start": 184.28,
+    "end": 184.76
+  },
+  {
+    "word": "architecture.",
+    "start": 184.76,
+    "end": 185.72
+  },
+  {
+    "word": "That",
+    "start": 185.72,
+    "end": 186.04
+  },
+  {
+    "word": "cost",
+    "start": 186.04,
+    "end": 186.36
+  },
+  {
+    "word": "is",
+    "start": 186.36,
+    "end": 186.52
+  },
+  {
+    "word": "borne",
+    "start": 186.52,
+    "end": 186.92
+  },
+  {
+    "word": "by",
+    "start": 186.92,
+    "end": 187.16
+  },
+  {
+    "word": "users",
+    "start": 187.16,
+    "end": 187.56
+  },
+  {
+    "word": "and",
+    "start": 187.56,
+    "end": 187.8
+  },
+  {
+    "word": "public",
+    "start": 187.8,
+    "end": 188.2
+  },
+  {
+    "word": "institutions.",
+    "start": 188.2,
+    "end": 189.32
+  },
+  {
+    "word": "Developers",
+    "start": 189.32,
+    "end": 190.12
+  },
+  {
+    "word": "underinvest",
+    "start": 190.12,
+    "end": 190.84
+  },
+  {
+    "word": "in",
+    "start": 190.84,
+    "end": 191.0
+  },
+  {
+    "word": "safety",
+    "start": 191.0,
+    "end": 191.56
+  },
+  {
+    "word": "because",
+    "start": 191.56,
+    "end": 191.8
+  },
+  {
+    "word": "the",
+    "start": 191.8,
+    "end": 191.96
+  },
+  {
+    "word": "market",
+    "start": 191.96,
+    "end": 192.44
+  },
+  {
+    "word": "allows",
+    "start": 192.44,
+    "end": 192.84
+  },
+  {
+    "word": "them",
+    "start": 192.84,
+    "end": 193.0
+  },
+  {
+    "word": "to",
+    "start": 193.0,
+    "end": 193.16
+  },
+  {
+    "word": "export",
+    "start": 193.16,
+    "end": 193.64
+  },
+  {
+    "word": "their",
+    "start": 193.64,
+    "end": 193.8
+  },
+  {
+    "word": "risks",
+    "start": 193.8,
+    "end": 194.2
+  },
+  {
+    "word": "onto",
+    "start": 194.2,
+    "end": 194.52
+  },
+  {
+    "word": "the",
+    "start": 194.52,
+    "end": 194.6
+  },
+  {
+    "word": "public.",
+    "start": 194.6,
+    "end": 195.4
+  },
+  {
+    "word": "Even",
+    "start": 195.4,
+    "end": 195.64
+  },
+  {
+    "word": "when",
+    "start": 195.64,
+    "end": 195.88
+  },
+  {
+    "word": "internal",
+    "start": 195.88,
+    "end": 196.36
+  },
+  {
+    "word": "teams",
+    "start": 196.36,
+    "end": 196.76
+  },
+  {
+    "word": "discover",
+    "start": 196.76,
+    "end": 197.16
+  },
+  {
+    "word": "these",
+    "start": 197.16,
+    "end": 197.4
+  },
+  {
+    "word": "risks,",
+    "start": 197.4,
+    "end": 198.04
+  },
+  {
+    "word": "structural",
+    "start": 198.04,
+    "end": 198.6
+  },
+  {
+    "word": "corporate",
+    "start": 198.6,
+    "end": 199.0
+  },
+  {
+    "word": "blockers",
+    "start": 199.0,
+    "end": 199.56
+  },
+  {
+    "word": "often",
+    "start": 199.56,
+    "end": 199.88
+  },
+  {
+    "word": "prevent",
+    "start": 199.88,
+    "end": 200.28
+  },
+  {
+    "word": "them",
+    "start": 200.28,
+    "end": 200.44
+  },
+  {
+    "word": "from",
+    "start": 200.44,
+    "end": 200.68
+  },
+  {
+    "word": "acting.",
+    "start": 200.68,
+    "end": 201.4
+  },
+  {
+    "word": "The",
+    "start": 201.4,
+    "end": 201.64
+  },
+  {
+    "word": "first",
+    "start": 201.64,
+    "end": 201.88
+  },
+  {
+    "word": "failure",
+    "start": 201.88,
+    "end": 202.28
+  },
+  {
+    "word": "mechanism",
+    "start": 202.28,
+    "end": 202.84
+  },
+  {
+    "word": "is",
+    "start": 202.84,
+    "end": 203.08
+  },
+  {
+    "word": "responsibility",
+    "start": 203.08,
+    "end": 204.04
+  },
+  {
+    "word": "without",
+    "start": 204.04,
+    "end": 204.36
+  },
+  {
+    "word": "authority.",
+    "start": 204.36,
+    "end": 205.16
+  },
+  {
+    "word": "Safety",
+    "start": 205.16,
+    "end": 205.72
+  },
+  {
+    "word": "teams",
+    "start": 205.72,
+    "end": 206.04
+  },
+  {
+    "word": "find",
+    "start": 206.04,
+    "end": 206.28
+  },
+  {
+    "word": "flaws",
+    "start": 206.28,
+    "end": 206.76
+  },
+  {
+    "word": "but",
+    "start": 206.84,
+    "end": 207.0
+  },
+  {
+    "word": "lack",
+    "start": 207.0,
+    "end": 207.24
+  },
+  {
+    "word": "the",
+    "start": 207.24,
+    "end": 207.4
+  },
+  {
+    "word": "budget",
+    "start": 207.4,
+    "end": 207.8
+  },
+  {
+    "word": "or",
+    "start": 207.8,
+    "end": 207.96
+  },
+  {
+    "word": "power",
+    "start": 207.96,
+    "end": 208.28
+  },
+  {
+    "word": "to",
+    "start": 208.28,
+    "end": 208.44
+  },
+  {
+    "word": "halt",
+    "start": 208.44,
+    "end": 208.76
+  },
+  {
+    "word": "launches.",
+    "start": 208.76,
+    "end": 209.64
+  },
+  {
+    "word": "Second",
+    "start": 209.64,
+    "end": 210.04
+  },
+  {
+    "word": "is",
+    "start": 210.12,
+    "end": 210.36
+  },
+  {
+    "word": "risk",
+    "start": 210.36,
+    "end": 210.76
+  },
+  {
+    "word": "discovery",
+    "start": 210.76,
+    "end": 211.24
+  },
+  {
+    "word": "as",
+    "start": 211.24,
+    "end": 211.4
+  },
+  {
+    "word": "a",
+    "start": 211.4,
+    "end": 211.48
+  },
+  {
+    "word": "career",
+    "start": 211.48,
+    "end": 211.88
+  },
+  {
+    "word": "threat.",
+    "start": 211.88,
+    "end": 212.44
+  },
+  {
+    "word": "Without",
+    "start": 212.44,
+    "end": 212.84
+  },
+  {
+    "word": "dedicated",
+    "start": 212.84,
+    "end": 213.4
+  },
+  {
+    "word": "remediation",
+    "start": 213.4,
+    "end": 214.04
+  },
+  {
+    "word": "budgets,",
+    "start": 214.04,
+    "end": 214.68
+  },
+  {
+    "word": "surfacing",
+    "start": 214.68,
+    "end": 215.24
+  },
+  {
+    "word": "problems",
+    "start": 215.24,
+    "end": 215.64
+  },
+  {
+    "word": "creates",
+    "start": 215.64,
+    "end": 216.04
+  },
+  {
+    "word": "costs,",
+    "start": 216.04,
+    "end": 216.68
+  },
+  {
+    "word": "turning",
+    "start": 216.68,
+    "end": 217.0
+  },
+  {
+    "word": "the",
+    "start": 217.0,
+    "end": 217.24
+  },
+  {
+    "word": "finder",
+    "start": 217.24,
+    "end": 217.64
+  },
+  {
+    "word": "into",
+    "start": 217.64,
+    "end": 217.8
+  },
+  {
+    "word": "a",
+    "start": 217.8,
+    "end": 217.96
+  },
+  {
+    "word": "liability.",
+    "start": 217.96,
+    "end": 219.0
+  },
+  {
+    "word": "Third,",
+    "start": 219.0,
+    "end": 219.56
+  },
+  {
+    "word": "compliance",
+    "start": 219.56,
+    "end": 220.28
+  },
+  {
+    "word": "substituting",
+    "start": 220.28,
+    "end": 221.0
+  },
+  {
+    "word": "for",
+    "start": 221.0,
+    "end": 221.24
+  },
+  {
+    "word": "reality.",
+    "start": 221.24,
+    "end": 222.04
+  },
+  {
+    "word": "Cheap",
+    "start": 222.04,
+    "end": 222.36
+  },
+  {
+    "word": "PDFs",
+    "start": 222.36,
+    "end": 223.0
+  },
+  {
+    "word": "replace",
+    "start": 223.0,
+    "end": 223.4
+  },
+  {
+    "word": "actual",
+    "start": 223.4,
+    "end": 223.72
+  },
+  {
+    "word": "constraints..",
+    "start": 223.72,
+    "end": 224.52
+  },
+  {
+    "word": "Finally,",
+    "start": 224.64,
+    "end": 225.28
+  },
+  {
+    "word": "diffuse",
+    "start": 225.28,
+    "end": 225.84
+  },
+  {
+    "word": "accountability",
+    "start": 225.84,
+    "end": 226.56
+  },
+  {
+    "word": "Risk",
+    "start": 226.8,
+    "end": 227.2
+  },
+  {
+    "word": "lands",
+    "start": 227.2,
+    "end": 227.6
+  },
+  {
+    "word": "between",
+    "start": 227.6,
+    "end": 227.84
+  },
+  {
+    "word": "departments,",
+    "start": 227.84,
+    "end": 228.56
+  },
+  {
+    "word": "so",
+    "start": 228.56,
+    "end": 228.8
+  },
+  {
+    "word": "no",
+    "start": 228.8,
+    "end": 228.96
+  },
+  {
+    "word": "single",
+    "start": 228.96,
+    "end": 229.36
+  },
+  {
+    "word": "executive",
+    "start": 229.36,
+    "end": 229.84
+  },
+  {
+    "word": "owns",
+    "start": 229.84,
+    "end": 230.16
+  },
+  {
+    "word": "the",
+    "start": 230.16,
+    "end": 230.24
+  },
+  {
+    "word": "outcome.",
+    "start": 230.24,
+    "end": 230.88
+  },
+  {
+    "word": "By",
+    "start": 230.88,
+    "end": 231.12
+  },
+  {
+    "word": "paying",
+    "start": 231.12,
+    "end": 231.52
+  },
+  {
+    "word": "for",
+    "start": 231.52,
+    "end": 231.68
+  },
+  {
+    "word": "fragmented",
+    "start": 231.68,
+    "end": 232.4
+  },
+  {
+    "word": "compliance",
+    "start": 232.4,
+    "end": 233.2
+  },
+  {
+    "word": "rather",
+    "start": 233.2,
+    "end": 233.44
+  },
+  {
+    "word": "than",
+    "start": 233.44,
+    "end": 233.68
+  },
+  {
+    "word": "cohesive",
+    "start": 233.68,
+    "end": 234.32
+  },
+  {
+    "word": "architecture,",
+    "start": 234.32,
+    "end": 235.2
+  },
+  {
+    "word": "the",
+    "start": 235.2,
+    "end": 235.36
+  },
+  {
+    "word": "organization",
+    "start": 235.36,
+    "end": 236.08
+  },
+  {
+    "word": "protects",
+    "start": 236.08,
+    "end": 236.56
+  },
+  {
+    "word": "its",
+    "start": 236.56,
+    "end": 236.72
+  },
+  {
+    "word": "budget",
+    "start": 236.72,
+    "end": 237.2
+  },
+  {
+    "word": "while",
+    "start": 237.2,
+    "end": 237.44
+  },
+  {
+    "word": "ensuring",
+    "start": 237.44,
+    "end": 238.08
+  },
+  {
+    "word": "system",
+    "start": 238.08,
+    "end": 238.4
+  },
+  {
+    "word": "failure.",
+    "start": 238.4,
+    "end": 239.2
+  },
+  {
+    "word": "If",
+    "start": 239.2,
+    "end": 239.36
+  },
+  {
+    "word": "inadequate",
+    "start": 239.36,
+    "end": 240.0
+  },
+  {
+    "word": "safety",
+    "start": 240.0,
+    "end": 240.4
+  },
+  {
+    "word": "is",
+    "start": 240.4,
+    "end": 240.56
+  },
+  {
+    "word": "underpriced,",
+    "start": 240.56,
+    "end": 241.44
+  },
+  {
+    "word": "the",
+    "start": 241.44,
+    "end": 241.6
+  },
+  {
+    "word": "practical",
+    "start": 241.6,
+    "end": 242.08
+  },
+  {
+    "word": "solution",
+    "start": 242.08,
+    "end": 242.48
+  },
+  {
+    "word": "is",
+    "start": 242.48,
+    "end": 242.72
+  },
+  {
+    "word": "to",
+    "start": 242.72,
+    "end": 242.8
+  },
+  {
+    "word": "force",
+    "start": 242.8,
+    "end": 243.12
+  },
+  {
+    "word": "the",
+    "start": 243.12,
+    "end": 243.28
+  },
+  {
+    "word": "market",
+    "start": 243.28,
+    "end": 243.6
+  },
+  {
+    "word": "to",
+    "start": 243.6,
+    "end": 243.76
+  },
+  {
+    "word": "price",
+    "start": 243.76,
+    "end": 244.08
+  },
+  {
+    "word": "it",
+    "start": 244.08,
+    "end": 244.24
+  },
+  {
+    "word": "correctly.",
+    "start": 244.24,
+    "end": 245.04
+  },
+  {
+    "word": "This",
+    "start": 245.04,
+    "end": 245.28
+  },
+  {
+    "word": "requires",
+    "start": 245.28,
+    "end": 245.84
+  },
+  {
+    "word": "changing",
+    "start": 245.84,
+    "end": 246.16
+  },
+  {
+    "word": "the",
+    "start": 246.16,
+    "end": 246.32
+  },
+  {
+    "word": "pricing",
+    "start": 246.32,
+    "end": 246.8
+  },
+  {
+    "word": "mechanism.",
+    "start": 246.8,
+    "end": 247.68
+  },
+  {
+    "word": "Statutory",
+    "start": 247.68,
+    "end": 248.4
+  },
+  {
+    "word": "liability",
+    "start": 248.4,
+    "end": 249.04
+  },
+  {
+    "word": "makes",
+    "start": 249.04,
+    "end": 249.28
+  },
+  {
+    "word": "safety",
+    "start": 249.28,
+    "end": 249.68
+  },
+  {
+    "word": "a",
+    "start": 249.68,
+    "end": 249.76
+  },
+  {
+    "word": "balance",
+    "start": 249.76,
+    "end": 250.16
+  },
+  {
+    "word": "sheet",
+    "start": 250.16,
+    "end": 250.4
+  },
+  {
+    "word": "concern.",
+    "start": 250.4,
+    "end": 251.04
+  },
+  {
+    "word": "It",
+    "start": 251.04,
+    "end": 251.28
+  },
+  {
+    "word": "punishes",
+    "start": 251.28,
+    "end": 251.76
+  },
+  {
+    "word": "failure",
+    "start": 251.76,
+    "end": 252.24
+  },
+  {
+    "word": "while",
+    "start": 252.24,
+    "end": 252.48
+  },
+  {
+    "word": "offering",
+    "start": 252.48,
+    "end": 252.8
+  },
+  {
+    "word": "safe",
+    "start": 252.8,
+    "end": 253.12
+  },
+  {
+    "word": "harbor",
+    "start": 253.12,
+    "end": 253.52
+  },
+  {
+    "word": "for",
+    "start": 253.52,
+    "end": 253.68
+  },
+  {
+    "word": "those",
+    "start": 253.68,
+    "end": 253.84
+  },
+  {
+    "word": "with",
+    "start": 253.84,
+    "end": 253.92
+  },
+  {
+    "word": "audited",
+    "start": 253.92,
+    "end": 254.48
+  },
+  {
+    "word": "architectural",
+    "start": 254.48,
+    "end": 255.12
+  },
+  {
+    "word": "controls.",
+    "start": 255.12,
+    "end": 256.0
+  },
+  {
+    "word": "Insurance",
+    "start": 256.0,
+    "end": 256.64
+  },
+  {
+    "word": "underwriting",
+    "start": 256.64,
+    "end": 257.28
+  },
+  {
+    "word": "forces",
+    "start": 257.28,
+    "end": 257.6
+  },
+  {
+    "word": "safety",
+    "start": 257.6,
+    "end": 258.0
+  },
+  {
+    "word": "to",
+    "start": 258.0,
+    "end": 258.16
+  },
+  {
+    "word": "become",
+    "start": 258.16,
+    "end": 258.4
+  },
+  {
+    "word": "a",
+    "start": 258.4,
+    "end": 258.56
+  },
+  {
+    "word": "cost",
+    "start": 258.56,
+    "end": 258.8
+  },
+  {
+    "word": "of",
+    "start": 258.8,
+    "end": 258.96
+  },
+  {
+    "word": "capital.",
+    "start": 258.96,
+    "end": 259.68
+  },
+  {
+    "word": "Insurers",
+    "start": 259.68,
+    "end": 260.32
+  },
+  {
+    "word": "price",
+    "start": 260.32,
+    "end": 260.64
+  },
+  {
+    "word": "loss,",
+    "start": 260.64,
+    "end": 261.12
+  },
+  {
+    "word": "not",
+    "start": 261.12,
+    "end": 261.28
+  },
+  {
+    "word": "philosophy.",
+    "start": 261.28,
+    "end": 262.16
+  },
+  {
+    "word": "They",
+    "start": 262.16,
+    "end": 262.32
+  },
+  {
+    "word": "will",
+    "start": 262.32,
+    "end": 262.48
+  },
+  {
+    "word": "demand",
+    "start": 262.48,
+    "end": 262.8
+  },
+  {
+    "word": "rigorous",
+    "start": 262.8,
+    "end": 263.28
+  },
+  {
+    "word": "runtime",
+    "start": 263.28,
+    "end": 263.76
+  },
+  {
+    "word": "controls",
+    "start": 263.76,
+    "end": 264.24
+  },
+  {
+    "word": "to",
+    "start": 264.24,
+    "end": 264.32
+  },
+  {
+    "word": "lower",
+    "start": 264.32,
+    "end": 264.64
+  },
+  {
+    "word": "premiums.",
+    "start": 264.64,
+    "end": 265.52
+  },
+  {
+    "word": "Procurement",
+    "start": 265.52,
+    "end": 266.16
+  },
+  {
+    "word": "standards",
+    "start": 266.16,
+    "end": 266.56
+  },
+  {
+    "word": "force",
+    "start": 266.56,
+    "end": 266.88
+  },
+  {
+    "word": "vendors",
+    "start": 266.96,
+    "end": 267.28
+  },
+  {
+    "word": "to",
+    "start": 267.28,
+    "end": 267.44
+  },
+  {
+    "word": "compete",
+    "start": 267.44,
+    "end": 267.76
+  },
+  {
+    "word": "on",
+    "start": 267.76,
+    "end": 267.92
+  },
+  {
+    "word": "evidence.",
+    "start": 267.92,
+    "end": 268.64
+  },
+  {
+    "word": "Buyers",
+    "start": 268.64,
+    "end": 269.12
+  },
+  {
+    "word": "must",
+    "start": 269.12,
+    "end": 269.36
+  },
+  {
+    "word": "demand",
+    "start": 269.36,
+    "end": 269.6
+  },
+  {
+    "word": "proof",
+    "start": 269.6,
+    "end": 269.92
+  },
+  {
+    "word": "of",
+    "start": 269.92,
+    "end": 270.08
+  },
+  {
+    "word": "what",
+    "start": 270.08,
+    "end": 270.16
+  },
+  {
+    "word": "a",
+    "start": 270.16,
+    "end": 270.24
+  },
+  {
+    "word": "deployed",
+    "start": 270.24,
+    "end": 270.88
+  },
+  {
+    "word": "system",
+    "start": 270.88,
+    "end": 271.2
+  },
+  {
+    "word": "can",
+    "start": 271.2,
+    "end": 271.44
+  },
+  {
+    "word": "and",
+    "start": 271.44,
+    "end": 271.6
+  },
+  {
+    "word": "cannot",
+    "start": 271.6,
+    "end": 272.16
+  },
+  {
+    "word": "do",
+    "start": 272.16,
+    "end": 272.32
+  },
+  {
+    "word": "before",
+    "start": 272.32,
+    "end": 272.56
+  },
+  {
+    "word": "signing",
+    "start": 272.56,
+    "end": 273.04
+  },
+  {
+    "word": "a",
+    "start": 273.04,
+    "end": 273.2
+  },
+  {
+    "word": "contract.",
+    "start": 273.2,
+    "end": 274.0
+  },
+  {
+    "word": "Until",
+    "start": 274.0,
+    "end": 274.4
+  },
+  {
+    "word": "these",
+    "start": 274.4,
+    "end": 274.56
+  },
+  {
+    "word": "external",
+    "start": 274.56,
+    "end": 275.04
+  },
+  {
+    "word": "forces",
+    "start": 275.04,
+    "end": 275.44
+  },
+  {
+    "word": "push",
+    "start": 275.44,
+    "end": 275.76
+  },
+  {
+    "word": "the",
+    "start": 275.76,
+    "end": 275.84
+  },
+  {
+    "word": "cost",
+    "start": 275.84,
+    "end": 276.08
+  },
+  {
+    "word": "of",
+    "start": 276.08,
+    "end": 276.24
+  },
+  {
+    "word": "failure",
+    "start": 276.24,
+    "end": 276.56
+  },
+  {
+    "word": "onto",
+    "start": 276.56,
+    "end": 276.88
+  },
+  {
+    "word": "the",
+    "start": 276.88,
+    "end": 276.96
+  },
+  {
+    "word": "deployer,",
+    "start": 276.96,
+    "end": 277.68
+  },
+  {
+    "word": "the",
+    "start": 277.68,
+    "end": 277.76
+  },
+  {
+    "word": "market",
+    "start": 277.76,
+    "end": 278.16
+  },
+  {
+    "word": "will",
+    "start": 278.16,
+    "end": 278.32
+  },
+  {
+    "word": "continue",
+    "start": 278.32,
+    "end": 278.64
+  },
+  {
+    "word": "to",
+    "start": 278.64,
+    "end": 278.72
+  },
+  {
+    "word": "sell",
+    "start": 278.72,
+    "end": 279.04
+  },
+  {
+    "word": "the",
+    "start": 279.04,
+    "end": 279.12
+  },
+  {
+    "word": "illusion",
+    "start": 279.12,
+    "end": 279.52
+  },
+  {
+    "word": "of",
+    "start": 279.52,
+    "end": 279.6
+  },
+  {
+    "word": "safety.",
+    "start": 279.6,
+    "end": 280.0
+  },
+  {
+    "word": "The",
+    "start": 280.44,
+    "end": 280.68
+  },
+  {
+    "word": "AI",
+    "start": 280.68,
+    "end": 281.16
+  },
+  {
+    "word": "productivity",
+    "start": 281.16,
+    "end": 281.64
+  },
+  {
+    "word": "trough",
+    "start": 281.64,
+    "end": 282.12
+  },
+  {
+    "word": "and",
+    "start": 282.12,
+    "end": 282.2
+  },
+  {
+    "word": "the",
+    "start": 282.2,
+    "end": 282.28
+  },
+  {
+    "word": "AI",
+    "start": 282.28,
+    "end": 282.6
+  },
+  {
+    "word": "safety",
+    "start": 282.6,
+    "end": 282.92
+  },
+  {
+    "word": "trough",
+    "start": 282.92,
+    "end": 283.32
+  },
+  {
+    "word": "are",
+    "start": 283.4,
+    "end": 283.48
+  },
+  {
+    "word": "the",
+    "start": 283.48,
+    "end": 283.72
+  },
+  {
+    "word": "same",
+    "start": 283.72,
+    "end": 283.96
+  },
+  {
+    "word": "problem",
+    "start": 283.96,
+    "end": 284.2
+  },
+  {
+    "word": "viewed",
+    "start": 284.28,
+    "end": 284.6
+  },
+  {
+    "word": "from",
+    "start": 284.6,
+    "end": 284.76
+  },
+  {
+    "word": "different",
+    "start": 284.76,
+    "end": 285.0
+  },
+  {
+    "word": "angles.",
+    "start": 285.0,
+    "end": 285.72
+  },
+  {
+    "word": "Escaping",
+    "start": 285.72,
+    "end": 286.36
+  },
+  {
+    "word": "the",
+    "start": 286.36,
+    "end": 286.52
+  },
+  {
+    "word": "trough",
+    "start": 286.52,
+    "end": 287.0
+  },
+  {
+    "word": "requires",
+    "start": 287.0,
+    "end": 287.4
+  },
+  {
+    "word": "fully",
+    "start": 287.4,
+    "end": 287.8
+  },
+  {
+    "word": "funding",
+    "start": 287.8,
+    "end": 288.2
+  },
+  {
+    "word": "the",
+    "start": 288.2,
+    "end": 288.36
+  },
+  {
+    "word": "missing",
+    "start": 288.36,
+    "end": 288.76
+  },
+  {
+    "word": "capital,",
+    "start": 288.76,
+    "end": 289.48
+  },
+  {
+    "word": "remediation",
+    "start": 289.48,
+    "end": 290.2
+  },
+  {
+    "word": "budgets,",
+    "start": 290.2,
+    "end": 290.92
+  },
+  {
+    "word": "evaluation",
+    "start": 290.92,
+    "end": 291.64
+  },
+  {
+    "word": "discipline,",
+    "start": 291.64,
+    "end": 292.36
+  },
+  {
+    "word": "and",
+    "start": 292.36,
+    "end": 292.6
+  },
+  {
+    "word": "accountable",
+    "start": 292.6,
+    "end": 293.24
+  },
+  {
+    "word": "ownership.",
+    "start": 293.24,
+    "end": 294.28
+  },
+  {
+    "word": "Building",
+    "start": 294.28,
+    "end": 294.76
+  },
+  {
+    "word": "these",
+    "start": 294.76,
+    "end": 294.92
+  },
+  {
+    "word": "architectural",
+    "start": 294.92,
+    "end": 295.8
+  },
+  {
+    "word": "systems",
+    "start": 295.8,
+    "end": 296.2
+  },
+  {
+    "word": "provides",
+    "start": 296.2,
+    "end": 296.68
+  },
+  {
+    "word": "the",
+    "start": 296.68,
+    "end": 296.84
+  },
+  {
+    "word": "stability",
+    "start": 296.84,
+    "end": 297.4
+  },
+  {
+    "word": "required",
+    "start": 297.4,
+    "end": 297.88
+  },
+  {
+    "word": "for",
+    "start": 297.88,
+    "end": 298.12
+  },
+  {
+    "word": "acceleration.",
+    "start": 298.12,
+    "end": 299.56
+  },
+  {
+    "word": "Treating",
+    "start": 299.56,
+    "end": 300.04
+  },
+  {
+    "word": "AI",
+    "start": 300.04,
+    "end": 300.52
+  },
+  {
+    "word": "safety",
+    "start": 300.52,
+    "end": 300.92
+  },
+  {
+    "word": "as",
+    "start": 300.92,
+    "end": 301.08
+  },
+  {
+    "word": "a",
+    "start": 301.08,
+    "end": 301.16
+  },
+  {
+    "word": "moral",
+    "start": 301.16,
+    "end": 301.56
+  },
+  {
+    "word": "aspiration",
+    "start": 301.56,
+    "end": 302.28
+  },
+  {
+    "word": "guarantees",
+    "start": 302.28,
+    "end": 303.0
+  },
+  {
+    "word": "it",
+    "start": 303.0,
+    "end": 303.16
+  },
+  {
+    "word": "will",
+    "start": 303.16,
+    "end": 303.32
+  },
+  {
+    "word": "remain",
+    "start": 303.32,
+    "end": 303.72
+  },
+  {
+    "word": "underfunded.",
+    "start": 303.72,
+    "end": 304.84
+  },
+  {
+    "word": "Safety",
+    "start": 304.84,
+    "end": 305.32
+  },
+  {
+    "word": "is",
+    "start": 305.32,
+    "end": 305.48
+  },
+  {
+    "word": "an",
+    "start": 305.48,
+    "end": 305.64
+  },
+  {
+    "word": "economic",
+    "start": 305.64,
+    "end": 306.2
+  },
+  {
+    "word": "requirement.",
+    "start": 306.2,
+    "end": 307.08
+  },
+  {
+    "word": "Until",
+    "start": 307.08,
+    "end": 307.48
+  },
+  {
+    "word": "it",
+    "start": 307.48,
+    "end": 307.64
+  },
+  {
+    "word": "has",
+    "start": 307.64,
+    "end": 307.8
+  },
+  {
+    "word": "a",
+    "start": 307.8,
+    "end": 307.96
+  },
+  {
+    "word": "real",
+    "start": 307.96,
+    "end": 308.2
+  },
+  {
+    "word": "price,",
+    "start": 308.2,
+    "end": 308.76
+  },
+  {
+    "word": "AI",
+    "start": 308.76,
+    "end": 309.16
+  },
+  {
+    "word": "deployments",
+    "start": 309.16,
+    "end": 309.72
+  },
+  {
+    "word": "will",
+    "start": 309.72,
+    "end": 309.88
+  },
+  {
+    "word": "remain",
+    "start": 309.88,
+    "end": 310.12
+  },
+  {
+    "word": "trapped",
+    "start": 310.12,
+    "end": 310.52
+  },
+  {
+    "word": "in",
+    "start": 310.52,
+    "end": 310.68
+  },
+  {
+    "word": "the",
+    "start": 310.68,
+    "end": 310.84
+  },
+  {
+    "word": "trough.",
+    "start": 310.84,
+    "end": 311.96
+  }
+]

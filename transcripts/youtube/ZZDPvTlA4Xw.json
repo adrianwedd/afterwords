@@ -1,0 +1,2417 @@
+[
+  {
+    "word": "In",
+    "start": 0.16,
+    "end": 0.48
+  },
+  {
+    "word": "the",
+    "start": 0.48,
+    "end": 0.64
+  },
+  {
+    "word": "year",
+    "start": 0.64,
+    "end": 0.88
+  },
+  {
+    "word": "1984,",
+    "start": 0.96,
+    "end": 2.16
+  },
+  {
+    "word": "the",
+    "start": 2.16,
+    "end": 2.32
+  },
+  {
+    "word": "American",
+    "start": 2.32,
+    "end": 2.88
+  },
+  {
+    "word": "Psychiatric",
+    "start": 2.88,
+    "end": 3.68
+  },
+  {
+    "word": "Association",
+    "start": 3.68,
+    "end": 4.4
+  },
+  {
+    "word": "officially",
+    "start": 4.4,
+    "end": 5.04
+  },
+  {
+    "word": "released",
+    "start": 5.04,
+    "end": 5.44
+  },
+  {
+    "word": "the",
+    "start": 5.44,
+    "end": 5.68
+  },
+  {
+    "word": "third",
+    "start": 5.68,
+    "end": 6.0
+  },
+  {
+    "word": "edition",
+    "start": 6.08,
+    "end": 6.32
+  },
+  {
+    "word": "of",
+    "start": 6.32,
+    "end": 6.4
+  },
+  {
+    "word": "its",
+    "start": 6.4,
+    "end": 6.56
+  },
+  {
+    "word": "diagnostic",
+    "start": 6.56,
+    "end": 7.28
+  },
+  {
+    "word": "manual,",
+    "start": 7.28,
+    "end": 7.84
+  },
+  {
+    "word": "the",
+    "start": 7.84,
+    "end": 8.08
+  },
+  {
+    "word": "DSM-3.",
+    "start": 8.08,
+    "end": 9.6
+  },
+  {
+    "word": "Within",
+    "start": 9.6,
+    "end": 10.0
+  },
+  {
+    "word": "those",
+    "start": 10.0,
+    "end": 10.24
+  },
+  {
+    "word": "pages,",
+    "start": 10.24,
+    "end": 10.88
+  },
+  {
+    "word": "attention",
+    "start": 10.88,
+    "end": 11.44
+  },
+  {
+    "word": "deficit",
+    "start": 11.44,
+    "end": 11.84
+  },
+  {
+    "word": "disorder",
+    "start": 11.84,
+    "end": 12.32
+  },
+  {
+    "word": "was",
+    "start": 12.32,
+    "end": 12.48
+  },
+  {
+    "word": "categorized",
+    "start": 12.48,
+    "end": 13.2
+  },
+  {
+    "word": "strictly",
+    "start": 13.2,
+    "end": 13.6
+  },
+  {
+    "word": "as",
+    "start": 13.6,
+    "end": 13.84
+  },
+  {
+    "word": "a",
+    "start": 13.84,
+    "end": 13.92
+  },
+  {
+    "word": "childhood",
+    "start": 13.92,
+    "end": 14.48
+  },
+  {
+    "word": "condition,",
+    "start": 14.48,
+    "end": 15.28
+  },
+  {
+    "word": "a",
+    "start": 15.28,
+    "end": 15.44
+  },
+  {
+    "word": "diagnosis",
+    "start": 15.44,
+    "end": 16.16
+  },
+  {
+    "word": "defined",
+    "start": 16.16,
+    "end": 16.56
+  },
+  {
+    "word": "by",
+    "start": 16.56,
+    "end": 16.72
+  },
+  {
+    "word": "behaviors",
+    "start": 16.72,
+    "end": 17.2
+  },
+  {
+    "word": "in",
+    "start": 17.2,
+    "end": 17.36
+  },
+  {
+    "word": "a",
+    "start": 17.36,
+    "end": 17.44
+  },
+  {
+    "word": "classroom.",
+    "start": 17.44,
+    "end": 18.32
+  },
+  {
+    "word": "For",
+    "start": 18.32,
+    "end": 18.56
+  },
+  {
+    "word": "adults,",
+    "start": 18.56,
+    "end": 19.28
+  },
+  {
+    "word": "any",
+    "start": 19.28,
+    "end": 19.6
+  },
+  {
+    "word": "persistent",
+    "start": 19.6,
+    "end": 20.08
+  },
+  {
+    "word": "traits",
+    "start": 20.08,
+    "end": 20.48
+  },
+  {
+    "word": "were",
+    "start": 20.48,
+    "end": 20.64
+  },
+  {
+    "word": "relegated",
+    "start": 20.64,
+    "end": 21.12
+  },
+  {
+    "word": "to",
+    "start": 21.12,
+    "end": 21.28
+  },
+  {
+    "word": "a",
+    "start": 21.28,
+    "end": 21.44
+  },
+  {
+    "word": "residual",
+    "start": 21.44,
+    "end": 22.08
+  },
+  {
+    "word": "type,",
+    "start": 22.08,
+    "end": 22.64
+  },
+  {
+    "word": "a",
+    "start": 22.64,
+    "end": 22.8
+  },
+  {
+    "word": "clinical",
+    "start": 22.8,
+    "end": 23.2
+  },
+  {
+    "word": "footnote",
+    "start": 23.2,
+    "end": 23.76
+  },
+  {
+    "word": "for",
+    "start": 23.76,
+    "end": 23.92
+  },
+  {
+    "word": "a",
+    "start": 23.92,
+    "end": 24.0
+  },
+  {
+    "word": "condition",
+    "start": 24.0,
+    "end": 24.4
+  },
+  {
+    "word": "science",
+    "start": 24.4,
+    "end": 24.88
+  },
+  {
+    "word": "assumed",
+    "start": 24.88,
+    "end": 25.36
+  },
+  {
+    "word": "most",
+    "start": 25.36,
+    "end": 25.6
+  },
+  {
+    "word": "people",
+    "start": 25.6,
+    "end": 25.84
+  },
+  {
+    "word": "simply",
+    "start": 25.84,
+    "end": 26.16
+  },
+  {
+    "word": "outgrew.",
+    "start": 26.16,
+    "end": 27.12
+  },
+  {
+    "word": "Medical",
+    "start": 27.12,
+    "end": 27.68
+  },
+  {
+    "word": "science",
+    "start": 27.68,
+    "end": 28.08
+  },
+  {
+    "word": "in",
+    "start": 28.08,
+    "end": 28.24
+  },
+  {
+    "word": "1984",
+    "start": 28.32,
+    "end": 29.04
+  },
+  {
+    "word": "lacked",
+    "start": 29.04,
+    "end": 29.36
+  },
+  {
+    "word": "the",
+    "start": 29.36,
+    "end": 29.52
+  },
+  {
+    "word": "vocabulary",
+    "start": 29.52,
+    "end": 30.16
+  },
+  {
+    "word": "to",
+    "start": 30.16,
+    "end": 30.32
+  },
+  {
+    "word": "validate",
+    "start": 30.32,
+    "end": 30.8
+  },
+  {
+    "word": "the",
+    "start": 30.8,
+    "end": 30.96
+  },
+  {
+    "word": "lived",
+    "start": 30.96,
+    "end": 31.28
+  },
+  {
+    "word": "experience",
+    "start": 31.28,
+    "end": 31.76
+  },
+  {
+    "word": "of",
+    "start": 31.76,
+    "end": 31.92
+  },
+  {
+    "word": "an",
+    "start": 31.92,
+    "end": 32.08
+  },
+  {
+    "word": "adult",
+    "start": 32.08,
+    "end": 32.48
+  },
+  {
+    "word": "whose",
+    "start": 32.48,
+    "end": 32.72
+  },
+  {
+    "word": "brain",
+    "start": 32.72,
+    "end": 33.04
+  },
+  {
+    "word": "operated",
+    "start": 33.04,
+    "end": 33.52
+  },
+  {
+    "word": "outside",
+    "start": 33.52,
+    "end": 33.92
+  },
+  {
+    "word": "these",
+    "start": 33.92,
+    "end": 34.08
+  },
+  {
+    "word": "rigid",
+    "start": 34.08,
+    "end": 34.56
+  },
+  {
+    "word": "lines.",
+    "start": 34.56,
+    "end": 35.44
+  },
+  {
+    "word": "That",
+    "start": 35.44,
+    "end": 35.76
+  },
+  {
+    "word": "same",
+    "start": 35.76,
+    "end": 36.08
+  },
+  {
+    "word": "year,",
+    "start": 36.08,
+    "end": 36.4
+  },
+  {
+    "word": "William",
+    "start": 36.4,
+    "end": 36.8
+  },
+  {
+    "word": "Gibson",
+    "start": 36.8,
+    "end": 37.36
+  },
+  {
+    "word": "published",
+    "start": 37.36,
+    "end": 37.68
+  },
+  {
+    "word": "his",
+    "start": 37.68,
+    "end": 37.84
+  },
+  {
+    "word": "debut",
+    "start": 37.84,
+    "end": 38.32
+  },
+  {
+    "word": "novel,",
+    "start": 38.32,
+    "end": 38.72
+  },
+  {
+    "word": "Neuromancer.",
+    "start": 38.72,
+    "end": 39.92
+  },
+  {
+    "word": "For",
+    "start": 39.92,
+    "end": 40.16
+  },
+  {
+    "word": "decades,",
+    "start": 40.16,
+    "end": 40.8
+  },
+  {
+    "word": "critics",
+    "start": 40.8,
+    "end": 41.12
+  },
+  {
+    "word": "have",
+    "start": 41.12,
+    "end": 41.28
+  },
+  {
+    "word": "analyzed",
+    "start": 41.28,
+    "end": 41.76
+  },
+  {
+    "word": "the",
+    "start": 41.76,
+    "end": 41.84
+  },
+  {
+    "word": "protagonist,",
+    "start": 41.84,
+    "end": 42.48
+  },
+  {
+    "word": "Case,",
+    "start": 42.48,
+    "end": 43.04
+  },
+  {
+    "word": "through",
+    "start": 43.2,
+    "end": 43.36
+  },
+  {
+    "word": "the",
+    "start": 43.36,
+    "end": 43.44
+  },
+  {
+    "word": "lenses",
+    "start": 43.44,
+    "end": 43.76
+  },
+  {
+    "word": "of",
+    "start": 43.76,
+    "end": 44.0
+  },
+  {
+    "word": "noir",
+    "start": 44.0,
+    "end": 44.56
+  },
+  {
+    "word": "alienation",
+    "start": 44.56,
+    "end": 45.2
+  },
+  {
+    "word": "or",
+    "start": 45.28,
+    "end": 45.44
+  },
+  {
+    "word": "the",
+    "start": 45.44,
+    "end": 45.6
+  },
+  {
+    "word": "mechanics",
+    "start": 45.6,
+    "end": 46.0
+  },
+  {
+    "word": "of",
+    "start": 46.0,
+    "end": 46.16
+  },
+  {
+    "word": "chemical",
+    "start": 46.16,
+    "end": 46.56
+  },
+  {
+    "word": "addiction.",
+    "start": 46.56,
+    "end": 47.44
+  },
+  {
+    "word": "However,",
+    "start": 47.44,
+    "end": 47.92
+  },
+  {
+    "word": "a",
+    "start": 47.92,
+    "end": 48.08
+  },
+  {
+    "word": "close",
+    "start": 48.08,
+    "end": 48.4
+  },
+  {
+    "word": "reading",
+    "start": 48.4,
+    "end": 48.8
+  },
+  {
+    "word": "suggests",
+    "start": 48.8,
+    "end": 49.2
+  },
+  {
+    "word": "a",
+    "start": 49.2,
+    "end": 49.44
+  },
+  {
+    "word": "different",
+    "start": 49.44,
+    "end": 49.68
+  },
+  {
+    "word": "reality.",
+    "start": 49.68,
+    "end": 50.48
+  },
+  {
+    "word": "Case",
+    "start": 50.48,
+    "end": 51.04
+  },
+  {
+    "word": "provides",
+    "start": 51.04,
+    "end": 51.36
+  },
+  {
+    "word": "a",
+    "start": 51.36,
+    "end": 51.44
+  },
+  {
+    "word": "detailed,",
+    "start": 51.44,
+    "end": 52.0
+  },
+  {
+    "word": "micro-level",
+    "start": 52.0,
+    "end": 52.8
+  },
+  {
+    "word": "portrait",
+    "start": 52.8,
+    "end": 53.2
+  },
+  {
+    "word": "of",
+    "start": 53.2,
+    "end": 53.28
+  },
+  {
+    "word": "an",
+    "start": 53.28,
+    "end": 53.44
+  },
+  {
+    "word": "adult",
+    "start": 53.44,
+    "end": 53.76
+  },
+  {
+    "word": "with",
+    "start": 53.76,
+    "end": 53.92
+  },
+  {
+    "word": "ADHD.",
+    "start": 53.92,
+    "end": 55.04
+  },
+  {
+    "word": "Gibson",
+    "start": 55.04,
+    "end": 55.68
+  },
+  {
+    "word": "encoded",
+    "start": 55.68,
+    "end": 56.16
+  },
+  {
+    "word": "this",
+    "start": 56.16,
+    "end": 56.32
+  },
+  {
+    "word": "cognitive",
+    "start": 56.32,
+    "end": 56.88
+  },
+  {
+    "word": "structure",
+    "start": 56.88,
+    "end": 57.44
+  },
+  {
+    "word": "into",
+    "start": 57.44,
+    "end": 57.68
+  },
+  {
+    "word": "his",
+    "start": 57.68,
+    "end": 57.92
+  },
+  {
+    "word": "prose",
+    "start": 57.92,
+    "end": 58.32
+  },
+  {
+    "word": "10",
+    "start": 58.48,
+    "end": 58.64
+  },
+  {
+    "word": "years",
+    "start": 58.64,
+    "end": 58.88
+  },
+  {
+    "word": "before",
+    "start": 58.88,
+    "end": 59.12
+  },
+  {
+    "word": "the",
+    "start": 59.12,
+    "end": 59.28
+  },
+  {
+    "word": "medical",
+    "start": 59.28,
+    "end": 59.6
+  },
+  {
+    "word": "community",
+    "start": 59.6,
+    "end": 59.76
+  },
+  {
+    "word": "established",
+    "start": 60.44,
+    "end": 60.92
+  },
+  {
+    "word": "the",
+    "start": 60.92,
+    "end": 61.0
+  },
+  {
+    "word": "vocabulary",
+    "start": 61.0,
+    "end": 61.72
+  },
+  {
+    "word": "to",
+    "start": 61.72,
+    "end": 61.88
+  },
+  {
+    "word": "describe",
+    "start": 61.88,
+    "end": 62.52
+  },
+  {
+    "word": "it.",
+    "start": 62.52,
+    "end": 63.08
+  },
+  {
+    "word": "Speculative",
+    "start": 63.08,
+    "end": 63.8
+  },
+  {
+    "word": "fiction",
+    "start": 63.8,
+    "end": 64.2
+  },
+  {
+    "word": "often",
+    "start": 64.2,
+    "end": 64.52
+  },
+  {
+    "word": "charts",
+    "start": 64.52,
+    "end": 64.84
+  },
+  {
+    "word": "the",
+    "start": 64.84,
+    "end": 64.92
+  },
+  {
+    "word": "terrain",
+    "start": 64.92,
+    "end": 65.4
+  },
+  {
+    "word": "of",
+    "start": 65.4,
+    "end": 65.48
+  },
+  {
+    "word": "the",
+    "start": 65.48,
+    "end": 65.56
+  },
+  {
+    "word": "human",
+    "start": 65.56,
+    "end": 65.88
+  },
+  {
+    "word": "mind",
+    "start": 65.88,
+    "end": 66.28
+  },
+  {
+    "word": "well",
+    "start": 66.28,
+    "end": 66.52
+  },
+  {
+    "word": "before",
+    "start": 66.52,
+    "end": 66.76
+  },
+  {
+    "word": "clinical",
+    "start": 66.76,
+    "end": 67.32
+  },
+  {
+    "word": "research",
+    "start": 67.32,
+    "end": 67.72
+  },
+  {
+    "word": "arrives",
+    "start": 67.72,
+    "end": 68.12
+  },
+  {
+    "word": "to",
+    "start": 68.12,
+    "end": 68.2
+  },
+  {
+    "word": "plant",
+    "start": 68.2,
+    "end": 68.52
+  },
+  {
+    "word": "a",
+    "start": 68.52,
+    "end": 68.68
+  },
+  {
+    "word": "flag.",
+    "start": 68.68,
+    "end": 69.48
+  },
+  {
+    "word": "While",
+    "start": 69.48,
+    "end": 69.8
+  },
+  {
+    "word": "Case",
+    "start": 69.8,
+    "end": 70.28
+  },
+  {
+    "word": "is",
+    "start": 70.28,
+    "end": 70.36
+  },
+  {
+    "word": "often",
+    "start": 70.36,
+    "end": 70.6
+  },
+  {
+    "word": "labeled",
+    "start": 70.6,
+    "end": 71.0
+  },
+  {
+    "word": "an",
+    "start": 71.0,
+    "end": 71.16
+  },
+  {
+    "word": "addict,",
+    "start": 71.16,
+    "end": 71.72
+  },
+  {
+    "word": "his",
+    "start": 71.72,
+    "end": 71.96
+  },
+  {
+    "word": "relationship",
+    "start": 71.96,
+    "end": 72.44
+  },
+  {
+    "word": "with",
+    "start": 72.44,
+    "end": 72.6
+  },
+  {
+    "word": "the",
+    "start": 72.6,
+    "end": 72.68
+  },
+  {
+    "word": "digital",
+    "start": 72.68,
+    "end": 73.08
+  },
+  {
+    "word": "matrix",
+    "start": 73.08,
+    "end": 73.56
+  },
+  {
+    "word": "follows",
+    "start": 73.56,
+    "end": 73.96
+  },
+  {
+    "word": "a",
+    "start": 73.96,
+    "end": 74.04
+  },
+  {
+    "word": "different",
+    "start": 74.04,
+    "end": 74.28
+  },
+  {
+    "word": "set",
+    "start": 74.28,
+    "end": 74.52
+  },
+  {
+    "word": "of",
+    "start": 74.52,
+    "end": 74.68
+  },
+  {
+    "word": "rules.",
+    "start": 74.68,
+    "end": 75.48
+  },
+  {
+    "word": "His",
+    "start": 75.48,
+    "end": 75.72
+  },
+  {
+    "word": "competence",
+    "start": 75.72,
+    "end": 76.28
+  },
+  {
+    "word": "is",
+    "start": 76.28,
+    "end": 76.44
+  },
+  {
+    "word": "defined",
+    "start": 76.44,
+    "end": 76.84
+  },
+  {
+    "word": "by",
+    "start": 76.84,
+    "end": 77.0
+  },
+  {
+    "word": "reversibility.",
+    "start": 77.0,
+    "end": 78.28
+  },
+  {
+    "word": "Instead",
+    "start": 78.28,
+    "end": 78.68
+  },
+  {
+    "word": "of",
+    "start": 78.68,
+    "end": 78.76
+  },
+  {
+    "word": "a",
+    "start": 78.76,
+    "end": 78.92
+  },
+  {
+    "word": "slow",
+    "start": 78.92,
+    "end": 79.32
+  },
+  {
+    "word": "healing",
+    "start": 79.32,
+    "end": 79.72
+  },
+  {
+    "word": "process",
+    "start": 79.72,
+    "end": 80.12
+  },
+  {
+    "word": "or",
+    "start": 80.12,
+    "end": 80.28
+  },
+  {
+    "word": "a",
+    "start": 80.28,
+    "end": 80.36
+  },
+  {
+    "word": "chemical",
+    "start": 80.36,
+    "end": 80.92
+  },
+  {
+    "word": "high,",
+    "start": 80.92,
+    "end": 81.4
+  },
+  {
+    "word": "his",
+    "start": 81.4,
+    "end": 81.56
+  },
+  {
+    "word": "faculties",
+    "start": 81.56,
+    "end": 82.12
+  },
+  {
+    "word": "return",
+    "start": 82.12,
+    "end": 82.52
+  },
+  {
+    "word": "the",
+    "start": 82.52,
+    "end": 82.68
+  },
+  {
+    "word": "moment",
+    "start": 82.68,
+    "end": 83.0
+  },
+  {
+    "word": "he",
+    "start": 83.0,
+    "end": 83.16
+  },
+  {
+    "word": "enters",
+    "start": 83.16,
+    "end": 83.4
+  },
+  {
+    "word": "the",
+    "start": 83.4,
+    "end": 83.56
+  },
+  {
+    "word": "matrix.",
+    "start": 83.56,
+    "end": 84.6
+  },
+  {
+    "word": "This",
+    "start": 84.6,
+    "end": 84.84
+  },
+  {
+    "word": "immediate",
+    "start": 84.84,
+    "end": 85.48
+  },
+  {
+    "word": "functional",
+    "start": 85.48,
+    "end": 85.96
+  },
+  {
+    "word": "return",
+    "start": 85.96,
+    "end": 86.44
+  },
+  {
+    "word": "suggests",
+    "start": 86.44,
+    "end": 86.84
+  },
+  {
+    "word": "his",
+    "start": 86.84,
+    "end": 87.08
+  },
+  {
+    "word": "struggle",
+    "start": 87.08,
+    "end": 87.4
+  },
+  {
+    "word": "is",
+    "start": 87.4,
+    "end": 87.56
+  },
+  {
+    "word": "environmental",
+    "start": 87.56,
+    "end": 88.28
+  },
+  {
+    "word": "fit.",
+    "start": 88.28,
+    "end": 88.92
+  },
+  {
+    "word": "In",
+    "start": 88.92,
+    "end": 89.08
+  },
+  {
+    "word": "the",
+    "start": 89.08,
+    "end": 89.16
+  },
+  {
+    "word": "digital",
+    "start": 89.16,
+    "end": 89.64
+  },
+  {
+    "word": "realm,",
+    "start": 89.64,
+    "end": 89.96
+  },
+  {
+    "word": "his",
+    "start": 89.96,
+    "end": 90.2
+  },
+  {
+    "word": "agency",
+    "start": 90.2,
+    "end": 90.68
+  },
+  {
+    "word": "is",
+    "start": 90.68,
+    "end": 90.84
+  },
+  {
+    "word": "restored",
+    "start": 90.84,
+    "end": 91.48
+  },
+  {
+    "word": "instantly.",
+    "start": 91.48,
+    "end": 92.44
+  },
+  {
+    "word": "This",
+    "start": 92.44,
+    "end": 92.68
+  },
+  {
+    "word": "environment",
+    "start": 92.68,
+    "end": 93.32
+  },
+  {
+    "word": "also",
+    "start": 93.32,
+    "end": 93.56
+  },
+  {
+    "word": "grants",
+    "start": 93.56,
+    "end": 93.88
+  },
+  {
+    "word": "him",
+    "start": 93.88,
+    "end": 94.04
+  },
+  {
+    "word": "a",
+    "start": 94.04,
+    "end": 94.12
+  },
+  {
+    "word": "surgical",
+    "start": 94.12,
+    "end": 94.6
+  },
+  {
+    "word": "level",
+    "start": 94.6,
+    "end": 94.92
+  },
+  {
+    "word": "of",
+    "start": 94.92,
+    "end": 95.08
+  },
+  {
+    "word": "precision.",
+    "start": 95.08,
+    "end": 95.96
+  },
+  {
+    "word": "His",
+    "start": 95.96,
+    "end": 96.2
+  },
+  {
+    "word": "memory",
+    "start": 96.2,
+    "end": 96.6
+  },
+  {
+    "word": "and",
+    "start": 96.6,
+    "end": 96.76
+  },
+  {
+    "word": "focus",
+    "start": 96.76,
+    "end": 97.08
+  },
+  {
+    "word": "don't",
+    "start": 97.08,
+    "end": 97.4
+  },
+  {
+    "word": "improve",
+    "start": 97.4,
+    "end": 97.8
+  },
+  {
+    "word": "across",
+    "start": 97.8,
+    "end": 98.12
+  },
+  {
+    "word": "the",
+    "start": 98.12,
+    "end": 98.2
+  },
+  {
+    "word": "board,",
+    "start": 98.2,
+    "end": 98.76
+  },
+  {
+    "word": "they",
+    "start": 98.76,
+    "end": 98.92
+  },
+  {
+    "word": "sharpen",
+    "start": 98.92,
+    "end": 99.4
+  },
+  {
+    "word": "specifically",
+    "start": 99.4,
+    "end": 99.88
+  },
+  {
+    "word": "within",
+    "start": 99.88,
+    "end": 100.28
+  },
+  {
+    "word": "high-interest",
+    "start": 100.28,
+    "end": 100.84
+  },
+  {
+    "word": "procedural",
+    "start": 100.92,
+    "end": 101.56
+  },
+  {
+    "word": "domains.",
+    "start": 101.56,
+    "end": 102.6
+  },
+  {
+    "word": "This",
+    "start": 102.6,
+    "end": 102.92
+  },
+  {
+    "word": "domain-specific",
+    "start": 102.92,
+    "end": 103.8
+  },
+  {
+    "word": "shift",
+    "start": 103.8,
+    "end": 104.12
+  },
+  {
+    "word": "in",
+    "start": 104.12,
+    "end": 104.28
+  },
+  {
+    "word": "attention",
+    "start": 104.28,
+    "end": 104.76
+  },
+  {
+    "word": "marks",
+    "start": 104.76,
+    "end": 105.08
+  },
+  {
+    "word": "a",
+    "start": 105.08,
+    "end": 105.24
+  },
+  {
+    "word": "distinct",
+    "start": 105.24,
+    "end": 105.64
+  },
+  {
+    "word": "cognitive",
+    "start": 105.64,
+    "end": 106.2
+  },
+  {
+    "word": "reconfiguration,",
+    "start": 106.2,
+    "end": 107.32
+  },
+  {
+    "word": "separating",
+    "start": 107.32,
+    "end": 107.88
+  },
+  {
+    "word": "his",
+    "start": 107.88,
+    "end": 108.04
+  },
+  {
+    "word": "experience",
+    "start": 108.04,
+    "end": 108.52
+  },
+  {
+    "word": "from",
+    "start": 108.52,
+    "end": 108.68
+  },
+  {
+    "word": "the",
+    "start": 108.68,
+    "end": 108.76
+  },
+  {
+    "word": "typical",
+    "start": 108.76,
+    "end": 109.16
+  },
+  {
+    "word": "patterns",
+    "start": 109.16,
+    "end": 109.56
+  },
+  {
+    "word": "of",
+    "start": 109.56,
+    "end": 109.64
+  },
+  {
+    "word": "addiction.",
+    "start": 109.64,
+    "end": 110.52
+  },
+  {
+    "word": "These",
+    "start": 110.52,
+    "end": 110.84
+  },
+  {
+    "word": "patterns",
+    "start": 110.84,
+    "end": 111.56
+  },
+  {
+    "word": "point",
+    "start": 111.56,
+    "end": 111.8
+  },
+  {
+    "word": "toward",
+    "start": 111.8,
+    "end": 112.12
+  },
+  {
+    "word": "a",
+    "start": 112.12,
+    "end": 112.36
+  },
+  {
+    "word": "central",
+    "start": 112.36,
+    "end": 112.92
+  },
+  {
+    "word": "concept,",
+    "start": 112.92,
+    "end": 113.64
+  },
+  {
+    "word": "cognitive",
+    "start": 113.64,
+    "end": 114.28
+  },
+  {
+    "word": "mismatch.",
+    "start": 114.28,
+    "end": 115.0
+  },
+  {
+    "word": "Dysfunction",
+    "start": 115.36,
+    "end": 116.16
+  },
+  {
+    "word": "in",
+    "start": 116.16,
+    "end": 116.32
+  },
+  {
+    "word": "this",
+    "start": 116.32,
+    "end": 116.48
+  },
+  {
+    "word": "context",
+    "start": 116.48,
+    "end": 116.96
+  },
+  {
+    "word": "originates",
+    "start": 116.96,
+    "end": 117.68
+  },
+  {
+    "word": "where",
+    "start": 117.68,
+    "end": 117.92
+  },
+  {
+    "word": "a",
+    "start": 117.92,
+    "end": 118.08
+  },
+  {
+    "word": "specific",
+    "start": 118.08,
+    "end": 118.64
+  },
+  {
+    "word": "cognitive",
+    "start": 118.64,
+    "end": 119.28
+  },
+  {
+    "word": "style",
+    "start": 119.28,
+    "end": 119.92
+  },
+  {
+    "word": "meets",
+    "start": 119.92,
+    "end": 120.32
+  },
+  {
+    "word": "an",
+    "start": 120.32,
+    "end": 120.48
+  },
+  {
+    "word": "environment",
+    "start": 120.48,
+    "end": 121.04
+  },
+  {
+    "word": "that",
+    "start": 121.04,
+    "end": 121.28
+  },
+  {
+    "word": "lacks",
+    "start": 121.28,
+    "end": 121.68
+  },
+  {
+    "word": "the",
+    "start": 121.68,
+    "end": 121.84
+  },
+  {
+    "word": "necessary",
+    "start": 121.84,
+    "end": 122.4
+  },
+  {
+    "word": "tools",
+    "start": 122.4,
+    "end": 122.88
+  },
+  {
+    "word": "to",
+    "start": 122.88,
+    "end": 123.12
+  },
+  {
+    "word": "support",
+    "start": 123.12,
+    "end": 123.52
+  },
+  {
+    "word": "it.",
+    "start": 123.52,
+    "end": 124.0
+  },
+  {
+    "word": "In",
+    "start": 124.0,
+    "end": 124.24
+  },
+  {
+    "word": "the",
+    "start": 124.24,
+    "end": 124.4
+  },
+  {
+    "word": "physical",
+    "start": 124.4,
+    "end": 124.88
+  },
+  {
+    "word": "world,",
+    "start": 124.88,
+    "end": 125.36
+  },
+  {
+    "word": "Case's",
+    "start": 125.36,
+    "end": 125.92
+  },
+  {
+    "word": "brain",
+    "start": 126.0,
+    "end": 126.32
+  },
+  {
+    "word": "is",
+    "start": 126.32,
+    "end": 126.48
+  },
+  {
+    "word": "overwhelmed.",
+    "start": 126.48,
+    "end": 127.52
+  },
+  {
+    "word": "In",
+    "start": 127.52,
+    "end": 127.68
+  },
+  {
+    "word": "the",
+    "start": 127.68,
+    "end": 127.84
+  },
+  {
+    "word": "abstract,",
+    "start": 127.84,
+    "end": 128.56
+  },
+  {
+    "word": "pattern-heavy",
+    "start": 128.56,
+    "end": 129.44
+  },
+  {
+    "word": "space",
+    "start": 129.44,
+    "end": 129.68
+  },
+  {
+    "word": "of",
+    "start": 129.68,
+    "end": 129.76
+  },
+  {
+    "word": "cyberspace,",
+    "start": 129.76,
+    "end": 130.8
+  },
+  {
+    "word": "that",
+    "start": 130.8,
+    "end": 131.12
+  },
+  {
+    "word": "same",
+    "start": 131.12,
+    "end": 131.36
+  },
+  {
+    "word": "brain",
+    "start": 131.36,
+    "end": 131.84
+  },
+  {
+    "word": "finds",
+    "start": 131.84,
+    "end": 132.24
+  },
+  {
+    "word": "its",
+    "start": 132.24,
+    "end": 132.48
+  },
+  {
+    "word": "flow.",
+    "start": 132.48,
+    "end": 133.28
+  },
+  {
+    "word": "Gibson",
+    "start": 133.28,
+    "end": 133.92
+  },
+  {
+    "word": "provides",
+    "start": 133.92,
+    "end": 134.32
+  },
+  {
+    "word": "a",
+    "start": 134.32,
+    "end": 134.4
+  },
+  {
+    "word": "narrative",
+    "start": 134.4,
+    "end": 134.96
+  },
+  {
+    "word": "control",
+    "start": 134.96,
+    "end": 135.36
+  },
+  {
+    "word": "for",
+    "start": 135.36,
+    "end": 135.6
+  },
+  {
+    "word": "this",
+    "start": 135.6,
+    "end": 135.76
+  },
+  {
+    "word": "through",
+    "start": 135.76,
+    "end": 136.0
+  },
+  {
+    "word": "the",
+    "start": 136.0,
+    "end": 136.08
+  },
+  {
+    "word": "character",
+    "start": 136.08,
+    "end": 136.56
+  },
+  {
+    "word": "of",
+    "start": 136.56,
+    "end": 136.72
+  },
+  {
+    "word": "Molly.",
+    "start": 136.72,
+    "end": 137.6
+  },
+  {
+    "word": "Her",
+    "start": 137.6,
+    "end": 137.84
+  },
+  {
+    "word": "sensorium",
+    "start": 137.84,
+    "end": 138.64
+  },
+  {
+    "word": "is",
+    "start": 138.64,
+    "end": 138.8
+  },
+  {
+    "word": "optimized",
+    "start": 138.8,
+    "end": 139.44
+  },
+  {
+    "word": "for",
+    "start": 139.44,
+    "end": 139.6
+  },
+  {
+    "word": "physical,",
+    "start": 139.6,
+    "end": 140.16
+  },
+  {
+    "word": "embodied",
+    "start": 140.16,
+    "end": 140.8
+  },
+  {
+    "word": "precision,",
+    "start": 140.8,
+    "end": 141.76
+  },
+  {
+    "word": "the",
+    "start": 141.76,
+    "end": 141.92
+  },
+  {
+    "word": "exact",
+    "start": 141.92,
+    "end": 142.32
+  },
+  {
+    "word": "environment",
+    "start": 142.32,
+    "end": 142.88
+  },
+  {
+    "word": "where",
+    "start": 142.88,
+    "end": 143.12
+  },
+  {
+    "word": "Case",
+    "start": 143.12,
+    "end": 143.6
+  },
+  {
+    "word": "fails.",
+    "start": 143.6,
+    "end": 144.4
+  },
+  {
+    "word": "By",
+    "start": 144.4,
+    "end": 144.64
+  },
+  {
+    "word": "contrasting",
+    "start": 144.64,
+    "end": 145.36
+  },
+  {
+    "word": "these",
+    "start": 145.36,
+    "end": 145.6
+  },
+  {
+    "word": "two,",
+    "start": 145.6,
+    "end": 146.08
+  },
+  {
+    "word": "the",
+    "start": 146.08,
+    "end": 146.24
+  },
+  {
+    "word": "novel",
+    "start": 146.24,
+    "end": 146.64
+  },
+  {
+    "word": "reframes",
+    "start": 146.64,
+    "end": 147.28
+  },
+  {
+    "word": "neurodivergence",
+    "start": 147.28,
+    "end": 148.32
+  },
+  {
+    "word": "as",
+    "start": 148.32,
+    "end": 148.56
+  },
+  {
+    "word": "an",
+    "start": 148.56,
+    "end": 148.72
+  },
+  {
+    "word": "ecological",
+    "start": 148.72,
+    "end": 149.6
+  },
+  {
+    "word": "issue.",
+    "start": 149.6,
+    "end": 150.4
+  },
+  {
+    "word": "Case",
+    "start": 150.4,
+    "end": 150.88
+  },
+  {
+    "word": "isn't",
+    "start": 150.88,
+    "end": 151.2
+  },
+  {
+    "word": "fundamentally",
+    "start": 151.2,
+    "end": 151.84
+  },
+  {
+    "word": "broken.",
+    "start": 151.84,
+    "end": 152.64
+  },
+  {
+    "word": "He's",
+    "start": 152.64,
+    "end": 152.96
+  },
+  {
+    "word": "simply",
+    "start": 152.96,
+    "end": 153.28
+  },
+  {
+    "word": "operating",
+    "start": 153.28,
+    "end": 153.84
+  },
+  {
+    "word": "in",
+    "start": 153.84,
+    "end": 154.0
+  },
+  {
+    "word": "the",
+    "start": 154.0,
+    "end": 154.16
+  },
+  {
+    "word": "wrong",
+    "start": 154.16,
+    "end": 154.48
+  },
+  {
+    "word": "spatial",
+    "start": 154.48,
+    "end": 155.04
+  },
+  {
+    "word": "realm.",
+    "start": 155.04,
+    "end": 155.84
+  },
+  {
+    "word": "Gibson's",
+    "start": 155.84,
+    "end": 156.56
+  },
+  {
+    "word": "depiction",
+    "start": 156.56,
+    "end": 156.88
+  },
+  {
+    "word": "of",
+    "start": 156.88,
+    "end": 157.04
+  },
+  {
+    "word": "this",
+    "start": 157.04,
+    "end": 157.2
+  },
+  {
+    "word": "pre-clinical",
+    "start": 157.2,
+    "end": 158.0
+  },
+  {
+    "word": "pattern",
+    "start": 158.0,
+    "end": 158.4
+  },
+  {
+    "word": "is",
+    "start": 158.4,
+    "end": 158.64
+  },
+  {
+    "word": "not",
+    "start": 158.64,
+    "end": 158.88
+  },
+  {
+    "word": "an",
+    "start": 158.88,
+    "end": 159.04
+  },
+  {
+    "word": "isolated",
+    "start": 159.04,
+    "end": 159.6
+  },
+  {
+    "word": "occurrence",
+    "start": 159.6,
+    "end": 160.08
+  },
+  {
+    "word": "in",
+    "start": 160.08,
+    "end": 160.24
+  },
+  {
+    "word": "the",
+    "start": 160.24,
+    "end": 160.4
+  },
+  {
+    "word": "genre.",
+    "start": 160.4,
+    "end": 161.12
+  },
+  {
+    "word": "Philip",
+    "start": 161.12,
+    "end": 161.52
+  },
+  {
+    "word": "K.",
+    "start": 161.52,
+    "end": 161.68
+  },
+  {
+    "word": "Dick's",
+    "start": 161.68,
+    "end": 162.16
+  },
+  {
+    "word": "body",
+    "start": 162.16,
+    "end": 162.4
+  },
+  {
+    "word": "of",
+    "start": 162.4,
+    "end": 162.56
+  },
+  {
+    "word": "work",
+    "start": 162.56,
+    "end": 162.8
+  },
+  {
+    "word": "reveals",
+    "start": 162.8,
+    "end": 163.2
+  },
+  {
+    "word": "a",
+    "start": 163.2,
+    "end": 163.36
+  },
+  {
+    "word": "similar",
+    "start": 163.36,
+    "end": 163.68
+  },
+  {
+    "word": "fascination",
+    "start": 163.68,
+    "end": 164.4
+  },
+  {
+    "word": "with",
+    "start": 164.4,
+    "end": 164.56
+  },
+  {
+    "word": "these",
+    "start": 164.56,
+    "end": 164.72
+  },
+  {
+    "word": "cognitive",
+    "start": 164.72,
+    "end": 165.36
+  },
+  {
+    "word": "shifts.",
+    "start": 165.36,
+    "end": 166.16
+  },
+  {
+    "word": "Dick's",
+    "start": 166.16,
+    "end": 166.72
+  },
+  {
+    "word": "prose",
+    "start": 166.72,
+    "end": 167.2
+  },
+  {
+    "word": "frequently",
+    "start": 167.2,
+    "end": 167.76
+  },
+  {
+    "word": "documents",
+    "start": 167.76,
+    "end": 168.4
+  },
+  {
+    "word": "these",
+    "start": 168.4,
+    "end": 168.64
+  },
+  {
+    "word": "same",
+    "start": 168.64,
+    "end": 168.88
+  },
+  {
+    "word": "preclinical",
+    "start": 168.88,
+    "end": 169.52
+  },
+  {
+    "word": "sensory",
+    "start": 169.6,
+    "end": 170.36
+  },
+  {
+    "word": "patterns",
+    "start": 170.36,
+    "end": 170.92
+  },
+  {
+    "word": "years",
+    "start": 171.16,
+    "end": 171.48
+  },
+  {
+    "word": "before",
+    "start": 171.48,
+    "end": 171.8
+  },
+  {
+    "word": "they",
+    "start": 171.8,
+    "end": 171.96
+  },
+  {
+    "word": "were",
+    "start": 171.96,
+    "end": 172.12
+  },
+  {
+    "word": "institutionalized",
+    "start": 172.12,
+    "end": 173.16
+  },
+  {
+    "word": "as",
+    "start": 173.16,
+    "end": 173.32
+  },
+  {
+    "word": "medical",
+    "start": 173.32,
+    "end": 173.88
+  },
+  {
+    "word": "facts.",
+    "start": 173.88,
+    "end": 174.68
+  },
+  {
+    "word": "Both",
+    "start": 174.68,
+    "end": 175.0
+  },
+  {
+    "word": "authors",
+    "start": 175.0,
+    "end": 175.64
+  },
+  {
+    "word": "translated",
+    "start": 175.64,
+    "end": 176.28
+  },
+  {
+    "word": "undocumented",
+    "start": 176.28,
+    "end": 177.24
+  },
+  {
+    "word": "internal",
+    "start": 177.24,
+    "end": 177.8
+  },
+  {
+    "word": "experiences",
+    "start": 177.8,
+    "end": 178.6
+  },
+  {
+    "word": "into",
+    "start": 178.6,
+    "end": 178.84
+  },
+  {
+    "word": "the",
+    "start": 178.84,
+    "end": 179.0
+  },
+  {
+    "word": "metaphors",
+    "start": 179.0,
+    "end": 179.64
+  },
+  {
+    "word": "of",
+    "start": 179.64,
+    "end": 179.72
+  },
+  {
+    "word": "the",
+    "start": 179.72,
+    "end": 179.88
+  },
+  {
+    "word": "machine",
+    "start": 179.88,
+    "end": 180.44
+  },
+  {
+    "word": "interface.",
+    "start": 180.44,
+    "end": 181.48
+  },
+  {
+    "word": "This",
+    "start": 181.48,
+    "end": 181.72
+  },
+  {
+    "word": "points",
+    "start": 181.72,
+    "end": 182.12
+  },
+  {
+    "word": "to",
+    "start": 182.12,
+    "end": 182.28
+  },
+  {
+    "word": "a",
+    "start": 182.28,
+    "end": 182.44
+  },
+  {
+    "word": "recurring",
+    "start": 182.44,
+    "end": 183.0
+  },
+  {
+    "word": "role",
+    "start": 183.0,
+    "end": 183.32
+  },
+  {
+    "word": "for",
+    "start": 183.32,
+    "end": 183.48
+  },
+  {
+    "word": "science",
+    "start": 183.48,
+    "end": 183.96
+  },
+  {
+    "word": "fiction.",
+    "start": 183.96,
+    "end": 184.84
+  },
+  {
+    "word": "Stories",
+    "start": 184.84,
+    "end": 185.32
+  },
+  {
+    "word": "like",
+    "start": 185.32,
+    "end": 185.56
+  },
+  {
+    "word": "Neuromancer",
+    "start": 185.56,
+    "end": 186.52
+  },
+  {
+    "word": "act",
+    "start": 186.52,
+    "end": 186.68
+  },
+  {
+    "word": "as",
+    "start": 186.68,
+    "end": 186.84
+  },
+  {
+    "word": "holding",
+    "start": 186.84,
+    "end": 187.32
+  },
+  {
+    "word": "environments",
+    "start": 187.32,
+    "end": 187.88
+  },
+  {
+    "word": "for",
+    "start": 187.88,
+    "end": 188.12
+  },
+  {
+    "word": "human",
+    "start": 188.12,
+    "end": 188.52
+  },
+  {
+    "word": "experiences",
+    "start": 188.52,
+    "end": 189.24
+  },
+  {
+    "word": "that",
+    "start": 189.24,
+    "end": 189.48
+  },
+  {
+    "word": "have",
+    "start": 189.48,
+    "end": 189.64
+  },
+  {
+    "word": "yet",
+    "start": 189.64,
+    "end": 189.88
+  },
+  {
+    "word": "to",
+    "start": 189.88,
+    "end": 189.96
+  },
+  {
+    "word": "be",
+    "start": 189.96,
+    "end": 190.12
+  },
+  {
+    "word": "named",
+    "start": 190.12,
+    "end": 190.52
+  },
+  {
+    "word": "by",
+    "start": 190.52,
+    "end": 190.76
+  },
+  {
+    "word": "society.",
+    "start": 190.76,
+    "end": 191.88
+  },
+  {
+    "word": "When",
+    "start": 191.88,
+    "end": 192.2
+  },
+  {
+    "word": "clinical",
+    "start": 192.2,
+    "end": 192.68
+  },
+  {
+    "word": "language",
+    "start": 192.68,
+    "end": 193.16
+  },
+  {
+    "word": "falls",
+    "start": 193.16,
+    "end": 193.48
+  },
+  {
+    "word": "short,",
+    "start": 193.48,
+    "end": 194.12
+  },
+  {
+    "word": "speculative",
+    "start": 194.12,
+    "end": 194.84
+  },
+  {
+    "word": "fiction",
+    "start": 194.84,
+    "end": 195.24
+  },
+  {
+    "word": "provides",
+    "start": 195.24,
+    "end": 195.64
+  },
+  {
+    "word": "the",
+    "start": 195.64,
+    "end": 195.8
+  },
+  {
+    "word": "framework",
+    "start": 195.8,
+    "end": 196.36
+  },
+  {
+    "word": "to",
+    "start": 196.36,
+    "end": 196.52
+  },
+  {
+    "word": "make",
+    "start": 196.52,
+    "end": 196.68
+  },
+  {
+    "word": "those",
+    "start": 196.68,
+    "end": 196.92
+  },
+  {
+    "word": "internal",
+    "start": 196.92,
+    "end": 197.56
+  },
+  {
+    "word": "realities",
+    "start": 197.56,
+    "end": 198.12
+  },
+  {
+    "word": "visible.",
+    "start": 198.12,
+    "end": 199.4
+  }
+]

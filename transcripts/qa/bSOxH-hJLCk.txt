@@ -1,0 +1,18 @@
+VIDEO: bSOxH-hJLCk
+TITLE: AI Nationalism and the Fracturing Digital Order
+
+ISSUE at ~0s: "For decades, the global technology market operated as a unified, borderless enterprise. The assumption was simple. The best product would naturally win out, regardless of where it was designed or manufactured."
+SOURCE SAYS: not mentioned (The source states the "fiction of a single, unified global technology market is over" but does not describe it as a "borderless enterprise" or characterize its past "assumptions" or duration in this way).
+REPLACEMENT: "The fiction of a single, unified global technology market is over. In its place, the global order is being reshaped by sovereign statecraft."
+
+ISSUE at ~0:22s: "The White House AI Action Plan pairs offensive domestic innovation with defensive economic statecraft. It uses semiconductor export controls to actively degrade China's capacity to compete while exporting full-stack AI packages to allies to create durable technological dependency."
+SOURCE SAYS: The "American doctrine" fuses innovation with statecraft; the "White House AI Action Plan" specifically refers to exporting "secure, full-stack AI export packages" to allies. (The export controls and innovation are broader doctrine elements).
+REPLACEMENT: "The American doctrine pairs offensive domestic innovation with defensive economic statecraft. It uses semiconductor export controls to actively degrade China's capacity to compete, while the White House AI Action Plan exports full-stack AI packages to allies to create durable technological dependency."
+
+ISSUE at ~1:52s: "...linking American design, Dutch lithography, Japanese materials, and Asian manufacturing."
+SOURCE SAYS: "Taiwanese/Korean manufacturing."
+REPLACEMENT: "...linking American design, Dutch lithography, Japanese materials, and Taiwanese and Korean manufacturing."
+
+ISSUE at ~1:52s: "...caught between their security ally and their largest commercial buyer."
+SOURCE SAYS: "largest commercial market."
+REPLACEMENT: "...caught between their security ally and their largest commercial market."

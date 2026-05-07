@@ -1,0 +1,4112 @@
+[
+  {
+    "word": "Biosecurity",
+    "start": 0.24,
+    "end": 1.36
+  },
+  {
+    "word": "researchers",
+    "start": 1.36,
+    "end": 2.0
+  },
+  {
+    "word": "measure",
+    "start": 2.0,
+    "end": 2.4
+  },
+  {
+    "word": "catastrophic",
+    "start": 2.4,
+    "end": 3.2
+  },
+  {
+    "word": "risk",
+    "start": 3.2,
+    "end": 3.6
+  },
+  {
+    "word": "with",
+    "start": 3.6,
+    "end": 3.76
+  },
+  {
+    "word": "a",
+    "start": 3.76,
+    "end": 3.92
+  },
+  {
+    "word": "specific",
+    "start": 3.92,
+    "end": 4.4
+  },
+  {
+    "word": "baseline,",
+    "start": 4.4,
+    "end": 5.28
+  },
+  {
+    "word": "the",
+    "start": 5.28,
+    "end": 5.44
+  },
+  {
+    "word": "annual",
+    "start": 5.44,
+    "end": 6.0
+  },
+  {
+    "word": "probability",
+    "start": 6.0,
+    "end": 6.48
+  },
+  {
+    "word": "of",
+    "start": 6.48,
+    "end": 6.64
+  },
+  {
+    "word": "a",
+    "start": 6.64,
+    "end": 6.8
+  },
+  {
+    "word": "human-caused",
+    "start": 6.8,
+    "end": 7.6
+  },
+  {
+    "word": "epidemic",
+    "start": 7.6,
+    "end": 8.16
+  },
+  {
+    "word": "killing",
+    "start": 8.16,
+    "end": 8.56
+  },
+  {
+    "word": "over",
+    "start": 8.56,
+    "end": 8.8
+  },
+  {
+    "word": "100,000",
+    "start": 9.04,
+    "end": 10.16
+  },
+  {
+    "word": "people",
+    "start": 10.16,
+    "end": 10.48
+  },
+  {
+    "word": "or",
+    "start": 10.48,
+    "end": 10.72
+  },
+  {
+    "word": "causing",
+    "start": 10.72,
+    "end": 11.2
+  },
+  {
+    "word": "over",
+    "start": 11.2,
+    "end": 11.44
+  },
+  {
+    "word": "$1",
+    "start": 11.6,
+    "end": 11.76
+  },
+  {
+    "word": "trillion",
+    "start": 11.76,
+    "end": 12.32
+  },
+  {
+    "word": "in",
+    "start": 12.64,
+    "end": 12.8
+  },
+  {
+    "word": "damages.",
+    "start": 12.8,
+    "end": 13.68
+  },
+  {
+    "word": "Historically,",
+    "start": 13.68,
+    "end": 14.4
+  },
+  {
+    "word": "that",
+    "start": 14.4,
+    "end": 14.64
+  },
+  {
+    "word": "baseline",
+    "start": 14.64,
+    "end": 15.12
+  },
+  {
+    "word": "risk",
+    "start": 15.12,
+    "end": 15.44
+  },
+  {
+    "word": "sits",
+    "start": 15.44,
+    "end": 15.76
+  },
+  {
+    "word": "at",
+    "start": 15.76,
+    "end": 15.92
+  },
+  {
+    "word": "about",
+    "start": 15.92,
+    "end": 16.16
+  },
+  {
+    "word": "0.3%",
+    "start": 16.32,
+    "end": 17.04
+  },
+  {
+    "word": "per",
+    "start": 17.2,
+    "end": 17.44
+  },
+  {
+    "word": "year.",
+    "start": 17.44,
+    "end": 18.0
+  },
+  {
+    "word": "This",
+    "start": 18.0,
+    "end": 18.24
+  },
+  {
+    "word": "chart",
+    "start": 18.24,
+    "end": 18.56
+  },
+  {
+    "word": "visualizes",
+    "start": 18.56,
+    "end": 19.2
+  },
+  {
+    "word": "the",
+    "start": 19.2,
+    "end": 19.36
+  },
+  {
+    "word": "0.3%",
+    "start": 19.52,
+    "end": 20.08
+  },
+  {
+    "word": "baseline.",
+    "start": 20.24,
+    "end": 21.04
+  },
+  {
+    "word": "A",
+    "start": 21.04,
+    "end": 21.2
+  },
+  {
+    "word": "2025",
+    "start": 21.28,
+    "end": 22.08
+  },
+  {
+    "word": "Forecasting",
+    "start": 22.08,
+    "end": 22.72
+  },
+  {
+    "word": "Research",
+    "start": 22.72,
+    "end": 23.12
+  },
+  {
+    "word": "Institute",
+    "start": 23.12,
+    "end": 23.68
+  },
+  {
+    "word": "survey",
+    "start": 23.68,
+    "end": 24.08
+  },
+  {
+    "word": "of",
+    "start": 24.08,
+    "end": 24.24
+  },
+  {
+    "word": "experts",
+    "start": 24.24,
+    "end": 24.64
+  },
+  {
+    "word": "and",
+    "start": 24.64,
+    "end": 24.8
+  },
+  {
+    "word": "superforecasters",
+    "start": 24.8,
+    "end": 26.0
+  },
+  {
+    "word": "found",
+    "start": 26.0,
+    "end": 26.24
+  },
+  {
+    "word": "that",
+    "start": 26.24,
+    "end": 26.48
+  },
+  {
+    "word": "if",
+    "start": 26.48,
+    "end": 26.72
+  },
+  {
+    "word": "AI",
+    "start": 26.72,
+    "end": 27.04
+  },
+  {
+    "word": "reaches",
+    "start": 27.04,
+    "end": 27.44
+  },
+  {
+    "word": "virologist-level",
+    "start": 27.44,
+    "end": 28.48
+  },
+  {
+    "word": "capabilities,",
+    "start": 28.48,
+    "end": 29.36
+  },
+  {
+    "word": "notice",
+    "start": 29.36,
+    "end": 29.6
+  },
+  {
+    "word": "the",
+    "start": 29.6,
+    "end": 29.76
+  },
+  {
+    "word": "spiker,",
+    "start": 29.76,
+    "end": 30.56
+  },
+  {
+    "word": "the",
+    "start": 30.56,
+    "end": 30.72
+  },
+  {
+    "word": "risk",
+    "start": 30.72,
+    "end": 30.96
+  },
+  {
+    "word": "multiplies",
+    "start": 30.96,
+    "end": 31.6
+  },
+  {
+    "word": "by",
+    "start": 31.6,
+    "end": 31.76
+  },
+  {
+    "word": "5,",
+    "start": 31.84,
+    "end": 32.24
+  },
+  {
+    "word": "jumping",
+    "start": 32.24,
+    "end": 32.64
+  },
+  {
+    "word": "to",
+    "start": 32.64,
+    "end": 32.8
+  },
+  {
+    "word": "1.5%.",
+    "start": 32.96,
+    "end": 34.32
+  },
+  {
+    "word": "To",
+    "start": 34.32,
+    "end": 34.56
+  },
+  {
+    "word": "counter",
+    "start": 34.56,
+    "end": 34.88
+  },
+  {
+    "word": "this,",
+    "start": 34.88,
+    "end": 35.28
+  },
+  {
+    "word": "experts",
+    "start": 35.28,
+    "end": 35.68
+  },
+  {
+    "word": "propose",
+    "start": 35.68,
+    "end": 36.16
+  },
+  {
+    "word": "two",
+    "start": 36.16,
+    "end": 36.4
+  },
+  {
+    "word": "primary",
+    "start": 36.4,
+    "end": 36.88
+  },
+  {
+    "word": "safeguards,",
+    "start": 36.88,
+    "end": 37.68
+  },
+  {
+    "word": "DNA",
+    "start": 37.68,
+    "end": 38.16
+  },
+  {
+    "word": "screening",
+    "start": 38.16,
+    "end": 38.64
+  },
+  {
+    "word": "and",
+    "start": 38.64,
+    "end": 38.8
+  },
+  {
+    "word": "AI",
+    "start": 38.8,
+    "end": 39.2
+  },
+  {
+    "word": "guardrails.",
+    "start": 39.2,
+    "end": 40.0
+  },
+  {
+    "word": "They",
+    "start": 40.0,
+    "end": 40.16
+  },
+  {
+    "word": "estimate",
+    "start": 40.24,
+    "end": 40.64
+  },
+  {
+    "word": "this",
+    "start": 40.64,
+    "end": 40.8
+  },
+  {
+    "word": "slashes",
+    "start": 40.8,
+    "end": 41.28
+  },
+  {
+    "word": "the",
+    "start": 41.28,
+    "end": 41.44
+  },
+  {
+    "word": "spiked",
+    "start": 41.44,
+    "end": 41.92
+  },
+  {
+    "word": "risk",
+    "start": 41.92,
+    "end": 42.24
+  },
+  {
+    "word": "by",
+    "start": 42.24,
+    "end": 42.4
+  },
+  {
+    "word": "70%,",
+    "start": 42.56,
+    "end": 43.44
+  },
+  {
+    "word": "returning",
+    "start": 43.44,
+    "end": 43.84
+  },
+  {
+    "word": "it",
+    "start": 43.84,
+    "end": 43.92
+  },
+  {
+    "word": "to",
+    "start": 43.92,
+    "end": 44.08
+  },
+  {
+    "word": "baseline.",
+    "start": 44.08,
+    "end": 44.88
+  },
+  {
+    "word": "This",
+    "start": 44.88,
+    "end": 45.12
+  },
+  {
+    "word": "70%",
+    "start": 45.36,
+    "end": 45.84
+  },
+  {
+    "word": "reduction",
+    "start": 46.0,
+    "end": 46.4
+  },
+  {
+    "word": "figure",
+    "start": 46.4,
+    "end": 46.8
+  },
+  {
+    "word": "creates",
+    "start": 46.8,
+    "end": 47.2
+  },
+  {
+    "word": "a",
+    "start": 47.2,
+    "end": 47.36
+  },
+  {
+    "word": "dangerous",
+    "start": 47.36,
+    "end": 47.84
+  },
+  {
+    "word": "illusion",
+    "start": 47.84,
+    "end": 48.32
+  },
+  {
+    "word": "of",
+    "start": 48.32,
+    "end": 48.48
+  },
+  {
+    "word": "safety.",
+    "start": 48.48,
+    "end": 49.2
+  },
+  {
+    "word": "It",
+    "start": 49.2,
+    "end": 49.36
+  },
+  {
+    "word": "masks",
+    "start": 49.36,
+    "end": 49.84
+  },
+  {
+    "word": "the",
+    "start": 49.84,
+    "end": 49.92
+  },
+  {
+    "word": "reality",
+    "start": 49.92,
+    "end": 50.32
+  },
+  {
+    "word": "that",
+    "start": 50.32,
+    "end": 50.56
+  },
+  {
+    "word": "our",
+    "start": 50.56,
+    "end": 50.72
+  },
+  {
+    "word": "primary",
+    "start": 50.72,
+    "end": 51.2
+  },
+  {
+    "word": "biological",
+    "start": 51.2,
+    "end": 51.84
+  },
+  {
+    "word": "defenses",
+    "start": 51.84,
+    "end": 52.4
+  },
+  {
+    "word": "are",
+    "start": 52.4,
+    "end": 52.56
+  },
+  {
+    "word": "obsolete,",
+    "start": 52.56,
+    "end": 53.36
+  },
+  {
+    "word": "and",
+    "start": 53.36,
+    "end": 53.6
+  },
+  {
+    "word": "neither",
+    "start": 53.6,
+    "end": 53.92
+  },
+  {
+    "word": "of",
+    "start": 53.92,
+    "end": 54.08
+  },
+  {
+    "word": "those",
+    "start": 54.08,
+    "end": 54.24
+  },
+  {
+    "word": "safeguards",
+    "start": 54.24,
+    "end": 54.88
+  },
+  {
+    "word": "actually",
+    "start": 54.88,
+    "end": 55.2
+  },
+  {
+    "word": "works",
+    "start": 55.2,
+    "end": 55.52
+  },
+  {
+    "word": "against",
+    "start": 55.52,
+    "end": 55.76
+  },
+  {
+    "word": "the",
+    "start": 55.76,
+    "end": 55.92
+  },
+  {
+    "word": "threats",
+    "start": 55.92,
+    "end": 56.32
+  },
+  {
+    "word": "they",
+    "start": 56.32,
+    "end": 56.4
+  },
+  {
+    "word": "are",
+    "start": 56.4,
+    "end": 56.56
+  },
+  {
+    "word": "meant",
+    "start": 56.56,
+    "end": 56.8
+  },
+  {
+    "word": "to",
+    "start": 56.8,
+    "end": 56.96
+  },
+  {
+    "word": "stop.",
+    "start": 56.96,
+    "end": 57.6
+  },
+  {
+    "word": "The",
+    "start": 57.6,
+    "end": 57.76
+  },
+  {
+    "word": "safety",
+    "start": 57.76,
+    "end": 58.24
+  },
+  {
+    "word": "predictions",
+    "start": 58.24,
+    "end": 58.8
+  },
+  {
+    "word": "of",
+    "start": 58.8,
+    "end": 58.96
+  },
+  {
+    "word": "these",
+    "start": 58.96,
+    "end": 59.12
+  },
+  {
+    "word": "experts",
+    "start": 59.12,
+    "end": 59.6
+  },
+  {
+    "word": "rely",
+    "start": 59.6,
+    "end": 59.76
+  },
+  {
+    "word": "on",
+    "start": 60.2,
+    "end": 60.44
+  },
+  {
+    "word": "a",
+    "start": 60.44,
+    "end": 60.6
+  },
+  {
+    "word": "timeline",
+    "start": 60.6,
+    "end": 61.08
+  },
+  {
+    "word": "that",
+    "start": 61.08,
+    "end": 61.24
+  },
+  {
+    "word": "has",
+    "start": 61.24,
+    "end": 61.4
+  },
+  {
+    "word": "already",
+    "start": 61.4,
+    "end": 61.88
+  },
+  {
+    "word": "collapsed.",
+    "start": 61.88,
+    "end": 62.84
+  },
+  {
+    "word": "When",
+    "start": 62.84,
+    "end": 63.16
+  },
+  {
+    "word": "surveyed,",
+    "start": 63.16,
+    "end": 63.88
+  },
+  {
+    "word": "those",
+    "start": 63.88,
+    "end": 64.04
+  },
+  {
+    "word": "biosecurity",
+    "start": 64.04,
+    "end": 65.0
+  },
+  {
+    "word": "professionals",
+    "start": 65.0,
+    "end": 65.64
+  },
+  {
+    "word": "predicted",
+    "start": 65.64,
+    "end": 66.12
+  },
+  {
+    "word": "that",
+    "start": 66.12,
+    "end": 66.36
+  },
+  {
+    "word": "AI",
+    "start": 66.36,
+    "end": 66.84
+  },
+  {
+    "word": "would",
+    "start": 66.84,
+    "end": 67.0
+  },
+  {
+    "word": "not",
+    "start": 67.0,
+    "end": 67.24
+  },
+  {
+    "word": "match",
+    "start": 67.24,
+    "end": 67.56
+  },
+  {
+    "word": "top",
+    "start": 67.56,
+    "end": 67.88
+  },
+  {
+    "word": "human",
+    "start": 67.88,
+    "end": 68.2
+  },
+  {
+    "word": "virologists",
+    "start": 68.2,
+    "end": 69.16
+  },
+  {
+    "word": "until",
+    "start": 69.16,
+    "end": 69.64
+  },
+  {
+    "word": "sometime",
+    "start": 69.64,
+    "end": 70.04
+  },
+  {
+    "word": "after",
+    "start": 70.04,
+    "end": 70.28
+  },
+  {
+    "word": "2030.",
+    "start": 70.44,
+    "end": 71.56
+  },
+  {
+    "word": "Subsequent",
+    "start": 71.56,
+    "end": 72.12
+  },
+  {
+    "word": "baselining",
+    "start": 72.12,
+    "end": 72.84
+  },
+  {
+    "word": "studies",
+    "start": 72.84,
+    "end": 73.16
+  },
+  {
+    "word": "found",
+    "start": 73.16,
+    "end": 73.4
+  },
+  {
+    "word": "that",
+    "start": 73.4,
+    "end": 73.64
+  },
+  {
+    "word": "current",
+    "start": 73.64,
+    "end": 74.04
+  },
+  {
+    "word": "large",
+    "start": 74.04,
+    "end": 74.36
+  },
+  {
+    "word": "language",
+    "start": 74.36,
+    "end": 74.76
+  },
+  {
+    "word": "models",
+    "start": 74.76,
+    "end": 75.16
+  },
+  {
+    "word": "have",
+    "start": 75.16,
+    "end": 75.4
+  },
+  {
+    "word": "already",
+    "start": 75.4,
+    "end": 75.8
+  },
+  {
+    "word": "crossed",
+    "start": 75.8,
+    "end": 76.28
+  },
+  {
+    "word": "that",
+    "start": 76.28,
+    "end": 76.44
+  },
+  {
+    "word": "virologist-level",
+    "start": 76.44,
+    "end": 77.48
+  },
+  {
+    "word": "capability",
+    "start": 77.48,
+    "end": 77.96
+  },
+  {
+    "word": "threshold",
+    "start": 77.96,
+    "end": 78.68
+  },
+  {
+    "word": "today.",
+    "start": 78.68,
+    "end": 79.16
+  },
+  {
+    "word": "This",
+    "start": 79.48,
+    "end": 79.72
+  },
+  {
+    "word": "six-year",
+    "start": 79.72,
+    "end": 80.44
+  },
+  {
+    "word": "forecasting",
+    "start": 80.44,
+    "end": 81.0
+  },
+  {
+    "word": "failure",
+    "start": 81.0,
+    "end": 81.4
+  },
+  {
+    "word": "by",
+    "start": 81.4,
+    "end": 81.64
+  },
+  {
+    "word": "top",
+    "start": 81.64,
+    "end": 82.04
+  },
+  {
+    "word": "experts",
+    "start": 82.04,
+    "end": 82.68
+  },
+  {
+    "word": "means",
+    "start": 82.68,
+    "end": 83.0
+  },
+  {
+    "word": "we",
+    "start": 83.0,
+    "end": 83.16
+  },
+  {
+    "word": "can",
+    "start": 83.16,
+    "end": 83.4
+  },
+  {
+    "word": "no",
+    "start": 83.4,
+    "end": 83.56
+  },
+  {
+    "word": "longer",
+    "start": 83.56,
+    "end": 83.88
+  },
+  {
+    "word": "build",
+    "start": 83.88,
+    "end": 84.2
+  },
+  {
+    "word": "governance",
+    "start": 84.2,
+    "end": 84.68
+  },
+  {
+    "word": "frameworks",
+    "start": 84.68,
+    "end": 85.24
+  },
+  {
+    "word": "that",
+    "start": 85.24,
+    "end": 85.4
+  },
+  {
+    "word": "rely",
+    "start": 85.4,
+    "end": 85.72
+  },
+  {
+    "word": "on",
+    "start": 85.72,
+    "end": 85.96
+  },
+  {
+    "word": "accurate",
+    "start": 85.96,
+    "end": 86.36
+  },
+  {
+    "word": "predictions",
+    "start": 86.36,
+    "end": 86.92
+  },
+  {
+    "word": "of",
+    "start": 86.92,
+    "end": 87.08
+  },
+  {
+    "word": "AI",
+    "start": 87.08,
+    "end": 87.48
+  },
+  {
+    "word": "timelines.",
+    "start": 87.48,
+    "end": 88.36
+  },
+  {
+    "word": "We",
+    "start": 88.36,
+    "end": 88.6
+  },
+  {
+    "word": "have",
+    "start": 88.6,
+    "end": 88.84
+  },
+  {
+    "word": "to",
+    "start": 88.84,
+    "end": 89.0
+  },
+  {
+    "word": "assume",
+    "start": 89.0,
+    "end": 89.48
+  },
+  {
+    "word": "surprise.",
+    "start": 89.48,
+    "end": 90.44
+  },
+  {
+    "word": "Current",
+    "start": 90.44,
+    "end": 90.84
+  },
+  {
+    "word": "nucleic",
+    "start": 90.84,
+    "end": 91.48
+  },
+  {
+    "word": "acid",
+    "start": 91.48,
+    "end": 91.72
+  },
+  {
+    "word": "screening",
+    "start": 91.72,
+    "end": 92.2
+  },
+  {
+    "word": "is",
+    "start": 92.2,
+    "end": 92.36
+  },
+  {
+    "word": "built",
+    "start": 92.36,
+    "end": 92.68
+  },
+  {
+    "word": "for",
+    "start": 92.68,
+    "end": 92.84
+  },
+  {
+    "word": "a",
+    "start": 92.84,
+    "end": 93.0
+  },
+  {
+    "word": "previous",
+    "start": 93.0,
+    "end": 93.4
+  },
+  {
+    "word": "era.",
+    "start": 93.48,
+    "end": 94.12
+  },
+  {
+    "word": "When",
+    "start": 94.12,
+    "end": 94.36
+  },
+  {
+    "word": "someone",
+    "start": 94.36,
+    "end": 94.68
+  },
+  {
+    "word": "orders",
+    "start": 94.68,
+    "end": 95.08
+  },
+  {
+    "word": "custom",
+    "start": 95.08,
+    "end": 95.48
+  },
+  {
+    "word": "DNA,",
+    "start": 95.48,
+    "end": 96.2
+  },
+  {
+    "word": "providers",
+    "start": 96.2,
+    "end": 96.76
+  },
+  {
+    "word": "check",
+    "start": 96.76,
+    "end": 97.08
+  },
+  {
+    "word": "that",
+    "start": 97.08,
+    "end": 97.24
+  },
+  {
+    "word": "sequence",
+    "start": 97.24,
+    "end": 97.72
+  },
+  {
+    "word": "against",
+    "start": 97.72,
+    "end": 98.04
+  },
+  {
+    "word": "list-based",
+    "start": 98.04,
+    "end": 98.76
+  },
+  {
+    "word": "databases",
+    "start": 98.76,
+    "end": 99.4
+  },
+  {
+    "word": "of",
+    "start": 99.4,
+    "end": 99.64
+  },
+  {
+    "word": "known",
+    "start": 99.64,
+    "end": 99.88
+  },
+  {
+    "word": "historical",
+    "start": 100.04,
+    "end": 100.6
+  },
+  {
+    "word": "pathogens,",
+    "start": 100.6,
+    "end": 101.56
+  },
+  {
+    "word": "like",
+    "start": 101.56,
+    "end": 101.72
+  },
+  {
+    "word": "the",
+    "start": 101.72,
+    "end": 101.88
+  },
+  {
+    "word": "Select",
+    "start": 101.88,
+    "end": 102.28
+  },
+  {
+    "word": "Agents",
+    "start": 102.28,
+    "end": 102.76
+  },
+  {
+    "word": "List.",
+    "start": 102.76,
+    "end": 103.4
+  },
+  {
+    "word": "That",
+    "start": 103.4,
+    "end": 103.64
+  },
+  {
+    "word": "matching",
+    "start": 103.64,
+    "end": 104.2
+  },
+  {
+    "word": "process",
+    "start": 104.2,
+    "end": 104.6
+  },
+  {
+    "word": "is",
+    "start": 104.6,
+    "end": 104.84
+  },
+  {
+    "word": "useless",
+    "start": 104.84,
+    "end": 105.32
+  },
+  {
+    "word": "against",
+    "start": 105.32,
+    "end": 105.64
+  },
+  {
+    "word": "modern",
+    "start": 105.64,
+    "end": 106.12
+  },
+  {
+    "word": "biological",
+    "start": 106.12,
+    "end": 106.76
+  },
+  {
+    "word": "design",
+    "start": 106.76,
+    "end": 107.16
+  },
+  {
+    "word": "tools",
+    "start": 107.16,
+    "end": 107.48
+  },
+  {
+    "word": "like",
+    "start": 107.48,
+    "end": 107.64
+  },
+  {
+    "word": "the",
+    "start": 107.64,
+    "end": 107.72
+  },
+  {
+    "word": "Evo",
+    "start": 107.72,
+    "end": 108.28
+  },
+  {
+    "word": "series.",
+    "start": 108.28,
+    "end": 108.92
+  },
+  {
+    "word": "These",
+    "start": 108.92,
+    "end": 109.24
+  },
+  {
+    "word": "models",
+    "start": 109.24,
+    "end": 109.64
+  },
+  {
+    "word": "generate",
+    "start": 109.64,
+    "end": 110.04
+  },
+  {
+    "word": "novel",
+    "start": 110.04,
+    "end": 110.44
+  },
+  {
+    "word": "proteins",
+    "start": 110.44,
+    "end": 110.92
+  },
+  {
+    "word": "and",
+    "start": 110.92,
+    "end": 111.08
+  },
+  {
+    "word": "genetic",
+    "start": 111.08,
+    "end": 111.48
+  },
+  {
+    "word": "sequences",
+    "start": 111.48,
+    "end": 112.12
+  },
+  {
+    "word": "from",
+    "start": 112.12,
+    "end": 112.28
+  },
+  {
+    "word": "scratch.",
+    "start": 112.28,
+    "end": 113.16
+  },
+  {
+    "word": "Because",
+    "start": 113.16,
+    "end": 113.48
+  },
+  {
+    "word": "the",
+    "start": 113.48,
+    "end": 113.64
+  },
+  {
+    "word": "resulting",
+    "start": 113.64,
+    "end": 114.12
+  },
+  {
+    "word": "sequence",
+    "start": 114.12,
+    "end": 114.6
+  },
+  {
+    "word": "has",
+    "start": 114.6,
+    "end": 114.68
+  },
+  {
+    "word": "no",
+    "start": 114.96,
+    "end": 115.2
+  },
+  {
+    "word": "natural",
+    "start": 115.2,
+    "end": 115.68
+  },
+  {
+    "word": "analog,",
+    "start": 115.68,
+    "end": 116.48
+  },
+  {
+    "word": "it",
+    "start": 116.48,
+    "end": 116.64
+  },
+  {
+    "word": "won't",
+    "start": 116.64,
+    "end": 116.88
+  },
+  {
+    "word": "match",
+    "start": 116.88,
+    "end": 117.28
+  },
+  {
+    "word": "anything",
+    "start": 117.28,
+    "end": 117.6
+  },
+  {
+    "word": "on",
+    "start": 117.6,
+    "end": 117.84
+  },
+  {
+    "word": "existing",
+    "start": 117.84,
+    "end": 118.24
+  },
+  {
+    "word": "lists,",
+    "start": 118.24,
+    "end": 118.96
+  },
+  {
+    "word": "sailing",
+    "start": 118.96,
+    "end": 119.44
+  },
+  {
+    "word": "through",
+    "start": 119.44,
+    "end": 119.6
+  },
+  {
+    "word": "screening",
+    "start": 119.6,
+    "end": 120.08
+  },
+  {
+    "word": "without",
+    "start": 120.08,
+    "end": 120.32
+  },
+  {
+    "word": "raising",
+    "start": 120.32,
+    "end": 120.72
+  },
+  {
+    "word": "an",
+    "start": 120.72,
+    "end": 120.88
+  },
+  {
+    "word": "alarm.",
+    "start": 120.88,
+    "end": 121.6
+  },
+  {
+    "word": "Even",
+    "start": 121.6,
+    "end": 121.84
+  },
+  {
+    "word": "for",
+    "start": 121.84,
+    "end": 122.16
+  },
+  {
+    "word": "known",
+    "start": 122.16,
+    "end": 122.48
+  },
+  {
+    "word": "threats",
+    "start": 122.48,
+    "end": 122.8
+  },
+  {
+    "word": "that",
+    "start": 122.8,
+    "end": 122.96
+  },
+  {
+    "word": "appear",
+    "start": 122.96,
+    "end": 123.28
+  },
+  {
+    "word": "on",
+    "start": 123.28,
+    "end": 123.44
+  },
+  {
+    "word": "those",
+    "start": 123.44,
+    "end": 123.6
+  },
+  {
+    "word": "lists,",
+    "start": 123.6,
+    "end": 124.24
+  },
+  {
+    "word": "the",
+    "start": 124.24,
+    "end": 124.32
+  },
+  {
+    "word": "screening",
+    "start": 124.32,
+    "end": 124.8
+  },
+  {
+    "word": "is",
+    "start": 124.8,
+    "end": 124.96
+  },
+  {
+    "word": "easily",
+    "start": 124.96,
+    "end": 125.36
+  },
+  {
+    "word": "bypassed.",
+    "start": 125.36,
+    "end": 126.32
+  },
+  {
+    "word": "Adversaries",
+    "start": 126.32,
+    "end": 127.04
+  },
+  {
+    "word": "can",
+    "start": 127.04,
+    "end": 127.2
+  },
+  {
+    "word": "split",
+    "start": 127.2,
+    "end": 127.52
+  },
+  {
+    "word": "a",
+    "start": 127.52,
+    "end": 127.68
+  },
+  {
+    "word": "dangerous",
+    "start": 127.68,
+    "end": 128.16
+  },
+  {
+    "word": "gene",
+    "start": 128.16,
+    "end": 128.48
+  },
+  {
+    "word": "into",
+    "start": 128.48,
+    "end": 128.72
+  },
+  {
+    "word": "fragments",
+    "start": 128.72,
+    "end": 129.36
+  },
+  {
+    "word": "shorter",
+    "start": 129.36,
+    "end": 129.76
+  },
+  {
+    "word": "than",
+    "start": 129.76,
+    "end": 129.92
+  },
+  {
+    "word": "the",
+    "start": 129.92,
+    "end": 130.08
+  },
+  {
+    "word": "standard",
+    "start": 130.08,
+    "end": 130.4
+  },
+  {
+    "word": "50",
+    "start": 130.56,
+    "end": 130.88
+  },
+  {
+    "word": "to",
+    "start": 130.88,
+    "end": 131.04
+  },
+  {
+    "word": "200",
+    "start": 131.2,
+    "end": 131.6
+  },
+  {
+    "word": "base",
+    "start": 131.6,
+    "end": 131.92
+  },
+  {
+    "word": "pair",
+    "start": 131.92,
+    "end": 132.16
+  },
+  {
+    "word": "detection",
+    "start": 132.16,
+    "end": 132.56
+  },
+  {
+    "word": "threshold,",
+    "start": 132.56,
+    "end": 133.36
+  },
+  {
+    "word": "order",
+    "start": 133.36,
+    "end": 133.68
+  },
+  {
+    "word": "them",
+    "start": 133.68,
+    "end": 133.84
+  },
+  {
+    "word": "separately,",
+    "start": 133.84,
+    "end": 134.4
+  },
+  {
+    "word": "and",
+    "start": 134.4,
+    "end": 134.56
+  },
+  {
+    "word": "reassemble",
+    "start": 134.56,
+    "end": 135.2
+  },
+  {
+    "word": "them",
+    "start": 135.2,
+    "end": 135.36
+  },
+  {
+    "word": "later.",
+    "start": 135.36,
+    "end": 136.08
+  },
+  {
+    "word": "Another",
+    "start": 136.08,
+    "end": 136.4
+  },
+  {
+    "word": "documented",
+    "start": 136.4,
+    "end": 137.04
+  },
+  {
+    "word": "technique",
+    "start": 137.04,
+    "end": 137.52
+  },
+  {
+    "word": "interleaves",
+    "start": 137.52,
+    "end": 138.24
+  },
+  {
+    "word": "those",
+    "start": 138.24,
+    "end": 138.4
+  },
+  {
+    "word": "toxic",
+    "start": 138.4,
+    "end": 138.8
+  },
+  {
+    "word": "gene",
+    "start": 138.8,
+    "end": 139.04
+  },
+  {
+    "word": "fragments",
+    "start": 139.04,
+    "end": 139.52
+  },
+  {
+    "word": "with",
+    "start": 139.52,
+    "end": 139.68
+  },
+  {
+    "word": "benign",
+    "start": 139.68,
+    "end": 140.16
+  },
+  {
+    "word": "sequences.",
+    "start": 140.16,
+    "end": 141.04
+  },
+  {
+    "word": "Once",
+    "start": 141.04,
+    "end": 141.44
+  },
+  {
+    "word": "introduced",
+    "start": 141.44,
+    "end": 142.0
+  },
+  {
+    "word": "into",
+    "start": 142.0,
+    "end": 142.16
+  },
+  {
+    "word": "a",
+    "start": 142.16,
+    "end": 142.32
+  },
+  {
+    "word": "target",
+    "start": 142.32,
+    "end": 142.64
+  },
+  {
+    "word": "cell,",
+    "start": 142.64,
+    "end": 143.2
+  },
+  {
+    "word": "the",
+    "start": 143.2,
+    "end": 143.36
+  },
+  {
+    "word": "cell's",
+    "start": 143.36,
+    "end": 143.76
+  },
+  {
+    "word": "own",
+    "start": 143.76,
+    "end": 144.0
+  },
+  {
+    "word": "internal",
+    "start": 144.0,
+    "end": 144.4
+  },
+  {
+    "word": "splicing",
+    "start": 144.4,
+    "end": 144.88
+  },
+  {
+    "word": "machinery",
+    "start": 144.88,
+    "end": 145.36
+  },
+  {
+    "word": "cuts",
+    "start": 145.36,
+    "end": 145.68
+  },
+  {
+    "word": "out",
+    "start": 145.68,
+    "end": 145.76
+  },
+  {
+    "word": "the",
+    "start": 145.76,
+    "end": 145.92
+  },
+  {
+    "word": "benign",
+    "start": 145.92,
+    "end": 146.4
+  },
+  {
+    "word": "parts",
+    "start": 146.4,
+    "end": 146.72
+  },
+  {
+    "word": "and",
+    "start": 146.72,
+    "end": 146.96
+  },
+  {
+    "word": "reassembles",
+    "start": 146.96,
+    "end": 147.68
+  },
+  {
+    "word": "the",
+    "start": 147.68,
+    "end": 147.76
+  },
+  {
+    "word": "harmful",
+    "start": 147.76,
+    "end": 148.16
+  },
+  {
+    "word": "agent",
+    "start": 148.16,
+    "end": 148.56
+  },
+  {
+    "word": "for",
+    "start": 148.56,
+    "end": 148.72
+  },
+  {
+    "word": "the",
+    "start": 148.72,
+    "end": 148.8
+  },
+  {
+    "word": "attacker.",
+    "start": 148.8,
+    "end": 149.68
+  },
+  {
+    "word": "List-based",
+    "start": 149.68,
+    "end": 150.4
+  },
+  {
+    "word": "screening",
+    "start": 150.4,
+    "end": 150.88
+  },
+  {
+    "word": "fails",
+    "start": 150.88,
+    "end": 151.36
+  },
+  {
+    "word": "because",
+    "start": 151.36,
+    "end": 151.52
+  },
+  {
+    "word": "it",
+    "start": 151.52,
+    "end": 151.68
+  },
+  {
+    "word": "searches",
+    "start": 151.68,
+    "end": 152.08
+  },
+  {
+    "word": "for",
+    "start": 152.08,
+    "end": 152.32
+  },
+  {
+    "word": "historical",
+    "start": 152.32,
+    "end": 152.96
+  },
+  {
+    "word": "structural",
+    "start": 152.96,
+    "end": 153.36
+  },
+  {
+    "word": "matches",
+    "start": 153.36,
+    "end": 154.08
+  },
+  {
+    "word": "instead",
+    "start": 154.08,
+    "end": 154.4
+  },
+  {
+    "word": "of",
+    "start": 154.4,
+    "end": 154.56
+  },
+  {
+    "word": "analyzing",
+    "start": 154.56,
+    "end": 155.12
+  },
+  {
+    "word": "the",
+    "start": 155.12,
+    "end": 155.28
+  },
+  {
+    "word": "actual",
+    "start": 155.28,
+    "end": 155.6
+  },
+  {
+    "word": "biological",
+    "start": 155.6,
+    "end": 156.32
+  },
+  {
+    "word": "function",
+    "start": 156.32,
+    "end": 156.64
+  },
+  {
+    "word": "of",
+    "start": 156.64,
+    "end": 156.8
+  },
+  {
+    "word": "the",
+    "start": 156.8,
+    "end": 156.88
+  },
+  {
+    "word": "sequence.",
+    "start": 156.88,
+    "end": 157.68
+  },
+  {
+    "word": "It",
+    "start": 157.68,
+    "end": 157.92
+  },
+  {
+    "word": "looks",
+    "start": 157.92,
+    "end": 158.16
+  },
+  {
+    "word": "for",
+    "start": 158.16,
+    "end": 158.32
+  },
+  {
+    "word": "shapes",
+    "start": 158.32,
+    "end": 158.72
+  },
+  {
+    "word": "we",
+    "start": 158.72,
+    "end": 158.88
+  },
+  {
+    "word": "recognize",
+    "start": 158.88,
+    "end": 159.44
+  },
+  {
+    "word": "while",
+    "start": 159.52,
+    "end": 159.84
+  },
+  {
+    "word": "ignoring",
+    "start": 159.84,
+    "end": 160.24
+  },
+  {
+    "word": "what",
+    "start": 160.24,
+    "end": 160.4
+  },
+  {
+    "word": "the",
+    "start": 160.4,
+    "end": 160.48
+  },
+  {
+    "word": "sequence",
+    "start": 160.48,
+    "end": 160.96
+  },
+  {
+    "word": "will",
+    "start": 160.96,
+    "end": 161.12
+  },
+  {
+    "word": "do.",
+    "start": 161.12,
+    "end": 161.68
+  },
+  {
+    "word": "The",
+    "start": 161.68,
+    "end": 161.84
+  },
+  {
+    "word": "upstream",
+    "start": 161.84,
+    "end": 162.4
+  },
+  {
+    "word": "defense,",
+    "start": 162.4,
+    "end": 162.88
+  },
+  {
+    "word": "the",
+    "start": 162.88,
+    "end": 163.04
+  },
+  {
+    "word": "safety",
+    "start": 163.04,
+    "end": 163.36
+  },
+  {
+    "word": "guardrails",
+    "start": 163.36,
+    "end": 164.0
+  },
+  {
+    "word": "baked",
+    "start": 164.0,
+    "end": 164.24
+  },
+  {
+    "word": "into",
+    "start": 164.24,
+    "end": 164.4
+  },
+  {
+    "word": "AI",
+    "start": 164.4,
+    "end": 164.8
+  },
+  {
+    "word": "models,",
+    "start": 164.8,
+    "end": 165.44
+  },
+  {
+    "word": "shares",
+    "start": 165.44,
+    "end": 165.76
+  },
+  {
+    "word": "a",
+    "start": 165.76,
+    "end": 165.92
+  },
+  {
+    "word": "similar",
+    "start": 165.92,
+    "end": 166.24
+  },
+  {
+    "word": "structural",
+    "start": 166.24,
+    "end": 166.8
+  },
+  {
+    "word": "weakness.",
+    "start": 166.8,
+    "end": 167.76
+  },
+  {
+    "word": "These",
+    "start": 167.76,
+    "end": 168.08
+  },
+  {
+    "word": "refusal",
+    "start": 168.08,
+    "end": 168.72
+  },
+  {
+    "word": "mechanisms",
+    "start": 168.72,
+    "end": 169.36
+  },
+  {
+    "word": "are",
+    "start": 169.36,
+    "end": 169.52
+  },
+  {
+    "word": "statistical.",
+    "start": 169.52,
+    "end": 169.92
+  },
+  {
+    "word": "patterns",
+    "start": 170.52,
+    "end": 171.08
+  },
+  {
+    "word": "They",
+    "start": 171.32,
+    "end": 171.56
+  },
+  {
+    "word": "lack",
+    "start": 171.56,
+    "end": 171.88
+  },
+  {
+    "word": "the",
+    "start": 171.88,
+    "end": 172.04
+  },
+  {
+    "word": "robustness",
+    "start": 172.04,
+    "end": 172.68
+  },
+  {
+    "word": "of",
+    "start": 172.68,
+    "end": 172.84
+  },
+  {
+    "word": "hard-coded",
+    "start": 172.84,
+    "end": 173.56
+  },
+  {
+    "word": "security",
+    "start": 173.56,
+    "end": 174.04
+  },
+  {
+    "word": "architectures.",
+    "start": 174.04,
+    "end": 175.24
+  },
+  {
+    "word": "Researchers",
+    "start": 175.24,
+    "end": 176.04
+  },
+  {
+    "word": "regularly",
+    "start": 176.04,
+    "end": 176.68
+  },
+  {
+    "word": "achieve",
+    "start": 176.68,
+    "end": 177.16
+  },
+  {
+    "word": "up",
+    "start": 177.16,
+    "end": 177.32
+  },
+  {
+    "word": "to",
+    "start": 177.32,
+    "end": 177.48
+  },
+  {
+    "word": "92%",
+    "start": 177.72,
+    "end": 178.6
+  },
+  {
+    "word": "success",
+    "start": 178.6,
+    "end": 179.08
+  },
+  {
+    "word": "rates",
+    "start": 179.08,
+    "end": 179.48
+  },
+  {
+    "word": "bypassing",
+    "start": 179.56,
+    "end": 180.2
+  },
+  {
+    "word": "these",
+    "start": 180.2,
+    "end": 180.36
+  },
+  {
+    "word": "guardrails",
+    "start": 180.36,
+    "end": 181.08
+  },
+  {
+    "word": "using",
+    "start": 181.08,
+    "end": 181.4
+  },
+  {
+    "word": "persuasive",
+    "start": 181.4,
+    "end": 182.12
+  },
+  {
+    "word": "adversarial",
+    "start": 182.12,
+    "end": 182.92
+  },
+  {
+    "word": "prompts.",
+    "start": 182.92,
+    "end": 183.8
+  },
+  {
+    "word": "Simply",
+    "start": 183.8,
+    "end": 184.36
+  },
+  {
+    "word": "translating",
+    "start": 184.36,
+    "end": 184.92
+  },
+  {
+    "word": "the",
+    "start": 184.92,
+    "end": 185.08
+  },
+  {
+    "word": "malicious",
+    "start": 185.08,
+    "end": 185.56
+  },
+  {
+    "word": "request",
+    "start": 185.56,
+    "end": 186.04
+  },
+  {
+    "word": "into",
+    "start": 186.04,
+    "end": 186.28
+  },
+  {
+    "word": "a",
+    "start": 186.28,
+    "end": 186.52
+  },
+  {
+    "word": "low-resource",
+    "start": 186.52,
+    "end": 187.32
+  },
+  {
+    "word": "language",
+    "start": 187.32,
+    "end": 187.8
+  },
+  {
+    "word": "where",
+    "start": 187.96,
+    "end": 188.2
+  },
+  {
+    "word": "safety",
+    "start": 188.2,
+    "end": 188.6
+  },
+  {
+    "word": "training",
+    "start": 188.6,
+    "end": 188.92
+  },
+  {
+    "word": "is",
+    "start": 188.92,
+    "end": 189.08
+  },
+  {
+    "word": "sparse",
+    "start": 189.08,
+    "end": 189.48
+  },
+  {
+    "word": "increases",
+    "start": 189.72,
+    "end": 190.28
+  },
+  {
+    "word": "the",
+    "start": 190.28,
+    "end": 190.44
+  },
+  {
+    "word": "bypass",
+    "start": 190.44,
+    "end": 190.92
+  },
+  {
+    "word": "rate",
+    "start": 190.92,
+    "end": 191.24
+  },
+  {
+    "word": "by",
+    "start": 191.24,
+    "end": 191.4
+  },
+  {
+    "word": "62%.",
+    "start": 191.64,
+    "end": 193.0
+  },
+  {
+    "word": "For",
+    "start": 193.0,
+    "end": 193.24
+  },
+  {
+    "word": "specialized",
+    "start": 193.24,
+    "end": 193.96
+  },
+  {
+    "word": "biological",
+    "start": 193.96,
+    "end": 194.68
+  },
+  {
+    "word": "models,",
+    "start": 194.68,
+    "end": 195.32
+  },
+  {
+    "word": "attackers",
+    "start": 195.32,
+    "end": 195.88
+  },
+  {
+    "word": "use",
+    "start": 195.88,
+    "end": 196.12
+  },
+  {
+    "word": "automated",
+    "start": 196.12,
+    "end": 196.76
+  },
+  {
+    "word": "AI-on-AI",
+    "start": 196.92,
+    "end": 198.04
+  },
+  {
+    "word": "frameworks",
+    "start": 198.04,
+    "end": 198.6
+  },
+  {
+    "word": "like",
+    "start": 198.6,
+    "end": 198.76
+  },
+  {
+    "word": "GeneBreaker.",
+    "start": 198.76,
+    "end": 199.88
+  },
+  {
+    "word": "This",
+    "start": 199.88,
+    "end": 200.12
+  },
+  {
+    "word": "allows",
+    "start": 200.12,
+    "end": 200.6
+  },
+  {
+    "word": "one",
+    "start": 200.6,
+    "end": 200.84
+  },
+  {
+    "word": "AI",
+    "start": 200.84,
+    "end": 201.24
+  },
+  {
+    "word": "to",
+    "start": 201.24,
+    "end": 201.4
+  },
+  {
+    "word": "attack",
+    "start": 201.4,
+    "end": 201.88
+  },
+  {
+    "word": "another,",
+    "start": 201.88,
+    "end": 202.44
+  },
+  {
+    "word": "successfully",
+    "start": 202.44,
+    "end": 203.08
+  },
+  {
+    "word": "generating",
+    "start": 203.08,
+    "end": 203.56
+  },
+  {
+    "word": "pathogenic",
+    "start": 203.56,
+    "end": 204.28
+  },
+  {
+    "word": "sequences",
+    "start": 204.28,
+    "end": 204.76
+  },
+  {
+    "word": "for",
+    "start": 204.76,
+    "end": 204.92
+  },
+  {
+    "word": "viruses",
+    "start": 204.92,
+    "end": 205.56
+  },
+  {
+    "word": "with",
+    "start": 205.56,
+    "end": 205.72
+  },
+  {
+    "word": "up",
+    "start": 205.72,
+    "end": 205.88
+  },
+  {
+    "word": "to",
+    "start": 205.88,
+    "end": 206.04
+  },
+  {
+    "word": "60%",
+    "start": 206.2,
+    "end": 206.84
+  },
+  {
+    "word": "success",
+    "start": 206.84,
+    "end": 207.32
+  },
+  {
+    "word": "rates.",
+    "start": 207.32,
+    "end": 208.04
+  },
+  {
+    "word": "Refusal",
+    "start": 208.04,
+    "end": 208.76
+  },
+  {
+    "word": "mechanisms",
+    "start": 208.76,
+    "end": 209.48
+  },
+  {
+    "word": "reliably",
+    "start": 209.48,
+    "end": 210.04
+  },
+  {
+    "word": "break",
+    "start": 210.04,
+    "end": 210.36
+  },
+  {
+    "word": "under",
+    "start": 210.36,
+    "end": 210.6
+  },
+  {
+    "word": "adversarial",
+    "start": 210.6,
+    "end": 211.4
+  },
+  {
+    "word": "pressure.",
+    "start": 211.4,
+    "end": 212.2
+  },
+  {
+    "word": "Treating",
+    "start": 212.2,
+    "end": 212.68
+  },
+  {
+    "word": "AI",
+    "start": 212.68,
+    "end": 213.08
+  },
+  {
+    "word": "safety",
+    "start": 213.08,
+    "end": 213.48
+  },
+  {
+    "word": "training",
+    "start": 213.48,
+    "end": 213.8
+  },
+  {
+    "word": "as",
+    "start": 213.8,
+    "end": 213.96
+  },
+  {
+    "word": "a",
+    "start": 213.96,
+    "end": 214.12
+  },
+  {
+    "word": "primary",
+    "start": 214.12,
+    "end": 214.52
+  },
+  {
+    "word": "security",
+    "start": 214.52,
+    "end": 215.16
+  },
+  {
+    "word": "wall",
+    "start": 215.16,
+    "end": 215.56
+  },
+  {
+    "word": "leaves",
+    "start": 215.56,
+    "end": 216.12
+  },
+  {
+    "word": "the",
+    "start": 216.12,
+    "end": 216.36
+  },
+  {
+    "word": "entire",
+    "start": 216.36,
+    "end": 216.84
+  },
+  {
+    "word": "system",
+    "start": 216.84,
+    "end": 217.16
+  },
+  {
+    "word": "exposed.",
+    "start": 217.16,
+    "end": 218.36
+  },
+  {
+    "word": "AI",
+    "start": 218.36,
+    "end": 218.92
+  },
+  {
+    "word": "systems",
+    "start": 218.92,
+    "end": 219.32
+  },
+  {
+    "word": "attack",
+    "start": 219.32,
+    "end": 219.72
+  },
+  {
+    "word": "both",
+    "start": 219.72,
+    "end": 220.04
+  },
+  {
+    "word": "ends",
+    "start": 220.04,
+    "end": 220.28
+  },
+  {
+    "word": "of",
+    "start": 220.28,
+    "end": 220.36
+  },
+  {
+    "word": "the",
+    "start": 220.36,
+    "end": 220.52
+  },
+  {
+    "word": "biosecurity",
+    "start": 220.52,
+    "end": 221.32
+  },
+  {
+    "word": "spectrum.",
+    "start": 221.32,
+    "end": 222.12
+  },
+  {
+    "word": "Large",
+    "start": 222.12,
+    "end": 222.52
+  },
+  {
+    "word": "language",
+    "start": 222.52,
+    "end": 222.92
+  },
+  {
+    "word": "models",
+    "start": 222.92,
+    "end": 223.4
+  },
+  {
+    "word": "lower",
+    "start": 223.4,
+    "end": 223.72
+  },
+  {
+    "word": "the",
+    "start": 223.72,
+    "end": 223.8
+  },
+  {
+    "word": "floor",
+    "start": 223.8,
+    "end": 224.12
+  },
+  {
+    "word": "for",
+    "start": 224.12,
+    "end": 224.2
+  },
+  {
+    "word": "bioterrorism",
+    "start": 224.2,
+    "end": 224.92
+  },
+  {
+    "word": "by",
+    "start": 225.28,
+    "end": 225.52
+  },
+  {
+    "word": "converting",
+    "start": 225.52,
+    "end": 226.0
+  },
+  {
+    "word": "tacit",
+    "start": 226.0,
+    "end": 226.4
+  },
+  {
+    "word": "laboratory",
+    "start": 226.4,
+    "end": 226.96
+  },
+  {
+    "word": "knowledge",
+    "start": 226.96,
+    "end": 227.44
+  },
+  {
+    "word": "into",
+    "start": 227.44,
+    "end": 227.68
+  },
+  {
+    "word": "explicit",
+    "start": 227.68,
+    "end": 228.32
+  },
+  {
+    "word": "interactive",
+    "start": 228.32,
+    "end": 228.88
+  },
+  {
+    "word": "troubleshooting,",
+    "start": 228.88,
+    "end": 229.84
+  },
+  {
+    "word": "expanding",
+    "start": 229.84,
+    "end": 230.32
+  },
+  {
+    "word": "the",
+    "start": 230.32,
+    "end": 230.4
+  },
+  {
+    "word": "threat",
+    "start": 230.4,
+    "end": 230.72
+  },
+  {
+    "word": "pool",
+    "start": 230.72,
+    "end": 230.96
+  },
+  {
+    "word": "to",
+    "start": 230.96,
+    "end": 231.12
+  },
+  {
+    "word": "novices.",
+    "start": 231.12,
+    "end": 232.08
+  },
+  {
+    "word": "Biological",
+    "start": 232.08,
+    "end": 232.88
+  },
+  {
+    "word": "design",
+    "start": 232.88,
+    "end": 233.28
+  },
+  {
+    "word": "tools",
+    "start": 233.28,
+    "end": 233.76
+  },
+  {
+    "word": "raise",
+    "start": 233.76,
+    "end": 234.08
+  },
+  {
+    "word": "the",
+    "start": 234.08,
+    "end": 234.24
+  },
+  {
+    "word": "ceiling.",
+    "start": 234.24,
+    "end": 235.04
+  },
+  {
+    "word": "Instead",
+    "start": 235.04,
+    "end": 235.44
+  },
+  {
+    "word": "of",
+    "start": 235.44,
+    "end": 235.6
+  },
+  {
+    "word": "reproducing",
+    "start": 235.6,
+    "end": 236.32
+  },
+  {
+    "word": "known",
+    "start": 236.32,
+    "end": 236.64
+  },
+  {
+    "word": "threats,",
+    "start": 236.64,
+    "end": 237.36
+  },
+  {
+    "word": "they",
+    "start": 237.36,
+    "end": 237.52
+  },
+  {
+    "word": "allow",
+    "start": 237.52,
+    "end": 237.84
+  },
+  {
+    "word": "operators",
+    "start": 237.84,
+    "end": 238.48
+  },
+  {
+    "word": "to",
+    "start": 238.48,
+    "end": 238.64
+  },
+  {
+    "word": "design",
+    "start": 238.64,
+    "end": 239.04
+  },
+  {
+    "word": "entirely",
+    "start": 239.04,
+    "end": 239.76
+  },
+  {
+    "word": "new",
+    "start": 239.76,
+    "end": 240.0
+  },
+  {
+    "word": "agents",
+    "start": 240.0,
+    "end": 240.56
+  },
+  {
+    "word": "optimized",
+    "start": 240.56,
+    "end": 241.04
+  },
+  {
+    "word": "for",
+    "start": 241.04,
+    "end": 241.2
+  },
+  {
+    "word": "virulence",
+    "start": 241.2,
+    "end": 241.84
+  },
+  {
+    "word": "and",
+    "start": 241.84,
+    "end": 242.08
+  },
+  {
+    "word": "immune",
+    "start": 242.08,
+    "end": 242.48
+  },
+  {
+    "word": "evasion.",
+    "start": 242.48,
+    "end": 243.36
+  },
+  {
+    "word": "These",
+    "start": 243.36,
+    "end": 243.76
+  },
+  {
+    "word": "risks",
+    "start": 243.76,
+    "end": 244.4
+  },
+  {
+    "word": "compound.",
+    "start": 244.4,
+    "end": 245.28
+  },
+  {
+    "word": "A",
+    "start": 245.28,
+    "end": 245.52
+  },
+  {
+    "word": "novice",
+    "start": 245.52,
+    "end": 246.08
+  },
+  {
+    "word": "uses",
+    "start": 246.08,
+    "end": 246.32
+  },
+  {
+    "word": "a",
+    "start": 246.32,
+    "end": 246.48
+  },
+  {
+    "word": "language",
+    "start": 246.48,
+    "end": 246.8
+  },
+  {
+    "word": "model",
+    "start": 246.8,
+    "end": 247.2
+  },
+  {
+    "word": "to",
+    "start": 247.2,
+    "end": 247.36
+  },
+  {
+    "word": "acquire",
+    "start": 247.36,
+    "end": 247.68
+  },
+  {
+    "word": "foundational",
+    "start": 247.68,
+    "end": 248.24
+  },
+  {
+    "word": "virology,",
+    "start": 248.24,
+    "end": 249.28
+  },
+  {
+    "word": "operates",
+    "start": 249.28,
+    "end": 249.76
+  },
+  {
+    "word": "a",
+    "start": 249.76,
+    "end": 249.84
+  },
+  {
+    "word": "biological",
+    "start": 249.84,
+    "end": 250.48
+  },
+  {
+    "word": "design",
+    "start": 250.48,
+    "end": 250.8
+  },
+  {
+    "word": "tool",
+    "start": 250.8,
+    "end": 251.12
+  },
+  {
+    "word": "to",
+    "start": 251.12,
+    "end": 251.28
+  },
+  {
+    "word": "invent",
+    "start": 251.28,
+    "end": 251.6
+  },
+  {
+    "word": "a",
+    "start": 251.6,
+    "end": 251.68
+  },
+  {
+    "word": "novel",
+    "start": 251.68,
+    "end": 252.0
+  },
+  {
+    "word": "agent,",
+    "start": 252.0,
+    "end": 252.72
+  },
+  {
+    "word": "and",
+    "start": 252.72,
+    "end": 252.88
+  },
+  {
+    "word": "then",
+    "start": 252.88,
+    "end": 253.04
+  },
+  {
+    "word": "returns",
+    "start": 253.04,
+    "end": 253.44
+  },
+  {
+    "word": "to",
+    "start": 253.44,
+    "end": 253.52
+  },
+  {
+    "word": "the",
+    "start": 253.52,
+    "end": 253.68
+  },
+  {
+    "word": "language",
+    "start": 253.68,
+    "end": 254.08
+  },
+  {
+    "word": "model",
+    "start": 254.08,
+    "end": 254.4
+  },
+  {
+    "word": "to",
+    "start": 254.4,
+    "end": 254.56
+  },
+  {
+    "word": "troubleshoot",
+    "start": 254.56,
+    "end": 255.2
+  },
+  {
+    "word": "the",
+    "start": 255.2,
+    "end": 255.28
+  },
+  {
+    "word": "physical",
+    "start": 255.28,
+    "end": 255.68
+  },
+  {
+    "word": "laboratory",
+    "start": 255.68,
+    "end": 256.16
+  },
+  {
+    "word": "culturing.",
+    "start": 256.16,
+    "end": 257.12
+  },
+  {
+    "word": "These",
+    "start": 257.12,
+    "end": 257.44
+  },
+  {
+    "word": "risks",
+    "start": 257.44,
+    "end": 257.84
+  },
+  {
+    "word": "multiply.",
+    "start": 257.84,
+    "end": 258.8
+  },
+  {
+    "word": "Every",
+    "start": 258.8,
+    "end": 259.12
+  },
+  {
+    "word": "new",
+    "start": 259.12,
+    "end": 259.36
+  },
+  {
+    "word": "capability",
+    "start": 259.36,
+    "end": 260.0
+  },
+  {
+    "word": "and",
+    "start": 260.0,
+    "end": 260.16
+  },
+  {
+    "word": "biological",
+    "start": 260.16,
+    "end": 260.8
+  },
+  {
+    "word": "design",
+    "start": 260.8,
+    "end": 261.2
+  },
+  {
+    "word": "increases",
+    "start": 261.2,
+    "end": 261.84
+  },
+  {
+    "word": "the",
+    "start": 261.84,
+    "end": 261.92
+  },
+  {
+    "word": "danger",
+    "start": 261.92,
+    "end": 262.32
+  },
+  {
+    "word": "posed",
+    "start": 262.32,
+    "end": 262.64
+  },
+  {
+    "word": "by",
+    "start": 262.64,
+    "end": 262.8
+  },
+  {
+    "word": "the",
+    "start": 262.8,
+    "end": 262.88
+  },
+  {
+    "word": "others,",
+    "start": 262.88,
+    "end": 263.44
+  },
+  {
+    "word": "overwhelming",
+    "start": 263.44,
+    "end": 264.08
+  },
+  {
+    "word": "our",
+    "start": 264.08,
+    "end": 264.24
+  },
+  {
+    "word": "linear",
+    "start": 264.24,
+    "end": 264.64
+  },
+  {
+    "word": "defense",
+    "start": 264.64,
+    "end": 265.12
+  },
+  {
+    "word": "systems.",
+    "start": 265.12,
+    "end": 265.84
+  },
+  {
+    "word": "Closing",
+    "start": 265.84,
+    "end": 266.32
+  },
+  {
+    "word": "the",
+    "start": 266.32,
+    "end": 266.4
+  },
+  {
+    "word": "mitigation",
+    "start": 266.4,
+    "end": 266.96
+  },
+  {
+    "word": "gap",
+    "start": 266.96,
+    "end": 267.28
+  },
+  {
+    "word": "requires",
+    "start": 267.28,
+    "end": 267.68
+  },
+  {
+    "word": "moving",
+    "start": 267.68,
+    "end": 268.0
+  },
+  {
+    "word": "toward",
+    "start": 268.0,
+    "end": 268.32
+  },
+  {
+    "word": "an",
+    "start": 268.32,
+    "end": 268.48
+  },
+  {
+    "word": "interdependent",
+    "start": 268.48,
+    "end": 269.28
+  },
+  {
+    "word": "three-layer",
+    "start": 269.28,
+    "end": 269.92
+  },
+  {
+    "word": "architecture.",
+    "start": 269.92,
+    "end": 270.96
+  },
+  {
+    "word": "The",
+    "start": 270.96,
+    "end": 271.2
+  },
+  {
+    "word": "first",
+    "start": 271.2,
+    "end": 271.44
+  },
+  {
+    "word": "is",
+    "start": 271.44,
+    "end": 271.6
+  },
+  {
+    "word": "the",
+    "start": 271.6,
+    "end": 271.76
+  },
+  {
+    "word": "technical",
+    "start": 271.76,
+    "end": 272.24
+  },
+  {
+    "word": "layer.",
+    "start": 272.24,
+    "end": 272.88
+  },
+  {
+    "word": "We",
+    "start": 272.88,
+    "end": 273.04
+  },
+  {
+    "word": "must",
+    "start": 273.04,
+    "end": 273.28
+  },
+  {
+    "word": "replace",
+    "start": 273.28,
+    "end": 273.68
+  },
+  {
+    "word": "sequence",
+    "start": 273.68,
+    "end": 274.08
+  },
+  {
+    "word": "matching",
+    "start": 274.08,
+    "end": 274.48
+  },
+  {
+    "word": "with",
+    "start": 274.48,
+    "end": 274.64
+  },
+  {
+    "word": "predictive",
+    "start": 274.64,
+    "end": 275.12
+  },
+  {
+    "word": "screening,",
+    "start": 275.12,
+    "end": 275.84
+  },
+  {
+    "word": "using",
+    "start": 275.84,
+    "end": 276.16
+  },
+  {
+    "word": "AI",
+    "start": 276.16,
+    "end": 276.64
+  },
+  {
+    "word": "to",
+    "start": 276.64,
+    "end": 276.8
+  },
+  {
+    "word": "analyze",
+    "start": 276.8,
+    "end": 277.2
+  },
+  {
+    "word": "what",
+    "start": 277.2,
+    "end": 277.36
+  },
+  {
+    "word": "a",
+    "start": 277.36,
+    "end": 277.44
+  },
+  {
+    "word": "novel",
+    "start": 277.44,
+    "end": 277.76
+  },
+  {
+    "word": "biological",
+    "start": 277.76,
+    "end": 278.4
+  },
+  {
+    "word": "structure",
+    "start": 278.4,
+    "end": 278.88
+  },
+  {
+    "word": "will",
+    "start": 278.88,
+    "end": 279.12
+  },
+  {
+    "word": "actually",
+    "start": 279.12,
+    "end": 279.44
+  },
+  {
+    "word": "do.,",
+    "start": 279.44,
+    "end": 280.04
+  },
+  {
+    "word": "rather",
+    "start": 280.04,
+    "end": 280.28
+  },
+  {
+    "word": "than",
+    "start": 280.28,
+    "end": 280.44
+  },
+  {
+    "word": "checking",
+    "start": 280.44,
+    "end": 280.76
+  },
+  {
+    "word": "if",
+    "start": 280.76,
+    "end": 280.92
+  },
+  {
+    "word": "we",
+    "start": 280.92,
+    "end": 281.0
+  },
+  {
+    "word": "have",
+    "start": 281.0,
+    "end": 281.16
+  },
+  {
+    "word": "seen",
+    "start": 281.16,
+    "end": 281.48
+  },
+  {
+    "word": "it",
+    "start": 281.48,
+    "end": 281.64
+  },
+  {
+    "word": "before",
+    "start": 281.64,
+    "end": 281.88
+  },
+  {
+    "word": "The",
+    "start": 282.2,
+    "end": 282.44
+  },
+  {
+    "word": "second",
+    "start": 282.44,
+    "end": 282.76
+  },
+  {
+    "word": "is",
+    "start": 282.76,
+    "end": 282.92
+  },
+  {
+    "word": "the",
+    "start": 282.92,
+    "end": 283.08
+  },
+  {
+    "word": "developer",
+    "start": 283.08,
+    "end": 283.56
+  },
+  {
+    "word": "layer.",
+    "start": 283.56,
+    "end": 284.28
+  },
+  {
+    "word": "We",
+    "start": 284.28,
+    "end": 284.44
+  },
+  {
+    "word": "need",
+    "start": 284.44,
+    "end": 284.68
+  },
+  {
+    "word": "statutory",
+    "start": 284.68,
+    "end": 285.56
+  },
+  {
+    "word": "liability",
+    "start": 285.56,
+    "end": 286.2
+  },
+  {
+    "word": "to",
+    "start": 286.2,
+    "end": 286.36
+  },
+  {
+    "word": "force",
+    "start": 286.36,
+    "end": 286.76
+  },
+  {
+    "word": "safety",
+    "start": 286.76,
+    "end": 287.24
+  },
+  {
+    "word": "to",
+    "start": 287.24,
+    "end": 287.4
+  },
+  {
+    "word": "become",
+    "start": 287.4,
+    "end": 287.64
+  },
+  {
+    "word": "a",
+    "start": 287.64,
+    "end": 287.8
+  },
+  {
+    "word": "legally",
+    "start": 287.8,
+    "end": 288.28
+  },
+  {
+    "word": "binding",
+    "start": 288.28,
+    "end": 288.68
+  },
+  {
+    "word": "business",
+    "start": 288.68,
+    "end": 289.16
+  },
+  {
+    "word": "incentive",
+    "start": 289.16,
+    "end": 289.72
+  },
+  {
+    "word": "rather",
+    "start": 289.88,
+    "end": 290.12
+  },
+  {
+    "word": "than",
+    "start": 290.12,
+    "end": 290.28
+  },
+  {
+    "word": "a",
+    "start": 290.28,
+    "end": 290.44
+  },
+  {
+    "word": "voluntary",
+    "start": 290.44,
+    "end": 291.0
+  },
+  {
+    "word": "commitment.",
+    "start": 291.0,
+    "end": 292.04
+  },
+  {
+    "word": "Finally,",
+    "start": 292.04,
+    "end": 292.6
+  },
+  {
+    "word": "the",
+    "start": 292.6,
+    "end": 292.84
+  },
+  {
+    "word": "international",
+    "start": 292.84,
+    "end": 293.48
+  },
+  {
+    "word": "layer.",
+    "start": 293.48,
+    "end": 294.2
+  },
+  {
+    "word": "While",
+    "start": 294.2,
+    "end": 294.52
+  },
+  {
+    "word": "data",
+    "start": 294.52,
+    "end": 294.84
+  },
+  {
+    "word": "is",
+    "start": 294.84,
+    "end": 295.08
+  },
+  {
+    "word": "diffuse,",
+    "start": 295.08,
+    "end": 295.72
+  },
+  {
+    "word": "the",
+    "start": 295.72,
+    "end": 295.88
+  },
+  {
+    "word": "physical",
+    "start": 295.88,
+    "end": 296.28
+  },
+  {
+    "word": "data",
+    "start": 296.28,
+    "end": 296.6
+  },
+  {
+    "word": "centers",
+    "start": 296.6,
+    "end": 297.08
+  },
+  {
+    "word": "required",
+    "start": 297.08,
+    "end": 297.56
+  },
+  {
+    "word": "to",
+    "start": 297.56,
+    "end": 297.64
+  },
+  {
+    "word": "train",
+    "start": 297.64,
+    "end": 297.96
+  },
+  {
+    "word": "frontier",
+    "start": 297.96,
+    "end": 298.52
+  },
+  {
+    "word": "models",
+    "start": 298.52,
+    "end": 298.92
+  },
+  {
+    "word": "are",
+    "start": 298.92,
+    "end": 299.16
+  },
+  {
+    "word": "massive",
+    "start": 299.16,
+    "end": 299.64
+  },
+  {
+    "word": "and",
+    "start": 299.64,
+    "end": 299.88
+  },
+  {
+    "word": "energy",
+    "start": 299.88,
+    "end": 300.28
+  },
+  {
+    "word": "intensive.",
+    "start": 300.36,
+    "end": 301.32
+  },
+  {
+    "word": "They",
+    "start": 301.32,
+    "end": 301.48
+  },
+  {
+    "word": "provide",
+    "start": 301.48,
+    "end": 301.96
+  },
+  {
+    "word": "verifiable",
+    "start": 302.04,
+    "end": 302.68
+  },
+  {
+    "word": "choke",
+    "start": 302.68,
+    "end": 303.0
+  },
+  {
+    "word": "points",
+    "start": 303.0,
+    "end": 303.32
+  },
+  {
+    "word": "for",
+    "start": 303.32,
+    "end": 303.56
+  },
+  {
+    "word": "international",
+    "start": 303.56,
+    "end": 304.2
+  },
+  {
+    "word": "oversight.",
+    "start": 304.2,
+    "end": 305.24
+  },
+  {
+    "word": "These",
+    "start": 305.24,
+    "end": 305.56
+  },
+  {
+    "word": "three",
+    "start": 305.56,
+    "end": 305.8
+  },
+  {
+    "word": "layers",
+    "start": 305.8,
+    "end": 306.28
+  },
+  {
+    "word": "are",
+    "start": 306.28,
+    "end": 306.44
+  },
+  {
+    "word": "strictly",
+    "start": 306.44,
+    "end": 306.92
+  },
+  {
+    "word": "interdependent.",
+    "start": 306.92,
+    "end": 308.04
+  },
+  {
+    "word": "Liability",
+    "start": 308.04,
+    "end": 308.84
+  },
+  {
+    "word": "requires",
+    "start": 308.84,
+    "end": 309.24
+  },
+  {
+    "word": "a",
+    "start": 309.24,
+    "end": 309.4
+  },
+  {
+    "word": "technical",
+    "start": 309.4,
+    "end": 309.96
+  },
+  {
+    "word": "standard",
+    "start": 309.96,
+    "end": 310.28
+  },
+  {
+    "word": "to",
+    "start": 310.28,
+    "end": 310.44
+  },
+  {
+    "word": "measure",
+    "start": 310.44,
+    "end": 310.76
+  },
+  {
+    "word": "against,",
+    "start": 310.76,
+    "end": 311.4
+  },
+  {
+    "word": "and",
+    "start": 311.4,
+    "end": 311.64
+  },
+  {
+    "word": "international",
+    "start": 311.64,
+    "end": 312.28
+  },
+  {
+    "word": "agreements",
+    "start": 312.28,
+    "end": 312.76
+  },
+  {
+    "word": "require",
+    "start": 312.76,
+    "end": 313.16
+  },
+  {
+    "word": "the",
+    "start": 313.16,
+    "end": 313.32
+  },
+  {
+    "word": "verifial",
+    "start": 313.4,
+    "end": 313.88
+  },
+  {
+    "word": "choke",
+    "start": 314.04,
+    "end": 314.36
+  },
+  {
+    "word": "points",
+    "start": 314.36,
+    "end": 314.6
+  },
+  {
+    "word": "that",
+    "start": 314.6,
+    "end": 314.76
+  },
+  {
+    "word": "compute",
+    "start": 314.76,
+    "end": 315.24
+  },
+  {
+    "word": "governance",
+    "start": 315.24,
+    "end": 315.72
+  },
+  {
+    "word": "provides.",
+    "start": 315.72,
+    "end": 316.52
+  },
+  {
+    "word": "Remove",
+    "start": 316.52,
+    "end": 317.08
+  },
+  {
+    "word": "any",
+    "start": 317.08,
+    "end": 317.32
+  },
+  {
+    "word": "single",
+    "start": 317.32,
+    "end": 317.72
+  },
+  {
+    "word": "layer,",
+    "start": 317.72,
+    "end": 318.12
+  },
+  {
+    "word": "and",
+    "start": 318.12,
+    "end": 318.28
+  },
+  {
+    "word": "the",
+    "start": 318.28,
+    "end": 318.44
+  },
+  {
+    "word": "entire",
+    "start": 318.44,
+    "end": 318.84
+  },
+  {
+    "word": "security",
+    "start": 318.84,
+    "end": 319.4
+  },
+  {
+    "word": "structure",
+    "start": 319.4,
+    "end": 319.88
+  },
+  {
+    "word": "collapses.",
+    "start": 319.88,
+    "end": 321.08
+  },
+  {
+    "word": "The",
+    "start": 321.08,
+    "end": 321.24
+  },
+  {
+    "word": "mitigation",
+    "start": 321.24,
+    "end": 321.88
+  },
+  {
+    "word": "gap",
+    "start": 321.88,
+    "end": 322.2
+  },
+  {
+    "word": "is",
+    "start": 322.2,
+    "end": 322.36
+  },
+  {
+    "word": "a",
+    "start": 322.36,
+    "end": 322.44
+  },
+  {
+    "word": "political",
+    "start": 322.44,
+    "end": 322.92
+  },
+  {
+    "word": "failure.",
+    "start": 322.92,
+    "end": 323.72
+  },
+  {
+    "word": "Policymakers",
+    "start": 323.72,
+    "end": 324.68
+  },
+  {
+    "word": "lack",
+    "start": 324.68,
+    "end": 324.92
+  },
+  {
+    "word": "the",
+    "start": 324.92,
+    "end": 325.0
+  },
+  {
+    "word": "urgency",
+    "start": 325.0,
+    "end": 325.56
+  },
+  {
+    "word": "to",
+    "start": 325.56,
+    "end": 325.64
+  },
+  {
+    "word": "implement",
+    "start": 325.64,
+    "end": 326.12
+  },
+  {
+    "word": "new",
+    "start": 326.12,
+    "end": 326.28
+  },
+  {
+    "word": "frameworks",
+    "start": 326.28,
+    "end": 326.92
+  },
+  {
+    "word": "because",
+    "start": 326.92,
+    "end": 327.16
+  },
+  {
+    "word": "experts",
+    "start": 327.16,
+    "end": 327.72
+  },
+  {
+    "word": "continue",
+    "start": 327.72,
+    "end": 328.12
+  },
+  {
+    "word": "to",
+    "start": 328.12,
+    "end": 328.28
+  },
+  {
+    "word": "falsely",
+    "start": 328.28,
+    "end": 328.76
+  },
+  {
+    "word": "assure",
+    "start": 328.76,
+    "end": 329.08
+  },
+  {
+    "word": "them",
+    "start": 329.08,
+    "end": 329.24
+  },
+  {
+    "word": "that",
+    "start": 329.24,
+    "end": 329.4
+  },
+  {
+    "word": "catastrophic",
+    "start": 329.4,
+    "end": 330.12
+  },
+  {
+    "word": "bio-risk",
+    "start": 330.12,
+    "end": 330.76
+  },
+  {
+    "word": "is",
+    "start": 330.76,
+    "end": 330.92
+  },
+  {
+    "word": "managed.",
+    "start": 330.92,
+    "end": 331.72
+  },
+  {
+    "word": "When",
+    "start": 331.72,
+    "end": 332.04
+  },
+  {
+    "word": "told",
+    "start": 332.04,
+    "end": 332.28
+  },
+  {
+    "word": "that",
+    "start": 332.28,
+    "end": 332.44
+  },
+  {
+    "word": "current",
+    "start": 332.44,
+    "end": 332.76
+  },
+  {
+    "word": "safeguards",
+    "start": 332.76,
+    "end": 333.4
+  },
+  {
+    "word": "provide",
+    "start": 333.4,
+    "end": 333.64
+  },
+  {
+    "word": "a",
+    "start": 333.64,
+    "end": 333.8
+  },
+  {
+    "word": "70-the",
+    "start": 333.88,
+    "end": 334.6
+  },
+  {
+    "word": "hardest",
+    "start": 334.6,
+    "end": 334.84
+  },
+  {
+    "word": "part",
+    "start": 335.12,
+    "end": 335.28
+  },
+  {
+    "word": "of",
+    "start": 335.28,
+    "end": 335.44
+  },
+  {
+    "word": "securing",
+    "start": 335.44,
+    "end": 336.0
+  },
+  {
+    "word": "these",
+    "start": 336.0,
+    "end": 336.16
+  },
+  {
+    "word": "biological",
+    "start": 336.16,
+    "end": 336.88
+  },
+  {
+    "word": "advancements",
+    "start": 336.88,
+    "end": 337.68
+  },
+  {
+    "word": "isn't",
+    "start": 337.68,
+    "end": 338.16
+  },
+  {
+    "word": "building",
+    "start": 338.16,
+    "end": 338.56
+  },
+  {
+    "word": "better",
+    "start": 338.56,
+    "end": 338.8
+  },
+  {
+    "word": "screening",
+    "start": 338.8,
+    "end": 339.28
+  },
+  {
+    "word": "tools.",
+    "start": 339.28,
+    "end": 340.0
+  },
+  {
+    "word": "It's",
+    "start": 340.0,
+    "end": 340.24
+  },
+  {
+    "word": "convincing",
+    "start": 340.24,
+    "end": 340.88
+  },
+  {
+    "word": "decision",
+    "start": 340.88,
+    "end": 341.28
+  },
+  {
+    "word": "makers",
+    "start": 341.28,
+    "end": 341.68
+  },
+  {
+    "word": "that",
+    "start": 341.68,
+    "end": 341.84
+  },
+  {
+    "word": "the",
+    "start": 341.84,
+    "end": 342.0
+  },
+  {
+    "word": "defenses",
+    "start": 342.0,
+    "end": 342.56
+  },
+  {
+    "word": "they",
+    "start": 342.56,
+    "end": 342.72
+  },
+  {
+    "word": "currently",
+    "start": 342.72,
+    "end": 343.2
+  },
+  {
+    "word": "trust",
+    "start": 343.2,
+    "end": 343.6
+  },
+  {
+    "word": "are",
+    "start": 343.6,
+    "end": 343.84
+  },
+  {
+    "word": "dangerously",
+    "start": 343.84,
+    "end": 344.56
+  },
+  {
+    "word": "inadequate.",
+    "start": 344.56,
+    "end": 345.84
+  }
+]

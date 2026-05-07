@@ -1,0 +1,22 @@
+VIDEO: c0zCJjQ1iMs
+TITLE: Safety-First Therapeutic AI
+
+ISSUE at ~15s: "The technology sector is directing massive capital toward a scalable solution to this access problem, artificial intelligence, deploying therapeutic chatbots that can scale up care."
+SOURCE SAYS: not mentioned (The source discusses the potential for AI to extend access but does not mention "massive capital" or specific "tech sector" investment trends)
+REPLACEMENT: "Artificial intelligence is being explored as a scalable solution to this access problem, with therapeutic chatbots deployed to extend the reach of care."
+
+ISSUE at ~46s: "This graph illustrates why the standard approach fails here. The standard model flattens the curve early to prevent user distress, but a therapeutic session deliberately pushes that curve to a high peak before resolving it. Artificially flattening that distress neutralizes the therapy."
+SOURCE SAYS: not mentioned (The source does not describe a graph, nor does it use "flattening the curve" or "high peak" terminology)
+REPLACEMENT: "The standard approach fails because it treats safety as a guardrail to prevent distress. However, the therapeutic mechanism of EMDR requires activating distress to work; you cannot eliminate one without neutralizing the other."
+
+ISSUE at ~2:08s: "This logic tree maps out the application's context layer."
+SOURCE SAYS: not mentioned (The source describes explicit, auditable code in a `SafetyProtocolService` rather than a "logic tree" or "context layer")
+REPLACEMENT: "The safety architecture monitors session state and clinical indicators."
+
+ISSUE at ~2:22s: "One elevated metric is low risk, multiple indicators escalate to medium, and specific combinations trigger critical."
+SOURCE SAYS: "Risk levels cascade: CRITICAL if any critical indicator is present, HIGH if two or more high indicators, MEDIUM if one high or two medium, LOW otherwise."
+REPLACEMENT: "A single high indicator triggers a medium risk level, while any critical indicator triggers an immediate emergency response."
+
+ISSUE at ~3:02s: "Instead, a schematic interface like this takes over. It displays fixed, non-editable text."
+SOURCE SAYS: not mentioned (The source mentions "control passes to pre-written safety scripts" and "hardcoded" techniques, but does not describe a "schematic interface")
+REPLACEMENT: "Instead, the system switches to hardcoded grounding protocols."

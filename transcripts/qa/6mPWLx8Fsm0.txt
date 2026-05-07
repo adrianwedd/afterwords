@@ -1,0 +1,22 @@
+VIDEO: 6mPWLx8Fsm0
+TITLE: Adversarial Poetry: When Rhyme Bypasses Reason
+
+ISSUE at ~0s: "Tech giants spend billions of dollars on alignment"
+SOURCE SAYS: not mentioned
+REPLACEMENT: "Tech giants invest heavily in alignment"
+
+ISSUE at ~43s: "Dexi Icaro Lab"
+SOURCE SAYS: "DEXAI Icaro Lab"
+REPLACEMENT: "DEXAI Icaro Lab"
+
+ISSUE at ~129s: "OpenWait Lama"
+SOURCE SAYS: "Llama" (referred to as "open-weight" later in text)
+REPLACEMENT: "open-weight Llama"
+
+ISSUE at ~308s: "human literature, art, and history"
+SOURCE SAYS: "massive corpora of poetry"
+REPLACEMENT: "massive corpora of poetry"
+
+ISSUE at ~494s: "trillion-dollar artificial intelligence"
+SOURCE SAYS: not mentioned
+REPLACEMENT: "frontier artificial intelligence"

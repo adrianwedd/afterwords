@@ -1,0 +1,18 @@
+VIDEO: xF-BklkSqoI
+TITLE: dodgylegally
+
+ISSUE at ~1:28: "called Dodge Legally"
+SOURCE SAYS: "dodgylegally"
+REPLACEMENT: "called dodgylegally"
+
+ISSUE at ~1:45: "This text targets a massive, unstructured data cloud."
+SOURCE SAYS: "not mentioned; source specifies YouTube and local files as the search targets"
+REPLACEMENT: "This text targets YouTube and local file directories."
+
+ISSUE at ~3:07: "Expanding this data block into a branching node tree displays"
+SOURCE SAYS: "not mentioned (source specifies a JSON sidecar for tracking provenance)"
+REPLACEMENT: "This data block displays"
+
+ISSUE at ~4:01: "That is what Dodge Lieberly ultimately proves."
+SOURCE SAYS: "dodgylegally"
+REPLACEMENT: "That is what dodgylegally ultimately proves."

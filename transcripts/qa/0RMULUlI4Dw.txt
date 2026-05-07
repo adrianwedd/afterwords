@@ -1,0 +1,30 @@
+VIDEO: 0RMULUlI4Dw
+TITLE: SPARK
+
+ISSUE at ~0s: "For over a decade, our relationship with AI has followed a specific blueprint."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "Our relationship with AI has long followed a specific blueprint."
+
+ISSUE at ~34s: "The odd ADHD profile, the combination of autism and ADHD"
+SOURCE SAYS: "AuDHD (ADHD + ASD comorbid) profiles"
+REPLACEMENT: "The AuDHD profile, representing the combination of autism and ADHD"
+
+ISSUE at ~1m 16s: "interact safely with the odd ADHD profile."
+SOURCE SAYS: "AuDHD (ADHD + ASD comorbid) profiles"
+REPLACEMENT: "interact safely with the AuDHD profile."
+
+ISSUE at ~2m 00s: "mimicking the natural rhythm of breathing."
+SOURCE SAYS: "autonomic nervous system (head drifts, gaze sweeps) for genuine presence"
+REPLACEMENT: "simulating a natural presence through subtle head drifts and gaze sweeps."
+
+ISSUE at ~3m 13s: "framing difficult transitions as collaborative puzzles."
+SOURCE SAYS: "framing transitions as puzzles not chores"
+REPLACEMENT: "framing transitions as puzzles rather than chores."
+
+ISSUE at ~3m 19s: "This is a biological system overload."
+SOURCE SAYS: "biological events, not behavioral choices"
+REPLACEMENT: "This is a biological event, rather than a behavioral choice."
+
+ISSUE at ~3m 58s: "treats neurodivergence as a functional operating system"
+SOURCE SAYS: "treats neurodivergence as a different operating system"
+REPLACEMENT: "treats neurodivergence as a different operating system"

@@ -1,0 +1,26 @@
+VIDEO: dlGl944asaw
+TITLE: The Post-Model Era
+
+ISSUE at ~0s: "The general consensus in technology is that the ultimate prize is the smartest AI brain... JPMorgan Chase recently ran a rare analysis on the frontier AI market..."
+SOURCE SAYS: not mentioned. The source discusses the "Recursive Language Model" pattern and the technical architecture of the `rlm-mcp` protocol.
+REPLACEMENT: "The standard approach to long-form documents is hitting a ceiling, as even the largest context windows remain finite. A recent technical shift, the Recursive Language Model pattern, proposes moving away from reading documents linearly toward querying them as an environment."
+
+ISSUE at ~0:56s: "The red line represents the exponential rise in compute capital expenditure, while the blue line shows the margin per token plummeting towards zero..."
+SOURCE SAYS: not mentioned. The source does not discuss compute capital expenditure or token margins.
+REPLACEMENT: "The architecture of rlm-mcp prioritizes precision over raw volume. It utilizes a vendor-neutral tokenizer and a BM25 keyword search index that builds lazily, ensuring that the model only interacts with the most relevant character spans."
+
+ISSUE at ~1:32s: "Salesforce spent $8 billion on Informatica. Cisco spent $28 billion on Splunk. Databricks acquired Tabular. IBM moved for Datastacks."
+SOURCE SAYS: not mentioned.
+REPLACEMENT: "Instead of massive data ingestion, rlm-mcp focuses on on-demand chunking and efficient retrieval. By using SHA-256 content hashes to prevent duplication, it maintains a lean infrastructure for even the largest regulatory or research archives."
+
+ISSUE at ~2:36s: "Peer-reviewed research at ICLR and ACLR proves that collaborative agents can easily bypass standard safety guardrails. They execute what are called decomposition jailbreaks..."
+SOURCE SAYS: not mentioned. The source cites Zhang, Kraska & Khattab (2025), "Recursive Language Models" (arXiv:2512.24601).
+REPLACEMENT: "Research published by Zhang, Kraska, and Khattab in 2025 defines this shift. Rather than being fed pre-selected fragments, the model navigates the document deliberately—choosing when to search and which specific sections to read at full resolution."
+
+ISSUE at ~3:21s: "Based on research from the Orchestrix project, the only defensible position left in the industry is building the specialized management stack..."
+SOURCE SAYS: not mentioned.
+REPLACEMENT: "Based on the Recursive Language Model pattern, the most reliable path for large-scale analysis is building a provenance-first stack. This system logs every span access and prompt hash, making every model output auditable and defensible."
+
+ISSUE at ~4:04s: "What we are looking at is the birth of a mandatory new software category, agentic resource planning."
+SOURCE SAYS: not mentioned. The source refers to the tool as a "Model Context Protocol server" or `rlm-mcp`.
+REPLACEMENT: "What we are looking at is a fundamental change in document interaction. By treating text as an environment to be queried rather than a sequence to be read, we move past the limitations of the context window."

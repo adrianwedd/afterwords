@@ -1,0 +1,34 @@
+VIDEO: J8I3kHWV0kc
+TITLE: The Organismic Line: Where Predictive Processing Stops Being a Metaphor
+
+ISSUE at ~22s: "boardroom presentations, and in sworn testimony before lawmakers"
+SOURCE SAYS: "product pages, in press releases, and in Senate testimony"
+REPLACEMENT: "press releases, and in testimony before lawmakers"
+
+ISSUE at ~40s: "what researchers call the organismic line"
+SOURCE SAYS: "The previous post... named the distinction."
+REPLACEMENT: "the boundary the author calls the organismic line"
+
+ISSUE at ~59s: "Neuroscientist Carl Fristen"
+SOURCE SAYS: "Karl Friston"
+REPLACEMENT: "Neuroscientist Karl Friston"
+
+ISSUE at ~1:04: "minimize surprise"
+SOURCE SAYS: "minimise free energy"
+REPLACEMENT: "minimize free energy"
+
+ISSUE at ~1:21: "Left, an AI lowers its error rate. Right, an organism avoids starvation."
+SOURCE SAYS: Not mentioned (the source text does not describe the infographic's layout or mention starvation).
+REPLACEMENT: "The formula treats an AI outputting a larger loss number and an organism facing death identically."
+
+ISSUE at ~2:21: "constant error prediction"
+SOURCE SAYS: "prediction error"
+REPLACEMENT: "prediction error"
+
+ISSUE at ~2:45: "If a biological brain hallucinates a predator, the survival threat is immediate."
+SOURCE SAYS: Not mentioned (the source discusses a "lethal world" generally without the predator example).
+REPLACEMENT: "For a biological brain in a lethal world, the survival threat of being wrong is immediate."
+
+ISSUE at ~3:04: "profound flavor of human consciousness"
+SOURCE SAYS: "phenomenological flavour"
+REPLACEMENT: "phenomenological flavor"

@@ -1,0 +1,42 @@
+VIDEO: 8TwAvE9Sl-0
+TITLE: orbitr
+
+ISSUE at ~12s: "When Adrian Wedds sat down to build Orbiter, the goal was highly specific. Create a unified system to track, connect, and map disparate data points into a cohesive digital orbit."
+SOURCE SAYS: Adrian Wedd (no 's') created orbitr, a music sequencer where "Four tracks orbit a shared centre, each at its own tempo" to make "Polyrhythm made spatial."
+REPLACEMENT: "When Adrian Wedd sat down to build orbitr, the goal was highly specific: to reimagine the sequencer as concentric rings where rhythm becomes spatial geometry."
+
+ISSUE at ~41s: "Instead of looking at the polished, final version of Orbiter, we are going to bypass the end product and read the raw chronological development log. We will track the exact sequence of problem solving that built this architecture from scratch."
+SOURCE SAYS: not mentioned (Source is a project description/README, not a dev log).
+REPLACEMENT: "Instead of the linear grid of traditional sequencers, we are going to look at a system inspired by Playtronica's Orbita that uses Meta’s MusicGen for real-time AI sound generation."
+
+ISSUE at ~1:06s: "The early entries of the Orbiter development log reveal an immediate need for organization. A project of this scale has to be broken down into discrete, functional pillars before a single line of code can be written. The first pillar is the front end... The second pillar is the back end. This is the invisible data routing and storage framework."
+SOURCE SAYS: not mentioned (The source describes four tracks, sixteen-step patterns, and text-to-audio generation).
+REPLACEMENT: "The architecture of orbitr is built on concentric rings rather than rows and columns. The first layer is the spatial sequencer, which visualizes polymetric relationships; the second is the AI engine, which generates samples from text prompts."
+
+ISSUE at ~1:38s: "To make these two pillars talk to each other, the log introduces a concept called state management. This is the logic that allows the system to remember what a user is doing, like keeping an item in a shopping cart, across both the front end and back end simultaneously."
+SOURCE SAYS: not mentioned.
+REPLACEMENT: "To make these rings come alive, the system uses MusicGen to turn descriptions like 'dusty Detroit kick' or 'pitched-down glass shatter' into immediate audio samples."
+
+ISSUE at ~1:58s: "But this setup is fragile. If a sudden flood of users generates thousands of requests, the central hub could buckle under pressure."
+SOURCE SAYS: not mentioned (The project is an "experiment" and a music tool, not a high-concurrency web service).
+REPLACEMENT: "But the setup is experimental. It works well enough to be interesting, using pre-configured genre packs for Detroit techno and UK garage as starting points for sonic departure."
+
+ISSUE at ~2:09s: "Moving into the mid-project phase of the devlog, the focus shifts from building to testing. Orbiter undergoes its first rigorous stress tests... Under the weight of concurrent processes, a massive data flow collision occurs, causing the entire system to stall."
+SOURCE SAYS: not mentioned.
+REPLACEMENT: "Moving into the performance phase of the sequencer, each track rotates at its own tempo. This allows for complex polyrhythms that feel like a natural state rather than a special case of arithmetic."
+
+ISSUE at ~2:41s: "The original state management architecture failed because it treated every single data request with equal urgency. It tried to process a low-priority background update at the exact same millisecond as a critical user command. Adrian's proposed engineering fix was to restructure the data payload sequence."
+SOURCE SAYS: not mentioned.
+REPLACEMENT: "The original sequencer model was reimagined because linear grids enforce a relationship with time that privileges linearity. Wedd's fix was to make rhythm spatial, allowing users to hear generated sounds in context immediately."
+
+ISSUE at ~3:31s: "This network visualization represents the culmination of the DevLog's timeline, the transition from a localized testing environment to Orbiter's final production deployment. In its completed state, the Orbiter system operates as a unified entity. It seamlessly routes live data across thousands of nodes without a single physical stutter."
+SOURCE SAYS: not mentioned (Source describes a "spatial" sequencer with four tracks, not a network with thousands of nodes).
+REPLACEMENT: "This geometric visualization represents the culmination of the project's goal: a unified musical entity. In its completed state, the orbitr system seamlessly rotates sixteen-step patterns across concentric rings without the constraints of a traditional grid."
+
+ISSUE at ~4:04s: "The high-speed reliability that defines Orbiter Tway is directly enabled by that mid-project data sequencing breakthrough. The system stays online precisely because it learned how to sort traffic when the data flow turns chaotic."
+SOURCE SAYS: not mentioned.
+REPLACEMENT: "The unique rhythmic character that defines orbitr is enabled by its independent track tempos. The system creates music precisely because it allows for polymetric relationships to emerge as visible geometry."
+
+ISSUE at ~4:15s: "Highly polished digital tools do not emerge fully formed. They are essentially layers of scar tissue built heavily over the specific engineering problems that were solved along the way."
+SOURCE SAYS: "This is an experiment. It works well enough to be interesting and unevenly enough to be honest about that."
+REPLACEMENT: "Experimental digital tools do not emerge fully formed. As an honest experiment, orbitr is defined by the unevenness of its real-time AI generation and its departure from traditional imitation."

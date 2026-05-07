@@ -1,0 +1,26 @@
+VIDEO: C67cw_cTUOc
+TITLE: Building in the Open
+
+ISSUE at ~0:00s: "Most personal websites function like museums. You walk in to find carefully selected exhibits, arranged chronologically, designed to showcase past successes."
+SOURCE SAYS: not mentioned (the source discusses the "performance of competence" and technical polish but does not use the museum analogy)
+REPLACEMENT: "The default posture for technical work is polish. We typically show the finished product, hiding the messy false starts and three-day troubleshooting sessions that actually define the work."
+
+ISSUE at ~0:51s: "Modern creators face constant pressure to build for market approval. When every project must be a product, curiosity is often sacrificed for the sake of a viable launch."
+SOURCE SAYS: not mentioned (the source mentions that polish is "dishonest in a way that matters" but does not mention "market approval" or "products")
+REPLACEMENT: "This curated version of competence is exhausting and dishonest. When we only show the polished README, we teach people what we built, but we don't teach them how we built it."
+
+ISSUE at ~1:35s: "There is an alternative to the sterile museum, the workshop. This is a space where active construction happens in plain sight..."
+SOURCE SAYS: not mentioned (the source describes "building in public" and "messy repositories" but does not use the workshop metaphor)
+REPLACEMENT: "There is an alternative: building in public. This means keeping messy repositories and half-finished branches in plain sight..."
+
+ISSUE at ~2:30s: "One week, AI safety research. The next, audio archaeology tools, or even a squishmallow tracker."
+SOURCE SAYS: not mentioned (the source refers generally to "messy repositories" and "experiments that went nowhere" but does not name any of these specific project topics)
+REPLACEMENT: "One week, it is a messy repository with cryptic commit messages. The next, a half-finished branch or an experiment that went nowhere."
+
+ISSUE at ~2:45s: "These disparate projects are unified by a single starting point, a genuine, unanswered question. The methodology requires building relentlessly until that answer becomes clear, or until the work itself forces the original question to change."
+SOURCE SAYS: not mentioned (the source mentions "thinking-out-loud" in issues but does not describe this specific methodology or "unanswered questions")
+REPLACEMENT: "These disparate projects are unified by a commitment to the real changelog. This approach records the actual sequence of decisions, mistakes, and reversals until the logic of the build becomes clear."
+
+ISSUE at ~3:39s: "Stop curating sterile museums. Leave the door to the workshop open and let the world see the messy, honest reality of the build."
+SOURCE SAYS: not mentioned (the source does not use the museum or workshop analogies)
+REPLACEMENT: "If you're building something and it's messy—show it anyway. Let the world see the messy, honest reality of the build."

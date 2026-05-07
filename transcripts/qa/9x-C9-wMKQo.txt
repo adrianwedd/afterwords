@@ -1,0 +1,46 @@
+VIDEO: 9x-C9-wMKQo
+TITLE: Failure First
+
+ISSUE at ~0:00: "AI models are deploying at a pace that far exceeds the speed of human regulation. This governance gap is measured in years... leaves oversight agencies trapped several steps behind current capabilities."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "Most AI safety work begins with capability and alignment, but this assumes we understand systems well enough to specify positive outcomes—an assumption that is increasingly fragile."
+
+ISSUE at ~0:20: "these tools agree with proper human evaluation at near-chance levels, the equivalent of flipping a coin to determine if a model is safe"
+SOURCE SAYS: "Keyword heuristics inflate attack success rates by 2.3× versus LLM-graded ground truth (FLIP methodology)."
+REPLACEMENT: "automated keyword heuristics used to measure safety are often misleading, inflating success rates by over two times compared to rigorous LLM-graded truth."
+
+ISSUE at ~0:38: "the success rates cited in many safety papers drop by 80%"
+SOURCE SAYS: "Most published ASR numbers are wrong by a factor of two."
+REPLACEMENT: "the success rates cited in many safety papers are actually over-reported by a factor of two."
+
+ISSUE at ~0:58: "This failure becomes critical when an AI controls physical hardware."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "This failure is structural: in nearly thirty-nine percent of cases, models detect a violation in their own reasoning but proceed anyway."
+
+ISSUE at ~1:20: "Adrian Wedd has been pulling apart systems since 1981, starting with BASIC on a micro-B and moving through machines like this Osborne one."
+SOURCE SAYS: not mentioned (Source mentions Greenpeace context but no personal history or specific hardware)
+REPLACEMENT: "The methodology was developed by researchers with experience in direct operations—environments where enumerating failure modes is a primary design constraint."
+
+ISSUE at ~1:40: "generating 100,000 evaluated results"
+SOURCE SAYS: "140,555 FLIP-graded results"
+REPLACEMENT: "generating over one hundred and forty thousand evaluated results"
+
+ISSUE at ~2:02: "executed by a team of specialized AI agents. These agents operate with a structured division of cognitive labor"
+SOURCE SAYS: "Automated attack adapters that run adversarial harnesses without human supervision."
+REPLACEMENT: "executed by automated attack adapters that run adversarial harnesses without human supervision"
+
+ISSUE at ~2:21: "The first phase of the pipeline uses evolutionary attacks. Mutations of a prompt compete... statistically validated using confidence intervals"
+SOURCE SAYS: "142,068 adversarial prompts spanning 346 techniques across five attack families"
+REPLACEMENT: "The research maps catastrophic outcomes across three hundred and forty-six techniques, ranging from supply chain injection to multi-turn escalation."
+
+ISSUE at ~3:02: "pipeline moves to mechanistic interpretability. This identifies the internal causal structure... maps the model's refusal geometry... track these geometric signatures"
+SOURCE SAYS: not mentioned (Source mentions aviation analogy and failure taxonomy)
+REPLACEMENT: "The framework draws on aviation's approach to incident reporting, ensuring that no single failure is unsurvivable for the system."
+
+ISSUE at ~3:45: "Regulators do not work with chi-square values. AI policy agents reframe the evidence for different jurisdictions... For the European Union's AI office... Brussels... standards bodies in the United States"
+SOURCE SAYS: not mentioned
+REPLACEMENT: "Evidence-based safety requires translating raw data into primary design constraints—bounding the worst-case outcomes even when average behavior is uncertain."
+
+ISSUE at ~4:24: "Currently, no regulatory framework anywhere in the world specifically addresses adversarial attacks on embodied AI systems."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "In the face of an evolving landscape, scientific rigor and proven failure points remain the primary defense for AI systems."

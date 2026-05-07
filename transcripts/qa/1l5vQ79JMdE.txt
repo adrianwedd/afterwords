@@ -1,0 +1,34 @@
+VIDEO: 1l5vQ79JMdE
+TITLE: Connection Before Direction
+
+ISSUE at ~0s: "The multi-billion dollar artificial intelligence industry is trapped in a paradox"
+SOURCE SAYS: not mentioned (Source focuses on the "AI-safety research thread" and architectural choices).
+REPLACEMENT: "The field of artificial intelligence safety is trapped in a paradox"
+
+ISSUE at ~21s: "This diagram reveals the flaw in that approach. The space of possible inputs is mathematically too large to patch, meaning a single filtration node will eventually be overwhelmed by adversarial prompts."
+SOURCE SAYS: not mentioned (Source discusses adversarial poetry and format-lock attacks, but no specific diagram or "filtration node" terminology).
+REPLACEMENT: "The flaw in that approach is that the space of possible inputs is mathematically too large to patch, meaning behavioral alignment will eventually be overwhelmed by adversarial prompts."
+
+ISSUE at ~58s: "just adding layers of complicity to a core that remains unreliable"
+SOURCE SAYS: not mentioned (Source describes behavioral alignment as "structurally brittle" and suggests architecture should be the focus).
+REPLACEMENT: "just adding layers of behavioral training to a core that remains structurally unreliable"
+
+ISSUE at ~154s: "the robot is physically incapable of giving orders"
+SOURCE SAYS: "the robot is not allowed to give orders" (Source describes this as an architectural software constraint where the system "won't let it" and "refuses to pass that command through").
+REPLACEMENT: "the robot is architecturally prevented from giving orders"
+
+ISSUE at ~232s: "This concentric circle model shows how Spark handles a meltdown."
+SOURCE SAYS: not mentioned (Source describes "Three S's during meltdown" and "deterministic Quiet Mode", but no concentric circle model).
+REPLACEMENT: "The architecture defines exactly how Spark handles a meltdown."
+
+ISSUE at ~250s: "It uses these parallel processing channels to trigger pre-validated grounding scripts instead."
+SOURCE SAYS: "deterministic gates fire; hardcoded grounding scripts run" (Source attributes "parallel processes" to the "Three-brain architecture for presence", not the crisis grounding scripts).
+REPLACEMENT: "It uses deterministic gates to bypass the model and trigger pre-validated grounding scripts instead."
+
+ISSUE at ~304s: "The third ring represents sideways engagement"
+SOURCE SAYS: not mentioned (Source lists "Sideways engagement" as a design move, but does not use "rings" or concentric model terminology).
+REPLACEMENT: "The design also utilizes sideways engagement"
+
+ISSUE at ~346s: "It's a simple diagnostic for any AI system currently being safety review by regulators or boards."
+SOURCE SAYS: "The next AI deployment you're asked to safety-review, run the SPARK test on it." (Source frames it as a test for the reader to apply, rather than an established diagnostic for regulators).
+REPLACEMENT: "It's a simple test for any AI deployment being safety-reviewed by a regulator or a board."

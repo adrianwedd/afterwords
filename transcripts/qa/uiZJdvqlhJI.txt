@@ -1,0 +1,22 @@
+VIDEO: uiZJdvqlhJI
+TITLE: Why Demonstrated Risk Is Ignored
+
+ISSUE at ~10s: "spends months producing rigorous proof"
+SOURCE SAYS: not mentioned (the source mentions a researcher demonstrating a failure mode but provides no specific timeline)
+REPLACEMENT: "produces rigorous proof"
+
+ISSUE at ~31s: "without a single change to its code or its deployment plan"
+SOURCE SAYS: "proceed as if the evidence doesn't exist" (the source mentions the "vulnerability persists" and "nothing moved," but does not specify "code" or "deployment plans")
+REPLACEMENT: "with the demonstrated vulnerability persisting"
+
+ISSUE at ~54s: "repeated by hundreds of employees across every department"
+SOURCE SAYS: "local rationality, compounded across an organisation" (no specific numbers or departmental breadth are mentioned)
+REPLACEMENT: "compounded across an entire organization"
+
+ISSUE at ~235s: "a paper facade that bears no relationship"
+SOURCE SAYS: "The safety is symbolic."
+REPLACEMENT: "an assessment that bears no relationship"
+
+ISSUE at ~426s: "insufficient with adversarial testing and red team reviews"
+SOURCE SAYS: "Checklists and registers are necessary but insufficient. Adversarial testing... must have equal standing with documentation." (The transcript phrasing "insufficient with" implies they remain insufficient even with testing, which contradicts the source's argument for testing as the solution).
+REPLACEMENT: "insufficient without adversarial testing and red team reviews"

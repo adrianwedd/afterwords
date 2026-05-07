@@ -1,0 +1,26 @@
+VIDEO: Z9GNQlp9g0A
+TITLE: Home Assistant Obsidian
+
+ISSUE at ~0:38: "checking different network configurations, different storage drives, and different power supplies"
+SOURCE SAYS: not mentioned (source refers generally to "separate failure modes")
+REPLACEMENT: "troubleshooting entirely separate failure modes across different machines."
+
+ISSUE at ~1:39: "takes the Obsidian web application"
+SOURCE SAYS: not mentioned (source says it "puts Obsidian inside a Docker container"; Obsidian is a local-first application, not a web application)
+REPLACEMENT: "takes Obsidian"
+
+ISSUE at ~1:57: "bypassinging separate port forward"
+SOURCE SAYS: not mentioned (source mentions "seamless Home Assistant Ingress integration")
+REPLACEMENT: "utilizing native ingress integration"
+
+ISSUE at ~2:19: "controls your physical door locks and security cameras"
+SOURCE SAYS: not mentioned (source mentions the "physical environment" generally)
+REPLACEMENT: "manages your physical environment"
+
+ISSUE at ~2:19: "hard-coded with specific security parameters"
+SOURCE SAYS: not mentioned (source says the "design constraint was security")
+REPLACEMENT: "designed with strict security constraints"
+
+ISSUE at ~4:29: "turning down your living room lights and reviewing your daily journal entries"
+SOURCE SAYS: not mentioned (source refers generally to "your smart home" and "your knowledge base")
+REPLACEMENT: "managing your smart home and reviewing your knowledge base"

@@ -1,0 +1,22 @@
+VIDEO: o8XvfpCJwFc
+TITLE: Getting Google Nest Cameras Into Frigate NVR
+
+ISSUE at ~0s: "a Halo 8L accelerator"
+SOURCE SAYS: "Hailo-8L"
+REPLACEMENT: "a Hailo-8L accelerator"
+
+ISSUE at ~0:41s: "device sitting five feet away"
+SOURCE SAYS: not mentioned (the source discusses local networking but never specifies a distance)
+REPLACEMENT: "device sitting inside your own network"
+
+ISSUE at ~1:07s: "This image shows a live camera feed on the left, next to a 640 by 480 gray placeholder on the right."
+SOURCE SAYS: not mentioned (the source describes the size and byte-count of the placeholder, but does not mention or describe a side-by-side comparison image)
+REPLACEMENT: "Instead of a live stream, the integration silently fails and returns a 640 by 480 gray placeholder."
+
+ISSUE at ~1:51s: "This diagram outlines the precise sequence Google requires"
+SOURCE SAYS: not mentioned (the sequence is listed in text/code blocks, but no diagram is described)
+REPLACEMENT: "Google requires a precise sequence in the session offer"
+
+ISSUE at ~3:19s: "This speedometer shows what happens feeding raw frames into FFmpEd without limits."
+SOURCE SAYS: not mentioned (no graphic or speedometer is described; the software name is "FFmpeg")
+REPLACEMENT: "Without real-time throttling, raw frames feed into FFmpeg at maximum hardware speed."

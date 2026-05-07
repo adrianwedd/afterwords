@@ -1,0 +1,18 @@
+VIDEO: pLbwFRqgF6s
+TITLE: Wolf Clan Zen Do Kai Hub
+
+ISSUE at ~2:30: "students must honestly evaluate their own skills across kata, fitness, and theory, shifting their status from practicing to confident."
+SOURCE SAYS: "grading eligibility calculator"
+REPLACEMENT: "students use a grading eligibility calculator to measure their proficiency against the curriculum, ensuring they meet the technical requirements for their next rank."
+
+ISSUE at ~2:50: "The portal functions as a digital mirror. It demands the same continuous, honest self-reflection from the student online as the head instructor expects from them on the training mat."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "The portal provides a clear window into their training history, reflecting the same standard of technical progress online as the head instructor expects from them on the mat."
+
+ISSUE at ~3:09: "feeds directly into attendance heat maps."
+SOURCE SAYS: "attendance analytics"
+REPLACEMENT: "feeds directly into attendance analytics."
+
+ISSUE at ~3:27: "When a student marks themselves as confident in a technique, the instructor reviews it. Through the macro dashboard, the instructor validates that skill, locking the student's self-assessment into a formalized, assessed state."
+SOURCE SAYS: "Instructor-only views for roster management, attendance analytics, and grading administration."
+REPLACEMENT: "Instructors manage these requirements through a grading administration dashboard, validating student progress and formalizing rank progression within the digital roster."

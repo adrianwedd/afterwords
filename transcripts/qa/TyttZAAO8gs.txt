@@ -1,0 +1,22 @@
+VIDEO: TyttZAAO8gs
+TITLE: Auditory Spiral
+
+ISSUE at ~1:34: "DJs Seamus and Mikawai"
+SOURCE SAYS: "DJ Shamus (Shane) and Nicolai"
+REPLACEMENT: "DJs Shamus and Nicolai"
+
+ISSUE at ~2:14: "presenters, Seamus, Nikolai, and Roger"
+SOURCE SAYS: "DJ Shamus (Shane)... Nicolai... Roger helped maintain"
+REPLACEMENT: "presenters Shamus, Nicolai, and Roger"
+
+ISSUE at ~2:53: "highly specialized skill of manually beat matching and live mixing"
+SOURCE SAYS: "continuous six-hour journeys" and "long-form mixing" (does not mention "beat matching" or "highly specialized skill")
+REPLACEMENT: "live mixing of"
+
+ISSUE at ~3:30: "birthed a thriving secondary market"
+SOURCE SAYS: "The cassette network" (mentions tapes were dubbed, traded, and circulated; no mention of a "market" or sales)
+REPLACEMENT: "birthed a thriving cassette network"
+
+ISSUE at ~4:14: "Rhythm Tripping"
+SOURCE SAYS: "Rhythm Trippin"
+REPLACEMENT: "Rhythm Trippin"

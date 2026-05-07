@@ -1,0 +1,34 @@
+VIDEO: E4XGmIPM09g
+TITLE: Reconciling the Great Divergence
+
+ISSUE at ~4s: "Darren Asimoglu"
+SOURCE SAYS: "Daron Acemoglu"
+REPLACEMENT: "Daron Acemoglu"
+
+ISSUE at ~8s: "projects a 0.5% increase in productivity"
+SOURCE SAYS: "projects 0.5% total factor productivity growth over a decade"
+REPLACEMENT: "projects a 0.5% increase in total factor productivity over the next decade"
+
+ISSUE at ~42s: "In this blueprint, we see AI positioned alongside the historical electrical grid."
+SOURCE SAYS: "general-purpose technology analogous to electricity or the internet."
+REPLACEMENT: "In these forecasts, we see AI positioned as a general-purpose technology, much like electricity."
+
+ISSUE at ~59s: "changes the cost structure of almost everything"
+SOURCE SAYS: "changes the cost structure of cognitive work"
+REPLACEMENT: "changes the cost structure of cognitive work"
+
+ISSUE at ~1:33: "AI only impacts about 5% of total work performed by humans"
+SOURCE SAYS: "roughly 5% of tasks currently performed by workers are plausible near-term targets"
+REPLACEMENT: "AI only impacts about 5% of tasks currently performed by workers"
+
+ISSUE at ~2:01: "whether AI takes over broad roles, like accountant, or if it only speeds up narrow tasks, like summarizing a meeting transcript"
+SOURCE SAYS: not mentioned (Source mentions "large swaths of cognitive work" vs "a narrow slice" and specific domains like customer service and software development, but not accountants or meeting transcripts).
+REPLACEMENT: "whether AI takes over broad swaths of cognitive work, or if it only speeds up a narrow slice of specific tasks"
+
+ISSUE at ~2:22: "plugging new AI into 50-year-old legacy software systems"
+SOURCE SAYS: "integrating new systems into existing processes"
+REPLACEMENT: "integrating new systems into complex existing organizational processes"
+
+ISSUE at ~2:40: "This scale shows the actual math of automation."
+SOURCE SAYS: "The profitability filter... is the most underappreciated variable." (No mention of a "scale").
+REPLACEMENT: "The profitability filter represents the actual math of automation."

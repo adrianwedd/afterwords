@@ -1,0 +1,26 @@
+VIDEO: dVD75vZg7fw
+TITLE: Footnotes at the Edge of Reality
+
+ISSUE at ~0s: "For centuries, humanity has approached the universe as a grand encrypted text..."
+SOURCE SAYS: not mentioned (Source begins with Wheeler’s 20th-century formulation and a modern poem).
+REPLACEMENT: "We have often approached the universe as a grand encrypted text..."
+
+ISSUE at ~0:58s: "...models the collision of distant galaxies with precision. But when we zoom in past the cellular level..."
+SOURCE SAYS: not mentioned (Source mentions "orbits" and "subatomic realm," but nothing about galaxies or biology/cells).
+REPLACEMENT: "...models the vast movements of the cosmos with precision. But when we zoom in past the scale of our intuition..."
+
+ISSUE at ~2:46s: "You simply cannot draw a smooth curve across a jittery grid."
+SOURCE SAYS: not mentioned (Source describes the two theories as "two grammars for the same reality" that are "mutually untranslatable").
+REPLACEMENT: "The two grammars remain precise, yet mutually untranslatable."
+
+ISSUE at ~3:14s: "Concepts like stream theory..."
+SOURCE SAYS: "string theory"
+REPLACEMENT: "Concepts like string theory..."
+
+ISSUE at ~3:48s: "We lack the technology required to test them."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "These frameworks remain a different grammar for a reality we cannot yet fully resolve."
+
+ISSUE at ~4:28s: "You are not turning on a flashlight to reveal an object already sitting quietly in the dark."
+SOURCE SAYS: not mentioned (Source says "Measurement doesn't reveal reality — it selects it").
+REPLACEMENT: "Observation is not a passive act of uncovering something already fixed."

@@ -1,0 +1,3097 @@
+[
+  {
+    "word": "Open",
+    "start": 0.24,
+    "end": 0.64
+  },
+  {
+    "word": "a",
+    "start": 0.64,
+    "end": 0.88
+  },
+  {
+    "word": "product",
+    "start": 0.88,
+    "end": 1.2
+  },
+  {
+    "word": "page",
+    "start": 1.2,
+    "end": 1.52
+  },
+  {
+    "word": "for",
+    "start": 1.52,
+    "end": 1.68
+  },
+  {
+    "word": "a",
+    "start": 1.68,
+    "end": 1.92
+  },
+  {
+    "word": "new",
+    "start": 1.92,
+    "end": 2.16
+  },
+  {
+    "word": "AI",
+    "start": 2.16,
+    "end": 2.56
+  },
+  {
+    "word": "model",
+    "start": 2.56,
+    "end": 3.04
+  },
+  {
+    "word": "today,",
+    "start": 3.04,
+    "end": 3.52
+  },
+  {
+    "word": "and",
+    "start": 3.52,
+    "end": 3.76
+  },
+  {
+    "word": "you",
+    "start": 3.76,
+    "end": 3.92
+  },
+  {
+    "word": "will",
+    "start": 3.92,
+    "end": 4.08
+  },
+  {
+    "word": "immediately",
+    "start": 4.08,
+    "end": 4.72
+  },
+  {
+    "word": "encounter",
+    "start": 4.72,
+    "end": 5.36
+  },
+  {
+    "word": "a",
+    "start": 5.36,
+    "end": 5.6
+  },
+  {
+    "word": "very",
+    "start": 5.6,
+    "end": 5.84
+  },
+  {
+    "word": "specific",
+    "start": 5.84,
+    "end": 6.48
+  },
+  {
+    "word": "vocabulary.",
+    "start": 6.48,
+    "end": 7.76
+  },
+  {
+    "word": "Systems",
+    "start": 7.76,
+    "end": 8.24
+  },
+  {
+    "word": "are",
+    "start": 8.24,
+    "end": 8.48
+  },
+  {
+    "word": "described",
+    "start": 8.48,
+    "end": 8.96
+  },
+  {
+    "word": "as",
+    "start": 8.96,
+    "end": 9.2
+  },
+  {
+    "word": "reasoning,",
+    "start": 9.2,
+    "end": 10.32
+  },
+  {
+    "word": "understanding,",
+    "start": 10.32,
+    "end": 11.2
+  },
+  {
+    "word": "thinking,",
+    "start": 11.2,
+    "end": 11.92
+  },
+  {
+    "word": "and",
+    "start": 11.92,
+    "end": 12.16
+  },
+  {
+    "word": "occasionally",
+    "start": 12.16,
+    "end": 12.72
+  },
+  {
+    "word": "hallucinating.",
+    "start": 12.88,
+    "end": 14.24
+  },
+  {
+    "word": "These",
+    "start": 14.24,
+    "end": 14.56
+  },
+  {
+    "word": "descriptions",
+    "start": 14.56,
+    "end": 15.2
+  },
+  {
+    "word": "have",
+    "start": 15.2,
+    "end": 15.44
+  },
+  {
+    "word": "moved",
+    "start": 15.44,
+    "end": 15.76
+  },
+  {
+    "word": "far",
+    "start": 15.76,
+    "end": 16.08
+  },
+  {
+    "word": "beyond",
+    "start": 16.08,
+    "end": 16.56
+  },
+  {
+    "word": "casual",
+    "start": 16.56,
+    "end": 17.04
+  },
+  {
+    "word": "tech",
+    "start": 17.04,
+    "end": 17.44
+  },
+  {
+    "word": "industry",
+    "start": 17.44,
+    "end": 17.92
+  },
+  {
+    "word": "shorthand.",
+    "start": 17.92,
+    "end": 18.8
+  },
+  {
+    "word": "They",
+    "start": 18.8,
+    "end": 18.96
+  },
+  {
+    "word": "operate",
+    "start": 18.96,
+    "end": 19.44
+  },
+  {
+    "word": "as",
+    "start": 19.44,
+    "end": 19.68
+  },
+  {
+    "word": "formal",
+    "start": 19.68,
+    "end": 20.08
+  },
+  {
+    "word": "claims",
+    "start": 20.08,
+    "end": 20.56
+  },
+  {
+    "word": "made",
+    "start": 20.56,
+    "end": 20.8
+  },
+  {
+    "word": "in",
+    "start": 20.8,
+    "end": 20.96
+  },
+  {
+    "word": "press",
+    "start": 20.96,
+    "end": 21.28
+  },
+  {
+    "word": "releases,",
+    "start": 21.28,
+    "end": 22.0
+  },
+  {
+    "word": "in",
+    "start": 22.0,
+    "end": 22.16
+  },
+  {
+    "word": "boardroom",
+    "start": 22.16,
+    "end": 22.72
+  },
+  {
+    "word": "presentations,",
+    "start": 22.72,
+    "end": 23.52
+  },
+  {
+    "word": "and",
+    "start": 23.52,
+    "end": 23.76
+  },
+  {
+    "word": "in",
+    "start": 23.76,
+    "end": 23.92
+  },
+  {
+    "word": "sworn",
+    "start": 23.92,
+    "end": 24.4
+  },
+  {
+    "word": "testimony",
+    "start": 24.4,
+    "end": 24.96
+  },
+  {
+    "word": "before",
+    "start": 24.96,
+    "end": 25.2
+  },
+  {
+    "word": "lawmakers",
+    "start": 25.2,
+    "end": 26.08
+  },
+  {
+    "word": "by",
+    "start": 26.08,
+    "end": 26.32
+  },
+  {
+    "word": "executives",
+    "start": 26.32,
+    "end": 26.96
+  },
+  {
+    "word": "who",
+    "start": 26.96,
+    "end": 27.12
+  },
+  {
+    "word": "assert",
+    "start": 27.12,
+    "end": 27.52
+  },
+  {
+    "word": "they",
+    "start": 27.52,
+    "end": 27.6
+  },
+  {
+    "word": "are",
+    "start": 27.6,
+    "end": 27.76
+  },
+  {
+    "word": "building",
+    "start": 27.76,
+    "end": 28.08
+  },
+  {
+    "word": "a",
+    "start": 28.08,
+    "end": 28.24
+  },
+  {
+    "word": "digital",
+    "start": 28.24,
+    "end": 28.8
+  },
+  {
+    "word": "brain",
+    "start": 28.8,
+    "end": 29.28
+  },
+  {
+    "word": "for",
+    "start": 29.28,
+    "end": 29.6
+  },
+  {
+    "word": "the",
+    "start": 29.6,
+    "end": 29.84
+  },
+  {
+    "word": "world.",
+    "start": 29.84,
+    "end": 30.48
+  },
+  {
+    "word": "A",
+    "start": 30.48,
+    "end": 30.8
+  },
+  {
+    "word": "problem",
+    "start": 30.8,
+    "end": 31.12
+  },
+  {
+    "word": "arises",
+    "start": 31.12,
+    "end": 31.6
+  },
+  {
+    "word": "when",
+    "start": 31.6,
+    "end": 31.84
+  },
+  {
+    "word": "we",
+    "start": 31.84,
+    "end": 32.0
+  },
+  {
+    "word": "apply",
+    "start": 32.0,
+    "end": 32.32
+  },
+  {
+    "word": "the",
+    "start": 32.32,
+    "end": 32.48
+  },
+  {
+    "word": "exact",
+    "start": 32.48,
+    "end": 32.88
+  },
+  {
+    "word": "same",
+    "start": 32.88,
+    "end": 33.12
+  },
+  {
+    "word": "vocabulary",
+    "start": 33.12,
+    "end": 34.0
+  },
+  {
+    "word": "to",
+    "start": 34.0,
+    "end": 34.16
+  },
+  {
+    "word": "a",
+    "start": 34.16,
+    "end": 34.4
+  },
+  {
+    "word": "server",
+    "start": 34.4,
+    "end": 34.8
+  },
+  {
+    "word": "guessing",
+    "start": 34.8,
+    "end": 35.2
+  },
+  {
+    "word": "the",
+    "start": 35.2,
+    "end": 35.36
+  },
+  {
+    "word": "next",
+    "start": 35.36,
+    "end": 35.52
+  },
+  {
+    "word": "word",
+    "start": 35.52,
+    "end": 35.84
+  },
+  {
+    "word": "in",
+    "start": 35.84,
+    "end": 35.92
+  },
+  {
+    "word": "a",
+    "start": 35.92,
+    "end": 36.08
+  },
+  {
+    "word": "sequence",
+    "start": 36.08,
+    "end": 36.72
+  },
+  {
+    "word": "and",
+    "start": 36.72,
+    "end": 36.96
+  },
+  {
+    "word": "a",
+    "start": 36.96,
+    "end": 37.12
+  },
+  {
+    "word": "human",
+    "start": 37.12,
+    "end": 37.52
+  },
+  {
+    "word": "mind",
+    "start": 37.52,
+    "end": 37.92
+  },
+  {
+    "word": "processing",
+    "start": 37.92,
+    "end": 38.56
+  },
+  {
+    "word": "reality.",
+    "start": 38.56,
+    "end": 39.44
+  },
+  {
+    "word": "It",
+    "start": 39.44,
+    "end": 39.6
+  },
+  {
+    "word": "begins",
+    "start": 39.6,
+    "end": 40.0
+  },
+  {
+    "word": "to",
+    "start": 40.0,
+    "end": 40.16
+  },
+  {
+    "word": "convince",
+    "start": 40.16,
+    "end": 40.56
+  },
+  {
+    "word": "the",
+    "start": 40.56,
+    "end": 40.72
+  },
+  {
+    "word": "public",
+    "start": 40.72,
+    "end": 41.04
+  },
+  {
+    "word": "that",
+    "start": 41.04,
+    "end": 41.36
+  },
+  {
+    "word": "these",
+    "start": 41.36,
+    "end": 41.6
+  },
+  {
+    "word": "systems",
+    "start": 41.6,
+    "end": 42.0
+  },
+  {
+    "word": "possess",
+    "start": 42.0,
+    "end": 42.56
+  },
+  {
+    "word": "actual",
+    "start": 42.56,
+    "end": 42.96
+  },
+  {
+    "word": "biological",
+    "start": 42.96,
+    "end": 43.76
+  },
+  {
+    "word": "sentience.",
+    "start": 43.76,
+    "end": 44.8
+  },
+  {
+    "word": "This",
+    "start": 44.8,
+    "end": 45.12
+  },
+  {
+    "word": "shared",
+    "start": 45.12,
+    "end": 45.6
+  },
+  {
+    "word": "vocabulary",
+    "start": 45.6,
+    "end": 46.4
+  },
+  {
+    "word": "effectively",
+    "start": 46.4,
+    "end": 47.04
+  },
+  {
+    "word": "blurs",
+    "start": 47.04,
+    "end": 47.52
+  },
+  {
+    "word": "what",
+    "start": 47.52,
+    "end": 47.68
+  },
+  {
+    "word": "researchers",
+    "start": 47.68,
+    "end": 48.32
+  },
+  {
+    "word": "call",
+    "start": 48.32,
+    "end": 48.56
+  },
+  {
+    "word": "the",
+    "start": 48.56,
+    "end": 48.8
+  },
+  {
+    "word": "organismic",
+    "start": 48.8,
+    "end": 49.6
+  },
+  {
+    "word": "line,",
+    "start": 49.6,
+    "end": 50.16
+  },
+  {
+    "word": "the",
+    "start": 50.16,
+    "end": 50.32
+  },
+  {
+    "word": "boundary",
+    "start": 50.32,
+    "end": 50.88
+  },
+  {
+    "word": "between",
+    "start": 50.88,
+    "end": 51.12
+  },
+  {
+    "word": "systems",
+    "start": 51.12,
+    "end": 51.52
+  },
+  {
+    "word": "that",
+    "start": 51.52,
+    "end": 51.84
+  },
+  {
+    "word": "have",
+    "start": 51.84,
+    "end": 52.08
+  },
+  {
+    "word": "real",
+    "start": 52.08,
+    "end": 52.32
+  },
+  {
+    "word": "physical",
+    "start": 52.32,
+    "end": 52.88
+  },
+  {
+    "word": "stakes",
+    "start": 52.88,
+    "end": 53.44
+  },
+  {
+    "word": "and",
+    "start": 53.44,
+    "end": 53.68
+  },
+  {
+    "word": "systems",
+    "start": 53.68,
+    "end": 54.08
+  },
+  {
+    "word": "that",
+    "start": 54.08,
+    "end": 54.24
+  },
+  {
+    "word": "merely",
+    "start": 54.24,
+    "end": 54.64
+  },
+  {
+    "word": "simulate",
+    "start": 54.64,
+    "end": 55.28
+  },
+  {
+    "word": "them.",
+    "start": 55.28,
+    "end": 55.84
+  },
+  {
+    "word": "To",
+    "start": 55.84,
+    "end": 56.16
+  },
+  {
+    "word": "understand",
+    "start": 56.16,
+    "end": 56.4
+  },
+  {
+    "word": "how",
+    "start": 56.64,
+    "end": 56.88
+  },
+  {
+    "word": "that",
+    "start": 56.88,
+    "end": 57.04
+  },
+  {
+    "word": "line",
+    "start": 57.04,
+    "end": 57.36
+  },
+  {
+    "word": "got",
+    "start": 57.36,
+    "end": 57.52
+  },
+  {
+    "word": "blurred,",
+    "start": 57.52,
+    "end": 58.24
+  },
+  {
+    "word": "we",
+    "start": 58.24,
+    "end": 58.4
+  },
+  {
+    "word": "have",
+    "start": 58.4,
+    "end": 58.48
+  },
+  {
+    "word": "to",
+    "start": 58.48,
+    "end": 58.64
+  },
+  {
+    "word": "look",
+    "start": 58.64,
+    "end": 58.8
+  },
+  {
+    "word": "at",
+    "start": 58.8,
+    "end": 58.96
+  },
+  {
+    "word": "the",
+    "start": 58.96,
+    "end": 59.04
+  },
+  {
+    "word": "math",
+    "start": 59.04,
+    "end": 59.36
+  },
+  {
+    "word": "used",
+    "start": 59.36,
+    "end": 59.52
+  },
+  {
+    "word": "to",
+    "start": 59.52,
+    "end": 59.6
+  },
+  {
+    "word": "define.",
+    "start": 59.6,
+    "end": 59.92
+  },
+  {
+    "word": "intelligence",
+    "start": 60.36,
+    "end": 61.08
+  },
+  {
+    "word": "Neuroscientist",
+    "start": 61.4,
+    "end": 62.44
+  },
+  {
+    "word": "Carl",
+    "start": 62.44,
+    "end": 62.84
+  },
+  {
+    "word": "Fristen",
+    "start": 62.84,
+    "end": 63.64
+  },
+  {
+    "word": "developed",
+    "start": 63.64,
+    "end": 64.04
+  },
+  {
+    "word": "a",
+    "start": 64.04,
+    "end": 64.12
+  },
+  {
+    "word": "theory",
+    "start": 64.12,
+    "end": 64.52
+  },
+  {
+    "word": "called",
+    "start": 64.52,
+    "end": 64.68
+  },
+  {
+    "word": "the",
+    "start": 64.68,
+    "end": 64.84
+  },
+  {
+    "word": "free",
+    "start": 64.84,
+    "end": 65.24
+  },
+  {
+    "word": "energy",
+    "start": 65.24,
+    "end": 65.72
+  },
+  {
+    "word": "principle.",
+    "start": 65.72,
+    "end": 66.6
+  },
+  {
+    "word": "At",
+    "start": 66.6,
+    "end": 66.84
+  },
+  {
+    "word": "a",
+    "start": 66.84,
+    "end": 66.92
+  },
+  {
+    "word": "high",
+    "start": 66.92,
+    "end": 67.16
+  },
+  {
+    "word": "level,",
+    "start": 67.16,
+    "end": 67.72
+  },
+  {
+    "word": "it",
+    "start": 67.72,
+    "end": 67.88
+  },
+  {
+    "word": "states",
+    "start": 67.88,
+    "end": 68.28
+  },
+  {
+    "word": "that",
+    "start": 68.28,
+    "end": 68.44
+  },
+  {
+    "word": "all",
+    "start": 68.44,
+    "end": 68.68
+  },
+  {
+    "word": "self-organizing",
+    "start": 68.68,
+    "end": 69.8
+  },
+  {
+    "word": "systems",
+    "start": 69.8,
+    "end": 70.28
+  },
+  {
+    "word": "act",
+    "start": 70.28,
+    "end": 70.52
+  },
+  {
+    "word": "to",
+    "start": 70.52,
+    "end": 70.76
+  },
+  {
+    "word": "minimize",
+    "start": 70.76,
+    "end": 71.32
+  },
+  {
+    "word": "surprise",
+    "start": 71.32,
+    "end": 71.88
+  },
+  {
+    "word": "and",
+    "start": 71.88,
+    "end": 72.12
+  },
+  {
+    "word": "maintain",
+    "start": 72.12,
+    "end": 72.6
+  },
+  {
+    "word": "their",
+    "start": 72.6,
+    "end": 72.84
+  },
+  {
+    "word": "internal",
+    "start": 72.84,
+    "end": 73.4
+  },
+  {
+    "word": "states.",
+    "start": 73.4,
+    "end": 74.2
+  },
+  {
+    "word": "This",
+    "start": 74.2,
+    "end": 74.44
+  },
+  {
+    "word": "mathematical",
+    "start": 74.44,
+    "end": 75.08
+  },
+  {
+    "word": "framework",
+    "start": 75.08,
+    "end": 75.64
+  },
+  {
+    "word": "creates",
+    "start": 75.64,
+    "end": 76.12
+  },
+  {
+    "word": "an",
+    "start": 76.12,
+    "end": 76.28
+  },
+  {
+    "word": "illusion.",
+    "start": 76.28,
+    "end": 77.24
+  },
+  {
+    "word": "Left,",
+    "start": 77.24,
+    "end": 77.88
+  },
+  {
+    "word": "an",
+    "start": 77.88,
+    "end": 78.04
+  },
+  {
+    "word": "AI",
+    "start": 78.04,
+    "end": 78.44
+  },
+  {
+    "word": "lowers",
+    "start": 78.44,
+    "end": 78.76
+  },
+  {
+    "word": "its",
+    "start": 78.76,
+    "end": 78.92
+  },
+  {
+    "word": "error",
+    "start": 79.0,
+    "end": 79.24
+  },
+  {
+    "word": "rate.",
+    "start": 79.24,
+    "end": 79.88
+  },
+  {
+    "word": "Right,",
+    "start": 79.88,
+    "end": 80.44
+  },
+  {
+    "word": "an",
+    "start": 80.44,
+    "end": 80.6
+  },
+  {
+    "word": "organism",
+    "start": 80.6,
+    "end": 81.16
+  },
+  {
+    "word": "avoids",
+    "start": 81.16,
+    "end": 81.64
+  },
+  {
+    "word": "starvation.",
+    "start": 81.64,
+    "end": 82.6
+  },
+  {
+    "word": "The",
+    "start": 82.6,
+    "end": 82.84
+  },
+  {
+    "word": "formula",
+    "start": 82.84,
+    "end": 83.32
+  },
+  {
+    "word": "treats",
+    "start": 83.32,
+    "end": 83.72
+  },
+  {
+    "word": "them",
+    "start": 83.72,
+    "end": 83.88
+  },
+  {
+    "word": "identically,",
+    "start": 83.88,
+    "end": 84.68
+  },
+  {
+    "word": "removing",
+    "start": 84.68,
+    "end": 85.24
+  },
+  {
+    "word": "lethal",
+    "start": 85.24,
+    "end": 85.72
+  },
+  {
+    "word": "physical",
+    "start": 85.72,
+    "end": 86.12
+  },
+  {
+    "word": "consequences.",
+    "start": 86.12,
+    "end": 87.32
+  },
+  {
+    "word": "The",
+    "start": 87.32,
+    "end": 87.48
+  },
+  {
+    "word": "animal",
+    "start": 87.48,
+    "end": 87.96
+  },
+  {
+    "word": "dies,",
+    "start": 87.96,
+    "end": 88.44
+  },
+  {
+    "word": "the",
+    "start": 88.44,
+    "end": 88.6
+  },
+  {
+    "word": "AI",
+    "start": 88.6,
+    "end": 89.08
+  },
+  {
+    "word": "simply",
+    "start": 89.08,
+    "end": 89.32
+  },
+  {
+    "word": "outputs",
+    "start": 89.32,
+    "end": 89.8
+  },
+  {
+    "word": "a",
+    "start": 89.8,
+    "end": 89.96
+  },
+  {
+    "word": "larger",
+    "start": 89.96,
+    "end": 90.36
+  },
+  {
+    "word": "loss",
+    "start": 90.36,
+    "end": 90.84
+  },
+  {
+    "word": "number.",
+    "start": 90.84,
+    "end": 91.48
+  },
+  {
+    "word": "AI",
+    "start": 91.48,
+    "end": 91.96
+  },
+  {
+    "word": "pioneer",
+    "start": 91.96,
+    "end": 92.44
+  },
+  {
+    "word": "Jeffrey",
+    "start": 92.44,
+    "end": 92.84
+  },
+  {
+    "word": "Hinton",
+    "start": 92.84,
+    "end": 93.4
+  },
+  {
+    "word": "focuses",
+    "start": 93.4,
+    "end": 93.8
+  },
+  {
+    "word": "on",
+    "start": 93.8,
+    "end": 93.96
+  },
+  {
+    "word": "a",
+    "start": 93.96,
+    "end": 94.04
+  },
+  {
+    "word": "technical",
+    "start": 94.04,
+    "end": 94.52
+  },
+  {
+    "word": "divide",
+    "start": 94.52,
+    "end": 95.08
+  },
+  {
+    "word": "between",
+    "start": 95.08,
+    "end": 95.32
+  },
+  {
+    "word": "these",
+    "start": 95.32,
+    "end": 95.56
+  },
+  {
+    "word": "two",
+    "start": 95.56,
+    "end": 95.8
+  },
+  {
+    "word": "worlds,",
+    "start": 95.8,
+    "end": 96.36
+  },
+  {
+    "word": "distinguishing",
+    "start": 96.36,
+    "end": 97.08
+  },
+  {
+    "word": "between",
+    "start": 97.08,
+    "end": 97.32
+  },
+  {
+    "word": "digital",
+    "start": 97.32,
+    "end": 97.8
+  },
+  {
+    "word": "hardware",
+    "start": 97.8,
+    "end": 98.28
+  },
+  {
+    "word": "and",
+    "start": 98.28,
+    "end": 98.52
+  },
+  {
+    "word": "what",
+    "start": 98.52,
+    "end": 98.68
+  },
+  {
+    "word": "he",
+    "start": 98.68,
+    "end": 98.84
+  },
+  {
+    "word": "calls",
+    "start": 98.84,
+    "end": 99.16
+  },
+  {
+    "word": "mortal",
+    "start": 99.16,
+    "end": 99.8
+  },
+  {
+    "word": "computation.",
+    "start": 99.8,
+    "end": 100.92
+  },
+  {
+    "word": "Immortal",
+    "start": 100.92,
+    "end": 101.48
+  },
+  {
+    "word": "digital",
+    "start": 101.48,
+    "end": 101.96
+  },
+  {
+    "word": "systems",
+    "start": 101.96,
+    "end": 102.36
+  },
+  {
+    "word": "allow",
+    "start": 102.36,
+    "end": 102.68
+  },
+  {
+    "word": "data",
+    "start": 102.68,
+    "end": 103.0
+  },
+  {
+    "word": "to",
+    "start": 103.0,
+    "end": 103.16
+  },
+  {
+    "word": "be",
+    "start": 103.16,
+    "end": 103.32
+  },
+  {
+    "word": "perfectly",
+    "start": 103.32,
+    "end": 103.72
+  },
+  {
+    "word": "copied",
+    "start": 103.72,
+    "end": 104.12
+  },
+  {
+    "word": "to",
+    "start": 104.12,
+    "end": 104.28
+  },
+  {
+    "word": "new",
+    "start": 104.28,
+    "end": 104.52
+  },
+  {
+    "word": "hardware,",
+    "start": 104.52,
+    "end": 105.24
+  },
+  {
+    "word": "even",
+    "start": 105.24,
+    "end": 105.4
+  },
+  {
+    "word": "if",
+    "start": 105.4,
+    "end": 105.56
+  },
+  {
+    "word": "the",
+    "start": 105.56,
+    "end": 105.72
+  },
+  {
+    "word": "original",
+    "start": 105.72,
+    "end": 106.12
+  },
+  {
+    "word": "machine",
+    "start": 106.12,
+    "end": 106.52
+  },
+  {
+    "word": "is",
+    "start": 106.52,
+    "end": 106.6
+  },
+  {
+    "word": "destroyed.",
+    "start": 106.6,
+    "end": 107.56
+  },
+  {
+    "word": "But",
+    "start": 107.56,
+    "end": 107.72
+  },
+  {
+    "word": "mortal",
+    "start": 107.72,
+    "end": 108.2
+  },
+  {
+    "word": "biological",
+    "start": 108.2,
+    "end": 108.92
+  },
+  {
+    "word": "systems",
+    "start": 108.92,
+    "end": 109.32
+  },
+  {
+    "word": "hold",
+    "start": 109.32,
+    "end": 109.64
+  },
+  {
+    "word": "knowledge",
+    "start": 109.64,
+    "end": 110.04
+  },
+  {
+    "word": "inseparable",
+    "start": 110.04,
+    "end": 110.76
+  },
+  {
+    "word": "from",
+    "start": 110.76,
+    "end": 110.84
+  },
+  {
+    "word": "their",
+    "start": 110.84,
+    "end": 111.08
+  },
+  {
+    "word": "physical",
+    "start": 111.08,
+    "end": 111.4
+  },
+  {
+    "word": "device.",
+    "start": 111.4,
+    "end": 112.2
+  },
+  {
+    "word": "When",
+    "start": 112.2,
+    "end": 112.44
+  },
+  {
+    "word": "the",
+    "start": 112.44,
+    "end": 112.6
+  },
+  {
+    "word": "organic",
+    "start": 112.6,
+    "end": 113.08
+  },
+  {
+    "word": "structure",
+    "start": 113.08,
+    "end": 113.48
+  },
+  {
+    "word": "dies,",
+    "start": 113.48,
+    "end": 113.96
+  },
+  {
+    "word": "its",
+    "start": 113.96,
+    "end": 114.12
+  },
+  {
+    "word": "knowledge",
+    "start": 114.12,
+    "end": 114.44
+  },
+  {
+    "word": "dies",
+    "start": 114.44,
+    "end": 114.68
+  },
+  {
+    "word": "alongside",
+    "start": 114.68,
+    "end": 115.52
+  },
+  {
+    "word": "it.",
+    "start": 115.52,
+    "end": 116.0
+  },
+  {
+    "word": "In",
+    "start": 116.0,
+    "end": 116.16
+  },
+  {
+    "word": "a",
+    "start": 116.16,
+    "end": 116.24
+  },
+  {
+    "word": "digital",
+    "start": 116.24,
+    "end": 116.72
+  },
+  {
+    "word": "framework,",
+    "start": 116.72,
+    "end": 117.2
+  },
+  {
+    "word": "mortality",
+    "start": 117.2,
+    "end": 117.76
+  },
+  {
+    "word": "is",
+    "start": 117.76,
+    "end": 117.92
+  },
+  {
+    "word": "often",
+    "start": 117.92,
+    "end": 118.24
+  },
+  {
+    "word": "viewed",
+    "start": 118.24,
+    "end": 118.48
+  },
+  {
+    "word": "as",
+    "start": 118.48,
+    "end": 118.64
+  },
+  {
+    "word": "a",
+    "start": 118.64,
+    "end": 118.72
+  },
+  {
+    "word": "computational",
+    "start": 118.72,
+    "end": 119.36
+  },
+  {
+    "word": "inefficiency",
+    "start": 119.36,
+    "end": 120.16
+  },
+  {
+    "word": "or",
+    "start": 120.16,
+    "end": 120.4
+  },
+  {
+    "word": "a",
+    "start": 120.4,
+    "end": 120.48
+  },
+  {
+    "word": "tax",
+    "start": 120.48,
+    "end": 120.88
+  },
+  {
+    "word": "on",
+    "start": 120.88,
+    "end": 121.04
+  },
+  {
+    "word": "power.",
+    "start": 121.04,
+    "end": 121.68
+  },
+  {
+    "word": "But",
+    "start": 121.68,
+    "end": 121.92
+  },
+  {
+    "word": "this",
+    "start": 121.92,
+    "end": 122.16
+  },
+  {
+    "word": "perspective",
+    "start": 122.16,
+    "end": 122.8
+  },
+  {
+    "word": "ignores",
+    "start": 122.8,
+    "end": 123.36
+  },
+  {
+    "word": "how",
+    "start": 123.36,
+    "end": 123.6
+  },
+  {
+    "word": "deeply",
+    "start": 123.6,
+    "end": 124.24
+  },
+  {
+    "word": "a",
+    "start": 124.24,
+    "end": 124.48
+  },
+  {
+    "word": "system's",
+    "start": 124.48,
+    "end": 124.88
+  },
+  {
+    "word": "behavior",
+    "start": 124.88,
+    "end": 125.44
+  },
+  {
+    "word": "changes",
+    "start": 125.44,
+    "end": 126.08
+  },
+  {
+    "word": "when",
+    "start": 126.08,
+    "end": 126.4
+  },
+  {
+    "word": "its",
+    "start": 126.4,
+    "end": 126.64
+  },
+  {
+    "word": "learned",
+    "start": 126.64,
+    "end": 127.12
+  },
+  {
+    "word": "structure",
+    "start": 127.12,
+    "end": 127.6
+  },
+  {
+    "word": "cannot",
+    "start": 127.6,
+    "end": 128.08
+  },
+  {
+    "word": "be",
+    "start": 128.08,
+    "end": 128.24
+  },
+  {
+    "word": "separated",
+    "start": 128.24,
+    "end": 128.88
+  },
+  {
+    "word": "from",
+    "start": 128.88,
+    "end": 129.04
+  },
+  {
+    "word": "a",
+    "start": 129.04,
+    "end": 129.2
+  },
+  {
+    "word": "physical",
+    "start": 129.2,
+    "end": 129.68
+  },
+  {
+    "word": "body",
+    "start": 129.68,
+    "end": 130.08
+  },
+  {
+    "word": "that",
+    "start": 130.08,
+    "end": 130.24
+  },
+  {
+    "word": "can",
+    "start": 130.24,
+    "end": 130.4
+  },
+  {
+    "word": "be",
+    "start": 130.4,
+    "end": 130.56
+  },
+  {
+    "word": "destroyed.",
+    "start": 130.56,
+    "end": 131.6
+  },
+  {
+    "word": "An",
+    "start": 131.6,
+    "end": 131.84
+  },
+  {
+    "word": "organism",
+    "start": 131.84,
+    "end": 132.56
+  },
+  {
+    "word": "does",
+    "start": 132.56,
+    "end": 132.8
+  },
+  {
+    "word": "not",
+    "start": 132.8,
+    "end": 133.04
+  },
+  {
+    "word": "predict",
+    "start": 133.04,
+    "end": 133.52
+  },
+  {
+    "word": "its",
+    "start": 133.52,
+    "end": 133.76
+  },
+  {
+    "word": "environment",
+    "start": 133.76,
+    "end": 134.48
+  },
+  {
+    "word": "because",
+    "start": 134.64,
+    "end": 134.88
+  },
+  {
+    "word": "it",
+    "start": 134.88,
+    "end": 135.12
+  },
+  {
+    "word": "is",
+    "start": 135.12,
+    "end": 135.28
+  },
+  {
+    "word": "mathematically",
+    "start": 135.28,
+    "end": 136.08
+  },
+  {
+    "word": "elegant",
+    "start": 136.08,
+    "end": 136.64
+  },
+  {
+    "word": "to",
+    "start": 136.64,
+    "end": 136.8
+  },
+  {
+    "word": "do",
+    "start": 136.8,
+    "end": 137.04
+  },
+  {
+    "word": "so.",
+    "start": 137.04,
+    "end": 137.6
+  },
+  {
+    "word": "It",
+    "start": 137.6,
+    "end": 137.84
+  },
+  {
+    "word": "predicts",
+    "start": 137.84,
+    "end": 138.48
+  },
+  {
+    "word": "because",
+    "start": 138.48,
+    "end": 138.8
+  },
+  {
+    "word": "failing",
+    "start": 138.8,
+    "end": 139.28
+  },
+  {
+    "word": "to",
+    "start": 139.28,
+    "end": 139.44
+  },
+  {
+    "word": "predict",
+    "start": 139.44,
+    "end": 139.84
+  },
+  {
+    "word": "is",
+    "start": 139.84,
+    "end": 140.08
+  },
+  {
+    "word": "fatal.",
+    "start": 140.08,
+    "end": 140.88
+  },
+  {
+    "word": "Neuroscientist",
+    "start": 140.88,
+    "end": 141.84
+  },
+  {
+    "word": "Anil",
+    "start": 141.84,
+    "end": 142.32
+  },
+  {
+    "word": "Seth",
+    "start": 142.4,
+    "end": 142.88
+  },
+  {
+    "word": "calls",
+    "start": 142.88,
+    "end": 143.2
+  },
+  {
+    "word": "human",
+    "start": 143.2,
+    "end": 143.6
+  },
+  {
+    "word": "perception",
+    "start": 143.6,
+    "end": 144.08
+  },
+  {
+    "word": "a",
+    "start": 144.08,
+    "end": 144.32
+  },
+  {
+    "word": "controlled",
+    "start": 144.32,
+    "end": 144.96
+  },
+  {
+    "word": "hallucination",
+    "start": 144.96,
+    "end": 146.0
+  },
+  {
+    "word": "that",
+    "start": 146.0,
+    "end": 146.24
+  },
+  {
+    "word": "is",
+    "start": 146.24,
+    "end": 146.48
+  },
+  {
+    "word": "carefully",
+    "start": 146.48,
+    "end": 147.04
+  },
+  {
+    "word": "yoked",
+    "start": 147.04,
+    "end": 147.52
+  },
+  {
+    "word": "to",
+    "start": 147.52,
+    "end": 147.6
+  },
+  {
+    "word": "the",
+    "start": 147.6,
+    "end": 147.84
+  },
+  {
+    "word": "real",
+    "start": 147.84,
+    "end": 148.08
+  },
+  {
+    "word": "world",
+    "start": 148.08,
+    "end": 148.32
+  },
+  {
+    "word": "by",
+    "start": 148.32,
+    "end": 148.64
+  },
+  {
+    "word": "constant",
+    "start": 148.64,
+    "end": 149.12
+  },
+  {
+    "word": "error",
+    "start": 149.2,
+    "end": 149.52
+  },
+  {
+    "word": "prediction.",
+    "start": 149.52,
+    "end": 150.48
+  },
+  {
+    "word": "The",
+    "start": 150.48,
+    "end": 150.72
+  },
+  {
+    "word": "AI",
+    "start": 150.72,
+    "end": 151.2
+  },
+  {
+    "word": "industry",
+    "start": 151.2,
+    "end": 151.68
+  },
+  {
+    "word": "quickly",
+    "start": 151.68,
+    "end": 152.08
+  },
+  {
+    "word": "co-opted",
+    "start": 152.08,
+    "end": 152.72
+  },
+  {
+    "word": "Seth's",
+    "start": 152.72,
+    "end": 153.2
+  },
+  {
+    "word": "phrase.",
+    "start": 153.2,
+    "end": 153.92
+  },
+  {
+    "word": "They",
+    "start": 153.92,
+    "end": 154.16
+  },
+  {
+    "word": "began",
+    "start": 154.16,
+    "end": 154.48
+  },
+  {
+    "word": "calling",
+    "start": 154.48,
+    "end": 154.88
+  },
+  {
+    "word": "large",
+    "start": 154.88,
+    "end": 155.2
+  },
+  {
+    "word": "language",
+    "start": 155.2,
+    "end": 155.68
+  },
+  {
+    "word": "model",
+    "start": 155.68,
+    "end": 156.0
+  },
+  {
+    "word": "confabulations",
+    "start": 156.0,
+    "end": 156.96
+  },
+  {
+    "word": "hallucinations,",
+    "start": 156.96,
+    "end": 158.32
+  },
+  {
+    "word": "completely",
+    "start": 158.32,
+    "end": 158.88
+  },
+  {
+    "word": "unmooring",
+    "start": 158.88,
+    "end": 159.76
+  },
+  {
+    "word": "the",
+    "start": 159.76,
+    "end": 159.84
+  },
+  {
+    "word": "concept",
+    "start": 159.84,
+    "end": 160.24
+  },
+  {
+    "word": "from",
+    "start": 160.24,
+    "end": 160.4
+  },
+  {
+    "word": "its",
+    "start": 160.4,
+    "end": 160.64
+  },
+  {
+    "word": "necessary",
+    "start": 160.64,
+    "end": 161.2
+  },
+  {
+    "word": "biological",
+    "start": 161.2,
+    "end": 161.84
+  },
+  {
+    "word": "caveats.",
+    "start": 161.84,
+    "end": 162.96
+  },
+  {
+    "word": "The",
+    "start": 162.96,
+    "end": 163.12
+  },
+  {
+    "word": "consequences",
+    "start": 163.12,
+    "end": 163.84
+  },
+  {
+    "word": "for",
+    "start": 163.84,
+    "end": 164.0
+  },
+  {
+    "word": "errors",
+    "start": 164.08,
+    "end": 164.48
+  },
+  {
+    "word": "across",
+    "start": 164.48,
+    "end": 164.88
+  },
+  {
+    "word": "these",
+    "start": 164.88,
+    "end": 165.12
+  },
+  {
+    "word": "two",
+    "start": 165.12,
+    "end": 165.36
+  },
+  {
+    "word": "systems",
+    "start": 165.36,
+    "end": 165.84
+  },
+  {
+    "word": "could",
+    "start": 165.84,
+    "end": 166.08
+  },
+  {
+    "word": "not",
+    "start": 166.08,
+    "end": 166.4
+  },
+  {
+    "word": "be",
+    "start": 166.4,
+    "end": 166.56
+  },
+  {
+    "word": "more",
+    "start": 166.56,
+    "end": 166.8
+  },
+  {
+    "word": "different.",
+    "start": 166.8,
+    "end": 167.36
+  },
+  {
+    "word": "If",
+    "start": 167.36,
+    "end": 167.6
+  },
+  {
+    "word": "a",
+    "start": 167.6,
+    "end": 167.76
+  },
+  {
+    "word": "biological",
+    "start": 167.76,
+    "end": 168.4
+  },
+  {
+    "word": "brain",
+    "start": 168.4,
+    "end": 168.8
+  },
+  {
+    "word": "hallucinates",
+    "start": 168.8,
+    "end": 169.44
+  },
+  {
+    "word": "a",
+    "start": 169.44,
+    "end": 169.52
+  },
+  {
+    "word": "predator,",
+    "start": 169.52,
+    "end": 170.0
+  },
+  {
+    "word": "the",
+    "start": 170.28,
+    "end": 170.44
+  },
+  {
+    "word": "survival",
+    "start": 170.44,
+    "end": 170.92
+  },
+  {
+    "word": "threat",
+    "start": 170.92,
+    "end": 171.24
+  },
+  {
+    "word": "is",
+    "start": 171.24,
+    "end": 171.4
+  },
+  {
+    "word": "immediate.",
+    "start": 171.4,
+    "end": 172.28
+  },
+  {
+    "word": "When",
+    "start": 172.28,
+    "end": 172.52
+  },
+  {
+    "word": "a",
+    "start": 172.52,
+    "end": 172.68
+  },
+  {
+    "word": "server",
+    "start": 172.68,
+    "end": 173.08
+  },
+  {
+    "word": "rack",
+    "start": 173.08,
+    "end": 173.4
+  },
+  {
+    "word": "outputs",
+    "start": 173.4,
+    "end": 173.88
+  },
+  {
+    "word": "an",
+    "start": 173.88,
+    "end": 173.96
+  },
+  {
+    "word": "incorrect",
+    "start": 173.96,
+    "end": 174.52
+  },
+  {
+    "word": "word,",
+    "start": 174.52,
+    "end": 175.0
+  },
+  {
+    "word": "there",
+    "start": 175.0,
+    "end": 175.16
+  },
+  {
+    "word": "is",
+    "start": 175.16,
+    "end": 175.32
+  },
+  {
+    "word": "zero",
+    "start": 175.48,
+    "end": 175.8
+  },
+  {
+    "word": "physical",
+    "start": 175.8,
+    "end": 176.28
+  },
+  {
+    "word": "danger",
+    "start": 176.28,
+    "end": 176.6
+  },
+  {
+    "word": "to",
+    "start": 176.6,
+    "end": 176.76
+  },
+  {
+    "word": "the",
+    "start": 176.76,
+    "end": 176.92
+  },
+  {
+    "word": "machine.",
+    "start": 176.92,
+    "end": 177.72
+  },
+  {
+    "word": "When",
+    "start": 177.72,
+    "end": 178.04
+  },
+  {
+    "word": "the",
+    "start": 178.04,
+    "end": 178.2
+  },
+  {
+    "word": "tech",
+    "start": 178.2,
+    "end": 178.68
+  },
+  {
+    "word": "industry",
+    "start": 178.68,
+    "end": 179.24
+  },
+  {
+    "word": "excuses",
+    "start": 179.24,
+    "end": 179.88
+  },
+  {
+    "word": "glitches",
+    "start": 179.88,
+    "end": 180.6
+  },
+  {
+    "word": "as",
+    "start": 180.6,
+    "end": 180.84
+  },
+  {
+    "word": "hallucinations,",
+    "start": 180.84,
+    "end": 182.2
+  },
+  {
+    "word": "they",
+    "start": 182.2,
+    "end": 182.44
+  },
+  {
+    "word": "borrow",
+    "start": 182.44,
+    "end": 182.92
+  },
+  {
+    "word": "the",
+    "start": 182.92,
+    "end": 183.16
+  },
+  {
+    "word": "profound",
+    "start": 183.16,
+    "end": 183.72
+  },
+  {
+    "word": "flavor",
+    "start": 183.72,
+    "end": 184.2
+  },
+  {
+    "word": "of",
+    "start": 184.2,
+    "end": 184.44
+  },
+  {
+    "word": "human",
+    "start": 184.44,
+    "end": 184.76
+  },
+  {
+    "word": "consciousness",
+    "start": 184.76,
+    "end": 185.56
+  },
+  {
+    "word": "while",
+    "start": 185.8,
+    "end": 186.12
+  },
+  {
+    "word": "discarding",
+    "start": 186.12,
+    "end": 186.76
+  },
+  {
+    "word": "the",
+    "start": 186.76,
+    "end": 186.92
+  },
+  {
+    "word": "metabolic",
+    "start": 186.92,
+    "end": 187.64
+  },
+  {
+    "word": "cost",
+    "start": 187.64,
+    "end": 188.12
+  },
+  {
+    "word": "of",
+    "start": 188.12,
+    "end": 188.36
+  },
+  {
+    "word": "being",
+    "start": 188.36,
+    "end": 188.6
+  },
+  {
+    "word": "wrong.",
+    "start": 188.6,
+    "end": 189.4
+  },
+  {
+    "word": "Which",
+    "start": 189.4,
+    "end": 189.64
+  },
+  {
+    "word": "brings",
+    "start": 189.64,
+    "end": 190.04
+  },
+  {
+    "word": "us",
+    "start": 190.04,
+    "end": 190.2
+  },
+  {
+    "word": "back",
+    "start": 190.2,
+    "end": 190.44
+  },
+  {
+    "word": "to",
+    "start": 190.44,
+    "end": 190.6
+  },
+  {
+    "word": "the",
+    "start": 190.6,
+    "end": 190.84
+  },
+  {
+    "word": "AI",
+    "start": 190.84,
+    "end": 191.24
+  },
+  {
+    "word": "products",
+    "start": 191.24,
+    "end": 191.72
+  },
+  {
+    "word": "being",
+    "start": 191.72,
+    "end": 191.96
+  },
+  {
+    "word": "sold",
+    "start": 191.96,
+    "end": 192.36
+  },
+  {
+    "word": "today.",
+    "start": 192.36,
+    "end": 193.0
+  },
+  {
+    "word": "When",
+    "start": 193.0,
+    "end": 193.24
+  },
+  {
+    "word": "a",
+    "start": 193.24,
+    "end": 193.4
+  },
+  {
+    "word": "product",
+    "start": 193.4,
+    "end": 193.8
+  },
+  {
+    "word": "page",
+    "start": 193.8,
+    "end": 194.12
+  },
+  {
+    "word": "claims",
+    "start": 194.12,
+    "end": 194.52
+  },
+  {
+    "word": "a",
+    "start": 194.52,
+    "end": 194.76
+  },
+  {
+    "word": "model",
+    "start": 194.76,
+    "end": 195.16
+  },
+  {
+    "word": "thinks",
+    "start": 195.16,
+    "end": 195.56
+  },
+  {
+    "word": "or",
+    "start": 195.72,
+    "end": 196.04
+  },
+  {
+    "word": "reasons,",
+    "start": 196.04,
+    "end": 196.92
+  },
+  {
+    "word": "it",
+    "start": 196.92,
+    "end": 197.08
+  },
+  {
+    "word": "implies",
+    "start": 197.08,
+    "end": 197.64
+  },
+  {
+    "word": "an",
+    "start": 197.64,
+    "end": 197.88
+  },
+  {
+    "word": "organismic",
+    "start": 197.88,
+    "end": 198.68
+  },
+  {
+    "word": "commitment.",
+    "start": 198.68,
+    "end": 199.64
+  },
+  {
+    "word": "It",
+    "start": 199.64,
+    "end": 199.8
+  },
+  {
+    "word": "promises",
+    "start": 199.8,
+    "end": 200.44
+  },
+  {
+    "word": "a",
+    "start": 200.44,
+    "end": 200.6
+  },
+  {
+    "word": "level",
+    "start": 200.6,
+    "end": 200.92
+  },
+  {
+    "word": "of",
+    "start": 200.92,
+    "end": 201.16
+  },
+  {
+    "word": "intent",
+    "start": 201.16,
+    "end": 201.56
+  },
+  {
+    "word": "that",
+    "start": 201.56,
+    "end": 201.8
+  },
+  {
+    "word": "silicon",
+    "start": 201.8,
+    "end": 202.44
+  },
+  {
+    "word": "cannot",
+    "start": 202.44,
+    "end": 202.76
+  },
+  {
+    "word": "fulfill.",
+    "start": 202.76,
+    "end": 203.72
+  },
+  {
+    "word": "It",
+    "start": 203.72,
+    "end": 203.88
+  },
+  {
+    "word": "executes",
+    "start": 203.88,
+    "end": 204.52
+  },
+  {
+    "word": "sequential",
+    "start": 204.52,
+    "end": 205.24
+  },
+  {
+    "word": "token",
+    "start": 205.24,
+    "end": 205.64
+  },
+  {
+    "word": "prediction,",
+    "start": 205.64,
+    "end": 206.44
+  },
+  {
+    "word": "processing",
+    "start": 206.44,
+    "end": 207.08
+  },
+  {
+    "word": "text",
+    "start": 207.08,
+    "end": 207.4
+  },
+  {
+    "word": "inputs",
+    "start": 207.4,
+    "end": 207.96
+  },
+  {
+    "word": "into",
+    "start": 207.96,
+    "end": 208.28
+  },
+  {
+    "word": "statistical",
+    "start": 208.28,
+    "end": 208.92
+  },
+  {
+    "word": "outputs",
+    "start": 208.92,
+    "end": 209.72
+  },
+  {
+    "word": "through",
+    "start": 209.72,
+    "end": 209.88
+  },
+  {
+    "word": "a",
+    "start": 209.88,
+    "end": 210.12
+  },
+  {
+    "word": "transformer",
+    "start": 210.12,
+    "end": 210.76
+  },
+  {
+    "word": "architecture.",
+    "start": 210.76,
+    "end": 211.88
+  },
+  {
+    "word": "Running",
+    "start": 211.88,
+    "end": 212.36
+  },
+  {
+    "word": "safely",
+    "start": 212.36,
+    "end": 212.84
+  },
+  {
+    "word": "on",
+    "start": 212.84,
+    "end": 213.0
+  },
+  {
+    "word": "an",
+    "start": 213.0,
+    "end": 213.16
+  },
+  {
+    "word": "external",
+    "start": 213.16,
+    "end": 213.64
+  },
+  {
+    "word": "grid,",
+    "start": 213.64,
+    "end": 214.28
+  },
+  {
+    "word": "it",
+    "start": 214.28,
+    "end": 214.52
+  },
+  {
+    "word": "has",
+    "start": 214.52,
+    "end": 214.68
+  },
+  {
+    "word": "no",
+    "start": 214.68,
+    "end": 214.92
+  },
+  {
+    "word": "intrinsic",
+    "start": 214.92,
+    "end": 215.64
+  },
+  {
+    "word": "stakes,",
+    "start": 215.64,
+    "end": 216.36
+  },
+  {
+    "word": "optimizing",
+    "start": 216.36,
+    "end": 217.08
+  },
+  {
+    "word": "equations",
+    "start": 217.08,
+    "end": 217.72
+  },
+  {
+    "word": "without",
+    "start": 217.72,
+    "end": 218.12
+  },
+  {
+    "word": "facing",
+    "start": 218.12,
+    "end": 218.52
+  },
+  {
+    "word": "the",
+    "start": 218.52,
+    "end": 218.68
+  },
+  {
+    "word": "threat",
+    "start": 218.68,
+    "end": 219.0
+  },
+  {
+    "word": "of",
+    "start": 219.0,
+    "end": 219.16
+  },
+  {
+    "word": "its",
+    "start": 219.16,
+    "end": 219.4
+  },
+  {
+    "word": "own",
+    "start": 219.4,
+    "end": 219.56
+  },
+  {
+    "word": "destruction.",
+    "start": 219.56,
+    "end": 220.6
+  },
+  {
+    "word": "The",
+    "start": 220.6,
+    "end": 220.84
+  },
+  {
+    "word": "human",
+    "start": 220.84,
+    "end": 221.24
+  },
+  {
+    "word": "brain",
+    "start": 221.24,
+    "end": 221.72
+  },
+  {
+    "word": "is",
+    "start": 221.72,
+    "end": 221.88
+  },
+  {
+    "word": "not",
+    "start": 221.88,
+    "end": 222.12
+  },
+  {
+    "word": "running",
+    "start": 222.12,
+    "end": 222.44
+  },
+  {
+    "word": "a",
+    "start": 222.44,
+    "end": 222.6
+  },
+  {
+    "word": "detached",
+    "start": 222.6,
+    "end": 223.16
+  },
+  {
+    "word": "mathematical",
+    "start": 223.16,
+    "end": 223.88
+  },
+  {
+    "word": "loss",
+    "start": 223.88,
+    "end": 224.2
+  },
+  {
+    "word": "function.",
+    "start": 224.2,
+    "end": 224.76
+  },
+  {
+    "word": "It",
+    "start": 224.96,
+    "end": 225.12
+  },
+  {
+    "word": "is",
+    "start": 225.12,
+    "end": 225.28
+  },
+  {
+    "word": "running",
+    "start": 225.28,
+    "end": 225.6
+  },
+  {
+    "word": "a",
+    "start": 225.6,
+    "end": 225.84
+  },
+  {
+    "word": "strict",
+    "start": 225.84,
+    "end": 226.24
+  },
+  {
+    "word": "life-or-death",
+    "start": 226.4,
+    "end": 227.2
+  },
+  {
+    "word": "body",
+    "start": 227.2,
+    "end": 227.52
+  },
+  {
+    "word": "budget.",
+    "start": 227.52,
+    "end": 228.24
+  },
+  {
+    "word": "Ignoring",
+    "start": 228.24,
+    "end": 228.88
+  },
+  {
+    "word": "this",
+    "start": 228.88,
+    "end": 229.04
+  },
+  {
+    "word": "line",
+    "start": 229.04,
+    "end": 229.36
+  },
+  {
+    "word": "has",
+    "start": 229.36,
+    "end": 229.6
+  },
+  {
+    "word": "severe",
+    "start": 229.6,
+    "end": 230.08
+  },
+  {
+    "word": "downstream",
+    "start": 230.08,
+    "end": 230.72
+  },
+  {
+    "word": "consequences.",
+    "start": 230.72,
+    "end": 231.76
+  },
+  {
+    "word": "It",
+    "start": 231.76,
+    "end": 231.92
+  },
+  {
+    "word": "distorts",
+    "start": 231.92,
+    "end": 232.56
+  },
+  {
+    "word": "how",
+    "start": 232.56,
+    "end": 232.8
+  },
+  {
+    "word": "lawmakers",
+    "start": 232.8,
+    "end": 233.44
+  },
+  {
+    "word": "attempt",
+    "start": 233.44,
+    "end": 233.76
+  },
+  {
+    "word": "to",
+    "start": 233.76,
+    "end": 233.84
+  },
+  {
+    "word": "regulate",
+    "start": 233.84,
+    "end": 234.4
+  },
+  {
+    "word": "these",
+    "start": 234.4,
+    "end": 234.56
+  },
+  {
+    "word": "systems,",
+    "start": 234.56,
+    "end": 235.44
+  },
+  {
+    "word": "and",
+    "start": 235.44,
+    "end": 235.6
+  },
+  {
+    "word": "it",
+    "start": 235.6,
+    "end": 235.84
+  },
+  {
+    "word": "changes",
+    "start": 235.84,
+    "end": 236.32
+  },
+  {
+    "word": "what",
+    "start": 236.32,
+    "end": 236.48
+  },
+  {
+    "word": "we",
+    "start": 236.48,
+    "end": 236.72
+  },
+  {
+    "word": "forget",
+    "start": 236.72,
+    "end": 237.12
+  },
+  {
+    "word": "about",
+    "start": 237.12,
+    "end": 237.36
+  },
+  {
+    "word": "our",
+    "start": 237.36,
+    "end": 237.6
+  },
+  {
+    "word": "humanity",
+    "start": 237.6,
+    "end": 238.16
+  },
+  {
+    "word": "when",
+    "start": 238.16,
+    "end": 238.4
+  },
+  {
+    "word": "we",
+    "start": 238.4,
+    "end": 238.48
+  },
+  {
+    "word": "treat",
+    "start": 238.48,
+    "end": 238.8
+  },
+  {
+    "word": "software",
+    "start": 238.8,
+    "end": 239.36
+  },
+  {
+    "word": "as",
+    "start": 239.36,
+    "end": 239.52
+  },
+  {
+    "word": "a",
+    "start": 239.52,
+    "end": 239.6
+  },
+  {
+    "word": "mirror.",
+    "start": 239.6,
+    "end": 240.4
+  },
+  {
+    "word": "The",
+    "start": 240.4,
+    "end": 240.56
+  },
+  {
+    "word": "next",
+    "start": 240.56,
+    "end": 240.8
+  },
+  {
+    "word": "time",
+    "start": 240.8,
+    "end": 241.04
+  },
+  {
+    "word": "a",
+    "start": 241.04,
+    "end": 241.2
+  },
+  {
+    "word": "tech",
+    "start": 241.2,
+    "end": 241.6
+  },
+  {
+    "word": "CEO",
+    "start": 241.6,
+    "end": 242.08
+  },
+  {
+    "word": "claims",
+    "start": 242.08,
+    "end": 242.48
+  },
+  {
+    "word": "their",
+    "start": 242.48,
+    "end": 242.72
+  },
+  {
+    "word": "model",
+    "start": 242.72,
+    "end": 243.04
+  },
+  {
+    "word": "is",
+    "start": 243.04,
+    "end": 243.28
+  },
+  {
+    "word": "hallucinating",
+    "start": 243.28,
+    "end": 244.24
+  },
+  {
+    "word": "or",
+    "start": 244.24,
+    "end": 244.56
+  },
+  {
+    "word": "thinking,",
+    "start": 244.56,
+    "end": 245.52
+  },
+  {
+    "word": "ask",
+    "start": 245.52,
+    "end": 245.76
+  },
+  {
+    "word": "yourself",
+    "start": 245.76,
+    "end": 246.32
+  },
+  {
+    "word": "what",
+    "start": 246.32,
+    "end": 246.56
+  },
+  {
+    "word": "the",
+    "start": 246.56,
+    "end": 246.8
+  },
+  {
+    "word": "system",
+    "start": 246.8,
+    "end": 247.12
+  },
+  {
+    "word": "is",
+    "start": 247.12,
+    "end": 247.36
+  },
+  {
+    "word": "physically",
+    "start": 247.36,
+    "end": 247.92
+  },
+  {
+    "word": "paying",
+    "start": 247.92,
+    "end": 248.4
+  },
+  {
+    "word": "for",
+    "start": 248.4,
+    "end": 248.64
+  },
+  {
+    "word": "its",
+    "start": 248.64,
+    "end": 248.8
+  },
+  {
+    "word": "errors.",
+    "start": 248.88,
+    "end": 249.84
+  },
+  {
+    "word": "Because",
+    "start": 249.84,
+    "end": 250.08
+  },
+  {
+    "word": "if",
+    "start": 250.08,
+    "end": 250.24
+  },
+  {
+    "word": "the",
+    "start": 250.24,
+    "end": 250.32
+  },
+  {
+    "word": "answer",
+    "start": 250.32,
+    "end": 250.64
+  },
+  {
+    "word": "is",
+    "start": 250.64,
+    "end": 250.88
+  },
+  {
+    "word": "nothing,",
+    "start": 250.88,
+    "end": 251.6
+  },
+  {
+    "word": "it",
+    "start": 251.6,
+    "end": 251.76
+  },
+  {
+    "word": "is",
+    "start": 251.76,
+    "end": 252.0
+  },
+  {
+    "word": "just",
+    "start": 252.0,
+    "end": 252.32
+  },
+  {
+    "word": "math,",
+    "start": 252.32,
+    "end": 253.12
+  },
+  {
+    "word": "not",
+    "start": 253.12,
+    "end": 253.44
+  },
+  {
+    "word": "a",
+    "start": 253.44,
+    "end": 253.68
+  },
+  {
+    "word": "mind.",
+    "start": 253.68,
+    "end": 254.8
+  }
+]

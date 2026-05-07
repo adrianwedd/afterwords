@@ -1,0 +1,26 @@
+VIDEO: ZXB_at0Ke_w
+TITLE: Why Demonstrated Risk Is Ignored
+
+ISSUE at ~20s: "without a single change to its code or its deployment plan"
+SOURCE SAYS: "proceed as if the evidence doesn't exist", "nothing moved", "vulnerability persists"
+REPLACEMENT: "without any remediation being applied to the system or its deployment strategy."
+
+ISSUE at ~60s: "repeated by hundreds of employees across every department"
+SOURCE SAYS: "compounded across an organisation"
+REPLACEMENT: "repeated and compounded across the entire organisation"
+
+ISSUE at ~134s: "At the executive level, management often uses bureaucracy to maintain a distance from messy, empirical reality."
+SOURCE SAYS: "Governance loves artefacts... these can become a substitute for empirical validation."
+REPLACEMENT: "Governance structures often prioritize administrative artefacts over messy empirical reality."
+
+ISSUE at ~134s: "This is the danger of compliance theater."
+SOURCE SAYS: "Compliance substituting for reality... safety is symbolic."
+REPLACEMENT: "This is the danger of symbolic safety, where documentation replaces reality."
+
+ISSUE at ~195s: "The bureaucratic layers of the organization work to neutralize truth long before it can threaten the institutional status quo."
+SOURCE SAYS: "Four mechanisms... reliably prevent demonstrated risk from reaching remediation."
+REPLACEMENT: "These structural mechanisms reliably prevent demonstrated risk from reaching remediation."
+
+ISSUE at ~271s: "Checklists are necessary, but they are insufficient with adversarial testing and red team reviews."
+SOURCE SAYS: "Checklists are necessary but insufficient. Adversarial testing... must have equal standing with documentation."
+REPLACEMENT: "Checklists are necessary, but they are insufficient unless they are paired with adversarial testing and red team reviews."

@@ -1,0 +1,3467 @@
+[
+  {
+    "word": "This",
+    "start": 0.32,
+    "end": 0.64
+  },
+  {
+    "word": "heavy",
+    "start": 0.64,
+    "end": 1.28
+  },
+  {
+    "word": "iron",
+    "start": 1.28,
+    "end": 1.76
+  },
+  {
+    "word": "pendulum",
+    "start": 1.76,
+    "end": 2.48
+  },
+  {
+    "word": "swings",
+    "start": 2.48,
+    "end": 3.04
+  },
+  {
+    "word": "in",
+    "start": 3.04,
+    "end": 3.2
+  },
+  {
+    "word": "a",
+    "start": 3.2,
+    "end": 3.36
+  },
+  {
+    "word": "smooth,",
+    "start": 3.36,
+    "end": 3.92
+  },
+  {
+    "word": "predictable",
+    "start": 3.92,
+    "end": 4.64
+  },
+  {
+    "word": "arc.",
+    "start": 4.64,
+    "end": 5.44
+  },
+  {
+    "word": "For",
+    "start": 5.44,
+    "end": 5.68
+  },
+  {
+    "word": "centuries,",
+    "start": 5.68,
+    "end": 6.48
+  },
+  {
+    "word": "this",
+    "start": 6.48,
+    "end": 6.72
+  },
+  {
+    "word": "was",
+    "start": 6.72,
+    "end": 6.88
+  },
+  {
+    "word": "the",
+    "start": 6.88,
+    "end": 7.12
+  },
+  {
+    "word": "model",
+    "start": 7.12,
+    "end": 7.44
+  },
+  {
+    "word": "for",
+    "start": 7.44,
+    "end": 7.6
+  },
+  {
+    "word": "the",
+    "start": 7.6,
+    "end": 7.84
+  },
+  {
+    "word": "entire",
+    "start": 7.84,
+    "end": 8.32
+  },
+  {
+    "word": "cosmos,",
+    "start": 8.32,
+    "end": 9.28
+  },
+  {
+    "word": "a",
+    "start": 9.28,
+    "end": 9.52
+  },
+  {
+    "word": "single",
+    "start": 9.52,
+    "end": 9.92
+  },
+  {
+    "word": "unified",
+    "start": 10.08,
+    "end": 10.8
+  },
+  {
+    "word": "machine",
+    "start": 10.8,
+    "end": 11.36
+  },
+  {
+    "word": "governed",
+    "start": 11.36,
+    "end": 11.92
+  },
+  {
+    "word": "by",
+    "start": 11.92,
+    "end": 12.16
+  },
+  {
+    "word": "one",
+    "start": 12.16,
+    "end": 12.48
+  },
+  {
+    "word": "set",
+    "start": 12.48,
+    "end": 12.64
+  },
+  {
+    "word": "of",
+    "start": 12.64,
+    "end": 12.8
+  },
+  {
+    "word": "rules",
+    "start": 12.8,
+    "end": 13.36
+  },
+  {
+    "word": "that",
+    "start": 13.36,
+    "end": 13.68
+  },
+  {
+    "word": "could",
+    "start": 13.68,
+    "end": 13.84
+  },
+  {
+    "word": "explain",
+    "start": 13.84,
+    "end": 14.56
+  },
+  {
+    "word": "everything",
+    "start": 14.56,
+    "end": 14.8
+  },
+  {
+    "word": "from",
+    "start": 14.8,
+    "end": 15.04
+  },
+  {
+    "word": "a",
+    "start": 15.04,
+    "end": 15.28
+  },
+  {
+    "word": "falling",
+    "start": 15.28,
+    "end": 15.68
+  },
+  {
+    "word": "apple",
+    "start": 15.68,
+    "end": 16.08
+  },
+  {
+    "word": "to",
+    "start": 16.08,
+    "end": 16.24
+  },
+  {
+    "word": "the",
+    "start": 16.24,
+    "end": 16.4
+  },
+  {
+    "word": "orbits",
+    "start": 16.4,
+    "end": 16.88
+  },
+  {
+    "word": "of",
+    "start": 16.88,
+    "end": 17.12
+  },
+  {
+    "word": "distant",
+    "start": 17.12,
+    "end": 17.6
+  },
+  {
+    "word": "planets.",
+    "start": 17.6,
+    "end": 18.64
+  },
+  {
+    "word": "As",
+    "start": 18.64,
+    "end": 18.88
+  },
+  {
+    "word": "our",
+    "start": 18.88,
+    "end": 19.04
+  },
+  {
+    "word": "measurements",
+    "start": 19.04,
+    "end": 19.68
+  },
+  {
+    "word": "reached",
+    "start": 19.68,
+    "end": 20.08
+  },
+  {
+    "word": "the",
+    "start": 20.08,
+    "end": 20.24
+  },
+  {
+    "word": "extremes",
+    "start": 20.24,
+    "end": 20.96
+  },
+  {
+    "word": "of",
+    "start": 20.96,
+    "end": 21.2
+  },
+  {
+    "word": "the",
+    "start": 21.2,
+    "end": 21.44
+  },
+  {
+    "word": "very",
+    "start": 21.44,
+    "end": 21.68
+  },
+  {
+    "word": "large",
+    "start": 21.68,
+    "end": 22.16
+  },
+  {
+    "word": "and",
+    "start": 22.16,
+    "end": 22.32
+  },
+  {
+    "word": "the",
+    "start": 22.32,
+    "end": 22.48
+  },
+  {
+    "word": "very",
+    "start": 22.48,
+    "end": 22.8
+  },
+  {
+    "word": "small,",
+    "start": 22.8,
+    "end": 23.52
+  },
+  {
+    "word": "that",
+    "start": 23.52,
+    "end": 23.76
+  },
+  {
+    "word": "model",
+    "start": 23.76,
+    "end": 24.24
+  },
+  {
+    "word": "failed.",
+    "start": 24.24,
+    "end": 25.12
+  },
+  {
+    "word": "Modern",
+    "start": 25.12,
+    "end": 25.68
+  },
+  {
+    "word": "physics",
+    "start": 25.68,
+    "end": 26.16
+  },
+  {
+    "word": "shows",
+    "start": 26.16,
+    "end": 26.48
+  },
+  {
+    "word": "that",
+    "start": 26.48,
+    "end": 26.64
+  },
+  {
+    "word": "the",
+    "start": 26.64,
+    "end": 26.8
+  },
+  {
+    "word": "universe",
+    "start": 26.8,
+    "end": 27.44
+  },
+  {
+    "word": "does",
+    "start": 27.44,
+    "end": 27.6
+  },
+  {
+    "word": "not",
+    "start": 27.6,
+    "end": 27.84
+  },
+  {
+    "word": "follow",
+    "start": 27.84,
+    "end": 28.4
+  },
+  {
+    "word": "one",
+    "start": 28.4,
+    "end": 28.64
+  },
+  {
+    "word": "set",
+    "start": 28.64,
+    "end": 28.88
+  },
+  {
+    "word": "of",
+    "start": 28.88,
+    "end": 29.04
+  },
+  {
+    "word": "rules.",
+    "start": 29.04,
+    "end": 29.76
+  },
+  {
+    "word": "It",
+    "start": 29.76,
+    "end": 29.92
+  },
+  {
+    "word": "follows",
+    "start": 29.92,
+    "end": 30.64
+  },
+  {
+    "word": "two.",
+    "start": 30.64,
+    "end": 31.2
+  },
+  {
+    "word": "We",
+    "start": 31.2,
+    "end": 31.44
+  },
+  {
+    "word": "describe",
+    "start": 31.44,
+    "end": 32.0
+  },
+  {
+    "word": "our",
+    "start": 32.0,
+    "end": 32.24
+  },
+  {
+    "word": "reality",
+    "start": 32.24,
+    "end": 32.72
+  },
+  {
+    "word": "using",
+    "start": 32.72,
+    "end": 33.2
+  },
+  {
+    "word": "two",
+    "start": 33.2,
+    "end": 33.36
+  },
+  {
+    "word": "distinct",
+    "start": 33.36,
+    "end": 34.0
+  },
+  {
+    "word": "languages,",
+    "start": 34.0,
+    "end": 35.04
+  },
+  {
+    "word": "general",
+    "start": 35.04,
+    "end": 35.52
+  },
+  {
+    "word": "relativity",
+    "start": 35.52,
+    "end": 36.24
+  },
+  {
+    "word": "for",
+    "start": 36.24,
+    "end": 36.4
+  },
+  {
+    "word": "the",
+    "start": 36.4,
+    "end": 36.48
+  },
+  {
+    "word": "massive",
+    "start": 36.48,
+    "end": 36.96
+  },
+  {
+    "word": "scale",
+    "start": 36.96,
+    "end": 37.28
+  },
+  {
+    "word": "of",
+    "start": 37.28,
+    "end": 37.44
+  },
+  {
+    "word": "galaxies",
+    "start": 37.44,
+    "end": 38.08
+  },
+  {
+    "word": "and",
+    "start": 38.32,
+    "end": 38.56
+  },
+  {
+    "word": "quantum",
+    "start": 38.56,
+    "end": 39.04
+  },
+  {
+    "word": "mechanics",
+    "start": 39.04,
+    "end": 39.6
+  },
+  {
+    "word": "for",
+    "start": 39.6,
+    "end": 39.76
+  },
+  {
+    "word": "the",
+    "start": 39.76,
+    "end": 39.92
+  },
+  {
+    "word": "subatomic",
+    "start": 39.92,
+    "end": 40.64
+  },
+  {
+    "word": "scale",
+    "start": 40.64,
+    "end": 41.04
+  },
+  {
+    "word": "of",
+    "start": 41.04,
+    "end": 41.36
+  },
+  {
+    "word": "particles.",
+    "start": 41.36,
+    "end": 42.24
+  },
+  {
+    "word": "Both",
+    "start": 42.24,
+    "end": 42.64
+  },
+  {
+    "word": "theories",
+    "start": 42.64,
+    "end": 43.12
+  },
+  {
+    "word": "are",
+    "start": 43.12,
+    "end": 43.28
+  },
+  {
+    "word": "mathematically",
+    "start": 43.28,
+    "end": 44.08
+  },
+  {
+    "word": "precise",
+    "start": 44.08,
+    "end": 44.64
+  },
+  {
+    "word": "and",
+    "start": 44.8,
+    "end": 45.04
+  },
+  {
+    "word": "have",
+    "start": 45.04,
+    "end": 45.2
+  },
+  {
+    "word": "survived",
+    "start": 45.2,
+    "end": 45.84
+  },
+  {
+    "word": "every",
+    "start": 45.84,
+    "end": 46.16
+  },
+  {
+    "word": "experimental",
+    "start": 46.16,
+    "end": 46.8
+  },
+  {
+    "word": "test",
+    "start": 46.8,
+    "end": 47.12
+  },
+  {
+    "word": "we've",
+    "start": 47.12,
+    "end": 47.36
+  },
+  {
+    "word": "thrown",
+    "start": 47.36,
+    "end": 47.68
+  },
+  {
+    "word": "at",
+    "start": 47.68,
+    "end": 47.84
+  },
+  {
+    "word": "them.",
+    "start": 47.84,
+    "end": 48.32
+  },
+  {
+    "word": "They",
+    "start": 48.32,
+    "end": 48.48
+  },
+  {
+    "word": "are",
+    "start": 48.48,
+    "end": 48.72
+  },
+  {
+    "word": "the",
+    "start": 48.72,
+    "end": 48.88
+  },
+  {
+    "word": "most",
+    "start": 48.88,
+    "end": 49.12
+  },
+  {
+    "word": "accurate",
+    "start": 49.12,
+    "end": 49.68
+  },
+  {
+    "word": "models",
+    "start": 49.68,
+    "end": 50.16
+  },
+  {
+    "word": "humans",
+    "start": 50.16,
+    "end": 50.64
+  },
+  {
+    "word": "have",
+    "start": 50.64,
+    "end": 50.8
+  },
+  {
+    "word": "ever",
+    "start": 50.8,
+    "end": 51.12
+  },
+  {
+    "word": "constructed.",
+    "start": 51.12,
+    "end": 52.24
+  },
+  {
+    "word": "The",
+    "start": 52.24,
+    "end": 52.48
+  },
+  {
+    "word": "tension",
+    "start": 52.48,
+    "end": 52.96
+  },
+  {
+    "word": "lies",
+    "start": 52.96,
+    "end": 53.28
+  },
+  {
+    "word": "in",
+    "start": 53.28,
+    "end": 53.44
+  },
+  {
+    "word": "their",
+    "start": 53.44,
+    "end": 53.68
+  },
+  {
+    "word": "intersection.",
+    "start": 53.68,
+    "end": 54.72
+  },
+  {
+    "word": "Despite",
+    "start": 54.72,
+    "end": 55.28
+  },
+  {
+    "word": "being",
+    "start": 55.28,
+    "end": 55.52
+  },
+  {
+    "word": "individually",
+    "start": 55.52,
+    "end": 56.32
+  },
+  {
+    "word": "perfect,",
+    "start": 56.32,
+    "end": 57.04
+  },
+  {
+    "word": "these",
+    "start": 57.04,
+    "end": 57.28
+  },
+  {
+    "word": "two",
+    "start": 57.28,
+    "end": 57.52
+  },
+  {
+    "word": "models",
+    "start": 57.52,
+    "end": 58.0
+  },
+  {
+    "word": "contradict",
+    "start": 58.0,
+    "end": 58.56
+  },
+  {
+    "word": "each",
+    "start": 58.56,
+    "end": 58.8
+  },
+  {
+    "word": "other",
+    "start": 58.8,
+    "end": 58.96
+  },
+  {
+    "word": "at",
+    "start": 58.96,
+    "end": 59.12
+  },
+  {
+    "word": "a",
+    "start": 59.12,
+    "end": 59.2
+  },
+  {
+    "word": "structural",
+    "start": 59.2,
+    "end": 59.68
+  },
+  {
+    "word": "level.",
+    "start": 59.68,
+    "end": 60.0
+  },
+  {
+    "word": "The",
+    "start": 60.44,
+    "end": 60.6
+  },
+  {
+    "word": "geometric",
+    "start": 60.6,
+    "end": 61.32
+  },
+  {
+    "word": "rules",
+    "start": 61.32,
+    "end": 61.72
+  },
+  {
+    "word": "we",
+    "start": 61.72,
+    "end": 61.96
+  },
+  {
+    "word": "use",
+    "start": 61.96,
+    "end": 62.12
+  },
+  {
+    "word": "to",
+    "start": 62.12,
+    "end": 62.28
+  },
+  {
+    "word": "calculate",
+    "start": 62.28,
+    "end": 62.76
+  },
+  {
+    "word": "the",
+    "start": 62.76,
+    "end": 62.84
+  },
+  {
+    "word": "movement",
+    "start": 62.84,
+    "end": 63.32
+  },
+  {
+    "word": "of",
+    "start": 63.32,
+    "end": 63.56
+  },
+  {
+    "word": "stars",
+    "start": 63.56,
+    "end": 64.2
+  },
+  {
+    "word": "cannot",
+    "start": 64.2,
+    "end": 64.68
+  },
+  {
+    "word": "be",
+    "start": 64.68,
+    "end": 64.92
+  },
+  {
+    "word": "applied",
+    "start": 64.92,
+    "end": 65.24
+  },
+  {
+    "word": "to",
+    "start": 65.24,
+    "end": 65.4
+  },
+  {
+    "word": "the",
+    "start": 65.4,
+    "end": 65.48
+  },
+  {
+    "word": "behavior",
+    "start": 65.48,
+    "end": 66.04
+  },
+  {
+    "word": "of",
+    "start": 66.04,
+    "end": 66.2
+  },
+  {
+    "word": "atoms.",
+    "start": 66.2,
+    "end": 67.0
+  },
+  {
+    "word": "They",
+    "start": 67.0,
+    "end": 67.16
+  },
+  {
+    "word": "are",
+    "start": 67.16,
+    "end": 67.32
+  },
+  {
+    "word": "mutually",
+    "start": 67.32,
+    "end": 67.96
+  },
+  {
+    "word": "untranslatable.",
+    "start": 67.96,
+    "end": 69.4
+  },
+  {
+    "word": "We",
+    "start": 69.4,
+    "end": 69.56
+  },
+  {
+    "word": "are",
+    "start": 69.56,
+    "end": 69.72
+  },
+  {
+    "word": "living",
+    "start": 69.72,
+    "end": 70.12
+  },
+  {
+    "word": "in",
+    "start": 70.12,
+    "end": 70.28
+  },
+  {
+    "word": "a",
+    "start": 70.28,
+    "end": 70.36
+  },
+  {
+    "word": "universe",
+    "start": 70.36,
+    "end": 70.84
+  },
+  {
+    "word": "that",
+    "start": 70.84,
+    "end": 71.08
+  },
+  {
+    "word": "appears",
+    "start": 71.08,
+    "end": 71.4
+  },
+  {
+    "word": "to",
+    "start": 71.4,
+    "end": 71.56
+  },
+  {
+    "word": "operate",
+    "start": 71.56,
+    "end": 72.12
+  },
+  {
+    "word": "on",
+    "start": 72.12,
+    "end": 72.44
+  },
+  {
+    "word": "two",
+    "start": 72.44,
+    "end": 72.68
+  },
+  {
+    "word": "different,",
+    "start": 72.68,
+    "end": 73.16
+  },
+  {
+    "word": "valid",
+    "start": 73.16,
+    "end": 73.64
+  },
+  {
+    "word": "grammars",
+    "start": 73.64,
+    "end": 74.36
+  },
+  {
+    "word": "that",
+    "start": 74.36,
+    "end": 74.6
+  },
+  {
+    "word": "cannot",
+    "start": 74.6,
+    "end": 75.0
+  },
+  {
+    "word": "be",
+    "start": 75.0,
+    "end": 75.16
+  },
+  {
+    "word": "combined,",
+    "start": 75.16,
+    "end": 76.04
+  },
+  {
+    "word": "leaving",
+    "start": 76.04,
+    "end": 76.44
+  },
+  {
+    "word": "us",
+    "start": 76.44,
+    "end": 76.6
+  },
+  {
+    "word": "to",
+    "start": 76.6,
+    "end": 76.68
+  },
+  {
+    "word": "wonder",
+    "start": 76.68,
+    "end": 77.08
+  },
+  {
+    "word": "if",
+    "start": 77.08,
+    "end": 77.24
+  },
+  {
+    "word": "we",
+    "start": 77.24,
+    "end": 77.48
+  },
+  {
+    "word": "have",
+    "start": 77.48,
+    "end": 77.72
+  },
+  {
+    "word": "actually",
+    "start": 77.72,
+    "end": 78.04
+  },
+  {
+    "word": "grasped",
+    "start": 78.04,
+    "end": 78.6
+  },
+  {
+    "word": "the",
+    "start": 78.6,
+    "end": 78.76
+  },
+  {
+    "word": "nature",
+    "start": 78.76,
+    "end": 79.16
+  },
+  {
+    "word": "of",
+    "start": 79.16,
+    "end": 79.4
+  },
+  {
+    "word": "reality",
+    "start": 79.4,
+    "end": 79.96
+  },
+  {
+    "word": "at",
+    "start": 79.96,
+    "end": 80.2
+  },
+  {
+    "word": "all.",
+    "start": 80.2,
+    "end": 80.76
+  },
+  {
+    "word": "To",
+    "start": 80.76,
+    "end": 81.0
+  },
+  {
+    "word": "see",
+    "start": 81.0,
+    "end": 81.16
+  },
+  {
+    "word": "where",
+    "start": 81.16,
+    "end": 81.4
+  },
+  {
+    "word": "the",
+    "start": 81.4,
+    "end": 81.56
+  },
+  {
+    "word": "conflict",
+    "start": 81.56,
+    "end": 82.04
+  },
+  {
+    "word": "begins,",
+    "start": 82.04,
+    "end": 82.84
+  },
+  {
+    "word": "we",
+    "start": 82.84,
+    "end": 83.0
+  },
+  {
+    "word": "have",
+    "start": 83.0,
+    "end": 83.16
+  },
+  {
+    "word": "to",
+    "start": 83.16,
+    "end": 83.32
+  },
+  {
+    "word": "look",
+    "start": 83.32,
+    "end": 83.48
+  },
+  {
+    "word": "at",
+    "start": 83.48,
+    "end": 83.64
+  },
+  {
+    "word": "the",
+    "start": 83.64,
+    "end": 83.88
+  },
+  {
+    "word": "first",
+    "start": 83.88,
+    "end": 84.12
+  },
+  {
+    "word": "grammar,",
+    "start": 84.12,
+    "end": 84.84
+  },
+  {
+    "word": "the",
+    "start": 84.84,
+    "end": 85.08
+  },
+  {
+    "word": "physics",
+    "start": 85.08,
+    "end": 85.56
+  },
+  {
+    "word": "of",
+    "start": 85.56,
+    "end": 85.72
+  },
+  {
+    "word": "the",
+    "start": 85.72,
+    "end": 85.88
+  },
+  {
+    "word": "very",
+    "start": 85.88,
+    "end": 85.96
+  },
+  {
+    "word": "large.",
+    "start": 86.12,
+    "end": 87.0
+  },
+  {
+    "word": "In",
+    "start": 87.0,
+    "end": 87.24
+  },
+  {
+    "word": "general",
+    "start": 87.24,
+    "end": 87.72
+  },
+  {
+    "word": "relativity,",
+    "start": 87.72,
+    "end": 88.52
+  },
+  {
+    "word": "gravity",
+    "start": 88.52,
+    "end": 89.0
+  },
+  {
+    "word": "is",
+    "start": 89.0,
+    "end": 89.16
+  },
+  {
+    "word": "a",
+    "start": 89.16,
+    "end": 89.32
+  },
+  {
+    "word": "continuous",
+    "start": 89.32,
+    "end": 89.96
+  },
+  {
+    "word": "geometric",
+    "start": 89.96,
+    "end": 90.6
+  },
+  {
+    "word": "language.",
+    "start": 90.6,
+    "end": 91.4
+  },
+  {
+    "word": "It",
+    "start": 91.4,
+    "end": 91.56
+  },
+  {
+    "word": "isn't",
+    "start": 91.56,
+    "end": 91.88
+  },
+  {
+    "word": "a",
+    "start": 91.88,
+    "end": 92.04
+  },
+  {
+    "word": "force",
+    "start": 92.04,
+    "end": 92.36
+  },
+  {
+    "word": "that",
+    "start": 92.36,
+    "end": 92.52
+  },
+  {
+    "word": "pulls,",
+    "start": 92.52,
+    "end": 93.24
+  },
+  {
+    "word": "it's",
+    "start": 93.24,
+    "end": 93.56
+  },
+  {
+    "word": "the",
+    "start": 93.56,
+    "end": 93.72
+  },
+  {
+    "word": "shape",
+    "start": 93.72,
+    "end": 94.04
+  },
+  {
+    "word": "of",
+    "start": 94.04,
+    "end": 94.2
+  },
+  {
+    "word": "the",
+    "start": 94.2,
+    "end": 94.28
+  },
+  {
+    "word": "environment",
+    "start": 94.28,
+    "end": 95.0
+  },
+  {
+    "word": "itself.",
+    "start": 95.0,
+    "end": 95.8
+  },
+  {
+    "word": "Wheeler",
+    "start": 95.8,
+    "end": 96.36
+  },
+  {
+    "word": "noted",
+    "start": 96.36,
+    "end": 96.68
+  },
+  {
+    "word": "the",
+    "start": 96.68,
+    "end": 96.84
+  },
+  {
+    "word": "dialogue:",
+    "start": 96.84,
+    "end": 97.64
+  },
+  {
+    "word": "matter",
+    "start": 97.64,
+    "end": 98.12
+  },
+  {
+    "word": "tells",
+    "start": 98.12,
+    "end": 98.44
+  },
+  {
+    "word": "space",
+    "start": 98.44,
+    "end": 98.84
+  },
+  {
+    "word": "how",
+    "start": 98.84,
+    "end": 99.0
+  },
+  {
+    "word": "to",
+    "start": 99.0,
+    "end": 99.16
+  },
+  {
+    "word": "curve,",
+    "start": 99.16,
+    "end": 99.88
+  },
+  {
+    "word": "space",
+    "start": 99.88,
+    "end": 100.36
+  },
+  {
+    "word": "tells",
+    "start": 100.36,
+    "end": 100.68
+  },
+  {
+    "word": "matter",
+    "start": 100.68,
+    "end": 101.08
+  },
+  {
+    "word": "how",
+    "start": 101.08,
+    "end": 101.32
+  },
+  {
+    "word": "to",
+    "start": 101.32,
+    "end": 101.48
+  },
+  {
+    "word": "move.",
+    "start": 101.48,
+    "end": 102.28
+  },
+  {
+    "word": "This",
+    "start": 102.28,
+    "end": 102.6
+  },
+  {
+    "word": "smooth",
+    "start": 102.6,
+    "end": 103.08
+  },
+  {
+    "word": "geometry",
+    "start": 103.08,
+    "end": 103.72
+  },
+  {
+    "word": "shatters",
+    "start": 103.72,
+    "end": 104.2
+  },
+  {
+    "word": "at",
+    "start": 104.2,
+    "end": 104.28
+  },
+  {
+    "word": "the",
+    "start": 104.28,
+    "end": 104.44
+  },
+  {
+    "word": "subatomic",
+    "start": 104.44,
+    "end": 105.16
+  },
+  {
+    "word": "scale,",
+    "start": 105.16,
+    "end": 105.8
+  },
+  {
+    "word": "replaced",
+    "start": 105.8,
+    "end": 106.28
+  },
+  {
+    "word": "by",
+    "start": 106.28,
+    "end": 106.52
+  },
+  {
+    "word": "discrete,",
+    "start": 106.52,
+    "end": 107.16
+  },
+  {
+    "word": "vibrating",
+    "start": 107.16,
+    "end": 107.72
+  },
+  {
+    "word": "data",
+    "start": 107.72,
+    "end": 108.04
+  },
+  {
+    "word": "points.",
+    "start": 108.04,
+    "end": 108.76
+  },
+  {
+    "word": "Particles",
+    "start": 108.76,
+    "end": 109.4
+  },
+  {
+    "word": "inhabit",
+    "start": 109.4,
+    "end": 109.96
+  },
+  {
+    "word": "multiple",
+    "start": 109.96,
+    "end": 110.44
+  },
+  {
+    "word": "positions",
+    "start": 110.44,
+    "end": 111.0
+  },
+  {
+    "word": "at",
+    "start": 111.0,
+    "end": 111.16
+  },
+  {
+    "word": "the",
+    "start": 111.16,
+    "end": 111.32
+  },
+  {
+    "word": "same",
+    "start": 111.32,
+    "end": 111.56
+  },
+  {
+    "word": "time,",
+    "start": 111.56,
+    "end": 112.04
+  },
+  {
+    "word": "a",
+    "start": 112.04,
+    "end": 112.2
+  },
+  {
+    "word": "superposition",
+    "start": 112.2,
+    "end": 113.08
+  },
+  {
+    "word": "of",
+    "start": 113.08,
+    "end": 113.24
+  },
+  {
+    "word": "overlapping",
+    "start": 113.24,
+    "end": 113.96
+  },
+  {
+    "word": "possibilities.",
+    "start": 113.96,
+    "end": 114.76
+  },
+  {
+    "word": "This",
+    "start": 115.12,
+    "end": 115.44
+  },
+  {
+    "word": "grammar",
+    "start": 115.44,
+    "end": 115.92
+  },
+  {
+    "word": "is",
+    "start": 115.92,
+    "end": 116.08
+  },
+  {
+    "word": "defined",
+    "start": 116.08,
+    "end": 116.48
+  },
+  {
+    "word": "by",
+    "start": 116.48,
+    "end": 116.64
+  },
+  {
+    "word": "its",
+    "start": 116.64,
+    "end": 116.8
+  },
+  {
+    "word": "refusal",
+    "start": 116.8,
+    "end": 117.36
+  },
+  {
+    "word": "to",
+    "start": 117.36,
+    "end": 117.6
+  },
+  {
+    "word": "commit.",
+    "start": 117.6,
+    "end": 118.32
+  },
+  {
+    "word": "A",
+    "start": 118.32,
+    "end": 118.56
+  },
+  {
+    "word": "particle",
+    "start": 118.56,
+    "end": 119.12
+  },
+  {
+    "word": "exists",
+    "start": 119.12,
+    "end": 119.68
+  },
+  {
+    "word": "as",
+    "start": 119.68,
+    "end": 119.84
+  },
+  {
+    "word": "a",
+    "start": 119.84,
+    "end": 120.08
+  },
+  {
+    "word": "range",
+    "start": 120.08,
+    "end": 120.48
+  },
+  {
+    "word": "of",
+    "start": 120.48,
+    "end": 120.72
+  },
+  {
+    "word": "probabilities",
+    "start": 120.72,
+    "end": 121.6
+  },
+  {
+    "word": "until",
+    "start": 121.6,
+    "end": 122.0
+  },
+  {
+    "word": "an",
+    "start": 122.0,
+    "end": 122.24
+  },
+  {
+    "word": "interaction",
+    "start": 122.24,
+    "end": 122.88
+  },
+  {
+    "word": "forces",
+    "start": 122.88,
+    "end": 123.36
+  },
+  {
+    "word": "it",
+    "start": 123.36,
+    "end": 123.6
+  },
+  {
+    "word": "to",
+    "start": 123.6,
+    "end": 123.76
+  },
+  {
+    "word": "settle",
+    "start": 123.76,
+    "end": 124.16
+  },
+  {
+    "word": "into",
+    "start": 124.16,
+    "end": 124.4
+  },
+  {
+    "word": "a",
+    "start": 124.4,
+    "end": 124.56
+  },
+  {
+    "word": "single",
+    "start": 124.56,
+    "end": 124.96
+  },
+  {
+    "word": "definitive",
+    "start": 125.04,
+    "end": 125.92
+  },
+  {
+    "word": "state.",
+    "start": 125.92,
+    "end": 126.72
+  },
+  {
+    "word": "Reality",
+    "start": 126.72,
+    "end": 127.44
+  },
+  {
+    "word": "functions",
+    "start": 127.44,
+    "end": 128.08
+  },
+  {
+    "word": "through",
+    "start": 128.08,
+    "end": 128.32
+  },
+  {
+    "word": "smooth",
+    "start": 128.32,
+    "end": 128.88
+  },
+  {
+    "word": "dialogue",
+    "start": 128.88,
+    "end": 129.52
+  },
+  {
+    "word": "at",
+    "start": 129.52,
+    "end": 129.68
+  },
+  {
+    "word": "the",
+    "start": 129.68,
+    "end": 129.76
+  },
+  {
+    "word": "cosmic",
+    "start": 129.76,
+    "end": 130.32
+  },
+  {
+    "word": "scale",
+    "start": 130.32,
+    "end": 130.72
+  },
+  {
+    "word": "and",
+    "start": 130.96,
+    "end": 131.2
+  },
+  {
+    "word": "chaotic",
+    "start": 131.2,
+    "end": 131.84
+  },
+  {
+    "word": "abundance",
+    "start": 131.84,
+    "end": 132.4
+  },
+  {
+    "word": "at",
+    "start": 132.4,
+    "end": 132.56
+  },
+  {
+    "word": "the",
+    "start": 132.56,
+    "end": 132.64
+  },
+  {
+    "word": "microscale.",
+    "start": 132.64,
+    "end": 134.0
+  },
+  {
+    "word": "These",
+    "start": 134.0,
+    "end": 134.32
+  },
+  {
+    "word": "two",
+    "start": 134.32,
+    "end": 134.56
+  },
+  {
+    "word": "grammars",
+    "start": 134.56,
+    "end": 135.2
+  },
+  {
+    "word": "work",
+    "start": 135.2,
+    "end": 135.36
+  },
+  {
+    "word": "perfectly,",
+    "start": 135.36,
+    "end": 136.4
+  },
+  {
+    "word": "but",
+    "start": 136.4,
+    "end": 136.64
+  },
+  {
+    "word": "only",
+    "start": 136.64,
+    "end": 136.88
+  },
+  {
+    "word": "if",
+    "start": 136.88,
+    "end": 137.12
+  },
+  {
+    "word": "they",
+    "start": 137.12,
+    "end": 137.36
+  },
+  {
+    "word": "never",
+    "start": 137.36,
+    "end": 137.6
+  },
+  {
+    "word": "have",
+    "start": 137.6,
+    "end": 137.76
+  },
+  {
+    "word": "to",
+    "start": 137.76,
+    "end": 137.92
+  },
+  {
+    "word": "occupy",
+    "start": 137.92,
+    "end": 138.56
+  },
+  {
+    "word": "the",
+    "start": 138.56,
+    "end": 138.8
+  },
+  {
+    "word": "same",
+    "start": 138.8,
+    "end": 139.04
+  },
+  {
+    "word": "page.",
+    "start": 139.04,
+    "end": 139.92
+  },
+  {
+    "word": "But",
+    "start": 139.92,
+    "end": 140.08
+  },
+  {
+    "word": "there",
+    "start": 140.08,
+    "end": 140.32
+  },
+  {
+    "word": "are",
+    "start": 140.32,
+    "end": 140.56
+  },
+  {
+    "word": "places",
+    "start": 140.56,
+    "end": 141.04
+  },
+  {
+    "word": "where",
+    "start": 141.04,
+    "end": 141.2
+  },
+  {
+    "word": "the",
+    "start": 141.2,
+    "end": 141.36
+  },
+  {
+    "word": "universe",
+    "start": 141.36,
+    "end": 141.92
+  },
+  {
+    "word": "forces",
+    "start": 141.92,
+    "end": 142.4
+  },
+  {
+    "word": "these",
+    "start": 142.4,
+    "end": 142.64
+  },
+  {
+    "word": "two",
+    "start": 142.64,
+    "end": 142.88
+  },
+  {
+    "word": "grammars",
+    "start": 142.88,
+    "end": 143.44
+  },
+  {
+    "word": "together.",
+    "start": 143.44,
+    "end": 144.32
+  },
+  {
+    "word": "At",
+    "start": 144.32,
+    "end": 144.56
+  },
+  {
+    "word": "the",
+    "start": 144.56,
+    "end": 144.72
+  },
+  {
+    "word": "center",
+    "start": 144.72,
+    "end": 145.12
+  },
+  {
+    "word": "of",
+    "start": 145.12,
+    "end": 145.28
+  },
+  {
+    "word": "a",
+    "start": 145.28,
+    "end": 145.44
+  },
+  {
+    "word": "black",
+    "start": 145.44,
+    "end": 145.76
+  },
+  {
+    "word": "hole,",
+    "start": 145.76,
+    "end": 146.32
+  },
+  {
+    "word": "an",
+    "start": 146.32,
+    "end": 146.56
+  },
+  {
+    "word": "immense",
+    "start": 146.56,
+    "end": 147.04
+  },
+  {
+    "word": "mass",
+    "start": 147.04,
+    "end": 147.52
+  },
+  {
+    "word": "is",
+    "start": 147.52,
+    "end": 147.76
+  },
+  {
+    "word": "crushed",
+    "start": 147.76,
+    "end": 148.32
+  },
+  {
+    "word": "into",
+    "start": 148.32,
+    "end": 148.56
+  },
+  {
+    "word": "a",
+    "start": 148.56,
+    "end": 148.72
+  },
+  {
+    "word": "subatomic",
+    "start": 148.72,
+    "end": 149.68
+  },
+  {
+    "word": "space.",
+    "start": 149.68,
+    "end": 150.4
+  },
+  {
+    "word": "When",
+    "start": 150.4,
+    "end": 150.72
+  },
+  {
+    "word": "we",
+    "start": 150.72,
+    "end": 150.96
+  },
+  {
+    "word": "try",
+    "start": 150.96,
+    "end": 151.12
+  },
+  {
+    "word": "to",
+    "start": 151.12,
+    "end": 151.36
+  },
+  {
+    "word": "use",
+    "start": 151.36,
+    "end": 151.52
+  },
+  {
+    "word": "both",
+    "start": 151.52,
+    "end": 151.84
+  },
+  {
+    "word": "theories",
+    "start": 151.84,
+    "end": 152.4
+  },
+  {
+    "word": "to",
+    "start": 152.4,
+    "end": 152.56
+  },
+  {
+    "word": "describe",
+    "start": 152.56,
+    "end": 152.96
+  },
+  {
+    "word": "a",
+    "start": 152.96,
+    "end": 153.12
+  },
+  {
+    "word": "singularity,",
+    "start": 153.12,
+    "end": 154.24
+  },
+  {
+    "word": "the",
+    "start": 154.24,
+    "end": 154.4
+  },
+  {
+    "word": "math",
+    "start": 154.4,
+    "end": 154.88
+  },
+  {
+    "word": "breaks.",
+    "start": 154.88,
+    "end": 155.84
+  },
+  {
+    "word": "The",
+    "start": 155.84,
+    "end": 156.0
+  },
+  {
+    "word": "equations",
+    "start": 156.0,
+    "end": 156.64
+  },
+  {
+    "word": "for",
+    "start": 156.64,
+    "end": 156.88
+  },
+  {
+    "word": "gravity",
+    "start": 156.88,
+    "end": 157.44
+  },
+  {
+    "word": "and",
+    "start": 157.44,
+    "end": 157.68
+  },
+  {
+    "word": "the",
+    "start": 157.68,
+    "end": 157.76
+  },
+  {
+    "word": "equations",
+    "start": 157.76,
+    "end": 158.4
+  },
+  {
+    "word": "for",
+    "start": 158.4,
+    "end": 158.64
+  },
+  {
+    "word": "particles",
+    "start": 158.64,
+    "end": 159.28
+  },
+  {
+    "word": "collide",
+    "start": 159.28,
+    "end": 159.84
+  },
+  {
+    "word": "and",
+    "start": 159.84,
+    "end": 160.08
+  },
+  {
+    "word": "collapse",
+    "start": 160.08,
+    "end": 160.72
+  },
+  {
+    "word": "into",
+    "start": 160.72,
+    "end": 160.96
+  },
+  {
+    "word": "paradox.",
+    "start": 160.96,
+    "end": 162.08
+  },
+  {
+    "word": "This",
+    "start": 162.08,
+    "end": 162.32
+  },
+  {
+    "word": "creates",
+    "start": 162.32,
+    "end": 162.88
+  },
+  {
+    "word": "a",
+    "start": 162.88,
+    "end": 163.04
+  },
+  {
+    "word": "total",
+    "start": 163.04,
+    "end": 163.44
+  },
+  {
+    "word": "breakdown",
+    "start": 163.44,
+    "end": 164.16
+  },
+  {
+    "word": "in",
+    "start": 164.16,
+    "end": 164.32
+  },
+  {
+    "word": "our",
+    "start": 164.32,
+    "end": 164.48
+  },
+  {
+    "word": "description",
+    "start": 164.48,
+    "end": 164.96
+  },
+  {
+    "word": "of",
+    "start": 164.96,
+    "end": 165.04
+  },
+  {
+    "word": "the",
+    "start": 165.04,
+    "end": 165.2
+  },
+  {
+    "word": "physical",
+    "start": 165.2,
+    "end": 165.92
+  },
+  {
+    "word": "world.",
+    "start": 165.92,
+    "end": 166.48
+  },
+  {
+    "word": "To",
+    "start": 166.48,
+    "end": 166.72
+  },
+  {
+    "word": "resolve",
+    "start": 166.72,
+    "end": 167.2
+  },
+  {
+    "word": "it,",
+    "start": 167.2,
+    "end": 167.6
+  },
+  {
+    "word": "we",
+    "start": 167.6,
+    "end": 167.76
+  },
+  {
+    "word": "need",
+    "start": 167.76,
+    "end": 167.92
+  },
+  {
+    "word": "a",
+    "start": 167.92,
+    "end": 168.08
+  },
+  {
+    "word": "mathematical",
+    "start": 168.08,
+    "end": 168.8
+  },
+  {
+    "word": "framework",
+    "start": 168.8,
+    "end": 169.36
+  },
+  {
+    "word": "capable",
+    "start": 169.36,
+    "end": 169.68
+  },
+  {
+    "word": "of",
+    "start": 169.68,
+    "end": 169.76
+  },
+  {
+    "word": "reconciling",
+    "start": 170.12,
+    "end": 170.84
+  },
+  {
+    "word": "these",
+    "start": 170.84,
+    "end": 171.08
+  },
+  {
+    "word": "contradictory",
+    "start": 171.08,
+    "end": 171.8
+  },
+  {
+    "word": "behaviors.",
+    "start": 171.8,
+    "end": 173.0
+  },
+  {
+    "word": "Theories",
+    "start": 173.0,
+    "end": 173.56
+  },
+  {
+    "word": "like",
+    "start": 173.56,
+    "end": 173.88
+  },
+  {
+    "word": "string",
+    "start": 173.88,
+    "end": 174.36
+  },
+  {
+    "word": "theory",
+    "start": 174.36,
+    "end": 174.76
+  },
+  {
+    "word": "or",
+    "start": 174.76,
+    "end": 175.08
+  },
+  {
+    "word": "loop",
+    "start": 175.08,
+    "end": 175.48
+  },
+  {
+    "word": "quantum",
+    "start": 175.48,
+    "end": 175.88
+  },
+  {
+    "word": "gravity",
+    "start": 175.88,
+    "end": 176.44
+  },
+  {
+    "word": "are",
+    "start": 176.44,
+    "end": 176.68
+  },
+  {
+    "word": "attempts",
+    "start": 176.68,
+    "end": 177.16
+  },
+  {
+    "word": "to",
+    "start": 177.16,
+    "end": 177.32
+  },
+  {
+    "word": "build",
+    "start": 177.32,
+    "end": 177.56
+  },
+  {
+    "word": "that",
+    "start": 177.56,
+    "end": 177.8
+  },
+  {
+    "word": "framework,",
+    "start": 177.8,
+    "end": 178.68
+  },
+  {
+    "word": "seeking",
+    "start": 178.68,
+    "end": 179.08
+  },
+  {
+    "word": "a",
+    "start": 179.08,
+    "end": 179.24
+  },
+  {
+    "word": "single",
+    "start": 179.24,
+    "end": 179.64
+  },
+  {
+    "word": "set",
+    "start": 179.64,
+    "end": 179.88
+  },
+  {
+    "word": "of",
+    "start": 179.88,
+    "end": 180.04
+  },
+  {
+    "word": "equations",
+    "start": 180.04,
+    "end": 180.68
+  },
+  {
+    "word": "that",
+    "start": 180.68,
+    "end": 180.84
+  },
+  {
+    "word": "can",
+    "start": 180.84,
+    "end": 181.0
+  },
+  {
+    "word": "describe",
+    "start": 181.0,
+    "end": 181.4
+  },
+  {
+    "word": "both",
+    "start": 181.4,
+    "end": 181.64
+  },
+  {
+    "word": "the",
+    "start": 181.64,
+    "end": 181.8
+  },
+  {
+    "word": "curve",
+    "start": 181.8,
+    "end": 182.2
+  },
+  {
+    "word": "of",
+    "start": 182.2,
+    "end": 182.36
+  },
+  {
+    "word": "a",
+    "start": 182.36,
+    "end": 182.44
+  },
+  {
+    "word": "galaxy",
+    "start": 182.44,
+    "end": 183.16
+  },
+  {
+    "word": "and",
+    "start": 183.16,
+    "end": 183.4
+  },
+  {
+    "word": "the",
+    "start": 183.4,
+    "end": 183.56
+  },
+  {
+    "word": "vibration",
+    "start": 183.56,
+    "end": 184.12
+  },
+  {
+    "word": "of",
+    "start": 184.12,
+    "end": 184.28
+  },
+  {
+    "word": "an",
+    "start": 184.28,
+    "end": 184.44
+  },
+  {
+    "word": "atom.",
+    "start": 184.44,
+    "end": 185.24
+  },
+  {
+    "word": "The",
+    "start": 185.24,
+    "end": 185.48
+  },
+  {
+    "word": "fact",
+    "start": 185.48,
+    "end": 185.72
+  },
+  {
+    "word": "that",
+    "start": 185.72,
+    "end": 185.96
+  },
+  {
+    "word": "our",
+    "start": 185.96,
+    "end": 186.12
+  },
+  {
+    "word": "best",
+    "start": 186.12,
+    "end": 186.44
+  },
+  {
+    "word": "theories",
+    "start": 186.44,
+    "end": 187.0
+  },
+  {
+    "word": "fail",
+    "start": 187.0,
+    "end": 187.4
+  },
+  {
+    "word": "at",
+    "start": 187.4,
+    "end": 187.56
+  },
+  {
+    "word": "these",
+    "start": 187.56,
+    "end": 187.72
+  },
+  {
+    "word": "extremes",
+    "start": 187.72,
+    "end": 188.52
+  },
+  {
+    "word": "suggests",
+    "start": 188.52,
+    "end": 189.16
+  },
+  {
+    "word": "they",
+    "start": 189.16,
+    "end": 189.32
+  },
+  {
+    "word": "aren't",
+    "start": 189.32,
+    "end": 189.64
+  },
+  {
+    "word": "the",
+    "start": 189.64,
+    "end": 189.8
+  },
+  {
+    "word": "final",
+    "start": 189.8,
+    "end": 190.12
+  },
+  {
+    "word": "word",
+    "start": 190.12,
+    "end": 190.52
+  },
+  {
+    "word": "on",
+    "start": 190.52,
+    "end": 190.76
+  },
+  {
+    "word": "reality.",
+    "start": 190.76,
+    "end": 191.48
+  },
+  {
+    "word": "They",
+    "start": 191.48,
+    "end": 191.72
+  },
+  {
+    "word": "are",
+    "start": 191.72,
+    "end": 191.96
+  },
+  {
+    "word": "likely",
+    "start": 191.96,
+    "end": 192.36
+  },
+  {
+    "word": "just",
+    "start": 192.36,
+    "end": 192.6
+  },
+  {
+    "word": "footnotes",
+    "start": 192.6,
+    "end": 193.24
+  },
+  {
+    "word": "to",
+    "start": 193.24,
+    "end": 193.4
+  },
+  {
+    "word": "a",
+    "start": 193.4,
+    "end": 193.56
+  },
+  {
+    "word": "deeper,",
+    "start": 193.56,
+    "end": 194.04
+  },
+  {
+    "word": "more",
+    "start": 194.04,
+    "end": 194.28
+  },
+  {
+    "word": "complex",
+    "start": 194.28,
+    "end": 194.84
+  },
+  {
+    "word": "story",
+    "start": 194.84,
+    "end": 195.24
+  },
+  {
+    "word": "we",
+    "start": 195.24,
+    "end": 195.4
+  },
+  {
+    "word": "haven't",
+    "start": 195.4,
+    "end": 195.64
+  },
+  {
+    "word": "yet",
+    "start": 195.64,
+    "end": 195.88
+  },
+  {
+    "word": "learned",
+    "start": 195.88,
+    "end": 196.2
+  },
+  {
+    "word": "how",
+    "start": 196.2,
+    "end": 196.44
+  },
+  {
+    "word": "to",
+    "start": 196.44,
+    "end": 196.68
+  },
+  {
+    "word": "read.",
+    "start": 196.68,
+    "end": 197.24
+  },
+  {
+    "word": "This",
+    "start": 197.24,
+    "end": 197.56
+  },
+  {
+    "word": "crisis",
+    "start": 197.56,
+    "end": 198.04
+  },
+  {
+    "word": "in",
+    "start": 198.04,
+    "end": 198.28
+  },
+  {
+    "word": "translation",
+    "start": 198.28,
+    "end": 198.84
+  },
+  {
+    "word": "has",
+    "start": 198.84,
+    "end": 199.08
+  },
+  {
+    "word": "pushed",
+    "start": 199.08,
+    "end": 199.4
+  },
+  {
+    "word": "some",
+    "start": 199.4,
+    "end": 199.64
+  },
+  {
+    "word": "physicists",
+    "start": 199.64,
+    "end": 200.28
+  },
+  {
+    "word": "to",
+    "start": 200.28,
+    "end": 200.52
+  },
+  {
+    "word": "look",
+    "start": 200.52,
+    "end": 200.76
+  },
+  {
+    "word": "away",
+    "start": 200.76,
+    "end": 201.0
+  },
+  {
+    "word": "from",
+    "start": 201.0,
+    "end": 201.16
+  },
+  {
+    "word": "the",
+    "start": 201.16,
+    "end": 201.4
+  },
+  {
+    "word": "equations",
+    "start": 201.4,
+    "end": 202.04
+  },
+  {
+    "word": "and",
+    "start": 202.04,
+    "end": 202.28
+  },
+  {
+    "word": "focus",
+    "start": 202.28,
+    "end": 202.68
+  },
+  {
+    "word": "on",
+    "start": 202.68,
+    "end": 202.84
+  },
+  {
+    "word": "the",
+    "start": 202.84,
+    "end": 203.08
+  },
+  {
+    "word": "person",
+    "start": 203.08,
+    "end": 203.32
+  },
+  {
+    "word": "writing",
+    "start": 203.32,
+    "end": 203.64
+  },
+  {
+    "word": "them,",
+    "start": 203.64,
+    "end": 204.04
+  },
+  {
+    "word": "the",
+    "start": 204.04,
+    "end": 204.2
+  },
+  {
+    "word": "observer.",
+    "start": 204.2,
+    "end": 205.16
+  },
+  {
+    "word": "We",
+    "start": 205.16,
+    "end": 205.32
+  },
+  {
+    "word": "often",
+    "start": 205.32,
+    "end": 205.72
+  },
+  {
+    "word": "view",
+    "start": 205.72,
+    "end": 206.04
+  },
+  {
+    "word": "ourselves",
+    "start": 206.04,
+    "end": 206.44
+  },
+  {
+    "word": "as",
+    "start": 206.44,
+    "end": 206.68
+  },
+  {
+    "word": "passive",
+    "start": 206.68,
+    "end": 207.16
+  },
+  {
+    "word": "witnesses,",
+    "start": 207.16,
+    "end": 207.96
+  },
+  {
+    "word": "watching",
+    "start": 207.96,
+    "end": 208.44
+  },
+  {
+    "word": "the",
+    "start": 208.44,
+    "end": 208.6
+  },
+  {
+    "word": "universe",
+    "start": 208.6,
+    "end": 209.08
+  },
+  {
+    "word": "from",
+    "start": 209.08,
+    "end": 209.24
+  },
+  {
+    "word": "behind",
+    "start": 209.24,
+    "end": 209.64
+  },
+  {
+    "word": "an",
+    "start": 209.64,
+    "end": 209.8
+  },
+  {
+    "word": "objective",
+    "start": 209.8,
+    "end": 210.28
+  },
+  {
+    "word": "pane",
+    "start": 210.28,
+    "end": 210.6
+  },
+  {
+    "word": "of",
+    "start": 210.6,
+    "end": 210.84
+  },
+  {
+    "word": "glass.",
+    "start": 210.84,
+    "end": 211.48
+  },
+  {
+    "word": "Quantum",
+    "start": 211.56,
+    "end": 212.04
+  },
+  {
+    "word": "mechanics",
+    "start": 212.04,
+    "end": 212.6
+  },
+  {
+    "word": "suggests",
+    "start": 212.6,
+    "end": 213.16
+  },
+  {
+    "word": "otherwise.",
+    "start": 213.16,
+    "end": 213.96
+  },
+  {
+    "word": "At",
+    "start": 213.96,
+    "end": 214.2
+  },
+  {
+    "word": "the",
+    "start": 214.2,
+    "end": 214.36
+  },
+  {
+    "word": "subatomic",
+    "start": 214.36,
+    "end": 215.08
+  },
+  {
+    "word": "level,",
+    "start": 215.08,
+    "end": 215.56
+  },
+  {
+    "word": "the",
+    "start": 215.56,
+    "end": 215.72
+  },
+  {
+    "word": "act",
+    "start": 215.72,
+    "end": 215.88
+  },
+  {
+    "word": "of",
+    "start": 215.88,
+    "end": 216.12
+  },
+  {
+    "word": "looking",
+    "start": 216.12,
+    "end": 216.44
+  },
+  {
+    "word": "at",
+    "start": 216.44,
+    "end": 216.68
+  },
+  {
+    "word": "a",
+    "start": 216.68,
+    "end": 216.84
+  },
+  {
+    "word": "system",
+    "start": 216.84,
+    "end": 217.08
+  },
+  {
+    "word": "is",
+    "start": 217.08,
+    "end": 217.32
+  },
+  {
+    "word": "an",
+    "start": 217.32,
+    "end": 217.56
+  },
+  {
+    "word": "intervention",
+    "start": 217.56,
+    "end": 218.2
+  },
+  {
+    "word": "that",
+    "start": 218.2,
+    "end": 218.44
+  },
+  {
+    "word": "changes",
+    "start": 218.44,
+    "end": 218.92
+  },
+  {
+    "word": "the",
+    "start": 218.92,
+    "end": 219.16
+  },
+  {
+    "word": "system's",
+    "start": 219.16,
+    "end": 219.56
+  },
+  {
+    "word": "state.",
+    "start": 219.56,
+    "end": 220.28
+  },
+  {
+    "word": "This",
+    "start": 220.28,
+    "end": 220.52
+  },
+  {
+    "word": "is",
+    "start": 220.52,
+    "end": 220.76
+  },
+  {
+    "word": "the",
+    "start": 220.76,
+    "end": 220.92
+  },
+  {
+    "word": "process",
+    "start": 220.92,
+    "end": 221.24
+  },
+  {
+    "word": "of",
+    "start": 221.24,
+    "end": 221.48
+  },
+  {
+    "word": "selection.",
+    "start": 221.48,
+    "end": 222.44
+  },
+  {
+    "word": "Measurement",
+    "start": 222.44,
+    "end": 223.16
+  },
+  {
+    "word": "doesn't",
+    "start": 223.16,
+    "end": 223.56
+  },
+  {
+    "word": "reveal",
+    "start": 223.56,
+    "end": 223.96
+  },
+  {
+    "word": "a",
+    "start": 223.96,
+    "end": 224.12
+  },
+  {
+    "word": "hidden",
+    "start": 224.12,
+    "end": 224.44
+  },
+  {
+    "word": "reality.",
+    "start": 224.44,
+    "end": 225.0
+  },
+  {
+    "word": "It",
+    "start": 225.28,
+    "end": 225.44
+  },
+  {
+    "word": "forces",
+    "start": 225.44,
+    "end": 225.92
+  },
+  {
+    "word": "a",
+    "start": 225.92,
+    "end": 226.16
+  },
+  {
+    "word": "cloud",
+    "start": 226.16,
+    "end": 226.48
+  },
+  {
+    "word": "of",
+    "start": 226.48,
+    "end": 226.64
+  },
+  {
+    "word": "quantum",
+    "start": 226.64,
+    "end": 227.12
+  },
+  {
+    "word": "possibilities",
+    "start": 227.12,
+    "end": 227.84
+  },
+  {
+    "word": "to",
+    "start": 227.84,
+    "end": 228.08
+  },
+  {
+    "word": "collapse",
+    "start": 228.08,
+    "end": 228.64
+  },
+  {
+    "word": "into",
+    "start": 228.64,
+    "end": 228.88
+  },
+  {
+    "word": "a",
+    "start": 228.88,
+    "end": 228.96
+  },
+  {
+    "word": "single",
+    "start": 228.96,
+    "end": 229.36
+  },
+  {
+    "word": "choice.",
+    "start": 229.36,
+    "end": 230.16
+  },
+  {
+    "word": "If",
+    "start": 230.16,
+    "end": 230.4
+  },
+  {
+    "word": "the",
+    "start": 230.4,
+    "end": 230.56
+  },
+  {
+    "word": "act",
+    "start": 230.56,
+    "end": 230.8
+  },
+  {
+    "word": "of",
+    "start": 230.8,
+    "end": 230.96
+  },
+  {
+    "word": "observation",
+    "start": 230.96,
+    "end": 231.76
+  },
+  {
+    "word": "defines",
+    "start": 231.76,
+    "end": 232.32
+  },
+  {
+    "word": "the",
+    "start": 232.32,
+    "end": 232.48
+  },
+  {
+    "word": "outcome,",
+    "start": 232.48,
+    "end": 233.2
+  },
+  {
+    "word": "then",
+    "start": 233.2,
+    "end": 233.44
+  },
+  {
+    "word": "our",
+    "start": 233.44,
+    "end": 233.6
+  },
+  {
+    "word": "search",
+    "start": 233.6,
+    "end": 233.92
+  },
+  {
+    "word": "for",
+    "start": 233.92,
+    "end": 234.08
+  },
+  {
+    "word": "a",
+    "start": 234.08,
+    "end": 234.24
+  },
+  {
+    "word": "perfectly",
+    "start": 234.24,
+    "end": 234.8
+  },
+  {
+    "word": "objective",
+    "start": 234.8,
+    "end": 235.36
+  },
+  {
+    "word": "theory",
+    "start": 235.36,
+    "end": 235.76
+  },
+  {
+    "word": "is",
+    "start": 235.76,
+    "end": 236.0
+  },
+  {
+    "word": "inherently",
+    "start": 236.0,
+    "end": 236.56
+  },
+  {
+    "word": "limited.",
+    "start": 236.56,
+    "end": 237.36
+  },
+  {
+    "word": "We",
+    "start": 237.36,
+    "end": 237.52
+  },
+  {
+    "word": "cannot",
+    "start": 237.52,
+    "end": 237.92
+  },
+  {
+    "word": "find",
+    "start": 237.92,
+    "end": 238.16
+  },
+  {
+    "word": "a",
+    "start": 238.16,
+    "end": 238.4
+  },
+  {
+    "word": "neutral,",
+    "start": 238.4,
+    "end": 239.04
+  },
+  {
+    "word": "outside",
+    "start": 239.04,
+    "end": 239.68
+  },
+  {
+    "word": "perspective",
+    "start": 239.68,
+    "end": 240.24
+  },
+  {
+    "word": "of",
+    "start": 240.24,
+    "end": 240.32
+  },
+  {
+    "word": "the",
+    "start": 240.32,
+    "end": 240.48
+  },
+  {
+    "word": "universe.",
+    "start": 240.48,
+    "end": 241.36
+  },
+  {
+    "word": "We",
+    "start": 241.36,
+    "end": 241.6
+  },
+  {
+    "word": "are",
+    "start": 241.6,
+    "end": 241.76
+  },
+  {
+    "word": "made",
+    "start": 241.76,
+    "end": 242.0
+  },
+  {
+    "word": "of",
+    "start": 242.0,
+    "end": 242.16
+  },
+  {
+    "word": "the",
+    "start": 242.16,
+    "end": 242.4
+  },
+  {
+    "word": "same",
+    "start": 242.4,
+    "end": 242.56
+  },
+  {
+    "word": "atoms",
+    "start": 242.56,
+    "end": 243.04
+  },
+  {
+    "word": "we",
+    "start": 243.04,
+    "end": 243.2
+  },
+  {
+    "word": "are",
+    "start": 243.2,
+    "end": 243.36
+  },
+  {
+    "word": "trying",
+    "start": 243.36,
+    "end": 243.6
+  },
+  {
+    "word": "to",
+    "start": 243.6,
+    "end": 243.68
+  },
+  {
+    "word": "measure,",
+    "start": 243.68,
+    "end": 244.4
+  },
+  {
+    "word": "and",
+    "start": 244.4,
+    "end": 244.56
+  },
+  {
+    "word": "we",
+    "start": 244.56,
+    "end": 244.72
+  },
+  {
+    "word": "are",
+    "start": 244.72,
+    "end": 244.88
+  },
+  {
+    "word": "held",
+    "start": 244.88,
+    "end": 245.2
+  },
+  {
+    "word": "by",
+    "start": 245.2,
+    "end": 245.36
+  },
+  {
+    "word": "the",
+    "start": 245.36,
+    "end": 245.44
+  },
+  {
+    "word": "same",
+    "start": 245.44,
+    "end": 245.68
+  },
+  {
+    "word": "gravity",
+    "start": 245.68,
+    "end": 246.24
+  },
+  {
+    "word": "we",
+    "start": 246.24,
+    "end": 246.4
+  },
+  {
+    "word": "are",
+    "start": 246.4,
+    "end": 246.56
+  },
+  {
+    "word": "trying",
+    "start": 246.56,
+    "end": 246.8
+  },
+  {
+    "word": "to",
+    "start": 246.8,
+    "end": 246.96
+  },
+  {
+    "word": "map.",
+    "start": 246.96,
+    "end": 247.68
+  },
+  {
+    "word": "The",
+    "start": 247.68,
+    "end": 247.92
+  },
+  {
+    "word": "observer",
+    "start": 247.92,
+    "end": 248.48
+  },
+  {
+    "word": "is",
+    "start": 248.48,
+    "end": 248.64
+  },
+  {
+    "word": "an",
+    "start": 248.64,
+    "end": 248.8
+  },
+  {
+    "word": "integrated",
+    "start": 248.8,
+    "end": 249.52
+  },
+  {
+    "word": "part",
+    "start": 249.52,
+    "end": 249.76
+  },
+  {
+    "word": "of",
+    "start": 249.76,
+    "end": 250.0
+  },
+  {
+    "word": "the",
+    "start": 250.0,
+    "end": 250.24
+  },
+  {
+    "word": "system.",
+    "start": 250.24,
+    "end": 250.88
+  },
+  {
+    "word": "This",
+    "start": 250.88,
+    "end": 251.12
+  },
+  {
+    "word": "suggests",
+    "start": 251.12,
+    "end": 251.68
+  },
+  {
+    "word": "that",
+    "start": 251.68,
+    "end": 251.92
+  },
+  {
+    "word": "the",
+    "start": 251.92,
+    "end": 252.0
+  },
+  {
+    "word": "contradictions",
+    "start": 252.0,
+    "end": 252.72
+  },
+  {
+    "word": "in",
+    "start": 252.72,
+    "end": 252.88
+  },
+  {
+    "word": "our",
+    "start": 252.88,
+    "end": 253.04
+  },
+  {
+    "word": "physics",
+    "start": 253.04,
+    "end": 253.68
+  },
+  {
+    "word": "might",
+    "start": 253.68,
+    "end": 253.92
+  },
+  {
+    "word": "be",
+    "start": 253.92,
+    "end": 254.08
+  },
+  {
+    "word": "a",
+    "start": 254.08,
+    "end": 254.24
+  },
+  {
+    "word": "result",
+    "start": 254.24,
+    "end": 254.56
+  },
+  {
+    "word": "of",
+    "start": 254.56,
+    "end": 254.8
+  },
+  {
+    "word": "our",
+    "start": 254.8,
+    "end": 255.04
+  },
+  {
+    "word": "own",
+    "start": 255.04,
+    "end": 255.28
+  },
+  {
+    "word": "position.",
+    "start": 255.28,
+    "end": 256.16
+  },
+  {
+    "word": "We",
+    "start": 256.16,
+    "end": 256.4
+  },
+  {
+    "word": "are",
+    "start": 256.4,
+    "end": 256.56
+  },
+  {
+    "word": "matter",
+    "start": 256.56,
+    "end": 257.04
+  },
+  {
+    "word": "attempting",
+    "start": 257.04,
+    "end": 257.52
+  },
+  {
+    "word": "to",
+    "start": 257.52,
+    "end": 257.6
+  },
+  {
+    "word": "model",
+    "start": 257.6,
+    "end": 258.0
+  },
+  {
+    "word": "the",
+    "start": 258.0,
+    "end": 258.16
+  },
+  {
+    "word": "laws",
+    "start": 258.16,
+    "end": 258.48
+  },
+  {
+    "word": "that",
+    "start": 258.48,
+    "end": 258.64
+  },
+  {
+    "word": "allow",
+    "start": 258.64,
+    "end": 258.96
+  },
+  {
+    "word": "us",
+    "start": 258.96,
+    "end": 259.12
+  },
+  {
+    "word": "to",
+    "start": 259.12,
+    "end": 259.36
+  },
+  {
+    "word": "exist,",
+    "start": 259.36,
+    "end": 260.16
+  },
+  {
+    "word": "the",
+    "start": 260.16,
+    "end": 260.32
+  },
+  {
+    "word": "universe",
+    "start": 260.32,
+    "end": 260.96
+  },
+  {
+    "word": "using",
+    "start": 260.96,
+    "end": 261.28
+  },
+  {
+    "word": "its",
+    "start": 261.28,
+    "end": 261.52
+  },
+  {
+    "word": "own",
+    "start": 261.52,
+    "end": 261.84
+  },
+  {
+    "word": "internal",
+    "start": 261.84,
+    "end": 262.24
+  },
+  {
+    "word": "logic",
+    "start": 262.24,
+    "end": 262.8
+  },
+  {
+    "word": "to",
+    "start": 262.8,
+    "end": 263.04
+  },
+  {
+    "word": "finally",
+    "start": 263.04,
+    "end": 263.52
+  },
+  {
+    "word": "describe",
+    "start": 263.52,
+    "end": 264.32
+  },
+  {
+    "word": "itself.",
+    "start": 264.32,
+    "end": 265.28
+  }
+]

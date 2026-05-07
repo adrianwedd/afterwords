@@ -1,0 +1,26 @@
+VIDEO: n47aO8KOwbI
+TITLE: ordr.fm
+
+ISSUE at ~0:20: "When a collection swells to 10, 20, or 50,000 files"
+SOURCE SAYS: "ten thousand albums"
+REPLACEMENT: "When a collection swells to thousands of albums"
+
+ISSUE at ~1:20: "That specific risk is why order.fm was built."
+SOURCE SAYS: "ordr.fm"
+REPLACEMENT: "That specific risk is why ordr dot fm was built."
+
+ISSUE at ~1:38: "extracting the raw EXF metadata"
+SOURCE SAYS: "EXIF metadata"
+REPLACEMENT: "extracting the raw EXIF metadata"
+
+ISSUE at ~2:22: "The defining feature of Order.fm is its absolute refusal to downgrade your audio. It operates on strict lossless format prioritization. Looking at this decision tree, we see how the logic protects the collection."
+SOURCE SAYS: "ordr.fm", "lossless format prioritisation" (decision tree not mentioned)
+REPLACEMENT: "The defining feature of ordr dot fm is its absolute refusal to downgrade your audio. It operates on strict lossless format prioritisation, with a logic designed specifically to protect the collection."
+
+ISSUE at ~2:44: "Incoming files are assigned weights based on format, creating a mathematical path where high-fidelity tracks bypass lower-tier files. If an MP3 tries to overwrite an existing flak node, it triggers a zero-overwrite protocol. The lesser file hits a hard stop and routes to quarantine."
+SOURCE SAYS: "lossless format prioritisation", "FLAC", "zero-overwrite safety" (weights, mathematical path, and quarantine not mentioned)
+REPLACEMENT: "This system ensures that high-fidelity tracks are never superseded by lower-tier files. If an MP3 tries to overwrite an existing FLAC file, it triggers a zero-overwrite protocol. The lesser file hits a hard stop, ensuring the integrity of the archive."
+
+ISSUE at ~4:34: "Order.fm operates exactly as the uncompromising guardian a lifetime of digital preservation deserves."
+SOURCE SAYS: "ordr.fm"
+REPLACEMENT: "ordr dot fm operates exactly as the uncompromising guardian a lifetime of digital preservation deserves."

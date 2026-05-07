@@ -1,0 +1,30 @@
+VIDEO: d-32AtO7xN4
+TITLE: The Cognitive Cage: Humanoid Robot Fatality Risk
+
+ISSUE at ~15s: "severing the power supply and bringing the machine to an immediate, absolute dead stop."
+SOURCE SAYS: "the interlock tripped. Safety was a function of separation."
+REPLACEMENT: "tripping a physical hardware interlock that ensured safety through spatial separation."
+
+ISSUE at ~50s: "folding laundry in your living room,"
+SOURCE SAYS: "working alongside people in homes,"
+REPLACEMENT: "performing tasks in your living room,"
+
+ISSUE at ~139s: "Because these models are entirely okay, certifying them as safe under legacy industrial standards is meaningless. There are three main ways this physical glitch happens."
+SOURCE SAYS: "This opacity — the fundamental undebuggability... Three variants are particularly dangerous:"
+REPLACEMENT: "Because these models are fundamentally opaque, certifying them as safe under legacy industrial standards is meaningless. There are three main ways this semantic failure occurs."
+
+ISSUE at ~146s: "up to a third of the time."
+SOURCE SAYS: "as high as 38.5%."
+REPLACEMENT: "in nearly forty percent of cases."
+
+ISSUE at ~159s: "pour boiling water into thin air"
+SOURCE SAYS: "pour boiling water onto the empty tray"
+REPLACEMENT: "pour boiling water onto an empty tray"
+
+ISSUE at ~216s: "This graph maps the deployment timeline of humanoid robots, showing a stark escalation. We move from low-volume industrial pilot programs right now to a projected 1 million active units by 2029. Let's zoom in on that 2029 data spike."
+SOURCE SAYS: "The risk... follows the deployment curve. ... 2027–2029 (The Danger Zone): Production scales... The installed base approaches one million units."
+REPLACEMENT: "The risk follows the deployment curve, escalating from industrial pilots today to a projected one million active units by 2029. During this 'Danger Zone' period,"
+
+ISSUE at ~237s: "performing hundreds of tasks,"
+SOURCE SAYS: "performing 100 tasks per day,"
+REPLACEMENT: "performing a hundred tasks a day,"

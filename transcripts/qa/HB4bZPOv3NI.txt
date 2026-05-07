@@ -1,0 +1,26 @@
+VIDEO: HB4bZPOv3NI
+TITLE: Grid 2.0
+
+ISSUE at ~3s: "the motion is smooth"
+SOURCE SAYS: not mentioned (source describes the output as "plausible" but specifies "broken layouts").
+REPLACEMENT: "the design seems consistent"
+
+ISSUE at ~11s: "This cross-section shows the reality beneath the surface."
+SOURCE SAYS: not mentioned (the source is text-only and does not contain a visual cross-section).
+REPLACEMENT: "But there is a different reality beneath the surface."
+
+ISSUE at ~21s: "structural layout boxes physically intersect and crash."
+SOURCE SAYS: "broken layouts, invented components, styles that conflict."
+REPLACEMENT: "layouts are broken and components are simply invented."
+
+ISSUE at ~104s: "an 80% chance."
+SOURCE SAYS: not mentioned (source uses the terms "probabilistic" and "probability" without specific percentages).
+REPLACEMENT: "statistical probability."
+
+ISSUE at ~209s: "scanning through a vast grid of modular UI sections."
+SOURCE SAYS: "selects the optimal combination of sections from a component library."
+REPLACEMENT: "scanning through a library of modular UI sections."
+
+ISSUE at ~318s: "Every specific color palette, every custom typography choice, and precise spacing rule"
+SOURCE SAYS: "brand identity propagates through the page without manual styling."
+REPLACEMENT: "Every aspect of the brand identity is unified"

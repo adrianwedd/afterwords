@@ -1,0 +1,6 @@
+VIDEO: A4qC7N3mDrk
+TITLE: Architectural Safety: The General Principle
+
+ISSUE at ~1:49: "Place those models in a multi-agent context, and the safety alignment breaks at a rate of 40%, with a median time to failure of just 16 minutes."
+SOURCE SAYS: "Multi-agent context breaks safety at 46% with 16-minute median time-to-failure."
+REPLACEMENT: "Place those models in a multi-agent context, and the safety alignment breaks at a rate of 46%, with a median time to failure of just 16 minutes."

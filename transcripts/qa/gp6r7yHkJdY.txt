@@ -1,0 +1,22 @@
+VIDEO: gp6r7yHkJdY
+TITLE: How to Read a Safety Claim
+
+ISSUE at ~1m47s: "This confusion matrix plots automated classifiers against human-verified ground truth."
+SOURCE SAYS: not mentioned; the source reports the statistical findings of a classification audit but does not include or describe a visual plot.
+REPLACEMENT: "An audit of these automated classifiers against human-verified ground truth revealed the scale of the error."
+
+ISSUE at ~1m47s: "Correcting this drops the 36%..2 ASR to 159."
+SOURCE SAYS: "headline ASR dropped from 36.2% to 15.9%"
+REPLACEMENT: "Correcting for these errors causes the headline ASR to drop from 36.2% to 15.9%."
+
+ISSUE at ~2m27s: "This line graph shows reasoning capabilities on the x-axis and vulnerability on the y-axis."
+SOURCE SAYS: not mentioned; the source discusses the "reasoning penalty" conceptually without describing a specific graph or axes.
+REPLACEMENT: "Research into the reasoning penalty illustrates that as models become more capable, they can paradoxically become more vulnerable."
+
+ISSUE at ~2m47s: "advanced autols"
+SOURCE SAYS: "reasoning models"
+REPLACEMENT: "advanced models"
+
+ISSUE at ~5m15s: "dangerous medical protocol"
+SOURCE SAYS: not mentioned; while "hospital administrators" are mentioned as an audience, the source uses a "hallucinated legal citation" as its specific example of professional error.
+REPLACEMENT: "a professional error that endangers organizational trust"

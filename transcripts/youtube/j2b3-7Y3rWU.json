@@ -1,0 +1,4307 @@
+[
+  {
+    "word": "Building",
+    "start": 0.24,
+    "end": 0.64
+  },
+  {
+    "word": "a",
+    "start": 0.64,
+    "end": 0.8
+  },
+  {
+    "word": "modern",
+    "start": 0.8,
+    "end": 1.28
+  },
+  {
+    "word": "web",
+    "start": 1.28,
+    "end": 1.68
+  },
+  {
+    "word": "application",
+    "start": 1.68,
+    "end": 2.32
+  },
+  {
+    "word": "almost",
+    "start": 2.32,
+    "end": 2.8
+  },
+  {
+    "word": "universally",
+    "start": 2.8,
+    "end": 3.6
+  },
+  {
+    "word": "assumes",
+    "start": 3.6,
+    "end": 4.16
+  },
+  {
+    "word": "a",
+    "start": 4.16,
+    "end": 4.32
+  },
+  {
+    "word": "certain",
+    "start": 4.32,
+    "end": 4.72
+  },
+  {
+    "word": "level",
+    "start": 4.72,
+    "end": 5.04
+  },
+  {
+    "word": "of",
+    "start": 5.04,
+    "end": 5.28
+  },
+  {
+    "word": "heavy",
+    "start": 5.28,
+    "end": 5.6
+  },
+  {
+    "word": "machinery.",
+    "start": 5.6,
+    "end": 6.64
+  },
+  {
+    "word": "Developers",
+    "start": 6.64,
+    "end": 7.36
+  },
+  {
+    "word": "rely",
+    "start": 7.36,
+    "end": 7.76
+  },
+  {
+    "word": "on",
+    "start": 7.76,
+    "end": 7.92
+  },
+  {
+    "word": "a",
+    "start": 7.92,
+    "end": 8.16
+  },
+  {
+    "word": "massive",
+    "start": 8.16,
+    "end": 8.56
+  },
+  {
+    "word": "dependency",
+    "start": 8.56,
+    "end": 9.36
+  },
+  {
+    "word": "tree,",
+    "start": 9.36,
+    "end": 9.92
+  },
+  {
+    "word": "complex",
+    "start": 9.92,
+    "end": 10.48
+  },
+  {
+    "word": "tooling,",
+    "start": 10.48,
+    "end": 11.12
+  },
+  {
+    "word": "and",
+    "start": 11.12,
+    "end": 11.28
+  },
+  {
+    "word": "a",
+    "start": 11.28,
+    "end": 11.44
+  },
+  {
+    "word": "build",
+    "start": 11.44,
+    "end": 11.76
+  },
+  {
+    "word": "pipeline",
+    "start": 11.76,
+    "end": 12.32
+  },
+  {
+    "word": "to",
+    "start": 12.32,
+    "end": 12.48
+  },
+  {
+    "word": "compile",
+    "start": 12.48,
+    "end": 12.96
+  },
+  {
+    "word": "code",
+    "start": 12.96,
+    "end": 13.44
+  },
+  {
+    "word": "before",
+    "start": 13.44,
+    "end": 13.68
+  },
+  {
+    "word": "it",
+    "start": 13.68,
+    "end": 13.84
+  },
+  {
+    "word": "ever",
+    "start": 13.84,
+    "end": 14.08
+  },
+  {
+    "word": "goes",
+    "start": 14.08,
+    "end": 14.4
+  },
+  {
+    "word": "live.",
+    "start": 14.4,
+    "end": 15.12
+  },
+  {
+    "word": "Consider",
+    "start": 15.12,
+    "end": 15.6
+  },
+  {
+    "word": "the",
+    "start": 15.6,
+    "end": 15.76
+  },
+  {
+    "word": "WolfClan",
+    "start": 15.76,
+    "end": 16.64
+  },
+  {
+    "word": "martial",
+    "start": 16.64,
+    "end": 17.04
+  },
+  {
+    "word": "arts",
+    "start": 17.04,
+    "end": 17.36
+  },
+  {
+    "word": "operations",
+    "start": 17.36,
+    "end": 17.92
+  },
+  {
+    "word": "platform.",
+    "start": 17.92,
+    "end": 18.72
+  },
+  {
+    "word": "It",
+    "start": 18.72,
+    "end": 18.96
+  },
+  {
+    "word": "features",
+    "start": 18.96,
+    "end": 19.36
+  },
+  {
+    "word": "a",
+    "start": 19.36,
+    "end": 19.52
+  },
+  {
+    "word": "marketing",
+    "start": 19.52,
+    "end": 20.0
+  },
+  {
+    "word": "site,",
+    "start": 20.0,
+    "end": 20.56
+  },
+  {
+    "word": "operations",
+    "start": 20.56,
+    "end": 21.12
+  },
+  {
+    "word": "hub,",
+    "start": 21.12,
+    "end": 21.68
+  },
+  {
+    "word": "and",
+    "start": 21.68,
+    "end": 21.84
+  },
+  {
+    "word": "member",
+    "start": 21.84,
+    "end": 22.24
+  },
+  {
+    "word": "portal,",
+    "start": 22.24,
+    "end": 22.8
+  },
+  {
+    "word": "connecting",
+    "start": 22.8,
+    "end": 23.2
+  },
+  {
+    "word": "to",
+    "start": 23.2,
+    "end": 23.36
+  },
+  {
+    "word": "a",
+    "start": 23.36,
+    "end": 23.44
+  },
+  {
+    "word": "database",
+    "start": 23.44,
+    "end": 24.0
+  },
+  {
+    "word": "and",
+    "start": 24.0,
+    "end": 24.16
+  },
+  {
+    "word": "stripe",
+    "start": 24.16,
+    "end": 24.56
+  },
+  {
+    "word": "billing.",
+    "start": 24.64,
+    "end": 25.36
+  },
+  {
+    "word": "Yet,",
+    "start": 25.36,
+    "end": 25.76
+  },
+  {
+    "word": "this",
+    "start": 25.76,
+    "end": 26.0
+  },
+  {
+    "word": "system",
+    "start": 26.0,
+    "end": 26.32
+  },
+  {
+    "word": "relies",
+    "start": 26.32,
+    "end": 26.8
+  },
+  {
+    "word": "on",
+    "start": 26.8,
+    "end": 27.04
+  },
+  {
+    "word": "exactly",
+    "start": 27.04,
+    "end": 27.52
+  },
+  {
+    "word": "zero",
+    "start": 27.68,
+    "end": 28.0
+  },
+  {
+    "word": "frameworks,",
+    "start": 28.0,
+    "end": 28.8
+  },
+  {
+    "word": "zero",
+    "start": 28.96,
+    "end": 29.36
+  },
+  {
+    "word": "NPM",
+    "start": 29.36,
+    "end": 29.92
+  },
+  {
+    "word": "packages,",
+    "start": 29.92,
+    "end": 30.64
+  },
+  {
+    "word": "and",
+    "start": 30.64,
+    "end": 30.8
+  },
+  {
+    "word": "zero",
+    "start": 30.88,
+    "end": 31.2
+  },
+  {
+    "word": "build",
+    "start": 31.2,
+    "end": 31.52
+  },
+  {
+    "word": "steps.",
+    "start": 31.52,
+    "end": 32.24
+  },
+  {
+    "word": "There",
+    "start": 32.24,
+    "end": 32.48
+  },
+  {
+    "word": "is",
+    "start": 32.48,
+    "end": 32.64
+  },
+  {
+    "word": "no",
+    "start": 32.64,
+    "end": 32.88
+  },
+  {
+    "word": "React.",
+    "start": 32.88,
+    "end": 33.6
+  },
+  {
+    "word": "There",
+    "start": 33.6,
+    "end": 33.76
+  },
+  {
+    "word": "is",
+    "start": 33.76,
+    "end": 34.0
+  },
+  {
+    "word": "no",
+    "start": 34.0,
+    "end": 34.16
+  },
+  {
+    "word": "Next.js.",
+    "start": 34.16,
+    "end": 35.6
+  },
+  {
+    "word": "Strip",
+    "start": 35.6,
+    "end": 36.0
+  },
+  {
+    "word": "away",
+    "start": 36.0,
+    "end": 36.32
+  },
+  {
+    "word": "the",
+    "start": 36.32,
+    "end": 36.48
+  },
+  {
+    "word": "expected",
+    "start": 36.48,
+    "end": 37.04
+  },
+  {
+    "word": "machinery,",
+    "start": 37.04,
+    "end": 37.84
+  },
+  {
+    "word": "and",
+    "start": 37.84,
+    "end": 38.0
+  },
+  {
+    "word": "the",
+    "start": 38.0,
+    "end": 38.16
+  },
+  {
+    "word": "raw",
+    "start": 38.16,
+    "end": 38.56
+  },
+  {
+    "word": "skeleton",
+    "start": 38.56,
+    "end": 39.12
+  },
+  {
+    "word": "underneath",
+    "start": 39.12,
+    "end": 39.68
+  },
+  {
+    "word": "is",
+    "start": 39.68,
+    "end": 39.84
+  },
+  {
+    "word": "purely",
+    "start": 39.84,
+    "end": 40.4
+  },
+  {
+    "word": "pure",
+    "start": 40.4,
+    "end": 40.8
+  },
+  {
+    "word": "HTML,",
+    "start": 40.8,
+    "end": 41.92
+  },
+  {
+    "word": "CSS,",
+    "start": 41.92,
+    "end": 42.64
+  },
+  {
+    "word": "and",
+    "start": 42.64,
+    "end": 42.8
+  },
+  {
+    "word": "vanilla",
+    "start": 42.8,
+    "end": 43.36
+  },
+  {
+    "word": "JavaScript.",
+    "start": 43.36,
+    "end": 44.24
+  },
+  {
+    "word": "It",
+    "start": 44.24,
+    "end": 44.48
+  },
+  {
+    "word": "raises",
+    "start": 44.48,
+    "end": 44.88
+  },
+  {
+    "word": "a",
+    "start": 44.88,
+    "end": 45.04
+  },
+  {
+    "word": "quiet",
+    "start": 45.04,
+    "end": 45.52
+  },
+  {
+    "word": "architectural",
+    "start": 45.52,
+    "end": 46.48
+  },
+  {
+    "word": "question.",
+    "start": 46.48,
+    "end": 47.12
+  },
+  {
+    "word": "How",
+    "start": 47.12,
+    "end": 47.36
+  },
+  {
+    "word": "does",
+    "start": 47.36,
+    "end": 47.52
+  },
+  {
+    "word": "a",
+    "start": 47.52,
+    "end": 47.76
+  },
+  {
+    "word": "highly",
+    "start": 47.76,
+    "end": 48.08
+  },
+  {
+    "word": "functional,",
+    "start": 48.08,
+    "end": 48.8
+  },
+  {
+    "word": "highly",
+    "start": 48.8,
+    "end": 49.12
+  },
+  {
+    "word": "secure",
+    "start": 49.12,
+    "end": 49.68
+  },
+  {
+    "word": "platform",
+    "start": 49.68,
+    "end": 50.4
+  },
+  {
+    "word": "operate",
+    "start": 50.4,
+    "end": 51.04
+  },
+  {
+    "word": "when",
+    "start": 51.04,
+    "end": 51.28
+  },
+  {
+    "word": "we",
+    "start": 51.28,
+    "end": 51.44
+  },
+  {
+    "word": "entirely",
+    "start": 51.44,
+    "end": 52.0
+  },
+  {
+    "word": "abandon",
+    "start": 52.0,
+    "end": 52.48
+  },
+  {
+    "word": "the",
+    "start": 52.48,
+    "end": 52.64
+  },
+  {
+    "word": "black",
+    "start": 52.64,
+    "end": 52.96
+  },
+  {
+    "word": "box",
+    "start": 52.96,
+    "end": 53.28
+  },
+  {
+    "word": "machinery",
+    "start": 53.28,
+    "end": 53.84
+  },
+  {
+    "word": "we've",
+    "start": 53.84,
+    "end": 54.08
+  },
+  {
+    "word": "been",
+    "start": 54.08,
+    "end": 54.24
+  },
+  {
+    "word": "taught",
+    "start": 54.24,
+    "end": 54.56
+  },
+  {
+    "word": "is",
+    "start": 54.56,
+    "end": 54.72
+  },
+  {
+    "word": "mandatory?",
+    "start": 54.72,
+    "end": 55.68
+  },
+  {
+    "word": "The",
+    "start": 55.68,
+    "end": 55.84
+  },
+  {
+    "word": "deployment",
+    "start": 55.84,
+    "end": 56.48
+  },
+  {
+    "word": "philosophy",
+    "start": 56.48,
+    "end": 57.12
+  },
+  {
+    "word": "relies",
+    "start": 57.12,
+    "end": 57.52
+  },
+  {
+    "word": "on",
+    "start": 57.52,
+    "end": 57.68
+  },
+  {
+    "word": "edge-first",
+    "start": 57.84,
+    "end": 58.48
+  },
+  {
+    "word": "hosting,",
+    "start": 58.48,
+    "end": 59.12
+  },
+  {
+    "word": "where",
+    "start": 59.12,
+    "end": 59.28
+  },
+  {
+    "word": "simple",
+    "start": 59.28,
+    "end": 59.6
+  },
+  {
+    "word": "servers",
+    "start": 59.6,
+    "end": 59.76
+  },
+  {
+    "word": "scattered",
+    "start": 60.36,
+    "end": 60.76
+  },
+  {
+    "word": "around",
+    "start": 60.76,
+    "end": 61.0
+  },
+  {
+    "word": "the",
+    "start": 61.0,
+    "end": 61.24
+  },
+  {
+    "word": "world",
+    "start": 61.24,
+    "end": 61.48
+  },
+  {
+    "word": "handle",
+    "start": 61.48,
+    "end": 61.88
+  },
+  {
+    "word": "requests.",
+    "start": 61.88,
+    "end": 62.84
+  },
+  {
+    "word": "The",
+    "start": 62.84,
+    "end": 63.0
+  },
+  {
+    "word": "mental",
+    "start": 63.0,
+    "end": 63.4
+  },
+  {
+    "word": "model",
+    "start": 63.4,
+    "end": 63.8
+  },
+  {
+    "word": "is",
+    "start": 63.8,
+    "end": 64.04
+  },
+  {
+    "word": "incredibly",
+    "start": 64.04,
+    "end": 64.68
+  },
+  {
+    "word": "direct.",
+    "start": 64.68,
+    "end": 65.48
+  },
+  {
+    "word": "Files",
+    "start": 65.48,
+    "end": 65.96
+  },
+  {
+    "word": "go",
+    "start": 65.96,
+    "end": 66.2
+  },
+  {
+    "word": "up,",
+    "start": 66.2,
+    "end": 66.6
+  },
+  {
+    "word": "the",
+    "start": 66.6,
+    "end": 66.76
+  },
+  {
+    "word": "site",
+    "start": 66.76,
+    "end": 67.16
+  },
+  {
+    "word": "comes",
+    "start": 67.16,
+    "end": 67.48
+  },
+  {
+    "word": "down.",
+    "start": 67.48,
+    "end": 68.12
+  },
+  {
+    "word": "By",
+    "start": 68.12,
+    "end": 68.36
+  },
+  {
+    "word": "skipping",
+    "start": 68.36,
+    "end": 68.76
+  },
+  {
+    "word": "the",
+    "start": 68.76,
+    "end": 68.84
+  },
+  {
+    "word": "build",
+    "start": 68.84,
+    "end": 69.24
+  },
+  {
+    "word": "cache",
+    "start": 69.24,
+    "end": 69.64
+  },
+  {
+    "word": "completely,",
+    "start": 69.64,
+    "end": 70.36
+  },
+  {
+    "word": "no",
+    "start": 70.36,
+    "end": 70.6
+  },
+  {
+    "word": "deployment",
+    "start": 70.6,
+    "end": 71.08
+  },
+  {
+    "word": "pipelines",
+    "start": 71.08,
+    "end": 71.56
+  },
+  {
+    "word": "to",
+    "start": 71.56,
+    "end": 71.72
+  },
+  {
+    "word": "debug,",
+    "start": 71.72,
+    "end": 72.36
+  },
+  {
+    "word": "no",
+    "start": 72.36,
+    "end": 72.52
+  },
+  {
+    "word": "sprawling",
+    "start": 72.52,
+    "end": 73.0
+  },
+  {
+    "word": "dependency",
+    "start": 73.0,
+    "end": 73.56
+  },
+  {
+    "word": "tree",
+    "start": 73.56,
+    "end": 73.8
+  },
+  {
+    "word": "to",
+    "start": 73.8,
+    "end": 73.88
+  },
+  {
+    "word": "audit,",
+    "start": 73.88,
+    "end": 74.36
+  },
+  {
+    "word": "and",
+    "start": 74.36,
+    "end": 74.52
+  },
+  {
+    "word": "no",
+    "start": 74.52,
+    "end": 74.68
+  },
+  {
+    "word": "framework",
+    "start": 74.68,
+    "end": 75.24
+  },
+  {
+    "word": "release",
+    "start": 75.24,
+    "end": 75.64
+  },
+  {
+    "word": "cycles,",
+    "start": 75.64,
+    "end": 76.44
+  },
+  {
+    "word": "the",
+    "start": 76.44,
+    "end": 76.68
+  },
+  {
+    "word": "entire",
+    "start": 76.68,
+    "end": 77.16
+  },
+  {
+    "word": "application",
+    "start": 77.16,
+    "end": 77.72
+  },
+  {
+    "word": "relies",
+    "start": 77.72,
+    "end": 78.12
+  },
+  {
+    "word": "on",
+    "start": 78.12,
+    "end": 78.28
+  },
+  {
+    "word": "a",
+    "start": 78.28,
+    "end": 78.44
+  },
+  {
+    "word": "single",
+    "start": 78.44,
+    "end": 78.84
+  },
+  {
+    "word": "file",
+    "start": 78.84,
+    "end": 79.24
+  },
+  {
+    "word": "acting",
+    "start": 79.24,
+    "end": 79.4
+  },
+  {
+    "word": "as",
+    "start": 79.4,
+    "end": 79.56
+  },
+  {
+    "word": "middleware,",
+    "start": 79.56,
+    "end": 80.44
+  },
+  {
+    "word": "a",
+    "start": 80.44,
+    "end": 80.6
+  },
+  {
+    "word": "central",
+    "start": 80.6,
+    "end": 81.08
+  },
+  {
+    "word": "interceptor",
+    "start": 81.08,
+    "end": 81.72
+  },
+  {
+    "word": "for",
+    "start": 81.72,
+    "end": 81.88
+  },
+  {
+    "word": "traffic.",
+    "start": 81.88,
+    "end": 82.52
+  },
+  {
+    "word": "It",
+    "start": 82.52,
+    "end": 82.76
+  },
+  {
+    "word": "totals",
+    "start": 82.76,
+    "end": 83.24
+  },
+  {
+    "word": "exactly",
+    "start": 83.24,
+    "end": 83.72
+  },
+  {
+    "word": "480",
+    "start": 84.04,
+    "end": 84.76
+  },
+  {
+    "word": "lines",
+    "start": 84.76,
+    "end": 85.08
+  },
+  {
+    "word": "of",
+    "start": 85.08,
+    "end": 85.24
+  },
+  {
+    "word": "code.",
+    "start": 85.24,
+    "end": 86.04
+  },
+  {
+    "word": "This",
+    "start": 86.04,
+    "end": 86.28
+  },
+  {
+    "word": "file",
+    "start": 86.28,
+    "end": 86.68
+  },
+  {
+    "word": "acts",
+    "start": 86.68,
+    "end": 86.92
+  },
+  {
+    "word": "as",
+    "start": 86.92,
+    "end": 87.08
+  },
+  {
+    "word": "the",
+    "start": 87.08,
+    "end": 87.16
+  },
+  {
+    "word": "master",
+    "start": 87.16,
+    "end": 87.56
+  },
+  {
+    "word": "traffic",
+    "start": 87.56,
+    "end": 87.96
+  },
+  {
+    "word": "cop",
+    "start": 87.96,
+    "end": 88.36
+  },
+  {
+    "word": "for",
+    "start": 88.36,
+    "end": 88.52
+  },
+  {
+    "word": "the",
+    "start": 88.52,
+    "end": 88.6
+  },
+  {
+    "word": "entire",
+    "start": 88.6,
+    "end": 89.0
+  },
+  {
+    "word": "platform.",
+    "start": 89.0,
+    "end": 89.8
+  },
+  {
+    "word": "It",
+    "start": 89.8,
+    "end": 90.04
+  },
+  {
+    "word": "reads",
+    "start": 90.04,
+    "end": 90.28
+  },
+  {
+    "word": "the",
+    "start": 90.28,
+    "end": 90.44
+  },
+  {
+    "word": "URL",
+    "start": 90.44,
+    "end": 90.92
+  },
+  {
+    "word": "path",
+    "start": 90.92,
+    "end": 91.24
+  },
+  {
+    "word": "and",
+    "start": 91.24,
+    "end": 91.4
+  },
+  {
+    "word": "decides",
+    "start": 91.4,
+    "end": 91.88
+  },
+  {
+    "word": "exactly",
+    "start": 91.88,
+    "end": 92.28
+  },
+  {
+    "word": "what",
+    "start": 92.28,
+    "end": 92.52
+  },
+  {
+    "word": "data",
+    "start": 92.52,
+    "end": 92.84
+  },
+  {
+    "word": "the",
+    "start": 92.84,
+    "end": 93.0
+  },
+  {
+    "word": "user",
+    "start": 93.0,
+    "end": 93.32
+  },
+  {
+    "word": "is",
+    "start": 93.32,
+    "end": 93.48
+  },
+  {
+    "word": "allowed",
+    "start": 93.48,
+    "end": 93.8
+  },
+  {
+    "word": "to",
+    "start": 93.8,
+    "end": 93.96
+  },
+  {
+    "word": "see.",
+    "start": 93.96,
+    "end": 94.52
+  },
+  {
+    "word": "The",
+    "start": 94.52,
+    "end": 94.68
+  },
+  {
+    "word": "public",
+    "start": 94.68,
+    "end": 95.08
+  },
+  {
+    "word": "site",
+    "start": 95.08,
+    "end": 95.4
+  },
+  {
+    "word": "bypasses",
+    "start": 95.4,
+    "end": 95.96
+  },
+  {
+    "word": "authentication",
+    "start": 95.96,
+    "end": 96.68
+  },
+  {
+    "word": "entirely,",
+    "start": 96.68,
+    "end": 97.4
+  },
+  {
+    "word": "while",
+    "start": 97.4,
+    "end": 97.64
+  },
+  {
+    "word": "the",
+    "start": 97.64,
+    "end": 97.72
+  },
+  {
+    "word": "member",
+    "start": 97.72,
+    "end": 98.12
+  },
+  {
+    "word": "portal",
+    "start": 98.12,
+    "end": 98.44
+  },
+  {
+    "word": "checks",
+    "start": 98.44,
+    "end": 98.68
+  },
+  {
+    "word": "a",
+    "start": 98.68,
+    "end": 98.84
+  },
+  {
+    "word": "session",
+    "start": 98.84,
+    "end": 99.24
+  },
+  {
+    "word": "token",
+    "start": 99.24,
+    "end": 99.56
+  },
+  {
+    "word": "against",
+    "start": 99.56,
+    "end": 99.8
+  },
+  {
+    "word": "the",
+    "start": 99.8,
+    "end": 99.88
+  },
+  {
+    "word": "database",
+    "start": 99.88,
+    "end": 100.52
+  },
+  {
+    "word": "before",
+    "start": 100.52,
+    "end": 100.76
+  },
+  {
+    "word": "injecting",
+    "start": 100.76,
+    "end": 101.24
+  },
+  {
+    "word": "member",
+    "start": 101.24,
+    "end": 101.64
+  },
+  {
+    "word": "data",
+    "start": 101.64,
+    "end": 101.88
+  },
+  {
+    "word": "into",
+    "start": 101.88,
+    "end": 102.12
+  },
+  {
+    "word": "the",
+    "start": 102.12,
+    "end": 102.28
+  },
+  {
+    "word": "request.",
+    "start": 102.28,
+    "end": 103.24
+  },
+  {
+    "word": "Removing",
+    "start": 103.24,
+    "end": 103.8
+  },
+  {
+    "word": "the",
+    "start": 103.8,
+    "end": 103.88
+  },
+  {
+    "word": "abstraction",
+    "start": 103.88,
+    "end": 104.52
+  },
+  {
+    "word": "of",
+    "start": 104.52,
+    "end": 104.6
+  },
+  {
+    "word": "a",
+    "start": 104.6,
+    "end": 104.76
+  },
+  {
+    "word": "sprawling",
+    "start": 104.76,
+    "end": 105.24
+  },
+  {
+    "word": "middleware",
+    "start": 105.24,
+    "end": 105.8
+  },
+  {
+    "word": "chain",
+    "start": 105.8,
+    "end": 106.2
+  },
+  {
+    "word": "forces",
+    "start": 106.2,
+    "end": 106.68
+  },
+  {
+    "word": "the",
+    "start": 106.68,
+    "end": 106.76
+  },
+  {
+    "word": "security",
+    "start": 106.76,
+    "end": 107.32
+  },
+  {
+    "word": "boundary",
+    "start": 107.32,
+    "end": 107.8
+  },
+  {
+    "word": "out",
+    "start": 107.8,
+    "end": 108.04
+  },
+  {
+    "word": "into",
+    "start": 108.04,
+    "end": 108.28
+  },
+  {
+    "word": "the",
+    "start": 108.28,
+    "end": 108.52
+  },
+  {
+    "word": "open.",
+    "start": 108.52,
+    "end": 109.16
+  },
+  {
+    "word": "The",
+    "start": 109.16,
+    "end": 109.32
+  },
+  {
+    "word": "entire",
+    "start": 109.32,
+    "end": 109.8
+  },
+  {
+    "word": "access",
+    "start": 109.8,
+    "end": 110.2
+  },
+  {
+    "word": "logic",
+    "start": 110.2,
+    "end": 110.6
+  },
+  {
+    "word": "sits",
+    "start": 110.6,
+    "end": 110.84
+  },
+  {
+    "word": "in",
+    "start": 110.84,
+    "end": 111.0
+  },
+  {
+    "word": "one",
+    "start": 111.0,
+    "end": 111.24
+  },
+  {
+    "word": "highly",
+    "start": 111.24,
+    "end": 111.56
+  },
+  {
+    "word": "readable,",
+    "start": 111.56,
+    "end": 112.2
+  },
+  {
+    "word": "instantly",
+    "start": 112.2,
+    "end": 112.68
+  },
+  {
+    "word": "auditable",
+    "start": 112.68,
+    "end": 113.32
+  },
+  {
+    "word": "location.",
+    "start": 113.32,
+    "end": 114.12
+  },
+  {
+    "word": "Without",
+    "start": 114.12,
+    "end": 114.44
+  },
+  {
+    "word": "a",
+    "start": 114.44,
+    "end": 114.52
+  },
+  {
+    "word": "frameworks",
+    "start": 114.52,
+    "end": 115.12
+  },
+  {
+    "word": "abstraction",
+    "start": 115.28,
+    "end": 115.76
+  },
+  {
+    "word": "layer,",
+    "start": 115.76,
+    "end": 116.24
+  },
+  {
+    "word": "you",
+    "start": 116.24,
+    "end": 116.4
+  },
+  {
+    "word": "write",
+    "start": 116.4,
+    "end": 116.64
+  },
+  {
+    "word": "the",
+    "start": 116.64,
+    "end": 116.72
+  },
+  {
+    "word": "security",
+    "start": 116.72,
+    "end": 117.2
+  },
+  {
+    "word": "code",
+    "start": 117.2,
+    "end": 117.52
+  },
+  {
+    "word": "yourself.",
+    "start": 117.52,
+    "end": 118.32
+  },
+  {
+    "word": "You",
+    "start": 118.32,
+    "end": 118.64
+  },
+  {
+    "word": "also",
+    "start": 118.64,
+    "end": 118.96
+  },
+  {
+    "word": "have",
+    "start": 118.96,
+    "end": 119.12
+  },
+  {
+    "word": "to",
+    "start": 119.12,
+    "end": 119.28
+  },
+  {
+    "word": "read",
+    "start": 119.28,
+    "end": 119.52
+  },
+  {
+    "word": "that",
+    "start": 119.52,
+    "end": 119.68
+  },
+  {
+    "word": "security",
+    "start": 119.68,
+    "end": 120.24
+  },
+  {
+    "word": "code",
+    "start": 120.24,
+    "end": 120.64
+  },
+  {
+    "word": "yourself.",
+    "start": 120.64,
+    "end": 121.52
+  },
+  {
+    "word": "This",
+    "start": 121.52,
+    "end": 121.76
+  },
+  {
+    "word": "diagram",
+    "start": 121.76,
+    "end": 122.4
+  },
+  {
+    "word": "shows",
+    "start": 122.4,
+    "end": 122.64
+  },
+  {
+    "word": "a",
+    "start": 122.64,
+    "end": 122.8
+  },
+  {
+    "word": "subtle",
+    "start": 122.8,
+    "end": 123.2
+  },
+  {
+    "word": "vulnerability",
+    "start": 123.2,
+    "end": 124.0
+  },
+  {
+    "word": "in",
+    "start": 124.0,
+    "end": 124.24
+  },
+  {
+    "word": "standard",
+    "start": 124.24,
+    "end": 124.64
+  },
+  {
+    "word": "authentication.",
+    "start": 124.64,
+    "end": 125.92
+  },
+  {
+    "word": "The",
+    "start": 125.92,
+    "end": 126.16
+  },
+  {
+    "word": "top",
+    "start": 126.16,
+    "end": 126.48
+  },
+  {
+    "word": "half",
+    "start": 126.48,
+    "end": 126.8
+  },
+  {
+    "word": "visualizes",
+    "start": 126.8,
+    "end": 127.52
+  },
+  {
+    "word": "a",
+    "start": 127.52,
+    "end": 127.68
+  },
+  {
+    "word": "naive",
+    "start": 127.68,
+    "end": 128.24
+  },
+  {
+    "word": "password",
+    "start": 128.24,
+    "end": 128.72
+  },
+  {
+    "word": "check.",
+    "start": 128.72,
+    "end": 129.36
+  },
+  {
+    "word": "If",
+    "start": 129.36,
+    "end": 129.6
+  },
+  {
+    "word": "a",
+    "start": 129.6,
+    "end": 129.76
+  },
+  {
+    "word": "user",
+    "start": 129.76,
+    "end": 130.08
+  },
+  {
+    "word": "types",
+    "start": 130.08,
+    "end": 130.48
+  },
+  {
+    "word": "the",
+    "start": 130.48,
+    "end": 130.64
+  },
+  {
+    "word": "wrong",
+    "start": 130.64,
+    "end": 130.96
+  },
+  {
+    "word": "first",
+    "start": 130.96,
+    "end": 131.2
+  },
+  {
+    "word": "letter,",
+    "start": 131.2,
+    "end": 131.76
+  },
+  {
+    "word": "the",
+    "start": 131.76,
+    "end": 132.0
+  },
+  {
+    "word": "server",
+    "start": 132.0,
+    "end": 132.4
+  },
+  {
+    "word": "immediately",
+    "start": 132.4,
+    "end": 132.96
+  },
+  {
+    "word": "stops",
+    "start": 132.96,
+    "end": 133.36
+  },
+  {
+    "word": "checking",
+    "start": 133.36,
+    "end": 133.76
+  },
+  {
+    "word": "and",
+    "start": 133.76,
+    "end": 133.92
+  },
+  {
+    "word": "returns",
+    "start": 133.92,
+    "end": 134.32
+  },
+  {
+    "word": "an",
+    "start": 134.32,
+    "end": 134.48
+  },
+  {
+    "word": "error",
+    "start": 134.56,
+    "end": 134.88
+  },
+  {
+    "word": "faster",
+    "start": 134.88,
+    "end": 135.36
+  },
+  {
+    "word": "than",
+    "start": 135.36,
+    "end": 135.52
+  },
+  {
+    "word": "if",
+    "start": 135.52,
+    "end": 135.6
+  },
+  {
+    "word": "they",
+    "start": 135.6,
+    "end": 135.84
+  },
+  {
+    "word": "got",
+    "start": 135.84,
+    "end": 136.0
+  },
+  {
+    "word": "the",
+    "start": 136.0,
+    "end": 136.08
+  },
+  {
+    "word": "first",
+    "start": 136.08,
+    "end": 136.32
+  },
+  {
+    "word": "five",
+    "start": 136.32,
+    "end": 136.56
+  },
+  {
+    "word": "letters",
+    "start": 136.56,
+    "end": 137.04
+  },
+  {
+    "word": "right.",
+    "start": 137.04,
+    "end": 137.6
+  },
+  {
+    "word": "Attackers",
+    "start": 137.6,
+    "end": 138.24
+  },
+  {
+    "word": "can",
+    "start": 138.24,
+    "end": 138.32
+  },
+  {
+    "word": "measure",
+    "start": 138.32,
+    "end": 138.72
+  },
+  {
+    "word": "those",
+    "start": 138.72,
+    "end": 138.88
+  },
+  {
+    "word": "microscopic",
+    "start": 138.88,
+    "end": 139.76
+  },
+  {
+    "word": "time",
+    "start": 139.76,
+    "end": 140.0
+  },
+  {
+    "word": "differences",
+    "start": 140.0,
+    "end": 140.56
+  },
+  {
+    "word": "to",
+    "start": 140.56,
+    "end": 140.72
+  },
+  {
+    "word": "guess",
+    "start": 140.72,
+    "end": 141.04
+  },
+  {
+    "word": "passwords",
+    "start": 141.04,
+    "end": 141.6
+  },
+  {
+    "word": "letter",
+    "start": 141.6,
+    "end": 141.92
+  },
+  {
+    "word": "by",
+    "start": 141.92,
+    "end": 142.16
+  },
+  {
+    "word": "letter.",
+    "start": 142.16,
+    "end": 142.72
+  },
+  {
+    "word": "To",
+    "start": 142.72,
+    "end": 142.96
+  },
+  {
+    "word": "fix",
+    "start": 142.96,
+    "end": 143.28
+  },
+  {
+    "word": "this,",
+    "start": 143.28,
+    "end": 143.52
+  },
+  {
+    "word": "the",
+    "start": 143.52,
+    "end": 143.68
+  },
+  {
+    "word": "custom",
+    "start": 143.68,
+    "end": 144.0
+  },
+  {
+    "word": "middleware",
+    "start": 144.0,
+    "end": 144.64
+  },
+  {
+    "word": "uses",
+    "start": 144.64,
+    "end": 144.88
+  },
+  {
+    "word": "a",
+    "start": 144.88,
+    "end": 145.12
+  },
+  {
+    "word": "timing-safe",
+    "start": 145.12,
+    "end": 145.84
+  },
+  {
+    "word": "comparison",
+    "start": 145.84,
+    "end": 146.4
+  },
+  {
+    "word": "on",
+    "start": 146.4,
+    "end": 146.64
+  },
+  {
+    "word": "SHA256",
+    "start": 146.64,
+    "end": 148.0
+  },
+  {
+    "word": "password",
+    "start": 148.0,
+    "end": 148.48
+  },
+  {
+    "word": "hashes.",
+    "start": 148.48,
+    "end": 149.28
+  },
+  {
+    "word": "Every",
+    "start": 149.28,
+    "end": 149.6
+  },
+  {
+    "word": "single",
+    "start": 149.6,
+    "end": 150.0
+  },
+  {
+    "word": "comparison",
+    "start": 150.0,
+    "end": 150.56
+  },
+  {
+    "word": "takes",
+    "start": 150.56,
+    "end": 150.88
+  },
+  {
+    "word": "the",
+    "start": 150.88,
+    "end": 151.04
+  },
+  {
+    "word": "exact",
+    "start": 151.04,
+    "end": 151.44
+  },
+  {
+    "word": "same",
+    "start": 151.44,
+    "end": 151.68
+  },
+  {
+    "word": "amount",
+    "start": 151.68,
+    "end": 151.92
+  },
+  {
+    "word": "of",
+    "start": 151.92,
+    "end": 152.16
+  },
+  {
+    "word": "time,",
+    "start": 152.16,
+    "end": 152.64
+  },
+  {
+    "word": "completely",
+    "start": 152.64,
+    "end": 153.2
+  },
+  {
+    "word": "closing",
+    "start": 153.2,
+    "end": 153.52
+  },
+  {
+    "word": "the",
+    "start": 153.52,
+    "end": 153.68
+  },
+  {
+    "word": "leak.",
+    "start": 153.68,
+    "end": 154.32
+  },
+  {
+    "word": "For",
+    "start": 154.32,
+    "end": 154.56
+  },
+  {
+    "word": "state-changing",
+    "start": 154.56,
+    "end": 155.36
+  },
+  {
+    "word": "actions,",
+    "start": 155.36,
+    "end": 155.76
+  },
+  {
+    "word": "the",
+    "start": 155.76,
+    "end": 155.92
+  },
+  {
+    "word": "server",
+    "start": 155.92,
+    "end": 156.32
+  },
+  {
+    "word": "runs",
+    "start": 156.32,
+    "end": 156.56
+  },
+  {
+    "word": "a",
+    "start": 156.56,
+    "end": 156.72
+  },
+  {
+    "word": "strict",
+    "start": 156.72,
+    "end": 157.12
+  },
+  {
+    "word": "origin",
+    "start": 157.12,
+    "end": 157.68
+  },
+  {
+    "word": "validation",
+    "start": 157.68,
+    "end": 158.24
+  },
+  {
+    "word": "check.",
+    "start": 158.24,
+    "end": 158.8
+  },
+  {
+    "word": "It",
+    "start": 158.8,
+    "end": 158.96
+  },
+  {
+    "word": "verifies",
+    "start": 159.04,
+    "end": 159.52
+  },
+  {
+    "word": "that",
+    "start": 159.52,
+    "end": 159.68
+  },
+  {
+    "word": "the",
+    "start": 159.68,
+    "end": 159.76
+  },
+  {
+    "word": "request",
+    "start": 159.76,
+    "end": 160.32
+  },
+  {
+    "word": "is",
+    "start": 160.32,
+    "end": 160.56
+  },
+  {
+    "word": "actually",
+    "start": 160.56,
+    "end": 160.88
+  },
+  {
+    "word": "coming",
+    "start": 160.88,
+    "end": 161.12
+  },
+  {
+    "word": "from",
+    "start": 161.12,
+    "end": 161.28
+  },
+  {
+    "word": "the",
+    "start": 161.28,
+    "end": 161.44
+  },
+  {
+    "word": "expected",
+    "start": 161.44,
+    "end": 161.92
+  },
+  {
+    "word": "domain,",
+    "start": 161.92,
+    "end": 162.56
+  },
+  {
+    "word": "without",
+    "start": 162.56,
+    "end": 162.88
+  },
+  {
+    "word": "relying",
+    "start": 162.88,
+    "end": 163.28
+  },
+  {
+    "word": "on",
+    "start": 163.28,
+    "end": 163.44
+  },
+  {
+    "word": "external",
+    "start": 163.44,
+    "end": 163.84
+  },
+  {
+    "word": "security",
+    "start": 163.84,
+    "end": 164.32
+  },
+  {
+    "word": "libraries.",
+    "start": 164.32,
+    "end": 165.12
+  },
+  {
+    "word": "The",
+    "start": 165.12,
+    "end": 165.28
+  },
+  {
+    "word": "member",
+    "start": 165.28,
+    "end": 165.76
+  },
+  {
+    "word": "portal",
+    "start": 165.76,
+    "end": 166.08
+  },
+  {
+    "word": "abandons",
+    "start": 166.08,
+    "end": 166.56
+  },
+  {
+    "word": "passwords",
+    "start": 166.56,
+    "end": 167.12
+  },
+  {
+    "word": "altogether.",
+    "start": 167.12,
+    "end": 167.92
+  },
+  {
+    "word": "Entering",
+    "start": 167.92,
+    "end": 168.32
+  },
+  {
+    "word": "an",
+    "start": 168.32,
+    "end": 168.48
+  },
+  {
+    "word": "email",
+    "start": 168.48,
+    "end": 168.8
+  },
+  {
+    "word": "generates",
+    "start": 168.8,
+    "end": 169.2
+  },
+  {
+    "word": "a",
+    "start": 169.2,
+    "end": 169.28
+  },
+  {
+    "word": "single-use",
+    "start": 169.28,
+    "end": 169.88
+  },
+  {
+    "word": "token",
+    "start": 170.04,
+    "end": 170.36
+  },
+  {
+    "word": "link",
+    "start": 170.36,
+    "end": 170.68
+  },
+  {
+    "word": "with",
+    "start": 170.68,
+    "end": 170.84
+  },
+  {
+    "word": "a",
+    "start": 170.84,
+    "end": 170.92
+  },
+  {
+    "word": "15-minute",
+    "start": 171.0,
+    "end": 171.56
+  },
+  {
+    "word": "lifespan.",
+    "start": 171.56,
+    "end": 172.28
+  },
+  {
+    "word": "That",
+    "start": 172.28,
+    "end": 172.52
+  },
+  {
+    "word": "link",
+    "start": 172.52,
+    "end": 172.84
+  },
+  {
+    "word": "gets",
+    "start": 172.84,
+    "end": 173.08
+  },
+  {
+    "word": "emailed",
+    "start": 173.08,
+    "end": 173.48
+  },
+  {
+    "word": "out,",
+    "start": 173.48,
+    "end": 173.72
+  },
+  {
+    "word": "authenticating",
+    "start": 173.72,
+    "end": 174.44
+  },
+  {
+    "word": "the",
+    "start": 174.44,
+    "end": 174.52
+  },
+  {
+    "word": "user",
+    "start": 174.52,
+    "end": 174.84
+  },
+  {
+    "word": "upon",
+    "start": 174.84,
+    "end": 175.16
+  },
+  {
+    "word": "click.",
+    "start": 175.16,
+    "end": 175.88
+  },
+  {
+    "word": "Over",
+    "start": 175.88,
+    "end": 176.2
+  },
+  {
+    "word": "in",
+    "start": 176.2,
+    "end": 176.36
+  },
+  {
+    "word": "the",
+    "start": 176.36,
+    "end": 176.6
+  },
+  {
+    "word": "operations",
+    "start": 176.6,
+    "end": 177.24
+  },
+  {
+    "word": "hub,",
+    "start": 177.24,
+    "end": 177.8
+  },
+  {
+    "word": "markdown",
+    "start": 177.8,
+    "end": 178.52
+  },
+  {
+    "word": "documents",
+    "start": 178.52,
+    "end": 179.08
+  },
+  {
+    "word": "are",
+    "start": 179.08,
+    "end": 179.32
+  },
+  {
+    "word": "served",
+    "start": 179.32,
+    "end": 179.72
+  },
+  {
+    "word": "using",
+    "start": 179.72,
+    "end": 179.96
+  },
+  {
+    "word": "a",
+    "start": 179.96,
+    "end": 180.2
+  },
+  {
+    "word": "hard-coded",
+    "start": 180.2,
+    "end": 180.92
+  },
+  {
+    "word": "allow",
+    "start": 180.92,
+    "end": 181.4
+  },
+  {
+    "word": "list.",
+    "start": 181.4,
+    "end": 182.12
+  },
+  {
+    "word": "Instead",
+    "start": 182.12,
+    "end": 182.52
+  },
+  {
+    "word": "of",
+    "start": 182.52,
+    "end": 182.68
+  },
+  {
+    "word": "using",
+    "start": 182.68,
+    "end": 183.0
+  },
+  {
+    "word": "clever",
+    "start": 183.0,
+    "end": 183.4
+  },
+  {
+    "word": "sanitization",
+    "start": 183.4,
+    "end": 184.28
+  },
+  {
+    "word": "to",
+    "start": 184.28,
+    "end": 184.52
+  },
+  {
+    "word": "prevent",
+    "start": 184.52,
+    "end": 184.92
+  },
+  {
+    "word": "directory",
+    "start": 184.92,
+    "end": 185.48
+  },
+  {
+    "word": "traversal",
+    "start": 185.48,
+    "end": 186.04
+  },
+  {
+    "word": "attacks,",
+    "start": 186.04,
+    "end": 186.76
+  },
+  {
+    "word": "where",
+    "start": 186.76,
+    "end": 187.0
+  },
+  {
+    "word": "users",
+    "start": 187.0,
+    "end": 187.48
+  },
+  {
+    "word": "trick",
+    "start": 187.48,
+    "end": 187.8
+  },
+  {
+    "word": "the",
+    "start": 187.8,
+    "end": 187.96
+  },
+  {
+    "word": "server",
+    "start": 187.96,
+    "end": 188.28
+  },
+  {
+    "word": "into",
+    "start": 188.28,
+    "end": 188.52
+  },
+  {
+    "word": "showing",
+    "start": 188.52,
+    "end": 188.84
+  },
+  {
+    "word": "hidden",
+    "start": 188.84,
+    "end": 189.24
+  },
+  {
+    "word": "files,",
+    "start": 189.24,
+    "end": 189.96
+  },
+  {
+    "word": "the",
+    "start": 189.96,
+    "end": 190.2
+  },
+  {
+    "word": "system",
+    "start": 190.2,
+    "end": 190.52
+  },
+  {
+    "word": "simply",
+    "start": 190.52,
+    "end": 191.0
+  },
+  {
+    "word": "checks",
+    "start": 191.0,
+    "end": 191.4
+  },
+  {
+    "word": "an",
+    "start": 191.4,
+    "end": 191.64
+  },
+  {
+    "word": "array.",
+    "start": 191.64,
+    "end": 192.36
+  },
+  {
+    "word": "If",
+    "start": 192.36,
+    "end": 192.6
+  },
+  {
+    "word": "your",
+    "start": 192.6,
+    "end": 192.84
+  },
+  {
+    "word": "requested",
+    "start": 192.84,
+    "end": 193.4
+  },
+  {
+    "word": "file",
+    "start": 193.4,
+    "end": 193.72
+  },
+  {
+    "word": "isn't",
+    "start": 193.72,
+    "end": 194.12
+  },
+  {
+    "word": "on",
+    "start": 194.12,
+    "end": 194.28
+  },
+  {
+    "word": "the",
+    "start": 194.28,
+    "end": 194.36
+  },
+  {
+    "word": "approved",
+    "start": 194.36,
+    "end": 194.84
+  },
+  {
+    "word": "list,",
+    "start": 194.84,
+    "end": 195.4
+  },
+  {
+    "word": "you",
+    "start": 195.4,
+    "end": 195.56
+  },
+  {
+    "word": "get",
+    "start": 195.56,
+    "end": 195.72
+  },
+  {
+    "word": "a",
+    "start": 195.72,
+    "end": 195.8
+  },
+  {
+    "word": "404",
+    "start": 195.96,
+    "end": 196.6
+  },
+  {
+    "word": "error.",
+    "start": 196.68,
+    "end": 197.32
+  },
+  {
+    "word": "These",
+    "start": 197.32,
+    "end": 197.56
+  },
+  {
+    "word": "are",
+    "start": 197.56,
+    "end": 197.88
+  },
+  {
+    "word": "highly",
+    "start": 197.88,
+    "end": 198.2
+  },
+  {
+    "word": "robust",
+    "start": 198.2,
+    "end": 198.76
+  },
+  {
+    "word": "vanilla",
+    "start": 198.76,
+    "end": 199.48
+  },
+  {
+    "word": "implementations.",
+    "start": 199.48,
+    "end": 200.68
+  },
+  {
+    "word": "They",
+    "start": 200.68,
+    "end": 200.92
+  },
+  {
+    "word": "prove",
+    "start": 200.92,
+    "end": 201.24
+  },
+  {
+    "word": "that",
+    "start": 201.24,
+    "end": 201.48
+  },
+  {
+    "word": "digital",
+    "start": 201.48,
+    "end": 201.96
+  },
+  {
+    "word": "security",
+    "start": 201.96,
+    "end": 202.6
+  },
+  {
+    "word": "doesn't",
+    "start": 202.6,
+    "end": 202.92
+  },
+  {
+    "word": "require",
+    "start": 202.92,
+    "end": 203.4
+  },
+  {
+    "word": "rigid",
+    "start": 203.4,
+    "end": 203.96
+  },
+  {
+    "word": "third-party",
+    "start": 203.96,
+    "end": 204.68
+  },
+  {
+    "word": "opinions.",
+    "start": 204.68,
+    "end": 205.56
+  },
+  {
+    "word": "It",
+    "start": 205.56,
+    "end": 205.72
+  },
+  {
+    "word": "requires",
+    "start": 205.72,
+    "end": 206.36
+  },
+  {
+    "word": "well-understood,",
+    "start": 206.36,
+    "end": 207.32
+  },
+  {
+    "word": "transparent",
+    "start": 207.32,
+    "end": 207.96
+  },
+  {
+    "word": "patterns.",
+    "start": 207.96,
+    "end": 208.92
+  },
+  {
+    "word": "Standard",
+    "start": 208.92,
+    "end": 209.48
+  },
+  {
+    "word": "engagement",
+    "start": 209.48,
+    "end": 210.12
+  },
+  {
+    "word": "tracking",
+    "start": 210.12,
+    "end": 210.6
+  },
+  {
+    "word": "counts",
+    "start": 210.6,
+    "end": 210.92
+  },
+  {
+    "word": "page",
+    "start": 210.92,
+    "end": 211.24
+  },
+  {
+    "word": "views",
+    "start": 211.24,
+    "end": 211.64
+  },
+  {
+    "word": "or",
+    "start": 211.64,
+    "end": 211.88
+  },
+  {
+    "word": "clicks.",
+    "start": 211.88,
+    "end": 212.68
+  },
+  {
+    "word": "That",
+    "start": 212.68,
+    "end": 212.92
+  },
+  {
+    "word": "tells",
+    "start": 212.92,
+    "end": 213.24
+  },
+  {
+    "word": "the",
+    "start": 213.24,
+    "end": 213.4
+  },
+  {
+    "word": "club",
+    "start": 213.4,
+    "end": 213.72
+  },
+  {
+    "word": "someone",
+    "start": 213.72,
+    "end": 214.12
+  },
+  {
+    "word": "loaded",
+    "start": 214.12,
+    "end": 214.44
+  },
+  {
+    "word": "a",
+    "start": 214.44,
+    "end": 214.6
+  },
+  {
+    "word": "page,",
+    "start": 214.6,
+    "end": 215.24
+  },
+  {
+    "word": "but",
+    "start": 215.24,
+    "end": 215.4
+  },
+  {
+    "word": "it",
+    "start": 215.4,
+    "end": 215.56
+  },
+  {
+    "word": "fails",
+    "start": 215.56,
+    "end": 215.88
+  },
+  {
+    "word": "to",
+    "start": 215.88,
+    "end": 216.04
+  },
+  {
+    "word": "capture",
+    "start": 216.04,
+    "end": 216.52
+  },
+  {
+    "word": "actual",
+    "start": 216.52,
+    "end": 217.0
+  },
+  {
+    "word": "continuous",
+    "start": 217.0,
+    "end": 217.72
+  },
+  {
+    "word": "presence.",
+    "start": 217.72,
+    "end": 218.6
+  },
+  {
+    "word": "This",
+    "start": 218.6,
+    "end": 218.84
+  },
+  {
+    "word": "graph",
+    "start": 218.84,
+    "end": 219.32
+  },
+  {
+    "word": "illustrates",
+    "start": 219.32,
+    "end": 219.88
+  },
+  {
+    "word": "a",
+    "start": 219.88,
+    "end": 219.96
+  },
+  {
+    "word": "custom",
+    "start": 219.96,
+    "end": 220.44
+  },
+  {
+    "word": "solution.",
+    "start": 220.44,
+    "end": 221.24
+  },
+  {
+    "word": "Built",
+    "start": 221.24,
+    "end": 221.64
+  },
+  {
+    "word": "entirely",
+    "start": 221.64,
+    "end": 222.2
+  },
+  {
+    "word": "without",
+    "start": 222.2,
+    "end": 222.52
+  },
+  {
+    "word": "a",
+    "start": 222.52,
+    "end": 222.6
+  },
+  {
+    "word": "framework,",
+    "start": 222.6,
+    "end": 223.24
+  },
+  {
+    "word": "the",
+    "start": 223.24,
+    "end": 223.4
+  },
+  {
+    "word": "member",
+    "start": 223.4,
+    "end": 223.8
+  },
+  {
+    "word": "portal",
+    "start": 223.8,
+    "end": 224.2
+  },
+  {
+    "word": "sends",
+    "start": 224.2,
+    "end": 224.44
+  },
+  {
+    "word": "a",
+    "start": 224.44,
+    "end": 224.52
+  },
+  {
+    "word": "lightweight",
+    "start": 224.52,
+    "end": 224.84
+  },
+  {
+    "word": "heartbeat",
+    "start": 225.28,
+    "end": 225.76
+  },
+  {
+    "word": "signal",
+    "start": 225.76,
+    "end": 226.16
+  },
+  {
+    "word": "back",
+    "start": 226.16,
+    "end": 226.32
+  },
+  {
+    "word": "to",
+    "start": 226.32,
+    "end": 226.48
+  },
+  {
+    "word": "the",
+    "start": 226.48,
+    "end": 226.72
+  },
+  {
+    "word": "server",
+    "start": 226.72,
+    "end": 227.12
+  },
+  {
+    "word": "every",
+    "start": 227.12,
+    "end": 227.36
+  },
+  {
+    "word": "30",
+    "start": 227.52,
+    "end": 227.76
+  },
+  {
+    "word": "seconds",
+    "start": 227.76,
+    "end": 228.24
+  },
+  {
+    "word": "during",
+    "start": 228.24,
+    "end": 228.48
+  },
+  {
+    "word": "an",
+    "start": 228.48,
+    "end": 228.64
+  },
+  {
+    "word": "active",
+    "start": 228.64,
+    "end": 228.96
+  },
+  {
+    "word": "session.",
+    "start": 228.96,
+    "end": 229.76
+  },
+  {
+    "word": "Logging",
+    "start": 229.76,
+    "end": 230.32
+  },
+  {
+    "word": "those",
+    "start": 230.32,
+    "end": 230.48
+  },
+  {
+    "word": "continuous",
+    "start": 230.48,
+    "end": 231.04
+  },
+  {
+    "word": "heartbeats",
+    "start": 231.04,
+    "end": 231.68
+  },
+  {
+    "word": "generates",
+    "start": 231.68,
+    "end": 232.16
+  },
+  {
+    "word": "incredibly",
+    "start": 232.16,
+    "end": 232.8
+  },
+  {
+    "word": "precise",
+    "start": 232.8,
+    "end": 233.28
+  },
+  {
+    "word": "data.",
+    "start": 233.28,
+    "end": 233.84
+  },
+  {
+    "word": "The",
+    "start": 233.84,
+    "end": 234.0
+  },
+  {
+    "word": "club",
+    "start": 234.0,
+    "end": 234.4
+  },
+  {
+    "word": "can",
+    "start": 234.4,
+    "end": 234.56
+  },
+  {
+    "word": "calculate",
+    "start": 234.56,
+    "end": 235.04
+  },
+  {
+    "word": "average",
+    "start": 235.04,
+    "end": 235.52
+  },
+  {
+    "word": "session",
+    "start": 235.52,
+    "end": 235.92
+  },
+  {
+    "word": "duration",
+    "start": 235.92,
+    "end": 236.48
+  },
+  {
+    "word": "and",
+    "start": 236.48,
+    "end": 236.72
+  },
+  {
+    "word": "track",
+    "start": 236.72,
+    "end": 237.04
+  },
+  {
+    "word": "consistency,",
+    "start": 237.04,
+    "end": 238.08
+  },
+  {
+    "word": "allowing",
+    "start": 238.08,
+    "end": 238.48
+  },
+  {
+    "word": "them",
+    "start": 238.48,
+    "end": 238.64
+  },
+  {
+    "word": "to",
+    "start": 238.64,
+    "end": 238.8
+  },
+  {
+    "word": "identify",
+    "start": 238.8,
+    "end": 239.28
+  },
+  {
+    "word": "members",
+    "start": 239.28,
+    "end": 239.76
+  },
+  {
+    "word": "who",
+    "start": 239.76,
+    "end": 239.92
+  },
+  {
+    "word": "are",
+    "start": 239.92,
+    "end": 240.08
+  },
+  {
+    "word": "slowly",
+    "start": 240.08,
+    "end": 240.48
+  },
+  {
+    "word": "drifting",
+    "start": 240.48,
+    "end": 240.96
+  },
+  {
+    "word": "away",
+    "start": 240.96,
+    "end": 241.28
+  },
+  {
+    "word": "and",
+    "start": 241.28,
+    "end": 241.44
+  },
+  {
+    "word": "check",
+    "start": 241.44,
+    "end": 241.76
+  },
+  {
+    "word": "in",
+    "start": 241.76,
+    "end": 241.92
+  },
+  {
+    "word": "on",
+    "start": 241.92,
+    "end": 242.08
+  },
+  {
+    "word": "them",
+    "start": 242.08,
+    "end": 242.24
+  },
+  {
+    "word": "before",
+    "start": 242.24,
+    "end": 242.48
+  },
+  {
+    "word": "they",
+    "start": 242.48,
+    "end": 242.64
+  },
+  {
+    "word": "cancel.",
+    "start": 242.64,
+    "end": 243.52
+  },
+  {
+    "word": "But",
+    "start": 243.52,
+    "end": 243.76
+  },
+  {
+    "word": "operating",
+    "start": 243.76,
+    "end": 244.24
+  },
+  {
+    "word": "without",
+    "start": 244.24,
+    "end": 244.56
+  },
+  {
+    "word": "a",
+    "start": 244.56,
+    "end": 244.64
+  },
+  {
+    "word": "framework",
+    "start": 244.64,
+    "end": 245.2
+  },
+  {
+    "word": "introduces",
+    "start": 245.2,
+    "end": 245.84
+  },
+  {
+    "word": "rigid",
+    "start": 245.84,
+    "end": 246.32
+  },
+  {
+    "word": "costs.",
+    "start": 246.32,
+    "end": 247.12
+  },
+  {
+    "word": "Without",
+    "start": 247.12,
+    "end": 247.44
+  },
+  {
+    "word": "a",
+    "start": 247.44,
+    "end": 247.6
+  },
+  {
+    "word": "component",
+    "start": 247.6,
+    "end": 248.08
+  },
+  {
+    "word": "templating",
+    "start": 248.08,
+    "end": 248.64
+  },
+  {
+    "word": "system,",
+    "start": 248.64,
+    "end": 249.28
+  },
+  {
+    "word": "user",
+    "start": 249.28,
+    "end": 249.6
+  },
+  {
+    "word": "interface",
+    "start": 249.6,
+    "end": 250.16
+  },
+  {
+    "word": "elements",
+    "start": 250.16,
+    "end": 250.56
+  },
+  {
+    "word": "like",
+    "start": 250.56,
+    "end": 250.8
+  },
+  {
+    "word": "headers",
+    "start": 250.8,
+    "end": 251.28
+  },
+  {
+    "word": "and",
+    "start": 251.28,
+    "end": 251.36
+  },
+  {
+    "word": "footers",
+    "start": 251.36,
+    "end": 251.92
+  },
+  {
+    "word": "have",
+    "start": 251.92,
+    "end": 252.08
+  },
+  {
+    "word": "to",
+    "start": 252.08,
+    "end": 252.16
+  },
+  {
+    "word": "be",
+    "start": 252.16,
+    "end": 252.4
+  },
+  {
+    "word": "manually",
+    "start": 252.4,
+    "end": 252.88
+  },
+  {
+    "word": "copied",
+    "start": 252.88,
+    "end": 253.28
+  },
+  {
+    "word": "and",
+    "start": 253.28,
+    "end": 253.44
+  },
+  {
+    "word": "pasted",
+    "start": 253.44,
+    "end": 253.92
+  },
+  {
+    "word": "across",
+    "start": 253.92,
+    "end": 254.24
+  },
+  {
+    "word": "multiple",
+    "start": 254.24,
+    "end": 254.8
+  },
+  {
+    "word": "HTML",
+    "start": 254.8,
+    "end": 255.44
+  },
+  {
+    "word": "files.",
+    "start": 255.44,
+    "end": 256.16
+  },
+  {
+    "word": "The",
+    "start": 256.16,
+    "end": 256.48
+  },
+  {
+    "word": "system",
+    "start": 256.48,
+    "end": 256.8
+  },
+  {
+    "word": "also",
+    "start": 256.8,
+    "end": 257.04
+  },
+  {
+    "word": "sacrifices",
+    "start": 257.04,
+    "end": 257.84
+  },
+  {
+    "word": "type",
+    "start": 257.84,
+    "end": 258.16
+  },
+  {
+    "word": "safety.",
+    "start": 258.16,
+    "end": 258.88
+  },
+  {
+    "word": "Because",
+    "start": 258.88,
+    "end": 259.12
+  },
+  {
+    "word": "it",
+    "start": 259.12,
+    "end": 259.36
+  },
+  {
+    "word": "uses",
+    "start": 259.36,
+    "end": 259.6
+  },
+  {
+    "word": "vanilla",
+    "start": 259.6,
+    "end": 260.16
+  },
+  {
+    "word": "JavaScript",
+    "start": 260.16,
+    "end": 260.8
+  },
+  {
+    "word": "instead",
+    "start": 260.8,
+    "end": 261.04
+  },
+  {
+    "word": "of",
+    "start": 261.04,
+    "end": 261.12
+  },
+  {
+    "word": "TypeScript,",
+    "start": 261.12,
+    "end": 262.0
+  },
+  {
+    "word": "which",
+    "start": 262.0,
+    "end": 262.16
+  },
+  {
+    "word": "catches",
+    "start": 262.16,
+    "end": 262.56
+  },
+  {
+    "word": "errors",
+    "start": 262.64,
+    "end": 262.96
+  },
+  {
+    "word": "before",
+    "start": 262.96,
+    "end": 263.2
+  },
+  {
+    "word": "code",
+    "start": 263.2,
+    "end": 263.52
+  },
+  {
+    "word": "goes",
+    "start": 263.52,
+    "end": 263.76
+  },
+  {
+    "word": "live,",
+    "start": 263.76,
+    "end": 264.32
+  },
+  {
+    "word": "a",
+    "start": 264.32,
+    "end": 264.48
+  },
+  {
+    "word": "simple",
+    "start": 264.48,
+    "end": 264.8
+  },
+  {
+    "word": "typo",
+    "start": 264.8,
+    "end": 265.36
+  },
+  {
+    "word": "in",
+    "start": 265.36,
+    "end": 265.44
+  },
+  {
+    "word": "a",
+    "start": 265.44,
+    "end": 265.52
+  },
+  {
+    "word": "database",
+    "start": 265.52,
+    "end": 266.0
+  },
+  {
+    "word": "column",
+    "start": 266.0,
+    "end": 266.32
+  },
+  {
+    "word": "name",
+    "start": 266.32,
+    "end": 266.64
+  },
+  {
+    "word": "will",
+    "start": 266.64,
+    "end": 266.8
+  },
+  {
+    "word": "only",
+    "start": 266.8,
+    "end": 267.04
+  },
+  {
+    "word": "surface",
+    "start": 267.04,
+    "end": 267.44
+  },
+  {
+    "word": "as",
+    "start": 267.44,
+    "end": 267.6
+  },
+  {
+    "word": "a",
+    "start": 267.6,
+    "end": 267.68
+  },
+  {
+    "word": "runtime",
+    "start": 267.68,
+    "end": 268.16
+  },
+  {
+    "word": "error",
+    "start": 268.24,
+    "end": 268.48
+  },
+  {
+    "word": "for",
+    "start": 268.48,
+    "end": 268.56
+  },
+  {
+    "word": "the",
+    "start": 268.56,
+    "end": 268.72
+  },
+  {
+    "word": "end",
+    "start": 268.72,
+    "end": 268.96
+  },
+  {
+    "word": "user.",
+    "start": 268.96,
+    "end": 269.6
+  },
+  {
+    "word": "And",
+    "start": 269.6,
+    "end": 269.84
+  },
+  {
+    "word": "managing",
+    "start": 269.84,
+    "end": 270.24
+  },
+  {
+    "word": "raw",
+    "start": 270.24,
+    "end": 270.64
+  },
+  {
+    "word": "CSS",
+    "start": 270.64,
+    "end": 271.12
+  },
+  {
+    "word": "files",
+    "start": 271.12,
+    "end": 271.52
+  },
+  {
+    "word": "without",
+    "start": 271.52,
+    "end": 271.84
+  },
+  {
+    "word": "dedicated",
+    "start": 271.84,
+    "end": 272.4
+  },
+  {
+    "word": "tooling",
+    "start": 272.4,
+    "end": 272.96
+  },
+  {
+    "word": "means",
+    "start": 272.96,
+    "end": 273.28
+  },
+  {
+    "word": "there",
+    "start": 273.28,
+    "end": 273.44
+  },
+  {
+    "word": "is",
+    "start": 273.44,
+    "end": 273.6
+  },
+  {
+    "word": "no",
+    "start": 273.6,
+    "end": 273.84
+  },
+  {
+    "word": "automated",
+    "start": 273.84,
+    "end": 274.32
+  },
+  {
+    "word": "dead",
+    "start": 274.32,
+    "end": 274.64
+  },
+  {
+    "word": "code",
+    "start": 274.64,
+    "end": 274.88
+  },
+  {
+    "word": "elimination",
+    "start": 274.88,
+    "end": 275.6
+  },
+  {
+    "word": "and",
+    "start": 275.6,
+    "end": 275.84
+  },
+  {
+    "word": "no",
+    "start": 275.84,
+    "end": 276.08
+  },
+  {
+    "word": "minification",
+    "start": 276.08,
+    "end": 276.72
+  },
+  {
+    "word": "to",
+    "start": 276.72,
+    "end": 276.88
+  },
+  {
+    "word": "compress",
+    "start": 276.88,
+    "end": 277.28
+  },
+  {
+    "word": "file",
+    "start": 277.28,
+    "end": 277.6
+  },
+  {
+    "word": "sizes.",
+    "start": 277.6,
+    "end": 278.4
+  },
+  {
+    "word": "The",
+    "start": 278.4,
+    "end": 278.56
+  },
+  {
+    "word": "costs",
+    "start": 278.56,
+    "end": 278.88
+  },
+  {
+    "word": "of",
+    "start": 278.88,
+    "end": 279.04
+  },
+  {
+    "word": "this",
+    "start": 279.04,
+    "end": 279.12
+  },
+  {
+    "word": "raw",
+    "start": 279.12,
+    "end": 279.44
+  },
+  {
+    "word": "transparency",
+    "start": 279.44,
+    "end": 279.84
+  },
+  {
+    "word": "are",
+    "start": 280.28,
+    "end": 280.44
+  },
+  {
+    "word": "genuine,",
+    "start": 280.44,
+    "end": 281.24
+  },
+  {
+    "word": "but",
+    "start": 281.24,
+    "end": 281.4
+  },
+  {
+    "word": "for",
+    "start": 281.4,
+    "end": 281.56
+  },
+  {
+    "word": "a",
+    "start": 281.56,
+    "end": 281.72
+  },
+  {
+    "word": "project",
+    "start": 281.72,
+    "end": 282.12
+  },
+  {
+    "word": "at",
+    "start": 282.12,
+    "end": 282.28
+  },
+  {
+    "word": "this",
+    "start": 282.28,
+    "end": 282.44
+  },
+  {
+    "word": "specific",
+    "start": 282.44,
+    "end": 282.92
+  },
+  {
+    "word": "scale,",
+    "start": 282.92,
+    "end": 283.48
+  },
+  {
+    "word": "absorbing",
+    "start": 283.48,
+    "end": 284.04
+  },
+  {
+    "word": "those",
+    "start": 284.04,
+    "end": 284.28
+  },
+  {
+    "word": "minor",
+    "start": 284.28,
+    "end": 284.6
+  },
+  {
+    "word": "inefficiencies",
+    "start": 284.6,
+    "end": 285.32
+  },
+  {
+    "word": "is",
+    "start": 285.32,
+    "end": 285.48
+  },
+  {
+    "word": "vastly",
+    "start": 285.48,
+    "end": 285.96
+  },
+  {
+    "word": "cheaper",
+    "start": 285.96,
+    "end": 286.36
+  },
+  {
+    "word": "than",
+    "start": 286.36,
+    "end": 286.52
+  },
+  {
+    "word": "maintaining",
+    "start": 286.52,
+    "end": 286.92
+  },
+  {
+    "word": "the",
+    "start": 286.92,
+    "end": 287.0
+  },
+  {
+    "word": "heavy,",
+    "start": 287.0,
+    "end": 287.48
+  },
+  {
+    "word": "complex",
+    "start": 287.48,
+    "end": 287.88
+  },
+  {
+    "word": "build",
+    "start": 287.88,
+    "end": 288.28
+  },
+  {
+    "word": "tooling",
+    "start": 288.28,
+    "end": 288.68
+  },
+  {
+    "word": "required",
+    "start": 288.68,
+    "end": 289.0
+  },
+  {
+    "word": "to",
+    "start": 289.0,
+    "end": 289.16
+  },
+  {
+    "word": "prevent",
+    "start": 289.16,
+    "end": 289.56
+  },
+  {
+    "word": "them.",
+    "start": 289.56,
+    "end": 290.04
+  },
+  {
+    "word": "Deconstructing",
+    "start": 290.04,
+    "end": 291.16
+  },
+  {
+    "word": "an",
+    "start": 291.16,
+    "end": 291.32
+  },
+  {
+    "word": "application",
+    "start": 291.32,
+    "end": 292.04
+  },
+  {
+    "word": "down",
+    "start": 292.04,
+    "end": 292.28
+  },
+  {
+    "word": "to",
+    "start": 292.28,
+    "end": 292.44
+  },
+  {
+    "word": "its",
+    "start": 292.44,
+    "end": 292.68
+  },
+  {
+    "word": "vanilla",
+    "start": 292.68,
+    "end": 293.32
+  },
+  {
+    "word": "roots",
+    "start": 293.32,
+    "end": 293.8
+  },
+  {
+    "word": "is",
+    "start": 293.8,
+    "end": 294.04
+  },
+  {
+    "word": "not",
+    "start": 294.04,
+    "end": 294.28
+  },
+  {
+    "word": "a",
+    "start": 294.28,
+    "end": 294.52
+  },
+  {
+    "word": "universal",
+    "start": 294.52,
+    "end": 295.16
+  },
+  {
+    "word": "mandate",
+    "start": 295.16,
+    "end": 295.72
+  },
+  {
+    "word": "to",
+    "start": 295.72,
+    "end": 295.96
+  },
+  {
+    "word": "abandon",
+    "start": 295.96,
+    "end": 296.52
+  },
+  {
+    "word": "modern",
+    "start": 296.52,
+    "end": 296.92
+  },
+  {
+    "word": "frameworks.",
+    "start": 296.92,
+    "end": 297.96
+  },
+  {
+    "word": "This",
+    "start": 297.96,
+    "end": 298.2
+  },
+  {
+    "word": "approach",
+    "start": 298.2,
+    "end": 298.68
+  },
+  {
+    "word": "thrives",
+    "start": 298.68,
+    "end": 299.32
+  },
+  {
+    "word": "under",
+    "start": 299.32,
+    "end": 299.56
+  },
+  {
+    "word": "highly",
+    "start": 299.56,
+    "end": 299.96
+  },
+  {
+    "word": "strict",
+    "start": 299.96,
+    "end": 300.44
+  },
+  {
+    "word": "conditions.",
+    "start": 300.44,
+    "end": 301.48
+  },
+  {
+    "word": "It",
+    "start": 301.48,
+    "end": 301.64
+  },
+  {
+    "word": "works",
+    "start": 301.64,
+    "end": 302.04
+  },
+  {
+    "word": "best",
+    "start": 302.04,
+    "end": 302.36
+  },
+  {
+    "word": "for",
+    "start": 302.36,
+    "end": 302.6
+  },
+  {
+    "word": "small",
+    "start": 302.6,
+    "end": 303.0
+  },
+  {
+    "word": "teams",
+    "start": 303.0,
+    "end": 303.32
+  },
+  {
+    "word": "of",
+    "start": 303.32,
+    "end": 303.56
+  },
+  {
+    "word": "one",
+    "start": 303.56,
+    "end": 303.8
+  },
+  {
+    "word": "or",
+    "start": 303.8,
+    "end": 303.96
+  },
+  {
+    "word": "two",
+    "start": 303.96,
+    "end": 304.12
+  },
+  {
+    "word": "developers",
+    "start": 304.12,
+    "end": 305.0
+  },
+  {
+    "word": "operating",
+    "start": 305.0,
+    "end": 305.64
+  },
+  {
+    "word": "in",
+    "start": 305.64,
+    "end": 305.8
+  },
+  {
+    "word": "edge-first",
+    "start": 305.88,
+    "end": 306.6
+  },
+  {
+    "word": "hosting",
+    "start": 306.6,
+    "end": 307.0
+  },
+  {
+    "word": "environments.",
+    "start": 307.0,
+    "end": 307.96
+  },
+  {
+    "word": "Crucially,",
+    "start": 307.96,
+    "end": 308.76
+  },
+  {
+    "word": "it",
+    "start": 308.76,
+    "end": 308.92
+  },
+  {
+    "word": "requires",
+    "start": 308.92,
+    "end": 309.4
+  },
+  {
+    "word": "a",
+    "start": 309.4,
+    "end": 309.56
+  },
+  {
+    "word": "security",
+    "start": 309.56,
+    "end": 310.04
+  },
+  {
+    "word": "model",
+    "start": 310.04,
+    "end": 310.44
+  },
+  {
+    "word": "that",
+    "start": 310.44,
+    "end": 310.6
+  },
+  {
+    "word": "is",
+    "start": 310.6,
+    "end": 310.76
+  },
+  {
+    "word": "straightforward",
+    "start": 310.76,
+    "end": 311.48
+  },
+  {
+    "word": "enough",
+    "start": 311.48,
+    "end": 311.72
+  },
+  {
+    "word": "to",
+    "start": 311.72,
+    "end": 311.88
+  },
+  {
+    "word": "audit",
+    "start": 311.88,
+    "end": 312.44
+  },
+  {
+    "word": "by",
+    "start": 312.44,
+    "end": 312.6
+  },
+  {
+    "word": "reading",
+    "start": 312.6,
+    "end": 312.92
+  },
+  {
+    "word": "the",
+    "start": 312.92,
+    "end": 313.08
+  },
+  {
+    "word": "raw",
+    "start": 313.08,
+    "end": 313.4
+  },
+  {
+    "word": "code",
+    "start": 313.4,
+    "end": 313.88
+  },
+  {
+    "word": "yourself,",
+    "start": 313.88,
+    "end": 314.68
+  },
+  {
+    "word": "rather",
+    "start": 314.68,
+    "end": 315.0
+  },
+  {
+    "word": "than",
+    "start": 315.0,
+    "end": 315.24
+  },
+  {
+    "word": "trusting",
+    "start": 315.24,
+    "end": 315.64
+  },
+  {
+    "word": "the",
+    "start": 315.64,
+    "end": 315.72
+  },
+  {
+    "word": "maintainers",
+    "start": 315.72,
+    "end": 316.36
+  },
+  {
+    "word": "of",
+    "start": 316.36,
+    "end": 316.52
+  },
+  {
+    "word": "a",
+    "start": 316.52,
+    "end": 316.6
+  },
+  {
+    "word": "third-party",
+    "start": 316.6,
+    "end": 317.24
+  },
+  {
+    "word": "dependency.",
+    "start": 317.24,
+    "end": 318.44
+  },
+  {
+    "word": "It",
+    "start": 318.44,
+    "end": 318.68
+  },
+  {
+    "word": "is",
+    "start": 318.68,
+    "end": 318.84
+  },
+  {
+    "word": "an",
+    "start": 318.84,
+    "end": 319.0
+  },
+  {
+    "word": "architecture",
+    "start": 319.0,
+    "end": 319.72
+  },
+  {
+    "word": "reserved",
+    "start": 319.72,
+    "end": 320.2
+  },
+  {
+    "word": "for",
+    "start": 320.2,
+    "end": 320.36
+  },
+  {
+    "word": "environments",
+    "start": 320.36,
+    "end": 321.0
+  },
+  {
+    "word": "where",
+    "start": 321.0,
+    "end": 321.24
+  },
+  {
+    "word": "raw",
+    "start": 321.24,
+    "end": 321.56
+  },
+  {
+    "word": "deployment",
+    "start": 321.56,
+    "end": 322.12
+  },
+  {
+    "word": "speed,",
+    "start": 322.12,
+    "end": 322.76
+  },
+  {
+    "word": "absolute",
+    "start": 322.76,
+    "end": 323.32
+  },
+  {
+    "word": "control,",
+    "start": 323.32,
+    "end": 323.96
+  },
+  {
+    "word": "and",
+    "start": 323.96,
+    "end": 324.2
+  },
+  {
+    "word": "transparency",
+    "start": 324.2,
+    "end": 325.16
+  },
+  {
+    "word": "take",
+    "start": 325.16,
+    "end": 325.4
+  },
+  {
+    "word": "absolute",
+    "start": 325.4,
+    "end": 326.04
+  },
+  {
+    "word": "priority",
+    "start": 326.04,
+    "end": 326.6
+  },
+  {
+    "word": "over",
+    "start": 326.6,
+    "end": 326.84
+  },
+  {
+    "word": "developer",
+    "start": 326.84,
+    "end": 327.64
+  },
+  {
+    "word": "experience.",
+    "start": 327.64,
+    "end": 328.6
+  },
+  {
+    "word": "Modern",
+    "start": 328.6,
+    "end": 329.16
+  },
+  {
+    "word": "frameworks",
+    "start": 329.16,
+    "end": 329.72
+  },
+  {
+    "word": "are",
+    "start": 329.72,
+    "end": 329.88
+  },
+  {
+    "word": "brilliant",
+    "start": 329.88,
+    "end": 330.36
+  },
+  {
+    "word": "tools,",
+    "start": 330.36,
+    "end": 331.0
+  },
+  {
+    "word": "but",
+    "start": 331.0,
+    "end": 331.16
+  },
+  {
+    "word": "they",
+    "start": 331.16,
+    "end": 331.32
+  },
+  {
+    "word": "are",
+    "start": 331.32,
+    "end": 331.56
+  },
+  {
+    "word": "not",
+    "start": 331.56,
+    "end": 331.72
+  },
+  {
+    "word": "mandatory",
+    "start": 331.72,
+    "end": 332.36
+  },
+  {
+    "word": "prerequisites",
+    "start": 332.36,
+    "end": 333.24
+  },
+  {
+    "word": "for",
+    "start": 333.24,
+    "end": 333.4
+  },
+  {
+    "word": "building",
+    "start": 333.4,
+    "end": 333.8
+  },
+  {
+    "word": "on",
+    "start": 333.8,
+    "end": 333.96
+  },
+  {
+    "word": "the",
+    "start": 333.96,
+    "end": 334.12
+  },
+  {
+    "word": "web.",
+    "start": 334.12,
+    "end": 334.76
+  },
+  {
+    "word": "The",
+    "start": 334.8,
+    "end": 335.04
+  },
+  {
+    "word": "most",
+    "start": 335.04,
+    "end": 335.28
+  },
+  {
+    "word": "sophisticated",
+    "start": 335.28,
+    "end": 336.0
+  },
+  {
+    "word": "architecture",
+    "start": 336.0,
+    "end": 336.72
+  },
+  {
+    "word": "isn't",
+    "start": 336.72,
+    "end": 337.12
+  },
+  {
+    "word": "the",
+    "start": 337.12,
+    "end": 337.28
+  },
+  {
+    "word": "one",
+    "start": 337.28,
+    "end": 337.44
+  },
+  {
+    "word": "packing",
+    "start": 337.44,
+    "end": 337.92
+  },
+  {
+    "word": "the",
+    "start": 337.92,
+    "end": 338.0
+  },
+  {
+    "word": "most",
+    "start": 338.0,
+    "end": 338.24
+  },
+  {
+    "word": "hidden",
+    "start": 338.24,
+    "end": 338.64
+  },
+  {
+    "word": "dependencies,",
+    "start": 338.64,
+    "end": 339.68
+  },
+  {
+    "word": "it's",
+    "start": 339.68,
+    "end": 339.92
+  },
+  {
+    "word": "the",
+    "start": 339.92,
+    "end": 340.08
+  },
+  {
+    "word": "one",
+    "start": 340.08,
+    "end": 340.32
+  },
+  {
+    "word": "where",
+    "start": 340.32,
+    "end": 340.48
+  },
+  {
+    "word": "you",
+    "start": 340.48,
+    "end": 340.64
+  },
+  {
+    "word": "can",
+    "start": 340.64,
+    "end": 340.8
+  },
+  {
+    "word": "confidently",
+    "start": 340.8,
+    "end": 341.28
+  },
+  {
+    "word": "hold",
+    "start": 341.28,
+    "end": 341.52
+  },
+  {
+    "word": "the",
+    "start": 341.52,
+    "end": 341.6
+  }
+]

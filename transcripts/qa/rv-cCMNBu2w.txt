@@ -1,0 +1,14 @@
+VIDEO: rv-cCMNBu2w
+TITLE: VERITAS
+
+ISSUE at ~2:13s: "conflict detection protocol cryptographically verifies that no conflicting interests exist"
+SOURCE SAYS: "Conflict detection runs before any analysis begins." (The source mentions end-to-end encryption for privilege protection, but does not specify a cryptographic implementation for conflict detection.)
+REPLACEMENT: "conflict detection protocol verifies that no conflicting interests exist before analysis begins."
+
+ISSUE at ~2:21s: "every single action the AI takes is lolled."
+SOURCE SAYS: "An immutable audit trail". (The transcript contains a typo or hallucinated term "lolled" instead of "logged".)
+REPLACEMENT: "every single action the AI takes is logged."
+
+ISSUE at ~2:45s: "often sold as premium upgrades in enterprise software."
+SOURCE SAYS: "These are not features. They are the minimum requirements for a system that a lawyer could use without professional liability exposure."
+REPLACEMENT: "are not optional add-ons, but the fundamental requirements for any system operating in a high-liability environment."

@@ -1,0 +1,38 @@
+VIDEO: uHWSOTDXNbA
+TITLE: This Wasn't in the Brochure
+
+ISSUE at ~0:18: "feeling entirely to blame for a situation you can't control"
+SOURCE SAYS: not mentioned
+REPLACEMENT: "too exhausted to speak"
+
+ISSUE at ~0:43: "biological power search"
+SOURCE SAYS: "biological power surge"
+REPLACEMENT: "biological power surge"
+
+ISSUE at ~0:47: "like dopamine"
+SOURCE SAYS: "exact neural systems your child's brain under-produces"
+REPLACEMENT: "neural systems"
+
+ISSUE at ~1:41: "Unexamined, these inherited traits act as an invisible variable, often sabotaging the very environment you're trying to stabilize."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "When you understand your own brain—your time-blindness, your sensory thresholds, your demand avoidance—you stop fighting your nature and start scaffolding for it."
+
+ISSUE at ~1:57: "When a parent with a low sensory threshold collides with a child's meltdown, the two nervous systems agitate each other."
+SOURCE SAYS: "When you understand your own brain — your time-blindness, your sensory thresholds, your demand avoidance, your rejection sensitivity — you stop fighting your nature and start scaffolding for it."
+REPLACEMENT: "When your own sensory thresholds or rejection sensitivity collide with a child's meltdown, you stop fighting your nature and start scaffolding for it."
+
+ISSUE at ~2:03: "Add parental demand avoidance or rejection sensitivity, and an innocent request becomes an accelerator, spinning the conflict cycle faster. These colliding neurologies create a compounding environment of friction."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "Identifying your own neurology provides the foundation for co-parenting that actually works."
+
+ISSUE at ~2:16: "You aren't reacting to your child's stress in a vacuum. You are often drowning in your own."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "Managing your own neurology is the baseline for effective co-parenting."
+
+ISSUE at ~2:45: "daily exercises designed to maintain your neurological baseline so you have more capacity when things get difficult."
+SOURCE SAYS: "exercises you can do in ten minutes"
+REPLACEMENT: "exercises you can do in ten minutes"
+
+ISSUE at ~2:56: "These tools succeed because they don't rely on willpower or perfect emotional regulation. They are pre-built neurological safety nets."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "A Survival Card is a crisis protocol designed to be carried in your pocket for the moments when your thinking brain goes offline."

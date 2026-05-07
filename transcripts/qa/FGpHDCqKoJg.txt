@@ -1,0 +1,14 @@
+VIDEO: FGpHDCqKoJg
+TITLE: Strategic Acquisitions
+
+ISSUE at ~1:13: "stripping away the marketing language to look purely at the math"
+SOURCE SAYS: not mentioned
+REPLACEMENT: "prioritizing high-signal engineered features to look purely at the math"
+
+ISSUE at ~1:25: "That statistical process tests thousands of variables against historical data"
+SOURCE SAYS: not mentioned
+REPLACEMENT: "That statistical process weights complex feature interactions against historical data"
+
+ISSUE at ~2:21: "or involves ruins like these"
+SOURCE SAYS: not mentioned
+REPLACEMENT: "or carries significant heritage constraints"

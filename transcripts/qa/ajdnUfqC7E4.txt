@@ -1,0 +1,78 @@
+VIDEO: ajdnUfqC7E4
+TITLE: Afterwords: Completing the Voice Loop in Claude Code
+
+ISSUE at ~0s: "Hold the spacebar, speak normally, and clawed code transcribes every word you say."
+SOURCE SAYS: "Claude Code already listens — hold Space, talk, it transcribes."
+REPLACEMENT: "Hold the spacebar, talk, and Claude Code transcribes every word you say."
+
+ISSUE at ~0:35s: "Afterwards was built to close this loop."
+SOURCE SAYS: "Afterwords completes the voice loop in Claude Code."
+REPLACEMENT: "Afterwords was built to close this loop."
+
+ISSUE at ~0:51s: "meaning your proprietary code base stays entirely local."
+SOURCE SAYS: "your coding assistant, running entirely on your machine." (Source does not mention the code being proprietary).
+REPLACEMENT: "meaning your data and your code stay entirely local."
+
+ISSUE at ~1:32s: "engine called Quen3 TTS. It sits on Apple's MLX framework, designed specifically to optimize machine learning on their silicon. This setup relies on a 0.6 billion parameter model with 8-bit quantization, shrinking the model size. It only takes up 6 gigabytes of memory at peak load. Between the unified hardware architecture and the compressed weights, generating fluid, human-sounding speech offline is now completely realistic for a standard MacBook Air."
+SOURCE SAYS: "Qwen3-TTS Base (0.6B, 8-bit quantised) on MLX... loads once (~6 GB peak)... An M1 MacBook Air with 8 GB of unified memory is sufficient." (Explanations of MLX's design, unified memory's specific hardware benefits, and the realism claim are not mentioned).
+REPLACEMENT: "engine called Qwen3-TTS. It runs on Apple's MLX framework, using a 0.6 billion parameter model with 8-bit quantization. It takes up about 6 gigabytes of memory at peak load, making it capable of running offline on a standard MacBook Air."
+
+ISSUE at ~2:13s: "moment clawed code finishes a thought."
+SOURCE SAYS: "moment Claude Code finishes a thought." (Name error).
+REPLACEMENT: "moment Claude Code finishes a thought."
+
+ISSUE at ~2:32s: "the engine instantly maps the text onto 17 distinct pre-loaded cloned voices"
+SOURCE SAYS: "About 15 seconds of fixed overhead for speaker embedding extraction, plus roughly 0.5x real-time for the audio." (Claim of "instantly" contradicts the stated latency).
+REPLACEMENT: "the engine maps the text onto 17 distinct pre-loaded cloned voices"
+
+ISSUE at ~2:32s: "cadence of Kate Blanchette"
+SOURCE SAYS: "Cate Blanchett"
+REPLACEMENT: "cadence of Cate Blanchett"
+
+ISSUE at ~4:05s: "originally designed for clawed code."
+SOURCE SAYS: "Claude Code"
+REPLACEMENT: "originally designed for Claude Code."
+
+ISSUE at ~4:43s: "raw materials to construct secure, highly responsive sensory environments entirely under their own roof."
+SOURCE SAYS: "Developers now have the raw materials to construct secure, highly responsive... entirely under their own roof." (Source does not mention "sensory environments").
+REPLACEMENT: "raw materials to construct secure voice environments entirely under their own roof."
+
+The audit of the **Afterwords** narration transcript is complete. While the narration accurately captured core technical stats (0.6B parameters, 8-bit quantization, 6 GB RAM, 17 voices), it suffered from phonetic/transcription errors regarding the product names and several hallucinations involving technical explanations and descriptions.
+
+The following issues were identified:
+
+ISSUE at ~0s: "Hold the spacebar, speak normally, and clawed code transcribes every word you say."
+SOURCE SAYS: "Claude Code already listens — hold Space, talk, it transcribes."
+REPLACEMENT: "Hold the spacebar, talk, and Claude Code transcribes every word you say."
+
+ISSUE at ~0:35s: "Afterwards was built to close this loop."
+SOURCE SAYS: "Afterwords completes the voice loop in Claude Code."
+REPLACEMENT: "Afterwords was built to close this loop."
+
+ISSUE at ~0:51s: "meaning your proprietary code base stays entirely local."
+SOURCE SAYS: "your coding assistant, running entirely on your machine." (Source does not mention the code being proprietary).
+REPLACEMENT: "meaning your data and your code stay entirely local."
+
+ISSUE at ~1:32s: "engine called Quen3 TTS. It sits on Apple's MLX framework, designed specifically to optimize machine learning on their silicon. This setup relies on a 0.6 billion parameter model with 8-bit quantization, shrinking the model size. It only takes up 6 gigabytes of memory at peak load. Between the unified hardware architecture and the compressed weights, generating fluid, human-sounding speech offline is now completely realistic for a standard MacBook Air."
+SOURCE SAYS: "Qwen3-TTS Base (0.6B, 8-bit quantised) on MLX... loads once (~6 GB peak)... An M1 MacBook Air with 8 GB of unified memory is sufficient." (Explanations of MLX's design, unified memory's specific hardware benefits, and the realism claim are not mentioned).
+REPLACEMENT: "engine called Qwen3-TTS. It runs on Apple's MLX framework, using a 0.6 billion parameter model with 8-bit quantization. It takes up about 6 gigabytes of memory at peak load, making it capable of running offline on a standard MacBook Air."
+
+ISSUE at ~2:13s: "moment clawed code finishes a thought."
+SOURCE SAYS: "moment Claude Code finishes a thought." (Name error).
+REPLACEMENT: "moment Claude Code finishes a thought."
+
+ISSUE at ~2:32s: "the engine instantly maps the text onto 17 distinct pre-loaded cloned voices"
+SOURCE SAYS: "About 15 seconds of fixed overhead for speaker embedding extraction, plus roughly 0.5x real-time for the audio." (Claim of "instantly" contradicts the stated latency).
+REPLACEMENT: "the engine maps the text onto 17 distinct pre-loaded cloned voices"
+
+ISSUE at ~2:32s: "cadence of Kate Blanchette"
+SOURCE SAYS: "Cate Blanchett"
+REPLACEMENT: "cadence of Cate Blanchett"
+
+ISSUE at ~4:05s: "originally designed for clawed code."
+SOURCE SAYS: "Claude Code"
+REPLACEMENT: "originally designed for Claude Code."
+
+ISSUE at ~4:43s: "raw materials to construct secure, highly responsive sensory environments entirely under their own roof."
+SOURCE SAYS: "Developers now have the raw materials to construct secure, highly responsive... entirely under their own roof." (Source does not mention "sensory environments").
+REPLACEMENT: "raw materials to construct secure voice environments entirely under their own roof."

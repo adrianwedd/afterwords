@@ -1,0 +1,3272 @@
+[
+  {
+    "word": "For",
+    "start": 0.0,
+    "end": 0.16
+  },
+  {
+    "word": "some",
+    "start": 0.48,
+    "end": 0.64
+  },
+  {
+    "word": "of",
+    "start": 0.64,
+    "end": 0.8
+  },
+  {
+    "word": "us,",
+    "start": 0.8,
+    "end": 1.12
+  },
+  {
+    "word": "a",
+    "start": 1.12,
+    "end": 1.36
+  },
+  {
+    "word": "music",
+    "start": 1.36,
+    "end": 1.76
+  },
+  {
+    "word": "library",
+    "start": 1.76,
+    "end": 2.24
+  },
+  {
+    "word": "is",
+    "start": 2.24,
+    "end": 2.4
+  },
+  {
+    "word": "a",
+    "start": 2.4,
+    "end": 2.56
+  },
+  {
+    "word": "lifetime",
+    "start": 2.56,
+    "end": 3.2
+  },
+  {
+    "word": "pursuit.",
+    "start": 3.2,
+    "end": 4.08
+  },
+  {
+    "word": "Decades",
+    "start": 4.08,
+    "end": 4.56
+  },
+  {
+    "word": "of",
+    "start": 4.56,
+    "end": 4.8
+  },
+  {
+    "word": "albums",
+    "start": 4.8,
+    "end": 5.36
+  },
+  {
+    "word": "carefully",
+    "start": 5.36,
+    "end": 5.84
+  },
+  {
+    "word": "sourced",
+    "start": 5.84,
+    "end": 6.32
+  },
+  {
+    "word": "and",
+    "start": 6.32,
+    "end": 6.56
+  },
+  {
+    "word": "arranged,",
+    "start": 6.56,
+    "end": 7.36
+  },
+  {
+    "word": "turning",
+    "start": 7.36,
+    "end": 7.68
+  },
+  {
+    "word": "a",
+    "start": 7.68,
+    "end": 7.84
+  },
+  {
+    "word": "chaotic",
+    "start": 7.84,
+    "end": 8.4
+  },
+  {
+    "word": "pile",
+    "start": 8.4,
+    "end": 8.72
+  },
+  {
+    "word": "of",
+    "start": 8.72,
+    "end": 8.88
+  },
+  {
+    "word": "audio",
+    "start": 8.88,
+    "end": 9.36
+  },
+  {
+    "word": "files",
+    "start": 9.36,
+    "end": 9.84
+  },
+  {
+    "word": "into",
+    "start": 9.84,
+    "end": 10.08
+  },
+  {
+    "word": "a",
+    "start": 10.08,
+    "end": 10.24
+  },
+  {
+    "word": "highly",
+    "start": 10.24,
+    "end": 10.64
+  },
+  {
+    "word": "intentional",
+    "start": 10.64,
+    "end": 11.28
+  },
+  {
+    "word": "digital",
+    "start": 11.28,
+    "end": 11.76
+  },
+  {
+    "word": "archive.",
+    "start": 11.76,
+    "end": 12.64
+  },
+  {
+    "word": "Holding",
+    "start": 12.64,
+    "end": 13.12
+  },
+  {
+    "word": "that",
+    "start": 13.12,
+    "end": 13.28
+  },
+  {
+    "word": "archive",
+    "start": 13.28,
+    "end": 13.76
+  },
+  {
+    "word": "together",
+    "start": 13.76,
+    "end": 14.08
+  },
+  {
+    "word": "is",
+    "start": 14.08,
+    "end": 14.24
+  },
+  {
+    "word": "a",
+    "start": 14.24,
+    "end": 14.4
+  },
+  {
+    "word": "hidden,",
+    "start": 14.4,
+    "end": 14.88
+  },
+  {
+    "word": "meticulous",
+    "start": 14.88,
+    "end": 15.84
+  },
+  {
+    "word": "system.",
+    "start": 15.84,
+    "end": 16.4
+  },
+  {
+    "word": "Every",
+    "start": 16.4,
+    "end": 16.72
+  },
+  {
+    "word": "genre",
+    "start": 16.72,
+    "end": 17.2
+  },
+  {
+    "word": "tag,",
+    "start": 17.2,
+    "end": 17.68
+  },
+  {
+    "word": "release",
+    "start": 17.68,
+    "end": 18.16
+  },
+  {
+    "word": "year,",
+    "start": 18.16,
+    "end": 18.48
+  },
+  {
+    "word": "and",
+    "start": 18.48,
+    "end": 18.64
+  },
+  {
+    "word": "album",
+    "start": 18.64,
+    "end": 18.96
+  },
+  {
+    "word": "artist",
+    "start": 18.96,
+    "end": 19.44
+  },
+  {
+    "word": "is",
+    "start": 19.44,
+    "end": 19.76
+  },
+  {
+    "word": "logged",
+    "start": 19.76,
+    "end": 20.24
+  },
+  {
+    "word": "exactly",
+    "start": 20.24,
+    "end": 20.64
+  },
+  {
+    "word": "where",
+    "start": 20.64,
+    "end": 20.8
+  },
+  {
+    "word": "it",
+    "start": 20.8,
+    "end": 21.04
+  },
+  {
+    "word": "belongs,",
+    "start": 21.04,
+    "end": 21.76
+  },
+  {
+    "word": "following",
+    "start": 21.76,
+    "end": 22.16
+  },
+  {
+    "word": "a",
+    "start": 22.16,
+    "end": 22.32
+  },
+  {
+    "word": "logic",
+    "start": 22.32,
+    "end": 22.72
+  },
+  {
+    "word": "that",
+    "start": 22.72,
+    "end": 22.88
+  },
+  {
+    "word": "makes",
+    "start": 22.88,
+    "end": 23.2
+  },
+  {
+    "word": "perfect",
+    "start": 23.2,
+    "end": 23.6
+  },
+  {
+    "word": "sense",
+    "start": 23.6,
+    "end": 23.84
+  },
+  {
+    "word": "to",
+    "start": 23.84,
+    "end": 24.0
+  },
+  {
+    "word": "the",
+    "start": 24.0,
+    "end": 24.16
+  },
+  {
+    "word": "curator.",
+    "start": 24.16,
+    "end": 25.04
+  },
+  {
+    "word": "But",
+    "start": 25.04,
+    "end": 25.28
+  },
+  {
+    "word": "human",
+    "start": 25.28,
+    "end": 25.68
+  },
+  {
+    "word": "maintenance",
+    "start": 25.68,
+    "end": 26.24
+  },
+  {
+    "word": "has",
+    "start": 26.24,
+    "end": 26.4
+  },
+  {
+    "word": "a",
+    "start": 26.4,
+    "end": 26.48
+  },
+  {
+    "word": "hard",
+    "start": 26.48,
+    "end": 26.8
+  },
+  {
+    "word": "limit.",
+    "start": 26.8,
+    "end": 27.44
+  },
+  {
+    "word": "When",
+    "start": 27.44,
+    "end": 27.68
+  },
+  {
+    "word": "a",
+    "start": 27.68,
+    "end": 27.84
+  },
+  {
+    "word": "collection",
+    "start": 27.84,
+    "end": 28.32
+  },
+  {
+    "word": "swells",
+    "start": 28.32,
+    "end": 28.8
+  },
+  {
+    "word": "to",
+    "start": 28.8,
+    "end": 28.88
+  },
+  {
+    "word": "10,",
+    "start": 29.04,
+    "end": 29.36
+  },
+  {
+    "word": "20,",
+    "start": 29.52,
+    "end": 29.92
+  },
+  {
+    "word": "or",
+    "start": 29.92,
+    "end": 30.08
+  },
+  {
+    "word": "50,000",
+    "start": 30.16,
+    "end": 30.88
+  },
+  {
+    "word": "files,",
+    "start": 30.88,
+    "end": 31.6
+  },
+  {
+    "word": "manually",
+    "start": 31.6,
+    "end": 32.16
+  },
+  {
+    "word": "fixing",
+    "start": 32.16,
+    "end": 32.64
+  },
+  {
+    "word": "tags",
+    "start": 32.64,
+    "end": 33.04
+  },
+  {
+    "word": "and",
+    "start": 33.04,
+    "end": 33.2
+  },
+  {
+    "word": "organizing",
+    "start": 33.2,
+    "end": 33.84
+  },
+  {
+    "word": "folders",
+    "start": 33.84,
+    "end": 34.32
+  },
+  {
+    "word": "becomes",
+    "start": 34.32,
+    "end": 34.72
+  },
+  {
+    "word": "impossible.",
+    "start": 34.72,
+    "end": 35.84
+  },
+  {
+    "word": "You",
+    "start": 35.84,
+    "end": 36.0
+  },
+  {
+    "word": "are",
+    "start": 36.0,
+    "end": 36.16
+  },
+  {
+    "word": "forced",
+    "start": 36.16,
+    "end": 36.48
+  },
+  {
+    "word": "to",
+    "start": 36.48,
+    "end": 36.72
+  },
+  {
+    "word": "make",
+    "start": 36.72,
+    "end": 36.88
+  },
+  {
+    "word": "a",
+    "start": 36.88,
+    "end": 37.04
+  },
+  {
+    "word": "difficult",
+    "start": 37.04,
+    "end": 37.52
+  },
+  {
+    "word": "choice.",
+    "start": 37.52,
+    "end": 38.24
+  },
+  {
+    "word": "Let",
+    "start": 38.24,
+    "end": 38.48
+  },
+  {
+    "word": "the",
+    "start": 38.48,
+    "end": 38.56
+  },
+  {
+    "word": "library",
+    "start": 38.56,
+    "end": 39.04
+  },
+  {
+    "word": "descend",
+    "start": 39.04,
+    "end": 39.6
+  },
+  {
+    "word": "into",
+    "start": 39.6,
+    "end": 39.84
+  },
+  {
+    "word": "unsearchable",
+    "start": 39.84,
+    "end": 40.56
+  },
+  {
+    "word": "chaos,",
+    "start": 40.56,
+    "end": 41.44
+  },
+  {
+    "word": "or",
+    "start": 41.44,
+    "end": 41.68
+  },
+  {
+    "word": "hand",
+    "start": 41.68,
+    "end": 42.08
+  },
+  {
+    "word": "over",
+    "start": 42.08,
+    "end": 42.24
+  },
+  {
+    "word": "your",
+    "start": 42.24,
+    "end": 42.48
+  },
+  {
+    "word": "life's",
+    "start": 42.48,
+    "end": 42.88
+  },
+  {
+    "word": "work",
+    "start": 42.88,
+    "end": 43.04
+  },
+  {
+    "word": "to",
+    "start": 43.04,
+    "end": 43.2
+  },
+  {
+    "word": "an",
+    "start": 43.2,
+    "end": 43.36
+  },
+  {
+    "word": "automated",
+    "start": 43.36,
+    "end": 44.16
+  },
+  {
+    "word": "system.",
+    "start": 44.16,
+    "end": 44.72
+  },
+  {
+    "word": "The",
+    "start": 44.72,
+    "end": 45.04
+  },
+  {
+    "word": "problem",
+    "start": 45.04,
+    "end": 45.36
+  },
+  {
+    "word": "is",
+    "start": 45.36,
+    "end": 45.52
+  },
+  {
+    "word": "that",
+    "start": 45.52,
+    "end": 45.76
+  },
+  {
+    "word": "most",
+    "start": 45.76,
+    "end": 46.0
+  },
+  {
+    "word": "conventional",
+    "start": 46.0,
+    "end": 46.64
+  },
+  {
+    "word": "organizers",
+    "start": 46.64,
+    "end": 47.36
+  },
+  {
+    "word": "prioritize",
+    "start": 47.36,
+    "end": 48.08
+  },
+  {
+    "word": "neat",
+    "start": 48.08,
+    "end": 48.48
+  },
+  {
+    "word": "text",
+    "start": 48.48,
+    "end": 48.8
+  },
+  {
+    "word": "over",
+    "start": 48.8,
+    "end": 49.12
+  },
+  {
+    "word": "high-quality",
+    "start": 49.12,
+    "end": 49.76
+  },
+  {
+    "word": "audio.",
+    "start": 49.76,
+    "end": 50.56
+  },
+  {
+    "word": "They",
+    "start": 50.56,
+    "end": 50.72
+  },
+  {
+    "word": "are",
+    "start": 50.72,
+    "end": 50.88
+  },
+  {
+    "word": "designed",
+    "start": 50.88,
+    "end": 51.28
+  },
+  {
+    "word": "to",
+    "start": 51.28,
+    "end": 51.44
+  },
+  {
+    "word": "fix",
+    "start": 51.44,
+    "end": 51.68
+  },
+  {
+    "word": "messy",
+    "start": 51.68,
+    "end": 52.16
+  },
+  {
+    "word": "text",
+    "start": 52.16,
+    "end": 52.48
+  },
+  {
+    "word": "tags,",
+    "start": 52.48,
+    "end": 53.12
+  },
+  {
+    "word": "often",
+    "start": 53.12,
+    "end": 53.52
+  },
+  {
+    "word": "ignoring",
+    "start": 53.52,
+    "end": 54.08
+  },
+  {
+    "word": "the",
+    "start": 54.08,
+    "end": 54.24
+  },
+  {
+    "word": "actual",
+    "start": 54.24,
+    "end": 54.64
+  },
+  {
+    "word": "file",
+    "start": 54.64,
+    "end": 55.04
+  },
+  {
+    "word": "formats",
+    "start": 55.04,
+    "end": 55.52
+  },
+  {
+    "word": "underneath.",
+    "start": 55.52,
+    "end": 56.24
+  },
+  {
+    "word": "If",
+    "start": 56.24,
+    "end": 56.48
+  },
+  {
+    "word": "you",
+    "start": 56.48,
+    "end": 56.64
+  },
+  {
+    "word": "have",
+    "start": 56.64,
+    "end": 56.8
+  },
+  {
+    "word": "a",
+    "start": 56.8,
+    "end": 56.88
+  },
+  {
+    "word": "pristine,",
+    "start": 56.88,
+    "end": 57.68
+  },
+  {
+    "word": "lossless",
+    "start": 57.68,
+    "end": 58.24
+  },
+  {
+    "word": "FLAC",
+    "start": 58.24,
+    "end": 58.64
+  },
+  {
+    "word": "file",
+    "start": 58.72,
+    "end": 59.04
+  },
+  {
+    "word": "missing",
+    "start": 59.04,
+    "end": 59.36
+  },
+  {
+    "word": "a",
+    "start": 59.36,
+    "end": 59.44
+  },
+  {
+    "word": "date",
+    "start": 59.44,
+    "end": 59.68
+  },
+  {
+    "word": "and",
+    "start": 59.96,
+    "end": 60.2
+  },
+  {
+    "word": "an",
+    "start": 60.2,
+    "end": 60.44
+  },
+  {
+    "word": "MP3",
+    "start": 60.44,
+    "end": 61.08
+  },
+  {
+    "word": "duplicate",
+    "start": 61.08,
+    "end": 61.64
+  },
+  {
+    "word": "with",
+    "start": 61.64,
+    "end": 61.8
+  },
+  {
+    "word": "the",
+    "start": 61.8,
+    "end": 61.88
+  },
+  {
+    "word": "correct",
+    "start": 61.88,
+    "end": 62.28
+  },
+  {
+    "word": "year,",
+    "start": 62.28,
+    "end": 62.84
+  },
+  {
+    "word": "the",
+    "start": 62.84,
+    "end": 63.0
+  },
+  {
+    "word": "organizer",
+    "start": 63.0,
+    "end": 63.64
+  },
+  {
+    "word": "assumes",
+    "start": 63.64,
+    "end": 64.04
+  },
+  {
+    "word": "the",
+    "start": 64.04,
+    "end": 64.28
+  },
+  {
+    "word": "MP3",
+    "start": 64.28,
+    "end": 65.0
+  },
+  {
+    "word": "is",
+    "start": 65.0,
+    "end": 65.16
+  },
+  {
+    "word": "superior.",
+    "start": 65.16,
+    "end": 66.12
+  },
+  {
+    "word": "Running",
+    "start": 66.12,
+    "end": 66.52
+  },
+  {
+    "word": "in",
+    "start": 66.52,
+    "end": 66.68
+  },
+  {
+    "word": "the",
+    "start": 66.68,
+    "end": 66.84
+  },
+  {
+    "word": "background,",
+    "start": 66.84,
+    "end": 67.56
+  },
+  {
+    "word": "high-fidelity",
+    "start": 67.56,
+    "end": 68.44
+  },
+  {
+    "word": "tracks",
+    "start": 68.44,
+    "end": 68.84
+  },
+  {
+    "word": "are",
+    "start": 68.84,
+    "end": 69.0
+  },
+  {
+    "word": "quietly",
+    "start": 69.0,
+    "end": 69.56
+  },
+  {
+    "word": "replaced",
+    "start": 69.56,
+    "end": 70.12
+  },
+  {
+    "word": "by",
+    "start": 70.12,
+    "end": 70.28
+  },
+  {
+    "word": "pixelated",
+    "start": 70.28,
+    "end": 71.08
+  },
+  {
+    "word": "audio,",
+    "start": 71.08,
+    "end": 71.8
+  },
+  {
+    "word": "mangling",
+    "start": 71.8,
+    "end": 72.44
+  },
+  {
+    "word": "the",
+    "start": 72.44,
+    "end": 72.52
+  },
+  {
+    "word": "metadata",
+    "start": 72.52,
+    "end": 73.08
+  },
+  {
+    "word": "structure.",
+    "start": 73.08,
+    "end": 73.96
+  },
+  {
+    "word": "Letting",
+    "start": 73.96,
+    "end": 74.36
+  },
+  {
+    "word": "a",
+    "start": 74.36,
+    "end": 74.6
+  },
+  {
+    "word": "generic",
+    "start": 74.6,
+    "end": 75.0
+  },
+  {
+    "word": "algorithm",
+    "start": 75.0,
+    "end": 75.72
+  },
+  {
+    "word": "run",
+    "start": 75.72,
+    "end": 75.96
+  },
+  {
+    "word": "loose",
+    "start": 75.96,
+    "end": 76.28
+  },
+  {
+    "word": "through",
+    "start": 76.28,
+    "end": 76.52
+  },
+  {
+    "word": "decades",
+    "start": 76.52,
+    "end": 77.0
+  },
+  {
+    "word": "of",
+    "start": 77.0,
+    "end": 77.16
+  },
+  {
+    "word": "curation",
+    "start": 77.16,
+    "end": 77.72
+  },
+  {
+    "word": "is",
+    "start": 77.72,
+    "end": 77.96
+  },
+  {
+    "word": "a",
+    "start": 77.96,
+    "end": 78.12
+  },
+  {
+    "word": "blind",
+    "start": 78.12,
+    "end": 78.52
+  },
+  {
+    "word": "gamble.",
+    "start": 78.52,
+    "end": 79.4
+  },
+  {
+    "word": "You",
+    "start": 79.4,
+    "end": 79.64
+  },
+  {
+    "word": "risk",
+    "start": 79.64,
+    "end": 80.04
+  },
+  {
+    "word": "permanently",
+    "start": 80.04,
+    "end": 80.68
+  },
+  {
+    "word": "destroying",
+    "start": 80.68,
+    "end": 81.24
+  },
+  {
+    "word": "the",
+    "start": 81.24,
+    "end": 81.4
+  },
+  {
+    "word": "exact",
+    "start": 81.4,
+    "end": 81.8
+  },
+  {
+    "word": "audio",
+    "start": 81.8,
+    "end": 82.28
+  },
+  {
+    "word": "quality",
+    "start": 82.28,
+    "end": 82.76
+  },
+  {
+    "word": "you",
+    "start": 82.76,
+    "end": 82.92
+  },
+  {
+    "word": "spent",
+    "start": 82.92,
+    "end": 83.4
+  },
+  {
+    "word": "years",
+    "start": 83.4,
+    "end": 83.64
+  },
+  {
+    "word": "trying",
+    "start": 83.64,
+    "end": 83.88
+  },
+  {
+    "word": "to",
+    "start": 83.88,
+    "end": 84.12
+  },
+  {
+    "word": "preserve.",
+    "start": 84.12,
+    "end": 85.24
+  },
+  {
+    "word": "That",
+    "start": 85.24,
+    "end": 85.56
+  },
+  {
+    "word": "specific",
+    "start": 85.56,
+    "end": 86.2
+  },
+  {
+    "word": "risk",
+    "start": 86.2,
+    "end": 86.6
+  },
+  {
+    "word": "is",
+    "start": 86.6,
+    "end": 86.76
+  },
+  {
+    "word": "why",
+    "start": 86.76,
+    "end": 87.0
+  },
+  {
+    "word": "order.fm",
+    "start": 87.0,
+    "end": 88.2
+  },
+  {
+    "word": "was",
+    "start": 88.2,
+    "end": 88.44
+  },
+  {
+    "word": "built.",
+    "start": 88.44,
+    "end": 89.08
+  },
+  {
+    "word": "It",
+    "start": 89.08,
+    "end": 89.24
+  },
+  {
+    "word": "is",
+    "start": 89.24,
+    "end": 89.4
+  },
+  {
+    "word": "a",
+    "start": 89.4,
+    "end": 89.64
+  },
+  {
+    "word": "command",
+    "start": 89.64,
+    "end": 89.96
+  },
+  {
+    "word": "line",
+    "start": 90.04,
+    "end": 90.36
+  },
+  {
+    "word": "interface,",
+    "start": 90.36,
+    "end": 91.08
+  },
+  {
+    "word": "a",
+    "start": 91.08,
+    "end": 91.24
+  },
+  {
+    "word": "text-based",
+    "start": 91.24,
+    "end": 91.96
+  },
+  {
+    "word": "control",
+    "start": 91.96,
+    "end": 92.44
+  },
+  {
+    "word": "panel",
+    "start": 92.44,
+    "end": 92.84
+  },
+  {
+    "word": "designed",
+    "start": 93.0,
+    "end": 93.48
+  },
+  {
+    "word": "by",
+    "start": 93.48,
+    "end": 93.64
+  },
+  {
+    "word": "a",
+    "start": 93.64,
+    "end": 93.72
+  },
+  {
+    "word": "developer",
+    "start": 93.72,
+    "end": 94.28
+  },
+  {
+    "word": "who",
+    "start": 94.28,
+    "end": 94.44
+  },
+  {
+    "word": "had",
+    "start": 94.44,
+    "end": 94.6
+  },
+  {
+    "word": "their",
+    "start": 94.6,
+    "end": 94.84
+  },
+  {
+    "word": "own",
+    "start": 94.84,
+    "end": 95.0
+  },
+  {
+    "word": "massive",
+    "start": 95.0,
+    "end": 95.4
+  },
+  {
+    "word": "library",
+    "start": 95.4,
+    "end": 95.88
+  },
+  {
+    "word": "to",
+    "start": 95.88,
+    "end": 96.12
+  },
+  {
+    "word": "lose",
+    "start": 96.12,
+    "end": 96.44
+  },
+  {
+    "word": "and",
+    "start": 96.6,
+    "end": 96.76
+  },
+  {
+    "word": "needed",
+    "start": 96.76,
+    "end": 97.08
+  },
+  {
+    "word": "a",
+    "start": 97.08,
+    "end": 97.24
+  },
+  {
+    "word": "tool",
+    "start": 97.24,
+    "end": 97.48
+  },
+  {
+    "word": "that",
+    "start": 97.48,
+    "end": 97.64
+  },
+  {
+    "word": "wouldn't",
+    "start": 97.64,
+    "end": 97.96
+  },
+  {
+    "word": "wreck",
+    "start": 97.96,
+    "end": 98.36
+  },
+  {
+    "word": "it.",
+    "start": 98.36,
+    "end": 98.92
+  },
+  {
+    "word": "Instead",
+    "start": 98.92,
+    "end": 99.32
+  },
+  {
+    "word": "of",
+    "start": 99.32,
+    "end": 99.48
+  },
+  {
+    "word": "blindly",
+    "start": 99.48,
+    "end": 100.04
+  },
+  {
+    "word": "swapping",
+    "start": 100.04,
+    "end": 100.52
+  },
+  {
+    "word": "files",
+    "start": 100.52,
+    "end": 100.92
+  },
+  {
+    "word": "based",
+    "start": 100.92,
+    "end": 101.16
+  },
+  {
+    "word": "on",
+    "start": 101.16,
+    "end": 101.32
+  },
+  {
+    "word": "folder",
+    "start": 101.32,
+    "end": 101.64
+  },
+  {
+    "word": "names,",
+    "start": 101.64,
+    "end": 102.28
+  },
+  {
+    "word": "it",
+    "start": 102.28,
+    "end": 102.44
+  },
+  {
+    "word": "digs",
+    "start": 102.44,
+    "end": 102.84
+  },
+  {
+    "word": "directly",
+    "start": 102.84,
+    "end": 103.4
+  },
+  {
+    "word": "into",
+    "start": 103.4,
+    "end": 103.64
+  },
+  {
+    "word": "the",
+    "start": 103.64,
+    "end": 103.8
+  },
+  {
+    "word": "structural",
+    "start": 103.8,
+    "end": 104.36
+  },
+  {
+    "word": "data",
+    "start": 104.36,
+    "end": 104.68
+  },
+  {
+    "word": "embedded",
+    "start": 104.68,
+    "end": 105.24
+  },
+  {
+    "word": "within",
+    "start": 105.24,
+    "end": 105.48
+  },
+  {
+    "word": "the",
+    "start": 105.48,
+    "end": 105.56
+  },
+  {
+    "word": "audio",
+    "start": 105.56,
+    "end": 106.04
+  },
+  {
+    "word": "files",
+    "start": 106.04,
+    "end": 106.44
+  },
+  {
+    "word": "themselves,",
+    "start": 106.44,
+    "end": 107.24
+  },
+  {
+    "word": "extracting",
+    "start": 107.24,
+    "end": 107.88
+  },
+  {
+    "word": "the",
+    "start": 107.88,
+    "end": 108.04
+  },
+  {
+    "word": "raw",
+    "start": 108.04,
+    "end": 108.44
+  },
+  {
+    "word": "EXF",
+    "start": 108.44,
+    "end": 109.0
+  },
+  {
+    "word": "metadata",
+    "start": 109.0,
+    "end": 109.64
+  },
+  {
+    "word": "to",
+    "start": 109.64,
+    "end": 109.8
+  },
+  {
+    "word": "see",
+    "start": 109.8,
+    "end": 110.04
+  },
+  {
+    "word": "exactly",
+    "start": 110.04,
+    "end": 110.52
+  },
+  {
+    "word": "what",
+    "start": 110.52,
+    "end": 110.68
+  },
+  {
+    "word": "it",
+    "start": 110.68,
+    "end": 110.84
+  },
+  {
+    "word": "is",
+    "start": 110.84,
+    "end": 111.0
+  },
+  {
+    "word": "dealing",
+    "start": 111.0,
+    "end": 111.48
+  },
+  {
+    "word": "with.",
+    "start": 111.48,
+    "end": 111.96
+  },
+  {
+    "word": "It",
+    "start": 111.96,
+    "end": 112.2
+  },
+  {
+    "word": "takes",
+    "start": 112.2,
+    "end": 112.6
+  },
+  {
+    "word": "those",
+    "start": 112.6,
+    "end": 112.84
+  },
+  {
+    "word": "extracted",
+    "start": 112.84,
+    "end": 113.48
+  },
+  {
+    "word": "details",
+    "start": 113.48,
+    "end": 114.04
+  },
+  {
+    "word": "and",
+    "start": 114.04,
+    "end": 114.2
+  },
+  {
+    "word": "verifies",
+    "start": 114.28,
+    "end": 114.68
+  },
+  {
+    "word": "them",
+    "start": 114.68,
+    "end": 114.84
+  },
+  {
+    "word": "against",
+    "start": 115.28,
+    "end": 115.68
+  },
+  {
+    "word": "massive",
+    "start": 115.68,
+    "end": 116.16
+  },
+  {
+    "word": "community-maintained",
+    "start": 116.4,
+    "end": 117.52
+  },
+  {
+    "word": "databases",
+    "start": 117.52,
+    "end": 118.24
+  },
+  {
+    "word": "like",
+    "start": 118.24,
+    "end": 118.48
+  },
+  {
+    "word": "MusicBrainz",
+    "start": 118.48,
+    "end": 119.36
+  },
+  {
+    "word": "and",
+    "start": 119.36,
+    "end": 119.44
+  },
+  {
+    "word": "Discogs,",
+    "start": 119.44,
+    "end": 120.48
+  },
+  {
+    "word": "ensuring",
+    "start": 120.48,
+    "end": 121.04
+  },
+  {
+    "word": "the",
+    "start": 121.04,
+    "end": 121.2
+  },
+  {
+    "word": "information",
+    "start": 121.2,
+    "end": 121.68
+  },
+  {
+    "word": "is",
+    "start": 121.68,
+    "end": 121.92
+  },
+  {
+    "word": "strictly",
+    "start": 121.92,
+    "end": 122.56
+  },
+  {
+    "word": "accurate",
+    "start": 122.56,
+    "end": 123.12
+  },
+  {
+    "word": "before",
+    "start": 123.12,
+    "end": 123.44
+  },
+  {
+    "word": "making",
+    "start": 123.44,
+    "end": 123.76
+  },
+  {
+    "word": "a",
+    "start": 123.76,
+    "end": 123.92
+  },
+  {
+    "word": "single",
+    "start": 123.92,
+    "end": 124.48
+  },
+  {
+    "word": "move.",
+    "start": 124.48,
+    "end": 125.2
+  },
+  {
+    "word": "Crucially,",
+    "start": 125.2,
+    "end": 126.08
+  },
+  {
+    "word": "the",
+    "start": 126.08,
+    "end": 126.24
+  },
+  {
+    "word": "software",
+    "start": 126.24,
+    "end": 126.8
+  },
+  {
+    "word": "processes",
+    "start": 126.8,
+    "end": 127.36
+  },
+  {
+    "word": "your",
+    "start": 127.36,
+    "end": 127.52
+  },
+  {
+    "word": "music",
+    "start": 127.52,
+    "end": 128.0
+  },
+  {
+    "word": "album",
+    "start": 128.0,
+    "end": 128.48
+  },
+  {
+    "word": "by",
+    "start": 128.48,
+    "end": 128.72
+  },
+  {
+    "word": "album.",
+    "start": 128.72,
+    "end": 129.44
+  },
+  {
+    "word": "It",
+    "start": 129.44,
+    "end": 129.68
+  },
+  {
+    "word": "looks",
+    "start": 129.68,
+    "end": 129.92
+  },
+  {
+    "word": "at",
+    "start": 129.92,
+    "end": 130.08
+  },
+  {
+    "word": "the",
+    "start": 130.08,
+    "end": 130.32
+  },
+  {
+    "word": "entire",
+    "start": 130.32,
+    "end": 130.72
+  },
+  {
+    "word": "release",
+    "start": 130.72,
+    "end": 131.2
+  },
+  {
+    "word": "as",
+    "start": 131.2,
+    "end": 131.44
+  },
+  {
+    "word": "a",
+    "start": 131.44,
+    "end": 131.6
+  },
+  {
+    "word": "complete",
+    "start": 131.6,
+    "end": 132.16
+  },
+  {
+    "word": "unit,",
+    "start": 132.16,
+    "end": 132.8
+  },
+  {
+    "word": "rather",
+    "start": 132.8,
+    "end": 133.12
+  },
+  {
+    "word": "than",
+    "start": 133.12,
+    "end": 133.36
+  },
+  {
+    "word": "shuffling",
+    "start": 133.36,
+    "end": 134.08
+  },
+  {
+    "word": "around",
+    "start": 134.08,
+    "end": 134.24
+  },
+  {
+    "word": "individual",
+    "start": 134.24,
+    "end": 134.96
+  },
+  {
+    "word": "tracks.",
+    "start": 134.96,
+    "end": 135.84
+  },
+  {
+    "word": "Treating",
+    "start": 135.84,
+    "end": 136.32
+  },
+  {
+    "word": "records",
+    "start": 136.32,
+    "end": 136.8
+  },
+  {
+    "word": "holistically",
+    "start": 136.8,
+    "end": 137.52
+  },
+  {
+    "word": "keeps",
+    "start": 137.52,
+    "end": 137.76
+  },
+  {
+    "word": "multi-disc",
+    "start": 137.76,
+    "end": 138.64
+  },
+  {
+    "word": "sets",
+    "start": 138.64,
+    "end": 138.96
+  },
+  {
+    "word": "and",
+    "start": 138.96,
+    "end": 139.12
+  },
+  {
+    "word": "sequential",
+    "start": 139.12,
+    "end": 139.68
+  },
+  {
+    "word": "track",
+    "start": 139.68,
+    "end": 140.08
+  },
+  {
+    "word": "lists",
+    "start": 140.08,
+    "end": 140.56
+  },
+  {
+    "word": "perfectly",
+    "start": 140.56,
+    "end": 141.12
+  },
+  {
+    "word": "intact,",
+    "start": 141.12,
+    "end": 141.92
+  },
+  {
+    "word": "preventing",
+    "start": 141.92,
+    "end": 142.4
+  },
+  {
+    "word": "the",
+    "start": 142.4,
+    "end": 142.56
+  },
+  {
+    "word": "scattered",
+    "start": 142.56,
+    "end": 143.12
+  },
+  {
+    "word": "digital",
+    "start": 143.12,
+    "end": 143.52
+  },
+  {
+    "word": "fragmentation",
+    "start": 143.52,
+    "end": 144.32
+  },
+  {
+    "word": "that",
+    "start": 144.32,
+    "end": 144.56
+  },
+  {
+    "word": "usually",
+    "start": 144.56,
+    "end": 144.96
+  },
+  {
+    "word": "ruins",
+    "start": 144.96,
+    "end": 145.44
+  },
+  {
+    "word": "large",
+    "start": 145.44,
+    "end": 145.84
+  },
+  {
+    "word": "collections.",
+    "start": 145.84,
+    "end": 146.96
+  },
+  {
+    "word": "The",
+    "start": 146.96,
+    "end": 147.2
+  },
+  {
+    "word": "defining",
+    "start": 147.2,
+    "end": 147.84
+  },
+  {
+    "word": "feature",
+    "start": 147.84,
+    "end": 148.24
+  },
+  {
+    "word": "of",
+    "start": 148.24,
+    "end": 148.4
+  },
+  {
+    "word": "Order.fm",
+    "start": 148.4,
+    "end": 149.52
+  },
+  {
+    "word": "is",
+    "start": 149.52,
+    "end": 149.76
+  },
+  {
+    "word": "its",
+    "start": 149.76,
+    "end": 149.92
+  },
+  {
+    "word": "absolute",
+    "start": 149.92,
+    "end": 150.56
+  },
+  {
+    "word": "refusal",
+    "start": 150.56,
+    "end": 151.2
+  },
+  {
+    "word": "to",
+    "start": 151.2,
+    "end": 151.44
+  },
+  {
+    "word": "downgrade",
+    "start": 151.44,
+    "end": 152.0
+  },
+  {
+    "word": "your",
+    "start": 152.0,
+    "end": 152.16
+  },
+  {
+    "word": "audio.",
+    "start": 152.16,
+    "end": 152.96
+  },
+  {
+    "word": "It",
+    "start": 152.96,
+    "end": 153.2
+  },
+  {
+    "word": "operates",
+    "start": 153.2,
+    "end": 153.68
+  },
+  {
+    "word": "on",
+    "start": 153.68,
+    "end": 153.92
+  },
+  {
+    "word": "strict",
+    "start": 153.92,
+    "end": 154.24
+  },
+  {
+    "word": "lossless",
+    "start": 154.4,
+    "end": 155.04
+  },
+  {
+    "word": "format",
+    "start": 155.04,
+    "end": 155.44
+  },
+  {
+    "word": "prioritization.",
+    "start": 155.44,
+    "end": 156.64
+  },
+  {
+    "word": "Looking",
+    "start": 156.64,
+    "end": 157.04
+  },
+  {
+    "word": "at",
+    "start": 157.04,
+    "end": 157.2
+  },
+  {
+    "word": "this",
+    "start": 157.2,
+    "end": 157.44
+  },
+  {
+    "word": "decision",
+    "start": 157.44,
+    "end": 157.84
+  },
+  {
+    "word": "tree,",
+    "start": 157.84,
+    "end": 158.4
+  },
+  {
+    "word": "we",
+    "start": 158.4,
+    "end": 158.64
+  },
+  {
+    "word": "see",
+    "start": 158.64,
+    "end": 158.8
+  },
+  {
+    "word": "how",
+    "start": 158.8,
+    "end": 158.96
+  },
+  {
+    "word": "the",
+    "start": 158.96,
+    "end": 159.12
+  },
+  {
+    "word": "logic",
+    "start": 159.12,
+    "end": 159.52
+  },
+  {
+    "word": "protects",
+    "start": 159.52,
+    "end": 160.0
+  },
+  {
+    "word": "the",
+    "start": 160.0,
+    "end": 160.16
+  },
+  {
+    "word": "collection.",
+    "start": 160.16,
+    "end": 161.12
+  },
+  {
+    "word": "Incoming",
+    "start": 161.12,
+    "end": 161.68
+  },
+  {
+    "word": "files",
+    "start": 161.68,
+    "end": 162.08
+  },
+  {
+    "word": "are",
+    "start": 162.08,
+    "end": 162.24
+  },
+  {
+    "word": "assigned",
+    "start": 162.24,
+    "end": 162.64
+  },
+  {
+    "word": "weights",
+    "start": 162.64,
+    "end": 163.12
+  },
+  {
+    "word": "based",
+    "start": 163.12,
+    "end": 163.36
+  },
+  {
+    "word": "on",
+    "start": 163.36,
+    "end": 163.6
+  },
+  {
+    "word": "format,",
+    "start": 163.6,
+    "end": 164.24
+  },
+  {
+    "word": "creating",
+    "start": 164.24,
+    "end": 164.64
+  },
+  {
+    "word": "a",
+    "start": 164.64,
+    "end": 164.8
+  },
+  {
+    "word": "mathematical",
+    "start": 164.8,
+    "end": 165.52
+  },
+  {
+    "word": "path",
+    "start": 165.52,
+    "end": 165.84
+  },
+  {
+    "word": "where",
+    "start": 165.84,
+    "end": 166.08
+  },
+  {
+    "word": "high-fidelity",
+    "start": 166.08,
+    "end": 166.88
+  },
+  {
+    "word": "tracks",
+    "start": 166.88,
+    "end": 167.28
+  },
+  {
+    "word": "bypass",
+    "start": 167.28,
+    "end": 167.84
+  },
+  {
+    "word": "lower-tier",
+    "start": 167.84,
+    "end": 168.56
+  },
+  {
+    "word": "files.",
+    "start": 168.56,
+    "end": 169.2
+  },
+  {
+    "word": "If",
+    "start": 169.2,
+    "end": 169.36
+  },
+  {
+    "word": "an",
+    "start": 169.36,
+    "end": 169.44
+  },
+  {
+    "word": "MP3",
+    "start": 169.44,
+    "end": 169.76
+  },
+  {
+    "word": "tries",
+    "start": 170.28,
+    "end": 170.52
+  },
+  {
+    "word": "to",
+    "start": 170.52,
+    "end": 170.68
+  },
+  {
+    "word": "overwrite",
+    "start": 170.68,
+    "end": 171.32
+  },
+  {
+    "word": "an",
+    "start": 171.32,
+    "end": 171.48
+  },
+  {
+    "word": "existing",
+    "start": 171.48,
+    "end": 171.8
+  },
+  {
+    "word": "flak",
+    "start": 171.8,
+    "end": 172.2
+  },
+  {
+    "word": "node,",
+    "start": 172.28,
+    "end": 172.76
+  },
+  {
+    "word": "it",
+    "start": 172.76,
+    "end": 172.92
+  },
+  {
+    "word": "triggers",
+    "start": 172.92,
+    "end": 173.32
+  },
+  {
+    "word": "a",
+    "start": 173.32,
+    "end": 173.48
+  },
+  {
+    "word": "zero-overwrite",
+    "start": 173.64,
+    "end": 174.52
+  },
+  {
+    "word": "protocol.",
+    "start": 174.52,
+    "end": 175.32
+  },
+  {
+    "word": "The",
+    "start": 175.32,
+    "end": 175.56
+  },
+  {
+    "word": "lesser",
+    "start": 175.56,
+    "end": 176.04
+  },
+  {
+    "word": "file",
+    "start": 176.04,
+    "end": 176.52
+  },
+  {
+    "word": "hits",
+    "start": 176.52,
+    "end": 176.84
+  },
+  {
+    "word": "a",
+    "start": 176.84,
+    "end": 177.0
+  },
+  {
+    "word": "hard",
+    "start": 177.0,
+    "end": 177.4
+  },
+  {
+    "word": "stop",
+    "start": 177.4,
+    "end": 177.8
+  },
+  {
+    "word": "and",
+    "start": 177.8,
+    "end": 178.04
+  },
+  {
+    "word": "routes",
+    "start": 178.04,
+    "end": 178.44
+  },
+  {
+    "word": "to",
+    "start": 178.44,
+    "end": 178.6
+  },
+  {
+    "word": "quarantine.",
+    "start": 178.6,
+    "end": 179.64
+  },
+  {
+    "word": "That",
+    "start": 179.64,
+    "end": 179.96
+  },
+  {
+    "word": "defensive",
+    "start": 179.96,
+    "end": 180.52
+  },
+  {
+    "word": "architecture",
+    "start": 180.52,
+    "end": 181.16
+  },
+  {
+    "word": "reflects",
+    "start": 181.16,
+    "end": 181.72
+  },
+  {
+    "word": "a",
+    "start": 181.72,
+    "end": 181.88
+  },
+  {
+    "word": "core",
+    "start": 181.88,
+    "end": 182.2
+  },
+  {
+    "word": "philosophy.",
+    "start": 182.2,
+    "end": 183.32
+  },
+  {
+    "word": "Any",
+    "start": 183.32,
+    "end": 183.64
+  },
+  {
+    "word": "software",
+    "start": 183.64,
+    "end": 184.28
+  },
+  {
+    "word": "handling",
+    "start": 184.28,
+    "end": 184.76
+  },
+  {
+    "word": "critical",
+    "start": 184.76,
+    "end": 185.24
+  },
+  {
+    "word": "data",
+    "start": 185.24,
+    "end": 185.64
+  },
+  {
+    "word": "has",
+    "start": 185.64,
+    "end": 185.88
+  },
+  {
+    "word": "to",
+    "start": 185.88,
+    "end": 186.12
+  },
+  {
+    "word": "earn",
+    "start": 186.12,
+    "end": 186.52
+  },
+  {
+    "word": "your",
+    "start": 186.52,
+    "end": 186.76
+  },
+  {
+    "word": "trust",
+    "start": 186.76,
+    "end": 187.24
+  },
+  {
+    "word": "before",
+    "start": 187.24,
+    "end": 187.48
+  },
+  {
+    "word": "it",
+    "start": 187.48,
+    "end": 187.72
+  },
+  {
+    "word": "adds",
+    "start": 187.72,
+    "end": 188.04
+  },
+  {
+    "word": "new",
+    "start": 188.04,
+    "end": 188.28
+  },
+  {
+    "word": "features.",
+    "start": 188.28,
+    "end": 189.24
+  },
+  {
+    "word": "Earning",
+    "start": 189.24,
+    "end": 189.64
+  },
+  {
+    "word": "that",
+    "start": 189.64,
+    "end": 189.88
+  },
+  {
+    "word": "trust",
+    "start": 189.88,
+    "end": 190.28
+  },
+  {
+    "word": "starts",
+    "start": 190.28,
+    "end": 190.68
+  },
+  {
+    "word": "at",
+    "start": 190.68,
+    "end": 190.84
+  },
+  {
+    "word": "the",
+    "start": 190.84,
+    "end": 191.0
+  },
+  {
+    "word": "foundation,",
+    "start": 191.0,
+    "end": 191.8
+  },
+  {
+    "word": "with",
+    "start": 191.8,
+    "end": 191.96
+  },
+  {
+    "word": "a",
+    "start": 191.96,
+    "end": 192.12
+  },
+  {
+    "word": "codebase",
+    "start": 192.12,
+    "end": 192.76
+  },
+  {
+    "word": "built",
+    "start": 192.76,
+    "end": 193.08
+  },
+  {
+    "word": "entirely",
+    "start": 193.08,
+    "end": 193.72
+  },
+  {
+    "word": "around",
+    "start": 193.72,
+    "end": 193.96
+  },
+  {
+    "word": "rigorous,",
+    "start": 193.96,
+    "end": 194.68
+  },
+  {
+    "word": "test-driven",
+    "start": 194.68,
+    "end": 195.48
+  },
+  {
+    "word": "development.",
+    "start": 195.48,
+    "end": 196.36
+  },
+  {
+    "word": "The",
+    "start": 196.36,
+    "end": 196.6
+  },
+  {
+    "word": "reliability",
+    "start": 196.6,
+    "end": 197.32
+  },
+  {
+    "word": "is",
+    "start": 197.32,
+    "end": 197.56
+  },
+  {
+    "word": "mathematically",
+    "start": 197.56,
+    "end": 198.28
+  },
+  {
+    "word": "quantifiable.",
+    "start": 198.28,
+    "end": 199.48
+  },
+  {
+    "word": "90%",
+    "start": 199.64,
+    "end": 200.36
+  },
+  {
+    "word": "of",
+    "start": 200.36,
+    "end": 200.52
+  },
+  {
+    "word": "the",
+    "start": 200.52,
+    "end": 200.6
+  },
+  {
+    "word": "entire",
+    "start": 200.6,
+    "end": 201.0
+  },
+  {
+    "word": "codebase",
+    "start": 201.0,
+    "end": 201.64
+  },
+  {
+    "word": "is",
+    "start": 201.64,
+    "end": 201.88
+  },
+  {
+    "word": "covered",
+    "start": 201.88,
+    "end": 202.2
+  },
+  {
+    "word": "by",
+    "start": 202.2,
+    "end": 202.36
+  },
+  {
+    "word": "automated",
+    "start": 202.36,
+    "end": 202.92
+  },
+  {
+    "word": "checks.",
+    "start": 202.92,
+    "end": 203.72
+  },
+  {
+    "word": "That",
+    "start": 203.72,
+    "end": 203.96
+  },
+  {
+    "word": "translates",
+    "start": 203.96,
+    "end": 204.6
+  },
+  {
+    "word": "to",
+    "start": 204.6,
+    "end": 204.84
+  },
+  {
+    "word": "150",
+    "start": 205.16,
+    "end": 205.88
+  },
+  {
+    "word": "separate,",
+    "start": 205.88,
+    "end": 206.52
+  },
+  {
+    "word": "continuously",
+    "start": 206.52,
+    "end": 207.24
+  },
+  {
+    "word": "running",
+    "start": 207.24,
+    "end": 207.64
+  },
+  {
+    "word": "tests",
+    "start": 207.64,
+    "end": 208.12
+  },
+  {
+    "word": "acting",
+    "start": 208.28,
+    "end": 208.68
+  },
+  {
+    "word": "as",
+    "start": 208.68,
+    "end": 208.84
+  },
+  {
+    "word": "a",
+    "start": 208.84,
+    "end": 209.0
+  },
+  {
+    "word": "constant",
+    "start": 209.0,
+    "end": 209.48
+  },
+  {
+    "word": "security",
+    "start": 209.48,
+    "end": 209.96
+  },
+  {
+    "word": "perimeter",
+    "start": 209.96,
+    "end": 210.52
+  },
+  {
+    "word": "against",
+    "start": 210.52,
+    "end": 210.84
+  },
+  {
+    "word": "data",
+    "start": 210.84,
+    "end": 211.24
+  },
+  {
+    "word": "loss.",
+    "start": 211.24,
+    "end": 211.96
+  },
+  {
+    "word": "Because",
+    "start": 211.96,
+    "end": 212.28
+  },
+  {
+    "word": "the",
+    "start": 212.28,
+    "end": 212.52
+  },
+  {
+    "word": "safety",
+    "start": 212.52,
+    "end": 212.92
+  },
+  {
+    "word": "logic",
+    "start": 212.92,
+    "end": 213.32
+  },
+  {
+    "word": "is",
+    "start": 213.32,
+    "end": 213.48
+  },
+  {
+    "word": "locked",
+    "start": 213.48,
+    "end": 213.88
+  },
+  {
+    "word": "down",
+    "start": 213.88,
+    "end": 214.12
+  },
+  {
+    "word": "so",
+    "start": 214.12,
+    "end": 214.36
+  },
+  {
+    "word": "tightly,",
+    "start": 214.36,
+    "end": 215.0
+  },
+  {
+    "word": "the",
+    "start": 215.0,
+    "end": 215.16
+  },
+  {
+    "word": "tool",
+    "start": 215.16,
+    "end": 215.56
+  },
+  {
+    "word": "safely",
+    "start": 215.56,
+    "end": 215.88
+  },
+  {
+    "word": "chews",
+    "start": 215.88,
+    "end": 216.36
+  },
+  {
+    "word": "through",
+    "start": 216.36,
+    "end": 216.52
+  },
+  {
+    "word": "massive",
+    "start": 216.52,
+    "end": 216.92
+  },
+  {
+    "word": "loads,",
+    "start": 216.92,
+    "end": 217.64
+  },
+  {
+    "word": "taking",
+    "start": 217.64,
+    "end": 217.96
+  },
+  {
+    "word": "on",
+    "start": 217.96,
+    "end": 218.2
+  },
+  {
+    "word": "batches",
+    "start": 218.2,
+    "end": 218.6
+  },
+  {
+    "word": "of",
+    "start": 218.6,
+    "end": 218.76
+  },
+  {
+    "word": "10,000",
+    "start": 218.92,
+    "end": 219.56
+  },
+  {
+    "word": "albums",
+    "start": 219.56,
+    "end": 220.12
+  },
+  {
+    "word": "at",
+    "start": 220.12,
+    "end": 220.28
+  },
+  {
+    "word": "once.",
+    "start": 220.28,
+    "end": 221.0
+  },
+  {
+    "word": "It",
+    "start": 221.0,
+    "end": 221.16
+  },
+  {
+    "word": "processes",
+    "start": 221.16,
+    "end": 221.72
+  },
+  {
+    "word": "that",
+    "start": 221.72,
+    "end": 221.96
+  },
+  {
+    "word": "staggering",
+    "start": 221.96,
+    "end": 222.52
+  },
+  {
+    "word": "volume",
+    "start": 222.52,
+    "end": 222.92
+  },
+  {
+    "word": "in",
+    "start": 222.92,
+    "end": 223.08
+  },
+  {
+    "word": "just",
+    "start": 223.08,
+    "end": 223.24
+  },
+  {
+    "word": "20",
+    "start": 223.4,
+    "end": 223.72
+  },
+  {
+    "word": "to",
+    "start": 223.72,
+    "end": 223.88
+  },
+  {
+    "word": "45",
+    "start": 224.04,
+    "end": 224.36
+  },
+  {
+    "word": "minutes.",
+    "start": 224.36,
+    "end": 225.0
+  },
+  {
+    "word": "Blistering",
+    "start": 225.2,
+    "end": 225.92
+  },
+  {
+    "word": "speed",
+    "start": 225.92,
+    "end": 226.24
+  },
+  {
+    "word": "is",
+    "start": 226.24,
+    "end": 226.48
+  },
+  {
+    "word": "useless",
+    "start": 226.48,
+    "end": 226.96
+  },
+  {
+    "word": "if",
+    "start": 226.96,
+    "end": 227.12
+  },
+  {
+    "word": "it",
+    "start": 227.12,
+    "end": 227.2
+  },
+  {
+    "word": "damages",
+    "start": 227.2,
+    "end": 227.68
+  },
+  {
+    "word": "the",
+    "start": 227.68,
+    "end": 227.92
+  },
+  {
+    "word": "product",
+    "start": 227.92,
+    "end": 228.24
+  },
+  {
+    "word": "along",
+    "start": 228.24,
+    "end": 228.56
+  },
+  {
+    "word": "the",
+    "start": 228.56,
+    "end": 228.72
+  },
+  {
+    "word": "way.",
+    "start": 228.72,
+    "end": 229.2
+  },
+  {
+    "word": "When",
+    "start": 229.2,
+    "end": 229.52
+  },
+  {
+    "word": "every",
+    "start": 229.52,
+    "end": 229.84
+  },
+  {
+    "word": "action",
+    "start": 229.84,
+    "end": 230.16
+  },
+  {
+    "word": "is",
+    "start": 230.16,
+    "end": 230.32
+  },
+  {
+    "word": "mathematically",
+    "start": 230.32,
+    "end": 231.12
+  },
+  {
+    "word": "protected",
+    "start": 231.12,
+    "end": 231.6
+  },
+  {
+    "word": "against",
+    "start": 231.6,
+    "end": 231.84
+  },
+  {
+    "word": "failure,",
+    "start": 231.84,
+    "end": 232.56
+  },
+  {
+    "word": "speed",
+    "start": 232.56,
+    "end": 232.96
+  },
+  {
+    "word": "becomes",
+    "start": 232.96,
+    "end": 233.36
+  },
+  {
+    "word": "an",
+    "start": 233.36,
+    "end": 233.6
+  },
+  {
+    "word": "actual",
+    "start": 233.6,
+    "end": 234.0
+  },
+  {
+    "word": "advantage.",
+    "start": 234.0,
+    "end": 235.04
+  },
+  {
+    "word": "Once",
+    "start": 235.04,
+    "end": 235.44
+  },
+  {
+    "word": "the",
+    "start": 235.44,
+    "end": 235.68
+  },
+  {
+    "word": "command",
+    "start": 235.68,
+    "end": 236.08
+  },
+  {
+    "word": "line",
+    "start": 236.08,
+    "end": 236.4
+  },
+  {
+    "word": "finishes",
+    "start": 236.4,
+    "end": 236.88
+  },
+  {
+    "word": "its",
+    "start": 236.88,
+    "end": 237.12
+  },
+  {
+    "word": "work,",
+    "start": 237.12,
+    "end": 237.6
+  },
+  {
+    "word": "the",
+    "start": 237.6,
+    "end": 237.84
+  },
+  {
+    "word": "results",
+    "start": 237.84,
+    "end": 238.32
+  },
+  {
+    "word": "are",
+    "start": 238.32,
+    "end": 238.56
+  },
+  {
+    "word": "brought",
+    "start": 238.56,
+    "end": 238.96
+  },
+  {
+    "word": "into",
+    "start": 238.96,
+    "end": 239.2
+  },
+  {
+    "word": "the",
+    "start": 239.2,
+    "end": 239.44
+  },
+  {
+    "word": "light.",
+    "start": 239.44,
+    "end": 240.08
+  },
+  {
+    "word": "A",
+    "start": 240.08,
+    "end": 240.32
+  },
+  {
+    "word": "chaotic",
+    "start": 240.32,
+    "end": 240.88
+  },
+  {
+    "word": "library",
+    "start": 240.88,
+    "end": 241.52
+  },
+  {
+    "word": "snaps",
+    "start": 241.52,
+    "end": 242.24
+  },
+  {
+    "word": "into",
+    "start": 242.24,
+    "end": 242.48
+  },
+  {
+    "word": "perfectly",
+    "start": 242.48,
+    "end": 243.12
+  },
+  {
+    "word": "aligned",
+    "start": 243.12,
+    "end": 243.6
+  },
+  {
+    "word": "order,",
+    "start": 243.6,
+    "end": 244.32
+  },
+  {
+    "word": "viewed",
+    "start": 244.32,
+    "end": 244.8
+  },
+  {
+    "word": "through",
+    "start": 244.8,
+    "end": 244.96
+  },
+  {
+    "word": "an",
+    "start": 244.96,
+    "end": 245.2
+  },
+  {
+    "word": "interactive",
+    "start": 245.2,
+    "end": 245.92
+  },
+  {
+    "word": "PWA",
+    "start": 245.92,
+    "end": 246.64
+  },
+  {
+    "word": "dashboard,",
+    "start": 246.64,
+    "end": 247.44
+  },
+  {
+    "word": "complete",
+    "start": 247.44,
+    "end": 247.92
+  },
+  {
+    "word": "with",
+    "start": 247.92,
+    "end": 248.16
+  },
+  {
+    "word": "detailed",
+    "start": 248.16,
+    "end": 248.64
+  },
+  {
+    "word": "waveform",
+    "start": 248.64,
+    "end": 249.28
+  },
+  {
+    "word": "visualizations",
+    "start": 249.28,
+    "end": 250.16
+  },
+  {
+    "word": "for",
+    "start": 250.16,
+    "end": 250.48
+  },
+  {
+    "word": "every",
+    "start": 250.48,
+    "end": 250.8
+  },
+  {
+    "word": "track.",
+    "start": 250.8,
+    "end": 251.6
+  },
+  {
+    "word": "To",
+    "start": 251.6,
+    "end": 251.84
+  },
+  {
+    "word": "keep",
+    "start": 251.84,
+    "end": 252.08
+  },
+  {
+    "word": "that",
+    "start": 252.08,
+    "end": 252.32
+  },
+  {
+    "word": "freshly",
+    "start": 252.32,
+    "end": 252.88
+  },
+  {
+    "word": "organized",
+    "start": 252.88,
+    "end": 253.36
+  },
+  {
+    "word": "archive",
+    "start": 253.36,
+    "end": 253.84
+  },
+  {
+    "word": "safe,",
+    "start": 253.84,
+    "end": 254.4
+  },
+  {
+    "word": "the",
+    "start": 254.4,
+    "end": 254.56
+  },
+  {
+    "word": "dashboard",
+    "start": 254.56,
+    "end": 255.2
+  },
+  {
+    "word": "runs",
+    "start": 255.2,
+    "end": 255.52
+  },
+  {
+    "word": "with",
+    "start": 255.52,
+    "end": 255.76
+  },
+  {
+    "word": "full",
+    "start": 255.76,
+    "end": 256.08
+  },
+  {
+    "word": "offline",
+    "start": 256.08,
+    "end": 256.64
+  },
+  {
+    "word": "support,",
+    "start": 256.64,
+    "end": 257.28
+  },
+  {
+    "word": "automatically",
+    "start": 257.28,
+    "end": 258.0
+  },
+  {
+    "word": "pushing",
+    "start": 258.0,
+    "end": 258.4
+  },
+  {
+    "word": "structural",
+    "start": 258.4,
+    "end": 258.96
+  },
+  {
+    "word": "backups",
+    "start": 258.96,
+    "end": 259.6
+  },
+  {
+    "word": "directly",
+    "start": 259.6,
+    "end": 259.92
+  },
+  {
+    "word": "to",
+    "start": 259.92,
+    "end": 260.08
+  },
+  {
+    "word": "Google",
+    "start": 260.08,
+    "end": 260.48
+  },
+  {
+    "word": "Drive,",
+    "start": 260.48,
+    "end": 261.12
+  },
+  {
+    "word": "so",
+    "start": 261.12,
+    "end": 261.28
+  },
+  {
+    "word": "your",
+    "start": 261.28,
+    "end": 261.52
+  },
+  {
+    "word": "configuration",
+    "start": 261.52,
+    "end": 262.48
+  },
+  {
+    "word": "is",
+    "start": 262.48,
+    "end": 262.8
+  },
+  {
+    "word": "never",
+    "start": 262.8,
+    "end": 263.04
+  },
+  {
+    "word": "lost.",
+    "start": 263.04,
+    "end": 263.84
+  },
+  {
+    "word": "When",
+    "start": 263.84,
+    "end": 264.16
+  },
+  {
+    "word": "engineered",
+    "start": 264.16,
+    "end": 264.8
+  },
+  {
+    "word": "with",
+    "start": 264.8,
+    "end": 264.96
+  },
+  {
+    "word": "precision,",
+    "start": 264.96,
+    "end": 265.76
+  },
+  {
+    "word": "automation",
+    "start": 265.76,
+    "end": 266.56
+  },
+  {
+    "word": "does",
+    "start": 266.56,
+    "end": 266.8
+  },
+  {
+    "word": "not",
+    "start": 266.8,
+    "end": 266.96
+  },
+  {
+    "word": "require",
+    "start": 266.96,
+    "end": 267.44
+  },
+  {
+    "word": "a",
+    "start": 267.44,
+    "end": 267.68
+  },
+  {
+    "word": "compromising",
+    "start": 267.68,
+    "end": 268.48
+  },
+  {
+    "word": "quality.",
+    "start": 268.48,
+    "end": 269.28
+  },
+  {
+    "word": "Order.fm",
+    "start": 269.28,
+    "end": 270.48
+  },
+  {
+    "word": "operates",
+    "start": 270.48,
+    "end": 271.12
+  },
+  {
+    "word": "exactly",
+    "start": 271.12,
+    "end": 271.6
+  },
+  {
+    "word": "as",
+    "start": 271.6,
+    "end": 271.84
+  },
+  {
+    "word": "the",
+    "start": 271.84,
+    "end": 272.08
+  },
+  {
+    "word": "uncompromising",
+    "start": 272.08,
+    "end": 272.96
+  },
+  {
+    "word": "guardian",
+    "start": 272.96,
+    "end": 273.52
+  },
+  {
+    "word": "a",
+    "start": 273.68,
+    "end": 273.92
+  },
+  {
+    "word": "lifetime",
+    "start": 273.92,
+    "end": 274.4
+  },
+  {
+    "word": "of",
+    "start": 274.4,
+    "end": 274.56
+  },
+  {
+    "word": "digital",
+    "start": 274.56,
+    "end": 275.04
+  },
+  {
+    "word": "preservation",
+    "start": 275.04,
+    "end": 275.6
+  },
+  {
+    "word": "deserves.",
+    "start": 275.84,
+    "end": 277.44
+  }
+]

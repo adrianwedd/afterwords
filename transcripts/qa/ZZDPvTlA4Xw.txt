@@ -1,0 +1,38 @@
+VIDEO: ZZDPvTlA4Xw
+TITLE: Before the Words Existed
+
+ISSUE at ~0s: "the American Psychiatric Association officially released the third edition of its diagnostic manual, the DSM-3."
+SOURCE SAYS: "In 1984, the DSM-III categorised ADD as a childhood disorder..."
+REPLACEMENT: "the DSM-III categorized attention deficit disorder as a childhood disorder."
+
+ISSUE at ~15s: "a diagnosis defined by behaviors in a classroom."
+SOURCE SAYS: not mentioned
+REPLACEMENT: ""
+
+ISSUE at ~22s: "a clinical footnote for a condition science assumed most people simply outgrew."
+SOURCE SAYS: "adult persistence relegated to 'residual type.'"
+REPLACEMENT: "a clinical footnote for adult persistence, relegated to a residual type."
+
+ISSUE at ~41s: "published his debut novel"
+SOURCE SAYS: "published a novel"
+REPLACEMENT: "published his novel"
+
+ISSUE at ~1:37s: "high-interest procedural domains."
+SOURCE SAYS: "procedural domains"
+REPLACEMENT: "procedural domains."
+
+ISSUE at ~1:59s: "environment that lacks the necessary tools to support it."
+SOURCE SAYS: "mismatch between cognitive style and available affordances"
+REPLACEMENT: "environment that lacks the necessary affordances to support it."
+
+ISSUE at ~2:15s: "Gibson provides a narrative control for this through the character of Molly."
+SOURCE SAYS: "analysis extends to Molly as cognitive contrast"
+REPLACEMENT: "Gibson provides a cognitive contrast through the character of Molly."
+
+ISSUE at ~2:20s: "reframes neurodivergence as an ecological issue."
+SOURCE SAYS: "mismatch between cognitive style and available affordances"
+REPLACEMENT: "reframes the dysfunction as a mismatch between cognitive style and available affordances."
+
+ISSUE at ~2:42s: "Philip K. Dick's body of work reveals a similar fascination with these cognitive shifts. Dick's prose frequently documents these same preclinical sensory patterns"
+SOURCE SAYS: "A parallel case study traces the same pre-clinical sensor pattern in Philip K. Dick's work"
+REPLACEMENT: "A parallel case study traces these same pre-clinical sensor patterns in Philip K. Dick's work"

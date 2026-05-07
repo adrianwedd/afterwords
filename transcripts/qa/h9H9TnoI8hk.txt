@@ -1,0 +1,18 @@
+VIDEO: h9H9TnoI8hk
+TITLE: Dx0
+
+ISSUE at ~0:40s: "Doctors manage finite time, restricted budgets, and limited access to specialized equipment."
+SOURCE SAYS: "resource constraints, with appropriate uncertainty" and "budget with real CPT/CMS cost mapping"
+REPLACEMENT: "Doctors manage restricted budgets and the inherent resource constraints of the clinical environment."
+
+ISSUE at ~2:04s: "the researchers tested it against some of the most difficult cases in the history of medicine."
+SOURCE SAYS: "304 NEJM Clinical Pathological Conference cases"
+REPLACEMENT: "the system was benchmarked against 304 complex Clinical Pathological Conference cases."
+
+ISSUE at ~2:23s: "documenting months of contradictory symptoms and rare physiological markers that the AI must navigate in sequence."
+SOURCE SAYS: "304 NEJM Clinical Pathological Conference cases the way a real differential diagnosis unfolds."
+REPLACEMENT: "representing clinical puzzles that require the AI to navigate a sequential differential diagnosis."
+
+ISSUE at ~3:04s: "The results showed that a board of restricted personas consistently outperformed a single unconstrained AI model."
+SOURCE SAYS: not mentioned (The source describes the architecture and mentions "statistical significance testing with permutation tests," but does not state comparative results or a specific performance outcome).
+REPLACEMENT: "The architecture ensures that a board of restricted personas provides a more rigorous diagnostic process than a single-pass prompt."

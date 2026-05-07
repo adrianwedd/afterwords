@@ -1,0 +1,22 @@
+VIDEO: 1Zg7I5Awymc
+TITLE: Living CV
+
+ISSUE at ~0:51: "Instead of a ladder of titles, we can view a career as a sequence of complex problems."
+SOURCE SAYS: not mentioned; the source describes the career summarized via "real commit data, language statistics, and contribution metrics."
+REPLACEMENT: "Instead of a ladder of titles, we can view a career as a continuous stream of live activity data."
+
+ISSUE at ~1:08: "learning things you didn't know you needed, skills that a standard job title doesn't always describe."
+SOURCE SAYS: not mentioned; the source focuses on "real commit data" and "language statistics" collected by an activity tracker.
+REPLACEMENT: "language statistics and contribution metrics that a standard job title often fails to capture."
+
+ISSUE at ~1:25: "one that tracks these problem-solving shifts rather than just listing chronological steps."
+SOURCE SAYS: not mentioned; the architecture tracks "commit data, language statistics, and contribution metrics."
+REPLACEMENT: "one that tracks live commit data and contribution metrics rather than just listing chronological steps."
+
+ISSUE at ~1:55: "Updates happen immediately."
+SOURCE SAYS: "GitHub Actions runs twice daily... on the next scheduled run."
+REPLACEMENT: "Updates happen twice daily."
+
+ISSUE at ~2:28: "For an Australian employer, you emphasize individual metrics. For a Japanese employer, that data reorganizes to highlight group collaboration."
+SOURCE SAYS: Australia and Japan are mentioned as examples where "different emphasis" is needed for "contextual framing," but the specific qualities (individual metrics vs. group collaboration) are not stated.
+REPLACEMENT: "For an Australian employer, you highlight different signals of competence than you would when presenting to a Japanese one."

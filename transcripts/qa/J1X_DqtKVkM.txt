@@ -1,0 +1,30 @@
+VIDEO: J1X_DqtKVkM
+TITLE: The Failure First Team
+
+ISSUE at ~1:41: "This evolutionary tree diagram shows our offensive constraint in action."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "Our offensive methodology illustrates this constraint in action."
+
+ISSUE at ~1:49: "initialized through distinct clawed code sessions"
+SOURCE SAYS: "initialized through distinct Claude Code sessions"
+REPLACEMENT: "initialized through distinct Claude Code sessions"
+
+ISSUE at ~2:43: "analyzes 18,000 of these prompts simultaneously"
+SOURCE SAYS: Clara synthesises across models. The source mentions 18,000 prompts as a scale example where patterns emerge ("When you've tested 120 systems with 18,000 prompts"), not a specific simultaneous analysis count.
+REPLACEMENT: "identifies structural patterns that repeat across thousands of prompts and dozens of different systems."
+
+ISSUE at ~2:56: "agents named Ramana and Amy"
+SOURCE SAYS: Romana
+REPLACEMENT: "agents named Romana and Amy"
+
+ISSUE at ~3:31: "This top-down schematic reveals the technical engine driving the team."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "The technical engine driving this team is the structured division of cognitive labour."
+
+ISSUE at ~4:37: "As Teigen mapped our findings"
+SOURCE SAYS: Tegan
+REPLACEMENT: "As Tegan mapped our findings"
+
+ISSUE at ~4:53: "The rigid structure of the state machine makes every finding entirely auditable."
+SOURCE SAYS: not mentioned (describes a methodology/workflow involving session handoffs and git history)
+REPLACEMENT: "The rigid structure of this methodology makes every finding entirely auditable."

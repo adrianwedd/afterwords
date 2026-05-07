@@ -1,0 +1,38 @@
+VIDEO: EyPqXRhWNOA
+TITLE: Space Weather
+
+ISSUE at ~18s: "often the actual cause of that disruption is about 93 million miles away."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "often the actual cause of that disruption originates from our sun."
+
+ISSUE at ~59s: "Massive magnetic anomalies and bright solar flares explode directly on the surface of the sun, releasing staggering amounts of plasma."
+SOURCE SAYS: not mentioned (Source mentions coronal mass ejections and solar wind variations).
+REPLACEMENT: "Major events like coronal mass ejections and shifts in the solar wind originate on the surface of the sun."
+
+ISSUE at ~1m 20s: "it physically slams into our planet's magnetic field, severely compressing the sunward side and violently stretching the tail. This collision induces massive electrical currents. They travel down from the distorted magnetic shield, overloading physical hardware on the ground."
+SOURCE SAYS: not mentioned (Source mentions geomagnetic storms and effects on power grids/satellites, but not the physical mechanism).
+REPLACEMENT: "it triggers geomagnetic storms. These events affect radio propagation and satellite operations, and can even impact the power grids we depend on for daily life."
+
+ISSUE at ~1m 44s: "This stadium scoreboard shows"
+SOURCE SAYS: "This dashboard pulls real-time A-Index, K-Index, and Dst-Index data and presents it in a clean interface"
+REPLACEMENT: "The Space Weather Dashboard shows"
+
+ISSUE at ~1m 44s: "issuing storm warnings right alongside terrestrial weather alerts."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "monitoring these cosmic conditions with the same focus we give to weather on the ground."
+
+ISSUE at ~2m 04s: "This line chart shows a volatile K index reading, highlighting severe spikes in electromagnetic activity."
+SOURCE SAYS: not mentioned (Source mentions pulling real-time K-Index data, but doesn't describe specific charts or spikes).
+REPLACEMENT: "The dashboard tracks real-time data like the K index to monitor fluctuations in electromagnetic activity."
+
+ISSUE at ~2m 04s: "The raw data is published as unformatted arrays and dense text, an esoteric foreign language."
+SOURCE SAYS: "the raw feeds aren't designed for casual monitoring"
+REPLACEMENT: "The raw data feeds aren't designed for casual monitoring—they are often dense and difficult to parse."
+
+ISSUE at ~2m 25s: "This vital information is often locked away in academic noise, making it useless for anyone trying to monitor their own technological reliance."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "This vital information is often difficult to understand, making it hard for anyone trying to monitor how space weather affects their technology."
+
+ISSUE at ~2m 45s: "It takes the intimidating math of astrophysics, formatting it so you can read it as easily as checking the chance of rain on your phone."
+SOURCE SAYS: not mentioned (Source mentions a "clean interface" that "makes the invisible visible").
+REPLACEMENT: "It takes complex astrophysical data and formats it into a clean interface, making it as easy to check as the weather on your phone."

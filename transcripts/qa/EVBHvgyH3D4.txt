@@ -1,0 +1,38 @@
+VIDEO: EVBHvgyH3D4
+TITLE: TEL3SIS
+
+ISSUE at ~0:35: "This creates what engineers call the three-second rule."
+SOURCE SAYS: not mentioned (Source calls the sub-3s latency a "survival threshold")
+REPLACEMENT: "This creates what engineers call a survival threshold."
+
+ISSUE at ~1:15: "requires a dedicated engineering platform like Telthresis."
+SOURCE SAYS: TEL3SIS
+REPLACEMENT: "requires a dedicated engineering platform like TEL3SIS."
+
+ISSUE at ~1:36: "solve that exact failure mode, absence."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "ensure real-time presence."
+
+ISSUE at ~2:17: "Defeating absence requires engineering the cognitive loop to physically outpace human impatience"
+SOURCE SAYS: not mentioned (Source mentions completing the loop in under 3 seconds "to feel present")
+REPLACEMENT: "Ensuring presence requires engineering the cognitive loop to complete the loop in under three seconds"
+
+ISSUE at ~2:17: "it encounters a second major failure mode, amnesia. This is when the system loses track of the conversation or starts making things up."
+SOURCE SAYS: not mentioned (Source refers to "hallucination risk")
+REPLACEMENT: "it encounters a second major risk, hallucination. This is when the system loses track of the conversation or starts making things up."
+
+ISSUE at ~2:35: "To fix this, Tell3Sys uses tri-layer memory"
+SOURCE SAYS: TEL3SIS
+REPLACEMENT: "To fix this, TEL3SIS uses tri-layer memory"
+
+ISSUE at ~2:57: "The final and most common failure mode is hubris. This is the tendency of an AI voice system to confidently attempt a complex task that it has no ability to actually complete."
+SOURCE SAYS: not mentioned (Source refers to conversations that exceed "what an agent should attempt")
+REPLACEMENT: "The final challenge is the safety boundary. This prevents an AI voice system from confidently attempting a complex task that it has no ability to actually complete."
+
+ISSUE at ~3:17: "Tell Thrisa's safety oracle"
+SOURCE SAYS: TEL3SIS
+REPLACEMENT: "The TEL3SIS safety oracle"
+
+ISSUE at ~3:59: "Tellthresis demonstrates a necessary shift"
+SOURCE SAYS: TEL3SIS
+REPLACEMENT: "TEL3SIS demonstrates a necessary shift"

@@ -1,0 +1,30 @@
+VIDEO: RxsTVm4l55A
+TITLE: Why I Build in Public
+
+ISSUE at ~15s: "implying the structure was flawless."
+SOURCE SAYS: "implies the system was designed top-down"
+REPLACEMENT: "implying the system was designed top-down."
+
+ISSUE at ~32s: "creating the impression that success is a straight line from idea to execution."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "omitting the mistakes and false starts of the process."
+
+ISSUE at ~1m 03s: "You stall into the solutions sideways"
+SOURCE SAYS: "stumbled into it sideways"
+REPLACEMENT: "You stumble into the solutions sideways"
+
+ISSUE at ~1m 10s: "realize halfway through that your core dependency is entirely unmaintained, forcing you to rip out the foundation and reverse course entirely."
+SOURCE SAYS: "a dependency that turned out to be unmaintained."
+REPLACEMENT: "and a dependency that turned out to be unmaintained."
+
+ISSUE at ~1m 42s: "They are the actual mechanics of learning."
+SOURCE SAYS: "The mess is the most useful part."
+REPLACEMENT: "They are the most useful part of the process."
+
+ISSUE at ~2m 48s: "worst day of a a brutal refactor and form permanent opinion"
+SOURCE SAYS: "worst day of a refactor and form an opinion."
+REPLACEMENT: "worst day of a refactor and form an opinion,"
+
+ISSUE at ~3m 02s: "If the smooth launch is a fiction"
+SOURCE SAYS: "the narrative was always a fiction."
+REPLACEMENT: "If the narrative was always a fiction"

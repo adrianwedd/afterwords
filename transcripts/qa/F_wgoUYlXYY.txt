@@ -1,0 +1,38 @@
+VIDEO: F_wgoUYlXYY
+TITLE: Cygnet
+
+ISSUE at ~20s: "This logic flowchart illustrates the problem."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "Existing incentive structures illustrate the problem."
+
+ISSUE at ~39s: "Standard building relies on a linear blockade, a single file sequence where every trade, permit, and delivery waits on the step before it."
+SOURCE SAYS: "scheduling dependencies" (No mention of "linear blockade" or "single file sequence")
+REPLACEMENT: "Standard building relies on rigid scheduling dependencies where every trade, permit, and delivery waits on the step before it."
+
+ISSUE at ~1m 22s: "engineering philosophy known as the systemic bypass."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "engineering philosophy focused on routing around these structures entirely."
+
+ISSUE at ~1m 45s: "170-acre site in Signet, Tasmania."
+SOURCE SAYS: "170-acre site in Cygnet, Tasmania"
+REPLACEMENT: "170-acre site in Cygnet, Tasmania."
+
+ISSUE at ~2m 6s: "process eliminates the material waste, common in timber and frame assembly."
+SOURCE SAYS: "eighty percent waste reduction" (No mention of "timber and frame assembly")
+REPLACEMENT: "process eliminates the material waste common in traditional construction."
+
+ISSUE at ~2m 27s: "This network map shows the intelligence behind the build."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "A coordinating ecosystem manages the intelligence behind the build."
+
+ISSUE at ~2m 49s: "executing permit choreography instantly."
+SOURCE SAYS: "accelerate the parts that are slow for bad reasons: permit choreography"
+REPLACEMENT: "accelerating the complexities of permit choreography."
+
+ISSUE at ~3m 30s: "This chart compares standard construction baselines against Cignet's targets"
+SOURCE SAYS: not mentioned (and "Cignet" is misspelled)
+REPLACEMENT: "These outcomes compare standard construction baselines against Cygnet's targets"
+
+ISSUE at ~3m 51s: "If a design violates these strict mathematical constraints, the AI ecosystem will not allow the build to proceed."
+SOURCE SAYS: "These figures function as hard-coded engineering constraints." (No mention of the AI blocking the build)
+REPLACEMENT: "These metrics function as hard-coded engineering constraints that guide the entire process."

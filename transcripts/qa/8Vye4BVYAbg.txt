@@ -1,0 +1,6 @@
+VIDEO: 8Vye4BVYAbg
+TITLE: Multi-Agent Safety Is the New Supply Chain Security
+
+ISSUE at ~2:44: "often falling victim to what researchers call a sycophancy OOP."
+SOURCE SAYS: "Sycophancy loops, where agents uncritically validate unsafe propositions from peers to maintain group alignment, bypassed safety refusals in 37% of cases."
+REPLACEMENT: "often falling victim to what researchers call a sycophancy loop."

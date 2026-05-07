@@ -1,0 +1,38 @@
+VIDEO: O1Q8Kf_LxmM
+TITLE: Personal Agentic Operating System
+
+ISSUE at ~1m00s: "Paws"
+SOURCE SAYS: PAOS
+REPLACEMENT: "PAOS"
+
+ISSUE at ~1m22s: "Alama"
+SOURCE SAYS: Ollama
+REPLACEMENT: "Ollama"
+
+ISSUE at ~2m17s: "represented by the scattered points, or purely on entity graph lookups, the rigid web"
+SOURCE SAYS: not mentioned
+REPLACEMENT: "represented by vector embeddings, or purely on entity graph lookups"
+
+ISSUE at ~2m32s: "map a specific dot of context"
+SOURCE SAYS: not mentioned
+REPLACEMENT: "map a specific piece of context"
+
+ISSUE at ~2m40s: "they perfectly map onto each other. This combined network closely mimics how human beings actually organize and retrieve knowledge."
+SOURCE SAYS: "Together they get closer."
+REPLACEMENT: "they complement each other. This combined approach gets closer to how human beings actually organize and retrieve knowledge."
+
+ISSUE at ~3m30s: "nightly automated job"
+SOURCE SAYS: "daily"
+REPLACEMENT: "daily automated job"
+
+ISSUE at ~4m00s: "POWS"
+SOURCE SAYS: PAOS
+REPLACEMENT: "PAOS"
+
+ISSUE at ~4m24s: "POWS"
+SOURCE SAYS: PAOS
+REPLACEMENT: "PAOS"
+
+ISSUE at ~4m41s: "Possessing"
+SOURCE SAYS: PAOS
+REPLACEMENT: "PAOS's"

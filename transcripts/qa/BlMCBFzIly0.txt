@@ -1,0 +1,18 @@
+VIDEO: BlMCBFzIly0
+TITLE: Beyond Context Windows
+
+ISSUE at ~0:22s: "entire source code repositories"
+SOURCE SAYS: "novel-length manuscript"
+REPLACEMENT: "novel-length manuscripts"
+
+ISSUE at ~3:43s: "across data blocks only when"
+SOURCE SAYS: "built lazily on first query"
+REPLACEMENT: "only when"
+
+ISSUE at ~4:04s: "spiral into infinite search loops"
+SOURCE SAYS: "tool call budget (500 per session)"
+REPLACEMENT: "trigger runaway tool usage"
+
+ISSUE at ~5:14s: "For enterprise AI, the baseline requirement is eliminating untracked synthesis and hallucinations."
+SOURCE SAYS: "Provenance... Auditable, reproducible, and — when it matters — defensible."
+REPLACEMENT: "For critical research and regulatory work, the baseline requirement is establishing structural provenance and auditability."

@@ -1,0 +1,18 @@
+VIDEO: Pnay_w6XZ4s
+TITLE: Giving a Robot Three Voices
+
+ISSUE at ~2:32: "The framework allows zero-shot voice cloning using just 10 seconds of reference audio."
+SOURCE SAYS: Qwen3-TTS supports voice cloning from a 3-second clip.
+REPLACEMENT: "The framework allows zero-shot voice cloning using just a 3-second reference audio clip."
+
+ISSUE at ~3:10: "A short 10-second clip with perfect text alignment easily outperformed a much larger data set with minor transcription errors."
+SOURCE SAYS: The 10-second test failed (it continued reading from the reference text); the 15-second clip with an accurate transcript was the successful "sweet spot."
+REPLACEMENT: "A 15-second clip with perfect text alignment from a high-quality transcription model provided the ideal balance of speed and vocal clarity."
+
+ISSUE at ~4:29: "The developer solved this by building a strict background queue worker and implementing a set of lock systems."
+SOURCE SAYS: The GPU crash (Metal assertion failure) in the server was solved with a `threading.Lock`. The background queue worker and `mkdir` locks were specifically for the Claude Code voice hook.
+REPLACEMENT: "The developer solved this by wrapping all synthesis calls in a thread lock, ensuring the server processes only one request at a time to prevent GPU crashes."
+
+ISSUE at ~5:22: "If... a thread lock fails"
+SOURCE SAYS: not mentioned; the routing layer triggers the fallback if the network is down, the server is unreachable, or it returns an error.
+REPLACEMENT: "If the network drops or the server returns an error"

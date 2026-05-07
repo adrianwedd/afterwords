@@ -1,0 +1,14 @@
+VIDEO: eWwhcDrMcso
+TITLE: Afterglow Engine
+
+ISSUE at ~3.4s: "reverb tales"
+SOURCE SAYS: reverb tails
+REPLACEMENT: "reverb tails"
+
+ISSUE at ~12.3s: "different house, a different year."
+SOURCE SAYS: different house, in a different year, in a different life.
+REPLACEMENT: "different house, in a different year, in a different life."
+
+ISSUE at ~218s: "SFT caching"
+SOURCE SAYS: STFT caching
+REPLACEMENT: "STFT caching"

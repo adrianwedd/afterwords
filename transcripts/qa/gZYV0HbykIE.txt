@@ -1,0 +1,26 @@
+VIDEO: gZYV0HbykIE
+TITLE: The NotebookLM Pipeline
+
+ISSUE at ~1:10: "This flowchart maps out an automated engine."
+SOURCE SAYS: not mentioned (The source contains a text-based workflow diagram, but does not mention a "flowchart" or a visual map of the engine itself).
+REPLACEMENT: "The system is built on an automated engine."
+
+ISSUE at ~2:04: "replaces the manual output of an entire multidisciplinary production team."
+SOURCE SAYS: not mentioned (The source says "Doing this by hand for 32 projects would take weeks," but does not mention a production team).
+REPLACEMENT: "replaces weeks of manual production labor."
+
+ISSUE at ~2:25: "This chart compares file sizes. A typical static web page is incredibly lightweight, but"
+SOURCE SAYS: not mentioned (The source mentions 100MB video summaries are "untenable" for static sites, but does not include a chart or a comparison to the weight of a typical web page).
+REPLACEMENT: "File sizes also present a significant bottleneck; for example,"
+
+ISSUE at ~3:40: "If a statistic changes or a new paragraph is added, you don't have to manually re-record an audio track or redesign a mind map."
+SOURCE SAYS: not mentioned (The source states the Markdown file is the "single source of truth" and everything else is a "derived view," but does not use these specific examples or mention re-recording/redesigning).
+REPLACEMENT: "When the central document is updated, you don't have to manually re-create the individual formats."
+
+ISSUE at ~3:55: "This means you do not need to be a multidisciplinary artist to provide multimodal learning."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "This means you can provide a variety of multimedia assets without the burden of manual creation."
+
+ISSUE at ~4:03: "organize your thoughts flawlessly in one place"
+SOURCE SAYS: not mentioned (The source says "take structured content" and "the source of truth remains the Markdown file").
+REPLACEMENT: "maintain a single source of truth in one place"

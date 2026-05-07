@@ -1,0 +1,46 @@
+VIDEO: QIN1nHFvPMQ
+TITLE: Lunar Tools Prototypes
+
+ISSUE at ~0:37: "the biometric signature of a spoken word"
+SOURCE SAYS: "unique qualities of each visitor's voice"
+REPLACEMENT: "the unique qualities of a spoken word"
+
+ISSUE at ~1:54: "drops processing latency to a fraction of a second"
+SOURCE SAYS: "a loop tight enough that the visitor feels like a participant"
+REPLACEMENT: "minimizes processing latency enough that the interaction feels seamless"
+
+ISSUE at ~1:58: "manual typing is bypassed entirely"
+SOURCE SAYS: "narrative quilt that grows one visual patch per chat message"
+REPLACEMENT: "the need for manual typing is significantly reduced"
+
+ISSUE at ~2:17: "Your biometric markers... become the direct live controllers"
+SOURCE SAYS: "Each prototype explores a different intersection of AI generation, real-time audio, and human input"
+REPLACEMENT: "Human input and real-time audio become the direct live controllers"
+
+ISSUE at ~2:36: "It extracts the unique acoustic frequencies that make up the timbre of their specific voice."
+SOURCE SAYS: "renders abstract brushstrokes driven by the unique qualities of each visitor's voice"
+REPLACEMENT: "It responds to the unique qualities of their specific voice."
+
+ISSUE at ~2:43: "The raw audio data directly drives the visual geometry."
+SOURCE SAYS: "renders abstract brushstrokes driven by the unique qualities of each visitor's voice"
+REPLACEMENT: "The unique qualities of the voice directly drive the abstract brushstrokes."
+
+ISSUE at ~3:06: "Every footstep, cough, or echo in the space"
+SOURCE SAYS: "respond to ambient sound in real time"
+REPLACEMENT: "Unpredictable ambient sound in the space"
+
+ISSUE at ~3:28: "building the image while the person is still finishing their description."
+SOURCE SAYS: "listens to spoken descriptions and visualises them through Stable Diffusion pipelines"
+REPLACEMENT: "visualizing descriptions through Stable Diffusion pipelines as they are spoken."
+
+ISSUE at ~3:44: "the system uses biometric and environmental data"
+SOURCE SAYS: "AI generation, real-time audio, and human input"
+REPLACEMENT: "the system uses human input and environmental audio"
+
+ISSUE at ~4:03: "drops below a few hundred milliseconds"
+SOURCE SAYS: "a loop tight enough that the visitor feels like a participant"
+REPLACEMENT: "drops low enough that the visitor feels like a participant"
+
+ISSUE at ~4:13: "centralizing the heavy logic behind a single command line interface"
+SOURCE SAYS: "The shared core centralises Lunar Tools instances... A CLI entry point launches any installation by name."
+REPLACEMENT: "centralizing the core tools and using a simple command line interface for launching the installations"

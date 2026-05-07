@@ -1,0 +1,34 @@
+VIDEO: Y9o5Iy_daps
+TITLE: ModelAtlas
+
+ISSUE at ~0:41s: "Having 10,000 AI models to choose from means very little..."
+SOURCE SAYS: "There are thousands of foundation models now."
+REPLACEMENT: "Having thousands of AI models to choose from means very little..."
+
+ISSUE at ~1:20s: "To solve this, researchers built Model Atlas."
+SOURCE SAYS: "I built ModelAtlas"
+REPLACEMENT: "To solve this, Model Atlas was built."
+
+ISSUE at ~1:39s: "The framework pulls down raw, disorganized data scrapes directly from the OLAMA registry."
+SOURCE SAYS: "Ollama's registry"
+REPLACEMENT: "The framework pulls down raw, disorganized data scrapes directly from the Ollama registry."
+
+ISSUE at ~1:39s: "This flow diagram illustrates how Recursor 1 cleans the data."
+SOURCE SAYS: not mentioned (no mention of a flow diagram).
+REPLACEMENT: "Recursor 1 then cleans the data."
+
+ISSUE at ~2:24s: "This animated timeline maps a model's exact journey from raw scrape to final enriched state."
+SOURCE SAYS: not mentioned (no mention of an animated timeline).
+REPLACEMENT: "TracePoint maps a model's exact journey from raw scrape to its final enriched state."
+
+ISSUE at ~2:24s: "Zooming into a node, TracePoint reveals..."
+SOURCE SAYS: not mentioned (no mention of nodes or zooming).
+REPLACEMENT: "By auditing this lineage, TracePoint reveals..."
+
+ISSUE at ~3:05s: "This radar chart maps out the specific forensic dimensions evaluated by TrustForge."
+SOURCE SAYS: not mentioned (no mention of a radar chart).
+REPLACEMENT: "TrustForge evaluates specific forensic dimensions to calculate this score."
+
+ISSUE at ~3:27s: "This visualization shows the macro view of the new AI ecosystem. What was once a scattered swarm of opaque models locks into an organized navigable grid?"
+SOURCE SAYS: not mentioned (source mentions a React dashboard for "visual analytics" is in development, but does not describe a grid visualization).
+REPLACEMENT: "This framework provides a macro view of the AI ecosystem, turning a scattered swarm of opaque models into an organized, navigable landscape."

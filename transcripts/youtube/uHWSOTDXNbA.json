@@ -1,0 +1,3002 @@
+[
+  {
+    "word": "It",
+    "start": 0.0,
+    "end": 0.32
+  },
+  {
+    "word": "is",
+    "start": 0.32,
+    "end": 0.56
+  },
+  {
+    "word": "7.43",
+    "start": 0.8,
+    "end": 1.76
+  },
+  {
+    "word": "a.m.",
+    "start": 1.76,
+    "end": 2.4
+  },
+  {
+    "word": "You",
+    "start": 2.72,
+    "end": 2.88
+  },
+  {
+    "word": "are",
+    "start": 2.88,
+    "end": 3.04
+  },
+  {
+    "word": "standing",
+    "start": 3.04,
+    "end": 3.44
+  },
+  {
+    "word": "in",
+    "start": 3.44,
+    "end": 3.6
+  },
+  {
+    "word": "the",
+    "start": 3.6,
+    "end": 3.68
+  },
+  {
+    "word": "kitchen,",
+    "start": 3.68,
+    "end": 4.24
+  },
+  {
+    "word": "muscles",
+    "start": 4.24,
+    "end": 4.8
+  },
+  {
+    "word": "still",
+    "start": 4.8,
+    "end": 5.04
+  },
+  {
+    "word": "trembling",
+    "start": 5.04,
+    "end": 5.6
+  },
+  {
+    "word": "from",
+    "start": 5.6,
+    "end": 5.76
+  },
+  {
+    "word": "holding",
+    "start": 5.76,
+    "end": 6.08
+  },
+  {
+    "word": "your",
+    "start": 6.08,
+    "end": 6.24
+  },
+  {
+    "word": "child",
+    "start": 6.24,
+    "end": 6.56
+  },
+  {
+    "word": "through",
+    "start": 6.56,
+    "end": 6.8
+  },
+  {
+    "word": "a",
+    "start": 6.8,
+    "end": 6.88
+  },
+  {
+    "word": "meltdown,",
+    "start": 6.88,
+    "end": 7.76
+  },
+  {
+    "word": "thinking,",
+    "start": 7.76,
+    "end": 8.56
+  },
+  {
+    "word": "nobody",
+    "start": 8.56,
+    "end": 9.04
+  },
+  {
+    "word": "told",
+    "start": 9.04,
+    "end": 9.52
+  },
+  {
+    "word": "me",
+    "start": 9.52,
+    "end": 9.76
+  },
+  {
+    "word": "this.",
+    "start": 9.76,
+    "end": 10.4
+  },
+  {
+    "word": "Or",
+    "start": 10.4,
+    "end": 10.72
+  },
+  {
+    "word": "maybe",
+    "start": 10.72,
+    "end": 10.96
+  },
+  {
+    "word": "you're",
+    "start": 10.96,
+    "end": 11.2
+  },
+  {
+    "word": "the",
+    "start": 11.2,
+    "end": 11.36
+  },
+  {
+    "word": "co-parent",
+    "start": 11.36,
+    "end": 12.0
+  },
+  {
+    "word": "sitting",
+    "start": 12.0,
+    "end": 12.32
+  },
+  {
+    "word": "in",
+    "start": 12.32,
+    "end": 12.48
+  },
+  {
+    "word": "your",
+    "start": 12.48,
+    "end": 12.72
+  },
+  {
+    "word": "car",
+    "start": 12.72,
+    "end": 12.96
+  },
+  {
+    "word": "after",
+    "start": 12.96,
+    "end": 13.2
+  },
+  {
+    "word": "another",
+    "start": 13.2,
+    "end": 13.44
+  },
+  {
+    "word": "grueling",
+    "start": 13.44,
+    "end": 14.08
+  },
+  {
+    "word": "school",
+    "start": 14.08,
+    "end": 14.4
+  },
+  {
+    "word": "meeting.",
+    "start": 14.4,
+    "end": 15.12
+  },
+  {
+    "word": "You're",
+    "start": 15.12,
+    "end": 15.44
+  },
+  {
+    "word": "too",
+    "start": 15.44,
+    "end": 15.68
+  },
+  {
+    "word": "exhausted",
+    "start": 15.68,
+    "end": 16.16
+  },
+  {
+    "word": "to",
+    "start": 16.16,
+    "end": 16.32
+  },
+  {
+    "word": "speak,",
+    "start": 16.32,
+    "end": 16.96
+  },
+  {
+    "word": "feeling",
+    "start": 16.96,
+    "end": 17.36
+  },
+  {
+    "word": "entirely",
+    "start": 17.36,
+    "end": 17.92
+  },
+  {
+    "word": "to",
+    "start": 17.92,
+    "end": 18.08
+  },
+  {
+    "word": "blame",
+    "start": 18.08,
+    "end": 18.4
+  },
+  {
+    "word": "for",
+    "start": 18.4,
+    "end": 18.56
+  },
+  {
+    "word": "a",
+    "start": 18.56,
+    "end": 18.64
+  },
+  {
+    "word": "situation",
+    "start": 18.64,
+    "end": 19.28
+  },
+  {
+    "word": "you",
+    "start": 19.28,
+    "end": 19.44
+  },
+  {
+    "word": "can't",
+    "start": 19.44,
+    "end": 19.92
+  },
+  {
+    "word": "control.",
+    "start": 19.92,
+    "end": 20.88
+  },
+  {
+    "word": "That",
+    "start": 20.88,
+    "end": 21.12
+  },
+  {
+    "word": "heavy,",
+    "start": 21.12,
+    "end": 21.68
+  },
+  {
+    "word": "isolating",
+    "start": 21.68,
+    "end": 22.32
+  },
+  {
+    "word": "sense",
+    "start": 22.32,
+    "end": 22.64
+  },
+  {
+    "word": "of",
+    "start": 22.64,
+    "end": 22.72
+  },
+  {
+    "word": "failure",
+    "start": 22.72,
+    "end": 23.28
+  },
+  {
+    "word": "comes",
+    "start": 23.28,
+    "end": 23.6
+  },
+  {
+    "word": "from",
+    "start": 23.6,
+    "end": 23.76
+  },
+  {
+    "word": "a",
+    "start": 23.76,
+    "end": 23.92
+  },
+  {
+    "word": "specific",
+    "start": 23.92,
+    "end": 24.4
+  },
+  {
+    "word": "mismatch.",
+    "start": 24.4,
+    "end": 25.52
+  },
+  {
+    "word": "You",
+    "start": 25.52,
+    "end": 25.68
+  },
+  {
+    "word": "are",
+    "start": 25.68,
+    "end": 25.92
+  },
+  {
+    "word": "trying",
+    "start": 25.92,
+    "end": 26.16
+  },
+  {
+    "word": "to",
+    "start": 26.16,
+    "end": 26.32
+  },
+  {
+    "word": "use",
+    "start": 26.32,
+    "end": 26.48
+  },
+  {
+    "word": "a",
+    "start": 26.48,
+    "end": 26.64
+  },
+  {
+    "word": "standard",
+    "start": 26.64,
+    "end": 27.12
+  },
+  {
+    "word": "parenting",
+    "start": 27.12,
+    "end": 27.68
+  },
+  {
+    "word": "manual",
+    "start": 27.68,
+    "end": 28.08
+  },
+  {
+    "word": "on",
+    "start": 28.08,
+    "end": 28.32
+  },
+  {
+    "word": "a",
+    "start": 28.32,
+    "end": 28.4
+  },
+  {
+    "word": "brain",
+    "start": 28.4,
+    "end": 28.72
+  },
+  {
+    "word": "that",
+    "start": 28.72,
+    "end": 28.88
+  },
+  {
+    "word": "runs",
+    "start": 28.88,
+    "end": 29.12
+  },
+  {
+    "word": "a",
+    "start": 29.12,
+    "end": 29.28
+  },
+  {
+    "word": "completely",
+    "start": 29.28,
+    "end": 29.84
+  },
+  {
+    "word": "different",
+    "start": 29.84,
+    "end": 30.16
+  },
+  {
+    "word": "operating",
+    "start": 30.16,
+    "end": 31.04
+  },
+  {
+    "word": "system.",
+    "start": 31.04,
+    "end": 31.68
+  },
+  {
+    "word": "You",
+    "start": 31.68,
+    "end": 31.92
+  },
+  {
+    "word": "haven't",
+    "start": 31.92,
+    "end": 32.32
+  },
+  {
+    "word": "failed.",
+    "start": 32.32,
+    "end": 33.04
+  },
+  {
+    "word": "You",
+    "start": 33.04,
+    "end": 33.2
+  },
+  {
+    "word": "packed",
+    "start": 33.2,
+    "end": 33.6
+  },
+  {
+    "word": "for",
+    "start": 33.6,
+    "end": 33.76
+  },
+  {
+    "word": "a",
+    "start": 33.76,
+    "end": 33.84
+  },
+  {
+    "word": "picnic",
+    "start": 33.84,
+    "end": 34.32
+  },
+  {
+    "word": "and",
+    "start": 34.32,
+    "end": 34.48
+  },
+  {
+    "word": "ended",
+    "start": 34.48,
+    "end": 34.72
+  },
+  {
+    "word": "up",
+    "start": 34.72,
+    "end": 34.88
+  },
+  {
+    "word": "in",
+    "start": 34.88,
+    "end": 34.96
+  },
+  {
+    "word": "the",
+    "start": 34.96,
+    "end": 35.12
+  },
+  {
+    "word": "Drake",
+    "start": 35.12,
+    "end": 35.6
+  },
+  {
+    "word": "Passage.",
+    "start": 35.6,
+    "end": 36.4
+  },
+  {
+    "word": "The",
+    "start": 36.4,
+    "end": 36.56
+  },
+  {
+    "word": "map",
+    "start": 36.56,
+    "end": 36.88
+  },
+  {
+    "word": "you",
+    "start": 36.88,
+    "end": 37.04
+  },
+  {
+    "word": "were",
+    "start": 37.04,
+    "end": 37.12
+  },
+  {
+    "word": "given",
+    "start": 37.12,
+    "end": 37.44
+  },
+  {
+    "word": "was",
+    "start": 37.44,
+    "end": 37.6
+  },
+  {
+    "word": "drawn",
+    "start": 37.6,
+    "end": 37.92
+  },
+  {
+    "word": "for",
+    "start": 37.92,
+    "end": 38.08
+  },
+  {
+    "word": "a",
+    "start": 38.08,
+    "end": 38.16
+  },
+  {
+    "word": "calm",
+    "start": 38.16,
+    "end": 38.56
+  },
+  {
+    "word": "water",
+    "start": 38.56,
+    "end": 38.88
+  },
+  {
+    "word": "landscape",
+    "start": 38.88,
+    "end": 39.44
+  },
+  {
+    "word": "that",
+    "start": 39.44,
+    "end": 39.68
+  },
+  {
+    "word": "doesn't",
+    "start": 39.68,
+    "end": 40.0
+  },
+  {
+    "word": "exist",
+    "start": 40.0,
+    "end": 40.32
+  },
+  {
+    "word": "in",
+    "start": 40.32,
+    "end": 40.56
+  },
+  {
+    "word": "your",
+    "start": 40.56,
+    "end": 40.8
+  },
+  {
+    "word": "home.",
+    "start": 40.8,
+    "end": 41.44
+  },
+  {
+    "word": "A",
+    "start": 41.44,
+    "end": 41.68
+  },
+  {
+    "word": "tantrum",
+    "start": 41.68,
+    "end": 42.32
+  },
+  {
+    "word": "is",
+    "start": 42.32,
+    "end": 42.48
+  },
+  {
+    "word": "a",
+    "start": 42.48,
+    "end": 42.56
+  },
+  {
+    "word": "behavioral",
+    "start": 42.56,
+    "end": 43.12
+  },
+  {
+    "word": "negotiation,",
+    "start": 43.12,
+    "end": 44.0
+  },
+  {
+    "word": "a",
+    "start": 44.0,
+    "end": 44.16
+  },
+  {
+    "word": "flowchart",
+    "start": 44.16,
+    "end": 44.8
+  },
+  {
+    "word": "of",
+    "start": 44.8,
+    "end": 44.96
+  },
+  {
+    "word": "cause",
+    "start": 44.96,
+    "end": 45.28
+  },
+  {
+    "word": "and",
+    "start": 45.28,
+    "end": 45.52
+  },
+  {
+    "word": "effect.",
+    "start": 45.52,
+    "end": 46.24
+  },
+  {
+    "word": "A",
+    "start": 46.24,
+    "end": 46.4
+  },
+  {
+    "word": "meltdown",
+    "start": 46.4,
+    "end": 47.12
+  },
+  {
+    "word": "is",
+    "start": 47.12,
+    "end": 47.28
+  },
+  {
+    "word": "a",
+    "start": 47.28,
+    "end": 47.36
+  },
+  {
+    "word": "biological",
+    "start": 47.36,
+    "end": 48.08
+  },
+  {
+    "word": "power",
+    "start": 48.08,
+    "end": 48.4
+  },
+  {
+    "word": "search.",
+    "start": 48.4,
+    "end": 49.2
+  },
+  {
+    "word": "This",
+    "start": 49.2,
+    "end": 49.44
+  },
+  {
+    "word": "taxes",
+    "start": 49.44,
+    "end": 50.0
+  },
+  {
+    "word": "neural",
+    "start": 50.0,
+    "end": 50.48
+  },
+  {
+    "word": "systems,",
+    "start": 50.48,
+    "end": 50.88
+  },
+  {
+    "word": "like",
+    "start": 50.88,
+    "end": 51.04
+  },
+  {
+    "word": "dopamine,",
+    "start": 51.04,
+    "end": 51.92
+  },
+  {
+    "word": "that",
+    "start": 51.92,
+    "end": 52.08
+  },
+  {
+    "word": "their",
+    "start": 52.08,
+    "end": 52.32
+  },
+  {
+    "word": "brain",
+    "start": 52.32,
+    "end": 52.72
+  },
+  {
+    "word": "underproduces.",
+    "start": 52.72,
+    "end": 54.0
+  },
+  {
+    "word": "Transitioning",
+    "start": 54.0,
+    "end": 54.8
+  },
+  {
+    "word": "homes",
+    "start": 54.8,
+    "end": 55.2
+  },
+  {
+    "word": "forces",
+    "start": 55.2,
+    "end": 55.6
+  },
+  {
+    "word": "them",
+    "start": 55.6,
+    "end": 55.76
+  },
+  {
+    "word": "to",
+    "start": 55.76,
+    "end": 55.92
+  },
+  {
+    "word": "instantly",
+    "start": 55.92,
+    "end": 56.4
+  },
+  {
+    "word": "load",
+    "start": 56.4,
+    "end": 56.8
+  },
+  {
+    "word": "new",
+    "start": 56.8,
+    "end": 56.96
+  },
+  {
+    "word": "environmental",
+    "start": 56.96,
+    "end": 57.68
+  },
+  {
+    "word": "rules.",
+    "start": 57.68,
+    "end": 58.48
+  },
+  {
+    "word": "Neurologically,",
+    "start": 58.48,
+    "end": 59.28
+  },
+  {
+    "word": "they",
+    "start": 59.28,
+    "end": 59.44
+  },
+  {
+    "word": "are",
+    "start": 59.44,
+    "end": 59.52
+  },
+  {
+    "word": "switching",
+    "start": 59.52,
+    "end": 59.76
+  },
+  {
+    "word": "operating",
+    "start": 60.12,
+    "end": 60.68
+  },
+  {
+    "word": "systems.",
+    "start": 60.68,
+    "end": 61.48
+  },
+  {
+    "word": "Managing",
+    "start": 61.48,
+    "end": 62.12
+  },
+  {
+    "word": "these",
+    "start": 62.12,
+    "end": 62.36
+  },
+  {
+    "word": "events",
+    "start": 62.36,
+    "end": 62.84
+  },
+  {
+    "word": "requires",
+    "start": 62.84,
+    "end": 63.4
+  },
+  {
+    "word": "biological",
+    "start": 63.4,
+    "end": 64.2
+  },
+  {
+    "word": "scaffolding",
+    "start": 64.2,
+    "end": 65.0
+  },
+  {
+    "word": "rather",
+    "start": 65.0,
+    "end": 65.32
+  },
+  {
+    "word": "than",
+    "start": 65.32,
+    "end": 65.48
+  },
+  {
+    "word": "behavioral",
+    "start": 65.48,
+    "end": 66.2
+  },
+  {
+    "word": "discipline.",
+    "start": 66.2,
+    "end": 67.08
+  },
+  {
+    "word": "Building",
+    "start": 67.08,
+    "end": 67.48
+  },
+  {
+    "word": "that",
+    "start": 67.48,
+    "end": 67.72
+  },
+  {
+    "word": "scaffolding",
+    "start": 67.72,
+    "end": 68.44
+  },
+  {
+    "word": "forces",
+    "start": 68.44,
+    "end": 68.92
+  },
+  {
+    "word": "you",
+    "start": 68.92,
+    "end": 69.08
+  },
+  {
+    "word": "to",
+    "start": 69.08,
+    "end": 69.24
+  },
+  {
+    "word": "examine",
+    "start": 69.24,
+    "end": 69.64
+  },
+  {
+    "word": "a",
+    "start": 69.64,
+    "end": 69.8
+  },
+  {
+    "word": "variable",
+    "start": 69.8,
+    "end": 70.28
+  },
+  {
+    "word": "you",
+    "start": 70.28,
+    "end": 70.52
+  },
+  {
+    "word": "might",
+    "start": 70.52,
+    "end": 70.68
+  },
+  {
+    "word": "have",
+    "start": 70.68,
+    "end": 70.84
+  },
+  {
+    "word": "missed,",
+    "start": 70.84,
+    "end": 71.56
+  },
+  {
+    "word": "your",
+    "start": 71.56,
+    "end": 71.8
+  },
+  {
+    "word": "own",
+    "start": 71.8,
+    "end": 72.04
+  },
+  {
+    "word": "brain.",
+    "start": 72.04,
+    "end": 72.84
+  },
+  {
+    "word": "While",
+    "start": 72.84,
+    "end": 73.16
+  },
+  {
+    "word": "the",
+    "start": 73.16,
+    "end": 73.32
+  },
+  {
+    "word": "focus",
+    "start": 73.32,
+    "end": 73.72
+  },
+  {
+    "word": "usually",
+    "start": 73.72,
+    "end": 74.12
+  },
+  {
+    "word": "stays",
+    "start": 74.12,
+    "end": 74.44
+  },
+  {
+    "word": "on",
+    "start": 74.44,
+    "end": 74.6
+  },
+  {
+    "word": "the",
+    "start": 74.6,
+    "end": 74.76
+  },
+  {
+    "word": "child,",
+    "start": 74.76,
+    "end": 75.32
+  },
+  {
+    "word": "the",
+    "start": 75.32,
+    "end": 75.48
+  },
+  {
+    "word": "neuroscience",
+    "start": 75.48,
+    "end": 76.36
+  },
+  {
+    "word": "points",
+    "start": 76.36,
+    "end": 76.68
+  },
+  {
+    "word": "a",
+    "start": 76.68,
+    "end": 76.84
+  },
+  {
+    "word": "massive",
+    "start": 76.84,
+    "end": 77.24
+  },
+  {
+    "word": "spotlight",
+    "start": 77.24,
+    "end": 77.96
+  },
+  {
+    "word": "back",
+    "start": 77.96,
+    "end": 78.12
+  },
+  {
+    "word": "up",
+    "start": 78.12,
+    "end": 78.28
+  },
+  {
+    "word": "the",
+    "start": 78.28,
+    "end": 78.44
+  },
+  {
+    "word": "family",
+    "start": 78.44,
+    "end": 78.84
+  },
+  {
+    "word": "tree.",
+    "start": 78.84,
+    "end": 79.56
+  },
+  {
+    "word": "Consider",
+    "start": 79.56,
+    "end": 80.04
+  },
+  {
+    "word": "the",
+    "start": 80.04,
+    "end": 80.2
+  },
+  {
+    "word": "data",
+    "start": 80.2,
+    "end": 80.52
+  },
+  {
+    "word": "on",
+    "start": 80.52,
+    "end": 80.76
+  },
+  {
+    "word": "heritability.",
+    "start": 80.76,
+    "end": 81.8
+  },
+  {
+    "word": "ADHD",
+    "start": 81.8,
+    "end": 82.68
+  },
+  {
+    "word": "is",
+    "start": 82.68,
+    "end": 82.92
+  },
+  {
+    "word": "74",
+    "start": 83.16,
+    "end": 83.64
+  },
+  {
+    "word": "to",
+    "start": 83.64,
+    "end": 83.8
+  },
+  {
+    "word": "88%",
+    "start": 83.88,
+    "end": 84.52
+  },
+  {
+    "word": "heritable.",
+    "start": 84.68,
+    "end": 85.56
+  },
+  {
+    "word": "Autism",
+    "start": 85.56,
+    "end": 86.2
+  },
+  {
+    "word": "sits",
+    "start": 86.2,
+    "end": 86.52
+  },
+  {
+    "word": "between",
+    "start": 86.52,
+    "end": 86.76
+  },
+  {
+    "word": "70",
+    "start": 86.92,
+    "end": 87.24
+  },
+  {
+    "word": "and",
+    "start": 87.24,
+    "end": 87.4
+  },
+  {
+    "word": "90%.",
+    "start": 87.56,
+    "end": 88.68
+  },
+  {
+    "word": "This",
+    "start": 88.68,
+    "end": 88.92
+  },
+  {
+    "word": "leads",
+    "start": 88.92,
+    "end": 89.24
+  },
+  {
+    "word": "to",
+    "start": 89.24,
+    "end": 89.4
+  },
+  {
+    "word": "the",
+    "start": 89.4,
+    "end": 89.56
+  },
+  {
+    "word": "double",
+    "start": 89.56,
+    "end": 89.96
+  },
+  {
+    "word": "discovery.",
+    "start": 89.96,
+    "end": 90.76
+  },
+  {
+    "word": "It's",
+    "start": 90.76,
+    "end": 91.08
+  },
+  {
+    "word": "the",
+    "start": 91.08,
+    "end": 91.16
+  },
+  {
+    "word": "moment",
+    "start": 91.16,
+    "end": 91.56
+  },
+  {
+    "word": "a",
+    "start": 91.56,
+    "end": 91.72
+  },
+  {
+    "word": "mother",
+    "start": 91.72,
+    "end": 92.04
+  },
+  {
+    "word": "reads",
+    "start": 92.04,
+    "end": 92.28
+  },
+  {
+    "word": "a",
+    "start": 92.28,
+    "end": 92.44
+  },
+  {
+    "word": "diagnostic",
+    "start": 92.44,
+    "end": 93.08
+  },
+  {
+    "word": "checklist",
+    "start": 93.08,
+    "end": 93.56
+  },
+  {
+    "word": "for",
+    "start": 93.56,
+    "end": 93.72
+  },
+  {
+    "word": "her",
+    "start": 93.72,
+    "end": 93.88
+  },
+  {
+    "word": "daughter",
+    "start": 93.88,
+    "end": 94.36
+  },
+  {
+    "word": "and",
+    "start": 94.36,
+    "end": 94.6
+  },
+  {
+    "word": "recognizes",
+    "start": 94.6,
+    "end": 95.32
+  },
+  {
+    "word": "her",
+    "start": 95.32,
+    "end": 95.48
+  },
+  {
+    "word": "own",
+    "start": 95.48,
+    "end": 95.72
+  },
+  {
+    "word": "lifelong",
+    "start": 95.72,
+    "end": 96.28
+  },
+  {
+    "word": "undiagnosed",
+    "start": 96.36,
+    "end": 97.24
+  },
+  {
+    "word": "behaviors",
+    "start": 97.24,
+    "end": 97.8
+  },
+  {
+    "word": "in",
+    "start": 97.8,
+    "end": 97.96
+  },
+  {
+    "word": "every",
+    "start": 97.96,
+    "end": 98.2
+  },
+  {
+    "word": "bullet",
+    "start": 98.2,
+    "end": 98.68
+  },
+  {
+    "word": "point.",
+    "start": 98.68,
+    "end": 99.24
+  },
+  {
+    "word": "Unexamined,",
+    "start": 99.24,
+    "end": 100.2
+  },
+  {
+    "word": "these",
+    "start": 100.2,
+    "end": 100.36
+  },
+  {
+    "word": "inherited",
+    "start": 100.36,
+    "end": 100.92
+  },
+  {
+    "word": "traits",
+    "start": 100.92,
+    "end": 101.32
+  },
+  {
+    "word": "act",
+    "start": 101.32,
+    "end": 101.56
+  },
+  {
+    "word": "as",
+    "start": 101.56,
+    "end": 101.72
+  },
+  {
+    "word": "an",
+    "start": 101.72,
+    "end": 101.88
+  },
+  {
+    "word": "invisible",
+    "start": 101.88,
+    "end": 102.44
+  },
+  {
+    "word": "variable,",
+    "start": 102.44,
+    "end": 103.24
+  },
+  {
+    "word": "often",
+    "start": 103.24,
+    "end": 103.64
+  },
+  {
+    "word": "sabotaging",
+    "start": 103.64,
+    "end": 104.36
+  },
+  {
+    "word": "the",
+    "start": 104.36,
+    "end": 104.52
+  },
+  {
+    "word": "very",
+    "start": 104.52,
+    "end": 104.68
+  },
+  {
+    "word": "environment",
+    "start": 104.68,
+    "end": 105.32
+  },
+  {
+    "word": "you're",
+    "start": 105.32,
+    "end": 105.56
+  },
+  {
+    "word": "trying",
+    "start": 105.56,
+    "end": 105.72
+  },
+  {
+    "word": "to",
+    "start": 105.72,
+    "end": 105.8
+  },
+  {
+    "word": "stabilize.",
+    "start": 105.8,
+    "end": 106.92
+  },
+  {
+    "word": "Diagnosing",
+    "start": 106.92,
+    "end": 107.64
+  },
+  {
+    "word": "the",
+    "start": 107.64,
+    "end": 107.8
+  },
+  {
+    "word": "child",
+    "start": 107.8,
+    "end": 108.12
+  },
+  {
+    "word": "is",
+    "start": 108.12,
+    "end": 108.28
+  },
+  {
+    "word": "only",
+    "start": 108.28,
+    "end": 108.44
+  },
+  {
+    "word": "half",
+    "start": 108.44,
+    "end": 108.76
+  },
+  {
+    "word": "the",
+    "start": 108.76,
+    "end": 108.92
+  },
+  {
+    "word": "equation.",
+    "start": 108.92,
+    "end": 109.64
+  },
+  {
+    "word": "Identifying",
+    "start": 109.64,
+    "end": 110.36
+  },
+  {
+    "word": "your",
+    "start": 110.36,
+    "end": 110.52
+  },
+  {
+    "word": "own",
+    "start": 110.52,
+    "end": 110.68
+  },
+  {
+    "word": "genetic",
+    "start": 110.68,
+    "end": 111.16
+  },
+  {
+    "word": "reality",
+    "start": 111.16,
+    "end": 111.56
+  },
+  {
+    "word": "provides",
+    "start": 111.56,
+    "end": 112.04
+  },
+  {
+    "word": "the",
+    "start": 112.04,
+    "end": 112.2
+  },
+  {
+    "word": "foundation",
+    "start": 112.2,
+    "end": 112.6
+  },
+  {
+    "word": "for",
+    "start": 112.6,
+    "end": 112.84
+  },
+  {
+    "word": "co-parenting",
+    "start": 112.84,
+    "end": 113.64
+  },
+  {
+    "word": "that",
+    "start": 113.64,
+    "end": 113.88
+  },
+  {
+    "word": "actually",
+    "start": 113.88,
+    "end": 114.2
+  },
+  {
+    "word": "works.",
+    "start": 114.2,
+    "end": 114.76
+  },
+  {
+    "word": "Let's",
+    "start": 114.96,
+    "end": 115.28
+  },
+  {
+    "word": "map",
+    "start": 115.28,
+    "end": 115.6
+  },
+  {
+    "word": "the",
+    "start": 115.6,
+    "end": 115.76
+  },
+  {
+    "word": "friction.",
+    "start": 115.76,
+    "end": 116.64
+  },
+  {
+    "word": "When",
+    "start": 116.64,
+    "end": 116.88
+  },
+  {
+    "word": "a",
+    "start": 116.88,
+    "end": 117.04
+  },
+  {
+    "word": "parent",
+    "start": 117.04,
+    "end": 117.36
+  },
+  {
+    "word": "with",
+    "start": 117.36,
+    "end": 117.52
+  },
+  {
+    "word": "a",
+    "start": 117.52,
+    "end": 117.68
+  },
+  {
+    "word": "low",
+    "start": 117.68,
+    "end": 117.92
+  },
+  {
+    "word": "sensory",
+    "start": 117.92,
+    "end": 118.4
+  },
+  {
+    "word": "threshold",
+    "start": 118.4,
+    "end": 118.96
+  },
+  {
+    "word": "collides",
+    "start": 118.96,
+    "end": 119.44
+  },
+  {
+    "word": "with",
+    "start": 119.44,
+    "end": 119.6
+  },
+  {
+    "word": "a",
+    "start": 119.6,
+    "end": 119.68
+  },
+  {
+    "word": "child's",
+    "start": 119.68,
+    "end": 120.08
+  },
+  {
+    "word": "meltdown,",
+    "start": 120.08,
+    "end": 120.88
+  },
+  {
+    "word": "the",
+    "start": 120.88,
+    "end": 121.04
+  },
+  {
+    "word": "two",
+    "start": 121.04,
+    "end": 121.2
+  },
+  {
+    "word": "nervous",
+    "start": 121.2,
+    "end": 121.68
+  },
+  {
+    "word": "systems",
+    "start": 121.68,
+    "end": 122.0
+  },
+  {
+    "word": "agitate",
+    "start": 122.0,
+    "end": 122.56
+  },
+  {
+    "word": "each",
+    "start": 122.56,
+    "end": 122.8
+  },
+  {
+    "word": "other.",
+    "start": 122.8,
+    "end": 123.36
+  },
+  {
+    "word": "Add",
+    "start": 123.36,
+    "end": 123.6
+  },
+  {
+    "word": "parental",
+    "start": 123.6,
+    "end": 124.16
+  },
+  {
+    "word": "demand",
+    "start": 124.16,
+    "end": 124.48
+  },
+  {
+    "word": "avoidance",
+    "start": 124.48,
+    "end": 124.96
+  },
+  {
+    "word": "or",
+    "start": 124.96,
+    "end": 125.12
+  },
+  {
+    "word": "rejection",
+    "start": 125.12,
+    "end": 125.68
+  },
+  {
+    "word": "sensitivity,",
+    "start": 125.68,
+    "end": 126.56
+  },
+  {
+    "word": "and",
+    "start": 126.56,
+    "end": 126.72
+  },
+  {
+    "word": "an",
+    "start": 126.72,
+    "end": 126.88
+  },
+  {
+    "word": "innocent",
+    "start": 126.88,
+    "end": 127.36
+  },
+  {
+    "word": "request",
+    "start": 127.36,
+    "end": 127.76
+  },
+  {
+    "word": "becomes",
+    "start": 127.76,
+    "end": 128.16
+  },
+  {
+    "word": "an",
+    "start": 128.16,
+    "end": 128.32
+  },
+  {
+    "word": "accelerator,",
+    "start": 128.32,
+    "end": 129.28
+  },
+  {
+    "word": "spinning",
+    "start": 129.28,
+    "end": 129.68
+  },
+  {
+    "word": "the",
+    "start": 129.68,
+    "end": 129.76
+  },
+  {
+    "word": "conflict",
+    "start": 129.76,
+    "end": 130.24
+  },
+  {
+    "word": "cycle",
+    "start": 130.24,
+    "end": 130.64
+  },
+  {
+    "word": "faster.",
+    "start": 130.64,
+    "end": 131.44
+  },
+  {
+    "word": "These",
+    "start": 131.44,
+    "end": 131.68
+  },
+  {
+    "word": "colliding",
+    "start": 131.68,
+    "end": 132.24
+  },
+  {
+    "word": "neurologies",
+    "start": 132.24,
+    "end": 132.88
+  },
+  {
+    "word": "create",
+    "start": 132.88,
+    "end": 133.2
+  },
+  {
+    "word": "a",
+    "start": 133.2,
+    "end": 133.36
+  },
+  {
+    "word": "compounding",
+    "start": 133.36,
+    "end": 133.92
+  },
+  {
+    "word": "environment",
+    "start": 133.92,
+    "end": 134.4
+  },
+  {
+    "word": "of",
+    "start": 134.4,
+    "end": 134.56
+  },
+  {
+    "word": "friction.",
+    "start": 134.56,
+    "end": 135.36
+  },
+  {
+    "word": "You",
+    "start": 135.36,
+    "end": 135.52
+  },
+  {
+    "word": "aren't",
+    "start": 135.52,
+    "end": 135.84
+  },
+  {
+    "word": "reacting",
+    "start": 135.84,
+    "end": 136.24
+  },
+  {
+    "word": "to",
+    "start": 136.24,
+    "end": 136.32
+  },
+  {
+    "word": "your",
+    "start": 136.32,
+    "end": 136.48
+  },
+  {
+    "word": "child's",
+    "start": 136.48,
+    "end": 136.88
+  },
+  {
+    "word": "stress",
+    "start": 136.88,
+    "end": 137.2
+  },
+  {
+    "word": "in",
+    "start": 137.2,
+    "end": 137.28
+  },
+  {
+    "word": "a",
+    "start": 137.28,
+    "end": 137.36
+  },
+  {
+    "word": "vacuum.",
+    "start": 137.36,
+    "end": 138.16
+  },
+  {
+    "word": "You",
+    "start": 138.16,
+    "end": 138.32
+  },
+  {
+    "word": "are",
+    "start": 138.32,
+    "end": 138.48
+  },
+  {
+    "word": "often",
+    "start": 138.48,
+    "end": 138.8
+  },
+  {
+    "word": "drowning",
+    "start": 138.8,
+    "end": 139.2
+  },
+  {
+    "word": "in",
+    "start": 139.2,
+    "end": 139.36
+  },
+  {
+    "word": "your",
+    "start": 139.36,
+    "end": 139.6
+  },
+  {
+    "word": "own.",
+    "start": 139.6,
+    "end": 140.16
+  },
+  {
+    "word": "Managing",
+    "start": 140.16,
+    "end": 140.72
+  },
+  {
+    "word": "your",
+    "start": 140.72,
+    "end": 140.88
+  },
+  {
+    "word": "own",
+    "start": 140.88,
+    "end": 141.04
+  },
+  {
+    "word": "neurology",
+    "start": 141.04,
+    "end": 141.68
+  },
+  {
+    "word": "is",
+    "start": 141.68,
+    "end": 141.84
+  },
+  {
+    "word": "not",
+    "start": 141.84,
+    "end": 141.92
+  },
+  {
+    "word": "a",
+    "start": 141.92,
+    "end": 142.08
+  },
+  {
+    "word": "complication.",
+    "start": 142.08,
+    "end": 142.88
+  },
+  {
+    "word": "It",
+    "start": 142.88,
+    "end": 143.04
+  },
+  {
+    "word": "is",
+    "start": 143.04,
+    "end": 143.2
+  },
+  {
+    "word": "the",
+    "start": 143.2,
+    "end": 143.36
+  },
+  {
+    "word": "baseline",
+    "start": 143.36,
+    "end": 143.84
+  },
+  {
+    "word": "for",
+    "start": 143.84,
+    "end": 144.0
+  },
+  {
+    "word": "effective",
+    "start": 144.0,
+    "end": 144.4
+  },
+  {
+    "word": "co-parenting.",
+    "start": 144.4,
+    "end": 145.44
+  },
+  {
+    "word": "You",
+    "start": 145.44,
+    "end": 145.68
+  },
+  {
+    "word": "cannot",
+    "start": 145.68,
+    "end": 146.08
+  },
+  {
+    "word": "safely",
+    "start": 146.08,
+    "end": 146.48
+  },
+  {
+    "word": "guide",
+    "start": 146.48,
+    "end": 146.72
+  },
+  {
+    "word": "a",
+    "start": 146.72,
+    "end": 146.8
+  },
+  {
+    "word": "child",
+    "start": 146.8,
+    "end": 147.12
+  },
+  {
+    "word": "through",
+    "start": 147.12,
+    "end": 147.2
+  },
+  {
+    "word": "a",
+    "start": 147.2,
+    "end": 147.36
+  },
+  {
+    "word": "sensory",
+    "start": 147.36,
+    "end": 147.76
+  },
+  {
+    "word": "storm",
+    "start": 147.76,
+    "end": 148.08
+  },
+  {
+    "word": "if",
+    "start": 148.08,
+    "end": 148.24
+  },
+  {
+    "word": "your",
+    "start": 148.24,
+    "end": 148.4
+  },
+  {
+    "word": "own",
+    "start": 148.4,
+    "end": 148.56
+  },
+  {
+    "word": "thinking",
+    "start": 148.56,
+    "end": 148.88
+  },
+  {
+    "word": "brain",
+    "start": 148.88,
+    "end": 149.2
+  },
+  {
+    "word": "is",
+    "start": 149.2,
+    "end": 149.28
+  },
+  {
+    "word": "offline.",
+    "start": 149.28,
+    "end": 150.16
+  },
+  {
+    "word": "Once",
+    "start": 150.16,
+    "end": 150.56
+  },
+  {
+    "word": "you",
+    "start": 150.56,
+    "end": 150.8
+  },
+  {
+    "word": "understand",
+    "start": 150.8,
+    "end": 151.04
+  },
+  {
+    "word": "the",
+    "start": 151.04,
+    "end": 151.12
+  },
+  {
+    "word": "biology,",
+    "start": 151.12,
+    "end": 152.0
+  },
+  {
+    "word": "you",
+    "start": 152.0,
+    "end": 152.08
+  },
+  {
+    "word": "can",
+    "start": 152.08,
+    "end": 152.24
+  },
+  {
+    "word": "stop",
+    "start": 152.24,
+    "end": 152.56
+  },
+  {
+    "word": "fighting",
+    "start": 152.56,
+    "end": 152.88
+  },
+  {
+    "word": "your",
+    "start": 152.88,
+    "end": 153.04
+  },
+  {
+    "word": "nature",
+    "start": 153.04,
+    "end": 153.52
+  },
+  {
+    "word": "and",
+    "start": 153.52,
+    "end": 153.68
+  },
+  {
+    "word": "start",
+    "start": 153.68,
+    "end": 153.84
+  },
+  {
+    "word": "scaffolding",
+    "start": 153.84,
+    "end": 154.56
+  },
+  {
+    "word": "for",
+    "start": 154.56,
+    "end": 154.72
+  },
+  {
+    "word": "it.",
+    "start": 154.72,
+    "end": 155.28
+  },
+  {
+    "word": "This",
+    "start": 155.28,
+    "end": 155.52
+  },
+  {
+    "word": "is",
+    "start": 155.52,
+    "end": 155.68
+  },
+  {
+    "word": "the",
+    "start": 155.68,
+    "end": 155.92
+  },
+  {
+    "word": "survival",
+    "start": 155.92,
+    "end": 156.48
+  },
+  {
+    "word": "card,",
+    "start": 156.48,
+    "end": 156.96
+  },
+  {
+    "word": "a",
+    "start": 156.96,
+    "end": 157.12
+  },
+  {
+    "word": "physical",
+    "start": 157.12,
+    "end": 157.52
+  },
+  {
+    "word": "laminated",
+    "start": 157.6,
+    "end": 158.32
+  },
+  {
+    "word": "protocol",
+    "start": 158.32,
+    "end": 158.8
+  },
+  {
+    "word": "designed",
+    "start": 158.8,
+    "end": 159.12
+  },
+  {
+    "word": "for",
+    "start": 159.12,
+    "end": 159.28
+  },
+  {
+    "word": "the",
+    "start": 159.28,
+    "end": 159.44
+  },
+  {
+    "word": "exact",
+    "start": 159.44,
+    "end": 159.76
+  },
+  {
+    "word": "moment",
+    "start": 159.76,
+    "end": 160.08
+  },
+  {
+    "word": "a",
+    "start": 160.08,
+    "end": 160.24
+  },
+  {
+    "word": "crisis",
+    "start": 160.24,
+    "end": 160.64
+  },
+  {
+    "word": "hits.",
+    "start": 160.64,
+    "end": 161.2
+  },
+  {
+    "word": "It",
+    "start": 161.2,
+    "end": 161.44
+  },
+  {
+    "word": "bypasses",
+    "start": 161.44,
+    "end": 162.08
+  },
+  {
+    "word": "the",
+    "start": 162.08,
+    "end": 162.16
+  },
+  {
+    "word": "need",
+    "start": 162.16,
+    "end": 162.32
+  },
+  {
+    "word": "for",
+    "start": 162.32,
+    "end": 162.48
+  },
+  {
+    "word": "complex",
+    "start": 162.48,
+    "end": 162.96
+  },
+  {
+    "word": "thinking",
+    "start": 162.96,
+    "end": 163.28
+  },
+  {
+    "word": "when",
+    "start": 163.28,
+    "end": 163.44
+  },
+  {
+    "word": "you're",
+    "start": 163.44,
+    "end": 163.68
+  },
+  {
+    "word": "already",
+    "start": 163.68,
+    "end": 164.0
+  },
+  {
+    "word": "overwhelmed.",
+    "start": 164.0,
+    "end": 164.88
+  },
+  {
+    "word": "You",
+    "start": 164.88,
+    "end": 165.12
+  },
+  {
+    "word": "pair",
+    "start": 165.12,
+    "end": 165.36
+  },
+  {
+    "word": "this",
+    "start": 165.36,
+    "end": 165.6
+  },
+  {
+    "word": "with",
+    "start": 165.6,
+    "end": 165.76
+  },
+  {
+    "word": "a",
+    "start": 165.76,
+    "end": 165.92
+  },
+  {
+    "word": "parent",
+    "start": 165.92,
+    "end": 166.24
+  },
+  {
+    "word": "toolkit,",
+    "start": 166.24,
+    "end": 167.12
+  },
+  {
+    "word": "10-minute",
+    "start": 167.2,
+    "end": 167.76
+  },
+  {
+    "word": "daily",
+    "start": 167.76,
+    "end": 168.16
+  },
+  {
+    "word": "exercises",
+    "start": 168.16,
+    "end": 168.88
+  },
+  {
+    "word": "designed",
+    "start": 168.88,
+    "end": 169.28
+  },
+  {
+    "word": "to",
+    "start": 169.28,
+    "end": 169.36
+  },
+  {
+    "word": "maintain",
+    "start": 169.36,
+    "end": 169.76
+  },
+  {
+    "word": "your",
+    "start": 170.04,
+    "end": 170.2
+  },
+  {
+    "word": "neurological",
+    "start": 170.2,
+    "end": 170.92
+  },
+  {
+    "word": "baseline",
+    "start": 170.92,
+    "end": 171.72
+  },
+  {
+    "word": "so",
+    "start": 171.72,
+    "end": 171.96
+  },
+  {
+    "word": "you",
+    "start": 171.96,
+    "end": 172.12
+  },
+  {
+    "word": "have",
+    "start": 172.12,
+    "end": 172.28
+  },
+  {
+    "word": "more",
+    "start": 172.28,
+    "end": 172.52
+  },
+  {
+    "word": "capacity",
+    "start": 172.52,
+    "end": 173.08
+  },
+  {
+    "word": "when",
+    "start": 173.08,
+    "end": 173.32
+  },
+  {
+    "word": "things",
+    "start": 173.32,
+    "end": 173.64
+  },
+  {
+    "word": "get",
+    "start": 173.64,
+    "end": 173.88
+  },
+  {
+    "word": "difficult.",
+    "start": 173.88,
+    "end": 174.92
+  },
+  {
+    "word": "These",
+    "start": 174.92,
+    "end": 175.24
+  },
+  {
+    "word": "tools",
+    "start": 175.24,
+    "end": 175.64
+  },
+  {
+    "word": "succeed",
+    "start": 175.64,
+    "end": 176.12
+  },
+  {
+    "word": "because",
+    "start": 176.12,
+    "end": 176.36
+  },
+  {
+    "word": "they",
+    "start": 176.36,
+    "end": 176.52
+  },
+  {
+    "word": "don't",
+    "start": 176.52,
+    "end": 176.76
+  },
+  {
+    "word": "rely",
+    "start": 176.76,
+    "end": 177.08
+  },
+  {
+    "word": "on",
+    "start": 177.08,
+    "end": 177.32
+  },
+  {
+    "word": "willpower",
+    "start": 177.32,
+    "end": 177.96
+  },
+  {
+    "word": "or",
+    "start": 177.96,
+    "end": 178.12
+  },
+  {
+    "word": "perfect",
+    "start": 178.12,
+    "end": 178.52
+  },
+  {
+    "word": "emotional",
+    "start": 178.52,
+    "end": 179.16
+  },
+  {
+    "word": "regulation.",
+    "start": 179.16,
+    "end": 180.12
+  },
+  {
+    "word": "They",
+    "start": 180.12,
+    "end": 180.28
+  },
+  {
+    "word": "are",
+    "start": 180.28,
+    "end": 180.52
+  },
+  {
+    "word": "pre-built",
+    "start": 180.52,
+    "end": 181.16
+  },
+  {
+    "word": "neurological",
+    "start": 181.16,
+    "end": 181.88
+  },
+  {
+    "word": "safety",
+    "start": 181.88,
+    "end": 182.44
+  },
+  {
+    "word": "nets.",
+    "start": 182.44,
+    "end": 183.4
+  },
+  {
+    "word": "These",
+    "start": 183.4,
+    "end": 183.72
+  },
+  {
+    "word": "systems",
+    "start": 183.72,
+    "end": 184.12
+  },
+  {
+    "word": "are",
+    "start": 184.12,
+    "end": 184.28
+  },
+  {
+    "word": "designed",
+    "start": 184.28,
+    "end": 184.68
+  },
+  {
+    "word": "to",
+    "start": 184.68,
+    "end": 184.92
+  },
+  {
+    "word": "work",
+    "start": 184.92,
+    "end": 185.16
+  },
+  {
+    "word": "regardless",
+    "start": 185.16,
+    "end": 185.72
+  },
+  {
+    "word": "of",
+    "start": 185.72,
+    "end": 185.88
+  },
+  {
+    "word": "your",
+    "start": 185.88,
+    "end": 186.04
+  },
+  {
+    "word": "relationship",
+    "start": 186.04,
+    "end": 186.6
+  },
+  {
+    "word": "with",
+    "start": 186.6,
+    "end": 186.76
+  },
+  {
+    "word": "your",
+    "start": 186.76,
+    "end": 187.08
+  },
+  {
+    "word": "ex.",
+    "start": 187.08,
+    "end": 187.72
+  },
+  {
+    "word": "Every",
+    "start": 187.72,
+    "end": 188.04
+  },
+  {
+    "word": "strategy",
+    "start": 188.04,
+    "end": 188.6
+  },
+  {
+    "word": "includes",
+    "start": 188.6,
+    "end": 189.08
+  },
+  {
+    "word": "variations",
+    "start": 189.08,
+    "end": 189.72
+  },
+  {
+    "word": "for",
+    "start": 189.72,
+    "end": 189.96
+  },
+  {
+    "word": "high",
+    "start": 189.96,
+    "end": 190.12
+  },
+  {
+    "word": "conflict",
+    "start": 190.2,
+    "end": 190.76
+  },
+  {
+    "word": "and",
+    "start": 190.76,
+    "end": 190.92
+  },
+  {
+    "word": "parallel",
+    "start": 190.92,
+    "end": 191.4
+  },
+  {
+    "word": "parenting,",
+    "start": 191.4,
+    "end": 192.2
+  },
+  {
+    "word": "focusing",
+    "start": 192.2,
+    "end": 192.76
+  },
+  {
+    "word": "entirely",
+    "start": 192.76,
+    "end": 193.32
+  },
+  {
+    "word": "on",
+    "start": 193.32,
+    "end": 193.48
+  },
+  {
+    "word": "the",
+    "start": 193.48,
+    "end": 193.64
+  },
+  {
+    "word": "child's",
+    "start": 193.64,
+    "end": 194.04
+  },
+  {
+    "word": "well-being.",
+    "start": 194.04,
+    "end": 195.24
+  },
+  {
+    "word": "To",
+    "start": 195.24,
+    "end": 195.48
+  },
+  {
+    "word": "make",
+    "start": 195.48,
+    "end": 195.72
+  },
+  {
+    "word": "these",
+    "start": 195.72,
+    "end": 195.88
+  },
+  {
+    "word": "tools",
+    "start": 195.88,
+    "end": 196.28
+  },
+  {
+    "word": "practical",
+    "start": 196.28,
+    "end": 196.84
+  },
+  {
+    "word": "outside",
+    "start": 196.84,
+    "end": 197.24
+  },
+  {
+    "word": "the",
+    "start": 197.24,
+    "end": 197.4
+  },
+  {
+    "word": "home,",
+    "start": 197.4,
+    "end": 197.88
+  },
+  {
+    "word": "the",
+    "start": 197.88,
+    "end": 198.04
+  },
+  {
+    "word": "framework",
+    "start": 198.04,
+    "end": 198.52
+  },
+  {
+    "word": "is",
+    "start": 198.52,
+    "end": 198.68
+  },
+  {
+    "word": "adapted",
+    "start": 198.68,
+    "end": 199.16
+  },
+  {
+    "word": "for",
+    "start": 199.16,
+    "end": 199.32
+  },
+  {
+    "word": "local",
+    "start": 199.32,
+    "end": 199.72
+  },
+  {
+    "word": "systems,",
+    "start": 199.72,
+    "end": 200.36
+  },
+  {
+    "word": "incorporating",
+    "start": 200.36,
+    "end": 201.08
+  },
+  {
+    "word": "the",
+    "start": 201.08,
+    "end": 201.24
+  },
+  {
+    "word": "specific",
+    "start": 201.24,
+    "end": 201.64
+  },
+  {
+    "word": "clinical",
+    "start": 201.64,
+    "end": 202.12
+  },
+  {
+    "word": "terminology",
+    "start": 202.12,
+    "end": 202.76
+  },
+  {
+    "word": "and",
+    "start": 202.76,
+    "end": 202.92
+  },
+  {
+    "word": "legal",
+    "start": 202.92,
+    "end": 203.32
+  },
+  {
+    "word": "structures",
+    "start": 203.32,
+    "end": 203.96
+  },
+  {
+    "word": "required",
+    "start": 203.96,
+    "end": 204.52
+  },
+  {
+    "word": "for",
+    "start": 204.52,
+    "end": 204.68
+  },
+  {
+    "word": "an",
+    "start": 204.68,
+    "end": 204.84
+  },
+  {
+    "word": "NDIS",
+    "start": 204.84,
+    "end": 205.56
+  },
+  {
+    "word": "plan",
+    "start": 205.56,
+    "end": 205.8
+  },
+  {
+    "word": "in",
+    "start": 205.8,
+    "end": 205.96
+  },
+  {
+    "word": "Brisbane",
+    "start": 205.96,
+    "end": 206.52
+  },
+  {
+    "word": "or",
+    "start": 206.52,
+    "end": 206.76
+  },
+  {
+    "word": "an",
+    "start": 206.76,
+    "end": 206.92
+  },
+  {
+    "word": "IEP",
+    "start": 206.92,
+    "end": 207.48
+  },
+  {
+    "word": "in",
+    "start": 207.48,
+    "end": 207.64
+  },
+  {
+    "word": "Boston.",
+    "start": 207.64,
+    "end": 208.68
+  },
+  {
+    "word": "You",
+    "start": 208.68,
+    "end": 208.92
+  },
+  {
+    "word": "began",
+    "start": 208.92,
+    "end": 209.24
+  },
+  {
+    "word": "as",
+    "start": 209.32,
+    "end": 209.48
+  },
+  {
+    "word": "a",
+    "start": 209.48,
+    "end": 209.56
+  },
+  {
+    "word": "bewildered",
+    "start": 209.56,
+    "end": 210.12
+  },
+  {
+    "word": "tourist",
+    "start": 210.12,
+    "end": 210.6
+  },
+  {
+    "word": "clutching",
+    "start": 210.6,
+    "end": 210.92
+  },
+  {
+    "word": "a",
+    "start": 210.92,
+    "end": 211.0
+  },
+  {
+    "word": "brochure",
+    "start": 211.0,
+    "end": 211.72
+  },
+  {
+    "word": "for",
+    "start": 211.72,
+    "end": 211.8
+  },
+  {
+    "word": "a",
+    "start": 211.8,
+    "end": 211.88
+  },
+  {
+    "word": "trip",
+    "start": 211.88,
+    "end": 212.12
+  },
+  {
+    "word": "that",
+    "start": 212.12,
+    "end": 212.28
+  },
+  {
+    "word": "doesn't",
+    "start": 212.28,
+    "end": 212.6
+  },
+  {
+    "word": "exist.",
+    "start": 212.6,
+    "end": 213.48
+  },
+  {
+    "word": "You",
+    "start": 213.48,
+    "end": 213.72
+  },
+  {
+    "word": "end",
+    "start": 213.72,
+    "end": 213.88
+  },
+  {
+    "word": "as",
+    "start": 213.88,
+    "end": 214.12
+  },
+  {
+    "word": "a",
+    "start": 214.12,
+    "end": 214.2
+  },
+  {
+    "word": "cartographer,",
+    "start": 214.2,
+    "end": 215.32
+  },
+  {
+    "word": "someone",
+    "start": 215.32,
+    "end": 215.72
+  },
+  {
+    "word": "who",
+    "start": 215.72,
+    "end": 215.88
+  },
+  {
+    "word": "has",
+    "start": 215.88,
+    "end": 216.04
+  },
+  {
+    "word": "learned",
+    "start": 216.04,
+    "end": 216.36
+  },
+  {
+    "word": "to",
+    "start": 216.36,
+    "end": 216.44
+  },
+  {
+    "word": "draw",
+    "start": 216.44,
+    "end": 216.76
+  },
+  {
+    "word": "their",
+    "start": 216.76,
+    "end": 216.92
+  },
+  {
+    "word": "own",
+    "start": 216.92,
+    "end": 217.08
+  },
+  {
+    "word": "maps",
+    "start": 217.08,
+    "end": 217.56
+  },
+  {
+    "word": "and",
+    "start": 217.56,
+    "end": 217.72
+  },
+  {
+    "word": "sail",
+    "start": 217.72,
+    "end": 218.04
+  },
+  {
+    "word": "with",
+    "start": 218.04,
+    "end": 218.28
+  },
+  {
+    "word": "the",
+    "start": 218.28,
+    "end": 218.44
+  },
+  {
+    "word": "wind.",
+    "start": 218.44,
+    "end": 219.24
+  },
+  {
+    "word": "You",
+    "start": 219.24,
+    "end": 219.48
+  },
+  {
+    "word": "are",
+    "start": 219.48,
+    "end": 219.72
+  },
+  {
+    "word": "not",
+    "start": 219.72,
+    "end": 219.88
+  },
+  {
+    "word": "a",
+    "start": 219.88,
+    "end": 220.04
+  },
+  {
+    "word": "failed",
+    "start": 220.04,
+    "end": 220.52
+  },
+  {
+    "word": "neurotypical",
+    "start": 220.52,
+    "end": 221.32
+  },
+  {
+    "word": "parent.",
+    "start": 221.32,
+    "end": 222.2
+  },
+  {
+    "word": "You",
+    "start": 222.2,
+    "end": 222.52
+  },
+  {
+    "word": "are",
+    "start": 222.52,
+    "end": 222.76
+  },
+  {
+    "word": "an",
+    "start": 222.76,
+    "end": 222.92
+  },
+  {
+    "word": "exceptional",
+    "start": 222.92,
+    "end": 223.64
+  },
+  {
+    "word": "navigator",
+    "start": 223.64,
+    "end": 224.28
+  },
+  {
+    "word": "in",
+    "start": 224.36,
+    "end": 224.52
+  },
+  {
+    "word": "extraordinary",
+    "start": 224.52,
+    "end": 224.76
+  },
+  {
+    "word": "conditions,",
+    "start": 225.52,
+    "end": 226.56
+  },
+  {
+    "word": "and",
+    "start": 226.56,
+    "end": 226.8
+  },
+  {
+    "word": "you",
+    "start": 226.8,
+    "end": 227.04
+  },
+  {
+    "word": "are",
+    "start": 227.04,
+    "end": 227.36
+  },
+  {
+    "word": "no",
+    "start": 227.36,
+    "end": 227.6
+  },
+  {
+    "word": "longer",
+    "start": 227.6,
+    "end": 228.24
+  },
+  {
+    "word": "alone.",
+    "start": 228.24,
+    "end": 229.04
+  }
+]

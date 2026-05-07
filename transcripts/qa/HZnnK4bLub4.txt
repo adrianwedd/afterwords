@@ -1,0 +1,10 @@
+VIDEO: HZnnK4bLub4
+TITLE: NeuroConnect
+
+ISSUE at ~1:38: "returns via 11 laps."
+SOURCE SAYS: "back through ElevenLabs."
+REPLACEMENT: "returns via ElevenLabs."
+
+ISSUE at ~3:14: "This diagram illustrates how the extracted evidence is mapped to specific support domains and securely logged into a local Postgres database"
+SOURCE SAYS: The source does not mention a diagram. It notes that evidence is mapped to support domains for plan reviews, but mentions PostgreSQL only as a requirement for specific tests to pass ("The three that do not require a local PostgreSQL instance").
+REPLACEMENT: "The extracted evidence is mapped to specific support domains and securely logged, creating a reliable record for future plan reviews."

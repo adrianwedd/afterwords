@@ -1,0 +1,26 @@
+VIDEO: IKsovSI5n7U
+TITLE: The AI Productivity J-Curve: Why Most Enterprise AI Fails
+
+ISSUE at ~0:43: "The code is clean, the outputs are fast, and on a technical level, it works exactly as designed."
+SOURCE SAYS: "It works technically."
+REPLACEMENT: "On a technical level, the pilot project works exactly as designed."
+
+ISSUE at ~0:59: "fire the vendor"
+SOURCE SAYS: "blame the technology, or the teams deploying it, or the data."
+REPLACEMENT: "blame the algorithm, the teams, or the data."
+
+ISSUE at ~1:41: "mechanization"
+SOURCE SAYS: "computing"
+REPLACEMENT: "computing"
+
+ISSUE at ~2:02: "Eric Brinielsson, Daniel Rock, and Chad Cyberson"
+SOURCE SAYS: "Erik Brynjolfsson, Daniel Rock, and Chad Syverson"
+REPLACEMENT: "Erik Brynjolfsson, Daniel Rock, and Chad Syverson"
+
+ISSUE at ~3:46: "This chart shows the breakdown."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "The breakdown is telling:"
+
+ISSUE at ~4:25: "survive the troth"
+SOURCE SAYS: "survive the trough"
+REPLACEMENT: "survive the trough"

@@ -1,0 +1,38 @@
+VIDEO: iawRevXb9i4
+TITLE: Afterwords
+
+ISSUE at ~0:00: "clawed code transcribes every word you say."
+SOURCE SAYS: "Claude Code already listens — hold Space, talk, it transcribes."
+REPLACEMENT: "Claude Code transcribes your spoken words."
+
+ISSUE at ~0:35: "Afterwards was built to close this loop."
+SOURCE SAYS: "Afterwords completes the voice loop"
+REPLACEMENT: "Afterwords was built to close this loop."
+
+ISSUE at ~0:51: "it hooks into clawed code... meaning your proprietary code base stays entirely local."
+SOURCE SAYS: "Afterwords intercepts every response [from Claude Code]... Nothing leaves the machine. (proprietary not mentioned)"
+REPLACEMENT: "It hooks into Claude Code, ensuring your code base stays entirely local."
+
+ISSUE at ~1:12: "Historically, high-quality voice synthesis meant relying on heavy cloud infrastructure. You had to accept network latency, recurring API costs, and sending your raw data over the internet. The math changes with Apple Silicon."
+SOURCE SAYS: "not mentioned"
+REPLACEMENT: "Traditionally, high-quality voice synthesis required cloud-based infrastructure and an internet connection, which introduced latency and privacy concerns. This dynamic changes with Apple Silicon."
+
+ISSUE at ~1:32: "Afterwards, leverages this by running a text-to-speech engine called Quen3 TTS. It sits on Apple's MLX framework, designed specifically to optimize machine learning on their silicon. ... Devices like the M1 chip share their RAM between the CPU and GPU, a structure called unified memory,"
+SOURCE SAYS: "Afterwords... Qwen3-TTS Base... on MLX... M1 MacBook Air with 8 GB of unified memory. (MLX purpose and RAM sharing mechanism not mentioned)"
+REPLACEMENT: "Afterwords leverages this by running the Qwen3-TTS engine on Apple's MLX framework, utilizing the unified memory architecture of the M1 chip,"
+
+ISSUE at ~2:13: "moment clawed code finishes a thought"
+SOURCE SAYS: "moment Claude Code finishes"
+REPLACEMENT: "moment Claude Code finishes a thought"
+
+ISSUE at ~2:32: "the engine instantly maps the text onto 17 distinct pre-loaded cloned voices... Kate Blanchette"
+SOURCE SAYS: "About 15 seconds of fixed overhead for speaker embedding extraction... extracts speaker embeddings at inference time (not pre-loaded)... Cate Blanchett"
+REPLACEMENT: "the engine maps the text onto seventeen distinct cloned voices, including the cadence of Cate Blanchett,"
+
+ISSUE at ~3:48: "originally designed for clawed code."
+SOURCE SAYS: "originally designed for Claude Code."
+REPLACEMENT: "originally designed for Claude Code."
+
+ISSUE at ~4:43: "construct secure, highly responsive sensory environments"
+SOURCE SAYS: "Latency is inherent... not fast... About 15 seconds of fixed overhead."
+REPLACEMENT: "construct secure, local voice environments"

@@ -1,0 +1,18 @@
+VIDEO: Q531i2kWiJ4
+TITLE: The Organismic Prophecy
+
+ISSUE at ~0s: "treating the human brain as a biological computer"
+SOURCE SAYS: "picture of the brain as a passive computer"
+REPLACEMENT: "treating the human brain as a passive computer"
+
+ISSUE at ~57s: "This data visualization shows that biological cost."
+SOURCE SAYS: not mentioned (The source identifies a hero image as an "infographic," but does not describe its content or link it to specific metabolic data; the text introduces the 2%/20% stats independently).
+REPLACEMENT: "This prediction has a measurable biological cost."
+
+ISSUE at ~1:16: "in an indifferent, dangerous universe"
+SOURCE SAYS: "against an indifferent universe"
+REPLACEMENT: "in an indifferent universe"
+
+ISSUE at ~4:39: "Borrowing words from clinical pathology"
+SOURCE SAYS: "borrows from clinical phenomenology"
+REPLACEMENT: "Borrowing words from clinical phenomenology"

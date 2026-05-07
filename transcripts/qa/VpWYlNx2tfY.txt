@@ -1,0 +1,18 @@
+VIDEO: VpWYlNx2tfY
+TITLE: Squishmallowdex
+
+ISSUE at ~1:00s: "Look at these center shelves. To accurately catalog a collection like this, a kid has to sort through thousands of unique plush characters, right down to specific Harry Potter house variants."
+SOURCE SAYS: "3,000+ plush creatures catalogued." [No mention of center shelves or Harry Potter variants.]
+REPLACEMENT: "To accurately catalog a collection like this, a kid has to sort through thousands of unique plush characters, tracking a database of over 3,000 distinct creatures."
+
+ISSUE at ~1:45s: "This diagram shows the scraping process the developer deployed to gather raw, disorganized information scattered across the internet."
+SOURCE SAYS: "teaching how data gets scraped and structured." [No mention of a diagram.]
+REPLACEMENT: "The developer built a process to gather raw, disorganized information scattered across the internet, designed to teach the user how data gets scraped and structured."
+
+ISSUE at ~2:55s: "This split-screen interface shows a colorful plush toy coffile on the left, while the right side displays a stylized terminal log outputting actual data queries in a kid-friendly format."
+SOURCE SAYS: "running terminal commands, showing kid-friendly logs." [No mention of a split-screen interface or specific left/right layout.]
+REPLACEMENT: "The application runs terminal commands and shows kid-friendly logs, outputting actual data queries to show the user exactly how their search is working."
+
+ISSUE at ~3:55s: "The child can favorite items and manage their collection without a single bite of telemetry data ever leaving their tablet."
+SOURCE SAYS: "offline-capable resource with no ads, no tracking." [No mention of a tablet specifically.]
+REPLACEMENT: "The child can favorite items and manage their collection without a single bite of telemetry data ever leaving their device."

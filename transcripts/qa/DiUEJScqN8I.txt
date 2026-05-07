@@ -1,0 +1,22 @@
+VIDEO: DiUEJScqN8I
+TITLE: Freedom Engine
+
+ISSUE at ~0:37: "This diagram visualizes the bureaucratic complexity that separates an inmate from the law."
+SOURCE SAYS: not mentioned (the source is a text document; an infographic is mentioned only as a metadata image path)
+REPLACEMENT: "This highlights the bureaucratic complexity that separates an inmate from the law."
+
+ISSUE at ~1:25: "Corelinks or JPEG."
+SOURCE SAYS: "CorrLinks and JPay"
+REPLACEMENT: "CorrLinks or JPay."
+
+ISSUE at ~2:07: "Because case law evolves daily,"
+SOURCE SAYS: "law changes, case law evolves" (no specific frequency mentioned; notes that a system correct "last month" can be wrong today)
+REPLACEMENT: "Because case law is constantly evolving,"
+
+ISSUE at ~2:11: "tying ground truth to the exact day the question was submitted."
+SOURCE SAYS: not mentioned (source says the system uses "versioned interpretations" because of legal shifts over months)
+REPLACEMENT: "ensuring ground truth remains accurate even as the legal landscape shifts."
+
+ISSUE at ~2:16: "the AI retrieves statutes and assembles a plain language draft, functioning as a structured legal translator."
+SOURCE SAYS: AI-assisted drafting is part of a future "phased roadmap"; the current service is "fully manual."
+REPLACEMENT: "the system manages the knowledge base to support human-led responses, functioning as a structured legal tool."

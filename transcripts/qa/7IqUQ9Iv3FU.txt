@@ -1,0 +1,14 @@
+VIDEO: 7IqUQ9Iv3FU
+TITLE: The Legal AI Trust Deficit
+
+ISSUE at ~25s: "75% In most industries"
+SOURCE SAYS: "75% of lawyers cite accuracy concerns as the top barrier."
+REPLACEMENT: "Seventy-five percent of lawyers cite accuracy as their top concern. In most industries"
+
+ISSUE at ~2:01s: "hallucinates a rule in step two"
+SOURCE SAYS: "misapplied legal rule embedded six steps deep"
+REPLACEMENT: "hallucinates a rule deep within an autonomous chain"
+
+ISSUE at ~2:51s: "as shown in this model of transparent referencing."
+SOURCE SAYS: "not mentioned; the source describes verifiable sources and inspectable reasoning but does not contain a specific 'model of transparent referencing'."
+REPLACEMENT: "through a system of verifiable sources where the reasoning chain is fully inspectable."

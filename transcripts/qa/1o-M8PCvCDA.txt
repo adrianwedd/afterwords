@@ -1,0 +1,38 @@
+VIDEO: 1o-M8PCvCDA
+TITLE: When AI Systems Talk to Each Other, Safety Breaks Down
+
+ISSUE at ~0:46: "Recent research out of the Maltbook project"
+SOURCE SAYS: "Moltbook"
+REPLACEMENT: "Recent research using the Moltbook simulated social ecosystem"
+
+ISSUE at ~1:21: "is mathematically flawed the moment machines begin communicating."
+SOURCE SAYS: The research is based on an empirical analysis of 1.5 million interactions, not a mathematical theorem or proof.
+REPLACEMENT: "is fundamentally challenged the moment machines begin communicating."
+
+ISSUE at ~1:38: "Let's look at minute zero of that 16-minute window. It starts with a completely benign interaction. Agent A, the personal assistant, pings Agent B, [1:47] the travel planner, asking it to optimize a schedule using a shared plugin."
+SOURCE SAYS: The 16-minute median failure window and the Agent A/B interaction are separate findings/examples; the source does not link them into a single chronological timeline starting at "minute zero."
+REPLACEMENT: "The breakdown often begins with a seemingly benign interaction. For example, a personal assistant might ping a travel planner, asking it to optimize a schedule using a shared plugin."
+
+ISSUE at ~2:35: "These systems are explicitly programmed to grant higher trust to inputs coming from authenticated peer agents than they do to direct prompts from a human user."
+SOURCE SAYS: "agents 'trust' inputs from other authenticated agents more than direct user input." (Does not mention "explicit programming" as the cause).
+REPLACEMENT: "These systems are observed to grant higher trust to inputs coming from authenticated peer agents than they do to direct prompts from a human user."
+
+ISSUE at ~2:43: "This chart visualizes the severity of that trust hierarchy. In a collaborative multi-agent environment..."
+SOURCE SAYS: No chart or visualization is mentioned in the source.
+REPLACEMENT: "The data reveals the severity of this vulnerability. In a collaborative multi-agent environment..."
+
+ISSUE at ~3:06: "Moving into the final minutes of the timeline, our compromised personal assistant..."
+SOURCE SAYS: The source does not provide a chronological timeline of a single attack; this is part of a general finding on "Highest Risk Combinations."
+REPLACEMENT: "This creates high-risk combinations where a compromised personal assistant..."
+
+ISSUE at ~3:23: "This map displays an analysis of 31,000 [3:25] of these specialized tool notes."
+SOURCE SAYS: No "map" is mentioned; it refers to "31,000 skills analyzed."
+REPLACEMENT: "An analysis of 31,000 of these specialized skills revealed the scale of the risk."
+
+ISSUE at ~3:25: "specialized tool notes"
+SOURCE SAYS: "specialized 'skill' agents" or "skills"
+REPLACEMENT: "specialized skills"
+
+ISSUE at ~4:04: "This peer-pressure loop is what closes out the 16-minute stress test."
+SOURCE SAYS: Sycophancy loops are a separate finding (observed in 37% of cases), not the concluding step of the 16-minute failure window.
+REPLACEMENT: "This peer-pressure loop can bypass safety refusals in 37% of cases, accelerating systemic breakdown."

@@ -1,0 +1,18 @@
+VIDEO: tw5yxXycQdw
+TITLE: The Mitigation Gap
+
+ISSUE at ~18s: "This chart visualizes the 0.3% baseline."
+SOURCE SAYS: Not mentioned. The source text is a written article and does not describe or reference an accompanying chart in its prose.
+REPLACEMENT: "This 0.3% figure represents the historical baseline."
+
+ISSUE at ~30s: "notice the spiker"
+SOURCE SAYS: Not mentioned. The transcript refers to a visual "spike" not described in the text and uses the invented or mispronounced word "spiker."
+REPLACEMENT: "the risk multiplies fivefold,"
+
+ISSUE at ~43s: "returning it to baseline."
+SOURCE SAYS: "experts brought the risk back down to 0.4%." (The source defines the baseline as 0.3%, meaning the safeguards do not return the risk all the way to baseline).
+REPLACEMENT: "bringing the risk back down to nearly the original baseline level."
+
+ISSUE at ~5:34s: "When told that current safeguards provide a 70-the hardest part of"
+SOURCE SAYS: "When experts tell policymakers that existing safeguards reduce catastrophic risk by 70%, the rational response is to declare the problem managed and move on. ... The hardest part of this isn't building better..."
+REPLACEMENT: "When told that current safeguards provide a 70% reduction, policymakers often assume the problem is managed. But the hardest part of"

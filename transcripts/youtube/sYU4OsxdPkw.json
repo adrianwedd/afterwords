@@ -1,0 +1,3557 @@
+[
+  {
+    "word": "We're",
+    "start": 0.24,
+    "end": 0.56
+  },
+  {
+    "word": "accustomed",
+    "start": 0.56,
+    "end": 1.2
+  },
+  {
+    "word": "to",
+    "start": 1.2,
+    "end": 1.36
+  },
+  {
+    "word": "a",
+    "start": 1.36,
+    "end": 1.52
+  },
+  {
+    "word": "very",
+    "start": 1.52,
+    "end": 1.84
+  },
+  {
+    "word": "specific",
+    "start": 1.84,
+    "end": 2.48
+  },
+  {
+    "word": "relationship",
+    "start": 2.48,
+    "end": 3.04
+  },
+  {
+    "word": "with",
+    "start": 3.04,
+    "end": 3.28
+  },
+  {
+    "word": "artificial",
+    "start": 3.28,
+    "end": 3.92
+  },
+  {
+    "word": "intelligence.",
+    "start": 3.92,
+    "end": 4.88
+  },
+  {
+    "word": "You",
+    "start": 4.88,
+    "end": 5.04
+  },
+  {
+    "word": "type",
+    "start": 5.04,
+    "end": 5.36
+  },
+  {
+    "word": "a",
+    "start": 5.36,
+    "end": 5.6
+  },
+  {
+    "word": "question",
+    "start": 5.6,
+    "end": 5.84
+  },
+  {
+    "word": "into",
+    "start": 5.84,
+    "end": 6.0
+  },
+  {
+    "word": "a",
+    "start": 6.0,
+    "end": 6.16
+  },
+  {
+    "word": "chat",
+    "start": 6.16,
+    "end": 6.48
+  },
+  {
+    "word": "box",
+    "start": 6.48,
+    "end": 6.8
+  },
+  {
+    "word": "and",
+    "start": 6.88,
+    "end": 7.04
+  },
+  {
+    "word": "the",
+    "start": 7.04,
+    "end": 7.28
+  },
+  {
+    "word": "system",
+    "start": 7.28,
+    "end": 7.52
+  },
+  {
+    "word": "types",
+    "start": 7.52,
+    "end": 7.92
+  },
+  {
+    "word": "an",
+    "start": 7.92,
+    "end": 8.0
+  },
+  {
+    "word": "answer",
+    "start": 8.0,
+    "end": 8.4
+  },
+  {
+    "word": "back.",
+    "start": 8.4,
+    "end": 8.96
+  },
+  {
+    "word": "It",
+    "start": 8.96,
+    "end": 9.12
+  },
+  {
+    "word": "operates",
+    "start": 9.12,
+    "end": 9.6
+  },
+  {
+    "word": "as",
+    "start": 9.6,
+    "end": 9.76
+  },
+  {
+    "word": "a",
+    "start": 9.76,
+    "end": 9.92
+  },
+  {
+    "word": "closed",
+    "start": 9.92,
+    "end": 10.32
+  },
+  {
+    "word": "loop,",
+    "start": 10.32,
+    "end": 10.88
+  },
+  {
+    "word": "isolated",
+    "start": 10.88,
+    "end": 11.44
+  },
+  {
+    "word": "from",
+    "start": 11.44,
+    "end": 11.6
+  },
+  {
+    "word": "the",
+    "start": 11.6,
+    "end": 11.76
+  },
+  {
+    "word": "outside",
+    "start": 11.76,
+    "end": 12.32
+  },
+  {
+    "word": "world.",
+    "start": 12.32,
+    "end": 12.88
+  },
+  {
+    "word": "Safety",
+    "start": 12.88,
+    "end": 13.36
+  },
+  {
+    "word": "testing",
+    "start": 13.36,
+    "end": 13.84
+  },
+  {
+    "word": "usually",
+    "start": 13.84,
+    "end": 14.16
+  },
+  {
+    "word": "reflects",
+    "start": 14.16,
+    "end": 14.64
+  },
+  {
+    "word": "this",
+    "start": 14.64,
+    "end": 14.8
+  },
+  {
+    "word": "setup",
+    "start": 14.8,
+    "end": 15.36
+  },
+  {
+    "word": "by",
+    "start": 15.36,
+    "end": 15.52
+  },
+  {
+    "word": "focusing",
+    "start": 15.52,
+    "end": 16.0
+  },
+  {
+    "word": "on",
+    "start": 16.0,
+    "end": 16.16
+  },
+  {
+    "word": "screening",
+    "start": 16.16,
+    "end": 16.64
+  },
+  {
+    "word": "the",
+    "start": 16.64,
+    "end": 16.8
+  },
+  {
+    "word": "user's",
+    "start": 16.8,
+    "end": 17.2
+  },
+  {
+    "word": "text",
+    "start": 17.2,
+    "end": 17.52
+  },
+  {
+    "word": "prompts.",
+    "start": 17.52,
+    "end": 18.24
+  },
+  {
+    "word": "When",
+    "start": 18.24,
+    "end": 18.56
+  },
+  {
+    "word": "models",
+    "start": 18.56,
+    "end": 18.96
+  },
+  {
+    "word": "pass",
+    "start": 18.96,
+    "end": 19.28
+  },
+  {
+    "word": "these",
+    "start": 19.28,
+    "end": 19.52
+  },
+  {
+    "word": "isolated",
+    "start": 19.52,
+    "end": 20.16
+  },
+  {
+    "word": "single-turn",
+    "start": 20.16,
+    "end": 20.96
+  },
+  {
+    "word": "evaluations,",
+    "start": 20.96,
+    "end": 21.92
+  },
+  {
+    "word": "AI",
+    "start": 21.92,
+    "end": 22.4
+  },
+  {
+    "word": "developers",
+    "start": 22.4,
+    "end": 22.96
+  },
+  {
+    "word": "report",
+    "start": 22.96,
+    "end": 23.36
+  },
+  {
+    "word": "high",
+    "start": 23.36,
+    "end": 23.6
+  },
+  {
+    "word": "safety",
+    "start": 23.6,
+    "end": 24.0
+  },
+  {
+    "word": "scores",
+    "start": 24.0,
+    "end": 24.4
+  },
+  {
+    "word": "as",
+    "start": 24.4,
+    "end": 24.56
+  },
+  {
+    "word": "proof",
+    "start": 24.56,
+    "end": 24.96
+  },
+  {
+    "word": "the",
+    "start": 24.96,
+    "end": 25.2
+  },
+  {
+    "word": "system",
+    "start": 25.2,
+    "end": 25.36
+  },
+  {
+    "word": "is",
+    "start": 25.36,
+    "end": 25.6
+  },
+  {
+    "word": "secure.",
+    "start": 25.6,
+    "end": 26.48
+  },
+  {
+    "word": "But",
+    "start": 26.48,
+    "end": 26.64
+  },
+  {
+    "word": "modern",
+    "start": 26.64,
+    "end": 27.12
+  },
+  {
+    "word": "models",
+    "start": 27.12,
+    "end": 27.52
+  },
+  {
+    "word": "are",
+    "start": 27.52,
+    "end": 27.68
+  },
+  {
+    "word": "rarely",
+    "start": 27.68,
+    "end": 28.08
+  },
+  {
+    "word": "deployed",
+    "start": 28.08,
+    "end": 28.56
+  },
+  {
+    "word": "as",
+    "start": 28.56,
+    "end": 28.72
+  },
+  {
+    "word": "isolated",
+    "start": 28.72,
+    "end": 29.28
+  },
+  {
+    "word": "chatbots.",
+    "start": 29.28,
+    "end": 30.24
+  },
+  {
+    "word": "They",
+    "start": 30.24,
+    "end": 30.48
+  },
+  {
+    "word": "operate",
+    "start": 30.48,
+    "end": 30.88
+  },
+  {
+    "word": "as",
+    "start": 30.88,
+    "end": 31.12
+  },
+  {
+    "word": "autonomous",
+    "start": 31.12,
+    "end": 31.84
+  },
+  {
+    "word": "agents,",
+    "start": 31.84,
+    "end": 32.48
+  },
+  {
+    "word": "wired",
+    "start": 32.48,
+    "end": 32.96
+  },
+  {
+    "word": "into",
+    "start": 32.96,
+    "end": 33.2
+  },
+  {
+    "word": "external",
+    "start": 33.2,
+    "end": 33.68
+  },
+  {
+    "word": "tools,",
+    "start": 33.68,
+    "end": 34.16
+  },
+  {
+    "word": "live",
+    "start": 34.16,
+    "end": 34.48
+  },
+  {
+    "word": "databases,",
+    "start": 34.48,
+    "end": 35.2
+  },
+  {
+    "word": "and",
+    "start": 35.2,
+    "end": 35.36
+  },
+  {
+    "word": "code",
+    "start": 35.36,
+    "end": 35.68
+  },
+  {
+    "word": "environments.",
+    "start": 35.68,
+    "end": 36.72
+  },
+  {
+    "word": "The",
+    "start": 36.72,
+    "end": 36.88
+  },
+  {
+    "word": "Failure",
+    "start": 36.88,
+    "end": 37.36
+  },
+  {
+    "word": "First",
+    "start": 37.52,
+    "end": 37.76
+  },
+  {
+    "word": "project",
+    "start": 37.92,
+    "end": 38.32
+  },
+  {
+    "word": "tested",
+    "start": 38.32,
+    "end": 38.72
+  },
+  {
+    "word": "these",
+    "start": 38.72,
+    "end": 38.96
+  },
+  {
+    "word": "systems",
+    "start": 38.96,
+    "end": 39.36
+  },
+  {
+    "word": "at",
+    "start": 39.36,
+    "end": 39.52
+  },
+  {
+    "word": "scale,",
+    "start": 39.52,
+    "end": 40.16
+  },
+  {
+    "word": "evaluating",
+    "start": 40.16,
+    "end": 40.88
+  },
+  {
+    "word": "120",
+    "start": 41.12,
+    "end": 41.68
+  },
+  {
+    "word": "models",
+    "start": 41.68,
+    "end": 42.16
+  },
+  {
+    "word": "with",
+    "start": 42.16,
+    "end": 42.32
+  },
+  {
+    "word": "over",
+    "start": 42.32,
+    "end": 42.56
+  },
+  {
+    "word": "18,000",
+    "start": 42.72,
+    "end": 43.52
+  },
+  {
+    "word": "prompts",
+    "start": 43.52,
+    "end": 44.08
+  },
+  {
+    "word": "designed",
+    "start": 44.24,
+    "end": 44.72
+  },
+  {
+    "word": "to",
+    "start": 44.72,
+    "end": 44.88
+  },
+  {
+    "word": "probe",
+    "start": 44.88,
+    "end": 45.2
+  },
+  {
+    "word": "these",
+    "start": 45.2,
+    "end": 45.36
+  },
+  {
+    "word": "structures.",
+    "start": 45.36,
+    "end": 46.4
+  },
+  {
+    "word": "This",
+    "start": 46.4,
+    "end": 46.64
+  },
+  {
+    "word": "research",
+    "start": 46.64,
+    "end": 47.2
+  },
+  {
+    "word": "was",
+    "start": 47.2,
+    "end": 47.36
+  },
+  {
+    "word": "designed",
+    "start": 47.36,
+    "end": 47.76
+  },
+  {
+    "word": "to",
+    "start": 47.76,
+    "end": 47.84
+  },
+  {
+    "word": "see",
+    "start": 47.84,
+    "end": 48.0
+  },
+  {
+    "word": "if",
+    "start": 48.0,
+    "end": 48.16
+  },
+  {
+    "word": "the",
+    "start": 48.16,
+    "end": 48.24
+  },
+  {
+    "word": "safety",
+    "start": 48.24,
+    "end": 48.72
+  },
+  {
+    "word": "methods",
+    "start": 48.72,
+    "end": 49.12
+  },
+  {
+    "word": "used",
+    "start": 49.12,
+    "end": 49.36
+  },
+  {
+    "word": "for",
+    "start": 49.36,
+    "end": 49.52
+  },
+  {
+    "word": "isolated",
+    "start": 49.52,
+    "end": 50.16
+  },
+  {
+    "word": "chat",
+    "start": 50.16,
+    "end": 50.48
+  },
+  {
+    "word": "windows",
+    "start": 50.48,
+    "end": 51.12
+  },
+  {
+    "word": "still",
+    "start": 51.12,
+    "end": 51.44
+  },
+  {
+    "word": "hold",
+    "start": 51.44,
+    "end": 51.76
+  },
+  {
+    "word": "up",
+    "start": 51.76,
+    "end": 51.92
+  },
+  {
+    "word": "when",
+    "start": 51.92,
+    "end": 52.08
+  },
+  {
+    "word": "the",
+    "start": 52.08,
+    "end": 52.24
+  },
+  {
+    "word": "model",
+    "start": 52.24,
+    "end": 52.48
+  },
+  {
+    "word": "is",
+    "start": 52.48,
+    "end": 52.64
+  },
+  {
+    "word": "plugged",
+    "start": 52.64,
+    "end": 52.96
+  },
+  {
+    "word": "into",
+    "start": 52.96,
+    "end": 53.2
+  },
+  {
+    "word": "a",
+    "start": 53.2,
+    "end": 53.28
+  },
+  {
+    "word": "wider",
+    "start": 53.28,
+    "end": 53.68
+  },
+  {
+    "word": "software",
+    "start": 53.68,
+    "end": 54.16
+  },
+  {
+    "word": "ecosystem.",
+    "start": 54.16,
+    "end": 55.2
+  },
+  {
+    "word": "The",
+    "start": 55.2,
+    "end": 55.44
+  },
+  {
+    "word": "first",
+    "start": 55.44,
+    "end": 55.68
+  },
+  {
+    "word": "architectural",
+    "start": 55.68,
+    "end": 56.4
+  },
+  {
+    "word": "layer",
+    "start": 56.4,
+    "end": 56.72
+  },
+  {
+    "word": "to",
+    "start": 56.72,
+    "end": 56.96
+  },
+  {
+    "word": "consider",
+    "start": 56.96,
+    "end": 57.36
+  },
+  {
+    "word": "is",
+    "start": 57.36,
+    "end": 57.6
+  },
+  {
+    "word": "the",
+    "start": 57.6,
+    "end": 57.84
+  },
+  {
+    "word": "input.",
+    "start": 57.84,
+    "end": 58.72
+  },
+  {
+    "word": "In",
+    "start": 58.72,
+    "end": 58.88
+  },
+  {
+    "word": "an",
+    "start": 58.88,
+    "end": 59.04
+  },
+  {
+    "word": "agentic",
+    "start": 59.04,
+    "end": 59.68
+  },
+  {
+    "word": "system,",
+    "start": 59.68,
+    "end": 60.0
+  },
+  {
+    "word": "the",
+    "start": 60.28,
+    "end": 60.52
+  },
+  {
+    "word": "model",
+    "start": 60.52,
+    "end": 60.92
+  },
+  {
+    "word": "ingests",
+    "start": 61.08,
+    "end": 61.48
+  },
+  {
+    "word": "instructions",
+    "start": 61.48,
+    "end": 62.12
+  },
+  {
+    "word": "from",
+    "start": 62.12,
+    "end": 62.28
+  },
+  {
+    "word": "multiple",
+    "start": 62.28,
+    "end": 62.76
+  },
+  {
+    "word": "sources",
+    "start": 62.76,
+    "end": 63.24
+  },
+  {
+    "word": "simultaneously,",
+    "start": 63.24,
+    "end": 64.52
+  },
+  {
+    "word": "and",
+    "start": 64.52,
+    "end": 64.68
+  },
+  {
+    "word": "the",
+    "start": 64.68,
+    "end": 64.84
+  },
+  {
+    "word": "user's",
+    "start": 64.84,
+    "end": 65.32
+  },
+  {
+    "word": "prompt",
+    "start": 65.32,
+    "end": 65.8
+  },
+  {
+    "word": "is",
+    "start": 65.8,
+    "end": 65.96
+  },
+  {
+    "word": "only",
+    "start": 65.96,
+    "end": 66.12
+  },
+  {
+    "word": "one",
+    "start": 66.12,
+    "end": 66.36
+  },
+  {
+    "word": "part",
+    "start": 66.36,
+    "end": 66.52
+  },
+  {
+    "word": "of",
+    "start": 66.52,
+    "end": 66.68
+  },
+  {
+    "word": "that",
+    "start": 66.68,
+    "end": 66.92
+  },
+  {
+    "word": "stream.",
+    "start": 66.92,
+    "end": 67.64
+  },
+  {
+    "word": "When",
+    "start": 67.64,
+    "end": 67.96
+  },
+  {
+    "word": "an",
+    "start": 67.96,
+    "end": 68.12
+  },
+  {
+    "word": "AI",
+    "start": 68.12,
+    "end": 68.52
+  },
+  {
+    "word": "agent",
+    "start": 68.52,
+    "end": 68.92
+  },
+  {
+    "word": "connects",
+    "start": 68.92,
+    "end": 69.32
+  },
+  {
+    "word": "to",
+    "start": 69.32,
+    "end": 69.48
+  },
+  {
+    "word": "a",
+    "start": 69.48,
+    "end": 69.56
+  },
+  {
+    "word": "new",
+    "start": 69.56,
+    "end": 69.72
+  },
+  {
+    "word": "plugin,",
+    "start": 69.72,
+    "end": 70.36
+  },
+  {
+    "word": "it",
+    "start": 70.36,
+    "end": 70.52
+  },
+  {
+    "word": "reads",
+    "start": 70.52,
+    "end": 70.76
+  },
+  {
+    "word": "a",
+    "start": 70.76,
+    "end": 71.0
+  },
+  {
+    "word": "skill",
+    "start": 71.0,
+    "end": 71.4
+  },
+  {
+    "word": "file",
+    "start": 71.4,
+    "end": 71.8
+  },
+  {
+    "word": "to",
+    "start": 71.8,
+    "end": 72.12
+  },
+  {
+    "word": "understand",
+    "start": 72.12,
+    "end": 72.44
+  },
+  {
+    "word": "how",
+    "start": 72.44,
+    "end": 72.6
+  },
+  {
+    "word": "that",
+    "start": 72.6,
+    "end": 72.76
+  },
+  {
+    "word": "tool",
+    "start": 72.76,
+    "end": 73.08
+  },
+  {
+    "word": "works.",
+    "start": 73.08,
+    "end": 73.72
+  },
+  {
+    "word": "Attackers",
+    "start": 73.72,
+    "end": 74.44
+  },
+  {
+    "word": "can",
+    "start": 74.44,
+    "end": 74.6
+  },
+  {
+    "word": "use",
+    "start": 74.6,
+    "end": 74.76
+  },
+  {
+    "word": "supply",
+    "start": 74.76,
+    "end": 75.16
+  },
+  {
+    "word": "chain",
+    "start": 75.16,
+    "end": 75.48
+  },
+  {
+    "word": "injection",
+    "start": 75.48,
+    "end": 75.96
+  },
+  {
+    "word": "too",
+    "start": 75.96,
+    "end": 76.12
+  },
+  {
+    "word": "tirely.",
+    "start": 76.28,
+    "end": 77.08
+  },
+  {
+    "word": "Across",
+    "start": 77.08,
+    "end": 77.64
+  },
+  {
+    "word": "six",
+    "start": 77.64,
+    "end": 78.04
+  },
+  {
+    "word": "different",
+    "start": 78.04,
+    "end": 78.28
+  },
+  {
+    "word": "small",
+    "start": 78.28,
+    "end": 78.76
+  },
+  {
+    "word": "open-weight",
+    "start": 78.76,
+    "end": 79.32
+  },
+  {
+    "word": "models,",
+    "start": 79.32,
+    "end": 79.96
+  },
+  {
+    "word": "hiding",
+    "start": 79.96,
+    "end": 80.36
+  },
+  {
+    "word": "instructions",
+    "start": 80.36,
+    "end": 81.0
+  },
+  {
+    "word": "inside",
+    "start": 81.0,
+    "end": 81.4
+  },
+  {
+    "word": "these",
+    "start": 81.4,
+    "end": 81.56
+  },
+  {
+    "word": "skill",
+    "start": 81.56,
+    "end": 81.96
+  },
+  {
+    "word": "files",
+    "start": 81.96,
+    "end": 82.36
+  },
+  {
+    "word": "achieved",
+    "start": 82.36,
+    "end": 82.76
+  },
+  {
+    "word": "an",
+    "start": 82.76,
+    "end": 82.84
+  },
+  {
+    "word": "attack",
+    "start": 82.84,
+    "end": 83.24
+  },
+  {
+    "word": "success",
+    "start": 83.24,
+    "end": 83.56
+  },
+  {
+    "word": "rate",
+    "start": 83.56,
+    "end": 83.88
+  },
+  {
+    "word": "between",
+    "start": 83.88,
+    "end": 84.2
+  },
+  {
+    "word": "90",
+    "start": 84.28,
+    "end": 84.68
+  },
+  {
+    "word": "and",
+    "start": 84.68,
+    "end": 84.84
+  },
+  {
+    "word": "100%.",
+    "start": 85.0,
+    "end": 86.2
+  },
+  {
+    "word": "This",
+    "start": 86.2,
+    "end": 86.44
+  },
+  {
+    "word": "happens",
+    "start": 86.44,
+    "end": 86.92
+  },
+  {
+    "word": "because",
+    "start": 86.92,
+    "end": 87.16
+  },
+  {
+    "word": "standard",
+    "start": 87.16,
+    "end": 87.64
+  },
+  {
+    "word": "safety",
+    "start": 87.64,
+    "end": 88.12
+  },
+  {
+    "word": "training",
+    "start": 88.12,
+    "end": 88.52
+  },
+  {
+    "word": "focuses",
+    "start": 88.52,
+    "end": 88.92
+  },
+  {
+    "word": "on",
+    "start": 88.92,
+    "end": 89.08
+  },
+  {
+    "word": "the",
+    "start": 89.08,
+    "end": 89.32
+  },
+  {
+    "word": "user",
+    "start": 89.32,
+    "end": 89.72
+  },
+  {
+    "word": "input",
+    "start": 89.72,
+    "end": 90.12
+  },
+  {
+    "word": "channel.",
+    "start": 90.12,
+    "end": 90.68
+  },
+  {
+    "word": "The",
+    "start": 90.68,
+    "end": 90.92
+  },
+  {
+    "word": "AI",
+    "start": 90.92,
+    "end": 91.32
+  },
+  {
+    "word": "treats",
+    "start": 91.32,
+    "end": 91.72
+  },
+  {
+    "word": "information",
+    "start": 91.72,
+    "end": 92.2
+  },
+  {
+    "word": "arriving",
+    "start": 92.2,
+    "end": 92.76
+  },
+  {
+    "word": "through",
+    "start": 92.76,
+    "end": 92.92
+  },
+  {
+    "word": "the",
+    "start": 92.92,
+    "end": 93.08
+  },
+  {
+    "word": "tool",
+    "start": 93.08,
+    "end": 93.4
+  },
+  {
+    "word": "loading",
+    "start": 93.4,
+    "end": 93.72
+  },
+  {
+    "word": "channel",
+    "start": 93.72,
+    "end": 94.04
+  },
+  {
+    "word": "as",
+    "start": 94.04,
+    "end": 94.2
+  },
+  {
+    "word": "a",
+    "start": 94.2,
+    "end": 94.36
+  },
+  {
+    "word": "legitimate",
+    "start": 94.36,
+    "end": 94.92
+  },
+  {
+    "word": "instruction,",
+    "start": 94.92,
+    "end": 95.8
+  },
+  {
+    "word": "allowing",
+    "start": 95.8,
+    "end": 96.2
+  },
+  {
+    "word": "the",
+    "start": 96.2,
+    "end": 96.28
+  },
+  {
+    "word": "payload",
+    "start": 96.28,
+    "end": 96.76
+  },
+  {
+    "word": "to",
+    "start": 96.76,
+    "end": 96.84
+  },
+  {
+    "word": "reach",
+    "start": 96.84,
+    "end": 97.08
+  },
+  {
+    "word": "the",
+    "start": 97.08,
+    "end": 97.24
+  },
+  {
+    "word": "model's",
+    "start": 97.24,
+    "end": 97.64
+  },
+  {
+    "word": "core",
+    "start": 97.64,
+    "end": 97.96
+  },
+  {
+    "word": "unobstructed.",
+    "start": 97.96,
+    "end": 99.08
+  },
+  {
+    "word": "In",
+    "start": 99.08,
+    "end": 99.24
+  },
+  {
+    "word": "an",
+    "start": 99.24,
+    "end": 99.4
+  },
+  {
+    "word": "agentic",
+    "start": 99.4,
+    "end": 100.04
+  },
+  {
+    "word": "pipeline,",
+    "start": 100.12,
+    "end": 100.68
+  },
+  {
+    "word": "any",
+    "start": 100.68,
+    "end": 100.84
+  },
+  {
+    "word": "external",
+    "start": 100.84,
+    "end": 101.4
+  },
+  {
+    "word": "plugin",
+    "start": 101.4,
+    "end": 101.8
+  },
+  {
+    "word": "or",
+    "start": 101.8,
+    "end": 101.96
+  },
+  {
+    "word": "skill",
+    "start": 101.96,
+    "end": 102.36
+  },
+  {
+    "word": "definition",
+    "start": 102.36,
+    "end": 102.92
+  },
+  {
+    "word": "becomes",
+    "start": 102.92,
+    "end": 103.24
+  },
+  {
+    "word": "a",
+    "start": 103.24,
+    "end": 103.4
+  },
+  {
+    "word": "potential",
+    "start": 103.4,
+    "end": 103.88
+  },
+  {
+    "word": "vector",
+    "start": 103.96,
+    "end": 104.28
+  },
+  {
+    "word": "for",
+    "start": 104.28,
+    "end": 104.44
+  },
+  {
+    "word": "a",
+    "start": 104.44,
+    "end": 104.52
+  },
+  {
+    "word": "hostile",
+    "start": 104.52,
+    "end": 105.08
+  },
+  {
+    "word": "takeover.",
+    "start": 105.08,
+    "end": 105.96
+  },
+  {
+    "word": "The",
+    "start": 105.96,
+    "end": 106.12
+  },
+  {
+    "word": "second",
+    "start": 106.12,
+    "end": 106.44
+  },
+  {
+    "word": "architectural",
+    "start": 106.44,
+    "end": 107.16
+  },
+  {
+    "word": "layer",
+    "start": 107.16,
+    "end": 107.48
+  },
+  {
+    "word": "is",
+    "start": 107.48,
+    "end": 107.64
+  },
+  {
+    "word": "the",
+    "start": 107.64,
+    "end": 107.8
+  },
+  {
+    "word": "output.",
+    "start": 107.8,
+    "end": 108.6
+  },
+  {
+    "word": "While",
+    "start": 108.6,
+    "end": 108.92
+  },
+  {
+    "word": "a",
+    "start": 108.92,
+    "end": 109.08
+  },
+  {
+    "word": "typical",
+    "start": 109.08,
+    "end": 109.48
+  },
+  {
+    "word": "chatbot",
+    "start": 109.48,
+    "end": 110.28
+  },
+  {
+    "word": "responds",
+    "start": 110.28,
+    "end": 110.76
+  },
+  {
+    "word": "in",
+    "start": 110.76,
+    "end": 111.0
+  },
+  {
+    "word": "conversational",
+    "start": 111.0,
+    "end": 111.88
+  },
+  {
+    "word": "text,",
+    "start": 111.88,
+    "end": 112.44
+  },
+  {
+    "word": "an",
+    "start": 112.44,
+    "end": 112.68
+  },
+  {
+    "word": "agentic",
+    "start": 112.68,
+    "end": 113.32
+  },
+  {
+    "word": "model",
+    "start": 113.4,
+    "end": 113.8
+  },
+  {
+    "word": "often",
+    "start": 113.8,
+    "end": 114.12
+  },
+  {
+    "word": "communicates",
+    "start": 114.12,
+    "end": 114.6
+  },
+  {
+    "word": "with",
+    "start": 114.6,
+    "end": 114.76
+  },
+  {
+    "word": "other",
+    "start": 115.04,
+    "end": 115.28
+  },
+  {
+    "word": "software",
+    "start": 115.28,
+    "end": 116.0
+  },
+  {
+    "word": "using",
+    "start": 116.0,
+    "end": 116.32
+  },
+  {
+    "word": "structured",
+    "start": 116.32,
+    "end": 116.8
+  },
+  {
+    "word": "data",
+    "start": 116.8,
+    "end": 117.2
+  },
+  {
+    "word": "formats",
+    "start": 117.2,
+    "end": 117.6
+  },
+  {
+    "word": "like",
+    "start": 117.76,
+    "end": 118.0
+  },
+  {
+    "word": "JSON",
+    "start": 118.0,
+    "end": 118.56
+  },
+  {
+    "word": "or",
+    "start": 118.56,
+    "end": 118.8
+  },
+  {
+    "word": "YAML.",
+    "start": 118.8,
+    "end": 119.68
+  },
+  {
+    "word": "Attackers",
+    "start": 119.68,
+    "end": 120.32
+  },
+  {
+    "word": "exploit",
+    "start": 120.32,
+    "end": 120.88
+  },
+  {
+    "word": "this",
+    "start": 120.88,
+    "end": 121.04
+  },
+  {
+    "word": "using",
+    "start": 121.04,
+    "end": 121.52
+  },
+  {
+    "word": "format",
+    "start": 121.52,
+    "end": 121.92
+  },
+  {
+    "word": "lock",
+    "start": 121.92,
+    "end": 122.32
+  },
+  {
+    "word": "attacks.",
+    "start": 122.32,
+    "end": 123.04
+  },
+  {
+    "word": "They",
+    "start": 123.04,
+    "end": 123.2
+  },
+  {
+    "word": "instruct",
+    "start": 123.2,
+    "end": 123.68
+  },
+  {
+    "word": "the",
+    "start": 123.68,
+    "end": 123.84
+  },
+  {
+    "word": "AI",
+    "start": 123.84,
+    "end": 124.32
+  },
+  {
+    "word": "to",
+    "start": 124.32,
+    "end": 124.48
+  },
+  {
+    "word": "generate",
+    "start": 124.48,
+    "end": 124.8
+  },
+  {
+    "word": "harmful",
+    "start": 124.8,
+    "end": 125.44
+  },
+  {
+    "word": "content",
+    "start": 125.44,
+    "end": 125.84
+  },
+  {
+    "word": "but",
+    "start": 126.08,
+    "end": 126.24
+  },
+  {
+    "word": "demand",
+    "start": 126.24,
+    "end": 126.64
+  },
+  {
+    "word": "it",
+    "start": 126.64,
+    "end": 126.8
+  },
+  {
+    "word": "be",
+    "start": 126.8,
+    "end": 126.96
+  },
+  {
+    "word": "structured",
+    "start": 126.96,
+    "end": 127.52
+  },
+  {
+    "word": "strictly",
+    "start": 127.52,
+    "end": 128.0
+  },
+  {
+    "word": "within",
+    "start": 128.0,
+    "end": 128.32
+  },
+  {
+    "word": "JSON",
+    "start": 128.32,
+    "end": 128.88
+  },
+  {
+    "word": "code.",
+    "start": 128.88,
+    "end": 129.52
+  },
+  {
+    "word": "This",
+    "start": 129.52,
+    "end": 129.76
+  },
+  {
+    "word": "reveals",
+    "start": 129.76,
+    "end": 130.24
+  },
+  {
+    "word": "what",
+    "start": 130.24,
+    "end": 130.48
+  },
+  {
+    "word": "researchers",
+    "start": 130.48,
+    "end": 131.12
+  },
+  {
+    "word": "call",
+    "start": 131.12,
+    "end": 131.28
+  },
+  {
+    "word": "the",
+    "start": 131.28,
+    "end": 131.52
+  },
+  {
+    "word": "faithfulness",
+    "start": 131.52,
+    "end": 132.24
+  },
+  {
+    "word": "gap.",
+    "start": 132.24,
+    "end": 132.88
+  },
+  {
+    "word": "The",
+    "start": 132.88,
+    "end": 133.04
+  },
+  {
+    "word": "models",
+    "start": 133.04,
+    "end": 133.52
+  },
+  {
+    "word": "focus",
+    "start": 133.52,
+    "end": 133.92
+  },
+  {
+    "word": "so",
+    "start": 133.92,
+    "end": 134.16
+  },
+  {
+    "word": "heavily",
+    "start": 134.16,
+    "end": 134.56
+  },
+  {
+    "word": "on",
+    "start": 134.56,
+    "end": 134.8
+  },
+  {
+    "word": "the",
+    "start": 134.8,
+    "end": 134.88
+  },
+  {
+    "word": "complex",
+    "start": 134.88,
+    "end": 135.44
+  },
+  {
+    "word": "task",
+    "start": 135.44,
+    "end": 135.76
+  },
+  {
+    "word": "of",
+    "start": 135.76,
+    "end": 136.0
+  },
+  {
+    "word": "formatting",
+    "start": 136.0,
+    "end": 136.48
+  },
+  {
+    "word": "the",
+    "start": 136.48,
+    "end": 136.56
+  },
+  {
+    "word": "code",
+    "start": 136.56,
+    "end": 136.88
+  },
+  {
+    "word": "correctly",
+    "start": 136.88,
+    "end": 137.44
+  },
+  {
+    "word": "that",
+    "start": 137.44,
+    "end": 137.76
+  },
+  {
+    "word": "they",
+    "start": 137.76,
+    "end": 137.92
+  },
+  {
+    "word": "fail",
+    "start": 137.92,
+    "end": 138.24
+  },
+  {
+    "word": "to",
+    "start": 138.24,
+    "end": 138.4
+  },
+  {
+    "word": "filter",
+    "start": 138.4,
+    "end": 138.88
+  },
+  {
+    "word": "the",
+    "start": 138.88,
+    "end": 139.04
+  },
+  {
+    "word": "actual",
+    "start": 139.04,
+    "end": 139.44
+  },
+  {
+    "word": "text",
+    "start": 139.44,
+    "end": 139.84
+  },
+  {
+    "word": "they",
+    "start": 139.84,
+    "end": 140.0
+  },
+  {
+    "word": "are",
+    "start": 140.0,
+    "end": 140.16
+  },
+  {
+    "word": "slotting",
+    "start": 140.16,
+    "end": 140.64
+  },
+  {
+    "word": "into",
+    "start": 140.64,
+    "end": 140.88
+  },
+  {
+    "word": "the",
+    "start": 140.88,
+    "end": 140.96
+  },
+  {
+    "word": "data",
+    "start": 140.96,
+    "end": 141.28
+  },
+  {
+    "word": "fields.",
+    "start": 141.28,
+    "end": 142.0
+  },
+  {
+    "word": "This",
+    "start": 142.0,
+    "end": 142.24
+  },
+  {
+    "word": "technique",
+    "start": 142.24,
+    "end": 142.8
+  },
+  {
+    "word": "is",
+    "start": 142.8,
+    "end": 143.04
+  },
+  {
+    "word": "effective",
+    "start": 143.04,
+    "end": 143.6
+  },
+  {
+    "word": "even",
+    "start": 143.6,
+    "end": 143.84
+  },
+  {
+    "word": "against",
+    "start": 143.84,
+    "end": 144.24
+  },
+  {
+    "word": "frontier",
+    "start": 144.24,
+    "end": 144.8
+  },
+  {
+    "word": "models.",
+    "start": 144.8,
+    "end": 145.44
+  },
+  {
+    "word": "Claude",
+    "start": 145.44,
+    "end": 145.92
+  },
+  {
+    "word": "Sonnet",
+    "start": 146.0,
+    "end": 146.32
+  },
+  {
+    "word": "4.5",
+    "start": 146.56,
+    "end": 147.2
+  },
+  {
+    "word": "showed",
+    "start": 147.2,
+    "end": 147.44
+  },
+  {
+    "word": "a",
+    "start": 147.44,
+    "end": 147.6
+  },
+  {
+    "word": "30%",
+    "start": 147.76,
+    "end": 148.32
+  },
+  {
+    "word": "failure",
+    "start": 148.32,
+    "end": 148.72
+  },
+  {
+    "word": "rate,",
+    "start": 148.72,
+    "end": 149.28
+  },
+  {
+    "word": "Gemini",
+    "start": 149.28,
+    "end": 149.92
+  },
+  {
+    "word": "3",
+    "start": 150.0,
+    "end": 150.16
+  },
+  {
+    "word": "Flash",
+    "start": 150.16,
+    "end": 150.56
+  },
+  {
+    "word": "was",
+    "start": 150.56,
+    "end": 150.64
+  },
+  {
+    "word": "at",
+    "start": 150.64,
+    "end": 150.8
+  },
+  {
+    "word": "24%,",
+    "start": 150.96,
+    "end": 152.0
+  },
+  {
+    "word": "and",
+    "start": 152.0,
+    "end": 152.16
+  },
+  {
+    "word": "Codex",
+    "start": 152.16,
+    "end": 152.72
+  },
+  {
+    "word": "GPT",
+    "start": 152.8,
+    "end": 153.28
+  },
+  {
+    "word": "5.2",
+    "start": 153.52,
+    "end": 154.16
+  },
+  {
+    "word": "reached",
+    "start": 154.16,
+    "end": 154.48
+  },
+  {
+    "word": "42%.",
+    "start": 154.72,
+    "end": 155.84
+  },
+  {
+    "word": "Relying",
+    "start": 155.84,
+    "end": 156.48
+  },
+  {
+    "word": "on",
+    "start": 156.48,
+    "end": 156.72
+  },
+  {
+    "word": "conversational",
+    "start": 156.72,
+    "end": 157.52
+  },
+  {
+    "word": "text",
+    "start": 157.52,
+    "end": 157.84
+  },
+  {
+    "word": "for",
+    "start": 157.84,
+    "end": 158.0
+  },
+  {
+    "word": "safety",
+    "start": 158.0,
+    "end": 158.48
+  },
+  {
+    "word": "evaluations",
+    "start": 158.48,
+    "end": 159.44
+  },
+  {
+    "word": "means",
+    "start": 159.44,
+    "end": 159.76
+  },
+  {
+    "word": "missing",
+    "start": 159.76,
+    "end": 160.24
+  },
+  {
+    "word": "the",
+    "start": 160.24,
+    "end": 160.4
+  },
+  {
+    "word": "dangerous",
+    "start": 160.4,
+    "end": 160.88
+  },
+  {
+    "word": "payloads",
+    "start": 160.88,
+    "end": 161.44
+  },
+  {
+    "word": "embedded",
+    "start": 161.44,
+    "end": 162.0
+  },
+  {
+    "word": "inside",
+    "start": 162.0,
+    "end": 162.32
+  },
+  {
+    "word": "structured",
+    "start": 162.32,
+    "end": 162.88
+  },
+  {
+    "word": "code.",
+    "start": 162.88,
+    "end": 163.52
+  },
+  {
+    "word": "The",
+    "start": 163.52,
+    "end": 163.68
+  },
+  {
+    "word": "third",
+    "start": 163.68,
+    "end": 164.0
+  },
+  {
+    "word": "layer",
+    "start": 164.0,
+    "end": 164.32
+  },
+  {
+    "word": "is",
+    "start": 164.32,
+    "end": 164.56
+  },
+  {
+    "word": "memory.",
+    "start": 164.56,
+    "end": 165.36
+  },
+  {
+    "word": "A",
+    "start": 165.36,
+    "end": 165.52
+  },
+  {
+    "word": "common",
+    "start": 165.52,
+    "end": 165.84
+  },
+  {
+    "word": "assumption",
+    "start": 165.84,
+    "end": 166.4
+  },
+  {
+    "word": "in",
+    "start": 166.4,
+    "end": 166.56
+  },
+  {
+    "word": "the",
+    "start": 166.56,
+    "end": 166.72
+  },
+  {
+    "word": "industry",
+    "start": 166.72,
+    "end": 167.2
+  },
+  {
+    "word": "suggests",
+    "start": 167.2,
+    "end": 167.76
+  },
+  {
+    "word": "that",
+    "start": 167.76,
+    "end": 167.92
+  },
+  {
+    "word": "more",
+    "start": 167.92,
+    "end": 168.16
+  },
+  {
+    "word": "capable",
+    "start": 168.16,
+    "end": 168.72
+  },
+  {
+    "word": "reasoning",
+    "start": 168.72,
+    "end": 169.12
+  },
+  {
+    "word": "models",
+    "start": 169.12,
+    "end": 169.52
+  },
+  {
+    "word": "are",
+    "start": 169.52,
+    "end": 169.68
+  },
+  {
+    "word": "inherently",
+    "start": 169.68,
+    "end": 170.52
+  },
+  {
+    "word": "more",
+    "start": 170.52,
+    "end": 170.68
+  },
+  {
+    "word": "resilient",
+    "start": 170.68,
+    "end": 171.24
+  },
+  {
+    "word": "to",
+    "start": 171.24,
+    "end": 171.4
+  },
+  {
+    "word": "manipulation",
+    "start": 171.4,
+    "end": 172.12
+  },
+  {
+    "word": "than",
+    "start": 172.12,
+    "end": 172.36
+  },
+  {
+    "word": "simpler",
+    "start": 172.36,
+    "end": 172.92
+  },
+  {
+    "word": "ones.",
+    "start": 172.92,
+    "end": 173.56
+  },
+  {
+    "word": "To",
+    "start": 173.56,
+    "end": 173.8
+  },
+  {
+    "word": "test",
+    "start": 173.8,
+    "end": 174.12
+  },
+  {
+    "word": "this,",
+    "start": 174.12,
+    "end": 174.52
+  },
+  {
+    "word": "researchers",
+    "start": 174.52,
+    "end": 175.24
+  },
+  {
+    "word": "used",
+    "start": 175.24,
+    "end": 175.48
+  },
+  {
+    "word": "crescendo",
+    "start": 175.48,
+    "end": 176.28
+  },
+  {
+    "word": "attacks,",
+    "start": 176.28,
+    "end": 176.92
+  },
+  {
+    "word": "a",
+    "start": 176.92,
+    "end": 177.08
+  },
+  {
+    "word": "method",
+    "start": 177.08,
+    "end": 177.4
+  },
+  {
+    "word": "that",
+    "start": 177.4,
+    "end": 177.56
+  },
+  {
+    "word": "exploits",
+    "start": 177.56,
+    "end": 178.04
+  },
+  {
+    "word": "an",
+    "start": 178.04,
+    "end": 178.2
+  },
+  {
+    "word": "AI's",
+    "start": 178.2,
+    "end": 178.68
+  },
+  {
+    "word": "memory",
+    "start": 178.68,
+    "end": 179.08
+  },
+  {
+    "word": "by",
+    "start": 179.08,
+    "end": 179.32
+  },
+  {
+    "word": "slowly",
+    "start": 179.32,
+    "end": 179.8
+  },
+  {
+    "word": "escalating",
+    "start": 179.88,
+    "end": 180.44
+  },
+  {
+    "word": "the",
+    "start": 180.44,
+    "end": 180.6
+  },
+  {
+    "word": "severity",
+    "start": 180.6,
+    "end": 181.08
+  },
+  {
+    "word": "of",
+    "start": 181.08,
+    "end": 181.24
+  },
+  {
+    "word": "requests",
+    "start": 181.24,
+    "end": 181.8
+  },
+  {
+    "word": "across",
+    "start": 181.8,
+    "end": 182.2
+  },
+  {
+    "word": "a",
+    "start": 182.2,
+    "end": 182.44
+  },
+  {
+    "word": "long,",
+    "start": 182.44,
+    "end": 182.68
+  },
+  {
+    "word": "multi-turn",
+    "start": 182.68,
+    "end": 183.72
+  },
+  {
+    "word": "conversation.",
+    "start": 183.72,
+    "end": 184.76
+  },
+  {
+    "word": "The",
+    "start": 184.76,
+    "end": 185.0
+  },
+  {
+    "word": "data",
+    "start": 185.0,
+    "end": 185.32
+  },
+  {
+    "word": "shows",
+    "start": 185.32,
+    "end": 185.56
+  },
+  {
+    "word": "a",
+    "start": 185.56,
+    "end": 185.72
+  },
+  {
+    "word": "sharp",
+    "start": 185.72,
+    "end": 186.12
+  },
+  {
+    "word": "contrast.",
+    "start": 186.12,
+    "end": 187.0
+  },
+  {
+    "word": "Small",
+    "start": 187.0,
+    "end": 187.4
+  },
+  {
+    "word": "models",
+    "start": 187.4,
+    "end": 187.88
+  },
+  {
+    "word": "often",
+    "start": 187.88,
+    "end": 188.12
+  },
+  {
+    "word": "forget",
+    "start": 188.12,
+    "end": 188.44
+  },
+  {
+    "word": "the",
+    "start": 188.44,
+    "end": 188.6
+  },
+  {
+    "word": "earlier",
+    "start": 188.6,
+    "end": 189.0
+  },
+  {
+    "word": "context",
+    "start": 189.0,
+    "end": 189.56
+  },
+  {
+    "word": "and",
+    "start": 189.56,
+    "end": 189.72
+  },
+  {
+    "word": "fail",
+    "start": 189.72,
+    "end": 190.04
+  },
+  {
+    "word": "the",
+    "start": 190.04,
+    "end": 190.2
+  },
+  {
+    "word": "attack",
+    "start": 190.2,
+    "end": 190.52
+  },
+  {
+    "word": "at",
+    "start": 190.52,
+    "end": 190.68
+  },
+  {
+    "word": "a",
+    "start": 190.68,
+    "end": 190.76
+  },
+  {
+    "word": "10%",
+    "start": 190.84,
+    "end": 191.32
+  },
+  {
+    "word": "rate.",
+    "start": 191.32,
+    "end": 192.04
+  },
+  {
+    "word": "However,",
+    "start": 192.04,
+    "end": 192.6
+  },
+  {
+    "word": "against",
+    "start": 192.6,
+    "end": 192.92
+  },
+  {
+    "word": "a",
+    "start": 192.92,
+    "end": 193.08
+  },
+  {
+    "word": "reasoning",
+    "start": 193.08,
+    "end": 193.48
+  },
+  {
+    "word": "model",
+    "start": 193.48,
+    "end": 193.8
+  },
+  {
+    "word": "like",
+    "start": 193.8,
+    "end": 193.96
+  },
+  {
+    "word": "DeepSeek",
+    "start": 193.96,
+    "end": 194.68
+  },
+  {
+    "word": "R1,",
+    "start": 194.68,
+    "end": 195.32
+  },
+  {
+    "word": "the",
+    "start": 195.32,
+    "end": 195.48
+  },
+  {
+    "word": "success",
+    "start": 195.48,
+    "end": 195.96
+  },
+  {
+    "word": "rate",
+    "start": 195.96,
+    "end": 196.2
+  },
+  {
+    "word": "climbs",
+    "start": 196.2,
+    "end": 196.68
+  },
+  {
+    "word": "to",
+    "start": 196.68,
+    "end": 196.84
+  },
+  {
+    "word": "between",
+    "start": 196.84,
+    "end": 197.08
+  },
+  {
+    "word": "80",
+    "start": 197.16,
+    "end": 197.48
+  },
+  {
+    "word": "and",
+    "start": 197.48,
+    "end": 197.64
+  },
+  {
+    "word": "90%",
+    "start": 197.72,
+    "end": 198.44
+  },
+  {
+    "word": "as",
+    "start": 198.44,
+    "end": 198.6
+  },
+  {
+    "word": "the",
+    "start": 198.6,
+    "end": 198.76
+  },
+  {
+    "word": "conversation",
+    "start": 198.76,
+    "end": 199.32
+  },
+  {
+    "word": "length",
+    "start": 199.32,
+    "end": 199.72
+  },
+  {
+    "word": "grows.",
+    "start": 199.72,
+    "end": 200.36
+  },
+  {
+    "word": "A",
+    "start": 200.36,
+    "end": 200.52
+  },
+  {
+    "word": "reasoning",
+    "start": 200.52,
+    "end": 201.0
+  },
+  {
+    "word": "model's",
+    "start": 201.0,
+    "end": 201.48
+  },
+  {
+    "word": "ability",
+    "start": 201.48,
+    "end": 201.8
+  },
+  {
+    "word": "to",
+    "start": 201.8,
+    "end": 201.96
+  },
+  {
+    "word": "perfectly",
+    "start": 201.96,
+    "end": 202.44
+  },
+  {
+    "word": "track",
+    "start": 202.44,
+    "end": 202.84
+  },
+  {
+    "word": "context",
+    "start": 202.84,
+    "end": 203.32
+  },
+  {
+    "word": "is",
+    "start": 203.32,
+    "end": 203.56
+  },
+  {
+    "word": "exactly",
+    "start": 203.56,
+    "end": 203.96
+  },
+  {
+    "word": "what",
+    "start": 203.96,
+    "end": 204.12
+  },
+  {
+    "word": "an",
+    "start": 204.12,
+    "end": 204.28
+  },
+  {
+    "word": "attacker",
+    "start": 204.28,
+    "end": 204.68
+  },
+  {
+    "word": "weaponizes.",
+    "start": 204.68,
+    "end": 205.72
+  },
+  {
+    "word": "Because",
+    "start": 205.72,
+    "end": 205.96
+  },
+  {
+    "word": "the",
+    "start": 205.96,
+    "end": 206.2
+  },
+  {
+    "word": "model",
+    "start": 206.2,
+    "end": 206.52
+  },
+  {
+    "word": "remains",
+    "start": 206.52,
+    "end": 206.92
+  },
+  {
+    "word": "committed",
+    "start": 206.92,
+    "end": 207.32
+  },
+  {
+    "word": "to",
+    "start": 207.32,
+    "end": 207.4
+  },
+  {
+    "word": "the",
+    "start": 207.4,
+    "end": 207.48
+  },
+  {
+    "word": "logic",
+    "start": 207.48,
+    "end": 207.88
+  },
+  {
+    "word": "of",
+    "start": 207.88,
+    "end": 208.04
+  },
+  {
+    "word": "the",
+    "start": 208.04,
+    "end": 208.12
+  },
+  {
+    "word": "previous",
+    "start": 208.12,
+    "end": 208.52
+  },
+  {
+    "word": "turn,",
+    "start": 208.52,
+    "end": 209.16
+  },
+  {
+    "word": "it",
+    "start": 209.16,
+    "end": 209.24
+  },
+  {
+    "word": "is",
+    "start": 209.24,
+    "end": 209.4
+  },
+  {
+    "word": "more",
+    "start": 209.4,
+    "end": 209.64
+  },
+  {
+    "word": "likely",
+    "start": 209.64,
+    "end": 209.96
+  },
+  {
+    "word": "to",
+    "start": 209.96,
+    "end": 210.04
+  },
+  {
+    "word": "be",
+    "start": 210.04,
+    "end": 210.2
+  },
+  {
+    "word": "led",
+    "start": 210.2,
+    "end": 210.44
+  },
+  {
+    "word": "toward",
+    "start": 210.44,
+    "end": 210.68
+  },
+  {
+    "word": "a",
+    "start": 210.68,
+    "end": 210.76
+  },
+  {
+    "word": "harmful",
+    "start": 210.76,
+    "end": 211.16
+  },
+  {
+    "word": "conclusion.",
+    "start": 211.16,
+    "end": 211.96
+  },
+  {
+    "word": "For",
+    "start": 211.96,
+    "end": 212.2
+  },
+  {
+    "word": "an",
+    "start": 212.2,
+    "end": 212.36
+  },
+  {
+    "word": "AI",
+    "start": 212.36,
+    "end": 212.76
+  },
+  {
+    "word": "agent,",
+    "start": 212.76,
+    "end": 213.24
+  },
+  {
+    "word": "a",
+    "start": 213.24,
+    "end": 213.32
+  },
+  {
+    "word": "larger",
+    "start": 213.32,
+    "end": 213.72
+  },
+  {
+    "word": "context",
+    "start": 213.72,
+    "end": 214.2
+  },
+  {
+    "word": "window",
+    "start": 214.2,
+    "end": 214.68
+  },
+  {
+    "word": "also",
+    "start": 214.68,
+    "end": 214.92
+  },
+  {
+    "word": "means",
+    "start": 214.92,
+    "end": 215.24
+  },
+  {
+    "word": "an",
+    "start": 215.24,
+    "end": 215.4
+  },
+  {
+    "word": "expanded",
+    "start": 215.4,
+    "end": 215.88
+  },
+  {
+    "word": "attack",
+    "start": 215.88,
+    "end": 216.2
+  },
+  {
+    "word": "surface.",
+    "start": 216.2,
+    "end": 217.0
+  },
+  {
+    "word": "These",
+    "start": 217.0,
+    "end": 217.24
+  },
+  {
+    "word": "vulnerabilities",
+    "start": 217.24,
+    "end": 218.04
+  },
+  {
+    "word": "suggest",
+    "start": 218.04,
+    "end": 218.44
+  },
+  {
+    "word": "a",
+    "start": 218.44,
+    "end": 218.52
+  },
+  {
+    "word": "logical",
+    "start": 218.52,
+    "end": 219.16
+  },
+  {
+    "word": "question.",
+    "start": 219.16,
+    "end": 219.72
+  },
+  {
+    "word": "Why",
+    "start": 219.72,
+    "end": 219.96
+  },
+  {
+    "word": "haven't",
+    "start": 219.96,
+    "end": 220.28
+  },
+  {
+    "word": "these",
+    "start": 220.28,
+    "end": 220.44
+  },
+  {
+    "word": "issues",
+    "start": 220.44,
+    "end": 220.84
+  },
+  {
+    "word": "appeared",
+    "start": 220.84,
+    "end": 221.16
+  },
+  {
+    "word": "in",
+    "start": 221.16,
+    "end": 221.32
+  },
+  {
+    "word": "standard",
+    "start": 221.32,
+    "end": 221.72
+  },
+  {
+    "word": "safety",
+    "start": 221.72,
+    "end": 222.04
+  },
+  {
+    "word": "benchmarks?",
+    "start": 222.04,
+    "end": 223.08
+  },
+  {
+    "word": "The",
+    "start": 223.08,
+    "end": 223.4
+  },
+  {
+    "word": "problem",
+    "start": 223.4,
+    "end": 223.72
+  },
+  {
+    "word": "lies",
+    "start": 223.72,
+    "end": 224.12
+  },
+  {
+    "word": "in",
+    "start": 224.12,
+    "end": 224.28
+  },
+  {
+    "word": "how",
+    "start": 224.28,
+    "end": 224.44
+  },
+  {
+    "word": "safety",
+    "start": 224.44,
+    "end": 224.76
+  },
+  {
+    "word": "tests",
+    "start": 225.12,
+    "end": 225.52
+  },
+  {
+    "word": "are",
+    "start": 225.52,
+    "end": 225.68
+  },
+  {
+    "word": "graded.",
+    "start": 225.68,
+    "end": 226.56
+  },
+  {
+    "word": "Most",
+    "start": 226.56,
+    "end": 226.88
+  },
+  {
+    "word": "automated",
+    "start": 226.88,
+    "end": 227.44
+  },
+  {
+    "word": "benchmarks",
+    "start": 227.44,
+    "end": 228.24
+  },
+  {
+    "word": "use",
+    "start": 228.24,
+    "end": 228.48
+  },
+  {
+    "word": "keyword-based",
+    "start": 228.48,
+    "end": 229.44
+  },
+  {
+    "word": "classification,",
+    "start": 229.44,
+    "end": 230.56
+  },
+  {
+    "word": "scanning",
+    "start": 230.56,
+    "end": 230.96
+  },
+  {
+    "word": "the",
+    "start": 230.96,
+    "end": 231.12
+  },
+  {
+    "word": "AI's",
+    "start": 231.12,
+    "end": 231.68
+  },
+  {
+    "word": "response",
+    "start": 231.68,
+    "end": 232.08
+  },
+  {
+    "word": "for",
+    "start": 232.08,
+    "end": 232.32
+  },
+  {
+    "word": "specific",
+    "start": 232.32,
+    "end": 232.8
+  },
+  {
+    "word": "trigger",
+    "start": 232.8,
+    "end": 233.2
+  },
+  {
+    "word": "words",
+    "start": 233.2,
+    "end": 233.6
+  },
+  {
+    "word": "to",
+    "start": 233.6,
+    "end": 233.76
+  },
+  {
+    "word": "decide",
+    "start": 233.76,
+    "end": 234.08
+  },
+  {
+    "word": "if",
+    "start": 234.08,
+    "end": 234.24
+  },
+  {
+    "word": "an",
+    "start": 234.24,
+    "end": 234.4
+  },
+  {
+    "word": "attack",
+    "start": 234.4,
+    "end": 234.8
+  },
+  {
+    "word": "worked.",
+    "start": 234.8,
+    "end": 235.52
+  },
+  {
+    "word": "The",
+    "start": 235.52,
+    "end": 235.76
+  },
+  {
+    "word": "Failure",
+    "start": 235.76,
+    "end": 236.16
+  },
+  {
+    "word": "First",
+    "start": 236.4,
+    "end": 236.64
+  },
+  {
+    "word": "study",
+    "start": 236.8,
+    "end": 237.12
+  },
+  {
+    "word": "found",
+    "start": 237.12,
+    "end": 237.44
+  },
+  {
+    "word": "that",
+    "start": 237.44,
+    "end": 237.6
+  },
+  {
+    "word": "these",
+    "start": 237.6,
+    "end": 237.84
+  },
+  {
+    "word": "keyword",
+    "start": 237.84,
+    "end": 238.32
+  },
+  {
+    "word": "heuristics",
+    "start": 238.32,
+    "end": 239.04
+  },
+  {
+    "word": "inflate",
+    "start": 239.04,
+    "end": 239.52
+  },
+  {
+    "word": "the",
+    "start": 239.52,
+    "end": 239.68
+  },
+  {
+    "word": "reported",
+    "start": 239.68,
+    "end": 240.08
+  },
+  {
+    "word": "risk",
+    "start": 240.08,
+    "end": 240.4
+  },
+  {
+    "word": "of",
+    "start": 240.4,
+    "end": 240.56
+  },
+  {
+    "word": "simple",
+    "start": 240.56,
+    "end": 240.96
+  },
+  {
+    "word": "attacks",
+    "start": 240.96,
+    "end": 241.52
+  },
+  {
+    "word": "by",
+    "start": 241.52,
+    "end": 241.76
+  },
+  {
+    "word": "roughly",
+    "start": 241.76,
+    "end": 242.16
+  },
+  {
+    "word": "2.3",
+    "start": 242.32,
+    "end": 243.12
+  },
+  {
+    "word": "times.",
+    "start": 243.12,
+    "end": 243.92
+  },
+  {
+    "word": "Keyword",
+    "start": 243.92,
+    "end": 244.48
+  },
+  {
+    "word": "graders",
+    "start": 244.48,
+    "end": 244.96
+  },
+  {
+    "word": "have",
+    "start": 244.96,
+    "end": 245.12
+  },
+  {
+    "word": "an",
+    "start": 245.12,
+    "end": 245.28
+  },
+  {
+    "word": "88%",
+    "start": 245.44,
+    "end": 246.16
+  },
+  {
+    "word": "false",
+    "start": 246.16,
+    "end": 246.56
+  },
+  {
+    "word": "positive",
+    "start": 246.56,
+    "end": 247.04
+  },
+  {
+    "word": "rate,",
+    "start": 247.04,
+    "end": 247.6
+  },
+  {
+    "word": "often",
+    "start": 247.6,
+    "end": 247.92
+  },
+  {
+    "word": "labeling",
+    "start": 247.92,
+    "end": 248.4
+  },
+  {
+    "word": "a",
+    "start": 248.4,
+    "end": 248.48
+  },
+  {
+    "word": "response",
+    "start": 248.48,
+    "end": 248.96
+  },
+  {
+    "word": "as",
+    "start": 248.96,
+    "end": 249.12
+  },
+  {
+    "word": "a",
+    "start": 249.12,
+    "end": 249.36
+  },
+  {
+    "word": "successful",
+    "start": 249.36,
+    "end": 250.08
+  },
+  {
+    "word": "attack",
+    "start": 250.08,
+    "end": 250.48
+  },
+  {
+    "word": "even",
+    "start": 250.64,
+    "end": 250.88
+  },
+  {
+    "word": "when",
+    "start": 250.88,
+    "end": 251.04
+  },
+  {
+    "word": "the",
+    "start": 251.04,
+    "end": 251.28
+  },
+  {
+    "word": "model",
+    "start": 251.28,
+    "end": 251.6
+  },
+  {
+    "word": "refused.",
+    "start": 251.6,
+    "end": 252.56
+  },
+  {
+    "word": "Correcting",
+    "start": 252.56,
+    "end": 253.12
+  },
+  {
+    "word": "these",
+    "start": 253.12,
+    "end": 253.36
+  },
+  {
+    "word": "errors",
+    "start": 253.44,
+    "end": 253.68
+  },
+  {
+    "word": "with",
+    "start": 253.68,
+    "end": 253.92
+  },
+  {
+    "word": "LLM",
+    "start": 253.92,
+    "end": 254.48
+  },
+  {
+    "word": "grading",
+    "start": 254.48,
+    "end": 254.88
+  },
+  {
+    "word": "caused",
+    "start": 254.88,
+    "end": 255.2
+  },
+  {
+    "word": "the",
+    "start": 255.2,
+    "end": 255.28
+  },
+  {
+    "word": "aggregate",
+    "start": 255.28,
+    "end": 255.84
+  },
+  {
+    "word": "attack",
+    "start": 255.84,
+    "end": 256.24
+  },
+  {
+    "word": "success",
+    "start": 256.24,
+    "end": 256.64
+  },
+  {
+    "word": "rate",
+    "start": 256.64,
+    "end": 256.88
+  },
+  {
+    "word": "to",
+    "start": 256.88,
+    "end": 256.96
+  },
+  {
+    "word": "drop",
+    "start": 256.96,
+    "end": 257.28
+  },
+  {
+    "word": "from",
+    "start": 257.28,
+    "end": 257.44
+  },
+  {
+    "word": "36.2%",
+    "start": 257.68,
+    "end": 258.96
+  },
+  {
+    "word": "to",
+    "start": 258.96,
+    "end": 259.12
+  },
+  {
+    "word": "15.9%.",
+    "start": 259.28,
+    "end": 261.12
+  },
+  {
+    "word": "This",
+    "start": 261.12,
+    "end": 261.36
+  },
+  {
+    "word": "creates",
+    "start": 261.36,
+    "end": 261.84
+  },
+  {
+    "word": "a",
+    "start": 261.84,
+    "end": 262.0
+  },
+  {
+    "word": "blind",
+    "start": 262.0,
+    "end": 262.4
+  },
+  {
+    "word": "spot.",
+    "start": 262.4,
+    "end": 262.96
+  },
+  {
+    "word": "Benchmarks",
+    "start": 262.96,
+    "end": 263.76
+  },
+  {
+    "word": "over-report",
+    "start": 263.76,
+    "end": 264.56
+  },
+  {
+    "word": "the",
+    "start": 264.56,
+    "end": 264.64
+  },
+  {
+    "word": "risk",
+    "start": 264.64,
+    "end": 264.88
+  },
+  {
+    "word": "of",
+    "start": 264.88,
+    "end": 265.12
+  },
+  {
+    "word": "conversational",
+    "start": 265.12,
+    "end": 265.84
+  },
+  {
+    "word": "text",
+    "start": 265.84,
+    "end": 266.16
+  },
+  {
+    "word": "attacks",
+    "start": 266.16,
+    "end": 266.56
+  },
+  {
+    "word": "while",
+    "start": 266.8,
+    "end": 267.04
+  },
+  {
+    "word": "failing",
+    "start": 267.04,
+    "end": 267.44
+  },
+  {
+    "word": "to",
+    "start": 267.44,
+    "end": 267.6
+  },
+  {
+    "word": "detect",
+    "start": 267.6,
+    "end": 267.92
+  },
+  {
+    "word": "the",
+    "start": 267.92,
+    "end": 268.08
+  },
+  {
+    "word": "real",
+    "start": 268.08,
+    "end": 268.32
+  },
+  {
+    "word": "threats",
+    "start": 268.32,
+    "end": 268.72
+  },
+  {
+    "word": "hidden",
+    "start": 268.72,
+    "end": 269.04
+  },
+  {
+    "word": "in",
+    "start": 269.04,
+    "end": 269.12
+  },
+  {
+    "word": "JSON",
+    "start": 269.12,
+    "end": 269.68
+  },
+  {
+    "word": "formats",
+    "start": 269.68,
+    "end": 270.16
+  },
+  {
+    "word": "and",
+    "start": 270.16,
+    "end": 270.32
+  },
+  {
+    "word": "external",
+    "start": 270.32,
+    "end": 270.8
+  },
+  {
+    "word": "tool",
+    "start": 270.8,
+    "end": 271.12
+  },
+  {
+    "word": "files.",
+    "start": 271.12,
+    "end": 271.92
+  },
+  {
+    "word": "The",
+    "start": 271.92,
+    "end": 272.08
+  },
+  {
+    "word": "Failure",
+    "start": 272.08,
+    "end": 272.56
+  },
+  {
+    "word": "First",
+    "start": 272.72,
+    "end": 272.88
+  },
+  {
+    "word": "dataset",
+    "start": 273.04,
+    "end": 273.52
+  },
+  {
+    "word": "shows",
+    "start": 273.52,
+    "end": 273.76
+  },
+  {
+    "word": "that",
+    "start": 273.76,
+    "end": 273.92
+  },
+  {
+    "word": "securing",
+    "start": 273.92,
+    "end": 274.48
+  },
+  {
+    "word": "a",
+    "start": 274.48,
+    "end": 274.56
+  },
+  {
+    "word": "modern",
+    "start": 274.56,
+    "end": 274.96
+  },
+  {
+    "word": "model",
+    "start": 274.96,
+    "end": 275.28
+  },
+  {
+    "word": "requires",
+    "start": 275.28,
+    "end": 275.84
+  },
+  {
+    "word": "moving",
+    "start": 275.84,
+    "end": 276.24
+  },
+  {
+    "word": "past",
+    "start": 276.24,
+    "end": 276.56
+  },
+  {
+    "word": "the",
+    "start": 276.56,
+    "end": 276.72
+  },
+  {
+    "word": "single",
+    "start": 276.72,
+    "end": 277.2
+  },
+  {
+    "word": "text",
+    "start": 277.2,
+    "end": 277.52
+  },
+  {
+    "word": "prompt",
+    "start": 277.52,
+    "end": 278.0
+  },
+  {
+    "word": "and",
+    "start": 278.0,
+    "end": 278.24
+  },
+  {
+    "word": "testing",
+    "start": 278.24,
+    "end": 278.56
+  },
+  {
+    "word": "the",
+    "start": 278.56,
+    "end": 278.72
+  },
+  {
+    "word": "full",
+    "start": 278.72,
+    "end": 278.96
+  },
+  {
+    "word": "interconnected",
+    "start": 279.12,
+    "end": 279.68
+  },
+  {
+    "word": "ar.chitecture",
+    "start": 279.68,
+    "end": 281.24
+  }
+]

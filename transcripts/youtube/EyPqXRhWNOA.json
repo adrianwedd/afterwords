@@ -1,0 +1,2487 @@
+[
+  {
+    "word": "You're",
+    "start": 0.0,
+    "end": 0.48
+  },
+  {
+    "word": "driving",
+    "start": 0.48,
+    "end": 0.88
+  },
+  {
+    "word": "down",
+    "start": 0.88,
+    "end": 1.12
+  },
+  {
+    "word": "a",
+    "start": 1.12,
+    "end": 1.36
+  },
+  {
+    "word": "clear,",
+    "start": 1.36,
+    "end": 2.0
+  },
+  {
+    "word": "open",
+    "start": 2.0,
+    "end": 2.32
+  },
+  {
+    "word": "highway,",
+    "start": 2.32,
+    "end": 2.88
+  },
+  {
+    "word": "and",
+    "start": 2.88,
+    "end": 3.12
+  },
+  {
+    "word": "your",
+    "start": 3.12,
+    "end": 3.36
+  },
+  {
+    "word": "GPS",
+    "start": 3.36,
+    "end": 4.0
+  },
+  {
+    "word": "suddenly",
+    "start": 4.0,
+    "end": 4.56
+  },
+  {
+    "word": "insists",
+    "start": 4.56,
+    "end": 5.12
+  },
+  {
+    "word": "you're",
+    "start": 5.12,
+    "end": 5.52
+  },
+  {
+    "word": "three",
+    "start": 5.52,
+    "end": 5.76
+  },
+  {
+    "word": "streets",
+    "start": 5.76,
+    "end": 6.24
+  },
+  {
+    "word": "over,",
+    "start": 6.24,
+    "end": 6.72
+  },
+  {
+    "word": "parked",
+    "start": 6.72,
+    "end": 7.12
+  },
+  {
+    "word": "in",
+    "start": 7.12,
+    "end": 7.28
+  },
+  {
+    "word": "someone's",
+    "start": 7.28,
+    "end": 7.6
+  },
+  {
+    "word": "living",
+    "start": 7.6,
+    "end": 7.92
+  },
+  {
+    "word": "room,",
+    "start": 7.92,
+    "end": 8.56
+  },
+  {
+    "word": "or",
+    "start": 8.56,
+    "end": 8.8
+  },
+  {
+    "word": "your",
+    "start": 8.8,
+    "end": 8.96
+  },
+  {
+    "word": "satellite",
+    "start": 8.96,
+    "end": 9.52
+  },
+  {
+    "word": "radio",
+    "start": 9.52,
+    "end": 9.92
+  },
+  {
+    "word": "inexplicably",
+    "start": 9.92,
+    "end": 10.72
+  },
+  {
+    "word": "drops",
+    "start": 10.72,
+    "end": 11.2
+  },
+  {
+    "word": "out,",
+    "start": 11.2,
+    "end": 11.6
+  },
+  {
+    "word": "even",
+    "start": 11.6,
+    "end": 11.76
+  },
+  {
+    "word": "though",
+    "start": 11.76,
+    "end": 12.0
+  },
+  {
+    "word": "there's",
+    "start": 12.0,
+    "end": 12.24
+  },
+  {
+    "word": "not",
+    "start": 12.24,
+    "end": 12.4
+  },
+  {
+    "word": "a",
+    "start": 12.4,
+    "end": 12.56
+  },
+  {
+    "word": "single",
+    "start": 12.56,
+    "end": 12.96
+  },
+  {
+    "word": "cloud",
+    "start": 12.96,
+    "end": 13.36
+  },
+  {
+    "word": "in",
+    "start": 13.36,
+    "end": 13.52
+  },
+  {
+    "word": "the",
+    "start": 13.52,
+    "end": 13.6
+  },
+  {
+    "word": "sky.",
+    "start": 13.6,
+    "end": 14.4
+  },
+  {
+    "word": "We",
+    "start": 14.4,
+    "end": 14.64
+  },
+  {
+    "word": "naturally",
+    "start": 14.64,
+    "end": 15.12
+  },
+  {
+    "word": "blame",
+    "start": 15.12,
+    "end": 15.44
+  },
+  {
+    "word": "a",
+    "start": 15.44,
+    "end": 15.6
+  },
+  {
+    "word": "spotty",
+    "start": 15.6,
+    "end": 16.08
+  },
+  {
+    "word": "cell",
+    "start": 16.08,
+    "end": 16.4
+  },
+  {
+    "word": "tower",
+    "start": 16.4,
+    "end": 16.72
+  },
+  {
+    "word": "or",
+    "start": 16.72,
+    "end": 16.88
+  },
+  {
+    "word": "a",
+    "start": 16.88,
+    "end": 17.04
+  },
+  {
+    "word": "software",
+    "start": 17.04,
+    "end": 17.52
+  },
+  {
+    "word": "glitch,",
+    "start": 17.52,
+    "end": 18.32
+  },
+  {
+    "word": "but",
+    "start": 18.32,
+    "end": 18.48
+  },
+  {
+    "word": "often",
+    "start": 18.48,
+    "end": 18.8
+  },
+  {
+    "word": "the",
+    "start": 18.88,
+    "end": 19.12
+  },
+  {
+    "word": "actual",
+    "start": 19.12,
+    "end": 19.52
+  },
+  {
+    "word": "cause",
+    "start": 19.52,
+    "end": 19.84
+  },
+  {
+    "word": "of",
+    "start": 19.84,
+    "end": 20.0
+  },
+  {
+    "word": "that",
+    "start": 20.0,
+    "end": 20.16
+  },
+  {
+    "word": "disruption",
+    "start": 20.16,
+    "end": 20.88
+  },
+  {
+    "word": "is",
+    "start": 20.88,
+    "end": 21.04
+  },
+  {
+    "word": "about",
+    "start": 21.04,
+    "end": 21.28
+  },
+  {
+    "word": "93",
+    "start": 21.52,
+    "end": 22.0
+  },
+  {
+    "word": "million",
+    "start": 22.0,
+    "end": 22.32
+  },
+  {
+    "word": "miles",
+    "start": 22.32,
+    "end": 22.8
+  },
+  {
+    "word": "away.",
+    "start": 22.8,
+    "end": 23.52
+  },
+  {
+    "word": "Our",
+    "start": 23.52,
+    "end": 23.84
+  },
+  {
+    "word": "sun",
+    "start": 23.84,
+    "end": 24.24
+  },
+  {
+    "word": "is",
+    "start": 24.24,
+    "end": 24.32
+  },
+  {
+    "word": "a",
+    "start": 24.32,
+    "end": 24.48
+  },
+  {
+    "word": "remarkably",
+    "start": 24.48,
+    "end": 25.04
+  },
+  {
+    "word": "noisy",
+    "start": 25.04,
+    "end": 25.52
+  },
+  {
+    "word": "neighbor.",
+    "start": 25.52,
+    "end": 26.32
+  },
+  {
+    "word": "What",
+    "start": 26.32,
+    "end": 26.56
+  },
+  {
+    "word": "you're",
+    "start": 26.56,
+    "end": 26.88
+  },
+  {
+    "word": "experiencing",
+    "start": 26.88,
+    "end": 27.44
+  },
+  {
+    "word": "in",
+    "start": 27.44,
+    "end": 27.6
+  },
+  {
+    "word": "those",
+    "start": 27.6,
+    "end": 27.76
+  },
+  {
+    "word": "moments",
+    "start": 27.76,
+    "end": 28.24
+  },
+  {
+    "word": "is",
+    "start": 28.24,
+    "end": 28.48
+  },
+  {
+    "word": "space",
+    "start": 28.48,
+    "end": 28.88
+  },
+  {
+    "word": "weather,",
+    "start": 28.88,
+    "end": 29.52
+  },
+  {
+    "word": "a",
+    "start": 29.52,
+    "end": 29.76
+  },
+  {
+    "word": "constant",
+    "start": 29.76,
+    "end": 30.24
+  },
+  {
+    "word": "torrent",
+    "start": 30.24,
+    "end": 30.72
+  },
+  {
+    "word": "of",
+    "start": 30.72,
+    "end": 30.88
+  },
+  {
+    "word": "electromagnetic",
+    "start": 30.88,
+    "end": 31.92
+  },
+  {
+    "word": "energy",
+    "start": 31.92,
+    "end": 32.32
+  },
+  {
+    "word": "that",
+    "start": 32.32,
+    "end": 32.48
+  },
+  {
+    "word": "perpetually",
+    "start": 32.48,
+    "end": 33.28
+  },
+  {
+    "word": "rains",
+    "start": 33.28,
+    "end": 33.68
+  },
+  {
+    "word": "down",
+    "start": 33.68,
+    "end": 33.92
+  },
+  {
+    "word": "on",
+    "start": 33.92,
+    "end": 34.08
+  },
+  {
+    "word": "our",
+    "start": 34.08,
+    "end": 34.32
+  },
+  {
+    "word": "planet.",
+    "start": 34.32,
+    "end": 35.2
+  },
+  {
+    "word": "These",
+    "start": 35.2,
+    "end": 35.44
+  },
+  {
+    "word": "solar",
+    "start": 35.44,
+    "end": 35.84
+  },
+  {
+    "word": "bursts",
+    "start": 35.84,
+    "end": 36.32
+  },
+  {
+    "word": "infiltrate",
+    "start": 36.32,
+    "end": 36.96
+  },
+  {
+    "word": "high-voltage",
+    "start": 36.96,
+    "end": 37.68
+  },
+  {
+    "word": "power",
+    "start": 37.68,
+    "end": 37.92
+  },
+  {
+    "word": "grids,",
+    "start": 37.92,
+    "end": 38.56
+  },
+  {
+    "word": "disrupt",
+    "start": 38.56,
+    "end": 39.12
+  },
+  {
+    "word": "satellite",
+    "start": 39.12,
+    "end": 39.68
+  },
+  {
+    "word": "operations,",
+    "start": 39.68,
+    "end": 40.4
+  },
+  {
+    "word": "and",
+    "start": 40.4,
+    "end": 40.56
+  },
+  {
+    "word": "bend",
+    "start": 40.56,
+    "end": 40.96
+  },
+  {
+    "word": "radio",
+    "start": 40.96,
+    "end": 41.36
+  },
+  {
+    "word": "signals",
+    "start": 41.36,
+    "end": 41.76
+  },
+  {
+    "word": "across",
+    "start": 41.76,
+    "end": 42.16
+  },
+  {
+    "word": "entire",
+    "start": 42.16,
+    "end": 42.56
+  },
+  {
+    "word": "hemispheres.",
+    "start": 42.56,
+    "end": 43.76
+  },
+  {
+    "word": "We",
+    "start": 43.76,
+    "end": 44.0
+  },
+  {
+    "word": "live",
+    "start": 44.0,
+    "end": 44.32
+  },
+  {
+    "word": "oblivious",
+    "start": 44.32,
+    "end": 44.96
+  },
+  {
+    "word": "to",
+    "start": 44.96,
+    "end": 45.12
+  },
+  {
+    "word": "a",
+    "start": 45.12,
+    "end": 45.28
+  },
+  {
+    "word": "massive",
+    "start": 45.28,
+    "end": 45.76
+  },
+  {
+    "word": "weather",
+    "start": 45.76,
+    "end": 46.24
+  },
+  {
+    "word": "system",
+    "start": 46.24,
+    "end": 46.48
+  },
+  {
+    "word": "that",
+    "start": 46.48,
+    "end": 46.72
+  },
+  {
+    "word": "dictates",
+    "start": 46.72,
+    "end": 47.28
+  },
+  {
+    "word": "the",
+    "start": 47.28,
+    "end": 47.44
+  },
+  {
+    "word": "reliability",
+    "start": 47.44,
+    "end": 48.16
+  },
+  {
+    "word": "of",
+    "start": 48.16,
+    "end": 48.32
+  },
+  {
+    "word": "our",
+    "start": 48.32,
+    "end": 48.48
+  },
+  {
+    "word": "modern",
+    "start": 48.48,
+    "end": 49.2
+  },
+  {
+    "word": "world.",
+    "start": 49.2,
+    "end": 49.76
+  },
+  {
+    "word": "How",
+    "start": 49.76,
+    "end": 50.0
+  },
+  {
+    "word": "do",
+    "start": 50.0,
+    "end": 50.16
+  },
+  {
+    "word": "you",
+    "start": 50.16,
+    "end": 50.24
+  },
+  {
+    "word": "prepare",
+    "start": 50.24,
+    "end": 50.72
+  },
+  {
+    "word": "for",
+    "start": 50.72,
+    "end": 50.88
+  },
+  {
+    "word": "a",
+    "start": 50.88,
+    "end": 51.04
+  },
+  {
+    "word": "storm",
+    "start": 51.04,
+    "end": 51.44
+  },
+  {
+    "word": "you",
+    "start": 51.44,
+    "end": 51.6
+  },
+  {
+    "word": "can't",
+    "start": 51.6,
+    "end": 52.08
+  },
+  {
+    "word": "even",
+    "start": 52.08,
+    "end": 52.32
+  },
+  {
+    "word": "feel?",
+    "start": 52.32,
+    "end": 52.88
+  },
+  {
+    "word": "It",
+    "start": 52.88,
+    "end": 53.12
+  },
+  {
+    "word": "starts",
+    "start": 53.12,
+    "end": 53.44
+  },
+  {
+    "word": "with",
+    "start": 53.44,
+    "end": 53.6
+  },
+  {
+    "word": "an",
+    "start": 53.6,
+    "end": 53.76
+  },
+  {
+    "word": "eruption.",
+    "start": 53.84,
+    "end": 54.56
+  },
+  {
+    "word": "Massive",
+    "start": 54.56,
+    "end": 55.2
+  },
+  {
+    "word": "magnetic",
+    "start": 55.2,
+    "end": 55.92
+  },
+  {
+    "word": "anomalies",
+    "start": 55.92,
+    "end": 56.64
+  },
+  {
+    "word": "and",
+    "start": 56.64,
+    "end": 56.96
+  },
+  {
+    "word": "bright",
+    "start": 56.96,
+    "end": 57.36
+  },
+  {
+    "word": "solar",
+    "start": 57.36,
+    "end": 57.84
+  },
+  {
+    "word": "flares",
+    "start": 57.84,
+    "end": 58.4
+  },
+  {
+    "word": "explode",
+    "start": 58.4,
+    "end": 59.04
+  },
+  {
+    "word": "directly",
+    "start": 59.04,
+    "end": 59.52
+  },
+  {
+    "word": "on",
+    "start": 59.52,
+    "end": 59.6
+  },
+  {
+    "word": "the",
+    "start": 59.6,
+    "end": 59.68
+  },
+  {
+    "word": "surface",
+    "start": 59.68,
+    "end": 59.92
+  },
+  {
+    "word": "of",
+    "start": 60.36,
+    "end": 60.44
+  },
+  {
+    "word": "the",
+    "start": 60.44,
+    "end": 60.6
+  },
+  {
+    "word": "sun,",
+    "start": 60.6,
+    "end": 61.24
+  },
+  {
+    "word": "releasing",
+    "start": 61.24,
+    "end": 61.88
+  },
+  {
+    "word": "staggering",
+    "start": 61.88,
+    "end": 62.52
+  },
+  {
+    "word": "amounts",
+    "start": 62.52,
+    "end": 62.84
+  },
+  {
+    "word": "of",
+    "start": 62.84,
+    "end": 63.0
+  },
+  {
+    "word": "plasma.",
+    "start": 63.0,
+    "end": 63.96
+  },
+  {
+    "word": "This",
+    "start": 63.96,
+    "end": 64.2
+  },
+  {
+    "word": "energy",
+    "start": 64.2,
+    "end": 64.84
+  },
+  {
+    "word": "doesn't",
+    "start": 64.84,
+    "end": 65.16
+  },
+  {
+    "word": "stay",
+    "start": 65.16,
+    "end": 65.4
+  },
+  {
+    "word": "local.",
+    "start": 65.4,
+    "end": 66.12
+  },
+  {
+    "word": "Coronal",
+    "start": 66.12,
+    "end": 66.76
+  },
+  {
+    "word": "mass",
+    "start": 66.76,
+    "end": 67.08
+  },
+  {
+    "word": "ejections",
+    "start": 67.08,
+    "end": 67.8
+  },
+  {
+    "word": "and",
+    "start": 67.8,
+    "end": 68.04
+  },
+  {
+    "word": "intense",
+    "start": 68.04,
+    "end": 68.52
+  },
+  {
+    "word": "variations",
+    "start": 68.52,
+    "end": 69.24
+  },
+  {
+    "word": "in",
+    "start": 69.24,
+    "end": 69.4
+  },
+  {
+    "word": "the",
+    "start": 69.4,
+    "end": 69.48
+  },
+  {
+    "word": "solar",
+    "start": 69.48,
+    "end": 69.96
+  },
+  {
+    "word": "wind",
+    "start": 69.96,
+    "end": 70.52
+  },
+  {
+    "word": "blast",
+    "start": 70.52,
+    "end": 71.08
+  },
+  {
+    "word": "outward,",
+    "start": 71.08,
+    "end": 71.88
+  },
+  {
+    "word": "tearing",
+    "start": 71.88,
+    "end": 72.44
+  },
+  {
+    "word": "across",
+    "start": 72.44,
+    "end": 72.92
+  },
+  {
+    "word": "millions",
+    "start": 72.92,
+    "end": 73.48
+  },
+  {
+    "word": "of",
+    "start": 73.48,
+    "end": 73.64
+  },
+  {
+    "word": "miles",
+    "start": 73.64,
+    "end": 74.04
+  },
+  {
+    "word": "of",
+    "start": 74.04,
+    "end": 74.2
+  },
+  {
+    "word": "the",
+    "start": 74.2,
+    "end": 74.28
+  },
+  {
+    "word": "vacuum",
+    "start": 74.28,
+    "end": 74.76
+  },
+  {
+    "word": "of",
+    "start": 74.76,
+    "end": 75.08
+  },
+  {
+    "word": "space.",
+    "start": 75.08,
+    "end": 75.72
+  },
+  {
+    "word": "When",
+    "start": 75.72,
+    "end": 75.96
+  },
+  {
+    "word": "that",
+    "start": 75.96,
+    "end": 76.28
+  },
+  {
+    "word": "outbound",
+    "start": 76.28,
+    "end": 76.84
+  },
+  {
+    "word": "radiation",
+    "start": 76.84,
+    "end": 77.48
+  },
+  {
+    "word": "reaches",
+    "start": 77.48,
+    "end": 77.96
+  },
+  {
+    "word": "Earth,",
+    "start": 77.96,
+    "end": 78.6
+  },
+  {
+    "word": "it",
+    "start": 78.6,
+    "end": 78.76
+  },
+  {
+    "word": "physically",
+    "start": 78.76,
+    "end": 79.48
+  },
+  {
+    "word": "slams",
+    "start": 79.48,
+    "end": 80.04
+  },
+  {
+    "word": "into",
+    "start": 80.04,
+    "end": 80.2
+  },
+  {
+    "word": "our",
+    "start": 80.2,
+    "end": 80.36
+  },
+  {
+    "word": "planet's",
+    "start": 80.36,
+    "end": 80.84
+  },
+  {
+    "word": "magnetic",
+    "start": 80.84,
+    "end": 81.32
+  },
+  {
+    "word": "field,",
+    "start": 81.32,
+    "end": 82.04
+  },
+  {
+    "word": "severely",
+    "start": 82.04,
+    "end": 82.68
+  },
+  {
+    "word": "compressing",
+    "start": 82.68,
+    "end": 83.32
+  },
+  {
+    "word": "the",
+    "start": 83.32,
+    "end": 83.48
+  },
+  {
+    "word": "sunward",
+    "start": 83.48,
+    "end": 84.04
+  },
+  {
+    "word": "side",
+    "start": 84.04,
+    "end": 84.52
+  },
+  {
+    "word": "and",
+    "start": 84.52,
+    "end": 84.76
+  },
+  {
+    "word": "violently",
+    "start": 84.76,
+    "end": 85.4
+  },
+  {
+    "word": "stretching",
+    "start": 85.4,
+    "end": 85.96
+  },
+  {
+    "word": "the",
+    "start": 85.96,
+    "end": 86.2
+  },
+  {
+    "word": "tail.",
+    "start": 86.2,
+    "end": 86.92
+  },
+  {
+    "word": "This",
+    "start": 86.92,
+    "end": 87.24
+  },
+  {
+    "word": "collision",
+    "start": 87.24,
+    "end": 87.8
+  },
+  {
+    "word": "induces",
+    "start": 87.8,
+    "end": 88.44
+  },
+  {
+    "word": "massive",
+    "start": 88.44,
+    "end": 88.92
+  },
+  {
+    "word": "electrical",
+    "start": 88.92,
+    "end": 89.56
+  },
+  {
+    "word": "currents.",
+    "start": 89.56,
+    "end": 90.36
+  },
+  {
+    "word": "They",
+    "start": 90.36,
+    "end": 90.6
+  },
+  {
+    "word": "travel",
+    "start": 90.6,
+    "end": 91.08
+  },
+  {
+    "word": "down",
+    "start": 91.08,
+    "end": 91.32
+  },
+  {
+    "word": "from",
+    "start": 91.32,
+    "end": 91.48
+  },
+  {
+    "word": "the",
+    "start": 91.48,
+    "end": 91.64
+  },
+  {
+    "word": "distorted",
+    "start": 91.64,
+    "end": 92.2
+  },
+  {
+    "word": "magnetic",
+    "start": 92.2,
+    "end": 92.76
+  },
+  {
+    "word": "shield,",
+    "start": 92.76,
+    "end": 93.4
+  },
+  {
+    "word": "overloading",
+    "start": 93.4,
+    "end": 94.12
+  },
+  {
+    "word": "physical",
+    "start": 94.12,
+    "end": 94.6
+  },
+  {
+    "word": "hardware",
+    "start": 94.6,
+    "end": 95.08
+  },
+  {
+    "word": "on",
+    "start": 95.08,
+    "end": 95.24
+  },
+  {
+    "word": "the",
+    "start": 95.24,
+    "end": 95.4
+  },
+  {
+    "word": "ground.",
+    "start": 95.4,
+    "end": 96.12
+  },
+  {
+    "word": "The",
+    "start": 96.12,
+    "end": 96.28
+  },
+  {
+    "word": "vacuum",
+    "start": 96.28,
+    "end": 96.84
+  },
+  {
+    "word": "of",
+    "start": 96.84,
+    "end": 97.08
+  },
+  {
+    "word": "space",
+    "start": 97.08,
+    "end": 97.4
+  },
+  {
+    "word": "behaves",
+    "start": 97.4,
+    "end": 97.88
+  },
+  {
+    "word": "as",
+    "start": 97.88,
+    "end": 98.04
+  },
+  {
+    "word": "a",
+    "start": 98.04,
+    "end": 98.2
+  },
+  {
+    "word": "physical,",
+    "start": 98.2,
+    "end": 98.92
+  },
+  {
+    "word": "highly",
+    "start": 98.92,
+    "end": 99.32
+  },
+  {
+    "word": "dynamic",
+    "start": 99.32,
+    "end": 99.96
+  },
+  {
+    "word": "environment",
+    "start": 99.96,
+    "end": 100.68
+  },
+  {
+    "word": "that",
+    "start": 100.68,
+    "end": 100.92
+  },
+  {
+    "word": "exerts",
+    "start": 100.92,
+    "end": 101.48
+  },
+  {
+    "word": "constant",
+    "start": 101.48,
+    "end": 101.96
+  },
+  {
+    "word": "pressure",
+    "start": 101.96,
+    "end": 102.44
+  },
+  {
+    "word": "on",
+    "start": 102.44,
+    "end": 102.6
+  },
+  {
+    "word": "human",
+    "start": 102.6,
+    "end": 103.0
+  },
+  {
+    "word": "technology.",
+    "start": 103.0,
+    "end": 104.12
+  },
+  {
+    "word": "This",
+    "start": 104.12,
+    "end": 104.44
+  },
+  {
+    "word": "stadium",
+    "start": 104.44,
+    "end": 105.0
+  },
+  {
+    "word": "scoreboard",
+    "start": 105.0,
+    "end": 105.64
+  },
+  {
+    "word": "shows",
+    "start": 105.64,
+    "end": 105.88
+  },
+  {
+    "word": "how",
+    "start": 105.88,
+    "end": 106.04
+  },
+  {
+    "word": "agencies",
+    "start": 106.04,
+    "end": 106.68
+  },
+  {
+    "word": "like",
+    "start": 106.68,
+    "end": 106.84
+  },
+  {
+    "word": "the",
+    "start": 106.84,
+    "end": 107.0
+  },
+  {
+    "word": "Australian",
+    "start": 107.0,
+    "end": 107.56
+  },
+  {
+    "word": "Bureau",
+    "start": 107.56,
+    "end": 107.96
+  },
+  {
+    "word": "of",
+    "start": 107.96,
+    "end": 108.04
+  },
+  {
+    "word": "Meteorology",
+    "start": 108.04,
+    "end": 109.0
+  },
+  {
+    "word": "treat",
+    "start": 109.0,
+    "end": 109.32
+  },
+  {
+    "word": "these",
+    "start": 109.32,
+    "end": 109.56
+  },
+  {
+    "word": "cosmic",
+    "start": 109.56,
+    "end": 110.04
+  },
+  {
+    "word": "threats,",
+    "start": 110.04,
+    "end": 110.68
+  },
+  {
+    "word": "issuing",
+    "start": 110.68,
+    "end": 111.24
+  },
+  {
+    "word": "storm",
+    "start": 111.24,
+    "end": 111.56
+  },
+  {
+    "word": "warnings",
+    "start": 111.56,
+    "end": 112.12
+  },
+  {
+    "word": "right",
+    "start": 112.12,
+    "end": 112.36
+  },
+  {
+    "word": "alongside",
+    "start": 112.36,
+    "end": 112.84
+  },
+  {
+    "word": "terrestrial",
+    "start": 112.84,
+    "end": 113.48
+  },
+  {
+    "word": "weather",
+    "start": 113.48,
+    "end": 113.8
+  },
+  {
+    "word": "alerts.",
+    "start": 113.8,
+    "end": 114.52
+  },
+  {
+    "word": "They",
+    "start": 114.56,
+    "end": 114.88
+  },
+  {
+    "word": "use",
+    "start": 114.88,
+    "end": 115.12
+  },
+  {
+    "word": "specific",
+    "start": 115.12,
+    "end": 115.76
+  },
+  {
+    "word": "quantitative",
+    "start": 115.76,
+    "end": 116.56
+  },
+  {
+    "word": "metrics,",
+    "start": 116.56,
+    "end": 117.2
+  },
+  {
+    "word": "like",
+    "start": 117.2,
+    "end": 117.44
+  },
+  {
+    "word": "the",
+    "start": 117.44,
+    "end": 117.6
+  },
+  {
+    "word": "A",
+    "start": 117.6,
+    "end": 117.84
+  },
+  {
+    "word": "index",
+    "start": 117.92,
+    "end": 118.4
+  },
+  {
+    "word": "and",
+    "start": 118.4,
+    "end": 118.48
+  },
+  {
+    "word": "the",
+    "start": 118.48,
+    "end": 118.64
+  },
+  {
+    "word": "K",
+    "start": 118.64,
+    "end": 118.88
+  },
+  {
+    "word": "index,",
+    "start": 118.96,
+    "end": 119.52
+  },
+  {
+    "word": "to",
+    "start": 119.52,
+    "end": 119.68
+  },
+  {
+    "word": "measure",
+    "start": 119.68,
+    "end": 120.08
+  },
+  {
+    "word": "the",
+    "start": 120.08,
+    "end": 120.24
+  },
+  {
+    "word": "severity",
+    "start": 120.24,
+    "end": 120.8
+  },
+  {
+    "word": "of",
+    "start": 120.8,
+    "end": 120.96
+  },
+  {
+    "word": "these",
+    "start": 120.96,
+    "end": 121.12
+  },
+  {
+    "word": "geomagnetic",
+    "start": 121.12,
+    "end": 122.08
+  },
+  {
+    "word": "storms.",
+    "start": 122.08,
+    "end": 122.96
+  },
+  {
+    "word": "This",
+    "start": 122.96,
+    "end": 123.28
+  },
+  {
+    "word": "line",
+    "start": 123.28,
+    "end": 123.6
+  },
+  {
+    "word": "chart",
+    "start": 123.6,
+    "end": 123.92
+  },
+  {
+    "word": "shows",
+    "start": 123.92,
+    "end": 124.16
+  },
+  {
+    "word": "a",
+    "start": 124.16,
+    "end": 124.32
+  },
+  {
+    "word": "volatile",
+    "start": 124.32,
+    "end": 125.04
+  },
+  {
+    "word": "K",
+    "start": 125.04,
+    "end": 125.28
+  },
+  {
+    "word": "index",
+    "start": 125.36,
+    "end": 125.76
+  },
+  {
+    "word": "reading,",
+    "start": 125.76,
+    "end": 126.32
+  },
+  {
+    "word": "highlighting",
+    "start": 126.32,
+    "end": 126.88
+  },
+  {
+    "word": "severe",
+    "start": 126.88,
+    "end": 127.36
+  },
+  {
+    "word": "spikes",
+    "start": 127.36,
+    "end": 127.84
+  },
+  {
+    "word": "in",
+    "start": 127.84,
+    "end": 128.0
+  },
+  {
+    "word": "electromagnetic",
+    "start": 128.0,
+    "end": 129.04
+  },
+  {
+    "word": "activity.",
+    "start": 129.04,
+    "end": 130.0
+  },
+  {
+    "word": "But",
+    "start": 130.0,
+    "end": 130.24
+  },
+  {
+    "word": "if",
+    "start": 130.24,
+    "end": 130.4
+  },
+  {
+    "word": "you",
+    "start": 130.4,
+    "end": 130.56
+  },
+  {
+    "word": "look",
+    "start": 130.56,
+    "end": 130.8
+  },
+  {
+    "word": "up",
+    "start": 130.8,
+    "end": 130.96
+  },
+  {
+    "word": "this",
+    "start": 130.96,
+    "end": 131.12
+  },
+  {
+    "word": "feed",
+    "start": 131.12,
+    "end": 131.44
+  },
+  {
+    "word": "yourself,",
+    "start": 131.44,
+    "end": 132.08
+  },
+  {
+    "word": "you",
+    "start": 132.08,
+    "end": 132.24
+  },
+  {
+    "word": "hit",
+    "start": 132.24,
+    "end": 132.48
+  },
+  {
+    "word": "a",
+    "start": 132.48,
+    "end": 132.64
+  },
+  {
+    "word": "wall.",
+    "start": 132.64,
+    "end": 133.28
+  },
+  {
+    "word": "The",
+    "start": 133.28,
+    "end": 133.44
+  },
+  {
+    "word": "raw",
+    "start": 133.44,
+    "end": 133.76
+  },
+  {
+    "word": "data",
+    "start": 133.76,
+    "end": 134.08
+  },
+  {
+    "word": "is",
+    "start": 134.08,
+    "end": 134.32
+  },
+  {
+    "word": "published",
+    "start": 134.32,
+    "end": 134.8
+  },
+  {
+    "word": "as",
+    "start": 134.8,
+    "end": 135.04
+  },
+  {
+    "word": "unformatted",
+    "start": 135.04,
+    "end": 135.92
+  },
+  {
+    "word": "arrays",
+    "start": 135.92,
+    "end": 136.48
+  },
+  {
+    "word": "and",
+    "start": 136.48,
+    "end": 136.64
+  },
+  {
+    "word": "dense",
+    "start": 136.64,
+    "end": 137.12
+  },
+  {
+    "word": "text,",
+    "start": 137.12,
+    "end": 137.76
+  },
+  {
+    "word": "an",
+    "start": 137.76,
+    "end": 137.92
+  },
+  {
+    "word": "esoteric",
+    "start": 138.08,
+    "end": 138.8
+  },
+  {
+    "word": "foreign",
+    "start": 138.8,
+    "end": 139.2
+  },
+  {
+    "word": "language.",
+    "start": 139.2,
+    "end": 140.08
+  },
+  {
+    "word": "This",
+    "start": 140.08,
+    "end": 140.4
+  },
+  {
+    "word": "vital",
+    "start": 140.4,
+    "end": 140.88
+  },
+  {
+    "word": "information",
+    "start": 140.88,
+    "end": 141.44
+  },
+  {
+    "word": "is",
+    "start": 141.44,
+    "end": 141.68
+  },
+  {
+    "word": "often",
+    "start": 141.68,
+    "end": 142.0
+  },
+  {
+    "word": "locked",
+    "start": 142.0,
+    "end": 142.4
+  },
+  {
+    "word": "away",
+    "start": 142.4,
+    "end": 142.64
+  },
+  {
+    "word": "in",
+    "start": 142.64,
+    "end": 142.8
+  },
+  {
+    "word": "academic",
+    "start": 142.8,
+    "end": 143.36
+  },
+  {
+    "word": "noise,",
+    "start": 143.36,
+    "end": 144.0
+  },
+  {
+    "word": "making",
+    "start": 144.0,
+    "end": 144.32
+  },
+  {
+    "word": "it",
+    "start": 144.32,
+    "end": 144.48
+  },
+  {
+    "word": "useless",
+    "start": 144.48,
+    "end": 145.04
+  },
+  {
+    "word": "for",
+    "start": 145.04,
+    "end": 145.2
+  },
+  {
+    "word": "anyone",
+    "start": 145.2,
+    "end": 145.6
+  },
+  {
+    "word": "trying",
+    "start": 145.6,
+    "end": 145.84
+  },
+  {
+    "word": "to",
+    "start": 145.84,
+    "end": 145.92
+  },
+  {
+    "word": "monitor",
+    "start": 145.92,
+    "end": 146.4
+  },
+  {
+    "word": "their",
+    "start": 146.4,
+    "end": 146.64
+  },
+  {
+    "word": "own",
+    "start": 146.64,
+    "end": 146.88
+  },
+  {
+    "word": "technological",
+    "start": 146.88,
+    "end": 147.68
+  },
+  {
+    "word": "reliance.",
+    "start": 147.68,
+    "end": 148.72
+  },
+  {
+    "word": "That",
+    "start": 148.72,
+    "end": 149.04
+  },
+  {
+    "word": "readability",
+    "start": 149.04,
+    "end": 149.92
+  },
+  {
+    "word": "problem",
+    "start": 149.92,
+    "end": 150.16
+  },
+  {
+    "word": "is",
+    "start": 150.16,
+    "end": 150.4
+  },
+  {
+    "word": "exactly",
+    "start": 150.4,
+    "end": 150.88
+  },
+  {
+    "word": "why",
+    "start": 150.88,
+    "end": 151.04
+  },
+  {
+    "word": "the",
+    "start": 151.04,
+    "end": 151.2
+  },
+  {
+    "word": "Space",
+    "start": 151.2,
+    "end": 151.52
+  },
+  {
+    "word": "Weather",
+    "start": 151.52,
+    "end": 151.92
+  },
+  {
+    "word": "Dashboard",
+    "start": 151.92,
+    "end": 152.48
+  },
+  {
+    "word": "was",
+    "start": 152.48,
+    "end": 152.64
+  },
+  {
+    "word": "built.",
+    "start": 152.64,
+    "end": 153.28
+  },
+  {
+    "word": "It",
+    "start": 153.28,
+    "end": 153.52
+  },
+  {
+    "word": "autonomously",
+    "start": 153.52,
+    "end": 154.32
+  },
+  {
+    "word": "pulls",
+    "start": 154.32,
+    "end": 154.72
+  },
+  {
+    "word": "these",
+    "start": 154.72,
+    "end": 154.96
+  },
+  {
+    "word": "dense,",
+    "start": 154.96,
+    "end": 155.6
+  },
+  {
+    "word": "real-time",
+    "start": 155.6,
+    "end": 156.24
+  },
+  {
+    "word": "institutional",
+    "start": 156.24,
+    "end": 156.96
+  },
+  {
+    "word": "feeds,",
+    "start": 156.96,
+    "end": 157.76
+  },
+  {
+    "word": "including",
+    "start": 157.76,
+    "end": 158.16
+  },
+  {
+    "word": "the",
+    "start": 158.16,
+    "end": 158.4
+  },
+  {
+    "word": "A,",
+    "start": 158.4,
+    "end": 158.8
+  },
+  {
+    "word": "K,",
+    "start": 158.8,
+    "end": 159.2
+  },
+  {
+    "word": "and",
+    "start": 159.2,
+    "end": 159.28
+  },
+  {
+    "word": "DST",
+    "start": 159.28,
+    "end": 159.84
+  },
+  {
+    "word": "indices,",
+    "start": 159.84,
+    "end": 160.64
+  },
+  {
+    "word": "and",
+    "start": 160.64,
+    "end": 160.8
+  },
+  {
+    "word": "distills",
+    "start": 160.8,
+    "end": 161.36
+  },
+  {
+    "word": "them",
+    "start": 161.36,
+    "end": 161.52
+  },
+  {
+    "word": "into",
+    "start": 161.52,
+    "end": 161.76
+  },
+  {
+    "word": "a",
+    "start": 161.76,
+    "end": 161.92
+  },
+  {
+    "word": "single,",
+    "start": 161.92,
+    "end": 162.4
+  },
+  {
+    "word": "clean",
+    "start": 162.4,
+    "end": 162.88
+  },
+  {
+    "word": "interface.",
+    "start": 162.88,
+    "end": 163.92
+  },
+  {
+    "word": "It",
+    "start": 163.92,
+    "end": 164.08
+  },
+  {
+    "word": "takes",
+    "start": 164.08,
+    "end": 164.4
+  },
+  {
+    "word": "the",
+    "start": 164.4,
+    "end": 164.64
+  },
+  {
+    "word": "intimidating",
+    "start": 164.64,
+    "end": 165.28
+  },
+  {
+    "word": "math",
+    "start": 165.28,
+    "end": 165.6
+  },
+  {
+    "word": "of",
+    "start": 165.6,
+    "end": 165.76
+  },
+  {
+    "word": "astrophysics,",
+    "start": 165.76,
+    "end": 166.88
+  },
+  {
+    "word": "formatting",
+    "start": 166.88,
+    "end": 167.44
+  },
+  {
+    "word": "it",
+    "start": 167.44,
+    "end": 167.6
+  },
+  {
+    "word": "so",
+    "start": 167.6,
+    "end": 167.76
+  },
+  {
+    "word": "you",
+    "start": 167.76,
+    "end": 167.84
+  },
+  {
+    "word": "can",
+    "start": 167.84,
+    "end": 168.0
+  },
+  {
+    "word": "read",
+    "start": 168.0,
+    "end": 168.24
+  },
+  {
+    "word": "it",
+    "start": 168.24,
+    "end": 168.4
+  },
+  {
+    "word": "as",
+    "start": 168.4,
+    "end": 168.56
+  },
+  {
+    "word": "easily",
+    "start": 168.56,
+    "end": 168.88
+  },
+  {
+    "word": "as",
+    "start": 168.88,
+    "end": 169.04
+  },
+  {
+    "word": "checking",
+    "start": 169.04,
+    "end": 169.36
+  },
+  {
+    "word": "the",
+    "start": 169.36,
+    "end": 169.44
+  },
+  {
+    "word": "chance",
+    "start": 169.44,
+    "end": 169.6
+  },
+  {
+    "word": "of",
+    "start": 169.6,
+    "end": 169.68
+  },
+  {
+    "word": "rain",
+    "start": 169.68,
+    "end": 169.84
+  },
+  {
+    "word": "on",
+    "start": 170.28,
+    "end": 170.44
+  },
+  {
+    "word": "your",
+    "start": 170.44,
+    "end": 170.6
+  },
+  {
+    "word": "phone.",
+    "start": 170.6,
+    "end": 171.24
+  },
+  {
+    "word": "This",
+    "start": 171.24,
+    "end": 171.4
+  },
+  {
+    "word": "provides",
+    "start": 171.4,
+    "end": 171.88
+  },
+  {
+    "word": "a",
+    "start": 171.88,
+    "end": 172.04
+  },
+  {
+    "word": "view",
+    "start": 172.04,
+    "end": 172.36
+  },
+  {
+    "word": "into",
+    "start": 172.36,
+    "end": 172.6
+  },
+  {
+    "word": "the",
+    "start": 172.6,
+    "end": 172.84
+  },
+  {
+    "word": "electromagnetic",
+    "start": 172.84,
+    "end": 174.12
+  },
+  {
+    "word": "systems",
+    "start": 174.12,
+    "end": 174.6
+  },
+  {
+    "word": "shaping",
+    "start": 174.6,
+    "end": 175.24
+  },
+  {
+    "word": "our",
+    "start": 175.24,
+    "end": 175.48
+  },
+  {
+    "word": "world,",
+    "start": 175.48,
+    "end": 176.12
+  },
+  {
+    "word": "expanding",
+    "start": 176.12,
+    "end": 176.68
+  },
+  {
+    "word": "the",
+    "start": 176.68,
+    "end": 176.76
+  },
+  {
+    "word": "traditional",
+    "start": 176.76,
+    "end": 177.4
+  },
+  {
+    "word": "definition",
+    "start": 177.4,
+    "end": 177.88
+  },
+  {
+    "word": "of",
+    "start": 177.88,
+    "end": 178.12
+  },
+  {
+    "word": "weather",
+    "start": 178.12,
+    "end": 178.52
+  },
+  {
+    "word": "to",
+    "start": 178.52,
+    "end": 178.76
+  },
+  {
+    "word": "include",
+    "start": 178.76,
+    "end": 179.16
+  },
+  {
+    "word": "the",
+    "start": 179.16,
+    "end": 179.4
+  },
+  {
+    "word": "void",
+    "start": 179.4,
+    "end": 179.8
+  },
+  {
+    "word": "above",
+    "start": 179.8,
+    "end": 180.12
+  },
+  {
+    "word": "the",
+    "start": 180.12,
+    "end": 180.28
+  },
+  {
+    "word": "atmosphere.",
+    "start": 180.28,
+    "end": 181.4
+  },
+  {
+    "word": "We",
+    "start": 181.4,
+    "end": 181.56
+  },
+  {
+    "word": "build",
+    "start": 181.56,
+    "end": 181.88
+  },
+  {
+    "word": "our",
+    "start": 181.88,
+    "end": 182.04
+  },
+  {
+    "word": "cities",
+    "start": 182.04,
+    "end": 182.6
+  },
+  {
+    "word": "assuming",
+    "start": 182.6,
+    "end": 183.08
+  },
+  {
+    "word": "perfectly",
+    "start": 183.08,
+    "end": 183.64
+  },
+  {
+    "word": "quiet",
+    "start": 183.64,
+    "end": 184.12
+  },
+  {
+    "word": "operating",
+    "start": 184.12,
+    "end": 184.68
+  },
+  {
+    "word": "conditions,",
+    "start": 184.68,
+    "end": 185.56
+  },
+  {
+    "word": "but",
+    "start": 185.56,
+    "end": 185.8
+  },
+  {
+    "word": "we",
+    "start": 185.8,
+    "end": 186.04
+  },
+  {
+    "word": "actually",
+    "start": 186.04,
+    "end": 186.28
+  },
+  {
+    "word": "orbit",
+    "start": 186.28,
+    "end": 186.84
+  },
+  {
+    "word": "a",
+    "start": 186.84,
+    "end": 187.08
+  },
+  {
+    "word": "highly",
+    "start": 187.08,
+    "end": 187.4
+  },
+  {
+    "word": "volatile,",
+    "start": 187.4,
+    "end": 188.2
+  },
+  {
+    "word": "active",
+    "start": 188.2,
+    "end": 188.6
+  },
+  {
+    "word": "star.",
+    "start": 188.6,
+    "end": 189.48
+  },
+  {
+    "word": "Space",
+    "start": 189.48,
+    "end": 189.96
+  },
+  {
+    "word": "weather",
+    "start": 189.96,
+    "end": 190.28
+  },
+  {
+    "word": "is",
+    "start": 190.28,
+    "end": 190.44
+  },
+  {
+    "word": "indifferent",
+    "start": 190.44,
+    "end": 191.0
+  },
+  {
+    "word": "to",
+    "start": 191.0,
+    "end": 191.16
+  },
+  {
+    "word": "our",
+    "start": 191.16,
+    "end": 191.32
+  },
+  {
+    "word": "presence,",
+    "start": 191.32,
+    "end": 191.96
+  },
+  {
+    "word": "but",
+    "start": 191.96,
+    "end": 192.12
+  },
+  {
+    "word": "maintaining",
+    "start": 192.12,
+    "end": 192.76
+  },
+  {
+    "word": "our",
+    "start": 192.76,
+    "end": 192.92
+  },
+  {
+    "word": "infrastructure",
+    "start": 192.92,
+    "end": 193.72
+  },
+  {
+    "word": "requires",
+    "start": 193.72,
+    "end": 194.28
+  },
+  {
+    "word": "us",
+    "start": 194.28,
+    "end": 194.44
+  },
+  {
+    "word": "to",
+    "start": 194.44,
+    "end": 194.68
+  },
+  {
+    "word": "translate",
+    "start": 194.68,
+    "end": 195.16
+  },
+  {
+    "word": "its",
+    "start": 195.16,
+    "end": 195.4
+  },
+  {
+    "word": "noise",
+    "start": 195.4,
+    "end": 195.88
+  },
+  {
+    "word": "into",
+    "start": 195.88,
+    "end": 196.12
+  },
+  {
+    "word": "clarity.",
+    "start": 196.12,
+    "end": 197.08
+  },
+  {
+    "word": "By",
+    "start": 197.08,
+    "end": 197.4
+  },
+  {
+    "word": "making",
+    "start": 197.4,
+    "end": 197.72
+  },
+  {
+    "word": "the",
+    "start": 197.72,
+    "end": 197.96
+  },
+  {
+    "word": "invisible",
+    "start": 197.96,
+    "end": 198.52
+  },
+  {
+    "word": "visible,",
+    "start": 198.52,
+    "end": 199.24
+  },
+  {
+    "word": "we",
+    "start": 199.24,
+    "end": 199.4
+  },
+  {
+    "word": "expose",
+    "start": 199.4,
+    "end": 199.96
+  },
+  {
+    "word": "the",
+    "start": 199.96,
+    "end": 200.12
+  },
+  {
+    "word": "delicate,",
+    "start": 200.12,
+    "end": 200.76
+  },
+  {
+    "word": "unseen",
+    "start": 200.76,
+    "end": 201.48
+  },
+  {
+    "word": "threads",
+    "start": 201.48,
+    "end": 201.96
+  },
+  {
+    "word": "that",
+    "start": 201.96,
+    "end": 202.2
+  },
+  {
+    "word": "hold",
+    "start": 202.2,
+    "end": 202.44
+  },
+  {
+    "word": "our",
+    "start": 202.44,
+    "end": 202.6
+  },
+  {
+    "word": "technology-dependent",
+    "start": 202.6,
+    "end": 203.88
+  },
+  {
+    "word": "lives",
+    "start": 203.88,
+    "end": 204.52
+  },
+  {
+    "word": "together.",
+    "start": 204.52,
+    "end": 205.8
+  }
+]

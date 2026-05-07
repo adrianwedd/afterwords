@@ -1,0 +1,30 @@
+VIDEO: owXdPDifuQE
+TITLE: EMDR Agent
+
+ISSUE at ~13s: "looking at this generated video of an eye-shifting focus, capturing the subtle, involuntary micro-expressions of the facial muscles"
+SOURCE SAYS: "A human therapist reads the room—breath, posture, the micro-expressions that signal when to slow down or when to press forward. Software does not get that for free."
+REPLACEMENT: "When we consider how a human therapist reads the room—tracking breath, posture, and micro-expressions—it's clear that software doesn't get that environmental awareness for free."
+
+ISSUE at ~1:21s: "This animated diagram maps out those specific failure modes."
+SOURCE SAYS: "Its failure modes are serious. Get the bilateral stimulation timing wrong, push too quickly through a traumatic memory, or miss a dissociative response, and you have done harm."
+REPLACEMENT: "The system identifies failure modes that are serious; if the clinical precision of the bilateral stimulation is lost, the consequences are severe."
+
+ISSUE at ~2:04s: "The system sidesteps the danger of large language model hallucinations."
+SOURCE SAYS: "Crisis intervention protocols exist as hard stops—not suggestions the model might ignore, but deterministic gates that lock the AI out entirely"
+REPLACEMENT: "The architecture prioritizes hard-coded safety mechanisms, ensuring protocols are not mere suggestions the model might ignore, but deterministic gates."
+
+ISSUE at ~2:15s: "This diagram illustrates a real-time data timeline plotting a user's quantitative physiological arousal metric. Throughout the entire session, the system continuously tracks this tension as the trend line climbs toward that horizontal critical threshold."
+SOURCE SAYS: "Three layers of distress monitoring run continuously during every session. Grounding techniques trigger automatically when physiological arousal crosses thresholds."
+REPLACEMENT: "Throughout the entire session, the system continuously tracks physiological arousal, monitoring three layers of distress for any sign that the user is crossing a safety threshold."
+
+ISSUE at ~2:40s: "forcing the session to pause and the arousal trend to redirect sharply downward."
+SOURCE SAYS: "Grounding techniques trigger automatically when physiological arousal crosses thresholds. ... [and] hand control to pre-written safety scripts"
+REPLACEMENT: "triggering automatic grounding techniques to anchor the user and pause the session the moment safety thresholds are crossed."
+
+ISSUE at ~4:08s: "This flowchart demonstrates the system's hard stop."
+SOURCE SAYS: "Crisis intervention protocols exist as hard stops—not suggestions the model might ignore, but deterministic gates that lock the AI out entirely"
+REPLACEMENT: "The architecture employs a deterministic hard stop that acts as an unyielding software gate."
+
+ISSUE at ~5:18s: "It tests what responsible AI-assisted therapeutic tooling looks like in clinical vacuums."
+SOURCE SAYS: "the question of what responsible AI-assisted therapeutic tooling looks like is worth taking seriously—especially in contexts where the alternative is no access at all."
+REPLACEMENT: "It tests what responsible AI-assisted therapeutic tooling looks like in contexts where the alternative is no access to care at all."

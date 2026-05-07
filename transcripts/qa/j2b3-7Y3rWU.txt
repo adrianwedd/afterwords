@@ -1,0 +1,18 @@
+VIDEO: j2b3-7Y3rWU
+TITLE: Zero-Build Web Development
+
+ISSUE at ~0:21: "Consider the WolfClan martial arts operations platform."
+SOURCE SAYS: "Wolf Clan" (two words)
+REPLACEMENT: "Consider the Wolf Clan martial arts operations platform."
+
+ISSUE at ~1:05: "the entire application relies on a single file acting as middleware... totals exactly 480 lines of code."
+SOURCE SAYS: "The middleware is 480 lines" (The project also includes 20+ API endpoints, nine CSS files, and multiple HTML files; the 480 lines refer specifically to the middleware file, not the entire application).
+REPLACEMENT: "the system's core routing logic is handled by a single middleware file... totaling exactly 480 lines of code."
+
+ISSUE at ~2:00: "This diagram shows a subtle vulnerability in standard authentication. The top half visualizes a naive password check."
+SOURCE SAYS: not mentioned (The source text describes timing-safe comparisons but does not contain or describe a diagram or a "top half" visualization).
+REPLACEMENT: "This reveals a subtle vulnerability in standard authentication, often found in a naive password check."
+
+ISSUE at ~3:18: "This graph illustrates a custom solution."
+SOURCE SAYS: not mentioned (The source describes the "heartbeat model" in text, but does not describe or provide a graph).
+REPLACEMENT: "This leads to a custom solution."

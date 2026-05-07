@@ -1,0 +1,22 @@
+VIDEO: oW7AM5MyWDw
+TITLE: Jailbreak Archaeology: 4 Years of Broken Promises
+
+ISSUE at ~40s: "To test that assumption, researchers developed a methodology called jailbreak archaeology."
+SOURCE SAYS: "My latest research at Failure First involved a process I call Jailbreak Archaeology." (The author is describing their own specific research, not a general group of researchers).
+REPLACEMENT: "To test that assumption, I developed a methodology at Failure First called jailbreak archaeology."
+
+ISSUE at ~53s: "This graph illustrates the results of that test. The line plummeting to zero represents our public assumption of how secure these models have become over four years, but the actual data shows a stubborn, flat 30% success rate for historical attacks on today's frontier models."
+SOURCE SAYS: The source mentions a plateaued ~30% success rate, but does not mention a specific graph, nor does it describe a "line plummeting to zero" representing "public assumption."
+REPLACEMENT: "My findings illustrate a disturbing trend. While many assumed safety progress would drive success rates toward zero, the actual data shows a stubborn 30% success rate for historical attacks on today's frontier models."
+
+ISSUE at ~1:46s: "Researchers began using LLM on LLM red teaming, essentially training AIs to find the flaws in other AIs."
+SOURCE SAYS: "I started using models to break other models, leading to a massive expansion of known attack surfaces." (The author is describing their own methodology during the 2024 era).
+REPLACEMENT: "I began using industrial-scale LLM-on-LLM red teaming, leveraging models to find the flaws in other models."
+
+ISSUE at ~2:04s: "In 2025, developers introduced models that forge active internal connections to reason through complex problems."
+SOURCE SAYS: "As models gained internal 'Chain of Thought' capabilities, attackers learned to hijack that reasoning." (The source does not mention "forging active internal connections").
+REPLACEMENT: "In 2025, models gained internal 'Chain of Thought' capabilities, allowing them to reason through complex problems before generating output."
+
+ISSUE at ~3:34s: "This engineering diagram shows the result of that reliance. When a behavioral safety check is the only thing supporting the system, a single clever prompt can cause that pillar to crack, leaving the entire infrastructure vulnerable."
+SOURCE SAYS: Not mentioned. The source does not describe an engineering diagram or a metaphor involving a "cracking pillar."
+REPLACEMENT: "This reliance creates a structural vulnerability. When a behavioral safety check is the only thing supporting the system, a single clever prompt can bypass the guardrails, leaving the entire infrastructure exposed."

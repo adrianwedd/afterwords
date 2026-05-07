@@ -1,0 +1,30 @@
+VIDEO: PBClZsW-W4U
+TITLE: Voice Cloning with Qwen3-TTS and MLX on Apple Silicon
+
+ISSUE at ~0:21: "Our goal is to create a realistic, instantaneous voice"
+SOURCE SAYS: "A typical 2-sentence response takes 18-22 seconds on an 8 GB M1." (Source 1)
+REPLACEMENT: "Our goal is to create a realistic voice that can be generated in near real-time"
+
+ISSUE at ~0:58: "the speaker's timb andre cadence"
+SOURCE SAYS: "the speaker's timbre, cadence, and accent" (Source 1)
+REPLACEMENT: "the speaker's timbre and cadence"
+
+ISSUE at ~3:21: "symphlock"
+SOURCE SAYS: "`_synth_lock`" (Source 1)
+REPLACEMENT: "synthesis lock"
+
+ISSUE at ~3:21: "concurrent GPU paches"
+SOURCE SAYS: "concurrent GPU access" (Source 1)
+REPLACEMENT: "concurrent GPU access"
+
+ISSUE at ~3:21: "treating consumer hardware with the same rigorous traffic management used in massive data centers."
+SOURCE SAYS: not mentioned; the source describes using a threading lock and a queue worker to manage serialised requests.
+REPLACEMENT: "treating consumer hardware with the same rigorous serialisation of GPU requests as a professional production environment."
+
+ISSUE at ~3:40: "requiring only a small web file"
+SOURCE SAYS: "reference WAV (~700 KB)" (Source 1)
+REPLACEMENT: "requiring only a small WAV file"
+
+ISSUE at ~4:20: "no longer restricted to distant corporate server farms."
+SOURCE SAYS: not mentioned; the source states there is "zero cloud dependency."
+REPLACEMENT: "no longer dependent on external cloud providers."

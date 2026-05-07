@@ -1,0 +1,22 @@
+VIDEO: 9Mp-HZZDEo4
+TITLE: Beyond Optimisation: The Emergence of Learning Mechanics as a Formal Science
+
+ISSUE at ~0:00: "We have integrated systems built from billions and sometimes trillions of individual parameters... Neural networks now drive vehicles, diagnose medical conditions, and generate complex code."
+SOURCE SAYS: not mentioned
+REPLACEMENT: "We have integrated massive neural networks into the core of our digital infrastructure, yet despite their scale, the engineers programming them do not actually possess a mathematical blueprint for how they function."
+
+ISSUE at ~0:33: "Either the math is hopelessly complex because there are too many variables, or a blueprint simply is not necessary because the current tinkering process gets us the results we want."
+SOURCE SAYS: "the honest answer... has been some version of: we're not entirely sure... the actual mechanism... has felt more like craft than science. We have recipes. We lack laws."
+REPLACEMENT: "Ask why we don't have a rigid mathematical explanation for these networks, and the honest answer is that we're not entirely sure; we have recipes and craft, but we lack fundamental laws."
+
+ISSUE at ~1:41: "Physicists use statistical physics for billions of moving parts. Instead of tracking every atom, they calculate macroscopic observables, like measuring a room's temperature."
+SOURCE SAYS: not mentioned (Source uses terms "coarse aggregate statistics" and "macroscopic properties" but contains no physics/atom analogy).
+REPLACEMENT: "By focusing on what the authors call coarse aggregate statistics, researchers can track the macroscopic properties of training without needing to interpret every individual weight."
+
+ISSUE at ~2:37: "This graph shows chaotic data clusters mathematically resolving into a single geometric curve, representing macroscopic laws."
+SOURCE SAYS: not mentioned (The third pillar in the source is "Simple mathematical laws" such as scaling laws).
+REPLACEMENT: "Third, they identify simple mathematical laws. Scaling laws show that properties like loss follow clean power laws, providing the macroscopic regularity that a serious theory needs to explain."
+
+ISSUE at ~4:04: "By uncovering the underlying physics of deep learning, we move from empirical guesswork to mathematical certainty. We are no longer just observing the output of synthetic minds. We are calculating exactly how they work."
+SOURCE SAYS: "The theory doesn't yet tell you, before you start training, exactly what your model will learn to represent... We're not there. But the path toward it is beginning to look like science rather than guesswork."
+REPLACEMENT: "By uncovering these underlying mechanics, we move from guesswork toward a formal science. We aren't there yet, but the path is beginning to look like a predictable discipline rather than just craft."

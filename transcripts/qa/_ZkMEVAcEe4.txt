@@ -1,0 +1,14 @@
+VIDEO: _ZkMEVAcEe4
+TITLE: Agentic Index
+
+ISSUE at ~0:32: "This animated scatterplot demonstrates the issue. It maps GitHub stars on the vertical axis against actual functional quality on the horizontal axis. As you can see, there is zero correlation."
+SOURCE SAYS: Not mentioned. The source notes that GitHub stars "measure hype, not quality," but does not mention a scatterplot or specific axes.
+REPLACEMENT: "Existing metrics often fail us, because GitHub stars frequently measure marketing hype rather than underlying engineering quality, resulting in zero correlation between popularity and functional reliability."
+
+ISSUE at ~2:01: "Raw data nodes representing new tools enter a filtering funnel, sorted by engineering maturity. Survivors drop onto a pressure plate simulating continuous operational load. Most shatter. Intact tools settle into a grid..."
+SOURCE SAYS: Not mentioned. The source mentions a "transparent methodology" assessing maturity and performance "under load," but the visual metaphors of a funnel, pressure plate, shattering tools, and a grid are invented.
+REPLACEMENT: "Every tool is rigorously audited against a transparent methodology, focusing on engineering maturity and performance under sustained operational load. Only the tools that actually work are included, receiving a distinct quantitative data score..."
+
+ISSUE at ~2:19: "delivered as a PyPy package"
+SOURCE SAYS: "PyPI package"
+REPLACEMENT: "delivered as a PyPI package"
