@@ -18,9 +18,19 @@ VENV="$REPO_DIR/.venv/bin/python3"
 TRANSCRIBE="$REPO_DIR/scripts/transcribe.py"
 OUT_DIR="$REPO_DIR/transcripts/youtube"
 TMPDIR_BASE="$(mktemp -d /tmp/yt-transcribe-XXXXXX)"
+# Pin launcher binaries to absolute paths so caller-controlled PATH cannot
+# intercept the sandbox bootstrap. (env -i only sanitizes the environment of
+# the program it execs into; the launcher chain itself runs with caller PATH.)
+ENV_BIN="/usr/bin/env"
+# macOS does not ship setsid; force the Python fallback unconditionally so we
+# never resolve a launcher binary via caller-controlled PATH. Cross-platform
+# users would need an absolute /usr/bin/setsid check (`-x`) instead.
+SETSID_BIN=""
 SAFE_ENV=(
-  env -i
-  # Use a fixed tool search path so caller-controlled PATH cannot shadow tools.
+  "$ENV_BIN" -i
+  # Use an absolute env launcher plus a fixed tool search path. This prevents
+  # caller PATH from intercepting the sandbox bootstrap while still allowing
+  # execvp inside the sanitized environment to find expected tools.
   # /opt/homebrew comes first for Apple Silicon precedence.
   "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
   "HOME=$HOME"
@@ -44,11 +54,11 @@ run_with_timeout() {
   shift
 
   local cmd_pid
-  if command -v setsid >/dev/null 2>&1; then
-    setsid "$@" &
+  if [[ -n "$SETSID_BIN" ]]; then
+    "$SETSID_BIN" "$@" &
     cmd_pid=$!
   else
-    python3 - "$@" <<'PY' &
+    "$VENV" - "$@" <<'PY' &
 import os
 import sys
 
