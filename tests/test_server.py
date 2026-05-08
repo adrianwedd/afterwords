@@ -616,3 +616,88 @@ def test_lang_routing_unchanged_when_lang_supported(client):
         assert r.headers.get("x-backend") == "qwen3-0.6b"  # original, not routed
     finally:
         server.VOICES.clear()
+
+
+# --- Chatterbox backend unit tests ---
+
+
+def test_chatterbox_validate_extras_allows_cfg_weight_and_exaggeration():
+    """Chatterbox should accept cfg_weight and exaggeration as valid extras."""
+    from backends.chatterbox import ChatterboxBackend
+
+    be = ChatterboxBackend()
+    # Should not raise
+    be.validate_extras({"cfg_weight": 0.7, "exaggeration": 0.5})
+    be.validate_extras({"cfg_weight": 0.9})
+    be.validate_extras({"exaggeration": 0.3})
+    be.validate_extras({})
+
+
+def test_chatterbox_validate_extras_rejects_unknown():
+    """Chatterbox should reject extras it doesn't recognize."""
+    from backends.chatterbox import ChatterboxBackend
+
+    be = ChatterboxBackend()
+    try:
+        be.validate_extras({"unknown_key": 1})
+        assert False, "expected ValueError"
+    except ValueError as e:
+        assert "unknown_key" in str(e)
+
+
+def test_chatterbox_prepare_voice_preserves_extras():
+    """prepare_voice should preserve extras into PreparedVoice."""
+    from backends.chatterbox import ChatterboxBackend
+
+    be = ChatterboxBackend()
+    pv = be.prepare_voice("/tmp/ref.wav", "hello", {"cfg_weight": 0.8, "exaggeration": 0.4})
+    assert pv.extras["cfg_weight"] == 0.8
+    assert pv.extras["exaggeration"] == 0.4
+
+
+def test_chatterbox_synthesize_forwards_lang_and_defaults(monkeypatch, tmp_path):
+    """synthesize should forward lang_code, cfg_weight, and exaggeration to generate_audio."""
+    from backends.chatterbox import ChatterboxBackend, _DEFAULT_CFG_WEIGHT, _DEFAULT_EXAGGERATION
+    from backends.base import PreparedVoice, _read_only
+
+    be = ChatterboxBackend()
+    be._model = "fake-model"  # bypass load
+
+    captured_kwargs = {}
+
+    def fake_generate_audio(**kwargs):
+        captured_kwargs.update(kwargs)
+        # Write a tiny WAV so synthesize can read it back
+        import numpy as np
+        import soundfile as sf
+        path = os.path.join(kwargs["output_path"], "out_0.wav")
+        sf.write(path, np.zeros(2400, dtype=np.float32), 24000)
+        return path
+
+    # generate_audio is imported locally inside synthesize(), so patch at source
+    monkeypatch.setattr("mlx_audio.tts.generate.generate_audio", fake_generate_audio)
+
+    # Without extras — should use defaults
+    pv = PreparedVoice(
+        ref_audio_path=str(tmp_path / "ref.wav"),
+        ref_text="hello",
+        extras=_read_only({}),
+    )
+    be.synthesize("test text", pv, "es")
+
+    assert captured_kwargs["lang_code"] == "es"
+    assert captured_kwargs["cfg_weight"] == _DEFAULT_CFG_WEIGHT
+    assert captured_kwargs["exaggeration"] == _DEFAULT_EXAGGERATION
+
+    # With explicit extras — should override defaults
+    captured_kwargs.clear()
+    pv2 = PreparedVoice(
+        ref_audio_path=str(tmp_path / "ref.wav"),
+        ref_text="hello",
+        extras=_read_only({"cfg_weight": 0.9, "exaggeration": 0.3}),
+    )
+    be.synthesize("test text", pv2, "fr")
+
+    assert captured_kwargs["lang_code"] == "fr"
+    assert captured_kwargs["cfg_weight"] == 0.9
+    assert captured_kwargs["exaggeration"] == 0.3

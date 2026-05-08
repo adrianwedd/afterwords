@@ -16,6 +16,14 @@ log = logging.getLogger("backends.chatterbox")
 
 MODEL_ID = "mlx-community/chatterbox-fp16"
 
+# cfg_weight controls how closely output matches the reference voice (higher =
+# more similar, less natural). exaggeration controls expressiveness. Defaults
+# chosen for good cloning fidelity: 0.7 cfg_weight (up from model default 0.5)
+# and 0.5 exaggeration (model default).
+_ALLOWED_EXTRAS = {"cfg_weight", "exaggeration"}
+_DEFAULT_CFG_WEIGHT = 0.7
+_DEFAULT_EXAGGERATION = 0.5
+
 
 class ChatterboxBackend(BackendBase):
     name = "chatterbox"
@@ -37,7 +45,7 @@ class ChatterboxBackend(BackendBase):
         self._ensure_loaded(_do)
 
     def validate_extras(self, extras: Mapping[str, object]) -> None:
-        unknown = set(extras) - set()
+        unknown = set(extras) - _ALLOWED_EXTRAS
         if unknown:
             raise ValueError(f"Chatterbox does not accept extras: {sorted(unknown)}")
 
@@ -51,7 +59,7 @@ class ChatterboxBackend(BackendBase):
         return PreparedVoice(
             ref_audio_path=ref_audio_path,
             ref_text=ref_text,
-            extras=_read_only({}),
+            extras=_read_only(dict(extras)),
         )
 
     def synthesize(
@@ -66,14 +74,15 @@ class ChatterboxBackend(BackendBase):
             raise ValueError(
                 f"chatterbox does not support lang={lang!r}; supported: {self.supported_langs}"
             )
-        # lang is validated above but not forwarded — mlx-audio's chatterbox-fp16
-        # generator doesn't expose a lang_code kwarg; behavior is preserved.
         from mlx_audio.tts.generate import generate_audio
         with tempfile.TemporaryDirectory() as tmpdir:
             kwargs = dict(
                 text=text,
                 model=self._model,
                 ref_audio=prepared.ref_audio_path,
+                lang_code=lang,
+                cfg_weight=prepared.extras.get("cfg_weight", _DEFAULT_CFG_WEIGHT),
+                exaggeration=prepared.extras.get("exaggeration", _DEFAULT_EXAGGERATION),
                 output_path=tmpdir,
                 file_prefix="out",
                 verbose=False,
