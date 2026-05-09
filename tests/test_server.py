@@ -7,6 +7,7 @@ to exercise the full synthesis response path.
 import json
 import os
 
+import pytest
 import server
 
 
