@@ -9,7 +9,9 @@ __pycache__/
 # Afterwords TTS voice override
 .afterwords
 
-# Private voices (not shipped)
+# Private voices — available locally on the dev machine and loaded by the
+# server at runtime, but not shipped in the repo. These are personal/test
+# profiles that don't need to be distributed.
 voices/muse*
 voices/vixen*
 
