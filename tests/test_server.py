@@ -657,6 +657,7 @@ def test_chatterbox_prepare_voice_preserves_extras():
 
 def test_chatterbox_synthesize_forwards_lang_and_defaults(monkeypatch, tmp_path):
     """synthesize should forward lang_code, cfg_weight, and exaggeration to generate_audio."""
+    pytest.importorskip("mlx_audio")
     from backends.chatterbox import ChatterboxBackend, _DEFAULT_CFG_WEIGHT, _DEFAULT_EXAGGERATION
     from backends.base import PreparedVoice, _read_only
 
