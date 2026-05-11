@@ -299,6 +299,35 @@ def test_synthesize_unsupported_lang_returns_400(client, sample_voice):
     assert "fr" not in body["supported_langs"]
 
 
+def test_fake_backend_synthesize_raises_for_unsupported_lang():
+    """FakeBackend.synthesize must raise ValueError for langs outside supported_langs.
+
+    This verifies the backend contract, independent of the HTTP routing layer.
+    The server relies on ValueError to produce the 400 + supported_langs body.
+    """
+    import backends as _backends
+    from backends.base import PreparedVoice, _read_only
+    import numpy as np
+
+    be = _backends.get("fake")
+    pv = PreparedVoice(
+        ref_audio_path="/dev/null",
+        ref_text=None,
+        extras=_read_only({}),
+    )
+    assert "en" in be.supported_langs
+    assert "fr" not in be.supported_langs
+
+    # Supported lang must not raise
+    audio, sr = be.synthesize("hello", pv, "en")
+    assert isinstance(audio, np.ndarray)
+
+    # Unsupported lang must raise ValueError (not KeyError, not RuntimeError)
+    import pytest as _pytest
+    with _pytest.raises(ValueError, match="fr"):
+        be.synthesize("bonjour", pv, "fr")
+
+
 def test_post_synthesize_accepts_lang(client, sample_voice):
     """POST /synthesize with lang=en against an en voice should succeed."""
     server._clone_enabled = True
