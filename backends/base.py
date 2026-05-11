@@ -28,6 +28,10 @@ class PreparedVoice:
     extras: Mapping[str, object]
     owns_temp_audio: bool = False
     cleanup_paths: tuple[str, ...] = ()
+    # Backends may store pre-loaded in-memory data (e.g. a pre-converted mx.array)
+    # to avoid re-reading ref_audio_path at synthesize() time, eliminating the TOCTOU
+    # window with DELETE /session which removes the backing file.
+    data: object = None
 
     def __post_init__(self):
         # Enforce immutability contract — backends may pass dict, we wrap here.

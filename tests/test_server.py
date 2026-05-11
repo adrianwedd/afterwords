@@ -646,14 +646,19 @@ def test_chatterbox_validate_extras_rejects_unknown():
         assert "unknown_key" in str(e)
 
 
-def test_chatterbox_prepare_voice_preserves_extras():
+def test_chatterbox_prepare_voice_preserves_extras(tmp_path):
     """prepare_voice should preserve extras into PreparedVoice."""
+    import soundfile as sf
+    import numpy as np
     from backends.chatterbox import ChatterboxBackend
 
+    ref_wav = tmp_path / "ref.wav"
+    sf.write(str(ref_wav), np.zeros(24000, dtype=np.float32), 24000)
     be = ChatterboxBackend()
-    pv = be.prepare_voice("/tmp/ref.wav", "hello", {"cfg_weight": 0.8, "exaggeration": 0.4})
+    pv = be.prepare_voice(str(ref_wav), "hello", {"cfg_weight": 0.8, "exaggeration": 0.4})
     assert pv.extras["cfg_weight"] == 0.8
     assert pv.extras["exaggeration"] == 0.4
+    assert pv.data is not None
 
 
 def test_chatterbox_synthesize_forwards_lang_and_defaults(monkeypatch, tmp_path):

@@ -68,26 +68,21 @@ class VoxCPMBackend(BackendBase):
         ref_text: str | None,
         extras: Mapping[str, object],
     ) -> PreparedVoice:
+        import mlx.core as mx
         data, sr = sf.read(ref_audio_path)
         if data.ndim > 1:
             data = data.mean(axis=1)
-        if sr == NATIVE_SR:
-            return PreparedVoice(
-                ref_audio_path=ref_audio_path,
-                ref_text=ref_text,
-                extras=_read_only(dict(extras)),
-            )
-        # CPU-only resample; safe outside _synth_lock.
-        resampled = _resample_cpu(data.astype(np.float32), sr, NATIVE_SR)
-        tmpdir = tempfile.gettempdir()
-        out_path = os.path.join(tmpdir, f"voxcpm-ref-{uuid.uuid4().hex}.wav")
-        sf.write(out_path, resampled, NATIVE_SR, subtype="PCM_16")
+        if sr != NATIVE_SR:
+            data = _resample_cpu(data.astype(np.float32), sr, NATIVE_SR)
+        # Pre-convert to mx.array here so synthesize() never reads from disk.
+        # Eliminates TOCTOU race: DELETE /session can remove the file safely
+        # while a synthesis using this PreparedVoice is already in flight.
+        ref_array = mx.array(data.astype(np.float32))
         return PreparedVoice(
-            ref_audio_path=out_path,
+            ref_audio_path=ref_audio_path,
             ref_text=ref_text,
             extras=_read_only(dict(extras)),
-            owns_temp_audio=True,
-            cleanup_paths=(out_path,),
+            data=ref_array,
         )
 
     def synthesize(
@@ -104,19 +99,8 @@ class VoxCPMBackend(BackendBase):
             )
         # lang is validated above but not forwarded — mlx-audio's VoxCPM generate()
         # doesn't expose a lang kwarg; behavior is preserved.
-        # VoxCPM enters voice-cloning mode only when BOTH ref_audio (mx.array,
-        # already at NATIVE_SR) AND ref_text are passed. Earlier code passed
-        # the file path, which silently fell back to the default voice. Load
-        # the prepared (already-resampled to 44.1kHz) WAV into mx.array shape (T,).
-        import mlx.core as mx
-        ref_data, ref_sr = sf.read(prepared.ref_audio_path)
-        if ref_data.ndim > 1:
-            ref_data = ref_data.mean(axis=1)
-        if ref_sr != NATIVE_SR:
-            # prepare_voice should have already resampled; this is belt+braces.
-            from .voxcpm import _resample_cpu  # self-import for clarity
-            ref_data = _resample_cpu(ref_data.astype(np.float32), ref_sr, NATIVE_SR)
-        ref_array = mx.array(ref_data.astype(np.float32))
+        # Use the mx.array pre-loaded in prepare_voice(); never re-read from disk.
+        ref_array = prepared.data
 
         kwargs = dict(
             text=text,

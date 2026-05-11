@@ -201,7 +201,6 @@ def test_voxcpm_synthesize_passes_mxarray_ref_audio_to_model(tmp_path):
     from types import SimpleNamespace
     import numpy as np
     from backends.voxcpm import VoxCPMBackend
-    from backends.base import PreparedVoice, _read_only
 
     backend = VoxCPMBackend()
     captured_kwargs = {}
@@ -212,11 +211,8 @@ def test_voxcpm_synthesize_passes_mxarray_ref_audio_to_model(tmp_path):
             yield SimpleNamespace(audio=np.zeros(10, dtype=np.float32))
 
     backend._model = _CapturingModel()
-    prepared = PreparedVoice(
-        ref_audio_path=_write_silence_wav(tmp_path),
-        ref_text="reference text",
-        extras=_read_only({}),
-    )
+    # prepare_voice now pre-converts to mx.array and stores in prepared.data.
+    prepared = backend.prepare_voice(_write_silence_wav(tmp_path), "reference text", {})
     backend.synthesize("hello", prepared, lang="en")
 
     assert "ref_audio" in captured_kwargs, "must pass ref_audio (not reference_wav_path)"

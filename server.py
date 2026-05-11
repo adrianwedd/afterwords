@@ -143,6 +143,10 @@ def _build_voice_profile(profile_path: str) -> VoiceProfile | None:
 
     ref_rel = p.get("reference_audio", f"{stem}-ref.wav")
     ref_audio = os.path.join(_VOICES_DIR, ref_rel)
+    _voices_real = os.path.realpath(_VOICES_DIR)
+    if not os.path.realpath(ref_audio).startswith(_voices_real + os.sep):
+        log.warning("voice %r: reference_audio %r escapes voices/ — skipping", name, ref_rel)
+        return None
     if not os.path.exists(ref_audio):
         log.warning("voice %r missing ref audio %s — skipping", name, ref_audio)
         return None
@@ -540,6 +544,13 @@ async def clone_voice_endpoint(
     """Create a voice profile from raw audio. Denoises, optionally transcribes, registers."""
     if not _clone_enabled:
         return JSONResponse({"error": "clone not enabled (start with --allow-clone)"}, status_code=404)
+
+    import re as _re
+    if not _re.match(r'^[a-zA-Z0-9_-]{1,64}$', session_id):
+        return JSONResponse(
+            {"error": "session_id must be 1–64 alphanumeric/hyphen/underscore characters"},
+            status_code=400,
+        )
 
     audio_bytes = await audio.read()
     if len(audio_bytes) < 1000:

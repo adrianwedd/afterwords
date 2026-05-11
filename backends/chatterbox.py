@@ -55,11 +55,16 @@ class ChatterboxBackend(BackendBase):
         ref_text: str | None,
         extras: Mapping[str, object],
     ) -> PreparedVoice:
-        # Chatterbox accepts 24 kHz; ref_text is optional (used if present).
+        # Read ref audio into memory now so synthesize() never re-reads from disk.
+        # Eliminates TOCTOU race: DELETE /session removes the file, but an
+        # in-flight synthesis using this PreparedVoice can still complete.
+        with open(ref_audio_path, "rb") as fh:
+            ref_bytes = fh.read()
         return PreparedVoice(
             ref_audio_path=ref_audio_path,
             ref_text=ref_text,
             extras=_read_only(dict(extras)),
+            data=ref_bytes,
         )
 
     def synthesize(
@@ -76,10 +81,18 @@ class ChatterboxBackend(BackendBase):
             )
         from mlx_audio.tts.generate import generate_audio
         with tempfile.TemporaryDirectory() as tmpdir:
+            # Use buffered bytes from prepare_voice() to avoid reading the original
+            # file at synthesis time (guards against DELETE /session TOCTOU race).
+            if prepared.data is not None:
+                ref_path = os.path.join(tmpdir, "ref.wav")
+                with open(ref_path, "wb") as fh:
+                    fh.write(prepared.data)
+            else:
+                ref_path = prepared.ref_audio_path
             kwargs = dict(
                 text=text,
                 model=self._model,
-                ref_audio=prepared.ref_audio_path,
+                ref_audio=ref_path,
                 lang_code=lang,
                 cfg_weight=prepared.extras.get("cfg_weight", _DEFAULT_CFG_WEIGHT),
                 exaggeration=prepared.extras.get("exaggeration", _DEFAULT_EXAGGERATION),
