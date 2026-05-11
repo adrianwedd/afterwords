@@ -299,7 +299,7 @@ def test_synthesize_unsupported_lang_returns_400(client, sample_voice):
     assert "fr" not in body["supported_langs"]
 
 
-def test_fake_backend_synthesize_raises_for_unsupported_lang():
+def test_fake_backend_synthesize_raises_for_unsupported_lang(tmp_path):
     """FakeBackend.synthesize must raise ValueError for langs outside supported_langs.
 
     This verifies the backend contract, independent of the HTTP routing layer.
@@ -308,10 +308,13 @@ def test_fake_backend_synthesize_raises_for_unsupported_lang():
     import backends as _backends
     from backends.base import PreparedVoice, _read_only
     import numpy as np
+    import soundfile as sf
 
+    ref = tmp_path / "ref.wav"
+    sf.write(str(ref), np.zeros(24000, dtype=np.float32), 24000)
     be = _backends.get("fake")
     pv = PreparedVoice(
-        ref_audio_path="/dev/null",
+        ref_audio_path=str(ref),
         ref_text=None,
         extras=_read_only({}),
     )
@@ -743,13 +746,15 @@ def test_chatterbox_synthesize_forwards_lang_and_defaults(monkeypatch, tmp_path)
     be = ChatterboxBackend()
     be._model = "fake-model"  # bypass load
 
+    import numpy as np
+    import soundfile as sf
+    ref_wav = tmp_path / "ref.wav"
+    sf.write(str(ref_wav), np.zeros(24000, dtype=np.float32), 24000)
+
     captured_kwargs = {}
 
     def fake_generate_audio(**kwargs):
         captured_kwargs.update(kwargs)
-        # Write a tiny WAV so synthesize can read it back
-        import numpy as np
-        import soundfile as sf
         path = os.path.join(kwargs["output_path"], "out_0.wav")
         sf.write(path, np.zeros(2400, dtype=np.float32), 24000)
         return path
@@ -757,9 +762,9 @@ def test_chatterbox_synthesize_forwards_lang_and_defaults(monkeypatch, tmp_path)
     # generate_audio is imported locally inside synthesize(), so patch at source
     monkeypatch.setattr("mlx_audio.tts.generate.generate_audio", fake_generate_audio)
 
-    # Without extras — should use defaults
+    # Without extras — should use defaults. data=None so synthesize uses ref_audio_path directly.
     pv = PreparedVoice(
-        ref_audio_path=str(tmp_path / "ref.wav"),
+        ref_audio_path=str(ref_wav),
         ref_text="hello",
         extras=_read_only({}),
     )
@@ -769,13 +774,13 @@ def test_chatterbox_synthesize_forwards_lang_and_defaults(monkeypatch, tmp_path)
     assert captured_kwargs["cfg_weight"] == _DEFAULT_CFG_WEIGHT
     assert captured_kwargs["exaggeration"] == _DEFAULT_EXAGGERATION
     assert captured_kwargs["text"] == "test text"
-    assert captured_kwargs["ref_audio"] == str(tmp_path / "ref.wav")
+    assert captured_kwargs["ref_audio"] == str(ref_wav)
     assert captured_kwargs.get("ref_text") == "hello"
 
     # With explicit extras — should override defaults
     captured_kwargs.clear()
     pv2 = PreparedVoice(
-        ref_audio_path=str(tmp_path / "ref.wav"),
+        ref_audio_path=str(ref_wav),
         ref_text="hello",
         extras=_read_only({"cfg_weight": 0.9, "exaggeration": 0.3}),
     )
@@ -785,5 +790,5 @@ def test_chatterbox_synthesize_forwards_lang_and_defaults(monkeypatch, tmp_path)
     assert captured_kwargs["cfg_weight"] == 0.9
     assert captured_kwargs["exaggeration"] == 0.3
     assert captured_kwargs["text"] == "test text"
-    assert captured_kwargs["ref_audio"] == str(tmp_path / "ref.wav")
+    assert captured_kwargs["ref_audio"] == str(ref_wav)
     assert captured_kwargs.get("ref_text") == "hello"
