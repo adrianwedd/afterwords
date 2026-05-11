@@ -1895,3 +1895,4 @@ def test_xtts_v2_synthesize_uses_coqui_api_and_returns_float32_audio():
         "speaker_wav": "/tmp/ref.wav",
         "language": "en",
     }
+

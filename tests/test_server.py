@@ -768,6 +768,9 @@ def test_chatterbox_synthesize_forwards_lang_and_defaults(monkeypatch, tmp_path)
     assert captured_kwargs["lang_code"] == "es"
     assert captured_kwargs["cfg_weight"] == _DEFAULT_CFG_WEIGHT
     assert captured_kwargs["exaggeration"] == _DEFAULT_EXAGGERATION
+    assert captured_kwargs["text"] == "test text"
+    assert captured_kwargs["ref_audio"] == str(tmp_path / "ref.wav")
+    assert captured_kwargs.get("ref_text") == "hello"
 
     # With explicit extras — should override defaults
     captured_kwargs.clear()
@@ -781,3 +784,6 @@ def test_chatterbox_synthesize_forwards_lang_and_defaults(monkeypatch, tmp_path)
     assert captured_kwargs["lang_code"] == "fr"
     assert captured_kwargs["cfg_weight"] == 0.9
     assert captured_kwargs["exaggeration"] == 0.3
+    assert captured_kwargs["text"] == "test text"
+    assert captured_kwargs["ref_audio"] == str(tmp_path / "ref.wav")
+    assert captured_kwargs.get("ref_text") == "hello"
