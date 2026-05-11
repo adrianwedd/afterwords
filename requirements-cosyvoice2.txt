@@ -10,7 +10,7 @@
 # CosyVoice upstream code and CosyVoice2-0.5B weights are Apache-2.0.
 git+https://github.com/FunAudioLLM/CosyVoice.git
 torch==2.8.0
-torchaudio==2.3.1
+torchaudio==2.8.0
 onnxruntime==1.18.0; sys_platform == 'darwin' or sys_platform == 'win32'
 onnxruntime-gpu==1.18.0; sys_platform == 'linux'
 openai-whisper==20231117
@@ -22,7 +22,7 @@ HyperPyYAML==1.2.3
 inflect==7.3.1
 librosa==0.10.2
 modelscope==1.20.0
-numpy==1.26.4
+numpy>=1.26.4,<3
 omegaconf==2.3.0
 protobuf==5.29.6
 pyworld==0.3.4
