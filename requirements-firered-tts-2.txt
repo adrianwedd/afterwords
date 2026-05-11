@@ -19,8 +19,8 @@ torchvision>=0.22.1
 torchtune>=0.6.0
 torchao>=0.10.0
 transformers>=4.48.0
-einops
-librosa
-optuna
-accelerate
-tensorboard
+einops>=0.8.0
+librosa>=0.10.2
+optuna>=4.0.0
+accelerate>=1.0.0
+tensorboard>=2.17.0
