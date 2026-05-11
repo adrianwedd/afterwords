@@ -569,6 +569,50 @@ def test_reload_abort_cleans_tracked_temps(client, tmp_path, monkeypatch):
             pass
 
 
+def test_reload_abort_cleans_owned_temp_audio(client, tmp_path, monkeypatch):
+    """When reload aborts mid-batch, a PreparedVoice with owns_temp_audio=True
+    must have its ref_audio_path deleted during rollback."""
+    import backends as _backends
+    import tempfile as _tempfile
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+
+    owned_ref = os.path.join(_tempfile.gettempdir(), "reload-owned-ref.wav")
+    with open(owned_ref, "wb") as f:
+        f.write(b"x")
+
+    backend = _backends.get("fake")
+    from backends.base import PreparedVoice, _read_only
+
+    def prepare_with_owned_temp(ref, txt, extras):
+        if "succeed" in ref:
+            return PreparedVoice(
+                ref_audio_path=owned_ref,
+                ref_text=txt,
+                extras=_read_only(dict(extras)),
+                owns_temp_audio=True,
+            )
+        raise RuntimeError("boom")
+
+    monkeypatch.setattr(backend, "prepare_voice", prepare_with_owned_temp)
+
+    try:
+        _write_profile_json(str(tmp_path), "succeed", backend="fake")
+        _write_profile_json(str(tmp_path), "fail", backend="fake")
+        r = client.post("/reload")
+        assert r.status_code == 500
+        assert not os.path.exists(owned_ref), \
+            "rollback did not delete ref_audio_path for owns_temp_audio=True PreparedVoice"
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+        try:
+            os.remove(owned_ref)
+        except OSError:
+            pass
+
+
 # ──────────── Voice-family lang routing tests ────────────
 
 def _make_voice_in_voices(name, family, supported_langs, backend_alias="fake"):
