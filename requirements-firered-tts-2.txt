@@ -23,4 +23,6 @@ einops>=0.8.0
 librosa>=0.10.2
 optuna>=4.0.0
 accelerate>=1.0.0
+# tensorboard: training-side logging only — not imported by the afterwords server at runtime.
+# Do not start the tensorboard dashboard (binds 0.0.0.0:6006 unauthenticated) in production.
 tensorboard>=2.17.0
