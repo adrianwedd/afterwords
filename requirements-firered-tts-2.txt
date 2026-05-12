@@ -10,7 +10,7 @@
 #
 # FireRedTTS-2 code and weights are Apache-2.0. Upstream is CUDA-first; set
 # FIRERED_TTS_2_DEVICE=mps/cpu/cuda to override device selection.
-git+https://github.com/FireRedTeam/FireRedTTS2.git
+git+https://github.com/FireRedTeam/FireRedTTS2.git@404f3f61d25bb4804859b588a6a734bf8468090c
 torch>=2.8.0
 torchaudio>=2.8.0
 torchvision>=0.22.1

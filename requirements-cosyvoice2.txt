@@ -8,7 +8,7 @@
 #     --local-dir backends/extras/cosyvoice2/CosyVoice2-0.5B
 #
 # CosyVoice upstream code and CosyVoice2-0.5B weights are Apache-2.0.
-git+https://github.com/FunAudioLLM/CosyVoice.git
+git+https://github.com/FunAudioLLM/CosyVoice.git@ace7c47f41bbd303aa6bf1ea80e6f9fbd595cd40
 torch==2.8.0
 torchaudio==2.8.0
 onnxruntime==1.18.0; sys_platform == 'darwin' or sys_platform == 'win32'
