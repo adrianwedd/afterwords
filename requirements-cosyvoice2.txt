@@ -11,8 +11,8 @@
 git+https://github.com/FunAudioLLM/CosyVoice.git@ace7c47f41bbd303aa6bf1ea80e6f9fbd595cd40
 torch==2.8.0
 torchaudio==2.8.0
-onnxruntime==1.18.0; sys_platform == 'darwin' or sys_platform == 'win32'
-onnxruntime-gpu==1.18.0; sys_platform == 'linux'
+onnxruntime>=1.18.0,<1.19; sys_platform == 'darwin' or sys_platform == 'win32'
+onnxruntime-gpu>=1.18.0,<1.19; sys_platform == 'linux'
 openai-whisper==20231117
 conformer==0.3.2
 diffusers==0.38.0
