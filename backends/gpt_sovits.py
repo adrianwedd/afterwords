@@ -58,7 +58,18 @@ def _get_tts_wav_import():
 
 
 def _repo_dir() -> str:
-    return os.environ.get("GPT_SOVITS_REPO_DIR", DEFAULT_REPO_DIR)
+    raw = os.environ.get("GPT_SOVITS_REPO_DIR", DEFAULT_REPO_DIR)
+    resolved = os.path.realpath(raw)
+    # Reject paths under /tmp or other world-writable locations that
+    # are common symlink-attack targets.
+    _DANGEROUS_PREFIXES = ("/tmp", "/var/tmp", "/dev/shm")
+    for prefix in _DANGEROUS_PREFIXES:
+        if resolved == prefix or resolved.startswith(prefix + "/"):
+            raise ValueError(
+                f"GPT_SOVITS_REPO_DIR resolves to {resolved!r} under {prefix!r}; "
+                f"refusing to add world-writable directory to sys.path"
+            )
+    return resolved
 
 
 def _to_numpy(audio) -> np.ndarray:
