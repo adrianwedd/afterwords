@@ -1,6 +1,8 @@
 """Backend protocol shared by all cloning TTS backends."""
 from __future__ import annotations
 
+import logging
+import os
 import threading
 from dataclasses import dataclass
 from enum import Enum
@@ -8,6 +10,33 @@ from types import MappingProxyType
 from typing import Mapping, Protocol, runtime_checkable
 
 import numpy as np
+
+log = logging.getLogger("backends")
+
+# World-writable directories that are common symlink-attack targets.
+# Resolved through realpath() at module load so macOS /tmp → /private/tmp
+# is handled correctly.
+_DANGEROUS_PATH_PREFIXES = tuple(
+    os.path.realpath(p)
+    for p in ("/tmp", "/var/tmp", "/dev/shm")
+)
+
+
+def resolve_repo_dir(raw: str) -> str:
+    """Realpath-resolve a repo dir and reject world-writable locations.
+
+    All backends that insert a REPO_DIR into sys.path must route through
+    this function to prevent symlink attacks and world-writable directory
+    injection.
+    """
+    resolved = os.path.realpath(raw)
+    for prefix in _DANGEROUS_PATH_PREFIXES:
+        if resolved == prefix or resolved.startswith(prefix + os.sep):
+            raise ValueError(
+                f"repo dir resolves to {resolved!r} under {prefix!r}; "
+                f"refusing to add world-writable directory to sys.path"
+            )
+    return resolved
 
 
 class RefTextPolicy(Enum):

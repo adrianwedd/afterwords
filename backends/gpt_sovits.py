@@ -14,7 +14,7 @@ from typing import Mapping
 
 import numpy as np
 
-from .base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
+from .base import BackendBase, PreparedVoice, RefTextPolicy, _read_only, resolve_repo_dir
 
 log = logging.getLogger("backends.gpt_sovits")
 
@@ -58,18 +58,7 @@ def _get_tts_wav_import():
 
 
 def _repo_dir() -> str:
-    raw = os.environ.get("GPT_SOVITS_REPO_DIR", DEFAULT_REPO_DIR)
-    resolved = os.path.realpath(raw)
-    # Reject paths under /tmp or other world-writable locations that
-    # are common symlink-attack targets.
-    _DANGEROUS_PREFIXES = ("/tmp", "/var/tmp", "/dev/shm")
-    for prefix in _DANGEROUS_PREFIXES:
-        if resolved == prefix or resolved.startswith(prefix + "/"):
-            raise ValueError(
-                f"GPT_SOVITS_REPO_DIR resolves to {resolved!r} under {prefix!r}; "
-                f"refusing to add world-writable directory to sys.path"
-            )
-    return resolved
+    return resolve_repo_dir(os.path.expanduser(os.environ.get("GPT_SOVITS_REPO_DIR", DEFAULT_REPO_DIR)))
 
 
 def _to_numpy(audio) -> np.ndarray:

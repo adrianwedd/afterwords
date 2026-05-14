@@ -14,7 +14,7 @@ from typing import Mapping
 
 import numpy as np
 
-from .base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
+from .base import BackendBase, PreparedVoice, RefTextPolicy, _read_only, resolve_repo_dir
 
 log = logging.getLogger("backends.spark_tts")
 
@@ -33,7 +33,7 @@ _ALLOWED_EXTRAS = {"temperature", "top_k", "top_p"}
 
 
 def _repo_dir() -> str:
-    return os.environ.get("SPARK_TTS_REPO_DIR", DEFAULT_REPO_DIR)
+    return resolve_repo_dir(os.path.expanduser(os.environ.get("SPARK_TTS_REPO_DIR", DEFAULT_REPO_DIR)))
 
 
 def _model_dir() -> str:

@@ -14,7 +14,7 @@ from typing import Mapping
 
 import numpy as np
 
-from .base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
+from .base import BackendBase, PreparedVoice, RefTextPolicy, _read_only, resolve_repo_dir
 
 log = logging.getLogger("backends.mockingbird")
 
@@ -37,7 +37,7 @@ _RUNTIME_MODULES = (
 
 
 def _repo_dir() -> Path:
-    return Path(os.environ.get("MOCKINGBIRD_REPO_DIR", DEFAULT_REPO_DIR)).expanduser()
+    return Path(resolve_repo_dir(str(Path(os.environ.get("MOCKINGBIRD_REPO_DIR", str(DEFAULT_REPO_DIR))).expanduser())))
 
 
 def _encoder_path() -> Path:

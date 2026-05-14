@@ -15,7 +15,7 @@ from typing import Mapping
 
 import numpy as np
 
-from .base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
+from .base import BackendBase, PreparedVoice, RefTextPolicy, _read_only, resolve_repo_dir
 
 log = logging.getLogger("backends.sv2tts")
 
@@ -32,7 +32,7 @@ _ALLOWED_EXTRAS = {"vocoder_target", "vocoder_overlap", "vocoder_batched"}
 
 
 def _repo_dir() -> Path:
-    return Path(os.environ.get("SV2TTS_REPO_DIR", DEFAULT_REPO_DIR)).expanduser()
+    return Path(resolve_repo_dir(str(Path(os.environ.get("SV2TTS_REPO_DIR", str(DEFAULT_REPO_DIR))).expanduser())))
 
 
 def _encoder_path() -> Path:

@@ -4,7 +4,7 @@ from __future__ import annotations
 import pytest
 
 import backends
-from backends.base import Backend, PreparedVoice, RefTextPolicy, _read_only
+from backends.base import Backend, PreparedVoice, RefTextPolicy, _read_only, resolve_repo_dir
 
 
 @pytest.fixture(autouse=True)
@@ -1895,4 +1895,81 @@ def test_xtts_v2_synthesize_uses_coqui_api_and_returns_float32_audio():
         "speaker_wav": "/tmp/ref.wav",
         "language": "en",
     }
+
+
+# --- resolve_repo_dir security tests ---
+
+
+class TestResolveRepoDir:
+    """Tests for backends.base.resolve_repo_dir — symlink + world-writable rejection."""
+
+    def test_normal_path_passes(self, tmp_path):
+        from backends.base import resolve_repo_dir
+
+        assert resolve_repo_dir(str(tmp_path)) == str(tmp_path.resolve())
+
+    def test_rejects_tmp(self):
+        from backends.base import resolve_repo_dir
+
+        with pytest.raises(ValueError, match="world-writable"):
+            resolve_repo_dir("/tmp")
+
+    def test_rejects_tmp_subdir(self):
+        from backends.base import resolve_repo_dir
+
+        with pytest.raises(ValueError, match="world-writable"):
+            resolve_repo_dir("/tmp/evil_repo")
+
+    def test_rejects_var_tmp(self):
+        from backends.base import resolve_repo_dir
+
+        with pytest.raises(ValueError, match="world-writable"):
+            resolve_repo_dir("/var/tmp/evil")
+
+    def test_rejects_dev_shm(self):
+        from backends.base import resolve_repo_dir
+
+        with pytest.raises(ValueError, match="world-writable"):
+            resolve_repo_dir("/dev/shm/payload")
+
+    def test_rejects_symlink_to_tmp(self, tmp_path):
+        """A symlink pointing into /tmp must be caught after realpath resolution.
+
+        On macOS /tmp is a symlink to /private/tmp, so realpath resolves
+        through it. The _DANGEROUS_PATH_PREFIXES are themselves resolved at
+        module load, meaning /private/tmp is in the list on macOS.
+        """
+        import os
+
+        from backends.base import resolve_repo_dir
+
+        # Create a symlink from a safe location pointing into /tmp.
+        # After realpath, it resolves under /private/tmp (macOS) or /tmp (Linux).
+        target = os.path.realpath("/tmp")  # /private/tmp on macOS
+        link = str(tmp_path / "link_to_tmp")
+        os.symlink(target, link)
+        with pytest.raises(ValueError, match="world-writable"):
+            resolve_repo_dir(link)
+
+    def test_default_repo_dir_passes(self):
+        import os
+
+        from backends.base import resolve_repo_dir
+        import backends.gpt_sovits as gs
+
+        result = resolve_repo_dir(gs.DEFAULT_REPO_DIR)
+        assert os.path.isabs(result)
+        assert not result.startswith(os.path.realpath("/tmp"))
+
+    def test_expanduser_before_resolve(self):
+        """Tilde in env vars must expand before realpath resolution."""
+        import os
+
+        from backends.base import resolve_repo_dir
+
+        home = os.path.expanduser("~")
+        # ~/some_dir should resolve to the real home, not a literal ~
+        result = resolve_repo_dir(os.path.expanduser("~/some_dir"))
+        assert result.startswith(os.path.realpath(home))
+        assert "~" not in result
 
