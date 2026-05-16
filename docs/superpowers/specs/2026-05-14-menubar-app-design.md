@@ -81,7 +81,9 @@ The app tracks server state through HealthMonitor polling, not through ProcessMa
                                 └──→ .starting
 ```
 
-**`.starting` state:** Server takes 15-45s to load models. HealthMonitor polls every 2s during `.starting` (faster than the normal 5s) to detect the transition to `.running`. If health hasn't responded within 90s, transition to `.error("Server did not become healthy within 90s")`.
+**`.starting` state:** Server takes 15-45s to load models *once weights are cached locally*. HealthMonitor polls every 2s during `.starting` (faster than the normal 5s) to detect the transition to `.running`. If health hasn't responded within 90s, transition to `.error("Server did not become healthy within 90s")`.
+
+**Cold-cache first-run caveat:** The four backends preload ~10 GB of weights at boot. On a fresh install where weights are not yet cached, the Hugging Face download can take several minutes on typical residential bandwidth — well beyond the 90s timeout. Phase 1 mitigation: when the timeout fires, do NOT transition to `.error` outright if `/health` is still reachable and reports `loaded_backends == []`; instead surface a "Downloading models (first run)…" sub-state and extend the timeout. A cleaner long-term fix is to extend `/health` to report per-backend load progress so the app can distinguish `loading-weights-from-disk` (fast) from `downloading-weights` (slow).
 
 **Crash recovery:** If HealthMonitor detects `.running` → connection refused (3 consecutive failures), the app transitions to `.error` and shows a "Server crashed — Restart?" prompt. The user can click Restart to try again. The app does NOT auto-restart, because launchd's `KeepAlive: true` should handle that — if the server is down despite `KeepAlive`, something deeper is wrong.
 
@@ -177,6 +179,13 @@ When the app quits:
 ### Minimum macOS Version
 
 macOS 13.0 (Ventura) — required for `SMAppService` and modern SwiftUI APIs.
+
+### Phase 1 ↔ Signing dependency
+
+`SMAppService.mainApp.register()` works for unsigned development builds, but the system Login Items database persists the bundle identity. If a user installs an unsigned Phase 1 build and later replaces it with a Developer-ID-signed Phase 3 build at the same bundle ID, macOS may flag the registration as tampered and silently disable the launch-at-login item until the user toggles it again in System Settings → General → Login Items. Two mitigations to consider:
+
+1. Ship Phase 1 with at least an ad-hoc signature (`codesign --sign -`) so the bundle identity is stable.
+2. Document in the Phase 1 README that launch-at-login on unsigned dev builds is best-effort and may need a manual re-enable after upgrades. Real reliability arrives in Phase 3 with Developer ID + notarization.
 
 ### File Structure
 
