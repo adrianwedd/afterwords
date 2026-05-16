@@ -788,7 +788,7 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
         </div>
       </div>
 
-      <p style="margin-top: 1.5rem; color: var(--text-secondary); font-size: 0.95rem;">Chatterbox and VoxCPM are also loaded as backends but their voice-cloning fidelity in this integration is under verification &mdash; samples are <a href="https://github.com/adrianwedd/afterwords/issues/14">tracked in #14</a> and will be added once we&rsquo;re confident they&rsquo;re cloning the reference rather than producing default voices.</p>
+      <p style="margin-top: 1.5rem; color: var(--text-secondary); font-size: 0.95rem;">Qwen3-TTS at 0.6B and 1.7B is the recommended cloning path. Voxtral and SoproTTS are alternative verified backends; the registry also exposes 13 scaffolded backends (OpenVoice, F5-TTS, CosyVoice2, etc.) for experimentation. Chatterbox and VoxCPM were trialled but failed listen-tests on the flagship voices and were removed.</p>
     </section>
 
     <div class="divider"></div>
@@ -837,7 +837,7 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
       </div>
 
       <p><a href="https://docs.anthropic.com/en/docs/claude-code/voice-dictation"><code>/voice</code></a> handles input. This project handles output. Together: voice conversations.</p>
-      <p>The server ships four MLX backends: <a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (0.6B and 1.7B, 8-bit), <a href="https://huggingface.co/mlx-community/chatterbox-fp16">Chatterbox</a> (fp16, multilingual), and <a href="https://huggingface.co/mlx-community/VoxCPM1.5">VoxCPM 1.5</a> (44.1 kHz). Zero-shot voice cloning &mdash; no training. A 15-second reference + transcript = cloned voice on every backend.</p>
+      <p>The recommended cloning path is <a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> at two sizes (0.6B and 1.7B, 8-bit). Zero-shot voice cloning &mdash; no training. A 15-second reference + transcript = cloned voice.</p>
 
       <div class="callout">
         <strong>Why local?</strong> Nothing leaves your machine. No API key, no rate limits, no bill. The voice is yours.
@@ -864,13 +864,11 @@ bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
   "backend": "mlx",
   "model_loaded": true,
   "ready": true,
-  "voices": ["attenborough", "attenborough-chatterbox", "attenborough-qwen3-17b", "attenborough-voxcpm-15", "audrey", "..."],
+  "voices": ["attenborough", "attenborough-qwen3-06b", "attenborough-qwen3-17b", "audrey", "..."],
   "default_voice": "galadriel",
   "loaded_backends": {
     "qwen3-0.6b":  {"loaded": true, "voice_count": 45, "sample_rate": 24000, "display_name": "Qwen3-TTS 0.6B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
     "qwen3-1.7b":  {"loaded": true, "voice_count": 61, "sample_rate": 24000, "display_name": "Qwen3-TTS 1.7B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
-    "chatterbox":  {"loaded": true, "voice_count": 3,  "sample_rate": 24000, "display_name": "Chatterbox (fp16, multilingual)", "supported_langs": ["en","es","fr","de","it","pt","zh","ja","ko"]},
-    "voxcpm-1.5":  {"loaded": true, "voice_count": 3,  "sample_rate": 44100, "display_name": "VoxCPM 1.5", "supported_langs": ["en","zh"]},
     "voxtral":     {"loaded": true, "voice_count": 0,  "sample_rate": 24000, "display_name": "Voxtral 4B", "supported_langs": ["en","fr","de","es","it","pt","nl","ru","zh","ja","ko","ar","hi"]},
     "soprotts":    {"loaded": true, "voice_count": 0,  "sample_rate": 24000, "display_name": "SoproTTS", "supported_langs": ["en"]}
   }
@@ -1037,7 +1035,7 @@ afterwords reload</code><span class="copy-hint">click to copy</span></pre>
           <span class="endpoint-method">DELETE</span>
           <span class="endpoint-path">/session/{session_id}</span>
         </div>
-        <p class="endpoint-desc">Remove all voice palette entries and files for a session. Also cleans up any backend temp files (e.g. VoxCPM resampled refs). Requires <code>--allow-clone</code>.</p>
+        <p class="endpoint-desc">Remove all voice palette entries and files for a session. Requires <code>--allow-clone</code>.</p>
 <pre><code>curl -X DELETE localhost:7860/session/my-voice</code><span class="copy-hint">click to copy</span></pre>
         <div class="response-codes">
           <span class="response-code success">200 OK</span>
@@ -1122,9 +1120,7 @@ python server.py --allow-clone    # enables POST /clone, POST /synthesize, DELET
       <div class="info-grid">
         <div class="info-cell"><div class="info-cell-label">Qwen3 0.6B</div><div class="info-cell-value">~20s / sentence</div></div>
         <div class="info-cell"><div class="info-cell-label">Qwen3 1.7B</div><div class="info-cell-value">~35s / sentence</div></div>
-        <div class="info-cell"><div class="info-cell-label">Chatterbox</div><div class="info-cell-value">~25s / sentence</div></div>
-        <div class="info-cell"><div class="info-cell-label">VoxCPM 1.5</div><div class="info-cell-value">~30s / sentence</div></div>
-        <div class="info-cell"><div class="info-cell-label">Peak memory</div><div class="info-cell-value">~10 GB (all 4 loaded)</div></div>
+        <div class="info-cell"><div class="info-cell-label">Peak memory</div><div class="info-cell-value">~3-4 GB (qwen3 only)</div></div>
         <div class="info-cell"><div class="info-cell-label">Adding a voice</div><div class="info-cell-value">0 extra RAM</div></div>
       </div>
     </section>
@@ -1147,7 +1143,7 @@ python server.py --allow-clone    # enables POST /clone, POST /synthesize, DELET
 
     <section class="reveal">
       <div class="section-label">Credits</div>
-      <p><a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (Alibaba) &middot; <a href="https://huggingface.co/mlx-community/chatterbox-fp16">Chatterbox</a> (mlx-community) &middot; <a href="https://huggingface.co/mlx-community/VoxCPM1.5">VoxCPM</a> (mlx-community) &middot; <a href="https://github.com/Blaizzy/mlx-audio">mlx-audio</a> &middot; <a href="https://github.com/ml-explore/mlx">MLX</a> (Apple) &middot; <a href="https://docs.anthropic.com/en/docs/claude-code/">Claude Code</a> (Anthropic)</p>
+      <p><a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (Alibaba) &middot; <a href="https://github.com/Blaizzy/mlx-audio">mlx-audio</a> &middot; <a href="https://github.com/ml-explore/mlx">MLX</a> (Apple) &middot; <a href="https://docs.anthropic.com/en/docs/claude-code/">Claude Code</a> (Anthropic)</p>
       <p>Originally built for <a href="https://spark.wedd.au">SPARK</a>, a robot with an inner life. Full tutorial: <a href="https://adrianwedd.com/blog/voice-cloning-qwen3-tts-mlx/">Voice Cloning with Qwen3-TTS</a>.</p>
     </section>
 

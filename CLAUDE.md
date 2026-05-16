@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Afterwords is a local voice-cloning TTS server on Apple Silicon. It uses four MLX-based backends (Qwen3 0.6B/1.7B, Chatterbox, VoxCPM) for zero-shot voice cloning. The server is a standalone HTTP API usable from any tool. When Claude Code is installed, a Stop hook automatically speaks every response.
+Afterwords is a local voice-cloning TTS server on Apple Silicon. The recommended cloning path is MLX-based **Qwen3-TTS** at two sizes (0.6B + 1.7B); additional backends (Voxtral, OpenVoice, F5-TTS, etc.) are available but not endorsed for cloning fidelity. The server is a standalone HTTP API usable from any tool. When Claude Code is installed, a Stop hook automatically speaks every response.
 
 **Platform:** Apple Silicon Mac only (M1+), 16 GB+ RAM (32 GB recommended), Python 3.11+, macOS (uses launchd, afplay).
 
@@ -65,7 +65,7 @@ Verify changes with `pytest` (no GPU required). Run a single test with `pytest t
 
 The server (server.py) and voice cloning (clone-voice.sh) are fully independent of Claude Code. The Claude Code integration is an optional layer installed by setup.sh when Claude Code is detected.
 
-1. **server.py** — FastAPI/Uvicorn TTS server on `localhost:7860`. Preloads four cloning backends via `backends.register_all()` at startup, serializes all synthesis through `_synth_lock` (MLX Metal is not thread-safe across backends). Voice profiles pin to a backend via the `backend` JSON field; dispatch is `backend = backends.get(profile.backend); backend.synthesize(text, profile.prepared, lang)`. Voices are auto-discovered JSON profiles from `voices/`. Endpoints: `GET /health` (always available; exposes `loaded_backends[*].supported_langs`), `GET /synthesize?text=...&voice=...&lang=en` (always), and four endpoints gated by `--allow-clone`: `POST /synthesize` (JSON body with optional `emotion` + `lang`), `POST /clone` (multipart audio upload), `POST /reload` (rescan `voices/*.json`, atomic add-only — see Hot-reload), `DELETE /session/{id}` (remove cloned-session voices + temp files). Lifespan context manager handles shutdown cleanup; `_sweep_orphaned_temp_files()` runs at startup before profile load to clear VoxCPM resampled refs from a prior crashed run.
+1. **server.py** — FastAPI/Uvicorn TTS server on `localhost:7860`. Preloads cloning backends via `backends.register_all()` at startup, serializes all synthesis through `_synth_lock` (MLX Metal is not thread-safe across backends). Voice profiles pin to a backend via the `backend` JSON field; dispatch is `backend = backends.get(profile.backend); backend.synthesize(text, profile.prepared, lang)`. Voices are auto-discovered JSON profiles from `voices/`. Endpoints: `GET /health` (always available; exposes `loaded_backends[*].supported_langs`), `GET /synthesize?text=...&voice=...&lang=en` (always), and four endpoints gated by `--allow-clone`: `POST /synthesize` (JSON body with optional `emotion` + `lang`), `POST /clone` (multipart audio upload), `POST /reload` (rescan `voices/*.json`, atomic add-only — see Hot-reload), `DELETE /session/{id}` (remove cloned-session voices + temp files). Lifespan context manager handles shutdown cleanup.
 
 2. **Claude Code hooks** (`~/.claude/hooks/`, optional) — `tts-hook.sh` fires on Stop events, extracts response text, passes through `strip-markdown.py`, and queues for synthesis. `tts-worker.sh` processes the queue (max 10 items) with `mkdir`-based locking (no `flock` on macOS), plays WAV via `afplay`, archives as MP3. Only installed when Claude Code is present.
 
@@ -83,8 +83,8 @@ The `backends/` package exposes a `Backend` Protocol (in `backends/base.py`) and
 |------|------|-------------|-----------------|
 | `qwen3-0.6b` | 0.6B | 24 kHz | REQUIRED |
 | `qwen3-1.7b` | 1.7B | 24 kHz | REQUIRED |
-| `chatterbox` | 0.8B (fp16) | 24 kHz | OPTIONAL |
-| `voxcpm-1.5` | 2B (bf16) | 44.1 kHz | OPTIONAL |
+
+These two are the **recommended cloning path**. The registry also exposes ~17 other backends (voxtral, openvoice-v2, f5-tts, cosyvoice2, gpt-sovits, xtts-v2, indextts-2, neutts-air, spark-tts, dia2, yourtts, firered-tts-2, sv2tts, mockingbird, soprotts) for experimentation, but listen-tests (2026-05-16, Sprint 1) confirmed Qwen3 as the only backend that produces clones consistently recognizable on the flagship voices. Chatterbox + VoxCPM were removed entirely in commit f03e826 — they failed the listen-test, and VoxCPM additionally returned HTTP 500 on the launchd-managed server.
 
 Each backend has a `supported_langs: tuple[str, ...]` advertising what BCP-47 codes it accepts. Backend.synthesize takes a required `lang: str` parameter and raises `ValueError` for unsupported codes — server maps that to HTTP 400 with `voice_backend` + `supported_langs` in the body.
 
@@ -105,7 +105,7 @@ CLI: `afterwords reload` curls the endpoint and pretty-prints the response.
 
 ## Key Constraints
 
-- Four cloning backends (Qwen3 0.6B + 1.7B, Chatterbox fp16, VoxCPM 1.5) preload at boot (~10 GB total). Requires 16 GB+ unified memory; designed for 32 GB.
+- Qwen3 0.6B + 1.7B preload at boot (~3-4 GB total). Additional backends from the registry also preload if their dependencies are installed. Designed for 32 GB unified memory; 16 GB works for the qwen3-only path.
 - All synthesis is serialized through `_synth_lock` — MLX Metal is single-GPU, regardless of backend
 - Voice reference files (`.wav`) and profiles (`.json`) are tracked in git — shipped with the repo for the demo site and default server voices
 - `setup.sh` conditionally installs hooks into `~/.claude/` (only when Claude Code is present) and a launchd plist (always)
