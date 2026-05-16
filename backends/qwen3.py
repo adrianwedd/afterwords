@@ -57,11 +57,15 @@ class Qwen3Backend(BackendBase):
     ) -> PreparedVoice:
         if not ref_text:
             raise ValueError("Qwen3 REQUIRES ref_text for cloning")
-        # Qwen3 accepts 24 kHz refs natively — no resample needed.
+        # Read ref bytes now so synthesize() never re-reads from disk. Closes the
+        # DELETE /session ↔ in-flight synth TOCTOU race (same pattern as Chatterbox).
+        with open(ref_audio_path, "rb") as fh:
+            ref_bytes = fh.read()
         return PreparedVoice(
             ref_audio_path=ref_audio_path,
             ref_text=ref_text,
             extras=_read_only({}),
+            data=ref_bytes,
         )
 
     def synthesize(
@@ -78,10 +82,18 @@ class Qwen3Backend(BackendBase):
             )
         from mlx_audio.tts.generate import generate_audio
         with tempfile.TemporaryDirectory() as tmpdir:
+            # Use buffered bytes from prepare_voice() to avoid reading the original
+            # file at synthesis time (guards against DELETE /session TOCTOU race).
+            if prepared.data is not None:
+                ref_path = os.path.join(tmpdir, "ref.wav")
+                with open(ref_path, "wb") as fh:
+                    fh.write(prepared.data)
+            else:
+                ref_path = prepared.ref_audio_path
             generate_audio(
                 text=text,
                 model=self._model,
-                ref_audio=prepared.ref_audio_path,
+                ref_audio=ref_path,
                 ref_text=prepared.ref_text,
                 lang_code=lang,
                 output_path=tmpdir,

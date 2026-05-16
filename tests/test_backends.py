@@ -225,6 +225,79 @@ def test_voxcpm_synthesize_passes_mxarray_ref_audio_to_model(tmp_path):
     assert ref.shape[0] > 0
 
 
+def test_qwen3_prepare_voice_buffers_ref_audio_for_toctou(tmp_path):
+    """Regression: qwen3 must pre-load ref audio bytes in prepare_voice() so
+    a DELETE /session that removes the source file does NOT break an
+    in-flight synthesize() call. Mirrors the Chatterbox/VoxCPM mitigation
+    for the C3 TOCTOU finding."""
+    import os
+    import numpy as np
+    from backends.qwen3 import Qwen3Backend
+    from backends.base import PreparedVoice
+
+    backend = Qwen3Backend("0.6B")
+    ref_path = _write_silence_wav(tmp_path)
+    prepared = backend.prepare_voice(ref_path, "reference text", {})
+
+    # prepare_voice must capture bytes — synthesize() must never re-open the file.
+    assert isinstance(prepared, PreparedVoice)
+    assert prepared.data is not None, "qwen3 prepare_voice must buffer ref audio bytes"
+    assert isinstance(prepared.data, (bytes, bytearray))
+    assert len(prepared.data) > 0
+    # Verify bytes match disk content at prepare time.
+    with open(ref_path, "rb") as fh:
+        assert prepared.data == fh.read()
+
+    # Simulate DELETE /session removing the underlying ref file mid-run.
+    os.remove(ref_path)
+    assert not os.path.exists(ref_path)
+
+    # Stub the model and generate_audio to assert the path passed in is the
+    # buffered tempfile, not the now-deleted prepared.ref_audio_path.
+    captured = {}
+
+    def fake_generate_audio(**kwargs):
+        captured.update(kwargs)
+        # Write a tiny output WAV so synthesize's sf.read path succeeds.
+        import soundfile as sf
+        out = os.path.join(kwargs["output_path"], "out_000.wav")
+        sf.write(out, np.zeros(10, dtype=np.float32), 24000)
+
+    import sys
+    import types as _types
+
+    # Snapshot any existing real entries so we can restore them — avoids cross-test
+    # pollution of sys.modules for tests that monkeypatch mlx_audio.tts.generate later.
+    _saved = {k: sys.modules.get(k) for k in ("mlx_audio", "mlx_audio.tts", "mlx_audio.tts.generate")}
+    pkg = _types.ModuleType("mlx_audio")
+    tts_pkg = _types.ModuleType("mlx_audio.tts")
+    gen_mod = _types.ModuleType("mlx_audio.tts.generate")
+    gen_mod.generate_audio = fake_generate_audio
+    # Wire submodules as attributes so pytest's monkeypatch.setattr can walk the tree.
+    pkg.tts = tts_pkg
+    tts_pkg.generate = gen_mod
+    sys.modules["mlx_audio"] = pkg
+    sys.modules["mlx_audio.tts"] = tts_pkg
+    sys.modules["mlx_audio.tts.generate"] = gen_mod
+    backend._model = object()  # synthesize() guards against None; any value is fine
+
+    try:
+        audio, sr = backend.synthesize("hello", prepared, lang="en")
+    finally:
+        for k, v in _saved.items():
+            if v is None:
+                sys.modules.pop(k, None)
+            else:
+                sys.modules[k] = v
+
+    assert sr == 24000
+    # The ref_audio passed to generate_audio must point at a file that exists
+    # (the freshly written tempfile), proving TOCTOU is closed.
+    assert os.path.basename(captured["ref_audio"]) == "ref.wav"
+    assert captured["ref_text"] == "reference text"
+    assert captured["lang_code"] == "en"
+
+
 def test_voxtral_prepare_ignores_ref_text_and_preserves_extras():
     from backends.voxtral import VoxtralBackend
     from backends.base import RefTextPolicy
