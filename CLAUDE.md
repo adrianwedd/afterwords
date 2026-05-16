@@ -46,6 +46,13 @@ pytest
 # Run a single test
 pytest tests/test_server.py::test_health_returns_ok
 
+# Run the optional MFCC cloning-fidelity test (skipped if the server is up,
+# since it loads ~10 GB of Metal models in its own process):
+afterwords stop
+pip install -r requirements-dev.txt  # includes librosa
+pytest -m integration tests/test_fidelity.py
+afterwords start
+
 # If pytest fails with "bad interpreter" after brew upgrade, recreate the venv:
 bash setup.sh --server-only
 ```

@@ -13,3 +13,8 @@ starlette>=0.40
 uvicorn>=0.30
 python-multipart>=0.0.9
 noisereduce>=3.0
+
+# tests/test_fidelity.py only — integration-marked, skipped on CI. The test
+# uses pytest.importorskip("librosa") so this dep can be omitted in
+# minimal-install environments without breaking the suite.
+librosa>=0.10,<1.0
