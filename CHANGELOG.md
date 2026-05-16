@@ -60,7 +60,7 @@ Both failed Sprint 1 listen-tests on the flagship voices. VoxCPM additionally re
 
 ### Voice references
 
-90+ flagship voice families included, each with `{name}-ref.wav` (~15s) + `{name}.json` (metadata + transcript). Four voices (clara-oswald, gulley, loki, the-doctor) are scoped to v1.0.0 with deferred trim-threshold tuning per Phase 4 backlog (commit `04b7215`).
+97 unique flagship voice families included, each with `{name}-ref.wav` (~15s) + `{name}.json` (metadata + transcript). Four voices (clara-oswald, gulley, loki, the-doctor) are scoped to v1.0.0 with deferred trim-threshold tuning per Phase 4 backlog (annotated in `04b7215`, marker keyword normalized to `WONTFIX` in `e35c434`).
 
 ### Platform
 
