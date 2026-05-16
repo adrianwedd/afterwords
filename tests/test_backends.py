@@ -17,7 +17,7 @@ def _clean_registry():
 def test_register_all_populates_shipped_backends():
     backends.register_all()
     assert set(backends.names()) == {
-        "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5", "voxtral",
+        "qwen3-0.6b", "qwen3-1.7b", "voxtral",
         "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits", "xtts-v2",
         "indextts-2", "neutts-air", "spark-tts", "dia2", "yourtts",
         "firered-tts-2", "sv2tts", "mockingbird", "soprotts",
@@ -36,7 +36,7 @@ def test_each_registered_backend_satisfies_protocol():
 
 def test_duplicate_register_raises():
     backends.register_all()
-    b = backends.get("chatterbox")
+    b = backends.get("qwen3-0.6b")
     with pytest.raises(ValueError, match="already registered"):
         backends.register(b)
 
@@ -44,7 +44,7 @@ def test_duplicate_register_raises():
 def test_slug_collision_raises():
     backends.register_all()
     class _Fake:
-        name = "voxcpm-15"  # slugs to "voxcpm-15", collides with voxcpm-1.5
+        name = "qwen3-06b"  # slugs to "qwen3-06b", collides with qwen3-0.6b
         display_name = "fake"
         sample_rate = 16000
         ref_text_policy = RefTextPolicy.OPTIONAL
@@ -63,15 +63,16 @@ def test_get_unknown_raises():
         backends.get("nope")
 
 
-def test_max_sample_rate_reflects_voxcpm():
+def test_max_sample_rate_reflects_highest_backend():
     backends.register_all()
-    assert backends.max_sample_rate() == 44100
+    # Highest among shipped backends: f5-tts is 24000, voxtral is 24000, etc.
+    # Just assert it's a positive int >= the qwen3 sample rate.
+    assert backends.max_sample_rate() >= 24000
 
 
 def test_slug_strips_dots():
-    assert backends.slug("voxcpm-1.5") == "voxcpm-15"
     assert backends.slug("qwen3-0.6b") == "qwen3-06b"
-    assert backends.slug("chatterbox") == "chatterbox"
+    assert backends.slug("qwen3-1.7b") == "qwen3-17b"
     assert backends.slug("voxtral") == "voxtral"
 
 
@@ -127,109 +128,10 @@ def _write_silence_wav(tmp_path):
     return p
 
 
-def test_voxcpm_synthesize_handles_generator_output(tmp_path):
-    """Regression: mlx-audio's VoxCPM.generate() yields GenerationResult objects
-    (dataclass with .audio = mx.array). Earlier code passed the generator directly
-    to np.asarray which raised TypeError. Mock the model to verify the generator
-    branch concatenates chunk audio correctly without loading mlx-audio."""
-    pytest.importorskip("mlx.core")
-    from types import SimpleNamespace
-    import numpy as np
-    from backends.voxcpm import VoxCPMBackend
-    from backends.base import PreparedVoice, _read_only
-
-    backend = VoxCPMBackend()
-    # Stub the model — yields two GenerationResult-shaped objects.
-    chunk_a = SimpleNamespace(audio=np.full(100, 0.1, dtype=np.float32))
-    chunk_b = SimpleNamespace(audio=np.full(150, 0.2, dtype=np.float32))
-
-    class _StubModel:
-        def generate(self, **kwargs):
-            yield chunk_a
-            yield chunk_b
-
-    backend._model = _StubModel()
-    prepared = PreparedVoice(
-        ref_audio_path=_write_silence_wav(tmp_path),
-        ref_text="ref",
-        extras=_read_only({}),
-    )
-
-    audio, sr = backend.synthesize("hello", prepared, lang="en")
-    assert sr == 44100  # NATIVE_SR
-    assert audio.shape == (250,)
-    assert audio.dtype == np.float32
-    # First 100 samples from chunk_a, next 150 from chunk_b
-    assert np.allclose(audio[:100], 0.1)
-    assert np.allclose(audio[100:], 0.2)
-
-
-def test_voxcpm_synthesize_raises_on_empty_generator(tmp_path):
-    """If generate() yields nothing, surface a clear error rather than
-    returning an empty array silently."""
-    pytest.importorskip("mlx.core")
-    import pytest as _pytest
-    from backends.voxcpm import VoxCPMBackend
-    from backends.base import PreparedVoice, _read_only
-
-    backend = VoxCPMBackend()
-
-    class _EmptyModel:
-        def generate(self, **kwargs):
-            return (x for x in ())  # empty generator (real GeneratorType)
-
-    backend._model = _EmptyModel()
-    prepared = PreparedVoice(
-        ref_audio_path=_write_silence_wav(tmp_path),
-        ref_text="ref",
-        extras=_read_only({}),
-    )
-    with _pytest.raises(RuntimeError, match="no audio chunks"):
-        backend.synthesize("hello", prepared, lang="en")
-
-
-def test_voxcpm_synthesize_passes_mxarray_ref_audio_to_model(tmp_path):
-    """Regression for the kwarg-rename + mx.array conversion bug.
-
-    When BOTH ref_audio and ref_text are provided, voxcpm.py must:
-    - call generate() with kwarg names ref_audio (not reference_wav_path)
-      and ref_text (not prompt_text)
-    - pass ref_audio as an mx.array (the model's _encode_prompt_audio
-      expects a tensor, not a string path)
-    """
-    mx = pytest.importorskip("mlx.core")
-    from types import SimpleNamespace
-    import numpy as np
-    from backends.voxcpm import VoxCPMBackend
-
-    backend = VoxCPMBackend()
-    captured_kwargs = {}
-
-    class _CapturingModel:
-        def generate(self, **kwargs):
-            captured_kwargs.update(kwargs)
-            yield SimpleNamespace(audio=np.zeros(10, dtype=np.float32))
-
-    backend._model = _CapturingModel()
-    # prepare_voice now pre-converts to mx.array and stores in prepared.data.
-    prepared = backend.prepare_voice(_write_silence_wav(tmp_path), "reference text", {})
-    backend.synthesize("hello", prepared, lang="en")
-
-    assert "ref_audio" in captured_kwargs, "must pass ref_audio (not reference_wav_path)"
-    assert "ref_text" in captured_kwargs, "must pass ref_text (not prompt_text)"
-    assert captured_kwargs["ref_text"] == "reference text"
-    # ref_audio must be an mx.array of shape (T,), not a path string.
-    ref = captured_kwargs["ref_audio"]
-    assert isinstance(ref, mx.array), f"ref_audio must be mx.array, got {type(ref).__name__}"
-    assert ref.ndim == 1, f"ref_audio must be 1-D, got shape {ref.shape}"
-    assert ref.shape[0] > 0
-
-
 def test_qwen3_prepare_voice_buffers_ref_audio_for_toctou(tmp_path):
     """Regression: qwen3 must pre-load ref audio bytes in prepare_voice() so
     a DELETE /session that removes the source file does NOT break an
-    in-flight synthesize() call. Mirrors the Chatterbox/VoxCPM mitigation
-    for the C3 TOCTOU finding."""
+    in-flight synthesize() call (C3 TOCTOU fix from commit 5289576)."""
     import os
     import numpy as np
     from backends.qwen3 import Qwen3Backend

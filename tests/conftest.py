@@ -110,7 +110,7 @@ def _fake_backend_registry(request):
     # Register aliases so VoiceProfile.backend values like "qwen3-0.6b" resolve to the FakeBackend.
     # We do this by creating lightweight delegate instances that share the FakeBackend's methods
     # but advertise different names.
-    for alias in ("qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5"):
+    for alias in ("qwen3-0.6b", "qwen3-1.7b"):
         delegate = FakeBackend()
         delegate.name = alias
         delegate.display_name = f"{alias} (test-fake)"

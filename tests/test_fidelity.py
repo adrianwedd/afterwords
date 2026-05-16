@@ -59,16 +59,10 @@ SIMILARITY_FLOOR = 0.55
 FIDELITY_CASES = [
     ("qwen3-0.6b", "galadriel-qwen3-06b"),
     ("qwen3-1.7b", "galadriel-qwen3-17b"),
-    ("chatterbox", "galadriel-chatterbox"),
-    ("voxcpm-1.5", "galadriel-voxcpm-15"),
     ("qwen3-0.6b", "picard-qwen3-06b"),
     ("qwen3-1.7b", "picard-qwen3-17b"),
-    ("chatterbox", "picard-chatterbox"),
-    ("voxcpm-1.5", "picard-voxcpm-15"),
     ("qwen3-0.6b", "attenborough-qwen3-06b"),
     ("qwen3-1.7b", "attenborough-qwen3-17b"),
-    ("chatterbox", "attenborough-chatterbox"),
-    ("voxcpm-1.5", "attenborough-voxcpm-15"),
 ]
 
 

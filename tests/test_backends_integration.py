@@ -35,8 +35,6 @@ def registered():
 @pytest.mark.parametrize("backend_name", [
     "qwen3-0.6b",
     "qwen3-1.7b",
-    "chatterbox",
-    "voxcpm-1.5",
     "voxtral",
 ])
 def test_backend_loads_and_synthesizes_short_clip(registered, backend_name):

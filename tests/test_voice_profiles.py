@@ -48,10 +48,10 @@ def test_profile_with_explicit_backend_honoured(tmp_path, monkeypatch):
     from server import _load_voice_profiles, VOICES
     monkeypatch.setattr("server._VOICES_DIR", str(tmp_path))
     VOICES.clear()
-    _write_profile(tmp_path, "new", backend="chatterbox")  # no ref_text — Chatterbox OPTIONAL
+    _write_profile(tmp_path, "new", backend="xtts-v2")  # no ref_text — xtts-v2 OPTIONAL
     _load_voice_profiles()
     assert "new" in VOICES
-    assert VOICES["new"].backend == "chatterbox"
+    assert VOICES["new"].backend == "xtts-v2"
 
 
 def test_profile_unknown_backend_skipped(tmp_path, monkeypatch, caplog):
@@ -78,10 +78,10 @@ def test_profile_optional_policy_without_ref_text_kept(tmp_path, monkeypatch):
     from server import _load_voice_profiles, VOICES
     monkeypatch.setattr("server._VOICES_DIR", str(tmp_path))
     VOICES.clear()
-    _write_profile(tmp_path, "chatvoice", backend="chatterbox")
+    _write_profile(tmp_path, "xttsvoice", backend="xtts-v2")
     _load_voice_profiles()
-    assert "chatvoice" in VOICES
-    assert VOICES["chatvoice"].ref_text is None
+    assert "xttsvoice" in VOICES
+    assert VOICES["xttsvoice"].ref_text is None
 
 
 def test_profile_with_unknown_extras_skipped(tmp_path, monkeypatch, caplog):

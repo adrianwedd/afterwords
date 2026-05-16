@@ -256,7 +256,7 @@ def test_health_includes_loaded_backends(client):
     assert body["backend"] == "mlx"  # legacy field unchanged
     assert "loaded_backends" in body
     assert set(body["loaded_backends"].keys()) >= {
-        "qwen3-0.6b", "qwen3-1.7b", "chatterbox", "voxcpm-1.5",
+        "qwen3-0.6b", "qwen3-1.7b",
     }
     for name, info in body["loaded_backends"].items():
         assert info["loaded"] is True
@@ -373,26 +373,6 @@ def test_cleanup_current_voices_deletes_tracked_paths(tmp_path):
     finally:
         server.VOICES.pop("cleaner", None)
         for p in (tmp_cleanup, tmp_owned, safe_file):
-            try:
-                os.remove(p)
-            except OSError:
-                pass
-
-
-def test_sweep_orphaned_temp_files_deletes_voxcpm_refs():
-    """_sweep_orphaned_temp_files must delete files matching voxcpm-ref-*.wav."""
-    import tempfile as _tempfile
-    stale = os.path.join(_tempfile.gettempdir(), "voxcpm-ref-deadbeef.wav")
-    unrelated = os.path.join(_tempfile.gettempdir(), "not-voxcpm-xyz.wav")
-    for p in (stale, unrelated):
-        with open(p, "wb") as f:
-            f.write(b"x")
-    try:
-        server._sweep_orphaned_temp_files()
-        assert not os.path.exists(stale), "stale voxcpm-ref-*.wav not swept"
-        assert os.path.exists(unrelated), "unrelated file must NOT be swept"
-    finally:
-        for p in (stale, unrelated):
             try:
                 os.remove(p)
             except OSError:
@@ -639,13 +619,13 @@ def test_lang_routing_swaps_within_family(client):
     """Request lang=zh against an en-only voice routes to a zh-capable family member."""
     server.VOICES.clear()
     _make_voice_in_voices("alpha-en", family="alpha", supported_langs=("en",), backend_alias="qwen3-0.6b")
-    _make_voice_in_voices("alpha-zh", family="alpha", supported_langs=("en", "zh"), backend_alias="voxcpm-1.5")
+    _make_voice_in_voices("alpha-zh", family="alpha", supported_langs=("en", "zh"), backend_alias="qwen3-1.7b")
     try:
         r = client.get("/synthesize", params={"text": "Ni hao", "voice": "alpha-en", "lang": "zh"})
         assert r.status_code == 200, r.text
         assert r.headers["content-type"] == "audio/wav"
         # X-Backend reports the routed backend
-        assert r.headers.get("x-backend") == "voxcpm-1.5"
+        assert r.headers.get("x-backend") == "qwen3-1.7b"
     finally:
         server.VOICES.clear()
 
@@ -670,7 +650,7 @@ def test_lang_routing_ignores_voice_with_no_family(client):
     server.VOICES.clear()
     _make_voice_in_voices("loner", family=None, supported_langs=("en",), backend_alias="qwen3-0.6b")
     # Also register a zh-capable family member that would route IF loner had a family.
-    _make_voice_in_voices("zh-helper", family="other", supported_langs=("en", "zh"), backend_alias="voxcpm-1.5")
+    _make_voice_in_voices("zh-helper", family="other", supported_langs=("en", "zh"), backend_alias="qwen3-1.7b")
     try:
         r = client.get("/synthesize", params={"text": "Hi", "voice": "loner", "lang": "zh"})
         assert r.status_code == 400
@@ -686,7 +666,7 @@ def test_lang_routing_unchanged_when_lang_supported(client):
     """If the resolved voice already supports the requested lang, no routing occurs."""
     server.VOICES.clear()
     _make_voice_in_voices("alpha-en", family="alpha", supported_langs=("en", "zh"), backend_alias="qwen3-0.6b")
-    _make_voice_in_voices("alpha-other", family="alpha", supported_langs=("en", "zh"), backend_alias="voxcpm-1.5")
+    _make_voice_in_voices("alpha-other", family="alpha", supported_langs=("en", "zh"), backend_alias="qwen3-1.7b")
     try:
         r = client.get("/synthesize", params={"text": "hi", "voice": "alpha-en", "lang": "en"})
         assert r.status_code == 200
@@ -695,100 +675,3 @@ def test_lang_routing_unchanged_when_lang_supported(client):
         server.VOICES.clear()
 
 
-# --- Chatterbox backend unit tests ---
-
-
-def test_chatterbox_validate_extras_allows_cfg_weight_and_exaggeration():
-    """Chatterbox should accept cfg_weight and exaggeration as valid extras."""
-    from backends.chatterbox import ChatterboxBackend
-
-    be = ChatterboxBackend()
-    # Should not raise
-    be.validate_extras({"cfg_weight": 0.7, "exaggeration": 0.5})
-    be.validate_extras({"cfg_weight": 0.9})
-    be.validate_extras({"exaggeration": 0.3})
-    be.validate_extras({})
-
-
-def test_chatterbox_validate_extras_rejects_unknown():
-    """Chatterbox should reject extras it doesn't recognize."""
-    from backends.chatterbox import ChatterboxBackend
-
-    be = ChatterboxBackend()
-    try:
-        be.validate_extras({"unknown_key": 1})
-        assert False, "expected ValueError"
-    except ValueError as e:
-        assert "unknown_key" in str(e)
-
-
-def test_chatterbox_prepare_voice_preserves_extras(tmp_path):
-    """prepare_voice should preserve extras into PreparedVoice."""
-    import soundfile as sf
-    import numpy as np
-    from backends.chatterbox import ChatterboxBackend
-
-    ref_wav = tmp_path / "ref.wav"
-    sf.write(str(ref_wav), np.zeros(24000, dtype=np.float32), 24000)
-    be = ChatterboxBackend()
-    pv = be.prepare_voice(str(ref_wav), "hello", {"cfg_weight": 0.8, "exaggeration": 0.4})
-    assert pv.extras["cfg_weight"] == 0.8
-    assert pv.extras["exaggeration"] == 0.4
-    assert pv.data is not None
-
-
-def test_chatterbox_synthesize_forwards_lang_and_defaults(monkeypatch, tmp_path):
-    """synthesize should forward lang_code, cfg_weight, and exaggeration to generate_audio."""
-    pytest.importorskip("mlx_audio")
-    from backends.chatterbox import ChatterboxBackend, _DEFAULT_CFG_WEIGHT, _DEFAULT_EXAGGERATION
-    from backends.base import PreparedVoice, _read_only
-
-    be = ChatterboxBackend()
-    be._model = "fake-model"  # bypass load
-
-    import numpy as np
-    import soundfile as sf
-    ref_wav = tmp_path / "ref.wav"
-    sf.write(str(ref_wav), np.zeros(24000, dtype=np.float32), 24000)
-
-    captured_kwargs = {}
-
-    def fake_generate_audio(**kwargs):
-        captured_kwargs.update(kwargs)
-        path = os.path.join(kwargs["output_path"], "out_0.wav")
-        sf.write(path, np.zeros(2400, dtype=np.float32), 24000)
-        return path
-
-    # generate_audio is imported locally inside synthesize(), so patch at source
-    monkeypatch.setattr("mlx_audio.tts.generate.generate_audio", fake_generate_audio)
-
-    # Without extras — should use defaults. data=None so synthesize uses ref_audio_path directly.
-    pv = PreparedVoice(
-        ref_audio_path=str(ref_wav),
-        ref_text="hello",
-        extras=_read_only({}),
-    )
-    be.synthesize("test text", pv, "es")
-
-    assert captured_kwargs["lang_code"] == "es"
-    assert captured_kwargs["cfg_weight"] == _DEFAULT_CFG_WEIGHT
-    assert captured_kwargs["exaggeration"] == _DEFAULT_EXAGGERATION
-    assert captured_kwargs["text"] == "test text"
-    assert captured_kwargs["ref_audio"] == str(ref_wav)
-    assert captured_kwargs.get("ref_text") == "hello"
-
-    # With explicit extras — should override defaults
-    captured_kwargs.clear()
-    pv2 = PreparedVoice(
-        ref_audio_path=str(ref_wav),
-        ref_text="hello",
-        extras=_read_only({"cfg_weight": 0.9, "exaggeration": 0.3}),
-    )
-    be.synthesize("test text", pv2, "fr")
-
-    assert captured_kwargs["lang_code"] == "fr"
-    assert captured_kwargs["cfg_weight"] == 0.9
-    assert captured_kwargs["exaggeration"] == 0.3
-    assert captured_kwargs["text"] == "test text"
-    assert captured_kwargs["ref_audio"] == str(ref_wav)
-    assert captured_kwargs.get("ref_text") == "hello"
