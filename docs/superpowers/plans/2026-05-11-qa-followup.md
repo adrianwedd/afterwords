@@ -1,5 +1,11 @@
 # QA Followup — Requirements Hygiene + Test Coverage Plan
 
+> **Status (2026-05-16): historical.** Tasks 1–6 landed in commits
+> `48455ff..639de85`; task 7 (issue #14 fidelity verification) was rolled
+> into Sprint 1 of the v1.0.0 roadmap. See
+> `docs/superpowers/plans/2026-05-16-roadmap.md`. Checkboxes below are
+> NOT maintained.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Close the six open findings from the 2026-05-10 QA session: three requirements hygiene issues (M4-M6) and three test coverage gaps (M1-M3), then resolve issue #14 (silence-gap + Chatterbox fidelity verification).
