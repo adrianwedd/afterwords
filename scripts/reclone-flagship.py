@@ -22,7 +22,7 @@ import backends
 
 FLAGSHIPS = ["picard", "galadriel", "attenborough"]
 # Non-default backends to generate profiles for (default is qwen3-0.6b, already present).
-NON_DEFAULT_BACKENDS = ["qwen3-1.7b", "chatterbox", "voxcpm-1.5"]
+NON_DEFAULT_BACKENDS = ["qwen3-1.7b"]
 
 
 def main() -> int:

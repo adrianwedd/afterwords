@@ -86,16 +86,6 @@ def _cleanup_current_voices():
                 pass
 
 
-def _sweep_orphaned_temp_files():
-    """Delete VoxCPM-resample temp files from any prior crashed run. Best-effort.
-    MUST run before _load_voice_profiles to avoid deleting fresh temps."""
-    for path in glob.glob(os.path.join(tempfile.gettempdir(), "voxcpm-ref-*.wav")):
-        try:
-            os.remove(path)
-        except OSError:
-            pass
-
-
 @asynccontextmanager
 async def lifespan(app):
     # startup body runs after main()'s sync setup — no-op here
@@ -850,9 +840,6 @@ def main():
             log.error("backend %s failed to load: %s", bname, exc, exc_info=True)
             raise SystemExit(1)
         log.info("backend %s loaded in %.1fs", bname, time.time() - t0)
-
-    # Clean up any VoxCPM temp files orphaned by a previous crashed run.
-    _sweep_orphaned_temp_files()
 
     # 3. Walk voices/*.json — prepare_voice() calls may touch Metal, so run in the MLX thread.
     _run_in_ml_thread(_load_voice_profiles)

@@ -29,8 +29,6 @@ def register_all() -> None:
     """Register every shipped backend. Called once at server startup."""
     # Imports inside function to avoid importing model libs at package import time.
     from .qwen3 import Qwen3Backend
-    from .chatterbox import ChatterboxBackend
-    from .voxcpm import VoxCPMBackend
     from .voxtral import VoxtralBackend
     from .openvoice_v2 import OpenVoiceV2Backend
     from .f5_tts import F5TTSBackend
@@ -49,8 +47,6 @@ def register_all() -> None:
 
     register(Qwen3Backend(size="0.6B"))
     register(Qwen3Backend(size="1.7B"))
-    register(ChatterboxBackend())
-    register(VoxCPMBackend())
     register(VoxtralBackend())
     register(OpenVoiceV2Backend())
     register(F5TTSBackend())

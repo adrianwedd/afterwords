@@ -25,8 +25,8 @@ SENTENCE="You are absolutely right. Your Claude Code session could sound like me
 
 VOICES=("picard" "galadriel" "attenborough")
 # Parallel arrays: BACKENDS[i] -> SLUGS[i]. macOS bash 3.2 lacks associative arrays.
-BACKENDS=("qwen3-0.6b" "qwen3-1.7b" "chatterbox" "voxcpm-1.5")
-SLUGS=("qwen3-06b"    "qwen3-17b"   "chatterbox" "voxcpm-15")
+BACKENDS=("qwen3-0.6b" "qwen3-1.7b")
+SLUGS=("qwen3-06b"    "qwen3-17b")
 
 for voice in "${VOICES[@]}"; do
     for i in "${!BACKENDS[@]}"; do
