@@ -21,6 +21,8 @@ docs/*-audit.json
 *-output.log
 pytest-output.log
 setup-output*.log
+session-report-*.html
+transcripts/youtube/*.json
 
 # Claude Code runtime locks (created by /loop / scheduled tasks)
 .claude/scheduled_tasks.lock
