@@ -13,7 +13,3 @@ starlette>=0.40
 uvicorn>=0.30
 python-multipart>=0.0.9
 noisereduce>=3.0
-
-# Optional: MFCC fidelity test (tests/test_fidelity.py). Heavy install; the test
-# skips via pytest.importorskip if absent and is integration-marked anyway.
-librosa>=0.10,<1.0

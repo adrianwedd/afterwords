@@ -46,10 +46,6 @@ pytest
 # Run a single test
 pytest tests/test_server.py::test_health_returns_ok
 
-# Run the optional MFCC cloning-fidelity test (requires librosa + loaded backends, ~5 min):
-pip install librosa
-pytest -m integration tests/test_fidelity.py
-
 # If pytest fails with "bad interpreter" after brew upgrade, recreate the venv:
 bash setup.sh --server-only
 ```
