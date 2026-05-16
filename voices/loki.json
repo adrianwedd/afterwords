@@ -1,5 +1,6 @@
 {
   "name": "loki",
   "reference_audio": "loki-ref.wav",
-  "reference_text": "Is not this simpler? Is this not your natural state?"
+  "reference_text": "Is not this simpler? Is this not your natural state?",
+  "notes": "[v1.0.0 SCOPE: trim-threshold sweep deferred 2026-05-16 — current state acceptable for ship; revisit in Phase 4 with per-voice threshold tuning if listen-tests surface issues]"
 }
