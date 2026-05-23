@@ -41,16 +41,16 @@ curl "localhost:7860/synthesize?text=Hello&voice=galadriel" -o test.wav
 
 # Run tests (no GPU required)
 pip install -r requirements-dev.txt
-PYTHONPATH=. pytest
+pytest
 
 # Run a single test
-PYTHONPATH=. pytest tests/test_server.py::test_health_returns_ok
+pytest tests/test_server.py::test_health_returns_ok
 
 # Reload voices without restarting (after editing voices/*.json or running clone-voice.sh)
 afterwords reload
 ```
 
-Verify changes with `PYTHONPATH=. pytest` (no GPU required).
+Verify changes with `pytest` (no GPU required).
 
 ## Architecture
 
@@ -75,7 +75,7 @@ Registry at `backends/__init__.py`; one Python file per backend implementing the
 | `qwen3-0.6b` | 0.6B | 24 kHz | REQUIRED |
 | `qwen3-1.7b` | 1.7B | 24 kHz | REQUIRED |
 
-Cloning fidelity (verified 2026-05-16 listen-test): Qwen3 0.6B and 1.7B are the only endorsed cloning path. Chatterbox + VoxCPM failed listen-tests and were removed in commit f03e826. The registry still exposes ~17 other backends for experimentation; consult the README backend-status table for current verification state.
+Cloning fidelity (verified 2026-05-16 listen-test): Qwen3 0.6B and 1.7B are the only endorsed cloning path. Chatterbox + VoxCPM failed listen-tests and were removed in commit f03e826. The registry still exposes 15 other backends for experimentation (voxtral, openvoice-v2, f5-tts, cosyvoice2, gpt-sovits, xtts-v2, indextts-2, neutts-air, spark-tts, dia2, yourtts, firered-tts-2, sv2tts, mockingbird, soprotts); consult the README backend-status table for current verification state.
 
 ## Key Constraints
 

@@ -1,6 +1,6 @@
 # YouTube Revoicing Pipeline
 
-**Status as of 2026-05-07**
+**Status as of 2026-05-07; CLI/endpoint references reconciled 2026-05-23.**
 
 This document describes the end-to-end pipeline for replacing the NotebookLM-generated narration on 69 YouTube videos with Adrian's cloned voice, including the QA process, content review, synthesis scripts, and a detailed mispronunciation reference for Qwen3-TTS.
 
@@ -272,28 +272,30 @@ Qwen3-TTS uses zero-shot voice cloning from a short reference audio clip (~15 se
 
 ### Voice cloning command
 
+`clone-voice.sh` is YouTube-only: it pulls audio via `yt-dlp`, segments and denoises, then writes the profile. To clone from a local WAV recording, host the file somewhere with a yt-dlp-compatible URL or upload it to a private YouTube and use that link. Direct local-file ingestion is not currently supported.
+
 ```bash
 cd /path/to/afterwords
 
-# Clone voice from a WAV file
-./clone-voice.sh --name "adrian" --file /path/to/reference.wav
+# Clone from a YouTube clip — positional args:
+#   URL                  YouTube link
+#   NAME                 voice slug (used for voices/NAME.json + NAME-ref.wav)
+#   START (optional)     segment start in seconds
+bash clone-voice.sh "https://youtube.com/watch?v=..." adrian-wedd 10
 
-# Or from a YouTube clip (15–30 sec segment works well)
-afterwords clone --name "adrian" --youtube "URL" --start 10 --duration 20
+# Or via the CLI wrapper (same args, passed through):
+afterwords clone "https://youtube.com/watch?v=..." adrian-wedd 10
 ```
 
 ### Synthesising a script
 
 ```bash
-# Synthesise one script
-afterwords speak --voice adrian \
-  "$(cat transcripts/review/afterwords.md | sed -n '/### B) SYNTHESIS SCRIPT/,$ p' | tail -n +2)"
+# GET /synthesize via the server (port 7860). curl-encode the text first:
+TEXT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(open(sys.argv[1]).read()))" script.txt)
+curl -s "http://localhost:7860/synthesize?text=${TEXT}&voice=adrian-wedd" -o afterwords-narration.wav
 
-# Or pipe to the server directly
-curl -s http://localhost:8000/synthesise \
-  -H "Content-Type: application/json" \
-  -d '{"text": "...", "voice": "adrian"}' \
-  --output afterwords-narration.wav
+# Or use the bundled helper (URL-encodes for you, trims model artifact, plays via afplay):
+bash scripts/hermes-tts.sh "$(cat script.txt)" adrian-wedd
 ```
 
 ---
@@ -392,15 +394,20 @@ sox -d -r 44100 -c 1 reference.wav trim 0 60
 
 ### After recording
 
+There is no `--file` ingestion path. To use a local recording, upload it to a yt-dlp-compatible source first (e.g. an unlisted YouTube), then:
+
 ```bash
 cd /path/to/afterwords
 
-# Clone the voice
-./clone-voice.sh --name "adrian-wedd" --file reference.wav
+# Clone the voice from the uploaded URL
+bash clone-voice.sh "<URL>" adrian-wedd 0
 
-# Verify it sounds right
-afterwords speak --voice "adrian-wedd" \
-  "This is Adrian Wedd. Afterwords is running on MLX with Qwen3-TTS."
+# Verify it sounds right via the server (port 7860):
+curl -s "http://localhost:7860/synthesize?text=This+is+Adrian+Wedd.+Afterwords+is+running+on+MLX+with+Qwen3-TTS.&voice=adrian-wedd" -o /tmp/adrian-check.wav
+afplay /tmp/adrian-check.wav
+
+# Or via the helper:
+bash scripts/hermes-tts.sh "This is Adrian Wedd. Afterwords is running on MLX with Qwen3-TTS." adrian-wedd
 ```
 
 ---

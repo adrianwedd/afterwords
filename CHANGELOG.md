@@ -2,6 +2,37 @@
 
 All notable changes to Afterwords. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- **lisa-simpson** voice family (commit `d18aca4`). Source: *Lisa the Skeptic*, Yeardley Smith, segment_start_s=42. Ships as the canonical trio (base + `qwen3-0.6b` + `qwen3-1.7b` siblings) sharing one reference WAV under `family: "lisa-simpson"`. Brings the gallery to **98 families / 294 profiles**.
+- Demo gallery card for lisa-simpson on the [Pages site](https://adrianwedd.github.io/afterwords/) (`docs/audio/lisa-simpson.mp3`).
+- **Parametrized schema validator** for every shipped `voices/*.json` (commit `b2cee38`). Checks required fields, that `reference_audio` resolves on disk, that the `backend` slug is registered, and that `reference_text` is non-empty for REQUIRED-policy backends. A malformed voice JSON now fails CI with a precise file-specific test ID.
+- **Family-routing tiebreaker tests** pinning the documented `(duration_s, confidence, name)` ordering across `/reload` cycles. Two tests cover the higher-duration and equal-duration-higher-confidence branches.
+- **Concurrency smoke test:** 6 workers × 18 requests against `FakeBackend`, asserting `_synth_lock` serialization holds and no synthesis leaks across requests.
+
+### Changed
+
+- Test suite grew from 186 to **491 unit + contract tests** (still no GPU required), driven by the schema validator + new regression guards.
+
+### Security
+
+- **Default bind to 127.0.0.1** (commit `0dba278`). `server.py` now defaults `--host` to loopback; the launchd-managed server is no longer reachable from other machines on the LAN by accident. `--allow-clone` continues to enforce its existing 127.0.0.1 rewrite as belt-and-braces.
+- **`DELETE /session/{id}` input validation** — same `^[a-zA-Z0-9_-]{1,64}$` regex as `POST /clone`. Closes an asymmetry where a voice JSON that had gained a `session_id` field could be HTTP-deletable.
+- **Backend-import isolation** — `register_all` now wraps each experimental backend's import + register in its own try/except. The primary Qwen3 path still fails loud; one broken experimental backend can no longer crash boot.
+- **Hook regex hardening** — `setup.sh` and `.claude/hooks/codex-tts-worker.sh` now use `awk` exact-field comparison instead of `grep "^${AGENT}:"`, so an `AGENT` value cannot be interpreted as a regex.
+
+### Fixed
+
+- **Qwen3 long-input truncation** (commit `0dba278`) — `backends/qwen3.py::synthesize` now concatenates *all* sorted `out_*.wav` segments instead of only `wavs[0]`. Long inputs were being silently truncated to the first segment.
+- **Qwen3 unavailability hint** — `load()` catches `ImportError`, sets `_unavailable_reason`, and logs at ERROR level with the brew-upgrade/venv-rebuild guidance from CLAUDE.md so the cause shows up directly in `afterwords logs`.
+- **XTTS v2 + F5-TTS TOCTOU** — `prepare_voice` now buffers the reference audio bytes when possible; `synthesize` writes a tempfile from those bytes if available, falling back to the path otherwise. Closes the same DELETE-during-synthesis race that qwen3 already handled.
+
+### Docs
+
+- Reconciled voice counts, hook-chain references, and the Phase 1 lock-acquisition claim in the Hot-reload section (commit `f9db36c`).
+
 ## [1.0.0] — 2026-05-16
 
 First tagged release. Local voice-cloning TTS server on Apple Silicon, with **Qwen3-TTS** as the recommended cloning path. Hot-reload, multi-language synthesis, optional Claude Code integration.

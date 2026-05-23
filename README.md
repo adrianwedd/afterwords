@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. ~97 flagship voice families across **the Qwen3-TTS cloning path** (0.6B + 1.7B, the recommended backends) plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. **98 flagship voice families** (294 profiles across backend variants) on **the Qwen3-TTS cloning path** (0.6B + 1.7B, the recommended backends), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -199,8 +199,8 @@ The skill handles voice selection, server health checks, synthesis, and playback
 │  Your Mac (Apple Silicon, 16 GB+)                          │
 │                                                             │
 │  ┌─────────────────────────┐                                │
-│  │  Multi-Backend TTS      │  ← MLX + optional OpenVoice     │
-│  │  localhost:7860          │  ← 110+ voice profiles         │
+│  │  Multi-Backend TTS      │  ← MLX Qwen3 + 15 alt backends │
+│  │  localhost:7860          │  ← 294 voice profiles (98 fam) │
 │  │  /synthesize?text=...    │  ← ~20s per sentence (Qwen3)   │
 │  └─────────┬───────────────┘                                │
 │            │                                                │
@@ -314,7 +314,7 @@ afterwords/
 ├── clone-voice.sh        ← add more voices from YouTube
 ├── server.py             ← multi-voice TTS server
 ├── strip_markdown.py     ← text cleaner for TTS (also used by hooks)
-├── tests/                ← pytest suite (190+ tests, no GPU needed)
+├── tests/                ← pytest suite (490+ tests, no GPU needed)
 ├── backends/             ← Backend Protocol + concrete backends + registry CLI
 ├── scripts/              ← reclone-flagship.py, gen-comparison-audio.sh, audit-voice-transcripts.py, audit-archive.py
 ├── docs/                 ← demo site (deployed to GitHub Pages)
@@ -327,7 +327,7 @@ afterwords/
 │   ├── galadriel-ref.wav ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav  ← (Scarlett Johansson, Her)
 │   ├── amy-pond-ref.wav  ← (Karen Gillan, Doctor Who)
-│   └── ...               ← ~97 families / ~290 profiles total; flagships have per-backend variants
+│   └── ...               ← 98 families / 294 profiles total; flagships have per-backend variants
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration
@@ -363,6 +363,7 @@ afterwords/
 | bardem | Javier Bardem, *Vicky Cristina Barcelona* | Warm, seductive Spanish |
 | depp | Johnny Depp, interview | Languid, charming |
 | data | Brent Spiner, *Star Trek TNG* | Precise, android curiosity |
+| lisa-simpson | Yeardley Smith, *The Simpsons* | Earnest, thoughtful, idealistic |
 | picard | Patrick Stewart, *Star Trek* | Authoritative, measured |
 | ronan | Ronan Keating, interview | Soft Irish, reflective |
 
@@ -386,7 +387,7 @@ afterwords/
 | tegan-jovanka | Janet Fielding, *Resurrection of the Daleks* | Blunt, emotional |
 | yasmin-khan | Mandip Gill, *Power of the Doctor* | Quiet, heartfelt |
 
-The full gallery includes ~97 voice families spanning British comedy (Blackadder, Alan Partridge, Basil Fawlty, Malcolm Tucker, Father Ted, Geraldine, Patsy & Edina, Bernard Black…), American drama (Frasier, Columbo, Saul Goodman, Harvey Specter…), science communicators (Carl Sagan, Feynman, Brian Cox, Neil deGrasse Tyson…), and more. Run `afterwords voices --demo` to browse and hear samples.
+The full gallery includes 98 voice families spanning British comedy (Blackadder, Alan Partridge, Basil Fawlty, Malcolm Tucker, Father Ted, Geraldine, Patsy & Edina, Bernard Black…), American drama (Frasier, Columbo, Saul Goodman, Harvey Specter…), American sitcom (Lisa Simpson…), science communicators (Carl Sagan, Feynman, Brian Cox, Neil deGrasse Tyson…), and more. Run `afterwords voices --demo` to browse and hear samples.
 
 ## Troubleshooting
 
@@ -410,7 +411,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-Tests cover the server API (endpoint validation, error handling, voice resolution, hot-reload atomicity, lang routing across backend families), backend protocol conformance, the strip-markdown text transform, and the `_cleanup_current_voices` lifecycle helper. 190+ tests pass without loading any real model — a `FakeBackend` fixture stands in. Real-model integration tests are opt-in via `pytest -m integration`.
+Tests cover the server API (endpoint validation, error handling, voice resolution, hot-reload atomicity, lang routing across backend families), backend protocol conformance, the strip-markdown text transform, the `_cleanup_current_voices` lifecycle helper, and a parametrized schema validator that runs against every shipped voice profile in `voices/*.json`. 490+ tests pass without loading any real model — a `FakeBackend` fixture stands in. Real-model integration tests are opt-in via `pytest -m integration`.
 
 Run a single test:
 
@@ -446,11 +447,11 @@ This removes the launchd service and offers to remove Claude Code hooks. Voice p
 
 ## Performance
 
-On 32 GB M3 Max (four backends preloaded):
-- Startup: ~2 min (backend load + warmup)
+On 32 GB M3 Max with the recommended Qwen3-only install:
+- Startup: ~30s–2 min (backend load + warmup; longer when other backends are installed)
 - Model load: ~5s (cached) / ~5 min (first run, downloading ~3 GB)
 - Per request: ~15s fixed overhead + ~0.5x real-time (~20s typical)
-- Peak memory: ~10 GB (all four backends)
+- Peak memory: ~3–4 GB (Qwen3 0.6B + 1.7B only); higher if optional backends from the registry are installed and preloaded
 - Adding voices: zero extra memory (each is just a 700 KB WAV)
 
 ## Credits
