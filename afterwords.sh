@@ -5,15 +5,18 @@
 # Usage: afterwords <command> [options]
 #
 # Commands:
-#   start      Start the TTS server (via launchd)
-#   stop       Stop the TTS server
-#   restart    Restart the TTS server
-#   status     Show server status, loaded voices, and health
-#   logs       Tail the server log
-#   voices     List available voices
-#   clone      Clone a new voice from YouTube
-#   codex-hook Manage the repo-local Codex CLI watcher
-#   uninstall  Remove the launchd service and optionally Claude Code hooks
+#   start        Start the TTS server (via launchd)
+#   stop         Stop the TTS server
+#   restart      Restart the TTS server
+#   status       Show server status, loaded voices, and health
+#   logs         Tail the server log
+#   voices       List available voices (--demo, --cloud)
+#   clone        Clone a new voice from YouTube
+#   push         Push a voice (and family variants) to the cloud
+#   pull         Pull a cloud voice to local voices/
+#   setup-cloud  Configure cloud API key and URL
+#   codex-hook   Manage the repo-local Codex CLI watcher
+#   uninstall    Remove the launchd service and optionally Claude Code hooks
 #
 set -uo pipefail
 
@@ -33,6 +36,8 @@ PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
 LOG_FILE="/tmp/claude-tts-server.log"
 PORT=7860
 HEALTH_URL="http://localhost:${PORT}/health"
+CLOUD_CONFIG_FILE="$HOME/.afterwords-cloud"
+CLOUD_DEFAULT_URL="https://afterwords-api.adrianwedd.workers.dev"
 CODEX_WATCH_PID="/tmp/codex-tts-watch.pid"
 CODEX_WATCH_LOG="/tmp/codex-tts-watch.log"
 CODEX_WATCH_SCRIPT_REL=".claude/hooks/codex-tts-watch.sh"
@@ -249,11 +254,48 @@ cmd_logs() {
     tail -f "$@" "$LOG_FILE"
 }
 
+# ── Cloud config helpers ──────────────────────────────────────────
+
+load_cloud_config() {
+    CLOUD_API_KEY=""
+    CLOUD_URL="$CLOUD_DEFAULT_URL"
+    if [ -f "$CLOUD_CONFIG_FILE" ]; then
+        local parsed
+        parsed=$(python3 -c "
+import sys
+data = {}
+with open(sys.argv[1]) as f:
+    for line in f:
+        line = line.strip()
+        if not line or line.startswith('#') or '=' not in line:
+            continue
+        k, _, v = line.partition('=')
+        data[k.strip()] = v.strip()
+print(data.get('api_key', ''))
+print(data.get('cloud_url', ''))
+" "$CLOUD_CONFIG_FILE" 2>/dev/null)
+        CLOUD_API_KEY="$(echo "$parsed" | sed -n '1p')"
+        local file_url
+        file_url="$(echo "$parsed" | sed -n '2p')"
+        [ -n "$file_url" ] && CLOUD_URL="$file_url"
+    fi
+    CLOUD_API_KEY="${AFTERWORDS_API_KEY:-$CLOUD_API_KEY}"
+    CLOUD_URL="${AFTERWORDS_CLOUD_URL:-$CLOUD_URL}"
+}
+
+require_cloud_config() {
+    load_cloud_config
+    if [ -z "$CLOUD_API_KEY" ]; then
+        fail "No API key configured. Run: ${CYAN}afterwords setup-cloud${NC}"
+    fi
+}
+
 cmd_voices() {
-    local demo=false
+    local demo=false cloud=false
     for arg in "$@"; do
         case "$arg" in
-            --demo) demo=true ;;
+            --demo)  demo=true ;;
+            --cloud) cloud=true ;;
         esac
     done
 
@@ -308,6 +350,39 @@ for v in data.get('voices', []):
     fi
 
     echo
+
+    if $cloud; then
+        load_cloud_config
+        if [ -z "$CLOUD_API_KEY" ]; then
+            warn "No API key configured — run: ${CYAN}afterwords setup-cloud${NC}"
+        else
+            echo -e "  ${DIM}── cloud ─────────────────────────────────${NC}"
+            echo
+            local full_response http_code cloud_body
+            full_response=$(curl -s -w "\n%{http_code}" --max-time 15 \
+                -H "Authorization: Bearer $CLOUD_API_KEY" \
+                "$CLOUD_URL/v1/voices" 2>/dev/null)
+            http_code=$(printf '%s' "$full_response" | tail -1)
+            cloud_body=$(printf '%s' "$full_response" | head -n -1)
+            if [ "$http_code" = "200" ]; then
+                printf '%s' "$cloud_body" | python3 -c "
+import sys, json
+voices = json.load(sys.stdin)
+if not voices:
+    print('    \033[2mNo cloud voices — push one with: afterwords push <name>\033[0m')
+else:
+    for v in voices:
+        name = v.get('name', '?')
+        backend = v.get('backend', '?')
+        vid = v.get('voice_id', '')[:8]
+        print(f'    \033[0;36m{name:<30}\033[0m \033[2m{backend}  {vid}...\033[0m')
+"
+            else
+                warn "Could not fetch cloud voices (HTTP ${http_code})"
+            fi
+            echo
+        fi
+    fi
 
     if $demo; then
         if ! health_check; then
@@ -548,6 +623,237 @@ cmd_uninstall() {
     echo
 }
 
+cmd_setup_cloud() {
+    echo
+    echo -e "  ${BOLD}afterwords${NC}  ${DIM}— setup cloud${NC}"
+    rule
+    echo
+
+    load_cloud_config
+    local current_key_display="(not set)"
+    [ -n "$CLOUD_API_KEY" ] && current_key_display="${CLOUD_API_KEY:0:8}..."
+
+    info "Current URL:     ${DIM}${CLOUD_URL}${NC}"
+    info "Current API key: ${DIM}${current_key_display}${NC}"
+    echo
+
+    local new_key
+    printf "  Enter API key (aw_...): "
+    read -r new_key
+    new_key="${new_key#"${new_key%%[! ]*}"}"  # ltrim
+    new_key="${new_key%"${new_key##*[! ]}"}"  # rtrim
+    [ -z "$new_key" ] && fail "API key cannot be empty"
+    [[ "$new_key" == aw_* ]] || warn "Key doesn't start with 'aw_' — proceeding anyway"
+
+    local new_url
+    printf "  Cloud URL [%s]: " "$CLOUD_URL"
+    read -r new_url
+    new_url="${new_url#"${new_url%%[! ]*}"}"; new_url="${new_url%"${new_url##*[! ]}"}"
+    [ -z "$new_url" ] && new_url="$CLOUD_URL"
+
+    info "Testing connection..."
+    local status_code
+    status_code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 \
+        -H "Authorization: Bearer $new_key" \
+        "${new_url}/v1/voices" 2>/dev/null)
+    case "$status_code" in
+        200) ok "Connection successful" ;;
+        401) fail "Invalid API key (HTTP 401)" ;;
+        000) fail "Could not reach ${new_url} — check URL and network" ;;
+        *)   warn "Unexpected status ${status_code} — saving config anyway" ;;
+    esac
+
+    printf 'api_key=%s\ncloud_url=%s\n' "$new_key" "$new_url" > "$CLOUD_CONFIG_FILE"
+    chmod 600 "$CLOUD_CONFIG_FILE"
+    ok "Config saved to ${DIM}${CLOUD_CONFIG_FILE}${NC}"
+    echo
+}
+
+cmd_push() {
+    local name="${1:-}"
+    [ -z "$name" ] && fail "Usage: afterwords push <voice-name>"
+
+    require_cloud_config
+
+    local profile="$REPO_DIR/voices/${name}.json"
+    [ -f "$profile" ] || fail "Voice profile not found: voices/${name}.json"
+
+    echo
+    echo -e "  ${BOLD}afterwords${NC}  ${DIM}— push${NC}"
+    rule
+    echo
+
+    # Collect all profiles to push (by family, or just this one if no family)
+    local profiles_list
+    profiles_list=$(VOICES_DIR="$REPO_DIR/voices" VOICE_NAME="$name" python3 -c "
+import json, glob, os
+name = os.environ['VOICE_NAME']
+voices_dir = os.environ['VOICES_DIR']
+base_file = os.path.join(voices_dir, name + '.json')
+try:
+    base = json.load(open(base_file))
+except Exception as e:
+    print(f'ERROR: {e}', flush=True)
+    raise SystemExit(1)
+family = base.get('family', '')
+results = []
+for f in sorted(glob.glob(os.path.join(voices_dir, '*.json'))):
+    try:
+        p = json.load(open(f))
+        if family and p.get('family') == family:
+            results.append(f)
+        elif not family and p.get('name') == name:
+            results.append(f)
+    except Exception:
+        pass
+print('\n'.join(results))
+" 2>/dev/null)
+    [ -z "$profiles_list" ] && fail "No profiles found for voice: ${name}"
+
+    local pushed=0 failed=0
+
+    while IFS= read -r pfile; do
+        [ -f "$pfile" ] || continue
+
+        local pname pbackend pref_text pfamily pwav
+        pname=$(    python3 -c "import json; p=json.load(open('$pfile')); print(p.get('name',''))" 2>/dev/null)
+        pbackend=$( python3 -c "import json; p=json.load(open('$pfile')); print(p.get('backend','qwen3-0.6b'))" 2>/dev/null)
+        pref_text=$(python3 -c "import json; p=json.load(open('$pfile')); print(p.get('reference_text') or '')" 2>/dev/null)
+        pfamily=$(  python3 -c "import json; p=json.load(open('$pfile')); print(p.get('family') or '')" 2>/dev/null)
+        pwav=$(     python3 -c "import json; p=json.load(open('$pfile')); print(p.get('reference_audio',''))" 2>/dev/null)
+
+        local wav_path="$REPO_DIR/voices/$pwav"
+        if [ ! -f "$wav_path" ]; then
+            warn "Skipping ${pname}: reference audio not found (${pwav})"
+            failed=$((failed + 1)); continue
+        fi
+
+        local form_args=(-F "name=$pname" -F "ref_audio=@${wav_path};type=audio/wav" -F "backend=$pbackend")
+        [ -n "$pref_text" ] && form_args+=(-F "ref_text=$pref_text")
+        [ -n "$pfamily"   ] && form_args+=(-F "family=$pfamily")
+
+        local full_response http_code http_body
+        full_response=$(curl -s -w "\n%{http_code}" --max-time 60 \
+            -X POST "${CLOUD_URL}/v1/voices" \
+            -H "Authorization: Bearer $CLOUD_API_KEY" \
+            "${form_args[@]}" 2>/dev/null)
+        http_code=$(printf '%s' "$full_response" | tail -1)
+        http_body=$(printf '%s' "$full_response" | head -n -1)
+
+        if [ "$http_code" = "201" ]; then
+            local voice_id
+            voice_id=$(python3 -c "import json,sys; print(json.loads(sys.argv[1]).get('voice_id',''))" "$http_body" 2>/dev/null)
+            PFILE="$pfile" VOICE_ID="$voice_id" python3 -c "
+import json, os
+p = json.load(open(os.environ['PFILE']))
+p['cloud_voice_id'] = os.environ['VOICE_ID']
+with open(os.environ['PFILE'], 'w') as f:
+    json.dump(p, f, indent=2)
+    f.write('\n')
+"
+            ok "${CYAN}${pname}${NC}  ${DIM}${pbackend}${NC}  →  ${voice_id}"
+            pushed=$((pushed + 1))
+        else
+            local err_msg
+            err_msg=$(python3 -c "import json,sys; print(json.loads(sys.argv[1]).get('error','unknown'))" "$http_body" 2>/dev/null || echo "$http_body")
+            warn "Failed to push ${pname}: ${err_msg} (HTTP ${http_code})"
+            failed=$((failed + 1))
+        fi
+    done <<< "$profiles_list"
+
+    echo
+    if [ "$failed" -eq 0 ]; then
+        ok "Pushed ${pushed} profile(s) to ${DIM}${CLOUD_URL}${NC}"
+    else
+        warn "Pushed ${pushed}, failed ${failed}"
+        [ "$pushed" -eq 0 ] && exit 1
+    fi
+    echo
+}
+
+cmd_pull() {
+    local voice_id="${1:-}"
+    [ -z "$voice_id" ] && fail "Usage: afterwords pull <voice-id>"
+
+    require_cloud_config
+
+    echo
+    echo -e "  ${BOLD}afterwords${NC}  ${DIM}— pull${NC}"
+    rule
+    echo
+
+    # Fetch voice metadata
+    local full_response http_code meta_body
+    full_response=$(curl -s -w "\n%{http_code}" --max-time 15 \
+        -H "Authorization: Bearer $CLOUD_API_KEY" \
+        "${CLOUD_URL}/v1/voices/${voice_id}" 2>/dev/null)
+    http_code=$(printf '%s' "$full_response" | tail -1)
+    meta_body=$(printf '%s' "$full_response" | head -n -1)
+
+    if [ "$http_code" != "200" ]; then
+        local err
+        err=$(python3 -c "import json,sys; print(json.loads(sys.argv[1]).get('error','unknown'))" "$meta_body" 2>/dev/null || echo "$meta_body")
+        fail "Could not fetch voice ${voice_id}: ${err} (HTTP ${http_code})"
+    fi
+
+    local vname
+    vname=$(python3 -c "import json,sys; print(json.loads(sys.argv[1]).get('name',''))" "$meta_body" 2>/dev/null)
+    [ -z "$vname" ] && fail "Voice metadata is missing 'name' field"
+
+    local target_json="$REPO_DIR/voices/${vname}.json"
+    local target_wav="$REPO_DIR/voices/${vname}-ref.wav"
+
+    [ -f "$target_json" ] && warn "Overwriting existing profile: voices/${vname}.json"
+    [ -f "$target_wav"  ] && warn "Overwriting existing audio:   voices/${vname}-ref.wav"
+
+    # Download reference WAV
+    local wav_status
+    wav_status=$(curl -s -w "%{http_code}" --max-time 60 \
+        -H "Authorization: Bearer $CLOUD_API_KEY" \
+        "${CLOUD_URL}/v1/voices/${voice_id}/audio" \
+        -o "$target_wav" 2>/dev/null)
+    if [ "$wav_status" != "200" ]; then
+        rm -f "$target_wav"
+        fail "Could not download audio for ${voice_id} (HTTP ${wav_status})"
+    fi
+
+    # Write local JSON profile (pass data via env to avoid quoting issues)
+    META_BODY="$meta_body" VOICE_ID="$voice_id" TARGET="$target_json" VNAME="$vname" python3 -c "
+import json, os
+meta = json.loads(os.environ['META_BODY'])
+vname = os.environ['VNAME']
+profile = {
+    'name': vname,
+    'reference_audio': f'{vname}-ref.wav',
+    'reference_text': meta.get('ref_text') or '',
+    'backend': meta.get('backend', 'qwen3-0.6b'),
+    'cloud_voice_id': os.environ['VOICE_ID'],
+}
+if meta.get('lang') and meta['lang'] != 'en':
+    profile['lang'] = meta['lang']
+if meta.get('family'):
+    profile['family'] = meta['family']
+with open(os.environ['TARGET'], 'w') as f:
+    json.dump(profile, f, indent=2)
+    f.write('\n')
+"
+
+    local vbackend
+    vbackend=$(python3 -c "import json,sys; print(json.loads(sys.argv[1]).get('backend','?'))" "$meta_body" 2>/dev/null)
+    ok "Pulled ${CYAN}${vname}${NC}  ${DIM}${vbackend}${NC}"
+
+    # Reload server if it's running
+    if health_check 2>/dev/null; then
+        info "Reloading server..."
+        curl -s -X POST "http://localhost:${PORT}/reload" >/dev/null 2>&1 \
+            && ok "Server reloaded — ${vname} is ready"
+    else
+        info "Server not running — voice available after next start"
+    fi
+
+    echo
+}
+
 cmd_help() {
     echo
     echo -e "  ${BOLD}afterwords${NC}  ${DIM}— local voice-cloning TTS server${NC}"
@@ -564,19 +870,25 @@ cmd_help() {
     echo -e "    ${CYAN}voices${NC}      List available voices"
     echo -e "    ${CYAN}reload${NC}      Reload voices from disk without restarting"
     echo -e "    ${CYAN}clone${NC}       Clone a new voice from YouTube"
+    echo -e "    ${CYAN}push${NC}        Push a voice (and its family variants) to the cloud"
+    echo -e "    ${CYAN}pull${NC}        Pull a cloud voice to local voices/"
+    echo -e "    ${CYAN}setup-cloud${NC} Configure cloud API key and URL"
     echo -e "    ${CYAN}audit${NC}       Audit voice profiles for transcript-vs-audio drift"
     echo -e "    ${CYAN}codex-hook${NC}  Start or stop the Codex CLI watcher"
     echo -e "    ${CYAN}uninstall${NC}   Remove the service and optionally hooks"
     echo
     echo -e "  ${BOLD}Options:${NC}"
-    echo -e "    ${DIM}voices --demo${NC}    Play a sample of each voice"
+    echo -e "    ${DIM}voices --demo${NC}          Play a sample of each voice"
+    echo -e "    ${DIM}voices --cloud${NC}         Show cloud voices after local list"
     echo -e "    ${DIM}clone URL NAME [START] [--yes]${NC}"
     echo -e "    ${DIM}codex-hook start [--diagnose]${NC}"
     echo
     echo -e "  ${BOLD}Examples:${NC}"
     echo -e "    ${DIM}afterwords start${NC}"
     echo -e "    ${DIM}afterwords voices --demo${NC}"
-    echo -e "    ${DIM}afterwords codex-hook start${NC}"
+    echo -e "    ${DIM}afterwords voices --cloud${NC}"
+    echo -e "    ${DIM}afterwords push picard${NC}"
+    echo -e "    ${DIM}afterwords pull <voice-id>${NC}"
     echo -e "    ${DIM}afterwords clone \"https://youtube.com/watch?v=...\" gandalf 45${NC}"
     echo
 }
@@ -593,11 +905,14 @@ case "$COMMAND" in
     status)    cmd_status "$@" ;;
     logs)      cmd_logs "$@" ;;
     voices)    cmd_voices "$@" ;;
-    reload)    cmd_reload "$@" ;;
-    clone)     cmd_clone "$@" ;;
-    audit)     cmd_audit "$@" ;;
-    codex-hook) cmd_codex_hook "$@" ;;
-    uninstall) cmd_uninstall "$@" ;;
+    reload)      cmd_reload "$@" ;;
+    clone)       cmd_clone "$@" ;;
+    push)        cmd_push "$@" ;;
+    pull)        cmd_pull "$@" ;;
+    setup-cloud) cmd_setup_cloud "$@" ;;
+    audit)       cmd_audit "$@" ;;
+    codex-hook)  cmd_codex_hook "$@" ;;
+    uninstall)   cmd_uninstall "$@" ;;
     help|--help|-h)  cmd_help ;;
     *)
         fail "Unknown command: ${COMMAND}. Run ${CYAN}afterwords help${NC} for usage."
