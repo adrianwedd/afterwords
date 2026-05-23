@@ -437,7 +437,8 @@ while true; do
         if grep -q ':' "$AW_FILE" 2>/dev/null; then
             # Mapping mode: agent-name: voice-name (one per line)
             if [ -n "$AGENT" ]; then
-                VOICE=$(grep "^${AGENT}:" "$AW_FILE" 2>/dev/null | head -1 | cut -d: -f2- | tr -d '[:space:]')
+                # awk with exact field comparison — AGENT cannot be interpreted as regex.
+                VOICE=$(awk -F: -v agent="$AGENT" '$1 == agent { sub(/^[^:]*:/, ""); gsub(/[[:space:]]/, ""); print; exit }' "$AW_FILE" 2>/dev/null)
             fi
             # Fall back to default: entry
             [ -z "$VOICE" ] && VOICE=$(grep "^default:" "$AW_FILE" 2>/dev/null | head -1 | cut -d: -f2- | tr -d '[:space:]')

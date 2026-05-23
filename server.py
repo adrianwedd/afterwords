@@ -600,8 +600,16 @@ async def clone_voice_endpoint(
         # Lock released — heavy CPU work (sf.write, whisper) runs unlocked.
 
         tmp_ref = ref_path + ".tmp"
-        sf.write(tmp_ref, reduced, sr_in, format="WAV", subtype="PCM_16")
-        os.rename(tmp_ref, ref_path)
+        try:
+            sf.write(tmp_ref, reduced, sr_in, format="WAV", subtype="PCM_16")
+            os.rename(tmp_ref, ref_path)
+        except Exception:
+            # Leave ref_path stub for the outer cleanup path; ensure tmp_ref doesn't leak.
+            try:
+                os.unlink(tmp_ref)
+            except OSError:
+                pass
+            raise
 
         transcript_confidence = 0.0
         if not transcript:
@@ -733,6 +741,9 @@ def delete_session(session_id: str):
     """Remove all voice palette entries and files for a session."""
     if not _clone_enabled:
         return JSONResponse({"error": "clone not enabled (start with --allow-clone)"}, status_code=404)
+    import re as _re
+    if not _re.match(r'^[a-zA-Z0-9_-]{1,64}$', session_id):
+        return JSONResponse({"error": "invalid session_id format"}, status_code=400)
     _unregister_session(session_id)
     log.info("session cleaned up: %s", session_id)
     return {"status": "ok", "session_id": session_id}
@@ -799,7 +810,7 @@ def reload_voices():
 def main():
     parser = argparse.ArgumentParser(description="Afterwords TTS server (MLX)")
     parser.add_argument("--port", type=int, default=7860)
-    parser.add_argument("--host", default="0.0.0.0")
+    parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--no-warmup", action="store_true", help="Skip warmup synthesis")
     parser.add_argument(
         "--allow-clone",

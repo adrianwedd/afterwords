@@ -32,3 +32,6 @@ skill/*-workspace/
 
 # Voice WAV backups produced by trim-silence-gaps.py
 voices/*.wav.bak
+
+# LLVM coverage artefacts from instrumented binaries
+*.profraw

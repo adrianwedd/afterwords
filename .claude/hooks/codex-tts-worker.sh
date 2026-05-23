@@ -71,7 +71,8 @@ print('TEXT=' + shlex.quote(d.get('text','')))
     if [ -n "$PROJECT_DIR" ] && [ -f "$AW_FILE" ]; then
         if grep -q ':' "$AW_FILE" 2>/dev/null; then
             if [ -n "$AGENT" ]; then
-                VOICE=$(grep "^${AGENT}:" "$AW_FILE" 2>/dev/null | head -1 | cut -d: -f2- | tr -d '[:space:]')
+                # awk with exact field comparison — AGENT cannot be interpreted as regex.
+                VOICE=$(awk -F: -v agent="$AGENT" '$1 == agent { sub(/^[^:]*:/, ""); gsub(/[[:space:]]/, ""); print; exit }' "$AW_FILE" 2>/dev/null)
             fi
             [ -z "$VOICE" ] && VOICE=$(grep "^default:" "$AW_FILE" 2>/dev/null | head -1 | cut -d: -f2- | tr -d '[:space:]')
         else

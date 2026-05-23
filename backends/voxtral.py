@@ -131,9 +131,14 @@ class VoxtralBackend(BackendBase):
                 f"voxtral does not support lang={lang!r}; supported: {self.supported_langs}"
             )
 
+        # _DEFAULT_VOICE_BY_LANG covers supported_langs today; .get() with a safe
+        # fallback prevents KeyError → HTTP 500 if the two ever diverge.
         kwargs = dict(
             text=text,
-            voice=prepared.extras.get("voice", _DEFAULT_VOICE_BY_LANG[lang]),
+            voice=prepared.extras.get(
+                "voice",
+                _DEFAULT_VOICE_BY_LANG.get(lang, "casual_male"),
+            ),
             verbose=False,
         )
         for key in ("temperature", "top_k", "top_p", "max_tokens"):

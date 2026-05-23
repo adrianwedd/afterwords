@@ -17,7 +17,7 @@ from .base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
 log = logging.getLogger("backends.dia2")
 
 MODEL_ID = "nari-labs/Dia2-2B"
-NATIVE_SR = 44000
+NATIVE_SR = 44100
 
 _ALLOWED_EXTRAS = {
     "temperature",

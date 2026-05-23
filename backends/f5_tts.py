@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import logging
 import os
+import tempfile
 from typing import Mapping
 
 import numpy as np
@@ -133,10 +134,20 @@ class F5TTSBackend(BackendBase):
         self.validate_extras(extras)
         if not ref_text or not ref_text.strip():
             raise ValueError("F5-TTS requires reference_text for reliable voice alignment")
+        # Buffer ref bytes so synthesize() never re-reads from disk — closes
+        # the DELETE /session ↔ in-flight synth TOCTOU race. Best-effort: if
+        # unreadable, fall back to passing the path through.
+        ref_bytes = None
+        try:
+            with open(ref_audio_path, "rb") as fh:
+                ref_bytes = fh.read()
+        except OSError as exc:
+            log.warning("f5-tts: could not buffer ref audio %s: %s", ref_audio_path, exc)
         return PreparedVoice(
             ref_audio_path=ref_audio_path,
             ref_text=ref_text.strip(),
             extras=_read_only(extras),
+            data=ref_bytes,
         )
 
     def synthesize(
@@ -156,18 +167,27 @@ class F5TTSBackend(BackendBase):
         if not prepared.ref_text:
             raise RuntimeError("F5-TTS prepared voice is missing reference_text")
 
-        kwargs = {
-            "ref_file": prepared.ref_audio_path,
-            "ref_text": prepared.ref_text,
-            "gen_text": text,
-            "show_info": log.debug,
-            "progress": None,
-        }
-        for key in _ALLOWED_EXTRAS:
-            if key in prepared.extras:
-                kwargs[key] = prepared.extras[key]
+        def _infer(ref_file):
+            kwargs = {
+                "ref_file": ref_file,
+                "ref_text": prepared.ref_text,
+                "gen_text": text,
+                "show_info": log.debug,
+                "progress": None,
+            }
+            for key in _ALLOWED_EXTRAS:
+                if key in prepared.extras:
+                    kwargs[key] = prepared.extras[key]
+            return self._model.infer(**kwargs)
 
-        wav, sr, _spec = self._model.infer(**kwargs)
+        if prepared.data is not None:
+            with tempfile.TemporaryDirectory() as tmpdir:
+                ref_path = os.path.join(tmpdir, "ref.wav")
+                with open(ref_path, "wb") as fh:
+                    fh.write(prepared.data)
+                wav, sr, _spec = _infer(ref_path)
+        else:
+            wav, sr, _spec = _infer(prepared.ref_audio_path)
         if wav is None:
             raise RuntimeError("F5-TTS produced no output")
         return np.asarray(wav, dtype=np.float32).reshape(-1), int(sr)

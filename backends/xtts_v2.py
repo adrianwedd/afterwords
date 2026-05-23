@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import logging
 import os
+import tempfile
 from typing import Mapping
 
 import numpy as np
@@ -111,10 +112,21 @@ class XTTSv2Backend(BackendBase):
     ) -> PreparedVoice:
         self.validate_extras(extras)
         ref_text = ref_text.strip() if ref_text and ref_text.strip() else None
+        # Buffer ref bytes so synthesize() never re-reads from disk — closes
+        # the DELETE /session ↔ in-flight synth TOCTOU race. Best-effort: if
+        # the file is unreadable (e.g. test contrivance with a fake path), fall
+        # back to passing the path through and rely on the model to load it.
+        ref_bytes = None
+        try:
+            with open(ref_audio_path, "rb") as fh:
+                ref_bytes = fh.read()
+        except OSError as exc:
+            log.warning("xtts-v2: could not buffer ref audio %s: %s", ref_audio_path, exc)
         return PreparedVoice(
             ref_audio_path=ref_audio_path,
             ref_text=ref_text,
             extras=_read_only(extras),
+            data=ref_bytes,
         )
 
     def synthesize(
@@ -132,11 +144,18 @@ class XTTSv2Backend(BackendBase):
                 f"xtts-v2 does not support lang={lang!r}; supported: {self.supported_langs}"
             )
 
-        audio = self._model.tts(
-            text=text,
-            speaker_wav=prepared.ref_audio_path,
-            language=lang,
-        )
+        if prepared.data is not None:
+            with tempfile.TemporaryDirectory() as tmpdir:
+                ref_path = os.path.join(tmpdir, "ref.wav")
+                with open(ref_path, "wb") as fh:
+                    fh.write(prepared.data)
+                audio = self._model.tts(text=text, speaker_wav=ref_path, language=lang)
+        else:
+            audio = self._model.tts(
+                text=text,
+                speaker_wav=prepared.ref_audio_path,
+                language=lang,
+            )
         if audio is None:
             raise RuntimeError("XTTS v2 produced no output")
         return _to_numpy(audio), self.sample_rate

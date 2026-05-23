@@ -26,42 +26,47 @@ def register(backend: Backend) -> None:
 
 
 def register_all() -> None:
-    """Register every shipped backend. Called once at server startup."""
-    # Imports inside function to avoid importing model libs at package import time.
-    from .qwen3 import Qwen3Backend
-    from .voxtral import VoxtralBackend
-    from .openvoice_v2 import OpenVoiceV2Backend
-    from .f5_tts import F5TTSBackend
-    from .cosyvoice2 import CosyVoice2Backend
-    from .gpt_sovits import GPTSoVITSBackend
-    from .xtts_v2 import XTTSv2Backend
-    from .indextts_2 import IndexTTS2Backend
-    from .neutts_air import NeuTTSAirBackend
-    from .spark_tts import SparkTTSBackend
-    from .dia2 import Dia2Backend
-    from .yourtts import YourTTSBackend
-    from .firered_tts_2 import FireRedTTS2Backend
-    from .sv2tts import SV2TTSBackend
-    from .mockingbird import MockingBirdBackend
-    from .soprotts import SoproTTSBackend
+    """Register every shipped backend. Called once at server startup.
 
+    qwen3 is the primary cloning path: a failure here is fatal (raised). Every
+    experimental backend is isolated — an import error, top-level crash, or
+    instantiation failure in one logs an error and skips, leaving the rest of
+    the registry intact.
+    """
+    import importlib
+    import logging
+    log = logging.getLogger("backends")
+
+    # qwen3 — primary path. Fail loud.
+    from .qwen3 import Qwen3Backend
     register(Qwen3Backend(size="0.6B"))
     register(Qwen3Backend(size="1.7B"))
-    register(VoxtralBackend())
-    register(OpenVoiceV2Backend())
-    register(F5TTSBackend())
-    register(CosyVoice2Backend())
-    register(GPTSoVITSBackend())
-    register(XTTSv2Backend())
-    register(IndexTTS2Backend())
-    register(NeuTTSAirBackend())
-    register(SparkTTSBackend())
-    register(Dia2Backend())
-    register(YourTTSBackend())
-    register(FireRedTTS2Backend())
-    register(SV2TTSBackend())
-    register(MockingBirdBackend())
-    register(SoproTTSBackend())
+
+    # Experimental backends — each isolated.
+    _experimental = (
+        ("voxtral", "VoxtralBackend"),
+        ("openvoice_v2", "OpenVoiceV2Backend"),
+        ("f5_tts", "F5TTSBackend"),
+        ("cosyvoice2", "CosyVoice2Backend"),
+        ("gpt_sovits", "GPTSoVITSBackend"),
+        ("xtts_v2", "XTTSv2Backend"),
+        ("indextts_2", "IndexTTS2Backend"),
+        ("neutts_air", "NeuTTSAirBackend"),
+        ("spark_tts", "SparkTTSBackend"),
+        ("dia2", "Dia2Backend"),
+        ("yourtts", "YourTTSBackend"),
+        ("firered_tts_2", "FireRedTTS2Backend"),
+        ("sv2tts", "SV2TTSBackend"),
+        ("mockingbird", "MockingBirdBackend"),
+        ("soprotts", "SoproTTSBackend"),
+    )
+    for module_name, class_name in _experimental:
+        try:
+            mod = importlib.import_module(f".{module_name}", package=__package__)
+            register(getattr(mod, class_name)())
+        except Exception as exc:
+            log.error("backend %s failed to register: %s: %s",
+                      module_name, type(exc).__name__, exc)
 
 
 def reset_for_tests() -> None:

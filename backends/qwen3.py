@@ -35,10 +35,23 @@ class Qwen3Backend(BackendBase):
         self.display_name = self.display_name_template.format(size=size)
         self.model_id = _MODEL_IDS[size]
         self._model = None
+        self._unavailable_reason: str | None = None
 
     def load(self) -> None:
         def _do():
-            from mlx_audio.tts import load_model
+            try:
+                from mlx_audio.tts import load_model
+            except ImportError as exc:
+                # Primary cloning path — log at ERROR (not WARNING) so operators
+                # see this clearly in `afterwords logs`. The most common cause is a
+                # broken venv after a brew Python minor-version bump; see CLAUDE.md.
+                self._unavailable_reason = (
+                    f"mlx-audio not importable ({exc}); "
+                    "if Python was upgraded recently, run `bash setup.sh --server-only` "
+                    "to rebuild the venv"
+                )
+                log.error("Qwen3 %s unavailable: %s", self.size, self._unavailable_reason)
+                return
             log.info("loading %s ...", self.model_id)
             self._model = load_model(self.model_id)
         self._ensure_loaded(_do)
@@ -75,6 +88,8 @@ class Qwen3Backend(BackendBase):
         lang: str,
     ) -> tuple[np.ndarray, int]:
         if self._model is None:
+            if self._unavailable_reason:
+                raise RuntimeError(f"Qwen3 {self.size} is unavailable: {self._unavailable_reason}")
             raise RuntimeError("Qwen3Backend.synthesize called before load()")
         if lang not in self.supported_langs:
             raise ValueError(
@@ -103,5 +118,20 @@ class Qwen3Backend(BackendBase):
             wavs = sorted(glob.glob(os.path.join(tmpdir, "out_*.wav")))
             if not wavs:
                 raise RuntimeError("Qwen3 produced no output")
-            data, sr = sf.read(wavs[0])
+            # Long inputs are split by generate_audio into out_0000.wav,
+            # out_0001.wav, …; concatenate so the caller gets full audio.
+            arrays = []
+            sr = None
+            for w in wavs:
+                d, s = sf.read(w)
+                if sr is None:
+                    sr = s
+                elif s != sr:
+                    raise RuntimeError(
+                        f"Qwen3 produced mismatched sample rates: {sr} vs {s}"
+                    )
+                arrays.append(d)
+            if len(arrays) > 1:
+                log.info("qwen3: concatenated %d segments", len(arrays))
+            data = arrays[0] if len(arrays) == 1 else np.concatenate(arrays)
             return np.asarray(data, dtype=np.float32), sr
