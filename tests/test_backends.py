@@ -1899,10 +1899,12 @@ def test_xtts_v2_synthesize_uses_coqui_api_and_returns_float32_audio():
 class TestResolveRepoDir:
     """Tests for backends.base.resolve_repo_dir — symlink + world-writable rejection."""
 
-    def test_normal_path_passes(self, tmp_path):
+    def test_normal_path_passes(self):
         from backends.base import resolve_repo_dir
+        import pathlib
 
-        assert resolve_repo_dir(str(tmp_path)) == str(tmp_path.resolve())
+        d = str(pathlib.Path(__file__).parent.resolve())
+        assert resolve_repo_dir(d) == d
 
     def test_rejects_tmp(self):
         from backends.base import resolve_repo_dir
