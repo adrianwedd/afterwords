@@ -216,6 +216,24 @@ def test_delete_session_idempotent(client):
     server._clone_enabled = False
 
 
+@pytest.mark.parametrize("bad", [
+    "../etc",
+    "a/b",
+    "session id",
+    "x" * 65,
+    "",
+    "name;rm",
+])
+def test_delete_session_rejects_invalid_id(client, bad):
+    """DELETE /session validates session_id with the same regex as /clone."""
+    server._clone_enabled = True
+    # Empty string hits a different path (the FastAPI route requires a value),
+    # so we expect either 400 (rejected by our guard) or 404 (route miss).
+    r = client.delete(f"/session/{bad}")
+    assert r.status_code in (400, 404), f"expected 4xx for {bad!r}, got {r.status_code}"
+    server._clone_enabled = False
+
+
 # --- Voice palette selection ---
 
 
@@ -662,6 +680,74 @@ def test_lang_routing_ignores_voice_with_no_family(client):
         server.VOICES.clear()
 
 
+def _make_voice_with_metrics(name, family, supported_langs, backend_alias,
+                              duration_s, confidence):
+    """Same as _make_voice_in_voices but lets the test set duration_s + confidence,
+    which together with name form the routing tiebreaker."""
+    import backends as _backends
+    b = _backends.get(backend_alias)
+    b.supported_langs = tuple(supported_langs)
+    prep = b.prepare_voice("/tmp/x.wav", "ref text", {})
+    profile = server.VoiceProfile(
+        name=name, backend=backend_alias, ref_audio="/tmp/x.wav", ref_text="ref text",
+        session_id=None, emotion="neutral", quality=None,
+        duration_s=duration_s, confidence=confidence, sequence=None, extras={}, prepared=prep,
+        family=family,
+    )
+    server.VOICES[name] = profile
+
+
+def test_lang_routing_tiebreaker_prefers_higher_duration(client):
+    """When two same-family candidates support the requested lang, the one with
+    higher duration_s wins per the documented (duration_s, confidence, name) max."""
+    server.VOICES.clear()
+    # English-only origin voice (needs routing for zh)
+    _make_voice_with_metrics(
+        "alpha-en", family="alpha", supported_langs=("en",),
+        backend_alias="qwen3-0.6b", duration_s=10.0, confidence=0.9,
+    )
+    # Two zh-capable candidates with different durations
+    _make_voice_with_metrics(
+        "alpha-zh-short", family="alpha", supported_langs=("en", "zh"),
+        backend_alias="qwen3-1.7b", duration_s=5.0, confidence=0.95,
+    )
+    _make_voice_with_metrics(
+        "alpha-zh-long", family="alpha", supported_langs=("en", "zh"),
+        backend_alias="fake", duration_s=15.0, confidence=0.5,
+    )
+    try:
+        r = client.get("/synthesize", params={"text": "Ni hao", "voice": "alpha-en", "lang": "zh"})
+        assert r.status_code == 200, r.text
+        # Longer duration wins despite lower confidence
+        assert r.headers.get("x-backend") == "fake"
+    finally:
+        server.VOICES.clear()
+
+
+def test_lang_routing_tiebreaker_falls_back_to_confidence_then_name(client):
+    """Equal duration_s → higher confidence wins; equal confidence → name max."""
+    server.VOICES.clear()
+    _make_voice_with_metrics(
+        "alpha-en", family="alpha", supported_langs=("en",),
+        backend_alias="qwen3-0.6b", duration_s=10.0, confidence=0.9,
+    )
+    _make_voice_with_metrics(
+        "alpha-zh-aaa", family="alpha", supported_langs=("en", "zh"),
+        backend_alias="qwen3-1.7b", duration_s=10.0, confidence=0.5,
+    )
+    _make_voice_with_metrics(
+        "alpha-zh-bbb", family="alpha", supported_langs=("en", "zh"),
+        backend_alias="fake", duration_s=10.0, confidence=0.8,
+    )
+    try:
+        r = client.get("/synthesize", params={"text": "Ni hao", "voice": "alpha-en", "lang": "zh"})
+        assert r.status_code == 200
+        # Higher confidence wins when duration ties
+        assert r.headers.get("x-backend") == "fake"
+    finally:
+        server.VOICES.clear()
+
+
 def test_lang_routing_unchanged_when_lang_supported(client):
     """If the resolved voice already supports the requested lang, no routing occurs."""
     server.VOICES.clear()
@@ -673,5 +759,26 @@ def test_lang_routing_unchanged_when_lang_supported(client):
         assert r.headers.get("x-backend") == "qwen3-0.6b"  # original, not routed
     finally:
         server.VOICES.clear()
+
+
+# ──────────── Concurrency smoke ────────────
+
+
+def test_concurrent_synthesize_no_deadlock(client, sample_voice):
+    """N concurrent GET /synthesize calls must all return 200 without deadlocking.
+    Exercises _synth_lock + _model_lock acquisition under contention via FakeBackend
+    (no real Metal work — failure modes here are lock-ordering bugs, not GPU saturation)."""
+    import concurrent.futures
+    n_workers = 6
+    n_requests = 18
+
+    def _one(_i):
+        r = client.get("/synthesize", params={"text": "hi", "voice": sample_voice})
+        return r.status_code
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=n_workers) as pool:
+        results = list(pool.map(_one, range(n_requests), timeout=30))
+
+    assert all(s == 200 for s in results), f"expected all 200, got {results}"
 
 

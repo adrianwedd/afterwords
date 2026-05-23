@@ -24,6 +24,27 @@ def test_register_all_populates_shipped_backends():
     }
 
 
+def test_register_all_isolates_experimental_failures(monkeypatch):
+    """A broken experimental backend logs and skips, leaving qwen3 + others intact."""
+    import importlib
+    real_import = importlib.import_module
+
+    def boom_one(name, package=None):
+        if name == ".voxtral":
+            raise ImportError("simulated dep missing for voxtral")
+        return real_import(name, package=package)
+
+    monkeypatch.setattr(importlib, "import_module", boom_one)
+    backends.register_all()
+    names = set(backends.names())
+    # primary path is unaffected
+    assert {"qwen3-0.6b", "qwen3-1.7b"} <= names
+    # broken backend is skipped, not crashed
+    assert "voxtral" not in names
+    # at least some other experimental backends still register
+    assert names & {"xtts-v2", "f5-tts", "dia2"}
+
+
 def test_each_registered_backend_satisfies_protocol():
     backends.register_all()
     for name in backends.names():
@@ -620,7 +641,7 @@ def test_dia2_metadata():
 
     assert backend.name == "dia2"
     assert backend.display_name == "Dia2 (Nari Labs Apache-2.0)"
-    assert backend.sample_rate == 44000
+    assert backend.sample_rate == 44100
     assert backend.ref_text_policy is RefTextPolicy.OPTIONAL
     assert backend.supported_langs == ("en",)
 
