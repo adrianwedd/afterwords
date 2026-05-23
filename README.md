@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. 90+ flagship voice families across **the Qwen3-TTS cloning path** (0.6B + 1.7B, the recommended backends) plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. ~97 flagship voice families across **the Qwen3-TTS cloning path** (0.6B + 1.7B, the recommended backends) plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -314,7 +314,7 @@ afterwords/
 ├── clone-voice.sh        ← add more voices from YouTube
 ├── server.py             ← multi-voice TTS server
 ├── strip_markdown.py     ← text cleaner for TTS (also used by hooks)
-├── tests/                ← pytest suite (82+ tests, no GPU needed)
+├── tests/                ← pytest suite (190+ tests, no GPU needed)
 ├── backends/             ← Backend Protocol + concrete backends + registry CLI
 ├── scripts/              ← reclone-flagship.py, gen-comparison-audio.sh, audit-voice-transcripts.py, audit-archive.py
 ├── docs/                 ← demo site (deployed to GitHub Pages)
@@ -327,7 +327,7 @@ afterwords/
 │   ├── galadriel-ref.wav ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav  ← (Scarlett Johansson, Her)
 │   ├── amy-pond-ref.wav  ← (Karen Gillan, Doctor Who)
-│   └── ...               ← 110+ voices total; 3 flagships have per-backend variants
+│   └── ...               ← ~97 families / ~290 profiles total; flagships have per-backend variants
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration
@@ -386,7 +386,7 @@ afterwords/
 | tegan-jovanka | Janet Fielding, *Resurrection of the Daleks* | Blunt, emotional |
 | yasmin-khan | Mandip Gill, *Power of the Doctor* | Quiet, heartfelt |
 
-The full gallery includes 110+ voices spanning British comedy (Blackadder, Alan Partridge, Basil Fawlty, Malcolm Tucker, Father Ted, Geraldine, Patsy & Edina, Bernard Black…), American drama (Frasier, Columbo, Saul Goodman, Harvey Specter…), science communicators (Carl Sagan, Feynman, Brian Cox, Neil deGrasse Tyson…), and more. Run `afterwords voices --demo` to browse and hear samples.
+The full gallery includes ~97 voice families spanning British comedy (Blackadder, Alan Partridge, Basil Fawlty, Malcolm Tucker, Father Ted, Geraldine, Patsy & Edina, Bernard Black…), American drama (Frasier, Columbo, Saul Goodman, Harvey Specter…), science communicators (Carl Sagan, Feynman, Brian Cox, Neil deGrasse Tyson…), and more. Run `afterwords voices --demo` to browse and hear samples.
 
 ## Troubleshooting
 
@@ -410,7 +410,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-Tests cover the server API (endpoint validation, error handling, voice resolution, hot-reload atomicity, lang routing across backend families), backend protocol conformance, the strip-markdown text transform, and lifecycle helpers (`_cleanup_current_voices`, `_sweep_orphaned_temp_files`). 82+ tests pass without loading any real model — a `FakeBackend` fixture stands in. Real-model integration tests are opt-in via `pytest -m integration`.
+Tests cover the server API (endpoint validation, error handling, voice resolution, hot-reload atomicity, lang routing across backend families), backend protocol conformance, the strip-markdown text transform, and the `_cleanup_current_voices` lifecycle helper. 190+ tests pass without loading any real model — a `FakeBackend` fixture stands in. Real-model integration tests are opt-in via `pytest -m integration`.
 
 Run a single test:
 
