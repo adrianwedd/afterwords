@@ -1,0 +1,9 @@
+{
+  "name": "lisa-simpson-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "lisa-simpson-ref.wav",
+  "reference_text": "I still believe in God. I just think there's another path to him or her. I'm not just going to pick a religion that seems cool. I'm going to pick one that's right for me. Mr. Gere, I was hoping Buddhism could bring me inner peace. Or is that just a pipe dream? I'm planting my own bodhi tree. If I meditate under it, perhaps I can find inner peace.",
+  "family": "lisa-simpson",
+  "source_url": "https://www.youtube.com/watch?v=Z66IHEEiCAw",
+  "segment_start_s": 42
+}
