@@ -27,6 +27,12 @@ afterwords voices      # list voices (--demo to play samples)
 afterwords clone       # clone a voice from YouTube
 afterwords uninstall   # remove service + optionally hooks
 
+# Codex CLI speech (run inside the interactive Codex session)
+bash setup-codex.sh
+afterwords codex-hook start
+afterwords codex-hook status
+afterwords codex-hook stop
+
 # Run server manually (without launchd)
 source .venv/bin/activate
 python server.py [--port 7860]
@@ -60,11 +66,19 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
 
 2. **Claude Code hooks** (`~/.claude/hooks/`, optional) — `tts-hook.sh` fires on Stop events, extracts response text, passes through `strip-markdown.py`, chunks via `chunk-text.py` (~2-sentence pieces), and appends tab-separated `CWD<TAB>AGENT<TAB>TEXT` lines to the queue. `tts-worker.sh` processes the queue (max 10 items) with `mkdir`-based locking (no `flock` on macOS), resolves the voice per chunk from `.afterwords` (using `AGENT`), plays WAV via `afplay`, archives as MP3. Only installed when Claude Code is present.
 
-3. **Voice profiles** (`voices/`) — Each voice is a `{name}-ref.wav` (15s reference clip, ~700KB) + `{name}.json` (metadata with transcript). Created by `clone-voice.sh` which downloads from YouTube, extracts a segment, denoises with noisereduce, and transcribes with faster-whisper.
+3. **Codex CLI watcher** (`.claude/hooks/codex-tts-watch.sh`, repo-local) — Codex has no Stop-hook API, so `afterwords codex-hook start` runs a detached watcher for the current `$CODEX_THREAD_ID`. It polls the matching `~/.codex/sessions/.../rollout-*.jsonl`, extracts final assistant messages, assigns missing `agent_type` to `codex`, queues JSON items under `/tmp/codex-tts-queue-$CODEX_THREAD_ID/`, and `codex-tts-worker.sh` synthesizes through `localhost:7860`, plays via `afplay`, and archives under `~/.codex/tts-archive/`. Start it from a real interactive Codex CLI terminal; API-hosted/non-interactive sessions may reap long-lived background processes.
 
-4. **Claude Code skill** (`skill/`) — A SKILL.md that enables natural-language TTS commands ("say this in picard's voice", "list voices", "set project voice"). Includes `scripts/speak.sh` helper for synthesis + playback.
+4. **Voice profiles** (`voices/`) — Each voice is a `{name}-ref.wav` (15s reference clip, ~700KB) + `{name}.json` (metadata with transcript). Created by `clone-voice.sh` which downloads from YouTube, extracts a segment, denoises with noisereduce, and transcribes with faster-whisper.
 
-**Per-project voice override:** A `.afterwords` file in any repo root sets the voice for that project (read by the hook before each synthesis). Supports two formats: a single voice name (legacy), or an agent-to-voice mapping (`agent-name: voice-name`, one per line, with `default:` as fallback). The hook reads `agent_type` from the Stop event payload to resolve per-agent voices. Built-in subagent types (Explore, Plan, general-purpose) are silently skipped.
+5. **Claude Code skill** (`skill/`) — A SKILL.md that enables natural-language TTS commands ("say this in picard's voice", "list voices", "set project voice"). Includes `scripts/speak.sh` helper for synthesis + playback.
+
+6. **Antigravity CLI (agy) hook** (`~/.claude/hooks/agy-tts-hook.sh`, optional) — registered in `~/.gemini/config/hooks.json` under `"afterwords-tts"`. It fires on `Stop` events, passing a JSON containing the `transcriptPath`. `agy-tts-hook.sh` uses `agy-session-hook.py` to parse the log backwards and retrieve the final model response text, then queues it for synthesis.
+
+7. **Hermes Agent TTS** (`~/.hermes/hooks/afterwords-tts/` + `scripts/afterwords-tts-command.sh`) — Two-part integration. (a) A gateway Python hook (`handler.py`) fires on `agent:end` events, does chunked pipelined synthesis (200-char sentence chunks, synthesize N+1 while playing N) with `asyncio.create_task`, and acquires the shared play lock (`/tmp/afterwords-play.lock` + `/tmp/afterwords-play.pid` dir+file convention) to coordinate with Claude/Codex/AGy workers. Only speaks on CLI/local platforms (skips Telegram/Discord). (b) A command provider script (`afterwords-tts-command.sh`) registered as `tts.provider: afterwords` in Hermes config. On CLI, it writes a silent placeholder WAV and returns immediately, firing real synthesis + `afplay` in a background subshell (with shared play lock) — text output appears instantly. On messaging platforms, it runs synchronously to produce the real audio file for attachment delivery.
+
+**Play lock convention:** All four agent integrations (Claude, Codex, AGy, Hermes) share `/tmp/afterwords-play.lock` (mkdir for atomicity) and `/tmp/afterwords-play.pid` (separate PID file, not inside the lock dir). Each worker acquires the lock before playing audio and releases after. Stale locks are detected by checking if the PID in the file is still alive. The PID file must be at `/tmp/afterwords-play.pid`, NOT inside the lock directory.
+
+**Per-project voice override:** A `.afterwords` file in any repo root sets the voice for that project (read by the hook before each synthesis). Supports two formats: a single voice name (legacy), or an agent-to-voice mapping (`agent-name: voice-name`, one per line, with `default:` as fallback). Claude Code reads `agent_type` from the Stop event payload to resolve per-agent voices; built-in subagent types (Explore, Plan, general-purpose) are silently skipped. Codex CLI normally has no `agent_type`, so the watcher uses `codex` as the agent key; add `codex: voice-name` to select a Codex-specific voice, otherwise it falls back to `default:`. Similarly, Antigravity CLI uses `agy` as the agent key, resolving to `agy: voice-name` if specified in `.afterwords`. Hermes Agent uses `hermes` as the agent key; the command script resolves from the `VOICE` config variable, then project `.afterwords` (using `hermes` key), then global `~/.afterwords` (using `hermes` key).
 
 ## Backends
 
