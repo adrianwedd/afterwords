@@ -1,6 +1,6 @@
 # afterwords (main) — Sprint 2 Design
 **Date:** 2026-05-25  
-**Status:** Approved — ready for implementation plan  
+**Status:** Revised — ready for implementation plan  
 **Repo:** `adrianwedd/afterwords`
 
 ---
@@ -27,15 +27,15 @@ Three commit groups landed on main after the v1.0.0 tag era:
 - `register_all()` isolates experimental-backend imports — one broken backend can no longer crash boot.
 - `setup.sh` + Codex hook worker use `awk` exact-field comparison instead of `grep` (AGENT can no longer be interpreted as regex).
 
-**Correctness**
+**Fixed**
 - `qwen3` synthesize now concatenates all output segments (was silently truncating long inputs to first segment).
 - `qwen3` `load()` catches `ImportError` with the brew-upgrade hint surfaced to operators.
 - `xtts_v2` + `f5_tts` buffer ref audio in `prepare_voice()` to close the TOCTOU race with `DELETE /session`.
 
-**Tests**
+**Added**
 - Schema validator, tiebreaker, concurrency smoke, and regression guards added (commit b2cee38). Suite: 505 passing.
 
-**Hook / CLI fixes (PRs #74–76)**
+**Changed**
 - `afterwords-tts-command.sh`: `bash -c 'echo $PPID'` for play-lock PID (portable on bash 3.2); `mktemp` for temp WAV; 50ms recheck on empty PID file before stale-lock eviction.
 - `codex-tts-worker.sh`: removed `eval` on queue content; direct field extraction via `python3`.
 - `setup.sh`: `--server-only` flag now correctly gates Gemini, AGy, and shared-hook blocks.
@@ -43,20 +43,31 @@ Three commit groups landed on main after the v1.0.0 tag era:
 
 ### CHANGELOG location
 
-`CHANGELOG.md` at repo root. Append a `## [1.0.1]` section above `[1.0.0]`. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+`CHANGELOG.md` at repo root. Append a `## [1.0.1] - 2026-05-25` section above `[1.0.0]`. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), using exactly these headings where applicable: `Added`, `Changed`, `Fixed`, `Security`.
+
+### Pre-tag gate
+
+Before creating the tag:
+
+1. `main` is checked out, clean, and up to date with `origin/main`.
+2. `pytest` passes.
+3. `git log --oneline v1.0.0..HEAD` has been reviewed against the `[1.0.1]` CHANGELOG entry.
+4. The release notes extracted from `CHANGELOG.md` match the intended GitHub release body.
 
 ### Release
 
 - Tag: `v1.0.1`
 - GitHub release title: `v1.0.1 — security, correctness, hook fixes`
-- Release notes drawn from the CHANGELOG entry (awk extract)
+- Release notes drawn from the CHANGELOG entry with:
+  `awk '/^## \\[1\\.0\\.1\\]/{flag=1; next} /^## \\[/{flag=0} flag' CHANGELOG.md`
 - Close issue #73 with a reference to the tag
+- Publish a full GitHub release, not a draft. The tag must point at the current `main` commit after the pre-tag gate passes.
 
 ### Success criteria
 
-- `CHANGELOG.md` has a `[1.0.1]` entry with all four categories above
+- `CHANGELOG.md` has a `[1.0.1]` entry using the Keep a Changelog headings above
 - `git tag v1.0.1` exists and is pushed
-- GitHub release page is live
+- GitHub release page is live and published, with notes copied from the `awk` extract
 - Issue #73 is closed
 
 ---
@@ -65,7 +76,7 @@ Three commit groups landed on main after the v1.0.0 tag era:
 
 ### What
 
-Replace the existing `docs/index.html` placeholder with the production-ready redesigned homepage. The design source is `afterwords-redesign/Surface 1 - afterwords local.html` (already in the repo as a design handoff deliverable).
+Replace the existing `docs/index.html` placeholder with the production-ready redesigned homepage. The design source is `afterwords-redesign/Surface 1 - afterwords local.html` (already in the repo as a design handoff deliverable). Quote this filename in every shell or CI command because it contains spaces.
 
 ### Approach
 
@@ -74,9 +85,14 @@ Replace the existing `docs/index.html` placeholder with the production-ready red
 1. Copy `afterwords-redesign/Surface 1 - afterwords local.html` → `docs/index.html`, replacing the existing page.
 2. Copy favicon assets from `afterwords-redesign/favicons/` into `docs/favicons/`.
 3. Copy `afterwords-redesign/afterwords-icon.svg` into `docs/`.
-4. Update any relative asset paths in the HTML to match the `docs/` layout.
-5. Wire in the OG meta tags for `og-local.svg` (already in favicons/).
-6. Verify `404.html` and `500.html` from the handoff are not needed for a GitHub Pages site (they are CF Pages–specific; skip them here).
+4. Update relative asset paths using this mapping only:
+   - `afterwords-icon.svg` → `afterwords-icon.svg`
+   - `favicons/*` → `favicons/*`
+   - links to `Surface 2a - cloud landing.html`, `Surface 2b - dashboard.html`, or `Surface 2c - api docs.html` → `https://afterwords-cloud.pages.dev/`
+   - links to `Surface 3 - afterwords app.html` → `https://adrianwedd.github.io/afterwords-app/`
+5. Convert `afterwords-redesign/favicons/og-local.svg` to `docs/favicons/og-local.png` at 1200×630 and wire the OG/Twitter meta tags to the absolute URL `https://adrianwedd.github.io/afterwords/favicons/og-local.png`. Do not ship SVG as `og:image`.
+6. Copy `afterwords-redesign/404.html` → `docs/404.html` and update its relative links/assets to the `docs/` layout. GitHub Pages serves a repo-root `404.html` from the published `docs/` root.
+7. Do not copy `500.html`; GitHub Pages does not serve a custom 500 page.
 
 **No Astro build.** The GitHub Pages site has no dynamic content, no templating, and no npm dependency. A static HTML file is the correct tool.
 
@@ -102,7 +118,7 @@ Max content width: 720px. Page padding: 24px desktop, 16px mobile. Base spacing 
 
 ### CI
 
-Add a GitHub Actions step to the existing CI workflow that verifies `docs/index.html` exists and is non-empty. No HTML validation required — the handoff HTML is already QA'd.
+Add a step named `Verify GitHub Pages assets` to the existing CI workflow that runs on PRs and pushes to `main`. The step verifies `docs/index.html`, `docs/404.html`, and `docs/favicons/og-local.png` exist and are non-empty. No HTML validation required — the handoff HTML is already QA'd.
 
 ### Git
 
@@ -113,7 +129,8 @@ Add a GitHub Actions step to the existing CI workflow that verifies `docs/index.
 
 - `docs/index.html` renders the redesigned page on `adrianwedd.github.io/afterwords`
 - All favicon assets resolve (no 404s in browser dev tools)
-- OG image tag present and pointing to a valid file
+- OG and Twitter image tags point to `https://adrianwedd.github.io/afterwords/favicons/og-local.png`, and that PNG exists at 1200×630
+- `docs/404.html` renders as the GitHub Pages custom 404 page
 - Existing `pytest` suite unaffected (no Python changes)
 
 ---
