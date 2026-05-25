@@ -314,7 +314,7 @@ else
 fi
 echo
 
-if $HAS_CLAUDE || command -v gemini &>/dev/null || command -v agy &>/dev/null; then
+if ! $SERVER_ONLY && { $HAS_CLAUDE || command -v gemini &>/dev/null || command -v agy &>/dev/null; }; then
 next_step "Claude & CLI hooks"
 
 HOOKS_DIR="$HOME/.claude/hooks"
@@ -779,7 +779,7 @@ if command -v codex &>/dev/null; then
 fi
 
 # ── Gemini CLI discovery (manual config; gemini hooks migrate is buggy) ────
-if command -v gemini &>/dev/null; then
+if ! $SERVER_ONLY && command -v gemini &>/dev/null; then
     GEMINI_HOOK_DEST="$HOME/.claude/hooks/gemini-tts-hook.sh"
     GEMINI_SETTINGS="$HOME/.gemini/settings.json"
     echo
@@ -818,7 +818,7 @@ GEMINI_SNIPPET
 fi
 
 # ── Antigravity CLI discovery (agy) ──────────────────────────────────────
-if command -v agy &>/dev/null; then
+if ! $SERVER_ONLY && command -v agy &>/dev/null; then
     AGY_HOOK_DEST="$HOME/.claude/hooks/agy-tts-hook.sh"
     AGY_PYTHON_DEST="$HOME/.claude/hooks/agy-session-hook.py"
     AGY_CONFIG_DIR="$HOME/.gemini/config"
