@@ -75,8 +75,9 @@ if [ -z "$VOICE" ]; then
     fi
 fi
 
-# URL-encode the text
-ENCODED=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$TEXT")
+# URL-encode the text (strip markdown and truncate to 1000 chars)
+CLEANED=$(echo "$TEXT" | sed 's/`//g; s/\*//g; s/_//g' | cut -c 1-1000)
+ENCODED=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$CLEANED")
 
 # Build URL
 URL="http://127.0.0.1:${PORT}/synthesize?text=${ENCODED}"
@@ -119,28 +120,24 @@ with open(sys.argv[1], 'wb') as f:
 " "$OUTPUT_PATH"
 
     # Fire synthesis + playback in background (fully detached)
-    # Uses the same play lock as Claude/Codex/AGy workers for coordination.
     (
-        # Acquire play lock (mkdir-based, atomic on macOS)
-        # Same convention as Claude/Codex/AGy workers:
-        #   PLAY_LOCK="/tmp/afterwords-play.lock"  (mkdir for atomicity)
-        #   PLAY_PID="/tmp/afterwords-play.pid"    (separate PID file)
         PLAY_LOCK="/tmp/afterwords-play.lock"
         PLAY_PID="/tmp/afterwords-play.pid"
+        
+        # Acquire play lock (mkdir-based for atomicity)
         WAITED=0
         while ! mkdir "$PLAY_LOCK" 2>/dev/null; do
-            # Check if lock holder is still alive
             HOLDER=$(cat "$PLAY_PID" 2>/dev/null || true)
-            if [ -n "$HOLDER" ] && ! kill -0 "$HOLDER" 2>/dev/null; then
-                rm -f "$PLAY_PID"
-                rm -rf "$PLAY_LOCK"
+            if [ -z "$HOLDER" ]; then sleep 0.05; HOLDER=$(cat "$PLAY_PID" 2>/dev/null || true); fi
+            if [ -z "$HOLDER" ] || ! kill -0 "$HOLDER" 2>/dev/null; then
+                rm -rf "$PLAY_LOCK" "$PLAY_PID"
                 continue
             fi
             WAITED=$((WAITED + 1))
-            if [ "$WAITED" -ge 60 ]; then
-                exit 0  # Give up silently — audio is nice-to-have
+            if [ "$WAITED" -ge 200 ]; then
+                exit 0  # Give up silently
             fi
-            sleep 1
+            sleep 0.3
         done
         echo $$ > "$PLAY_PID"
 
@@ -151,6 +148,15 @@ with open(sys.argv[1], 'wb') as f:
         if [ "$HTTP_CODE" = "200" ] && [ -s "$TMP_WAV" ]; then
             # Play
             afplay "$TMP_WAV" 2>/dev/null || true
+
+            # Archive as MP3 + text sidecar (best-effort)
+            STAMP=$(date +%Y%m%d-%H%M%S)
+            ARCHIVE_DIR="$HOME/.hermes/tts-archive"
+            mkdir -p "$ARCHIVE_DIR"
+            ARCHIVE_MP3="${ARCHIVE_DIR}/${VOICE:-default}-${STAMP}.mp3"
+            lame --quiet -V 2 "$TMP_WAV" "$ARCHIVE_MP3" 2>/dev/null || true
+            printf '%s\n' "$CLEANED" > "${ARCHIVE_MP3%.mp3}.txt" 2>/dev/null || true
+
             rm -f "$TMP_WAV"
         else
             rm -f "$TMP_WAV"
@@ -180,3 +186,11 @@ if [ ! -s "$OUTPUT_PATH" ]; then
     echo "Afterwords TTS produced empty output" >&2
     exit 1
 fi
+
+# Archive as MP3 + text sidecar (best-effort)
+STAMP=$(date +%Y%m%d-%H%M%S)
+ARCHIVE_DIR="$HOME/.hermes/tts-archive"
+mkdir -p "$ARCHIVE_DIR"
+ARCHIVE_MP3="${ARCHIVE_DIR}/${VOICE:-default}-${STAMP}.mp3"
+lame --quiet -V 2 "$OUTPUT_PATH" "$ARCHIVE_MP3" 2>/dev/null || true
+printf '%s\n' "$CLEANED" > "${ARCHIVE_MP3%.mp3}.txt" 2>/dev/null || true
