@@ -1,0 +1,8 @@
+{
+  "name": "dalai-lama",
+  "backend": "qwen3-1.7b",
+  "source_url": "https://www.youtube.com/watch?v=Vlhlw01qWJs",
+  "reference_audio": "dalai-lama-ref.wav",
+  "reference_text": "Now here is the environment. According to that reality, now no longer to emphasis my nation, my country, now we should think more of we humanity.",
+  "segment_start_s": 480
+}
