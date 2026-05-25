@@ -19,6 +19,12 @@ All notable changes to Afterwords. Format follows [Keep a Changelog](https://kee
 - Test suite grew from 186 to **491 unit + contract tests** (still no GPU required), driven by the schema validator + new regression guards.
 - `.gitignore` now ignores `*.profraw` (LLVM coverage artefact from `default.profraw`).
 - `requirements-dev.txt` pins `mlx-audio>=0.4,<0.4.1` on Darwin; `mlx-audio` 0.4.1+ regresses Qwen3-1.7B ICL.
+- **Play-lock PID portability** (PR #76) — `afterwords-tts-command.sh` now uses `bash -c 'echo $PPID'` to write the background subshell PID (portable on macOS bash 3.2). Replaces the previous `$$`-based approach that wrote the parent shell PID and allowed a second agent to start audio before synthesis finished.
+- **`mktemp` for temp WAVs** (PR #76) — `afterwords-tts-command.sh` uses `mktemp /tmp/afterwords-cmd-XXXXXX.wav` instead of the `$$`-suffixed path. Avoids collisions between concurrent agents.
+- **Stale-lock 50ms recheck** (PR #76) — `afterwords-tts-command.sh` waits 50ms before clearing a lock whose PID file is empty, reducing the TOCTOU window between `mkdir` and PID write.
+- **`eval` removed from Codex TTS worker** (PR #76) — `codex-tts-worker.sh` replaced `eval` on queue content with direct `python3` field extraction. Queue content can no longer be interpreted as shell code.
+- **`--server-only` hook gate** (PR #76) — `setup.sh` now correctly skips the shared-hooks block, Gemini block, and AGy block when `--server-only` is passed.
+- **`lsof` filtered to LISTEN sockets** (PR #75) — `afterwords.sh` `server_pid()` now passes `-s TCP:LISTEN` to `lsof`, preventing false positives from ESTABLISHED connections to the server port.
 
 ### Security
 
