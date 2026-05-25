@@ -1,0 +1,37 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="wf">
+      <ellipse cx="568" cy="522" rx="70" ry="86"></ellipse>
+    </clipPath>
+  </defs>
+
+  
+  <rect width="1024" height="1024" fill="#1C1C1A"></rect>
+
+  
+  
+  <ellipse cx="448" cy="415" rx="76" ry="92" fill="#EDE8DF"></ellipse>
+  
+  <path fill="#EDE8DF" d="&#xA;    M 492,490&#xA;    C 484,490 480,492 476,498&#xA;    C 468,520 468,556 445,582&#xA;    C 432,598 415,606 406,594&#xA;    C 394,579 394,558 404,538&#xA;    C 412,518 420,506 404,490&#xA;    Z&#xA;  "></path>
+
+  
+  
+  <path fill="#EDE8DF" d="&#xA;    M 612,597&#xA;    C 604,597 600,599 596,605&#xA;    C 588,627 588,663 565,689&#xA;    C 552,705 535,713 526,701&#xA;    C 514,686 514,665 524,645&#xA;    C 532,625 540,613 524,597&#xA;    Z&#xA;  "></path>
+  
+  <ellipse cx="568" cy="522" rx="76" ry="92" fill="#1C1C1A" stroke="#EDE8DF" stroke-width="3"></ellipse>
+
+  
+  <g clip-path="url(#wf)" stroke="#EDE8DF" stroke-width="8" stroke-linecap="round">
+    <line x1="501" y1="510" x2="501" y2="534"></line>
+    <line x1="514" y1="496" x2="514" y2="548"></line>
+    <line x1="527" y1="482" x2="527" y2="562"></line>
+    <line x1="541" y1="470" x2="541" y2="574"></line>
+    <line x1="554" y1="466" x2="554" y2="578"></line>
+    <line x1="568" y1="464" x2="568" y2="580"></line>
+    <line x1="582" y1="467" x2="582" y2="577"></line>
+    <line x1="595" y1="474" x2="595" y2="570"></line>
+    <line x1="609" y1="486" x2="609" y2="558"></line>
+    <line x1="622" y1="500" x2="622" y2="544"></line>
+    <line x1="636" y1="510" x2="636" y2="534"></line>
+  </g>
+</svg>

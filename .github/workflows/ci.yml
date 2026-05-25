@@ -27,3 +27,13 @@ jobs:
 
       - name: Check OG metadata sync
         run: python scripts/check-og-metadata.py
+
+      - name: Verify GitHub Pages assets
+        run: |
+          test -f docs/index.html || (echo "ERROR: docs/index.html missing" && exit 1)
+          test -s docs/index.html || (echo "ERROR: docs/index.html is empty" && exit 1)
+          test -f docs/404.html   || (echo "ERROR: docs/404.html missing" && exit 1)
+          test -s docs/404.html   || (echo "ERROR: docs/404.html is empty" && exit 1)
+          test -f docs/favicons/og-local.png || (echo "ERROR: docs/favicons/og-local.png missing" && exit 1)
+          test -s docs/favicons/og-local.png || (echo "ERROR: docs/favicons/og-local.png is empty" && exit 1)
+          echo "GitHub Pages assets: OK"

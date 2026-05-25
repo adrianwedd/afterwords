@@ -3,1325 +3,384 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Afterwords — Local Voice-Cloning TTS</title>
-  <meta name="description" content="Clone any voice from a 15-second YouTube clip and hear Claude Code speak every response. Runs locally on Apple Silicon. No cloud. No subscription.">
-  <meta property="og:title" content="Afterwords — Local Voice-Cloning TTS">
-  <meta property="og:description" content="Zero-shot voice cloning on Apple Silicon with Qwen3-TTS. 270+ voices across 98 families, runs entirely on-device. No cloud dependency.">
+  <title>afterwords — local voice cloning</title>
+  <meta name="description" content="Clone any voice. Run it locally on Apple Silicon. No cloud.">
+  <meta property="og:title" content="afterwords">
+  <meta property="og:description" content="Clone any voice. Run it locally. 279+ voices. No cloud.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://adrianwedd.github.io/afterwords/">
-  <meta property="og:image" content="https://adrianwedd.github.io/afterwords/og-image.png">
+  <meta property="og:image" content="https://adrianwedd.github.io/afterwords/favicons/og-local.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://adrianwedd.github.io/afterwords/og-image.png">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230c0a0e'/><g fill='%23e8976b'><rect x='4' y='12' width='2' height='8' rx='1'/><rect x='8' y='9' width='2' height='14' rx='1'/><rect x='12' y='6' width='2' height='20' rx='1'/><rect x='16' y='10' width='2' height='12' rx='1'/><rect x='20' y='7' width='2' height='18' rx='1'/><rect x='24' y='11' width='2' height='10' rx='1'/><rect x='28' y='13' width='2' height='6' rx='1'/></g></svg>">
-  <link rel="canonical" href="https://adrianwedd.github.io/afterwords/">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <meta name="twitter:image" content="https://adrianwedd.github.io/afterwords/favicons/og-local.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%231C1C1A'/><rect x='4' y='12' width='2' height='8' rx='1' fill='%23EDE8DF'/><rect x='8' y='9' width='2' height='14' rx='1' fill='%23EDE8DF'/><rect x='12' y='6' width='2' height='20' rx='1' fill='%23EDE8DF'/><rect x='16' y='10' width='2' height='12' rx='1' fill='%23EDE8DF'/><rect x='20' y='7' width='2' height='18' rx='1' fill='%23EDE8DF'/><rect x='24' y='11' width='2' height='10' rx='1' fill='%23EDE8DF'/><rect x='28' y='13' width='2' height='6' rx='1' fill='%23EDE8DF'/></svg>">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-local-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-local-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicons/favicon-local-180.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0c0a0e;
-      --bg-elevated: #151218;
-      --bg-card: #1a1620;
-      --bg-card-hover: #201c28;
-      --text: #e8e4ec;
-      --text-secondary: #9a9198;
-      --text-dim: #6b6470;
-      --accent: #e8976b;
-      --accent-glow: rgba(232, 151, 107, 0.15);
-      --accent-bright: #f0a87e;
-      --wave: #e8976b;
-      --wave-dim: rgba(232, 151, 107, 0.08);
-      --border: rgba(255, 255, 255, 0.06);
-      --border-hover: rgba(232, 151, 107, 0.25);
-      --display: 'Instrument Serif', Georgia, serif;
-      --body: 'Plus Jakarta Sans', system-ui, sans-serif;
-      --mono: 'JetBrains Mono', 'SF Mono', monospace;
-      --max-w: 800px;
-      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --bg:       #1C1C1A;
+      --bg-up:    #222220;
+      --bg-dn:    #141412;
+      --fg:       #EDE8DF;
+      --fg-m:     #A09A8F;
+      --fg-d:     #5C5852;
+      --bd:       #3A3A37;
+      --ok:       #6B9E6B;
+      --warn:     #C49040;
+      --err:      #C45C5C;
+      --mono: ui-monospace,"SF Mono","JetBrains Mono",monospace;
+      --sans: -apple-system,BlinkMacSystemFont,"Inter",sans-serif;
+      --max: 720px;
+      --r: 4px;
     }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; color-scheme: dark; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    /* ── Layout ── */
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    @media (max-width: 600px) { .wrap { padding: 0 16px; } }
 
-    body {
-      font-family: var(--body);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.75;
-      font-size: 1.0625rem;
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+    /* ── Header ── */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--bg); border-bottom: 1px solid var(--bd);
+      height: 52px; display: flex; align-items: center;
     }
+    .header-inner { display: flex; align-items: center; gap: 10px; }
+    .mark svg { display: block; }
+    .wordmark { font-size: 15px; font-weight: 500; color: var(--fg); text-decoration: none; letter-spacing: -0.01em; }
 
-    ::selection { background: var(--accent-glow); color: var(--accent-bright); }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    /* ── Sections ── */
+    section { padding: 72px 0; border-bottom: 1px solid var(--bd); }
+    .section-label { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-m); margin-bottom: 16px; }
+    .section-title { font-size: 24px; font-weight: 500; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .section-desc { font-size: 15px; color: var(--fg-m); max-width: 540px; margin-bottom: 32px; line-height: 1.65; }
 
-    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+    /* ── Hero ── */
+    #hero { padding: 80px 0 72px; }
+    .hero-mark { margin-bottom: 32px; }
+    .hero-tagline { font-size: clamp(28px, 5vw, 40px); font-weight: 500; line-height: 1.2; letter-spacing: -0.025em; margin-bottom: 16px; }
+    .hero-sub { font-size: 15px; color: var(--fg-m); max-width: 440px; margin-bottom: 32px; line-height: 1.65; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .btn { height: 36px; padding: 0 16px; border-radius: var(--r); font-size: 15px; font-weight: 500; font-family: var(--sans); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.1s, background 0.1s, border-color 0.1s; }
+    .btn-primary { background: var(--fg); color: var(--bg); border: none; }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-primary:active { opacity: 0.80; }
+    .btn-secondary { background: transparent; color: var(--fg); border: 1px solid var(--bd); }
+    .btn-secondary:hover { background: rgba(237,232,223,.05); border-color: var(--fg-m); }
+    .hero-stats { display: flex; gap: 32px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--bd); flex-wrap: wrap; }
+    .stat-val { font-family: var(--mono); font-size: 20px; font-weight: 500; color: var(--fg); line-height: 1; }
+    .stat-lbl { font-family: var(--mono); font-size: 11px; color: var(--fg-d); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
 
-    /* ── Reveal animation ─────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* ── Voice grid ── */
+    .voice-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1px; background: var(--bd); border: 1px solid var(--bd); border-radius: var(--r); overflow: hidden; margin-bottom: 40px; }
+    .voice-card { background: var(--bg-up); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .vname { font-size: 15px; font-weight: 500; color: var(--fg); }
+    .vsrc  { font-size: 11px; color: var(--fg-d); font-family: var(--mono); line-height: 1.4; }
+    .voice-card audio { width: 100%; height: 28px; border-radius: 2px; opacity: 0.9; }
 
-    /* ── Hero ──────────────────────────────────── */
-    .hero {
-      position: relative;
-      padding: 6rem 0 4rem;
-      min-height: 80vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-    .hero-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.5;
-      pointer-events: none;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-    .hero-eyebrow {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: heroFade 0.8s 0.2s var(--ease-out-expo) forwards;
-    }
-    .hero h1 {
-      font-family: var(--display);
-      font-size: clamp(2.6rem, 7vw, 4.5rem);
-      font-weight: 400;
-      color: var(--text);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.25rem;
-      opacity: 0;
-      animation: heroFade 0.8s 0.35s var(--ease-out-expo) forwards;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero .subtitle {
-      font-size: 1.2rem;
-      font-weight: 300;
-      color: var(--text-secondary);
-      max-width: 520px;
-      margin-bottom: 2rem;
-      line-height: 1.65;
-      opacity: 0;
-      animation: heroFade 0.8s 0.5s var(--ease-out-expo) forwards;
-    }
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: heroFade 0.8s 0.65s var(--ease-out-expo) forwards;
-    }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      font-weight: 500;
-      background: var(--accent);
-      color: var(--bg);
-      border: none;
-      padding: 0.7rem 1.6rem;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 20px var(--accent-glow);
-    }
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      font-weight: 500;
-      background: transparent;
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-      padding: 0.65rem 1.4rem;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .btn-ghost:hover { color: var(--text); border-color: var(--text-dim); }
-    .hero-stats {
-      display: flex;
-      gap: 2.5rem;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      opacity: 0;
-      animation: heroFade 0.8s 0.8s var(--ease-out-expo) forwards;
-    }
-    .stat-value {
-      font-family: var(--display);
-      font-size: 1.9rem;
-      color: var(--text);
-      line-height: 1;
-    }
-    .stat-label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      font-weight: 400;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 0.35rem;
-    }
+    /* ── Comparison ── */
+    .compare-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1px; background: var(--bd); border: 1px solid var(--bd); border-radius: var(--r); overflow: hidden; }
+    .cmp-card { background: var(--bg-up); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .cmp-card .vname { font-size: 15px; }
+    .tab-row { display: flex; border: 1px solid var(--bd); border-radius: var(--r); overflow: hidden; }
+    .tab-btn { flex: 1; font-family: var(--mono); font-size: 11px; font-weight: 500; background: transparent; color: var(--fg-m); border: none; border-right: 1px solid var(--bd); padding: 6px 4px; cursor: pointer; transition: background 0.15s, color 0.15s; }
+    .tab-btn:last-child { border-right: none; }
+    .tab-btn:hover { color: var(--fg); background: rgba(237,232,223,.04); }
+    .tab-btn[aria-selected="true"] { color: var(--fg); background: rgba(237,232,223,.07); }
+    .cmp-card audio { width: 100%; height: 28px; border-radius: 2px; opacity: 0.9; }
 
-    @keyframes heroFade {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    /* ── Code blocks ── */
+    .steps { display: flex; flex-direction: column; gap: 1px; background: var(--bd); border: 1px solid var(--bd); border-radius: var(--r); overflow: hidden; }
+    .step { display: grid; grid-template-columns: 32px 1fr; background: var(--bg-up); }
+    .step-num { display: flex; align-items: flex-start; justify-content: center; padding-top: 14px; font-family: var(--mono); font-size: 11px; color: var(--fg-d); border-right: 1px solid var(--bd); }
+    .step-code { margin: 0; padding: 12px 16px; background: var(--bg-dn); overflow-x: auto; }
+    .step-code code { font-family: var(--mono); font-size: 13px; color: var(--fg); white-space: pre; }
+    pre.code-block { background: var(--bg-dn); border: 1px solid var(--bd); border-radius: var(--r); padding: 12px 16px; overflow-x: auto; margin-top: 16px; }
+    pre.code-block code { font-family: var(--mono); font-size: 13px; color: var(--fg); white-space: pre; }
 
-    /* ── Section styling ──────────────────────── */
-    section { padding: 4rem 0; }
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
-    }
-    .section-title {
-      font-family: var(--display);
-      font-size: clamp(1.7rem, 4vw, 2.6rem);
-      font-weight: 400;
-      color: var(--text);
-      line-height: 1.15;
-      margin-bottom: 1rem;
-    }
-    .section-desc {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      max-width: 540px;
-      margin-bottom: 2rem;
-    }
+    /* ── Claude code section ── */
+    .callout { border: 1px solid var(--bd); border-radius: var(--r); padding: 20px 24px; background: var(--bg-up); }
+    .callout p { font-size: 15px; line-height: 1.7; color: var(--fg-m); }
+    .callout p + p { margin-top: 8px; }
+    .callout a { color: var(--fg); text-underline-offset: 2px; }
 
-    /* ── Voice Gallery ─────────────────────────── */
-    .voice-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.1rem;
-    }
-    .voice-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem 1.3rem 1.15rem;
-      transition: border-color 0.3s, background 0.3s, transform 0.3s var(--ease-out-expo);
-      cursor: default;
-      position: relative;
-      overflow: hidden;
-    }
-    .voice-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, var(--accent-glow), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .voice-card:hover {
-      border-color: var(--border-hover);
-      background: var(--bg-card-hover);
-      transform: translateY(-2px);
-    }
-    .voice-card:hover::before { opacity: 1; }
-    .voice-card-inner { position: relative; z-index: 1; }
-    .voice-name {
-      font-family: var(--display);
-      font-weight: 400;
-      font-size: 1.25rem;
-      color: var(--text);
-      margin-bottom: 0.15rem;
-    }
-    .voice-source {
-      font-size: 0.78rem;
-      font-weight: 300;
-      color: var(--text-dim);
-      margin-bottom: 0.75rem;
-      min-height: 2.4em;
-    }
-    .voice-wave {
-      width: 100%;
-      height: 32px;
-      margin-bottom: 0.5rem;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .voice-wave canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-    .voice-card audio { width: 100%; height: 32px; border-radius: 4px; }
+    /* ── Backend table ── */
+    .backend-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .backend-table thead th { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-d); text-align: left; padding: 0 0 10px 0; border-bottom: 1px solid var(--bd); }
+    .backend-table thead th:not(:first-child) { padding-left: 24px; }
+    .backend-table tbody td { padding: 12px 0; border-bottom: 1px solid var(--bd); vertical-align: middle; color: var(--fg-m); }
+    .backend-table tbody td:not(:first-child) { padding-left: 24px; }
+    .backend-table tbody tr:last-child td { border-bottom: none; }
+    .td-name { font-family: var(--mono); font-size: 13px; color: var(--fg) !important; }
+    .badge { display: inline-block; font-family: var(--mono); font-size: 11px; padding: 2px 7px; border-radius: 2px; border: 1px solid; }
+    .badge-ok   { color: var(--ok);   border-color: var(--ok); }
+    .badge-warn { color: var(--warn); border-color: var(--warn); }
 
-    /* ── Code blocks ──────────────────────────── */
-    pre {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.1rem 1.3rem;
-      overflow-x: auto;
-      margin: 1.25rem 0;
-      font-size: 0.85rem;
-      line-height: 1.65;
-      position: relative;
-      cursor: pointer;
-      transition: border-color 0.2s;
-    }
-    pre:hover { border-color: rgba(255, 255, 255, 0.1); }
-    code { font-family: var(--mono); font-size: 0.85em; }
-    p code {
-      background: var(--bg-elevated);
-      padding: 0.15em 0.4em;
-      border-radius: 4px;
-      font-size: 0.8em;
-      color: var(--accent-bright);
-    }
-    pre .copy-hint {
-      position: absolute;
-      top: 0.6rem;
-      right: 0.8rem;
-      font-family: var(--mono);
-      font-size: 0.6rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-    pre:hover .copy-hint { opacity: 1; }
+    /* ── Footer ── */
+    footer { padding: 32px 0; }
+    .footer-inner { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; color: var(--fg-d); }
+    .footer-inner a { color: var(--fg-m); text-decoration: none; }
+    .footer-inner a:hover { color: var(--fg); }
+    .footer-sep { color: var(--fg-d); }
 
-    /* ── Architecture diagram ─────────────────── */
-    .arch-flow {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 2rem 0;
-      padding: 2rem 1rem;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-    .arch-node {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--text);
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: var(--bg-card);
-      white-space: nowrap;
-    }
-    .arch-arrow {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      padding: 0 0.6rem;
-    }
-
-    /* ── Callout ───────────────────────────────── */
-    .callout {
-      background: var(--wave-dim);
-      border-left: 2px solid var(--accent);
-      border-radius: 0 10px 10px 0;
-      padding: 1rem 1.25rem;
-      margin: 1.5rem 0;
-      font-size: 0.95rem;
-    }
-    .callout strong { color: var(--accent); }
-
-    /* ── Tables ────────────────────────────────── */
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      margin: 1.5rem 0;
-    }
-    .info-cell {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem 1.15rem;
-    }
-    .info-cell-label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-      margin-bottom: 0.25rem;
-    }
-    .info-cell-value {
-      font-family: var(--display);
-      font-size: 1.35rem;
-      color: var(--text);
-    }
-
-    /* ── API Reference ─────────────────────────── */
-    .endpoint {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-      transition: border-color 0.2s;
-    }
-    .endpoint:hover { border-color: rgba(255, 255, 255, 0.1); }
-    .endpoint-method {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--bg);
-      background: var(--accent);
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
-      margin-right: 0.6rem;
-      vertical-align: middle;
-    }
-    .endpoint-path {
-      font-family: var(--mono);
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text);
-      vertical-align: middle;
-    }
-    .endpoint-desc {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin: 0.75rem 0 0;
-      line-height: 1.6;
-    }
-    .endpoint-params {
-      margin-top: 1rem;
-      border-top: 1px solid var(--border);
-      padding-top: 0.85rem;
-    }
-    .param-row {
-      display: flex;
-      gap: 0.75rem;
-      align-items: baseline;
-      padding: 0.3rem 0;
-    }
-    .param-name {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--accent-bright);
-      min-width: 80px;
-      flex-shrink: 0;
-    }
-    .param-meta {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-    }
-    .param-meta em {
-      color: var(--text-secondary);
-      font-style: normal;
-    }
-    .response-codes {
-      display: flex;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-    .response-code {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 5px;
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-    }
-    .response-code.success { border-color: rgba(120, 200, 140, 0.3); color: #8cd49a; }
-    .response-code.error { border-color: rgba(200, 120, 120, 0.2); color: var(--text-dim); }
-
-    /* ── Links & prose ─────────────────────────── */
-    article p { margin-bottom: 1rem; }
-    article a {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
-    }
-    article a:hover { border-bottom-color: var(--accent); }
-    article strong { color: var(--text); font-weight: 500; }
-
-    /* ── Divider ───────────────────────────────── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin: 1rem 0;
-    }
-
-    /* ── Footer ────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 0 3rem;
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.8rem;
-    }
-    footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: var(--accent); }
-
-    /* ── Backend Comparison ──────────────────────── */
-    .compare-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.1rem;
-      margin-top: 1rem;
-    }
-    .compare-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem 1.3rem 1.15rem;
-      transition: border-color 0.3s, background 0.3s;
-    }
-    .compare-card:hover { border-color: var(--border-hover); }
-    .backend-tabs {
-      display: flex;
-      gap: 0;
-      margin: 0.75rem 0;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    .backend-tabs button {
-      flex: 1;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      font-weight: 500;
-      background: transparent;
-      color: var(--text-secondary);
-      border: none;
-      padding: 0.5rem 0.4rem;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      border-right: 1px solid var(--border);
-    }
-    .backend-tabs button:last-child { border-right: none; }
-    .backend-tabs button:hover { color: var(--text); background: rgba(255,255,255,0.03); }
-    .backend-tabs button[aria-selected="true"] {
-      color: var(--accent);
-      background: var(--accent-glow);
-    }
-    .backend-tabs button:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: -2px;
-    }
-    .compare-card [role="tabpanel"] { outline: none; }
-    .compare-card audio { width: 100%; height: 32px; border-radius: 4px; }
-
-    /* ── Responsive ────────────────────────────── */
+    /* ── Misc ── */
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     @media (max-width: 600px) {
-      .hero { min-height: auto; padding: 4rem 0 3rem; }
-      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
-      .voice-gallery { grid-template-columns: 1fr 1fr; }
-      .info-grid { grid-template-columns: 1fr; }
-      .arch-flow { flex-direction: column; gap: 0.5rem; }
-      .arch-arrow { transform: rotate(90deg); padding: 0.3rem 0; }
-    }
-    @media (max-width: 400px) {
-      .voice-gallery { grid-template-columns: 1fr; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      .reveal { opacity: 1; transform: none; }
+      #hero { padding: 48px 0 56px; }
+      section { padding: 48px 0; }
+      .hero-stats { gap: 20px; }
     }
   </style>
 </head>
 <body>
 
-<div class="hero">
-  <canvas class="hero-canvas" id="heroCanvas"></canvas>
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-eyebrow">Open Source &middot; Apple Silicon &middot; Zero Cloud</div>
-      <h1>Give your code<br>a <em>voice</em></h1>
-      <p class="subtitle">Clone any voice from a 15-second YouTube clip. Run it locally on your Mac. Hear Claude Code speak every response &mdash; or use the API from anything.</p>
-      <div class="hero-actions">
-        <a href="https://github.com/adrianwedd/afterwords" class="btn-primary">View on GitHub</a>
-        <a href="#voices" class="btn-ghost">Hear the voices</a>
-      </div>
-      <div class="hero-stats">
-        <div><div class="stat-value">20</div><div class="stat-label">Voices included</div></div>
-        <div><div class="stat-value">4</div><div class="stat-label">Backends</div></div>
-        <div><div class="stat-value">~10 GB</div><div class="stat-label">Peak memory</div></div>
-        <div><div class="stat-value">0</div><div class="stat-label">Cloud calls</div></div>
-      </div>
+<!-- ════ HEADER ════ -->
+<header>
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="#hero" class="mark" aria-label="afterwords home">
+        <svg viewBox="0 0 1024 1024" width="26" height="26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><clipPath id="h-wf"><ellipse cx="568" cy="522" rx="70" ry="86"/></clipPath></defs>
+          <rect width="1024" height="1024" fill="#1C1C1A"/>
+          <ellipse cx="448" cy="415" rx="76" ry="92" fill="#EDE8DF"/>
+          <path fill="#EDE8DF" d="M492,490 C484,490 480,492 476,498 C468,520 468,556 445,582 C432,598 415,606 406,594 C394,579 394,558 404,538 C412,518 420,506 404,490 Z"/>
+          <path fill="#EDE8DF" d="M612,597 C604,597 600,599 596,605 C588,627 588,663 565,689 C552,705 535,713 526,701 C514,686 514,665 524,645 C532,625 540,613 524,597 Z"/>
+          <ellipse cx="568" cy="522" rx="76" ry="92" fill="#1C1C1A" stroke="#EDE8DF" stroke-width="3"/>
+          <g clip-path="url(#h-wf)" stroke="#EDE8DF" stroke-width="8" stroke-linecap="round">
+            <line x1="501" y1="510" x2="501" y2="534"/><line x1="514" y1="496" x2="514" y2="548"/>
+            <line x1="527" y1="482" x2="527" y2="562"/><line x1="541" y1="470" x2="541" y2="574"/>
+            <line x1="554" y1="466" x2="554" y2="578"/><line x1="568" y1="464" x2="568" y2="580"/>
+            <line x1="582" y1="467" x2="582" y2="577"/><line x1="595" y1="474" x2="595" y2="570"/>
+            <line x1="609" y1="486" x2="609" y2="558"/><line x1="622" y1="500" x2="622" y2="544"/>
+            <line x1="636" y1="510" x2="636" y2="534"/>
+          </g>
+        </svg>
+      </a>
+      <a href="#hero" class="wordmark">afterwords</a>
     </div>
   </div>
-</div>
+</header>
 
-<div class="container">
-  <main>
-  <article>
+<!-- ════ HERO ════ -->
+<section id="hero">
+  <div class="wrap">
+    <div class="hero-mark">
+      <svg viewBox="0 0 1024 1024" width="64" height="64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><clipPath id="hero-wf"><ellipse cx="568" cy="522" rx="70" ry="86"/></clipPath></defs>
+        <rect width="1024" height="1024" fill="#1C1C1A"/>
+        <ellipse cx="448" cy="415" rx="76" ry="92" fill="#EDE8DF"/>
+        <path fill="#EDE8DF" d="M492,490 C484,490 480,492 476,498 C468,520 468,556 445,582 C432,598 415,606 406,594 C394,579 394,558 404,538 C412,518 420,506 404,490 Z"/>
+        <path fill="#EDE8DF" d="M612,597 C604,597 600,599 596,605 C588,627 588,663 565,689 C552,705 535,713 526,701 C514,686 514,665 524,645 C532,625 540,613 524,597 Z"/>
+        <ellipse cx="568" cy="522" rx="76" ry="92" fill="#1C1C1A" stroke="#EDE8DF" stroke-width="3"/>
+        <g clip-path="url(#hero-wf)" stroke="#EDE8DF" stroke-width="8" stroke-linecap="round">
+          <line x1="501" y1="510" x2="501" y2="534"/><line x1="514" y1="496" x2="514" y2="548"/>
+          <line x1="527" y1="482" x2="527" y2="562"/><line x1="541" y1="470" x2="541" y2="574"/>
+          <line x1="554" y1="466" x2="554" y2="578"/><line x1="568" y1="464" x2="568" y2="580"/>
+          <line x1="582" y1="467" x2="582" y2="577"/><line x1="595" y1="474" x2="595" y2="570"/>
+          <line x1="609" y1="486" x2="609" y2="558"/><line x1="622" y1="500" x2="622" y2="544"/>
+          <line x1="636" y1="510" x2="636" y2="534"/>
+        </g>
+      </svg>
+    </div>
+    <h1 class="hero-tagline">Clone any voice.<br>Run it locally.<br>No cloud.</h1>
+    <p class="hero-sub">Zero-shot voice cloning on Apple Silicon using Qwen3-TTS. 110+ voices included. Runs entirely on-device via a local HTTP server.</p>
+    <div class="hero-actions">
+      <a href="#quick-start" class="btn btn-primary">Get started →</a>
+      <a href="#demos" class="btn btn-secondary">Listen to demos →</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-val">110+</div><div class="stat-lbl">Voices</div></div>
+      <div><div class="stat-val">4</div><div class="stat-lbl">Backends</div></div>
+      <div><div class="stat-val">~3 GB</div><div class="stat-lbl">Peak RAM</div></div>
+      <div><div class="stat-val">0</div><div class="stat-lbl">Cloud calls</div></div>
+    </div>
+  </div>
+</section>
 
-    <section class="reveal">
-      <div class="section-label">Setup</div>
-      <div class="section-title">Five minutes to your first voice</div>
-      <p class="section-desc">The setup script checks your hardware, installs dependencies, walks you through cloning a voice from YouTube, and starts the server.</p>
-<pre><code>git clone https://github.com/adrianwedd/afterwords.git
-cd afterwords
-bash setup.sh</code><span class="copy-hint">click to copy</span></pre>
-      <p>Setup installs the <code>afterwords</code> command to your PATH and starts the server. If Claude Code is installed, it also wires a Stop hook so every response is spoken aloud. Without it, you get a standalone TTS API at <code>localhost:7860</code>.</p>
-    </section>
+<!-- ════ DEMO PLAYER ════ -->
+<section id="demos">
+  <div class="wrap">
+    <div class="section-label">Voice gallery</div>
+    <h2 class="section-title">20 demo clips from the 110+ voice library</h2>
+    <p class="section-desc">Each clip says <em>"You are absolutely right. Your Claude Code session could sound like me."</em> — synthesized locally on a 32 GB M1.</p>
 
-    <div class="divider"></div>
+    <div class="voice-grid">
+      <div class="voice-card"><div class="vname">Attenborough</div><div class="vsrc">David Attenborough · BBC Earth</div><audio controls preload="none" src="audio/attenborough.mp3" aria-label="Attenborough sample"></audio></div>
+      <div class="voice-card"><div class="vname">Audrey</div><div class="vsrc">Audrey Hepburn · 1961</div><audio controls preload="none" src="audio/audrey.mp3" aria-label="Audrey sample"></audio></div>
+      <div class="voice-card"><div class="vname">Aurora</div><div class="vsrc">AURORA · Shower Thoughts</div><audio controls preload="none" src="audio/aurora.mp3" aria-label="Aurora sample"></audio></div>
+      <div class="voice-card"><div class="vname">Avasarala</div><div class="vsrc">Shohreh Aghdashloo · The Expanse</div><audio controls preload="none" src="audio/avasarala.mp3" aria-label="Avasarala sample"></audio></div>
+      <div class="voice-card"><div class="vname">Bardem</div><div class="vsrc">Javier Bardem · Vicky Cristina Barcelona</div><audio controls preload="none" src="audio/bardem.mp3" aria-label="Bardem sample"></audio></div>
+      <div class="voice-card"><div class="vname">Claudia</div><div class="vsrc">Claudia Black · Dragon Age</div><audio controls preload="none" src="audio/claudia.mp3" aria-label="Claudia sample"></audio></div>
+      <div class="voice-card"><div class="vname">Data</div><div class="vsrc">Brent Spiner · Star Trek TNG</div><audio controls preload="none" src="audio/data.mp3" aria-label="Data sample"></audio></div>
+      <div class="voice-card"><div class="vname">Depp</div><div class="vsrc">Johnny Depp · interview</div><audio controls preload="none" src="audio/depp.mp3" aria-label="Depp sample"></audio></div>
+      <div class="voice-card"><div class="vname">Eartha</div><div class="vsrc">Eartha Kitt · interview</div><audio controls preload="none" src="audio/eartha.mp3" aria-label="Eartha sample"></audio></div>
+      <div class="voice-card"><div class="vname">Galadriel</div><div class="vsrc">Cate Blanchett · LOTR</div><audio controls preload="none" src="audio/galadriel.mp3" aria-label="Galadriel sample"></audio></div>
+      <div class="voice-card"><div class="vname">Han Solo</div><div class="vsrc">Harrison Ford · Star Wars</div><audio controls preload="none" src="audio/han-solo.mp3" aria-label="Han Solo sample"></audio></div>
+      <div class="voice-card"><div class="vname">Loki</div><div class="vsrc">Tom Hiddleston · Avengers</div><audio controls preload="none" src="audio/loki.mp3" aria-label="Loki sample"></audio></div>
+      <div class="voice-card"><div class="vname">Marla</div><div class="vsrc">Helena Bonham Carter · Fight Club</div><audio controls preload="none" src="audio/marla.mp3" aria-label="Marla sample"></audio></div>
+      <div class="voice-card"><div class="vname">Picard</div><div class="vsrc">Patrick Stewart · Star Trek</div><audio controls preload="none" src="audio/picard.mp3" aria-label="Picard sample"></audio></div>
+      <div class="voice-card"><div class="vname">Ronan</div><div class="vsrc">Ronan Keating · interview</div><audio controls preload="none" src="audio/ronan.mp3" aria-label="Ronan sample"></audio></div>
+      <div class="voice-card"><div class="vname">Samantha</div><div class="vsrc">Scarlett Johansson · Her</div><audio controls preload="none" src="audio/samantha.mp3" aria-label="Samantha sample"></audio></div>
+      <div class="voice-card"><div class="vname">Snape</div><div class="vsrc">Alan Rickman · Harry Potter</div><audio controls preload="none" src="audio/snape.mp3" aria-label="Snape sample"></audio></div>
+      <div class="voice-card"><div class="vname">Spock</div><div class="vsrc">Leonard Nimoy · Star Trek</div><audio controls preload="none" src="audio/spock.mp3" aria-label="Spock sample"></audio></div>
+      <div class="voice-card"><div class="vname">Tilda</div><div class="vsrc">Tilda Swinton · interview</div><audio controls preload="none" src="audio/tilda.mp3" aria-label="Tilda sample"></audio></div>
+      <div class="voice-card"><div class="vname">Vesper</div><div class="vsrc">Eva Green · Casino Royale</div><audio controls preload="none" src="audio/vesper.mp3" aria-label="Vesper sample"></audio></div>
+    </div>
 
-    <section id="voices" class="reveal">
-      <div class="section-label">Voice Gallery</div>
-      <div class="section-title">21 demo clips from the 98-family voice gallery (294 backend profiles total) &mdash; see backend comparison below for the three flagship voices across both Qwen3 sizes</div>
-      <p class="section-desc">Each says <em>&ldquo;You are absolutely right. Your Claude Code session could sound like me.&rdquo;</em> &mdash; generated locally on a 32 GB M1.</p>
-
-      <div class="voice-gallery">
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Attenborough</div>
-          <div class="voice-source">David Attenborough, BBC Earth</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/attenborough.mp3" aria-label="Attenborough voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Audrey</div>
-          <div class="voice-source">Audrey Hepburn, 1961</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/audrey.mp3" aria-label="Audrey voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Aurora</div>
-          <div class="voice-source">AURORA, Shower Thoughts</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/aurora.mp3" aria-label="Aurora voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Avasarala</div>
-          <div class="voice-source">Shohreh Aghdashloo, The Expanse</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/avasarala.mp3" aria-label="Avasarala voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Bardem</div>
-          <div class="voice-source">Javier Bardem, Vicky Cristina Barcelona</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/bardem.mp3" aria-label="Bardem voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Claudia</div>
-          <div class="voice-source">Claudia Black, Dragon Age</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/claudia.mp3" aria-label="Claudia voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Data</div>
-          <div class="voice-source">Brent Spiner, Star Trek TNG</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/data.mp3" aria-label="Data voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Depp</div>
-          <div class="voice-source">Johnny Depp, interview</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/depp.mp3" aria-label="Depp voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Eartha</div>
-          <div class="voice-source">Eartha Kitt, interview</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/eartha.mp3" aria-label="Eartha voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Galadriel</div>
-          <div class="voice-source">Cate Blanchett, LOTR</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/galadriel.mp3" aria-label="Galadriel voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Han Solo</div>
-          <div class="voice-source">Harrison Ford, Star Wars</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/han-solo.mp3" aria-label="Han Solo voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Loki</div>
-          <div class="voice-source">Tom Hiddleston, Avengers</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/loki.mp3" aria-label="Loki voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Lisa Simpson</div>
-          <div class="voice-source">Yeardley Smith, The Simpsons</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/lisa-simpson.mp3" aria-label="Lisa Simpson voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Marla</div>
-          <div class="voice-source">Helena Bonham Carter, Fight Club</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/marla.mp3" aria-label="Marla voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Picard</div>
-          <div class="voice-source">Patrick Stewart, Star Trek</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/picard.mp3" aria-label="Picard voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Ronan</div>
-          <div class="voice-source">Ronan Keating, interview</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/ronan.mp3" aria-label="Ronan voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Samantha</div>
-          <div class="voice-source">Scarlett Johansson, Her</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/samantha.mp3" aria-label="Samantha voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Snape</div>
-          <div class="voice-source">Alan Rickman, Harry Potter</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/snape.mp3" aria-label="Snape voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Spock</div>
-          <div class="voice-source">Leonard Nimoy, Star Trek</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/spock.mp3" aria-label="Spock voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Tilda</div>
-          <div class="voice-source">Tilda Swinton, interview</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/tilda.mp3" aria-label="Tilda voice sample"></audio>
-        </div></div>
-        <div class="voice-card reveal"><div class="voice-card-inner">
-          <div class="voice-name">Vesper</div>
-          <div class="voice-source">Eva Green, Casino Royale</div>
-          <div class="voice-wave"><canvas></canvas></div>
-          <audio controls preload="none" src="audio/vesper.mp3" aria-label="Vesper voice sample"></audio>
-        </div></div>
+    <!-- Model comparison -->
+    <div class="section-label" style="margin-top:40px;">Model comparison</div>
+    <p class="section-desc" style="margin-bottom:20px;">Same voice, two model sizes. Qwen3-TTS 0.6B is the default (fastest). 1.7B is higher quality, ~2× slower.</p>
+    <div class="compare-grid">
+      <div class="cmp-card" data-urls='{"qwen3-0.6b":"audio/comparison/picard-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/picard-qwen3-17b.mp3"}'>
+        <div class="vname">Picard</div>
+        <div class="vsrc">Patrick Stewart · Star Trek</div>
+        <div class="tab-row" role="tablist" aria-label="Picard backends">
+          <button role="tab" class="tab-btn" aria-selected="true" tabindex="0" data-backend="qwen3-0.6b">Qwen3 0.6B</button>
+          <button role="tab" class="tab-btn" aria-selected="false" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
+        </div>
+        <audio controls preload="none" src="audio/comparison/picard-qwen3-06b.mp3" aria-label="Picard synthesized"></audio>
       </div>
-
-      <p style="margin-top:1.5rem;">Add your own:</p>
-<pre><code>afterwords clone "https://youtube.com/watch?v=..." myvoice 30</code><span class="copy-hint">click to copy</span></pre>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="reveal">
-      <div class="section-label">Model Size Comparison</div>
-      <div class="section-title">Same voice, two model sizes</div>
-      <p class="section-desc">Three flagship voices, each synthesized by both Qwen3-TTS sizes. Click a tab to hear the difference between the 0.6B (default, fastest) and 1.7B (higher quality, slower) variants on the same 15-second reference.</p>
-
-      <div class="compare-grid">
-        <div class="compare-card" data-voice="picard" data-urls='{"qwen3-0.6b":"audio/comparison/picard-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/picard-qwen3-17b.mp3"}'>
-          <div class="voice-name">Picard</div>
-          <div class="voice-source">Patrick Stewart, Star Trek</div>
-          <div role="tablist" class="backend-tabs" aria-label="Backends for Picard">
-            <button role="tab" id="picard-tab-0" aria-selected="true"  aria-controls="picard-panel" tabindex="0"  data-backend="qwen3-0.6b">Qwen3 0.6B</button>
-            <button role="tab" id="picard-tab-1" aria-selected="false" aria-controls="picard-panel" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
-          </div>
-          <div role="tabpanel" id="picard-panel" aria-labelledby="picard-tab-0" tabindex="0">
-            <audio controls preload="none" src="audio/comparison/picard-qwen3-06b.mp3" aria-label="Picard synthesized"></audio>
-          </div>
+      <div class="cmp-card" data-urls='{"qwen3-0.6b":"audio/comparison/galadriel-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/galadriel-qwen3-17b.mp3"}'>
+        <div class="vname">Galadriel</div>
+        <div class="vsrc">Cate Blanchett · LOTR</div>
+        <div class="tab-row" role="tablist" aria-label="Galadriel backends">
+          <button role="tab" class="tab-btn" aria-selected="true" tabindex="0" data-backend="qwen3-0.6b">Qwen3 0.6B</button>
+          <button role="tab" class="tab-btn" aria-selected="false" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
         </div>
-
-        <div class="compare-card" data-voice="galadriel" data-urls='{"qwen3-0.6b":"audio/comparison/galadriel-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/galadriel-qwen3-17b.mp3"}'>
-          <div class="voice-name">Galadriel</div>
-          <div class="voice-source">Cate Blanchett, LOTR</div>
-          <div role="tablist" class="backend-tabs" aria-label="Backends for Galadriel">
-            <button role="tab" id="galadriel-tab-0" aria-selected="true"  aria-controls="galadriel-panel" tabindex="0"  data-backend="qwen3-0.6b">Qwen3 0.6B</button>
-            <button role="tab" id="galadriel-tab-1" aria-selected="false" aria-controls="galadriel-panel" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
-          </div>
-          <div role="tabpanel" id="galadriel-panel" aria-labelledby="galadriel-tab-0" tabindex="0">
-            <audio controls preload="none" src="audio/comparison/galadriel-qwen3-06b.mp3" aria-label="Galadriel synthesized"></audio>
-          </div>
-        </div>
-
-        <div class="compare-card" data-voice="attenborough" data-urls='{"qwen3-0.6b":"audio/comparison/attenborough-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/attenborough-qwen3-17b.mp3"}'>
-          <div class="voice-name">Attenborough</div>
-          <div class="voice-source">David Attenborough, BBC Earth</div>
-          <div role="tablist" class="backend-tabs" aria-label="Backends for Attenborough">
-            <button role="tab" id="attenborough-tab-0" aria-selected="true"  aria-controls="attenborough-panel" tabindex="0"  data-backend="qwen3-0.6b">Qwen3 0.6B</button>
-            <button role="tab" id="attenborough-tab-1" aria-selected="false" aria-controls="attenborough-panel" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
-          </div>
-          <div role="tabpanel" id="attenborough-panel" aria-labelledby="attenborough-tab-0" tabindex="0">
-            <audio controls preload="none" src="audio/comparison/attenborough-qwen3-06b.mp3" aria-label="Attenborough synthesized"></audio>
-          </div>
-        </div>
+        <audio controls preload="none" src="audio/comparison/galadriel-qwen3-06b.mp3" aria-label="Galadriel synthesized"></audio>
       </div>
-
-      <p style="margin-top: 1.5rem; color: var(--text-secondary); font-size: 0.95rem;">Qwen3-TTS at 0.6B and 1.7B is the recommended cloning path. Voxtral and SoproTTS are alternative verified backends; the registry also exposes 13 scaffolded backends (OpenVoice, F5-TTS, CosyVoice2, etc.) for experimentation. Chatterbox and VoxCPM were trialled but failed listen-tests on the flagship voices and were removed.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="reveal">
-      <div class="section-label">How It Works</div>
-      <div class="section-title">Input meets output</div>
-
-      <p style="font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 0.5rem;">Claude Code integration</p>
-      <div class="arch-flow">
-        <div class="arch-node">You speak</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node">/voice</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node">Claude responds</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node">Stop hook</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node" style="border-color: var(--border-hover); color: var(--accent);">TTS server</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node">Speaker</div>
+      <div class="cmp-card" data-urls='{"qwen3-0.6b":"audio/comparison/attenborough-qwen3-06b.mp3","qwen3-1.7b":"audio/comparison/attenborough-qwen3-17b.mp3"}'>
+        <div class="vname">Attenborough</div>
+        <div class="vsrc">David Attenborough · BBC Earth</div>
+        <div class="tab-row" role="tablist" aria-label="Attenborough backends">
+          <button role="tab" class="tab-btn" aria-selected="true" tabindex="0" data-backend="qwen3-0.6b">Qwen3 0.6B</button>
+          <button role="tab" class="tab-btn" aria-selected="false" tabindex="-1" data-backend="qwen3-1.7b">Qwen3 1.7B</button>
+        </div>
+        <audio controls preload="none" src="audio/comparison/attenborough-qwen3-06b.mp3" aria-label="Attenborough synthesized"></audio>
       </div>
+    </div>
 
-      <p style="font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 0.5rem; margin-top: 1.5rem;">Standalone API</p>
-      <div class="arch-flow">
-        <div class="arch-node">Any client</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node">GET /synthesize</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node" style="border-color: var(--border-hover); color: var(--accent);">TTS server</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node">WAV audio</div>
+    <p style="margin-top:24px; font-size:13px; color:var(--fg-m);">Add your own with <code style="font-family:var(--mono);font-size:12px;color:var(--fg);">afterwords clone "https://youtube.com/watch?v=..." myvoice 30</code></p>
+  </div>
+</section>
+
+<!-- ════ QUICK START ════ -->
+<section id="quick-start">
+  <div class="wrap">
+    <div class="section-label">Quick start</div>
+    <h2 class="section-title">Five minutes to your first voice</h2>
+    <p class="section-desc">The setup script checks your hardware, installs dependencies, and starts the server. Writes the <code style="font-family:var(--mono);font-size:13px;">afterwords</code> CLI to your PATH.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <pre class="step-code"><code>git clone https://github.com/adrianwedd/afterwords
+cd afterwords</code></pre>
       </div>
-
-      <p style="font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 0.5rem; margin-top: 1.5rem;">Programmatic cloning (--allow-clone)</p>
-      <div class="arch-flow">
-        <div class="arch-node">Upload audio</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node">POST /clone</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node">Denoise + transcribe</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node" style="border-color: var(--border-hover); color: var(--accent);">Voice palette</div>
-        <div class="arch-arrow">&rarr;</div>
-        <div class="arch-node">POST /synthesize</div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <pre class="step-code"><code>bash setup.sh</code></pre>
       </div>
-
-      <p><a href="https://docs.anthropic.com/en/docs/claude-code/voice-dictation"><code>/voice</code></a> handles input. This project handles output. Together: voice conversations.</p>
-      <p>The recommended cloning path is <a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> at two sizes (0.6B and 1.7B, 8-bit). Zero-shot voice cloning &mdash; no training. A 15-second reference + transcript = cloned voice.</p>
-
-      <div class="callout">
-        <strong>Why local?</strong> Nothing leaves your machine. No API key, no rate limits, no bill. The voice is yours.
+      <div class="step">
+        <div class="step-num">3</div>
+        <pre class="step-code"><code>curl "localhost:7860/synthesize?text=Hello+world&voice=picard" | afplay -</code></pre>
       </div>
-    </section>
+    </div>
+    <p style="margin-top:20px; font-size:13px; color:var(--fg-m);">Server runs at <code style="font-family:var(--mono); font-size:12px; color:var(--fg);">localhost:7860</code> and auto-starts on login via launchd. No authentication.</p>
+  </div>
+</section>
 
-    <div class="divider"></div>
+<!-- ════ CLAUDE CODE ════ -->
+<section id="claude-code">
+  <div class="wrap">
+    <div class="section-label">Claude Code integration</div>
+    <h2 class="section-title">Input and output, paired</h2>
+    <div class="callout">
+      <p>Afterwords pairs with Claude Code's <code>/voice</code> command — <code>/voice</code> handles dictation input, Afterwords handles spoken output. A stop hook fires after every response and pipes text to the local server, so every reply is spoken aloud in whatever voice you've set.</p>
+      <p style="margin-top:12px;"><a href="https://github.com/adrianwedd/afterwords#claude-code-integration">See the README for stop-hook setup →</a></p>
+    </div>
+    <pre class="code-block" style="margin-top: 24px;"><code># Per-project voice — drop a .afterwords file in any repo
+echo "galadriel" > ~/work/my-project/.afterwords
 
-    <section class="reveal">
-      <div class="section-label">API Reference</div>
-      <div class="section-title">A plain HTTP interface</div>
-      <p class="section-desc">The server runs on <code>localhost:7860</code>. No authentication. Use it from curl, scripts, other editors, web apps &mdash; anything that speaks HTTP. Endpoints marked <code>--allow-clone</code> require launching the server with that flag.</p>
-
-      <div class="endpoint reveal">
-        <div>
-          <span class="endpoint-method">GET</span>
-          <span class="endpoint-path">/health</span>
-        </div>
-        <p class="endpoint-desc">Server status, loaded voices, and readiness.</p>
-<pre><code>curl localhost:7860/health | jq .</code><span class="copy-hint">click to copy</span></pre>
-<pre><code>{
-  "status": "ok",
-  "model": "mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit",
-  "backend": "mlx",
-  "model_loaded": true,
-  "ready": true,
-  "voices": ["attenborough", "attenborough-qwen3-06b", "attenborough-qwen3-17b", "audrey", "..."],
-  "default_voice": "galadriel",
-  "loaded_backends": {
-    "qwen3-0.6b":  {"loaded": true, "voice_count": 45, "sample_rate": 24000, "display_name": "Qwen3-TTS 0.6B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
-    "qwen3-1.7b":  {"loaded": true, "voice_count": 61, "sample_rate": 24000, "display_name": "Qwen3-TTS 1.7B", "supported_langs": ["en","zh","ja","ko","es","fr","de","it","pt","ru"]},
-    "voxtral":     {"loaded": true, "voice_count": 0,  "sample_rate": 24000, "display_name": "Voxtral 4B", "supported_langs": ["en","fr","de","es","it","pt","nl","ru","zh","ja","ko","ar","hi"]},
-    "soprotts":    {"loaded": true, "voice_count": 0,  "sample_rate": 24000, "display_name": "SoproTTS", "supported_langs": ["en"]}
-  }
-}</code><span class="copy-hint">click to copy</span></pre>
-        <div class="response-codes">
-          <span class="response-code success">200 OK</span>
-        </div>
-      </div>
-
-      <div class="endpoint reveal">
-        <div>
-          <span class="endpoint-method">GET</span>
-          <span class="endpoint-path">/synthesize</span>
-        </div>
-        <p class="endpoint-desc">Generate speech from text. Returns 16-bit PCM WAV audio.</p>
-        <div class="endpoint-params">
-          <div class="param-row">
-            <span class="param-name">text</span>
-            <span class="param-meta"><em>required</em> &mdash; string, max 5000 chars</span>
-          </div>
-          <div class="param-row">
-            <span class="param-name">voice</span>
-            <span class="param-meta"><em>optional</em> &mdash; defaults to <code>galadriel</code>. Any name from /health</span>
-          </div>
-          <div class="param-row">
-            <span class="param-name">lang</span>
-            <span class="param-meta"><em>optional</em> &mdash; BCP-47 language code, defaults to <code>en</code>. Must be in the voice's backend's <code>supported_langs</code> (see /health). If unsupported and the voice declares a <code>family</code>, the server auto-routes to a same-family voice on a backend that supports it.</span>
-          </div>
-        </div>
-<pre><code># Synthesize and play
-curl "localhost:7860/synthesize?text=Hello+world&voice=snape" -o out.wav
-afplay out.wav
-
-# Non-English (the voice's backend must support the lang, or its family must)
-curl "localhost:7860/synthesize?text=Ni+hao&voice=galadriel&lang=zh" -o hi.wav
-
-# Pipe directly to speaker (macOS)
-curl -s "localhost:7860/synthesize?text=Testing" | afplay -</code><span class="copy-hint">click to copy</span></pre>
-        <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Response includes timing headers: <code>X-Synthesis-Time</code>, <code>X-Duration</code>, <code>X-Sample-Rate</code>, <code>X-Backend</code> (the actual backend that synthesized — may differ from the voice's pinned backend if family-routing kicked in).</p>
-        <div class="response-codes">
-          <span class="response-code success">200 audio/wav</span>
-          <span class="response-code error">400 unknown voice</span>
-          <span class="response-code error">400 lang not supported</span>
-          <span class="response-code error">400 text empty / too long</span>
-          <span class="response-code error">500 synthesis failed</span>
-          <span class="response-code error">503 warming up</span>
-        </div>
-      </div>
-
-      <div class="endpoint reveal">
-        <div>
-          <span class="endpoint-method">CLI</span>
-          <span class="endpoint-path">afterwords clone</span>
-        </div>
-        <p class="endpoint-desc">Clone a new voice from a YouTube clip. Run <code>afterwords reload</code> to load it (no restart needed).</p>
-<pre><code># Interactive (prompts for URL and name)
-afterwords clone
-
-# Non-interactive (URL, name, start-second)
-afterwords clone "https://youtube.com/watch?v=..." mycustomvoice 30
-
-# Fully automated (skip transcript confirmation)
-afterwords clone "https://youtube.com/watch?v=..." mycustomvoice 30 --yes</code><span class="copy-hint">click to copy</span></pre>
-        <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Each voice is a 700 KB WAV + JSON profile in <code>voices/</code>. Adding voices costs zero extra memory.</p>
-      </div>
-
-      <div class="endpoint reveal">
-        <div>
-          <span class="endpoint-method">POST</span>
-          <span class="endpoint-path">/synthesize</span>
-        </div>
-        <p class="endpoint-desc">JSON body version of /synthesize. Supports emotion-based palette lookup for session-cloned voices. Requires <code>--allow-clone</code>.</p>
-        <div class="endpoint-params">
-          <div class="param-row">
-            <span class="param-name">text</span>
-            <span class="param-meta"><em>required</em> &mdash; string, max 5000 chars</span>
-          </div>
-          <div class="param-row">
-            <span class="param-name">voice</span>
-            <span class="param-meta"><em>required</em> &mdash; voice name or session ID</span>
-          </div>
-          <div class="param-row">
-            <span class="param-name">emotion</span>
-            <span class="param-meta"><em>optional</em> &mdash; selects the matching palette entry (e.g. <code>"cheerful"</code>, <code>"serious"</code>)</span>
-          </div>
-        </div>
-<pre><code>curl -X POST localhost:7860/synthesize \
-  -H "Content-Type: application/json" \
-  -d '{"text": "Hello world", "voice": "my-session", "emotion": "cheerful"}' \
-  -o out.wav</code><span class="copy-hint">click to copy</span></pre>
-        <div class="response-codes">
-          <span class="response-code success">200 audio/wav</span>
-          <span class="response-code error">400 unknown voice</span>
-          <span class="response-code error">404 --allow-clone not enabled</span>
-          <span class="response-code error">503 warming up</span>
-        </div>
-      </div>
-
-      <div class="endpoint reveal">
-        <div>
-          <span class="endpoint-method">POST</span>
-          <span class="endpoint-path">/clone</span>
-        </div>
-        <p class="endpoint-desc">Create a voice profile from uploaded audio. Denoises, optionally transcribes via Whisper, and registers the voice for immediate use. Requires <code>--allow-clone</code>.</p>
-        <div class="endpoint-params">
-          <div class="param-row">
-            <span class="param-name">audio</span>
-            <span class="param-meta"><em>required</em> &mdash; WAV file upload (multipart/form-data)</span>
-          </div>
-          <div class="param-row">
-            <span class="param-name">session_id</span>
-            <span class="param-meta"><em>required</em> &mdash; groups palette entries (e.g. <code>"my-voice"</code>)</span>
-          </div>
-          <div class="param-row">
-            <span class="param-name">emotion</span>
-            <span class="param-meta"><em>optional</em> &mdash; tag for this entry, defaults to <code>"neutral"</code></span>
-          </div>
-          <div class="param-row">
-            <span class="param-name">transcript</span>
-            <span class="param-meta"><em>optional</em> &mdash; if omitted, auto-transcribed with Whisper</span>
-          </div>
-        </div>
-<pre><code># Clone a single voice
-curl -X POST localhost:7860/clone \
-  -F "audio=@sample.wav" \
-  -F "session_id=my-voice" \
-  -F "emotion=neutral"
-
-# Build a palette with multiple emotions
-curl -X POST localhost:7860/clone \
-  -F "audio=@cheerful.wav" -F "session_id=my-voice" -F "emotion=cheerful"
-curl -X POST localhost:7860/clone \
-  -F "audio=@serious.wav" -F "session_id=my-voice" -F "emotion=serious"</code><span class="copy-hint">click to copy</span></pre>
-        <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Returns voice name, quality rating (rough/developing/good based on duration), session ID, and sequence number. Voices are available immediately &mdash; no restart needed.</p>
-        <div class="response-codes">
-          <span class="response-code success">200 JSON</span>
-          <span class="response-code error">400 audio too short</span>
-          <span class="response-code error">404 --allow-clone not enabled</span>
-          <span class="response-code error">500 clone failed</span>
-        </div>
-      </div>
-
-      <div class="endpoint reveal">
-        <div>
-          <span class="endpoint-method">POST</span>
-          <span class="endpoint-path">/reload</span>
-        </div>
-        <p class="endpoint-desc">Rescan <code>voices/*.json</code> and merge new or changed profiles into the live registry &mdash; no restart, no synthesis interruption. Add-only and atomic: if any profile fails to validate, no changes commit. Requires <code>--allow-clone</code>.</p>
-<pre><code># After cloning a new voice or editing voices/*.json:
-curl -X POST localhost:7860/reload | jq .
-
-# Or via the CLI wrapper:
-afterwords reload</code><span class="copy-hint">click to copy</span></pre>
-        <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text-secondary);">Returns <code>{"status":"ok","reloaded":[names...],"errors":[]}</code> on success or <code>{"status":"failed","errors":[{file, error}]}</code> on atomic abort. Voices removed from disk are NOT dropped &mdash; use <code>DELETE /session/{id}</code> for that.</p>
-        <div class="response-codes">
-          <span class="response-code success">200 OK</span>
-          <span class="response-code error">404 --allow-clone not enabled</span>
-          <span class="response-code error">500 atomic abort (errors[] populated)</span>
-        </div>
-      </div>
-
-      <div class="endpoint reveal">
-        <div>
-          <span class="endpoint-method">DELETE</span>
-          <span class="endpoint-path">/session/{session_id}</span>
-        </div>
-        <p class="endpoint-desc">Remove all voice palette entries and files for a session. Requires <code>--allow-clone</code>.</p>
-<pre><code>curl -X DELETE localhost:7860/session/my-voice</code><span class="copy-hint">click to copy</span></pre>
-        <div class="response-codes">
-          <span class="response-code success">200 OK</span>
-          <span class="response-code error">404 --allow-clone not enabled</span>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="reveal">
-      <div class="section-label">Per-Project</div>
-      <div class="section-title">Different voice, different repo</div>
-      <p>Drop a <code>.afterwords</code> file in any project root. The hook reads it before each synthesis &mdash; no server restart.</p>
-<pre><code>echo "galadriel" > ~/work/frontend/.afterwords
-echo "snape"     > ~/work/backend/.afterwords
-echo "loki"      > ~/fun/side-project/.afterwords</code><span class="copy-hint">click to copy</span></pre>
-
-      <p style="margin-top:1.5rem;">If your project uses multiple agents, map each one to its own voice:</p>
-<pre><code># .afterwords — agent-to-voice mapping
-default: data
+# Multiple agents, multiple voices
+cat > ~/work/my-project/.afterwords &lt;&lt;EOF
+default: picard
 clara-oswald: clara-oswald
-donna-noble: donna-noble
-k9: k9</code><span class="copy-hint">click to copy</span></pre>
-      <p>When Claude Code spawns a subagent, the hook reads its <code>agent_type</code> and looks up the matching voice. Falls back to <code>default:</code> if no match.</p>
-    </section>
+k9: k9
+EOF</code></pre>
+  </div>
+</section>
 
-    <div class="divider"></div>
+<!-- ════ BACKENDS ════ -->
+<section id="backends">
+  <div class="wrap">
+    <div class="section-label">Backend support</div>
+    <h2 class="section-title">Four verified backends, 110+ voice profiles</h2>
+    <p class="section-desc">Each voice profile is a 700 KB WAV + JSON pair. Adding voices costs zero extra RAM — the reference audio is loaded per-synthesis, not held in memory.</p>
+    <table class="backend-table">
+      <thead>
+        <tr>
+          <th>Backend</th>
+          <th>Voice profiles</th>
+          <th>Languages</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-name">qwen3-0.6b</td>
+          <td style="font-family:var(--mono);">110+</td>
+          <td style="font-family:var(--mono);font-size:12px;">en zh ja ko es fr de it pt ru</td>
+          <td><span class="badge badge-ok">stable</span></td>
+        </tr>
+        <tr>
+          <td class="td-name">qwen3-1.7b</td>
+          <td style="font-family:var(--mono);">110+</td>
+          <td style="font-family:var(--mono);font-size:12px;">en zh ja ko es fr de it pt ru</td>
+          <td><span class="badge badge-ok">stable</span></td>
+        </tr>
+        <tr>
+          <td class="td-name">voxtral-4b</td>
+          <td style="font-family:var(--mono);">yours</td>
+          <td style="font-family:var(--mono);font-size:12px;">en fr de es it pt nl ru zh ja ko ar hi</td>
+          <td><span class="badge badge-ok">verified</span></td>
+        </tr>
+        <tr>
+          <td class="td-name">soprotts</td>
+          <td style="font-family:var(--mono);">yours</td>
+          <td style="font-family:var(--mono);font-size:12px;">en</td>
+          <td><span class="badge badge-ok">verified</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:20px; font-size:13px; color:var(--fg-m);">13 further backends are scaffolded and available for experimentation (OpenVoice, F5-TTS, CosyVoice2, and others). See the <a href="https://github.com/adrianwedd/afterwords" style="color:var(--fg); text-underline-offset:2px;">README</a> for integration status and hardware requirements.</p>
+  </div>
+</section>
 
-    <section class="reveal">
-      <div class="section-label">Emotion Palettes</div>
-      <div class="section-title">One voice, many moods</div>
-      <p class="section-desc">Clone the same speaker multiple times with different emotional deliveries. The server groups them into a palette by session ID.</p>
-<pre><code># Clone three emotions from the same speaker
-curl -X POST localhost:7860/clone \
-  -F "audio=@neutral.wav" -F "session_id=narrator" -F "emotion=neutral"
-curl -X POST localhost:7860/clone \
-  -F "audio=@cheerful.wav" -F "session_id=narrator" -F "emotion=cheerful"
-curl -X POST localhost:7860/clone \
-  -F "audio=@serious.wav" -F "session_id=narrator" -F "emotion=serious"
-
-# Synthesize with a specific emotion
-curl -X POST localhost:7860/synthesize \
-  -H "Content-Type: application/json" \
-  -d '{"text": "Great news!", "voice": "narrator", "emotion": "cheerful"}' \
-  -o out.wav</code><span class="copy-hint">click to copy</span></pre>
-      <p>Each palette entry gets a quality rating based on clip duration: <strong>rough</strong> (&lt;5s), <strong>developing</strong> (5&ndash;15s), <strong>good</strong> (15s+). If no emotion match is found, the server falls back to the best-quality entry for that session. Clean up with <code>DELETE /session/{id}</code>.</p>
-      <div class="callout">
-        <strong>Requires <code>--allow-clone</code>.</strong> Palette voices are ephemeral &mdash; stored in memory and on disk while the server runs. Use <code>afterwords clone</code> for permanent voices.
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="reveal">
-      <div class="section-label">Managing the Server</div>
-      <div class="section-title">One command for everything</div>
-      <p class="section-desc">The <code>afterwords</code> CLI is added to your PATH during setup. It wraps launchd, health checks, and voice management into a single tool.</p>
-<pre><code>afterwords start       # start the server (auto-starts on login)
-afterwords stop        # stop the server
-afterwords restart     # restart after adding voices
-afterwords status      # show health, model, loaded voices
-afterwords logs        # tail the server log
-afterwords voices      # list available voices
-afterwords reload      # pick up new voices without restart
-afterwords clone       # clone a new voice from YouTube
-afterwords uninstall   # remove service and optionally hooks</code><span class="copy-hint">click to copy</span></pre>
-      <p>The server runs on <code>localhost:7860</code> and auto-starts on login via macOS launchd. If you prefer to run it manually:</p>
-<pre><code>source .venv/bin/activate
-python server.py                  # read-only (GET endpoints only)
-python server.py --allow-clone    # enables POST /clone, POST /synthesize, DELETE /session</code><span class="copy-hint">click to copy</span></pre>
-      <div class="callout">
-        <strong>--allow-clone</strong> enables the clone and session endpoints and automatically binds to <code>127.0.0.1</code> (localhost only) for security.
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="reveal">
-      <div class="section-label">Performance</div>
-      <div class="section-title">On a 32 GB Apple Silicon Mac</div>
-      <div class="info-grid">
-        <div class="info-cell"><div class="info-cell-label">Qwen3 0.6B</div><div class="info-cell-value">~20s / sentence</div></div>
-        <div class="info-cell"><div class="info-cell-label">Qwen3 1.7B</div><div class="info-cell-value">~35s / sentence</div></div>
-        <div class="info-cell"><div class="info-cell-label">Peak memory</div><div class="info-cell-value">~3-4 GB (qwen3 only)</div></div>
-        <div class="info-cell"><div class="info-cell-label">Adding a voice</div><div class="info-cell-value">0 extra RAM</div></div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="reveal">
-      <div class="section-label">Requirements</div>
-      <div class="section-title">What you need</div>
-      <div class="info-grid">
-        <div class="info-cell"><div class="info-cell-label">Hardware</div><div class="info-cell-value">Apple Silicon M1+</div></div>
-        <div class="info-cell"><div class="info-cell-label">Memory</div><div class="info-cell-value">32 GB+ RAM</div></div>
-        <div class="info-cell"><div class="info-cell-label">Python</div><div class="info-cell-value">3.11+</div></div>
-        <div class="info-cell"><div class="info-cell-label">Disk</div><div class="info-cell-value">~2 GB</div></div>
-      </div>
-      <p>The setup script installs everything else. Claude Code is optional &mdash; use <code>bash setup.sh --server-only</code> for the API without hooks. Either way, you get the <code>afterwords</code> CLI for managing the server.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="reveal">
-      <div class="section-label">Credits</div>
-      <p><a href="https://github.com/QwenLM/Qwen3-TTS">Qwen3-TTS</a> (Alibaba) &middot; <a href="https://github.com/Blaizzy/mlx-audio">mlx-audio</a> &middot; <a href="https://github.com/ml-explore/mlx">MLX</a> (Apple) &middot; <a href="https://docs.anthropic.com/en/docs/claude-code/">Claude Code</a> (Anthropic)</p>
-      <p>Originally built for <a href="https://spark.wedd.au">SPARK</a>, a robot with an inner life. Full tutorial: <a href="https://adrianwedd.com/blog/voice-cloning-qwen3-tts-mlx/">Voice Cloning with Qwen3-TTS</a>.</p>
-    </section>
-
-  </article>
-  </main>
-
-  <footer>
-    <p><a href="https://adrianwedd.com">Adrian Wedd</a> &middot; <a href="https://github.com/adrianwedd/afterwords">GitHub</a> &middot; MIT</p>
-  </footer>
-</div>
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <a href="https://github.com/adrianwedd/afterwords">GitHub</a>
+      <span class="footer-sep">·</span>
+      <a href="https://afterwords-api.adrianwedd.workers.dev">Need a cloud API? →</a>
+      <span class="footer-sep">·</span>
+      <span>MIT licence</span>
+    </div>
+  </div>
+</footer>
 
 <script>
-// ── Hero soundwave canvas ────────────────────────────────────────
-(function() {
-  const canvas = document.getElementById('heroCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w, h, cols, time = 0, raf;
-
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = canvas.clientWidth;
-    h = canvas.clientHeight;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    ctx.scale(dpr, dpr);
-    cols = Math.floor(w / 3);
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, w, h);
-    const cy = h * 0.55;
-    const maxAmp = h * 0.25;
-
-    for (let i = 0; i < cols; i++) {
-      const x = (i / cols) * w;
-      const t = time * 0.4;
-      // layered sine waves for organic movement
-      const wave1 = Math.sin(i * 0.04 + t) * 0.5;
-      const wave2 = Math.sin(i * 0.02 - t * 0.7) * 0.3;
-      const wave3 = Math.sin(i * 0.07 + t * 1.3) * 0.2;
-      const envelope = Math.sin((i / cols) * Math.PI); // fade at edges
-      const amp = (wave1 + wave2 + wave3) * envelope * maxAmp;
-
-      const alpha = 0.12 + Math.abs(amp / maxAmp) * 0.18;
-      ctx.fillStyle = `rgba(232, 151, 107, ${alpha})`;
-      const barH = Math.max(1, Math.abs(amp));
-      ctx.fillRect(x, cy - barH, 1.5, barH * 2);
-    }
-    time += 0.016;
-    raf = requestAnimationFrame(draw);
-  }
-
-  resize();
-  draw();
-  window.addEventListener('resize', () => { resize(); });
-})();
-
-// ── Voice card waveform canvases ─────────────────────────────────
-document.querySelectorAll('.voice-card').forEach(card => {
-  const canvas = card.querySelector('.voice-wave canvas');
-  const audio = card.querySelector('audio');
-  if (!canvas || !audio) return;
-
-  const ctx = canvas.getContext('2d');
-  let animId = null;
-
-  function sizeCanvas() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const rect = canvas.parentElement.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
-    return { w: rect.width, h: rect.height };
-  }
-
-  // draw idle waveform
-  function drawIdle() {
-    const { w, h } = sizeCanvas();
-    ctx.clearRect(0, 0, w, h);
-    const bars = Math.floor(w / 3);
-    for (let i = 0; i < bars; i++) {
-      const x = (i / bars) * w;
-      const amp = (Math.sin(i * 0.3) * 0.3 + Math.sin(i * 0.17) * 0.2 + 0.5) * h * 0.35;
-      ctx.fillStyle = 'rgba(232, 151, 107, 0.15)';
-      ctx.fillRect(x, (h - amp) / 2, 1.5, amp);
-    }
-  }
-
-  // animated waveform during playback
-  function drawPlaying() {
-    const { w, h } = sizeCanvas();
-    const bars = Math.floor(w / 3);
-    const t = performance.now() * 0.003;
-
-    ctx.clearRect(0, 0, w, h);
-    for (let i = 0; i < bars; i++) {
-      const x = (i / bars) * w;
-      const wave = Math.sin(i * 0.15 + t * 2) * 0.4
-                 + Math.sin(i * 0.08 - t * 1.5) * 0.3
-                 + Math.sin(i * 0.22 + t * 3) * 0.3;
-      const amp = (0.3 + Math.abs(wave) * 0.7) * h * 0.7;
-      const alpha = 0.25 + Math.abs(wave) * 0.4;
-      ctx.fillStyle = `rgba(232, 151, 107, ${alpha})`;
-      ctx.fillRect(x, (h - amp) / 2, 1.5, amp);
-    }
-    animId = requestAnimationFrame(drawPlaying);
-  }
-
-  drawIdle();
-
-  audio.addEventListener('play', () => {
-    if (animId) cancelAnimationFrame(animId);
-    drawPlaying();
-  });
-  audio.addEventListener('pause', () => {
-    if (animId) { cancelAnimationFrame(animId); animId = null; }
-    drawIdle();
-  });
-  audio.addEventListener('ended', () => {
-    if (animId) { cancelAnimationFrame(animId); animId = null; }
-    drawIdle();
-  });
-});
-
-// ── Scroll reveal (IntersectionObserver) ─────────────────────────
-const observer = new IntersectionObserver(entries => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      // stagger reveals within the same observation batch
-      const delay = entry.target.closest('.voice-gallery')
-        ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 40
-        : 0;
-      setTimeout(() => entry.target.classList.add('visible'), delay);
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// ── Click to copy ────────────────────────────────────────────────
-document.querySelectorAll('pre').forEach(pre => {
-  pre.addEventListener('click', () => {
-    const code = pre.querySelector('code');
-    if (!code) return;
-    navigator.clipboard.writeText(code.textContent.trim()).then(() => {
-      const hint = pre.querySelector('.copy-hint');
-      if (hint) {
-        hint.textContent = 'copied';
-        hint.style.color = 'var(--accent)';
-        hint.style.opacity = '1';
-        setTimeout(() => {
-          hint.textContent = 'click to copy';
-          hint.style.color = '';
-          hint.style.opacity = '';
-        }, 1500);
-      }
-    });
-  });
-});
-
-// ── Backend Comparison tabs ──────────────────────────────────────
-document.querySelectorAll('.compare-card').forEach(card => {
-  const tablist = card.querySelector('[role="tablist"]');
+// Backend comparison tabs
+document.querySelectorAll('.cmp-card').forEach(card => {
   const tabs = Array.from(card.querySelectorAll('[role="tab"]'));
-  const panel = card.querySelector('[role="tabpanel"]');
   const audio = card.querySelector('audio');
-  if (!tablist || !panel || !audio) return;
-
   let urls = {};
-  try { urls = JSON.parse(card.getAttribute('data-urls') || '{}'); } catch (e) { return; }
+  try { urls = JSON.parse(card.getAttribute('data-urls') || '{}'); } catch(e) {}
 
   function activate(idx) {
     tabs.forEach((t, i) => {
@@ -1329,30 +388,22 @@ document.querySelectorAll('.compare-card').forEach(card => {
       t.setAttribute('aria-selected', on ? 'true' : 'false');
       t.setAttribute('tabindex', on ? '0' : '-1');
       if (on) {
-        panel.setAttribute('aria-labelledby', t.id);
-        const backend = t.getAttribute('data-backend');
-        const url = urls[backend];
-        if (url && audio.src !== new URL(url, location.href).href) {
-          audio.pause();
-          audio.src = url;
-          audio.load();
-        }
+        const url = urls[t.getAttribute('data-backend')];
+        if (url) { audio.pause(); audio.src = url; audio.load(); }
       }
     });
   }
 
   tabs.forEach((tab, idx) => {
     tab.addEventListener('click', () => { activate(idx); tab.focus(); });
-    tab.addEventListener('keydown', (e) => {
-      let next = idx;
-      if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
-      else if (e.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
-      else if (e.key === 'Home') next = 0;
-      else if (e.key === 'End') next = tabs.length - 1;
+    tab.addEventListener('keydown', e => {
+      let n = idx;
+      if (e.key === 'ArrowRight') n = (idx + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') n = (idx - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') n = 0;
+      else if (e.key === 'End') n = tabs.length - 1;
       else return;
-      e.preventDefault();
-      activate(next);
-      tabs[next].focus();
+      e.preventDefault(); activate(n); tabs[n].focus();
     });
   });
 });

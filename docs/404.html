@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — afterwords</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-local-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicons/favicon-local-180.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1C1C1A; --bg-up: #222220; --fg: #EDE8DF;
+      --fg-m: #A09A8F; --fg-d: #5C5852; --bd: #3A3A37; --acc: #B87333;
+      --mono: ui-monospace,"SF Mono","JetBrains Mono",monospace;
+      --sans: -apple-system,BlinkMacSystemFont,"Inter",sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{color-scheme:dark;}
+    body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;
+      line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
+    .mark{margin-bottom:32px;}
+    .code{font-family:var(--mono);font-size:11px;font-weight:500;text-transform:uppercase;
+      letter-spacing:.12em;color:var(--fg-d);margin-bottom:12px;}
+    h1{font-size:24px;font-weight:500;letter-spacing:-0.02em;margin-bottom:8px;}
+    p{font-size:15px;color:var(--fg-m);margin-bottom:32px;}
+    .links{display:flex;gap:16px;flex-wrap:wrap;align-items:center;
+      font-family:var(--mono);font-size:12px;}
+    .links a{color:var(--fg-m);text-decoration:none;text-underline-offset:2px;}
+    .links a:hover{color:var(--fg);}
+    .dot{color:var(--fg-d);}
+  </style>
+</head>
+<body>
+  <div class="mark">
+    <svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><clipPath id="e-wf"><ellipse cx="568" cy="522" rx="70" ry="86"/></clipPath></defs>
+      <rect width="1024" height="1024" fill="#1C1C1A"/>
+      <ellipse cx="448" cy="415" rx="76" ry="92" fill="#EDE8DF"/>
+      <path fill="#EDE8DF" d="M492,490 C484,490 480,492 476,498 C468,520 468,556 445,582 C432,598 415,606 406,594 C394,579 394,558 404,538 C412,518 420,506 404,490 Z"/>
+      <path fill="#EDE8DF" d="M612,597 C604,597 600,599 596,605 C588,627 588,663 565,689 C552,705 535,713 526,701 C514,686 514,665 524,645 C532,625 540,613 524,597 Z"/>
+      <ellipse cx="568" cy="522" rx="76" ry="92" fill="#1C1C1A" stroke="#EDE8DF" stroke-width="3"/>
+      <g clip-path="url(#e-wf)" stroke="#EDE8DF" stroke-width="8" stroke-linecap="round">
+        <line x1="501" y1="510" x2="501" y2="534"/><line x1="514" y1="496" x2="514" y2="548"/>
+        <line x1="527" y1="482" x2="527" y2="562"/><line x1="541" y1="470" x2="541" y2="574"/>
+        <line x1="554" y1="466" x2="554" y2="578"/><line x1="568" y1="464" x2="568" y2="580"/>
+        <line x1="582" y1="467" x2="582" y2="577"/><line x1="595" y1="474" x2="595" y2="570"/>
+        <line x1="609" y1="486" x2="609" y2="558"/><line x1="622" y1="500" x2="622" y2="544"/>
+        <line x1="636" y1="510" x2="636" y2="534"/>
+      </g>
+    </svg>
+  </div>
+  <div class="code">404</div>
+  <h1>Page not found.</h1>
+  <p>The resource you requested doesn't exist or has moved.</p>
+  <div class="links">
+    <a href="./index.html">Home</a>
+    <span class="dot">·</span>
+    <a href="https://github.com/adrianwedd/afterwords">GitHub</a>
+  </div>
+</body>
+</html>
