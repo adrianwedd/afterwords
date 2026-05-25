@@ -1,4 +1,8 @@
-default: seven-of-nine
+default: galadriel
+hermes: data
+codex: seven-of-nine
+agy: samantha
+gemini: marla
 feature-dev:code-reviewer: spock
 feature-dev:code-architect: picard
 feature-dev:code-explorer: attenborough

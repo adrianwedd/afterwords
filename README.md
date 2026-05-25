@@ -30,7 +30,7 @@ If Claude Code isn't installed, setup will offer to install it (requires Node.js
 
 ## With Codex CLI
 
-Codex CLI (`@openai/codex`) doesn't expose a Stop-hook event the way Claude Code does, so the integration uses a watcher instead: `tail -F` on the active session JSONL under `~/.codex/sessions`, extract final assistant answers, queue them for synthesis. Inside an interactive Codex session (where `$CODEX_THREAD_ID` is set):
+Codex CLI (`@openai/codex`) doesn't expose a Stop-hook event the way Claude Code does, so the integration uses a watcher instead: it polls the active session JSONL under `~/.codex/sessions`, extracts final assistant answers, and queues them for synthesis. Inside an interactive Codex session (where `$CODEX_THREAD_ID` is set):
 
 ```bash
 afterwords codex-hook start    # daemon follows this session, speaks final answers
@@ -38,11 +38,53 @@ afterwords codex-hook status   # check
 afterwords codex-hook stop
 ```
 
+The tested working configuration is:
+
+1. Start or verify the server:
+   ```bash
+   afterwords status
+   afterwords start
+   ```
+2. From the same interactive Codex CLI session you want spoken, start the watcher:
+   ```bash
+   afterwords codex-hook start
+   afterwords codex-hook status
+   ```
+3. Leave that Codex session running. The watcher process is detached under launchd's normal process tree (`PPID 1`) and follows only the current `$CODEX_THREAD_ID`.
+4. On each final assistant answer, the watcher reads the matching `~/.codex/sessions/.../rollout-*.jsonl`, extracts `phase=final_answer`, writes an item under `/tmp/codex-tts-queue-$CODEX_THREAD_ID/`, synthesizes through `localhost:7860/synthesize`, plays with `afplay`, and archives audio/text under `~/.codex/tts-archive/`.
+
+You can also run the session setup helper from inside Codex:
+
+```bash
+bash setup-codex.sh
+```
+
+That checks `$CODEX_THREAD_ID`, `python3`, `rg`, and `curl`; ensures the Codex hook scripts are executable; starts the server if needed; then runs `afterwords codex-hook start`.
+
 The watcher needs `ripgrep` (`brew install ripgrep`) to locate the session file. Setup auto-detects Codex and prints these commands when it finishes; you don't have to memorize them.
+
+Voice routing uses the same `.afterwords` mapping format as Claude hooks. Codex session JSONL does not normally include an `agent_type`, so the watcher assigns the synthetic agent key `codex`. For example:
+
+```text
+default: seven-of-nine
+codex: spock
+```
+
+If no `codex:` entry exists, it falls back to `default:`. If neither exists, it falls back to the server default voice from `/health`.
 
 For watcher debugging, run `afterwords codex-hook status`; it reports stale pid files and shows the tail of `/tmp/codex-tts-watch.log` when the watcher is not running. `afterwords codex-hook start --diagnose` prints the thread id, session file it would watch, hook path, and sample event detection without starting the daemon. The most common startup failures are `$CODEX_THREAD_ID` not being exported, or Codex not having created the first session event yet, so no `~/.codex/sessions/.../rollout-*.jsonl` file matches the thread id.
 
-Trade-offs vs Claude Code: this depends on Codex's local session file format and on `$CODEX_THREAD_ID` being exported, both undocumented contracts that may shift between Codex versions. For non-interactive Codex (`codex exec`), prefer wrapping with `--output-last-message <FILE>` and feeding the file to `/synthesize` directly — cleaner and version-stable.
+Useful checks:
+
+```bash
+afterwords status
+afterwords codex-hook status
+tail -40 /tmp/codex-tts-watch.log
+ls -lt ~/.codex/tts-archive | head
+ps -p "$(cat /tmp/codex-tts-watch.pid)" -o pid=,ppid=,stat=,command=
+```
+
+Trade-offs vs Claude Code: this depends on Codex's local session file format and on `$CODEX_THREAD_ID` being exported, both undocumented contracts that may shift between Codex versions. API-hosted or non-interactive Codex environments may reap long-lived background watcher processes; use the watcher from a real interactive Codex CLI terminal. For non-interactive Codex (`codex exec`), prefer wrapping with `--output-last-message <FILE>` and feeding the file to `/synthesize` directly — cleaner and version-stable.
 
 ## With Gemini CLI
 
@@ -71,9 +113,69 @@ So we ship a small adapter instead. `setup.sh` installs `~/.claude/hooks/gemini-
 Two things to know:
 
 - Gemini fires `AfterAgent` (analogue of Claude's `Stop`); there's no clean `SubagentStop` analogue, so per-agent voice mapping via `.afterwords` is Claude-only for now.
-- The adapter reuses Claude's TTS queue (`/tmp/claude-tts-queue.txt`) and worker, so a single Afterwords worker drains both Claude and Gemini sessions. No coordination needed.
+- The adapter writes into Claude's TTS queue directory (`/tmp/claude-tts-queue/`) and the same worker drains both Claude and Gemini sessions atomically. No coordination needed.
 
 Test: `gemini -p "say hi"` should speak the response via Afterwords using your default voice.
+
+## With Antigravity CLI (agy)
+
+Antigravity CLI (`agy`), the successor to Gemini CLI, supports hooks defined in `~/.gemini/config/hooks.json`. Unlike Gemini CLI's manual snippet configuration, `setup.sh` automatically detects `agy` and registers/updates the hook configuration programmatically.
+
+During execution, `agy` fires the `Stop` event when the reasoning loop terminates. It passes a JSON payload containing `transcriptPath` (the path to the conversation's `transcript.jsonl` file) on `stdin`.
+
+We process this with two files:
+1. `~/.claude/hooks/agy-session-hook.py` — reads the `transcript.jsonl` file backwards to extract the final model response content, filtering out intermediate tool execution logs.
+2. `~/.claude/hooks/agy-tts-hook.sh` — receives the hook payload, runs the python parser, pipes it through the markdown stripper, sets the agent to `agy`, and queues it.
+
+### Personalizing the Voice
+
+The hook sets the agent key to `agy`. This enables you to map a specific voice for `agy` sessions in your `.afterwords` file:
+
+```text
+default: seven-of-nine
+agy: spock
+```
+
+If no `agy:` voice is defined, it will automatically fall back to the `default:` voice.
+
+Test: `agy --print "say hello"` should speak the response via Afterwords.
+
+## With Hermes Agent
+
+Hermes has a full three-path integration. Setup does not auto-configure Hermes — add each path manually as shown below.
+
+**1. Shell hook (`post_llm_call`)** fires on every direct CLI response. In `~/.hermes/config.yaml`:
+
+```yaml
+hooks:
+  post_llm_call:
+  - command: bash /path/to/afterwords/scripts/afterwords-post-llm.sh
+    timeout: 60
+hooks_auto_accept: true
+```
+
+**2. Native Python hook (`agent:end`)** via Hermes's gateway hook system, installed at `~/.hermes/hooks/afterwords-tts/`. Only speaks on CLI/local contexts; skips Telegram/Discord automatically to avoid double-notification.
+
+**3. Command provider** handles explicit TTS calls (`/voice tts`, `text_to_speech` tool) and messaging-platform audio. In `~/.hermes/config.yaml`:
+
+```yaml
+tts:
+  provider: afterwords
+  providers:
+    afterwords:
+      type: command
+      command: 'bash ~/repos/afterwords/scripts/afterwords-tts-command.sh {input_path} {output_path} {voice}'
+      output_format: wav
+```
+
+On CLI the command script returns instantly (silent placeholder WAV) and plays audio in a detached background subshell — text output is never delayed. On messaging platforms it runs synchronously for audio-file attachment delivery.
+
+All three paths resolve voice from `.afterwords` files using `hermes` as the agent key and acquire the shared play lock (`/tmp/afterwords-play.lock`) to coordinate with Claude/Codex/AGy workers. The native hook (`handler.py`) and command provider archive MP3 + text sidecar to `~/.hermes/tts-archive/`; the shell hook (`afterwords-post-llm.sh`) is playback-only and does not archive.
+
+```
+hermes: data
+default: galadriel
+```
 
 ## Without Claude Code
 
@@ -89,14 +191,6 @@ curl http://localhost:7860/health | jq .voices
 ```
 
 Integrate with Cursor, Windsurf, shell scripts, web apps — anything that can make an HTTP request.
-
-For CLIs without native completion hooks (e.g. Hermes), use the bundled wrapper to speak any text via the server in one call:
-
-```bash
-bash scripts/hermes-tts.sh "Hello from Hermes" picard   # voice arg is optional
-```
-
-The wrapper checks the server, encodes the text, fetches the WAV, trims the leading 100 ms of model artifact, and plays via `afplay`. Same flow Claude Code's hook uses, just invoked manually.
 
 ## Adding More Voices
 
@@ -195,28 +289,40 @@ The skill handles voice selection, server health checks, synthesis, and playback
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  Your Mac (Apple Silicon, 16 GB+)                          │
-│                                                             │
-│  ┌─────────────────────────┐                                │
-│  │  Multi-Backend TTS      │  ← MLX Qwen3 + 15 alt backends │
-│  │  localhost:7860          │  ← 294 voice profiles (98 fam) │
-│  │  /synthesize?text=...    │  ← ~20s per sentence (Qwen3)   │
-│  └─────────┬───────────────┘                                │
-│            │                                                │
-│  ┌─────────┴───────────────┐  ┌──────────────────────────┐  │
-│  │  Claude Code Stop Hook  │  │  Claude Code /voice      │  │
-│  │  ~/.claude/hooks/       │  │  (hold Space to dictate) │  │
-│  │  tts-hook.sh            │  │  Speech → Text input     │  │
-│  │  Text → Speech output   │  │  (built-in)              │  │
-│  └─────────────────────────┘  └──────────────────────────┘  │
-│                                                             │
-│  Together: full voice conversation with Claude Code          │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│  Your Mac (Apple Silicon, 16 GB+)                               │
+│                                                                  │
+│  ┌──────────────────────────┐                                    │
+│  │  Multi-Backend TTS       │  ← MLX Qwen3 + 15 alt backends    │
+│  │  localhost:7860           │  ← 294 voice profiles (98 fam)    │
+│  │  /synthesize?text=...     │  ← ~20s per sentence (Qwen3)      │
+│  └────────────┬─────────────┘                                    │
+│               │  shared play lock (/tmp/afterwords-play.lock)    │
+│  ┌────────────┼──────────────────────────────────────────────┐   │
+│  │            │   Four CLI integrations (all coordinated)    │   │
+│  │  ┌─────────┴──────────┐   ┌────────────────────────────┐  │   │
+│  │  │  Claude Code       │   │  Codex CLI                 │  │   │
+│  │  │  Stop hook →       │   │  JSONL watcher →           │  │   │
+│  │  │  tts-hook.sh       │   │  codex-tts-hook.sh         │  │   │
+│  │  └────────────────────┘   └────────────────────────────┘  │   │
+│  │  ┌─────────────────────┐  ┌────────────────────────────┐  │   │
+│  │  │  Hermes Agent       │  │  Antigravity CLI (agy)     │  │   │
+│  │  │  post_llm_call +    │  │  Stop hook →               │  │   │
+│  │  │  agent:end hooks    │  │  agy-tts-hook.sh           │  │   │
+│  │  └─────────────────────┘  └────────────────────────────┘  │   │
+│  └──────────────────────────────────────────────────────────┘   │
+│                                                                  │
+│  ┌──────────────────────────┐  ┌─────────────────────────────┐  │
+│  │  Claude Code /voice      │  │  .afterwords voice routing  │  │
+│  │  (hold Space to dictate) │  │  per-project, per-agent     │  │
+│  │  Speech → Text input     │  │  agent: voice-name          │  │
+│  └──────────────────────────┘  └─────────────────────────────┘  │
+└──────────────────────────────────────────────────────────────────┘
 ```
 
 **`/voice`** handles input: you speak, Claude hears text.
-**This project** handles output: Claude responds, you hear speech.
+**This project** handles output: any of the four CLIs responds, you hear speech.
+All four integrations share the play lock — simultaneous audio is coordinated to prevent overlap.
 
 ## How It Works
 
@@ -290,13 +396,24 @@ DELETE /session/{id}      (--allow-clone only)
 
 ### The Hook
 
-Claude Code's [Stop hook](https://docs.anthropic.com/en/docs/claude-code/hooks) fires after every response. The hook extracts the response text, strips markdown, queues it for synthesis, and plays the result through your speakers. A background worker with `mkdir`-based locking (macOS has no `flock`) prevents overlapping audio.
+Claude Code's [Stop hook](https://docs.anthropic.com/en/docs/claude-code/hooks) fires after every response. The hook extracts the response text, strips markdown, and atomically writes a JSON item to the shared queue directory (`/tmp/claude-tts-queue/`). A background worker with `mkdir`-based locking (macOS has no `flock`) claims items one at a time and prevents overlapping audio via a shared play lock (`/tmp/afterwords-play.lock`) coordinated across all four CLI integrations.
 
 ### The Queue
 
-Fast Claude conversations generate responses faster than TTS can synthesise. The worker processes a queue (max 10 entries), trimming oldest entries when it overflows. Each response is archived as an MP3 plus a sidecar TXT file in `~/.claude/tts-archive/` (requires `lame`), so archived speech can be audited later with `python scripts/audit-archive.py`.
+Fast conversations generate responses faster than TTS can synthesise. The worker processes up to 10 queued items, discarding oldest when it overflows. Text is split into ~200-character sentence chunks; synthesis of chunk N+1 runs in the background while chunk N plays — latency to first audio is ~2 seconds regardless of response length.
 
-> **Privacy note:** the sidecar `.txt` files contain the exact text spoken by Claude — including code snippets, file paths, and anything else that appeared in a response. They persist indefinitely on local disk and are never uploaded anywhere. Clean periodically with `rm ~/.claude/tts-archive/*.txt` (or both `*.txt` and `*.mp3` to wipe the whole archive). If you'd rather not archive at all, remove the `lame ... && printf ...` block from `~/.claude/hooks/tts-worker.sh`.
+Each chunk is archived as an MP3 plus a sidecar TXT file under the CLI's own archive directory:
+
+| CLI | Archive directory | Notes |
+|-----|-------------------|-------|
+| Claude Code | `~/.claude/tts-archive/` | |
+| Codex CLI | `~/.codex/tts-archive/` | |
+| AGy | `~/.claude/tts-archive/` | shares Claude Code's worker |
+| Hermes (native hook + command provider) | `~/.hermes/tts-archive/` | shell hook is playback-only |
+
+Archiving requires `lame` (`brew install lame`).
+
+> **Privacy note:** sidecar `.txt` files contain the exact text spoken — including code snippets and file paths. They persist on local disk and are never uploaded. Clean with `rm ~/.claude/tts-archive/*.txt` or remove the `lame ... && printf ...` block from `~/.claude/hooks/tts-worker.sh` to disable archiving entirely.
 
 ## Requirements
 
@@ -309,33 +426,59 @@ Fast Claude conversations generate responses faster than TTS can synthesise. The
 
 ```
 afterwords/
-├── setup.sh              ← one-command setup (detects/installs Claude Code)
-├── afterwords.sh         ← CLI for server management (symlinked to PATH)
-├── clone-voice.sh        ← add more voices from YouTube
-├── server.py             ← multi-voice TTS server
-├── strip_markdown.py     ← text cleaner for TTS (also used by hooks)
-├── tests/                ← pytest suite (490+ tests, no GPU needed)
-├── backends/             ← Backend Protocol + concrete backends + registry CLI
-├── scripts/              ← reclone-flagship.py, gen-comparison-audio.sh, audit-voice-transcripts.py, audit-archive.py
-├── docs/                 ← demo site (deployed to GitHub Pages)
-├── requirements.txt      ← runtime deps
-├── requirements-dev.txt  ← test deps (pytest>=9.0.3, httpx)
-├── skill/                ← Claude Code skill for natural-language TTS
-│   ├── SKILL.md          ← skill instructions
-│   └── scripts/speak.sh  ← synthesize + play helper
+├── setup.sh                  ← one-command setup (detects/installs Claude Code)
+├── afterwords.sh             ← CLI for server management (symlinked to PATH)
+├── clone-voice.sh            ← add more voices from YouTube
+├── server.py                 ← multi-voice TTS server
+├── strip_markdown.py         ← text cleaner for TTS (Python-importable)
+├── chunk_text.py             ← sentence-boundary chunker (Python-importable)
+├── codex_session_hook.py     ← Codex JSONL parser (strip + agent-type extraction)
+├── agy_session_hook.py       ← AGy transcript parser (last model response)
+├── tests/                    ← pytest suite (505+ tests, no GPU needed)
+├── backends/                 ← Backend Protocol + concrete backends + registry CLI
+├── scripts/
+│   ├── afterwords-post-llm.sh      ← Hermes post_llm_call hook (chunked pipeline)
+│   ├── afterwords-tts-command.sh   ← Hermes command TTS provider
+│   ├── strip-markdown.py           ← CLI version (called from shell hooks)
+│   ├── chunk-text.py               ← CLI version (called from shell hooks)
+│   ├── reclone-flagship.py         ← reclone a voice from scratch
+│   ├── gen-comparison-audio.sh     ← generate backend-comparison samples
+│   └── audit-archive.py            ← audit ~/.*/tts-archive/ MP3s + sidecars
+├── docs/                     ← demo site + reference docs (GitHub Pages)
+├── requirements.txt          ← runtime deps
+├── requirements-dev.txt      ← test deps (pytest>=9.0.3, httpx)
+├── skill/                    ← Claude Code skill for natural-language TTS
+│   ├── SKILL.md              ← skill instructions
+│   └── scripts/speak.sh     ← synthesize + play helper
 ├── voices/
-│   ├── galadriel-ref.wav ← 15s reference (Cate Blanchett, LOTR)
-│   ├── samantha-ref.wav  ← (Scarlett Johansson, Her)
-│   ├── amy-pond-ref.wav  ← (Karen Gillan, Doctor Who)
-│   └── ...               ← 98 families / 294 profiles total; flagships have per-backend variants
+│   ├── galadriel-ref.wav     ← 15s reference (Cate Blanchett, LOTR)
+│   ├── samantha-ref.wav      ← (Scarlett Johansson, Her)
+│   ├── amy-pond-ref.wav      ← (Karen Gillan, Doctor Who)
+│   └── ...                   ← 98 families / 294 profiles; flagships have per-backend variants
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration
-├── settings.json         ← Stop hook registered here
+├── settings.json             ← Stop + SubagentStop hooks registered here
 └── hooks/
-    ├── tts-hook.sh       ← queue response for TTS
-    ├── tts-worker.sh     ← process queue, play audio
-    └── strip-markdown.py ← clean text for TTS
+    ├── tts-hook.sh           ← queue response for TTS (Claude Code)
+    ├── tts-worker.sh         ← process JSON queue, play audio (shared by Claude/AGy/Gemini)
+    ├── strip-markdown.py     ← clean text for TTS
+    ├── chunk-text.py         ← sentence-boundary text splitter
+    ├── gemini-tts-hook.sh    ← Gemini CLI adapter (normalises prompt_response)
+    ├── agy-tts-hook.sh       ← AGy Stop hook adapter
+    ├── agy-session-hook.py   ← AGy transcript parser
+    ├── codex-tts-hook.sh     ← Codex per-session hook
+    ├── codex-tts-worker.sh   ← Codex per-session worker (independent queue)
+    └── codex-tts-watch.sh    ← Codex JSONL session watcher daemon
+
+~/.hermes/
+├── hooks/afterwords-tts/     ← Hermes native Python hook (agent:end)
+│   ├── HOOK.yaml
+│   └── handler.py
+└── tts-archive/              ← Hermes MP3 + txt sidecars
+
+~/.claude/tts-archive/        ← Claude/AGy/Gemini MP3 + txt sidecars
+~/.codex/tts-archive/         ← Codex MP3 + txt sidecars
 
 ~/Library/LaunchAgents/
 └── com.afterwords.tts-server.plist  ← auto-start on login
@@ -398,8 +541,13 @@ The full gallery includes 98 voice families spanning British comedy (Blackadder,
 | Voice sounds wrong/garbled | Re-clone with a better reference clip; verify transcript accuracy |
 | 40+ seconds per request | Restart the server (model may be reloading per-request) |
 | `/voice` not working | Enable with `/voice` command in Claude Code; requires Claude.ai account |
-| Hook not firing | Open `/hooks` in Claude Code to verify; or restart session |
-| New voice not available | Restart the server — voices are discovered on startup |
+| Hook not firing (Claude) | Open `/hooks` in Claude Code to verify; or restart session |
+| Hook not firing (Codex) | Check `$CODEX_THREAD_ID` is set; run `afterwords codex-hook status` |
+| Hook not firing (AGy) | Verify `~/.gemini/config/hooks.json` has `afterwords-tts` entry; run `agy` from the project directory |
+| Hook not firing (Gemini) | Check `~/.gemini/settings.json` has `AfterAgent` hook; ensure `gemini-tts-hook.sh` is executable |
+| Hook not speaking (Hermes) | Check `afterwords status`; verify `hooks_auto_accept: true` in Hermes config |
+| Two agents talking at once | Shared play lock in `/tmp/afterwords-play.lock` should prevent this; check for stale lock: `rm -rf /tmp/afterwords-play.lock /tmp/afterwords-play.pid` |
+| New voice not available | Run `afterwords reload` or restart the server |
 | Port 7860 already in use | Another instance is running, or another app uses the port |
 | Model download fails | Check network; retry `python server.py` manually |
 | MP3 archives missing | Install `lame` via `brew install lame` |
@@ -411,7 +559,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-Tests cover the server API (endpoint validation, error handling, voice resolution, hot-reload atomicity, lang routing across backend families), backend protocol conformance, the strip-markdown text transform, the `_cleanup_current_voices` lifecycle helper, and a parametrized schema validator that runs against every shipped voice profile in `voices/*.json`. 490+ tests pass without loading any real model — a `FakeBackend` fixture stands in. Real-model integration tests are opt-in via `pytest -m integration`.
+Tests cover the server API (endpoint validation, error handling, voice resolution, hot-reload atomicity, lang routing across backend families), backend protocol conformance, the strip-markdown text transform, the `_cleanup_current_voices` lifecycle helper, AGy session hook parsing, voice-mapping resolution, and a parametrized schema validator that runs against every shipped voice profile in `voices/*.json`. 505+ tests pass without loading any real model — a `FakeBackend` fixture stands in. Real-model integration tests are opt-in via `pytest -m integration`.
 
 Run a single test:
 

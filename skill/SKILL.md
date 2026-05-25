@@ -60,13 +60,102 @@ galadriel
 **Agent mapping (one per line):**
 ```
 default: the-doctor
+hermes: seven-of-nine
 research-analyst: clara-oswald
 benchmark-operator: amy-pond
 ```
 
-The `default:` key is the fallback. Agent names map to Claude Code subagent types (from the Stop hook's `agent_type` field). Built-in types like `Explore`, `Plan`, and `general-purpose` are silently skipped by the hook.
+The `default:` key is the fallback. Agent names map to the agent processing the request:
+- **Hermes hook:** uses `hermes` as the agent key
+- **Claude Code hook:** uses the subagent type from the Stop event's `agent_type` field (built-in types like `Explore`, `Plan`, `general-purpose` are silently skipped)
 
-To set a project voice, write or edit `.afterwords` in the project root. Restart is not needed — the hook reads it fresh each time.
+### Voice resolution for Hermes Agent
+
+The Hermes hook resolves voice in this priority order (first match wins):
+
+1. **Project `.afterwords`** — looks for `hermes:` in mapping mode, then `default:`, then simple voice
+2. **Global `~/.afterwords`** — same format, same resolution logic
+3. **Server default** — whatever the Afterwords server returns from `/health`
+
+To set a Hermes-specific voice:
+
+- **Per-project:** add `hermes: voice-name` to the project's `.afterwords`
+- **Global fallback:** edit `~/.afterwords` and add `hermes: voice-name`
+
+No restart needed — the hook reads `.afterwords` files fresh on every response.
+
+### Example `~/.afterwords` (global)
+
+```
+# Global default for Hermes Agent
+default: galadriel
+hermes: seven-of-nine
+```
+
+### Example project `.afterwords` (per-repo)
+
+```
+default: picard
+hermes: spock
+```
+
+When Hermes is running in a project directory with a `.afterwords` file, the project file takes precedence over the global `~/.afterwords`.
+
+## Hermes Agent integration
+
+Afterwords integrates with Hermes Agent via **three mechanisms**, each covering different use cases:
+
+### 1. TTS command provider (recommended for messaging + explicit TTS)
+
+Afterwords is registered as a command-type TTS provider in `~/.hermes/config.yaml`. This powers `/voice tts`, the `text_to_speech` tool, and messaging-platform audio delivery.
+
+Config (already set up):
+```yaml
+tts:
+  provider: afterwords
+  providers:
+    afterwords:
+      type: command
+      command: 'bash ~/repos/afterwords/scripts/afterwords-tts-command.sh {input_path} {output_path} {voice}'
+      output_format: wav
+```
+
+The command script (`scripts/afterwords-tts-command.sh`) automatically resolves voice from `.afterwords` files:
+- **CLI sessions:** writes a silent placeholder WAV immediately (text output not delayed), then synthesizes + plays via `afplay` in a detached background subshell; archives MP3 + text sidecar to `~/.hermes/tts-archive/`
+- **Messaging platforms (Telegram/Discord):** runs synchronously, writes real audio to `{output_path}` for attachment delivery
+- If `{voice}` is empty, resolves from project `.afterwords` (hermes key → default:) → global `~/.afterwords` → server default
+- Strips basic markdown and truncates to 1000 chars before synthesis
+
+To switch back to Edge TTS: `hermes config set tts.provider edge`
+
+### 2. Shell/native hooks (auto-speak local CLI sessions)
+
+The shell hook in `~/.hermes/config.yaml` fires on `post_llm_call` for direct Hermes CLI sessions. The native `afterwords-tts` hook at `~/.hermes/hooks/afterwords-tts/` fires on `agent:end` events and currently speaks only local/CLI platform contexts. These hooks:
+- Strips markdown from responses before speaking
+- Truncates to 1000 characters before synthesis
+- Resolves voice from `.afterwords` files (project → global → server default)
+- Plays via `afplay` on macOS
+- Skip messaging platforms to avoid double-speech (the command provider handles those)
+- Fails silently if the Afterwords server isn't running
+
+The native hook uses `TERMINAL_CWD` env var for project-level voice resolution when event context does not include a working directory. Restart gateway after native hook changes: `hermes gateway restart`
+
+### 3. Explicit synthesis helpers
+
+For manual or skill-driven use:
+
+```bash
+# Speak.sh — resolves voice from .afterwords files
+bash <repo>/skill/scripts/speak.sh "Hello, I am Hermes." seven-of-nine
+
+# Or use the text_to_speech tool in a Hermes session (uses the command provider)
+```
+
+### Switching voices
+
+- **Per-project:** add `hermes: voice-name` to the project's `.afterwords`
+- **Global fallback:** edit `~/.afterwords` and set `hermes: voice-name`
+- **Temporary:** use `/voice tts` in a session to toggle auto-speak on/off
 
 ## Cloning a new voice
 
@@ -148,7 +237,7 @@ Session voices are ephemeral. Use `clone-voice.sh` for permanent voices that per
 
 ## Constraints
 
-- Apple Silicon Mac only (M1+), macOS, 8GB+ RAM
+- Apple Silicon Mac only (M1+), macOS, 16 GB+ RAM (32 GB recommended)
 - Model peaks at ~6GB unified memory — no concurrent models on 8GB machines
 - All synthesis is serialised (one request at a time) — MLX Metal crashes on concurrent GPU access
 - Max text length: 5000 characters per request

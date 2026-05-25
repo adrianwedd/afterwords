@@ -314,14 +314,14 @@ else
 fi
 echo
 
-if $HAS_CLAUDE; then
-next_step "Claude Code hooks"
+if $HAS_CLAUDE || command -v gemini &>/dev/null || command -v agy &>/dev/null; then
+next_step "Claude & CLI hooks"
 
 HOOKS_DIR="$HOME/.claude/hooks"
 mkdir -p "$HOOKS_DIR"
 
 # Back up existing hooks if present
-for hookfile in strip-markdown.py chunk-text.py tts-hook.sh tts-worker.sh; do
+for hookfile in strip-markdown.py chunk-text.py tts-hook.sh tts-worker.sh gemini-tts-hook.sh agy-tts-hook.sh agy-session-hook.py; do
     if [ -f "$HOOKS_DIR/$hookfile" ]; then
         cp "$HOOKS_DIR/$hookfile" "$HOOKS_DIR/$hookfile.bak"
     fi
@@ -333,11 +333,17 @@ cp "$SCRIPT_DIR/strip_markdown.py" "$HOOKS_DIR/strip-markdown.py"
 # Chunk-text helper (sentence splitter for chunked TTS)
 cp "$SCRIPT_DIR/chunk_text.py" "$HOOKS_DIR/chunk-text.py"
 
+# Copy CLI hook helper files if present
+[ -f "$SCRIPT_DIR/agy_session_hook.py" ] && cp "$SCRIPT_DIR/agy_session_hook.py" "$HOOKS_DIR/agy-session-hook.py"
+[ -f "$SCRIPT_DIR/.claude/hooks/gemini-tts-hook.sh" ] && cp "$SCRIPT_DIR/.claude/hooks/gemini-tts-hook.sh" "$HOOKS_DIR/gemini-tts-hook.sh" && chmod +x "$HOOKS_DIR/gemini-tts-hook.sh"
+[ -f "$SCRIPT_DIR/.claude/hooks/agy-tts-hook.sh" ] && cp "$SCRIPT_DIR/.claude/hooks/agy-tts-hook.sh" "$HOOKS_DIR/agy-tts-hook.sh" && chmod +x "$HOOKS_DIR/agy-tts-hook.sh"
+
+
 # TTS hook (fires on Stop event)
 cat > "$HOOKS_DIR/tts-hook.sh" <<'HOOKEOF'
 #!/usr/bin/env bash
 # Queue Claude's last response for TTS.
-QUEUE="/tmp/claude-tts-queue.txt"
+QUEUEDIR="/tmp/claude-tts-queue"
 WORKER_PID="/tmp/claude-tts-worker.pid"
 WORKER="$HOME/.claude/hooks/tts-worker.sh"
 
@@ -356,8 +362,13 @@ case "$AGENT" in
     Explore|Plan|general-purpose) exit 0 ;;
 esac
 
-# Queue format: CWD<tab>AGENT<tab>TEXT
-printf '%s\t%s\t%s\n' "$PWD" "$AGENT" "$TEXT" >> "$QUEUE"
+mkdir -p "$QUEUEDIR"
+ITEM="${QUEUEDIR}/$(date +%s)-${RANDOM}.json"
+ITEM_TMP="${ITEM}.tmp"
+python3 -c "
+import json, sys
+print(json.dumps({'project_dir': sys.argv[1], 'agent': sys.argv[2], 'text': sys.argv[3]}))
+" "$PWD" "$AGENT" "$TEXT" > "$ITEM_TMP" && mv "$ITEM_TMP" "$ITEM"
 
 if [ -f "$WORKER_PID" ]; then
     EXISTING=$(cat "$WORKER_PID" 2>/dev/null)
@@ -376,7 +387,7 @@ cat > "$HOOKS_DIR/tts-worker.sh" <<'WORKEREOF'
 #!/usr/bin/env bash
 set -uo pipefail
 
-QUEUE="/tmp/claude-tts-queue.txt"
+QUEUEDIR="/tmp/claude-tts-queue"
 PIDFILE="/tmp/claude-tts-worker.pid"
 LOCKDIR="/tmp/claude-tts-worker.lock"
 TTS_URL="http://127.0.0.1:7860/synthesize"
@@ -384,6 +395,23 @@ ARCHIVE_DIR="$HOME/.claude/tts-archive"
 MAX_QUEUE=10
 
 mkdir -p "$ARCHIVE_DIR"
+
+PLAY_LOCK="/tmp/afterwords-play.lock"
+PLAY_PID="/tmp/afterwords-play.pid"
+acquire_play_lock() {
+    local w=0
+    while ! mkdir "$PLAY_LOCK" 2>/dev/null; do
+        local h; h=$(cat "$PLAY_PID" 2>/dev/null)
+        if [ -z "$h" ]; then sleep 0.05; h=$(cat "$PLAY_PID" 2>/dev/null); fi
+        if [ -z "$h" ] || ! kill -0 "$h" 2>/dev/null; then
+            rm -rf "$PLAY_LOCK" "$PLAY_PID"
+        else
+            sleep 0.3; w=$((w+1)); [ "$w" -gt 200 ] && return 1
+        fi
+    done
+    echo $$ > "$PLAY_PID"
+}
+release_play_lock() { rm -f "$PLAY_PID"; rm -rf "$PLAY_LOCK"; }
 
 if ! mkdir "$LOCKDIR" 2>/dev/null; then
     if [ -f "$PIDFILE" ]; then
@@ -401,47 +429,68 @@ fi
 echo $$ > "$PIDFILE"
 trap 'rm -f "$PIDFILE"; rm -rf "$LOCKDIR"' EXIT
 
+mkdir -p "$QUEUEDIR"
+
 while true; do
-    [ -f "$QUEUE" ] || break
-    [ -s "$QUEUE" ] || break
+    # Prune excess items (keep newest MAX_QUEUE).
+    COUNT=0
+    while IFS= read -r EXCESS; do
+        COUNT=$((COUNT + 1))
+        [ "$COUNT" -gt "$MAX_QUEUE" ] && rm -f "$EXCESS"
+    done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
 
-    RAW_LINE=$(head -1 "$QUEUE" 2>/dev/null)
-    [ -z "$RAW_LINE" ] && break
-
-    REMAINING=$(tail -n +2 "$QUEUE" 2>/dev/null)
-    if [ -n "$REMAINING" ]; then
-        echo "$REMAINING" > "$QUEUE.tmp" && mv "$QUEUE.tmp" "$QUEUE"
-    else
-        rm -f "$QUEUE"
-    fi
-
-    if [ -f "$QUEUE" ]; then
-        LINES=$(wc -l < "$QUEUE" 2>/dev/null | tr -d ' ')
-        if [ "${LINES:-0}" -gt "$MAX_QUEUE" ]; then
-            tail -n "$MAX_QUEUE" "$QUEUE" > "$QUEUE.tmp" && mv "$QUEUE.tmp" "$QUEUE"
+    # Claim oldest unclaimed item atomically via mv.
+    ITEM=""
+    while IFS= read -r CANDIDATE; do
+        CLAIMED="${CANDIDATE%.json}.claimed"
+        if mv "$CANDIDATE" "$CLAIMED" 2>/dev/null; then
+            ITEM="$CLAIMED"
+            break
         fi
-    fi
+    done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null | tail -r 2>/dev/null || ls -1 "$QUEUEDIR"/*.json 2>/dev/null | sort)
+    [ -z "$ITEM" ] && break
 
-    # Queue format: CWD<tab>AGENT<tab>TEXT (tab-separated)
-    PROJECT_DIR=$(printf '%s' "$RAW_LINE" | cut -f1)
-    AGENT=$(printf '%s' "$RAW_LINE" | cut -f2)
-    LINE=$(printf '%s' "$RAW_LINE" | cut -f3-)
-    [ -z "$LINE" ] && continue
+    ITEM_EVAL=$(python3 -c "
+import json, sys, shlex
+d = json.load(open(sys.argv[1]))
+print('PROJECT_DIR=' + shlex.quote(d.get('project_dir','')))
+print('AGENT=' + shlex.quote(d.get('agent','')))
+print('LINE=' + shlex.quote(d.get('text','')))
+" "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
+    eval "$ITEM_EVAL"
+    rm -f "$ITEM"
+    [ -z "${LINE:-}" ] && continue
 
     STAMP=$(date +%Y%m%d-%H%M%S)-$$-$RANDOM
 
     # Resolve voice: .afterwords mapping → .afterwords single → server default
     VOICE=""
-    AW_FILE="$PROJECT_DIR/.afterwords"
-    if [ -n "$PROJECT_DIR" ] && [ -f "$AW_FILE" ]; then
+    AW_FILE=""
+    if [ -n "$PROJECT_DIR" ] && [ -f "$PROJECT_DIR/.afterwords" ]; then
+        AW_FILE="$PROJECT_DIR/.afterwords"
+    elif [ -f "$HOME/.afterwords" ]; then
+        AW_FILE="$HOME/.afterwords"
+    fi
+
+    if [ -n "$AW_FILE" ]; then
         if grep -q ':' "$AW_FILE" 2>/dev/null; then
-            # Mapping mode: agent-name: voice-name (one per line)
-            if [ -n "$AGENT" ]; then
-                # awk with exact field comparison — AGENT cannot be interpreted as regex.
-                VOICE=$(awk -F: -v agent="$AGENT" '$1 == agent { sub(/^[^:]*:/, ""); gsub(/[[:space:]]/, ""); print; exit }' "$AW_FILE" 2>/dev/null)
-            fi
-            # Fall back to default: entry
-            [ -z "$VOICE" ] && VOICE=$(grep "^default:" "$AW_FILE" 2>/dev/null | head -1 | cut -d: -f2- | tr -d '[:space:]')
+            # Mapping mode. Split on the final colon so keys may contain colons.
+            VOICE=$(awk -v agent="$AGENT" '
+                function trim(s) { gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s }
+                /^[[:space:]]*#/ || /^[[:space:]]*$/ { next }
+                {
+                    pos = 0
+                    for (i = 1; i <= length($0); i++) {
+                        if (substr($0, i, 1) == ":") pos = i
+                    }
+                    if (!pos) next
+                    key = trim(substr($0, 1, pos - 1))
+                    val = trim(substr($0, pos + 1))
+                    if (agent != "" && key == agent) { print val; found = 1; exit }
+                    if (key == "default" && fallback == "") fallback = val
+                }
+                END { if (!found && fallback != "") print fallback }
+            ' "$AW_FILE" 2>/dev/null)
         else
             # Legacy mode: first non-empty line is the voice name
             VOICE=$(head -1 "$AW_FILE" 2>/dev/null | tr -d '[:space:]')
@@ -452,12 +501,16 @@ while true; do
             | python3 -c "import sys,json; print(json.load(sys.stdin).get('default_voice',''))" 2>/dev/null || true)
     fi
     VOICE_PARAM=""
-    [ -n "$VOICE" ] && VOICE_PARAM="&voice=${VOICE}"
+    if [ -n "$VOICE" ]; then
+        VOICE_ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$VOICE" 2>/dev/null) || VOICE_ENC="$VOICE"
+        VOICE_PARAM="&voice=${VOICE_ENC}"
+    fi
 
     # Archive: full response text sidecar (written once; chunk audio archived per-chunk below).
     ARCHIVE_BASE="$ARCHIVE_DIR/${VOICE:-default}-${STAMP}"
     printf '%s\n' "$LINE" > "${ARCHIVE_BASE}.txt"
 
+    acquire_play_lock || continue
     # Split into sentence-boundary chunks and pipeline: synth-N → play-N → synth-N+1.
     # Latency-to-first-audio drops from ~30s (full blob) to ~2s (first chunk).
     CHUNK_SCRIPT="$HOME/.claude/hooks/chunk-text.py"
@@ -519,10 +572,10 @@ while true; do
         rm -f "$PREV_WAV"
     fi
 
+    release_play_lock
     rm -rf "$CHUNK_DIR"
 done
 
-rm -f "$QUEUE" "$QUEUE.tmp"
 WORKEREOF
 chmod +x "$HOOKS_DIR/tts-worker.sh"
 
@@ -708,6 +761,7 @@ if command -v codex &>/dev/null; then
     echo
     echo -e "  ${BOLD}Codex CLI detected.${NC}"
     echo -e "  Afterwords ships a watcher that speaks final Codex responses."
+    echo -e "  ${DIM}Run it from an interactive Codex CLI terminal; hosted/non-interactive sessions may stop background watchers.${NC}"
     echo
     if [ -n "${CODEX_THREAD_ID:-}" ]; then
         echo -e "  Inside this Codex session, run:"
@@ -725,7 +779,7 @@ if command -v codex &>/dev/null; then
 fi
 
 # ── Gemini CLI discovery (manual config; gemini hooks migrate is buggy) ────
-if command -v gemini &>/dev/null && $HAS_CLAUDE; then
+if command -v gemini &>/dev/null; then
     GEMINI_HOOK_DEST="$HOME/.claude/hooks/gemini-tts-hook.sh"
     GEMINI_SETTINGS="$HOME/.gemini/settings.json"
     echo
@@ -762,5 +816,46 @@ GEMINI_SNIPPET
     echo
     echo -e "  Test: ${CYAN}gemini -p \"say hi\"${NC} — should speak the response via afterwords."
 fi
+
+# ── Antigravity CLI discovery (agy) ──────────────────────────────────────
+if command -v agy &>/dev/null; then
+    AGY_HOOK_DEST="$HOME/.claude/hooks/agy-tts-hook.sh"
+    AGY_PYTHON_DEST="$HOME/.claude/hooks/agy-session-hook.py"
+    AGY_CONFIG_DIR="$HOME/.gemini/config"
+    AGY_HOOKS_FILE="$AGY_CONFIG_DIR/hooks.json"
+    echo
+    rule
+    echo
+    echo -e "  ${BOLD}Antigravity CLI (agy) detected.${NC}"
+    if [ ! -f "$AGY_HOOK_DEST" ]; then
+        cp "$SCRIPT_DIR/.claude/hooks/agy-tts-hook.sh" "$AGY_HOOK_DEST" 2>/dev/null && \
+            chmod +x "$AGY_HOOK_DEST" 2>/dev/null
+        ok "installed agy-tts-hook.sh adapter to ~/.claude/hooks/"
+    fi
+    if [ ! -f "$AGY_PYTHON_DEST" ]; then
+        cp "$SCRIPT_DIR/agy_session_hook.py" "$AGY_PYTHON_DEST" 2>/dev/null
+        ok "installed agy-session-hook.py helper to ~/.claude/hooks/"
+    fi
+
+    # Auto-update ~/.gemini/config/hooks.json
+    mkdir -p "$AGY_CONFIG_DIR"
+    if [ -f "$AGY_HOOKS_FILE" ]; then
+        if jq -e '."afterwords-tts".Stop[]? | select(.command == "bash ~/.claude/hooks/agy-tts-hook.sh")' "$AGY_HOOKS_FILE" &>/dev/null; then
+            ok "Afterwords hook already registered in ~/.gemini/config/hooks.json"
+        else
+            info "Registering/updating Afterwords hook in ~/.gemini/config/hooks.json..."
+            jq '."afterwords-tts" = {"Stop": [{"type": "command", "command": "bash ~/.claude/hooks/agy-tts-hook.sh", "timeout": 120000}]}' "$AGY_HOOKS_FILE" > "$AGY_HOOKS_FILE.tmp" && \
+                mv "$AGY_HOOKS_FILE.tmp" "$AGY_HOOKS_FILE"
+            ok "added/updated Afterwords hook in ~/.gemini/config/hooks.json"
+        fi
+    else
+        info "Creating ~/.gemini/config/hooks.json with Afterwords hook..."
+        echo '{"afterwords-tts": {"Stop": [{"type": "command", "command": "bash ~/.claude/hooks/agy-tts-hook.sh", "timeout": 120000}]}}' > "$AGY_HOOKS_FILE"
+        ok "created ~/.gemini/config/hooks.json"
+    fi
+    echo
+    echo -e "  Test: ${CYAN}agy --print \"say hi\"${NC} — should speak the response via afterwords."
+fi
+
 
 echo

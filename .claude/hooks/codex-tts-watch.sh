@@ -55,7 +55,7 @@ if [ -z "$THREAD_ID" ]; then
     exit 2
 fi
 
-SESSION_FILE=$(rg -l "\"id\":\"${THREAD_ID}\"" "$HOME/.codex/sessions" -g '*.jsonl' 2>/dev/null | head -1)
+SESSION_FILE=$(rg -Fl "\"id\":\"${THREAD_ID}\"" "$HOME/.codex/sessions" -g '*.jsonl' 2>/dev/null | head -1)
 
 if [ "$DIAGNOSE" -eq 1 ]; then
     echo "Codex watcher diagnose"
@@ -81,9 +81,35 @@ if [ -z "$SESSION_FILE" ]; then
 fi
 
 log "watching ${SESSION_FILE} for thread ${THREAD_ID}"
-tail -n 0 -F "$SESSION_FILE" | while IFS= read -r line; do
-    summary=$(printf '%s\n' "$line" | describe_event)
+process_line() {
+    local line="$1"
+    local summary=""
+    local AGENT=""
+
+    case "$line" in
+        *'"type":"message"'*'"role":"assistant"'*'"phase":"final_answer"'*) ;;
+        *) return 0 ;;
+    esac
+
+    summary=$(printf '%s\n' "$line" | describe_event || true)
     log "event ${summary}"
     AGENT=$(printf '%s\n' "$line" | python3 "${REPO_DIR}/codex_session_hook.py" --agent-type 2>/dev/null || true)
-    printf '%s\n' "$line" | PROJECT_DIR="$PROJECT_DIR" CODEX_THREAD_ID="$THREAD_ID" AGENT_TYPE="$AGENT" bash "$HOOK"
+    [ -n "$AGENT" ] || AGENT="codex"
+    PROJECT_DIR="$PROJECT_DIR" CODEX_THREAD_ID="$THREAD_ID" AGENT_TYPE="$AGENT" bash "$HOOK" <<< "$line" || true
+}
+
+LINE_NO=$(wc -l < "$SESSION_FILE" | tr -d '[:space:]')
+while true; do
+    CURRENT_LINES=$(wc -l < "$SESSION_FILE" | tr -d '[:space:]')
+    if [ "$CURRENT_LINES" -lt "$LINE_NO" ]; then
+        LINE_NO=0
+    fi
+    if [ "$CURRENT_LINES" -gt "$LINE_NO" ]; then
+        START_LINE=$((LINE_NO + 1))
+        while IFS= read -r line; do
+            process_line "$line"
+        done < <(sed -n "${START_LINE},${CURRENT_LINES}p" "$SESSION_FILE")
+        LINE_NO="$CURRENT_LINES"
+    fi
+    sleep 1
 done
