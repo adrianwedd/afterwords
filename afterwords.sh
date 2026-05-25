@@ -69,7 +69,7 @@ plist_exists() {
 
 # Find PID listening on the TTS port (works whether launchd or manual)
 server_pid() {
-    lsof -ti :"$PORT" 2>/dev/null | head -1
+    lsof -ti :"$PORT" -sTCP:LISTEN 2>/dev/null | head -1
 }
 
 # Get PID from launchd (available before port binding)
