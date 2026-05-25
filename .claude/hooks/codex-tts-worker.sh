@@ -70,16 +70,10 @@ while true; do
     done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null | tail -r 2>/dev/null || ls -1 "$QUEUEDIR"/*.json 2>/dev/null | sort)
     [ -z "$ITEM" ] && break
 
-    # Parse JSON item. Use shlex.quote to emit a safe eval block — handles
-    # newlines and special chars in text without shell delimiter tricks.
-    ITEM_EVAL=$(python3 -c "
-import json, sys, shlex
-d = json.load(open(sys.argv[1]))
-print('PROJECT_DIR=' + shlex.quote(d.get('project_dir','')))
-print('AGENT=' + shlex.quote(d.get('agent','')))
-print('TEXT=' + shlex.quote(d.get('text','')))
-" "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
-    eval "$ITEM_EVAL"
+    # Parse JSON item fields directly — avoids eval on queue content.
+    PROJECT_DIR=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('project_dir',''))" "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
+    AGENT=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('agent',''))" "$ITEM" 2>/dev/null) || true
+    TEXT=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('text',''))" "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
     rm -f "$ITEM"
     [ -z "${TEXT:-}" ] && continue
 
