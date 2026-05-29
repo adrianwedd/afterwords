@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. **100 flagship voice families** (296 profiles across backend variants) on **the Qwen3-TTS cloning path** (0.6B + 1.7B, the recommended backends), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. **100 flagship voice families** (281 profiles across backend variants) on **the Qwen3-TTS cloning path** (0.6B + 1.7B, the recommended backends), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -294,7 +294,7 @@ The skill handles voice selection, server health checks, synthesis, and playback
 │                                                                  │
 │  ┌──────────────────────────┐                                    │
 │  │  Multi-Backend TTS       │  ← MLX Qwen3 + 15 alt backends    │
-│  │  localhost:7860           │  ← 296 voice profiles (100 fam)   │
+│  │  localhost:7860           │  ← 281 voice profiles (100 fam)   │
 │  │  /synthesize?text=...     │  ← ~20s per sentence (Qwen3)      │
 │  └────────────┬─────────────┘                                    │
 │               │  shared play lock (/tmp/afterwords-play.lock)    │
@@ -454,7 +454,7 @@ afterwords/
 │   ├── galadriel-ref.wav     ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav      ← (Scarlett Johansson, Her)
 │   ├── amy-pond-ref.wav      ← (Karen Gillan, Doctor Who)
-│   └── ...                   ← 100 families / 296 profiles; flagships have per-backend variants
+│   └── ...                   ← 100 families / 281 profiles; flagships have per-backend variants
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration
