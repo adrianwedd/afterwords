@@ -164,7 +164,13 @@ except Exception:
     seen = set()
 seen.add(marker)
 p.parent.mkdir(parents=True, exist_ok=True)
-p.write_text(json.dumps(sorted(seen), indent=2))
+# Atomic swap: temp file in the SAME dir, then os.replace() so a crash
+# mid-write cannot truncate tts-feed-seen.json (which would make the
+# watcher re-send the entire backlog on its next load_seen()).
+import os
+tmp = p.with_suffix(p.suffix + '.tmp')
+tmp.write_text(json.dumps(sorted(seen), indent=2))
+os.replace(tmp, p)
 " "$SEEN_FILE" "${SLUG}-${STAMP}.mp3" 2>/dev/null || true
 
         # Convert to OGG for Telegram voice message

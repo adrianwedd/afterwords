@@ -99,7 +99,14 @@ def load_seen() -> set:
 
 def save_seen(seen: set) -> None:
     SEEN_FILE.parent.mkdir(parents=True, exist_ok=True)
-    SEEN_FILE.write_text(json.dumps(sorted(seen), indent=2))
+    # Read-merge-write: union with whatever is on disk right now so a marker
+    # the hook pre-seeded during this pass survives our write (no clobber).
+    merged = set(seen) | load_seen()
+    # Atomic swap: write to a temp file in the SAME dir, then os.replace() so a
+    # crash mid-write can never truncate the live tts-feed-seen.json.
+    tmp = SEEN_FILE.with_suffix(SEEN_FILE.suffix + ".tmp")
+    tmp.write_text(json.dumps(sorted(merged), indent=2))
+    os.replace(tmp, SEEN_FILE)
 
 
 def to_ogg(mp3_path: Path) -> Path | None:

@@ -11,11 +11,10 @@ import sys
 from pathlib import Path
 from unittest import mock
 
-import pytest
-
 
 SCRIPT = Path(__file__).resolve().parent.parent / "scripts" / "tts-feed-send.py"
 SPEC = importlib.util.spec_from_file_location("tts_feed_send", SCRIPT)
+assert SPEC is not None
 tfs = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 sys.modules["tts_feed_send"] = tfs
@@ -132,6 +131,8 @@ def test_dry_run_makes_no_subprocess_calls(tmp_path, monkeypatch):
     monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
     monkeypatch.setenv("AFTERWORDS_SEND_TO", "telegram,discord")
 
+    # dry-run intentionally mutates the in-memory seen set (markers added) but
+    # never persists it — save_seen() is skipped by main() when --dry-run.
     with mock.patch.object(tfs.subprocess, "run") as run_mock:
         tfs.process_new_files(set(), dry_run=True)
 
@@ -173,7 +174,7 @@ def test_telegram_only_send_to_skips_discord(tmp_path, monkeypatch):
 
     targets = []
 
-    def fake_run(cmd, *a, **k):
+    def fake_run(cmd, *_a, **_k):
         # hermes send -t <target> MEDIA:<file>
         if cmd[:3] == ["hermes", "send", "-t"]:
             targets.append(cmd[3])
