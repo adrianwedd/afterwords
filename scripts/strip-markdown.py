@@ -22,6 +22,8 @@ def strip_markdown(text: str) -> str:
     text = re.sub(r'^[-|:\s]+$', '', text, flags=re.M)
     text = re.sub(r'~~([^~]+)~~', r'\1', text)
     text = re.sub(r'\*{1,3}([^*]+)\*{1,3}', r'\1', text)
+    # Strip model/tokens/cost footers like "glm-5.1 · 9% · ~" or "claude-3.5-sonnet · 42% · $0.02"
+    text = re.sub(r'[a-z0-9._-]+\s*·.*$', '', text, flags=re.I)
     text = re.sub(r'\n{2,}', '. ', text)
     text = re.sub(r'\s+', ' ', text).strip()
     return text[:1000]

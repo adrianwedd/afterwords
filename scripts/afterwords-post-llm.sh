@@ -33,13 +33,37 @@ CHUNK_CHARS=200
 
 # ── Read payload ──────────────────────────────────────────────────────────
 PAYLOAD=$(cat)
-TEXT=$(printf '%s' "$PAYLOAD" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('extra',{}).get('assistant_response','')[:1000])" 2>/dev/null || true)
-CWD=$(printf '%s' "$PAYLOAD" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('cwd','') or d.get('extra',{}).get('cwd',''))" 2>/dev/null || true)
-PLATFORM=$(printf '%s' "$PAYLOAD" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('extra',{}).get('platform',''))" 2>/dev/null || true)
+# Gateway emits flat: {"platform":"discord","response":"...","session_id":"..."}
+# CLI emits nested: {"extra":{"assistant_response":"...","platform":"..."}}
+TEXT=$(printf '%s' "$PAYLOAD" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+t = d.get('response', '') or d.get('extra', {}).get('assistant_response', '')
+print(t[:1000])
+" 2>/dev/null || true)
+CWD=$(printf '%s' "$PAYLOAD" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+print(d.get('cwd', '') or d.get('extra', {}).get('cwd', ''))
+" 2>/dev/null || true)
+PLATFORM=$(printf '%s' "$PAYLOAD" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+print(d.get('platform', '') or d.get('extra', {}).get('platform', ''))
+" 2>/dev/null || true)
+CHAT_ID=$(printf '%s' "$PAYLOAD" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+print(d.get('chat_id', '') or d.get('extra', {}).get('chat_id', ''))
+" 2>/dev/null || true)
 
-# Only speak for CLI / local sessions (avoid double-notification on Telegram etc.)
+# ── Platform routing ──────────────────────────────────────────────────────
+# CLI/local: play audio locally via afplay
+# Messaging platforms: synthesize full audio, send as attachment via hermes send
+MSG_PLATFORM=false
 case "$PLATFORM" in
-    telegram|discord|slack|signal|matrix|whatsapp|email|sms|feishu|wecom|yuanbao) exit 0 ;;
+    telegram|discord) MSG_PLATFORM=true ;;
+    slack|signal|matrix|whatsapp|email|sms|feishu|wecom|yuanbao) exit 0 ;;
 esac
 
 [ -z "$TEXT" ] && exit 0
@@ -99,7 +123,88 @@ if [ -n "$VOICE" ]; then
     [ -n "$VOICE_ENC" ] && VOICE_PARAM="&voice=${VOICE_ENC}"
 fi
 
-# ── Chunked pipeline: synth N+1 while playing N ─────────────────────────
+# ── Messaging platform path: synthesize full audio, send as attachment ──
+if $MSG_PLATFORM; then
+    # Concatenate all chunks into one text for single synthesize call
+    SINGLE_WAV=$(mktemp /tmp/afterwords-msg-XXXXXX.wav)
+    ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$CLEAN" 2>/dev/null || true)
+    [ -z "$ENC" ] && exit 0
+
+    HTTP_CODE=$(curl -s -w "%{http_code}" -o "$SINGLE_WAV" "${TTS_ENDPOINT}?text=${ENC}${VOICE_PARAM}" 2>/dev/null || echo "000")
+
+    if [ "$HTTP_CODE" = "200" ] && [ -s "$SINGLE_WAV" ]; then
+        # Archive as MP3 — filename derived from spoken text
+        STAMP=$(date +%Y%m%d-%H%M%S)
+        SLUG=$(printf '%s' "$CLEAN" | python3 -c "
+import sys, re
+t = sys.stdin.read().strip().lower()
+t = re.sub(r'[^a-z0-9]+', '-', t)
+t = t.strip('-')[:60]
+print(t or 'voice')
+" 2>/dev/null || echo "voice")
+        ARCHIVE_DIR="$HOME/.hermes/tts-archive"
+        mkdir -p "$ARCHIVE_DIR"
+        ARCHIVE_MP3="${ARCHIVE_DIR}/${SLUG}-${STAMP}.mp3"
+        lame --quiet -V 2 "$SINGLE_WAV" "$ARCHIVE_MP3" 2>/dev/null || true
+        printf '%s\n' "$CLEAN" > "${ARCHIVE_MP3%.mp3}.txt" 2>/dev/null || true
+
+        # Pre-seed the feed watcher's seen-set so it does NOT re-send this
+        # archived file. The watcher keys hermes-archive files by bare filename
+        # (see tts-feed-send.py: `name in new_seen`). We add that marker here so
+        # the inline send below is the single delivery for this response.
+        SEEN_FILE="$HOME/.hermes/tts-feed-seen.json"
+        python3 -c "
+import json, sys
+from pathlib import Path
+p = Path(sys.argv[1])
+marker = sys.argv[2]
+try:
+    seen = set(json.loads(p.read_text())) if p.exists() else set()
+except Exception:
+    seen = set()
+seen.add(marker)
+p.parent.mkdir(parents=True, exist_ok=True)
+p.write_text(json.dumps(sorted(seen), indent=2))
+" "$SEEN_FILE" "${SLUG}-${STAMP}.mp3" 2>/dev/null || true
+
+        # Convert to OGG for Telegram voice message
+        OGG_FILE="${SINGLE_WAV%.wav}.ogg"
+        ffmpeg -y -i "$SINGLE_WAV" -c:a libopus -b:a 64k "$OGG_FILE" 2>/dev/null || true
+
+        # Copy to audio_cache (MEDIA: allowed dir) for delivery
+        AUDIO_CACHE_DIR="$HOME/.hermes/audio_cache"
+        mkdir -p "$AUDIO_CACHE_DIR"
+
+        # Reply into the ORIGINATING chat when we know it: hermes send supports
+        # `platform:chat_id`. Fall back to the platform home channel otherwise.
+        if [ -n "$CHAT_ID" ]; then
+            SEND_TARGET="${PLATFORM}:${CHAT_ID}"
+        else
+            SEND_TARGET="${PLATFORM}"
+        fi
+
+        # Send to the originating platform using MEDIA: tag for proper attachment delivery
+        case "$PLATFORM" in
+            telegram)
+                OGG_CACHE="$AUDIO_CACHE_DIR/${SLUG}-${STAMP}.ogg"
+                cp "$OGG_FILE" "$OGG_CACHE" 2>/dev/null || true
+                hermes send -t "$SEND_TARGET" "MEDIA:$OGG_CACHE" 2>/dev/null || true
+                ;;
+            discord)
+                MP3_CACHE="$AUDIO_CACHE_DIR/${SLUG}-${STAMP}.mp3"
+                cp "$ARCHIVE_MP3" "$MP3_CACHE" 2>/dev/null || true
+                hermes send -t "$SEND_TARGET" "MEDIA:$MP3_CACHE" 2>/dev/null || true
+                ;;
+        esac
+
+        rm -f "$SINGLE_WAV" "$OGG_FILE"
+    else
+        rm -f "$SINGLE_WAV"
+    fi
+    exit 0
+fi
+
+# ── CLI: Chunked pipeline: synth N+1 while playing N ────────────────────
 acquire_play_lock || exit 0
 CHUNK_DIR=$(mktemp -d "/tmp/hermes-tts-chunks-XXXXXX")
 trap 'rm -rf "$CHUNK_DIR"; release_play_lock' EXIT
@@ -157,3 +262,11 @@ if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
     fi
     rm -f "$PREV_WAV"
 fi
+
+# ── Outbound/CLI external delivery is owned by the feed watcher ─────────────
+# Local sessions (no originating chat) do NOT send inline from this hook.
+# tts-feed-send.py watches ~/.hermes/tts-archive + ~/.claude/tts-archive and
+# delivers to the platform home channel, gated by an explicit `send_to:`
+# opt-in (env AFTERWORDS_SEND_TO, or a send_to: line in .afterwords / ~/.afterwords).
+# Merely having a .afterwords (a local-playback voice config) is NOT consent to
+# broadcast externally. See docs/hermes-integration.md.

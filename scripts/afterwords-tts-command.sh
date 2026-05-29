@@ -149,11 +149,18 @@ with open(sys.argv[1], 'wb') as f:
             # Play
             afplay "$TMP_WAV" 2>/dev/null || true
 
-            # Archive as MP3 + text sidecar (best-effort)
+            # Archive as MP3 + text sidecar — filename derived from spoken text
             STAMP=$(date +%Y%m%d-%H%M%S)
             ARCHIVE_DIR="$HOME/.hermes/tts-archive"
             mkdir -p "$ARCHIVE_DIR"
-            ARCHIVE_MP3="${ARCHIVE_DIR}/${VOICE:-default}-${STAMP}.mp3"
+            SLUG=$(printf '%s' "$CLEANED" | python3 -c "
+import sys, re
+t = sys.stdin.read().strip().lower()
+t = re.sub(r'[^a-z0-9]+', '-', t)
+t = t.strip('-')[:60]
+print(t or 'voice')
+" 2>/dev/null || echo "voice")
+            ARCHIVE_MP3="${ARCHIVE_DIR}/${SLUG}-${STAMP}.mp3"
             lame --quiet -V 2 "$TMP_WAV" "$ARCHIVE_MP3" 2>/dev/null || true
             printf '%s\n' "$CLEANED" > "${ARCHIVE_MP3%.mp3}.txt" 2>/dev/null || true
 
@@ -187,10 +194,17 @@ if [ ! -s "$OUTPUT_PATH" ]; then
     exit 1
 fi
 
-# Archive as MP3 + text sidecar (best-effort)
+# Archive as MP3 + text sidecar — filename derived from spoken text
 STAMP=$(date +%Y%m%d-%H%M%S)
 ARCHIVE_DIR="$HOME/.hermes/tts-archive"
 mkdir -p "$ARCHIVE_DIR"
-ARCHIVE_MP3="${ARCHIVE_DIR}/${VOICE:-default}-${STAMP}.mp3"
+SLUG=$(printf '%s' "$CLEANED" | python3 -c "
+import sys, re
+t = sys.stdin.read().strip().lower()
+t = re.sub(r'[^a-z0-9]+', '-', t)
+t = t.strip('-')[:60]
+print(t or 'voice')
+" 2>/dev/null || echo "voice")
+ARCHIVE_MP3="${ARCHIVE_DIR}/${SLUG}-${STAMP}.mp3"
 lame --quiet -V 2 "$OUTPUT_PATH" "$ARCHIVE_MP3" 2>/dev/null || true
 printf '%s\n' "$CLEANED" > "${ARCHIVE_MP3%.mp3}.txt" 2>/dev/null || true

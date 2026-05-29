@@ -222,7 +222,52 @@ afterwords reload     # rescan voices/ without restart
 
 ---
 
-## 6. File Locations
+## 6. TTS Audio Delivery (external sends)
+
+Afterwords can deliver synthesized audio to messaging platforms (Telegram, Discord) in addition to local playback. Delivery is split by **direction** so each response is sent **exactly once per platform**, and **nothing leaves the machine unless you opt in**.
+
+### Opt-in: the `send_to:` directive
+
+External delivery from the **outbound/CLI path** is OFF by default. Merely having a `.afterwords` file (a local-playback voice config most repos carry) is **not** consent to broadcast responses. Enable it explicitly, resolved in priority order:
+
+1. **Env** `AFTERWORDS_SEND_TO` — comma-separated, e.g. `AFTERWORDS_SEND_TO="telegram,discord"`.
+2. **Project** `$PWD/.afterwords` — a `send_to:` line, e.g. `send_to: discord`.
+3. **Home** `$HOME/.afterwords` — a `send_to:` line.
+
+First source that resolves wins (env beats project beats home). Only `telegram` and `discord` are accepted; unknown tokens are ignored. Default (no env, no `send_to:` line anywhere) is the empty set: **no external send**.
+
+Example `.afterwords`:
+
+```
+default: picard
+send_to: telegram, discord
+```
+
+### Split-ownership model
+
+- **Inbound / gateway path** (a remote user messaged the bot via Telegram/Discord). The shell hook (`afterwords-post-llm.sh`) synthesizes inline and replies straight into the **originating chat** using `hermes send -t <platform>:<chat_id>` (falling back to the platform home channel if no `chat_id` is present). This is the single delivery for that response — the watcher does not touch it (see de-dup below).
+- **Outbound / CLI path** (a local session with no originating chat). The hook plays audio locally and does **not** send inline. The **feed watcher** (`tts-feed-send.py`) owns external delivery: it scans the archive and sends to the platform **home channel**, gated by `send_to:`. Per-chat replies are only possible on the inbound path; outbound always goes to the home channel.
+
+### Archive + seen-state layout
+
+| Path | Role |
+|------|------|
+| `~/.hermes/tts-archive/` | MP3 + `.txt` sidecar archive (inbound inline path + CLI) — watched |
+| `~/.claude/tts-archive/` | Claude Code chunked MP3s (`<stem>-c1.mp3`…) + `.txt` sidecar — watched |
+| `~/.hermes/audio_cache/` | `MEDIA:`-allowed delivery dir (MP3 for Discord, OGG/Opus for Telegram) |
+| `~/.hermes/tts-feed-seen.json` | JSON array of seen markers — prevents re-sends |
+
+Seen markers: hermes-archive files are keyed by **bare filename** (`example-20260529-000000.mp3`); Claude responses are keyed by `claude:<base-stem>` (chunk suffix `-c\d+` stripped).
+
+### De-dup mechanism
+
+The inbound inline path archives to `~/.hermes/tts-archive`, which the watcher also scans. To guarantee one delivery, the inline path **pre-seeds** `~/.hermes/tts-feed-seen.json` with the archived file's marker (`<slug>-<stamp>.mp3`) at send time, so the watcher treats it as already-delivered and skips it. Result: inbound is delivered once inline to the originating chat; the watcher only delivers genuinely outbound archive files to the home channel.
+
+> `--dry-run` previews delivery without sending and without mutating `tts-feed-seen.json`. When `send_to` is empty, the watcher still marks files seen (so they don't accumulate) and prints `[skip] <name> (no send_to configured)`.
+
+---
+
+## 7. File Locations
 
 | File | Purpose |
 |------|---------|
@@ -232,6 +277,7 @@ afterwords reload     # rescan voices/ without restart
 | `~/.hermes/tts-archive/` | MP3 + text sidecar archive (native hook + command provider; shell hook is playback-only) |
 | `afterwords/scripts/afterwords-post-llm.sh` | Shell hook script (chunked pipeline) |
 | `afterwords/scripts/afterwords-tts-command.sh` | Command provider (async CLI / sync messaging) |
+| `afterwords/scripts/tts-feed-send.py` | Feed watcher — delivers archived audio to home channel (gated by `send_to:`) |
 | `afterwords/scripts/chunk-text.py` | Sentence-boundary text chunker |
 | `afterwords/scripts/strip-markdown.py` | Markdown stripper for TTS |
 | `~/.afterwords` | Global voice config |
@@ -240,7 +286,7 @@ afterwords reload     # rescan voices/ without restart
 
 ---
 
-## 7. Troubleshooting
+## 8. Troubleshooting
 
 | Symptom | Check |
 |---------|-------|
