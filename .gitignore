@@ -35,3 +35,7 @@ voices/*.wav.bak
 
 # LLVM coverage artefacts from instrumented binaries
 *.profraw
+
+# Tool caches
+.wrangler/
+.playwright-mcp/
