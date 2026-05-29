@@ -3,7 +3,7 @@
 **Repo:** https://github.com/nari-labs/dia2
 **License:** Apache-2.0
 **Size:** 1B / 2B variants
-**Sample rate:** 44000
+**Sample rate:** 44100
 **Languages:** en-only
 **Apple Silicon path:** PyTorch runtime; upstream is CUDA-first and documents CUDA 12.8+ for best support. Try `DIA2_DEVICE=mps` or `DIA2_DEVICE=cpu` locally, but expect upstream compatibility to lag CUDA. Handles dialogue formatting natively and supports realtime/streaming-oriented generation.
 
@@ -38,7 +38,7 @@ from backends.base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
 
 class Dia2Backend(BackendBase):
     name = "dia2"
-    sample_rate = 44000
+    sample_rate = 44100
     ref_text_policy = RefTextPolicy.OPTIONAL
     supported_langs = ("en",)
 

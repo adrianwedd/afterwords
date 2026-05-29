@@ -33,7 +33,7 @@ tts.tts_to_file(text="This is a test sentence.", speaker_wav="reference.wav", la
 from backends.base import BackendBase, PreparedVoice, RefTextPolicy, _read_only
 
 class XTTSv2Backend(BackendBase):
-    name = "xtts_v2"
+    name = "xtts-v2"
     sample_rate = 24000
     ref_text_policy = RefTextPolicy.IGNORED
     supported_langs = ("en", "es", "fr", "de", "it", "pt", "pl", "tr", "ru", "nl", "cs", "ar", "zh", "hu", "ko", "ja", "hi")

@@ -5,9 +5,9 @@ NotebookLM deep research over 60 sources from arXiv, HuggingFace, project repos,
 ## Already shipping in afterwords
 
 - **Qwen3-TTS** (0.6B + 1.7B) — Apache-2.0, native MLX, 24 kHz, multilingual
-- **Chatterbox** (fp16) — MIT, MLX, 24 kHz, multilingual
-- **VoxCPM 1.5** — MLX, 44.1 kHz, en/zh
 - **Voxtral 4B** — CC-BY-NC, MLX, preset-only (cloning blocked upstream — see issue #45 / Blaizzy/mlx-audio#694)
+
+> Note (updated 2026-05-29): Chatterbox and VoxCPM were removed in commit f03e826 — they failed the listen-test and VoxCPM additionally returned HTTP 500 on the launchd-managed server. They no longer ship.
 
 ## Tier A — local M5 (32 GB unified memory)
 
@@ -27,8 +27,8 @@ NotebookLM deep research over 60 sources from arXiv, HuggingFace, project repos,
 | [SV2TTS](sv2tts.md) | Open Source | — | — | en | Classic 5-second cloning |
 | [MockingBird](mockingbird.md) | Open Source | <0.5 GB | 22k | zh/en | Chinese-focused SV2TTS extension |
 | [GPT-SoVITS](gpt-sovits.md) | Open Source | — | — | multi | High community traction |
-| [SoproTTS](soprotts.md) | Open Source | — | — | multi | — |
-| [NeuTTS Air](neutts-air.md) | Proprietary | 0.75B | 24k | en | On-device CoreML |
+| [SoproTTS](soprotts.md) | Open Source | 0.135B | 24k | en | Lightweight zero-shot cloning |
+| [NeuTTS Air](neutts-air.md) | Apache-2.0 | 0.75B | 24k | en | On-device GGUF (llama.cpp) |
 
 ## Tier B — Google Colab (GPU, too large for M5)
 

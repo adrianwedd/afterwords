@@ -209,7 +209,7 @@ When a user asks to "hear" or "preview" a voice, synthesize a characteristic lin
 
 ## Programmatic cloning (--allow-clone)
 
-When the server is started with `--allow-clone`, three additional endpoints are available. These are for programmatic/API-based cloning — distinct from the CLI `clone-voice.sh` which creates permanent voices.
+When the server is started with `--allow-clone`, three additional cloning endpoints are available (alongside `POST /reload`). These are for programmatic/API-based cloning — distinct from the CLI `clone-voice.sh` which creates permanent voices.
 
 **POST /clone** — Upload audio to create a session voice:
 ```bash
@@ -238,7 +238,7 @@ Session voices are ephemeral. Use `clone-voice.sh` for permanent voices that per
 ## Constraints
 
 - Apple Silicon Mac only (M1+), macOS, 16 GB+ RAM (32 GB recommended)
-- Model peaks at ~6GB unified memory — no concurrent models on 8GB machines
+- Model peaks at ~6GB unified memory — the qwen3-only path fits in 16 GB
 - All synthesis is serialised (one request at a time) — MLX Metal crashes on concurrent GPU access
 - Max text length: 5000 characters per request
 - Audio output: 24kHz mono WAV (PCM_16)

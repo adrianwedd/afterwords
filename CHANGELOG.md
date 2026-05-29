@@ -4,6 +4,10 @@ All notable changes to Afterwords. Format follows [Keep a Changelog](https://kee
 
 ## [Unreleased]
 
+### Added
+
+- **mckenna** and **dalai-lama** voices (commit `cfb5ecf`). Each ships as a single `qwen3-1.7b` profile with its own reference WAV. Brings the gallery to **100 families / 296 profiles**.
+
 ## [1.0.1] — 2026-05-23
 
 ### Added

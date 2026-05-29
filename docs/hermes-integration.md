@@ -217,7 +217,7 @@ afterwords reload     # rescan voices/ without restart
 
 - Endpoint: `http://127.0.0.1:7860`
 - Default voice: `galadriel`
-- Primary backend: `qwen3-0.6b` (194 voices) + `qwen3-1.7b` (99 voices)
+- Primary backend: `qwen3-0.6b` (155 voices) + `qwen3-1.7b` (100 voices)
 - All synthesis serialised through `_synth_lock` (single Metal GPU)
 
 ---
