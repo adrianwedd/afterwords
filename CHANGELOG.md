@@ -2,11 +2,29 @@
 
 All notable changes to Afterwords. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [1.0.2] — 2026-05-30
 
 ### Added
 
-- **mckenna** and **dalai-lama** voices (commit `cfb5ecf`). Each ships as a single `qwen3-1.7b` profile with its own reference WAV. Brings the gallery to **100 families / 296 profiles**.
+- **Redesigned GitHub Pages homepage** (Surface 1, commit `126a329`) — rebuilt `docs/index.html`, added a styled `docs/404.html`, local-themed favicons, and an OpenGraph preview image. The OG-metadata drift guard (`scripts/check-og-metadata.py`) keeps the advertised voice count in sync with the shipped gallery.
+- **mckenna** and **dalai-lama** voices (commit `cfb5ecf`). Each ships as a single `qwen3-1.7b` profile with its own reference WAV. Brings the gallery to **100 families / 281 profiles**.
+- **Opt-in external TTS delivery** — `scripts/tts-feed-send.py` is now the sole owner of outbound/CLI audio delivery from the archive, gated behind a `send_to:` directive in `.afterwords` (or the `AFTERWORDS_SEND_TO` env var). Accepts only `telegram` / `discord`; absent the opt-in, nothing leaves the machine. (commits `a9d19e1`, `278fee8`)
+- **Tests for `tts-feed-send.py`** — `tests/test_tts_feed_send.py` (15 tests): chunk-stem parsing, seen-state round-trip, dry-run sends nothing, full `send_to` resolver matrix. Suite now **522** unit + contract tests.
+
+### Changed
+
+- **Single-owner messaging delivery, split by direction** — inbound/gateway replies are sent inline by the hook to the *originating* chat (`hermes send -t <platform>:<chat_id>`); outbound/CLI responses are delivered from the archive by the feed watcher to the home channel. Replaces three overlapping send paths with one owner per direction. (commits `a9d19e1`, `278fee8`)
+- `.gitignore` now ignores the `.wrangler/` and `.playwright-mcp/` tool caches (commit `28390f2`).
+
+### Fixed
+
+- **Duplicate / triple-send of the same audio** — the hook's inline send, the CLI tail, and the feed watcher could each deliver the same response. Now exactly one delivery per response per platform, enforced by a pre-seeded, atomically-written `tts-feed-seen.json` (read-merge-write so a marker added by the hook mid-pass survives the watcher's write). (commits `a9d19e1`, `278fee8`)
+- **Wrong-recipient gateway replies** — the hook extracted `chat_id` but never used it, so inbound replies landed in the platform home channel instead of the originating chat. Now threaded through as `-t <platform>:<chat_id>`. (commit `a9d19e1`)
+- **Voice-count drift** — og:description, README, and the demo-site claimed 296 voices; the shipped (git-tracked) gallery is **281** (15 private `muse*` / `vixen*` profiles are gitignored and not distributed). Corrected to 281. (commit `acac4c0`)
+
+### Security
+
+- **Egress requires explicit opt-in** — external chat delivery no longer fires on the mere presence of a `.afterwords` file (a local-playback config most repos carry); without a `send_to:` directive, zero external sends occur and local playback is unaffected. Closes the privacy gap raised in the messaging security review (`docs/security/2026-05-29-hermes-messaging-review.md`, reviewed clean — no HIGH/MEDIUM findings). Untrusted text remains URL-encoded before HTTP and slug-whitelisted before filesystem use; all `subprocess.run` calls stay list-form (no `shell=True`).
 
 ## [1.0.1] — 2026-05-23
 
