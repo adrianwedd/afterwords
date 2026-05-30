@@ -454,7 +454,7 @@ afterwords/
 │   ├── galadriel-ref.wav     ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav      ← (Scarlett Johansson, Her)
 │   ├── amy-pond-ref.wav      ← (Karen Gillan, Doctor Who)
-│   └── ...                   ← 100 families / 281 profiles; flagships have per-backend variants
+│   └── ...                   ← 98 families / 275 profiles; flagships have per-backend variants
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration

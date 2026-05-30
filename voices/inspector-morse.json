@@ -1,8 +1,0 @@
-{
-  "name": "inspector-morse",
-  "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=DcYuXkwyM5w",
-  "reference_audio": "inspector-morse-ref.wav",
-  "reference_text": "Isn't it your round? Another one's a good idea, I think.",
-  "segment_start_s": 0
-}
