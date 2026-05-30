@@ -749,8 +749,24 @@ def delete_session(session_id: str):
     return {"status": "ok", "session_id": session_id}
 
 
+def _voice_name_for_json(profile_path: str) -> str:
+    """Resolve the VOICES key a JSON file maps to, WITHOUT building the profile.
+    Mirrors the name logic in _build_voice_profile. Falls back to the filename
+    stem if the JSON is unreadable, so a corrupt-but-present file still counts as
+    on-disk (and its voice is therefore kept, never pruned)."""
+    stem = os.path.splitext(os.path.basename(profile_path))[0]
+    if stem.endswith("-profile"):
+        stem = stem[:-8]
+    try:
+        with open(profile_path) as f:
+            p = json.load(f)
+        return p.get("name") or stem
+    except Exception:
+        return stem
+
+
 @app.post("/reload")
-def reload_voices():
+def reload_voices(prune: bool = False):
     """Re-walk voices/*.json and merge additions/updates into VOICES.
     Add-only: voices whose JSON is absent from disk are NOT removed.
     Atomic on error: if any profile's prepare_voice() raises, abort + rollback temps."""
@@ -762,10 +778,12 @@ def reload_voices():
     tracked_cleanup_paths: list[str] = []
     tracked_owned_refs: list[str] = []
     errors: list[dict] = []
+    on_disk_names: set[str] = set()
 
     # Phase 1: walk + build in the MLX thread (prepare_voice may touch Metal)
     def _build_all_profiles():
         for profile_path in sorted(glob.glob(os.path.join(_VOICES_DIR, "*.json"))):
+            on_disk_names.add(_voice_name_for_json(profile_path))
             try:
                 profile = _build_voice_profile(profile_path)
             except Exception as exc:
@@ -797,14 +815,38 @@ def reload_voices():
         log.warning("/reload aborted: %d errors, %.1fs", len(errors), time.time() - t0)
         return JSONResponse({"status": "failed", "errors": errors}, status_code=500)
 
-    # Phase 3: commit — merge under _model_lock (never removes absent voices)
+    # Phase 3: commit under _model_lock — add/update always; prune only on request.
+    removed: list[str] = []
     with _model_lock:
         for profile in new_profiles:
             VOICES[profile.name] = profile
+        if prune:
+            # Evict gallery voices (session_id is None) whose JSON is gone from disk.
+            # Session-cloned voices (session_id set) are exempt — managed via DELETE /session.
+            prunable = [
+                name for name, prof in VOICES.items()
+                if prof.session_id is None and name not in on_disk_names
+            ]
+            for name in prunable:
+                profile = VOICES.pop(name)
+                for path in profile.prepared.cleanup_paths:
+                    try:
+                        os.remove(path)
+                    except OSError:
+                        pass
+                if profile.prepared.owns_temp_audio:
+                    try:
+                        os.remove(profile.prepared.ref_audio_path)
+                    except OSError:
+                        pass
+                removed.append(name)
         reloaded = sorted(VOICES.keys())
 
-    log.info("/reload: %d voices loaded, 0 errors, %.1fs", len(reloaded), time.time() - t0)
-    return {"status": "ok", "reloaded": reloaded, "errors": []}
+    log.info(
+        "/reload: %d voices loaded, %d removed, 0 errors, %.1fs",
+        len(reloaded), len(removed), time.time() - t0,
+    )
+    return {"status": "ok", "reloaded": reloaded, "removed": sorted(removed), "errors": []}
 
 
 def main():

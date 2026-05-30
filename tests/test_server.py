@@ -764,6 +764,41 @@ def test_lang_routing_unchanged_when_lang_supported(client):
 # ──────────── Concurrency smoke ────────────
 
 
+def test_reload_default_reports_empty_removed(client, tmp_path, monkeypatch):
+    """Default reload (no prune) reports removed == [] and stays add-only."""
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+    try:
+        _write_profile_json(str(tmp_path), "alpha", backend="fake")
+        r = client.post("/reload")
+        assert r.status_code == 200
+        assert r.json()["removed"] == []
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
+def test_reload_prune_removes_deleted_gallery_voice(client, tmp_path, monkeypatch):
+    """prune=true evicts a gallery voice (session_id None) whose JSON was deleted."""
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+    try:
+        j1, _ = _write_profile_json(str(tmp_path), "gone", backend="fake")
+        client.post("/reload")
+        assert "gone" in server.VOICES
+        os.remove(j1)
+        r = client.post("/reload", params={"prune": "true"})
+        assert r.status_code == 200
+        body = r.json()
+        assert "gone" in body["removed"]
+        assert "gone" not in server.VOICES
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
 def test_concurrent_synthesize_no_deadlock(client, sample_voice):
     """N concurrent GET /synthesize calls must all return 200 without deadlocking.
     Exercises _synth_lock + _model_lock acquisition under contention via FakeBackend
