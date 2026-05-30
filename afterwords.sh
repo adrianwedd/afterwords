@@ -425,8 +425,11 @@ else:
 }
 
 cmd_reload() {
-    local response
-    if ! response=$(curl -s -X POST http://localhost:7860/reload); then
+    local response url="http://localhost:7860/reload"
+    if [ "${1:-}" = "--prune" ]; then
+        url="${url}?prune=true"
+    fi
+    if ! response=$(curl -s -X POST "$url"); then
         fail "Server not responding on localhost:7860"
     fi
     if command -v jq >/dev/null 2>&1; then
@@ -868,7 +871,7 @@ cmd_help() {
     echo -e "    ${CYAN}status${NC}      Show server status and loaded voices"
     echo -e "    ${CYAN}logs${NC}        Tail the server log"
     echo -e "    ${CYAN}voices${NC}      List available voices"
-    echo -e "    ${CYAN}reload${NC}      Reload voices from disk without restarting"
+    echo -e "    ${CYAN}reload${NC}      Reload voices from disk (add/update). --prune also evicts deleted gallery voices"
     echo -e "    ${CYAN}clone${NC}       Clone a new voice from YouTube"
     echo -e "    ${CYAN}push${NC}        Push a voice (and its family variants) to the cloud"
     echo -e "    ${CYAN}pull${NC}        Pull a cloud voice to local voices/"
