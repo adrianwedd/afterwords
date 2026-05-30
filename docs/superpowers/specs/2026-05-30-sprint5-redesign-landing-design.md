@@ -57,31 +57,53 @@ Order: **2a → 2c → 2b** (cheapest/safest first, riskiest last).
 
 ### A1. Surface 2a — landing (`pages/index.astro`, ~201 ln)
 
-Near-identical to the mockup already (same hero, sections, headings). Known
-delta: pricing-section heading `"Simple, transparent pricing."` →
-`"One tier. No surprises."` — apply **only if** it does not contradict live
-pricing (authority rule 3; if live billing is multi-tier, keep live copy and flag
-it). Enumerate and apply any remaining spacing/section deltas. Static page, no
-islands.
+Hero/sections/headings already align. **Pricing is the conflict (see C-1):** live
+is **two-tier** (Hobby $5/mo + Pro $20/mo "Coming soon"); the mockup is single-tier
+("One tier. No surprises."). Per authority rule 3 (live behavior wins), the live
+two-tier layout and the `"Simple, transparent pricing."` heading **stay** — the
+mockup's single-tier heading and single-card layout are **rejected**, because
+applying them would delete a shipped tier. Apply only the non-pricing visual
+deltas (spacing/section polish). Also see C-2 (1.7b copy) and C-3 (checkout CTA),
+which surface on this page but are out of scope for visual landing. Static page,
+no React mounts.
 
 ### A2. Surface 2c — API docs (`pages/docs.astro`, ~538 ln)
 
 Both live and mockup are large (538 vs 593 ln) with differing heading structure;
 the precise delta is enumerated at implementation time via a page-level diff.
-Static page. Keep all documented endpoints/params accurate to the live API
-(`openapi.yaml` is the source of truth for API facts, not the mockup).
+Static page. Keep all documented endpoints/params accurate to the live API —
+`openapi.yaml` is the source of truth, not the mockup. Note C-2: live `docs.astro`
+examples reference `qwen3-1.7b` in several places (health backends list, the
+`backend` enum description, a curl example, a JSON response), but `openapi.yaml`
+states only `qwen3-0.6b` is accepted at launch. The docs examples are factually
+wrong against the live API; correcting them to 0.6b is in scope **iff** the user
+approves C-2.
 
-### A3. Surface 2b — dashboard (`pages/dashboard/index.astro` + islands)
+### A3. Surface 2b — dashboard (highest care)
 
-Highest care. The live dashboard runs **6 React islands wired to `lib/api.ts`**:
-`VoiceUpload`, `VoiceList`, `UsageGraph`, `KeyDisplay`, `ApiKeyInput`,
-`CodeSnippets`. The mockup is a single static 709-ln HTML.
+**Actual live structure** (corrected after QA — there are no Astro islands and no
+`client:*` directives). The dashboard is **two route-level React `createRoot`
+mounts**:
 
-**Hard rule — untouchable:** the islands, their `client:*` directives, their
-props/mount points, every form, and every `lib/api.ts` call. Only the surrounding
-markup and styling may change. Any layout port that would alter an island's props
-or mount point is rejected; if the mockup's layout cannot be achieved without
-touching an island boundary, stop and flag it rather than rewiring.
+- `pages/dashboard/index.astro` (~247 ln) → `#dashboard-root`, renders a single
+  monolithic `Dashboard()` component composing `ApiKeyInput`, `VoiceList`,
+  `UsageGraph`, `CodeSnippets`, `KeyDisplay`, all calling `lib/api.ts`.
+- `pages/dashboard/voices/new.astro` → `#upload-root`, renders `VoiceUpload`
+  (`pages/dashboard/voices/[id].astro` also exists).
+
+**Architecture-mismatch caveat (C-4):** the Surface 2b mockup depicts a
+*different app* — multi-route with signup/key-gate/poller components that were
+never built. It is **not** a cosmetic variant of the live dashboard. So 2b is
+**partial visual reconciliation**: restyle only the sections that actually exist
+in the live pages (key entry, voice list, usage, code snippets, upload).
+Mockup-only routes/sections/components are explicitly **excluded** — do not build
+them.
+
+**Hard rule — untouchable:** the `createRoot` mount points (`#dashboard-root`,
+`#upload-root`), the `Dashboard()` / `VoiceUpload` component trees and their props,
+every form, and every `lib/api.ts` call. Only surrounding markup and styling may
+change. If a mockup layout can't be reached without altering a mount point or a
+component's props, stop and flag it rather than rewiring.
 
 ## Part B — afterwords-app (static)
 
@@ -95,14 +117,17 @@ and download/release URLs). Lower risk than Part A.
 
 | Gate | Part A (cloud) | Part B (app) |
 |---|---|---|
-| Build | `astro build` passes (`dashboard/`) | n/a (static) |
-| Tests | `npm test` in `api/` stays green (~59) | n/a |
+| Build | `astro build` from `dashboard/` passes (verified green, ~3.9s) | n/a (static) |
+| Tests | `npm test` in `api/` stays green (**89** tests / 11 files, verified). **`dashboard/` has no test script** — no automated coverage on the surfaces being changed. | n/a |
 | Visual | each page checked side-by-side vs its mockup | page checked vs Surface 3 |
-| Functional | 2b islands hydrate; live-API smoke test (upload/list/usage round-trip vs the live Worker) succeeds | links resolve |
-| No data drift | counts/URLs match live truth, not the mockup | same |
+| Functional (manual) | 2b: the two React roots (`#dashboard-root`, `#upload-root`) still render; live-API smoke test (key entry → voice list → usage → upload round-trip vs the live Worker) succeeds. Manual only — no dashboard tests exist. | links resolve |
+| No data drift | counts/URLs/backend match live truth, not the mockup | same |
 
-A page is "landed" only when its build, visual, and (for 2b) functional gates all
-pass and the "Open conflicts" note is either empty or acknowledged by the user.
+A page is "landed" only when its build + visual gates pass, the 2b functional
+gate passes (manual), and every relevant Open conflict is resolved or
+user-acknowledged. Because the dashboard has zero automated tests, the functional
+gate for 2b is entirely manual and is the primary safety net — treat it as
+mandatory, not optional.
 
 ## Deliverables & placement
 
@@ -116,9 +141,40 @@ pass and the "Open conflicts" note is either empty or acknowledged by the user.
 
 ## Open conflicts
 
-(Populated during implementation when a mockup contradicts live reality — e.g.
-pricing tiers, endpoint shapes, voice counts. Each entry: page, what the mockup
-shows, what's live, the resolution taken. Empty at design time.)
+Surfaced by codex + hermes QA (2026-05-30) and verified against the live repos.
+**C-1 and C-4 gate implementation — they need a user decision before plans are
+written.** C-2 and C-3 are pre-existing live bugs the redesign exposes; default is
+to leave them unless the user opts in.
+
+- **C-1 (BLOCKER, decision needed) — pricing tiers, Surface 2a.** Live
+  `index.astro` has two tiers: Hobby $5/mo and Pro $20/mo ("Coming soon"). The
+  mockup shows one tier ("One tier. No surprises."). *Proposed resolution:* keep
+  the live two-tier layout and `"Simple, transparent pricing."` heading; reject the
+  mockup's single-tier change (don't drop a shipped tier). **Confirm.**
+
+- **C-4 (BLOCKER, decision needed) — dashboard architecture mismatch, Surface 2b.**
+  The 2b mockup is a different, never-built app (multi-route signup/key-gate/poller).
+  *Proposed resolution:* 2b becomes partial visual reconciliation of the sections
+  that exist live; mockup-only routes/components are out of scope. **Confirm, or
+  re-scope 2b as a real dashboard rebuild (much larger).**
+
+- **C-2 (live bug, opt-in) — 1.7b backend drift, Surfaces 2a + 2c.** Live landing
+  and docs market/example `qwen3-1.7b` in 5+ places, but `openapi.yaml` accepts
+  only `qwen3-0.6b` at launch (1.7b rejected). *Default:* leave as-is (out of pure
+  visual scope). *Opt-in:* correct all 1.7b references to 0.6b as part of this
+  sprint (small, high-value truth fix). **User choice.**
+
+- **C-3 (pre-existing functional bug, out of scope) — checkout CTA, Surface 2a.**
+  The pricing forms POST a hidden `price_id` to `/v1/checkout`, but `openapi.yaml`
+  defines `/v1/checkout` as an email-based request returning `url` (the `/signup`
+  flow). The CTA may be broken independent of the redesign. *Resolution:* note
+  only; fixing the checkout flow is its own task, not this visual sprint. Flagged
+  for separate triage.
+
+- **C-5 (MINOR) — token naming, Surface 3.** `afterwords-app/docs/index.html`
+  re-declares the palette with shorthand names (`--bg`, `--fg-m`, `--acc`) vs
+  `Base.astro`'s `--color-*`. Cosmetic; no action required, noted for parity
+  awareness.
 
 ## Sequencing
 
