@@ -76,8 +76,8 @@ Static page. Keep all documented endpoints/params accurate to the live API —
 examples reference `qwen3-1.7b` in several places (health backends list, the
 `backend` enum description, a curl example, a JSON response), but `openapi.yaml`
 states only `qwen3-0.6b` is accepted at launch. The docs examples are factually
-wrong against the live API; correcting them to 0.6b is in scope **iff** the user
-approves C-2.
+wrong against the live API; **correcting them to 0.6b is in scope** (C-2 resolved
+in scope).
 
 ### A3. Surface 2b — dashboard (highest care)
 
@@ -141,28 +141,25 @@ mandatory, not optional.
 
 ## Open conflicts
 
-Surfaced by codex + hermes QA (2026-05-30) and verified against the live repos.
-**C-1 and C-4 gate implementation — they need a user decision before plans are
-written.** C-2 and C-3 are pre-existing live bugs the redesign exposes; default is
-to leave them unless the user opts in.
+Surfaced by codex + hermes QA (2026-05-30), verified against the live repos, and
+**resolved by user decision 2026-05-30** (C-1, C-4, C-2 below).
 
-- **C-1 (BLOCKER, decision needed) — pricing tiers, Surface 2a.** Live
-  `index.astro` has two tiers: Hobby $5/mo and Pro $20/mo ("Coming soon"). The
-  mockup shows one tier ("One tier. No surprises."). *Proposed resolution:* keep
-  the live two-tier layout and `"Simple, transparent pricing."` heading; reject the
-  mockup's single-tier change (don't drop a shipped tier). **Confirm.**
+- **C-1 (RESOLVED) — pricing tiers, Surface 2a.** Live `index.astro` has two tiers
+  (Hobby $5/mo + Pro $20/mo "Coming soon"); the mockup shows one. **Decision: keep
+  the live two-tier layout and `"Simple, transparent pricing."` heading.** The
+  mockup's single-tier change is rejected — do not drop the shipped Pro tier.
 
-- **C-4 (BLOCKER, decision needed) — dashboard architecture mismatch, Surface 2b.**
-  The 2b mockup is a different, never-built app (multi-route signup/key-gate/poller).
-  *Proposed resolution:* 2b becomes partial visual reconciliation of the sections
-  that exist live; mockup-only routes/components are out of scope. **Confirm, or
-  re-scope 2b as a real dashboard rebuild (much larger).**
+- **C-4 (RESOLVED) — dashboard architecture mismatch, Surface 2b.** The 2b mockup
+  is a different, never-built app (multi-route signup/key-gate/poller). **Decision:
+  2b is partial visual reconciliation** of the sections that exist live; mockup-only
+  routes/components are out of scope. No dashboard rebuild this sprint.
 
-- **C-2 (live bug, opt-in) — 1.7b backend drift, Surfaces 2a + 2c.** Live landing
-  and docs market/example `qwen3-1.7b` in 5+ places, but `openapi.yaml` accepts
-  only `qwen3-0.6b` at launch (1.7b rejected). *Default:* leave as-is (out of pure
-  visual scope). *Opt-in:* correct all 1.7b references to 0.6b as part of this
-  sprint (small, high-value truth fix). **User choice.**
+- **C-2 (RESOLVED — now IN SCOPE) — 1.7b backend drift, Surfaces 2a + 2c.** Live
+  landing and docs market/example `qwen3-1.7b` in 5+ places, but `openapi.yaml`
+  accepts only `qwen3-0.6b` at launch (1.7b rejected). **Decision: correct all 1.7b
+  references to 0.6b** as part of this sprint (landing pricing copy + docs health
+  list, enum description, curl example, JSON response). Truth-fix the user-facing
+  copy to match the live API.
 
 - **C-3 (pre-existing functional bug, out of scope) — checkout CTA, Surface 2a.**
   The pricing forms POST a hidden `price_id` to `/v1/checkout`, but `openapi.yaml`
