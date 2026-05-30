@@ -5,9 +5,10 @@
 **Target release:** v1.0.3
 **Status:** approved, ready for implementation plan
 **QA:** code-verified against server.py / check-og-metadata.py 2026-05-30 — Part A
-origin-scoping corrected (`session_id` overloaded → file-built-name registry
-required), Part B count enforcement clarified (guard gates the 275 profile number
-only, not families).
+origin-scoping resolved (`session_id is None` ⟺ prunable gallery voice; verified
+0/281 tracked JSONs set session_id and `/clone` always sets it; restart-safe, no
+new registry needed), Part B count enforcement clarified (guard gates the 275
+profile number only, not families).
 
 ## Goal
 
@@ -73,37 +74,37 @@ voices (added via `POST /clone`, with no backing JSON on disk) must never be
 evicted by a prune — a naive "remove any voice whose JSON is gone" would wrongly
 nuke every session voice.
 
-**`session_id` is NOT a usable file-vs-session discriminator** (verified against
-current code, 2026-05-30). `VoiceProfile.session_id` (server.py:44) is overloaded:
-one construction site leaves it `None` (`session_id=p.get("session_id")`,
-server.py:168), but a second site assigns it the *name stem* for file voices too
-(`session_id=meta.get("session_id") or name.rsplit("-",1)[0]`, server.py:230).
-So `session_id is None` does not mean "file-originated," and `session_id is not
-None` does not mean "session clone." Any prune keyed on `session_id` would
-mis-scope.
+**`session_id is None` is the discriminator** (verified against current code,
+2026-05-30, including the two construction sites and the clone handler):
 
-**Required mechanism — a file-built-name registry.** Maintain a module-level set
-of voice names built from `voices/*.json`, populated at startup discovery and
-refreshed on each reload's build phase. Prune removes names in that registry that
-are absent from the just-walked on-disk JSON set. Session voices (built via
-`POST /clone`) never enter the registry, so they are structurally exempt — no
-heuristic required. The build phase already walks the current on-disk JSON set,
-so "names present on disk this reload" is the prune keep-set for free.
+- File/gallery voices are built by `_build_voice_profile` →
+  `session_id=p.get("session_id")` (server.py:168). **Every git-tracked gallery
+  JSON omits `session_id` or sets it `null`** (verified: 0 of 281 tracked JSONs
+  carry a non-null `session_id`), so every gallery voice has `session_id is None`.
+- Session voices are built by `_register_voice` (server.py:213), whose **sole
+  caller is `POST /clone`** (server.py:692), and clone **always** passes the real
+  `session_id` in metadata (server.py:700). So every session voice has
+  `session_id` set (non-None).
 
-**Two open items the implementation plan must resolve before coding prune:**
+Therefore prune evicts a voice iff **`profile.session_id is None` AND its backing
+`voices/{name}.json` is absent from the just-walked on-disk set.** No new
+registry, no name-pattern heuristic.
 
-1. **Reconcile the two `VoiceProfile` construction sites** (server.py:168 vs
-   :230) — confirm which builds file-discovered voices, which builds session/
-   palette voices, and where each registers into `VOICES` (sites at server.py:189,
-   :241, :803). The registry must be populated at exactly the file-discovery /
-   reload-build path and nowhere else.
-2. **Confirm whether `POST /clone` persists a `voices/*.json` to disk.** The clone
-   handler writes a `{session_id}-NNN-ref.wav` under the voices dir (server.py:591);
-   if it *also* writes a sibling `.json`, a subsequent reload would re-discover
-   that session voice as a "file" voice and enter it into the registry — making it
-   prunable, contrary to the design intent. If clone does write JSON there, the
-   registry must exclude session-pattern names (or clone must write JSON outside
-   the reload walk). Resolve this before implementing, and add a test for it.
+This is also the resolution to the re-discovery hazard: `POST /clone` *does*
+persist `{name}.json` into the voices dir (server.py:674-689), so a reload walk
+re-discovers session voices. That is harmless here — a re-discovered session
+voice keeps its `session_id` (loaded from the JSON it wrote), so it stays exempt.
+And it is **restart-safe**: a session clone reloaded from disk after a restart
+still has `session_id` set, so prune never evicts it. The conservative direction
+(session voices are never auto-pruned; remove them via `DELETE /session`) is the
+correct one.
+
+**Keep-set precision.** The prune keep-set is the set of voice *names present on
+disk this reload*, derived from the JSON filenames — **not** from successfully
+built profiles. A JSON that fails to build (missing ref audio, bad backend) is
+still on disk, so its voice must be kept, not pruned. The build walk computes
+each on-disk name with the same resolution `_build_voice_profile` uses (stem of
+the filename, minus a trailing `-profile`, overridden by the JSON `name` field).
 
 ### Family-routing interaction
 
@@ -131,17 +132,15 @@ is unchanged (add-only).
    `VOICES` — current add-only contract preserved.
 2. `prune=true` removes a voice whose JSON was deleted, and frees its tracked
    temp resources.
-3. `prune=true` does **not** remove a session-cloned voice — assert via the
-   file-built-name registry, not via `session_id` (which is overloaded; see the
-   correctness crux). A session voice that is absent from the registry survives
-   prune even though it has no git-tracked JSON.
-4. If `POST /clone` is confirmed to persist a `voices/*.json` (open item #2
-   above): a reload that re-discovers that session JSON must not make the session
-   voice prunable — add a regression test pinning whichever resolution is chosen.
-5. `prune=true` with all JSONs still present removes nothing.
-6. An aborting build (one `prepare_voice` raises) returns 500 and removes
+3. `prune=true` does **not** remove a session-cloned voice (registered via
+   `_register_voice` with a `session_id`) even when its JSON is deleted from disk
+   — `session_id is not None` keeps it exempt.
+4. `prune=true` with all JSONs still present removes nothing.
+5. An aborting build (one `prepare_voice` raises) returns 500 and removes
    nothing — atomic abort still precedes any prune.
-7. A pruned family member is no longer selected by lang-routing.
+6. A pruned family member is no longer selected by lang-routing.
+7. A gallery JSON that is on disk but fails to build (e.g. missing ref audio) is
+   **not** pruned — keep-set is on-disk filenames, not built profiles.
 
 ### Docs
 
