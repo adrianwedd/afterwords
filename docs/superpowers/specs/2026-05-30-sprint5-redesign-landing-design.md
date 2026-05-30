@@ -175,5 +175,18 @@ Surfaced by codex + hermes QA (2026-05-30), verified against the live repos, and
 
 ## Sequencing
 
-Part A (2a → 2c → 2b) fully landed and verified before Part B. Each part is an
-independent commit cycle in its own repo; no shared state between them.
+Part A (2a → 2c → 2b) and Part B are independent commit cycles in their own repos.
+
+**Coordination status (2026-05-30):**
+- **Part A (cloud) — PAUSED by user.** The `afterwords-cloud` repo has its own
+  unfinished *"Sprint 5 — launch-ready hardening"* in flight: branch
+  `sprint5-launch-hardening` (~12 commits ahead of main + uncommitted `Base.astro`
+  / `astro.config.mjs` / `vitest.config.mts` edits — an OG/canonical-URL refactor).
+  It overlaps the redesign's files (`Base.astro`, dashboard pages). The user is
+  resolving that branch themselves. The redesign should branch off **updated main
+  after hardening merges**, then the cloud plan must be re-baselined. The plan file
+  (`afterwords-cloud/.../2026-05-30-sprint5-cloud.md`) is staged on disk, untracked,
+  and its name collides with the cloud repo's own Sprint 5 — rename on adoption.
+  Note: the cloud API already dropped 1.7b (`b189f69`), so C-2 is reinforced.
+- **Part B (app) — PROCEEDING NOW.** Plan:
+  `afterwords-app/docs/superpowers/plans/2026-05-30-sprint5-app.md`.
