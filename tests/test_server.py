@@ -799,6 +799,184 @@ def test_reload_prune_removes_deleted_gallery_voice(client, tmp_path, monkeypatc
         server.VOICES.clear()
 
 
+def test_reload_prune_keeps_session_voice(client, tmp_path, monkeypatch):
+    """A session-cloned voice (session_id set) is never pruned, even with no JSON."""
+    import backends as _backends
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+    backend = _backends.get("fake")
+    wav = str(tmp_path / "viewer-s1-001-ref.wav")
+    prep = backend.prepare_voice(wav, "text", {})
+    server._register_voice(
+        "viewer-s1-001", "fake", wav, "text", prep, "neutral",
+        {"session_id": "viewer-s1"},
+    )
+    try:
+        r = client.post("/reload", params={"prune": "true"})
+        assert r.status_code == 200
+        assert "viewer-s1-001" not in r.json()["removed"]
+        assert "viewer-s1-001" in server.VOICES
+    finally:
+        server._unregister_session("viewer-s1")
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
+def test_reload_prune_frees_temp_of_removed_voice(client, tmp_path, monkeypatch):
+    """Pruning a voice deletes its prepared cleanup_paths + owns_temp_audio file."""
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+    tmp_cleanup = str(tmp_path / "cleanup.bin")
+    tmp_owned = str(tmp_path / "owned.wav")
+    open(tmp_cleanup, "w").close()
+    open(tmp_owned, "w").close()
+    prep = server.PreparedVoice(
+        ref_audio_path=tmp_owned,
+        ref_text="x",
+        extras={},
+        owns_temp_audio=True,
+        cleanup_paths=(tmp_cleanup,),
+    )
+    profile = server.VoiceProfile(
+        name="ghost", backend="fake", ref_audio=tmp_owned, ref_text="x",
+        session_id=None, emotion="neutral", quality=None, duration_s=None,
+        confidence=None, sequence=None, extras={}, prepared=prep,
+    )
+    server.VOICES["ghost"] = profile  # no ghost.json on disk
+    try:
+        r = client.post("/reload", params={"prune": "true"})
+        assert "ghost" in r.json()["removed"]
+        assert "ghost" not in server.VOICES
+        assert not os.path.exists(tmp_cleanup)
+        assert not os.path.exists(tmp_owned)
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
+def test_reload_prune_keeps_present_voices(client, tmp_path, monkeypatch):
+    """prune=true removes nothing when every voice's JSON is still on disk."""
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+    try:
+        _write_profile_json(str(tmp_path), "a1", backend="fake")
+        _write_profile_json(str(tmp_path), "b2", backend="fake")
+        r = client.post("/reload", params={"prune": "true"})
+        assert r.json()["removed"] == []
+        assert "a1" in server.VOICES and "b2" in server.VOICES
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
+def test_reload_prune_keeps_voice_whose_json_is_present_but_unbuildable(
+    client, tmp_path, monkeypatch
+):
+    """A JSON on disk that fails to build keeps its voice — keep-set is on-disk
+    filenames, not successfully-built profiles."""
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+    try:
+        # First load 'keep' successfully.
+        j, wav = _write_profile_json(str(tmp_path), "keep", backend="fake")
+        client.post("/reload")
+        assert "keep" in server.VOICES
+        # Now break the build by removing its ref WAV (JSON stays on disk).
+        os.remove(wav)
+        r = client.post("/reload", params={"prune": "true"})
+        assert r.status_code == 200
+        # JSON 'keep.json' is still on disk → name is in keep-set → not pruned.
+        assert "keep" not in r.json()["removed"]
+        assert "keep" in server.VOICES
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
+def test_reload_prune_aborts_without_removing(client, tmp_path, monkeypatch):
+    """If any profile fails to build, reload returns 500 and prunes nothing —
+    atomic abort precedes prune."""
+    import backends as _backends
+    from backends.base import PreparedVoice, _read_only
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+
+    # Seed a gallery voice with no JSON on disk — it WOULD be pruned if commit ran.
+    backend = _backends.get("fake")
+    server.VOICES["doomed"] = server.VoiceProfile(
+        name="doomed", backend="fake", ref_audio="x", ref_text="x",
+        session_id=None, emotion="neutral", quality=None, duration_s=None,
+        confidence=None, sequence=None, extras={},
+        prepared=PreparedVoice(ref_audio_path="x", ref_text="x", extras=_read_only({})),
+    )
+
+    real_prepare = backend.prepare_voice
+
+    def boom(ref, txt, extras):
+        raise RuntimeError("prepare exploded")
+
+    monkeypatch.setattr(backend, "prepare_voice", boom)
+    try:
+        _write_profile_json(str(tmp_path), "fail", backend="fake")
+        r = client.post("/reload", params={"prune": "true"})
+        assert r.status_code == 500
+        assert "doomed" in server.VOICES, "abort must not prune"
+    finally:
+        monkeypatch.setattr(backend, "prepare_voice", real_prepare)
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
+def test_reload_prune_excludes_voice_from_lang_routing(client, tmp_path, monkeypatch):
+    """After prune removes a family member, lang-routing can no longer select it."""
+    import json as _json
+    import backends as _backends
+    monkeypatch.setattr(server, "_VOICES_DIR", str(tmp_path))
+    server.VOICES.clear()
+    server._clone_enabled = True
+
+    # Register a second fake backend that advertises 'fr'.
+    fr_backend = type(_backends.get("fake"))()
+    fr_backend.name = "fake-fr"
+    fr_backend.supported_langs = ("fr",)
+    _backends.register(fr_backend)
+
+    def _write(name, backend, family):
+        import soundfile as _sf
+        import numpy as _np
+        _sf.write(os.path.join(str(tmp_path), f"{name}-ref.wav"),
+                  _np.zeros(24000, dtype=_np.float32), 24000)
+        with open(os.path.join(str(tmp_path), f"{name}.json"), "w") as f:
+            _json.dump({"name": name, "backend": backend,
+                        "reference_audio": f"{name}-ref.wav",
+                        "reference_text": "hi", "family": family}, f)
+        return os.path.join(str(tmp_path), f"{name}.json")
+
+    try:
+        _write("dup-en", "fake", "dup")          # en-only, needs routing for fr
+        fr_json = _write("dup-fr", "fake-fr", "dup")  # fr-capable family sibling
+        client.post("/reload")
+        en_profile = server.VOICES["dup-en"]
+        # Before prune: routing 'fr' finds the fr sibling.
+        assert server._route_for_lang(en_profile, "fr").name == "dup-fr"
+        # Delete the fr sibling's JSON and prune.
+        os.remove(fr_json)
+        r = client.post("/reload", params={"prune": "true"})
+        assert "dup-fr" in r.json()["removed"]
+        # After prune: no fr candidate in the family → ValueError.
+        import pytest as _pytest
+        with _pytest.raises(ValueError):
+            server._route_for_lang(en_profile, "fr")
+    finally:
+        server._clone_enabled = False
+        server.VOICES.clear()
+
+
 def test_concurrent_synthesize_no_deadlock(client, sample_voice):
     """N concurrent GET /synthesize calls must all return 200 without deadlocking.
     Exercises _synth_lock + _model_lock acquisition under contention via FakeBackend
