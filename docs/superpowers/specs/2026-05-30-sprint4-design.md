@@ -4,6 +4,10 @@
 **Owner:** @adrianwedd
 **Target release:** v1.0.3
 **Status:** approved, ready for implementation plan
+**QA:** code-verified against server.py / check-og-metadata.py 2026-05-30 — Part A
+origin-scoping corrected (`session_id` overloaded → file-built-name registry
+required), Part B count enforcement clarified (guard gates the 275 profile number
+only, not families).
 
 ## Goal
 
@@ -69,20 +73,37 @@ voices (added via `POST /clone`, with no backing JSON on disk) must never be
 evicted by a prune — a naive "remove any voice whose JSON is gone" would wrongly
 nuke every session voice.
 
-Implementation approach (verify exact mechanism against current `VoiceProfile`
-during the plan; pick whichever the code already supports):
+**`session_id` is NOT a usable file-vs-session discriminator** (verified against
+current code, 2026-05-30). `VoiceProfile.session_id` (server.py:44) is overloaded:
+one construction site leaves it `None` (`session_id=p.get("session_id")`,
+server.py:168), but a second site assigns it the *name stem* for file voices too
+(`session_id=meta.get("session_id") or name.rsplit("-",1)[0]`, server.py:230).
+So `session_id is None` does not mean "file-originated," and `session_id is not
+None` does not mean "session clone." Any prune keyed on `session_id` would
+mis-scope.
 
-- **Preferred:** if `VoiceProfile` already records its origin (e.g. a source
-  JSON path, or session voices carry a `session_id`), prune iterates only
-  file-originated entries and removes those whose recorded JSON path no longer
-  resolves on disk.
-- **Fallback:** maintain a module-level set of file-built voice names, populated
-  at startup discovery and refreshed on every reload's build phase. Prune
-  removes names in that set that are absent from the just-walked on-disk set.
-  Session voices never enter the set, so they are structurally exempt.
+**Required mechanism — a file-built-name registry.** Maintain a module-level set
+of voice names built from `voices/*.json`, populated at startup discovery and
+refreshed on each reload's build phase. Prune removes names in that registry that
+are absent from the just-walked on-disk JSON set. Session voices (built via
+`POST /clone`) never enter the registry, so they are structurally exempt — no
+heuristic required. The build phase already walks the current on-disk JSON set,
+so "names present on disk this reload" is the prune keep-set for free.
 
-The build phase already walks the current on-disk JSON set, so "names present on
-disk this reload" is available for free as the prune keep-set.
+**Two open items the implementation plan must resolve before coding prune:**
+
+1. **Reconcile the two `VoiceProfile` construction sites** (server.py:168 vs
+   :230) — confirm which builds file-discovered voices, which builds session/
+   palette voices, and where each registers into `VOICES` (sites at server.py:189,
+   :241, :803). The registry must be populated at exactly the file-discovery /
+   reload-build path and nowhere else.
+2. **Confirm whether `POST /clone` persists a `voices/*.json` to disk.** The clone
+   handler writes a `{session_id}-NNN-ref.wav` under the voices dir (server.py:591);
+   if it *also* writes a sibling `.json`, a subsequent reload would re-discover
+   that session voice as a "file" voice and enter it into the registry — making it
+   prunable, contrary to the design intent. If clone does write JSON there, the
+   registry must exclude session-pattern names (or clone must write JSON outside
+   the reload walk). Resolve this before implementing, and add a test for it.
 
 ### Family-routing interaction
 
@@ -110,11 +131,17 @@ is unchanged (add-only).
    `VOICES` — current add-only contract preserved.
 2. `prune=true` removes a voice whose JSON was deleted, and frees its tracked
    temp resources.
-3. `prune=true` does **not** remove a session-cloned voice (no backing JSON).
-4. `prune=true` with all JSONs still present removes nothing.
-5. An aborting build (one `prepare_voice` raises) returns 500 and removes
+3. `prune=true` does **not** remove a session-cloned voice — assert via the
+   file-built-name registry, not via `session_id` (which is overloaded; see the
+   correctness crux). A session voice that is absent from the registry survives
+   prune even though it has no git-tracked JSON.
+4. If `POST /clone` is confirmed to persist a `voices/*.json` (open item #2
+   above): a reload that re-discovers that session JSON must not make the session
+   voice prunable — add a regression test pinning whichever resolution is chosen.
+5. `prune=true` with all JSONs still present removes nothing.
+6. An aborting build (one `prepare_voice` raises) returns 500 and removes
    nothing — atomic abort still precedes any prune.
-6. A pruned family member is no longer selected by lang-routing.
+7. A pruned family member is no longer selected by lang-routing.
 
 ### Docs
 
@@ -153,13 +180,21 @@ historical record).
 
 ### Count updates
 
-Advertised counts drop **281 → 275 profiles** and **100 → 98 families**.
-Update every surface that states a count: `README.md`, `docs/index.html`
-(og:description and any inline count), `AGENTS.md`, demo-site copy. The exact
-post-removal numbers are verified against `scripts/check-og-metadata.py` so
-`test_og_metadata` stays green — that guard is the source of truth; if the
-mechanical count differs from 275/98, the guard's number wins and the prose
-matches it.
+**What the guard actually enforces (verified 2026-05-30):**
+`scripts/check-og-metadata.py` `repo_voice_count()` counts `git ls-files
+voices/*.json` = **281** today; removing the 6 JSONs → **275**. The guard
+compares *only* this profile number against the `N voices` claim in
+`docs/index.html`'s og:description — it does **not** enforce a "families" count
+(the demo gallery is 21 `docs/audio/*.mp3` files, unrelated to either number).
+og:description must therefore read **`275 voices`** exactly (or `275+`, which the
+guard treats as "at least 275").
+
+Update every surface that states a count: `docs/index.html` og:description
+(gated by `test_og_metadata` — must be 275), plus the editorial **98 families /
+275 profiles** prose in `README.md`, `AGENTS.md`, and any inline `docs/index.html`
+copy (not gated, update by hand). The guard is the source of truth for the
+profile number; if the mechanical `git ls-files` count differs from 275, the
+guard's number wins and the prose matches it.
 
 ### Live dogfood of Part A
 
