@@ -2,6 +2,30 @@
 
 All notable changes to Afterwords. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.3] — 2026-05-30
+
+### Added
+
+- **Opt-in prune for `POST /reload`** (`afterwords reload --prune`). Evicts
+  gallery voices whose JSON has been deleted from disk, freeing their prepared
+  temp artifacts. Scoped to file-originated voices (`session_id is None`);
+  session-cloned voices are never pruned (use `DELETE /session/{id}`). The reload
+  response gains a `removed[]` field. Default (`prune=false`) is unchanged
+  add-only behavior. New tests cover removal, session exemption, temp freeing,
+  on-disk-keep precision, atomic abort, and lang-routing exclusion.
+
+### Removed
+
+- **`inspector-morse` and `francis-urquhart` voices** — sub-threshold references
+  (RMS 0.0404 / 0.0536) the project chose not to reclone. Gallery is now
+  **98 families / 275 profiles**.
+
+### Fixed
+
+- **Duplicate voice assignment** — `ronan` was the default voice in two unrelated
+  repos (`evolve-evolution` and `adrianwedd-ops`); `adrianwedd-ops` reassigned to
+  a unique voice (`mckenna`).
+
 ## [1.0.2] — 2026-05-30
 
 ### Added
