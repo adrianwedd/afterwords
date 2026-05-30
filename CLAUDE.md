@@ -103,6 +103,15 @@ Voice profiles can declare an optional `family: str` field (e.g. `"family": "pic
 2. **Atomic abort** — if any prepare_voice raises, delete every tracked temp file and return 500 with errors[]. VOICES is unchanged.
 3. **Add-only commit** under `_model_lock`: `VOICES[name] = profile` for each successful build. Voices whose JSON disappeared from disk are NOT removed (use `DELETE /session/{id}` or restart).
 
+`POST /reload?prune=true` (CLI: `afterwords reload --prune`) additionally evicts
+**gallery voices whose JSON has been deleted from disk**. Prune is scoped to
+file-originated voices — a voice is prunable iff `VoiceProfile.session_id is None`
+(every git-tracked gallery JSON omits `session_id`; `/clone` always sets it).
+Session-cloned voices are never pruned; remove them with `DELETE /session/{id}`.
+The keep-set is the names of JSON files present on disk this reload, so a
+present-but-unbuildable JSON keeps its voice. The response includes `removed[]`.
+Default (`prune=false`) is unchanged add-only behavior.
+
 CLI: `afterwords reload` curls the endpoint and pretty-prints the response.
 
 ## Key Constraints
