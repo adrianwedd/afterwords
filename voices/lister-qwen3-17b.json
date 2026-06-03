@@ -1,0 +1,9 @@
+{
+  "name": "lister-qwen3-17b",
+  "backend": "qwen3-1.7b",
+  "reference_audio": "lister-ref.wav",
+  "reference_text": "Mayday, Mayday, I wonder why they call it Mayday. The distress court, wonder why it's Mayday, it's only a bank holiday. Why not Shrove Tuesday or a Saturday?",
+  "family": "lister",
+  "source_url": "https://www.youtube.com/watch?v=_aPF-Rui09Y",
+  "segment_start_s": 0
+}

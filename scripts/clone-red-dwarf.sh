@@ -1,23 +1,25 @@
 #!/usr/bin/env bash
-# Clone the main Red Dwarf characters missing from the gallery: Lister, The Cat, Kryten.
-# Holly and Rimmer already exist and are skipped automatically.
+# Clone (or reclone) all five main Red Dwarf characters with in-character monologue sources.
 #
 # For each character this script:
-#   1. Runs clone-voice.sh from a BBC Studios YouTube source (interactive by default
-#      so you can confirm the transcript; pass --yes for fully non-interactive).
-#   2. Generates both qwen3-0.6b and qwen3-1.7b per-backend JSON profiles with
-#      a family field, matching the convention used for all other gallery voices.
+#   1. Runs clone-voice.sh from a BBC Studios YouTube source (interactive by
+#      default so you can confirm the transcript; pass --yes for non-interactive).
+#   2. Generates qwen3-0.6b and qwen3-1.7b per-backend JSON profiles with
+#      a family field, matching the convention for all other gallery voices.
 #
 # Usage:
-#   bash scripts/clone-red-dwarf.sh          # interactive (recommends confirming)
-#   bash scripts/clone-red-dwarf.sh --yes    # fully non-interactive (any start_s)
-#   bash scripts/clone-red-dwarf.sh --voice kryten          # single character
-#   bash scripts/clone-red-dwarf.sh --voice kryten --yes    # single, non-interactive
+#   bash scripts/clone-red-dwarf.sh                    # interactive, skips existing
+#   bash scripts/clone-red-dwarf.sh --force            # reclone even if voice exists
+#   bash scripts/clone-red-dwarf.sh --yes              # non-interactive
+#   bash scripts/clone-red-dwarf.sh --voice rimmer     # single character
+#   bash scripts/clone-red-dwarf.sh --voice rimmer --force --yes
 #
-# Clip notes:
-#   lister  — "Lister teaches Kryten how to lie" (BBC Studios) — Lister solo near start
-#   the-cat — "What is it?" (BBC) — Cat's voice prominent throughout
-#   kryten  — "Kryten Shares Surprising Information in the Shuttle" (BBC Studios) — Kryten monologue near start
+# Sources (all official BBC Studios YouTube, in-character monologues):
+#   holly   — "Holly Divulges the Captain's Remarks to Rimmer" — solo Holly exposition, Series 1
+#   rimmer  — "Arnold Rimmer tries to keep his Libido in check" — solo internal Rimmer monologue, S8
+#   lister  — "They're Dead Dave" (BBC Comedy Greats) — Lister's extended reaction speech, S1
+#   the-cat — "Cat Justifies His Existence" (The Inquisitor) — Cat's solo vanity monologue, S5
+#   kryten  — "Can Kryten Swear?" — extended Kryten solo, mechanoid guilt/formality, S4
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -33,10 +35,12 @@ rule()  { echo -e "${DIM}  ─────────────────�
 
 AUTO_YES=false
 ONLY_VOICE=""
+FORCE=false
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --yes) AUTO_YES=true; shift ;;
+        --yes)   AUTO_YES=true; shift ;;
+        --force) FORCE=true; shift ;;
         --voice) ONLY_VOICE="${2:-}"; shift 2 ;;
         *) echo "Unknown arg: $1"; exit 1 ;;
     esac
@@ -44,9 +48,11 @@ done
 
 # name | youtube_url | start_s | actor | clip_title
 CHARACTERS=(
-    "lister|https://www.youtube.com/watch?v=8525OKIhwqk|0|Craig Charles|Lister teaches Kryten how to lie (BBC Studios)"
-    "the-cat|https://www.youtube.com/watch?v=3r5Ynz-a7Io|5|Danny John-Jules|What is it? (BBC)"
-    "kryten|https://www.youtube.com/watch?v=5I76_eDxWdU|0|Robert Llewellyn|Kryten Shares Surprising Information in the Shuttle (BBC Studios)"
+    "holly|https://www.youtube.com/watch?v=MKhYaoeZDJU|10|Norman Lovett|Holly Returns Kicking Bottom (BBC Studios) — Holly solo comeback speech, expressive"
+    "rimmer|https://www.youtube.com/watch?v=W4ziDB2K46M|0|Chris Barrie|Rimmer's Eulogy (BBC Studios) — solo formal Rimmer speech"
+    "lister|https://www.youtube.com/watch?v=_aPF-Rui09Y|0|Craig Charles|Mayday (Marooned) — Lister alone making a distress call, S3"
+    "the-cat|https://www.youtube.com/watch?v=RfNJitORCVA|0|Danny John-Jules|Cat Justifies His Existence (The Inquisitor, BBC) — solo vanity monologue, S5"
+    "kryten|https://www.youtube.com/watch?v=RXKlC8ph7mM|0|Robert Llewellyn|Can Kryten Swear? (BBC Studios) — extended Kryten solo, mechanoid guilt, S4"
 )
 
 add_variants() {
@@ -74,8 +80,12 @@ for backend in ("qwen3-0.6b", "qwen3-1.7b"):
     variant_name = f"{name}-{sl}"
     variant_path = f"voices/{variant_name}.json"
     if os.path.exists(variant_path):
-        print(f"  [skip] {variant_name}.json already exists")
-        continue
+        # Refresh in case ref WAV changed (--force reclone).
+        with open(variant_path) as f:
+            existing = json.load(f)
+        if existing.get("reference_text") == ref_text and existing.get("source_url") == source_url:
+            print(f"  [skip] {variant_name}.json unchanged")
+            continue
     payload = {
         "name": variant_name,
         "backend": backend,
@@ -99,41 +109,43 @@ for ENTRY in "${CHARACTERS[@]}"; do
     [ -n "$ONLY_VOICE" ] && [ "$NAME" != "$ONLY_VOICE" ] && continue
 
     rule
-    if [ -f "voices/${NAME}.json" ]; then
-        warn "${NAME}: already cloned — skipping"
+    if [ -f "voices/${NAME}.json" ] && ! $FORCE; then
+        warn "${NAME}: already cloned (use --force to reclone)"
         add_variants "$NAME"
         continue
     fi
 
     echo -e "\n  ${BOLD}Cloning:${NC} ${CYAN}${NAME}${NC}  (${ACTOR})"
     info "$CLIP_TITLE"
-    info "Start: ${START_S}s — adjust if the auto-transcript misses the character's solo speech"
+    info "Start offset: ${START_S}s — confirm the transcript matches ${NAME}'s solo speech"
     echo ""
 
-    CLONE_ARGS=("$URL" "$NAME" "$START_S" "--backend" "qwen3-0.6b")
+    # --yes must be at $4 (clone-voice.sh checks ${4:-} == "--yes")
+    CLONE_ARGS=("$URL" "$NAME" "$START_S")
     $AUTO_YES && CLONE_ARGS+=("--yes")
+    CLONE_ARGS+=("--backend" "qwen3-0.6b")
 
-    bash clone-voice.sh "${CLONE_ARGS[@]}"
+    bash clone-voice.sh "${CLONE_ARGS[@]}" || true
 
     if [ -f "voices/${NAME}.json" ]; then
         add_variants "$NAME"
-        ok "${NAME} cloned"
+        ok "${NAME} done"
         ANY_CLONED=true
     else
-        warn "${NAME}: clone-voice.sh exited without writing voices/${NAME}.json"
+        warn "${NAME}: clone-voice.sh did not write voices/${NAME}.json"
     fi
 done
 
 rule
 echo ""
 if $ANY_CLONED; then
-    echo -e "  ${GREEN}✓${NC} Done. Run ${CYAN}afterwords reload${NC} to pick up the new voices."
+    echo -e "  ${GREEN}✓${NC} Done. Run ${CYAN}afterwords reload${NC} to pick up new voices."
 else
-    echo -e "  ${YELLOW}⚠${NC} Nothing new cloned (all characters already present or skipped)."
+    echo -e "  ${YELLOW}⚠${NC} Nothing new cloned (all present; use --force to reclone)."
 fi
 echo ""
-echo -e "  ${DIM}To use these voices in .afterwords:${NC}"
+echo -e "  ${DIM}Sample .afterwords for this repo:${NC}"
 echo -e "    default: rimmer"
-echo -e "    cursor: lister"
-echo -e "    claude: holly"
+echo -e "    cursor:  lister"
+echo -e "    claude:  holly"
 echo ""

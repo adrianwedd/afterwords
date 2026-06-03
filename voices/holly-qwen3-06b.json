@@ -2,8 +2,8 @@
   "name": "holly-qwen3-06b",
   "backend": "qwen3-0.6b",
   "reference_audio": "holly-ref.wav",
-  "reference_text": "This is an SOS distress call from the mining ship Red Dwarf. The crew are dead, killed by a radiation leak. The only survivors are Dave Lister, who was in suspended animation during the disaster, and his pregnant cat, who was safely sealed in the hold.",
+  "reference_text": "These bunks, drinks, dispensers, you name it. It's like a giant car boot sale. I think we've got some valuable stuff. What? Nackin' rings. I've got some peer -net requisition forms. A motorized, tie -wrackin' and inflatable shark.",
   "family": "holly",
-  "source_url": "https://www.youtube.com/watch?v=7ISFg5HYI7o",
-  "segment_start_s": 0
+  "source_url": "https://www.youtube.com/watch?v=MKhYaoeZDJU",
+  "segment_start_s": 10
 }

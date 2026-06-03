@@ -1,0 +1,8 @@
+{
+  "name": "the-cat",
+  "backend": "qwen3-0.6b",
+  "source_url": "https://www.youtube.com/watch?v=RfNJitORCVA",
+  "reference_audio": "the-cat-ref.wav",
+  "reference_text": "Hi buddy, this is your judgement day but I gotta be cruel, there can't be no favours. I'm hearing you on FM.",
+  "segment_start_s": 0
+}
