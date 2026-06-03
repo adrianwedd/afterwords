@@ -857,5 +857,46 @@ if ! $SERVER_ONLY && command -v agy &>/dev/null; then
     echo -e "  Test: ${CYAN}agy --print \"say hi\"${NC} — should speak the response via afterwords."
 fi
 
+# ── Cursor IDE discovery ──────────────────────────────────────────────────
+if ! $SERVER_ONLY && { [ -d "/Applications/Cursor.app" ] || command -v cursor &>/dev/null || [ -d "$HOME/.cursor" ]; }; then
+    CURSOR_HOOK_SRC="$SCRIPT_DIR/.claude/hooks/cursor-tts-hook.sh"
+    CURSOR_HOOK_DEST="$HOME/.claude/hooks/cursor-tts-hook.sh"
+    CURSOR_HOOKS_FILE="$HOME/.cursor/hooks.json"
+    echo
+    rule
+    echo
+    echo -e "  ${BOLD}Cursor IDE detected.${NC}"
+
+    if [ -f "$CURSOR_HOOK_SRC" ]; then
+        cp "$CURSOR_HOOK_SRC" "$CURSOR_HOOK_DEST" 2>/dev/null && \
+            chmod +x "$CURSOR_HOOK_DEST" 2>/dev/null
+        ok "installed cursor-tts-hook.sh to ~/.claude/hooks/"
+    fi
+
+    HOOK_ENTRY='{"command":"bash ~/.claude/hooks/cursor-tts-hook.sh","type":"command","timeout":10,"failClosed":false}'
+    if [ -f "$CURSOR_HOOKS_FILE" ]; then
+        if jq -e '.hooks.afterAgentResponse[]? | select(.command == "bash ~/.claude/hooks/cursor-tts-hook.sh")' "$CURSOR_HOOKS_FILE" &>/dev/null; then
+            ok "Afterwords hook already registered in ~/.cursor/hooks.json"
+        else
+            info "Registering Afterwords hook in ~/.cursor/hooks.json..."
+            jq --argjson entry "$HOOK_ENTRY" \
+                '.hooks.afterAgentResponse = ((.hooks.afterAgentResponse // []) + [$entry]) | .version = (.version // 1)' \
+                "$CURSOR_HOOKS_FILE" > "${CURSOR_HOOKS_FILE}.tmp" && \
+                mv "${CURSOR_HOOKS_FILE}.tmp" "$CURSOR_HOOKS_FILE"
+            ok "registered Afterwords hook in ~/.cursor/hooks.json"
+        fi
+    else
+        mkdir -p "$(dirname "$CURSOR_HOOKS_FILE")"
+        printf '{"version":1,"hooks":{"afterAgentResponse":[%s]}}\n' "$HOOK_ENTRY" > "$CURSOR_HOOKS_FILE"
+        ok "created ~/.cursor/hooks.json with Afterwords hook"
+    fi
+    echo
+    echo -e "  Voice per project: add a ${DIM}.afterwords${NC} file at the repo root, e.g.:"
+    echo -e "    ${DIM}cursor: lister${NC}"
+    echo -e "  Then ${CYAN}afterwords reload${NC} after adding new voices."
+    echo
+    echo -e "  Test: open Cursor agent, ask anything — afterwords should speak the response."
+fi
+
 
 echo
