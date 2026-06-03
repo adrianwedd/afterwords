@@ -91,7 +91,7 @@ def _skip_if_server_running():
 @pytest.fixture(scope="module")
 def registered():
     backends.reset_for_tests()
-    backends.register_all()
+    backends.register_all(with_17b=True)
     yield
     backends.reset_for_tests()
 

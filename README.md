@@ -22,6 +22,12 @@ For a server-only install with no Claude Code integration:
 bash setup.sh --server-only
 ```
 
+### Set up with an AI agent
+
+Paste this into Claude Code, Codex, Cursor, or any AI agent to install afterwords hands-free:
+
+> Clone https://github.com/adrianwedd/afterwords and run `bash setup.sh`. Walk me through each step — ask for a YouTube URL when you need a voice to clone.
+
 ## With Claude Code
 
 Claude Code has [`/voice`](https://docs.anthropic.com/en/docs/claude-code/voice-dictation) — hold Space to dictate prompts. But it's input only. Claude can hear you; you can't hear Claude. This project adds the missing half: **text-to-speech output**. Together, `/voice` input + TTS output = full voice conversations with Claude Code.

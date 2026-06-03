@@ -25,22 +25,24 @@ def register(backend: Backend) -> None:
     _SLUG_REGISTRY[slug] = backend.name
 
 
-def register_all() -> None:
-    """Register every shipped backend. Called once at server startup.
+def register_all(with_17b: bool = False) -> None:
+    """Register shipped backends. Called once at server startup.
 
-    qwen3 is the primary cloning path: a failure here is fatal (raised). Every
-    experimental backend is isolated — an import error, top-level crash, or
-    instantiation failure in one logs an error and skips, leaving the rest of
-    the registry intact.
+    qwen3-0.6b is always registered (primary cloning path; failure is fatal).
+    qwen3-1.7b is opt-in via with_17b=True (pass --with-1.7b to server.py).
+    Every experimental backend is isolated — import/instantiation failure logs
+    an error and skips, leaving the rest of the registry intact.
     """
     import importlib
     import logging
     log = logging.getLogger("backends")
 
-    # qwen3 — primary path. Fail loud.
+    # qwen3-0.6b — primary path. Fail loud.
     from .qwen3 import Qwen3Backend
     register(Qwen3Backend(size="0.6B"))
-    register(Qwen3Backend(size="1.7B"))
+
+    if with_17b:
+        register(Qwen3Backend(size="1.7B"))
 
     # Experimental backends — each isolated.
     _experimental = (

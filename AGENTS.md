@@ -4,7 +4,7 @@ This file provides guidance to Codex CLI and other AI coding agents when working
 
 ## Project Overview
 
-Afterwords is a local voice-cloning TTS server on Apple Silicon. The recommended cloning path is MLX-based **Qwen3-TTS** at two sizes (0.6B + 1.7B); other registered backends are available for experimentation but not endorsed for cloning fidelity. The server is a standalone HTTP API usable from any tool. When Claude Code is installed, a Stop hook automatically speaks every response.
+Afterwords is a local voice-cloning TTS server on Apple Silicon. The recommended cloning path is MLX-based **Qwen3-TTS 0.6B** (default); 1.7B loads via `--with-1.7b` for higher-fidelity clones. Other registered backends are available for experimentation but not endorsed for cloning fidelity. The server is a standalone HTTP API usable from any tool. When Claude Code is installed, a Stop hook automatically speaks every response.
 
 **Platform:** Apple Silicon Mac only (M1+), 16 GB+ RAM (32 GB recommended), Python 3.11+, macOS (uses launchd, afplay).
 
@@ -113,7 +113,7 @@ Registry at `backends/__init__.py`; one Python file per backend implementing the
 | `qwen3-0.6b` | 0.6B | 24 kHz | REQUIRED |
 | `qwen3-1.7b` | 1.7B | 24 kHz | REQUIRED |
 
-Cloning fidelity (verified 2026-05-16 listen-test): Qwen3 0.6B and 1.7B are the only endorsed cloning path. Chatterbox + VoxCPM failed listen-tests and were removed in commit f03e826. The registry still exposes 15 other backends for experimentation (voxtral, openvoice-v2, f5-tts, cosyvoice2, gpt-sovits, xtts-v2, indextts-2, neutts-air, spark-tts, dia2, yourtts, firered-tts-2, sv2tts, mockingbird, soprotts); consult the README backend-status table for current verification state.
+Cloning fidelity (verified 2026-05-16 listen-test): Qwen3 0.6B is the primary endorsed cloning path; 1.7B adds fidelity at the cost of ~2 GB extra RAM. Chatterbox + VoxCPM failed listen-tests and were removed in commit f03e826. The registry still exposes 15 other backends for experimentation (voxtral, openvoice-v2, f5-tts, cosyvoice2, gpt-sovits, xtts-v2, indextts-2, neutts-air, spark-tts, dia2, yourtts, firered-tts-2, sv2tts, mockingbird, soprotts); consult the README backend-status table for current verification state.
 
 Each backend declares `supported_langs: tuple[str, ...]` for the BCP-47 codes it accepts. `Backend.synthesize` takes a required `lang: str` parameter and raises `ValueError` for unsupported codes — the server maps that to HTTP 400 with `voice_backend` + `supported_langs` in the body.
 

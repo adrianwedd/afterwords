@@ -859,6 +859,12 @@ def main():
         action="store_true",
         help="Enable /clone, POST /synthesize, DELETE /session (binds to 127.0.0.1)",
     )
+    parser.add_argument(
+        "--with-1.7b",
+        dest="with_17b",
+        action="store_true",
+        help="Also register qwen3-1.7b (default: 0.6b only)",
+    )
     args = parser.parse_args()
 
     global DEFAULT_VOICE, _clone_enabled, _ml_executor
@@ -874,8 +880,8 @@ def main():
         max_workers=1, thread_name_prefix="mlx"
     )
 
-    # 1. Register all backends.
-    backends.register_all()
+    # 1. Register backends (0.6b always; 1.7b only with --with-1.7b).
+    backends.register_all(with_17b=args.with_17b)
     log.info("registered backends: %s", backends.names())
 
     # 2. Load all backend weights in the MLX thread (unconditional preload, per design D6).

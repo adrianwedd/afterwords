@@ -6,7 +6,7 @@
 # Works standalone as an HTTP API, or integrates with Claude Code
 # for automatic text-to-speech on every response.
 #
-# Requirements: Apple Silicon Mac (M1+), 16 GB+ RAM (32 GB recommended for all 4 backends), Python 3.11+
+# Requirements: Apple Silicon Mac (M1+), 16 GB+ RAM (32 GB recommended), Python 3.11+
 # Usage: bash setup.sh              # full setup (detects Claude Code)
 #        bash setup.sh --server-only # server + voices only, no hooks
 #
@@ -63,10 +63,10 @@ if ! [[ "$RAM_BYTES" =~ ^[0-9]+$ ]]; then
 else
     RAM_GB=$((RAM_BYTES / 1073741824))
     if [[ "$RAM_GB" -lt 16 ]]; then
-        fail "Need 16 GB+ RAM (32 GB recommended for all 4 backends). Detected: ${RAM_GB} GB"
+        fail "Need 16 GB+ RAM. Detected: ${RAM_GB} GB"
     fi
     if [[ "$RAM_GB" -lt 32 ]]; then
-        warn "${RAM_GB} GB RAM detected — 32 GB recommended for all 4 backends. Some backends may fail to load."
+        warn "${RAM_GB} GB RAM — 32 GB recommended for best results"
     fi
 fi
 ok "${RAM_GB} GB RAM"
@@ -706,53 +706,62 @@ fi
 echo
 
 # ── Verify ────────────────────────────────────────────────────────
-info "Waiting for server..."
+printf "  ${CYAN}▸${NC} Waiting for server to be ready"
 SERVER_OK=false
 for i in $(seq 1 60); do
     if curl -s --max-time 2 http://127.0.0.1:7860/health | jq -e '.ready == true' &>/dev/null; then
         SERVER_OK=true
         break
     fi
+    printf "."
     sleep 1
 done
+echo
 
+_ELAPSED=$(( $(date +%s) - _T0 ))
 echo
 if $SERVER_OK; then
-    echo -e "${BOLD}${GREEN}━━━ Setup Complete ━━━${NC}"
+    echo -e "  ${GREEN}${BOLD}✓ afterwords is running${NC}  ${DIM}(setup took ${_ELAPSED}s)${NC}"
 else
-    echo -e "${BOLD}${YELLOW}━━━ Setup Partially Complete ━━━${NC}"
+    echo -e "  ${YELLOW}${BOLD}⚠ server still starting${NC}  ${DIM}(${_ELAPSED}s — model may be downloading)${NC}"
     echo
-    echo -e "  ${YELLOW}The TTS server is still starting (model download may be in progress).${NC}"
-    echo -e "  Check: ${CYAN}curl http://127.0.0.1:7860/health${NC}"
-    echo -e "  Logs:  ${CYAN}tail -f /tmp/claude-tts-server.log${NC}"
+    echo -e "  ${DIM}Check:${NC} afterwords status"
+    echo -e "  ${DIM}Logs: ${NC} afterwords logs"
 fi
-_ELAPSED=$(( $(date +%s) - _T0 ))
 echo
 rule
 echo
-echo -e "  ${GREEN}${BOLD}✓ afterwords is ready${NC}  ${DIM}(${_ELAPSED}s)${NC}"
+echo -e "  ${BOLD}Quick reference${NC}"
 echo
-echo -e "  ${DIM}status${NC}      afterwords status"
-echo -e "  ${DIM}logs${NC}        afterwords logs"
-echo -e "  ${DIM}add voices${NC}  afterwords clone"
+echo -e "    ${CYAN}afterwords status${NC}          server state, voices, backends"
+echo -e "    ${CYAN}afterwords logs${NC}            tail server log"
+echo -e "    ${CYAN}afterwords voices${NC}          list cloned voices"
+echo -e "    ${CYAN}afterwords clone${NC}           clone a new voice from YouTube"
+echo -e "    ${CYAN}afterwords start / stop${NC}    start or stop the server"
 echo
 if $HAS_CLAUDE; then
-    echo -e "  Claude Code will now ${BOLD}speak every response${NC}."
-    echo -e "  Pair with ${CYAN}/voice${NC} for full voice conversations."
+    echo -e "  ${BOLD}Claude Code is wired up${NC} — every response will be spoken."
+    echo -e "  Pair with ${CYAN}/voice${NC} (hold Space to dictate) for full voice conversations."
     echo
-    echo -e "  ${DIM}archives${NC}      ls ~/.claude/tts-archive/"
-    echo -e "  ${DIM}per-project${NC}    echo \"snape\" > .afterwords  ${DIM}(override voice per repo)${NC}"
-    echo -e "  ${DIM}stop voice${NC}     afterwords stop"
+    echo -e "    ${DIM}per-project voice:${NC}  echo \"snape\" > .afterwords"
+    echo -e "    ${DIM}audio archive:${NC}      ls ~/.claude/tts-archive/"
 else
-    echo -e "  ${BOLD}TTS API ready.${NC} Use from any tool or script:"
+    echo -e "  ${BOLD}TTS API is ready${NC} at ${CYAN}http://localhost:7860${NC}"
     echo
-    echo -e "  ${DIM}synthesize${NC}    curl \"localhost:7860/synthesize?text=Hello&voice=galadriel\" -o out.wav"
-    echo -e "  ${DIM}play it${NC}       afplay out.wav"
-    echo -e "  ${DIM}voices${NC}        afterwords voices"
-    echo -e "  ${DIM}stop server${NC}   afterwords stop"
+    echo -e "    ${DIM}curl \"localhost:7860/synthesize?text=Hello&voice=galadriel\" -o out.wav${NC}"
+    echo -e "    ${DIM}afplay out.wav${NC}"
     echo
-    echo -e "  ${DIM}To add Claude Code integration later: re-run${NC} ${CYAN}bash setup.sh${NC}"
+    echo -e "  Add any AI agent integration later by re-running ${CYAN}bash setup.sh${NC}"
 fi
+echo
+rule
+echo
+echo -e "  ${BOLD}${DIM}Share this prompt to set up afterwords hands-free:${NC}"
+echo
+echo -e "  ${DIM}┌────────────────────────────────────────────────────────────────────────┐${NC}"
+echo -e "  ${DIM}│${NC} Clone https://github.com/adrianwedd/afterwords and run bash setup.sh.   ${DIM}│${NC}"
+echo -e "  ${DIM}│${NC} Walk me through each step — ask for a YouTube URL when you need a voice. ${DIM}│${NC}"
+echo -e "  ${DIM}└────────────────────────────────────────────────────────────────────────┘${NC}"
 
 # ── Codex CLI discovery (optional, per-session) ─────────────────
 if command -v codex &>/dev/null; then
@@ -896,6 +905,48 @@ if ! $SERVER_ONLY && { [ -d "/Applications/Cursor.app" ] || command -v cursor &>
     echo -e "  Then ${CYAN}afterwords reload${NC} after adding new voices."
     echo
     echo -e "  Test: open Cursor agent, ask anything — afterwords should speak the response."
+fi
+
+# ── Afterwords menubar app (optional) ────────────────────────────────────
+if ! $SERVER_ONLY && [ ! -d "/Applications/Afterwords.app" ]; then
+    echo
+    rule
+    echo
+    echo -e "  ${BOLD}Afterwords menubar app${NC}  ${DIM}— optional${NC}"
+    echo -e "  A macOS status-bar app that shows server state, voices, and playback."
+    echo
+
+    AFTERWORDS_APP_REPO="$HOME/repos/afterwords-app"
+    if [ -d "$AFTERWORDS_APP_REPO" ]; then
+        ask "Build and install Afterwords.app from ${DIM}${AFTERWORDS_APP_REPO}${NC}? [y/N]:"
+        read -r BUILD_APP
+        if [[ "$BUILD_APP" =~ ^[Yy] ]]; then
+            if command -v xcodegen &>/dev/null; then
+                info "Building Afterwords.app…"
+                if (cd "$AFTERWORDS_APP_REPO" && make build 2>&1 | tail -5); then
+                    BUILT_APP="$AFTERWORDS_APP_REPO/build/DerivedData/Build/Products/Debug/Afterwords.app"
+                    [ ! -d "$BUILT_APP" ] && BUILT_APP="$AFTERWORDS_APP_REPO/build/DerivedData/Build/Products/Release/Afterwords.app"
+                    if [ -d "$BUILT_APP" ]; then
+                        cp -r "$BUILT_APP" /Applications/Afterwords.app
+                        ok "Afterwords.app installed to /Applications/"
+                        open /Applications/Afterwords.app
+                    else
+                        warn "Build finished but Afterwords.app not found in expected location."
+                    fi
+                else
+                    warn "Build failed — check Xcode project setup."
+                fi
+            else
+                warn "xcodegen not found. Install: ${CYAN}brew install xcodegen${NC}, then run ${CYAN}make build${NC} in ${AFTERWORDS_APP_REPO}."
+            fi
+        else
+            info "Skipping app install — get it later: https://github.com/adrianwedd/afterwords-app"
+        fi
+    else
+        echo -e "  Get it from: ${CYAN}https://github.com/adrianwedd/afterwords-app${NC}"
+        echo -e "  ${DIM}git clone https://github.com/adrianwedd/afterwords-app.git ~/repos/afterwords-app${NC}"
+        echo -e "  ${DIM}cd ~/repos/afterwords-app && make build${NC}"
+    fi
 fi
 
 
