@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or pair it with Claude Code to hear every response spoken aloud. **100 flagship voice families** (281 profiles across backend variants) on **the Qwen3-TTS cloning path** (0.6B + 1.7B, the recommended backends), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or wire it into any AI coding harness — **Claude Code**, **Codex CLI**, **Cursor**, **Gemini CLI / Antigravity (agy)**, or **Hermes Agent** — to hear every response spoken aloud. **100 flagship voice families** (281 profiles across backend variants) on **the Qwen3-TTS cloning path** (0.6B + 1.7B, the recommended backends), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -177,7 +177,37 @@ hermes: data
 default: galadriel
 ```
 
-## Without Claude Code
+## With Cursor
+
+Cursor 1.7+ fires an `afterAgentResponse` hook when the agent completes a response, passing the full assistant text in the `text` field. Setup auto-detects Cursor and installs the hook; or wire it up manually:
+
+1. Copy `cursor-tts-hook.sh` to `~/.claude/hooks/`
+2. Add to `~/.cursor/hooks.json`:
+
+```json
+{
+  "version": 1,
+  "hooks": {
+    "afterAgentResponse": [
+      {
+        "command": "bash ~/.claude/hooks/cursor-tts-hook.sh",
+        "type": "command",
+        "timeout": 10,
+        "failClosed": false
+      }
+    ]
+  }
+}
+```
+
+The hook reuses the same TTS worker queue (`/tmp/claude-tts-queue/`) and `tts-worker.sh` as the Claude Code integration. Voice is resolved from `.afterwords` using the agent key `cursor`.
+
+```
+cursor: lister
+default: galadriel
+```
+
+## Without an AI Harness
 
 The TTS server is a plain HTTP API. Use it from any tool, script, or application:
 

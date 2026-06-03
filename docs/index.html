@@ -207,7 +207,7 @@
   <div class="wrap">
     <div class="section-label">Voice gallery</div>
     <h2 class="section-title">20 demo clips from the 100-voice library</h2>
-    <p class="section-desc">Each clip says <em>"You are absolutely right. Your Claude Code session could sound like me."</em> — synthesized locally on a 32 GB M1.</p>
+    <p class="section-desc">Each clip says <em>"You are absolutely right. Your AI session could sound like me."</em> — synthesized locally on a 32 GB M1.</p>
 
     <div class="voice-grid">
       <div class="voice-card"><div class="vname">Attenborough</div><div class="vsrc">David Attenborough · BBC Earth</div><audio controls preload="none" src="audio/attenborough.mp3" aria-label="Attenborough sample"></audio></div>
@@ -294,23 +294,47 @@ cd afterwords</code></pre>
   </div>
 </section>
 
-<!-- ════ CLAUDE CODE ════ -->
+<!-- ════ HARNESS INTEGRATIONS ════ -->
 <section id="claude-code">
   <div class="wrap">
-    <div class="section-label">Claude Code integration</div>
-    <h2 class="section-title">Input and output, paired</h2>
+    <div class="section-label">AI harness integrations</div>
+    <h2 class="section-title">Works with your whole stack</h2>
     <div class="callout">
-      <p>Afterwords pairs with Claude Code's <code>/voice</code> command — <code>/voice</code> handles dictation input, Afterwords handles spoken output. A stop hook fires after every response and pipes text to the local server, so every reply is spoken aloud in whatever voice you've set.</p>
-      <p style="margin-top:12px;"><a href="https://github.com/adrianwedd/afterwords#claude-code-integration">See the README for stop-hook setup →</a></p>
+      <p>Afterwords integrates with every major AI coding harness. A hook fires after each response, pipes the text to the local server, and plays it back in whatever voice you've set for that project or agent.</p>
+      <p style="margin-top:12px;"><a href="https://github.com/adrianwedd/afterwords#with-claude-code">See the README for per-harness setup →</a></p>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 24px;">
+      <div style="background:var(--bg-up); border:1px solid var(--bd); border-radius:var(--r); padding:14px 16px;">
+        <div style="font-family:var(--mono); font-size:12px; color:var(--fg); font-weight:500; margin-bottom:4px;">Claude Code</div>
+        <div style="font-size:12px; color:var(--fg-m);">Stop hook · /voice pairing · auto-installed</div>
+      </div>
+      <div style="background:var(--bg-up); border:1px solid var(--bd); border-radius:var(--r); padding:14px 16px;">
+        <div style="font-family:var(--mono); font-size:12px; color:var(--fg); font-weight:500; margin-bottom:4px;">Codex CLI</div>
+        <div style="font-size:12px; color:var(--fg-m);">Session JSONL watcher · afterwords codex-hook</div>
+      </div>
+      <div style="background:var(--bg-up); border:1px solid var(--bd); border-radius:var(--r); padding:14px 16px;">
+        <div style="font-family:var(--mono); font-size:12px; color:var(--fg); font-weight:500; margin-bottom:4px;">Cursor</div>
+        <div style="font-size:12px; color:var(--fg-m);">afterAgentResponse hook · auto-installed</div>
+      </div>
+      <div style="background:var(--bg-up); border:1px solid var(--bd); border-radius:var(--r); padding:14px 16px;">
+        <div style="font-family:var(--mono); font-size:12px; color:var(--fg); font-weight:500; margin-bottom:4px;">Gemini CLI / agy</div>
+        <div style="font-size:12px; color:var(--fg-m);">Shell adapter · payload normalised automatically</div>
+      </div>
+      <div style="background:var(--bg-up); border:1px solid var(--bd); border-radius:var(--r); padding:14px 16px;">
+        <div style="font-family:var(--mono); font-size:12px; color:var(--fg); font-weight:500; margin-bottom:4px;">Hermes Agent</div>
+        <div style="font-size:12px; color:var(--fg-m);">post_llm_call · agent:end · command provider</div>
+      </div>
     </div>
     <pre class="code-block" style="margin-top: 24px;"><code># Per-project voice — drop a .afterwords file in any repo
 echo "galadriel" > ~/work/my-project/.afterwords
 
-# Multiple agents, multiple voices
+# Per-agent voices — one key per harness
 cat > ~/work/my-project/.afterwords &lt;&lt;EOF
-default: picard
-clara-oswald: clara-oswald
-k9: k9
+default:  picard
+cursor:   lister
+codex:    seven-of-nine
+agy:      samantha
+hermes:   data
 EOF</code></pre>
   </div>
 </section>
