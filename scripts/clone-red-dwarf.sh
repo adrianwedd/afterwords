@@ -15,7 +15,7 @@
 #   bash scripts/clone-red-dwarf.sh --voice rimmer --force --yes
 #
 # Sources (all official BBC Studios YouTube, in-character monologues):
-#   holly   — "Holly Divulges the Captain's Remarks to Rimmer" — solo Holly exposition, Series 1
+#   holly   — "April Fool" (BBC) — Holly deadpan solo about Norweb + compound interest, Series 2
 #   rimmer  — "Arnold Rimmer tries to keep his Libido in check" — solo internal Rimmer monologue, S8
 #   lister  — "They're Dead Dave" (BBC Comedy Greats) — Lister's extended reaction speech, S1
 #   the-cat — "Cat Justifies His Existence" (The Inquisitor) — Cat's solo vanity monologue, S5
@@ -48,7 +48,7 @@ done
 
 # name | youtube_url | start_s | actor | clip_title
 CHARACTERS=(
-    "holly|https://www.youtube.com/watch?v=MKhYaoeZDJU|10|Norman Lovett|Holly Returns Kicking Bottom (BBC Studios) — Holly solo comeback speech, expressive"
+    "holly|https://www.youtube.com/watch?v=elZfflKkfxM|64|Norman Lovett|April Fool (BBC) — Holly solo deadpan monologue about Norweb and compound interest, S2"
     "rimmer|https://www.youtube.com/watch?v=W4ziDB2K46M|0|Chris Barrie|Rimmer's Eulogy (BBC Studios) — solo formal Rimmer speech"
     "lister|https://www.youtube.com/watch?v=_aPF-Rui09Y|0|Craig Charles|Mayday (Marooned) — Lister alone making a distress call, S3"
     "the-cat|https://www.youtube.com/watch?v=RfNJitORCVA|0|Danny John-Jules|Cat Justifies His Existence (The Inquisitor, BBC) — solo vanity monologue, S5"

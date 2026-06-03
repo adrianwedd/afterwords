@@ -1,8 +1,8 @@
 {
   "name": "holly",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=MKhYaoeZDJU",
+  "source_url": "https://www.youtube.com/watch?v=elZfflKkfxM",
   "reference_audio": "holly-ref.wav",
-  "reference_text": "These bunks, drinks, dispensers, you name it. It's like a giant car boot sale. I think we've got some valuable stuff. What? Nackin' rings. I've got some peer -net requisition forms. A motorized, tie -wrackin' and inflatable shark.",
-  "segment_start_s": 10
+  "reference_text": "all sausages Dave now cover seven eighths of the Earth's surface. Also you left 17 pounds 50 pets in your bank account thanks to compound interest you now owe 98 % of all the world's wealth. Because you hold it for three million years nobody",
+  "segment_start_s": 64
 }
