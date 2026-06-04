@@ -292,3 +292,22 @@ def test_ai_flag_no_pager():
     result = run_afterwords("--ai")
     assert result.returncode == 0
     assert len(result.stdout) > 500  # substantive output
+
+
+def test_help_contains_analysis_section():
+    result = run_afterwords("help")
+    assert result.returncode == 0
+    assert "Analysis" in result.stdout
+
+def test_help_contains_all_new_commands():
+    result = run_afterwords("help")
+    for cmd in ("transcribe", "qa", "trim", "compare", "refine", "update"):
+        assert cmd in result.stdout, f"'{cmd}' missing from help output"
+
+def test_help_contains_update_in_setup():
+    result = run_afterwords("help")
+    assert "update" in result.stdout
+    # update must appear under Setup section (or at minimum, in the output)
+    lines = result.stdout.splitlines()
+    setup_idx = next((i for i, l in enumerate(lines) if "Setup" in l), None)
+    assert setup_idx is not None, "Setup section missing from help"

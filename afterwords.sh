@@ -1236,13 +1236,17 @@ cmd_help() {
     echo -e "    ${CYAN}logs${NC}              Tail the server log"
     echo
     echo -e "  ${BOLD}Voices${NC}"
-    echo -e "    ${CYAN}voices${NC}            List cloned voices"
-    echo -e "    ${CYAN}voices --demo${NC}     Play a sample of each voice"
-    echo -e "    ${CYAN}voices --cloud${NC}    Show cloud voices"
-    echo -e "    ${CYAN}clone URL NAME${NC}    Clone a voice from a YouTube URL"
-    echo -e "    ${CYAN}reload${NC}            Reload voices from disk without restart"
-    echo -e "    ${CYAN}reload --prune${NC}    Also evict voices whose JSON was deleted"
-    echo -e "    ${CYAN}audit${NC}             Audit profiles for transcript drift"
+    echo -e "    ${CYAN}voices${NC}            List cloned voices (--demo to play samples, --cloud for cloud voices)"
+    echo -e "    ${CYAN}clone URL NAME${NC}    Clone from YouTube URL or local file (--quick for fast refine)"
+    echo -e "    ${CYAN}reload${NC}            Reload voices without restart (--prune to evict deleted)"
+    echo
+    echo -e "  ${BOLD}Analysis${NC}"
+    echo -e "    ${CYAN}transcribe <audio>${NC}  Word-level timestamps (--backend parakeet|faster-whisper)"
+    echo -e "    ${CYAN}qa${NC}                 Ref WER for all voices (--voice NAME, --synth, --json)"
+    echo -e "    ${CYAN}trim${NC}               Remove silence gaps from refs (--apply to write, --json)"
+    echo -e "    ${CYAN}compare <audio>${NC}    faster-whisper vs parakeet WER comparison (--json)"
+    echo -e "    ${CYAN}refine <voice>${NC}     Full QA cycle: qa → compare → trim → re-qa (--quick to skip compare/trim)"
+    echo -e "    ${CYAN}audit${NC}              Voice profile drift check (--archive for TTS archive pairs)"
     echo
     echo -e "  ${BOLD}Cloud${NC}"
     echo -e "    ${CYAN}push NAME${NC}         Push a voice (+ family variants) to the cloud"
@@ -1255,11 +1259,16 @@ cmd_help() {
     echo
     echo -e "  ${BOLD}Setup${NC}"
     echo -e "    ${CYAN}configure${NC}         Show or change server settings (e.g. --with-1.7b)"
+    echo -e "    ${CYAN}update${NC}            Pull latest commits, reinstall packages, reload voices"
     echo -e "    ${CYAN}uninstall${NC}         Remove service and optionally hooks"
     echo
     echo -e "  ${DIM}Examples:${NC}"
     echo -e "  ${DIM}  afterwords clone \"https://youtube.com/watch?v=xyz\" gandalf 45${NC}"
-    echo -e "  ${DIM}  afterwords voices --demo${NC}"
+    echo -e "  ${DIM}  afterwords clone voices/clip.wav myvoice --yes${NC}"
+    echo -e "  ${DIM}  afterwords refine gandalf${NC}"
+    echo -e "  ${DIM}  afterwords qa --json | python3 -c \"import json,sys; print([v for v in json.load(sys.stdin)['voices'] if v['ref_wer']>0.15])\"${NC}"
+    echo -e "  ${DIM}  afterwords compare voices/gandalf-ref.wav --json${NC}"
+    echo -e "  ${DIM}  afterwords update --check${NC}"
     echo -e "  ${DIM}  afterwords push picard${NC}"
     echo -e "  ${DIM}  echo \"snape\" > .afterwords  # per-project voice override${NC}"
     echo
