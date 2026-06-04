@@ -8,11 +8,11 @@
 #      a family field, matching the convention for all other gallery voices.
 #
 # Usage:
-#   bash scripts/clone-red-dwarf.sh                    # interactive, skips existing
-#   bash scripts/clone-red-dwarf.sh --force            # reclone even if voice exists
-#   bash scripts/clone-red-dwarf.sh --yes              # non-interactive
-#   bash scripts/clone-red-dwarf.sh --voice rimmer     # single character
-#   bash scripts/clone-red-dwarf.sh --voice rimmer --force --yes
+#   bash scripts/internal/clone-red-dwarf.sh                    # interactive, skips existing
+#   bash scripts/internal/clone-red-dwarf.sh --force            # reclone even if voice exists
+#   bash scripts/internal/clone-red-dwarf.sh --yes              # non-interactive
+#   bash scripts/internal/clone-red-dwarf.sh --voice rimmer     # single character
+#   bash scripts/internal/clone-red-dwarf.sh --voice rimmer --force --yes
 #
 # Sources (all official BBC Studios YouTube, in-character monologues):
 #   holly   — "April Fool" (BBC) — Holly deadpan solo about Norweb + compound interest, Series 2
@@ -23,7 +23,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_DIR="$(dirname "$SCRIPT_DIR")"
+REPO_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")"
 cd "$REPO_DIR"
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[0;33m'

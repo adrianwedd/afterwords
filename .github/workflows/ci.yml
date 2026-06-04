@@ -26,7 +26,7 @@ jobs:
         run: pytest --tb=short -q
 
       - name: Check OG metadata sync
-        run: python scripts/check-og-metadata.py
+        run: python scripts/internal/check-og-metadata.py
 
       - name: Verify GitHub Pages assets
         run: |

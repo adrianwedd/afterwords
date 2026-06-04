@@ -83,7 +83,7 @@ YouTube videos (69)
 | `ffmpeg` | 8.1.1 | Normalise to 16kHz mono WAV |
 | `parakeet-tdt-0.6b-v2` | via mlx-audio | Transcription |
 | `scripts/transcribe.py` | — | Single-file transcription |
-| `scripts/transcribe-youtube-batch.sh` | — | Batch pipeline |
+| `scripts/internal/transcribe-youtube-batch.sh` | — | Batch pipeline |
 
 ### Backend choice: parakeet over faster-whisper
 
@@ -123,13 +123,13 @@ Parakeet outputs sub-word tokens with leading spaces as word-boundary markers (e
 cd /path/to/afterwords
 
 # Single video
-./scripts/transcribe-youtube-batch.sh <VIDEO_ID>
+./scripts/internal/transcribe-youtube-batch.sh <VIDEO_ID>
 
 # Full batch (all IDs from summary at end of this doc)
-./scripts/transcribe-youtube-batch.sh ID1 ID2 ID3 ...
+./scripts/internal/transcribe-youtube-batch.sh ID1 ID2 ID3 ...
 
 # Resume (already-done IDs are skipped automatically)
-./scripts/transcribe-youtube-batch.sh $(cat video-ids.txt)
+./scripts/internal/transcribe-youtube-batch.sh $(cat video-ids.txt)
 ```
 
 ---
@@ -197,16 +197,16 @@ REPLACEMENT: "[...]"
 cd /path/to/afterwords
 
 # Single video
-python3 scripts/qa-transcripts.py <VIDEO_ID>
+python3 scripts/internal/qa-transcripts.py <VIDEO_ID>
 
 # All videos (skips already-done)
-python3 scripts/qa-transcripts.py
+python3 scripts/internal/qa-transcripts.py
 
 # List the video→source mapping
-python3 scripts/qa-transcripts.py --list
+python3 scripts/internal/qa-transcripts.py --list
 ```
 
-The mapping from video title to source content file is defined in `CONTENT_MAP` inside `scripts/qa-transcripts.py`. All 69 videos are mapped.
+The mapping from video title to source content file is defined in `CONTENT_MAP` inside `scripts/internal/qa-transcripts.py`. All 69 videos are mapped.
 
 One video (`eWwhcDrMcso` — Afterglow Engine) timed out and needs a re-run.
 
@@ -245,13 +245,13 @@ And produces two outputs per item:
 cd /path/to/afterwords
 
 # One slug (matches blog or project filename stem)
-python3 scripts/review-content.py afterwords
+python3 scripts/internal/review-content.py afterwords
 
 # All (skips already-done)
-python3 scripts/review-content.py
+python3 scripts/internal/review-content.py
 
 # List all items with their repo URLs
-python3 scripts/review-content.py --list
+python3 scripts/internal/review-content.py --list
 ```
 
 Model used: `gemini-3.1-flash-lite-preview` (fast, sufficient for factual QA and prose generation at this scale).
@@ -435,7 +435,7 @@ Options:
 Batch download + transcribe for YouTube video IDs.
 
 ```
-Usage: ./scripts/transcribe-youtube-batch.sh VIDEO_ID [VIDEO_ID ...]
+Usage: ./scripts/internal/transcribe-youtube-batch.sh VIDEO_ID [VIDEO_ID ...]
 
 Output: transcripts/youtube/<id>.json
 Skips:  IDs that already have a transcript file
@@ -460,9 +460,9 @@ Gemini-powered QA of NLM transcripts against source content.
 
 ```
 Usage:
-  python scripts/qa-transcripts.py                 # all videos
-  python scripts/qa-transcripts.py VIDEO_ID ...    # specific IDs
-  python scripts/qa-transcripts.py --list          # show mapping
+  python scripts/internal/qa-transcripts.py                 # all videos
+  python scripts/internal/qa-transcripts.py VIDEO_ID ...    # specific IDs
+  python scripts/internal/qa-transcripts.py --list          # show mapping
 
 Output:  transcripts/qa/<video_id>.txt
 Model:   gemini (default model, no flag)
@@ -477,9 +477,9 @@ Gemini content review: blog post revisions + synthesis scripts.
 
 ```
 Usage:
-  python scripts/review-content.py                 # all 72 items
-  python scripts/review-content.py SLUG ...        # specific slugs
-  python scripts/review-content.py --list          # show items + repos
+  python scripts/internal/review-content.py                 # all 72 items
+  python scripts/internal/review-content.py SLUG ...        # specific slugs
+  python scripts/internal/review-content.py --list          # show items + repos
 
 Output:  transcripts/review/<slug>.md
 Model:   gemini-3.1-flash-lite-preview

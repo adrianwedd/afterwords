@@ -20,7 +20,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 INDEX = REPO / "docs" / "index.html"
 GALLERY = REPO / "docs" / "audio"
 EXPECTED_OG_URL = "https://adrianwedd.github.io/afterwords/"
@@ -137,7 +137,7 @@ def main() -> int:
             "After fixing, force a Facebook re-scrape so the cached preview updates:",
             file=sys.stderr,
         )
-        print("    bash scripts/fb-reindex.sh", file=sys.stderr)
+        print("    bash scripts/internal/fb-reindex.sh", file=sys.stderr)
         return 1
 
     demo_count = gallery_voice_count()

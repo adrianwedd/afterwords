@@ -4,13 +4,13 @@
 # Two-pass ffmpeg loudnorm for accuracy. Operates in-place via temp file swap.
 #
 # Usage:
-#   bash scripts/loudnorm-demo-audio.sh                 # process all
-#   bash scripts/loudnorm-demo-audio.sh docs/audio/picard.mp3   # one file
+#   bash scripts/internal/loudnorm-demo-audio.sh                 # process all
+#   bash scripts/internal/loudnorm-demo-audio.sh docs/audio/picard.mp3   # one file
 #
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 TARGET_I="-18"
 TARGET_TP="-1.5"
 TARGET_LRA="11"

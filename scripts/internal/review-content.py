@@ -12,9 +12,9 @@ For every blog post and project page, this script:
   5. Saves structured output to transcripts/review/<slug>.md
 
 Usage:
-    python scripts/review-content.py                    # all content
-    python scripts/review-content.py afterwords         # one slug
-    python scripts/review-content.py --list             # show items and exit
+    python scripts/internal/review-content.py                    # all content
+    python scripts/internal/review-content.py afterwords         # one slug
+    python scripts/internal/review-content.py --list             # show items and exit
 """
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-REPO = Path(__file__).parent.parent
+REPO = Path(__file__).parent.parent.parent
 SITE = Path("/Users/adrian/repos/adrianwedd.com/src/content")
 BLOG = SITE / "blog"
 PROJ = SITE / "projects"

@@ -4,16 +4,16 @@
 # saves word-level JSON to transcripts/youtube/<video_id>.json.
 #
 # Usage:
-#   ./scripts/transcribe-youtube-batch.sh [VIDEO_ID ...]
+#   ./scripts/internal/transcribe-youtube-batch.sh [VIDEO_ID ...]
 #   # Or pipe a file of IDs (one per line):
-#   cat video-ids.txt | xargs ./scripts/transcribe-youtube-batch.sh
+#   cat video-ids.txt | xargs ./scripts/internal/transcribe-youtube-batch.sh
 #
 # Skips IDs that already have a transcript.
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+REPO_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 VENV="$REPO_DIR/.venv/bin/python3"
 TRANSCRIBE="$REPO_DIR/scripts/transcribe.py"
 OUT_DIR="$REPO_DIR/transcripts/youtube"

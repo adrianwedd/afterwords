@@ -5,8 +5,8 @@
 # serves stale link previews until its cache TTL expires (often days).
 #
 # Usage:
-#   bash scripts/fb-reindex.sh                                  # default URLs
-#   bash scripts/fb-reindex.sh https://example.com/page1 ...    # specific URLs
+#   bash scripts/internal/fb-reindex.sh                                  # default URLs
+#   bash scripts/internal/fb-reindex.sh https://example.com/page1 ...    # specific URLs
 #
 # Auth:
 #   - Set FB_APP_ID and FB_APP_SECRET in env to use the Graph API directly
