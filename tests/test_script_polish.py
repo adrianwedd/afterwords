@@ -8,6 +8,7 @@ import pytest
 REPO = Path(__file__).resolve().parent.parent
 VOICES_DIR = REPO / "voices"
 QA_SCRIPT = REPO / "scripts" / "qa-voices.py"
+TRIM_SCRIPT = REPO / "scripts" / "trim-silence-gaps.py"
 
 def run_script(script, *args, timeout=600):
     return subprocess.run(
@@ -33,3 +34,22 @@ def test_qa_json_structure():
     if data["voices"]:
         v = data["voices"][0]
         assert "name" in v and "ref_wer" in v
+
+
+# ── trim-silence-gaps tests ──
+
+def test_trim_has_json_flag():
+    result = run_script(TRIM_SCRIPT, "--help", timeout=30)
+    assert result.returncode == 0
+    assert "--json" in result.stdout
+
+@pytest.mark.integration
+def test_trim_json_structure():
+    pytest.importorskip("faster_whisper")
+    result = run_script(TRIM_SCRIPT, "--json")  # dry run — must still emit JSON
+    assert result.returncode in (0, 1), f"exit {result.returncode}: {result.stderr}"
+    data = json.loads(result.stdout)  # JSON in dry-run mode is the regression guard
+    assert isinstance(data["voices"], list)
+    if data["voices"]:
+        v = data["voices"][0]
+        assert "name" in v and "gap_count" in v and "changed" in v

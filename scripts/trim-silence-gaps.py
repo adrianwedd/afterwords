@@ -30,10 +30,6 @@ sys.modules["audit_vt"] = audit  # required for dataclasses on py3.14+
 spec.loader.exec_module(audit)
 
 
-def has_silence(finding) -> bool:
-    return any("mid-clip silence" in i for i in finding.issues)
-
-
 def trim_wav(src: Path, dst: Path) -> None:
     cmd = [
         "ffmpeg", "-y", "-i", str(src),
@@ -50,6 +46,8 @@ def main() -> int:
                     help="Actually overwrite WAVs and JSONs (otherwise dry-run)")
     ap.add_argument("--voice", help="Only process a single voice by name")
     ap.add_argument("--model", default="base.en")
+    ap.add_argument("--json", action="store_true",
+                    help="Emit JSON to stdout; suppress human output")
     args = ap.parse_args()
 
     from faster_whisper import WhisperModel
@@ -60,27 +58,34 @@ def main() -> int:
     if args.voice:
         profiles = [p for p in profiles if p.stem == args.voice]
 
+    quiet = args.json
     cache: dict[Path, str] = {}
-    targets: list[tuple[Path, Path]] = []
+    results: list[dict] = []                 # one entry per processed voice
+    targets: list[tuple[Path, Path, dict]] = []
     for jp in profiles:
         finding = audit.audit_one(jp, VOICES, cache, model)
-        if has_silence(finding):
+        gap_count = sum(1 for i in finding.issues if "mid-clip silence" in i)
+        rec = {"name": jp.stem, "gap_count": gap_count, "changed": False}
+        results.append(rec)
+        if gap_count > 0:
             ref = jp.parent / json.loads(jp.read_text())["reference_audio"]
-            targets.append((jp, ref))
+            targets.append((jp, ref, rec))
 
-    if not targets:
-        print("no silence-gap voices to trim")
-        return 0
-
-    print(f"would process {len(targets)} voice(s):")
-    for jp, ref in targets:
-        print(f"  {jp.stem}  ({ref.name})")
+    # Dry run: emit results and stop BEFORE applying (this is the bug the QA caught)
     if not args.apply:
-        print("\ndry run — pass --apply to actually trim and rewrite transcripts")
-        return 0
+        if quiet:
+            print(json.dumps({"voices": results}))
+        elif not targets:
+            print("no silence-gap voices to trim")
+        else:
+            print(f"would process {len(targets)} voice(s):")
+            for jp, ref, _ in targets:
+                print(f"  {jp.stem}  ({ref.name})")
+            print("\ndry run — pass --apply to actually trim and rewrite transcripts")
+        return 1 if any(r["gap_count"] for r in results) else 0
 
-    new_cache: dict[Path, str] = {}
-    for jp, ref in targets:
+    # Apply path
+    for jp, ref, rec in targets:
         backup = ref.with_suffix(ref.suffix + ".bak")
         if not backup.exists():
             shutil.copy2(ref, backup)
@@ -105,14 +110,25 @@ def main() -> int:
         profile["notes"] = (notes + " " + addition).strip() if notes else addition
 
         jp.write_text(json.dumps(profile, indent=2, ensure_ascii=False) + "\n")
-        print(f"  ✓ {jp.stem}: {info.duration:.1f}s")
-        if old_text != new_text:
-            print(f"      old: {old_text[:80]}")
-            print(f"      new: {new_text[:80]}")
+        rec["changed"] = True
+        if not quiet:
+            print(f"  ✓ {jp.stem}: {info.duration:.1f}s")
+            if old_text != new_text:
+                print(f"      old: {old_text[:80]}")
+                print(f"      new: {new_text[:80]}")
 
-    print(f"\ntrimmed {len(targets)} voice(s). re-run audit to verify.")
-    return 0
+    if quiet:
+        print(json.dumps({"voices": results}))
+    elif targets:
+        print(f"\ntrimmed {len(targets)} voice(s). re-run audit to verify.")
+    return 0   # apply succeeded — exit 0 (Unix convention). Dry-run returns 1 for "gaps found".
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except SystemExit:
+        raise
+    except Exception as e:
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)
