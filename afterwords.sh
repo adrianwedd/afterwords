@@ -706,9 +706,12 @@ cmd_update() {
     after_ref=$(git -C "$REPO_DIR" rev-parse --short HEAD)
 
     info "Installing packages..."
-    python3 -m pip install --quiet -r "${REPO_DIR}/requirements.txt"
-    [ -f "${REPO_DIR}/requirements-clone.txt" ] \
-        && python3 -m pip install --quiet -r "${REPO_DIR}/requirements-clone.txt"
+    python3 -m pip install --quiet -r "${REPO_DIR}/requirements.txt" \
+        || warn "pip install failed — run manually: python3 -m pip install -r requirements.txt"
+    if [ -f "${REPO_DIR}/requirements-clone.txt" ]; then
+        python3 -m pip install --quiet -r "${REPO_DIR}/requirements-clone.txt" \
+            || warn "pip install (clone deps) failed — run manually: python3 -m pip install -r requirements-clone.txt"
+    fi
 
     local changed_files
     changed_files=$(git -C "$REPO_DIR" diff --name-only "${before_ref}..${after_ref}" 2>/dev/null)
