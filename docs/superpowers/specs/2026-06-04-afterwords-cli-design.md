@@ -1,7 +1,7 @@
 # Afterwords CLI Expansion — Design Spec
 **Date:** 2026-06-04  
 **Sprint:** 6 (implementation)  
-**Status:** Draft — pending CLI agent QA
+**Status:** Draft — QA complete (Codex, 22 findings; 18 addressed below)
 
 ---
 
@@ -73,9 +73,11 @@ Wraps `scripts/compare-transcription.py`. Runs faster-whisper and parakeet on th
 ```
 afterwords compare voices/gandalf-ref.wav
 afterwords compare ref.wav --skip-parakeet
+afterwords compare ref.wav --skip-whisper
 ```
 
-Key passthrough flags: `--skip-parakeet`, `--model NAME`.
+Key passthrough flags: `--skip-parakeet`, `--skip-whisper`, `--duration SECS`, `--out-dir DIR`.
+Note: `compare-transcription.py` has no `--model` flag — do not document one.
 
 ### 1.5 `afterwords audit` (extended)
 
@@ -85,10 +87,10 @@ The existing `afterwords audit` wraps `scripts/audit-voice-transcripts.py` (voic
 afterwords audit                     # voice profile drift (existing behaviour)
 afterwords audit --voice picard      # single voice
 afterwords audit --archive           # audit TTS archive .mp3/.txt pairs
-afterwords audit --archive --voice picard
+afterwords audit --archive --json    # machine-readable archive audit
 ```
 
-The `--archive` flag is detected in `cmd_audit()` before passthrough; the remaining flags are forwarded to whichever script is selected.
+The `--archive` flag is detected in `cmd_audit()` before passthrough; the remaining flags are forwarded to whichever script is selected. Note: `audit-archive.py` does not support `--voice` filtering — do not document that combination.
 
 **Rationale for extending `audit` rather than a new `audit-archive` command:** keeps the surface area flat and groups related auditing concerns under one verb.
 
@@ -104,25 +106,33 @@ afterwords refine gandalf --quick    # skip compare and trim steps
 **Step sequence:**
 
 ```
-Step 1/4  qa --voice <name> --ref-only
-          → if WER > 15% warn but continue (user may want to see full picture)
+Step 1/4  qa --voice <name> --ref-only --json
+          → parse ref_wer field; if > 0.15 print warning but continue
+          → child exit 1 (WER warning) → warn and continue
+          → child exit 2 (hard error) → abort refine with exit 2
 
 Step 2/4  compare voices/<name>-ref.wav
           → print winner; if parakeet wins, note it but do not change the profile
             (backend selection is a separate decision requiring reclone)
+          → child exit 1 or 2 → print warning, continue to step 3
 
-Step 3/4  trim --voice <name>  (dry run first, then prompt)
-          → if no silence gap detected: skip prompt, print "✓ no silence gaps"
-          → if gap detected: show details, ask "Trim and rewrite reference? [Y/n]"
+Step 3/4  trim --voice <name> --json  (dry run; reads gap_count from JSON output)
+          → if gap_count == 0: print "✓ no silence gaps", skip prompt
+          → if gap_count > 0: show details, ask "Trim and rewrite reference? [Y/n]"
           → on Y: re-run trim --apply --voice <name>
+          → child exit 2 → abort refine with exit 2
 
-Step 4/4  audit --voice <name>
-          → final WER after any trim; print summary line
+Step 4/4  qa --voice <name> --ref-only --json
+          → re-measure WER after any trim; print final ref_wer summary line
+          → this is a re-run of step 1, not audit-voice-transcripts.py
+          → audit --voice is NOT used for WER (it reports drift flags, not WER)
 ```
 
-`--quick` skips steps 2 and 3 entirely (compare + trim). Useful when the reference is already known-good.
+`--quick` skips steps 2 and 3 (compare + trim) but still runs steps 1 and 4.
 
-**Exit codes:** 0 = all steps clean or warnings only; 1 = WER > 15% after step 4; 2 = script error in any step.
+**Exit code chaining:** `refine` treats child exit 1 as "warning — print and continue". Child exit 2 in any step aborts `refine` immediately with exit 2. This means implementors must not use `set -e` around the step subprocess calls; check `$?` explicitly.
+
+**Exit codes for `refine` itself:** 0 = all steps clean or warnings only; 1 = final WER (step 4) > 0.15; 2 = any step hard-errored.
 
 ### 1.7 `afterwords update [--check]`
 
@@ -136,17 +146,18 @@ afterwords update --check   # print available commits, exit without changing any
 **Sequence:**
 
 1. Verify the repo is a git working tree (`git rev-parse --git-dir`). If not (e.g. tarball install), print a clear message and exit 1.
-2. `git fetch origin`
-3. Report N commits available (`--check` exits here).
-4. `git pull --ff-only` — fast-forward only; if diverged, print instructions to merge manually and exit 1.
-5. `pip install --quiet -r requirements.txt`
-6. If `requirements-clone.txt` exists in the repo, `pip install --quiet -r requirements-clone.txt`.
-7. If the server is running, `afterwords reload` and report voices added/removed.
-8. Print a summary: version before → after, files changed, voices delta.
+2. Activate `${REPO_DIR}/.venv` — same pattern as all other CLI commands. Fail clearly if venv is missing.
+3. `git fetch origin`
+4. Report N commits available. `--check` exits here. Note: `--check` does modify `.git/FETCH_HEAD` and remote refs — "no changes" means no working-tree, package, or server state is modified.
+5. Check `git status --porcelain -- voices/` — if any tracked voice JSON or WAV is dirty, warn specifically ("your local edits to voices/ may be overwritten") and ask confirmation before proceeding.
+6. Check `git status --porcelain` for any other modifications — warn and ask confirmation before pulling.
+7. `git pull --ff-only` — fast-forward only; if diverged, print instructions to merge manually and exit 1.
+8. `pip install --quiet -r requirements.txt && pip install --quiet -r requirements-clone.txt` (if clone file exists).
+9. If the server is running, call `afterwords reload` (add-only — voices deleted from disk do NOT disappear; use `afterwords reload --prune` explicitly for that).
+10. Print a summary: git refs before → after, files changed, voices added (not removed — add-only reload).
+11. If `afterwords.sh` or `setup.sh` was among the changed files, print: *"Setup files changed — run `bash setup.sh` if behaviour feels wrong."* Do not attempt to re-exec the running shell process.
 
 **User voice safety:** `git pull` only touches tracked files. Untracked user-cloned voices in `voices/` are never affected.
-
-**Dirty working tree:** if `git status --porcelain` shows modifications, warn and ask confirmation before pulling. Do not pull silently over local changes.
 
 ---
 
@@ -158,7 +169,7 @@ If the first positional argument to `afterwords clone` (or `clone-voice.sh`) is 
 
 **Detection:** `[ -f "$1" ]` checked before the yt-dlp block. Accepts any format `ffprobe` can read (WAV, MP3, M4A, FLAC, etc.).
 
-**Profile JSON:** `source_url` is set to `"file://$(realpath "$1")"` so the provenance is recorded even though the file may not be portable.
+**Profile JSON:** `source_url` is set to `"local-file"` and a new `source_basename` field records only the filename (not the full path). Absolute paths are not stored — they leak filesystem layout when voices are committed or pushed to cloud.
 
 **Interactive flow:** unchanged — user is still asked for start time and voice name unless provided as positional args.
 
@@ -166,13 +177,13 @@ If the first positional argument to `afterwords clone` (or `clone-voice.sh`) is 
 
 After a successful clone, `clone` runs `afterwords refine <name>` automatically.
 
-`--quick` on the `clone` command passes `--quick` to `refine` (skips compare + trim). When `--quick` is used, the completion message reads:
+`--quick` on the `clone` command passes `--quick` to `refine`. This runs steps 1 and 4 (qa + re-audit) but skips steps 2 and 3 (compare + trim). It is not a full skip — the basic sanity check still runs. The distinction:
+- `clone URL NAME` → full refine (qa → compare → trim → re-audit)
+- `clone URL NAME --quick` → fast refine (qa → re-audit only)
 
-> *"Run `afterwords refine <name>` to verify reference quality when you're ready."*
+**Non-interactive / `--yes` mode:** auto-refine runs. The trim prompt in step 3 is suppressed (treated as "n"). Rationale: fully non-interactive callers must not block on a TTY prompt. Transcript confirmation and start-time prompts are also suppressed when all positional arguments are provided; if a required positional is missing with `--yes`, the script fails immediately rather than prompting.
 
-This makes `--quick` meaningful: it's not "skip QA forever", it's "I'll do QA separately".
-
-**Non-interactive / `--yes` mode:** auto-refine runs but skips the trim prompt (treats it as "n"). Rationale: fully non-interactive callers (scripts, agents) should not block on a TTY prompt; trim must be an explicit follow-up.
+**Argument parsing note:** existing `clone-voice.sh` uses raw positional args (`URL NAME [START] [--yes]`). Adding `--quick` requires care to avoid misparse when combined with `--yes` or a numeric START. Implementation must handle `--quick` as a named flag separate from the positional sequence.
 
 ---
 
@@ -180,7 +191,7 @@ This makes `--quick` meaningful: it's not "skip QA forever", it's "I'll do QA se
 
 `afterwords --ai` prints `docs/ai-guide.md` to stdout. The guide is a standalone Markdown document maintained separately from the shell script so it can be updated without touching `afterwords.sh`, and agents can also `cat` it directly from the repo.
 
-**Flag handling:** detected before the main `COMMAND` dispatch so it works as `afterwords --ai` (not a subcommand). If a pager (`less`, `bat`) is available and stdout is a TTY, pipe through it; otherwise raw stdout.
+**Flag handling:** detected before the main `COMMAND` dispatch so it works as `afterwords --ai` (not a subcommand). Always prints raw Markdown to stdout — no pager, even on a TTY. Agents frequently pipe `afterwords --ai | head` or capture the output; a pager would block them.
 
 **`docs/ai-guide.md` structure:**
 
@@ -247,7 +258,12 @@ Examples block at the bottom is extended with one example per new command.
 All user-facing analysis scripts receive a light consistency pass:
 
 - **Progress markers:** when stdout is a TTY (`sys.stdout.isatty()`), print `✓`, `⚠`, `✗` prefix lines matching the shell helper style. When stdout is redirected (pipe, file), print plain text only — no ANSI.
-- **`--json` flag:** all scripts that don't already have it get a `--json` flag that suppresses human output and prints a single JSON object to stdout. Enables agent parsing without screen-scraping.
+- **`--json` flag:** all scripts that don't already have it get a `--json` flag that suppresses human output and prints a single JSON object to stdout. Required fields per script:
+  - `qa --json` → `{ voices: [{name, ref_wer, synth_wer?}], threshold: 0.15 }`
+  - `trim --json` → `{ voices: [{name, gap_count, changed}] }` — `gap_count` is required; `refine` branches on it without screen-scraping
+  - `compare --json` → `{ winner: "faster-whisper"|"parakeet", faster_whisper_wer, parakeet_wer }`
+  - `audit-archive.py` already has `--json` — no change
+  - `transcribe.py` already outputs JSON by default — no `--json` flag needed
 - **Exit codes:** 0 = success/clean; 1 = warnings (WER above threshold, gaps found); 2 = hard error (missing dep, file not found).
 - **Argparse help strings:** updated to match the CLI-style descriptions above.
 
@@ -266,10 +282,12 @@ The following are moved to `scripts/internal/` (not exposed via CLI, no user-fac
 | `loudnorm-demo-audio.sh` | Website demo audio normalisation |
 | `clone-red-dwarf.sh` | One-off batch clone for the Red Dwarf gallery |
 | `check-og-metadata.py` | CI guard for og:description voice count |
-| `fb-reindex.sh` | Unknown/internal indexing tool |
+| `fb-reindex.sh` | Internal indexing tool |
 | `transcribe-youtube-batch.sh` | Bulk transcription — maintainer workflow |
-| `chunk-text.py` | Internal text-chunking utility |
 | `qa-transcripts.py` | NotebookLM transcript QA against source content — unrelated to voice cloning |
+| `review-content.py` | Gemini-powered blog post reviewer — unrelated to voice cloning |
+
+**Not moved — `chunk-text.py`:** has an existing test (`tests/test_chunk_text.py`). Moving it without updating the test import path would break CI. Leave it in `scripts/` and do not expose it via CLI.
 
 These remain in place (hook dependencies or user utilities):
 
@@ -291,13 +309,13 @@ These remain in place (hook dependencies or user utilities):
 | 2 | `afterwords --ai` prints the full ai-guide.md without error |
 | 3 | `afterwords clone /path/to/local.wav myvoice` completes without calling yt-dlp |
 | 4 | `afterwords clone <url> myvoice` runs `refine` at the end by default |
-| 5 | `afterwords clone <url> myvoice --quick` skips refine and prints the follow-up hint |
+| 5 | `afterwords clone <url> myvoice --quick` runs `refine --quick` (qa + re-audit, no compare/trim) |
 | 6 | `afterwords refine <voice>` runs all 4 steps, skips trim prompt when no gap found |
 | 7 | `afterwords update --check` reports commits without modifying anything |
 | 8 | `afterwords update` on a dirty working tree warns before pulling |
 | 9 | `afterwords audit --archive` uses `scripts/audit-archive.py`; plain `audit` unchanged |
 | 10 | All analysis scripts exit 0/1/2 per spec; `--json` flag present on qa, trim, compare |
-| 11 | `scripts/internal/` exists and contains the 8 moved scripts |
+| 11 | `scripts/internal/` exists and contains the 9 moved scripts (chunk-text.py stays in place) |
 | 12 | `pytest` passes (435+ tests) with no regressions |
 
 ---
