@@ -1267,6 +1267,17 @@ cmd_help() {
 
 # ── Main dispatch ────────────────────────────────────────────────
 
+# --ai flag: print AI guide and exit (detected before COMMAND dispatch)
+if [ "${1:-}" = "--ai" ]; then
+    AI_GUIDE="${REPO_DIR}/docs/ai-guide.md"
+    if [ -f "$AI_GUIDE" ]; then
+        cat "$AI_GUIDE"
+    else
+        fail "docs/ai-guide.md not found in ${REPO_DIR}"
+    fi
+    exit 0
+fi
+
 COMMAND="${1:-help}"
 shift 2>/dev/null || true
 

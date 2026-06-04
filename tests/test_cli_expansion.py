@@ -277,3 +277,18 @@ def test_update_warns_on_dirty_tree(tmp_path):
     combined = (result.stdout + result.stderr).lower()
     assert "voices" in combined          # warned about the dirty voices/ path
     assert result.returncode != 0        # aborted (non-TTY, no --yes)
+
+
+def test_ai_flag_prints_guide():
+    result = run_afterwords("--ai")
+    assert result.returncode == 0
+    assert "# Afterwords" in result.stdout
+    assert "## Command Reference" in result.stdout
+    assert "## Agent Tips" in result.stdout
+
+
+def test_ai_flag_no_pager():
+    """--ai must print raw to stdout (no pager, no interactive prompt)."""
+    result = run_afterwords("--ai")
+    assert result.returncode == 0
+    assert len(result.stdout) > 500  # substantive output
