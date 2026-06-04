@@ -261,7 +261,7 @@ All user-facing analysis scripts receive a light consistency pass:
 - **`--json` flag:** all scripts that don't already have it get a `--json` flag that suppresses human output and prints a single JSON object to stdout. Required fields per script:
   - `qa --json` → `{ voices: [{name, ref_wer, synth_wer?}], threshold: 0.15 }`
   - `trim --json` → `{ voices: [{name, gap_count, changed}] }` — `gap_count` is required; `refine` branches on it without screen-scraping
-  - `compare --json` → `{ winner: "faster-whisper"|"parakeet", faster_whisper_wer, parakeet_wer }`
+  - `compare --json` → `{ winner: "faster-whisper"|"parakeet"|null, agreement_wer, whisper_words, parakeet_words, skipped: [] }` — `winner` is the **faster** model by elapsed wall-clock (matching the script's on-screen Verdict), or `null` when only one model ran. The script has **no ground-truth reference transcript**, so it cannot produce per-model accuracy (`faster_whisper_wer`/`parakeet_wer`); `agreement_wer` is the inter-model WER (whisper-output vs parakeet-output, `null` unless both ran). `whisper_words`/`parakeet_words` are raw word counts; `skipped` lists models that did not run (e.g. `--skip-parakeet`). `refine` runs this only for its exit code and does not parse the body.
   - `audit-archive.py` already has `--json` — no change
   - `transcribe.py` already outputs JSON by default — no `--json` flag needed
 - **Exit codes:** 0 = success/clean; 1 = warnings (WER above threshold, gaps found); 2 = hard error (missing dep, file not found).
