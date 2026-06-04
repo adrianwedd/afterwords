@@ -1,9 +1,0 @@
-{
-  "name": "bardem-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "bardem-ref.wav",
-  "reference_text": "What's the most you ever lost on a coin toss? Sarah? The most you ever lost.",
-  "family": "bardem",
-  "source_url": "https://www.youtube.com/watch?v=ZY0DG8rUnCA",
-  "segment_start_s": 155
-}

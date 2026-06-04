@@ -1,9 +1,0 @@
-{
-  "name": "saul-goodman-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "saul-goodman-ref.wav",
-  "reference_text": "Oh, hello. I was just working on a multi-million dollar lawsuit for one of my clients. I know what you're thinking. Yeah, a lawsuit sounds good, Saul, but who can you call?",
-  "family": "saul-goodman",
-  "source_url": "https://www.youtube.com/watch?v=pPd67CEL54E",
-  "segment_start_s": 2
-}

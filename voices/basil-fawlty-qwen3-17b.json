@@ -1,9 +1,0 @@
-{
-  "name": "basil-fawlty-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "basil-fawlty-ref.wav",
-  "reference_text": "Would you care for a rat? Just the biscuit. I'm doing it, I'm doing it now!",
-  "family": "basil-fawlty",
-  "source_url": "https://www.youtube.com/watch?v=gy7xPCImMXk",
-  "segment_start_s": 13
-}

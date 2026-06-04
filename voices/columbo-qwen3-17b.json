@@ -1,9 +1,0 @@
-{
-  "name": "columbo-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "columbo-ref.wav",
-  "reference_text": "I can't find him and I was wondering whether you can help me. Apparently he goofed up on some expensive project that he was working on. Gee, I've seen this picture every day.",
-  "family": "columbo",
-  "source_url": "https://www.youtube.com/watch?v=QxBnaMGP2aY",
-  "segment_start_s": 2
-}

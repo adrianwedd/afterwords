@@ -1,7 +1,0 @@
-{
-  "name": "snape-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "snape-ref.wav",
-  "reference_text": "There will be no foolish wand waving or silly incantations in this class.",
-  "family": "snape"
-}

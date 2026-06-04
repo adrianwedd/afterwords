@@ -1,9 +1,0 @@
-{
-  "name": "jim-royle-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "jim-royle-ref.wav",
-  "reference_text": "Kiss my arse. Equaliser my arse. Preparation's my arse. Commuted my arse. Have a good time, my arse. Beast my arse.",
-  "family": "jim-royle",
-  "source_url": "https://www.youtube.com/watch?v=pUQhN-S-jwM",
-  "segment_start_s": 30
-}

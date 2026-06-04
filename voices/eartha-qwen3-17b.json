@@ -1,8 +1,0 @@
-{
-  "name": "eartha-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "eartha-ref.wav",
-  "reference_text": "A relationship is a relationship that has to be earned, not to compromise for. I love relationships. I think they're fantastic. They're wonderful. I think they're great. I think there's nothing in the world more beautiful.",
-  "family": "eartha",
-  "notes": "Reference re-trimmed via ffmpeg silenceremove (now 11.3s dense). Transcript refreshed from Whisper."
-}

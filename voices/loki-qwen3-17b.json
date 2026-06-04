@@ -1,7 +1,0 @@
-{
-  "name": "loki-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "loki-ref.wav",
-  "reference_text": "Is not this simpler? Is this not your natural state?",
-  "family": "loki"
-}

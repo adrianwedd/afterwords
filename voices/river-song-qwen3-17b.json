@@ -1,9 +1,0 @@
-{
-  "name": "river-song-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "river-song-ref.wav",
-  "reference_text": "When you love the Doctor, it's like loving the stars themselves. You don't expect a sunset to admire you back. And if I happen to find myself in danger, let me tell you, the Doctor is not stupid enough or sentimental enough.",
-  "family": "river-song",
-  "source_url": "https://www.youtube.com/watch?v=BgVJDd5vHfw",
-  "segment_start_s": 133
-}
