@@ -44,10 +44,11 @@ CODEX_WATCH_LOG="/tmp/codex-tts-watch.log"
 CODEX_WATCH_SCRIPT_REL=".claude/hooks/codex-tts-watch.sh"
 
 # Resolve the repo directory (where server.py lives)
-if [ -L "${BASH_SOURCE[0]}" ]; then
-    # Followed a symlink — resolve to the real script location
+# Allow test override of REPO_DIR
+if [ -n "${AFTERWORDS_REPO_DIR:-}" ]; then
+    REPO_DIR="$AFTERWORDS_REPO_DIR"
+elif [ -L "${BASH_SOURCE[0]}" ]; then
     REAL_SCRIPT="$(readlink "${BASH_SOURCE[0]}")"
-    # Handle relative symlinks
     if [[ "$REAL_SCRIPT" != /* ]]; then
         REAL_SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd "$(dirname "$REAL_SCRIPT")" && pwd)/$(basename "$REAL_SCRIPT")"
     fi
@@ -479,6 +480,42 @@ cmd_audit() {
     if [ ! -d "${REPO_DIR}/.venv" ]; then
         fail "venv missing — run setup.sh first"
     fi
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+    python3 "$script" "$@"
+}
+
+cmd_transcribe() {
+    local script="${REPO_DIR}/scripts/transcribe.py"
+    [ -f "$script" ] || fail "transcribe.py not found in ${REPO_DIR}/scripts/"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+    python3 "$script" "$@"
+}
+
+cmd_qa() {
+    local script="${REPO_DIR}/scripts/qa-voices.py"
+    [ -f "$script" ] || fail "qa-voices.py not found in ${REPO_DIR}/scripts/"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+    python3 "$script" "$@"
+}
+
+cmd_trim() {
+    local script="${REPO_DIR}/scripts/trim-silence-gaps.py"
+    [ -f "$script" ] || fail "trim-silence-gaps.py not found in ${REPO_DIR}/scripts/"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+    python3 "$script" "$@"
+}
+
+cmd_compare() {
+    local script="${REPO_DIR}/scripts/compare-transcription.py"
+    [ -f "$script" ] || fail "compare-transcription.py not found in ${REPO_DIR}/scripts/"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
     # shellcheck disable=SC1091
     source "${REPO_DIR}/.venv/bin/activate"
     python3 "$script" "$@"
@@ -1000,6 +1037,10 @@ case "$COMMAND" in
     pull)        cmd_pull "$@" ;;
     setup-cloud) cmd_setup_cloud "$@" ;;
     audit)       cmd_audit "$@" ;;
+    transcribe)  cmd_transcribe "$@" ;;
+    qa)          cmd_qa "$@" ;;
+    trim)        cmd_trim "$@" ;;
+    compare)     cmd_compare "$@" ;;
     codex-hook)  cmd_codex_hook "$@" ;;
     configure)   cmd_configure "$@" ;;
     uninstall)   cmd_uninstall "$@" ;;
