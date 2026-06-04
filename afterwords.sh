@@ -42,6 +42,7 @@ AFTERWORDS_SERVER_CONFIG="$HOME/.afterwords-server"
 CODEX_WATCH_PID="/tmp/codex-tts-watch.pid"
 CODEX_WATCH_LOG="/tmp/codex-tts-watch.log"
 CODEX_WATCH_SCRIPT_REL=".claude/hooks/codex-tts-watch.sh"
+MUTE_FILE="/tmp/afterwords-muted"
 
 # Resolve the repo directory (where server.py lives)
 # Allow test override of REPO_DIR
@@ -221,7 +222,9 @@ cmd_status() {
     if [ -n "$pid" ]; then
         local mgmt="manual"
         plist_loaded && mgmt="launchd (auto-start)"
-        echo -e "  ${GREEN}●${NC} ${BOLD}running${NC}  ${DIM}PID ${pid}  port ${PORT}  ${mgmt}${NC}${with17b_label}"
+        local mute_label=""
+        [ -f "$MUTE_FILE" ] && mute_label="  ${YELLOW}⏸ muted${NC}"
+        echo -e "  ${GREEN}●${NC} ${BOLD}running${NC}  ${DIM}PID ${pid}  port ${PORT}  ${mgmt}${NC}${with17b_label}${mute_label}"
     else
         echo -e "  ${RED}●${NC} ${BOLD}stopped${NC}${with17b_label}"
         echo
@@ -1227,6 +1230,18 @@ cmd_configure() {
     esac
 }
 
+cmd_mute() {
+    if [ -f "$MUTE_FILE" ]; then
+        rm -f "$MUTE_FILE"
+        ok "Unmuted — playback resumed"
+    else
+        touch "$MUTE_FILE"
+        pkill -x afplay 2>/dev/null || true
+        ok "Muted — synthesis continues, playback paused"
+        info "Run ${CYAN}afterwords mute${NC} again to unmute"
+    fi
+}
+
 cmd_help() {
     echo
     echo -e "  ${BOLD}afterwords${NC}  ${DIM}— local voice-cloning TTS for Apple Silicon${NC}"
@@ -1258,6 +1273,7 @@ cmd_help() {
     echo -e "    ${CYAN}setup-cloud${NC}       Configure API key and cloud URL"
     echo
     echo -e "  ${BOLD}Integrations${NC}"
+    echo -e "    ${CYAN}mute${NC}              Toggle playback on/off (synthesis and archiving continue)"
     echo -e "    ${CYAN}codex-hook start${NC}  Speak Codex CLI responses (run inside Codex)"
     echo -e "    ${CYAN}codex-hook stop${NC}   Stop the Codex watcher"
     echo
@@ -1313,6 +1329,7 @@ case "$COMMAND" in
     compare)     cmd_compare "$@" ;;
     refine)      cmd_refine "$@" ;;
     update)      cmd_update "$@" ;;
+    mute)        cmd_mute "$@" ;;
     codex-hook)  cmd_codex_hook "$@" ;;
     configure)   cmd_configure "$@" ;;
     uninstall)   cmd_uninstall "$@" ;;

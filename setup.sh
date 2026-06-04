@@ -401,6 +401,7 @@ mkdir -p "$ARCHIVE_DIR"
 
 PLAY_LOCK="/tmp/afterwords-play.lock"
 PLAY_PID="/tmp/afterwords-play.pid"
+MUTE_FILE="/tmp/afterwords-muted"
 acquire_play_lock() {
     local w=0
     while ! mkdir "$PLAY_LOCK" 2>/dev/null; do
@@ -552,7 +553,7 @@ print('LINE=' + shlex.quote(d.get('text','')))
                 ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
                     && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
                 lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c$((CHUNK_I-1)).mp3" 2>/dev/null || true
-                afplay "$PREV_WAV" 2>/dev/null
+                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
             fi
             rm -f "$PREV_WAV"
         fi
@@ -570,7 +571,7 @@ print('LINE=' + shlex.quote(d.get('text','')))
             ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
                 && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
             lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c${NCHUNKS}.mp3" 2>/dev/null || true
-            afplay "$PREV_WAV" 2>/dev/null
+            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
         fi
         rm -f "$PREV_WAV"
     fi
