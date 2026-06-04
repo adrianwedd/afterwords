@@ -9,6 +9,17 @@
 #
 set -euo pipefail
 
+# Single source of truth for local-file-vs-URL detection (shared by the
+# real flow below and the --check-source test hook). Strips an optional
+# file:// scheme, then tests for an existing file.
+_is_local_source() { [ -f "${1#file://}" ]; }
+
+# Test hook: print the resolved source kind and exit before any venv/IO work.
+if [[ " $* " == *" --check-source "* ]]; then
+    if _is_local_source "${1:-}"; then echo "local-file"; else echo "youtube"; fi
+    exit 0
+fi
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 source .venv/bin/activate 2>/dev/null || { echo -e "\033[0;31m✗\033[0m Run setup.sh first"; exit 1; }
@@ -29,28 +40,33 @@ rule()  { echo -e "${DIM}  ─────────────────�
 
 _T0=$(date +%s)
 
-YT_URL="${1:-}"
-VOICE_NAME="${2:-}"
-START_S="${3:-}"
 AUTO_YES=false
-[[ "${4:-}" == "--yes" ]] && AUTO_YES=true
-
-# Parse --backend and --all-backends from any argument position
+QUICK=false
 BACKEND_NAME=""
 ALL_BACKENDS=false
-for arg in "$@"; do
+
+# Separate positionals from flags. --backend consumes the following token.
+POSITIONAL=()
+skip_next=false
+all=("$@")
+for ((i=0; i<${#all[@]}; i++)); do
+    arg="${all[i]}"
+    if $skip_next; then skip_next=false; continue; fi
     case "$arg" in
-        --backend=*) BACKEND_NAME="${arg#--backend=}" ;;
+        --yes)          AUTO_YES=true ;;
+        --quick)        QUICK=true ;;
         --all-backends) ALL_BACKENDS=true ;;
+        --check-source) ;;                       # handled at top of file
+        --backend=*)    BACKEND_NAME="${arg#--backend=}" ;;
+        --backend)      BACKEND_NAME="${all[i+1]:-}"; skip_next=true ;;
+        --*)            warn "Ignoring unknown flag: $arg" ;;
+        *)              POSITIONAL+=("$arg") ;;
     esac
 done
-# Also accept `--backend NAME` split form
-args=("$@")
-for ((i=0; i<${#args[@]}; i++)); do
-    if [ "${args[i]}" = "--backend" ] && [ $((i+1)) -lt ${#args[@]} ]; then
-        BACKEND_NAME="${args[i+1]}"
-    fi
-done
+
+YT_URL="${POSITIONAL[0]:-}"
+VOICE_NAME="${POSITIONAL[1]:-}"
+START_S="${POSITIONAL[2]:-}"
 
 # Query registry via Python (registry lives in backends/__main__.py)
 if ! AVAILABLE_BACKENDS=$(python3 -m backends list 2>/dev/null); then
@@ -93,23 +109,39 @@ fi
 VOICE_NAME=$(echo "${VOICE_NAME:-voice}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g')
 [ -z "$VOICE_NAME" ] && VOICE_NAME="voice"
 
-# Download
-info "Downloading audio..."
-TMP_DL_DIR=$(mktemp -d)
-TMP_SRC="$TMP_DL_DIR/source.wav"
-TMPFILES+=("$TMP_DL_DIR")
-if ! yt-dlp -x --audio-format wav -o "$TMP_DL_DIR/source.%(ext)s" "$YT_URL" 2>&1 | tail -5; then
-    fail "Download failed. Check the URL is valid and not private/age-restricted."
+# Detect local file — skip yt-dlp if $YT_URL is an existing file path (file:// ok)
+LOCAL_FILE=false
+SOURCE_BASENAME=""
+if _is_local_source "$YT_URL"; then
+    LOCAL_FILE=true
+    YT_URL="${YT_URL#file://}"
+    SOURCE_BASENAME=$(basename "$YT_URL")
 fi
-# yt-dlp may leave intermediate files; find the final wav
-[ -f "$TMP_SRC" ] || TMP_SRC=$(find "$TMP_DL_DIR" -name '*.wav' -print -quit)
-[ -f "$TMP_SRC" ] || fail "Download produced no audio file. Check the URL."
-DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$TMP_SRC" 2>/dev/null | cut -d. -f1)
-[[ "$DURATION" =~ ^[0-9]+$ ]] || DURATION="unknown"
-if [[ "$DURATION" == "unknown" ]]; then
-    ok "Downloaded"
+
+if $LOCAL_FILE; then
+    TMP_SRC="$YT_URL"
+    DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$TMP_SRC" 2>/dev/null | cut -d. -f1) || DURATION="unknown"
+    [[ "$DURATION" =~ ^[0-9]+$ ]] || DURATION="unknown"
+    ok "Using local file: ${SOURCE_BASENAME} (${DURATION}s)"
 else
-    ok "Downloaded (${DURATION}s)"
+    # Download
+    info "Downloading audio..."
+    TMP_DL_DIR=$(mktemp -d)
+    TMP_SRC="$TMP_DL_DIR/source.wav"
+    TMPFILES+=("$TMP_DL_DIR")
+    if ! yt-dlp -x --audio-format wav -o "$TMP_DL_DIR/source.%(ext)s" "$YT_URL" 2>&1 | tail -5; then
+        fail "Download failed. Check the URL is valid and not private/age-restricted."
+    fi
+    # yt-dlp may leave intermediate files; find the final wav
+    [ -f "$TMP_SRC" ] || TMP_SRC=$(find "$TMP_DL_DIR" -name '*.wav' -print -quit)
+    [ -f "$TMP_SRC" ] || fail "Download produced no audio file. Check the URL."
+    DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$TMP_SRC" 2>/dev/null | cut -d. -f1)
+    [[ "$DURATION" =~ ^[0-9]+$ ]] || DURATION="unknown"
+    if [[ "$DURATION" == "unknown" ]]; then
+        ok "Downloaded"
+    else
+        ok "Downloaded (${DURATION}s)"
+    fi
 fi
 
 # Energy analysis — show expressiveness heatmap to help pick the best segment
@@ -286,18 +318,23 @@ fi
 if [ "$ALL_BACKENDS" = true ]; then
     DEFAULT_BACKEND="qwen3-0.6b"
     # Default-backend profile uses the plain voice_name
-    python3 - "$VOICE_NAME" "$YT_URL" "$REF_TEXT" "$START_S" "$DEFAULT_BACKEND" <<'PYEOF'
+    python3 - "$VOICE_NAME" "$YT_URL" "$REF_TEXT" "$START_S" "$DEFAULT_BACKEND" "$LOCAL_FILE" "$SOURCE_BASENAME" <<'PYEOF'
 import json, sys
 name, url, text, start, backend = sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4]), sys.argv[5]
+is_local = sys.argv[6] == "true"
+source_basename = sys.argv[7]
+profile = {
+    "name": name,
+    "backend": backend,
+    "source_url": "local-file" if is_local else url,
+    "reference_audio": f"{name}-ref.wav",
+    "reference_text": text,
+    "segment_start_s": start,
+}
+if is_local and source_basename:
+    profile["source_basename"] = source_basename
 with open(f"voices/{name}.json", "w") as f:
-    json.dump({
-        "name": name,
-        "backend": backend,
-        "source_url": url,
-        "reference_audio": f"{name}-ref.wav",
-        "reference_text": text,
-        "segment_start_s": start,
-    }, f, indent=2)
+    json.dump(profile, f, indent=2)
 PYEOF
     ok "Profile saved: voices/${VOICE_NAME}.json (backend: $DEFAULT_BACKEND)"
 
@@ -306,34 +343,44 @@ PYEOF
         [ "$_b" = "$DEFAULT_BACKEND" ] && continue
         _slug=$(python3 -m backends slug "$_b")
         _alt_name="${VOICE_NAME}-${_slug}"
-        python3 - "$VOICE_NAME" "$_alt_name" "$YT_URL" "$REF_TEXT" "$START_S" "$_b" <<'PYEOF'
+        python3 - "$VOICE_NAME" "$_alt_name" "$YT_URL" "$REF_TEXT" "$START_S" "$_b" "$LOCAL_FILE" "$SOURCE_BASENAME" <<'PYEOF'
 import json, sys
 voice_name, alt_name, url, text, start, backend = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], int(sys.argv[5]), sys.argv[6]
+is_local = sys.argv[7] == "true"
+source_basename = sys.argv[8]
+profile = {
+    "name": alt_name,
+    "backend": backend,
+    "source_url": "local-file" if is_local else url,
+    "reference_audio": f"{voice_name}-ref.wav",
+    "reference_text": text,
+    "segment_start_s": start,
+}
+if is_local and source_basename:
+    profile["source_basename"] = source_basename
 with open(f"voices/{alt_name}.json", "w") as f:
-    json.dump({
-        "name": alt_name,
-        "backend": backend,
-        "source_url": url,
-        "reference_audio": f"{voice_name}-ref.wav",
-        "reference_text": text,
-        "segment_start_s": start,
-    }, f, indent=2)
+    json.dump(profile, f, indent=2)
 PYEOF
         ok "Profile saved: voices/${_alt_name}.json (backend: $_b)"
     done <<< "$AVAILABLE_BACKENDS"
 else
-    python3 - "$VOICE_NAME" "$YT_URL" "$REF_TEXT" "$START_S" "$BACKEND_NAME" <<'PYEOF'
+    python3 - "$VOICE_NAME" "$YT_URL" "$REF_TEXT" "$START_S" "$BACKEND_NAME" "$LOCAL_FILE" "$SOURCE_BASENAME" <<'PYEOF'
 import json, sys
 name, url, text, start, backend = sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4]), sys.argv[5]
+is_local = sys.argv[6] == "true"
+source_basename = sys.argv[7]
+profile = {
+    "name": name,
+    "backend": backend,
+    "source_url": "local-file" if is_local else url,
+    "reference_audio": f"{name}-ref.wav",
+    "reference_text": text,
+    "segment_start_s": start,
+}
+if is_local and source_basename:
+    profile["source_basename"] = source_basename
 with open(f"voices/{name}.json", "w") as f:
-    json.dump({
-        "name": name,
-        "backend": backend,
-        "source_url": url,
-        "reference_audio": f"{name}-ref.wav",
-        "reference_text": text,
-        "segment_start_s": start,
-    }, f, indent=2)
+    json.dump(profile, f, indent=2)
 PYEOF
     ok "Profile saved: voices/${VOICE_NAME}.json (backend: $BACKEND_NAME)"
 fi

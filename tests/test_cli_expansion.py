@@ -54,3 +54,24 @@ def test_audit_plain_unchanged(tmp_path):
                             env_override={"AFTERWORDS_REPO_DIR": str(tmp_path)})
     assert "TRANSCRIPT_SCRIPT_CALLED" in result.stdout
     assert "WRONG_SCRIPT" not in result.stdout
+
+
+def test_clone_local_file_detected_not_ytdlp():
+    """A local file path resolves to local-file source, never yt-dlp."""
+    sample = REPO / "voices" / "galadriel-ref.wav"  # tracked, real file
+    result = subprocess.run(
+        ["bash", str(REPO / "clone-voice.sh"), str(sample), "test-local", "--check-source"],
+        capture_output=True, text=True, timeout=30,
+    )
+    assert result.returncode == 0, result.stderr
+    assert result.stdout.strip() == "local-file"
+    assert "yt-dlp" not in (result.stdout + result.stderr).lower()
+
+
+def test_clone_url_detected_as_youtube():
+    result = subprocess.run(
+        ["bash", str(REPO / "clone-voice.sh"),
+         "https://youtube.com/watch?v=x", "test-url", "--check-source"],
+        capture_output=True, text=True, timeout=30,
+    )
+    assert result.stdout.strip() == "youtube"
