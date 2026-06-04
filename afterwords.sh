@@ -606,7 +606,7 @@ except Exception:
             echo "$trim_json"
             local do_trim="n"
             if [ -t 0 ] && ! $yes; then
-                echo -en "  ${BOLD}Trim and rewrite reference? [Y/n]${NC} "
+                echo -en "  ${BOLD}Trim and rewrite reference? [y/N]${NC} "
                 read -r do_trim
             fi
             if [[ "${do_trim:-n}" =~ ^[Yy]$ ]]; then
