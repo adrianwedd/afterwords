@@ -1,6 +1,6 @@
 {
   "name": "mckenna",
-  "backend": "qwen3-1.7b",
+  "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=-dsgb7_ccPM",
   "reference_audio": "mckenna-ref.wav",
   "reference_text": "monolithic institutions. We can't really even imagine a world like that. There hasn't been a world like that since late Roman times. I mean, the Roman hegemony was quite cohesive.",

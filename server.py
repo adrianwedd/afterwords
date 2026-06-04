@@ -529,7 +529,7 @@ async def clone_voice_endpoint(
     session_id: str = Form(...),
     emotion: str = Form("neutral"),
     transcript: str | None = Form(None),
-    backend: str = Form("qwen3-1.7b"),
+    backend: str = Form("qwen3-0.6b"),
 ):
     """Create a voice profile from raw audio. Denoises, optionally transcribes, registers."""
     if not _clone_enabled:

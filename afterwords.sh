@@ -225,12 +225,13 @@ if lb:
 # Voices — compact list
 if voices:
     print(f'  {B}voices{R}  {D}(default: {defvoice}){R}')
-    cols = 4
-    padded = [f'{C}{v:<20}{R}' for v in voices]
+    col_w = max((len(v) for v in voices), default=20) + 2
+    cols = max(1, 80 // col_w)
+    padded = [f'{C}{v:<{col_w}}{R}' for v in voices]
     for i in range(0, len(padded), cols):
         print('    ' + ''.join(padded[i:i+cols]))
 print()
-print(f'  {D}afterwords logs  —  {sys.argv[0] if len(sys.argv) > 0 else \"log\"} at /tmp/claude-tts-server.log{R}')
+print(f'  {D}afterwords logs  —  /tmp/claude-tts-server.log{R}')
 " 2>/dev/null || warn "Server running but /health not yet responding (warming up)"
     fi
     echo
