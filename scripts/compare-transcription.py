@@ -209,6 +209,7 @@ def main() -> int:
     ap.add_argument("--out-dir", default=None, help="Save transcripts + audio here (default: /tmp/)")
     ap.add_argument("--skip-whisper", action="store_true", help="Only run parakeet")
     ap.add_argument("--skip-parakeet", action="store_true", help="Only run faster-whisper")
+    ap.add_argument("--json", action="store_true", help="Emit JSON to stdout; suppress human output")
     args = ap.parse_args()
 
     out_dir = Path(args.out_dir) if args.out_dir else Path(tempfile.mkdtemp(prefix="transcribe-cmp-"))
@@ -220,16 +221,16 @@ def main() -> int:
     if args.youtube:
         if not shutil.which("yt-dlp"):
             print("error: yt-dlp not found. brew install yt-dlp", file=sys.stderr)
-            return 1
+            return 2
         if not shutil.which("ffmpeg"):
             print("error: ffmpeg not found. brew install ffmpeg", file=sys.stderr)
-            return 1
+            return 2
         audio_path = download_youtube(args.youtube, args.duration, out_dir)
     else:
         src = Path(args.audio)
         if not src.exists():
             print(f"error: file not found: {src}", file=sys.stderr)
-            return 1
+            return 2
         # Normalise to 16kHz mono for fair comparison
         audio_path = out_dir / "source_norm.wav"
         subprocess.run(
@@ -265,8 +266,30 @@ def main() -> int:
         except Exception as e:
             print(f"  {c(RED, 'FAILED')}: {e}", file=sys.stderr)
 
-    # ── Analysis ───────────────────────────────────────────────────────────────
-    if whisper_words and parakeet_words:
+    # ── JSON output (skips all human output) ──────────────────────────────────
+    if args.json:
+        both = bool(whisper_words and parakeet_words)
+        # NOTE: no ground truth exists — agreement_wer is inter-model WER (wer_wp),
+        # not per-model accuracy; winner is the faster model by wall-clock time.
+        skipped = []
+        if not whisper_words:
+            skipped.append("faster-whisper")
+        if not parakeet_words:
+            skipped.append("parakeet")
+        out = {
+            "winner": (("parakeet" if parakeet_time < whisper_time else "faster-whisper")
+                       if both else None),
+            "agreement_wer": (wer(word_list(whisper_words), word_list(parakeet_words))
+                              if both else None),
+            "whisper_words": len(whisper_words),
+            "parakeet_words": len(parakeet_words),
+            "skipped": skipped,
+        }
+        print(json.dumps(out))
+        sys.exit(0 if both else 1)
+
+    # ── Analysis (human output only) ──────────────────────────────────────────
+    if not args.json and whisper_words and parakeet_words:
         wl = word_list(whisper_words)
         pl = word_list(parakeet_words)
         sim = similarity(wl, pl)
@@ -318,4 +341,10 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except SystemExit:
+        raise
+    except Exception as e:
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)
