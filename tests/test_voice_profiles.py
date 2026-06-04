@@ -12,7 +12,7 @@ import backends
 @pytest.fixture(autouse=True)
 def _load_registry():
     backends.reset_for_tests()
-    backends.register_all()
+    backends.register_all(with_17b=True)
     yield
     backends.reset_for_tests()
 

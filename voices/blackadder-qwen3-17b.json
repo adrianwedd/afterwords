@@ -1,9 +1,0 @@
-{
-  "name": "blackadder-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "blackadder-ref.wav",
-  "reference_text": "The rain beats down so hard, it makes your head bleed. So some sort of hat. There's probably an order. So did Bortig, actually. Only last year, my aunt.",
-  "family": "blackadder",
-  "source_url": "https://www.youtube.com/watch?v=n-Zm8H6G108",
-  "segment_start_s": 60
-}

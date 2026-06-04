@@ -1,9 +1,0 @@
-{
-  "name": "rimmer-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "rimmer-ref.wav",
-  "reference_text": "We are gathered here today to say our final farewells to Mr. River. On occasion he was a small -minded bureaucratic and competent cowardid little person. But he also had his good qualities. Those were his good qualities.",
-  "family": "rimmer",
-  "source_url": "https://www.youtube.com/watch?v=W4ziDB2K46M",
-  "segment_start_s": 0
-}

@@ -1,9 +1,0 @@
-{
-  "name": "vesper-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "vesper-ref.wav",
-  "reference_text": "Now, I haven't just met you. I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine. You think of women as disposable pleasures rather than meaningful pursuits.",
-  "family": "vesper",
-  "source_url": "https://www.youtube.com/watch?v=xuyoqS31Yug",
-  "segment_start_s": 197
-}

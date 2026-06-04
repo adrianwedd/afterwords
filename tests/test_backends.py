@@ -15,7 +15,16 @@ def _clean_registry():
 
 
 def test_register_all_populates_shipped_backends():
+    # Default (lean) install: 0.6b only + experimentals.
     backends.register_all()
+    names = set(backends.names())
+    assert "qwen3-0.6b" in names
+    assert "qwen3-1.7b" not in names
+    assert "voxtral" in names
+
+
+def test_register_all_with_17b_includes_large_model():
+    backends.register_all(with_17b=True)
     assert set(backends.names()) == {
         "qwen3-0.6b", "qwen3-1.7b", "voxtral",
         "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits", "xtts-v2",
@@ -35,7 +44,7 @@ def test_register_all_isolates_experimental_failures(monkeypatch):
         return real_import(name, package=package)
 
     monkeypatch.setattr(importlib, "import_module", boom_one)
-    backends.register_all()
+    backends.register_all(with_17b=True)
     names = set(backends.names())
     # primary path is unaffected
     assert {"qwen3-0.6b", "qwen3-1.7b"} <= names

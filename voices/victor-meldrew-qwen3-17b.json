@@ -1,9 +1,0 @@
-{
-  "name": "victor-meldrew-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "victor-meldrew-ref.wav",
-  "reference_text": "Goodie, goodie. Oh, goodie. This is some sort of joke. No, this is spiffing fun, isn't it? That's all I need. The end of a perfect day. 72 hours of non-stop madness, misery and mayhem. You're no belief. Thank you very much.",
-  "family": "victor-meldrew",
-  "source_url": "https://www.youtube.com/watch?v=ZqLT3PmOKtQ",
-  "segment_start_s": 40
-}

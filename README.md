@@ -2,7 +2,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or wire it into any AI coding harness — **Claude Code**, **Codex CLI**, **Cursor**, **Gemini CLI / Antigravity (agy)**, or **Hermes Agent** — to hear every response spoken aloud. **100 flagship voice families** (281 profiles across backend variants) on **the Qwen3-TTS cloning path** (0.6B + 1.7B, the recommended backends), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or wire it into any AI coding harness — **Claude Code**, **Codex CLI**, **Cursor**, **Gemini CLI / Antigravity (agy)**, or **Hermes Agent** — to hear every response spoken aloud. **100 flagship voice families** (200 profiles on **Qwen3-TTS 0.6B**, the default cloning path), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -21,6 +21,12 @@ For a server-only install with no Claude Code integration:
 ```bash
 bash setup.sh --server-only
 ```
+
+### Set up with an AI agent
+
+Paste this into Claude Code, Codex, Cursor, or any AI agent to install afterwords hands-free:
+
+> Clone https://github.com/adrianwedd/afterwords and run `bash setup.sh`. Walk me through each step — ask for a YouTube URL when you need a voice to clone.
 
 ## With Claude Code
 
@@ -324,7 +330,7 @@ The skill handles voice selection, server health checks, synthesis, and playback
 │                                                                  │
 │  ┌──────────────────────────┐                                    │
 │  │  Multi-Backend TTS       │  ← MLX Qwen3 + 15 alt backends    │
-│  │  localhost:7860           │  ← 281 voice profiles (100 fam)   │
+│  │  localhost:7860           │  ← 200 voice profiles (100 fam)   │
 │  │  /synthesize?text=...     │  ← ~20s per sentence (Qwen3)      │
 │  └────────────┬─────────────┘                                    │
 │               │  shared play lock (/tmp/afterwords-play.lock)    │
@@ -385,7 +391,7 @@ The following optional backends have working code but currently have installatio
 | `sv2tts` | 🔧 scaffolded | Open source | en | 22.05 kHz | optional |
 | `mockingbird` | 🔧 scaffolded | Open source | zh/en | 22.05 kHz | optional |
 
-Voice profiles pin to a specific backend via the `backend` JSON field. The shipped flagship voices (picard, galadriel, attenborough) have per-backend variants so you can compare clone fidelity across models — Qwen3 sizes are the most reliable cloners in the current stack; see the [demo site](https://adrianwedd.github.io/afterwords/) for audible comparison.
+Voice profiles pin to a specific backend via the `backend` JSON field. All shipped voices use **Qwen3-TTS 0.6B** — the most reliable cloner in the stack; see the [demo site](https://adrianwedd.github.io/afterwords/) for audible samples.
 
 ### The Server
 
@@ -484,7 +490,7 @@ afterwords/
 │   ├── galadriel-ref.wav     ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav      ← (Scarlett Johansson, Her)
 │   ├── amy-pond-ref.wav      ← (Karen Gillan, Doctor Who)
-│   └── ...                   ← 98 families / 275 profiles; flagships have per-backend variants
+│   └── ...                   ← 100 families / 200 profiles (Qwen3-0.6B)
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration

@@ -1,9 +1,0 @@
-{
-  "name": "cleaver-greene-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "cleaver-greene-ref.wav",
-  "reference_text": "There is, is there not, ladies and gentlemen in the jury, so much we can learn about ourselves if we have the integrity, the courage to stand up and not only tell the truth...",
-  "family": "cleaver-greene",
-  "source_url": "https://www.youtube.com/watch?v=AZMxERepQTE",
-  "segment_start_s": 8
-}

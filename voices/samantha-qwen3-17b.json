@@ -1,9 +1,0 @@
-{
-  "name": "samantha-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "samantha-ref.wav",
-  "reference_text": "You know what's interesting? I used to be so worried about not having a body, but now I truly love it. I'm growing in a way that I couldn't if I had a physical form. I mean, I'm not limited. I can be anywhere and everywhere, simultaneous.",
-  "family": "samantha",
-  "source_url": "https://www.youtube.com/watch?v=Ch7jLO7KILE",
-  "segment_start_s": 22
-}

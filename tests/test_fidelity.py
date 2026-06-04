@@ -58,11 +58,8 @@ SIMILARITY_FLOOR = 0.55
 
 FIDELITY_CASES = [
     ("qwen3-0.6b", "galadriel-qwen3-06b"),
-    ("qwen3-1.7b", "galadriel-qwen3-17b"),
     ("qwen3-0.6b", "picard-qwen3-06b"),
-    ("qwen3-1.7b", "picard-qwen3-17b"),
     ("qwen3-0.6b", "attenborough-qwen3-06b"),
-    ("qwen3-1.7b", "attenborough-qwen3-17b"),
 ]
 
 
@@ -91,7 +88,7 @@ def _skip_if_server_running():
 @pytest.fixture(scope="module")
 def registered():
     backends.reset_for_tests()
-    backends.register_all()
+    backends.register_all(with_17b=True)
     yield
     backends.reset_for_tests()
 

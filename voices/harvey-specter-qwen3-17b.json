@@ -1,9 +1,0 @@
-{
-  "name": "harvey-specter-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "harvey-specter-ref.wav",
-  "reference_text": "I need a grown god damn man. I'm inclined to give you a shot, but what if I decide to go another way? They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story. I'm in court right now.",
-  "family": "harvey-specter",
-  "source_url": "https://www.youtube.com/watch?v=hacr7EI-1JA",
-  "segment_start_s": 10
-}

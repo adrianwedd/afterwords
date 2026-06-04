@@ -1,9 +1,0 @@
-{
-  "name": "holly-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "holly-ref.wav",
-  "reference_text": "all sausages Dave now cover seven eighths of the Earth's surface. Also you left 17 pounds 50 pets in your bank account thanks to compound interest you now owe 98 % of all the world's wealth. Because you hold it for three million years nobody",
-  "family": "holly",
-  "source_url": "https://www.youtube.com/watch?v=elZfflKkfxM",
-  "segment_start_s": 64
-}

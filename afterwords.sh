@@ -173,23 +173,20 @@ cmd_status() {
     rule
     echo
 
-    # Process info
     local pid
     pid=$(server_pid)
-    if [ -n "$pid" ]; then
-        ok "Server running (PID ${pid})"
 
-        if plist_loaded; then
-            info "Managed by launchd (auto-starts on login)"
-        else
-            info "Running manually (no launchd)"
-        fi
+    if [ -n "$pid" ]; then
+        local mgmt="manual"
+        plist_loaded && mgmt="launchd (auto-start)"
+        echo -e "  ${GREEN}●${NC} ${BOLD}running${NC}  ${DIM}PID ${pid}  port ${PORT}  ${mgmt}${NC}"
     else
-        warn "Server is not running"
+        echo -e "  ${RED}●${NC} ${BOLD}stopped${NC}"
+        echo
         if plist_exists; then
-            info "Plist exists — start with: ${CYAN}afterwords start${NC}"
+            echo -e "  ${CYAN}afterwords start${NC}  to start the server"
         else
-            info "No plist — run: ${CYAN}bash setup.sh${NC}"
+            echo -e "  ${CYAN}bash setup.sh${NC}  to install"
         fi
         echo
         return 0
@@ -197,52 +194,46 @@ cmd_status() {
 
     echo
 
-    # Health check
     if health_check; then
-        local ready model voices default_voice
-        ready=$(echo "$HEALTH_JSON" | python3 -c "import sys,json; print(json.load(sys.stdin).get('ready', False))")
-        model=$(echo "$HEALTH_JSON" | python3 -c "import sys,json; print(json.load(sys.stdin).get('model', '?'))")
-        default_voice=$(echo "$HEALTH_JSON" | python3 -c "import sys,json; print(json.load(sys.stdin).get('default_voice', '?'))")
-        voices=$(echo "$HEALTH_JSON" | python3 -c "import sys,json; print(', '.join(json.load(sys.stdin).get('voices', [])))")
-
-        if [ "$ready" = "True" ]; then
-            ok "Model loaded and ready"
-        else
-            warn "Model loading (warmup in progress)"
-        fi
-        info "Model: ${DIM}${model}${NC}"
-        info "Default voice: ${CYAN}${default_voice}${NC}"
-        echo
-        info "Available voices:"
-        echo "$HEALTH_JSON" | python3 -c "
-import sys, json
-for v in json.load(sys.stdin).get('voices', []):
-    print(f'    \033[0;36m{v}\033[0m')
-"
-        echo
-        info "Backends:"
         echo "$HEALTH_JSON" | python3 -c "
 import sys, json
 data = json.load(sys.stdin)
-lb = data.get('loaded_backends', {})
-if not lb:
-    print('    \033[2m(loaded_backends not reported)\033[0m')
-else:
-    for name in sorted(lb.keys()):
-        b = lb[name]
-        loaded = b.get('loaded', False)
-        vc = b.get('voice_count', 0)
-        sr = b.get('sample_rate', '?')
-        mark = '\033[0;32m✓\033[0m' if loaded else '\033[0;33m⚠\033[0m'
-        print(f'    {mark} \033[0;36m{name:<15}\033[0m \033[2m{vc} voices, {sr} Hz\033[0m')
-"
-    else
-        warn "Server running but /health not responding (still warming up?)"
-    fi
+ready    = data.get('ready', False)
+model    = data.get('model', '?')
+defvoice = data.get('default_voice', '?')
+voices   = data.get('voices', [])
+lb       = data.get('loaded_backends', {})
 
-    echo
-    info "Logs: ${DIM}${LOG_FILE}${NC}"
-    info "Port: ${DIM}${PORT}${NC}"
+G  = '\033[0;32m'; Y = '\033[0;33m'; C = '\033[0;36m'
+D  = '\033[2m';    B = '\033[1m';    R = '\033[0m'
+
+state_mark = f'{G}✓{R}' if ready else f'{Y}⚑{R}'
+state_word  = 'ready' if ready else 'warming up'
+print(f'  {state_mark} {B}{state_word}{R}  {D}{model}  {len(voices)} voice(s){R}')
+print()
+
+# Backends
+if lb:
+    for name in sorted(lb):
+        b = lb[name]
+        mark = f'{G}✓{R}' if b.get('loaded') else f'{Y}⚠{R}'
+        vc   = b.get('voice_count', 0)
+        sr   = b.get('sample_rate', '?')
+        print(f'  {mark}  {C}{name:<18}{R}  {D}{vc} voices  {sr} Hz{R}')
+    print()
+
+# Voices — compact list
+if voices:
+    print(f'  {B}voices{R}  {D}(default: {defvoice}){R}')
+    col_w = max((len(v) for v in voices), default=20) + 2
+    cols = max(1, 80 // col_w)
+    padded = [f'{C}{v:<{col_w}}{R}' for v in voices]
+    for i in range(0, len(padded), cols):
+        print('    ' + ''.join(padded[i:i+cols]))
+print()
+print(f'  {D}afterwords logs  —  /tmp/claude-tts-server.log{R}')
+" 2>/dev/null || warn "Server running but /health not yet responding (warming up)"
+    fi
     echo
 }
 
@@ -859,40 +850,42 @@ with open(os.environ['TARGET'], 'w') as f:
 
 cmd_help() {
     echo
-    echo -e "  ${BOLD}afterwords${NC}  ${DIM}— local voice-cloning TTS server${NC}"
+    echo -e "  ${BOLD}afterwords${NC}  ${DIM}— local voice-cloning TTS for Apple Silicon${NC}"
     rule
     echo
-    echo -e "  ${BOLD}Usage:${NC} afterwords <command> [options]"
+    echo -e "  ${BOLD}Server${NC}"
+    echo -e "    ${CYAN}start${NC}             Start the TTS server (via launchd)"
+    echo -e "    ${CYAN}stop${NC}              Stop the server"
+    echo -e "    ${CYAN}restart${NC}           Restart"
+    echo -e "    ${CYAN}status${NC}            Server state, loaded voices, backends"
+    echo -e "    ${CYAN}logs${NC}              Tail the server log"
     echo
-    echo -e "  ${BOLD}Commands:${NC}"
-    echo -e "    ${CYAN}start${NC}       Start the TTS server"
-    echo -e "    ${CYAN}stop${NC}        Stop the TTS server"
-    echo -e "    ${CYAN}restart${NC}     Restart the TTS server"
-    echo -e "    ${CYAN}status${NC}      Show server status and loaded voices"
-    echo -e "    ${CYAN}logs${NC}        Tail the server log"
-    echo -e "    ${CYAN}voices${NC}      List available voices"
-    echo -e "    ${CYAN}reload${NC}      Reload voices from disk (add/update). --prune also evicts deleted gallery voices"
-    echo -e "    ${CYAN}clone${NC}       Clone a new voice from YouTube"
-    echo -e "    ${CYAN}push${NC}        Push a voice (and its family variants) to the cloud"
-    echo -e "    ${CYAN}pull${NC}        Pull a cloud voice to local voices/"
-    echo -e "    ${CYAN}setup-cloud${NC} Configure cloud API key and URL"
-    echo -e "    ${CYAN}audit${NC}       Audit voice profiles for transcript-vs-audio drift"
-    echo -e "    ${CYAN}codex-hook${NC}  Start or stop the Codex CLI watcher"
-    echo -e "    ${CYAN}uninstall${NC}   Remove the service and optionally hooks"
+    echo -e "  ${BOLD}Voices${NC}"
+    echo -e "    ${CYAN}voices${NC}            List cloned voices"
+    echo -e "    ${CYAN}voices --demo${NC}     Play a sample of each voice"
+    echo -e "    ${CYAN}voices --cloud${NC}    Show cloud voices"
+    echo -e "    ${CYAN}clone URL NAME${NC}    Clone a voice from a YouTube URL"
+    echo -e "    ${CYAN}reload${NC}            Reload voices from disk without restart"
+    echo -e "    ${CYAN}reload --prune${NC}    Also evict voices whose JSON was deleted"
+    echo -e "    ${CYAN}audit${NC}             Audit profiles for transcript drift"
     echo
-    echo -e "  ${BOLD}Options:${NC}"
-    echo -e "    ${DIM}voices --demo${NC}          Play a sample of each voice"
-    echo -e "    ${DIM}voices --cloud${NC}         Show cloud voices after local list"
-    echo -e "    ${DIM}clone URL NAME [START] [--yes]${NC}"
-    echo -e "    ${DIM}codex-hook start [--diagnose]${NC}"
+    echo -e "  ${BOLD}Cloud${NC}"
+    echo -e "    ${CYAN}push NAME${NC}         Push a voice (+ family variants) to the cloud"
+    echo -e "    ${CYAN}pull ID${NC}           Pull a cloud voice to local voices/"
+    echo -e "    ${CYAN}setup-cloud${NC}       Configure API key and cloud URL"
     echo
-    echo -e "  ${BOLD}Examples:${NC}"
-    echo -e "    ${DIM}afterwords start${NC}"
-    echo -e "    ${DIM}afterwords voices --demo${NC}"
-    echo -e "    ${DIM}afterwords voices --cloud${NC}"
-    echo -e "    ${DIM}afterwords push picard${NC}"
-    echo -e "    ${DIM}afterwords pull <voice-id>${NC}"
-    echo -e "    ${DIM}afterwords clone \"https://youtube.com/watch?v=...\" gandalf 45${NC}"
+    echo -e "  ${BOLD}Integrations${NC}"
+    echo -e "    ${CYAN}codex-hook start${NC}  Speak Codex CLI responses (run inside Codex)"
+    echo -e "    ${CYAN}codex-hook stop${NC}   Stop the Codex watcher"
+    echo
+    echo -e "  ${BOLD}Setup${NC}"
+    echo -e "    ${CYAN}uninstall${NC}         Remove service and optionally hooks"
+    echo
+    echo -e "  ${DIM}Examples:${NC}"
+    echo -e "  ${DIM}  afterwords clone \"https://youtube.com/watch?v=xyz\" gandalf 45${NC}"
+    echo -e "  ${DIM}  afterwords voices --demo${NC}"
+    echo -e "  ${DIM}  afterwords push picard${NC}"
+    echo -e "  ${DIM}  echo \"snape\" > .afterwords  # per-project voice override${NC}"
     echo
 }
 

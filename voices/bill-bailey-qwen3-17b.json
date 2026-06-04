@@ -1,9 +1,0 @@
-{
-  "name": "bill-bailey-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "bill-bailey-ref.wav",
-  "reference_text": "Hello, I'm Bill Bailey, 1984, stars in their eyes meet low regional winner, and nearly got the Michael Bolton gig, but then he had his ear cut, so great to be here.",
-  "family": "bill-bailey",
-  "source_url": "https://www.youtube.com/watch?v=B2-6BgjL3zE",
-  "segment_start_s": 0
-}

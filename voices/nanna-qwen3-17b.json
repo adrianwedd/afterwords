@@ -1,7 +1,0 @@
-{
-  "name": "nanna-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "nanna-ref.wav",
-  "reference_text": "I'm working on porcelain, coloured porcelain, and the technique is called nerikomi. The Japanese word meaning that you create patterns from different coloured clay.",
-  "family": "nanna"
-}

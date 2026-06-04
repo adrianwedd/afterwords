@@ -1,9 +1,0 @@
-{
-  "name": "nyssa-of-traken-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "nyssa-of-traken-ref.wav",
-  "reference_text": "I'm not coming with you there's too much to be done here and with my skills I can help them I've enjoyed every moment of my time on the TARDIS now miss you both But here I have a chance to put into practice the skills I learned on Traken Please miss I'm adamant. I'm fully aware of that, but I want to stay",
-  "family": "nyssa-of-traken",
-  "source_url": "https://www.youtube.com/watch?v=DkJJv-xHink",
-  "segment_start_s": 56
-}

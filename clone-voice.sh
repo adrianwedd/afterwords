@@ -55,7 +55,7 @@ fi
 MAX_SR=$(python3 -m backends max-sample-rate 2>/dev/null || echo 24000)
 
 # Default backend
-[ -z "$BACKEND_NAME" ] && BACKEND_NAME="qwen3-1.7b"
+[ -z "$BACKEND_NAME" ] && BACKEND_NAME="qwen3-0.6b"
 
 # Validate chosen backend (unless --all-backends, which uses all registered)
 if [ "$ALL_BACKENDS" = false ]; then
@@ -280,7 +280,7 @@ fi
 
 # Save profile(s). If --all-backends, emit one JSON per registered backend (same ref WAV).
 if [ "$ALL_BACKENDS" = true ]; then
-    DEFAULT_BACKEND="qwen3-1.7b"
+    DEFAULT_BACKEND="qwen3-0.6b"
     # Default-backend profile uses the plain voice_name
     python3 - "$VOICE_NAME" "$YT_URL" "$REF_TEXT" "$START_S" "$DEFAULT_BACKEND" <<'PYEOF'
 import json, sys

@@ -1,9 +1,0 @@
-{
-  "name": "bill-potts-qwen3-17b",
-  "backend": "qwen3-1.7b",
-  "reference_audio": "bill-potts-ref.wav",
-  "reference_text": "I am the real Bill! Our life is just memories. Our more rare memories. So I'm her. Okay. I'm gonna prove to you how important memories are. And don't go forgetting me again because... ...quite frankly, that was a fence.",
-  "family": "bill-potts",
-  "source_url": "https://www.youtube.com/watch?v=GfjLXdA4hk4",
-  "segment_start_s": 27
-}
