@@ -473,16 +473,31 @@ cmd_reload() {
 }
 
 cmd_audit() {
-    local script="${REPO_DIR}/scripts/audit-voice-transcripts.py"
-    if [ ! -f "$script" ]; then
-        fail "audit-voice-transcripts.py not found"
+    local use_archive=false
+    for arg in "$@"; do
+        [ "$arg" = "--archive" ] && use_archive=true
+    done
+
+    if $use_archive; then
+        local script="${REPO_DIR}/scripts/audit-archive.py"
+        [ -f "$script" ] || fail "audit-archive.py not found in ${REPO_DIR}/scripts/"
+        [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+        # shellcheck disable=SC1091
+        source "${REPO_DIR}/.venv/bin/activate"
+        # Strip --archive before forwarding; remaining flags pass through to audit-archive.py
+        local args=()
+        for arg in "$@"; do
+            [ "$arg" != "--archive" ] && args+=("$arg")
+        done
+        python3 "$script" ${args[@]+"${args[@]}"}
+    else
+        local script="${REPO_DIR}/scripts/audit-voice-transcripts.py"
+        [ -f "$script" ] || fail "audit-voice-transcripts.py not found in ${REPO_DIR}/scripts/"
+        [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+        # shellcheck disable=SC1091
+        source "${REPO_DIR}/.venv/bin/activate"
+        python3 "$script" "$@"
     fi
-    if [ ! -d "${REPO_DIR}/.venv" ]; then
-        fail "venv missing — run setup.sh first"
-    fi
-    # shellcheck disable=SC1091
-    source "${REPO_DIR}/.venv/bin/activate"
-    python3 "$script" "$@"
 }
 
 cmd_transcribe() {
