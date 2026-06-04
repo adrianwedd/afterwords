@@ -158,3 +158,39 @@ def test_refine_quick_skips_compare_trim(tmp_path):
     # If compare were called, it would exit 2 and potentially cause issues;
     # with --quick it should complete cleanly
     assert result.returncode in (0, 1)
+
+
+def test_clone_calls_refine_after_success(tmp_path):
+    """After a successful clone, cmd_clone must invoke cmd_refine."""
+    scripts = tmp_path / "scripts"
+    scripts.mkdir()
+    venv = tmp_path / ".venv" / "bin"
+    venv.mkdir(parents=True)
+    (venv / "activate").write_text("# stub")
+    # qa-voices.py emits a sentinel so we can assert refine was actually invoked
+    for name in ("trim-silence-gaps.py", "compare-transcription.py"):
+        (scripts / name).write_text("import sys; sys.exit(0)")
+    (scripts / "qa-voices.py").write_text(
+        "import sys; print('REFINE_RAN'); sys.exit(0)"
+    )
+    voices = tmp_path / "voices"
+    voices.mkdir()
+
+    # Stub clone-voice.sh to exit 0 and write a fake voice
+    stub_clone = tmp_path / "clone-voice.sh"
+    stub_clone.write_text(
+        "#!/bin/bash\n"
+        f"mkdir -p {voices}\n"
+        f"touch {voices}/myvoice-ref.wav\n"
+        f"echo '{{\"name\":\"myvoice\"}}' > {voices}/myvoice.json\n"
+        "echo 'CLONE_DONE'\n"
+        "exit 0\n"
+    )
+    stub_clone.chmod(0o755)
+
+    result = run_afterwords("clone", "http://example.com", "myvoice",
+                            env_override={"AFTERWORDS_REPO_DIR": str(tmp_path)})
+    # refine calls qa-voices.py which prints REFINE_RAN; assert it was wired
+    assert result.returncode in (0, 1), result.stderr
+    assert "CLONE_DONE" in result.stdout
+    assert "REFINE_RAN" in result.stdout

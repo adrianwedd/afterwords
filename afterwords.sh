@@ -635,11 +635,46 @@ except Exception:
 }
 
 cmd_clone() {
-    if [ ! -f "$REPO_DIR/clone-voice.sh" ]; then
-        fail "clone-voice.sh not found in ${REPO_DIR}"
-    fi
-    # Pass all arguments through to clone-voice.sh
+    local quick=false yes=false
+    # Mirror clone-voice.sh: drop flags, take the 2nd positional as the voice name.
+    local positional=() skip_next=false all=("$@") i arg
+    for ((i=0; i<${#all[@]}; i++)); do
+        arg="${all[i]}"
+        if $skip_next; then skip_next=false; continue; fi
+        case "$arg" in
+            --quick)        quick=true ;;
+            --yes)          yes=true ;;
+            --backend)      skip_next=true ;;
+            --backend=*|--all-backends|--check-source) ;;
+            --*)            ;;
+            *)              positional+=("$arg") ;;
+        esac
+    done
+    local voice_name="${positional[1]:-}"
+    voice_name=$(echo "${voice_name}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g')
+
+    [ -f "$REPO_DIR/clone-voice.sh" ] || fail "clone-voice.sh not found in ${REPO_DIR}"
     bash "$REPO_DIR/clone-voice.sh" "$@"
+    local clone_exit=$?
+    [ $clone_exit -ne 0 ] && return $clone_exit
+
+    if [ -n "$voice_name" ]; then
+        echo
+        local refine_args=("$voice_name")
+        $quick && refine_args+=(--quick)
+        $yes && refine_args+=(--yes)
+        cmd_refine "${refine_args[@]}"
+        local refine_exit=$?
+        if [ $refine_exit -eq 2 ]; then
+            warn "refine hard-errored (exit 2) — clone succeeded but QA could not run."
+            info "Diagnose with: ${CYAN}afterwords refine ${voice_name}${NC}"
+        elif [ $refine_exit -eq 1 ]; then
+            warn "Refine finished with warnings — review the WER above."
+        fi
+    else
+        echo
+        info "Voice cloned. Run ${CYAN}afterwords refine <name>${NC} to verify quality."
+    fi
 
     # Prompt restart if server is running
     if [ -n "$(server_pid)" ]; then
