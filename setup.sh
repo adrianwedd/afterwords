@@ -195,6 +195,9 @@ fi
 source .venv/bin/activate
 pip install --quiet --upgrade pip
 pip install --quiet -r requirements.txt
+if ! $SERVER_ONLY; then
+    pip install --quiet -r requirements-clone.txt
+fi
 ok "Python packages installed"
 echo
 
@@ -657,8 +660,10 @@ next_step "Auto-start service"
 PLIST_NAME="com.afterwords.tts-server"
 PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
 VENV_PYTHON="${SCRIPT_DIR}/.venv/bin/python3"
+AFTERWORDS_SERVER_CONFIG="$HOME/.afterwords-server"
 
-cat > "$PLIST_PATH" <<PLISTEOF
+{
+    cat <<PLIST_HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
   "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -670,6 +675,11 @@ cat > "$PLIST_PATH" <<PLISTEOF
     <array>
         <string>${VENV_PYTHON}</string>
         <string>${SCRIPT_DIR}/server.py</string>
+PLIST_HEAD
+    if [ -f "$AFTERWORDS_SERVER_CONFIG" ] && grep -q "^WITH_17B=true" "$AFTERWORDS_SERVER_CONFIG"; then
+        echo "        <string>--with-1.7b</string>"
+    fi
+    cat <<PLIST_TAIL
     </array>
     <key>RunAtLoad</key><true/>
     <key>KeepAlive</key><true/>
@@ -679,7 +689,8 @@ cat > "$PLIST_PATH" <<PLISTEOF
     <string>/tmp/claude-tts-server.log</string>
 </dict>
 </plist>
-PLISTEOF
+PLIST_TAIL
+} > "$PLIST_PATH"
 
 launchctl unload "$PLIST_PATH" 2>/dev/null || true
 launchctl load "$PLIST_PATH"

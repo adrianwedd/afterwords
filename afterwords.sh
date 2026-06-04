@@ -38,6 +38,7 @@ PORT=7860
 HEALTH_URL="http://localhost:${PORT}/health"
 CLOUD_CONFIG_FILE="$HOME/.afterwords-cloud"
 CLOUD_DEFAULT_URL="https://afterwords-api.adrianwedd.workers.dev"
+AFTERWORDS_SERVER_CONFIG="$HOME/.afterwords-server"
 CODEX_WATCH_PID="/tmp/codex-tts-watch.pid"
 CODEX_WATCH_LOG="/tmp/codex-tts-watch.log"
 CODEX_WATCH_SCRIPT_REL=".claude/hooks/codex-tts-watch.sh"
@@ -65,6 +66,43 @@ plist_loaded() {
 # Check if plist file exists on disk
 plist_exists() {
     [ -f "$PLIST_PATH" ]
+}
+
+# True if 1.7B is enabled in the server config file
+with_17b_enabled() {
+    [ -f "$AFTERWORDS_SERVER_CONFIG" ] && grep -q "^WITH_17B=true" "$AFTERWORDS_SERVER_CONFIG"
+}
+
+# Write (or rewrite) the launchd plist, honouring current server config
+write_plist() {
+    local venv_python="${REPO_DIR}/.venv/bin/python3"
+    {
+        cat <<PLIST_HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>${PLIST_NAME}</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>${venv_python}</string>
+        <string>${REPO_DIR}/server.py</string>
+PLIST_HEAD
+        with_17b_enabled && echo "        <string>--with-1.7b</string>"
+        cat <<PLIST_TAIL
+    </array>
+    <key>RunAtLoad</key><true/>
+    <key>KeepAlive</key><true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/claude-tts-server.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/claude-tts-server.log</string>
+</dict>
+</plist>
+PLIST_TAIL
+    } > "$PLIST_PATH"
 }
 
 # Find PID listening on the TTS port (works whether launchd or manual)
@@ -176,12 +214,15 @@ cmd_status() {
     local pid
     pid=$(server_pid)
 
+    local with17b_label=""
+    with_17b_enabled && with17b_label="  ${DIM}1.7B: enabled${NC}"
+
     if [ -n "$pid" ]; then
         local mgmt="manual"
         plist_loaded && mgmt="launchd (auto-start)"
-        echo -e "  ${GREEN}●${NC} ${BOLD}running${NC}  ${DIM}PID ${pid}  port ${PORT}  ${mgmt}${NC}"
+        echo -e "  ${GREEN}●${NC} ${BOLD}running${NC}  ${DIM}PID ${pid}  port ${PORT}  ${mgmt}${NC}${with17b_label}"
     else
-        echo -e "  ${RED}●${NC} ${BOLD}stopped${NC}"
+        echo -e "  ${RED}●${NC} ${BOLD}stopped${NC}${with17b_label}"
         echo
         if plist_exists; then
             echo -e "  ${CYAN}afterwords start${NC}  to start the server"
@@ -848,6 +889,57 @@ with open(os.environ['TARGET'], 'w') as f:
     echo
 }
 
+cmd_configure() {
+    local flag="${1:-}"
+    case "$flag" in
+        --with-1.7b)
+            # Write config, regenerate plist, reload launchd
+            if [ -f "$AFTERWORDS_SERVER_CONFIG" ] && grep -q "^WITH_17B=" "$AFTERWORDS_SERVER_CONFIG"; then
+                sed -i '' "s|^WITH_17B=.*|WITH_17B=true|" "$AFTERWORDS_SERVER_CONFIG"
+            else
+                echo "WITH_17B=true" >> "$AFTERWORDS_SERVER_CONFIG"
+            fi
+            if plist_exists; then
+                write_plist
+                plist_loaded && { launchctl unload "$PLIST_PATH" 2>/dev/null; launchctl load "$PLIST_PATH"; }
+                ok "1.7B model enabled — run ${CYAN}afterwords restart${NC} to apply"
+            else
+                ok "1.7B model enabled — run ${CYAN}bash setup.sh${NC} to install the service"
+            fi
+            ;;
+        --no-1.7b)
+            if [ -f "$AFTERWORDS_SERVER_CONFIG" ]; then
+                sed -i '' "/^WITH_17B=/d" "$AFTERWORDS_SERVER_CONFIG"
+            fi
+            if plist_exists; then
+                write_plist
+                plist_loaded && { launchctl unload "$PLIST_PATH" 2>/dev/null; launchctl load "$PLIST_PATH"; }
+                ok "1.7B model disabled — run ${CYAN}afterwords restart${NC} to apply"
+            else
+                ok "1.7B model disabled"
+            fi
+            ;;
+        "")
+            echo
+            echo -e "  ${BOLD}afterwords configure${NC}  ${DIM}— server settings${NC}"
+            rule
+            echo
+            if with_17b_enabled; then
+                echo -e "  1.7B model  ${GREEN}enabled${NC}  ${DIM}(Qwen3-1.7B loads alongside 0.6B)${NC}"
+            else
+                echo -e "  1.7B model  ${DIM}disabled (default — 0.6B only)${NC}"
+            fi
+            echo
+            echo -e "  ${DIM}afterwords configure --with-1.7b  # enable Qwen3-1.7B (higher fidelity)${NC}"
+            echo -e "  ${DIM}afterwords configure --no-1.7b   # revert to 0.6B only${NC}"
+            echo
+            ;;
+        *)
+            fail "Unknown option: ${flag}. Use --with-1.7b or --no-1.7b"
+            ;;
+    esac
+}
+
 cmd_help() {
     echo
     echo -e "  ${BOLD}afterwords${NC}  ${DIM}— local voice-cloning TTS for Apple Silicon${NC}"
@@ -879,6 +971,7 @@ cmd_help() {
     echo -e "    ${CYAN}codex-hook stop${NC}   Stop the Codex watcher"
     echo
     echo -e "  ${BOLD}Setup${NC}"
+    echo -e "    ${CYAN}configure${NC}         Show or change server settings (e.g. --with-1.7b)"
     echo -e "    ${CYAN}uninstall${NC}         Remove service and optionally hooks"
     echo
     echo -e "  ${DIM}Examples:${NC}"
@@ -908,6 +1001,7 @@ case "$COMMAND" in
     setup-cloud) cmd_setup_cloud "$@" ;;
     audit)       cmd_audit "$@" ;;
     codex-hook)  cmd_codex_hook "$@" ;;
+    configure)   cmd_configure "$@" ;;
     uninstall)   cmd_uninstall "$@" ;;
     help|--help|-h)  cmd_help ;;
     *)

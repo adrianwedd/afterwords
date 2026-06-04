@@ -2,6 +2,25 @@
 
 All notable changes to Afterwords. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.4] — 2026-06-04
+
+### Added
+
+- **`afterwords configure`** — new subcommand to toggle the Qwen3-1.7B model for the launchd service without editing plists by hand. `afterwords configure --with-1.7b` writes `~/.afterwords-server`, regenerates the plist, and reloads launchd; `--no-1.7b` reverts. `afterwords status` shows `1.7B: enabled` when set. `bash setup.sh` picks up the config on reinstall.
+- **Cursor IDE hook** — `~/.claude/hooks/cursor-tts-hook.sh` auto-configured by `setup.sh` when Cursor 1.7+ is detected. Fires on `afterAgentResponse` events; uses `cursor` as the agent key for `.afterwords` voice overrides.
+- **Red Dwarf gallery** — 5 new voice families (Arnold Rimmer, Dave Lister, The Cat, Holly, Kryten) cloned from in-character BBC monologues. Brings the gallery to **103 families / 284 profiles**.
+- **`requirements-clone.txt`** — cloning-only dependencies (`faster-whisper`, `noisereduce`) split out of `requirements.txt`. `setup.sh --server-only` installs the server-only subset; `clone-voice.sh` checks for the clone deps and prints a helpful message if missing.
+
+### Changed
+
+- **holly reclone** — new reference from the April Fool clip (pure solo speech, no crowd noise). Higher fidelity than the previous source.
+- **Architecture docs expanded** — `docs/architecture/` now covers all six agent integrations (Claude Code, Codex, AGy, Gemini CLI, Cursor, Hermes) and harness details for each. Previously covered only three.
+
+### Fixed
+
+- **tegan-jovanka synthesis garble** — reference clip now splices only clean solo-speech windows (spectral heuristic + noisereduce per chunk), eliminating the music bleed that caused Qwen3 to hallucinate phonemes.
+- **OG metadata voice count** — `og:description` and README updated from 275 → 284 after the Red Dwarf addition.
+
 ## [1.0.3] — 2026-05-30
 
 ### Added
