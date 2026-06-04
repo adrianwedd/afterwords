@@ -1,6 +1,6 @@
 """Acceptance and integration tests for Sprint 6 CLI expansion."""
 from __future__ import annotations
-import json, os, subprocess, sys
+import os, subprocess, sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -311,3 +311,34 @@ def test_help_contains_update_in_setup():
     lines = result.stdout.splitlines()
     setup_idx = next((i for i, l in enumerate(lines) if "Setup" in l), None)
     assert setup_idx is not None, "Setup section missing from help"
+
+
+def test_ac10_json_flags_present():
+    """AC10: --json flag present on qa, trim, compare (model-free --help check)."""
+    import subprocess as _sp
+    for script_name in ("qa-voices.py", "trim-silence-gaps.py", "compare-transcription.py"):
+        result = _sp.run(
+            [sys.executable, str(REPO / "scripts" / script_name), "--help"],
+            capture_output=True, text=True, timeout=30,
+        )
+        assert "--json" in result.stdout, f"--json missing from {script_name} --help"
+
+
+def test_ac11_scripts_internal_contains_moved():
+    """AC11: scripts/internal/ contains (at least) the 9 moved scripts."""
+    internal = REPO / "scripts" / "internal"
+    assert internal.is_dir()
+    expected = {
+        "reclone-flagship.py", "gen-comparison-audio.sh", "loudnorm-demo-audio.sh",
+        "clone-red-dwarf.sh", "check-og-metadata.py", "fb-reindex.sh",
+        "transcribe-youtube-batch.sh", "qa-transcripts.py", "review-content.py",
+    }
+    actual = {f.name for f in internal.iterdir() if not f.name.startswith(".")}
+    missing = expected - actual
+    assert not missing, f"missing from scripts/internal/: {missing}"
+
+
+def test_ac11_chunk_text_stays_in_scripts():
+    """AC11: chunk-text.py must NOT move (has tests/test_chunk_text.py)."""
+    assert (REPO / "scripts" / "chunk-text.py").exists()
+    assert not (REPO / "scripts" / "internal" / "chunk-text.py").exists()
