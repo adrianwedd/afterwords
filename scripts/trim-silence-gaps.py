@@ -50,13 +50,16 @@ def main() -> int:
                     help="Emit JSON to stdout; suppress human output")
     args = ap.parse_args()
 
-    from faster_whisper import WhisperModel
-    print("loading whisper...", file=sys.stderr)
-    model = WhisperModel(args.model, compute_type="int8")
-
     profiles = sorted(VOICES.glob("*.json"))
     if args.voice:
         profiles = [p for p in profiles if p.stem == args.voice]
+        if not profiles:
+            print(f"Voice '{args.voice}' not found.", file=sys.stderr)
+            sys.exit(2)
+
+    from faster_whisper import WhisperModel
+    print("loading whisper...", file=sys.stderr)
+    model = WhisperModel(args.model, compute_type="int8")
 
     quiet = args.json
     cache: dict[Path, str] = {}

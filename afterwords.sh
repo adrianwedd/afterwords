@@ -603,8 +603,9 @@ except Exception:
         if [ "$gap_count" -eq 0 ]; then
             ok "No silence gaps found"
         else
-            echo "$trim_json"
+            warn "Found ${gap_count} silence gap(s) in '${voice}'"
             local do_trim="n"
+            $yes && do_trim="y"
             if [ -t 0 ] && ! $yes; then
                 echo -en "  ${BOLD}Trim and rewrite reference? [y/N]${NC} "
                 read -r do_trim

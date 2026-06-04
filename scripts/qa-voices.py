@@ -118,7 +118,7 @@ def main():
                  json.loads(p.read_text()).get("name") == args.voice]
         if not jsons:
             print(f"Voice '{args.voice}' not found.", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
 
     if not quiet:
         print(f"Found {len(jsons)} base voice profiles.\n", flush=True)

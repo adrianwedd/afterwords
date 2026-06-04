@@ -20,6 +20,7 @@ if [[ " $* " == *" --check-source "* ]]; then
     exit 0
 fi
 
+CALLER_DIR="$(pwd)"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 source .venv/bin/activate 2>/dev/null || { echo -e "\033[0;31m✗\033[0m Run setup.sh first"; exit 1; }
@@ -110,6 +111,12 @@ VOICE_NAME=$(echo "${VOICE_NAME:-voice}" | tr '[:upper:]' '[:lower:]' | sed 's/[
 [ -z "$VOICE_NAME" ] && VOICE_NAME="voice"
 
 # Detect local file — skip yt-dlp if $YT_URL is an existing file path (file:// ok)
+# Resolve relative paths against the caller's cwd (cd above moved us to SCRIPT_DIR)
+if [[ "$YT_URL" != /* ]] && [[ "$YT_URL" != file://* ]] && [ -f "$CALLER_DIR/$YT_URL" ]; then
+    YT_URL="$CALLER_DIR/$YT_URL"
+elif [[ "$YT_URL" == file://* ]] && [[ "${YT_URL#file://}" != /* ]] && [ -f "$CALLER_DIR/${YT_URL#file://}" ]; then
+    YT_URL="file://$CALLER_DIR/${YT_URL#file://}"
+fi
 LOCAL_FILE=false
 SOURCE_BASENAME=""
 if _is_local_source "$YT_URL"; then
