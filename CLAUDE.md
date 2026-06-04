@@ -144,7 +144,7 @@ CLI: `afterwords reload` curls the endpoint and pretty-prints the response.
 
 ## Key Constraints
 
-- Qwen3 0.6B + 1.7B preload at boot (~3-4 GB total). Additional backends from the registry also preload if their dependencies are installed. Designed for 32 GB unified memory; 16 GB works for the qwen3-only path.
+- Qwen3 0.6B preloads at boot by default (~1.5 GB). Pass `--with-1.7b` to server.py to also load 1.7B (~3.5 GB total). Additional backends also preload if their deps are installed. Designed for 32 GB unified memory; 16 GB works for the default 0.6B-only path.
 - All synthesis is serialized through `_synth_lock` — MLX Metal is single-GPU, regardless of backend
 - Voice reference files (`.wav`) and profiles (`.json`) are tracked in git — shipped with the repo for the demo site and default server voices
 - `setup.sh` conditionally installs hooks into `~/.claude/` (only when Claude Code is present) and a launchd plist (always)

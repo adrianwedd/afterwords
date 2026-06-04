@@ -62,7 +62,7 @@ Verify changes with `pytest` (no GPU required). Run a single test with `pytest t
 
 ## Architecture
 
-The server (server.py) and voice cloning (clone-voice.sh) are fully independent of Claude Code. The Claude Code integration is an optional layer installed by setup.sh when Claude Code is detected. Six agent integrations share the same queue and play-lock infrastructure.
+The server (server.py) and voice cloning (clone-voice.sh) are fully independent of Claude Code. The Claude Code integration is an optional layer installed by setup.sh when Claude Code is detected. Six agent integrations share the same play-lock infrastructure.
 
 1. **server.py** — FastAPI/Uvicorn TTS server on `localhost:7860`. Preloads cloning backends via `backends.register_all()` at startup, serializes all synthesis through `_synth_lock` (MLX Metal is not thread-safe across backends). Voice profiles pin to a backend via the `backend` JSON field; dispatch is `backend = backends.get(profile.backend); backend.synthesize(text, profile.prepared, lang)`. Voices are auto-discovered JSON profiles from `voices/`. Endpoints: `GET /health` (always; exposes `loaded_backends[*].supported_langs`), `GET /synthesize?text=...&voice=...&lang=en` (always), and `--allow-clone`-gated: `POST /synthesize` (JSON body), `POST /clone` (multipart upload), `POST /reload` (atomic add-only rescan), `DELETE /session/{id}`. Lang validation is per-backend; an unsupported lang raises `ValueError` mapped to HTTP 400 with `voice_backend` and `supported_langs`. Voice profiles can declare an optional `family` field; if a voice's backend doesn't support the requested lang, the server auto-routes to a same-family voice on a backend that does (lookup under `_model_lock`). Lock-acquisition order is invariant: `_synth_lock` → `_model_lock`.
 
@@ -72,7 +72,7 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
 
 4. **AGy (Antigravity CLI) hook** (`~/.claude/hooks/agy-tts-hook.sh`, optional) — registered in `~/.gemini/config/hooks.json` under `"afterwords-tts"`. Fires on `Stop` events with a JSON payload containing `transcriptPath`. Uses `agy-session-hook.py` to parse the transcript backwards for the final model response text, then queues it for synthesis. Uses `agy` as the agent key.
 
-5. **Gemini CLI hook** (`~/.claude/hooks/gemini-tts-hook.sh`, optional) — Gemini's `AfterAgent` payload uses `.prompt_response` rather than `.last_assistant_message`; this adapter normalises it and re-emits in Claude queue format so `tts-worker.sh` drains both sources without modification. Wire-up: reference it from `~/.gemini/settings.json`. Uses `gemini` as the agent key.
+5. **Gemini CLI hook** (`~/.claude/hooks/gemini-tts-hook.sh`, optional) — Gemini's `AfterAgent` payload uses `.prompt_response` rather than `.last_assistant_message`; this adapter normalises it and re-emits in Claude queue format so `tts-worker.sh` drains both sources without modification. Wire-up: add to `~/.gemini/config/hooks.json` (setup.sh does this automatically when Gemini CLI is detected). Uses `gemini` as the agent key.
 
 6. **Cursor IDE hook** (`~/.claude/hooks/cursor-tts-hook.sh`, optional) — fires on Cursor 1.7+'s `afterAgentResponse` event. Wire-up: copy to `~/.claude/hooks/` and add to `~/.cursor/hooks.json`:
    ```json
@@ -80,7 +80,7 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
    ```
    Uses `cursor` as the agent key. `bash setup.sh` installs it automatically when Cursor is detected.
 
-7. **Hermes Agent TTS** (`~/.hermes/hooks/afterwords-tts/` + `scripts/`) — Three-path integration; none is auto-configured by setup.sh. (a) Shell hook (`afterwords-post-llm.sh`) fires on `post_llm_call`, strips markdown, pipelines synthesis+playback. (b) Native Python hook (`handler.py`) fires on `agent:end`, async chunked pipeline via `aiohttp`, archives MP3+txt to `~/.hermes/tts-archive/`; only speaks on CLI/local platforms. Play lock fix: `_pid_alive()` uses `try/except` around `os.kill(pid, 0)` — `os.kill` returns `None` on success, never test the return value directly. (c) Command provider (`afterwords-tts-command.sh`): on CLI writes a silent placeholder WAV immediately (non-blocking) then synthesizes in a detached subshell; on messaging platforms runs synchronously for audio attachment delivery.
+7. **Hermes Agent TTS** (`~/.hermes/hooks/afterwords-tts/` + `scripts/`) — Three-path integration; none is auto-configured by setup.sh. (a) Shell hook (`afterwords-post-llm.sh`) fires on `post_llm_call`, strips markdown, chunks text (~200-char sentence boundaries), pipelines synthesis+playback, archives MP3+txt to `~/.hermes/tts-archive/`. (b) Native Python hook (`handler.py`) fires on `agent:end`, acquires shared `/tmp/afterwords-play.lock`, async chunked pipeline via `aiohttp`, archives MP3+txt to `~/.hermes/tts-archive/`; only speaks on CLI/local platforms. Play lock fix: `_pid_alive()` uses `try/except` around `os.kill(pid, 0)` — `os.kill` returns `None` on success, never test the return value directly. (c) Command provider (`afterwords-tts-command.sh`): on CLI writes a silent placeholder WAV immediately (non-blocking) then synthesizes in a detached subshell, archives MP3+txt sidecars; on messaging platforms runs synchronously for audio attachment delivery.
 
 8. **Voice profiles** (`voices/`) — Each voice is a `{name}-ref.wav` (15s reference clip, ~700KB) + `{name}.json` (metadata with transcript). Created by `clone-voice.sh` which downloads from YouTube, extracts a segment, denoises with noisereduce, and transcribes with faster-whisper.
 
@@ -88,7 +88,7 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
 
 9. **Claude Code skill** (`skill/`) — A SKILL.md that enables natural-language TTS commands ("say this in picard's voice", "list voices", "set project voice"). Includes `scripts/speak.sh` helper for synthesis + playback.
 
-**Play lock convention:** All six agent integrations (Claude Code, Codex, AGy, Gemini CLI, Cursor, Hermes) share `/tmp/afterwords-play.lock` (mkdir for atomicity) and `/tmp/afterwords-play.pid` (a separate PID file, not inside the lock dir). Each worker acquires the lock before playing audio and releases after. Stale lock detection: if the PID file is empty (TOCTOU window between mkdir and PID write), implementations do a 50ms recheck before clearing. The PID file must be at `/tmp/afterwords-play.pid`, NOT inside the lock directory. To clear a stuck lock: `rm -rf /tmp/afterwords-play.lock /tmp/afterwords-play.pid`.
+**Play lock convention:** All six agent integrations (Claude Code, Codex, AGy, Gemini CLI, Cursor, Hermes) share `/tmp/afterwords-play.lock` (mkdir for atomicity) and `/tmp/afterwords-play.pid` (a separate PID file, not inside the lock dir). Each worker acquires the lock before playing audio and releases after. Stale lock detection: if the PID file is empty (TOCTOU window between mkdir and PID write), implementations do a 50ms recheck before clearing — this mitigates but does not fully eliminate the TOCTOU window. The PID file must be at `/tmp/afterwords-play.pid`, NOT inside the lock directory. To clear a stuck lock: `rm -rf /tmp/afterwords-play.lock /tmp/afterwords-play.pid`.
 
 **Per-project voice override:** A `.afterwords` file in any repo root sets the voice for that project. Two formats: a bare voice name (legacy), or an agent-to-voice mapping (`key: voice-name`, one per line) with `default:` as fallback. Supported agent keys:
 
@@ -127,7 +127,7 @@ Voice profiles can declare an optional `family: str` field (e.g. `"family": "pic
 
 `POST /reload` (gated by `--allow-clone`) re-walks `voices/*.json` in three phases:
 1. Build new VoiceProfile per JSON on the dedicated MLX thread (`_run_in_ml_thread`, a single-worker executor) so `prepare_voice` Metal ops are serialized with in-flight synthesis without holding `_synth_lock` and blocking unrelated work. Track every profile's cleanup_paths + owns_temp_audio for rollback.
-2. **Atomic abort** — if any prepare_voice raises, delete every tracked temp file and return 500 with errors[]. VOICES is unchanged.
+2. **Atomic abort** — if any profiles fail to build (errors collected across all profiles), delete every tracked temp file and return 500 with errors[]. VOICES is unchanged.
 3. **Add-only commit** under `_model_lock`: `VOICES[name] = profile` for each successful build. Voices whose JSON disappeared from disk are NOT removed (use `DELETE /session/{id}` or restart).
 
 `POST /reload?prune=true` (CLI: `afterwords reload --prune`) additionally evicts **gallery voices whose JSON has been deleted from disk**. Prune is scoped to file-originated voices — a voice is prunable iff `VoiceProfile.session_id is None` (every git-tracked gallery JSON omits `session_id`; `/clone` always sets it). Session-cloned voices are never pruned; remove them with `DELETE /session/{id}`. The response includes `removed[]`. Default (`prune=false`) is unchanged add-only behavior.
@@ -136,7 +136,7 @@ CLI: `afterwords reload` curls the endpoint and pretty-prints the response.
 
 ## Key Constraints
 
-- Qwen3 0.6B + 1.7B preload at boot (~3-4 GB total). Other registered backends also preload if their deps are installed. Designed for 32 GB unified memory; 16 GB works for the qwen3-only path.
+- Qwen3 0.6B preloads at boot by default (~1.5 GB). Pass `--with-1.7b` to server.py to also load 1.7B (~3.5 GB total). Additional backends also preload if their deps are installed. Designed for 32 GB unified memory; 16 GB works for the default 0.6B-only path.
 - All synthesis is serialized through `_synth_lock` — MLX Metal is single-GPU, regardless of backend
 - Voice reference files (`.wav`) and profiles (`.json`) are tracked in git — shipped with the repo for the demo site and default server voices
 - `setup.sh` conditionally installs hooks into `~/.claude/` (only when Claude Code is present) and a launchd plist (always)
