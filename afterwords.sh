@@ -634,6 +634,104 @@ except Exception:
     return 0
 }
 
+cmd_update() {
+    local check_only=false yes=false
+    for arg in "$@"; do
+        case "$arg" in
+            --check) check_only=true ;;
+            --yes)   yes=true ;;
+        esac
+    done
+
+    git -C "$REPO_DIR" rev-parse --git-dir &>/dev/null \
+        || fail "Not a git working tree — cannot self-update (tarball installs must update manually)"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+
+    info "Fetching latest commits..."
+    git -C "$REPO_DIR" fetch origin 2>&1 \
+        || warn "git fetch failed — check your network. Continuing with local state."
+
+    # Resolve upstream robustly: prefer the tracking branch, else origin/<branch>.
+    local upstream branch
+    upstream=$(git -C "$REPO_DIR" rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null)
+    if [ -z "$upstream" ]; then
+        branch=$(git -C "$REPO_DIR" symbolic-ref --short HEAD 2>/dev/null)
+        upstream="origin/${branch}"
+    fi
+
+    local behind
+    behind=$(git -C "$REPO_DIR" rev-list "HEAD..${upstream}" --count 2>/dev/null || echo "0")
+    info "${behind} commit(s) available upstream (${upstream})"
+
+    if $check_only; then
+        ok "--check complete (no working-tree, package, or server changes made)"
+        return 0
+    fi
+    if [ "$behind" -eq 0 ]; then
+        ok "Already up to date"
+        return 0
+    fi
+
+    # Refuse to pull over a dirty tree unless confirmed (TTY) or --yes.
+    local dirty
+    dirty=$(git -C "$REPO_DIR" status --porcelain 2>/dev/null)
+    if [ -n "$dirty" ]; then
+        local dirty_voices
+        dirty_voices=$(git -C "$REPO_DIR" status --porcelain -- voices/ 2>/dev/null)
+        if [ -n "$dirty_voices" ]; then
+            warn "Local edits to voices/ may be overwritten by git pull:"
+            echo "$dirty_voices" | sed 's/^/    /'
+        fi
+        warn "Working tree has uncommitted changes:"
+        echo "$dirty" | sed 's/^/    /'
+        if $yes; then
+            warn "--yes given — proceeding over dirty tree"
+        elif [ -t 0 ]; then
+            echo -en "  ${BOLD}Continue anyway? [y/N]${NC} "
+            local confirm; read -r confirm
+            [[ "${confirm:-n}" =~ ^[Yy]$ ]] || { info "Cancelled"; return 1; }
+        else
+            fail "Dirty working tree and no TTY — re-run with --yes to override"
+        fi
+    fi
+
+    local before_ref after_ref
+    before_ref=$(git -C "$REPO_DIR" rev-parse --short HEAD)
+
+    info "Pulling..."
+    git -C "$REPO_DIR" pull --ff-only 2>&1 \
+        || fail "git pull --ff-only failed — your branch may have diverged. Merge manually."
+    after_ref=$(git -C "$REPO_DIR" rev-parse --short HEAD)
+
+    info "Installing packages..."
+    python3 -m pip install --quiet -r "${REPO_DIR}/requirements.txt"
+    [ -f "${REPO_DIR}/requirements-clone.txt" ] \
+        && python3 -m pip install --quiet -r "${REPO_DIR}/requirements-clone.txt"
+
+    local changed_files
+    changed_files=$(git -C "$REPO_DIR" diff --name-only "${before_ref}..${after_ref}" 2>/dev/null)
+
+    # Reload voices if running (subshell so cmd_reload's `fail` can't abort update).
+    if [ -n "$(server_pid)" ]; then
+        info "Reloading voices (best-effort; /reload needs --allow-clone)..."
+        ( cmd_reload ) || warn "reload failed — server may not be started with --allow-clone"
+    fi
+
+    # Reload is add-only and won't reimport changed code/deps — recommend a restart.
+    if echo "$changed_files" | grep -qE '^(server\.py|requirements.*\.txt|backends/)'; then
+        warn "Server code or dependencies changed — run ${CYAN}afterwords restart${NC} to apply."
+    fi
+    if echo "$changed_files" | grep -qE '^(afterwords\.sh|setup\.sh)$'; then
+        warn "Setup files changed — run ${CYAN}bash setup.sh${NC} if behaviour feels wrong."
+    fi
+
+    ok "Updated ${before_ref} → ${after_ref}"
+    echo "$changed_files" | sed 's/^/    /' | head -20
+    return 0
+}
+
 cmd_clone() {
     local quick=false yes=false
     # Mirror clone-voice.sh: drop flags, take the 2nd positional as the voice name.
@@ -1190,6 +1288,7 @@ case "$COMMAND" in
     trim)        cmd_trim "$@" ;;
     compare)     cmd_compare "$@" ;;
     refine)      cmd_refine "$@" ;;
+    update)      cmd_update "$@" ;;
     codex-hook)  cmd_codex_hook "$@" ;;
     configure)   cmd_configure "$@" ;;
     uninstall)   cmd_uninstall "$@" ;;

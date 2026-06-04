@@ -194,3 +194,86 @@ def test_clone_calls_refine_after_success(tmp_path):
     assert result.returncode in (0, 1), result.stderr
     assert "CLONE_DONE" in result.stdout
     assert "REFINE_RAN" in result.stdout
+
+
+# ── update tests ─────────────────────────────────────────────────────────────
+
+def _make_git_repo(tmp_path):
+    """Create a minimal git repo for update tests."""
+    import subprocess as _sp
+    _sp.run(["git", "init"], cwd=tmp_path, check=True, capture_output=True)
+    _sp.run(["git", "config", "user.email", "test@test.com"], cwd=tmp_path,
+            check=True, capture_output=True)
+    _sp.run(["git", "config", "user.name", "Test"], cwd=tmp_path,
+            check=True, capture_output=True)
+    # Minimal structure
+    (tmp_path / "server.py").write_text("# stub")
+    (tmp_path / "requirements.txt").write_text("# stub")
+    venv = tmp_path / ".venv" / "bin"
+    venv.mkdir(parents=True)
+    (venv / "activate").write_text("# stub")
+    scripts = tmp_path / "scripts"
+    scripts.mkdir()
+    _sp.run(["git", "add", "."], cwd=tmp_path, check=True, capture_output=True)
+    _sp.run(["git", "commit", "-m", "init"], cwd=tmp_path,
+            check=True, capture_output=True)
+    return tmp_path
+
+
+def _make_git_repo_with_upstream(tmp_path):
+    """Clone-backed repo that is exactly 1 commit BEHIND its origin, so
+    `behind > 0` and cmd_update reaches the dirty-tree check (the bug agy
+    caught: a no-remote repo computes behind=0 and returns 'up to date'
+    before ever checking dirty state)."""
+    import subprocess as _sp
+    origin = tmp_path / "origin.git"
+    _sp.run(["git", "init", "--bare", "-b", "main", str(origin)],
+            check=True, capture_output=True)
+
+    work = tmp_path / "work"
+    _sp.run(["git", "clone", str(origin), str(work)], check=True, capture_output=True)
+    def g(*a): _sp.run(["git", "-C", str(work), *a], check=True, capture_output=True)
+    g("config", "user.email", "t@t.com"); g("config", "user.name", "T")
+    (work / "server.py").write_text("# stub")
+    (work / "requirements.txt").write_text("# stub")
+    venv = work / ".venv" / "bin"; venv.mkdir(parents=True)
+    (venv / "activate").write_text("# stub")
+    (work / "scripts").mkdir()
+    g("add", "."); g("commit", "-m", "init"); g("push", "-u", "origin", "main")
+
+    # Advance origin by one commit via a throwaway clone, leaving `work` behind.
+    other = tmp_path / "other"
+    _sp.run(["git", "clone", str(origin), str(other)], check=True, capture_output=True)
+    def go(*a): _sp.run(["git", "-C", str(other), *a], check=True, capture_output=True)
+    go("config", "user.email", "t@t.com"); go("config", "user.name", "T")
+    (other / "UPSTREAM.txt").write_text("new")
+    go("add", "."); go("commit", "-m", "upstream change"); go("push", "origin", "main")
+    return work
+
+
+def test_update_check_exits_without_modifying_tree(tmp_path):
+    """afterwords update --check must not touch working tree files."""
+    repo = _make_git_repo(tmp_path)          # no remote — fetch warns, behind=0
+    sentinel = tmp_path / "sentinel.txt"
+    sentinel.write_text("original")
+
+    run_afterwords("update", "--check",
+                   env_override={"AFTERWORDS_REPO_DIR": str(repo)})
+    assert sentinel.read_text() == "original"
+
+
+def test_update_warns_on_dirty_tree(tmp_path):
+    """With commits available upstream AND a dirty tree, update must warn and
+    abort non-interactively (no TTY, no --yes)."""
+    repo = _make_git_repo_with_upstream(tmp_path)
+    (repo / "voices").mkdir()
+    (repo / "voices" / "test.json").write_text('{"name":"test"}')  # untracked-dirty under voices/
+    import subprocess as _sp
+    _sp.run(["git", "-C", str(repo), "add", "voices/test.json"],
+            check=True, capture_output=True)   # stage so status --porcelain reports it
+
+    result = run_afterwords("update",
+                            env_override={"AFTERWORDS_REPO_DIR": str(repo)})
+    combined = (result.stdout + result.stderr).lower()
+    assert "voices" in combined          # warned about the dirty voices/ path
+    assert result.returncode != 0        # aborted (non-TTY, no --yes)
