@@ -306,7 +306,6 @@ Replace the loop-and-early-return body (current lines ~63–114) so it (a) recor
         return 1 if any(r["gap_count"] for r in results) else 0
 
     # Apply path
-    new_cache: dict[Path, str] = {}
     for jp, ref, rec in targets:
         # ... existing trim_wav / re-transcribe / write-profile body, unchanged ...
         rec["changed"] = True
@@ -317,8 +316,10 @@ Replace the loop-and-early-return body (current lines ~63–114) so it (a) recor
         print(json.dumps({"voices": results}))
     elif targets:
         print(f"\ntrimmed {len(targets)} voice(s). re-run audit to verify.")
-    return 1 if any(r["gap_count"] for r in results) else 0
+    return 0   # apply succeeded — exit 0 (Unix convention). Dry-run returns 1 for "gaps found".
 ```
+
+> **Exit-code note (resolved 2026-06-04):** the **dry-run** path returns `1 if any(r["gap_count"]) else 0` (1 = "gaps found", a detection signal that `refine` and humans read). The **apply** path returns `0` on success — a command that successfully did its mutating job exits clean, so `trim --apply && next` chains work. Hard errors are exit 2 via the `__main__` wrapper. `refine` does not check `trim --apply`'s exit code (Task 8), so this is purely for standalone use.
 
 Update `if __name__ == "__main__":` — the current code is `sys.exit(main())` and **must stay that way** (trim's `main()` returns its exit code via `return 1 if … else 0`; a bare `main()` call would discard it and the script would exit 0 even when gaps are found, violating spec §5). Add only the exception→exit-2 guard:
 ```python
