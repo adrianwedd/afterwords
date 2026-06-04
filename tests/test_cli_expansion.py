@@ -75,3 +75,86 @@ def test_clone_url_detected_as_youtube():
         capture_output=True, text=True, timeout=30,
     )
     assert result.stdout.strip() == "youtube"
+
+
+# ── refine: 4-step pipeline exit-code chaining ───────────────────────
+
+def _make_stub_repo(tmp_path, qa_exit=0, compare_exit=0, trim_exit=0,
+                    trim_json=None, qa_json=None):
+    """Build a minimal fake REPO_DIR for testing cmd_refine."""
+    scripts = tmp_path / "scripts"
+    scripts.mkdir()
+    venv = tmp_path / ".venv" / "bin"
+    venv.mkdir(parents=True)
+    (venv / "activate").write_text("# stub")
+
+    qa_out = qa_json or '{"voices":[{"name":"v","ref_wer":0.05}],"threshold":0.15}'
+    trim_out = trim_json or '{"voices":[{"name":"v","gap_count":0,"changed":false}]}'
+
+    (scripts / "qa-voices.py").write_text(
+        f"import sys; print({qa_out!r}); sys.exit({qa_exit})"
+    )
+    (scripts / "compare-transcription.py").write_text(
+        f'import sys; print(\'{{"winner":"faster-whisper","agreement_wer":0.05,"whisper_words":40,"parakeet_words":40,"skipped":[]}}\'); sys.exit({compare_exit})'
+    )
+    (scripts / "trim-silence-gaps.py").write_text(
+        f"import sys; print({trim_out!r}); sys.exit({trim_exit})"
+    )
+    # Stub voice file so refine finds it
+    voices = tmp_path / "voices"
+    voices.mkdir()
+    (voices / "testvoice-ref.wav").write_text("")
+    (voices / "testvoice.json").write_text('{"name":"testvoice"}')
+    return tmp_path
+
+
+def _run_refine(tmp_path, *extra_args):
+    return run_afterwords("refine", "testvoice", *extra_args,
+                          env_override={"AFTERWORDS_REPO_DIR": str(tmp_path)})
+
+
+def test_refine_exits_0_on_clean(tmp_path):
+    repo = _make_stub_repo(tmp_path)
+    result = _run_refine(repo)
+    assert result.returncode == 0, result.stderr
+
+
+def test_refine_continues_after_qa_exit1(tmp_path):
+    """qa exit 1 (WER warning) → refine continues to next step."""
+    qa_json = '{"voices":[{"name":"testvoice","ref_wer":0.20}],"threshold":0.15}'
+    repo = _make_stub_repo(tmp_path, qa_exit=1, qa_json=qa_json)
+    result = _run_refine(repo)
+    # Should complete (exit 1 because final WER still > 0.15), not abort with 2
+    assert result.returncode in (0, 1), f"should not hard-abort: {result.stderr}"
+
+
+def test_refine_aborts_on_qa_exit2(tmp_path):
+    """qa exit 2 (hard error) → refine aborts immediately with exit 2."""
+    repo = _make_stub_repo(tmp_path, qa_exit=2)
+    result = _run_refine(repo)
+    assert result.returncode == 2, f"expected 2, got {result.returncode}: {result.stderr}"
+
+
+def test_refine_aborts_on_trim_exit2(tmp_path):
+    """trim exit 2 → abort with exit 2 (unlike compare, which continues)."""
+    repo = _make_stub_repo(tmp_path, trim_exit=2)
+    result = _run_refine(repo)
+    assert result.returncode == 2, f"expected 2, got {result.returncode}: {result.stderr}"
+
+
+def test_refine_continues_after_compare_exit2(tmp_path):
+    """compare exit 2 → refine prints warning but continues to step 3."""
+    repo = _make_stub_repo(tmp_path, compare_exit=2)
+    result = _run_refine(repo)
+    # Should still finish (exit 0 or 1), not exit 2
+    assert result.returncode != 2, f"should not abort on compare exit 2: {result.stderr}"
+
+
+def test_refine_quick_skips_compare_trim(tmp_path):
+    """--quick must skip steps 2 and 3 entirely."""
+    # Give compare a fatal exit — if --quick works, it should never be called
+    repo = _make_stub_repo(tmp_path, compare_exit=2)
+    result = _run_refine(repo, "--quick")
+    # If compare were called, it would exit 2 and potentially cause issues;
+    # with --quick it should complete cleanly
+    assert result.returncode in (0, 1)

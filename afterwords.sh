@@ -536,6 +536,104 @@ cmd_compare() {
     python3 "$script" "$@"
 }
 
+cmd_refine() {
+    local voice="" quick=false yes=false
+    for arg in "$@"; do
+        case "$arg" in
+            --quick) quick=true ;;
+            --yes)   yes=true ;;
+            --*)     ;;                       # ignore other flags
+            *)       [ -z "$voice" ] && voice="$arg" ;;
+        esac
+    done
+
+    [ -z "$voice" ] && fail "Usage: afterwords refine <voice> [--quick] [--yes]"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+
+    local qa_script="${REPO_DIR}/scripts/qa-voices.py"
+    local compare_script="${REPO_DIR}/scripts/compare-transcription.py"
+    local trim_script="${REPO_DIR}/scripts/trim-silence-gaps.py"
+    local ref_wav="${REPO_DIR}/voices/${voice}-ref.wav"
+
+    [ -f "$qa_script" ]      || fail "qa-voices.py not found"
+    [ -f "$compare_script" ] || fail "compare-transcription.py not found"
+    [ -f "$trim_script" ]    || fail "trim-silence-gaps.py not found"
+    [ -f "$ref_wav" ]        || fail "Reference WAV not found: ${ref_wav}"
+
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+
+    # Hard-error abort helper: prints ✗ and returns 2 (NOT fail/exit 1).
+    _refine_abort() { echo -e "  ${RED}✗${NC} $*" >&2; return 2; }
+
+    info "Refining ${voice}..."
+    echo
+
+    # Step 1/4 — QA ref WER
+    info "Step 1/4  qa --voice ${voice} --ref-only"
+    python3 "$qa_script" --voice "$voice" --ref-only --json
+    local qa1_exit=$?
+    [ $qa1_exit -eq 2 ] && { _refine_abort "qa hard-errored (exit 2) — aborting refine"; return 2; }
+    [ $qa1_exit -eq 1 ] && warn "WER above threshold — continuing"
+
+    if ! $quick; then
+        # Step 2/4 — Compare transcription models (diagnostic-only; exit 1 or 2 → continue)
+        info "Step 2/4  compare voices/${voice}-ref.wav"
+        python3 "$compare_script" "$ref_wav" --json
+        local compare_exit=$?
+        [ $compare_exit -ne 0 ] && warn "compare exited ${compare_exit} — continuing to step 3"
+
+        # Step 3/4 — Trim silence gaps (dry run, then ask)
+        info "Step 3/4  trim --voice ${voice} (dry run)"
+        local trim_json
+        trim_json=$(python3 "$trim_script" --voice "$voice" --json 2>/dev/null)
+        local trim_exit=$?
+        [ $trim_exit -eq 2 ] && { _refine_abort "trim hard-errored (exit 2) — aborting refine"; return 2; }
+
+        local gap_count=0
+        gap_count=$(echo "$trim_json" | python3 -c "
+import json, sys
+try:
+    d = json.load(sys.stdin)
+    print(sum(v.get('gap_count', 0) for v in d.get('voices', [])))
+except Exception:
+    print(0)
+" 2>/dev/null || echo "0")
+
+        if [ "$gap_count" -eq 0 ]; then
+            ok "No silence gaps found"
+        else
+            echo "$trim_json"
+            local do_trim="n"
+            if [ -t 0 ] && ! $yes; then
+                echo -en "  ${BOLD}Trim and rewrite reference? [Y/n]${NC} "
+                read -r do_trim
+            fi
+            if [[ "${do_trim:-n}" =~ ^[Yy]$ ]]; then
+                info "Applying trim..."
+                python3 "$trim_script" --voice "$voice" --apply
+            fi
+        fi
+    else
+        info "Step 2/4  compare  (skipped — --quick)"
+        info "Step 3/4  trim     (skipped — --quick)"
+    fi
+
+    # Step 4/4 — Re-measure WER
+    info "Step 4/4  qa --voice ${voice} --ref-only (final)"
+    python3 "$qa_script" --voice "$voice" --ref-only --json
+    local qa2_exit=$?
+    [ $qa2_exit -eq 2 ] && { _refine_abort "qa hard-errored on final check (exit 2)"; return 2; }
+
+    echo
+    if [ $qa2_exit -eq 1 ]; then
+        warn "Final WER still above threshold"
+        return 1
+    fi
+    ok "Refine complete"
+    return 0
+}
+
 cmd_clone() {
     if [ ! -f "$REPO_DIR/clone-voice.sh" ]; then
         fail "clone-voice.sh not found in ${REPO_DIR}"
@@ -1056,6 +1154,7 @@ case "$COMMAND" in
     qa)          cmd_qa "$@" ;;
     trim)        cmd_trim "$@" ;;
     compare)     cmd_compare "$@" ;;
+    refine)      cmd_refine "$@" ;;
     codex-hook)  cmd_codex_hook "$@" ;;
     configure)   cmd_configure "$@" ;;
     uninstall)   cmd_uninstall "$@" ;;
