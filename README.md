@@ -1,5 +1,7 @@
 # Afterwords — Local Voice-Cloning TTS Server
 
+**[afterwords local](https://adrianwedd.github.io/afterwords/)** &nbsp;·&nbsp; **[afterwords for Mac](https://afterwords-app.pages.dev/)** &nbsp;·&nbsp; **[afterwords cloud](https://afterwords-cloud.pages.dev/)**
+
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
 Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or wire it into any AI coding harness — **Claude Code**, **Codex CLI**, **Cursor**, **Gemini CLI / Antigravity (agy)**, or **Hermes Agent** — to hear every response spoken aloud. **100 flagship voice families** (200 profiles on **Qwen3-TTS 0.6B**, the default cloning path), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
@@ -615,6 +617,7 @@ afterwords status      # show health, PID, loaded voices
 afterwords logs        # tail the server log
 afterwords voices      # list available voices
 afterwords reload      # pick up new voices without restarting (no synth interruption)
+afterwords mute        # toggle TTS playback on/off without stopping synthesis
 afterwords clone       # clone a new voice from YouTube
 afterwords uninstall   # remove service and optionally hooks
 ```
