@@ -2,6 +2,33 @@
 
 All notable changes to Afterwords. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.5] — 2026-06-13
+
+Sprint 6 — CLI expansion from a server-management tool into a voice-curation workbench.
+
+### Added
+
+- **Analysis subcommands** — `afterwords transcribe`, `qa`, `trim`, and `compare`: thin bash passthroughs to the QA scripts, all now emitting `--json`, meaningful exit codes, and TTY-gated colour markers.
+- **`afterwords refine`** — 4-step QA pipeline (qa → compare → trim → qa) that chains the analysis scripts through their stable exit codes.
+- **Auto-refine after clone** — `clone-voice.sh` runs `refine` automatically on success; `--quick` keeps the fast path.
+- **`afterwords update`** — self-update via `git pull` (warns instead of silently ignoring a pip failure; `--check` dry-run makes no working-tree, package, or server changes).
+- **`afterwords mute`** — toggle playback on/off without stopping synthesis.
+- **`afterwords audit --archive`** — pair-audit the `tts-archive` (text/audio) alongside the voice gallery.
+- **`--ai` flag + `docs/ai-guide.md`** — machine-readable guidance for agent-driven workflows.
+- **Local-file clone** — `clone-voice.sh` accepts a local audio file, with flag-filtered positionals and `source_basename` recorded in the voice JSON.
+- **Help redesign** — `afterwords` help reorganised into six sections, including a new Analysis group.
+- **Acceptance-criteria tests** — `tests/test_cli_expansion.py` and `tests/test_script_polish.py`.
+
+### Changed
+
+- **`qa-voices.py`, `trim-silence-gaps.py`, `compare-transcription.py`** gained `--json` output, exit codes, and TTY markers so `refine` can consume them as stable contracts.
+- **Maintainer-internal scripts moved to `scripts/internal/`** (CI workflow and references updated).
+
+### Fixed
+
+- **5 UX issues** flagged in external CLI review.
+- **Honest `[y/N]` prompt label** for the destructive trim step in `refine`.
+
 ## [1.0.4] — 2026-06-04
 
 ### Added
