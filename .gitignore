@@ -39,3 +39,8 @@ voices/*.wav.bak
 # Tool caches
 .wrangler/
 .playwright-mcp/
+
+# Local scratch/QA artefacts (audit: untracked but unignored = git add -A risk)
+/cache/
+/afterwords-redesign/
+/*.diff

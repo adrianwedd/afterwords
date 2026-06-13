@@ -35,8 +35,10 @@ GRN="\033[0;32m"; YLW="\033[0;33m"; RED="\033[0;31m"; DIM="\033[2m"; NC="\033[0m
 # the Graph API. Otherwise, fall back to printing the manual Debugger URLs.
 TOKEN=""
 if [ -n "${FB_APP_ID:-}" ] && [ -n "${FB_APP_SECRET:-}" ]; then
-    TOKEN_URL="https://graph.facebook.com/oauth/access_token?client_id=${FB_APP_ID}&client_secret=${FB_APP_SECRET}&grant_type=client_credentials"
-    TOKEN=$(curl -sS "$TOKEN_URL" | python3 -c 'import sys,json
+    TOKEN=$(curl -sS -X POST "https://graph.facebook.com/oauth/access_token" \
+        --data-urlencode "client_id=${FB_APP_ID}" \
+        --data-urlencode "client_secret=${FB_APP_SECRET}" \
+        --data-urlencode "grant_type=client_credentials" | python3 -c 'import sys,json
 try: print(json.load(sys.stdin).get("access_token",""))
 except: pass' 2>/dev/null)
     if [ -z "$TOKEN" ]; then
