@@ -210,6 +210,10 @@ def _run_in_ml_thread(fn, *args, **kwargs):
     return _ml_executor.submit(fn, *args, **kwargs).result()
 _clone_enabled = False
 
+# /clone uploads are buffered in RAM for denoising; cap them. 25 MB is ~4 min
+# of 16-bit 48 kHz mono — far beyond the 60 s the cloning path needs.
+MAX_CLONE_UPLOAD_BYTES = 25 * 1024 * 1024
+
 def _register_voice(
     name: str,
     backend_name: str,
@@ -542,7 +546,12 @@ async def clone_voice_endpoint(
             status_code=400,
         )
 
-    audio_bytes = await audio.read()
+    audio_bytes = await audio.read(MAX_CLONE_UPLOAD_BYTES + 1)
+    if len(audio_bytes) > MAX_CLONE_UPLOAD_BYTES:
+        return JSONResponse(
+            {"error": f"audio exceeds {MAX_CLONE_UPLOAD_BYTES // (1024*1024)}MB limit"},
+            status_code=413,
+        )
     if len(audio_bytes) < 1000:
         return JSONResponse({"error": "audio too short"}, status_code=400)
 

@@ -152,6 +152,20 @@ def test_clone_too_short(client):
     server._clone_enabled = False
 
 
+def test_clone_rejects_oversized_upload(client, monkeypatch):
+    """Uploads beyond MAX_CLONE_UPLOAD_BYTES get 413 before any processing."""
+    monkeypatch.setattr(server, "_clone_enabled", True)
+    monkeypatch.setattr(server, "MAX_CLONE_UPLOAD_BYTES", 10_000)
+    payload = b"\x00" * 10_001
+    resp = client.post(
+        "/clone",
+        files={"audio": ("big.wav", payload, "audio/wav")},
+        data={"session_id": "size-test"},
+    )
+    assert resp.status_code == 413
+    assert "exceeds" in resp.json()["error"]
+
+
 # --- POST /synthesize tests ---
 
 
