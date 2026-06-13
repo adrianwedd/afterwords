@@ -34,10 +34,14 @@ acquire_play_lock() {
 release_play_lock() { rm -f "$PLAY_PID"; rm -rf "$PLAY_LOCK"; }
 
 mkdir -p "$ARCHIVE_DIR"
+if [ -L "$QUEUEDIR" ]; then
+  echo "afterwords: $QUEUEDIR is a symlink — refusing to use it" >&2
+  exit 1
+fi
 mkdir -p "$QUEUEDIR"
 chmod 700 "$QUEUEDIR" 2>/dev/null || true
-if [ "$(stat -f%u "$QUEUEDIR" 2>/dev/null)" != "$(id -u)" ]; then
-  echo "afterwords: $QUEUEDIR is owned by another user — refusing to use it" >&2
+if [ ! -d "$QUEUEDIR" ] || [ "$(stat -f%u "$QUEUEDIR" 2>/dev/null)" != "$(id -u)" ]; then
+  echo "afterwords: $QUEUEDIR is not a directory we own — refusing to use it" >&2
   exit 1
 fi
 

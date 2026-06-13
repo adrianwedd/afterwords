@@ -104,6 +104,22 @@ async def _validate_host(request, call_next):
     return await call_next(request)
 
 
+@app.middleware("http")
+async def _limit_clone_body(request, call_next):
+    # Reject oversized /clone uploads by Content-Length BEFORE multipart parsing
+    # spools the body to a temp file (audit follow-up: the in-handler read() cap
+    # bounds RAM but the parser had already spooled to disk). A lying/absent
+    # Content-Length still falls through to the in-handler read(MAX+1) cap.
+    if request.url.path == "/clone" and request.method == "POST":
+        cl = request.headers.get("content-length", "")
+        if cl.isdigit() and int(cl) > MAX_CLONE_UPLOAD_BYTES:
+            return JSONResponse(
+                {"error": f"audio exceeds {MAX_CLONE_UPLOAD_BYTES // (1024*1024)}MB limit"},
+                status_code=413,
+            )
+    return await call_next(request)
+
+
 _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")
 
 # Voice registry: name → (ref_audio_path, ref_text)

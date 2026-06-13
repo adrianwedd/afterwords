@@ -166,6 +166,22 @@ def test_clone_rejects_oversized_upload(client, monkeypatch):
     assert "exceeds" in resp.json()["error"]
 
 
+def test_clone_oversized_rejected_before_routing(client, monkeypatch):
+    """Content-Length middleware 413s an oversized /clone before the route runs.
+
+    Clone is DISABLED here: a 413 (not the disabled-path response) proves the
+    body cap fires pre-parser, before multipart spools to disk."""
+    monkeypatch.setattr(server, "_clone_enabled", False)
+    monkeypatch.setattr(server, "MAX_CLONE_UPLOAD_BYTES", 10_000)
+    payload = b"\x00" * 10_001
+    resp = client.post(
+        "/clone",
+        files={"audio": ("big.wav", payload, "audio/wav")},
+        data={"session_id": "pre-route"},
+    )
+    assert resp.status_code == 413
+
+
 # --- POST /synthesize tests ---
 
 
