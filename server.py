@@ -96,6 +96,30 @@ async def lifespan(app):
 
 app = FastAPI(title="Afterwords TTS", lifespan=lifespan)
 
+
+@app.middleware("http")
+async def _validate_host(request, call_next):
+    if _enforce_host_check and not _host_allowed(request.headers.get("host", "")):
+        return JSONResponse({"error": "invalid host header"}, status_code=403)
+    return await call_next(request)
+
+
+@app.middleware("http")
+async def _limit_clone_body(request, call_next):
+    # Reject oversized /clone uploads by Content-Length BEFORE multipart parsing
+    # spools the body to a temp file (audit follow-up: the in-handler read() cap
+    # bounds RAM but the parser had already spooled to disk). A lying/absent
+    # Content-Length still falls through to the in-handler read(MAX+1) cap.
+    if request.url.path == "/clone" and request.method == "POST":
+        cl = request.headers.get("content-length", "")
+        if cl.isdigit() and int(cl) > MAX_CLONE_UPLOAD_BYTES:
+            return JSONResponse(
+                {"error": f"audio exceeds {MAX_CLONE_UPLOAD_BYTES // (1024*1024)}MB limit"},
+                status_code=413,
+            )
+    return await call_next(request)
+
+
 _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")
 
 # Voice registry: name → (ref_audio_path, ref_text)
@@ -209,6 +233,25 @@ def _run_in_ml_thread(fn, *args, **kwargs):
         return fn(*args, **kwargs)
     return _ml_executor.submit(fn, *args, **kwargs).result()
 _clone_enabled = False
+
+# /clone uploads are buffered in RAM for denoising; cap them. 25 MB is ~4 min
+# of 16-bit 48 kHz mono — far beyond the 60 s the cloning path needs.
+MAX_CLONE_UPLOAD_BYTES = 25 * 1024 * 1024
+
+# Host-header allowlist (audit M3): blocks DNS-rebinding and cross-origin
+# abuse of the GPU. Enabled in main() for loopback binds; stays False under
+# TestClient (which sends Host: testserver) and for --bind-public deployments.
+_enforce_host_check = False
+_ALLOWED_HOSTNAMES = {"localhost", "127.0.0.1", "[::1]"}
+
+
+def _host_allowed(host_header: str) -> bool:
+    host = host_header.strip().lower()
+    if host.startswith("["):                      # [::1] or [::1]:7860
+        hostname = host.split("]")[0] + "]"
+    else:
+        hostname = host.rsplit(":", 1)[0] if ":" in host else host
+    return hostname in _ALLOWED_HOSTNAMES
 
 def _register_voice(
     name: str,
@@ -542,7 +585,12 @@ async def clone_voice_endpoint(
             status_code=400,
         )
 
-    audio_bytes = await audio.read()
+    audio_bytes = await audio.read(MAX_CLONE_UPLOAD_BYTES + 1)
+    if len(audio_bytes) > MAX_CLONE_UPLOAD_BYTES:
+        return JSONResponse(
+            {"error": f"audio exceeds {MAX_CLONE_UPLOAD_BYTES // (1024*1024)}MB limit"},
+            status_code=413,
+        )
     if len(audio_bytes) < 1000:
         return JSONResponse({"error": "audio too short"}, status_code=400)
 
@@ -849,6 +897,27 @@ def reload_voices(prune: bool = False):
     return {"status": "ok", "reloaded": reloaded, "removed": sorted(removed), "errors": []}
 
 
+_LOOPBACK_HOSTS = ("127.0.0.1", "localhost", "::1")
+
+
+def _resolve_bind_host(host: str, *, allow_clone: bool, bind_public: bool) -> str:
+    """Decide the actual bind address (audit L2).
+
+    --allow-clone always forces loopback (clone endpoints must never be
+    LAN-reachable). Otherwise a non-loopback host requires the explicit
+    --bind-public opt-in.
+    """
+    if allow_clone and host not in _LOOPBACK_HOSTS:
+        log.info("--allow-clone: binding to 127.0.0.1 for security")
+        return "127.0.0.1"
+    if host not in _LOOPBACK_HOSTS and not bind_public:
+        raise SystemExit(
+            f"refusing to bind {host}: non-loopback binds expose the GPU to the "
+            "network. Re-run with --bind-public if this is intentional."
+        )
+    return host
+
+
 def main():
     parser = argparse.ArgumentParser(description="Afterwords TTS server (MLX)")
     parser.add_argument("--port", type=int, default=7860)
@@ -865,14 +934,20 @@ def main():
         action="store_true",
         help="Also register qwen3-1.7b (default: 0.6b only)",
     )
+    parser.add_argument(
+        "--bind-public",
+        action="store_true",
+        help="Allow binding a non-loopback address (exposes synthesis to the network)",
+    )
     args = parser.parse_args()
 
-    global DEFAULT_VOICE, _clone_enabled, _ml_executor
+    global DEFAULT_VOICE, _clone_enabled, _ml_executor, _enforce_host_check
     if args.allow_clone:
         _clone_enabled = True
-        if args.host == "0.0.0.0":
-            args.host = "127.0.0.1"
-            log.info("--allow-clone: binding to 127.0.0.1 for security")
+    args.host = _resolve_bind_host(
+        args.host, allow_clone=args.allow_clone, bind_public=args.bind_public
+    )
+    _enforce_host_check = args.host in ("127.0.0.1", "localhost", "::1")
 
     # Spin up the dedicated MLX thread BEFORE any backend loading so that all Metal
     # stream IDs (0, 1, 2, …) are created in the same thread that will later run synthesis.

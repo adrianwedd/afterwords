@@ -152,6 +152,36 @@ def test_clone_too_short(client):
     server._clone_enabled = False
 
 
+def test_clone_rejects_oversized_upload(client, monkeypatch):
+    """Uploads beyond MAX_CLONE_UPLOAD_BYTES get 413 before any processing."""
+    monkeypatch.setattr(server, "_clone_enabled", True)
+    monkeypatch.setattr(server, "MAX_CLONE_UPLOAD_BYTES", 10_000)
+    payload = b"\x00" * 10_001
+    resp = client.post(
+        "/clone",
+        files={"audio": ("big.wav", payload, "audio/wav")},
+        data={"session_id": "size-test"},
+    )
+    assert resp.status_code == 413
+    assert "exceeds" in resp.json()["error"]
+
+
+def test_clone_oversized_rejected_before_routing(client, monkeypatch):
+    """Content-Length middleware 413s an oversized /clone before the route runs.
+
+    Clone is DISABLED here: a 413 (not the disabled-path response) proves the
+    body cap fires pre-parser, before multipart spools to disk."""
+    monkeypatch.setattr(server, "_clone_enabled", False)
+    monkeypatch.setattr(server, "MAX_CLONE_UPLOAD_BYTES", 10_000)
+    payload = b"\x00" * 10_001
+    resp = client.post(
+        "/clone",
+        files={"audio": ("big.wav", payload, "audio/wav")},
+        data={"session_id": "pre-route"},
+    )
+    assert resp.status_code == 413
+
+
 # --- POST /synthesize tests ---
 
 
@@ -993,5 +1023,36 @@ def test_concurrent_synthesize_no_deadlock(client, sample_voice):
         results = list(pool.map(_one, range(n_requests), timeout=30))
 
     assert all(s == 200 for s in results), f"expected all 200, got {results}"
+
+
+# --- Host-header validation (audit M3) ---
+
+
+def test_host_header_validation_rejects_foreign_host(client, monkeypatch):
+    monkeypatch.setattr(server, "_enforce_host_check", True)
+    resp = client.get("/health", headers={"Host": "evil.example.com"})
+    assert resp.status_code == 403
+
+
+def test_host_header_validation_allows_localhost(client, monkeypatch):
+    monkeypatch.setattr(server, "_enforce_host_check", True)
+    resp = client.get("/health", headers={"Host": "localhost:7860"})
+    assert resp.status_code == 200
+
+
+# --- Bind-host resolution (audit L2) ---
+
+
+def test_resolve_bind_host_refuses_public_without_flag():
+    with pytest.raises(SystemExit):
+        server._resolve_bind_host("0.0.0.0", allow_clone=False, bind_public=False)
+
+
+def test_resolve_bind_host_allows_public_with_flag():
+    assert server._resolve_bind_host("0.0.0.0", allow_clone=False, bind_public=True) == "0.0.0.0"
+
+
+def test_resolve_bind_host_forces_loopback_with_clone():
+    assert server._resolve_bind_host("0.0.0.0", allow_clone=True, bind_public=True) == "127.0.0.1"
 
 
