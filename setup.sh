@@ -366,6 +366,11 @@ case "$AGENT" in
 esac
 
 mkdir -p "$QUEUEDIR"
+chmod 700 "$QUEUEDIR" 2>/dev/null || true
+if [ "$(stat -f%u "$QUEUEDIR" 2>/dev/null)" != "$(id -u)" ]; then
+  echo "afterwords: $QUEUEDIR is owned by another user — refusing to use it" >&2
+  exit 1
+fi
 ITEM="${QUEUEDIR}/$(date +%s)-${RANDOM}.json"
 ITEM_TMP="${ITEM}.tmp"
 python3 -c "
@@ -434,6 +439,11 @@ echo $$ > "$PIDFILE"
 trap 'rm -f "$PIDFILE"; rm -rf "$LOCKDIR"' EXIT
 
 mkdir -p "$QUEUEDIR"
+chmod 700 "$QUEUEDIR" 2>/dev/null || true
+if [ "$(stat -f%u "$QUEUEDIR" 2>/dev/null)" != "$(id -u)" ]; then
+  echo "afterwords: $QUEUEDIR is owned by another user — refusing to use it" >&2
+  exit 1
+fi
 
 while true; do
     # Prune excess items (keep newest MAX_QUEUE).
