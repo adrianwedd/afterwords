@@ -1,8 +1,10 @@
 # Afterwords — Local Voice-Cloning TTS Server
 
+**[afterwords local](https://adrianwedd.github.io/afterwords/)** &nbsp;·&nbsp; **[afterwords for Mac](https://afterwords-app.pages.dev/)** &nbsp;·&nbsp; **[afterwords cloud](https://afterwords-cloud.pages.dev/)**
+
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or wire it into any AI coding harness — **Claude Code**, **Codex CLI**, **Cursor**, **Gemini CLI / Antigravity (agy)**, or **Hermes Agent** — to hear every response spoken aloud. **100 flagship voice families** (200 profiles on **Qwen3-TTS 0.6B**, the default cloning path), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or wire it into any AI coding harness — **Claude Code**, **Codex CLI**, **Cursor**, **Gemini CLI / Antigravity (agy)**, or **Hermes Agent** — to hear every response spoken aloud. **103 flagship voice families** (284 profiles across **Qwen3-TTS 0.6B** and **1.7B**, the default cloning path), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -357,8 +359,8 @@ The skill handles voice selection, server health checks, synthesis, and playback
 ```
 
 **`/voice`** handles input: you speak, Claude hears text.
-**This project** handles output: any of the four CLIs responds, you hear speech.
-All four integrations share the play lock — simultaneous audio is coordinated to prevent overlap.
+**This project** handles output: any of the six CLIs responds, you hear speech.
+All six integrations share the play lock — simultaneous audio is coordinated to prevent overlap.
 
 ## How It Works
 
@@ -432,7 +434,7 @@ DELETE /session/{id}      (--allow-clone only)
 
 ### The Hook
 
-Claude Code's [Stop hook](https://docs.anthropic.com/en/docs/claude-code/hooks) fires after every response. The hook extracts the response text, strips markdown, and atomically writes a JSON item to the shared queue directory (`/tmp/claude-tts-queue/`). A background worker with `mkdir`-based locking (macOS has no `flock`) claims items one at a time and prevents overlapping audio via a shared play lock (`/tmp/afterwords-play.lock`) coordinated across all four CLI integrations.
+Claude Code's [Stop hook](https://docs.anthropic.com/en/docs/claude-code/hooks) fires after every response. The hook extracts the response text, strips markdown, and atomically writes a JSON item to the shared queue directory (`/tmp/claude-tts-queue/`). A background worker with `mkdir`-based locking (macOS has no `flock`) claims items one at a time and prevents overlapping audio via a shared play lock (`/tmp/afterwords-play.lock`) coordinated across all six CLI integrations.
 
 ### The Queue
 
@@ -490,7 +492,7 @@ afterwords/
 │   ├── galadriel-ref.wav     ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav      ← (Scarlett Johansson, Her)
 │   ├── amy-pond-ref.wav      ← (Karen Gillan, Doctor Who)
-│   └── ...                   ← 100 families / 200 profiles (Qwen3-0.6B)
+│   └── ...                   ← 103 families / 284 profiles (Qwen3-0.6B + 1.7B)
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration
@@ -615,6 +617,7 @@ afterwords status      # show health, PID, loaded voices
 afterwords logs        # tail the server log
 afterwords voices      # list available voices
 afterwords reload      # pick up new voices without restarting (no synth interruption)
+afterwords mute        # toggle TTS playback on/off without stopping synthesis
 afterwords clone       # clone a new voice from YouTube
 afterwords uninstall   # remove service and optionally hooks
 ```

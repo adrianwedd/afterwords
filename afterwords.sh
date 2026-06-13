@@ -42,12 +42,14 @@ AFTERWORDS_SERVER_CONFIG="$HOME/.afterwords-server"
 CODEX_WATCH_PID="/tmp/codex-tts-watch.pid"
 CODEX_WATCH_LOG="/tmp/codex-tts-watch.log"
 CODEX_WATCH_SCRIPT_REL=".claude/hooks/codex-tts-watch.sh"
+MUTE_FILE="/tmp/afterwords-muted"
 
 # Resolve the repo directory (where server.py lives)
-if [ -L "${BASH_SOURCE[0]}" ]; then
-    # Followed a symlink — resolve to the real script location
+# Allow test override of REPO_DIR
+if [ -n "${AFTERWORDS_REPO_DIR:-}" ]; then
+    REPO_DIR="$AFTERWORDS_REPO_DIR"
+elif [ -L "${BASH_SOURCE[0]}" ]; then
     REAL_SCRIPT="$(readlink "${BASH_SOURCE[0]}")"
-    # Handle relative symlinks
     if [[ "$REAL_SCRIPT" != /* ]]; then
         REAL_SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd "$(dirname "$REAL_SCRIPT")" && pwd)/$(basename "$REAL_SCRIPT")"
     fi
@@ -220,7 +222,9 @@ cmd_status() {
     if [ -n "$pid" ]; then
         local mgmt="manual"
         plist_loaded && mgmt="launchd (auto-start)"
-        echo -e "  ${GREEN}●${NC} ${BOLD}running${NC}  ${DIM}PID ${pid}  port ${PORT}  ${mgmt}${NC}${with17b_label}"
+        local mute_label=""
+        [ -f "$MUTE_FILE" ] && mute_label="  ${YELLOW}⏸ muted${NC}"
+        echo -e "  ${GREEN}●${NC} ${BOLD}running${NC}  ${DIM}PID ${pid}  port ${PORT}  ${mgmt}${NC}${with17b_label}${mute_label}"
     else
         echo -e "  ${RED}●${NC} ${BOLD}stopped${NC}${with17b_label}"
         echo
@@ -472,24 +476,310 @@ cmd_reload() {
 }
 
 cmd_audit() {
-    local script="${REPO_DIR}/scripts/audit-voice-transcripts.py"
-    if [ ! -f "$script" ]; then
-        fail "audit-voice-transcripts.py not found"
+    local use_archive=false
+    for arg in "$@"; do
+        [ "$arg" = "--archive" ] && use_archive=true
+    done
+
+    if $use_archive; then
+        local script="${REPO_DIR}/scripts/audit-archive.py"
+        [ -f "$script" ] || fail "audit-archive.py not found in ${REPO_DIR}/scripts/"
+        [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+        # shellcheck disable=SC1091
+        source "${REPO_DIR}/.venv/bin/activate"
+        # Strip --archive before forwarding; remaining flags pass through to audit-archive.py
+        local args=()
+        for arg in "$@"; do
+            [ "$arg" != "--archive" ] && args+=("$arg")
+        done
+        python3 "$script" ${args[@]+"${args[@]}"}
+    else
+        local script="${REPO_DIR}/scripts/audit-voice-transcripts.py"
+        [ -f "$script" ] || fail "audit-voice-transcripts.py not found in ${REPO_DIR}/scripts/"
+        [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+        # shellcheck disable=SC1091
+        source "${REPO_DIR}/.venv/bin/activate"
+        python3 "$script" "$@"
     fi
-    if [ ! -d "${REPO_DIR}/.venv" ]; then
-        fail "venv missing — run setup.sh first"
-    fi
+}
+
+cmd_transcribe() {
+    local script="${REPO_DIR}/scripts/transcribe.py"
+    [ -f "$script" ] || fail "transcribe.py not found in ${REPO_DIR}/scripts/"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
     # shellcheck disable=SC1091
     source "${REPO_DIR}/.venv/bin/activate"
     python3 "$script" "$@"
 }
 
-cmd_clone() {
-    if [ ! -f "$REPO_DIR/clone-voice.sh" ]; then
-        fail "clone-voice.sh not found in ${REPO_DIR}"
+cmd_qa() {
+    local script="${REPO_DIR}/scripts/qa-voices.py"
+    [ -f "$script" ] || fail "qa-voices.py not found in ${REPO_DIR}/scripts/"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+    python3 "$script" "$@"
+}
+
+cmd_trim() {
+    local script="${REPO_DIR}/scripts/trim-silence-gaps.py"
+    [ -f "$script" ] || fail "trim-silence-gaps.py not found in ${REPO_DIR}/scripts/"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+    python3 "$script" "$@"
+}
+
+cmd_compare() {
+    local script="${REPO_DIR}/scripts/compare-transcription.py"
+    [ -f "$script" ] || fail "compare-transcription.py not found in ${REPO_DIR}/scripts/"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+    python3 "$script" "$@"
+}
+
+cmd_refine() {
+    local voice="" quick=false yes=false
+    for arg in "$@"; do
+        case "$arg" in
+            --quick) quick=true ;;
+            --yes)   yes=true ;;
+            --*)     ;;                       # ignore other flags
+            *)       [ -z "$voice" ] && voice="$arg" ;;
+        esac
+    done
+
+    [ -z "$voice" ] && fail "Usage: afterwords refine <voice> [--quick] [--yes]"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+
+    local qa_script="${REPO_DIR}/scripts/qa-voices.py"
+    local compare_script="${REPO_DIR}/scripts/compare-transcription.py"
+    local trim_script="${REPO_DIR}/scripts/trim-silence-gaps.py"
+    local ref_wav="${REPO_DIR}/voices/${voice}-ref.wav"
+
+    [ -f "$qa_script" ]      || fail "qa-voices.py not found"
+    [ -f "$compare_script" ] || fail "compare-transcription.py not found"
+    [ -f "$trim_script" ]    || fail "trim-silence-gaps.py not found"
+    [ -f "$ref_wav" ]        || fail "Reference WAV not found: ${ref_wav}"
+
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+
+    # Hard-error abort helper: prints ✗ and returns 2 (NOT fail/exit 1).
+    _refine_abort() { echo -e "  ${RED}✗${NC} $*" >&2; return 2; }
+
+    info "Refining ${voice}..."
+    echo
+
+    # Step 1/4 — QA ref WER
+    info "Step 1/4  qa --voice ${voice} --ref-only"
+    python3 "$qa_script" --voice "$voice" --ref-only --json
+    local qa1_exit=$?
+    [ $qa1_exit -eq 2 ] && { _refine_abort "qa hard-errored (exit 2) — aborting refine"; return 2; }
+    [ $qa1_exit -eq 1 ] && warn "WER above threshold — continuing"
+
+    if ! $quick; then
+        # Step 2/4 — Compare transcription models (diagnostic-only; exit 1 or 2 → continue)
+        info "Step 2/4  compare voices/${voice}-ref.wav"
+        python3 "$compare_script" "$ref_wav" --json
+        local compare_exit=$?
+        [ $compare_exit -ne 0 ] && warn "compare exited ${compare_exit} — continuing to step 3"
+
+        # Step 3/4 — Trim silence gaps (dry run, then ask)
+        info "Step 3/4  trim --voice ${voice} (dry run)"
+        local trim_json
+        trim_json=$(python3 "$trim_script" --voice "$voice" --json 2>/dev/null)
+        local trim_exit=$?
+        [ $trim_exit -eq 2 ] && { _refine_abort "trim hard-errored (exit 2) — aborting refine"; return 2; }
+
+        local gap_count=0
+        gap_count=$(echo "$trim_json" | python3 -c "
+import json, sys
+try:
+    d = json.load(sys.stdin)
+    print(sum(v.get('gap_count', 0) for v in d.get('voices', [])))
+except Exception:
+    print(0)
+" 2>/dev/null || echo "0")
+
+        if [ "$gap_count" -eq 0 ]; then
+            ok "No silence gaps found"
+        else
+            warn "Found ${gap_count} silence gap(s) in '${voice}'"
+            local do_trim="n"
+            $yes && do_trim="y"
+            if [ -t 0 ] && ! $yes; then
+                echo -en "  ${BOLD}Trim and rewrite reference? [y/N]${NC} "
+                read -r do_trim
+            fi
+            if [[ "${do_trim:-n}" =~ ^[Yy]$ ]]; then
+                info "Applying trim..."
+                python3 "$trim_script" --voice "$voice" --apply
+            fi
+        fi
+    else
+        info "Step 2/4  compare  (skipped — --quick)"
+        info "Step 3/4  trim     (skipped — --quick)"
     fi
-    # Pass all arguments through to clone-voice.sh
+
+    # Step 4/4 — Re-measure WER
+    info "Step 4/4  qa --voice ${voice} --ref-only (final)"
+    python3 "$qa_script" --voice "$voice" --ref-only --json
+    local qa2_exit=$?
+    [ $qa2_exit -eq 2 ] && { _refine_abort "qa hard-errored on final check (exit 2)"; return 2; }
+
+    echo
+    if [ $qa2_exit -eq 1 ]; then
+        warn "Final WER still above threshold"
+        return 1
+    fi
+    ok "Refine complete"
+    return 0
+}
+
+cmd_update() {
+    local check_only=false yes=false
+    for arg in "$@"; do
+        case "$arg" in
+            --check) check_only=true ;;
+            --yes)   yes=true ;;
+        esac
+    done
+
+    git -C "$REPO_DIR" rev-parse --git-dir &>/dev/null \
+        || fail "Not a git working tree — cannot self-update (tarball installs must update manually)"
+    [ -d "${REPO_DIR}/.venv" ] || fail "venv missing — run setup.sh first"
+    # shellcheck disable=SC1091
+    source "${REPO_DIR}/.venv/bin/activate"
+
+    info "Fetching latest commits..."
+    git -C "$REPO_DIR" fetch origin 2>&1 \
+        || warn "git fetch failed — check your network. Continuing with local state."
+
+    # Resolve upstream robustly: prefer the tracking branch, else origin/<branch>.
+    local upstream branch
+    upstream=$(git -C "$REPO_DIR" rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null)
+    if [ -z "$upstream" ]; then
+        branch=$(git -C "$REPO_DIR" symbolic-ref --short HEAD 2>/dev/null)
+        upstream="origin/${branch}"
+    fi
+
+    local behind
+    behind=$(git -C "$REPO_DIR" rev-list "HEAD..${upstream}" --count 2>/dev/null || echo "0")
+    info "${behind} commit(s) available upstream (${upstream})"
+
+    if $check_only; then
+        ok "--check complete (no working-tree, package, or server changes made)"
+        return 0
+    fi
+    if [ "$behind" -eq 0 ]; then
+        ok "Already up to date"
+        return 0
+    fi
+
+    # Refuse to pull over a dirty tree unless confirmed (TTY) or --yes.
+    local dirty
+    dirty=$(git -C "$REPO_DIR" status --porcelain 2>/dev/null)
+    if [ -n "$dirty" ]; then
+        local dirty_voices
+        dirty_voices=$(git -C "$REPO_DIR" status --porcelain -- voices/ 2>/dev/null)
+        if [ -n "$dirty_voices" ]; then
+            warn "Local edits to voices/ may be overwritten by git pull:"
+            echo "$dirty_voices" | sed 's/^/    /'
+        fi
+        warn "Working tree has uncommitted changes:"
+        echo "$dirty" | sed 's/^/    /'
+        if $yes; then
+            warn "--yes given — proceeding over dirty tree"
+        elif [ -t 0 ]; then
+            echo -en "  ${BOLD}Continue anyway? [y/N]${NC} "
+            local confirm; read -r confirm
+            [[ "${confirm:-n}" =~ ^[Yy]$ ]] || { info "Cancelled"; return 1; }
+        else
+            fail "Dirty working tree and no TTY — re-run with --yes to override"
+        fi
+    fi
+
+    local before_ref after_ref
+    before_ref=$(git -C "$REPO_DIR" rev-parse --short HEAD)
+
+    info "Pulling..."
+    git -C "$REPO_DIR" pull --ff-only 2>&1 \
+        || fail "git pull --ff-only failed — your branch may have diverged. Merge manually."
+    after_ref=$(git -C "$REPO_DIR" rev-parse --short HEAD)
+
+    info "Installing packages..."
+    python3 -m pip install --quiet -r "${REPO_DIR}/requirements.txt" \
+        || warn "pip install failed — run manually: python3 -m pip install -r requirements.txt"
+    if [ -f "${REPO_DIR}/requirements-clone.txt" ]; then
+        python3 -m pip install --quiet -r "${REPO_DIR}/requirements-clone.txt" \
+            || warn "pip install (clone deps) failed — run manually: python3 -m pip install -r requirements-clone.txt"
+    fi
+
+    local changed_files
+    changed_files=$(git -C "$REPO_DIR" diff --name-only "${before_ref}..${after_ref}" 2>/dev/null)
+
+    # Reload voices if running (subshell so cmd_reload's `fail` can't abort update).
+    if [ -n "$(server_pid)" ]; then
+        info "Reloading voices (best-effort; /reload needs --allow-clone)..."
+        ( cmd_reload ) || warn "reload failed — server may not be started with --allow-clone"
+    fi
+
+    # Reload is add-only and won't reimport changed code/deps — recommend a restart.
+    if echo "$changed_files" | grep -qE '^(server\.py|requirements.*\.txt|backends/)'; then
+        warn "Server code or dependencies changed — run ${CYAN}afterwords restart${NC} to apply."
+    fi
+    if echo "$changed_files" | grep -qE '^(afterwords\.sh|setup\.sh)$'; then
+        warn "Setup files changed — run ${CYAN}bash setup.sh${NC} if behaviour feels wrong."
+    fi
+
+    ok "Updated ${before_ref} → ${after_ref}"
+    echo "$changed_files" | sed 's/^/    /' | head -20
+    return 0
+}
+
+cmd_clone() {
+    local quick=false yes=false
+    # Mirror clone-voice.sh: drop flags, take the 2nd positional as the voice name.
+    local positional=() skip_next=false all=("$@") i arg
+    for ((i=0; i<${#all[@]}; i++)); do
+        arg="${all[i]}"
+        if $skip_next; then skip_next=false; continue; fi
+        case "$arg" in
+            --quick)        quick=true ;;
+            --yes)          yes=true ;;
+            --backend)      skip_next=true ;;
+            --backend=*|--all-backends|--check-source) ;;
+            --*)            ;;
+            *)              positional+=("$arg") ;;
+        esac
+    done
+    local voice_name="${positional[1]:-}"
+    voice_name=$(echo "${voice_name}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g')
+
+    [ -f "$REPO_DIR/clone-voice.sh" ] || fail "clone-voice.sh not found in ${REPO_DIR}"
     bash "$REPO_DIR/clone-voice.sh" "$@"
+    local clone_exit=$?
+    [ $clone_exit -ne 0 ] && return $clone_exit
+
+    if [ -n "$voice_name" ]; then
+        echo
+        local refine_args=("$voice_name")
+        $quick && refine_args+=(--quick)
+        $yes && refine_args+=(--yes)
+        cmd_refine "${refine_args[@]}"
+        local refine_exit=$?
+        if [ $refine_exit -eq 2 ]; then
+            warn "refine hard-errored (exit 2) — clone succeeded but QA could not run."
+            info "Diagnose with: ${CYAN}afterwords refine ${voice_name}${NC}"
+        elif [ $refine_exit -eq 1 ]; then
+            warn "Refine finished with warnings — review the WER above."
+        fi
+    else
+        echo
+        info "Voice cloned. Run ${CYAN}afterwords refine <name>${NC} to verify quality."
+    fi
 
     # Prompt restart if server is running
     if [ -n "$(server_pid)" ]; then
@@ -940,6 +1230,18 @@ cmd_configure() {
     esac
 }
 
+cmd_mute() {
+    if [ -f "$MUTE_FILE" ]; then
+        rm -f "$MUTE_FILE"
+        ok "Unmuted — playback resumed"
+    else
+        touch "$MUTE_FILE"
+        pkill -x afplay 2>/dev/null || true
+        ok "Muted — synthesis continues, playback paused"
+        info "Run ${CYAN}afterwords mute${NC} again to unmute"
+    fi
+}
+
 cmd_help() {
     echo
     echo -e "  ${BOLD}afterwords${NC}  ${DIM}— local voice-cloning TTS for Apple Silicon${NC}"
@@ -953,13 +1255,17 @@ cmd_help() {
     echo -e "    ${CYAN}logs${NC}              Tail the server log"
     echo
     echo -e "  ${BOLD}Voices${NC}"
-    echo -e "    ${CYAN}voices${NC}            List cloned voices"
-    echo -e "    ${CYAN}voices --demo${NC}     Play a sample of each voice"
-    echo -e "    ${CYAN}voices --cloud${NC}    Show cloud voices"
-    echo -e "    ${CYAN}clone URL NAME${NC}    Clone a voice from a YouTube URL"
-    echo -e "    ${CYAN}reload${NC}            Reload voices from disk without restart"
-    echo -e "    ${CYAN}reload --prune${NC}    Also evict voices whose JSON was deleted"
-    echo -e "    ${CYAN}audit${NC}             Audit profiles for transcript drift"
+    echo -e "    ${CYAN}voices${NC}            List cloned voices (--demo to play samples, --cloud for cloud voices)"
+    echo -e "    ${CYAN}clone URL NAME${NC}    Clone from YouTube URL or local file (--quick for fast refine)"
+    echo -e "    ${CYAN}reload${NC}            Reload voices without restart (--prune to evict deleted)"
+    echo
+    echo -e "  ${BOLD}Analysis${NC}"
+    echo -e "    ${CYAN}transcribe <audio>${NC}  Word-level timestamps (--backend parakeet|faster-whisper)"
+    echo -e "    ${CYAN}qa${NC}                 Ref WER for all voices (--voice NAME, --synth, --json)"
+    echo -e "    ${CYAN}trim${NC}               Remove silence gaps from refs (--apply to write, --json)"
+    echo -e "    ${CYAN}compare <audio>${NC}    faster-whisper vs parakeet WER comparison (--json)"
+    echo -e "    ${CYAN}refine <voice>${NC}     Full QA cycle: qa → compare → trim → re-qa (--quick to skip compare/trim)"
+    echo -e "    ${CYAN}audit${NC}              Voice profile drift check (--archive for TTS archive pairs)"
     echo
     echo -e "  ${BOLD}Cloud${NC}"
     echo -e "    ${CYAN}push NAME${NC}         Push a voice (+ family variants) to the cloud"
@@ -967,22 +1273,39 @@ cmd_help() {
     echo -e "    ${CYAN}setup-cloud${NC}       Configure API key and cloud URL"
     echo
     echo -e "  ${BOLD}Integrations${NC}"
+    echo -e "    ${CYAN}mute${NC}              Toggle playback on/off (synthesis and archiving continue)"
     echo -e "    ${CYAN}codex-hook start${NC}  Speak Codex CLI responses (run inside Codex)"
     echo -e "    ${CYAN}codex-hook stop${NC}   Stop the Codex watcher"
     echo
     echo -e "  ${BOLD}Setup${NC}"
     echo -e "    ${CYAN}configure${NC}         Show or change server settings (e.g. --with-1.7b)"
+    echo -e "    ${CYAN}update${NC}            Pull latest commits, reinstall packages, reload voices"
     echo -e "    ${CYAN}uninstall${NC}         Remove service and optionally hooks"
     echo
     echo -e "  ${DIM}Examples:${NC}"
     echo -e "  ${DIM}  afterwords clone \"https://youtube.com/watch?v=xyz\" gandalf 45${NC}"
-    echo -e "  ${DIM}  afterwords voices --demo${NC}"
+    echo -e "  ${DIM}  afterwords clone voices/clip.wav myvoice --yes${NC}"
+    echo -e "  ${DIM}  afterwords refine gandalf${NC}"
+    echo -e "  ${DIM}  afterwords qa --json | python3 -c \"import json,sys; print([v for v in json.load(sys.stdin)['voices'] if v['ref_wer']>0.15])\"${NC}"
+    echo -e "  ${DIM}  afterwords compare voices/gandalf-ref.wav --json${NC}"
+    echo -e "  ${DIM}  afterwords update --check${NC}"
     echo -e "  ${DIM}  afterwords push picard${NC}"
     echo -e "  ${DIM}  echo \"snape\" > .afterwords  # per-project voice override${NC}"
     echo
 }
 
 # ── Main dispatch ────────────────────────────────────────────────
+
+# --ai flag: print AI guide and exit (detected before COMMAND dispatch)
+if [ "${1:-}" = "--ai" ]; then
+    AI_GUIDE="${REPO_DIR}/docs/ai-guide.md"
+    if [ -f "$AI_GUIDE" ]; then
+        cat "$AI_GUIDE"
+    else
+        fail "docs/ai-guide.md not found in ${REPO_DIR}"
+    fi
+    exit 0
+fi
 
 COMMAND="${1:-help}"
 shift 2>/dev/null || true
@@ -1000,6 +1323,13 @@ case "$COMMAND" in
     pull)        cmd_pull "$@" ;;
     setup-cloud) cmd_setup_cloud "$@" ;;
     audit)       cmd_audit "$@" ;;
+    transcribe)  cmd_transcribe "$@" ;;
+    qa)          cmd_qa "$@" ;;
+    trim)        cmd_trim "$@" ;;
+    compare)     cmd_compare "$@" ;;
+    refine)      cmd_refine "$@" ;;
+    update)      cmd_update "$@" ;;
+    mute)        cmd_mute "$@" ;;
     codex-hook)  cmd_codex_hook "$@" ;;
     configure)   cmd_configure "$@" ;;
     uninstall)   cmd_uninstall "$@" ;;

@@ -5,16 +5,16 @@
 #
 # Prerequisites:
 #   - Server running on localhost:7860 with all 4 backends loaded
-#   - scripts/reclone-flagship.py has been run (per-backend profiles exist)
+#   - scripts/internal/reclone-flagship.py has been run (per-backend profiles exist)
 #   - `lame` installed: brew install lame
 #
 # Usage:
-#   bash scripts/gen-comparison-audio.sh           # skip-if-exists
-#   bash scripts/gen-comparison-audio.sh --force   # overwrite existing
+#   bash scripts/internal/gen-comparison-audio.sh           # skip-if-exists
+#   bash scripts/internal/gen-comparison-audio.sh --force   # overwrite existing
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 OUT_DIR="$REPO_ROOT/docs/audio/comparison"
 mkdir -p "$OUT_DIR"
 

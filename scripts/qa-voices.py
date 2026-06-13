@@ -18,6 +18,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 REPO = Path(__file__).parent.parent
 TEST_PHRASE = "Good morning. Testing one, two, three. The quick brown fox jumps over the lazy dog."
+
+REF_WER_THRESHOLD = 0.15  # machine/exit threshold (spec §5); human WARN-REF stays at 0.6
 SERVER = "http://localhost:7860"
 
 VARIANT_SUFFIXES = re.compile(r'-qwen3-\d+|-(ibuki|sanchin|picard)$')
@@ -96,12 +98,16 @@ def main():
     ap.add_argument("--ref-only", action="store_true")
     ap.add_argument("--voice", default="")
     ap.add_argument("--out", default="/tmp/voice-qa.tsv")
+    ap.add_argument("--json", action="store_true", help="Emit JSON to stdout; suppress human output")
     args = ap.parse_args()
+
+    quiet = args.json  # suppress all human stdout when --json is set
 
     run_synth = args.synth and not args.ref_only
 
     import faster_whisper
-    print("Loading Whisper base model...", flush=True)
+    if not quiet:
+        print("Loading Whisper base model...", flush=True)
     model = faster_whisper.WhisperModel("base", device="cpu", compute_type="int8")
 
     jsons = sorted(p for p in (REPO / "voices").glob("*.json")
@@ -112,9 +118,10 @@ def main():
                  json.loads(p.read_text()).get("name") == args.voice]
         if not jsons:
             print(f"Voice '{args.voice}' not found.", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
 
-    print(f"Found {len(jsons)} base voice profiles.\n", flush=True)
+    if not quiet:
+        print(f"Found {len(jsons)} base voice profiles.\n", flush=True)
 
     rows = []
     header = ["voice", "ref_wer", "ref_lang", "ref_transcript", "ref_stored",
@@ -128,7 +135,8 @@ def main():
         stored_ref = profile.get("reference_text", "")
         ref_wav = REPO / "voices" / profile.get("reference_audio", f"{name}-ref.wav")
 
-        print(f"[{i:03d}/{len(jsons)}] {name}", end="  ", flush=True)
+        if not quiet:
+            print(f"[{i:03d}/{len(jsons)}] {name}", end="  ", flush=True)
 
         # --- Ref WAV transcription ---
         if ref_wav.exists():
@@ -140,9 +148,10 @@ def main():
             ref_lang_prob = 0.0
             r_wer = 1.0
 
-        print(f"ref_wer={r_wer:.2f}", end="", flush=True)
-        if ref_lang and ref_lang != "en":
-            print(f"(lang={ref_lang}:{ref_lang_prob:.0%})", end="", flush=True)
+        if not quiet:
+            print(f"ref_wer={r_wer:.2f}", end="", flush=True)
+            if ref_lang and ref_lang != "en":
+                print(f"(lang={ref_lang}:{ref_lang_prob:.0%})", end="", flush=True)
 
         # --- Synthesis test ---
         s_wer = None
@@ -161,14 +170,17 @@ def main():
                 synth_transcript, _, _ = transcribe(tmp_path, model)
                 s_wer = phrase_wer(TEST_PHRASE, synth_transcript)
                 os.unlink(tmp_path)
-                print(f"  synth_wer={s_wer:.2f}", end="", flush=True)
+                if not quiet:
+                    print(f"  synth_wer={s_wer:.2f}", end="", flush=True)
             except Exception as e:
                 synth_transcript = f"ERROR: {e}"
                 s_wer = 1.0
-                print(f"  synth=ERROR", end="", flush=True)
+                if not quiet:
+                    print(f"  synth=ERROR", end="", flush=True)
 
         f_str = build_flags(r_wer, ref_lang, s_wer)
-        print(f"  [{f_str}]", flush=True)
+        if not quiet:
+            print(f"  [{f_str}]", flush=True)
 
         rows.append([
             name,
@@ -186,17 +198,39 @@ def main():
         for row in rows:
             f.write("\t".join(str(c) for c in row) + "\n")
 
-    print(f"\nResults written to {args.out}")
+    n_over = sum(1 for r in rows if float(r[1]) > REF_WER_THRESHOLD)
 
-    warn = [r for r in rows if "WARN" in r[-1]]
-    print(f"\nSummary: {len(rows)} voices, {len(warn)} warnings")
-    if warn:
-        print("\nWarnings:")
-        for r in warn:
-            print(f"  {r[0]:30s}  ref_wer={r[1]}  {r[-1]}")
-            print(f"    stored:      {r[4][:80]}")
-            print(f"    transcribed: {r[3][:80]}")
+    if args.json:
+        out = {
+            "threshold": REF_WER_THRESHOLD,
+            "voices": [
+                {"name": r[0], "ref_wer": float(r[1]),
+                 **({"synth_wer": float(r[5])} if r[5] else {})}
+                for r in rows
+            ],
+        }
+        print(json.dumps(out))
+    else:
+        print(f"\nResults written to {args.out}")
+
+        warn = [r for r in rows if "WARN" in r[-1]]
+        print(f"\nSummary: {len(rows)} voices, {len(warn)} warnings")
+        if warn:
+            print("\nWarnings:")
+            for r in warn:
+                print(f"  {r[0]:30s}  ref_wer={r[1]}  {r[-1]}")
+                print(f"    stored:      {r[4][:80]}")
+                print(f"    transcribed: {r[3][:80]}")
+
+    # exit 1 if any voice is over the attention threshold; 0 otherwise
+    sys.exit(1 if n_over else 0)
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        sys.exit(main())          # preserves a returned code AND a sys.exit() inside main()
+    except SystemExit:
+        raise
+    except Exception as e:
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)

@@ -5,8 +5,8 @@ Reads voices/{name}.json for each flagship name, writes per-backend slugged
 profiles that share the existing ref WAV and reference_text.
 
 Usage:
-    python scripts/reclone-flagship.py           # skip-if-exists
-    python scripts/reclone-flagship.py --force   # overwrite existing
+    python scripts/internal/reclone-flagship.py           # skip-if-exists
+    python scripts/internal/reclone-flagship.py --force   # overwrite existing
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ import os
 import sys
 
 # Make `backends` importable when run from repo root.
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 import backends
 
@@ -30,7 +30,7 @@ def main() -> int:
     parser.add_argument("--force", action="store_true", help="Overwrite existing profiles")
     parser.add_argument(
         "--voices-dir",
-        default=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "voices"),
+        default=os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "voices"),
         help="Path to voices/ directory",
     )
     args = parser.parse_args()

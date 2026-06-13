@@ -6,9 +6,9 @@ For each video, finds the matching source markdown file(s), then runs
 voice synthesis.
 
 Usage:
-    python scripts/qa-transcripts.py                    # all videos
-    python scripts/qa-transcripts.py pLbwFRqgF6s        # one video by ID
-    python scripts/qa-transcripts.py --list             # show mapping and exit
+    python scripts/internal/qa-transcripts.py                    # all videos
+    python scripts/internal/qa-transcripts.py pLbwFRqgF6s        # one video by ID
+    python scripts/internal/qa-transcripts.py --list             # show mapping and exit
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-REPO = Path(__file__).parent.parent
+REPO = Path(__file__).parent.parent.parent
 TRANSCRIPTS = REPO / "transcripts" / "youtube"
 TITLES_FILE = TRANSCRIPTS / "video-titles.tsv"
 QA_OUT = REPO / "transcripts" / "qa"

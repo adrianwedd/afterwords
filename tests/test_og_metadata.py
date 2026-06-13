@@ -12,7 +12,7 @@ from pathlib import Path
 
 
 REPO = Path(__file__).resolve().parent.parent
-SCRIPT = REPO / "scripts" / "check-og-metadata.py"
+SCRIPT = REPO / "scripts" / "internal" / "check-og-metadata.py"
 
 
 def test_og_metadata_in_sync_with_demo_gallery():
