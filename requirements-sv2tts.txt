@@ -13,7 +13,7 @@
 #
 # Override paths with SV2TTS_REPO_DIR, SV2TTS_ENCODER_PATH,
 # SV2TTS_SYNTHESIZER_PATH, SV2TTS_VOCODER_PATH, and SV2TTS_ENCODER_DEVICE.
-torch>=2.1
+torch>=2.12.0
 librosa>=0.10
 soundfile>=0.12
 numpy>=1.24
