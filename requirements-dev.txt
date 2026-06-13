@@ -2,7 +2,7 @@
 #
 # Install: pip install -r requirements-dev.txt
 pytest>=9.0.3,<10.0
-httpx>=0.28,<1.0
+httpx>=0.28.1,<1.0
 
 # mlx-audio is the runtime dep used by the qwen3 backend. Pinned here too so dev
 # environments installing only requirements-dev.txt can't float to 0.4.1+ (which
