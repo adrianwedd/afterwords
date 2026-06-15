@@ -124,7 +124,7 @@ Adding a backend: create `backends/newmodel.py` implementing the Backend protoco
 
 ## Voice-family routing
 
-Voice profiles can declare an optional `family: str` field (e.g. `"family": "picard"` on `picard.json`, `picard-qwen3-17b.json`, etc.). When a caller asks for a lang the voice's backend doesn't support, the server auto-routes to a same-family voice on a backend that does. The lookup runs under `_model_lock` to avoid racing with `/reload` Phase 3. Tiebreaker is `(duration_s or 0, confidence or 0, name)` for deterministic selection across `/reload` cycles. Voices with `family=None` (most gallery voices, all session-cloned voices) are never routed and never used as routing targets.
+Voice profiles can declare an optional `family: str` field (e.g. `"family": "picard"` on `picard.json`, `picard-qwen3-06b.json`, etc.). When a caller asks for a lang the voice's backend doesn't support, the server auto-routes to a same-family voice on a backend that does. The lookup runs under `_model_lock` to avoid racing with `/reload` Phase 3. Tiebreaker is `(duration_s or 0, confidence or 0, name)` for deterministic selection across `/reload` cycles. Voices with `family=None` (most gallery voices, all session-cloned voices) are never routed and never used as routing targets.
 
 ## Hot-reload
 

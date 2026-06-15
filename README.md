@@ -4,7 +4,7 @@
 
 **[Listen to the voice demos →](https://adrianwedd.github.io/afterwords/)** &nbsp; [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/adrianwedd/afterwords/blob/main/colab/afterwords_comparison.ipynb)
 
-Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or wire it into any AI coding harness — **Claude Code**, **Codex CLI**, **Cursor**, **Gemini CLI / Antigravity (agy)**, or **Hermes Agent** — to hear every response spoken aloud. **103 flagship voice families** (284 profiles across **Qwen3-TTS 0.6B** and **1.7B**, the default cloning path), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
+Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or wire it into any AI coding harness — **Claude Code**, **Codex CLI**, **Cursor**, **Gemini CLI / Antigravity (agy)**, or **Hermes Agent** — to hear every response spoken aloud. **94 flagship voice families** (190 profiles, all cloned with **Qwen3-TTS 0.6B**, the default cloning path; the higher-fidelity 1.7B model loads via `--with-1.7b`), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
 
 No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
@@ -310,7 +310,7 @@ Pass `lang=` on a synthesis request when you want a non-English language:
 curl "http://localhost:7860/synthesize?text=Ni+hao&voice=galadriel&lang=zh" -o hello-zh.wav
 ```
 
-If the voice's backend doesn't support the requested language, and the voice belongs to a *family* (e.g. `picard`, `picard-qwen3-17b` both have `family: picard` in their JSON), the server auto-routes to a same-family voice on a backend that does support it. If no family member supports the language, you get a clean 400 with the list of supported languages.
+If the voice's backend doesn't support the requested language, and the voice belongs to a *family* (e.g. `picard`, `picard-qwen3-06b` both have `family: picard` in their JSON), the server auto-routes to a same-family voice on a backend that does support it. If no family member supports the language, you get a clean 400 with the list of supported languages.
 
 ## Claude Code Skill
 
@@ -332,12 +332,12 @@ The skill handles voice selection, server health checks, synthesis, and playback
 │                                                                  │
 │  ┌──────────────────────────┐                                    │
 │  │  Multi-Backend TTS       │  ← MLX Qwen3 + 15 alt backends    │
-│  │  localhost:7860           │  ← 200 voice profiles (100 fam)   │
+│  │  localhost:7860           │  ← 190 voice profiles (94 fam)    │
 │  │  /synthesize?text=...     │  ← ~20s per sentence (Qwen3)      │
 │  └────────────┬─────────────┘                                    │
 │               │  shared play lock (/tmp/afterwords-play.lock)    │
 │  ┌────────────┼──────────────────────────────────────────────┐   │
-│  │            │   Four CLI integrations (all coordinated)    │   │
+│  │            │   Six CLI integrations (all coordinated)     │   │
 │  │  ┌─────────┴──────────┐   ┌────────────────────────────┐  │   │
 │  │  │  Claude Code       │   │  Codex CLI                 │  │   │
 │  │  │  Stop hook →       │   │  JSONL watcher →           │  │   │
@@ -432,6 +432,8 @@ DELETE /session/{id}      (--allow-clone only)
        → removes all voices for that session, cleans up temp files
 ```
 
+**Binding & limits.** The server binds to `127.0.0.1` (loopback) by default. Binding to a non-loopback address requires the explicit `--bind-public` flag, and `--allow-clone` always forces loopback regardless. `POST /clone` rejects request bodies larger than **25 MB** before parsing, and non-loopback binds enforce a Host-header allowlist. See [SECURITY.md](SECURITY.md) for the full threat model.
+
 ### The Hook
 
 Claude Code's [Stop hook](https://docs.anthropic.com/en/docs/claude-code/hooks) fires after every response. The hook extracts the response text, strips markdown, and atomically writes a JSON item to the shared queue directory (`/tmp/claude-tts-queue/`). A background worker with `mkdir`-based locking (macOS has no `flock`) claims items one at a time and prevents overlapping audio via a shared play lock (`/tmp/afterwords-play.lock`) coordinated across all six CLI integrations.
@@ -472,7 +474,7 @@ afterwords/
 ├── chunk_text.py             ← sentence-boundary chunker (Python-importable)
 ├── codex_session_hook.py     ← Codex JSONL parser (strip + agent-type extraction)
 ├── agy_session_hook.py       ← AGy transcript parser (last model response)
-├── tests/                    ← pytest suite (505+ tests, no GPU needed)
+├── tests/                    ← pytest suite (520+ tests, no GPU needed)
 ├── backends/                 ← Backend Protocol + concrete backends + registry CLI
 ├── scripts/
 │   ├── afterwords-post-llm.sh      ← Hermes post_llm_call hook (chunked pipeline)
@@ -492,7 +494,7 @@ afterwords/
 │   ├── galadriel-ref.wav     ← 15s reference (Cate Blanchett, LOTR)
 │   ├── samantha-ref.wav      ← (Scarlett Johansson, Her)
 │   ├── amy-pond-ref.wav      ← (Karen Gillan, Doctor Who)
-│   └── ...                   ← 103 families / 284 profiles (Qwen3-0.6B + 1.7B)
+│   └── ...                   ← 94 families / 190 profiles (Qwen3-0.6B)
 └── README.md
 
 ~/.claude/                    ← only with Claude Code integration
@@ -568,7 +570,7 @@ afterwords/
 | tegan-jovanka | Janet Fielding, *Resurrection of the Daleks* | Blunt, emotional |
 | yasmin-khan | Mandip Gill, *Power of the Doctor* | Quiet, heartfelt |
 
-The full gallery includes 100 voice families spanning British comedy (Blackadder, Alan Partridge, Basil Fawlty, Malcolm Tucker, Father Ted, Geraldine, Patsy & Edina, Bernard Black…), American drama (Frasier, Columbo, Saul Goodman, Harvey Specter…), American sitcom (Lisa Simpson…), science communicators (Carl Sagan, Feynman, Brian Cox, Neil deGrasse Tyson…), and more. Run `afterwords voices --demo` to browse and hear samples.
+The full gallery includes 94 voice families spanning British comedy (Blackadder, Alan Partridge, Basil Fawlty, Malcolm Tucker, Father Ted, Geraldine, Patsy & Edina, Bernard Black…), American drama (Frasier, Columbo, Saul Goodman, Harvey Specter…), American sitcom (Lisa Simpson…), science communicators (Carl Sagan, Feynman, Brian Cox, Neil deGrasse Tyson…), and more. Run `afterwords voices --demo` to browse and hear samples.
 
 ## Troubleshooting
 
@@ -597,7 +599,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-Tests cover the server API (endpoint validation, error handling, voice resolution, hot-reload atomicity, lang routing across backend families), backend protocol conformance, the strip-markdown text transform, the `_cleanup_current_voices` lifecycle helper, AGy session hook parsing, voice-mapping resolution, and a parametrized schema validator that runs against every shipped voice profile in `voices/*.json`. 505+ tests pass without loading any real model — a `FakeBackend` fixture stands in. Real-model integration tests are opt-in via `pytest -m integration`.
+Tests cover the server API (endpoint validation, error handling, voice resolution, hot-reload atomicity, lang routing across backend families), backend protocol conformance, the strip-markdown text transform, the `_cleanup_current_voices` lifecycle helper, AGy session hook parsing, voice-mapping resolution, and a parametrized schema validator that runs against every shipped voice profile in `voices/*.json`. 520+ tests pass without loading any real model — a `FakeBackend` fixture stands in. Real-model integration tests are opt-in via `pytest -m integration`.
 
 Run a single test:
 
