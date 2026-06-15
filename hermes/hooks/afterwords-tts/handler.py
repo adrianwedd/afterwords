@@ -26,6 +26,11 @@ import urllib.parse
 import uuid
 from pathlib import Path
 
+try:
+    import aiohttp
+except ModuleNotFoundError:  # only needed for the CLI/local synth+playback path
+    aiohttp = None  # type: ignore[assignment]  # messaging-only installs return early
+
 log = logging.getLogger("afterwords-tts")
 
 # Afterwords server endpoint
@@ -210,7 +215,6 @@ async def handle(event_type: str, context: dict) -> None:
 
     # Check server health
     try:
-        import aiohttp
         async with aiohttp.ClientSession() as session:
             async with session.get(AFTERWORDS_HEALTH, timeout=aiohttp.ClientTimeout(total=2)) as resp:
                 if resp.status != 200:
