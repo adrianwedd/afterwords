@@ -121,6 +121,7 @@ with open(sys.argv[1], 'wb') as f:
 
     # Fire synthesis + playback in background (fully detached)
     (
+        MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
         PLAY_LOCK="/tmp/afterwords-play.lock"
         PLAY_PID="/tmp/afterwords-play.pid"
         
@@ -147,7 +148,7 @@ with open(sys.argv[1], 'wb') as f:
 
         if [ "$HTTP_CODE" = "200" ] && [ -s "$TMP_WAV" ]; then
             # Play
-            afplay "$TMP_WAV" 2>/dev/null || true
+            [ -f "$MUTE_FILE" ] || afplay "$TMP_WAV" 2>/dev/null || true
 
             # Archive as MP3 + text sidecar — filename derived from spoken text
             STAMP=$(date +%Y%m%d-%H%M%S)
