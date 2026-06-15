@@ -18,7 +18,7 @@ torchvision>=0.22.1
 # for Metal acceleration. Backend defaults to MPS → CPU via PYTORCH_ENABLE_MPS_FALLBACK.
 torchtune>=0.6.0
 torchao>=0.10.0
-transformers>=4.48.0
+transformers>=5.12.0
 einops>=0.8.0
 librosa>=0.10.2
 optuna>=4.0.0
