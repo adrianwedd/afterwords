@@ -10,5 +10,5 @@
 # build timeouts on Apple Silicon. Work around with:
 #   pip install Cython && pip install TTS --no-build-isolation
 TTS>=0.22
-torch>=2.1
+torch>=2.12.0
 torchaudio>=2.1

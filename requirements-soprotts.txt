@@ -7,7 +7,7 @@
 # from Hugging Face on first load. Override the repo id with SOPROTTS_MODEL and
 # the torch device with SOPROTTS_DEVICE. Upstream's current Mac guidance is CPU.
 sopro>=1.5.0
-torch>=2.1
+torch>=2.12.0
 torchaudio>=2.1
 soundfile>=0.12.1
 numpy>=1.23
