@@ -8,6 +8,7 @@ Security hardening, mute-everywhere, and a repo-tracked Hermes native hook.
 
 ### Added
 
+- **3 new voice families** — HAL 9000, JARVIS, and Scotty (Montgomery Scott). Gallery grows to **97 families / 193 profiles**. Reference audio QA'd via faster-whisper transcription; corrected a Whisper mishearing in `jarvis.json` ("stock industry's" → "Stark Industries").
 - **Hermes native hook is now repo-tracked** (`hermes/hooks/afterwords-tts/handler.py`, previously untracked) — fires on `agent:end`, runs an async chunked synth/playback pipeline via `aiohttp`, archives MP3 + text to `~/.hermes/tts-archive/`, and handles single-owner Discord/Telegram delivery. Local `afplay` playback is guarded on the mute flag.
 - **`--bind-public` server flag** — non-loopback binds now require an explicit opt-in; `--allow-clone` always forces `127.0.0.1` regardless. See `SECURITY.md`.
 

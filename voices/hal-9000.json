@@ -1,0 +1,8 @@
+{
+  "name": "hal-9000",
+  "backend": "qwen3-0.6b",
+  "source_url": "https://www.youtube.com/watch?v=9wrjl-H4Hs8",
+  "reference_audio": "hal-9000-ref.wav",
+  "reference_text": "Good afternoon, Mr. Raymer. Everything is going extremely well. Let me put it this way, Mr. Raymer. The 9000 series is the most reliable computer ever made. No 9000 computer has ever made a mistake or",
+  "segment_start_s": 0
+}

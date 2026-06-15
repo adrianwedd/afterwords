@@ -1,0 +1,8 @@
+{
+  "name": "scotty",
+  "backend": "qwen3-0.6b",
+  "source_url": "https://www.youtube.com/watch?v=oXZa89Hv8Bo",
+  "reference_audio": "scotty-ref.wav",
+  "reference_text": "Oh, uh, four in all, sir. Captain, what is it? He's turned the engines off, completely cold. It'll take 30 minutes to regenerate them. Ships out of skin is beginning to heat.",
+  "segment_start_s": 60
+}

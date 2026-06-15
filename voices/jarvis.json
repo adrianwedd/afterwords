@@ -1,0 +1,8 @@
+{
+  "name": "jarvis",
+  "backend": "qwen3-0.6b",
+  "source_url": "https://www.youtube.com/watch?v=KUxTstoFd1Q",
+  "reference_audio": "jarvis-ref.wav",
+  "reference_text": "The compression in cylinder three appears to be down. For you, sir, always. Shall I store this on the Stark Industries central database? Working on a secret project, are we, sir? At your service, sir. Check. We'll do, sir. I have a...",
+  "segment_start_s": 0
+}
