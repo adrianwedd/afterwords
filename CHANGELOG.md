@@ -2,6 +2,33 @@
 
 All notable changes to Afterwords. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.6] — 2026-06-15
+
+Security hardening, mute-everywhere, and a repo-tracked Hermes native hook.
+
+### Added
+
+- **Hermes native hook is now repo-tracked** (`hermes/hooks/afterwords-tts/handler.py`, previously untracked) — fires on `agent:end`, runs an async chunked synth/playback pipeline via `aiohttp`, archives MP3 + text to `~/.hermes/tts-archive/`, and handles single-owner Discord/Telegram delivery. Local `afplay` playback is guarded on the mute flag.
+- **`--bind-public` server flag** — non-loopback binds now require an explicit opt-in; `--allow-clone` always forces `127.0.0.1` regardless. See `SECURITY.md`.
+
+### Changed
+
+- **`afterwords mute` now silences _every_ automatic agent-response playback path.** The flag (`/tmp/afterwords-muted`) is honored by all six integrations' shell workers (Claude Code, Codex, AGy, Gemini, Cursor, Hermes) and the Hermes `handler.py`, while synthesis, archiving, and Discord/Telegram delivery continue unaffected. Foreground, user-initiated playback stays exempt — `afterwords voices --demo`, the post-clone preview, and the "say X in Y's voice" skill still play.
+
+### Security
+
+- **Hardened the `/clone` upload path** — a 25 MB request-body cap is enforced before parsing, plus a Host-header allowlist on non-loopback binds.
+- **Queue-directory hardening** — shared `/tmp` queue dirs are created `chmod 700` with an ownership check, and a symlink TOCTOU window was closed.
+- **Moved the Facebook reindex secret out of the request URL** into the POST body; closed `.gitignore` gaps; added `SECURITY.md` and a Dependabot config.
+
+### Fixed
+
+- **Mute-guard test suite hardened** — `tests/test_mute_guard.py` discovers every `afplay` site and fails on any new unguarded one. Closed three fail-open detection gaps: a substring-only guard match, a commented-out guard satisfying the window check, and unhandled command-prefix forms (`env FOO=1 afplay`, `nice -n 10 afplay`, …).
+
+### Dependencies
+
+- Bumped torch 2.8→2.12, transformers 5.0.0rc3→5.12.0, tensorboard ≥2.20, sentencepiece ≥0.2.1, plus modelscope, httpx, `actions/checkout` v4→v6, and `actions/setup-python` v5→v6.
+
 ## [1.0.5] — 2026-06-13
 
 Sprint 6 — CLI expansion from a server-management tool into a voice-curation workbench.

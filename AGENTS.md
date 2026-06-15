@@ -24,6 +24,7 @@ afterwords restart     # restart
 afterwords status      # health, PID, loaded voices
 afterwords logs        # tail server log
 afterwords voices      # list voices (--demo to play samples)
+afterwords mute        # toggle TTS playback on/off (mute the Mac; synthesis continues)
 afterwords clone       # clone a voice from YouTube
 afterwords uninstall   # remove service + optionally hooks
 

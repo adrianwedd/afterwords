@@ -1,7 +1,7 @@
 # Afterwords — AI Assistant Guide
 
 ## Version
-Sprint 6 (2026-06-04). Run `afterwords status` to confirm the server is running before issuing any synthesis or clone commands.
+v1.0.6 (2026-06-15). Run `afterwords status` to confirm the server is running before issuing any synthesis or clone commands.
 
 ## Critical: First-Run Setup
 1. `bash setup.sh` — installs venv, launchd service, and CLI symlink
@@ -17,6 +17,7 @@ afterwords stop           Stop the server
 afterwords restart        Restart the server
 afterwords status         Server state, loaded voices, backends
 afterwords logs           Tail the server log
+afterwords mute           Toggle TTS playback on/off (mute the Mac; synthesis continues)
 ```
 
 ### Voice commands
