@@ -49,10 +49,19 @@ EXEMPT = {
 # Quoted-string content is stripped before matching (see `_strip_quotes`), so
 # afplay inside echo/help text — e.g. `echo "... && afplay test.wav"` — is NOT
 # counted. This matches `afplay "$WAV"`, `afplay $WAV`, `afplay /x.wav`,
-# `... || afplay ...`, and `exec afplay ...`.
+# `... || afplay ...`, `exec afplay ...`, and wrappers that carry their own
+# options/assignments (`env FOO=1 afplay`, `time -p afplay`, `nice -n 10 afplay`).
+#
+# Wrappers may take their own flags / VAR=val assignments / numeric flag-values
+# before the target command; control keywords (`then`/`do`/`else`) take none. A
+# wrapper arg is deliberately NOT a bare word, so `env mycmd afplay` (where afplay
+# is mycmd's argument, not a command) is not mistaken for an afplay invocation.
+_WRAPPER = r'(?:exec|command|builtin|env|time|nice|nohup|caffeinate|stdbuf)'
+_WRAPPER_ARG = r'(?:-{1,2}[\w-]+|[A-Za-z_]\w*=[^\s;&|(){}]*|\d[\w.]*)\s+'
+_KEYWORD = r'(?:then|do|else)'
 _CMD_PREFIX = (
-    r'(?:exec|command|builtin|env|time|nice|nohup|caffeinate|stdbuf'
-    r'|then|do|else)\s+'
+    r'(?:' + _WRAPPER + r'\s+(?:' + _WRAPPER_ARG + r')*'  # wrapper + its flags/assignments
+    r'|' + _KEYWORD + r'\s+)'                             # or a bare control keyword
 )
 INVOCATION_RE = re.compile(
     r'(?:^\s*|[;&|({]\s*)'        # command position: line start or a separator
@@ -72,6 +81,58 @@ def _strip_quotes(line: str) -> str:
 
 
 GUARD = '[ -f "$MUTE_FILE" ]'
+
+
+# The guard must DIRECTLY protect the afplay: `[ -f "$MUTE_FILE" ] || afplay ...`,
+# the `||` connecting straight to the (optionally wrapper/path-qualified) afplay.
+# A line that merely *contains* the guard substring but runs afplay through a
+# separate, unconditional command (`... || true; afplay`) is fail-open and must
+# NOT count as guarded. Quotes are NOT stripped here — the guard literally
+# contains "$MUTE_FILE".
+_GUARD_RE = re.compile(
+    re.escape(GUARD) +              # [ -f "$MUTE_FILE" ]
+    r'\s*\|\|\s*'                   # directly OR-guarded
+    r'(?:' + _CMD_PREFIX + r')*'    # optional wrapper/keyword prefixes (exec, ...)
+    r'(?:[^\s;&|(){}]*/)?'          # optional path qualifier (/usr/bin/)
+    r'afplay(?=\s|$|;)'
+)
+
+
+def _afplay_line_is_guarded(line: str) -> bool:
+    """True iff this line's afplay is actually protected by the mute guard — the
+    guard must be `||`-connected straight to the afplay command, not merely
+    present somewhere on the line."""
+    return bool(_GUARD_RE.search(line))
+
+
+# Python guard (Hermes native hook): `if not Path("/tmp/afterwords-muted").exists():`
+_PY_GUARD_RE = re.compile(
+    r'if\s+not\s+Path\(\s*["\']' + re.escape(MUTE_FILE_PATH) + r'["\']\s*\)\.exists\(\)\s*:'
+)
+
+
+def _py_afplay_is_guarded(lines: list[str], idx: int) -> bool:
+    """True iff the afplay subprocess call at line `idx` is genuinely enclosed by
+    a real mute guard — a non-commented `if not Path("/tmp/afterwords-muted")
+    .exists():` whose block actually contains the call.
+
+    Walking upward through the few lines above the call, we track the smallest
+    indent of the intervening code lines. A candidate guard encloses the call
+    only if it is less-indented than every one of those body lines: a dedent back
+    to (or below) the guard's own indent means the call is a sibling statement,
+    not inside the block, so it does NOT count. A commented-out guard never
+    counts."""
+    body_min = len(lines[idx]) - len(lines[idx].lstrip())
+    for j in range(idx - 1, max(-1, idx - 8), -1):
+        ln = lines[j]
+        if not ln.strip() or ln.lstrip().startswith("#"):
+            continue
+        indent = len(ln) - len(ln.lstrip())
+        if _PY_GUARD_RE.search(ln):
+            return indent < body_min
+        body_min = min(body_min, indent)
+    return False
+
 
 _SKIP_DIR_PARTS = {".git", "node_modules", ".venv", "venv", "__pycache__"}
 
@@ -121,7 +182,7 @@ def test_afplay_invocations_are_mute_guarded(rel, path):
     )
 
     for ln in _afplay_lines(text):
-        assert GUARD in ln, (
+        assert _afplay_line_is_guarded(ln), (
             f"{rel}: unguarded afplay — wrap as `{GUARD} || afplay ...`, "
             f"or add {rel!r} to EXEMPT with a rationale:\n    {ln.strip()}"
         )
@@ -150,8 +211,7 @@ def test_hermes_handler_afplay_is_mute_guarded():
     assert afplay_idxs, "expected afplay subprocess call(s) in handler.py"
 
     for i in afplay_idxs:
-        window = "\n".join(lines[max(0, i - 6):i])
-        assert "afterwords-muted" in window, (
+        assert _py_afplay_is_guarded(lines, i), (
             f"handler.py:{i + 1}: afplay not preceded by a mute guard "
             f'(`if not Path("{MUTE_FILE_PATH}").exists():`)'
         )
@@ -180,6 +240,10 @@ _REAL_INVOCATIONS = [
     'command afplay "$WAV"',                    # command wrapper
     'env afplay "$WAV"',                        # env wrapper
     'nohup afplay "$WAV"',                      # nohup wrapper
+    'env FOO=1 afplay "$WAV"',                  # env + assignment — was MISSED
+    'time -p afplay "$WAV"',                    # time + flag — was MISSED
+    'nice -n 10 afplay "$WAV"',                 # nice + flag + value — was MISSED
+    'nohup nice -5 afplay "$WAV"',             # chained wrappers w/ flag
     'if cond; then afplay "$WAV"; fi',          # then keyword
     '{ afplay "$WAV"; }',                       # brace group
 ]
@@ -193,6 +257,9 @@ _NON_INVOCATIONS = [
     '    echo -e "    ${DIM}afplay out.wav${NC}"',
     # The exact clone-voice.sh:432 help line (escaped inner quotes and all).
     r'echo -e "  curl \"localhost:7860/synthesize?voice=x\" -o test.wav && afplay test.wav"',
+    # A wrapper whose *command* is something else, with afplay only an argument —
+    # the wrapper-flag loosening below must not let this slip through.
+    'env mycmd afplay out.wav',
 ]
 
 
@@ -216,4 +283,98 @@ def test_clone_voice_help_text_not_counted_keeps_exempt_check_honest():
     )
     assert not any("curl" in ln and "afplay test.wav" in ln for ln in detected), (
         "help-text afplay example must NOT be counted as a playback site"
+    )
+
+
+# --- Regression: shell guard must DIRECTLY protect afplay ---------------------
+# QA found the guard check was line-substring based (`GUARD in ln`): it only asked
+# whether `[ -f "$MUTE_FILE" ]` appeared *anywhere* on the afplay line. That is
+# fail-open — `[ -f "$MUTE_FILE" ] || true; afplay x` carries the guard substring
+# yet runs afplay unconditionally (the guard short-circuits into `true`, then `;`
+# starts a fresh, unguarded command). The guard must be `||`-connected straight to
+# the afplay, the proven form `[ -f "$MUTE_FILE" ] || afplay ...`.
+
+_GUARDED_LINES = [
+    '[ -f "$MUTE_FILE" ] || afplay "$WAV" 2>/dev/null',          # canonical
+    '[ -f "$MUTE_FILE" ] || afplay "$TMP_WAV" 2>/dev/null || true',  # trailing || true
+    '            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null',  # indented
+    '[ -f "$MUTE_FILE" ] || /usr/bin/afplay "$WAV"',            # path-qualified
+    '[ -f "$MUTE_FILE" ] || exec afplay "$WAV"',                # wrapper after guard
+]
+
+_FAIL_OPEN_LINES = [
+    '[ -f "$MUTE_FILE" ] || true; afplay "$WAV"',         # guard short-circuits, afplay after ;
+    '[ -f "$MUTE_FILE" ] && echo muted; afplay "$WAV"',   # guard present, afplay still unconditional
+    'echo "$MUTE_FILE"; afplay "$WAV"',                   # MUTE_FILE mentioned, no real guard
+    'afplay "$WAV"',                                      # no guard at all
+]
+
+
+@pytest.mark.parametrize("line", _GUARDED_LINES)
+def test_guard_detects_directly_protected_afplay(line):
+    assert _afplay_line_is_guarded(line), (
+        f"a directly-guarded afplay must be recognized as guarded: {line!r}"
+    )
+
+
+@pytest.mark.parametrize("line", _FAIL_OPEN_LINES)
+def test_guard_rejects_afplay_not_directly_protected(line):
+    assert not _afplay_line_is_guarded(line), (
+        f"afplay not `||`-connected to the guard must read as UNGUARDED: {line!r}"
+    )
+
+
+# --- Regression: handler.py guard must be a REAL (uncommented) if-block --------
+# QA found the Python check was a 6-line substring window for "afterwords-muted":
+# a *commented-out* guard above the call would still satisfy it (fail-open). The
+# guard must be a real `if not Path(...).exists():` (not a comment) at a lower
+# indent than the afplay call — i.e. the call genuinely sits inside the block.
+
+_PY_GUARDED_BLOCK = [
+    '            if not Path("/tmp/afterwords-muted").exists():',
+    '                subprocess.call(',
+    '                    ["afplay", str(play_path)],',
+    '                )',
+]
+_PY_COMMENTED_GUARD = [
+    '            # if not Path("/tmp/afterwords-muted").exists():',
+    '            subprocess.call(',
+    '                ["afplay", str(play_path)],',
+    '            )',
+]
+_PY_NO_GUARD = [
+    '            subprocess.call(',
+    '                ["afplay", str(play_path)],',
+    '            )',
+]
+# A guard block whose body ends BEFORE the afplay: the call dedents back to the
+# guard's own indent (a sibling statement), so afplay runs unconditionally. The
+# guard exists nearby but does not enclose the call — must read as UNGUARDED.
+_PY_SIBLING_GUARD = [
+    '            if not Path("/tmp/afterwords-muted").exists():',  # idx 0, indent 12
+    '                do_other()',                                  # idx 1, indent 16 (in block)
+    '            subprocess.call(',                                # idx 2, indent 12 (dedent → sibling)
+    '                ["afplay", str(play_path)],',                 # idx 3, indent 16
+    '            )',                                               # idx 4, indent 12
+]
+
+
+def test_py_guard_detects_real_if_block():
+    assert _py_afplay_is_guarded(_PY_GUARDED_BLOCK, 2)
+
+
+def test_py_guard_rejects_commented_out_guard():
+    assert not _py_afplay_is_guarded(_PY_COMMENTED_GUARD, 2), (
+        "a commented-out guard above the call must read as UNGUARDED"
+    )
+
+
+def test_py_guard_rejects_missing_guard():
+    assert not _py_afplay_is_guarded(_PY_NO_GUARD, 1)
+
+
+def test_py_guard_rejects_sibling_block_not_enclosing_afplay():
+    assert not _py_afplay_is_guarded(_PY_SIBLING_GUARD, 3), (
+        "a guard whose block ends before the call (afplay dedented to a sibling) "
+        "must read as UNGUARDED"
     )
