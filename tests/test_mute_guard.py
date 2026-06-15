@@ -42,11 +42,35 @@ EXEMPT = {
 }
 
 # A real afplay *command* invocation: afplay in command position — at the start
-# of a line (possibly indented), after a shell separator (`;` `&` `|` `(`), or
-# after `||`/`&&` — optionally path-qualified (/usr/bin/afplay), followed by an
-# argument or end of line. This matches afplay "$WAV", afplay $WAV, afplay /x.wav
-# and `... || afplay ...`, but NOT afplay sitting inside echo/help/comment text.
-INVOCATION_RE = re.compile(r'(?:^\s*|[;&|(]\s*)(?:[^\s;&|()]*/)?afplay(?=\s|$)')
+# of a line (possibly indented), after a shell separator (`;` `&` `|` `(` `{`) or
+# `||`/`&&`, optionally behind a command wrapper/keyword (`exec`, `command`,
+# `env`, `time`, `nohup`, `caffeinate`, `then`, `do`, `else`, ...) and optionally
+# path-qualified (/usr/bin/afplay), followed by an argument or end of line.
+# Quoted-string content is stripped before matching (see `_strip_quotes`), so
+# afplay inside echo/help text — e.g. `echo "... && afplay test.wav"` — is NOT
+# counted. This matches `afplay "$WAV"`, `afplay $WAV`, `afplay /x.wav`,
+# `... || afplay ...`, and `exec afplay ...`.
+_CMD_PREFIX = (
+    r'(?:exec|command|builtin|env|time|nice|nohup|caffeinate|stdbuf'
+    r'|then|do|else)\s+'
+)
+INVOCATION_RE = re.compile(
+    r'(?:^\s*|[;&|({]\s*)'        # command position: line start or a separator
+    r'(?:' + _CMD_PREFIX + r')*'  # optional wrapper/keyword prefixes (exec, ...)
+    r'(?:[^\s;&|(){}]*/)?'        # optional path qualifier (/usr/bin/)
+    r'afplay(?=\s|$|;)'           # afplay as its own word
+)
+
+# Shell string literals ('...' and "..."). Stripped before invocation matching so
+# afplay mentioned inside help text / echo output is not mistaken for a command;
+# real invocations (afplay "$WAV") keep the bare `afplay` token after stripping.
+_QUOTED_RE = re.compile(r'"[^"]*"|\'[^\']*\'')
+
+
+def _strip_quotes(line: str) -> str:
+    return _QUOTED_RE.sub("", line)
+
+
 GUARD = '[ -f "$MUTE_FILE" ]'
 
 _SKIP_DIR_PARTS = {".git", "node_modules", ".venv", "venv", "__pycache__"}
@@ -62,7 +86,7 @@ def _shell_scripts() -> list[Path]:
 def _afplay_lines(text: str) -> list[str]:
     return [
         ln for ln in text.splitlines()
-        if INVOCATION_RE.search(ln) and not ln.lstrip().startswith("#")
+        if not ln.lstrip().startswith("#") and INVOCATION_RE.search(_strip_quotes(ln))
     ]
 
 
@@ -131,3 +155,65 @@ def test_hermes_handler_afplay_is_mute_guarded():
             f"handler.py:{i + 1}: afplay not preceded by a mute guard "
             f'(`if not Path("{MUTE_FILE_PATH}").exists():`)'
         )
+
+
+# --- Regression: command-position detection (PR #92 QA hardening) -------------
+# QA (codex/agy/hermes) found INVOCATION_RE both *missed* real invocations behind
+# a wrapper/keyword prefix (`exec afplay`) and *false-positived* on afplay inside
+# quoted help text (clone-voice.sh's `echo "... && afplay test.wav"`), which also
+# let the EXEMPT integrity check pass off help text. These pin both directions.
+
+# Real command invocations that MUST be detected as afplay sites.
+_REAL_INVOCATIONS = [
+    'afplay "$WAV"',
+    '    afplay "$WAV"',                        # indented
+    'afplay $WAV',                              # unquoted var
+    'afplay /tmp/x.wav',                        # literal path arg
+    '/usr/bin/afplay "$WAV"',                   # path-qualified
+    '[ -f "$MUTE_FILE" ] || afplay "$WAV"',     # the canonical guarded form
+    'foo && afplay "$WAV"',                     # &&-chained
+    'foo; afplay "$WAV"',                       # ;-chained
+    'cat x | afplay -',                         # pipe
+    'exec afplay "$WAV"',                       # exec wrapper — was MISSED
+    'exec /usr/bin/afplay "$WAV"',              # exec + path qualifier
+    'time afplay "$WAV"',                       # time wrapper
+    'command afplay "$WAV"',                    # command wrapper
+    'env afplay "$WAV"',                        # env wrapper
+    'nohup afplay "$WAV"',                      # nohup wrapper
+    'if cond; then afplay "$WAV"; fi',          # then keyword
+    '{ afplay "$WAV"; }',                       # brace group
+]
+
+# Mentions of afplay that are NOT command invocations and MUST NOT be counted:
+# afplay appears as string/help/echo *data*, not as a command.
+_NON_INVOCATIONS = [
+    'echo "run: afplay out.wav"',
+    "echo 'afplay out.wav'",
+    'echo afplay',                              # prints the literal word
+    '    echo -e "    ${DIM}afplay out.wav${NC}"',
+    # The exact clone-voice.sh:432 help line (escaped inner quotes and all).
+    r'echo -e "  curl \"localhost:7860/synthesize?voice=x\" -o test.wav && afplay test.wav"',
+]
+
+
+@pytest.mark.parametrize("line", _REAL_INVOCATIONS)
+def test_regex_detects_real_afplay_invocations(line):
+    assert _afplay_lines(line), f"regex failed to detect a real invocation: {line!r}"
+
+
+@pytest.mark.parametrize("line", _NON_INVOCATIONS)
+def test_regex_ignores_afplay_in_strings_and_help_text(line):
+    assert not _afplay_lines(line), f"regex false-positived on a non-invocation: {line!r}"
+
+
+def test_clone_voice_help_text_not_counted_keeps_exempt_check_honest():
+    """clone-voice.sh has a real foreground preview afplay AND a help line that
+    only prints an afplay example. Only the real invocation may count — otherwise
+    the EXEMPT integrity check could be satisfied by help text alone."""
+    detected = _afplay_lines((REPO / "clone-voice.sh").read_text())
+    assert any('afplay "$TEST_WAV"' in ln for ln in detected), (
+        "real post-clone preview afplay must still be detected"
+    )
+    assert not any("curl" in ln and "afplay test.wav" in ln for ln in detected), (
+        "help-text afplay example must NOT be counted as a playback site"
+    )

@@ -213,6 +213,14 @@ async def handle(event_type: str, context: dict) -> None:
         log.info("Skipping TTS for messaging platform %s (use tts-audio-feed cron)", platform)
         return
 
+    # Native synth+playback needs aiohttp; messaging-only installs omit it. Bail
+    # explicitly here rather than dereferencing None below and being rescued by
+    # the broad health-check `except` (which would log a misleading "server not
+    # reachable"). Everything past this point may use aiohttp.
+    if aiohttp is None:
+        log.info("aiohttp not installed — skipping local TTS (messaging-only install)")
+        return
+
     # Check server health
     try:
         async with aiohttp.ClientSession() as session:
