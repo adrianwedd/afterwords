@@ -16,6 +16,7 @@ TTS_URL="http://127.0.0.1:7860/synthesize"
 ARCHIVE_DIR="$HOME/.codex/tts-archive"
 MAX_QUEUE=10
 
+MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
 PLAY_LOCK="/tmp/afterwords-play.lock"
 PLAY_PID="/tmp/afterwords-play.pid"
 acquire_play_lock() {
@@ -173,7 +174,7 @@ while true; do
                 ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
                     && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
                 lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c$((CHUNK_I-1)).mp3" 2>/dev/null || true
-                afplay "$PREV_WAV" 2>/dev/null
+                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
             fi
             rm -f "$PREV_WAV"
         fi
@@ -190,7 +191,7 @@ while true; do
             ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
                 && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
             lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c${NCHUNKS}.mp3" 2>/dev/null || true
-            afplay "$PREV_WAV" 2>/dev/null
+            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
         fi
         rm -f "$PREV_WAV"
     fi

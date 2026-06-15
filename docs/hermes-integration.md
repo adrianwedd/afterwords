@@ -275,6 +275,8 @@ The inbound inline path archives to `~/.hermes/tts-archive`, which the watcher a
 | `~/.hermes/hooks/afterwords-tts/HOOK.yaml` | Native hook manifest |
 | `~/.hermes/hooks/afterwords-tts/handler.py` | Native hook handler (async, chunked) |
 | `~/.hermes/tts-archive/` | MP3 + text sidecar archive (native hook + command provider; shell hook is playback-only) |
+| `afterwords/hermes/hooks/afterwords-tts/handler.py` | Native hook source — copied to `~/.hermes/hooks/afterwords-tts/` |
+| `afterwords/hermes/hooks/afterwords-tts/HOOK.yaml` | Native hook manifest source |
 | `afterwords/scripts/afterwords-post-llm.sh` | Shell hook script (chunked pipeline) |
 | `afterwords/scripts/afterwords-tts-command.sh` | Command provider (async CLI / sync messaging) |
 | `afterwords/scripts/tts-feed-send.py` | Feed watcher — delivers archived audio to home channel (gated by `send_to:`) |

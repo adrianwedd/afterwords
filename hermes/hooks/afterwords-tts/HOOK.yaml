@@ -1,0 +1,4 @@
+name: afterwords-tts
+description: Auto-speak Hermes agent responses via local Afterwords TTS server
+events:
+  - agent:end

@@ -7,6 +7,7 @@ set -e
 TEXT="${1:-Hello from Hermes}"
 VOICE="${2:-}"  # Optional: specific voice name
 AFTERWORDS_URL="http://127.0.0.1:7860"
+MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
 
 # Check if Afterwords server is running
 if ! curl -s --max-time 2 "${AFTERWORDS_URL}/health" >/dev/null 2>&1; then
@@ -37,7 +38,7 @@ if curl -s --max-time 90 "$URL" -o "$WAVFILE" 2>/dev/null; then
         rm -f "$TRIMMED"
 
         # Play audio (afplay is macOS default)
-        afplay "$WAVFILE" 2>/dev/null || echo "Audio saved to $WAVFILE (could not play)"
+        [ -f "$MUTE_FILE" ] || afplay "$WAVFILE" 2>/dev/null || echo "Audio saved to $WAVFILE (could not play)"
         rm -f "$WAVFILE"
         exit 0
     fi

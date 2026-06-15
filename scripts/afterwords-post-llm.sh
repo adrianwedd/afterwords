@@ -11,6 +11,7 @@ set -uo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AFTERWORDS_URL="http://127.0.0.1:7860"
 
+MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
 PLAY_LOCK="/tmp/afterwords-play.lock"
 PLAY_PID="/tmp/afterwords-play.pid"
 acquire_play_lock() {
@@ -248,7 +249,7 @@ for i in $(seq 1 "$NCHUNKS"); do
             TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
             ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
                 && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
-            afplay "$PREV_WAV" 2>/dev/null
+            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
         fi
         rm -f "$PREV_WAV"
     fi
@@ -264,7 +265,7 @@ if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
         TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
         ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
             && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
-        afplay "$PREV_WAV" 2>/dev/null
+        [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
     fi
     rm -f "$PREV_WAV"
 fi
