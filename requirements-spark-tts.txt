@@ -17,7 +17,7 @@
 einops==0.8.1
 einx==0.3.0
 numpy==2.2.3
-omegaconf==2.3.0
+omegaconf==2.3.1
 packaging==24.2
 safetensors==0.5.2
 soundfile==0.12.1
