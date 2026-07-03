@@ -126,6 +126,51 @@ fi
 
 # ── Messaging platform path: synthesize full audio, send as attachment ──
 if $MSG_PLATFORM; then
+    # ── Dedup: skip if we already sent audio for this exact text recently ──
+    # Compaction/retry loops can re-fire this hook with the same response text
+    # hundreds of times. Hash the text to detect duplicates and throttle.
+    # /tmp is shared: refuse a symlinked or foreign-owned dedup dir (same
+    # hardening as the queue dirs) — but proceed WITHOUT dedup rather than
+    # dropping the send.
+    DEDUP_DIR="/tmp/afterwords-dedup"
+    DEDUP_OK=true
+    if [ -L "$DEDUP_DIR" ]; then
+        DEDUP_OK=false
+    else
+        mkdir -p "$DEDUP_DIR" 2>/dev/null || true
+        chmod 700 "$DEDUP_DIR" 2>/dev/null || true
+        # stat -f%u is BSD (macOS); stat -c%u is GNU (Linux)
+        DEDUP_UID=$(stat -f%u "$DEDUP_DIR" 2>/dev/null || stat -c%u "$DEDUP_DIR" 2>/dev/null || echo "")
+        if [ ! -d "$DEDUP_DIR" ] || [ "$DEDUP_UID" != "$(id -u)" ]; then
+            DEDUP_OK=false
+        fi
+    fi
+    DEDUP_FILE=""
+    if $DEDUP_OK; then
+        # Expire stale markers so the dir does not accumulate forever
+        find "$DEDUP_DIR" -type f -mmin +60 -delete 2>/dev/null || true
+        TEXT_HASH=$(printf '%s' "$CLEAN" | python3 -c "
+import sys, hashlib
+print(hashlib.sha256(sys.stdin.read().encode()).hexdigest()[:16])
+" 2>/dev/null || echo "$(date +%s)$$")
+        DEDUP_FILE="${DEDUP_DIR}/${PLATFORM}-${TEXT_HASH}"
+        NOW_S=$(date +%s)
+        # Atomic claim via noclobber: concurrent re-fires with the same text
+        # race on this create, so create-or-fail picks a single winner instead
+        # of a check-then-write gap letting several through.
+        if ! (set -o noclobber; printf '%s\n' "$NOW_S" > "$DEDUP_FILE") 2>/dev/null; then
+            # Marker already exists: skip if we sent this text in the last 60s
+            # stat -f%m is BSD (macOS); stat -c%Y is GNU (Linux)
+            FILE_S=$(stat -f%m "$DEDUP_FILE" 2>/dev/null || stat -c%Y "$DEDUP_FILE" 2>/dev/null || echo 0)
+            AGE_S=$(( NOW_S - FILE_S ))
+            if [ "$AGE_S" -lt 60 ]; then
+                exit 0
+            fi
+            # Stale marker: refresh it and proceed
+            printf '%s\n' "$NOW_S" > "$DEDUP_FILE" 2>/dev/null || true
+        fi
+    fi
+
     # Concatenate all chunks into one text for single synthesize call
     SINGLE_WAV=$(mktemp /tmp/afterwords-msg-XXXXXX.wav)
     ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$CLEAN" 2>/dev/null || true)
@@ -195,18 +240,23 @@ os.replace(tmp, p)
             telegram)
                 OGG_CACHE="$AUDIO_CACHE_DIR/${SLUG}-${STAMP}.ogg"
                 cp "$OGG_FILE" "$OGG_CACHE" 2>/dev/null || true
-                hermes send -t "$SEND_TARGET" "MEDIA:$OGG_CACHE" 2>/dev/null || true
+                hermes send -t "$SEND_TARGET" "MEDIA:$OGG_CACHE" 2>/dev/null \
+                    || rm -f ${DEDUP_FILE:+"$DEDUP_FILE"}  # failed send: allow retry
                 ;;
             discord)
                 MP3_CACHE="$AUDIO_CACHE_DIR/${SLUG}-${STAMP}.mp3"
                 cp "$ARCHIVE_MP3" "$MP3_CACHE" 2>/dev/null || true
-                hermes send -t "$SEND_TARGET" "MEDIA:$MP3_CACHE" 2>/dev/null || true
+                hermes send -t "$SEND_TARGET" "MEDIA:$MP3_CACHE" 2>/dev/null \
+                    || rm -f ${DEDUP_FILE:+"$DEDUP_FILE"}  # failed send: allow retry
                 ;;
         esac
 
         rm -f "$SINGLE_WAV" "$OGG_FILE"
     else
         rm -f "$SINGLE_WAV"
+        # Failed synthesis: release the dedup marker so a legitimate retry
+        # of the same text within the window is not swallowed.
+        rm -f ${DEDUP_FILE:+"$DEDUP_FILE"}
     fi
     exit 0
 fi
