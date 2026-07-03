@@ -1,4 +1,7 @@
-# 0.4.1+ broke Qwen3-1.7B ICL (generates EOS on first token); pin below regression.
+# 0.4.1+ broke Qwen3-1.7B ICL cloning (generates EOS on first token). Separately,
+# MLX Metal is not thread-safe: all Metal ops run on the dedicated single-worker ML
+# executor (see CLAUDE.md "Architecture" and "Key Constraints"). Only lift this pin
+# after re-verifying both ICL cloning and executor thread-safety on the live server.
 mlx-audio>=0.4,<0.4.1
 soundfile>=0.13,<1.0
 fastapi>=0.135,<1.0
