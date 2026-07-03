@@ -107,6 +107,8 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
 
 Each hook falls back to `~/.afterwords` (global) before using the server's default voice.
 
+The repo's own `.afterwords` is deliberately both git-tracked (it ships the default agent→voice mapping) and listed in `.gitignore` (so the entry documents intent, though gitignore does not silence tracked files). Local edits to it are personal preference: never commit `.afterwords` changes unless a task explicitly says so.
+
 ## Backends
 
 The `backends/` package exposes a `Backend` Protocol (in `backends/base.py`) and a registry (`backends/__init__.py`). Each backend is a single Python file implementing `load / validate_extras / prepare_voice / synthesize`. Registered shipped backends:
@@ -152,3 +154,5 @@ CLI: `afterwords reload` curls the endpoint and pretty-prints the response.
 - `setup.sh` conditionally installs hooks into `~/.claude/` (only when Claude Code is present) and a launchd plist (always)
 - `afterwords.sh` is a pure-bash CLI wrapper (no venv needed) symlinked to `/usr/local/bin/afterwords` by setup.sh — handles start/stop/restart/status/logs/voices/clone/uninstall
 - Shell scripts use macOS-specific tools throughout (afplay, mkdir-based locking, launchd)
+
+Read STRATEGY.md before any task. It overrides your judgment. Conflicts with reality are escalations.
