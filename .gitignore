@@ -6,7 +6,9 @@ __pycache__/
 *.DS_Store
 !voices/*.wav
 
-# Afterwords TTS voice override
+# Afterwords TTS voice override — the tracked repo copy ships default
+# agent-to-voice mappings; this entry documents that LOCAL edits are personal
+# preference and are never committed (gitignore does not silence tracked files).
 .afterwords
 
 # Private voices — available locally on the dev machine and loaded by the
@@ -16,6 +18,8 @@ voices/muse*
 voices/vixen*
 
 # QA artefacts
+# Root-level peer-agent QA reports stay local (evidence, not shipped).
+/hermes_qa_*.md
 qa-run.txt
 docs/*-audit.json
 *-output.log

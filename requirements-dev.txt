@@ -6,7 +6,8 @@ httpx>=0.28.1,<1.0
 
 # mlx-audio is the runtime dep used by the qwen3 backend. Pinned here too so dev
 # environments installing only requirements-dev.txt can't float to 0.4.1+ (which
-# regressed Qwen3-1.7B ICL — generates EOS on first token).
+# regressed Qwen3-1.7B ICL — generates EOS on first token). Full pin rationale
+# (incl. the Metal thread-safety constraint) lives above the pin in requirements.txt.
 mlx-audio>=0.4,<0.4.1; sys_platform == "darwin"
 
 # Required to import conftest.py, backends/, and server.py in CI (no MLX/torch).
