@@ -48,3 +48,6 @@ voices/*.wav.bak
 /cache/
 /afterwords-redesign/
 /*.diff
+# 2026-06-10 security sprint plan stays local: it names live-credential storage
+# location + rotation status, and docs/ publishes to the public Pages site (#103)
+docs/superpowers/plans/2026-06-10-security-fix-sprint.md
