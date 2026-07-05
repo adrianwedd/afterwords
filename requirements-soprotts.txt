@@ -8,7 +8,7 @@
 # the torch device with SOPROTTS_DEVICE. Upstream's current Mac guidance is CPU.
 sopro>=1.5.0
 torch>=2.12.0
-torchaudio>=2.1
+torchaudio>=2.11.0
 soundfile>=0.12.1
 numpy>=1.23
 transformers>=5.12.0
