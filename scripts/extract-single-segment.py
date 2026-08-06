@@ -7,6 +7,9 @@ import os
 import sys
 import argparse
 import json
+import math
+import re
+import subprocess
 import numpy as np
 import scipy.io.wavfile as wavfile
 from scipy import signal
@@ -18,6 +21,8 @@ except ImportError:
     print("Please install faster-whisper: pip install faster-whisper")
     sys.exit(1)
 
+VOICE_SLUG = re.compile(r"^[a-z0-9][a-z0-9-]*$")
+
 
 def get_spectral_ratio(data, rate):
     """Mid/high energy ratio. < 4.0 typically indicates music."""
@@ -27,66 +32,64 @@ def get_spectral_ratio(data, rate):
     mid_energy = np.sum(Pxx[(f >= 300) & (f <= 2000)])
     high_energy = np.sum(Pxx[(f > 2000) & (f <= 8000)])
     if high_energy == 0:
-        return 999.0
-    return mid_energy / high_energy
+        return 0.0
+    ratio = mid_energy / high_energy
+    if not math.isfinite(ratio):
+        return 0.0
+    return ratio
 
 
-def find_best_window(segments, rate, total_samples, target_dur=15.0, min_dur=10.0, max_dur=20.0):
+def candidate_windows(segments, target_dur=15.0, min_dur=10.0, max_dur=20.0):
     """
-    Scan all segments and find the best continuous window of ~target_dur seconds.
-    Returns (start_sample, end_sample, text, start_time, spectral_ratio).
+    Enumerate continuous windows built from consecutive transcript segments,
+    including every intermediate extension whose duration fits the bounds.
+    Yields (score, window_start, window_end, text).
     """
     seg_list = list(segments)
-    if not seg_list:
-        return None
-
-    best_score = -1
-    best_window = None
-
-    # Try each segment as a starting point
     for i, start_seg in enumerate(seg_list):
         window_start = start_seg.start
         window_text_parts = [start_seg.text.strip()]
         window_end = start_seg.end
 
-        # Extend window with subsequent segments until we hit target duration
-        for j in range(i + 1, len(seg_list)):
-            next_seg = seg_list[j]
-            gap = next_seg.start - window_end
-            if gap > 2.0:  # Break on large gaps (>2s silence = scene change)
+        j = i
+        while True:
+            duration = window_end - window_start
+            if min_dur <= duration <= max_dur:
+                full_text = " ".join(window_text_parts)
+                word_count = len(full_text.split())
+                dur_score = 1.0 - abs(duration - target_dur) / target_dur
+                word_score = min(word_count / 40.0, 1.0)  # Cap at ~40 words
+                yield (dur_score * 0.4 + word_score * 0.6,
+                       window_start, window_end, full_text)
+
+            j += 1
+            if j >= len(seg_list):
                 break
-            candidate_end = next_seg.end
-            candidate_dur = candidate_end - window_start
-            if candidate_dur > max_dur:
+            next_seg = seg_list[j]
+            if next_seg.start - window_end > 2.0:  # >2s silence = scene change
+                break
+            if next_seg.end - window_start > max_dur:
                 break
             window_text_parts.append(next_seg.text.strip())
-            window_end = candidate_end
+            window_end = next_seg.end
 
-        duration = window_end - window_start
-        if duration < min_dur or duration > max_dur:
-            continue
 
-        # Extract audio chunk for spectral analysis
-        s_idx = int(window_start * rate)
-        e_idx = int(window_end * rate)
-        if e_idx > total_samples:
-            e_idx = total_samples
-        chunk = np.zeros(e_idx - s_idx, dtype=np.float32)
-        # We'll compute spectral ratio after loading data
-        # For now, score on duration match and word count
-        full_text = " ".join(window_text_parts)
-        word_count = len(full_text.split())
+def write_json_atomic(path, obj):
+    tmp = path + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(obj, f, indent=2)
+    os.replace(tmp, path)
 
-        # Score: prefer ~15s, lots of words, no huge gaps
-        dur_score = 1.0 - abs(duration - target_dur) / target_dur
-        word_score = min(word_count / 40.0, 1.0)  # Cap at ~40 words
-        score = dur_score * 0.4 + word_score * 0.6
 
-        if score > best_score:
-            best_score = score
-            best_window = (window_start, window_end, full_text, s_idx, e_idx)
-
-    return best_window
+def is_git_tracked(repo_root, rel_path):
+    try:
+        res = subprocess.run(
+            ["git", "-C", repo_root, "ls-files", "--error-unmatch", rel_path],
+            capture_output=True,
+        )
+        return res.returncode == 0
+    except OSError:
+        return False
 
 
 def main():
@@ -101,8 +104,27 @@ def main():
     parser.add_argument("--reject-music", action="store_true", default=True,
                         help="Reject segments with spectral mid/high ratio < 4.0")
     parser.add_argument("--no-reject-music", dest="reject_music", action="store_false")
+    parser.add_argument("--force", action="store_true",
+                        help="Allow overwriting a git-tracked (shipped) reference WAV")
 
     args = parser.parse_args()
+
+    if not VOICE_SLUG.match(args.voice):
+        print(f"Error: --voice must be a lowercase slug ([a-z0-9-]), got: {args.voice!r}")
+        sys.exit(1)
+    if not (0 < args.min_dur <= args.target_dur <= args.max_dur):
+        print("Error: duration bounds must satisfy 0 < --min-dur <= --target-dur <= --max-dur.")
+        sys.exit(1)
+    if not os.path.isfile(args.wav):
+        print(f"Error: input file not found: {args.wav}")
+        sys.exit(1)
+
+    repo_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+    ref_rel = f"voices/{args.voice}-ref.wav"
+    ref_wav = os.path.join(repo_root, ref_rel)
+    if os.path.exists(ref_wav) and is_git_tracked(repo_root, ref_rel) and not args.force:
+        print(f"Error: {ref_rel} is git-tracked (a shipped voice). Re-run with --force to overwrite.")
+        sys.exit(1)
 
     print(f"Loading audio: {args.wav}")
     rate, data = wavfile.read(args.wav)
@@ -117,34 +139,45 @@ def main():
 
     print("Transcribing with faster-whisper...")
     model = WhisperModel("base.en", compute_type="int8")
-    segments, _ = model.transcribe(args.wav, word_timestamps=True)
+    segments, _ = model.transcribe(args.wav)
 
     print("Finding best continuous window...")
-    result = find_best_window(
-        segments, rate, total_samples,
-        target_dur=args.target_dur, min_dur=args.min_dur, max_dur=args.max_dur
+    candidates = sorted(
+        candidate_windows(segments, target_dur=args.target_dur,
+                          min_dur=args.min_dur, max_dur=args.max_dur),
+        key=lambda c: c[0], reverse=True,
     )
 
-    if result is None:
+    if not candidates:
         print("ERROR: No suitable window found. Try adjusting duration bounds.")
         sys.exit(1)
 
-    window_start, window_end, full_text, s_idx, e_idx = result
+    # Walk candidates best-first; take the first that passes the music check
+    # so one contaminated window doesn't abort when clean ones exist.
+    chosen = None
+    for score, window_start, window_end, full_text in candidates:
+        s_idx = int(window_start * rate)
+        e_idx = min(int(window_end * rate), total_samples)
+        chunk = data[s_idx:e_idx]
+        ratio = get_spectral_ratio(chunk, rate)
+        if args.reject_music and ratio < 4.0:
+            print(f"  [REJECTED MUSIC {ratio:.1f}] {window_start:.1f}s-{window_end:.1f}s")
+            continue
+        chosen = (window_start, window_end, full_text, s_idx, e_idx, ratio)
+        break
+
+    if chosen is None:
+        print("ERROR: Every candidate window failed the music check (spectral ratio < 4.0).")
+        print("Try a different source file, or pass --no-reject-music to override.")
+        sys.exit(1)
+
+    window_start, window_end, full_text, s_idx, e_idx, ratio = chosen
     duration = window_end - window_start
     print(f"\nBest window: {window_start:.1f}s - {window_end:.1f}s ({duration:.1f}s)")
     print(f"Text: {full_text}")
-
-    # Extract audio
-    chunk = data[s_idx:e_idx].copy()
-
-    # Spectral check
-    ratio = get_spectral_ratio(chunk, rate)
     print(f"Spectral ratio (mid/high): {ratio:.1f}")
 
-    if args.reject_music and ratio < 4.0:
-        print(f"WARNING: Spectral ratio {ratio:.1f} < 4.0 — likely contains music!")
-        print("Try a different source file or adjust --min-dur/--max-dur.")
-        sys.exit(1)
+    chunk = data[s_idx:e_idx].copy()
 
     # Noise reduction
     print("Applying noise reduction...")
@@ -159,9 +192,6 @@ def main():
     chunk = np.clip(chunk, -1.0, 1.0)
     chunk_16 = (chunk * 32767).astype(np.int16)
 
-    # Save reference WAV
-    repo_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-    ref_wav = os.path.join(repo_root, f"voices/{args.voice}-ref.wav")
     wavfile.write(ref_wav, rate, chunk_16)
     print(f"Saved reference audio: {ref_wav}")
 
@@ -186,8 +216,7 @@ def main():
             f"Noisereduce, RMS norm. [extract-single-segment.py]"
         )
 
-        with open(json_path, "w") as f:
-            json.dump(profile, f, indent=2)
+        write_json_atomic(json_path, profile)
         print(f"Updated {json_path}")
     else:
         print(f"Warning: {json_path} not found — JSON not updated.")

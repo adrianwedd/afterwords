@@ -7,7 +7,11 @@
 #   • POST /clone  (server must run with --allow-clone)
 #   • clone-voice.sh
 #   • scripts/transcribe.py and related audit/QA scripts
+#   • scripts/splice-voice.py and scripts/extract-single-segment.py
 #
 # setup.sh installs this automatically in a full install; --server-only skips it.
 noisereduce>=3.0,<4.0
 faster-whisper>=1.0,<2.0
+# Imported directly by the splicing scripts (also a transitive dep of noisereduce —
+# pinned here so a noisereduce dep change can't silently break them).
+scipy>=1.10
