@@ -119,7 +119,29 @@ def main() -> int:
                 f"og:image points to {img_url} but {img_path} not found in repo"
             )
 
-    # 5. Same-as title — a Twitter card without title is fine if og:title exists,
+    # 5. Visible on-page counts must agree with the tracked gallery too — the
+    # 2026-08-06 QA round found the hero ("98 voices included") and backends
+    # section title ("281 voice profiles") had drifted for months because only
+    # og:description was checked. Same "N+" approx semantics as check 2.
+    for label, pattern in (
+        ("hero subtitle", r'class="hero-sub">[^<]*?(\d+)(\+)?\s+voices'),
+        ("backends section title", r'class="section-title">[^<]*?(\d+)(\+)?\s+voice profiles'),
+    ):
+        m = re.search(pattern, html, re.IGNORECASE)
+        if not m:
+            continue  # section reworded to drop the count — nothing to drift
+        claimed = int(m.group(1))
+        if m.group(2) == "+":
+            if actual_count < claimed:
+                issues.append(
+                    f"{label} claims {claimed}+ voices but voices/ only has {actual_count}"
+                )
+        elif claimed != actual_count:
+            issues.append(
+                f"{label} claims {claimed} voices but voices/ has {actual_count}"
+            )
+
+    # 6. Same-as title — a Twitter card without title is fine if og:title exists,
     # but flag if og:title and twitter:title both exist and differ.
     if "twitter:title" in meta and meta["twitter:title"] != meta.get("og:title"):
         issues.append(
