@@ -8,7 +8,7 @@ Afterwords is a local voice-cloning TTS server for Apple Silicon Macs whose agen
 
 Source-of-truth precedence: code + tests > CLAUDE.md/AGENTS.md > README/docs site > memory/session notes. `docs/` is the **published GitHub Pages site** — committed source-of-truth AND externally visible on every push to main (OBSERVED: CI verifies Pages assets; commit 9832d8e fixed its og:description under a CI guard).
 
-Time-sensitive baselines (re-measure, don't quote): latest release v1.0.6, tagged 2026-06-15; shipped voice gallery 97 families / 193 profiles as of 2026-06-15, derived from `git ls-files voices/*.json` — NOT from on-disk counts (OBSERVED: 308 files on disk vs 294 tracked; untracked + gitignored private voices inflate disk counts, and a prior session shipped a wrong count from `ls`). Recheck trigger: any task touching voice counts, README stats, or `docs/` metadata must recount from `git ls-files` first.
+Time-sensitive baselines (re-measure, don't quote): latest release v1.0.7, tagged 2026-08-06; shipped voice gallery 102 families / 198 profiles as of 2026-08-06, derived from `git ls-files voices/*.json` — NOT from on-disk counts (OBSERVED: 308 files on disk vs 294 tracked; untracked + gitignored private voices inflate disk counts, and a prior session shipped a wrong count from `ls`). Recheck trigger: any task touching voice counts, README stats, or `docs/` metadata must recount from `git ls-files` first.
 
 ## 2. INVARIANTS
 
@@ -30,7 +30,7 @@ Time-sensitive baselines (re-measure, don't quote): latest release v1.0.6, tagge
 - **Chatterbox and VoxCPM backends removed entirely** (commit f03e826): failed listen-test; VoxCPM 500'd under launchd (OBSERVED). Do not re-add.
 - **inspector-morse and francis-urquhart voices removed in v1.0.3; ronan deduplicated to mckenna** (OBSERVED, memory + CHANGELOG). Do not resurrect from git history.
 - **`/reload` is add-only by default; pruning is opt-in (`?prune=true`) and scoped to file-originated gallery voices** (OBSERVED, CLAUDE.md). Do not "improve" reload to auto-remove missing voices.
-- **Reference-clip splicing procedure for contaminated sources** is codified in CLAUDE.md (spectral mid/high heuristic, per-chunk denoise, fades, gaps). Follow it; don't invent an alternative pipeline.
+- **Reference-clip splicing procedure for contaminated sources** is codified in CLAUDE.md (spectral mid/high heuristic, per-chunk denoise, fades, gaps) and automated by `scripts/splice-voice.py` / `scripts/extract-single-segment.py`. Follow it; don't invent an alternative pipeline.
 - **A prior Stripe/CF-token-in-.env security finding was explicitly DISMISSED by the owner 2026-06-15** (local-only, never committed). Do not re-flag it (OBSERVED, session memory — documented-stale-adjacent: this is a standing owner decision, not drift).
 - **QA convention:** high-blast-radius changes get review-only peer-agent QA rounds via `codex exec -s read-only`, `hermes -z`, `agy -p` (OBSERVED pattern across sprints 3–6). GitHub issues are the parking lot for deferred findings (OBSERVED, issues #79–#94 workflow).
 
