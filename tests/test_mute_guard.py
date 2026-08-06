@@ -217,6 +217,41 @@ def test_hermes_handler_afplay_is_mute_guarded():
         )
 
 
+# Python playback sites: the shell discovery above only globs *.sh, so a new
+# .py file shelling out to afplay would otherwise be invisible to this suite.
+# Every Python file that mentions afplay must either be the known Hermes
+# handler (its guard is verified by the dedicated test above) or be listed
+# here with a rationale.
+_PY_KNOWN_AFPLAY = {
+    "hermes/hooks/afterwords-tts/handler.py",  # guard verified by test_hermes_handler_afplay_is_mute_guarded
+}
+
+
+def _python_files() -> list[Path]:
+    return [
+        p for p in sorted(REPO.rglob("*.py"))
+        if not (_SKIP_DIR_PARTS | {"tests"}) & set(p.parts)
+    ]
+
+
+def test_no_unaccounted_python_afplay_sites():
+    """Close the .py blind spot in afplay-site discovery."""
+    for p in _python_files():
+        rel = str(p.relative_to(REPO))
+        if rel in _PY_KNOWN_AFPLAY:
+            continue
+        offending = [
+            i + 1 for i, ln in enumerate(p.read_text().splitlines())
+            if "afplay" in ln and not ln.lstrip().startswith("#")
+        ]
+        assert not offending, (
+            f"{rel} lines {offending}: new Python afplay site — add a mute guard "
+            f"plus a dedicated guard test (see "
+            f"test_hermes_handler_afplay_is_mute_guarded), or add the file to "
+            f"_PY_KNOWN_AFPLAY with a rationale"
+        )
+
+
 # --- Regression: command-position detection (PR #92 QA hardening) -------------
 # QA (codex/agy/hermes) found INVOCATION_RE both *missed* real invocations behind
 # a wrapper/keyword prefix (`exec afplay`) and *false-positived* on afplay inside
