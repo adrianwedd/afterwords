@@ -2,12 +2,30 @@
 
 All notable changes to Afterwords. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Fixed
+
+- **Splicing helper scripts hardened after 3-agent QA (codex/hermes/agy)** — `--voice` is validated as a slug (blocks path traversal out of `voices/`); `--match` is now a literal case-insensitive substring as documented (was an undocumented regex that crashed on `[`); profile JSONs are resolved by `reference_audio` instead of filename prefix (the prefix glob would have clobbered e.g. `avasarala-errinwright.json` when splicing `avasarala`); the scripts fail fast before touching audio when no profile exists, and refuse to overwrite a git-tracked reference WAV without `--force`; JSON writes are atomic (`tmp` + `os.replace`); degenerate/NaN spectral ratios are rejected instead of passing as "clean"; `extract-single-segment.py` now walks candidate windows best-first past music-contaminated ones instead of aborting, and scores intermediate window extensions so it actually prefers ~15 s. `scipy` is declared explicitly in `requirements-clone.txt`.
+- **Demo-site voice counts corrected and now CI-guarded** — the hero subtitle said "98 voices included" and the backends section title "281 voice profiles" (both stale since ~v1.0.2/v1.0.6 era; actual: 198). `check-og-metadata.py` now checks these visible strings too, not just `og:description`, so they can't silently drift again.
+- **Mute-guard suite closes its Python blind spot** — `afplay`-site discovery only globbed `*.sh`, so a new Python playback site would have been invisible; a new test fails on any unaccounted `afplay` in `*.py` files.
+
 ## [1.0.7] — 2026-08-06
 
 ### Added
 
-- Add voice-splicing helper scripts (scripts/splice-voice.py, scripts/extract-single-segment.py) and agent docs for the splicing workflow
+- **Voice-splicing helper scripts** — `scripts/splice-voice.py` (multi-window splice with the spectral music heuristic) and `scripts/extract-single-segment.py` (single clean ~15s window), plus agent docs for the splicing workflow in CLAUDE.md/AGENTS.md.
+- **STRATEGY.md executor doctrine** — repo-level intent/invariants/escalation file for agentic executors, with pointers from CLAUDE.md and AGENTS.md.
 - **5 new voice families** — K and Joi (Blade Runner 2049), Leia Organa (Star Wars), Dave Bowman (2001: A Space Odyssey), and John Sheppard (Stargate Atlantis). Gallery grows to **102 families / 198 profiles**. All references are boundary-aware cuts or doctrine-compliant splices ending on complete sentences: `joi` is a 9-line splice of clean solo-speech windows (spectral ratio ≥ 4.0 per span), `leia-organa`'s transcript was corrected from an ASR mishearing to the canonical hologram line, and `dave-bowman` was re-sourced from a repetitive radio-check clip to the psychiatric-report monologue. Same-actor, non-franchise sources for two voices: `k`'s reference is Ryan Gosling's Drive monologue and `john-sheppard`'s is a Joe Flanigan interview. Known caveat: `leia-organa` retains the film's underscore beneath the hologram scene (not removable without losing the line).
+
+### Fixed
+
+- **Hermes messaging-path duplicate sends deduplicated** — repeated Discord/Telegram deliveries of the same response are deduped via expiring markers, with hardening and behavioral tests (#102).
+- Corrected the site og:description voice count to 193 under the CI guard (interim fix before the gallery bump above).
+
+### Dependencies
+
+- Bumped torchaudio 2.8→2.11, torchvision ≥0.27.1, whisper-timestamped, omegaconf 2.3.0→2.3.1, hydra-core 1.3.2→1.3.3, and `actions/checkout` v6→v7.
 
 ## [1.0.6] — 2026-06-15
 
