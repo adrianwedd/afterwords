@@ -2,6 +2,12 @@
 
 All notable changes to Afterwords. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- **5 new voice families** — K and Joi (Blade Runner 2049), Leia Organa (Star Wars), Dave Bowman (2001: A Space Odyssey), and John Sheppard (Stargate Atlantis). Gallery grows to **102 families / 198 profiles**. All references are boundary-aware cuts or doctrine-compliant splices ending on complete sentences: `joi` is a 9-line splice of clean solo-speech windows (spectral ratio ≥ 4.0 per span), `leia-organa`'s transcript was corrected from an ASR mishearing to the canonical hologram line, and `dave-bowman` was re-sourced from a repetitive radio-check clip to the psychiatric-report monologue. Same-actor, non-franchise sources for two voices: `k`'s reference is Ryan Gosling's Drive monologue and `john-sheppard`'s is a Joe Flanigan interview. Known caveat: `leia-organa` retains the film's underscore beneath the hologram scene (not removable without losing the line).
+
 ## [1.0.6] — 2026-06-15
 
 Security hardening, mute-everywhere, and a repo-tracked Hermes native hook.

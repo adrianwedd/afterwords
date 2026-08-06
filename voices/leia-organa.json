@@ -1,0 +1,10 @@
+{
+  "name": "leia-organa",
+  "backend": "qwen3-0.6b",
+  "source_url": "local-file",
+  "reference_audio": "leia-organa-ref.wav",
+  "reference_text": "General Kenobi, years ago you served my father in the Clone Wars. Now he begs you to help him and his struggle against the Empire. I regret that I am unable to present my father's request to you in person, but my ship has fallen under attack, and I'm afraid my mission to bring you to Obi-Wan has failed.",
+  "segment_start_s": 10.3,
+  "source_basename": "leia_holo.wav",
+  "notes": "Princess Leia (Carrie Fisher), Star Wars. Manually fetched 'help me obi wan' hologram speech. Spliced 9 clean solo-speech windows. Per-chunk noisereduce, 30ms fades, 150ms gaps, RMS-targeted gain with soft limiter. [Curated manually] [Curated manually, strict fix] [Auto-spliced with splice-voice.py] [Auto-spliced with splice-voice.py] [Auto-spliced with splice-voice.py] [Perfect exact 15s] [Boundary-aware re-trim from leia_holo.wav 10.30-25.47s (15.17s): full sentence through '...to Obi-Wan has failed.' Corrected mis-heard ASR ('to order on his faith') to the canonical line since audio clearly contains the real dialogue under iconic score/transmission-static bed (spectral ratio dips 0.7-4.0 in several 1s windows are the film's underscore, present throughout this scene and not removable without cutting the line)]"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "joi",
+  "backend": "qwen3-0.6b",
+  "source_url": "local-file",
+  "reference_audio": "joi-ref.wav",
+  "reference_text": "How was your meeting? I'm getting cabin fever. I had an accident at work. I think I ruined my shirt. Let me take a look at it. You want to drink first? I just need a bit more practice. Don't fuss. I should have marinated it longer.",
+  "segment_start_s": 23.88,
+  "source_basename": "joi_cand_00002.wav",
+  "notes": "Joi (Ana de Armas), Blade Runner 2049. Manually fetched 'you look lonely' hologram. Spliced 5 clean solo-speech windows. Per-chunk noisereduce, 30ms fades, 150ms gaps, RMS-targeted gain with soft limiter. [Curated manually] [Curated manually, strict fix] [Auto-spliced with splice-voice.py] [Auto-spliced with splice-voice.py] [Perfect exact 15s] [Boundary-aware re-splice from joi_cand_00002.wav: 9 clean solo Joi lines (ratio>=4.0 verified per-span), ends cleanly on 'longer.']"
+}

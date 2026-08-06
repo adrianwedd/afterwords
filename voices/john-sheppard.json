@@ -1,0 +1,10 @@
+{
+  "name": "john-sheppard",
+  "backend": "qwen3-0.6b",
+  "source_url": "local-file",
+  "reference_audio": "john-sheppard-ref.wav",
+  "reference_text": "and realize it would be politicized, and everybody's gonna start questioning the science and stuff, so that's a little unfortunate. But this thing is gonna go on until springtime, so maybe we'll recalibrate and realize that we are all in it together, so who knows.",
+  "segment_start_s": 300.0,
+  "source_basename": "john-sheppard.wav",
+  "notes": " [Auto-spliced with splice-voice.py] [Auto-spliced with splice-voice.py] [Auto-spliced with splice-voice.py] [Curated manually] [Curated manually, strict fix] [Auto-spliced with splice-voice.py] [Auto-spliced with splice-voice.py] [Perfect exact 15s] [Boundary-aware re-trim: raw source for this COVID-interview clip could not be located in scratch_v (source_basename john-sheppard.wav / its cand_00002 duplicate contain unrelated Stargate Atlantis dialogue, not this interview) so the existing 15.000s ref.wav was re-cut in place at 14.85s, before a rising-energy ramp at 14.90-15.00s that indicated a clipped following utterance; content/reference_text unchanged, ends cleanly on 'so who knows.'"
+}

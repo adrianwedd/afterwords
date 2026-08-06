@@ -1,0 +1,10 @@
+{
+  "name": "k",
+  "backend": "qwen3-0.6b",
+  "source_url": "local-file",
+  "reference_audio": "k-ref.wav",
+  "reference_text": "You give me a time in a place. I give you a five-minute window Anything happens in that five minutes and I'm yours No matter what Anything happens a minute either side of that and you're on your own",
+  "segment_start_s": 7.8,
+  "source_basename": "k.wav",
+  "notes": "Single continuous segment 61.4s-77.6s (16.3s). Spectral ratio: 5.9. Noisereduce, RMS norm. [extract-single-segment.py] [Perfect exact 15s] [Perfect exact 15s] [Boundary-aware re-trim from k_drive.wav 7.8-22.8s, ends cleanly at 'own.'] [Boundary-aware re-trim from k_drive.wav 7.8-22.68s (14.88s), ends cleanly at 'own.' before a click artifact in source at ~22.70s]"
+}

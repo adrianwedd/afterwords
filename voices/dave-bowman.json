@@ -1,0 +1,10 @@
+{
+  "name": "dave-bowman",
+  "backend": "qwen3-0.6b",
+  "source_url": "local-file",
+  "reference_audio": "dave-bowman-ref.wav",
+  "reference_text": "Rumors about something being dug up on the moon. I never gave these stories much credence, but particularly in view of some of the other things that have happened, I find them difficult to put out of my mind.",
+  "segment_start_s": 94.46,
+  "source_basename": "dave_bowman_cand_00005.wav",
+  "notes": "[Curated manually] [Curated manually, strict fix] [Curated manually, fixed Dave] [Auto-spliced with splice-voice.py] [Auto-spliced with splice-voice.py] [Perfect exact 15s] [Boundary-aware re-source from dave_bowman_cand_00005.wav (HAL-interview scene, psychiatric-report dialogue) 94.46-109.46s (15.0s): replaced the repetitive 'how do you read me' radio-check clip with Dave's own extended, single-speaker answer about mission secrecy; 3 complete sentences ending cleanly on 'mind.']"
+}
