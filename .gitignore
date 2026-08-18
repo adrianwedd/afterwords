@@ -51,3 +51,6 @@ voices/*.wav.bak
 # 2026-06-10 security sprint plan stays local: it names live-credential storage
 # location + rotation status, and docs/ publishes to the public Pages site (#103)
 docs/superpowers/plans/2026-06-10-security-fix-sprint.md
+
+# Local voice-splicing scratch workspace
+/scratch_v/
