@@ -151,4 +151,4 @@ CLI: `afterwords reload` curls the endpoint and pretty-prints the response.
 - `afterwords.sh` is a pure-bash CLI wrapper (no venv needed) symlinked to `/usr/local/bin/afterwords` by setup.sh — handles start/stop/restart/status/logs/voices/clone/uninstall
 - Shell scripts use macOS-specific tools throughout (afplay, mkdir-based locking, launchd)
 
-Read STRATEGY.md before any task. It overrides your judgment. Conflicts with reality are escalations.
+STRATEGY.md lists what is irreversible here — check it before deploying, releasing, publishing, or deleting anything.
