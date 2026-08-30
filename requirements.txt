@@ -3,7 +3,7 @@
 # executor (see CLAUDE.md "Architecture" and "Key Constraints"). Only lift this pin
 # after re-verifying both ICL cloning and executor thread-safety on the live server.
 mlx-audio>=0.4,<0.4.1
-soundfile>=0.13,<1.0
+soundfile>=0.14.0,<1.0
 fastapi>=0.135,<1.0
 python-multipart>=0.0.18,<1.0
 uvicorn>=0.42,<1.0
