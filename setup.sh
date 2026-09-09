@@ -324,7 +324,7 @@ HOOKS_DIR="$HOME/.claude/hooks"
 mkdir -p "$HOOKS_DIR"
 
 # Back up existing hooks if present
-for hookfile in strip-markdown.py chunk-text.py tts-hook.sh tts-worker.sh gemini-tts-hook.sh agy-tts-hook.sh agy-session-hook.py; do
+for hookfile in strip-markdown.py chunk-text.py summarize-for-tts.py tts-hook.sh tts-worker.sh gemini-tts-hook.sh agy-tts-hook.sh agy-session-hook.py cursor-tts-hook.sh; do
     if [ -f "$HOOKS_DIR/$hookfile" ]; then
         cp "$HOOKS_DIR/$hookfile" "$HOOKS_DIR/$hookfile.bak"
     fi
@@ -332,6 +332,7 @@ done
 
 # Strip-markdown helper
 cp "$SCRIPT_DIR/strip_markdown.py" "$HOOKS_DIR/strip-markdown.py"
+cp "$SCRIPT_DIR/summarize_for_tts.py" "$HOOKS_DIR/summarize-for-tts.py"
 
 # Chunk-text helper (sentence splitter for chunked TTS)
 cp "$SCRIPT_DIR/chunk_text.py" "$HOOKS_DIR/chunk-text.py"
@@ -354,7 +355,7 @@ WORKER="$HOME/.claude/hooks/tts-worker.sh"
 INPUT=$(cat)
 
 TEXT=$(printf '%s' "$INPUT" | jq -r '.last_assistant_message // empty' 2>/dev/null \
-    | python3 "$HOME/.claude/hooks/strip-markdown.py" 2>/dev/null)
+    | STRIP_MARKDOWN_MAX_CHARS=0 python3 "$HOME/.claude/hooks/strip-markdown.py" 2>/dev/null)
 [ -z "$TEXT" ] && exit 0
 
 # Agent type (empty for main conversation, e.g. "clara-oswald" for subagents)
@@ -404,7 +405,7 @@ PIDFILE="/tmp/claude-tts-worker.pid"
 LOCKDIR="/tmp/claude-tts-worker.lock"
 TTS_URL="http://127.0.0.1:7860/synthesize"
 ARCHIVE_DIR="$HOME/.claude/tts-archive"
-MAX_QUEUE=10
+MAX_QUEUE=25
 
 mkdir -p "$ARCHIVE_DIR"
 
@@ -454,22 +455,45 @@ if [ ! -d "$QUEUEDIR" ] || [ "$(stat -f%u "$QUEUEDIR" 2>/dev/null)" != "$(id -u)
 fi
 
 while true; do
-    # Prune excess items (keep newest MAX_QUEUE).
+    # Coalesce backlog: when multiple replies are waiting, keep only the
+    # newest so TTS stays current instead of narrating stale turns.
+    NEWEST=""
     COUNT=0
-    while IFS= read -r EXCESS; do
+    while IFS= read -r CAND; do
         COUNT=$((COUNT + 1))
-        [ "$COUNT" -gt "$MAX_QUEUE" ] && rm -f "$EXCESS"
-    done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
-
-    # Claim oldest unclaimed item atomically via mv.
-    ITEM=""
-    while IFS= read -r CANDIDATE; do
-        CLAIMED="${CANDIDATE%.json}.claimed"
-        if mv "$CANDIDATE" "$CLAIMED" 2>/dev/null; then
-            ITEM="$CLAIMED"
-            break
+        if [ -z "$NEWEST" ]; then
+            NEWEST="$CAND"
+        else
+            rm -f "$CAND"
         fi
-    done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null | tail -r 2>/dev/null || ls -1 "$QUEUEDIR"/*.json 2>/dev/null | sort)
+    done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
+    # Hard cap still applies if coalesce somehow leaves extras.
+    if [ "$COUNT" -gt "$MAX_QUEUE" ]; then
+        EXTRA=0
+        while IFS= read -r EXCESS; do
+            EXTRA=$((EXTRA + 1))
+            [ "$EXTRA" -gt "$MAX_QUEUE" ] && rm -f "$EXCESS"
+        done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
+    fi
+
+    # Claim the remaining (newest) item atomically via mv.
+    ITEM=""
+    if [ -n "$NEWEST" ] && [ -f "$NEWEST" ]; then
+        CLAIMED="${NEWEST%.json}.claimed"
+        if mv "$NEWEST" "$CLAIMED" 2>/dev/null; then
+            ITEM="$CLAIMED"
+        fi
+    fi
+    # Fallback: any remaining unclaimed file (race with a concurrent writer).
+    if [ -z "$ITEM" ]; then
+        while IFS= read -r CANDIDATE; do
+            CLAIMED="${CANDIDATE%.json}.claimed"
+            if mv "$CANDIDATE" "$CLAIMED" 2>/dev/null; then
+                ITEM="$CLAIMED"
+                break
+            fi
+        done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
+    fi
     [ -z "$ITEM" ] && break
 
     ITEM_EVAL=$(python3 -c "
@@ -478,10 +502,12 @@ d = json.load(open(sys.argv[1]))
 print('PROJECT_DIR=' + shlex.quote(d.get('project_dir','')))
 print('AGENT=' + shlex.quote(d.get('agent','')))
 print('LINE=' + shlex.quote(d.get('text','')))
+print('ATTEMPTS=' + shlex.quote(str(d.get('attempts', 0))))
 " "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
     eval "$ITEM_EVAL"
     rm -f "$ITEM"
     [ -z "${LINE:-}" ] && continue
+    ATTEMPTS=${ATTEMPTS:-0}
 
     STAMP=$(date +%Y%m%d-%H%M%S)-$$-$RANDOM
 
@@ -522,17 +548,42 @@ print('LINE=' + shlex.quote(d.get('text','')))
         VOICE=$(curl -s --max-time 2 "${TTS_URL%/synthesize}/health" 2>/dev/null \
             | python3 -c "import sys,json; print(json.load(sys.stdin).get('default_voice',''))" 2>/dev/null || true)
     fi
-    VOICE_PARAM=""
-    if [ -n "$VOICE" ]; then
-        VOICE_ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$VOICE" 2>/dev/null) || VOICE_ENC="$VOICE"
-        VOICE_PARAM="&voice=${VOICE_ENC}"
-    fi
+    # Voice is passed via curl --data-urlencode (no pre-encoding needed).
+    :
 
     # Archive: full response text sidecar (written once; chunk audio archived per-chunk below).
     ARCHIVE_BASE="$ARCHIVE_DIR/${VOICE:-default}-${STAMP}"
     printf '%s\n' "$LINE" > "${ARCHIVE_BASE}.txt"
 
-    acquire_play_lock || continue
+    # Optional: compress long agent replies before TTS (full text still archived above).
+    SPEAK_LINE="$LINE"
+    SUMMARIZE_SCRIPT="$HOME/.claude/hooks/summarize-for-tts.py"
+    if [ -f "$SUMMARIZE_SCRIPT" ] && [ -n "${AW_FILE:-}" ]; then
+        SUMMARIZED=$(printf '%s' "$LINE" | python3 "$SUMMARIZE_SCRIPT" --agent "$AGENT" --afterwords "$AW_FILE" 2>/dev/null || true)
+        [ -n "$SUMMARIZED" ] && SPEAK_LINE="$SUMMARIZED"
+    fi
+
+    # Never silently drop speech if another agent holds the play lock —
+    # re-queue and retry after a brief backoff (capped to avoid wedged locks).
+    if ! acquire_play_lock; then
+        NEXT_ATTEMPTS=$((ATTEMPTS + 1))
+        if [ "$NEXT_ATTEMPTS" -ge 3 ]; then
+            echo "afterwords: dropping TTS item after $NEXT_ATTEMPTS lock waits" >&2
+            continue
+        fi
+        REQUEUE="${QUEUEDIR}/$(date +%s)-requeue-${RANDOM}.json"
+        python3 -c "
+import json, sys
+print(json.dumps({
+    'project_dir': sys.argv[1],
+    'agent': sys.argv[2],
+    'text': sys.argv[3],
+    'attempts': int(sys.argv[4]),
+}))
+" "$PROJECT_DIR" "$AGENT" "$LINE" "$NEXT_ATTEMPTS" > "${REQUEUE}.tmp" && mv "${REQUEUE}.tmp" "$REQUEUE"
+        sleep 2
+        continue
+    fi
     # Split into sentence-boundary chunks and pipeline: synth-N → play-N → synth-N+1.
     # Latency-to-first-audio drops from ~30s (full blob) to ~2s (first chunk).
     CHUNK_SCRIPT="$HOME/.claude/hooks/chunk-text.py"
@@ -545,38 +596,59 @@ print('LINE=' + shlex.quote(d.get('text','')))
         [ -z "$CHUNK" ] && continue
         NCHUNKS=$((NCHUNKS + 1))
         printf '%s' "$CHUNK" > "${CHUNK_DIR}/${NCHUNKS}.txt"
-    done < <([ -f "$CHUNK_SCRIPT" ] && python3 "$CHUNK_SCRIPT" <<< "$LINE" 2>/dev/null \
-             || printf '%s\n' "$LINE")
+    done < <([ -f "$CHUNK_SCRIPT" ] && python3 "$CHUNK_SCRIPT" <<< "$SPEAK_LINE" 2>/dev/null \
+             || printf '%s\n' "$SPEAK_LINE")
+
+    # curl --data-urlencode avoids a python3 quote process per chunk.
+    synth_chunk() {
+        local out="$1" text="$2"
+        if [ -n "${VOICE:-}" ]; then
+            curl -s --max-time 60 -G                 --data-urlencode "text=${text}"                 --data-urlencode "voice=${VOICE}"                 -o "$out" "$TTS_URL" 2>/dev/null || true
+        else
+            curl -s --max-time 60 -G                 --data-urlencode "text=${text}"                 -o "$out" "$TTS_URL" 2>/dev/null || true
+        fi
+    }
 
     PREV_WAV=""
+    PREV_TEXT=""
+    PREV_ARCH=""
     SYNTH_PID=""
     CHUNK_I=1
     while [ "$CHUNK_I" -le "$NCHUNKS" ]; do
         CHUNK=$(cat "${CHUNK_DIR}/${CHUNK_I}.txt")
         CURR_WAV="${CHUNK_DIR}/${CHUNK_I}.wav"
-        ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$CHUNK" 2>/dev/null) || { CHUNK_I=$((CHUNK_I+1)); continue; }
 
         # Wait for previous synth to finish (so PREV_WAV is fully written).
         [ -n "$SYNTH_PID" ] && { wait "$SYNTH_PID"; SYNTH_PID=""; }
 
         # Start current synth in background BEFORE playing previous chunk —
         # this is the overlap: synth(N+1) runs while afplay plays chunk(N).
-        curl -s --max-time 60 "${TTS_URL}?text=${ENC}${VOICE_PARAM}" -o "$CURR_WAV" 2>/dev/null &
+        synth_chunk "$CURR_WAV" "$CHUNK" &
         SYNTH_PID=$!
 
         if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
             FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
-            if [ "$FILESIZE" -gt 1000 ]; then
-                TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
-                ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
-                    && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
-                lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c$((CHUNK_I-1)).mp3" 2>/dev/null || true
-                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+            # One sync retry on empty/short audio — silent skips sound like dropouts.
+            if [ "$FILESIZE" -le 1000 ] && [ -n "$PREV_TEXT" ]; then
+                synth_chunk "$PREV_WAV" "$PREV_TEXT"
+                FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
             fi
-            rm -f "$PREV_WAV"
+            if [ "$FILESIZE" -gt 1000 ]; then
+                # Play first; archive after so lame never delays the ear.
+                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+                if [ -n "$PREV_ARCH" ]; then
+                    (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
+                else
+                    rm -f "$PREV_WAV"
+                fi
+            else
+                rm -f "$PREV_WAV"
+            fi
         fi
 
         PREV_WAV="$CURR_WAV"
+        PREV_TEXT="$CHUNK"
+        PREV_ARCH="${ARCHIVE_BASE}-c${CHUNK_I}.mp3"
         CHUNK_I=$((CHUNK_I + 1))
     done
 
@@ -584,16 +656,23 @@ print('LINE=' + shlex.quote(d.get('text','')))
     [ -n "$SYNTH_PID" ] && wait "$SYNTH_PID"
     if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
         FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
-        if [ "$FILESIZE" -gt 1000 ]; then
-            TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
-            ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
-                && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
-            lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c${NCHUNKS}.mp3" 2>/dev/null || true
-            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+        if [ "$FILESIZE" -le 1000 ] && [ -n "$PREV_TEXT" ]; then
+            synth_chunk "$PREV_WAV" "$PREV_TEXT"
+            FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
         fi
-        rm -f "$PREV_WAV"
+        if [ "$FILESIZE" -gt 1000 ]; then
+            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+            if [ -n "$PREV_ARCH" ]; then
+                (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
+            else
+                rm -f "$PREV_WAV"
+            fi
+        else
+            rm -f "$PREV_WAV"
+        fi
     fi
 
+    wait 2>/dev/null || true
     release_play_lock
     rm -rf "$CHUNK_DIR"
 done

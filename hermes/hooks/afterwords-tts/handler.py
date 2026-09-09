@@ -1,6 +1,6 @@
 """Afterwords TTS hook for Hermes — auto-speaks agent responses.
 
-Chunked pipelining: split text into ~200-char sentence chunks, then
+Chunked pipelining: split text into ~400-char sentence chunks, then
 synthesize chunk N+1 while playing chunk N for ~2s latency-to-first-audio.
 
 Voice resolution priority (first match wins):
@@ -38,11 +38,9 @@ AFTERWORDS_URL = "http://127.0.0.1:7860"
 AFTERWORDS_HEALTH = f"{AFTERWORDS_URL}/health"
 TTS_ENDPOINT = f"{AFTERWORDS_URL}/synthesize"
 
-# Max response length to speak (before chunking)
-MAX_SPEAK_CHARS = 1000
-
-# Chunk size for TTS (characters per synthesis request)
-CHUNK_CHARS = 200
+# Chunk size for TTS (characters per synthesis request).
+# 400 keeps first-audio latency low while cutting seams vs 200.
+CHUNK_CHARS = 400
 
 # Agent name used for .afterwords mapping lookup
 HERMES_AGENT = "hermes"
@@ -52,24 +50,42 @@ GLOBAL_AFTERWORDS = Path.home() / ".afterwords"
 
 
 def strip_markdown(text: str) -> str:
-    """Strip markdown formatting for cleaner TTS."""
+    """Strip markdown for TTS, with Hermes footer cleanup.
+
+    Prefers the shared strip_markdown.py (list/heading pause cues) from the
+    repo or ~/.claude/hooks; falls back to a minimal local pass.
+    """
+    cleaned = _shared_strip_markdown(text)
+    # Strip model/tokens/cost footers like "glm-5.1 · 9% · ~" or "claude-3.5-sonnet · 42% · $0.02"
+    cleaned = re.sub(r'[a-z0-9._-]+\s*·.*$', '', cleaned, flags=re.I)
+    return cleaned.strip()
+
+
+def _shared_strip_markdown(text: str) -> str:
+    import importlib.util
+
+    candidates = [
+        Path(__file__).resolve().parents[3] / "strip_markdown.py",
+        Path.home() / ".claude" / "hooks" / "strip-markdown.py",
+    ]
+    for path in candidates:
+        if not path.is_file():
+            continue
+        try:
+            spec = importlib.util.spec_from_file_location("aw_strip_markdown", path)
+            if spec is None or spec.loader is None:
+                continue
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            return mod.strip_markdown(text, max_chars=None)
+        except Exception:
+            continue
+    # Minimal fallback if shared module is unavailable.
     text = re.sub(r'```[\s\S]*?```', '', text)
     text = re.sub(r'`([^`]+)`', r'\1', text)
-    text = re.sub(r'!\[([^\]]*)\]\([^)]+\)', r'\1', text)
-    text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
-    text = re.sub(r'^#{1,6}\s+', '', text, flags=re.M)
-    text = re.sub(r'^\s*>\s?', '', text, flags=re.M)
-    text = re.sub(r'^\s*[-*]\s+', '', text, flags=re.M)
-    text = re.sub(r'^\s*\d+\.\s+', '', text, flags=re.M)
-    text = re.sub(r'^\|.*\|$', '', text, flags=re.M)
-    text = re.sub(r'^[-|:\s]+$', '', text, flags=re.M)
-    text = re.sub(r'~~([^~]+)~~', r'\1', text)
-    text = re.sub(r'\*{1,3}([^*]+)\*{1,3}', r'\1', text)
-    # Strip model/tokens/cost footers like "glm-5.1 · 9% · ~" or "claude-3.5-sonnet · 42% · $0.02"
-    text = re.sub(r'[a-z0-9._-]+\s*·.*$', '', text, flags=re.I)
+    text = re.sub(r'^\s*([-*•]|\d+[.)])\s+', '', text, flags=re.M)
     text = re.sub(r'\n{2,}', '. ', text)
-    text = re.sub(r'\s+', ' ', text).strip()
-    return text[:MAX_SPEAK_CHARS]
+    return re.sub(r'\s+', ' ', text).strip()
 
 
 def chunk_text(text: str, max_chars: int = CHUNK_CHARS) -> list[str]:
@@ -360,30 +376,23 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
                         wav_path = Path(f"/tmp/hermes-hook-tts-{tag}-{i-1}.wav")
                         wav_path.write_bytes(wav_bytes)
 
-                        # Trim silence and play (sync — blocks until audio finishes)
-                        trimmed = Path(f"/tmp/hermes-hook-tts-trim-{tag}-{i-1}.wav")
-                        ffmpeg_ok = subprocess.call(
-                            ["ffmpeg", "-y", "-ss", "0.1", "-i", str(wav_path), "-c", "copy", str(trimmed)],
-                            stdout=subprocess.DEVNULL,
-                            stderr=subprocess.DEVNULL
-                        ) == 0
-
-                        play_path = trimmed if ffmpeg_ok else wav_path
-                        # Play audio (blocking — this IS the desired delay between chunks).
-                        # `afterwords mute` (/tmp/afterwords-muted) skips local playback;
-                        # synthesis + archiving below still run, so feed delivery is unaffected.
+                        # Play first; archive in a thread so lame never delays
+                        # the next synth kickoff.
                         if not Path("/tmp/afterwords-muted").exists():
                             subprocess.call(
-                                ["afplay", str(play_path)],
+                                ["afplay", str(wav_path)],
                                 stdout=subprocess.DEVNULL,
                                 stderr=subprocess.DEVNULL
                             )
 
-                        # Archive as MP3 (best-effort, don't block on failure)
-                        _archive_wav(wav_path, f"{stamp}-c{i-1}.mp3", archive_dir)
-
-                        wav_path.unlink(missing_ok=True)
-                        trimmed.unlink(missing_ok=True)
+                        asyncio.create_task(
+                            asyncio.to_thread(
+                                _archive_wav_and_cleanup,
+                                wav_path,
+                                f"{stamp}-c{i-1}.mp3",
+                                archive_dir,
+                            )
+                        )
 
                 prev_task = curr_task
 
@@ -394,27 +403,19 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
                     wav_path = Path(f"/tmp/hermes-hook-tts-{tag}-last.wav")
                     wav_path.write_bytes(wav_bytes)
 
-                    trimmed = Path(f"/tmp/hermes-hook-tts-trim-{tag}-last.wav")
-                    ffmpeg_ok = subprocess.call(
-                        ["ffmpeg", "-y", "-ss", "0.1", "-i", str(wav_path), "-c", "copy", str(trimmed)],
-                        stdout=subprocess.DEVNULL,
-                        stderr=subprocess.DEVNULL
-                    ) == 0
-
-                    play_path = trimmed if ffmpeg_ok else wav_path
-                    # `afterwords mute` (/tmp/afterwords-muted) skips local playback.
                     if not Path("/tmp/afterwords-muted").exists():
                         subprocess.call(
-                            ["afplay", str(play_path)],
+                            ["afplay", str(wav_path)],
                             stdout=subprocess.DEVNULL,
                             stderr=subprocess.DEVNULL
                         )
 
-                    # Archive last chunk
-                    _archive_wav(wav_path, f"{stamp}-c{len(chunks)-1}.mp3", archive_dir)
-
-                    wav_path.unlink(missing_ok=True)
-                    trimmed.unlink(missing_ok=True)
+                    await asyncio.to_thread(
+                        _archive_wav_and_cleanup,
+                        wav_path,
+                        f"{stamp}-c{len(chunks)-1}.mp3",
+                        archive_dir,
+                    )
 
     except Exception as e:
         # Fail silently — TTS is a nice-to-have
@@ -425,6 +426,11 @@ def _ts() -> str:
     """ISO-like timestamp for archive filenames: YYYYMMDD-HHMMSS."""
     from datetime import datetime
     return datetime.now().strftime("%Y%m%d-%H%M%S")
+
+
+def _archive_wav_and_cleanup(wav_path: Path, mp3_name: str, archive_dir: Path) -> None:
+    _archive_wav(wav_path, mp3_name, archive_dir)
+    wav_path.unlink(missing_ok=True)
 
 
 def _archive_wav(wav_path: Path, mp3_name: str, archive_dir: Path) -> None:
@@ -441,13 +447,22 @@ def _archive_wav(wav_path: Path, mp3_name: str, archive_dir: Path) -> None:
 
 
 async def _fetch_audio(session, url: str) -> bytes | None:
-    """Fetch audio bytes from the TTS endpoint."""
-    try:
-        async with session.get(url, timeout=aiohttp.ClientTimeout(total=30)) as resp:
-            if resp.status != 200:
-                log.warning("TTS synthesis failed: HTTP %d", resp.status)
-                return None
-            return await resp.read()
-    except Exception as e:
-        log.warning("TTS fetch error: %s", e)
-        return None
+    """Fetch audio bytes from the TTS endpoint; one retry on empty/short/fail."""
+    for attempt in range(2):
+        try:
+            async with session.get(url, timeout=aiohttp.ClientTimeout(total=30)) as resp:
+                if resp.status != 200:
+                    log.warning("TTS synthesis failed: HTTP %d", resp.status)
+                else:
+                    data = await resp.read()
+                    if data and len(data) > 1000:
+                        return data
+                    log.warning(
+                        "TTS synthesis returned short audio (%s bytes)",
+                        0 if not data else len(data),
+                    )
+        except Exception as e:
+            log.warning("TTS fetch error: %s", e)
+        if attempt == 0:
+            await asyncio.sleep(0.2)
+    return None

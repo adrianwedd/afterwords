@@ -24,7 +24,7 @@ PROJECT_DIR="${PROJECT_DIR:-$PWD}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 TEXT=$(python3 "${SCRIPT_DIR}/agy-session-hook.py" "$TRANSCRIPT_PATH" 2>/dev/null \
-    | python3 "${SCRIPT_DIR}/strip-markdown.py" 2>/dev/null)
+    | STRIP_MARKDOWN_MAX_CHARS=0 python3 "${SCRIPT_DIR}/strip-markdown.py" 2>/dev/null)
 [ -z "$TEXT" ] && exit 0
 
 AGENT="agy"

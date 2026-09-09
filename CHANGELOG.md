@@ -4,8 +4,20 @@ All notable changes to Afterwords. Format follows [Keep a Changelog](https://kee
 
 ## [Unreleased]
 
+### Added
+
+- **Optional long-reply TTS summarization** — `summarize_for_tts.py` (installed as `~/.claude/hooks/summarize-for-tts.py`) can compress long agent replies before speech via `.afterwords` keys such as `cursor_summarize: true` / `cursor_summarize_model: qwen2.5:3b`. Ollama is used when configured (8s timeout); otherwise a fast extractive first+last sentence fallback. Full reply text is still archived.
+- **`AFTERWORDS_BACKENDS` env filter** — comma-separated backend allowlist so launchd can preload only e.g. `qwen3-0.6b` instead of probing every registered backend.
+
+### Changed
+
+- **TTS chunk size 200→400** — fewer synthesis round-trips and fewer audible seams between chunks.
+- **Playback queue coalesce** — when multiple replies are waiting, only the newest is spoken (Claude/Cursor/Gemini/AGy worker + Codex worker). Queue cap raised to 25.
+- **Prosody-aware markdown stripping** — bullets/numbered lists/headings become spoken sentence beats; URLs dropped; paths keep basenames; snake_case and em-dashes/arrows become natural pauses. CLI no longer truncates at 1000 chars by default.
+
 ### Fixed
 
+- **Speech cutoffs and chunk-boundary glitches** — removed the per-chunk `ffmpeg -ss 0.1` trim that chopped phonemes; archive with `lame` after `afplay` (background) so encoding never delays playback; one retry on empty/short synth; play-lock waits re-queue (capped) instead of silently dropping the item; Cursor/Claude/Gemini/AGy hooks pass full stripped text through to the worker.
 - **Splicing helper scripts hardened after 3-agent QA (codex/hermes/agy)** — `--voice` is validated as a slug (blocks path traversal out of `voices/`); `--match` is now a literal case-insensitive substring as documented (was an undocumented regex that crashed on `[`); profile JSONs are resolved by `reference_audio` instead of filename prefix (the prefix glob would have clobbered e.g. `avasarala-errinwright.json` when splicing `avasarala`); the scripts fail fast before touching audio when no profile exists, and refuse to overwrite a git-tracked reference WAV without `--force`; JSON writes are atomic (`tmp` + `os.replace`); degenerate/NaN spectral ratios are rejected instead of passing as "clean"; `extract-single-segment.py` now walks candidate windows best-first past music-contaminated ones instead of aborting, and scores intermediate window extensions so it actually prefers ~15 s. `scipy` is declared explicitly in `requirements-clone.txt`.
 - **Demo-site voice counts corrected and now CI-guarded** — the hero subtitle said "98 voices included" and the backends section title "281 voice profiles" (both stale since ~v1.0.2/v1.0.6 era; actual: 198). `check-og-metadata.py` now checks these visible strings too, not just `og:description`, so they can't silently drift again.
 - **Mute-guard suite closes its Python blind spot** — `afplay`-site discovery only globbed `*.sh`, so a new Python playback site would have been invisible; a new test fails on any unaccounted `afplay` in `*.py` files.

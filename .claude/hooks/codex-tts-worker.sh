@@ -14,7 +14,7 @@ PIDFILE="/tmp/codex-tts-worker-${SESSION_ID}.pid"
 LOCKDIR="/tmp/codex-tts-worker-${SESSION_ID}.lock"
 TTS_URL="http://127.0.0.1:7860/synthesize"
 ARCHIVE_DIR="$HOME/.codex/tts-archive"
-MAX_QUEUE=10
+MAX_QUEUE=25
 
 MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
 PLAY_LOCK="/tmp/afterwords-play.lock"
@@ -63,22 +63,42 @@ echo $$ > "$PIDFILE"
 trap 'rm -f "$PIDFILE"; rm -rf "$LOCKDIR"' EXIT
 
 while true; do
-    # Prune excess items (keep newest MAX_QUEUE). Bash 3.2-compatible: no mapfile.
+    # Coalesce backlog: keep only the newest pending item so TTS stays current.
+    NEWEST=""
     COUNT=0
-    while IFS= read -r EXCESS; do
+    while IFS= read -r CAND; do
         COUNT=$((COUNT + 1))
-        [ "$COUNT" -gt "$MAX_QUEUE" ] && rm -f "$EXCESS"
-    done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
-
-    # Claim oldest unclaimed item atomically via mv.
-    ITEM=""
-    while IFS= read -r CANDIDATE; do
-        CLAIMED="${CANDIDATE%.json}.claimed"
-        if mv "$CANDIDATE" "$CLAIMED" 2>/dev/null; then
-            ITEM="$CLAIMED"
-            break
+        if [ -z "$NEWEST" ]; then
+            NEWEST="$CAND"
+        else
+            rm -f "$CAND"
         fi
-    done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null | tail -r 2>/dev/null || ls -1 "$QUEUEDIR"/*.json 2>/dev/null | sort)
+    done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
+    if [ "$COUNT" -gt "$MAX_QUEUE" ]; then
+        EXTRA=0
+        while IFS= read -r EXCESS; do
+            EXTRA=$((EXTRA + 1))
+            [ "$EXTRA" -gt "$MAX_QUEUE" ] && rm -f "$EXCESS"
+        done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
+    fi
+
+    # Claim the remaining (newest) item atomically via mv.
+    ITEM=""
+    if [ -n "$NEWEST" ] && [ -f "$NEWEST" ]; then
+        CLAIMED="${NEWEST%.json}.claimed"
+        if mv "$NEWEST" "$CLAIMED" 2>/dev/null; then
+            ITEM="$CLAIMED"
+        fi
+    fi
+    if [ -z "$ITEM" ]; then
+        while IFS= read -r CANDIDATE; do
+            CLAIMED="${CANDIDATE%.json}.claimed"
+            if mv "$CANDIDATE" "$CLAIMED" 2>/dev/null; then
+                ITEM="$CLAIMED"
+                break
+            fi
+        done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
+    fi
     [ -z "$ITEM" ] && break
 
     # Parse JSON item fields directly — avoids eval on queue content.
@@ -128,14 +148,12 @@ while true; do
             | python3 -c "import sys,json; print(json.load(sys.stdin).get('default_voice',''))" 2>/dev/null || true)
     fi
 
-    # URL-encode voice name to handle special characters.
-    VOICE_PARAM=""
-    if [ -n "$VOICE" ]; then
-        VOICE_ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$VOICE" 2>/dev/null) || VOICE_ENC="$VOICE"
-        VOICE_PARAM="&voice=${VOICE_ENC}"
+    # Never silently drop speech if another agent holds the play lock.
+    if ! acquire_play_lock; then
+        echo "afterwords: play lock busy — skipping codex item" >&2
+        sleep 2
+        continue
     fi
-
-    acquire_play_lock || continue
     CHUNK_SCRIPT="${REPO_DIR}/chunk_text.py"
     [ -f "$CHUNK_SCRIPT" ] || CHUNK_SCRIPT="$HOME/.claude/hooks/chunk-text.py"
     CHUNK_DIR="/tmp/codex-tts-chunks-${SESSION_ID}-$$"
@@ -153,49 +171,74 @@ while true; do
     done < <([ -f "$CHUNK_SCRIPT" ] && python3 "$CHUNK_SCRIPT" <<< "$TEXT" 2>/dev/null \
              || printf '%s\n' "$TEXT")
 
+    synth_chunk() {
+        local out="$1" text="$2"
+        if [ -n "${VOICE:-}" ]; then
+            curl -s --max-time 60 -G                 --data-urlencode "text=${text}"                 --data-urlencode "voice=${VOICE}"                 -o "$out" "$TTS_URL" 2>/dev/null || true
+        else
+            curl -s --max-time 60 -G                 --data-urlencode "text=${text}"                 -o "$out" "$TTS_URL" 2>/dev/null || true
+        fi
+    }
+
     PREV_WAV=""
+    PREV_TEXT=""
+    PREV_ARCH=""
     SYNTH_PID=""
     CHUNK_I=1
     while [ "$CHUNK_I" -le "$NCHUNKS" ]; do
         CHUNK=$(cat "${CHUNK_DIR}/${CHUNK_I}.txt")
         CURR_WAV="${CHUNK_DIR}/${CHUNK_I}.wav"
-        ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$CHUNK" 2>/dev/null) || { CHUNK_I=$((CHUNK_I+1)); continue; }
 
         [ -n "$SYNTH_PID" ] && { wait "$SYNTH_PID"; SYNTH_PID=""; }
 
         # Start next synth in background — overlaps with playback of previous chunk.
-        curl -s --max-time 60 "${TTS_URL}?text=${ENC}${VOICE_PARAM}" -o "$CURR_WAV" 2>/dev/null &
+        synth_chunk "$CURR_WAV" "$CHUNK" &
         SYNTH_PID=$!
 
         if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
             FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
-            if [ "$FILESIZE" -gt 1000 ]; then
-                TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
-                ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
-                    && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
-                lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c$((CHUNK_I-1)).mp3" 2>/dev/null || true
-                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+            if [ "$FILESIZE" -le 1000 ] && [ -n "$PREV_TEXT" ]; then
+                synth_chunk "$PREV_WAV" "$PREV_TEXT"
+                FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
             fi
-            rm -f "$PREV_WAV"
+            if [ "$FILESIZE" -gt 1000 ]; then
+                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+                if [ -n "$PREV_ARCH" ]; then
+                    (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
+                else
+                    rm -f "$PREV_WAV"
+                fi
+            else
+                rm -f "$PREV_WAV"
+            fi
         fi
 
         PREV_WAV="$CURR_WAV"
+        PREV_TEXT="$CHUNK"
+        PREV_ARCH="${ARCHIVE_BASE}-c${CHUNK_I}.mp3"
         CHUNK_I=$((CHUNK_I + 1))
     done
 
     [ -n "$SYNTH_PID" ] && wait "$SYNTH_PID"
     if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
         FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
-        if [ "$FILESIZE" -gt 1000 ]; then
-            TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
-            ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
-                && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
-            lame --quiet -V 2 "$PREV_WAV" "${ARCHIVE_BASE}-c${NCHUNKS}.mp3" 2>/dev/null || true
-            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+        if [ "$FILESIZE" -le 1000 ] && [ -n "$PREV_TEXT" ]; then
+            synth_chunk "$PREV_WAV" "$PREV_TEXT"
+            FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
         fi
-        rm -f "$PREV_WAV"
+        if [ "$FILESIZE" -gt 1000 ]; then
+            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+            if [ -n "$PREV_ARCH" ]; then
+                (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
+            else
+                rm -f "$PREV_WAV"
+            fi
+        else
+            rm -f "$PREV_WAV"
+        fi
     fi
 
+    wait 2>/dev/null || true
     rm -rf "$CHUNK_DIR"
     release_play_lock
 done

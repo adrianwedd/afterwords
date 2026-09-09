@@ -30,7 +30,7 @@ acquire_play_lock() {
 release_play_lock() { rm -f "$PLAY_PID"; rm -rf "$PLAY_LOCK"; }
 AFTERWORDS_HEALTH="$AFTERWORDS_URL/health"
 TTS_ENDPOINT="$AFTERWORDS_URL/synthesize"
-CHUNK_CHARS=200
+CHUNK_CHARS=400
 
 # ── Read payload ──────────────────────────────────────────────────────────
 PAYLOAD=$(cat)
@@ -276,45 +276,56 @@ done < <(printf '%s' "$CLEAN" | python3 "$SCRIPT_DIR/chunk-text.py" 2>/dev/null 
 NCHUNKS=${#CHUNKS[@]}
 [ "$NCHUNKS" -eq 0 ] && exit 0
 
+synth_chunk() {
+    local out="$1" text="$2"
+    if [ -n "${VOICE:-}" ]; then
+        curl -s --max-time 60 -G             --data-urlencode "text=${text}"             --data-urlencode "voice=${VOICE}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+    else
+        curl -s --max-time 60 -G             --data-urlencode "text=${text}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+    fi
+}
+
 PREV_WAV=""
+PREV_TEXT=""
 SYNTH_PID=""
 
 for i in $(seq 1 "$NCHUNKS"); do
     CHUNK="${CHUNKS[$((i-1))]}"
     CURR_WAV="${CHUNK_DIR}/${i}.wav"
-    ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$CHUNK" 2>/dev/null || { continue; })
 
     # Wait for previous synth to finish so PREV_WAV is fully written
     [ -n "$SYNTH_PID" ] && { wait "$SYNTH_PID" 2>/dev/null; SYNTH_PID=""; }
 
     # Start current synth in background — overlaps with playback of previous chunk
-    curl -s --max-time 60 "${TTS_ENDPOINT}?text=${ENC}${VOICE_PARAM}" -o "$CURR_WAV" 2>/dev/null &
+    synth_chunk "$CURR_WAV" "$CHUNK" &
     SYNTH_PID=$!
 
     # Play previous chunk while current one synthesizes
     if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
         FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
+        if [ "$FILESIZE" -le 1000 ] && [ -n "$PREV_TEXT" ]; then
+            synth_chunk "$PREV_WAV" "$PREV_TEXT"
+            FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
+        fi
         if [ "$FILESIZE" -gt 1000 ]; then
-            # Trim leading silence for snappier playback
-            TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
-            ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
-                && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
             [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
         fi
         rm -f "$PREV_WAV"
     fi
 
     PREV_WAV="$CURR_WAV"
+    PREV_TEXT="$CHUNK"
 done
 
 # Wait for and play the last chunk
 [ -n "$SYNTH_PID" ] && wait "$SYNTH_PID" 2>/dev/null
 if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
     FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
+    if [ "$FILESIZE" -le 1000 ] && [ -n "$PREV_TEXT" ]; then
+        synth_chunk "$PREV_WAV" "$PREV_TEXT"
+        FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
+    fi
     if [ "$FILESIZE" -gt 1000 ]; then
-        TRIMMED="${PREV_WAV%.wav}.trimmed.wav"
-        ffmpeg -y -ss 0.1 -i "$PREV_WAV" -c copy "$TRIMMED" 2>/dev/null \
-            && mv "$TRIMMED" "$PREV_WAV" || rm -f "$TRIMMED"
         [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
     fi
     rm -f "$PREV_WAV"
