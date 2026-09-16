@@ -121,6 +121,13 @@ server_config_set() {
         }
         END { if (!done && v != "") print k "=" v }
     ' <(printf '%s\n' "$value") "$AFTERWORDS_SERVER_CONFIG" > "$tmp" 2>/dev/null; then
+        # Preserve the existing file's mode: the temp file was created under the
+        # ambient umask (022 → 644), so a config the operator had tightened to
+        # 600 would silently become world-readable after any update.
+        if [ -e "$AFTERWORDS_SERVER_CONFIG" ]; then
+            chmod "$(stat -f '%Lp' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null || echo 644)" \
+                "$tmp" 2>/dev/null || true
+        fi
         mv "$tmp" "$AFTERWORDS_SERVER_CONFIG"
     else
         rm -f "$tmp"
@@ -142,6 +149,11 @@ server_host() { server_config_get HOST; }
 is_valid_bind_address() {
     case "$1" in
         "") return 1 ;;
+        # A leading `-` would be parsed by server.py's argparse as an option,
+        # not as the value of --host: `server.py --host -leading-dash` exits 2
+        # with "argument --host: expected one argument". Under launchd
+        # KeepAlive that is an endless restart loop, so reject it here.
+        -*) return 1 ;;
     esac
     # Only [A-Za-z0-9.:_%-] allowed (covers IPv4, IPv6, `fe80::1%en0`, and
     # hostnames). `[`/`]` are permitted only as an IPv6 bracketed form.
@@ -428,7 +440,14 @@ if voices:
         print('    ' + ''.join(padded[i:i+cols]))
 print()
 print(f'  {D}afterwords logs  —  /tmp/claude-tts-server.log{R}')
-" 2>/dev/null || warn "Server running but /health not responding on localhost:${PORT} — check the bind address (${CYAN}afterwords configure${NC})"
+"
+    else
+        # health_check failed. Two causes: the server is still warming up
+        # (model preload means it does not bind for 60-180s), or it is bound to
+        # a non-loopback address so localhost is refused. This must be in the
+        # else branch — as a `|| warn` chained to the python3 above it was
+        # unreachable, since that command only runs when the condition is true.
+        warn "Server running but /health not responding on localhost:${PORT} — still warming up, or bound elsewhere (check ${CYAN}afterwords configure${NC})"
     fi
     echo
 }

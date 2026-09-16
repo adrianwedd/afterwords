@@ -519,3 +519,140 @@ def test_setup_sh_block_scoped_under_strict_mode():
                 f"unguarded grep substitution aborts setup.sh under set -e: {line.strip()}"
             )
 
+
+# ── Round-2 QA findings ───────────────────────────────────────────────
+
+
+def test_setup_sh_ignores_unsafe_host(tmp_path):
+    """setup.sh must not interpolate an unsafe HOST into plist XML.
+
+    A hand-edited `HOST=evil<addr>&x` in ~/.afterwords-server otherwise emits a
+    plist plutil rejects and launchd cannot load, breaking the whole install.
+    """
+    repo = _prepare_repo_dir(tmp_path)
+    home = tmp_path
+    la = home / "Library" / "LaunchAgents"
+    la.mkdir(parents=True, exist_ok=True)
+    plist = la / "com.afterwords.tts-server.plist"
+    (home / ".afterwords-server").write_text("HOST=evil<addr>&x\nBIND_PUBLIC=true\n")
+
+    script = f'''
+set -euo pipefail
+SCRIPT_DIR={repo}
+HOME={home}
+{_setup_plist_block()}
+'''
+    result = subprocess.run(["bash", "-c", script], capture_output=True, text=True)
+    assert result.returncode == 0, f"block failed: {result.stderr}"
+
+    lint = subprocess.run(["plutil", "-lint", str(plist)],
+                          capture_output=True, text=True)
+    assert lint.returncode == 0, f"emitted unparseable plist: {lint.stdout}"
+    assert "evil" not in plist.read_text(), "unsafe HOST reached the plist"
+    assert "unsafe" in result.stderr.lower(), "no warning was emitted"
+
+
+def test_setup_sh_ignores_host_with_leading_dash(tmp_path):
+    """A leading `-` makes argparse read the value as an option, not --host's
+    argument; under launchd KeepAlive that is an endless restart loop."""
+    repo = _prepare_repo_dir(tmp_path)
+    home = tmp_path
+    la = home / "Library" / "LaunchAgents"
+    la.mkdir(parents=True, exist_ok=True)
+    plist = la / "com.afterwords.tts-server.plist"
+    (home / ".afterwords-server").write_text("HOST=-leading-dash\nBIND_PUBLIC=true\n")
+
+    script = f'''
+set -euo pipefail
+SCRIPT_DIR={repo}
+HOME={home}
+{_setup_plist_block()}
+'''
+    subprocess.run(["bash", "-c", script], capture_output=True, text=True)
+
+    assert "--host" not in _program_args(plist), "leading-dash host was emitted"
+    # And no orphan --bind-public either.
+    assert "--bind-public" not in _program_args(plist)
+
+
+def test_leading_dash_bind_is_rejected(tmp_path):
+    """`configure --bind -leading-dash` must be refused at the CLI."""
+    for bad in ("-leading-dash", "--help", "-v", "--host"):
+        result, plist, _ = _run_configure(tmp_path, "--bind", bad)
+        assert result.returncode != 0, f"{bad!r} was accepted"
+        assert "--host" not in _program_args(plist), f"{bad!r} reached the plist"
+
+
+def test_config_file_permissions_are_preserved(tmp_path):
+    """Updating the config must not widen its permissions.
+
+    The temp file is created under the ambient umask (022 → 644); without an
+    explicit chmod, a config the operator tightened to 600 silently becomes
+    world-readable after any update.
+    """
+    config = tmp_path / "cfg"
+    config.write_text("HOST=1.2.3.4\n")
+    os.chmod(config, 0o600)
+
+    script = f'''
+set -uo pipefail
+AFTERWORDS_SERVER_CONFIG={config}
+{_helper_function_source("server_config_set")}
+server_config_set HOST 5.6.7.8
+'''
+    subprocess.run(["bash", "-c", script], capture_output=True, text=True)
+
+    mode = oct(config.stat().st_mode & 0o777)
+    assert mode == oct(0o600), f"permissions changed to {mode}"
+    assert "HOST=5.6.7.8" in config.read_text()
+
+
+def test_status_warns_when_health_check_fails(tmp_path):
+    """The LAN-bind diagnostic must be reachable.
+
+    It was previously chained as `|| warn` to the python3 renderer INSIDE the
+    `if health_check; then` block, so it could never fire when health_check
+    (the condition) failed — exactly the case it was written for.
+    """
+    fake_home = tmp_path
+    (fake_home / "Library" / "LaunchAgents").mkdir(parents=True, exist_ok=True)
+    env = os.environ.copy()
+    env["AFTERWORDS_PLIST_PATH"] = str(tmp_path / "nonexistent.plist")
+    env["AFTERWORDS_SERVER_CONFIG"] = str(tmp_path / "cfg")
+    env["AFTERWORDS_NO_LAUNCHCTL"] = "1"
+    env["AFTERWORDS_REPO_DIR"] = str(tmp_path)
+    # Point at a dead port so health_check fails while a PID is reported.
+    result = subprocess.run(
+        ["bash", "-c", f'''
+PORT=9
+HEALTH_URL="http://127.0.0.1:$PORT/health"
+AFTERWORDS_SERVER_CONFIG={tmp_path}/cfg
+AFTERWORDS_PLIST_PATH={tmp_path}/nonexistent.plist
+# Minimal output helpers, mirroring afterwords.sh's own.
+GREEN=""; RED=""; YELLOW=""; CYAN=""; DIM=""; BOLD=""; NC=""
+warn() {{ echo "WARN: $*"; }}
+ok() {{ echo "OK: $*"; }}
+fail() {{ echo "FAIL: $*"; }}
+rule() {{ echo "---"; }}
+{_helper_function_source("plist_loaded", "cmd_status")}
+server_pid() {{ echo 99999; }}
+plist_loaded() {{ return 0; }}
+plist_exists() {{ return 0; }}
+MUTE_FILE=/nonexistent
+with_17b_enabled() {{ return 1; }}
+health_check() {{ return 1; }}
+cmd_status
+'''],
+        capture_output=True, text=True, env=env,
+    )
+    output = result.stdout + result.stderr
+    assert "not responding" in output, (
+        f"status printed no warning when /health failed:\n{output}"
+    )
+    # The message must name both plausible causes: a cold start (the model
+    # takes 60-180s to bind) and a non-loopback bind. Naming only the bind
+    # would send an operator chasing a config bug during a normal warmup.
+    assert "warming up" in output, f"warning omits the warmup case:\n{output}"
+    assert "bound elsewhere" in output, f"warning omits the bind case:\n{output}"
+    assert "configure" in output, f"warning omits the remedy:\n{output}"
+

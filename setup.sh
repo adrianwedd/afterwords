@@ -707,6 +707,21 @@ if '--host' in args and args.index('--host') + 1 < len(args):
     print(args[args.index('--host') + 1])
 " "$PLIST_PATH" 2>/dev/null || true)"
 fi
+
+# Reject an unsafe HOST before interpolating it into XML, mirroring
+# afterwords.sh's is_valid_bind_address. A value carrying XML metacharacters
+# (e.g. from a hand-edited ~/.afterwords-server) otherwise emits a plist that
+# plutil rejects and launchd cannot load — breaking the whole install. Leading
+# `-` is rejected too: argparse would read it as an option, not --host's value.
+case "$SETUP_HOST" in
+    "") ;;
+    -*)  echo "  ⚠ ignoring unsafe HOST=${SETUP_HOST} (leading '-'); using loopback" >&2
+         SETUP_HOST="" ;;
+    *[!A-Za-z0-9.:_%-]*)
+         echo "  ⚠ ignoring unsafe HOST=${SETUP_HOST} in ${AFTERWORDS_SERVER_CONFIG}; using loopback" >&2
+         SETUP_HOST="" ;;
+esac
+
 # An explicit BIND_PUBLIC key (true OR false) is authoritative; only when the
 # key is absent do we inherit --bind-public from the live plist. This matches
 # afterwords.sh's write_plist(), which is the whole point — the two generators
@@ -714,6 +729,11 @@ fi
 if [ -z "$SETUP_BIND_PUBLIC" ] && [ -n "$SETUP_HOST" ] \
    && grep -q -- "--bind-public" "$PLIST_PATH" 2>/dev/null; then
     SETUP_BIND_PUBLIC="true"
+fi
+# --bind-public without --host is meaningless (and would be silently ignored);
+# don't emit a flag that has no effect.
+if [ -z "$SETUP_HOST" ] && [ "$SETUP_BIND_PUBLIC" = "true" ]; then
+    SETUP_BIND_PUBLIC=""
 fi
 
 {
