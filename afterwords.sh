@@ -256,7 +256,11 @@ PLIST_HEAD
             echo "        <string>--host</string>"
             echo "        <string>${host}</string>"
         fi
-        [ "$bind_public" = "true" ] && echo "        <string>--bind-public</string>"
+        # --bind-public is meaningless without --host (server.py ignores it for a
+        # loopback bind), so don't emit an orphan flag — this keeps parity with
+        # setup.sh's suppression and avoids a plist that reads as a configured
+        # LAN bind when host degraded to empty.
+        [ -n "$host" ] && [ "$bind_public" = "true" ] && echo "        <string>--bind-public</string>"
         cat <<PLIST_TAIL
     </array>
     <key>RunAtLoad</key><true/>

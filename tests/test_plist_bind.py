@@ -639,6 +639,57 @@ def test_mode_preservation_does_not_use_stat_f():
     )
 
 
+def test_orphan_bind_public_is_suppressed(tmp_path):
+    """`--bind-public` without `--host` must not be emitted by either generator.
+
+    It is meaningless — server.py ignores it for a loopback bind — but it reads
+    as a configured LAN bind, so an orphan flag is misleading. setup.sh already
+    suppressed it; write_plist now matches (round-3 QA NIT).
+    """
+    # write_plist: BIND_PUBLIC=true but HOST cleared (unsafe value degrades to "")
+    plist = tmp_path / "test.plist"
+    with open(plist, "wb") as f:
+        plistlib.dump({"Label": "x", "ProgramArguments": ["py", "server.py"]}, f)
+    config = tmp_path / "server-config"
+    config.write_text("HOST=unsafe<value>\nBIND_PUBLIC=true\n")
+
+    env = os.environ.copy()
+    env["AFTERWORDS_PLIST_PATH"] = str(plist)
+    env["AFTERWORDS_SERVER_CONFIG"] = str(config)
+    env["AFTERWORDS_REPO_DIR"] = str(tmp_path)
+    env["AFTERWORDS_NO_LAUNCHCTL"] = "1"
+    subprocess.run(["bash", str(AFTERWORDS), "configure", "--with-1.7b"],
+                   capture_output=True, text=True, env=env)
+
+    args = _program_args(plist)
+    assert "--bind-public" not in args, (
+        f"orphan --bind-public emitted without --host: {args}"
+    )
+    _assert_valid_plist(plist, "orphan bind-public case")
+
+
+def test_orphan_bind_public_suppressed_in_setup_sh(tmp_path):
+    """Same suppression in setup.sh (parity check)."""
+    repo = _prepare_repo_dir(tmp_path)
+    home = tmp_path
+    (home / "Library" / "LaunchAgents").mkdir(parents=True, exist_ok=True)
+    plist = home / "Library" / "LaunchAgents" / "com.afterwords.tts-server.plist"
+    (home / ".afterwords-server").write_text("HOST=unsafe<value>\nBIND_PUBLIC=true\n")
+
+    script = f'''
+set -euo pipefail
+SCRIPT_DIR={repo}
+HOME={home}
+{_setup_plist_block()}
+'''
+    subprocess.run(["bash", "-c", script], capture_output=True, text=True)
+
+    args = _program_args(plist)
+    assert "--bind-public" not in args, (
+        f"orphan --bind-public emitted by setup.sh: {args}"
+    )
+
+
 def test_status_warns_when_health_check_fails(tmp_path):
     """The LAN-bind diagnostic must be reachable.
 
