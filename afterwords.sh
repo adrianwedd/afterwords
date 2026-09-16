@@ -123,10 +123,14 @@ server_config_set() {
     ' <(printf '%s\n' "$value") "$AFTERWORDS_SERVER_CONFIG" > "$tmp" 2>/dev/null; then
         # Preserve the existing file's mode: the temp file was created under the
         # ambient umask (022 → 644), so a config the operator had tightened to
-        # 600 would silently become world-readable after any update.
+        # 600 would silently become world-readable after any update. `stat -f`
+        # is BSD/macOS; GNU coreutils uses `-c`. Try both, default to 644.
         if [ -e "$AFTERWORDS_SERVER_CONFIG" ]; then
-            chmod "$(stat -f '%Lp' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null || echo 644)" \
-                "$tmp" 2>/dev/null || true
+            local _mode
+            _mode="$(stat -f '%Lp' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null \
+                  || stat -c '%a' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null \
+                  || echo 644)"
+            chmod "$_mode" "$tmp" 2>/dev/null || true
         fi
         mv "$tmp" "$AFTERWORDS_SERVER_CONFIG"
     else

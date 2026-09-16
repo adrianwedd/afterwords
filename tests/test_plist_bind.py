@@ -25,6 +25,27 @@ def _shq(value: str) -> str:
     return "'" + value.replace("'", "'\\''") + "'"
 
 
+def _assert_valid_plist(path: Path, context: str = "") -> None:
+    """Assert `path` parses as a plist.
+
+    Uses Python's plistlib rather than the macOS-only `plutil` so the suite
+    runs on CI (Ubuntu). plistlib is stricter about XML well-formedness, which
+    is the property these tests actually care about — an unparseable plist is
+    one launchd refuses to load.
+    """
+    import plistlib as _plistlib
+
+    try:
+        with open(path, "rb") as f:
+            _plistlib.load(f)
+    except Exception as exc:
+        raw = path.read_text(errors="replace") if path.exists() else "<missing>"
+        raise AssertionError(
+            f"plist is not parseable{(' — ' + context) if context else ''}: "
+            f"{type(exc).__name__}: {exc}\n--- file ---\n{raw}"
+        ) from exc
+
+
 def _helper_function_source(*names: str) -> str:
     """Extract named bash function definitions from afterwords.sh.
 
@@ -183,10 +204,7 @@ def test_generated_plist_is_valid_plist_xml(tmp_path):
     """The emitted plist must parse — malformed XML would fail to load in launchd."""
     _, plist, _ = _run_configure(tmp_path, "--bind", "192.168.0.249")
 
-    lint = subprocess.run(
-        ["plutil", "-lint", str(plist)], capture_output=True, text=True,
-    )
-    assert lint.returncode == 0, f"plutil rejected the plist: {lint.stdout}{lint.stderr}"
+    _assert_valid_plist(plist, "generated plist")
 
 
 def test_config_values_with_sed_metacharacters_are_literal(tmp_path):
@@ -326,9 +344,7 @@ def test_bad_bind_address_is_rejected_not_written(tmp_path):
         assert result.returncode != 0, f"{bad!r} was accepted"
         # The good value must survive untouched.
         assert "HOST=192.168.0.249" in config_after.read_text()
-        lint = subprocess.run(["plutil", "-lint", str(plist_after)],
-                              capture_output=True, text=True)
-        assert lint.returncode == 0, f"plist invalid after {bad!r}: {lint.stdout}"
+        _assert_valid_plist(plist_after, f"after {bad!r}")
 
 
 def test_good_bind_addresses_are_accepted(tmp_path):
@@ -337,9 +353,7 @@ def test_good_bind_addresses_are_accepted(tmp_path):
                  "::1", "fe80::1%en0"):
         result, plist, _ = _run_configure(tmp_path, "--bind", good)
         assert result.returncode == 0, f"{good!r} was wrongly rejected: {result.stdout}"
-        lint = subprocess.run(["plutil", "-lint", str(plist)],
-                              capture_output=True, text=True)
-        assert lint.returncode == 0, f"plist invalid for {good!r}"
+        _assert_valid_plist(plist, f"for {good!r}")
 
 
 def test_unsafe_host_in_config_degrades_to_loopback(tmp_path):
@@ -361,9 +375,7 @@ def test_unsafe_host_in_config_degrades_to_loopback(tmp_path):
     )
 
     assert result.returncode == 0, f"crashed on unsafe HOST: {result.stderr}"
-    lint = subprocess.run(["plutil", "-lint", str(plist)],
-                          capture_output=True, text=True)
-    assert lint.returncode == 0, f"emitted an unparseable plist: {lint.stdout}"
+    _assert_valid_plist(plist, "unsafe host in config")
     assert "--host" not in _program_args(plist), "unsafe host was emitted anyway"
 
 
@@ -440,9 +452,7 @@ echo "REACHED_END"
     assert "REACHED_END" in result.stdout, (
         f"setup.sh aborted before finishing the plist:\n{result.stderr}"
     )
-    lint = subprocess.run(["plutil", "-lint", str(plist)],
-                          capture_output=True, text=True)
-    assert lint.returncode == 0, f"truncated/invalid plist: {lint.stdout}"
+    _assert_valid_plist(plist, "setup.sh empty-config run")
 
 
 def test_setup_sh_preserves_existing_plist_host(tmp_path):
@@ -545,9 +555,7 @@ HOME={home}
     result = subprocess.run(["bash", "-c", script], capture_output=True, text=True)
     assert result.returncode == 0, f"block failed: {result.stderr}"
 
-    lint = subprocess.run(["plutil", "-lint", str(plist)],
-                          capture_output=True, text=True)
-    assert lint.returncode == 0, f"emitted unparseable plist: {lint.stdout}"
+    _assert_valid_plist(plist, "unsafe HOST")
     assert "evil" not in plist.read_text(), "unsafe HOST reached the plist"
     assert "unsafe" in result.stderr.lower(), "no warning was emitted"
 
