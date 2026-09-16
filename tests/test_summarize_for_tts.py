@@ -89,3 +89,33 @@ def test_extractive_first_and_last_sentence():
     out = extractive_summary(text, sentences=2, max_chars=200)
     assert out.startswith("Fixed the Gatekeeper block.")
     assert "normally now." in out
+
+
+def test_agent_keys_win_regardless_of_line_order(tmp_path: Path):
+    """Regression: a global key below an agent key used to overwrite it.
+
+    parse_afterwords_config walked the file top-to-bottom and every matching
+    line unconditionally wrote cfg[field], so whichever appeared LAST won —
+    contradicting the function's own "agent-specific keys win" contract.
+    """
+    # agent key first, global key last -> agent must still win
+    aw = tmp_path / ".afterwords"
+    aw.write_text("cursor_summarize: true\nsummarize: false\n", encoding="utf-8")
+    assert parse_afterwords_config(aw, "cursor")["enabled"] is True
+
+    # global key first, agent key last -> agent wins (this direction always worked)
+    aw.write_text("summarize: false\ncursor_summarize: true\n", encoding="utf-8")
+    assert parse_afterwords_config(aw, "cursor")["enabled"] is True
+
+    # an agent key turning the feature OFF must beat a global key turning it ON
+    aw.write_text("cursor_summarize: false\nsummarize: true\n", encoding="utf-8")
+    assert parse_afterwords_config(aw, "cursor")["enabled"] is False
+
+    # numeric fields follow the same precedence
+    aw.write_text(
+        "cursor_summarize: true\n"
+        "summarize_max_chars: 200\n"
+        "cursor_summarize_max_chars: 500\n",
+        encoding="utf-8",
+    )
+    assert parse_afterwords_config(aw, "cursor")["max_chars"] == 500

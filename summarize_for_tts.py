@@ -63,18 +63,25 @@ def parse_afterwords_config(aw_path: str | Path | None, agent: str) -> dict:
         reverse=True,
     )
 
-    for raw_line in path.read_text(encoding="utf-8").splitlines():
-        line = raw_line.strip()
-        if not line or line.startswith("#"):
-            continue
-        for key, field in ordered:
-            if not line.startswith(key):
-                continue
-            rest = line[len(key) :].lstrip()
-            if not rest.startswith(":"):
-                continue
-            _apply_config_key(cfg, field, _trim(rest[1:]))
-            break
+    # Two passes so agent-specific keys win over global keys regardless of the
+    # order the lines appear in the file (global first, then agent-specific).
+    agent_key_names = set(agent_keys)
+    lines = [
+        ln.strip()
+        for ln in path.read_text(encoding="utf-8").splitlines()
+        if ln.strip() and not ln.strip().startswith("#")
+    ]
+    for want_agent in (False, True):
+        for line in lines:
+            for key, field in ordered:
+                if not line.startswith(key):
+                    continue
+                rest = line[len(key) :].lstrip()
+                if not rest.startswith(":"):
+                    continue
+                if (key in agent_key_names) is want_agent:
+                    _apply_config_key(cfg, field, _trim(rest[1:]))
+                break
 
     return cfg
 

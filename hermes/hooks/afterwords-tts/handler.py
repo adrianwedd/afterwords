@@ -351,6 +351,7 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
     except OSError:
         pass  # archiving is best-effort
 
+    archive_tasks: list[asyncio.Task] = []
     try:
         async with aiohttp.ClientSession() as session:
             prev_wav: Path | None = None
@@ -385,12 +386,17 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
                                 stderr=subprocess.DEVNULL
                             )
 
-                        asyncio.create_task(
-                            asyncio.to_thread(
-                                _archive_wav_and_cleanup,
-                                wav_path,
-                                f"{stamp}-c{i-1}.mp3",
-                                archive_dir,
+                        # Keep a reference: an un-referenced task can be garbage
+                        # collected mid-flight, dropping the archived MP3. Gathered
+                        # before the lock is released (see `finally` below).
+                        archive_tasks.append(
+                            asyncio.create_task(
+                                asyncio.to_thread(
+                                    _archive_wav_and_cleanup,
+                                    wav_path,
+                                    f"{stamp}-c{i-1}.mp3",
+                                    archive_dir,
+                                )
                             )
                         )
 
@@ -420,6 +426,10 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
     except Exception as e:
         # Fail silently — TTS is a nice-to-have
         log.warning("TTS playback error: %s", e)
+    finally:
+        # Let in-flight archive jobs finish before the loop can tear down.
+        if archive_tasks:
+            await asyncio.gather(*archive_tasks, return_exceptions=True)
 
 
 def _ts() -> str:

@@ -241,3 +241,17 @@ For more details, see the [README](https://github.com/adrianwedd/afterwords)."""
     assert "github.com" not in result
     # No backticks remain
     assert "`" not in result
+
+
+def test_url_strip_keeps_sentence_punctuation():
+    """Regression: `https?://\\S+` consumed the period that ended the sentence,
+    fusing the text on either side of a link into one run-on clause."""
+    assert strip_markdown("See https://example.com/docs. It works.") == "See . It works."
+    assert "It works." in strip_markdown("See https://example.com/docs. It works.")
+    # the URL itself is still removed
+    assert "example.com" not in strip_markdown("See https://example.com/docs. It works.")
+    # a bare URL with no trailing punctuation is still fully stripped
+    assert strip_markdown("Visit https://x.com/path and come back.") == "Visit and come back."
+    # sentence-final punctuation survives so downstream chunking still splits
+    # the orphaned comma is tidied by the whitespace collapse, not left dangling
+    assert strip_markdown("Check https://a.io/x, then go.") == "Check, then go."

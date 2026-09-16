@@ -105,8 +105,10 @@ while true; do
     PROJECT_DIR=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('project_dir',''))" "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
     AGENT=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('agent',''))" "$ITEM" 2>/dev/null) || true
     TEXT=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('text',''))" "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
+    ATTEMPTS=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('attempts',0))" "$ITEM" 2>/dev/null) || true
     rm -f "$ITEM"
     [ -z "${TEXT:-}" ] && continue
+    ATTEMPTS=${ATTEMPTS:-0}
 
     ENCODED=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$TEXT" 2>/dev/null) || continue
     STAMP=$(date +%Y%m%d-%H%M%S)-$$-$RANDOM
@@ -148,9 +150,24 @@ while true; do
             | python3 -c "import sys,json; print(json.load(sys.stdin).get('default_voice',''))" 2>/dev/null || true)
     fi
 
-    # Never silently drop speech if another agent holds the play lock.
+    # Never silently drop speech if another agent holds the play lock —
+    # re-queue and retry after a brief backoff (capped to avoid wedged locks).
     if ! acquire_play_lock; then
-        echo "afterwords: play lock busy — skipping codex item" >&2
+        NEXT_ATTEMPTS=$((ATTEMPTS + 1))
+        if [ "$NEXT_ATTEMPTS" -ge 3 ]; then
+            echo "afterwords: dropping codex TTS item after $NEXT_ATTEMPTS lock waits" >&2
+            continue
+        fi
+        REQUEUE="${QUEUEDIR}/$(date +%s%N 2>/dev/null || date +%s)-requeue-${RANDOM}.json"
+        python3 -c "
+import json, sys
+print(json.dumps({
+    'project_dir': sys.argv[1],
+    'agent': sys.argv[2],
+    'text': sys.argv[3],
+    'attempts': int(sys.argv[4]),
+}))
+" "$PROJECT_DIR" "$AGENT" "$TEXT" "$NEXT_ATTEMPTS" > "${REQUEUE}.tmp" && mv "${REQUEUE}.tmp" "$REQUEUE"
         sleep 2
         continue
     fi

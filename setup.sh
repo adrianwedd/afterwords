@@ -376,7 +376,7 @@ if [ ! -d "$QUEUEDIR" ] || [ "$(stat -f%u "$QUEUEDIR" 2>/dev/null)" != "$(id -u)
   echo "afterwords: $QUEUEDIR is not a directory we own — refusing to use it" >&2
   exit 1
 fi
-ITEM="${QUEUEDIR}/$(date +%s)-${RANDOM}.json"
+ITEM="${QUEUEDIR}/$(date +%s%N 2>/dev/null || date +%s)-${RANDOM}.json"
 ITEM_TMP="${ITEM}.tmp"
 python3 -c "
 import json, sys
@@ -455,45 +455,27 @@ if [ ! -d "$QUEUEDIR" ] || [ "$(stat -f%u "$QUEUEDIR" 2>/dev/null)" != "$(id -u)
 fi
 
 while true; do
-    # Coalesce backlog: when multiple replies are waiting, keep only the
-    # newest so TTS stays current instead of narrating stale turns.
-    NEWEST=""
+    # Keep only the newest MAX_QUEUE items, then drain oldest-first (FIFO).
+    # Coalescing to a single turn silently discarded both the audio AND the
+    # archive record of every other pending reply, and `ls -1t` cannot order
+    # items written within the same second, so it could keep the wrong one.
     COUNT=0
-    while IFS= read -r CAND; do
+    while IFS= read -r EXCESS; do
         COUNT=$((COUNT + 1))
-        if [ -z "$NEWEST" ]; then
-            NEWEST="$CAND"
-        else
-            rm -f "$CAND"
-        fi
+        [ "$COUNT" -gt "$MAX_QUEUE" ] && rm -f "$EXCESS"
     done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
-    # Hard cap still applies if coalesce somehow leaves extras.
-    if [ "$COUNT" -gt "$MAX_QUEUE" ]; then
-        EXTRA=0
-        while IFS= read -r EXCESS; do
-            EXTRA=$((EXTRA + 1))
-            [ "$EXTRA" -gt "$MAX_QUEUE" ] && rm -f "$EXCESS"
-        done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
-    fi
 
-    # Claim the remaining (newest) item atomically via mv.
+    # Claim oldest unclaimed item atomically via mv.
     ITEM=""
-    if [ -n "$NEWEST" ] && [ -f "$NEWEST" ]; then
-        CLAIMED="${NEWEST%.json}.claimed"
-        if mv "$NEWEST" "$CLAIMED" 2>/dev/null; then
+    while IFS= read -r CANDIDATE; do
+        CLAIMED="${CANDIDATE%.json}.claimed"
+        if mv "$CANDIDATE" "$CLAIMED" 2>/dev/null; then
             ITEM="$CLAIMED"
+            break
         fi
-    fi
-    # Fallback: any remaining unclaimed file (race with a concurrent writer).
-    if [ -z "$ITEM" ]; then
-        while IFS= read -r CANDIDATE; do
-            CLAIMED="${CANDIDATE%.json}.claimed"
-            if mv "$CANDIDATE" "$CLAIMED" 2>/dev/null; then
-                ITEM="$CLAIMED"
-                break
-            fi
-        done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
-    fi
+    # Oldest first: -t sorts newest-first, so reverse it. `tail -r` is BSD/macOS;
+    # the sort fallback compares full paths, which is close enough for a tie.
+    done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null | tail -r 2>/dev/null || ls -1 "$QUEUEDIR"/*.json 2>/dev/null | sort)
     [ -z "$ITEM" ] && break
 
     ITEM_EVAL=$(python3 -c "
@@ -551,17 +533,22 @@ print('ATTEMPTS=' + shlex.quote(str(d.get('attempts', 0))))
     # Voice is passed via curl --data-urlencode (no pre-encoding needed).
     :
 
-    # Archive: full response text sidecar (written once; chunk audio archived per-chunk below).
+    # Archive base; the text sidecar is written AFTER the optional
+    # summarization step so it holds the text actually synthesized
+    # (README "sidecar .txt files contain the exact text spoken", and
+    # scripts/audit-archive.py compares this file against the audio).
     ARCHIVE_BASE="$ARCHIVE_DIR/${VOICE:-default}-${STAMP}"
-    printf '%s\n' "$LINE" > "${ARCHIVE_BASE}.txt"
 
-    # Optional: compress long agent replies before TTS (full text still archived above).
+    # Optional: compress long agent replies before TTS.
     SPEAK_LINE="$LINE"
     SUMMARIZE_SCRIPT="$HOME/.claude/hooks/summarize-for-tts.py"
     if [ -f "$SUMMARIZE_SCRIPT" ] && [ -n "${AW_FILE:-}" ]; then
-        SUMMARIZED=$(printf '%s' "$LINE" | python3 "$SUMMARIZE_SCRIPT" --agent "$AGENT" --afterwords "$AW_FILE" 2>/dev/null || true)
+        SUMMARIZED=$(printf '%s' "$LINE" | python3 "$SUMMARIZE_SCRIPT" --agent "${AGENT:-claude}" --afterwords "$AW_FILE" 2>/dev/null || true)
         [ -n "$SUMMARIZED" ] && SPEAK_LINE="$SUMMARIZED"
     fi
+
+    # Sidecar == spoken text (written once; chunk audio archived per-chunk below).
+    printf '%s\n' "$SPEAK_LINE" > "${ARCHIVE_BASE}.txt"
 
     # Never silently drop speech if another agent holds the play lock —
     # re-queue and retry after a brief backoff (capped to avoid wedged locks).
@@ -571,7 +558,7 @@ print('ATTEMPTS=' + shlex.quote(str(d.get('attempts', 0))))
             echo "afterwords: dropping TTS item after $NEXT_ATTEMPTS lock waits" >&2
             continue
         fi
-        REQUEUE="${QUEUEDIR}/$(date +%s)-requeue-${RANDOM}.json"
+        REQUEUE="${QUEUEDIR}/$(date +%s%N 2>/dev/null || date +%s)-requeue-${RANDOM}.json"
         python3 -c "
 import json, sys
 print(json.dumps({

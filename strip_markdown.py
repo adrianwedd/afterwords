@@ -41,7 +41,8 @@ def _inline_markdown(text: str) -> str:
     text = re.sub(r'~~([^~]+)~~', r'\1', text)
     text = re.sub(r'\*{1,3}([^*]+)\*{1,3}', r'\1', text)
     # Drop raw URLs — speaking them aloud is noise.
-    text = re.sub(r'https?://\S+', '', text)
+    # Strip the URL but keep any punctuation that ends the sentence.
+    text = re.sub(r'https?://\S*[^\s.,!?:;)\]\'"]', '', text)
     text = re.sub(r'\bwww\.\S+', '', text)
     # Prefer the file basename over a long path (/a/b/foo.py → foo.py).
     text = re.sub(r'(?:[A-Za-z]:)?(?:/[\w.-]+)+/([\w.-]+\.\w+)\b', r'\1', text)
