@@ -1,51 +1,31 @@
 """Split text into sentence-boundary chunks for TTS synthesis.
 
-Each chunk is capped at MAX_CHARS characters. Chunks are printed one per line
-with internal newlines stripped — safe to pass directly to /synthesize.
-
-400 chars keeps latency-to-first-audio low while cutting HTTP/Metal round-trips
-and audible seams vs the old 200-char cap.
+Importable module form of the canonical chunker: the splitting logic lives in
+the repo-root `chunks.py` and this file only exposes it under the historical
+module name, so `from chunk_text import chunk_text` keeps working.
 """
-import re
+from __future__ import annotations
+
+import importlib.util
 import sys
+from pathlib import Path
 
-MAX_CHARS = 400
+_CANONICAL = Path(__file__).resolve().parent / "chunks.py"
 
-text = sys.stdin.read().strip()
-if not text:
-    sys.exit(0)
+if not _CANONICAL.is_file():
+    raise RuntimeError(f"chunk_text.py: canonical chunker missing at {_CANONICAL}")
 
-sentences = re.split(r'(?<=[.!?…])\s+', text)
-sentences = [s.strip().replace('\n', ' ') for s in sentences if s.strip()]
+_spec = importlib.util.spec_from_file_location("afterwords_chunks", _CANONICAL)
+if _spec is None or _spec.loader is None:
+    raise RuntimeError(f"chunk_text.py: cannot load {_CANONICAL}")
+_mod = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_mod)
 
-def _word_split(sentence: str) -> list[str]:
-    """Split a sentence longer than MAX_CHARS on word boundaries."""
-    parts: list[str] = []
-    while len(sentence) > MAX_CHARS:
-        split_at = sentence.rfind(' ', 0, MAX_CHARS)
-        if split_at == -1:
-            split_at = MAX_CHARS
-        parts.append(sentence[:split_at].strip())
-        sentence = sentence[split_at:].strip()
-    if sentence:
-        parts.append(sentence)
-    return parts
+# Re-export the canonical surface.
+CHUNK_CHARS = _mod.CHUNK_CHARS
+chunk_text = _mod.chunk_text
 
 
-# Normalize: sentences longer than MAX_CHARS become multiple word-split parts.
-parts: list[str] = []
-for s in sentences:
-    parts.extend(_word_split(s) if len(s) > MAX_CHARS else [s])
-
-chunk = ''
-for part in parts:
-    if chunk and len(chunk) + 1 + len(part) > MAX_CHARS:
+if __name__ == "__main__":
+    for chunk in chunk_text(sys.stdin.read().strip()):
         print(chunk)
-        chunk = part
-    elif chunk:
-        chunk = chunk + ' ' + part
-    else:
-        chunk = part
-
-if chunk:
-    print(chunk)

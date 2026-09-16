@@ -40,7 +40,7 @@ TEXT=$(printf '%s' "$PAYLOAD" | python3 -c "
 import sys, json
 d = json.load(sys.stdin)
 t = d.get('response', '') or d.get('extra', {}).get('assistant_response', '')
-print(t[:1000])
+print(t)
 " 2>/dev/null || true)
 CWD=$(printf '%s' "$PAYLOAD" | python3 -c "
 import sys, json
@@ -70,8 +70,54 @@ esac
 [ -z "$TEXT" ] && exit 0
 
 # ── Strip markdown ─────────────────────────────────────────────────────────
-CLEAN=$(printf '%s' "$TEXT" | python3 "$SCRIPT_DIR/strip-markdown.py" 2>/dev/null || printf '%s' "$TEXT")
-[ -z "$CLEAN" ] && exit 0
+# Canonical helpers live in the repo root (strip_markdown.py, chunks.py). Every
+# Hermes surface loads those, so the shell path cannot drift from the gateway
+# hook. Resolution mirrors hermes/hooks/afterwords-tts/handler.py:
+#   $AFTERWORDS_REPO → walk up for a dir holding both modules → ~/.claude/hooks
+#     (shims there resolve back to the repo).
+AFTERWORDS_REPO_ROOT=""
+if [ -n "${AFTERWORDS_REPO:-}" ] && [ -f "$AFTERWORDS_REPO/strip_markdown.py" ] && [ -f "$AFTERWORDS_REPO/chunks.py" ]; then
+    AFTERWORDS_REPO_ROOT="$AFTERWORDS_REPO"
+else
+    _probe="$SCRIPT_DIR"
+    while [ -n "$_probe" ] && [ "$_probe" != "/" ]; do
+        if [ -f "$_probe/strip_markdown.py" ] && [ -f "$_probe/chunks.py" ]; then
+            AFTERWORDS_REPO_ROOT="$_probe"; break
+        fi
+        _probe=$(dirname "$_probe")
+    done
+fi
+
+STRIP_SCRIPT=""
+CHUNK_SCRIPT=""
+if [ -n "$AFTERWORDS_REPO_ROOT" ]; then
+    STRIP_SCRIPT="$AFTERWORDS_REPO_ROOT/strip_markdown.py"
+    CHUNK_SCRIPT="$AFTERWORDS_REPO_ROOT/chunks.py"
+fi
+# Fall back to the setup.sh-installed helper dir (shims that resolve back to the
+# repo). If neither resolves, the canonical modules are unreachable → log and
+# skip rather than speaking with a different rule set.
+if [ -z "$STRIP_SCRIPT" ] && [ -f "$HOME/.claude/hooks/strip-markdown.py" ]; then
+    STRIP_SCRIPT="$HOME/.claude/hooks/strip-markdown.py"
+fi
+if [ -z "$CHUNK_SCRIPT" ] && [ -f "$HOME/.claude/hooks/chunk-text.py" ]; then
+    CHUNK_SCRIPT="$HOME/.claude/hooks/chunk-text.py"
+fi
+HOOK_LOG="${TMPDIR:-/tmp}/afterwords-hermes-hook.log"
+if [ -z "$STRIP_SCRIPT" ] || [ -z "$CHUNK_SCRIPT" ]; then
+    printf '%s strip/chunk helper unresolved (repo=%s) — skipping TTS\n' \
+        "$(date '+%Y-%m-%d %H:%M:%S')" "${AFTERWORDS_REPO_ROOT:-none}" >> "$HOOK_LOG" 2>/dev/null || true
+    exit 0
+fi
+
+CLEAN=$(printf '%s' "$TEXT" | python3 "$STRIP_SCRIPT" 2>>"$HOOK_LOG" || true)
+if [ -z "$CLEAN" ]; then
+    # Canonical stripper missing/failed → log it, do not silently substitute a
+    # weaker stripper (that is how this path drifted from the gateway hook).
+    printf '%s canonical strip failed (%s) — skipping TTS\n' \
+        "$(date '+%Y-%m-%d %H:%M:%S')" "$STRIP_SCRIPT" >> "$HOOK_LOG" 2>/dev/null || true
+    exit 0
+fi
 
 # ── Check server health ────────────────────────────────────────────────────
 if ! curl -s --max-time 2 "$AFTERWORDS_HEALTH" > /dev/null 2>&1; then
@@ -271,7 +317,7 @@ CHUNKS=()
 while IFS= read -r CHUNK; do
     [ -z "$CHUNK" ] && continue
     CHUNKS+=("$CHUNK")
-done < <(printf '%s' "$CLEAN" | python3 "$SCRIPT_DIR/chunk-text.py" 2>/dev/null || printf '%s\n' "$CLEAN")
+done < <(printf '%s' "$CLEAN" | python3 "$CHUNK_SCRIPT" 2>>"$HOOK_LOG" || true)
 
 NCHUNKS=${#CHUNKS[@]}
 [ "$NCHUNKS" -eq 0 ] && exit 0

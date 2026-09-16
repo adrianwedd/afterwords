@@ -22,6 +22,18 @@ _HEADING = re.compile(r'^#{1,6}\s+(.*)$')
 _BLOCKQUOTE = re.compile(r'^\s*>\s?(.*)$')
 _TABLE_ROW = re.compile(r'^\|.*\|$')
 _TABLE_SEP = re.compile(r'^[-|:\s]+$')
+# Model/tokens/cost footers Hermes appends to replies, e.g.
+# "glm-5.1 · 9% · ~" or "claude-3.5-sonnet · 42% · $0.02".
+_TTS_FOOTER = re.compile(r'[a-z0-9._-]+\s*·.*$', re.I)
+
+
+def _strip_tts_footer(text: str) -> str:
+    """Drop the trailing model/token/cost footer so TTS never speaks it.
+
+    Every Hermes surface appends this footer, so the rule lives here (one
+    implementation) instead of being re-implemented per entrypoint.
+    """
+    return _TTS_FOOTER.sub('', text)
 
 
 def _ensure_sentence(text: str) -> str:
@@ -133,9 +145,10 @@ def _join_spoken(parts: list[str]) -> str:
 def strip_markdown(text: str, max_chars: int | None = 1000) -> str:
     """Strip markdown formatting from text for TTS."""
     text = _join_spoken(_structural_lines(text))
+    text = _strip_tts_footer(text)
     if max_chars is not None:
         text = text[:max_chars]
-    return text
+    return text.strip()
 
 
 if __name__ == "__main__":

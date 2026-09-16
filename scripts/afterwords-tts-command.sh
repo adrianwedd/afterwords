@@ -75,8 +75,24 @@ if [ -z "$VOICE" ]; then
     fi
 fi
 
-# URL-encode the text (strip markdown and truncate to 1000 chars)
-CLEANED=$(echo "$TEXT" | sed 's/`//g; s/\*//g; s/_//g' | cut -c 1-1000)
+# Strip markdown via the canonical repo implementation (repo root first, then
+# the setup.sh-installed helper dir) so this path cannot drift from the gateway
+# hook and the CLI shell hook. No truncation: the TTS server takes the full text.
+AFTERWORDS_REPO_ROOT="${AFTERWORDS_REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+STRIP_SCRIPT="$AFTERWORDS_REPO_ROOT/strip_markdown.py"
+[ -f "$STRIP_SCRIPT" ] || STRIP_SCRIPT="$HOME/.claude/hooks/strip-markdown.py"
+CLEANED=""
+if [ -f "$STRIP_SCRIPT" ]; then
+    CLEANED=$(printf '%s' "$TEXT" | python3 "$STRIP_SCRIPT" 2>/dev/null || true)
+fi
+if [ -z "$CLEANED" ]; then
+    # Canonical stripper unavailable → speak the raw text rather than
+    # substituting a different (shell-sed) rule set.
+    printf '%s command-provider strip helper unresolved (%s); using raw text\n' \
+        "$(date '+%Y-%m-%d %H:%M:%S')" "$STRIP_SCRIPT" \
+        >> "${TMPDIR:-/tmp}/afterwords-hermes-hook.log" 2>/dev/null || true
+    CLEANED="$TEXT"
+fi
 ENCODED=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$CLEANED")
 
 # Build URL

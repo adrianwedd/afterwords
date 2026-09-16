@@ -17,6 +17,7 @@ Requires Afterwords server running at http://127.0.0.1:7860
 """
 
 import asyncio
+import importlib.util
 import json
 import logging
 import os
@@ -42,6 +43,11 @@ TTS_ENDPOINT = f"{AFTERWORDS_URL}/synthesize"
 # 400 keeps first-audio latency low while cutting seams vs 200.
 CHUNK_CHARS = 400
 
+# Canonical helper module filenames in the repo root. The gateway hook, the CLI
+# shell hook and the Claude/Codex workers all load these — one implementation.
+_STRIP_MODULE = "strip_markdown.py"
+_CHUNK_MODULE = "chunks.py"
+
 # Agent name used for .afterwords mapping lookup
 HERMES_AGENT = "hermes"
 
@@ -50,58 +56,130 @@ GLOBAL_AFTERWORDS = Path.home() / ".afterwords"
 
 
 def strip_markdown(text: str) -> str:
-    """Strip markdown for TTS, with Hermes footer cleanup.
+    """Strip markdown for TTS via the canonical repo implementation.
 
-    Prefers the shared strip_markdown.py (list/heading pause cues) from the
-    repo or ~/.claude/hooks; falls back to a minimal local pass.
+    The rules (including Hermes' model/tokens/cost footer) live in the repo-root
+    `strip_markdown.py`. This function does not re-implement them; if the
+    canonical module cannot be resolved it logs a warning and uses a minimal
+    fallback, so the degradation is visible in the gateway log rather than
+    silently changing what gets spoken.
     """
-    cleaned = _shared_strip_markdown(text)
-    # Strip model/tokens/cost footers like "glm-5.1 · 9% · ~" or "claude-3.5-sonnet · 42% · $0.02"
-    cleaned = re.sub(r'[a-z0-9._-]+\s*·.*$', '', cleaned, flags=re.I)
-    return cleaned.strip()
+    fn, _ = _canonical("strip_markdown.py", "strip_markdown")
+    if fn is not None:
+        return fn(text, max_chars=None).strip()
+    log.warning(
+        "canonical strip_markdown.py unresolved (%s) — using minimal fallback; "
+        "TTS will lack list/heading pause cues",
+        _resolution_report(),
+    )
+    return _minimal_strip(text)
 
 
-def _shared_strip_markdown(text: str) -> str:
-    import importlib.util
-
-    candidates = [
-        Path(__file__).resolve().parents[3] / "strip_markdown.py",
-        Path.home() / ".claude" / "hooks" / "strip-markdown.py",
-    ]
-    for path in candidates:
-        if not path.is_file():
-            continue
-        try:
-            spec = importlib.util.spec_from_file_location("aw_strip_markdown", path)
-            if spec is None or spec.loader is None:
-                continue
-            mod = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(mod)
-            return mod.strip_markdown(text, max_chars=None)
-        except Exception:
-            continue
-    # Minimal fallback if shared module is unavailable.
+def _minimal_strip(text: str) -> str:
+    """Last-resort strip for when the canonical module is unreachable."""
     text = re.sub(r'```[\s\S]*?```', '', text)
     text = re.sub(r'`([^`]+)`', r'\1', text)
     text = re.sub(r'^\s*([-*•]|\d+[.)])\s+', '', text, flags=re.M)
+    text = re.sub(r'[a-z0-9._-]+\s*·.*$', '', text, flags=re.I)
     text = re.sub(r'\n{2,}', '. ', text)
     return re.sub(r'\s+', ' ', text).strip()
 
 
-def chunk_text(text: str, max_chars: int = CHUNK_CHARS) -> list[str]:
-    """Split text into sentence-boundary chunks for TTS synthesis.
+def _repo_root() -> Path | None:
+    """Locate the afterwords repo root, or None if it isn't reachable.
 
-    Each chunk is capped at max_chars characters. Splits on sentence
-    boundaries (.!?) then on word boundaries for overlong sentences.
+    Resolution order:
+      1. $AFTERWORDS_REPO — explicit override (needed when this file is deployed
+         outside the repo, e.g. ~/.hermes/hooks/afterwords-tts/).
+      2. Walk up from this file for a directory holding BOTH canonical modules.
+         When handler.py is symlinked into ~/.hermes/hooks/ (the recommended
+         deployment), `resolve()` lands in the repo and this finds it; it also
+         finds it for any in-repo run. No hardcoded parents[n] index.
     """
+    override = os.environ.get("AFTERWORDS_REPO", "").strip()
+    if override:
+        candidate = Path(override).expanduser()
+        if (candidate / _STRIP_MODULE).is_file() and (candidate / _CHUNK_MODULE).is_file():
+            return candidate
+        log.warning("AFTERWORDS_REPO=%s has no %s/%s", override, _STRIP_MODULE, _CHUNK_MODULE)
+    for directory in Path(__file__).resolve().parents:
+        if (directory / _STRIP_MODULE).is_file() and (directory / _CHUNK_MODULE).is_file():
+            return directory
+    return None
+
+
+def _candidates(filename: str) -> list[Path]:
+    """Places to look for a canonical module, in priority order."""
+    paths: list[Path] = []
+    root = _repo_root()
+    if root is not None:
+        paths.append(root / filename)
+    # setup.sh-installed helper locations (shim-backed after the 2026-09 fix, so
+    # they resolve back to the repo rather than carrying their own rules).
+    hooks = Path.home() / ".claude" / "hooks"
+    paths.append(hooks / filename.replace("_", "-"))
+    paths.append(hooks / filename)
+    seen: set[Path] = set()
+    return [p for p in paths if not (p in seen or seen.add(p))]
+
+
+def _canonical(filename: str, attr: str):
+    """Load a canonical helper. Returns (callable, source) or (None, reason)."""
+    for path in _candidates(filename):
+        if not path.is_file():
+            continue
+        try:
+            spec = importlib.util.spec_from_file_location(f"aw_{attr}", path)
+            if spec is None or spec.loader is None:
+                continue
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+        except Exception as exc:
+            # Never swallow this: a silent fallback is how the gateway hook and
+            # the shell hook drifted into different TTS semantics.
+            log.warning("cannot load canonical %s at %s: %r", filename, path, exc)
+            continue
+        fn = getattr(mod, attr, None)
+        if not callable(fn):
+            log.warning("%s defines no callable %s", path, attr)
+            continue
+        return fn, str(path)
+    return None, f"{filename} not found in {[str(p) for p in _candidates(filename)]}"
+
+
+def _resolution_report() -> str:
+    """Human-readable summary of which canonical helpers resolved, for logs/tests."""
+    parts: list[str] = []
+    for filename, attr in ((_STRIP_MODULE, "strip_markdown"), (_CHUNK_MODULE, "chunk_text")):
+        fn, source = _canonical(filename, attr)
+        parts.append(f"{filename}={'OK:' + source if fn is not None else 'MISSING (' + source + ')'}")
+    return "; ".join(parts)
+
+
+def chunk_text(text: str, max_chars: int | None = None) -> list[str]:
+    """Split text into TTS chunks via the canonical repo implementation.
+
+    Falls back to the local splitter only if the canonical module is
+    unreachable, and logs that it did.
+    """
+    fn, _ = _canonical(_CHUNK_MODULE, "chunk_text")
+    if fn is not None:
+        return fn(text, max_chars=max_chars)
+    log.warning(
+        "canonical chunks.py unresolved (%s) — using local splitter",
+        _resolution_report(),
+    )
+    return _local_chunk_text(text, max_chars or CHUNK_CHARS)
+
+
+def _local_chunk_text(text: str, max_chars: int) -> list[str]:
+    """Last-resort splitter for when the canonical module is unreachable."""
     if not text:
         return []
 
-    # Split on sentence boundaries
     sentences = re.split(r'(?<=[.!?…])\s+', text)
     sentences = [s.strip().replace('\n', ' ') for s in sentences if s.strip()]
 
-    # Word-split overlong sentences
     parts: list[str] = []
     for s in sentences:
         if len(s) > max_chars:
@@ -118,7 +196,6 @@ def chunk_text(text: str, max_chars: int = CHUNK_CHARS) -> list[str]:
         else:
             parts.append(s)
 
-    # Merge short consecutive parts into chunks up to max_chars
     chunks: list[str] = []
     chunk = ''
     for part in parts:

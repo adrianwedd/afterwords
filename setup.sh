@@ -330,12 +330,31 @@ for hookfile in strip-markdown.py chunk-text.py summarize-for-tts.py tts-hook.sh
     fi
 done
 
-# Strip-markdown helper
-cp "$SCRIPT_DIR/strip_markdown.py" "$HOOKS_DIR/strip-markdown.py"
+# Strip-markdown helper. The canonical rules live in $SCRIPT_DIR/strip_markdown.py;
+# the installed copy is a SHIM that resolves back there (so the rules can never
+# drift between the repo and ~/.claude/hooks). Stamp the repo path into the shim.
+cp "$SCRIPT_DIR/scripts/strip-markdown.py" "$HOOKS_DIR/strip-markdown.py"
+python3 - "$HOOKS_DIR/strip-markdown.py" "$SCRIPT_DIR" <<'SHIMEOF'
+import re, sys
+path, repo = sys.argv[1], sys.argv[2]
+src = open(path).read()
+src = re.sub(r'^_REPO_HINT = .*$', f'_REPO_HINT = {repo!r}', src, count=1, flags=re.M)
+open(path, 'w').write(src)
+SHIMEOF
 cp "$SCRIPT_DIR/summarize_for_tts.py" "$HOOKS_DIR/summarize-for-tts.py"
 
-# Chunk-text helper (sentence splitter for chunked TTS)
-cp "$SCRIPT_DIR/chunk_text.py" "$HOOKS_DIR/chunk-text.py"
+# Chunk-text helper (shim for the canonical $SCRIPT_DIR/chunks.py splitter)
+cp "$SCRIPT_DIR/scripts/chunk-text.py" "$HOOKS_DIR/chunk-text.py"
+python3 - "$HOOKS_DIR/chunk-text.py" "$SCRIPT_DIR" "$HOOKS_DIR/strip-markdown.py" <<'CHUNKEOF'
+import re, sys
+path, repo, strip_shim = sys.argv[1], sys.argv[2], sys.argv[3]
+src = open(path).read()
+src = re.sub(r'^_REPO_HINT = .*$', f'_REPO_HINT = {repo!r}', src, count=1, flags=re.M)
+open(path, 'w').write(src)
+# sanity: the installed shims must point at the repo, not carry their own rules
+for p in (path, strip_shim):
+    assert "_REPO_HINT = " + repr(repo) in open(p).read(), f"shim not stamped: {p}"
+CHUNKEOF
 
 # Copy CLI hook helper files if present
 [ -f "$SCRIPT_DIR/agy_session_hook.py" ] && cp "$SCRIPT_DIR/agy_session_hook.py" "$HOOKS_DIR/agy-session-hook.py"
