@@ -18,6 +18,7 @@ Requires Afterwords server running at http://127.0.0.1:7860
 
 import asyncio
 import importlib.util
+import inspect
 import json
 import logging
 import os
@@ -47,6 +48,12 @@ CHUNK_CHARS = 400
 # shell hook and the Claude/Codex workers all load these — one implementation.
 _STRIP_MODULE = "strip_markdown.py"
 _CHUNK_MODULE = "chunks.py"
+
+# Repo root for this deployment, stamped by scripts/install-hermes-hook.sh when
+# handler.py is installed outside the repo (the gateway loads it from
+# ~/.hermes/hooks/afterwords-tts/, where a walk-up cannot reach the checkout).
+# Also settable via $AFTERWORDS_REPO.
+_REPO_HINT = ""
 
 # Agent name used for .afterwords mapping lookup
 HERMES_AGENT = "hermes"
@@ -89,19 +96,22 @@ def _repo_root() -> Path | None:
     """Locate the afterwords repo root, or None if it isn't reachable.
 
     Resolution order:
-      1. $AFTERWORDS_REPO — explicit override (needed when this file is deployed
-         outside the repo, e.g. ~/.hermes/hooks/afterwords-tts/).
-      2. Walk up from this file for a directory holding BOTH canonical modules.
-         When handler.py is symlinked into ~/.hermes/hooks/ (the recommended
-         deployment), `resolve()` lands in the repo and this finds it; it also
-         finds it for any in-repo run. No hardcoded parents[n] index.
+      1. `$AFTERWORDS_REPO` — explicit override.
+      2. `_REPO_HINT` — stamped into the installed copy by
+         scripts/install-hermes-hook.sh, because the gateway loads this file from
+         ~/.hermes/hooks/afterwords-tts/ where a walk-up cannot reach the repo.
+      3. Walk up from this file for a directory holding BOTH canonical modules.
+         When handler.py is symlinked into ~/.hermes/hooks/, `resolve()` lands in
+         the repo and this finds it; it also finds it for any in-repo run.
+         No hardcoded parents[n] index.
     """
-    override = os.environ.get("AFTERWORDS_REPO", "").strip()
-    if override:
+    for override in (os.environ.get("AFTERWORDS_REPO", "").strip(), _REPO_HINT):
+        if not override:
+            continue
         candidate = Path(override).expanduser()
         if (candidate / _STRIP_MODULE).is_file() and (candidate / _CHUNK_MODULE).is_file():
             return candidate
-        log.warning("AFTERWORDS_REPO=%s has no %s/%s", override, _STRIP_MODULE, _CHUNK_MODULE)
+        log.warning("repo hint %s has no %s/%s", override, _STRIP_MODULE, _CHUNK_MODULE)
     for directory in Path(__file__).resolve().parents:
         if (directory / _STRIP_MODULE).is_file() and (directory / _CHUNK_MODULE).is_file():
             return directory
@@ -143,6 +153,23 @@ def _canonical(filename: str, attr: str):
         if not callable(fn):
             log.warning("%s defines no callable %s", path, attr)
             continue
+        # A file in the hooks dir that lacks max_chars is the pre-2026-09 legacy
+        # copy: calling it would raise TypeError and demote every caller to the
+        # fallback, which is the exact silent degradation this guards against.
+        if path.parent == Path.home() / ".claude" / "hooks":
+            try:
+                params = inspect.signature(fn).parameters
+            except (TypeError, ValueError):
+                params = {}
+            accepts_max = "max_chars" in params or any(
+                p.kind is inspect.Parameter.VAR_KEYWORD for p in params.values()
+            )
+            if not accepts_max:
+                log.warning(
+                    "ignoring legacy %s at %s (no max_chars; run setup.sh to install the shim)",
+                    filename, path,
+                )
+                continue
         return fn, str(path)
     return None, f"{filename} not found in {[str(p) for p in _candidates(filename)]}"
 
