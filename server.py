@@ -964,7 +964,18 @@ def main():
     def _load_backend(b):
         b.load()
 
+    allowed_backends = None
+    backends_filter = os.environ.get("AFTERWORDS_BACKENDS", "").strip()
+    if backends_filter:
+        allowed_backends = {
+            name.strip() for name in backends_filter.split(",") if name.strip()
+        }
+        log.info("AFTERWORDS_BACKENDS filter active: %s", sorted(allowed_backends))
+
     for bname in backends.names():
+        if allowed_backends is not None and bname not in allowed_backends:
+            log.info("skipping backend %s (not in AFTERWORDS_BACKENDS)", bname)
+            continue
         b = backends.get(bname)
         t0 = time.time()
         log.info("loading backend %s (%s)...", bname, b.display_name)

@@ -6,7 +6,7 @@ with internal newlines stripped — safe to pass directly to /synthesize.
 import re
 import sys
 
-MAX_CHARS = 200
+MAX_CHARS = 400
 
 text = sys.stdin.read().strip()
 if not text:

@@ -31,10 +31,10 @@ def test_two_short_sentences_in_one_chunk():
     assert "How are you?" in chunks[0]
 
 
-def test_splits_at_200_char_boundary():
-    # ~110 chars each sentence; together >200 chars → must split
-    s1 = "A" * 100 + "."
-    s2 = "B" * 100 + "."
+def test_splits_at_400_char_boundary():
+    # ~210 chars each sentence; together >400 chars → must split
+    s1 = "A" * 200 + "."
+    s2 = "B" * 200 + "."
     chunks = _run_chunk(s1 + " " + s2)
     assert len(chunks) == 2
     assert s1 in chunks[0]
@@ -67,21 +67,21 @@ def test_multiple_sentences_pack_until_limit():
 
 def test_exclamation_and_ellipsis_as_sentence_boundaries():
     chunks = _run_chunk("Wow! That was amazing. Really… Or was it?")
-    # All together <200 chars → 1 chunk, but splits ARE at these boundaries
+    # All together <400 chars → 1 chunk, but splits ARE at these boundaries
     assert len(chunks) >= 1
 
 
 def test_single_sentence_exceeding_max_chars_is_word_split():
     # A single sentence with no punctuation that exceeds MAX_CHARS must be split.
-    long_sentence = "word " * 50  # 250 chars, no sentence-end punctuation
+    long_sentence = "word " * 100  # 500 chars, no sentence-end punctuation
     chunks = _run_chunk(long_sentence.strip())
-    assert all(len(c) <= 200 for c in chunks), f"Chunk exceeds 200 chars: {[len(c) for c in chunks]}"
+    assert all(len(c) <= 400 for c in chunks), f"Chunk exceeds 400 chars: {[len(c) for c in chunks]}"
     assert len(chunks) >= 2
 
 
 def test_word_split_preserves_all_words():
     # Ensure no words are dropped when word-splitting a long sentence.
-    long_sentence = ("alpha " * 40).strip()  # 240 chars
+    long_sentence = ("alpha " * 80).strip()  # 480 chars
     chunks = _run_chunk(long_sentence)
     rejoined = " ".join(chunks)
     assert rejoined == long_sentence

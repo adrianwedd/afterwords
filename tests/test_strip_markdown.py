@@ -40,7 +40,7 @@ def test_italic_stripped():
 
 
 def test_heading_stripped():
-    assert strip_markdown("## Section Title") == "Section Title"
+    assert strip_markdown("## Section Title") == "Section Title."
 
 
 def test_bullet_list_stripped():
@@ -50,11 +50,66 @@ def test_bullet_list_stripped():
     assert result.startswith("-") is False
 
 
+def test_bullet_list_pauses_between_items():
+    result = strip_markdown("- First point\n- Second point\n- Third point")
+    assert "First point." in result
+    assert "Second point." in result
+    assert "Third point." in result
+    # Items must be separate spoken beats, not a run-on clause.
+    assert result.index("First point.") < result.index("Second point.")
+    assert ". Second point." in result or result.count(". ") >= 2
+
+
 def test_numbered_list_stripped():
     result = strip_markdown("1. first\n2. second")
     assert "first" in result
     assert "second" in result
     assert "1." not in result
+
+
+def test_numbered_list_pauses_between_items():
+    result = strip_markdown("1. Install deps\n2. Restart the server\n3. Verify health")
+    assert "Install deps." in result
+    assert "Restart the server." in result
+    assert "Verify health." in result
+
+
+def test_heading_becomes_spoken_sentence():
+    result = strip_markdown("## Voice Configuration\n\nBody text here.")
+    assert "Voice Configuration." in result
+    assert "##" not in result
+
+
+def test_em_dash_becomes_comma_pause():
+    result = strip_markdown("galadriel — ethereal, ancient")
+    assert "—" not in result
+    assert "galadriel, ethereal" in result
+
+
+def test_urls_are_dropped():
+    result = strip_markdown("See https://example.com/docs for details.")
+    assert "https://" not in result
+    assert "example.com" not in result
+    assert "See" in result
+    assert "for details." in result
+
+
+def test_file_path_keeps_basename():
+    result = strip_markdown("Updated /Users/chris/local/dev/afterwords/server.py today.")
+    assert "/Users/" not in result
+    assert "server.py" in result
+
+
+def test_snake_case_spoken_as_words():
+    result = strip_markdown("Fixed strip_markdown and chunk_text helpers.")
+    assert "strip markdown" in result
+    assert "chunk text" in result
+
+
+def test_arrow_becomes_pause():
+    result = strip_markdown("hook → worker → speaker")
+    assert "→" not in result
+    assert "hook, worker, speaker" in result
 
 
 def test_link_keeps_text():
@@ -91,6 +146,33 @@ def test_truncates_at_1000_chars():
     text = "word " * 400  # 2000 chars
     result = strip_markdown(text)
     assert len(result) <= 1000
+
+
+def test_max_chars_none_preserves_full_text():
+    text = "word " * 400
+    result = strip_markdown(text, max_chars=None)
+    assert len(result) > 1000
+    assert result.startswith("word")
+
+
+def test_cli_default_does_not_truncate():
+    """Hook CLI must not silently cut speech at 1000 chars."""
+    import os
+    import subprocess
+    import sys
+    from pathlib import Path
+
+    script = Path(__file__).resolve().parent.parent / "strip_markdown.py"
+    long = ("Hello world. " * 200).strip()
+    env = os.environ.copy()
+    env.pop("STRIP_MARKDOWN_MAX_CHARS", None)
+    out = subprocess.check_output(
+        [sys.executable, str(script)],
+        input=long.encode(),
+        env=env,
+    ).decode()
+    assert len(out.strip()) > 1000
+    assert out.strip().startswith("Hello world")
 
 
 def test_collapses_whitespace():
@@ -139,9 +221,13 @@ For more details, see the [README](https://github.com/adrianwedd/afterwords)."""
     assert "**" not in result
     # Table removed
     assert "|" not in result
-    # Bullet list markers stripped, content preserved
-    assert "Zero-shot cloning" in result
+    # Bullet list markers stripped, content preserved as separate sentences
+    assert "Zero-shot cloning." in result
+    assert "Real-time synthesis." in result
     assert result.count("- ") == 0  # no bullet markers remain
+    # Numbered list items also get spoken pauses (em dash → comma)
+    assert "galadriel, ethereal, ancient." in result
+    assert "snape, velvet menace." in result
     # Blockquote stripped
     assert ">" not in result
     assert "experimental" in result
@@ -155,3 +241,17 @@ For more details, see the [README](https://github.com/adrianwedd/afterwords)."""
     assert "github.com" not in result
     # No backticks remain
     assert "`" not in result
+
+
+def test_url_strip_keeps_sentence_punctuation():
+    """Regression: `https?://\\S+` consumed the period that ended the sentence,
+    fusing the text on either side of a link into one run-on clause."""
+    assert strip_markdown("See https://example.com/docs. It works.") == "See . It works."
+    assert "It works." in strip_markdown("See https://example.com/docs. It works.")
+    # the URL itself is still removed
+    assert "example.com" not in strip_markdown("See https://example.com/docs. It works.")
+    # a bare URL with no trailing punctuation is still fully stripped
+    assert strip_markdown("Visit https://x.com/path and come back.") == "Visit and come back."
+    # sentence-final punctuation survives so downstream chunking still splits
+    # the orphaned comma is tidied by the whitespace collapse, not left dangling
+    assert strip_markdown("Check https://a.io/x, then go.") == "Check, then go."

@@ -24,7 +24,7 @@ INPUT=$(cat)
 # Gemini sends prompt_response. Fall back to last_assistant_message in case the
 # Gemini schema converges with Claude's in a future release.
 TEXT=$(printf '%s' "$INPUT" | jq -r '.prompt_response // .last_assistant_message // empty' 2>/dev/null \
-    | python3 "$STRIP_MARKDOWN" 2>/dev/null)
+    | STRIP_MARKDOWN_MAX_CHARS=0 python3 "$STRIP_MARKDOWN" 2>/dev/null)
 [ -z "$TEXT" ] && exit 0
 
 # Gemini hook payload doesn't carry an agent_type; subagent semantics differ

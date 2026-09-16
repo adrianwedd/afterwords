@@ -23,8 +23,11 @@
 #   }
 #
 # Voice per project: add a .afterwords file at the repo root, e.g.:
-#   default: rimmer
-#   cursor: lister
+#   default: holly
+#   cursor: holly
+#   cursor_summarize: true          # speak a short summary for long replies
+#   cursor_summarize_model: qwen2.5:3b   # optional Ollama model; extractive fallback if absent
+#   cursor_summarize_min: 500
 #
 # Run `bash setup.sh` to install automatically when Cursor is detected.
 set -uo pipefail
@@ -38,7 +41,7 @@ INPUT=$(cat)
 [ -z "$INPUT" ] && exit 0
 
 TEXT=$(printf '%s' "$INPUT" | jq -r '.text // empty' 2>/dev/null \
-    | python3 "$STRIP_MARKDOWN" 2>/dev/null)
+    | STRIP_MARKDOWN_MAX_CHARS=0 python3 "$STRIP_MARKDOWN" 2>/dev/null)
 [ -z "$TEXT" ] && exit 0
 
 # workspace_roots[0] is the project directory; fall back to $PWD.

@@ -2,11 +2,14 @@
 
 Each chunk is capped at MAX_CHARS characters. Chunks are printed one per line
 with internal newlines stripped — safe to pass directly to /synthesize.
+
+400 chars keeps latency-to-first-audio low while cutting HTTP/Metal round-trips
+and audible seams vs the old 200-char cap.
 """
 import re
 import sys
 
-MAX_CHARS = 200
+MAX_CHARS = 400
 
 text = sys.stdin.read().strip()
 if not text:

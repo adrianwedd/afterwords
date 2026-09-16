@@ -30,14 +30,7 @@ WAVFILE="/tmp/hermes-afterwords-$$.wav"
 if curl -s --max-time 90 "$URL" -o "$WAVFILE" 2>/dev/null; then
     FILESIZE=$(stat -f%z "$WAVFILE" 2>/dev/null || echo 0)
     if [ "$FILESIZE" -gt 1000 ]; then
-        # Trim silence like the original hook does
-        TRIMMED="/tmp/hermes-afterwords-trimmed-$$.wav"
-        if ffmpeg -y -ss 0.1 -i "$WAVFILE" -c copy "$TRIMMED" 2>/dev/null; then
-            mv "$TRIMMED" "$WAVFILE"
-        fi
-        rm -f "$TRIMMED"
-
-        # Play audio (afplay is macOS default)
+        # Play full audio — fixed -ss 0.1 chops the start of every clip.
         [ -f "$MUTE_FILE" ] || afplay "$WAVFILE" 2>/dev/null || echo "Audio saved to $WAVFILE (could not play)"
         rm -f "$WAVFILE"
         exit 0
