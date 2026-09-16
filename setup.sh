@@ -681,6 +681,61 @@ PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
 VENV_PYTHON="${SCRIPT_DIR}/.venv/bin/python3"
 AFTERWORDS_SERVER_CONFIG="$HOME/.afterwords-server"
 
+# ── Resolve plist settings BEFORE opening the output file ─────────────
+# Two traps here, both real bugs once fixed:
+#  1. `{ ... } > "$PLIST_PATH"` truncates the file the instant the redirect
+#     opens, so any read of $PLIST_PATH from inside the block (the --host
+#     fallback below) sees an empty file and always fails. Resolution must
+#     happen first.
+#  2. This script runs under `set -euo pipefail`, so a `grep` that matches
+#     nothing (the common case: no HOST= line yet) makes the pipeline exit
+#     non-zero and aborts setup.sh mid-write, leaving a truncated plist.
+#     Every substitution therefore ends in `|| true`.
+SETUP_HOST="$(grep '^HOST=' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2- || true)"
+SETUP_BIND_PUBLIC="$(grep '^BIND_PUBLIC=' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2- || true)"
+
+# Fall back to a pre-existing plist (one hand-edited before HOST/BIND_PUBLIC
+# existed in the config), so re-running setup.sh never clobbers a live LAN bind.
+if [ -z "$SETUP_HOST" ] && [ -f "$PLIST_PATH" ]; then
+    SETUP_HOST="$(python3 -c "
+import plistlib, sys
+try:
+    args = plistlib.load(open(sys.argv[1], 'rb')).get('ProgramArguments', [])
+except Exception:
+    sys.exit(0)
+if '--host' in args and args.index('--host') + 1 < len(args):
+    print(args[args.index('--host') + 1])
+" "$PLIST_PATH" 2>/dev/null || true)"
+fi
+
+# Reject an unsafe HOST before interpolating it into XML, mirroring
+# afterwords.sh's is_valid_bind_address. A value carrying XML metacharacters
+# (e.g. from a hand-edited ~/.afterwords-server) otherwise emits a plist that
+# plutil rejects and launchd cannot load — breaking the whole install. Leading
+# `-` is rejected too: argparse would read it as an option, not --host's value.
+case "$SETUP_HOST" in
+    "") ;;
+    -*)  echo "  ⚠ ignoring unsafe HOST=${SETUP_HOST} (leading '-'); using loopback" >&2
+         SETUP_HOST="" ;;
+    *[!A-Za-z0-9.:_%-]*)
+         echo "  ⚠ ignoring unsafe HOST=${SETUP_HOST} in ${AFTERWORDS_SERVER_CONFIG}; using loopback" >&2
+         SETUP_HOST="" ;;
+esac
+
+# An explicit BIND_PUBLIC key (true OR false) is authoritative; only when the
+# key is absent do we inherit --bind-public from the live plist. This matches
+# afterwords.sh's write_plist(), which is the whole point — the two generators
+# must not disagree about the bind.
+if [ -z "$SETUP_BIND_PUBLIC" ] && [ -n "$SETUP_HOST" ] \
+   && grep -q -- "--bind-public" "$PLIST_PATH" 2>/dev/null; then
+    SETUP_BIND_PUBLIC="true"
+fi
+# --bind-public without --host is meaningless (and would be silently ignored);
+# don't emit a flag that has no effect.
+if [ -z "$SETUP_HOST" ] && [ "$SETUP_BIND_PUBLIC" = "true" ]; then
+    SETUP_BIND_PUBLIC=""
+fi
+
 {
     cat <<PLIST_HEAD
 <?xml version="1.0" encoding="UTF-8"?>
@@ -697,6 +752,13 @@ AFTERWORDS_SERVER_CONFIG="$HOME/.afterwords-server"
 PLIST_HEAD
     if [ -f "$AFTERWORDS_SERVER_CONFIG" ] && grep -q "^WITH_17B=true" "$AFTERWORDS_SERVER_CONFIG"; then
         echo "        <string>--with-1.7b</string>"
+    fi
+    if [ -n "$SETUP_HOST" ]; then
+        echo "        <string>--host</string>"
+        echo "        <string>${SETUP_HOST}</string>"
+    fi
+    if [ "$SETUP_BIND_PUBLIC" = "true" ]; then
+        echo "        <string>--bind-public</string>"
     fi
     cat <<PLIST_TAIL
     </array>

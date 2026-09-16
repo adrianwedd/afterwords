@@ -32,13 +32,14 @@ rule()  { echo -e "${DIM}  ─────────────────�
 
 # ── Constants ────────────────────────────────────────────────────
 PLIST_NAME="com.afterwords.tts-server"
-PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
+# Allow test override (tests/ write to a temp path, never the real LaunchAgents dir)
+PLIST_PATH="${AFTERWORDS_PLIST_PATH:-$HOME/Library/LaunchAgents/${PLIST_NAME}.plist}"
 LOG_FILE="/tmp/claude-tts-server.log"
 PORT=7860
 HEALTH_URL="http://localhost:${PORT}/health"
 CLOUD_CONFIG_FILE="$HOME/.afterwords-cloud"
 CLOUD_DEFAULT_URL="https://afterwords-api.adrianwedd.workers.dev"
-AFTERWORDS_SERVER_CONFIG="$HOME/.afterwords-server"
+AFTERWORDS_SERVER_CONFIG="${AFTERWORDS_SERVER_CONFIG:-$HOME/.afterwords-server}"
 CODEX_WATCH_PID="/tmp/codex-tts-watch.pid"
 CODEX_WATCH_LOG="/tmp/codex-tts-watch.log"
 CODEX_WATCH_SCRIPT_REL=".claude/hooks/codex-tts-watch.sh"
@@ -60,8 +61,16 @@ fi
 
 # ── Helpers ──────────────────────────────────────────────────────
 
+# launchd is machine-global and keyed by Label, not by path — so a test with a
+# temp plist would otherwise see the operator's real service as "loaded" and
+# unload it. Tests set AFTERWORDS_NO_LAUNCHCTL=1 to make every launchd
+# interaction a no-op; nothing else may set it.
+LAUNCHD_DISABLED=0
+[ "${AFTERWORDS_NO_LAUNCHCTL:-}" = "1" ] && LAUNCHD_DISABLED=1
+
 # Check if plist is loaded in launchd
 plist_loaded() {
+    [ "$LAUNCHD_DISABLED" = "1" ] && return 1
     launchctl list "$PLIST_NAME" &>/dev/null
 }
 
@@ -75,9 +84,159 @@ with_17b_enabled() {
     [ -f "$AFTERWORDS_SERVER_CONFIG" ] && grep -q "^WITH_17B=true" "$AFTERWORDS_SERVER_CONFIG"
 }
 
-# Write (or rewrite) the launchd plist, honouring current server config
+# Read a KEY=value from the server config file (empty when unset)
+server_config_get() {
+    local key="$1"
+    [ -f "$AFTERWORDS_SERVER_CONFIG" ] || return 0
+    grep "^${key}=" "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2-
+}
+
+# Set (or clear, when value is empty) a KEY=value in the server config file.
+# Uses awk rather than `sed -i "s|..|..|"` because sed treats `&` in the
+# replacement as "the matched text" and `|`/`\` as delimiters — so a value
+# containing one (a typo'd address, a future key holding a shell fragment)
+# silently corrupts the file into e.g. `HOST=aHOST=old b` and that corrupted
+# value is re-emitted as --host on every regeneration. awk sets the value
+# literally, and the write is atomic (temp + mv) so a failed write cannot
+# truncate the config.
+#
+# The value is read as an input RECORD (first file) rather than via `awk -v`,
+# because -v interprets escape sequences in the value (`back\\slash` would
+# arrive as `back\slash`). Records are taken verbatim.
+server_config_set() {
+    local key="${1:-}" value="${2:-}"
+    [ -n "$key" ] || return 1
+    [ -e "$AFTERWORDS_SERVER_CONFIG" ] || : > "$AFTERWORDS_SERVER_CONFIG"
+    local tmp="${AFTERWORDS_SERVER_CONFIG}.tmp.$$"
+    if awk -v k="$key" '
+        NR == FNR { v = $0; next }
+        {
+            if (index($0, k "=") == 1) {
+                if (done) next
+                done = 1
+                if (v != "") print k "=" v
+                next
+            }
+            print
+        }
+        END { if (!done && v != "") print k "=" v }
+    ' <(printf '%s\n' "$value") "$AFTERWORDS_SERVER_CONFIG" > "$tmp" 2>/dev/null; then
+        # Preserve the existing file's mode: the temp file was created under the
+        # ambient umask (022 → 644), so a config the operator had tightened to
+        # 600 would silently become world-readable after any update.
+        #
+        # Done via Python, not `stat`, because the two implementations are
+        # mutually incompatible in a way that fails silently: on macOS
+        # `stat -f '%Lp'` prints the mode, but on GNU coreutils `-f` means
+        # "filesystem" and `%Lp` prints the filesystem type — exit status 0,
+        # garbage output, so a `|| fallback` never fires. (chmod --reference is
+        # also BSD-incompatible.) Python is already required by this script.
+        if [ -e "$AFTERWORDS_SERVER_CONFIG" ]; then
+            local _mode
+            _mode="$(python3 -c '
+import os, sys
+try:
+    print(oct(os.stat(sys.argv[1]).st_mode & 0o777)[2:])
+except Exception:
+    print("644")
+' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null || echo 644)"
+            chmod "$_mode" "$tmp" 2>/dev/null || true
+        fi
+        mv "$tmp" "$AFTERWORDS_SERVER_CONFIG"
+    else
+        rm -f "$tmp"
+        return 1
+    fi
+}
+
+# The bind address the plist must launch with. Persisted in the server config so
+# a regenerated plist (configure --with-1.7b, setup.sh) cannot silently drop a
+# LAN bind and break remote clients — see HOST/BIND_PUBLIC.
+server_host() { server_config_get HOST; }
+
+# True if the argument is a plausible bind address: an IPv4/IPv6 literal,
+# `0.0.0.0`, or a hostname. Deliberately conservative — rejects anything with
+# whitespace or XML/shell metacharacters, because the value is interpolated
+# into plist XML and into a launchd ProgramArguments entry. A bad value there
+# yields a plist launchd silently refuses to load, which is discovered only at
+# the next login, so it is worth failing fast at the CLI instead.
+is_valid_bind_address() {
+    case "$1" in
+        "") return 1 ;;
+        # A leading `-` would be parsed by server.py's argparse as an option,
+        # not as the value of --host: `server.py --host -leading-dash` exits 2
+        # with "argument --host: expected one argument". Under launchd
+        # KeepAlive that is an endless restart loop, so reject it here.
+        -*) return 1 ;;
+    esac
+    # Only [A-Za-z0-9.:_%-] allowed (covers IPv4, IPv6, `fe80::1%en0`, and
+    # hostnames). `[`/`]` are permitted only as an IPv6 bracketed form.
+    case "$1" in
+        \[*\])  # [::1] style — inner part must still be address-safe
+            local inner="${1#[}"; inner="${inner%]}"
+            case "$inner" in
+                ""|*[!A-Za-z0-9.:_%-]*) return 1 ;;
+            esac
+            return 0
+            ;;
+        *[!A-Za-z0-9.:_%-]*) return 1 ;;
+    esac
+    return 0
+}
+
+# Read --host out of an existing plist (empty when absent). Used so a regenerate
+# preserves a bind that predates the HOST config key instead of reverting to
+# loopback; the config key still wins when set explicitly.
+plist_host() {
+    [ -f "$PLIST_PATH" ] || return 0
+    python3 - "$PLIST_PATH" <<'PY' 2>/dev/null
+import plistlib, sys
+try:
+    with open(sys.argv[1], "rb") as f:
+        args = plistlib.load(f).get("ProgramArguments", [])
+except Exception:
+    sys.exit(0)
+for i, a in enumerate(args):
+    if a == "--host" and i + 1 < len(args):
+        print(args[i + 1]); break
+PY
+}
+
+# True when an existing plist passes --bind-public
+plist_bind_public() {
+    [ -f "$PLIST_PATH" ] || return 1
+    grep -q -- "--bind-public" "$PLIST_PATH" 2>/dev/null
+}
+
+# Write (or rewrite) the launchd plist, honouring current server config.
+# --host/--bind-public are driven from HOST/BIND_PUBLIC in the server config,
+# NOT hardcoded — omitting them here once silently reverted the server to
+# loopback and broke every LAN client (and conversely, a hand-edited plist
+# was clobbered on the next configure run). Resolution order: explicit config
+# key, then whatever the live plist already had, then the loopback default.
 write_plist() {
     local venv_python="${REPO_DIR}/.venv/bin/python3"
+    local host bind_public
+    host="$(server_host)"
+    [ -z "$host" ] && host="$(plist_host)"
+    # Defensive: a HOST written by hand into the config (or carried over from an
+    # older version) could contain XML metacharacters and would produce a plist
+    # launchd cannot parse. validate at the point of emission too, not only in
+    # `configure --bind`, so a bad value degrades to loopback rather than
+    # bricking the service.
+    if [ -n "$host" ] && ! is_valid_bind_address "$host"; then
+        warn "ignoring unsafe HOST=${host} in ${AFTERWORDS_SERVER_CONFIG} (invalid bind address)"
+        host=""
+    fi
+    # An explicit BIND_PUBLIC key (true OR false) is authoritative; only when
+    # the key is entirely absent do we fall back to the live plist.
+    if [ -n "$(server_config_get BIND_PUBLIC)" ]; then
+        bind_public="$(server_config_get BIND_PUBLIC)"
+    elif plist_bind_public; then
+        bind_public="true"
+    else
+        bind_public=""
+    fi
     {
         cat <<PLIST_HEAD
 <?xml version="1.0" encoding="UTF-8"?>
@@ -93,6 +252,15 @@ write_plist() {
         <string>${REPO_DIR}/server.py</string>
 PLIST_HEAD
         with_17b_enabled && echo "        <string>--with-1.7b</string>"
+        if [ -n "$host" ]; then
+            echo "        <string>--host</string>"
+            echo "        <string>${host}</string>"
+        fi
+        # --bind-public is meaningless without --host (server.py ignores it for a
+        # loopback bind), so don't emit an orphan flag — this keeps parity with
+        # setup.sh's suppression and avoids a plist that reads as a configured
+        # LAN bind when host degraded to empty.
+        [ -n "$host" ] && [ "$bind_public" = "true" ] && echo "        <string>--bind-public</string>"
         cat <<PLIST_TAIL
     </array>
     <key>RunAtLoad</key><true/>
@@ -114,6 +282,7 @@ server_pid() {
 
 # Get PID from launchd (available before port binding)
 launchd_pid() {
+    [ "$LAUNCHD_DISABLED" = "1" ] && return 0
     launchctl list "$PLIST_NAME" 2>/dev/null | awk '/PID/{gsub(/[^0-9]/,"",$3); if($3+0>0) print $3}'
 }
 
@@ -224,7 +393,19 @@ cmd_status() {
         plist_loaded && mgmt="launchd (auto-start)"
         local mute_label=""
         [ -f "$MUTE_FILE" ] && mute_label="  ${YELLOW}⏸ muted${NC}"
-        echo -e "  ${GREEN}●${NC} ${BOLD}running${NC}  ${DIM}PID ${pid}  port ${PORT}  ${mgmt}${NC}${with17b_label}${mute_label}"
+        # Show where it actually listens. A non-loopback bind is the usual
+        # reason local curl/hooks can't reach it, and "running" alone hid that.
+        # lsof prints e.g. `*:7860`, `127.0.0.1:7860`, `[::1]:7860` — strip
+        # only the trailing :PORT (a bare `s/.*://` would mangle `*:7860`).
+        local listen_addr
+        listen_addr=$(lsof -nP -iTCP:"$PORT" -sTCP:LISTEN 2>/dev/null \
+            | awk 'NR==2{print $9}' | sed "s/:${PORT}\$//")
+        case "$listen_addr" in
+            "")           listen_addr="?" ;;
+            "*"|"0.0.0.0") listen_addr="all interfaces" ;;
+        esac
+        local bind_label="  ${DIM}bind ${listen_addr}${NC}"
+        echo -e "  ${GREEN}●${NC} ${BOLD}running${NC}  ${DIM}PID ${pid}  port ${PORT}  ${mgmt}${NC}${bind_label}${with17b_label}${mute_label}"
     else
         echo -e "  ${RED}●${NC} ${BOLD}stopped${NC}${with17b_label}"
         echo
@@ -277,7 +458,14 @@ if voices:
         print('    ' + ''.join(padded[i:i+cols]))
 print()
 print(f'  {D}afterwords logs  —  /tmp/claude-tts-server.log{R}')
-" 2>/dev/null || warn "Server running but /health not yet responding (warming up)"
+"
+    else
+        # health_check failed. Two causes: the server is still warming up
+        # (model preload means it does not bind for 60-180s), or it is bound to
+        # a non-loopback address so localhost is refused. This must be in the
+        # else branch — as a `|| warn` chained to the python3 above it was
+        # unreachable, since that command only runs when the condition is true.
+        warn "Server running but /health not responding on localhost:${PORT} — still warming up, or bound elsewhere (check ${CYAN}afterwords configure${NC})"
     fi
     echo
 }
@@ -1182,6 +1370,42 @@ with open(os.environ['TARGET'], 'w') as f:
 cmd_configure() {
     local flag="${1:-}"
     case "$flag" in
+        --bind)
+            # Set the launchd bind address. `--bind loopback` reverts to the
+            # default; anything else is a literal address passed to --host.
+            local target="${2:-}"
+            case "$target" in
+                "")
+                    fail "Usage: afterwords configure --bind <address|loopback>"
+                    ;;
+                loopback|local|default)
+                    # Set explicitly rather than clearing: cleared keys would
+                    # let write_plist fall back to the live plist and resurrect
+                    # the LAN bind, making the revert a silent no-op.
+                    server_config_set HOST "127.0.0.1"
+                    server_config_set BIND_PUBLIC "false"
+                    ;;
+                *)
+                    # Validate before persisting. The value is interpolated into
+                    # plist XML and into a launchd argument, so an address with
+                    # XML metacharacters (e.g. `foo<bar>`) would emit a plist
+                    # that plutil rejects and launchd cannot load — a failure
+                    # that only surfaces at next boot. Reject it here instead.
+                    if ! is_valid_bind_address "$target"; then
+                        fail "Invalid bind address: ${target}. Expected an IPv4/IPv6 address or hostname (no spaces or XML metacharacters)."
+                    fi
+                    server_config_set HOST "$target"
+                    server_config_set BIND_PUBLIC "true"
+                    ;;
+            esac
+            if plist_exists; then
+                write_plist
+                plist_loaded && { launchctl unload "$PLIST_PATH" 2>/dev/null; launchctl load "$PLIST_PATH"; }
+                ok "Bind address set to ${target} — run ${CYAN}afterwords restart${NC} to apply"
+            else
+                ok "Bind address set to ${target} — run ${CYAN}bash setup.sh${NC} to install the service"
+            fi
+            ;;
         --with-1.7b)
             # Write config, regenerate plist, reload launchd
             if [ -f "$AFTERWORDS_SERVER_CONFIG" ] && grep -q "^WITH_17B=" "$AFTERWORDS_SERVER_CONFIG"; then
@@ -1219,13 +1443,35 @@ cmd_configure() {
             else
                 echo -e "  1.7B model  ${DIM}disabled (default — 0.6B only)${NC}"
             fi
+            local bind_display
+            bind_display="$(server_host)"
+            if [ -z "$bind_display" ]; then
+                bind_display="$(plist_host)"
+            fi
+            case "$bind_display" in
+                "")
+                    # No HOST configured and no --host in the plist: server.py
+                    # defaults to 127.0.0.1.
+                    echo -e "  Bind        ${DIM}loopback (127.0.0.1, default)${NC}"
+                    ;;
+                127.0.0.1|localhost|"::1"|"[::1]")
+                    # A loopback HOST is the explicit revert target of
+                    # `--bind loopback`; labelling it "non-loopback" was wrong.
+                    echo -e "  Bind        ${DIM}loopback (${bind_display})${NC}"
+                    ;;
+                *)
+                    echo -e "  Bind        ${CYAN}${bind_display}${NC}  ${DIM}(non-loopback — LAN clients can reach it)${NC}"
+                    ;;
+            esac
             echo
             echo -e "  ${DIM}afterwords configure --with-1.7b  # enable Qwen3-1.7B (higher fidelity)${NC}"
             echo -e "  ${DIM}afterwords configure --no-1.7b   # revert to 0.6B only${NC}"
+            echo -e "  ${DIM}afterwords configure --bind <addr>   # bind a LAN address (e.g. 0.0.0.0)${NC}"
+            echo -e "  ${DIM}afterwords configure --bind loopback # revert to loopback-only${NC}"
             echo
             ;;
         *)
-            fail "Unknown option: ${flag}. Use --with-1.7b or --no-1.7b"
+            fail "Unknown option: ${flag}. Use --with-1.7b, --no-1.7b, or --bind <address|loopback>"
             ;;
     esac
 }
@@ -1278,7 +1524,7 @@ cmd_help() {
     echo -e "    ${CYAN}codex-hook stop${NC}   Stop the Codex watcher"
     echo
     echo -e "  ${BOLD}Setup${NC}"
-    echo -e "    ${CYAN}configure${NC}         Show or change server settings (e.g. --with-1.7b)"
+    echo -e "    ${CYAN}configure${NC}         Show or change server settings (--with-1.7b, --bind)"
     echo -e "    ${CYAN}update${NC}            Pull latest commits, reinstall packages, reload voices"
     echo -e "    ${CYAN}uninstall${NC}         Remove service and optionally hooks"
     echo

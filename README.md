@@ -434,6 +434,17 @@ DELETE /session/{id}      (--allow-clone only)
 
 **Binding & limits.** The server binds to `127.0.0.1` (loopback) by default. Binding to a non-loopback address requires the explicit `--bind-public` flag, and `--allow-clone` always forces loopback regardless. `POST /clone` rejects request bodies larger than **25 MB** before parsing, and non-loopback binds enforce a Host-header allowlist. See [SECURITY.md](SECURITY.md) for the full threat model.
 
+To make a LAN bind survive restarts, set it through the CLI rather than editing the plist by hand — the value is stored in `~/.afterwords-server` (`HOST` / `BIND_PUBLIC`) and re-emitted on every plist regeneration, so `afterwords configure --with-1.7b` and re-running `setup.sh` no longer silently revert the server to loopback:
+
+```bash
+afterwords configure --bind 0.0.0.0      # reachable on every interface
+afterwords configure --bind 192.168.0.249 # one specific address
+afterwords configure --bind loopback      # back to 127.0.0.1 (default)
+afterwords restart                        # apply
+```
+
+`afterwords status` prints the resolved bind address, and `afterwords configure` shows the currently configured one.
+
 ### The Hook
 
 Claude Code's [Stop hook](https://docs.anthropic.com/en/docs/claude-code/hooks) fires after every response. The hook extracts the response text, strips markdown, and atomically writes a JSON item to the shared queue directory (`/tmp/claude-tts-queue/`). A background worker with `mkdir`-based locking (macOS has no `flock`) claims items one at a time and prevents overlapping audio via a shared play lock (`/tmp/afterwords-play.lock`) coordinated across all six CLI integrations.
