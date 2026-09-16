@@ -698,6 +698,27 @@ PLIST_HEAD
     if [ -f "$AFTERWORDS_SERVER_CONFIG" ] && grep -q "^WITH_17B=true" "$AFTERWORDS_SERVER_CONFIG"; then
         echo "        <string>--with-1.7b</string>"
     fi
+    # Preserve a non-loopback bind (HOST/BIND_PUBLIC in ~/.afterwords-server).
+    # Without this, re-running setup.sh silently reverts the server to loopback
+    # and every LAN client (voice satellites, other machines) breaks.
+    SETUP_HOST=$(grep "^HOST=" "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2-)
+    if [ -z "$SETUP_HOST" ] && [ -f "$PLIST_PATH" ]; then
+        SETUP_HOST=$(python3 -c "
+import plistlib,sys
+try:
+    a=plistlib.load(open(sys.argv[1],'rb')).get('ProgramArguments',[])
+    print(a[a.index('--host')+1] if '--host' in a else '')
+except Exception: print('')
+" "$PLIST_PATH" 2>/dev/null)
+    fi
+    if [ -n "$SETUP_HOST" ]; then
+        echo "        <string>--host</string>"
+        echo "        <string>${SETUP_HOST}</string>"
+    fi
+    if grep -q "^BIND_PUBLIC=true" "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null \
+       || { [ -n "$SETUP_HOST" ] && grep -q -- "--bind-public" "$PLIST_PATH" 2>/dev/null; }; then
+        echo "        <string>--bind-public</string>"
+    fi
     cat <<PLIST_TAIL
     </array>
     <key>RunAtLoad</key><true/>

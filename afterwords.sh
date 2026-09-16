@@ -32,13 +32,14 @@ rule()  { echo -e "${DIM}  ─────────────────�
 
 # ── Constants ────────────────────────────────────────────────────
 PLIST_NAME="com.afterwords.tts-server"
-PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
+# Allow test override (tests/ write to a temp path, never the real LaunchAgents dir)
+PLIST_PATH="${AFTERWORDS_PLIST_PATH:-$HOME/Library/LaunchAgents/${PLIST_NAME}.plist}"
 LOG_FILE="/tmp/claude-tts-server.log"
 PORT=7860
 HEALTH_URL="http://localhost:${PORT}/health"
 CLOUD_CONFIG_FILE="$HOME/.afterwords-cloud"
 CLOUD_DEFAULT_URL="https://afterwords-api.adrianwedd.workers.dev"
-AFTERWORDS_SERVER_CONFIG="$HOME/.afterwords-server"
+AFTERWORDS_SERVER_CONFIG="${AFTERWORDS_SERVER_CONFIG:-$HOME/.afterwords-server}"
 CODEX_WATCH_PID="/tmp/codex-tts-watch.pid"
 CODEX_WATCH_LOG="/tmp/codex-tts-watch.log"
 CODEX_WATCH_SCRIPT_REL=".claude/hooks/codex-tts-watch.sh"
@@ -60,8 +61,16 @@ fi
 
 # ── Helpers ──────────────────────────────────────────────────────
 
+# launchd is machine-global and keyed by Label, not by path — so a test with a
+# temp plist would otherwise see the operator's real service as "loaded" and
+# unload it. Tests set AFTERWORDS_NO_LAUNCHCTL=1 to make every launchd
+# interaction a no-op; nothing else may set it.
+LAUNCHD_DISABLED=0
+[ "${AFTERWORDS_NO_LAUNCHCTL:-}" = "1" ] && LAUNCHD_DISABLED=1
+
 # Check if plist is loaded in launchd
 plist_loaded() {
+    [ "$LAUNCHD_DISABLED" = "1" ] && return 1
     launchctl list "$PLIST_NAME" &>/dev/null
 }
 
@@ -75,9 +84,77 @@ with_17b_enabled() {
     [ -f "$AFTERWORDS_SERVER_CONFIG" ] && grep -q "^WITH_17B=true" "$AFTERWORDS_SERVER_CONFIG"
 }
 
-# Write (or rewrite) the launchd plist, honouring current server config
+# Read a KEY=value from the server config file (empty when unset)
+server_config_get() {
+    local key="$1"
+    [ -f "$AFTERWORDS_SERVER_CONFIG" ] || return 0
+    grep "^${key}=" "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2-
+}
+
+# Set (or clear, when value is empty) a KEY=value in the server config file
+server_config_set() {
+    local key="$1" value="$2"
+    touch "$AFTERWORDS_SERVER_CONFIG"
+    if grep -q "^${key}=" "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null; then
+        if [ -z "$value" ]; then
+            sed -i '' "/^${key}=/d" "$AFTERWORDS_SERVER_CONFIG"
+        else
+            sed -i '' "s|^${key}=.*|${key}=${value}|" "$AFTERWORDS_SERVER_CONFIG"
+        fi
+    elif [ -n "$value" ]; then
+        echo "${key}=${value}" >> "$AFTERWORDS_SERVER_CONFIG"
+    fi
+}
+
+# The bind address the plist must launch with. Persisted in the server config so
+# a regenerated plist (configure --with-1.7b, setup.sh) cannot silently drop a
+# LAN bind and break remote clients — see HOST/BIND_PUBLIC.
+server_host() { server_config_get HOST; }
+
+# Read --host out of an existing plist (empty when absent). Used so a regenerate
+# preserves a bind that predates the HOST config key instead of reverting to
+# loopback; the config key still wins when set explicitly.
+plist_host() {
+    [ -f "$PLIST_PATH" ] || return 0
+    python3 - "$PLIST_PATH" <<'PY' 2>/dev/null
+import plistlib, sys
+try:
+    with open(sys.argv[1], "rb") as f:
+        args = plistlib.load(f).get("ProgramArguments", [])
+except Exception:
+    sys.exit(0)
+for i, a in enumerate(args):
+    if a == "--host" and i + 1 < len(args):
+        print(args[i + 1]); break
+PY
+}
+
+# True when an existing plist passes --bind-public
+plist_bind_public() {
+    [ -f "$PLIST_PATH" ] || return 1
+    grep -q -- "--bind-public" "$PLIST_PATH" 2>/dev/null
+}
+
+# Write (or rewrite) the launchd plist, honouring current server config.
+# --host/--bind-public are driven from HOST/BIND_PUBLIC in the server config,
+# NOT hardcoded — omitting them here once silently reverted the server to
+# loopback and broke every LAN client (and conversely, a hand-edited plist
+# was clobbered on the next configure run). Resolution order: explicit config
+# key, then whatever the live plist already had, then the loopback default.
 write_plist() {
     local venv_python="${REPO_DIR}/.venv/bin/python3"
+    local host bind_public
+    host="$(server_host)"
+    [ -z "$host" ] && host="$(plist_host)"
+    # An explicit BIND_PUBLIC key (true OR false) is authoritative; only when
+    # the key is entirely absent do we fall back to the live plist.
+    if [ -n "$(server_config_get BIND_PUBLIC)" ]; then
+        bind_public="$(server_config_get BIND_PUBLIC)"
+    elif plist_bind_public; then
+        bind_public="true"
+    else
+        bind_public=""
+    fi
     {
         cat <<PLIST_HEAD
 <?xml version="1.0" encoding="UTF-8"?>
@@ -93,6 +170,11 @@ write_plist() {
         <string>${REPO_DIR}/server.py</string>
 PLIST_HEAD
         with_17b_enabled && echo "        <string>--with-1.7b</string>"
+        if [ -n "$host" ]; then
+            echo "        <string>--host</string>"
+            echo "        <string>${host}</string>"
+        fi
+        [ "$bind_public" = "true" ] && echo "        <string>--bind-public</string>"
         cat <<PLIST_TAIL
     </array>
     <key>RunAtLoad</key><true/>
@@ -114,6 +196,7 @@ server_pid() {
 
 # Get PID from launchd (available before port binding)
 launchd_pid() {
+    [ "$LAUNCHD_DISABLED" = "1" ] && return 0
     launchctl list "$PLIST_NAME" 2>/dev/null | awk '/PID/{gsub(/[^0-9]/,"",$3); if($3+0>0) print $3}'
 }
 
@@ -224,7 +307,19 @@ cmd_status() {
         plist_loaded && mgmt="launchd (auto-start)"
         local mute_label=""
         [ -f "$MUTE_FILE" ] && mute_label="  ${YELLOW}⏸ muted${NC}"
-        echo -e "  ${GREEN}●${NC} ${BOLD}running${NC}  ${DIM}PID ${pid}  port ${PORT}  ${mgmt}${NC}${with17b_label}${mute_label}"
+        # Show where it actually listens. A non-loopback bind is the usual
+        # reason local curl/hooks can't reach it, and "running" alone hid that.
+        # lsof prints e.g. `*:7860`, `127.0.0.1:7860`, `[::1]:7860` — strip
+        # only the trailing :PORT (a bare `s/.*://` would mangle `*:7860`).
+        local listen_addr
+        listen_addr=$(lsof -nP -iTCP:"$PORT" -sTCP:LISTEN 2>/dev/null \
+            | awk 'NR==2{print $9}' | sed "s/:${PORT}\$//")
+        case "$listen_addr" in
+            "")           listen_addr="?" ;;
+            "*"|"0.0.0.0") listen_addr="all interfaces" ;;
+        esac
+        local bind_label="  ${DIM}bind ${listen_addr}${NC}"
+        echo -e "  ${GREEN}●${NC} ${BOLD}running${NC}  ${DIM}PID ${pid}  port ${PORT}  ${mgmt}${NC}${bind_label}${with17b_label}${mute_label}"
     else
         echo -e "  ${RED}●${NC} ${BOLD}stopped${NC}${with17b_label}"
         echo
@@ -277,7 +372,7 @@ if voices:
         print('    ' + ''.join(padded[i:i+cols]))
 print()
 print(f'  {D}afterwords logs  —  /tmp/claude-tts-server.log{R}')
-" 2>/dev/null || warn "Server running but /health not yet responding (warming up)"
+" 2>/dev/null || warn "Server running but /health not responding on localhost:${PORT} — check the bind address (${CYAN}afterwords configure${NC})"
     fi
     echo
 }
@@ -1182,6 +1277,34 @@ with open(os.environ['TARGET'], 'w') as f:
 cmd_configure() {
     local flag="${1:-}"
     case "$flag" in
+        --bind)
+            # Set the launchd bind address. `--bind loopback` reverts to the
+            # default; anything else is a literal address passed to --host.
+            local target="${2:-}"
+            case "$target" in
+                "")
+                    fail "Usage: afterwords configure --bind <address|loopback>"
+                    ;;
+                loopback|local|default)
+                    # Set explicitly rather than clearing: cleared keys would
+                    # let write_plist fall back to the live plist and resurrect
+                    # the LAN bind, making the revert a silent no-op.
+                    server_config_set HOST "127.0.0.1"
+                    server_config_set BIND_PUBLIC "false"
+                    ;;
+                *)
+                    server_config_set HOST "$target"
+                    server_config_set BIND_PUBLIC "true"
+                    ;;
+            esac
+            if plist_exists; then
+                write_plist
+                plist_loaded && { launchctl unload "$PLIST_PATH" 2>/dev/null; launchctl load "$PLIST_PATH"; }
+                ok "Bind address set to ${target} — run ${CYAN}afterwords restart${NC} to apply"
+            else
+                ok "Bind address set to ${target} — run ${CYAN}bash setup.sh${NC} to install the service"
+            fi
+            ;;
         --with-1.7b)
             # Write config, regenerate plist, reload launchd
             if [ -f "$AFTERWORDS_SERVER_CONFIG" ] && grep -q "^WITH_17B=" "$AFTERWORDS_SERVER_CONFIG"; then
@@ -1219,13 +1342,25 @@ cmd_configure() {
             else
                 echo -e "  1.7B model  ${DIM}disabled (default — 0.6B only)${NC}"
             fi
+            local bind_display
+            bind_display="$(server_host)"
+            if [ -z "$bind_display" ]; then
+                bind_display="$(plist_host)"
+            fi
+            if [ -n "$bind_display" ]; then
+                echo -e "  Bind        ${CYAN}${bind_display}${NC}  ${DIM}(non-loopback — LAN clients can reach it)${NC}"
+            else
+                echo -e "  Bind        ${DIM}loopback (127.0.0.1, default)${NC}"
+            fi
             echo
             echo -e "  ${DIM}afterwords configure --with-1.7b  # enable Qwen3-1.7B (higher fidelity)${NC}"
             echo -e "  ${DIM}afterwords configure --no-1.7b   # revert to 0.6B only${NC}"
+            echo -e "  ${DIM}afterwords configure --bind <addr>   # bind a LAN address (e.g. 0.0.0.0)${NC}"
+            echo -e "  ${DIM}afterwords configure --bind loopback # revert to loopback-only${NC}"
             echo
             ;;
         *)
-            fail "Unknown option: ${flag}. Use --with-1.7b or --no-1.7b"
+            fail "Unknown option: ${flag}. Use --with-1.7b, --no-1.7b, or --bind <address|loopback>"
             ;;
     esac
 }
@@ -1278,7 +1413,7 @@ cmd_help() {
     echo -e "    ${CYAN}codex-hook stop${NC}   Stop the Codex watcher"
     echo
     echo -e "  ${BOLD}Setup${NC}"
-    echo -e "    ${CYAN}configure${NC}         Show or change server settings (e.g. --with-1.7b)"
+    echo -e "    ${CYAN}configure${NC}         Show or change server settings (--with-1.7b, --bind)"
     echo -e "    ${CYAN}update${NC}            Pull latest commits, reinstall packages, reload voices"
     echo -e "    ${CYAN}uninstall${NC}         Remove service and optionally hooks"
     echo
