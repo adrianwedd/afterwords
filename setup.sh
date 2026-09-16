@@ -681,6 +681,41 @@ PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
 VENV_PYTHON="${SCRIPT_DIR}/.venv/bin/python3"
 AFTERWORDS_SERVER_CONFIG="$HOME/.afterwords-server"
 
+# ── Resolve plist settings BEFORE opening the output file ─────────────
+# Two traps here, both real bugs once fixed:
+#  1. `{ ... } > "$PLIST_PATH"` truncates the file the instant the redirect
+#     opens, so any read of $PLIST_PATH from inside the block (the --host
+#     fallback below) sees an empty file and always fails. Resolution must
+#     happen first.
+#  2. This script runs under `set -euo pipefail`, so a `grep` that matches
+#     nothing (the common case: no HOST= line yet) makes the pipeline exit
+#     non-zero and aborts setup.sh mid-write, leaving a truncated plist.
+#     Every substitution therefore ends in `|| true`.
+SETUP_HOST="$(grep '^HOST=' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2- || true)"
+SETUP_BIND_PUBLIC="$(grep '^BIND_PUBLIC=' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2- || true)"
+
+# Fall back to a pre-existing plist (one hand-edited before HOST/BIND_PUBLIC
+# existed in the config), so re-running setup.sh never clobbers a live LAN bind.
+if [ -z "$SETUP_HOST" ] && [ -f "$PLIST_PATH" ]; then
+    SETUP_HOST="$(python3 -c "
+import plistlib, sys
+try:
+    args = plistlib.load(open(sys.argv[1], 'rb')).get('ProgramArguments', [])
+except Exception:
+    sys.exit(0)
+if '--host' in args and args.index('--host') + 1 < len(args):
+    print(args[args.index('--host') + 1])
+" "$PLIST_PATH" 2>/dev/null || true)"
+fi
+# An explicit BIND_PUBLIC key (true OR false) is authoritative; only when the
+# key is absent do we inherit --bind-public from the live plist. This matches
+# afterwords.sh's write_plist(), which is the whole point — the two generators
+# must not disagree about the bind.
+if [ -z "$SETUP_BIND_PUBLIC" ] && [ -n "$SETUP_HOST" ] \
+   && grep -q -- "--bind-public" "$PLIST_PATH" 2>/dev/null; then
+    SETUP_BIND_PUBLIC="true"
+fi
+
 {
     cat <<PLIST_HEAD
 <?xml version="1.0" encoding="UTF-8"?>
@@ -698,25 +733,11 @@ PLIST_HEAD
     if [ -f "$AFTERWORDS_SERVER_CONFIG" ] && grep -q "^WITH_17B=true" "$AFTERWORDS_SERVER_CONFIG"; then
         echo "        <string>--with-1.7b</string>"
     fi
-    # Preserve a non-loopback bind (HOST/BIND_PUBLIC in ~/.afterwords-server).
-    # Without this, re-running setup.sh silently reverts the server to loopback
-    # and every LAN client (voice satellites, other machines) breaks.
-    SETUP_HOST=$(grep "^HOST=" "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2-)
-    if [ -z "$SETUP_HOST" ] && [ -f "$PLIST_PATH" ]; then
-        SETUP_HOST=$(python3 -c "
-import plistlib,sys
-try:
-    a=plistlib.load(open(sys.argv[1],'rb')).get('ProgramArguments',[])
-    print(a[a.index('--host')+1] if '--host' in a else '')
-except Exception: print('')
-" "$PLIST_PATH" 2>/dev/null)
-    fi
     if [ -n "$SETUP_HOST" ]; then
         echo "        <string>--host</string>"
         echo "        <string>${SETUP_HOST}</string>"
     fi
-    if grep -q "^BIND_PUBLIC=true" "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null \
-       || { [ -n "$SETUP_HOST" ] && grep -q -- "--bind-public" "$PLIST_PATH" 2>/dev/null; }; then
+    if [ "$SETUP_BIND_PUBLIC" = "true" ]; then
         echo "        <string>--bind-public</string>"
     fi
     cat <<PLIST_TAIL

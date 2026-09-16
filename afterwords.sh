@@ -91,18 +91,40 @@ server_config_get() {
     grep "^${key}=" "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2-
 }
 
-# Set (or clear, when value is empty) a KEY=value in the server config file
+# Set (or clear, when value is empty) a KEY=value in the server config file.
+# Uses awk rather than `sed -i "s|..|..|"` because sed treats `&` in the
+# replacement as "the matched text" and `|`/`\` as delimiters — so a value
+# containing one (a typo'd address, a future key holding a shell fragment)
+# silently corrupts the file into e.g. `HOST=aHOST=old b` and that corrupted
+# value is re-emitted as --host on every regeneration. awk sets the value
+# literally, and the write is atomic (temp + mv) so a failed write cannot
+# truncate the config.
+#
+# The value is read as an input RECORD (first file) rather than via `awk -v`,
+# because -v interprets escape sequences in the value (`back\\slash` would
+# arrive as `back\slash`). Records are taken verbatim.
 server_config_set() {
-    local key="$1" value="$2"
-    touch "$AFTERWORDS_SERVER_CONFIG"
-    if grep -q "^${key}=" "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null; then
-        if [ -z "$value" ]; then
-            sed -i '' "/^${key}=/d" "$AFTERWORDS_SERVER_CONFIG"
-        else
-            sed -i '' "s|^${key}=.*|${key}=${value}|" "$AFTERWORDS_SERVER_CONFIG"
-        fi
-    elif [ -n "$value" ]; then
-        echo "${key}=${value}" >> "$AFTERWORDS_SERVER_CONFIG"
+    local key="${1:-}" value="${2:-}"
+    [ -n "$key" ] || return 1
+    [ -e "$AFTERWORDS_SERVER_CONFIG" ] || : > "$AFTERWORDS_SERVER_CONFIG"
+    local tmp="${AFTERWORDS_SERVER_CONFIG}.tmp.$$"
+    if awk -v k="$key" '
+        NR == FNR { v = $0; next }
+        {
+            if (index($0, k "=") == 1) {
+                if (done) next
+                done = 1
+                if (v != "") print k "=" v
+                next
+            }
+            print
+        }
+        END { if (!done && v != "") print k "=" v }
+    ' <(printf '%s\n' "$value") "$AFTERWORDS_SERVER_CONFIG" > "$tmp" 2>/dev/null; then
+        mv "$tmp" "$AFTERWORDS_SERVER_CONFIG"
+    else
+        rm -f "$tmp"
+        return 1
     fi
 }
 
@@ -110,6 +132,31 @@ server_config_set() {
 # a regenerated plist (configure --with-1.7b, setup.sh) cannot silently drop a
 # LAN bind and break remote clients — see HOST/BIND_PUBLIC.
 server_host() { server_config_get HOST; }
+
+# True if the argument is a plausible bind address: an IPv4/IPv6 literal,
+# `0.0.0.0`, or a hostname. Deliberately conservative — rejects anything with
+# whitespace or XML/shell metacharacters, because the value is interpolated
+# into plist XML and into a launchd ProgramArguments entry. A bad value there
+# yields a plist launchd silently refuses to load, which is discovered only at
+# the next login, so it is worth failing fast at the CLI instead.
+is_valid_bind_address() {
+    case "$1" in
+        "") return 1 ;;
+    esac
+    # Only [A-Za-z0-9.:_%-] allowed (covers IPv4, IPv6, `fe80::1%en0`, and
+    # hostnames). `[`/`]` are permitted only as an IPv6 bracketed form.
+    case "$1" in
+        \[*\])  # [::1] style — inner part must still be address-safe
+            local inner="${1#[}"; inner="${inner%]}"
+            case "$inner" in
+                ""|*[!A-Za-z0-9.:_%-]*) return 1 ;;
+            esac
+            return 0
+            ;;
+        *[!A-Za-z0-9.:_%-]*) return 1 ;;
+    esac
+    return 0
+}
 
 # Read --host out of an existing plist (empty when absent). Used so a regenerate
 # preserves a bind that predates the HOST config key instead of reverting to
@@ -146,6 +193,15 @@ write_plist() {
     local host bind_public
     host="$(server_host)"
     [ -z "$host" ] && host="$(plist_host)"
+    # Defensive: a HOST written by hand into the config (or carried over from an
+    # older version) could contain XML metacharacters and would produce a plist
+    # launchd cannot parse. validate at the point of emission too, not only in
+    # `configure --bind`, so a bad value degrades to loopback rather than
+    # bricking the service.
+    if [ -n "$host" ] && ! is_valid_bind_address "$host"; then
+        warn "ignoring unsafe HOST=${host} in ${AFTERWORDS_SERVER_CONFIG} (invalid bind address)"
+        host=""
+    fi
     # An explicit BIND_PUBLIC key (true OR false) is authoritative; only when
     # the key is entirely absent do we fall back to the live plist.
     if [ -n "$(server_config_get BIND_PUBLIC)" ]; then
@@ -1293,6 +1349,14 @@ cmd_configure() {
                     server_config_set BIND_PUBLIC "false"
                     ;;
                 *)
+                    # Validate before persisting. The value is interpolated into
+                    # plist XML and into a launchd argument, so an address with
+                    # XML metacharacters (e.g. `foo<bar>`) would emit a plist
+                    # that plutil rejects and launchd cannot load — a failure
+                    # that only surfaces at next boot. Reject it here instead.
+                    if ! is_valid_bind_address "$target"; then
+                        fail "Invalid bind address: ${target}. Expected an IPv4/IPv6 address or hostname (no spaces or XML metacharacters)."
+                    fi
                     server_config_set HOST "$target"
                     server_config_set BIND_PUBLIC "true"
                     ;;
@@ -1347,11 +1411,21 @@ cmd_configure() {
             if [ -z "$bind_display" ]; then
                 bind_display="$(plist_host)"
             fi
-            if [ -n "$bind_display" ]; then
-                echo -e "  Bind        ${CYAN}${bind_display}${NC}  ${DIM}(non-loopback — LAN clients can reach it)${NC}"
-            else
-                echo -e "  Bind        ${DIM}loopback (127.0.0.1, default)${NC}"
-            fi
+            case "$bind_display" in
+                "")
+                    # No HOST configured and no --host in the plist: server.py
+                    # defaults to 127.0.0.1.
+                    echo -e "  Bind        ${DIM}loopback (127.0.0.1, default)${NC}"
+                    ;;
+                127.0.0.1|localhost|"::1"|"[::1]")
+                    # A loopback HOST is the explicit revert target of
+                    # `--bind loopback`; labelling it "non-loopback" was wrong.
+                    echo -e "  Bind        ${DIM}loopback (${bind_display})${NC}"
+                    ;;
+                *)
+                    echo -e "  Bind        ${CYAN}${bind_display}${NC}  ${DIM}(non-loopback — LAN clients can reach it)${NC}"
+                    ;;
+            esac
             echo
             echo -e "  ${DIM}afterwords configure --with-1.7b  # enable Qwen3-1.7B (higher fidelity)${NC}"
             echo -e "  ${DIM}afterwords configure --no-1.7b   # revert to 0.6B only${NC}"
