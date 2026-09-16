@@ -123,13 +123,23 @@ server_config_set() {
     ' <(printf '%s\n' "$value") "$AFTERWORDS_SERVER_CONFIG" > "$tmp" 2>/dev/null; then
         # Preserve the existing file's mode: the temp file was created under the
         # ambient umask (022 → 644), so a config the operator had tightened to
-        # 600 would silently become world-readable after any update. `stat -f`
-        # is BSD/macOS; GNU coreutils uses `-c`. Try both, default to 644.
+        # 600 would silently become world-readable after any update.
+        #
+        # Done via Python, not `stat`, because the two implementations are
+        # mutually incompatible in a way that fails silently: on macOS
+        # `stat -f '%Lp'` prints the mode, but on GNU coreutils `-f` means
+        # "filesystem" and `%Lp` prints the filesystem type — exit status 0,
+        # garbage output, so a `|| fallback` never fires. (chmod --reference is
+        # also BSD-incompatible.) Python is already required by this script.
         if [ -e "$AFTERWORDS_SERVER_CONFIG" ]; then
             local _mode
-            _mode="$(stat -f '%Lp' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null \
-                  || stat -c '%a' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null \
-                  || echo 644)"
+            _mode="$(python3 -c '
+import os, sys
+try:
+    print(oct(os.stat(sys.argv[1]).st_mode & 0o777)[2:])
+except Exception:
+    print("644")
+' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null || echo 644)"
             chmod "$_mode" "$tmp" 2>/dev/null || true
         fi
         mv "$tmp" "$AFTERWORDS_SERVER_CONFIG"

@@ -615,6 +615,30 @@ server_config_set HOST 5.6.7.8
     assert "HOST=5.6.7.8" in config.read_text()
 
 
+def test_mode_preservation_does_not_use_stat_f():
+    """The mode reader must not rely on `stat -f`.
+
+    `stat -f '%Lp'` prints the mode on macOS/BSD, but on GNU coreutils `-f`
+    means "filesystem" so `%Lp` prints the filesystem type with exit status 0 —
+    the fallback never fires and mode preservation silently breaks on Linux.
+    (This exact bug made CI fail while passing locally.) Python's os.stat is
+    identical on both platforms, so it is what the code must use.
+    """
+    src = _helper_function_source("server_config_set")
+    # Strip comment lines: the function's own comment explains why `stat -f` is
+    # avoided and therefore contains the string.
+    code = "\n".join(
+        ln for ln in src.splitlines() if not ln.strip().startswith("#")
+    )
+    assert "stat -f" not in code, (
+        "server_config_set reads the file mode with BSD-only `stat -f`, which "
+        "silently misbehaves on GNU coreutils"
+    )
+    assert "os.stat" in code or "st_mode" in code, (
+        "expected the mode to be read via Python's os.stat"
+    )
+
+
 def test_status_warns_when_health_check_fails(tmp_path):
     """The LAN-bind diagnostic must be reachable.
 
