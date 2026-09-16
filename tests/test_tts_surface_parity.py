@@ -316,6 +316,32 @@ def test_shell_hook_has_no_bsd_only_stat_size_reads():
     assert "file_size()" in source, "portable file_size helper missing"
 
 
+def test_both_surfaces_allow_time_for_queued_synthesis():
+    """Per-chunk timeout must accommodate a chunk queued behind another synthesis.
+
+    Synthesis is serialised server-side and the pipelined loop keeps a second
+    request in flight, so a request can wait for a full synthesis of the chunk
+    ahead of it. A timeout that only covers network transfer expires and the
+    chunk is silently dropped — 30s dropped every chunk after the first.
+    """
+    import re
+
+    handler = (REPO / "hermes/hooks/afterwords-tts/handler.py").read_text()
+    match = re.search(r"^TTS_REQUEST_TIMEOUT = .*$", handler, re.M)
+    assert match, "handler has no TTS_REQUEST_TIMEOUT"
+    assert "ClientTimeout(total=TTS_REQUEST_TIMEOUT" in handler, (
+        "handler fetch does not use TTS_REQUEST_TIMEOUT"
+    )
+
+    shell = SHELL_HOOK.read_text()
+    assert 'local t="${AFTERWORDS_TTS_TIMEOUT:-180}"' in shell, (
+        "shell hook synth timeout is not configurable/bounded correctly"
+    )
+    assert "--max-time 60 -G" not in shell, (
+        "shell hook still uses the marginal 60s per-chunk synth timeout"
+    )
+
+
 def test_file_size_helper_is_portable(tmp_path):
     """Extract the helper and prove it works with BSD stat unavailable."""
     import re

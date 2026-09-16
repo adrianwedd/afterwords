@@ -44,6 +44,18 @@ TTS_ENDPOINT = f"{AFTERWORDS_URL}/synthesize"
 # 400 keeps first-audio latency low while cutting seams vs 200.
 CHUNK_CHARS = 400
 
+# Budget for one chunk's synthesis request. The server serialises synthesis
+# (single-GPU), and the pipelined loop keeps a second request in flight while the
+# current chunk plays, so a request can wait behind a full synthesis. Measured
+# ~18s per 400-char chunk on a warm 0.6B model: the previous 30s total timeout
+# expired for every chunk after the first and silently dropped most of a long
+# reply. Override with AFTERWORDS_TTS_TIMEOUT (seconds).
+TTS_REQUEST_TIMEOUT = float(os.environ.get("AFTERWORDS_TTS_TIMEOUT", "180"))
+
+# Attempts per chunk before giving up (transient timeouts are the common case
+# when the server is busy with another chunk).
+_FETCH_ATTEMPTS = 3
+
 # Canonical helper module filenames in the repo root. The gateway hook, the CLI
 # shell hook and the Claude/Codex workers all load these — one implementation.
 _STRIP_MODULE = "strip_markdown.py"
@@ -561,22 +573,44 @@ def _archive_wav(wav_path: Path, mp3_name: str, archive_dir: Path) -> None:
 
 
 async def _fetch_audio(session, url: str) -> bytes | None:
-    """Fetch audio bytes from the TTS endpoint; one retry on empty/short/fail."""
-    for attempt in range(2):
+    """Fetch audio bytes from the TTS endpoint; retries transient failures.
+
+    The timeout must cover SYNTHESIS, not just network latency, and synthesis is
+    serialised server-side (MLX/Metal is single-GPU): the pipelined loop keeps a
+    second request in flight while the first chunk plays, so a request can sit
+    behind another full synthesis. Measured at ~18s per 400-char chunk, a 30s
+    total timeout expired for every chunk after the first and silently dropped
+    most of a long reply. Chunk synthesis also costs bytes, so allow up to
+    TTS_REQUEST_TIMEOUT for the whole response, with the connect phase bounded
+    separately so an unreachable server still fails fast.
+    """
+    timeout = aiohttp.ClientTimeout(total=TTS_REQUEST_TIMEOUT, connect=5, sock_read=TTS_REQUEST_TIMEOUT)
+    last_reason = "ok"
+    for attempt in range(_FETCH_ATTEMPTS):
         try:
-            async with session.get(url, timeout=aiohttp.ClientTimeout(total=30)) as resp:
+            async with session.get(url, timeout=timeout) as resp:
                 if resp.status != 200:
+                    last_reason = f"HTTP {resp.status}"
                     log.warning("TTS synthesis failed: HTTP %d", resp.status)
                 else:
                     data = await resp.read()
                     if data and len(data) > 1000:
                         return data
-                    log.warning(
-                        "TTS synthesis returned short audio (%s bytes)",
-                        0 if not data else len(data),
-                    )
+                    last_reason = f"short audio ({0 if not data else len(data)} bytes)"
+                    log.warning("TTS synthesis returned short audio (%s bytes)", last_reason)
+        except asyncio.TimeoutError:
+            last_reason = f"timed out after {TTS_REQUEST_TIMEOUT:.0f}s"
+            log.warning(
+                "TTS synthesis timed out after %.0fs (attempt %d/%d) — server may be "
+                "busy synthesizing another chunk",
+                TTS_REQUEST_TIMEOUT, attempt + 1, _FETCH_ATTEMPTS,
+            )
         except Exception as e:
+            last_reason = repr(e)
             log.warning("TTS fetch error: %s", e)
-        if attempt == 0:
-            await asyncio.sleep(0.2)
+        if attempt < _FETCH_ATTEMPTS - 1:
+            await asyncio.sleep(0.5 * (attempt + 1))
+    log.warning(
+        "TTS chunk permanently failed after %d attempts: %s", _FETCH_ATTEMPTS, last_reason
+    )
     return None

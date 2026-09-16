@@ -336,10 +336,16 @@ NCHUNKS=${#CHUNKS[@]}
 
 synth_chunk() {
     local out="$1" text="$2"
+    # Timeout must cover SYNTHESIS, not just transfer. The server serialises
+    # synthesis (single-GPU) and this loop keeps a second request in flight while
+    # the current chunk plays, so a request can wait behind a full synthesis
+    # (~18s per 400-char chunk measured). 60s was marginal; override with
+    # AFTERWORDS_TTS_TIMEOUT (seconds).
+    local t="${AFTERWORDS_TTS_TIMEOUT:-180}"
     if [ -n "${VOICE:-}" ]; then
-        curl -s --max-time 60 -G             --data-urlencode "text=${text}"             --data-urlencode "voice=${VOICE}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+        curl -s --max-time "$t" -G             --data-urlencode "text=${text}"             --data-urlencode "voice=${VOICE}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
     else
-        curl -s --max-time 60 -G             --data-urlencode "text=${text}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+        curl -s --max-time "$t" -G             --data-urlencode "text=${text}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
     fi
 }
 
