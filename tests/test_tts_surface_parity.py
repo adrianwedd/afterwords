@@ -296,3 +296,60 @@ def test_setup_stamps_repo_hint_into_installed_shims():
     assert "scripts/strip-markdown.py" in source
     assert "scripts/chunk-text.py" in source
     assert "_REPO_HINT" in source
+
+
+# --------------------------------------------------------------------------
+# Portability: the hook runs on Linux CI as well as macOS
+# --------------------------------------------------------------------------
+
+def test_shell_hook_has_no_bsd_only_stat_size_reads():
+    """`stat -f%z` is BSD-only; on Linux it fails and the size check reads 0.
+
+    That made every chunk look unsynthesized and get synthesized a second time
+    (CI runs on ubuntu-latest). Size must go through the portable helper.
+    """
+    source = SHELL_HOOK.read_text()
+    body = "\n".join(
+        line for line in source.splitlines() if not line.lstrip().startswith("#")
+    )
+    assert "stat -f%z" not in body, "BSD-only stat size read in the hook body"
+    assert "file_size()" in source, "portable file_size helper missing"
+
+
+def test_file_size_helper_is_portable(tmp_path):
+    """Extract the helper and prove it works with BSD stat unavailable."""
+    import re
+
+    source = SHELL_HOOK.read_text()
+    match = re.search(r"^file_size\(\) \{.*?^\}", source, re.M | re.S)
+    assert match, "file_size() not found in the hook"
+    helper = tmp_path / "helper.sh"
+    helper.write_text(match.group(0))
+
+    probe = tmp_path / "probe.wav"
+    probe.write_bytes(b"\0" * 4000)
+
+    # A stat shim that rejects the BSD form, exactly like GNU coreutils.
+    bindir = tmp_path / "bin"
+    bindir.mkdir()
+    fake_stat = bindir / "stat"
+    fake_stat.write_text(
+        "#!/usr/bin/env bash\n"
+        "if [ \"$1\" = \"-f%z\" ]; then\n"
+        "  echo \"stat: cannot read file system information\" >&2\n"
+        "  exit 1\n"
+        "fi\n"
+        "exec /usr/bin/stat \"$@\"\n"
+    )
+    fake_stat.chmod(0o755)
+
+    env = dict(os.environ)
+    env["PATH"] = f"{bindir}:{env['PATH']}"
+    result = subprocess.run(
+        ["bash", "-c", f"source {helper!s}; file_size {probe!s}"],
+        capture_output=True, text=True, env=env,
+    )
+    assert result.returncode == 0, result.stderr
+    assert result.stdout.strip() == "4000", (
+        f"file_size returned {result.stdout.strip()!r} with BSD stat unavailable"
+    )

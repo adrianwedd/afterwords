@@ -32,6 +32,18 @@ AFTERWORDS_HEALTH="$AFTERWORDS_URL/health"
 TTS_ENDPOINT="$AFTERWORDS_URL/synthesize"
 CHUNK_CHARS=400
 
+# Portable file size in bytes. `stat -f%z` is BSD (macOS) only and `stat -c%s` is
+# GNU only, so neither alone is safe: without a fallback the size check below read
+# 0 on Linux and every chunk was synthesized a second time.
+file_size() {
+    local n
+    n=$(wc -c < "$1" 2>/dev/null | tr -d '[:space:]')
+    case "$n" in
+        ''|*[!0-9]*) echo 0 ;;
+        *) echo "$n" ;;
+    esac
+}
+
 # ── Read payload ──────────────────────────────────────────────────────────
 PAYLOAD=$(cat)
 # Gateway emits flat: {"platform":"discord","response":"...","session_id":"..."}
@@ -348,10 +360,10 @@ for i in $(seq 1 "$NCHUNKS"); do
 
     # Play previous chunk while current one synthesizes
     if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
-        FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
+        FILESIZE=$(file_size "$PREV_WAV")
         if [ "$FILESIZE" -le 1000 ] && [ -n "$PREV_TEXT" ]; then
             synth_chunk "$PREV_WAV" "$PREV_TEXT"
-            FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
+            FILESIZE=$(file_size "$PREV_WAV")
         fi
         if [ "$FILESIZE" -gt 1000 ]; then
             [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
@@ -366,10 +378,10 @@ done
 # Wait for and play the last chunk
 [ -n "$SYNTH_PID" ] && wait "$SYNTH_PID" 2>/dev/null
 if [ -n "$PREV_WAV" ] && [ -f "$PREV_WAV" ]; then
-    FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
+    FILESIZE=$(file_size "$PREV_WAV")
     if [ "$FILESIZE" -le 1000 ] && [ -n "$PREV_TEXT" ]; then
         synth_chunk "$PREV_WAV" "$PREV_TEXT"
-        FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
+        FILESIZE=$(file_size "$PREV_WAV")
     fi
     if [ "$FILESIZE" -gt 1000 ]; then
         [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
