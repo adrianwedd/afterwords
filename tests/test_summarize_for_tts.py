@@ -205,6 +205,26 @@ def test_speak_mode_unset_keeps_project_opt_in(tmp_path: Path):
     )
 
 
+def test_speak_mode_summarize_without_afterwords_file(tmp_path: Path):
+    """SPEAK_MODE=summarize must compress even with no project .afterwords."""
+    server = tmp_path / "server"
+    server.write_text("SPEAK_MODE=summarize\n", encoding="utf-8")
+    text = (
+        "I cleared quarantine from the app bundle. "
+        "Then I re-signed the Sparkle framework and nested components. "
+        "Afterwords is now running and you can open it from Applications. "
+        + ("More spoken detail about the launch and signing work. " * 12)
+    )
+    out = summarize_for_tts(
+        text,
+        agent="cursor",
+        afterwords_path=None,
+        server_config_path=server,
+    )
+    assert len(out) < len(text)
+    assert "quarantine" in out
+
+
 def test_env_server_config_used_when_path_omitted(tmp_path: Path, monkeypatch):
     aw = tmp_path / ".afterwords"
     aw.write_text(
