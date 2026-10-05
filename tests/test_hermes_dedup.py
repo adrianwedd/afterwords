@@ -191,3 +191,12 @@ def test_stale_markers_are_expired(hook_env):
     assert not stale.exists()
     # ...and the run itself still synthesized normally
     assert len(synth_calls(log)) == 1
+
+
+def test_cli_scope_skips_gateway_and_external_delivery(hook_env):
+    env, log, workdir = hook_env
+    env["AFTERWORDS_SHELL_SCOPE"] = "cli"
+    for platform in ("local", "discord", "telegram", ""):
+        result = run_hook(env, workdir, unique_text(), platform=platform)
+        assert result.returncode == 0
+    assert not log.exists(), "out-of-scope hooks must not synthesize, play, or send"

@@ -44,6 +44,9 @@ TTS_ENDPOINT = f"{AFTERWORDS_URL}/synthesize"
 # 400 keeps first-audio latency low while cutting seams vs 200.
 CHUNK_CHARS = 400
 
+# Stamped by the installer for paired direct-CLI / gateway installations.
+LOCAL_PLATFORMS = ("cli", "local", "")
+
 # Budget for one chunk's synthesis request. The server serialises synthesis
 # (single-GPU), and the pipelined loop keeps a second request in flight while the
 # current chunk plays, so a request can wait behind a full synthesis. Measured
@@ -341,7 +344,7 @@ async def handle(event_type: str, context: dict) -> None:
     log.info("Hook fired: platform=%s, cwd=%s, response_len=%d", platform, _get_cwd(context), len(response))
 
     # Messaging platforms: skip — audio delivery is handled by the cron feed watcher
-    if platform in ("telegram", "discord"):
+    if platform not in LOCAL_PLATFORMS:
         log.info("Skipping TTS for messaging platform %s (use tts-audio-feed cron)", platform)
         return
 

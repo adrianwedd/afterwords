@@ -70,6 +70,14 @@ d = json.load(sys.stdin)
 print(d.get('chat_id', '') or d.get('extra', {}).get('chat_id', ''))
 " 2>/dev/null || true)
 
+# Direct CLI can share a config with a gateway native hook. Select the shell
+# scope explicitly to avoid duplicate local playback or external delivery.
+case "${AFTERWORDS_SHELL_SCOPE:-all}" in
+    all) ;;
+    cli) [ "$PLATFORM" = "cli" ] || exit 0 ;;
+    *) echo "afterwords: invalid AFTERWORDS_SHELL_SCOPE" >&2; exit 1 ;;
+esac
+
 # ── Platform routing ──────────────────────────────────────────────────────
 # CLI/local: play audio locally via afplay
 # Messaging platforms: synthesize full audio, send as attachment via hermes send

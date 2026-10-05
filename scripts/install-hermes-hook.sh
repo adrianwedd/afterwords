@@ -13,6 +13,8 @@
 # Usage: bash scripts/install-hermes-hook.sh [--dry-run]
 set -uo pipefail
 
+LOCAL_ONLY=false
+[ "${1:-}" = "--local-only" ] && LOCAL_ONLY=true
 DRY_RUN=false
 [ "${1:-}" = "--dry-run" ] && DRY_RUN=true
 
@@ -40,15 +42,17 @@ mkdir -p "$HOOK_DIR"
 
 # Stamp the repo path into the installed copy so resolution never falls back to
 # a stale ~/.claude/hooks helper.
-python3 - "$SRC" "$DST" "$REPO_ROOT" <<'PYEOF'
+python3 - "$SRC" "$DST" "$REPO_ROOT" "$LOCAL_ONLY" <<'PYEOF'
 import re, sys
-src_path, dst_path, repo = sys.argv[1], sys.argv[2], sys.argv[3]
+src_path, dst_path, repo, local_only = sys.argv[1:]
 src = open(src_path).read()
 stamped, count = re.subn(r'^_REPO_HINT = .*$', f'_REPO_HINT = {repo!r}', src, count=1, flags=re.M)
 if count != 1:
     sys.exit(f"ERROR: could not stamp _REPO_HINT in {src_path}")
 if f"_REPO_HINT = {repo!r}" not in stamped:
     sys.exit("ERROR: stamp verification failed")
+if local_only == 'true':
+    stamped = stamped.replace('LOCAL_PLATFORMS = ("cli", "local", "")', 'LOCAL_PLATFORMS = ("local",)')
 open(dst_path, 'w').write(stamped)
 PYEOF
 rc=$?
@@ -57,6 +61,7 @@ if [ "$rc" -ne 0 ]; then
     exit "$rc"
 fi
 
+cp "$REPO_ROOT/hermes/hooks/afterwords-tts/HOOK.yaml" "$HOOK_DIR/HOOK.yaml"
 rm -rf "$HOOK_DIR/__pycache__"
 echo "installed: $DST"
 echo "stamped:   _REPO_HINT = $REPO_ROOT"
