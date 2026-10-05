@@ -307,7 +307,8 @@ def test_health_includes_loaded_backends(client):
         "qwen3-0.6b", "qwen3-1.7b",
     }
     for name, info in body["loaded_backends"].items():
-        assert info["loaded"] is True
+        assert info["registered"] is True
+        assert isinstance(info["loaded"], bool)
         assert isinstance(info["voice_count"], int)
         assert isinstance(info["sample_rate"], int)
 
@@ -444,7 +445,8 @@ def _write_profile_json(dir_path, name, backend="fake", ref_text="hello"):
     return j, wav
 
 
-def test_reload_disabled_without_allow_clone(client):
+def test_reload_disabled_without_permission(client, monkeypatch):
+    monkeypatch.setattr(server, "_reload_enabled", False)
     server._clone_enabled = False
     r = client.post("/reload")
     assert r.status_code == 404

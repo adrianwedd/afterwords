@@ -1,0 +1,138 @@
+#!/usr/bin/env python3
+"""Read-only baseline installation checks. Never install or alter configuration."""
+import json
+import os
+from pathlib import Path
+import shutil
+import shlex
+import subprocess
+import sys
+import urllib.request
+
+
+def writable_ancestor(path):
+    while not path.exists():
+        path = path.parent
+    return os.access(path, os.W_OK)
+
+
+def check_port(repo):
+    """Require both owning process identity and HTTP service identity."""
+    try:
+        result = subprocess.run(
+            ['lsof', '-nP', '-tiTCP:7860', '-sTCP:LISTEN'],
+            capture_output=True, text=True, timeout=5,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return [f'cannot establish port ownership: {exc}']
+    if not result.stdout.strip():
+        if result.returncode == 1 and not result.stderr.strip():
+            print('Port 7860: free')
+            return []
+        return ['cannot establish port ownership: unexpected lsof result']
+    if result.returncode != 0:
+        return ['cannot establish port ownership: lsof failed']
+    expected = (repo / 'server.py').resolve()
+    for pid in set(result.stdout.split()):
+        if not pid.isdigit():
+            return ['cannot establish port ownership: invalid PID']
+        try:
+            process = subprocess.run(['ps', '-p', pid, '-o', 'command='],
+                                     capture_output=True, text=True, timeout=5)
+            command = process.stdout.strip()
+            prefix = f'{repo / ".venv/bin/python3"} {repo / "server.py"}'
+            venv_owned = command == prefix or command.startswith(prefix + ' ')
+            argv = shlex.split(command)
+            owned = (process.returncode == 0 and len(argv) >= 2
+                     and Path(argv[0]).name.startswith('python')
+                     and Path(argv[1]).is_absolute()
+                     and Path(argv[1]).resolve() == expected)
+            owned = process.returncode == 0 and (owned or venv_owned)
+        except (OSError, ValueError, subprocess.TimeoutExpired):
+            owned = False
+        if not owned:
+            return [f"port 7860 conflict: PID {pid} is not this checkout's Afterwords server"]
+    try:
+        with urllib.request.urlopen('http://127.0.0.1:7860/health', timeout=3) as response:
+            health = json.load(response)
+        if health.get('service') != 'afterwords':
+            return ['port 7860 listener does not identify as Afterwords']
+    except Exception:
+        return ['port 7860 is occupied by an unidentified or unreachable listener']
+    print('Existing Afterwords service detected; installation will replace its launchd configuration.')
+    return []
+
+
+def check_cli_destination(cli_dir, repo):
+    if not cli_dir.is_absolute():
+        return ['CLI directory must be absolute']
+    if cli_dir.exists() and not cli_dir.is_dir():
+        return ['CLI destination is not a directory']
+    directories = {Path(entry or os.curdir).resolve() for entry in os.environ.get('PATH', '').split(os.pathsep)}
+    if cli_dir.resolve() not in directories:
+        return [f'CLI directory {cli_dir} is not on PATH; add it before installing']
+    existing = shutil.which('afterwords')
+    target = cli_dir / 'afterwords'
+    if existing and Path(existing).absolute() != target.absolute():
+        return [f'another afterwords command shadows the selected destination: {existing}']
+    if (target.exists() or target.is_symlink()) and (not target.is_symlink() or target.resolve() != (repo / 'afterwords.sh').resolve()):
+        return [f'CLI destination contains another file or installation: {target}']
+    return []
+
+
+def check_python_version(version, unlocked=False):
+    version = tuple(version[:2])
+    if version < (3, 11):
+        return ['Python 3.11 or newer is required even in experimental --unlocked mode']
+    if not unlocked and version > (3, 14):
+        return ['locked baseline requires Python 3.11–3.14; newer Python requires experimental --unlocked']
+    return []
+
+
+def check_install_python(repo, unlocked=False):
+    """Check both the selected Python and a reusable venv before installation."""
+    failures = check_python_version(sys.version_info, unlocked)
+    venv_python = repo / '.venv/bin/python3'
+    if venv_python.exists():
+        try:
+            result = subprocess.run(
+                [str(venv_python), '-c', 'import json,sys; print(json.dumps(list(sys.version_info[:2])))'],
+                capture_output=True, text=True, timeout=5,
+            )
+            if result.returncode == 0:
+                failures.extend('existing venv: ' + error for error in
+                                check_python_version(json.loads(result.stdout), unlocked))
+            # Broken venvs are rebuilt using the already-checked selected Python.
+        except (OSError, subprocess.TimeoutExpired):
+            pass
+    return failures
+
+
+def main():
+    repo = Path(sys.argv[1])
+    cli_dir = Path(sys.argv[2] if len(sys.argv) > 2 else '/usr/local/bin')
+    unlocked = len(sys.argv) > 4 and sys.argv[4] == "true"
+    failures = check_install_python(repo, unlocked) + check_cli_destination(cli_dir, repo)
+    if len(sys.argv) > 3 and sys.argv[3] == "true" and not writable_ancestor(cli_dir):
+        failures.append(f"explicit CLI destination is not writable: {cli_dir}")
+    for path in (repo, Path.home() / 'Library/LaunchAgents', cli_dir):
+        writable = writable_ancestor(path)
+        print(f'{path}: writable ancestor={writable}')
+        if not writable:
+            print('  Not writable; the CLI destination may require sudo. Other destinations require corrected ownership.')
+    free = shutil.disk_usage(repo).free / 2**30
+    print(f'Free disk: {free:.1f} GiB (reserve at least 6 GiB for baseline environment/model/cache)')
+    if free < 6:
+        failures.append('insufficient free disk')
+    macos = subprocess.check_output(['sw_vers', '-productVersion'], text=True).strip()
+    print('macOS:', macos)
+    if int(macos.split('.')[0]) < 14:
+        failures.append('macOS 14+ required by the baseline MLX wheel dependencies')
+    failures.extend(check_port(repo))
+    for failure in failures:
+        print('FAIL:', failure, file=sys.stderr)
+    return bool(failures)
+
+
+if __name__ == '__main__':
+    sys.exit(main())

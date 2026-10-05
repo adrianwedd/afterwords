@@ -155,6 +155,10 @@ def _build_voice_profile(profile_path: str) -> VoiceProfile | None:
         )
         return None
 
+    if _backend_states and not _backend_states.get(backend_name, {}).get("loaded", False):
+        log.info("voice %r: backend %s is not loaded — skipping", name, backend_name)
+        return None
+
     ref_rel = p.get("reference_audio", f"{stem}-ref.wav")
     ref_audio = os.path.join(_VOICES_DIR, ref_rel)
     _voices_real = os.path.realpath(_VOICES_DIR)
@@ -218,6 +222,7 @@ DEFAULT_VOICE = "galadriel"
 _model_lock = threading.Lock()
 _synth_lock = threading.Lock()  # serialise synthesis — MLX/Metal is not thread-safe
 _ready = threading.Event()
+_backend_states: dict[str, dict] = {}
 # Dedicated single thread for all MLX/Metal operations.
 # MLX stream IDs are globally incrementing and thread-local: the thread that loads the
 # model creates streams 0, 1, 2, … and subsequent calls from OTHER threads fail with
@@ -233,6 +238,7 @@ def _run_in_ml_thread(fn, *args, **kwargs):
         return fn(*args, **kwargs)
     return _ml_executor.submit(fn, *args, **kwargs).result()
 _clone_enabled = False
+_reload_enabled = False
 
 # /clone uploads are buffered in RAM for denoising; cap them. 25 MB is ~4 min
 # of 16-bit 48 kHz mono — far beyond the 60 s the cloning path needs.
@@ -388,17 +394,17 @@ def _warmup():
     """Prime MLX caches by generating a tiny synth against the default voice."""
     profile = VOICES.get(DEFAULT_VOICE)
     if profile is None:
-        log.warning("default voice '%s' not loaded — skipping warmup", DEFAULT_VOICE)
-        return
+        raise RuntimeError(f"default voice {DEFAULT_VOICE!r} is not loaded")
     backend = backends.get(profile.backend)
     log.info("warming up with %s (backend=%s)...", DEFAULT_VOICE, profile.backend)
     t0 = time.time()
-    try:
-        with _synth_lock:
-            _run_in_ml_thread(backend.synthesize, "Hello.", profile.prepared, lang="en")
-        log.info("warmup done in %.1fs", time.time() - t0)
-    except Exception as exc:
-        log.warning("warmup failed (non-fatal): %s", exc)
+    with _synth_lock:
+        audio, sr = _run_in_ml_thread(
+            backend.synthesize, "Hello.", profile.prepared, lang="en"
+        )
+    if sr <= 0 or np.asarray(audio).size == 0 or not np.isfinite(audio).all():
+        raise RuntimeError("warmup produced invalid audio")
+    log.info("warmup done in %.1fs", time.time() - t0)
 
 
 @app.get("/health")
@@ -414,7 +420,12 @@ def health():
     for bname in backends.names():
         b = backends.get(bname)
         loaded_backends[bname] = {
-            "loaded": True,
+            "registered": True,
+            "model_revision": getattr(b, "model_revision", None),
+            "available": _backend_states.get(bname, {}).get("available"),
+            "loaded": _backend_states.get(bname, {}).get("loaded", False),
+            "state": _backend_states.get(bname, {}).get("state", "registered"),
+            "error": _backend_states.get(bname, {}).get("error"),
             "voice_count": backend_counts.get(bname, 0),
             "sample_rate": b.sample_rate,
             "display_name": b.display_name,
@@ -431,6 +442,7 @@ def health():
 
     return {
         "status": "ok",
+        "service": "afterwords",
         "model": default_model_id,
         "backend": "mlx",
         "model_loaded": _ready.is_set(),
@@ -818,8 +830,8 @@ def reload_voices(prune: bool = False):
     """Re-walk voices/*.json and merge additions/updates into VOICES.
     Add-only: voices whose JSON is absent from disk are NOT removed.
     Atomic on error: if any profile's prepare_voice() raises, abort + rollback temps."""
-    if not _clone_enabled:
-        return JSONResponse({"error": "clone not enabled (start with --allow-clone)"}, status_code=404)
+    if not (_clone_enabled or _reload_enabled):
+        return JSONResponse({"error": "gallery reload not enabled (start with --allow-reload)"}, status_code=404)
 
     t0 = time.time()
     new_profiles: list[VoiceProfile] = []
@@ -908,7 +920,7 @@ def _resolve_bind_host(host: str, *, allow_clone: bool, bind_public: bool) -> st
     --bind-public opt-in.
     """
     if allow_clone and host not in _LOOPBACK_HOSTS:
-        log.info("--allow-clone: binding to 127.0.0.1 for security")
+        log.info("local mutation permission: binding to 127.0.0.1 for security")
         return "127.0.0.1"
     if host not in _LOOPBACK_HOSTS and not bind_public:
         raise SystemExit(
@@ -918,10 +930,23 @@ def _resolve_bind_host(host: str, *, allow_clone: bool, bind_public: bool) -> st
     return host
 
 
+def _selected_backends(with_17b: bool) -> set[str]:
+    raw = os.environ.get("AFTERWORDS_BACKENDS", "").strip()
+    selected = {name.strip() for name in raw.split(",") if name.strip()} if raw else {"qwen3-0.6b"}
+    if with_17b:
+        selected.add("qwen3-1.7b")
+    unknown = selected - set(backends.names())
+    if unknown or not selected:
+        raise ValueError(f"invalid AFTERWORDS_BACKENDS selection: {sorted(unknown)}")
+    return selected
+
+
 def main():
     parser = argparse.ArgumentParser(description="Afterwords TTS server (MLX)")
     parser.add_argument("--port", type=int, default=7860)
     parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--allow-reload", action="store_true",
+                        help="Enable local gallery reload without upload cloning (loopback only)")
     parser.add_argument("--no-warmup", action="store_true", help="Skip warmup synthesis")
     parser.add_argument(
         "--allow-clone",
@@ -941,11 +966,11 @@ def main():
     )
     args = parser.parse_args()
 
-    global DEFAULT_VOICE, _clone_enabled, _ml_executor, _enforce_host_check
-    if args.allow_clone:
-        _clone_enabled = True
+    global DEFAULT_VOICE, _clone_enabled, _reload_enabled, _ml_executor, _enforce_host_check
+    _clone_enabled = args.allow_clone
+    _reload_enabled = args.allow_reload
     args.host = _resolve_bind_host(
-        args.host, allow_clone=args.allow_clone, bind_public=args.bind_public
+        args.host, allow_clone=(args.allow_clone or args.allow_reload), bind_public=args.bind_public
     )
     _enforce_host_check = args.host in ("127.0.0.1", "localhost", "::1")
 
@@ -959,31 +984,28 @@ def main():
     backends.register_all(with_17b=args.with_17b)
     log.info("registered backends: %s", backends.names())
 
-    # 2. Load all backend weights in the MLX thread (unconditional preload, per design D6).
-    #    Sequential + logged — takes 60-180s cold; operator visibility matters.
-    def _load_backend(b):
-        b.load()
-
-    allowed_backends = None
-    backends_filter = os.environ.get("AFTERWORDS_BACKENDS", "").strip()
-    if backends_filter:
-        allowed_backends = {
-            name.strip() for name in backends_filter.split(",") if name.strip()
-        }
-        log.info("AFTERWORDS_BACKENDS filter active: %s", sorted(allowed_backends))
-
+    # Only the baseline is selected by default; experiments require explicit opt-in.
+    selected = _selected_backends(args.with_17b)
+    _backend_states.clear()
     for bname in backends.names():
-        if allowed_backends is not None and bname not in allowed_backends:
-            log.info("skipping backend %s (not in AFTERWORDS_BACKENDS)", bname)
-            continue
+        _backend_states[bname] = {
+            "state": "registered", "available": None, "loaded": False, "error": None,
+        }
+    for bname in sorted(selected):
         b = backends.get(bname)
+        state = _backend_states[bname]
         t0 = time.time()
         log.info("loading backend %s (%s)...", bname, b.display_name)
         try:
-            _run_in_ml_thread(_load_backend, b)
+            _run_in_ml_thread(b.load)
+            reason = getattr(b, "_unavailable_reason", None)
+            if reason:
+                raise RuntimeError(reason)
         except Exception as exc:
+            state.update(state="failed", available=False, error=str(exc))
             log.error("backend %s failed to load: %s", bname, exc, exc_info=True)
             raise SystemExit(1)
+        state.update(state="loaded", available=True, loaded=True)
         log.info("backend %s loaded in %.1fs", bname, time.time() - t0)
 
     # 3. Walk voices/*.json — prepare_voice() calls may touch Metal, so run in the MLX thread.
@@ -1004,12 +1026,13 @@ def main():
     log.info("afterwords starting on %s:%d", args.host, args.port)
     log.info("voices: %d loaded (default: %s)", len(VOICES), DEFAULT_VOICE)
 
-    # 5. Warmup (skippable via --no-warmup; does NOT skip backend loads — those are mandatory per D6).
+    # Readiness requires successful synthesis unless explicitly disabled for diagnostics.
     if not args.no_warmup:
         try:
             _warmup()
         except Exception as exc:
-            log.warning("warmup encountered an error: %s", exc)
+            log.error("warmup failed; server is not ready: %s", exc)
+            raise SystemExit(1)
     _ready.set()
     log.info("ready — %d voices, accepting requests", len(VOICES))
 

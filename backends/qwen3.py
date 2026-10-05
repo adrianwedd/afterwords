@@ -20,6 +20,13 @@ _MODEL_IDS = {
 }
 
 
+# Immutable Hub revisions checked with `hf models info` on 2026-10-05.
+_MODEL_REVISIONS = {
+    "0.6B": "50f45ef0047cde7e84c2ef04326acb8ada2436a7",
+    "1.7B": "e7dd0585652209fa0d7783659aad4e8a324de11c",
+}
+
+
 class Qwen3Backend(BackendBase):
     display_name_template = "Qwen3-TTS {size}"
     sample_rate = 24000
@@ -34,6 +41,7 @@ class Qwen3Backend(BackendBase):
         self.name = f"qwen3-{size.lower()}"
         self.display_name = self.display_name_template.format(size=size)
         self.model_id = _MODEL_IDS[size]
+        self.model_revision = _MODEL_REVISIONS[size]
         self._model = None
         self._unavailable_reason: str | None = None
 
@@ -51,9 +59,10 @@ class Qwen3Backend(BackendBase):
                     "to rebuild the venv"
                 )
                 log.error("Qwen3 %s unavailable: %s", self.size, self._unavailable_reason)
-                return
+                raise RuntimeError(self._unavailable_reason) from exc
+            self._unavailable_reason = None
             log.info("loading %s ...", self.model_id)
-            self._model = load_model(self.model_id)
+            self._model = load_model(self.model_id, revision=self.model_revision)
         self._ensure_loaded(_do)
 
     def validate_extras(self, extras: Mapping[str, object]) -> None:

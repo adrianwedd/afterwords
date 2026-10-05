@@ -6,7 +6,7 @@
 
 Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or wire it into any AI coding harness — **Claude Code**, **Codex CLI**, **Cursor**, **Gemini CLI / Antigravity (agy)**, or **Hermes Agent** — to hear every response spoken aloud. **102 flagship voice families** (198 profiles, all cloned with **Qwen3-TTS 0.6B**, the default cloning path; the higher-fidelity 1.7B model loads via `--with-1.7b`), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
 
-No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
+Local synthesis needs no cloud API key or subscription. Initial installation downloads packages and model weights; optional YouTube cloning and cloud commands access external services. Agent integrations retain spoken-text and audio archives locally. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
 ## Quick Start
 
@@ -16,25 +16,35 @@ cd afterwords
 bash setup.sh
 ```
 
-The setup script checks prerequisites, creates a venv, walks you through cloning a voice from YouTube, and starts the server. If Claude Code is detected (or you choose to install it), the script also wires up a Stop hook so Claude speaks every response.
+Setup defaults to the bundled-voice server on loopback, with Qwen3 0.6B only. It creates a Python environment, a launchd service, and `/usr/local/bin/afterwords`; it does not install agent hooks or YouTube cloning tools. `--server-only` remains an explicit alias for the default.
 
-For a server-only install with no Claude Code integration:
+Start with the read-only checks:
 
 ```bash
+bash setup.sh --preflight
 bash setup.sh --server-only
 ```
 
+Installation succeeds only after the running service identifies itself as Afterwords and returns a valid, non-silent WAV. Listen separately to verify speech completeness. See [the first-success checklist](ONBOARDING.md) for changes, resource budgets, backend configuration, and live acceptance.
+
+Optional tools are explicit:
+
+```bash
+bash setup.sh --cloning       # add YouTube/download/transcription tools
+bash setup.sh --integrations  # interactive discovery/configuration of installed agents
+```
+
+The default path needs no answers or voice URL. For an unattended install without sudo, add `$HOME/.local/bin` to PATH and pass `--cli-dir "$HOME/.local/bin"`. The legacy `/usr/local/bin` default may require sudo. Preflight checks PATH before changes. Unknown options fail before installation. Integration mode can prompt and may modify other tools' configuration.
+
 ### Set up with an AI agent
 
-Paste this into Claude Code, Codex, Cursor, or any AI agent to install afterwords hands-free:
-
-> Clone https://github.com/adrianwedd/afterwords and run `bash setup.sh`. Walk me through each step — ask for a YouTube URL when you need a voice to clone.
+> Clone https://github.com/adrianwedd/afterwords, read ONBOARDING.md, and run `bash setup.sh --preflight`. Install the bundled-voice server only, verify a synthesized WAV, and help me listen before enabling one integration.
 
 ## With Claude Code
 
 Claude Code has [`/voice`](https://docs.anthropic.com/en/docs/claude-code/voice-dictation) — hold Space to dictate prompts. But it's input only. Claude can hear you; you can't hear Claude. This project adds the missing half: **text-to-speech output**. Together, `/voice` input + TTS output = full voice conversations with Claude Code.
 
-If Claude Code isn't installed, setup will offer to install it (requires Node.js; setup installs that too if needed via Homebrew).
+In `--integrations` mode, if Claude Code isn't installed, setup will offer to install it (requires Node.js; setup installs that too if needed via Homebrew).
 
 ## With Codex CLI
 
@@ -98,7 +108,7 @@ Trade-offs vs Claude Code: this depends on Codex's local session file format and
 
 Gemini CLI ships hook support, including a `gemini hooks migrate --from-claude` subcommand. Tempting — but in our testing it has a silent-write bug: when run from `$HOME` it reports success but leaves `~/.gemini/settings.json` unchanged (it writes via `setValue("Workspace", ...)` which is read-only when cwd == home). Even when the migrate succeeds elsewhere, the resulting config wouldn't work for TTS because the **payload schema differs**: Claude sends `last_assistant_message`, Gemini sends `prompt_response`.
 
-So we ship a small adapter instead. `setup.sh` installs `~/.claude/hooks/gemini-tts-hook.sh` (it normalises `prompt_response` → the existing Claude tts-hook + worker chain) and prints the JSON snippet to add to `~/.gemini/settings.json`:
+So we ship a small adapter instead. `setup.sh --integrations` installs `~/.claude/hooks/gemini-tts-hook.sh` (it normalises `prompt_response` → the existing Claude tts-hook + worker chain) and prints the JSON snippet to add to `~/.gemini/settings.json`:
 
 ```json
 {
@@ -127,7 +137,7 @@ Test: `gemini -p "say hi"` should speak the response via Afterwords using your d
 
 ## With Antigravity CLI (agy)
 
-Antigravity CLI (`agy`), the successor to Gemini CLI, supports hooks defined in `~/.gemini/config/hooks.json`. Unlike Gemini CLI's manual snippet configuration, `setup.sh` automatically detects `agy` and registers/updates the hook configuration programmatically.
+Antigravity CLI (`agy`), the successor to Gemini CLI, supports hooks defined in `~/.gemini/config/hooks.json`. Unlike Gemini CLI's manual snippet configuration, `setup.sh --integrations` detects `agy` and registers/updates the hook configuration programmatically.
 
 During execution, `agy` fires the `Stop` event when the reasoning loop terminates. It passes a JSON payload containing `transcriptPath` (the path to the conversation's `transcript.jsonl` file) on `stdin`.
 
@@ -176,7 +186,7 @@ tts:
       output_format: wav
 ```
 
-On CLI the command script returns instantly (silent placeholder WAV) and plays audio in a detached background subshell — text output is never delayed. On messaging platforms it runs synchronously for audio-file attachment delivery.
+The command provider produces a real audio artifact synchronously on every platform. On CLI it pipelines local playback as chunks arrive. Complete delivery exits zero; partial CLI artifacts are preserved with a nonzero exit, and total failure removes the output.
 
 All three paths resolve voice from `.afterwords` files using `hermes` as the agent key and acquire the shared play lock (`/tmp/afterwords-play.lock`) to coordinate with Claude/Codex/AGy workers. The native hook (`handler.py`) and command provider archive MP3 + text sidecar to `~/.hermes/tts-archive/`; the shell hook (`afterwords-post-llm.sh`) is playback-only and does not archive.
 
@@ -423,7 +433,7 @@ POST /clone               (--allow-clone only)
        multipart: audio file, session_id, emotion, transcript?, backend?
        → JSON {voice, backend, emotion, quality, sequence, ...}
 
-POST /reload              (--allow-clone only)
+POST /reload              (--allow-reload or --allow-clone; default loopback install enables gallery reload)
        → JSON {status, reloaded:[names], errors:[]} on success (200)
        → JSON {status:"failed", errors:[...]}        on abort   (500)
        Add-only, atomic — if any voice fails to prepare, no changes committed.
@@ -451,7 +461,7 @@ Claude Code's [Stop hook](https://docs.anthropic.com/en/docs/claude-code/hooks) 
 
 ### The Queue
 
-Fast conversations generate responses faster than TTS can synthesise. The worker processes up to 10 queued items, discarding oldest when it overflows. Text is split into ~200-character sentence chunks; synthesis of chunk N+1 runs in the background while chunk N plays — latency to first audio is ~2 seconds regardless of response length.
+Fast conversations generate responses faster than TTS can synthesise. The shared worker keeps up to 25 queued items, discarding oldest when it overflows. Text is split into roughly 400-character sentence chunks using the canonical helper; synthesis of chunk N+1 runs in the background while chunk N plays. First-audio latency depends on the model, text, and queue.
 
 Each chunk is archived as an MP3 plus a sidecar TXT file under the CLI's own archive directory:
 
@@ -469,15 +479,15 @@ Archiving requires `lame` (`brew install lame`).
 ## Requirements
 
 - Apple Silicon Mac (M1/M2/M3/M4), 16 GB+ RAM (32 GB recommended)
-- Python 3.11+
-- ~2 GB disk (model weights + venv)
+- Python 3.11–3.14 for the locked baseline (newer Python requires experimental `--unlocked`)
+- Reserve at least 6 GiB free disk for the baseline environment, weights, and cache (planning allowance; fixed model revisions and baseline dependency locks are described in ONBOARDING.md)
 - Claude Code (optional — for automatic TTS on responses; setup offers to install it)
 
 ## File Map
 
 ```
 afterwords/
-├── setup.sh                  ← one-command setup (detects/installs Claude Code)
+├── setup.sh                  ← bundled-voice server setup; --integrations opts into agent setup
 ├── afterwords.sh             ← CLI for server management (symlinked to PATH)
 ├── clone-voice.sh            ← add more voices from YouTube
 ├── server.py                 ← multi-voice TTS server
@@ -649,7 +659,7 @@ This removes the launchd service and offers to remove Claude Code hooks. Voice p
 
 On 32 GB M3 Max with the recommended Qwen3-only install:
 - Startup: ~30s–2 min (backend load + warmup; longer when other backends are installed)
-- Model load: ~5s (cached) / ~5 min (first run, downloading ~3 GB)
+- Model load: depends on cache and download bandwidth; first startup downloads the selected model. See ONBOARDING.md for model IDs and cache location.
 - Per request: ~15s fixed overhead + ~0.5x real-time (~20s typical)
 - Peak memory: ~3–4 GB (Qwen3 0.6B + 1.7B only); higher if optional backends from the registry are installed and preloaded
 - Adding voices: zero extra memory (each is just a 700 KB WAV)
