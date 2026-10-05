@@ -44,7 +44,7 @@ def check_port(repo):
             venv_owned = command == prefix or command.startswith(prefix + ' ')
             argv = shlex.split(command)
             owned = (process.returncode == 0 and len(argv) >= 2
-                     and Path(argv[0]).name.startswith('python')
+                     and Path(argv[0]).name.lower().startswith('python')
                      and Path(argv[1]).is_absolute()
                      and Path(argv[1]).resolve() == expected)
             owned = process.returncode == 0 and (owned or venv_owned)

@@ -6,7 +6,7 @@
 # Works standalone as an HTTP API, or integrates with Claude Code
 # for automatic text-to-speech on every response.
 #
-# Requirements: Apple Silicon Mac (M1+), 16 GB+ RAM (32 GB recommended), Python 3.11+
+# Requirements: Apple Silicon Mac (M1+), 16 GB+ RAM (32 GB recommended), Python 3.11–3.14 (locked baseline)
 # Usage: bash setup.sh              # bundled-voice server only
 #        bash setup.sh --server-only # server + voices only, no hooks
 #
@@ -361,11 +361,8 @@ echo
 next_step "Server check"
 VOICE_FILES=$(ls voices/*-ref.wav 2>/dev/null | wc -l | tr -d ' ')
 ok "${VOICE_FILES} voice file(s) in voices/"
-if grep -q "^VOICES = {" server.py 2>/dev/null; then
-    ok "server.py has multi-voice support"
-else
-    warn "server.py may need updating for multi-voice support."
-fi
+[ -f server.py ] || fail "Server entrypoint missing: server.py"
+ok "Server entrypoint found"
 echo
 
 HAS_CURSOR=false
