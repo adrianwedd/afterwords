@@ -23,10 +23,10 @@ afplay /tmp/afterwords-first-speech.wav
 
 Confirm the opening words, complete phrase, and absence of long internal silence. WAV validity does not prove fidelity. The leading-word/internal-silence defects reported in issue #122 remain unresolved by this onboarding work.
 
-Only after foreground speech passes, enable one integration. `bash setup.sh --integrations` performs interactive discovery; Codex uses `bash setup-codex.sh` inside an interactive session, while Hermes has separate instructions in `docs/hermes-integration.md`. Confirm one final response speaks once and produces its expected local archive. Integration acceptance has not been established by server unit tests.
+Only after foreground speech passes, enable one integration using [the authoritative matrix](INTEGRATIONS.md). `bash setup.sh --integrations` performs interactive discovery; Codex uses `bash setup-codex.sh` inside an interactive session, while Hermes has separate instructions in `docs/hermes-integration.md`. Confirm one final response speaks once and produces its expected local archive. Integration acceptance has not been established by server unit tests.
 
 Exercise `afterwords mute` twice (mute/unmute), then operator-authorized stop/start and repeat synthesis. Mute suppresses automatic playback while synthesis and archives continue; foreground samples still play. Archives persist spoken text/audio under each agent's home directory. Optional cloud commands can upload voice data and use `~/.afterwords-cloud`; their privacy boundary differs from local inference.
 
 Gallery reload is enabled by default on installed loopback services through `--allow-reload`; uploads, POST synthesis, and session deletion remain disabled. `ALLOW_RELOAD=false` in `~/.afterwords-server` disables gallery reload on plist regeneration. LAN installations omit it by default; the server confines reload-enabled configurations to loopback. HTTP failures from the reload CLI return nonzero.
 
-Remaining audit work includes reconciling the full integration matrix and Hermes guidance, dependency/model reproducibility, and live macOS/launchd/audio/integration acceptance.
+Remaining audit work includes dependency/model reproducibility and live macOS/launchd/audio/integration acceptance. The integration matrix and Hermes delivery guidance now reflect repository behavior; live third-party configuration acceptance remains separate.

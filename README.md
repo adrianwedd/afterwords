@@ -186,7 +186,7 @@ tts:
       output_format: wav
 ```
 
-On CLI the command script returns instantly (silent placeholder WAV) and plays audio in a detached background subshell — text output is never delayed. On messaging platforms it runs synchronously for audio-file attachment delivery.
+The command provider produces a real audio artifact synchronously on every platform. On CLI it pipelines local playback as chunks arrive. Complete delivery exits zero; partial CLI artifacts are preserved with a nonzero exit, and total failure removes the output.
 
 All three paths resolve voice from `.afterwords` files using `hermes` as the agent key and acquire the shared play lock (`/tmp/afterwords-play.lock`) to coordinate with Claude/Codex/AGy workers. The native hook (`handler.py`) and command provider archive MP3 + text sidecar to `~/.hermes/tts-archive/`; the shell hook (`afterwords-post-llm.sh`) is playback-only and does not archive.
 
@@ -461,7 +461,7 @@ Claude Code's [Stop hook](https://docs.anthropic.com/en/docs/claude-code/hooks) 
 
 ### The Queue
 
-Fast conversations generate responses faster than TTS can synthesise. The worker processes up to 10 queued items, discarding oldest when it overflows. Text is split into ~200-character sentence chunks; synthesis of chunk N+1 runs in the background while chunk N plays — latency to first audio is ~2 seconds regardless of response length.
+Fast conversations generate responses faster than TTS can synthesise. The shared worker keeps up to 25 queued items, discarding oldest when it overflows. Text is split into roughly 400-character sentence chunks using the canonical helper; synthesis of chunk N+1 runs in the background while chunk N plays. First-audio latency depends on the model, text, and queue.
 
 Each chunk is archived as an MP3 plus a sidecar TXT file under the CLI's own archive directory:
 
@@ -480,7 +480,7 @@ Archiving requires `lame` (`brew install lame`).
 
 - Apple Silicon Mac (M1/M2/M3/M4), 16 GB+ RAM (32 GB recommended)
 - Python 3.11+
-- ~2 GB disk (model weights + venv)
+- Reserve at least 6 GiB free disk for the baseline environment, weights, and cache (planning allowance; exact model download sizes are not locked)
 - Claude Code (optional — for automatic TTS on responses; setup offers to install it)
 
 ## File Map
@@ -659,7 +659,7 @@ This removes the launchd service and offers to remove Claude Code hooks. Voice p
 
 On 32 GB M3 Max with the recommended Qwen3-only install:
 - Startup: ~30s–2 min (backend load + warmup; longer when other backends are installed)
-- Model load: ~5s (cached) / ~5 min (first run, downloading ~3 GB)
+- Model load: depends on cache and download bandwidth; first startup downloads the selected model. See ONBOARDING.md for model IDs and cache location.
 - Per request: ~15s fixed overhead + ~0.5x real-time (~20s typical)
 - Peak memory: ~3–4 GB (Qwen3 0.6B + 1.7B only); higher if optional backends from the registry are installed and preloaded
 - Adding voices: zero extra memory (each is just a 700 KB WAV)

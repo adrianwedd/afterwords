@@ -343,7 +343,13 @@ else
 fi
 echo
 
-if ! $SERVER_ONLY && { $HAS_CLAUDE || command -v gemini &>/dev/null || command -v agy &>/dev/null; }; then
+HAS_CURSOR=false
+if [ -d "/Applications/Cursor.app" ] || command -v cursor &>/dev/null || [ -d "$HOME/.cursor" ]; then
+    HAS_CURSOR=true
+fi
+
+# Shared hook installation (every queue-based integration needs these helpers).
+if ! $SERVER_ONLY && { $HAS_CLAUDE || $HAS_CURSOR || command -v gemini &>/dev/null || command -v agy &>/dev/null; }; then
 next_step "Claude & CLI hooks"
 
 HOOKS_DIR="$HOME/.claude/hooks"
@@ -386,6 +392,7 @@ CHUNKEOF
 [ -f "$SCRIPT_DIR/agy_session_hook.py" ] && cp "$SCRIPT_DIR/agy_session_hook.py" "$HOOKS_DIR/agy-session-hook.py"
 [ -f "$SCRIPT_DIR/.claude/hooks/gemini-tts-hook.sh" ] && cp "$SCRIPT_DIR/.claude/hooks/gemini-tts-hook.sh" "$HOOKS_DIR/gemini-tts-hook.sh" && chmod +x "$HOOKS_DIR/gemini-tts-hook.sh"
 [ -f "$SCRIPT_DIR/.claude/hooks/agy-tts-hook.sh" ] && cp "$SCRIPT_DIR/.claude/hooks/agy-tts-hook.sh" "$HOOKS_DIR/agy-tts-hook.sh" && chmod +x "$HOOKS_DIR/agy-tts-hook.sh"
+[ -f "$SCRIPT_DIR/.claude/hooks/cursor-tts-hook.sh" ] && cp "$SCRIPT_DIR/.claude/hooks/cursor-tts-hook.sh" "$HOOKS_DIR/cursor-tts-hook.sh" && chmod +x "$HOOKS_DIR/cursor-tts-hook.sh"
 
 
 # TTS hook (fires on Stop event)
@@ -714,7 +721,8 @@ chmod +x "$HOOKS_DIR/tts-worker.sh"
 
 ok "Hook scripts installed (backups saved as *.bak)"
 
-# Wire into Claude Code settings
+# Wire into Claude Code settings only when that integration was selected.
+if $HAS_CLAUDE; then
 SETTINGS="$HOME/.claude/settings.json"
 mkdir -p "$HOME/.claude"
 
@@ -783,7 +791,8 @@ SETTINGSEOF
     ok "settings.json created"
 fi
 echo
-fi  # end HAS_CLAUDE hooks block
+fi  # end Claude settings block
+fi  # end shared hooks block
 
 next_step "Auto-start service"
 
@@ -1053,7 +1062,7 @@ if ! $SERVER_ONLY && command -v agy &>/dev/null; then
 fi
 
 # ── Cursor IDE discovery ──────────────────────────────────────────────────
-if ! $SERVER_ONLY && { [ -d "/Applications/Cursor.app" ] || command -v cursor &>/dev/null || [ -d "$HOME/.cursor" ]; }; then
+if ! $SERVER_ONLY && $HAS_CURSOR; then
     CURSOR_HOOK_SRC="$SCRIPT_DIR/.claude/hooks/cursor-tts-hook.sh"
     CURSOR_HOOK_DEST="$HOME/.claude/hooks/cursor-tts-hook.sh"
     CURSOR_HOOKS_FILE="$HOME/.cursor/hooks.json"

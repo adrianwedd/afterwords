@@ -45,7 +45,7 @@ hooks_auto_accept: true
 **Script** (`afterwords/scripts/afterwords-post-llm.sh`):
 
 - Reads JSON payload from stdin (`assistant_response`, `cwd`, `platform`)
-- Strips markdown (via `strip-markdown.py`), splits into ~200-char sentence chunks
+- Strips markdown (via `strip-markdown.py`), splits into ~400-char sentence chunks
   (via `chunk-text.py`)
 - Checks Afterwords server health (`/health`)
 - Resolves voice from `.afterwords` files
@@ -99,7 +99,7 @@ events:
 - Filters: only speaks for `cli`, `local`, or empty platform (avoids
   double-notification on Telegram/Discord)
 - Strips markdown (built-in), truncates to 1000 chars, then splits into
-  ~200-char sentence chunks (`chunk_text()`)
+  ~400-char sentence chunks (`chunk_text()`)
 - **Pipelined playback**: synthesizes chunk N+1 via aiohttp while playing
   chunk N via `afplay`; trims leading silence with `ffmpeg`; overlaps
   synthesis and playback for ~2s latency-to-first-audio
@@ -187,18 +187,18 @@ bash afterwords-tts-command.sh <input_path> <output_path> [voice]
 ```
 
 **CLI mode (default when `$HERMES_SESSION_PLATFORM` is unset/`cli`/`local`):**
-- Writes a silent placeholder WAV (0.1s) and returns immediately — text output is not delayed
-- Fires real synthesis + `afplay` in a detached background subshell
+- Produces the real output WAV synchronously; the caller waits for artifact delivery
+- Pipelines synthesis and local playback as chunks become available
 - Acquires shared play lock (`/tmp/afterwords-play.lock`) to coordinate with other agents
 
 **Messaging-platform mode (Telegram, Discord, etc.):**
 - Runs synchronously; produces the real audio file for attachment delivery
 
 Both paths:
-- Strip basic markdown (`sed`), truncate to 1000 chars
+- Use repository strip/chunk helpers when available (see the script for fallback behavior)
 - Resolve voice: config arg → project `.afterwords` (`hermes` key → `default:`) → global `~/.afterwords`
 - Archive MP3 + text sidecar to `~/.hermes/tts-archive/` (best-effort)
-- Exit non-zero on synthesis failure (messaging path only; CLI path is fire-and-forget)
+- Exit zero only on complete speech delivery. The CLI preserves surviving chunks on partial failure and exits nonzero; total failure removes the output artifact. Local playback is separate from artifact delivery.
 
 ---
 
@@ -297,7 +297,7 @@ The inbound inline path archives to `~/.hermes/tts-archive`, which the watcher a
 | Wrong voice | Check project `.afterwords` then `~/.afterwords` — first match wins |
 | Hook not loading | Ensure `HOOK.yaml` + `handler.py` in `~/.hermes/hooks/afterwords-tts/` |
 | Native hook not updated | Restart gateway: `kill $(pgrep -f 'hermes.*gateway.*run')` then reconnect — hooks load at startup |
-| Audio plays but first chunk delayed | Old un-chunked hook — both `afterwords-post-llm.sh` and `handler.py` should split text into ~200-char chunks |
+| Audio plays but first chunk delayed | Old un-chunked hook — both `afterwords-post-llm.sh` and `handler.py` should split text into ~400-char chunks |
 | Shell hook blocked | `hermes hooks list` — should show `✓ allowed`. Set `hooks_auto_accept: true` |
 | Shell hook timeout | The shell hook plays audio synchronously (blocks until afplay finishes); long responses can exceed the configured 60s timeout — raise `timeout: 120` in config.yaml or use the command provider instead |
 | Server down silently | Both hooks exit silently when `/health` fails — check `afterwords status` |

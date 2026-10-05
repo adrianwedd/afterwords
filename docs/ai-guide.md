@@ -1,12 +1,12 @@
 # Afterwords — AI Assistant Guide
 
-## Version
-v1.0.6 (2026-06-15). Run `afterwords status` to confirm the server is running before issuing any synthesis or clone commands.
+## First entrypoint
+Read [the onboarding checklist](../ONBOARDING.md) for the supported baseline, installer changes, known limitations, and acceptance evidence. Run `afterwords status` before synthesis. Cloning dependencies and integrations are explicit opt-ins.
 
 ## Critical: First-Run Setup
-1. `bash setup.sh` — installs venv, launchd service, and CLI symlink
-2. `afterwords start` — starts the TTS server
-3. `afterwords status` — confirm server is healthy and voices are loaded
+1. `bash setup.sh --preflight` — read-only prerequisites and port checks
+2. `bash setup.sh --server-only` — installs the baseline and requires valid synthesized audio
+3. Listen to a foreground sample using the onboarding checklist, then enable one integration explicitly
 
 ## Command Reference
 
