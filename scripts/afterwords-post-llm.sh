@@ -74,7 +74,11 @@ print(d.get('chat_id', '') or d.get('extra', {}).get('chat_id', ''))
 # scope explicitly to avoid duplicate local playback or external delivery.
 case "${AFTERWORDS_SHELL_SCOPE:-all}" in
     all) ;;
-    cli) [ "$PLATFORM" = "cli" ] || exit 0 ;;
+    cli)
+        # Hermes maps gateway LOCAL to cli for agent hooks. Its process marker
+        # distinguishes those turns from direct CLI, which owns shell speech.
+        [ "$PLATFORM" = "cli" ] && [ "${_HERMES_GATEWAY:-}" != "1" ] || exit 0
+        ;;
     *) echo "afterwords: invalid AFTERWORDS_SHELL_SCOPE" >&2; exit 1 ;;
 esac
 

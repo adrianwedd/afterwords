@@ -308,7 +308,9 @@ When direct CLI shell hooks and native gateway hooks are both installed, use
 `env AFTERWORDS_SHELL_SCOPE=cli bash /path/to/afterwords/scripts/afterwords-post-llm.sh`
 as the shell command, and install the native hook with
 `bash scripts/install-hermes-hook.sh --local-only`. The shell owns `cli` turns;
-the native hook owns `local` gateway turns. Other platforms are skipped, so this
+the native hook owns `local` gateway turns. Hermes maps gateway local turns to
+`cli` inside agent hooks; CLI-only shell scope also checks Hermes' `_HERMES_GATEWAY`
+process marker to skip those turns. Other platforms are skipped, so this
 configuration neither duplicates local speech nor sends external audio. The
 installer installs both the manifest and stamped handler. The default installer
 retains the documented CLI/local/empty native scope for standalone use.
