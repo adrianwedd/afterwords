@@ -445,7 +445,8 @@ def _write_profile_json(dir_path, name, backend="fake", ref_text="hello"):
     return j, wav
 
 
-def test_reload_disabled_without_allow_clone(client):
+def test_reload_disabled_without_permission(client, monkeypatch):
+    monkeypatch.setattr(server, "_reload_enabled", False)
     server._clone_enabled = False
     r = client.post("/reload")
     assert r.status_code == 404

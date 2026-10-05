@@ -238,6 +238,7 @@ def _run_in_ml_thread(fn, *args, **kwargs):
         return fn(*args, **kwargs)
     return _ml_executor.submit(fn, *args, **kwargs).result()
 _clone_enabled = False
+_reload_enabled = False
 
 # /clone uploads are buffered in RAM for denoising; cap them. 25 MB is ~4 min
 # of 16-bit 48 kHz mono — far beyond the 60 s the cloning path needs.
@@ -828,8 +829,8 @@ def reload_voices(prune: bool = False):
     """Re-walk voices/*.json and merge additions/updates into VOICES.
     Add-only: voices whose JSON is absent from disk are NOT removed.
     Atomic on error: if any profile's prepare_voice() raises, abort + rollback temps."""
-    if not _clone_enabled:
-        return JSONResponse({"error": "clone not enabled (start with --allow-clone)"}, status_code=404)
+    if not (_clone_enabled or _reload_enabled):
+        return JSONResponse({"error": "gallery reload not enabled (start with --allow-reload)"}, status_code=404)
 
     t0 = time.time()
     new_profiles: list[VoiceProfile] = []
@@ -918,7 +919,7 @@ def _resolve_bind_host(host: str, *, allow_clone: bool, bind_public: bool) -> st
     --bind-public opt-in.
     """
     if allow_clone and host not in _LOOPBACK_HOSTS:
-        log.info("--allow-clone: binding to 127.0.0.1 for security")
+        log.info("local mutation permission: binding to 127.0.0.1 for security")
         return "127.0.0.1"
     if host not in _LOOPBACK_HOSTS and not bind_public:
         raise SystemExit(
@@ -943,6 +944,8 @@ def main():
     parser = argparse.ArgumentParser(description="Afterwords TTS server (MLX)")
     parser.add_argument("--port", type=int, default=7860)
     parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--allow-reload", action="store_true",
+                        help="Enable local gallery reload without upload cloning (loopback only)")
     parser.add_argument("--no-warmup", action="store_true", help="Skip warmup synthesis")
     parser.add_argument(
         "--allow-clone",
@@ -962,11 +965,11 @@ def main():
     )
     args = parser.parse_args()
 
-    global DEFAULT_VOICE, _clone_enabled, _ml_executor, _enforce_host_check
-    if args.allow_clone:
-        _clone_enabled = True
+    global DEFAULT_VOICE, _clone_enabled, _reload_enabled, _ml_executor, _enforce_host_check
+    _clone_enabled = args.allow_clone
+    _reload_enabled = args.allow_reload
     args.host = _resolve_bind_host(
-        args.host, allow_clone=args.allow_clone, bind_public=args.bind_public
+        args.host, allow_clone=(args.allow_clone or args.allow_reload), bind_public=args.bind_public
     )
     _enforce_host_check = args.host in ("127.0.0.1", "localhost", "::1")
 

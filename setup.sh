@@ -854,6 +854,8 @@ if grep -q '^WITH_17B=true' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null; then
 fi
 SETUP_BACKENDS="$(grep '^BACKENDS=' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2- || true)"
 PLIST_ARGS+=(--backends "${SETUP_BACKENDS:-${AFTERWORDS_BACKENDS:-}}")
+SETUP_RELOAD="$(grep '^ALLOW_RELOAD=' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2- || true)"
+PLIST_ARGS+=(--gallery-reload "${SETUP_RELOAD:-auto}")
 python3 "$SCRIPT_DIR/scripts/write-server-plist.py" "${PLIST_ARGS[@]}"
 
 launchctl unload "$PLIST_PATH" 2>/dev/null || true

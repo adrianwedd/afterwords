@@ -27,4 +27,6 @@ Only after foreground speech passes, enable one integration. `bash setup.sh --in
 
 Exercise `afterwords mute` twice (mute/unmute), then operator-authorized stop/start and repeat synthesis. Mute suppresses automatic playback while synthesis and archives continue; foreground samples still play. Archives persist spoken text/audio under each agent's home directory. Optional cloud commands can upload voice data and use `~/.afterwords-cloud`; their privacy boundary differs from local inference.
 
-Remaining audit work includes separating gallery reload permissions from upload cloning, reconciling the full integration matrix and Hermes guidance, dependency/model reproducibility, and live macOS/launchd/audio/integration acceptance. `afterwords reload` still requires a server launched with `--allow-clone`; HTTP failures now return nonzero.
+Gallery reload is enabled by default on installed loopback services through `--allow-reload`; uploads, POST synthesis, and session deletion remain disabled. `ALLOW_RELOAD=false` in `~/.afterwords-server` disables gallery reload on plist regeneration. LAN installations omit it by default; the server confines reload-enabled configurations to loopback. HTTP failures from the reload CLI return nonzero.
+
+Remaining audit work includes reconciling the full integration matrix and Hermes guidance, dependency/model reproducibility, and live macOS/launchd/audio/integration acceptance.

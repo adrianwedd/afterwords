@@ -129,3 +129,35 @@ def test_regenerated_plist_preserves_explicit_backend_selection(tmp_path):
     subprocess.run(base + ['--backends', 'qwen3-0.6b,fake'], check=True)
     subprocess.run(base, check=True)
     assert plistlib.loads(path.read_bytes())['EnvironmentVariables']['AFTERWORDS_BACKENDS'] == 'qwen3-0.6b,fake'
+
+
+def test_gallery_reload_without_upload_permissions(client, tmp_path, monkeypatch):
+    monkeypatch.setattr(server, '_clone_enabled', False)
+    monkeypatch.setattr(server, '_reload_enabled', True)
+    monkeypatch.setattr(server, '_VOICES_DIR', str(tmp_path))
+    assert client.post('/reload').status_code == 200
+    assert client.post('/synthesize', json={'text': 'hi', 'voice': 'testvoice'}).status_code == 404
+    assert client.delete('/session/example').status_code == 404
+    assert client.post('/clone', data={'session_id': 'example'},
+                       files={'audio': ('ref.wav', b'not decoded when disabled', 'audio/wav')}).status_code == 404
+
+
+@pytest.mark.parametrize('host,enabled', [('', True), ('127.0.0.1', True), ('192.168.0.2', False)])
+def test_gallery_reload_plist_default_is_local(tmp_path, host, enabled):
+    path = tmp_path / 'server.plist'
+    subprocess.run([sys.executable, str(REPO / 'scripts/write-server-plist.py'),
+                    '--path', str(path), '--repo', str(tmp_path), '--host', host], check=True)
+    argv = plistlib.loads(path.read_bytes())['ProgramArguments']
+    assert ('--allow-reload' in argv) is enabled
+
+
+def test_reload_cli_propagates_http_error(tmp_path):
+    stub = tmp_path / 'bin'
+    stub.mkdir()
+    curl = stub / 'curl'
+    curl.write_text('#!/bin/bash\necho "disabled endpoint"\nexit 22\n')
+    curl.chmod(0o755)
+    result = subprocess.run(['bash', str(REPO / 'afterwords.sh'), 'reload'],
+                            env={**os.environ, 'PATH': str(stub) + ':' + os.environ['PATH']},
+                            capture_output=True, text=True)
+    assert result.returncode != 0

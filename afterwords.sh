@@ -241,6 +241,8 @@ write_plist() {
     with_17b_enabled && args+=(--with-1.7b)
     [ "$bind_public" = "true" ] && args+=(--bind-public)
     args+=(--backends "$(server_config_get BACKENDS)")
+    local reload="$(server_config_get ALLOW_RELOAD)"
+    args+=(--gallery-reload "${reload:-auto}")
     python3 "${REPO_DIR}/scripts/write-server-plist.py" "${args[@]}"
 
 }
@@ -658,7 +660,7 @@ cmd_reload() {
         url="${url}?prune=true"
     fi
     if ! response=$(curl --fail-with-body --silent --show-error -X POST "$url"); then
-        fail "Server not responding on localhost:7860"
+        fail "Gallery reload failed (HTTP error or unavailable server on localhost:7860)"
     fi
     if command -v jq >/dev/null 2>&1; then
         echo "$response" | jq .
