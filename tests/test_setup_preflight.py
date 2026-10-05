@@ -86,3 +86,15 @@ def test_preflight_rejects_reusable_unsupported_venv(preflight, monkeypatch, tmp
     errors = preflight.check_install_python(tmp_path)
     assert any('existing venv' in error for error in errors)
     assert preflight.check_install_python(tmp_path, unlocked=True) == []
+
+
+def test_macos_framework_python_is_owned(preflight, monkeypatch, tmp_path):
+    def run(argv, **kwargs):
+        if argv[0] == 'lsof':
+            return SimpleNamespace(returncode=0, stdout='11', stderr='')
+        return SimpleNamespace(returncode=0,
+                               stdout=f'/opt/homebrew/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python {tmp_path}/server.py --allow-reload',
+                               stderr='')
+    monkeypatch.setattr(preflight.subprocess, 'run', run)
+    monkeypatch.setattr(preflight.urllib.request, 'urlopen', lambda *a, **k: io.StringIO('{"service":"afterwords"}'))
+    assert preflight.check_port(tmp_path) == []

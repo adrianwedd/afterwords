@@ -265,7 +265,7 @@ expected = os.path.realpath(os.path.join(sys.argv[2], "server.py"))
 prefix = os.path.join(sys.argv[2], ".venv/bin/python3") + " " + os.path.join(sys.argv[2], "server.py")
 if sys.argv[1].strip() == prefix or sys.argv[1].strip().startswith(prefix + " "):
     sys.exit(0)
-sys.exit(not (len(argv) >= 2 and os.path.basename(argv[0]).startswith("python")
+sys.exit(not (len(argv) >= 2 and os.path.basename(argv[0]).lower().startswith("python")
               and os.path.isabs(argv[1]) and os.path.realpath(argv[1]) == expected))
 ' "$command" "$REPO_DIR"
 }

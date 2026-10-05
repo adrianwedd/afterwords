@@ -250,3 +250,23 @@ exec(code)
     assert list(tmp_path.iterdir()) == [wrapper]
     if minor == 15 and not unlocked:
         assert 'experimental --unlocked' in result.stderr
+
+
+@pytest.mark.parametrize('server_path,owned', [(str(REPO / 'server.py'), True), ('/foreign/server.py', False)])
+def test_cli_owns_framework_python_only_for_this_checkout(tmp_path, server_path, owned):
+    stub = tmp_path / 'bin'
+    stub.mkdir()
+    scripts = {
+        'lsof': 'echo 987654',
+        'ps': f'echo "/opt/homebrew/Python.framework/Resources/Python.app/Contents/MacOS/Python {server_path} --allow-reload"',
+        'curl': "echo '{\"service\":\"afterwords\",\"ready\":true,\"voices\":[],\"loaded_backends\":{}}'",
+    }
+    for name, content in scripts.items():
+        path = stub / name
+        path.write_text('#!/bin/bash\n' + content + '\n')
+        path.chmod(0o755)
+    result = subprocess.run(['bash', str(REPO / 'afterwords.sh'), 'status'],
+                            env={**os.environ, 'PATH': str(stub) + ':' + os.environ['PATH'],
+                                 'AFTERWORDS_NO_LAUNCHCTL': '1'}, capture_output=True, text=True)
+    assert (result.returncode == 0) is owned, result.stdout + result.stderr
+    assert ('conflict' in result.stdout) is (not owned)
