@@ -305,7 +305,7 @@ The inbound inline path archives to `~/.hermes/tts-archive`, which the watcher a
 ## Paired Studio scopes
 
 When direct CLI shell hooks and native gateway hooks are both installed, use
-`AFTERWORDS_SHELL_SCOPE=cli bash /path/to/afterwords/scripts/afterwords-post-llm.sh`
+`env AFTERWORDS_SHELL_SCOPE=cli bash /path/to/afterwords/scripts/afterwords-post-llm.sh`
 as the shell command, and install the native hook with
 `bash scripts/install-hermes-hook.sh --local-only`. The shell owns `cli` turns;
 the native hook owns `local` gateway turns. Other platforms are skipped, so this
