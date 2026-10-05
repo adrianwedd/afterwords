@@ -38,3 +38,24 @@ def test_handle_skips_explicitly_when_aiohttp_missing(caplog):
     assert "not reachable" not in msgs, (
         f"must not fall through to the health-check except; got: {msgs!r}"
     )
+
+
+def test_native_local_only_skips_direct_cli_before_network():
+    mod = _load_handler()
+    mod.LOCAL_PLATFORMS = ("local",)
+    class UnexpectedNetwork:
+        def ClientSession(self, *args, **kwargs):
+            raise AssertionError("direct CLI must be owned by the shell hook")
+    mod.aiohttp = UnexpectedNetwork()
+    asyncio.run(mod.handle("agent:end", {"response": "distinct turn", "platform": "cli"}))
+
+
+def test_installer_local_only_installs_manifest_and_scope(tmp_path):
+    import os, subprocess
+    env = os.environ.copy()
+    env["HERMES_HOME"] = str(tmp_path)
+    result = subprocess.run(["bash", str(REPO / "scripts/install-hermes-hook.sh"), "--local-only"], env=env, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    hook = tmp_path / "hooks/afterwords-tts"
+    assert (hook / "HOOK.yaml").read_text() == (REPO / "hermes/hooks/afterwords-tts/HOOK.yaml").read_text()
+    assert 'LOCAL_PLATFORMS = ("local",)' in (hook / "handler.py").read_text()

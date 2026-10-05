@@ -301,3 +301,14 @@ The inbound inline path archives to `~/.hermes/tts-archive`, which the watcher a
 | Shell hook blocked | `hermes hooks list` — should show `✓ allowed`. Set `hooks_auto_accept: true` |
 | Shell hook timeout | The shell hook plays audio synchronously (blocks until afplay finishes); long responses can exceed the configured 60s timeout — raise `timeout: 120` in config.yaml or use the command provider instead |
 | Server down silently | Both hooks exit silently when `/health` fails — check `afterwords status` |
+
+## Paired Studio scopes
+
+When direct CLI shell hooks and native gateway hooks are both installed, use
+`AFTERWORDS_SHELL_SCOPE=cli bash /path/to/afterwords/scripts/afterwords-post-llm.sh`
+as the shell command, and install the native hook with
+`bash scripts/install-hermes-hook.sh --local-only`. The shell owns `cli` turns;
+the native hook owns `local` gateway turns. Other platforms are skipped, so this
+configuration neither duplicates local speech nor sends external audio. The
+installer installs both the manifest and stamped handler. The default installer
+retains the documented CLI/local/empty native scope for standalone use.
