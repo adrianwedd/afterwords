@@ -95,7 +95,10 @@ def main():
     print(f'Free disk: {free:.1f} GiB (reserve at least 6 GiB for baseline environment/model/cache)')
     if free < 6:
         failures.append('insufficient free disk')
-    print('macOS:', subprocess.check_output(['sw_vers', '-productVersion'], text=True).strip())
+    macos = subprocess.check_output(['sw_vers', '-productVersion'], text=True).strip()
+    print('macOS:', macos)
+    if int(macos.split('.')[0]) < 14:
+        failures.append('macOS 14+ required by the baseline MLX wheel dependencies')
     failures.extend(check_port(repo))
     for failure in failures:
         print('FAIL:', failure, file=sys.stderr)

@@ -480,7 +480,7 @@ Archiving requires `lame` (`brew install lame`).
 
 - Apple Silicon Mac (M1/M2/M3/M4), 16 GB+ RAM (32 GB recommended)
 - Python 3.11+
-- Reserve at least 6 GiB free disk for the baseline environment, weights, and cache (planning allowance; exact model download sizes are not locked)
+- Reserve at least 6 GiB free disk for the baseline environment, weights, and cache (planning allowance; fixed model revisions and baseline dependency locks are described in ONBOARDING.md)
 - Claude Code (optional — for automatic TTS on responses; setup offers to install it)
 
 ## File Map

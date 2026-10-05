@@ -190,3 +190,35 @@ def test_cli_installs_to_explicit_user_directory_without_sudo(tmp_path):
     assert 'unexpected-sudo' not in result.stderr
     assert (destination / 'afterwords').is_symlink()
     assert (destination / 'afterwords').resolve() == REPO / 'afterwords.sh'
+
+
+@pytest.mark.parametrize('size', ['0.6B', '1.7B'])
+def test_qwen_load_uses_fixed_hub_revision(monkeypatch, size):
+    from types import ModuleType
+    tts = ModuleType('mlx_audio.tts')
+    calls = []
+    tts.load_model = lambda model_id, **kwargs: calls.append((model_id, kwargs)) or object()
+    monkeypatch.setitem(sys.modules, 'mlx_audio', ModuleType('mlx_audio'))
+    monkeypatch.setitem(sys.modules, 'mlx_audio.tts', tts)
+    backend = Qwen3Backend(size)
+    backend.load()
+    assert calls == [(backend.model_id, {'revision': backend.model_revision})]
+    assert len(backend.model_revision) == 40
+    assert backend._loaded is True
+
+
+@pytest.mark.parametrize('version,unlocked,expected', [('311', False, 0), ('314', False, 0), ('999', False, 1), ('999', True, 0)])
+def test_baseline_installer_requires_known_lock_unless_explicitly_unlocked(tmp_path, version, unlocked, expected):
+    source = (REPO / 'setup.sh').read_text()
+    start = source.index('VENV_VERSION=$(python3')
+    end = source.index('\nif $CLONING;', start)
+    script = 'set -euo pipefail\nwarn() { :; }; fail() { exit 1; }\n'
+    script += f'python3() {{ echo {version}; }}\n'
+    script += 'pip() { printf "%s\\n" "$@"; }\n'
+    script += f'UNLOCKED={str(unlocked).lower()}\n'
+    result = subprocess.run(['bash', '-c', script + source[start:end]],
+                            cwd=REPO, capture_output=True, text=True)
+    assert result.returncode == expected, result.stderr
+    if expected == 0:
+        assert ('--require-hashes' in result.stdout) is (not unlocked)
+        assert ('requirements.txt' in result.stdout) is unlocked

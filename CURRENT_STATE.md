@@ -16,7 +16,7 @@ Start at [ONBOARDING.md](ONBOARDING.md). The intended baseline is bundled voices
 | Explicit install scope | Server-only default; opt-in cloning/integrations; read-only preflight; unknown flags rejected | Unattended install on a fresh Mac; explicit writable `--cli-dir` avoids sudo; system default may require sudo |
 | Integration isolation | Cursor-only shared helpers fixed; non-Claude agents no longer register Claude hooks; per-agent disposable-HOME install/config tests | One final reply speaks once and archives for the selected live integration |
 | Current documentation | Integration matrix, Hermes real-artifact contract, current chunk/queue budgets, baseline and privacy boundaries reconciled | Other historical documentation may need further cleanup |
-| Reproducibility/platform bounds | mlx-audio compatibility cap retained; documentation distinguishes tested Python from dependency resolution | Full dependency/model revision locks; tested macOS minimum and upper Python runtime bound |
+| Reproducibility/platform bounds | Hash-checked baseline locks for Python 3.11–3.14/ARM macOS 14+, immutable Qwen revisions; mlx-audio compatibility cap retained | Runtime qualification of new locks/revisions; optional dependency locks; tested macOS minimum and upper Python runtime bound |
 
 Main includes the persistent-bind changes from PR #119, the real-artifact command-provider delivery contract from PR #121, and the bounded fidelity probe from PR #124. Git history and the corresponding current source verify those capabilities. The probe is diagnostic; it does not fix synthesis fidelity.
 

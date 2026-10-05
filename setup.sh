@@ -16,6 +16,7 @@ set -euo pipefail
 SERVER_ONLY=true
 CLONING=false
 PREFLIGHT=false
+UNLOCKED=false
 CLI_DIR="/usr/local/bin"
 CLI_DIR_EXPLICIT=false
 while [ "$#" -gt 0 ]; do
@@ -24,13 +25,14 @@ while [ "$#" -gt 0 ]; do
         --server-only) SERVER_ONLY=true ;;
         --integrations) SERVER_ONLY=false ;;
         --cloning) CLONING=true ;;
+        --unlocked) UNLOCKED=true ;;
         --preflight) PREFLIGHT=true ;;
         --cli-dir)
             [ "$#" -ge 2 ] || { echo "--cli-dir requires an absolute directory" >&2; exit 2; }
             CLI_DIR="$2"; CLI_DIR_EXPLICIT=true; shift ;;
         --cli-dir=*) CLI_DIR="${arg#*=}"; CLI_DIR_EXPLICIT=true ;;
         --help|-h)
-            echo "Usage: bash setup.sh [--server-only] [--preflight] [--cloning] [--integrations] [--cli-dir DIR]"
+            echo "Usage: bash setup.sh [--server-only] [--preflight] [--cloning] [--integrations] [--cli-dir DIR] [--unlocked]"
             echo "Default: bundled-voice server only, no integration or cloning tools."
             exit 0 ;;
         *) echo "Unknown option: $arg" >&2; exit 2 ;;
@@ -232,7 +234,16 @@ fi
 
 source .venv/bin/activate
 pip install --quiet --upgrade pip
-pip install --quiet -r requirements.txt
+VENV_VERSION=$(python3 -c 'import sys; print(f"{sys.version_info.major}{sys.version_info.minor}")')
+BASELINE_LOCK="requirements-macos-arm64-py${VENV_VERSION}.lock"
+if $UNLOCKED; then
+    warn "Experimental unlocked dependency resolution; reproducibility is not guaranteed"
+    pip install --quiet -r requirements.txt
+elif [ -f "$BASELINE_LOCK" ]; then
+    pip install --quiet --require-hashes -r "$BASELINE_LOCK"
+else
+    fail "No baseline dependency lock for this Python version. Use Python 3.11–3.14 or explicitly choose --unlocked."
+fi
 if $CLONING; then
     pip install --quiet -r requirements-clone.txt
 fi

@@ -421,6 +421,7 @@ def health():
         b = backends.get(bname)
         loaded_backends[bname] = {
             "registered": True,
+            "model_revision": getattr(b, "model_revision", None),
             "available": _backend_states.get(bname, {}).get("available"),
             "loaded": _backend_states.get(bname, {}).get("loaded", False),
             "state": _backend_states.get(bname, {}).get("state", "registered"),
