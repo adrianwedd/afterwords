@@ -50,3 +50,18 @@ def test_existing_service_in_checkout_with_spaces(preflight, monkeypatch, tmp_pa
     monkeypatch.setattr(preflight.subprocess, 'run', run)
     monkeypatch.setattr(preflight.urllib.request, 'urlopen', lambda *a, **k: io.StringIO('{"service":"afterwords"}'))
     assert preflight.check_port(repo) == []
+
+
+def test_cli_directory_checked_before_installation(preflight, monkeypatch, tmp_path):
+    destination = tmp_path / 'missing/bin'
+    monkeypatch.setenv('PATH', str(destination))
+    assert preflight.check_cli_destination(destination, tmp_path) == []
+    assert not destination.exists()
+    monkeypatch.setenv('PATH', '/usr/bin')
+    assert preflight.check_cli_destination(destination, tmp_path)
+
+
+def test_cli_destination_does_not_overwrite_other_installation(preflight, monkeypatch, tmp_path):
+    monkeypatch.setenv('PATH', str(tmp_path))
+    (tmp_path / 'afterwords').write_text('foreign CLI')
+    assert preflight.check_cli_destination(tmp_path, tmp_path)

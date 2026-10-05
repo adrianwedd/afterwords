@@ -13,7 +13,7 @@ Start at [ONBOARDING.md](ONBOARDING.md). The intended baseline is bundled voices
 | Fresh installation destinations | Plist generator creates parent directories and escapes XML-sensitive paths; CLI directory created and PATH checked | Fresh macOS install, permissions and launchd behavior |
 | Process identity | CLI rejects foreign listeners; preflight verifies owning process plus HTTP identity, and rejects unknown ownership | Live start/stop/recovery |
 | Gallery reload | Separate local reload permission enabled by default for installed loopback service; HTTP failures exit nonzero | Live gallery rescan after startup |
-| Explicit install scope | Server-only default; opt-in cloning/integrations; read-only preflight; unknown flags rejected | Unattended install on a fresh Mac; sudo may still be required for system CLI directory |
+| Explicit install scope | Server-only default; opt-in cloning/integrations; read-only preflight; unknown flags rejected | Unattended install on a fresh Mac; explicit writable `--cli-dir` avoids sudo; system default may require sudo |
 | Integration isolation | Cursor-only shared helpers fixed; non-Claude agents no longer register Claude hooks; per-agent disposable-HOME install/config tests | One final reply speaks once and archives for the selected live integration |
 | Current documentation | Integration matrix, Hermes real-artifact contract, current chunk/queue budgets, baseline and privacy boundaries reconciled | Other historical documentation may need further cleanup |
 | Reproducibility/platform bounds | mlx-audio compatibility cap retained; documentation distinguishes tested Python from dependency resolution | Full dependency/model revision locks; tested macOS minimum and upper Python runtime bound |

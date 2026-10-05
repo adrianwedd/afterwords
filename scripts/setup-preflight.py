@@ -63,10 +63,30 @@ def check_port(repo):
     return []
 
 
+def check_cli_destination(cli_dir, repo):
+    if not cli_dir.is_absolute():
+        return ['CLI directory must be absolute']
+    if cli_dir.exists() and not cli_dir.is_dir():
+        return ['CLI destination is not a directory']
+    directories = {Path(entry or os.curdir).resolve() for entry in os.environ.get('PATH', '').split(os.pathsep)}
+    if cli_dir.resolve() not in directories:
+        return [f'CLI directory {cli_dir} is not on PATH; add it before installing']
+    existing = shutil.which('afterwords')
+    target = cli_dir / 'afterwords'
+    if existing and Path(existing).absolute() != target.absolute():
+        return [f'another afterwords command shadows the selected destination: {existing}']
+    if (target.exists() or target.is_symlink()) and (not target.is_symlink() or target.resolve() != (repo / 'afterwords.sh').resolve()):
+        return [f'CLI destination contains another file or installation: {target}']
+    return []
+
+
 def main():
     repo = Path(sys.argv[1])
-    failures = []
-    for path in (repo, Path.home() / 'Library/LaunchAgents', Path('/usr/local/bin')):
+    cli_dir = Path(sys.argv[2] if len(sys.argv) > 2 else '/usr/local/bin')
+    failures = check_cli_destination(cli_dir, repo)
+    if len(sys.argv) > 3 and sys.argv[3] == "true" and not writable_ancestor(cli_dir):
+        failures.append(f"explicit CLI destination is not writable: {cli_dir}")
+    for path in (repo, Path.home() / 'Library/LaunchAgents', cli_dir):
         writable = writable_ancestor(path)
         print(f'{path}: writable ancestor={writable}')
         if not writable:

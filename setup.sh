@@ -16,19 +16,31 @@ set -euo pipefail
 SERVER_ONLY=true
 CLONING=false
 PREFLIGHT=false
-for arg in "$@"; do
+CLI_DIR="/usr/local/bin"
+CLI_DIR_EXPLICIT=false
+while [ "$#" -gt 0 ]; do
+    arg="$1"
     case "$arg" in
         --server-only) SERVER_ONLY=true ;;
         --integrations) SERVER_ONLY=false ;;
         --cloning) CLONING=true ;;
         --preflight) PREFLIGHT=true ;;
+        --cli-dir)
+            [ "$#" -ge 2 ] || { echo "--cli-dir requires an absolute directory" >&2; exit 2; }
+            CLI_DIR="$2"; CLI_DIR_EXPLICIT=true; shift ;;
+        --cli-dir=*) CLI_DIR="${arg#*=}"; CLI_DIR_EXPLICIT=true ;;
         --help|-h)
-            echo "Usage: bash setup.sh [--server-only] [--preflight] [--cloning] [--integrations]"
+            echo "Usage: bash setup.sh [--server-only] [--preflight] [--cloning] [--integrations] [--cli-dir DIR]"
             echo "Default: bundled-voice server only, no integration or cloning tools."
             exit 0 ;;
         *) echo "Unknown option: $arg" >&2; exit 2 ;;
     esac
+    shift
 done
+case "$CLI_DIR" in
+    /*) ;;
+    *) echo "--cli-dir requires an absolute directory" >&2; exit 2 ;;
+esac
 
 # ── Colours & output helpers ────────────────────────────────────────
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[0;33m'
@@ -97,11 +109,11 @@ PY_ARCH=$(python3 -c 'import platform; print(platform.machine())')
 [ -n "$(find voices -maxdepth 1 -name '*-ref.wav' -print -quit)" ] || fail "Bundled voices missing; restore the repository voice files before setup."
 # The read-only preflight ends before dependency installation or filesystem writes.
 if $PREFLIGHT; then
-    python3 "$SCRIPT_DIR/scripts/setup-preflight.py" "$SCRIPT_DIR"
+    python3 "$SCRIPT_DIR/scripts/setup-preflight.py" "$SCRIPT_DIR" "$CLI_DIR" "$CLI_DIR_EXPLICIT"
     exit $?
 fi
 
-python3 "$SCRIPT_DIR/scripts/setup-preflight.py" "$SCRIPT_DIR" || fail "Preflight failed"
+python3 "$SCRIPT_DIR/scripts/setup-preflight.py" "$SCRIPT_DIR" "$CLI_DIR" "$CLI_DIR_EXPLICIT" || fail "Preflight failed"
 
 if ! $SERVER_ONLY || $CLONING; then
 # ffmpeg check
@@ -873,16 +885,20 @@ ok "TTS server will auto-start on login"
 
 # Install CLI to PATH
 CLI_SCRIPT="${SCRIPT_DIR}/afterwords.sh"
-CLI_LINK="/usr/local/bin/afterwords"
+CLI_LINK="${CLI_DIR%/}/afterwords"
 if [ -f "$CLI_SCRIPT" ]; then
-    mkdir -p "$(dirname "$CLI_LINK")" 2>/dev/null || sudo mkdir -p "$(dirname "$CLI_LINK")"
+    if $CLI_DIR_EXPLICIT; then
+        mkdir -p "$CLI_DIR" || fail "Cannot create CLI directory: $CLI_DIR"
+    else
+        mkdir -p "$CLI_DIR" 2>/dev/null || sudo mkdir -p "$CLI_DIR"
+    fi
     if [ -L "$CLI_LINK" ] && [ "$(readlink "$CLI_LINK")" = "$CLI_SCRIPT" ]; then
         ok "CLI already on PATH: ${CYAN}afterwords${NC}"
     else
         info "Adding ${CYAN}afterwords${NC} command to PATH..."
         if ln -sf "$CLI_SCRIPT" "$CLI_LINK" 2>/dev/null; then
             ok "CLI installed: ${CYAN}afterwords${NC}"
-        elif sudo ln -sf "$CLI_SCRIPT" "$CLI_LINK" 2>/dev/null; then
+        elif ! $CLI_DIR_EXPLICIT && sudo ln -sf "$CLI_SCRIPT" "$CLI_LINK" 2>/dev/null; then
             ok "CLI installed: ${CYAN}afterwords${NC} (sudo)"
         else
             warn "Could not symlink to ${CLI_LINK}"
@@ -890,7 +906,7 @@ if [ -f "$CLI_SCRIPT" ]; then
         fi
     fi
 fi
-[ "$(command -v afterwords || true)" = "$CLI_LINK" ] || fail "CLI is not available at ${CLI_LINK} on PATH; add /usr/local/bin to PATH and rerun setup."
+[ "$(command -v afterwords || true)" = "$CLI_LINK" ] || fail "CLI is not available at ${CLI_LINK} on PATH; add ${CLI_DIR} to PATH and rerun setup."
 echo
 
 # ── Verify ────────────────────────────────────────────────────────

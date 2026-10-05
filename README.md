@@ -34,7 +34,7 @@ bash setup.sh --cloning       # add YouTube/download/transcription tools
 bash setup.sh --integrations  # interactive discovery/configuration of installed agents
 ```
 
-The default path needs no answers or voice URL. System directory permissions may require sudo; prepare `/usr/local/bin` and PATH before an unattended install. Unknown options fail before installation. Integration mode can prompt and may modify other tools' configuration.
+The default path needs no answers or voice URL. For an unattended install without sudo, add `$HOME/.local/bin` to PATH and pass `--cli-dir "$HOME/.local/bin"`. The legacy `/usr/local/bin` default may require sudo. Preflight checks PATH before changes. Unknown options fail before installation. Integration mode can prompt and may modify other tools' configuration.
 
 ### Set up with an AI agent
 

@@ -161,3 +161,32 @@ def test_reload_cli_propagates_http_error(tmp_path):
                             env={**os.environ, 'PATH': str(stub) + ':' + os.environ['PATH']},
                             capture_output=True, text=True)
     assert result.returncode != 0
+
+
+@pytest.mark.parametrize('flags', [['--cli-dir'], ['--cli-dir=relative'], ['--cli-dir', 'relative']])
+def test_invalid_cli_destination_fails_before_installation(tmp_path, flags):
+    result = subprocess.run(['bash', str(REPO / 'setup.sh'), *flags],
+                            env={**os.environ, 'HOME': str(tmp_path)}, capture_output=True)
+    assert result.returncode == 2
+    assert not list(tmp_path.iterdir())
+
+
+def test_cli_installs_to_explicit_user_directory_without_sudo(tmp_path):
+    import shlex
+    destination = tmp_path / 'local tools/bin'
+    source = (REPO / 'setup.sh').read_text()
+    start = source.index('# Install CLI to PATH')
+    end = source.index('# ── Verify', start)
+    stub = tmp_path / 'stub'
+    stub.mkdir()
+    (stub / 'sudo').write_text('#!/bin/bash\necho unexpected-sudo >&2\nexit 99\n')
+    (stub / 'sudo').chmod(0o755)
+    script = 'set -euo pipefail\ninfo() { :; }; ok() { :; }; warn() { :; }; fail() { exit 1; }\nCYAN=; NC=; DIM=\n'
+    script += f'SCRIPT_DIR={shlex.quote(str(REPO))}\nCLI_DIR={shlex.quote(str(destination))}\nCLI_DIR_EXPLICIT=true\n'
+    result = subprocess.run(['bash', '-c', script + source[start:end]],
+                            env={**os.environ, 'PATH': str(destination) + ':' + str(stub) + ':' + os.environ['PATH']},
+                            capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    assert 'unexpected-sudo' not in result.stderr
+    assert (destination / 'afterwords').is_symlink()
+    assert (destination / 'afterwords').resolve() == REPO / 'afterwords.sh'

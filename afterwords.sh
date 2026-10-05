@@ -1104,10 +1104,14 @@ cmd_uninstall() {
     fi
 
     # Remove symlink
-    if [ -L /usr/local/bin/afterwords ]; then
-        info "Removing /usr/local/bin/afterwords symlink..."
-        rm -f /usr/local/bin/afterwords 2>/dev/null || sudo rm -f /usr/local/bin/afterwords
-        ok "Removed CLI symlink"
+    local cli_link="${BASH_SOURCE[0]}"
+    [ -L "$cli_link" ] || cli_link="$(command -v afterwords || true)"
+    if [ -L "$cli_link" ] && python3 -c '
+import os, sys
+sys.exit(os.path.realpath(sys.argv[1]) != os.path.realpath(sys.argv[2]))
+' "$cli_link" "$REPO_DIR/afterwords.sh"; then
+        info "Removing ${cli_link} symlink..."
+        rm -f "$cli_link" 2>/dev/null || sudo rm -f "$cli_link"
     fi
 
     # Offer to remove Claude Code hooks

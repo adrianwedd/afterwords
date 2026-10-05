@@ -8,7 +8,17 @@ Run `bash setup.sh --preflight` first. It reads architecture, Python architectur
 
 Reserve at least 6 GiB of free disk for the baseline environment and model cache; this is a conservative planning allowance, not a measured download size. The baseline model is `mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit`, approximately 1.5 GiB resident memory. Optional `--with-1.7b` adds `mlx-community/Qwen3-TTS-12Hz-1.7B-Base-8bit`, approximately 3.5 GiB total resident memory. Exact download sizes/revisions are not locked. The default Hugging Face cache is `~/.cache/huggingface/hub` (environment overrides can relocate it). Local inference needs no cloud API key; initial package/model downloads use the network.
 
-Run `bash setup.sh --server-only`. Setup installs baseline Python dependencies into `.venv`, creates `~/Library/LaunchAgents/com.afterwords.tts-server.plist`, installs `/usr/local/bin/afterwords`, and loads the login service. It replaces the existing service configuration and restarts it. It does not install cloning tools or hooks. Ensure `/usr/local/bin` is on PATH and its permissions permit creating the symlink; otherwise setup may need sudo. Missing bundled voices fail rather than prompting for a YouTube URL.
+For an unattended install without sudo, choose a writable CLI directory and put it on PATH first:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+bash setup.sh --preflight --cli-dir "$HOME/.local/bin"
+bash setup.sh --server-only --cli-dir "$HOME/.local/bin"
+```
+
+Preflight checks PATH and refuses a shadowing command or another file/installation at the destination. Explicit CLI destinations never use sudo. The legacy default remains `/usr/local/bin`.
+
+Run `bash setup.sh --server-only` for the default system CLI location. Setup installs baseline Python dependencies into `.venv`, creates `~/Library/LaunchAgents/com.afterwords.tts-server.plist`, installs `afterwords` in the selected CLI directory, and loads the login service. It replaces the existing service configuration and restarts it. It does not install cloning tools or hooks. Ensure `/usr/local/bin` is on PATH and its permissions permit creating the symlink; otherwise setup may need sudo. Missing bundled voices fail rather than prompting for a YouTube URL.
 
 The plist preserves backend selection across service startup and regeneration. Only Qwen 0.6B loads by default; `--with-1.7b` additionally selects 1.7B. For experimental backends set `BACKENDS=qwen3-0.6b,<backend-name>` in `~/.afterwords-server` before setup/configure. An explicit `AFTERWORDS_BACKENDS` environment variable can select backends during initial setup. Unknown names fail at server startup. Registration in `/health` does not imply availability or successful loading: an unselected backend has `state=registered`, `available=null`, and `loaded=false`. Selected failures abort startup. Warmup synthesis must succeed before normal startup declares readiness; `--no-warmup` is a diagnostic bypass, not installation acceptance.
 
