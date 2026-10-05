@@ -307,7 +307,8 @@ def test_health_includes_loaded_backends(client):
         "qwen3-0.6b", "qwen3-1.7b",
     }
     for name, info in body["loaded_backends"].items():
-        assert info["loaded"] is True
+        assert info["registered"] is True
+        assert isinstance(info["loaded"], bool)
         assert isinstance(info["voice_count"], int)
         assert isinstance(info["sample_rate"], int)
 

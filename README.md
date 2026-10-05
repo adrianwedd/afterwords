@@ -6,7 +6,7 @@
 
 Clone any voice from a 15-second YouTube clip and run it locally on your Mac. Use it as a standalone TTS API, or wire it into any AI coding harness — **Claude Code**, **Codex CLI**, **Cursor**, **Gemini CLI / Antigravity (agy)**, or **Hermes Agent** — to hear every response spoken aloud. **102 flagship voice families** (198 profiles, all cloned with **Qwen3-TTS 0.6B**, the default cloning path; the higher-fidelity 1.7B model loads via `--with-1.7b`), plus **2 verified alternatives** (Voxtral, SoproTTS) and **13 scaffolded backends** (OpenVoice v2, F5-TTS, CosyVoice2, GPT-SoVITS, XTTS v2, IndexTTS-2, NeuTTS Air, Spark-TTS, Dia2, YourTTS, SV2TTS, MockingBird, FireRedTTS-2) that load correctly but have known installation issues on Apple Silicon — see the [Backend Status](#backend-status) table for details.
 
-No cloud API. No subscription. No data leaves your machine. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
+Local synthesis needs no cloud API key or subscription. Initial installation downloads packages and model weights; optional YouTube cloning and cloud commands access external services. Agent integrations retain spoken-text and audio archives locally. The voice comes from a 15-second audio sample — yours, a friend's, or anyone on YouTube.
 
 ## Quick Start
 
@@ -16,25 +16,35 @@ cd afterwords
 bash setup.sh
 ```
 
-The setup script checks prerequisites, creates a venv, walks you through cloning a voice from YouTube, and starts the server. If Claude Code is detected (or you choose to install it), the script also wires up a Stop hook so Claude speaks every response.
+Setup defaults to the bundled-voice server on loopback, with Qwen3 0.6B only. It creates a Python environment, a launchd service, and `/usr/local/bin/afterwords`; it does not install agent hooks or YouTube cloning tools. `--server-only` remains an explicit alias for the default.
 
-For a server-only install with no Claude Code integration:
+Start with the read-only checks:
 
 ```bash
+bash setup.sh --preflight
 bash setup.sh --server-only
 ```
 
+Installation succeeds only after the running service identifies itself as Afterwords and returns a valid, non-silent WAV. Listen separately to verify speech completeness. See [the first-success checklist](ONBOARDING.md) for changes, resource budgets, backend configuration, and live acceptance.
+
+Optional tools are explicit:
+
+```bash
+bash setup.sh --cloning       # add YouTube/download/transcription tools
+bash setup.sh --integrations  # interactive discovery/configuration of installed agents
+```
+
+The default path needs no answers or voice URL. System directory permissions may require sudo; prepare `/usr/local/bin` and PATH before an unattended install. Unknown options fail before installation. Integration mode can prompt and may modify other tools' configuration.
+
 ### Set up with an AI agent
 
-Paste this into Claude Code, Codex, Cursor, or any AI agent to install afterwords hands-free:
-
-> Clone https://github.com/adrianwedd/afterwords and run `bash setup.sh`. Walk me through each step — ask for a YouTube URL when you need a voice to clone.
+> Clone https://github.com/adrianwedd/afterwords, read ONBOARDING.md, and run `bash setup.sh --preflight`. Install the bundled-voice server only, verify a synthesized WAV, and help me listen before enabling one integration.
 
 ## With Claude Code
 
 Claude Code has [`/voice`](https://docs.anthropic.com/en/docs/claude-code/voice-dictation) — hold Space to dictate prompts. But it's input only. Claude can hear you; you can't hear Claude. This project adds the missing half: **text-to-speech output**. Together, `/voice` input + TTS output = full voice conversations with Claude Code.
 
-If Claude Code isn't installed, setup will offer to install it (requires Node.js; setup installs that too if needed via Homebrew).
+In `--integrations` mode, if Claude Code isn't installed, setup will offer to install it (requires Node.js; setup installs that too if needed via Homebrew).
 
 ## With Codex CLI
 

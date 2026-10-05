@@ -7,16 +7,26 @@
 # for automatic text-to-speech on every response.
 #
 # Requirements: Apple Silicon Mac (M1+), 16 GB+ RAM (32 GB recommended), Python 3.11+
-# Usage: bash setup.sh              # full setup (detects Claude Code)
+# Usage: bash setup.sh              # bundled-voice server only
 #        bash setup.sh --server-only # server + voices only, no hooks
 #
 set -euo pipefail
 
 # ── Flags ─────────────────────────────────────────────────────────
-SERVER_ONLY=false
+SERVER_ONLY=true
+CLONING=false
+PREFLIGHT=false
 for arg in "$@"; do
     case "$arg" in
         --server-only) SERVER_ONLY=true ;;
+        --integrations) SERVER_ONLY=false ;;
+        --cloning) CLONING=true ;;
+        --preflight) PREFLIGHT=true ;;
+        --help|-h)
+            echo "Usage: bash setup.sh [--server-only] [--preflight] [--cloning] [--integrations]"
+            echo "Default: bundled-voice server only, no integration or cloning tools."
+            exit 0 ;;
+        *) echo "Unknown option: $arg" >&2; exit 2 ;;
     esac
 done
 
@@ -82,6 +92,18 @@ if [[ "$PY_OK" != "1" ]]; then
 fi
 ok "Python ${PY_VER}"
 
+PY_ARCH=$(python3 -c 'import platform; print(platform.machine())')
+[ "$PY_ARCH" = "arm64" ] || fail "Selected Python must be ARM-native; detected ${PY_ARCH}"
+[ -n "$(find voices -maxdepth 1 -name '*-ref.wav' -print -quit)" ] || fail "Bundled voices missing; restore the repository voice files before setup."
+# The read-only preflight ends before dependency installation or filesystem writes.
+if $PREFLIGHT; then
+    python3 "$SCRIPT_DIR/scripts/setup-preflight.py" "$SCRIPT_DIR"
+    exit $?
+fi
+
+python3 "$SCRIPT_DIR/scripts/setup-preflight.py" "$SCRIPT_DIR" || fail "Preflight failed"
+
+if ! $SERVER_ONLY || $CLONING; then
 # ffmpeg check
 if ! command -v ffmpeg &>/dev/null; then
     warn "ffmpeg not found — installing via Homebrew..."
@@ -98,6 +120,7 @@ if ! command -v jq &>/dev/null; then
 fi
 ok "jq"
 
+if $CLONING; then
 # yt-dlp check
 if ! command -v yt-dlp &>/dev/null; then
     if command -v brew &>/dev/null; then
@@ -109,6 +132,7 @@ if ! command -v yt-dlp &>/dev/null; then
     fi
 fi
 ok "yt-dlp"
+fi
 
 # lame check (optional — for MP3 archiving)
 if ! command -v lame &>/dev/null; then
@@ -118,6 +142,8 @@ if ! command -v lame &>/dev/null; then
     else
         warn "lame not found. Spoken responses won't be archived as MP3."
     fi
+fi
+
 fi
 
 # ── Claude Code detection ────────────────────────────────────────
@@ -195,7 +221,7 @@ fi
 source .venv/bin/activate
 pip install --quiet --upgrade pip
 pip install --quiet -r requirements.txt
-if ! $SERVER_ONLY; then
+if $CLONING; then
     pip install --quiet -r requirements-clone.txt
 fi
 ok "Python packages installed"
@@ -821,42 +847,14 @@ if [ -z "$SETUP_HOST" ] && [ "$SETUP_BIND_PUBLIC" = "true" ]; then
     SETUP_BIND_PUBLIC=""
 fi
 
-{
-    cat <<PLIST_HEAD
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>${PLIST_NAME}</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>${VENV_PYTHON}</string>
-        <string>${SCRIPT_DIR}/server.py</string>
-PLIST_HEAD
-    if [ -f "$AFTERWORDS_SERVER_CONFIG" ] && grep -q "^WITH_17B=true" "$AFTERWORDS_SERVER_CONFIG"; then
-        echo "        <string>--with-1.7b</string>"
-    fi
-    if [ -n "$SETUP_HOST" ]; then
-        echo "        <string>--host</string>"
-        echo "        <string>${SETUP_HOST}</string>"
-    fi
-    if [ "$SETUP_BIND_PUBLIC" = "true" ]; then
-        echo "        <string>--bind-public</string>"
-    fi
-    cat <<PLIST_TAIL
-    </array>
-    <key>RunAtLoad</key><true/>
-    <key>KeepAlive</key><true/>
-    <key>StandardOutPath</key>
-    <string>/tmp/claude-tts-server.log</string>
-    <key>StandardErrorPath</key>
-    <string>/tmp/claude-tts-server.log</string>
-</dict>
-</plist>
-PLIST_TAIL
-} > "$PLIST_PATH"
+PLIST_ARGS=(--path "$PLIST_PATH" --repo "$SCRIPT_DIR" --host "$SETUP_HOST")
+[ "$SETUP_BIND_PUBLIC" = "true" ] && PLIST_ARGS+=(--bind-public)
+if grep -q '^WITH_17B=true' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null; then
+    PLIST_ARGS+=(--with-1.7b)
+fi
+SETUP_BACKENDS="$(grep '^BACKENDS=' "$AFTERWORDS_SERVER_CONFIG" 2>/dev/null | head -1 | cut -d= -f2- || true)"
+PLIST_ARGS+=(--backends "${SETUP_BACKENDS:-${AFTERWORDS_BACKENDS:-}}")
+python3 "$SCRIPT_DIR/scripts/write-server-plist.py" "${PLIST_ARGS[@]}"
 
 launchctl unload "$PLIST_PATH" 2>/dev/null || true
 launchctl load "$PLIST_PATH"
@@ -866,6 +864,7 @@ ok "TTS server will auto-start on login"
 CLI_SCRIPT="${SCRIPT_DIR}/afterwords.sh"
 CLI_LINK="/usr/local/bin/afterwords"
 if [ -f "$CLI_SCRIPT" ]; then
+    mkdir -p "$(dirname "$CLI_LINK")" 2>/dev/null || sudo mkdir -p "$(dirname "$CLI_LINK")"
     if [ -L "$CLI_LINK" ] && [ "$(readlink "$CLI_LINK")" = "$CLI_SCRIPT" ]; then
         ok "CLI already on PATH: ${CYAN}afterwords${NC}"
     else
@@ -880,13 +879,14 @@ if [ -f "$CLI_SCRIPT" ]; then
         fi
     fi
 fi
+[ "$(command -v afterwords || true)" = "$CLI_LINK" ] || fail "CLI is not available at ${CLI_LINK} on PATH; add /usr/local/bin to PATH and rerun setup."
 echo
 
 # ── Verify ────────────────────────────────────────────────────────
 printf "  ${CYAN}▸${NC} Waiting for server to be ready"
 SERVER_OK=false
 for i in $(seq 1 60); do
-    if curl -s --max-time 2 http://127.0.0.1:7860/health | jq -e '.ready == true' &>/dev/null; then
+    if curl -s --max-time 2 http://127.0.0.1:7860/health | python3 -c 'import json,sys; h=json.load(sys.stdin); sys.exit(not (h.get("service") == "afterwords" and h.get("ready") is True))'  &>/dev/null; then
         SERVER_OK=true
         break
     fi
@@ -898,12 +898,19 @@ echo
 _ELAPSED=$(( $(date +%s) - _T0 ))
 echo
 if $SERVER_OK; then
+    VERIFY_WAV=$(mktemp -t afterwords-acceptance).wav
+    TMPFILES+=("$VERIFY_WAV" "${VERIFY_WAV%.wav}")
+    curl --fail --silent --show-error --max-time 120 --get \
+        --data-urlencode 'text=Afterwords is ready to speak.' \
+        http://127.0.0.1:7860/synthesize -o "$VERIFY_WAV" || fail "Acceptance synthesis failed"
+    python3 "$SCRIPT_DIR/scripts/validate-wav.py" "$VERIFY_WAV" || fail "Acceptance synthesis returned invalid audio"
     echo -e "  ${GREEN}${BOLD}✓ afterwords is running${NC}  ${DIM}(setup took ${_ELAPSED}s)${NC}"
 else
     echo -e "  ${YELLOW}${BOLD}⚠ server still starting${NC}  ${DIM}(${_ELAPSED}s — model may be downloading)${NC}"
     echo
     echo -e "  ${DIM}Check:${NC} afterwords status"
     echo -e "  ${DIM}Logs: ${NC} afterwords logs"
+    fail "Installation has not passed synthesis acceptance; check logs and rerun after resolving startup."
 fi
 echo
 rule
@@ -928,7 +935,7 @@ else
     echo -e "    ${DIM}curl \"localhost:7860/synthesize?text=Hello&voice=galadriel\" -o out.wav${NC}"
     echo -e "    ${DIM}afplay out.wav${NC}"
     echo
-    echo -e "  Add any AI agent integration later by re-running ${CYAN}bash setup.sh${NC}"
+    echo -e "  Add any AI agent integration later by re-running ${CYAN}bash setup.sh --integrations${NC}"
 fi
 echo
 rule
@@ -937,7 +944,7 @@ echo -e "  ${BOLD}${DIM}Share this prompt to set up afterwords hands-free:${NC}"
 echo
 echo -e "  ${DIM}┌────────────────────────────────────────────────────────────────────────┐${NC}"
 echo -e "  ${DIM}│${NC} Clone https://github.com/adrianwedd/afterwords and run bash setup.sh.   ${DIM}│${NC}"
-echo -e "  ${DIM}│${NC} Walk me through each step — ask for a YouTube URL when you need a voice. ${DIM}│${NC}"
+echo -e "  ${DIM}│${NC} Run preflight, install bundled voices, then verify synthesized speech. ${DIM}│${NC}"
 echo -e "  ${DIM}└────────────────────────────────────────────────────────────────────────┘${NC}"
 
 # ── Codex CLI discovery (optional, per-session) ─────────────────

@@ -51,7 +51,8 @@ class Qwen3Backend(BackendBase):
                     "to rebuild the venv"
                 )
                 log.error("Qwen3 %s unavailable: %s", self.size, self._unavailable_reason)
-                return
+                raise RuntimeError(self._unavailable_reason) from exc
+            self._unavailable_reason = None
             log.info("loading %s ...", self.model_id)
             self._model = load_model(self.model_id)
         self._ensure_loaded(_do)

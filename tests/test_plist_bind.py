@@ -13,11 +13,19 @@ from __future__ import annotations
 
 import os
 import plistlib
+import pytest
+import shutil
 import subprocess
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 AFTERWORDS = REPO / "afterwords.sh"
+
+
+@pytest.fixture(autouse=True)
+def installed_plist_writer(tmp_path):
+    (tmp_path / "scripts").mkdir(exist_ok=True)
+    shutil.copy(REPO / "scripts/write-server-plist.py", tmp_path / "scripts")
 
 
 def _shq(value: str) -> str:
@@ -419,7 +427,7 @@ def _setup_plist_block() -> str:
     """
     body = (REPO / "setup.sh").read_text()
     start = body.index('PLIST_NAME="com.afterwords.tts-server"')
-    end = body.rindex('} > "$PLIST_PATH"') + len('} > "$PLIST_PATH"')
+    end = body.index('\nlaunchctl unload', start)
     return body[start:end]
 
 

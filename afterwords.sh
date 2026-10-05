@@ -237,47 +237,46 @@ write_plist() {
     else
         bind_public=""
     fi
-    {
-        cat <<PLIST_HEAD
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>${PLIST_NAME}</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>${venv_python}</string>
-        <string>${REPO_DIR}/server.py</string>
-PLIST_HEAD
-        with_17b_enabled && echo "        <string>--with-1.7b</string>"
-        if [ -n "$host" ]; then
-            echo "        <string>--host</string>"
-            echo "        <string>${host}</string>"
-        fi
-        # --bind-public is meaningless without --host (server.py ignores it for a
-        # loopback bind), so don't emit an orphan flag — this keeps parity with
-        # setup.sh's suppression and avoids a plist that reads as a configured
-        # LAN bind when host degraded to empty.
-        [ -n "$host" ] && [ "$bind_public" = "true" ] && echo "        <string>--bind-public</string>"
-        cat <<PLIST_TAIL
-    </array>
-    <key>RunAtLoad</key><true/>
-    <key>KeepAlive</key><true/>
-    <key>StandardOutPath</key>
-    <string>/tmp/claude-tts-server.log</string>
-    <key>StandardErrorPath</key>
-    <string>/tmp/claude-tts-server.log</string>
-</dict>
-</plist>
-PLIST_TAIL
-    } > "$PLIST_PATH"
+    local args=(--path "$PLIST_PATH" --repo "$REPO_DIR" --host "$host")
+    with_17b_enabled && args+=(--with-1.7b)
+    [ "$bind_public" = "true" ] && args+=(--bind-public)
+    args+=(--backends "$(server_config_get BACKENDS)")
+    python3 "${REPO_DIR}/scripts/write-server-plist.py" "${args[@]}"
+
 }
 
-# Find PID listening on the TTS port (works whether launchd or manual)
+# Port ownership alone never authorizes signaling a process.
+listener_pid() {
+    lsof -ti :"$PORT" -sTCP:LISTEN 2>/dev/null | sort -u
+}
+
+is_server_pid() {
+    local command
+    command=$(ps -p "$1" -o command= 2>/dev/null) || return 1
+    python3 -c '
+import os, shlex, sys
+try:
+    argv = shlex.split(sys.argv[1])
+except ValueError:
+    sys.exit(1)
+expected = os.path.realpath(os.path.join(sys.argv[2], "server.py"))
+sys.exit(not (len(argv) >= 2 and os.path.basename(argv[0]).startswith("python")
+              and os.path.isabs(argv[1]) and os.path.realpath(argv[1]) == expected))
+' "$command" "$REPO_DIR"
+}
+
 server_pid() {
-    lsof -ti :"$PORT" -sTCP:LISTEN 2>/dev/null | head -1
+    local pid
+    for pid in $(listener_pid); do
+        is_server_pid "$pid" && echo "$pid" && return 0
+    done
+}
+
+check_port_owner() {
+    local pid
+    for pid in $(listener_pid); do
+        is_server_pid "$pid" || fail "Port ${PORT} conflict: PID ${pid} is not this Afterwords server; leaving it untouched."
+    done
 }
 
 # Get PID from launchd (available before port binding)
@@ -295,6 +294,7 @@ health_check() {
 # ── Commands ─────────────────────────────────────────────────────
 
 cmd_start() {
+    check_port_owner
     local pid
     pid=$(server_pid)
     if [ -n "$pid" ]; then
@@ -331,6 +331,7 @@ cmd_start() {
 }
 
 cmd_stop() {
+    check_port_owner
     local pid
     pid=$(server_pid)
 
@@ -346,6 +347,7 @@ cmd_stop() {
         launchctl unload "$PLIST_PATH" 2>/dev/null
     else
         info "Stopping afterwords (PID ${pid})..."
+        is_server_pid "$pid" || fail "Process identity changed; refusing to stop PID ${pid}"
         kill "$pid" 2>/dev/null
     fi
 
@@ -360,6 +362,7 @@ cmd_stop() {
         ok "Server stopped"
     else
         warn "Server still running — sending SIGKILL..."
+        is_server_pid "$pid" || fail "Process identity changed; refusing to kill PID ${pid}"
         kill -9 "$pid" 2>/dev/null
         sleep 1
         if [ -z "$(server_pid)" ]; then
@@ -377,6 +380,7 @@ cmd_restart() {
 }
 
 cmd_status() {
+    check_port_owner
     echo
     echo -e "  ${BOLD}afterwords${NC}  ${DIM}— status${NC}"
     rule
@@ -653,7 +657,7 @@ cmd_reload() {
     if [ "${1:-}" = "--prune" ]; then
         url="${url}?prune=true"
     fi
-    if ! response=$(curl -s -X POST "$url"); then
+    if ! response=$(curl --fail-with-body --silent --show-error -X POST "$url"); then
         fail "Server not responding on localhost:7860"
     fi
     if command -v jq >/dev/null 2>&1; then
