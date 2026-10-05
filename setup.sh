@@ -233,6 +233,8 @@ else
 fi
 
 source .venv/bin/activate
+VENV_ARCH=$(python3 -c 'import platform; print(platform.machine())')
+[ "$VENV_ARCH" = "arm64" ] || fail "Existing venv Python is not ARM-native (${VENV_ARCH}); recreate it with native Python before setup."
 pip install --quiet --upgrade pip
 VENV_VERSION=$(python3 -c 'import sys; print(f"{sys.version_info.major}{sys.version_info.minor}")')
 BASELINE_LOCK="requirements-macos-arm64-py${VENV_VERSION}.lock"

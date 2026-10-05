@@ -11,11 +11,11 @@ Afterwords is a local voice-cloning TTS server on Apple Silicon. The recommended
 ## Commands
 
 ```bash
-# Setup — full (detects/offers Claude Code)
+# Setup — bundled-voice baseline (no integrations)
 bash setup.sh
 
-# Setup — server only, no Claude Code hooks
-bash setup.sh --server-only
+# Setup — optional interactive agent integrations
+bash setup.sh --integrations
 
 # Server management (CLI — symlinked to PATH by setup.sh)
 afterwords start       # start via launchd
