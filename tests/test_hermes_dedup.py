@@ -200,3 +200,12 @@ def test_cli_scope_skips_gateway_and_external_delivery(hook_env):
         result = run_hook(env, workdir, unique_text(), platform=platform)
         assert result.returncode == 0
     assert not log.exists(), "out-of-scope hooks must not synthesize, play, or send"
+
+
+def test_cli_scope_skips_gateway_local_mapped_to_cli(hook_env):
+    env, log, workdir = hook_env
+    env["AFTERWORDS_SHELL_SCOPE"] = "cli"
+    env["_HERMES_GATEWAY"] = "1"
+    result = run_hook(env, workdir, unique_text(), platform="cli")
+    assert result.returncode == 0
+    assert not log.exists(), "gateway local turns are owned by the native hook"
