@@ -2,7 +2,7 @@
 
 Snapshot checked on 2026-10-05. Refresh GitHub metadata and runtime evidence before relying on these status statements later.
 
-The published release is v1.0.7. GitHub main remains `060b3752d064ae04019e5b96e5f503a2e9f633ce`; the onboarding work is local on `fix/deterministic-baseline-onboarding` and has not been deployed or pushed. These facts were read from GitHub's branch/release API and the local Git history.
+The onboarding work is on branch `fix/deterministic-baseline-onboarding`. Its reviewed checkpoint `55b25a6fc3f352b8a6a86ee26e8788d16cd9763b` was pushed to origin; subsequent fixes use the same branch. This work is not merged or deployed. Refresh branch, PR, release, and runtime state before relying on this snapshot; check `git ls-remote origin refs/heads/fix/deterministic-baseline-onboarding` for the current remote head. Deployment and live acceptance require separate evidence.
 
 Start at [ONBOARDING.md](ONBOARDING.md). The intended baseline is bundled voices, Qwen 0.6B, ARM Python, loopback HTTP, and no hooks or cloning tools. The first useful remaining task is live baseline acceptance after owner approval, then one integration from [INTEGRATIONS.md](INTEGRATIONS.md).
 

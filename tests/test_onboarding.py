@@ -222,3 +222,31 @@ def test_baseline_installer_requires_known_lock_unless_explicitly_unlocked(tmp_p
     if expected == 0:
         assert ('--require-hashes' in result.stdout) is (not unlocked)
         assert ('requirements.txt' in result.stdout) is unlocked
+
+
+@pytest.mark.parametrize('minor,unlocked,allowed', [(11, False, True), (14, False, True), (15, False, False), (15, True, True), (10, True, False)])
+def test_setup_python_gate_rejects_unsupported_version_before_mutation(tmp_path, minor, unlocked, allowed):
+    import shlex
+    source = (REPO / 'setup.sh').read_text()
+    start = source.index('# Python check')
+    end = source.index('PY_ARCH=', start)
+    # Execute the actual shell gate using a Python wrapper that reports a simulated version.
+    wrapper = tmp_path / 'python3'
+    wrapper.write_text(f'''#!{sys.executable}
+import sys
+from collections import namedtuple
+code = sys.argv[2]
+sys.argv = ['-c'] + sys.argv[3:]
+sys.version_info = namedtuple('Version', 'major minor micro releaselevel serial')(3, {minor}, 0, 'final', 0)
+exec(code)
+''')
+    wrapper.chmod(0o755)
+    script = f'UNLOCKED={str(unlocked).lower()}\nCYAN=; NC=; RED=\n'
+    script += 'ok() { :; }; fail() { echo "$*" >&2; exit 1; }\n'
+    result = subprocess.run(['bash', '-c', script + source[start:end]],
+                            env={**os.environ, 'PATH': str(tmp_path) + ':' + os.environ['PATH']},
+                            capture_output=True, text=True)
+    assert (result.returncode == 0) is allowed, result.stderr
+    assert list(tmp_path.iterdir()) == [wrapper]
+    if minor == 15 and not unlocked:
+        assert 'experimental --unlocked' in result.stderr

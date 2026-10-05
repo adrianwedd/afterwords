@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Afterwords is a local voice-cloning TTS server on Apple Silicon. The recommended cloning path is MLX-based **Qwen3-TTS 0.6B** (default); 1.7B loads via `--with-1.7b` for higher-fidelity clones. Additional backends (Voxtral, OpenVoice, F5-TTS, etc.) are available but not endorsed for cloning fidelity. The server is a standalone HTTP API usable from any tool. When Claude Code is installed, a Stop hook automatically speaks every response.
 
-**Platform:** Apple Silicon Mac only (M1+), 16 GB+ RAM (32 GB recommended), Python 3.11+, macOS (uses launchd, afplay).
+**Platform:** Apple Silicon Mac only (M1+), 16 GB+ RAM (32 GB recommended), Python 3.11–3.14 for the locked baseline (newer Python requires experimental `--unlocked`), macOS (uses launchd, afplay).
 
 ## Commands
 
@@ -65,7 +65,7 @@ Verify changes with `pytest` (no GPU required). Run a single test with `pytest t
 
 The authoritative configuration/prerequisite/acceptance matrix is [INTEGRATIONS.md](INTEGRATIONS.md).
 
-The server (server.py) and voice cloning (clone-voice.sh) are fully independent of Claude Code. The Claude Code integration is an optional layer installed by setup.sh when Claude Code is detected. Six agent integrations share the same queue and play-lock infrastructure.
+The server (server.py) and voice cloning (clone-voice.sh) are fully independent of Claude Code. The Claude Code integration is an optional layer installed by `setup.sh --integrations` when Claude Code is detected. Six agent integrations share the same queue and play-lock infrastructure.
 
 1. **server.py** — FastAPI/Uvicorn TTS server on `localhost:7860`. Registers backends via `backends.register_all()` and loads Qwen 0.6B by default, serializes all synthesis through `_synth_lock` (MLX Metal is not thread-safe across backends). Voice profiles pin to a backend via the `backend` JSON field; dispatch is `backend = backends.get(profile.backend); backend.synthesize(text, profile.prepared, lang)`. Voices are auto-discovered JSON profiles from `voices/`. Endpoints: `GET /health` (always available; exposes `loaded_backends[*].supported_langs`), `GET /synthesize?text=...&voice=...&lang=en` (always), and three endpoints gated by `--allow-clone`: `POST /synthesize` (JSON body with optional `emotion` + `lang`), `POST /clone` (multipart audio upload), `DELETE /session/{id}` (remove cloned-session voices + temp files). Lifespan context manager handles shutdown cleanup.
 
@@ -81,7 +81,7 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
    ```json
    {"version":1,"hooks":{"afterAgentResponse":[{"command":"bash ~/.claude/hooks/cursor-tts-hook.sh","type":"command","timeout":10,"failClosed":false}]}}
    ```
-   Uses `cursor` as the agent key. `bash setup.sh` installs it automatically when Cursor is detected.
+   Uses `cursor` as the agent key. `bash setup.sh --integrations` installs it when Cursor is detected.
 
 7. **Hermes Agent TTS** (`~/.hermes/hooks/afterwords-tts/` + `scripts/`) — Three-path integration; none is auto-configured by setup.sh. (a) Shell hook (`afterwords-post-llm.sh`) fires on `post_llm_call`, strips markdown, pipelines synthesis+playback. (b) Native Python hook (`handler.py`) fires on `agent:end`, async chunked pipeline via `aiohttp`, archives MP3+txt to `~/.hermes/tts-archive/`; only speaks on CLI/local platforms. Play lock fix: `_pid_alive()` uses `try/except` around `os.kill(pid, 0)` — `os.kill` returns `None` on success, never test the return value directly. (c) Command provider (`afterwords-tts-command.sh`): on CLI synthesizes the real output artifact synchronously while pipelining playback; messaging platforms also receive synchronous real audio. Partial delivery returns nonzero and preserves surviving audio.
 
@@ -158,8 +158,8 @@ CLI: `afterwords reload` curls the endpoint and pretty-prints the response.
 - Qwen3 0.6B preloads at boot by default (~1.5 GB). Pass `--with-1.7b` to server.py to also load 1.7B (~3.5 GB total). Additional backends load only when explicitly selected through `AFTERWORDS_BACKENDS`; generated plists persist selection. Designed for 32 GB unified memory; 16 GB works for the default 0.6B-only path.
 - All synthesis is serialized through `_synth_lock` — MLX Metal is single-GPU, regardless of backend
 - Voice reference files (`.wav`) and profiles (`.json`) are tracked in git — shipped with the repo for the demo site and default server voices
-- `setup.sh` conditionally installs hooks into `~/.claude/` (only when Claude Code is present) and a launchd plist (always)
-- `afterwords.sh` is a pure-bash CLI wrapper (no venv needed) symlinked to `/usr/local/bin/afterwords` by setup.sh — handles start/stop/restart/status/logs/voices/clone/uninstall
+- `setup.sh` defaults to server-only; `--integrations` installs shared helpers for detected queue-based agents and registers Claude hooks only when Claude is selected
+- `afterwords.sh` is a pure-bash CLI wrapper (no venv needed) symlinked into the selected `--cli-dir` (default `/usr/local/bin`) by setup.sh — handles start/stop/restart/status/logs/voices/clone/uninstall
 - Shell scripts use macOS-specific tools throughout (afplay, mkdir-based locking, launchd)
 
 STRATEGY.md lists what is irreversible here — check it before deploying, releasing, publishing, or deleting anything.

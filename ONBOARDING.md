@@ -2,7 +2,7 @@
 
 See [the current work and acceptance status](CURRENT_STATE.md) before installing.
 
-Afterwords serves local voice-cloning TTS over HTTP on Apple Silicon. The supported baseline is ARM-native Python 3.11+, at least 16 GiB RAM (32 recommended), Qwen3 0.6B, bundled voices, and loopback port 7860. Python dependency resolution on newer versions is not proof of MLX compatibility; Python 3.11 is the CI reference. The resolved baseline requires macOS 14+ MLX wheel tags. No runtime-tested macOS minimum or upper Python bound is established yet; locks for Python 3.11–3.14 prove resolution only.
+Afterwords serves local voice-cloning TTS over HTTP on Apple Silicon. The supported baseline is ARM-native Python 3.11–3.14 for the locked baseline (newer Python requires experimental `--unlocked`), at least 16 GiB RAM (32 recommended), Qwen3 0.6B, bundled voices, and loopback port 7860. Python dependency resolution on newer versions is not proof of MLX compatibility; Python 3.11 is the CI reference. The resolved baseline requires macOS 14+ MLX wheel tags. No runtime-tested macOS minimum or upper Python bound is established yet; locks for Python 3.11–3.14 prove resolution only.
 
 Run `bash setup.sh --preflight` first. It reads architecture, Python architecture/version, RAM, available disk, destination permissions, macOS version, bundled voice presence, and port ownership. It neither installs packages nor writes configuration. A busy port with no Afterwords identity fails closed; an older server without the identity field needs operator investigation before setup.
 

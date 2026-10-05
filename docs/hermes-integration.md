@@ -217,7 +217,7 @@ afterwords reload     # rescan voices/ without restart
 
 - Endpoint: `http://127.0.0.1:7860`
 - Default voice: `galadriel`
-- Primary backend: `qwen3-0.6b` (190 voices — every shipped voice resolves to 0.6b); 1.7B loadable via `--with-1.7b` (ships no pre-built profiles)
+- Primary backend: `qwen3-0.6b` (shipped gallery profiles target 0.6B; use `afterwords voices` for the live list); 1.7B loadable via `--with-1.7b` (ships no pre-built profiles)
 - All synthesis serialised through `_synth_lock` (single Metal GPU)
 
 ---

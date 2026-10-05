@@ -80,10 +80,39 @@ def check_cli_destination(cli_dir, repo):
     return []
 
 
+def check_python_version(version, unlocked=False):
+    version = tuple(version[:2])
+    if version < (3, 11):
+        return ['Python 3.11 or newer is required even in experimental --unlocked mode']
+    if not unlocked and version > (3, 14):
+        return ['locked baseline requires Python 3.11–3.14; newer Python requires experimental --unlocked']
+    return []
+
+
+def check_install_python(repo, unlocked=False):
+    """Check both the selected Python and a reusable venv before installation."""
+    failures = check_python_version(sys.version_info, unlocked)
+    venv_python = repo / '.venv/bin/python3'
+    if venv_python.exists():
+        try:
+            result = subprocess.run(
+                [str(venv_python), '-c', 'import json,sys; print(json.dumps(list(sys.version_info[:2])))'],
+                capture_output=True, text=True, timeout=5,
+            )
+            if result.returncode == 0:
+                failures.extend('existing venv: ' + error for error in
+                                check_python_version(json.loads(result.stdout), unlocked))
+            # Broken venvs are rebuilt using the already-checked selected Python.
+        except (OSError, subprocess.TimeoutExpired):
+            pass
+    return failures
+
+
 def main():
     repo = Path(sys.argv[1])
     cli_dir = Path(sys.argv[2] if len(sys.argv) > 2 else '/usr/local/bin')
-    failures = check_cli_destination(cli_dir, repo)
+    unlocked = len(sys.argv) > 4 and sys.argv[4] == "true"
+    failures = check_install_python(repo, unlocked) + check_cli_destination(cli_dir, repo)
     if len(sys.argv) > 3 and sys.argv[3] == "true" and not writable_ancestor(cli_dir):
         failures.append(f"explicit CLI destination is not writable: {cli_dir}")
     for path in (repo, Path.home() / 'Library/LaunchAgents', cli_dir):

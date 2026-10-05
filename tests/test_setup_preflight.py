@@ -65,3 +65,24 @@ def test_cli_destination_does_not_overwrite_other_installation(preflight, monkey
     monkeypatch.setenv('PATH', str(tmp_path))
     (tmp_path / 'afterwords').write_text('foreign CLI')
     assert preflight.check_cli_destination(tmp_path, tmp_path)
+
+
+@pytest.mark.parametrize('version,unlocked,allowed', [
+    ((3, 10), False, False), ((3, 10), True, False),
+    ((3, 11), False, True), ((3, 12), False, True),
+    ((3, 13), False, True), ((3, 14), False, True),
+    ((3, 15), False, False), ((3, 15), True, True),
+])
+def test_python_policy_matches_locked_installer(preflight, version, unlocked, allowed):
+    assert (preflight.check_python_version(version, unlocked) == []) is allowed
+
+
+def test_preflight_rejects_reusable_unsupported_venv(preflight, monkeypatch, tmp_path):
+    venv = tmp_path / '.venv/bin/python3'
+    venv.parent.mkdir(parents=True)
+    venv.write_text('placeholder')
+    monkeypatch.setattr(preflight.sys, 'version_info', (3, 14))
+    monkeypatch.setattr(preflight.subprocess, 'run', lambda *a, **k: SimpleNamespace(returncode=0, stdout='[3, 15]'))
+    errors = preflight.check_install_python(tmp_path)
+    assert any('existing venv' in error for error in errors)
+    assert preflight.check_install_python(tmp_path, unlocked=True) == []

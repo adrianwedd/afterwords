@@ -95,14 +95,14 @@ else
 fi
 ok "${RAM_GB} GB RAM"
 
-# Python check (need 3.11+)
+# Python check (locked baseline: 3.11–3.14; newer versions are experimental)
 if ! command -v python3 &>/dev/null; then
     fail "Python 3 not found. Install: brew install python"
 fi
 PY_VER=$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
-PY_OK=$(python3 -c 'import sys; print(1 if sys.version_info >= (3, 11) else 0)')
+PY_OK=$(python3 -c 'import sys; unlocked = sys.argv[1] == "true"; print(int(sys.version_info[:2] >= (3, 11) and (unlocked or sys.version_info[:2] <= (3, 14))))' "$UNLOCKED")
 if [[ "$PY_OK" != "1" ]]; then
-    fail "Python 3.11+ required. Detected: ${PY_VER}. Upgrade: brew install python"
+    fail "Locked baseline requires Python 3.11–3.14. Detected: ${PY_VER}. Python 3.15+ requires experimental --unlocked; Python below 3.11 is unsupported."
 fi
 ok "Python ${PY_VER}"
 
@@ -111,11 +111,11 @@ PY_ARCH=$(python3 -c 'import platform; print(platform.machine())')
 [ -n "$(find voices -maxdepth 1 -name '*-ref.wav' -print -quit)" ] || fail "Bundled voices missing; restore the repository voice files before setup."
 # The read-only preflight ends before dependency installation or filesystem writes.
 if $PREFLIGHT; then
-    python3 "$SCRIPT_DIR/scripts/setup-preflight.py" "$SCRIPT_DIR" "$CLI_DIR" "$CLI_DIR_EXPLICIT"
+    python3 "$SCRIPT_DIR/scripts/setup-preflight.py" "$SCRIPT_DIR" "$CLI_DIR" "$CLI_DIR_EXPLICIT" "$UNLOCKED"
     exit $?
 fi
 
-python3 "$SCRIPT_DIR/scripts/setup-preflight.py" "$SCRIPT_DIR" "$CLI_DIR" "$CLI_DIR_EXPLICIT" || fail "Preflight failed"
+python3 "$SCRIPT_DIR/scripts/setup-preflight.py" "$SCRIPT_DIR" "$CLI_DIR" "$CLI_DIR_EXPLICIT" "$UNLOCKED" || fail "Preflight failed"
 
 if ! $SERVER_ONLY || $CLONING; then
 # ffmpeg check

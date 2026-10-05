@@ -108,7 +108,7 @@ Trade-offs vs Claude Code: this depends on Codex's local session file format and
 
 Gemini CLI ships hook support, including a `gemini hooks migrate --from-claude` subcommand. Tempting — but in our testing it has a silent-write bug: when run from `$HOME` it reports success but leaves `~/.gemini/settings.json` unchanged (it writes via `setValue("Workspace", ...)` which is read-only when cwd == home). Even when the migrate succeeds elsewhere, the resulting config wouldn't work for TTS because the **payload schema differs**: Claude sends `last_assistant_message`, Gemini sends `prompt_response`.
 
-So we ship a small adapter instead. `setup.sh` installs `~/.claude/hooks/gemini-tts-hook.sh` (it normalises `prompt_response` → the existing Claude tts-hook + worker chain) and prints the JSON snippet to add to `~/.gemini/settings.json`:
+So we ship a small adapter instead. `setup.sh --integrations` installs `~/.claude/hooks/gemini-tts-hook.sh` (it normalises `prompt_response` → the existing Claude tts-hook + worker chain) and prints the JSON snippet to add to `~/.gemini/settings.json`:
 
 ```json
 {
@@ -137,7 +137,7 @@ Test: `gemini -p "say hi"` should speak the response via Afterwords using your d
 
 ## With Antigravity CLI (agy)
 
-Antigravity CLI (`agy`), the successor to Gemini CLI, supports hooks defined in `~/.gemini/config/hooks.json`. Unlike Gemini CLI's manual snippet configuration, `setup.sh` automatically detects `agy` and registers/updates the hook configuration programmatically.
+Antigravity CLI (`agy`), the successor to Gemini CLI, supports hooks defined in `~/.gemini/config/hooks.json`. Unlike Gemini CLI's manual snippet configuration, `setup.sh --integrations` detects `agy` and registers/updates the hook configuration programmatically.
 
 During execution, `agy` fires the `Stop` event when the reasoning loop terminates. It passes a JSON payload containing `transcriptPath` (the path to the conversation's `transcript.jsonl` file) on `stdin`.
 
@@ -433,7 +433,7 @@ POST /clone               (--allow-clone only)
        multipart: audio file, session_id, emotion, transcript?, backend?
        → JSON {voice, backend, emotion, quality, sequence, ...}
 
-POST /reload              (--allow-clone only)
+POST /reload              (--allow-reload or --allow-clone; default loopback install enables gallery reload)
        → JSON {status, reloaded:[names], errors:[]} on success (200)
        → JSON {status:"failed", errors:[...]}        on abort   (500)
        Add-only, atomic — if any voice fails to prepare, no changes committed.
@@ -479,7 +479,7 @@ Archiving requires `lame` (`brew install lame`).
 ## Requirements
 
 - Apple Silicon Mac (M1/M2/M3/M4), 16 GB+ RAM (32 GB recommended)
-- Python 3.11+
+- Python 3.11–3.14 for the locked baseline (newer Python requires experimental `--unlocked`)
 - Reserve at least 6 GiB free disk for the baseline environment, weights, and cache (planning allowance; fixed model revisions and baseline dependency locks are described in ONBOARDING.md)
 - Claude Code (optional — for automatic TTS on responses; setup offers to install it)
 
@@ -487,7 +487,7 @@ Archiving requires `lame` (`brew install lame`).
 
 ```
 afterwords/
-├── setup.sh                  ← one-command setup (detects/installs Claude Code)
+├── setup.sh                  ← bundled-voice server setup; --integrations opts into agent setup
 ├── afterwords.sh             ← CLI for server management (symlinked to PATH)
 ├── clone-voice.sh            ← add more voices from YouTube
 ├── server.py                 ← multi-voice TTS server
