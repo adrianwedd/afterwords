@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "b5f6772b154c30488dd44adb8f6cd7d4e3a918688644234adf5bb0c031ba88eb",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "1282ebf3-d8c9-4900-961f-02f29314d067",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b5f6772b154c30488dd44adb8f6cd7d4e3a918688644234adf5bb0c031ba88eb"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b5f6772b154c30488dd44adb8f6cd7d4e3a918688644234adf5bb0c031ba88eb"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "1282ebf3-d8c9-4900-961f-02f29314d067",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It was the immensity of the universe, and how much we did not know. It was the not knowing that was the force of attraction for me.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 8.5]\n  ],\n  \"uncertainty\": \"Boundary timings are perceptual estimates with an uncertainty margin of approximately +/- 0.4s as they are evaluated without waveform inspection tools. Wording confidence is very high with negligible lexical uncertainty; the speech is dry, clean, isolated, and clearly articulated throughout.\"\n}\n```\n",
+    "duration_seconds": 28.749427,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20543,
+      "output_tokens": 2465,
+      "thinking_tokens": 2115,
+      "cache_read_tokens": 16115,
+      "total_tokens": 23008
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

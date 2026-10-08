@@ -1,0 +1,38 @@
+{
+  "wav": "neil-degrasse-tyson-ref.wav",
+  "source_sha256": "cd36a1125427eb8c904bfd6b00ec528b30c0bfe8bed4e2ea22cd98885c1e46cc",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "8477607d-c0d2-4634-a05b-e75865c7ad9f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "cd36a1125427eb8c904bfd6b00ec528b30c0bfe8bed4e2ea22cd98885c1e46cc"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "cd36a1125427eb8c904bfd6b00ec528b30c0bfe8bed4e2ea22cd98885c1e46cc"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8477607d-c0d2-4634-a05b-e75865c7ad9f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 2.9],\n    [2.9, 11.2]\n  ],\n  \"literal_transcript\": \"...most astounding fact. The most astounding fact... is the knowledge that the atoms that comprise life on Earth... the atoms that make up the human body.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Multiple speakers present; truncated opening syllable; persistent ambient musical score/drone beneath the primary speaker's dialogue prevents clean solo vocal conditioning.\",\n  \"candidate_clean_intervals_s\": [\n    [3.0, 6.8],\n    [7.5, 11.0]\n  ],\n  \"uncertainty\": \"Boundaries are perceptual estimates (+/- 0.2s). The very first utterance at 0.0s begins abruptly mid-syllable (unclear whether '[The] most' or truncated '...st astounding'). Background audio under Speaker 2 is perceptually identified as an ambient cinematic musical drone/score, though reverberant processing could contribute to the acoustic bed. Whether [3.0, 11.0] is salvageable depends on the conditioning model's tolerance to low-level background music; for clean dry reference standards, it is compromised.\"\n}\n```\n",
+    "duration_seconds": 45.887627,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20567,
+      "output_tokens": 4102,
+      "thinking_tokens": 3626,
+      "cache_read_tokens": 15979,
+      "total_tokens": 24669
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
