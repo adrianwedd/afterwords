@@ -3687,7 +3687,8 @@
       "delivery_commit_locator": "git log -- voices/denny-crane-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/denny-crane-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/denny-crane-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/denny-crane-result.json",
+      "delivery_commit": "4cfb66a22fec1859283813ee1a3ea39d685fa1f1"
     },
     {
       "wav": "columbo-ref.wav",
@@ -3762,7 +3763,8 @@
         "b_roll_frame_s": 230
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/columbo-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/columbo-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/columbo-result.json",
+      "delivery_commit": "3bf95c2090947d259a5a1e35ae42dcc31b1f104c"
     }
   ],
   "exclusions": [
