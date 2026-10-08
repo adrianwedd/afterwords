@@ -6917,7 +6917,8 @@
         "publisher_metadata_sha256": "fb5c0ae4485567b89799fe10048566d68c445ae0ffaeb1b386fa411b400412ac"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/tegan-jovanka-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/tegan-jovanka-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/tegan-jovanka-result.json",
+      "delivery_commit": "a4028eb2a15f79646c370c898d42030d7719e468"
     }
   ],
   "exclusions": [
