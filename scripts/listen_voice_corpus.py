@@ -53,6 +53,14 @@ def parsed_observation(result):
         return None
     if not isinstance(value.get("literal_transcript"), str):
         return None
+    # A stored WAV attachment cannot override the reviewer's explicit statement
+    # that it used a transcript or could not hear. Keep timing-only uncertainty
+    # valid, and do not scan literal speech (which may itself say "cannot hear").
+    limitations = json.dumps({k: value.get(k) for k in ("uncertainty", "fatal_defect")})
+    if re.search(r"text[- ]based (?:transcription|transcript)|"
+                 r"(?:cannot|can't|unable to) (?:hear|listen)|rather than native acoustic",
+                 limitations, re.IGNORECASE):
+        return None
     return value
 
 

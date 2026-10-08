@@ -1,0 +1,37 @@
+{
+  "wav": "depp-ref.wav",
+  "source_sha256": "5ee7b89a7e13c80014f663d634c4ae459e25e76562aa007e5af0296ed98110bb",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "3e8a5f8c-1b05-41d6-883c-5101bea7a311",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5ee7b89a7e13c80014f663d634c4ae459e25e76562aa007e5af0296ed98110bb"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5ee7b89a7e13c80014f663d634c4ae459e25e76562aa007e5af0296ed98110bb"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3e8a5f8c-1b05-41d6-883c-5101bea7a311",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 3,\n  \"speaker_change_intervals_s\": [\n    [0.0, 2.1],\n    [2.3, 11.5],\n    [11.9, 15.8]\n  ],\n  \"literal_transcript\": \"[...all/well] this dock stays off limits to civilians. It's a fine goal, to be sure. But it seems to me that a... a ship like that makes this one here a bit superfluous, really. Oh, the Dauntless is the power in these waters, true enough. But there's no[...]\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": \"Faint outdoor harbor/dock ambient atmosphere; distinct physical handling/movement rustle or creak between approximately 6.2s and 7.2s during the middle speaker's pause.\",\n  \"acoustic_changes\": \"Consistent outdoor film/location acoustic space with minimal room reverberation; differences primarily reflect distinct speaker vocal timbres and microphone orientations.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [2.3, 4.8],\n    [7.5, 11.5],\n    [2.3, 11.5]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an estimated margin of +/- 0.3 seconds. Speaker count is likely 3 (Speaker 1 opening guard, Speaker 2 middle speaker, Speaker 3 closing guard), though Speaker 1 and Speaker 3 share a similar British accent/register and could potentially be the same individual. The opening word has a clipped onset ('...all this dock' / '...well this dock' / '...this dock'). The ending utterance cuts off abruptly mid-clause on 'no' (or onset of following word). Interval [2.3, 11.5] covers the full central speaker turn, but contains a mid-sentence hesitation and slight movement noise around 6.2s-7.2s; sub-intervals [2.3, 4.8] ('It's a fine goal, to be sure') and [7.5, 11.5] ('makes this one here a bit superfluous, really') provide cleaner, uninterrupted continuous speech phrases for conditioning.\"\n}\n```\n",
+    "duration_seconds": 44.844817,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20643,
+      "output_tokens": 4280,
+      "thinking_tokens": 3605,
+      "cache_read_tokens": 15981,
+      "total_tokens": 24923
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

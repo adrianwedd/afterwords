@@ -61,6 +61,17 @@ def test_attachment_cannot_override_reviewer_reporting_native_audio_unavailable(
     assert listener.parsed_observation({"response": "I cannot hear this file."}) is None
 
 
+def test_valid_json_cannot_override_reviewer_reporting_transcript_only_review():
+    listener = load_script("listen_voice_corpus")
+    payload = {"speaker_count": 1, "literal_transcript": "I cannot hear you.",
+               "uncertainty": "Timings are approximate perceptual estimates."}
+    assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)})
+    payload["uncertainty"] = (
+        "Audio was interpreted through a text-based transcription layer "
+        "rather than native acoustic signal analysis.")
+    assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None
+
+
 def test_review_parser_accepts_single_fenced_result_without_ambiguous_multiple_results():
     listener = load_script("listen_voice_corpus")
     payload = '{"speaker_count": 1, "literal_transcript": "hello"}'

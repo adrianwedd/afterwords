@@ -1,0 +1,37 @@
+{
+  "wav": "sarah-jane-smith-ref.wav",
+  "source_sha256": "069609273ca36fcbe533cae0d6a973fef6961f1e79929c3092cadcb674a602ba",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "4121c9c3-bda1-4024-980c-9cd0222e26fc",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "069609273ca36fcbe533cae0d6a973fef6961f1e79929c3092cadcb674a602ba"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "069609273ca36fcbe533cae0d6a973fef6961f1e79929c3092cadcb674a602ba"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4121c9c3-bda1-4024-980c-9cd0222e26fc",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 3,\n  \"speaker_change_intervals_s\": [\n    [0.0, 3.2],\n    [3.5, 9.6],\n    [10.0, 14.2]\n  ],\n  \"literal_transcript\": \"I can't do this anymore. Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you, and found a life of my own. Some things are worth getting your heart broken for.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Multiple distinct speakers and hard splices present in a single unedited file\",\n  \"candidate_clean_intervals_s\": [\n    [3.5, 9.6]\n  ],\n  \"uncertainty\": {\n    \"boundary_estimates\": \"Timestamps are perceptual estimates with an uncertainty margin of approximately \u00b10.3s.\",\n    \"wording\": \"Transcript enunciation is very clear across all three segments; wording uncertainty is low.\",\n    \"speaker_identity_and_count\": \"Estimated at 2 to 3 distinct speakers. Segment 1 (~0.0-3.2s) is a quiet, breathy voice. Segment 2 (~3.5-9.6s) is a bright British-accented voice. Segment 3 (~10.0-14.2s) has a gentle British delivery that could either be the same speaker as Segment 2 performing in a quieter emotional register across a scene cut, or a separate speaker entirely. Regardless, the acoustic backgrounds and vocal deliveries differ substantially across the cuts.\",\n    \"conditioning_assessment\": \"The raw audio cannot condition a single coherent voice due to multi-speaker splicing and acoustic shifts. Segment 2 ([3.5, 9.6]s) provides the only adequately long, isolated, and syntactically complete phrase suitable for voice cloning.\"\n  }\n}\n```\n",
+    "duration_seconds": 58.615558,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20466,
+      "output_tokens": 4674,
+      "thinking_tokens": 4076,
+      "cache_read_tokens": 16005,
+      "total_tokens": 25140
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

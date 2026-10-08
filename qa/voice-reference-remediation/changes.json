@@ -2539,6 +2539,398 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/rod-serling-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/rod-serling-result.json",
       "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203"
+    },
+    {
+      "wav": "dr-cox-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "d03ad1b403e7b54d6349d1c9021eee78198a7eaa428a11d3f8c4b9f1a49407fd",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.07904094357836591,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f",
+        "frames": 134505,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.05,
+        "peak": 0.785858154296875,
+        "rms": 0.07461380122462988,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 39690,
+        "end_frame_exclusive": 174195,
+        "start_s": 0.9,
+        "end_s": 3.95
+      },
+      "profiles": [
+        {
+          "path": "voices/dr-cox-qwen3-06b.json",
+          "old_reference_text": "Fine. I'm going to go ahead and tell you how it ends. Dr. Phil says, and how is that working out for you? I'm going to make the fat lady cry. All right. I'm sure you're wondering why I",
+          "new_reference_text": "Fine. I'm gonna go ahead and tell you how it ends.",
+          "old_segment_start_s": 2,
+          "new_segment_start_s": 2.9
+        },
+        {
+          "path": "voices/dr-cox.json",
+          "old_reference_text": "Fine. I'm going to go ahead and tell you how it ends. Dr. Phil says, and how is that working out for you? I'm going to make the fat lady cry. All right. I'm sure you're wondering why I",
+          "new_reference_text": "Fine. I'm gonna go ahead and tell you how it ends.",
+          "old_segment_start_s": 2,
+          "new_segment_start_s": 2.9
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=vN71Vt5XOnE",
+      "adjudication": "Original begins with crowd reaction, has character vocal caricature and apparent transition later, and cuts off last utterance. Exact0.9-3.95s retains a complete first statement after the crowd reaction; full edited native3.1 hearing confirms one isolated speaker, no crowd/music/effects or clipped words. Native hears I'm gonna, original hearing suspected [I'm] gonna; ASR replaces this with I'll, so retain complete native literal wording instead of normalizing. Actual3.05s is shorter than preferred but complete two-clause speech with useful variety; no padding/splicing or cleanup. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/dr-cox-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/dr-cox-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/dr-cox-result.json"
+    },
+    {
+      "wav": "del-boy-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "3fa2066561c96552d56db6da877ba7d43b0cecd73029751a65b59f43868f95a3",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.10903558777689444,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08",
+        "frames": 298557,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.77,
+        "peak": 0.899993896484375,
+        "rms": 0.10112630390648122,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 18963,
+        "end_frame_exclusive": 317520,
+        "start_s": 0.43,
+        "end_s": 7.2
+      },
+      "profiles": [
+        {
+          "path": "voices/del-boy-qwen3-06b.json",
+          "old_reference_text": "And then you announce that you've changed your mind about having a chaffee and then you go late night shopping at family planning. Cassandra and I discussed it and our initial reaction was, quite naturally, to hold back until the financial climate was more conducive to starting.",
+          "new_reference_text": "And then you announce that you've changed your mind about having a chavvy. And then you go late night shopping at Family Planning.",
+          "old_segment_start_s": 90,
+          "new_segment_start_s": 90.43
+        },
+        {
+          "path": "voices/del-boy.json",
+          "old_reference_text": "And then you announce that you've changed your mind about having a chaffee and then you go late night shopping at family planning. Cassandra and I discussed it and our initial reaction was, quite naturally, to hold back until the financial climate was more conducive to starting.",
+          "new_reference_text": "And then you announce that you've changed your mind about having a chavvy. And then you go late night shopping at Family Planning.",
+          "old_segment_start_s": 90,
+          "new_segment_start_s": 90.43
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=Bc3eNzOx5-g",
+      "adjudication": "Original includes back-and-forth dialogue and final chopped second speaker. Initial0-7.2s candidate newly revealed opening word fragment missed by original hearing; rejected. Revised0.43-7.2s starts in measured quiet valley before And onset near0.5, keeps complete target first turn, ends before next speaker. Full edited native3.8 review confirms one voice, complete utterance, no contaminants or cutoffs. Three hearings/ASR agree /chavi/ syllables; choose ordinary spelling chavvy, alternatives chavvie/chavi represent same heard slang, replacing old phantom chaffee. No canonical dialogue lookup used. Natural speech intact with no DSP/padding/splicing. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/del-boy-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/del-boy-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/del-boy-result.json"
+    },
+    {
+      "wav": "michael-palin-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "3ae19c35e9233f9f13d1d0aefc246241e67d5a8646c814a2c91d340b27598398",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.07853747107127529,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2",
+        "frames": 368160,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 7.67,
+        "peak": 0.570281982421875,
+        "rms": 0.08652852055033339,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 124.05,
+        "source_end_s": 131.72,
+        "source_start_frame": 5954400,
+        "source_end_frame_exclusive": 6322560,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/michael-palin-qwen3-06b.json",
+          "old_reference_text": "Phileas Fogg left from here 116 years ago in October 1872. He set off with head high, clear eye, never hurried, always calm. But then of course he was fictional. I've actually got to do it.",
+          "new_reference_text": "Well, I was extremely surprised in the latest film that we did that John probably had the single most uncomfortable role of anyone in the film.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 124.05
+        },
+        {
+          "path": "voices/michael-palin.json",
+          "old_reference_text": "Phileas Fogg left from here 116 years ago in October 1872. He set off with head high, clear eye, never hurried, always calm. But then of course he was fictional. I've actually got to do it.",
+          "new_reference_text": "Well, I was extremely surprised in the latest film that we did that John probably had the single most uncomfortable role of anyone in the film.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 124.05
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=evEIeWbhd9c",
+      "adjudication": "Original travel narration has persistent orchestral music and cannot be salvaged with timing edits. Replaced with continuous7.67s complete Palin interview answer, exact decoded source frames124.05-131.72. First3.1 reviewer returned NATIVE_AUDIO_UNAVAILABLE despite hash-matched attachment; preserved unaccepted. Independent full native3.8 review demonstrably ingested matching actual WAV and confirms one voice, literal sentence, no music/crowd/effects/splices or boundary damage. ASR agrees words. Public publisher credits and reviewed source frame establish intended speaker separately from blind acoustic QA. Earlier1982 interview instead of1988 travel narration explicitly sourced; no DSP/normalization/splicing. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/michael-palin-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=evEIeWbhd9c",
+        "title": "1982: PALIN and CLEESE on THE MEANING OF LIFE | Film 82 | Classic Movie Interviews | BBC Archive",
+        "uploader": "BBC Archive",
+        "source_audio_sha256": "f52bcdfcfe12e0ec7e79e27332a78213fad74a74da556b745eb6b00c9ce70ce9",
+        "source_metadata_sha256": "553b8b0bc9ac7f4b274c76982cd41d7260512444cbf0b04af48434fda9e4807d",
+        "source_basis": "Public BBC Archive1982 Film82 interview with credited Michael Palin and John Cleese. Frame126 identifies Palin delivering retained answer, rather than assuming every male voice in interview is him.",
+        "source_frame": "qa/voice-reference-remediation/evidence/michael-palin-source-126.jpg",
+        "source_frame_s": 126
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/michael-palin-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/michael-palin-result.json"
+    },
+    {
+      "wav": "depp-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "5ee7b89a7e13c80014f663d634c4ae459e25e76562aa007e5af0296ed98110bb",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.04834498486108696,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "40a7e37b646e0539ad6659df113fafc6e42ef29d14270cab6288f6e02c28a083",
+        "frames": 141120,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.2,
+        "peak": 0.580352783203125,
+        "rms": 0.03743688503411263,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 330750,
+        "end_frame_exclusive": 471870,
+        "start_s": 7.5,
+        "end_s": 10.7
+      },
+      "profiles": [
+        {
+          "path": "voices/depp-qwen3-06b.json",
+          "old_reference_text": "this dock stays off limits to civilians. It's a fine goal to be sure, but it seems to me that a ship like that makes this one here a bit superfluous really. Oh the dauntless is the power in these waters true enough but there's no",
+          "new_reference_text": "Makes this one here a bit superfluous, really.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 37.5
+        },
+        {
+          "path": "voices/depp.json",
+          "old_reference_text": "this dock stays off limits to civilians. It's a fine goal to be sure, but it seems to me that a ship like that makes this one here a bit superfluous really. Oh the dauntless is the power in these waters true enough but there's no",
+          "new_reference_text": "Makes this one here a bit superfluous, really.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 37.5
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=2GGMHmBgIEg",
+      "adjudication": "Original includes guards plus target central speaker and a mid-pause metallic prop clink. Full central-turn candidate2-10.65 had one voice but retained clink and disputed goal/gold first phrase; not admitted. Shorter7.63-10.65 candidate isolated last phrase but reviewer suspected clipped Makes onset; not admitted. Revised7.5-10.7 retains pre-roll before Makes and full tail. Full native3.8 edited hearing confirms one speaker, exact retained words, no music/crowd/laughter/effects/splices or cutoffs. Actual3.2s is short but contains a complete understandable predicate phrase and useful phonetic variety, rather than padding or splicing; slight room tone accepted. Removes all other dialogue and clink without DSP. Source title/context Captain Jack Sparrow talking to guards corroborates existing intended central-speaker relationship. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/depp-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/depp-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/depp-result.json"
+    },
+    {
+      "wav": "spock-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "caf5dff59a916a7b2cfebd600c9c9e13c8417faefa25af61f821bf8d9d975487",
+        "frames": 259200,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 10.8,
+        "peak": 0.9000244140625,
+        "rms": 0.04822398135208204,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "dc8aca559d9cfb8088534de7a29858fc0dc9df7f01db29634598b44d9fbcb978",
+        "frames": 407520,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 8.49,
+        "peak": 0.226287841796875,
+        "rms": 0.02351571772481197,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 52.12,
+        "source_end_s": 60.61,
+        "source_start_frame": 2501760,
+        "source_end_frame_exclusive": 2909280,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/spock-qwen3-06b.json",
+          "old_reference_text": "Space, the final frontier. These are the continuing voyages of the Starship Enterprise.",
+          "new_reference_text": "Uh, I think a lot. I, I think that I was much more, uh, emotionally, uh, directed, rather than logically directed before I started playing the character.",
+          "old_segment_start_s": 491,
+          "new_segment_start_s": 52.12
+        },
+        {
+          "path": "voices/spock.json",
+          "old_reference_text": "Space, the final frontier. These are the continuing voyages of the Starship Enterprise.",
+          "new_reference_text": "Uh, I think a lot. I, I think that I was much more, uh, emotionally, uh, directed, rather than logically directed before I started playing the character.",
+          "old_segment_start_s": 491,
+          "new_segment_start_s": 52.12
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=NsPiw1J7dYo",
+      "adjudication": "Original reference has persistent orchestral score across all phrases. Initial47.7-60.61 interview candidate had a quiet host Yeah not detected by source ASR; rejected by native reviewer. Revised continuous52.12-60.61s starts after host turn. Two independent complete native3.1/3.8 hearings agree literal wording including Uh and repeated I, one isolated voice, no score/crowd/effects/splices or cutoffs. ASR collapses disfluencies; retain audible fillers consistently heard in both native reviews. Public broadcaster credits intended actor, recorded1989 interview delivery replacing in-character opening narration explicitly. Exact decoded PCM16 source slice8.49s, no cleanup/normalization/separation/splicing. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/spock-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=NsPiw1J7dYo",
+        "title": "1989: LEONARD NIMOY on Spock and STAR TREK | Wogan | Classic Celebrity Interviews | BBC Archive",
+        "uploader": "BBC Archive",
+        "source_audio_sha256": "0c874d7aa9d1b83eedaf9255dbdf0ac093e3b7089f76ea9b438e3a63b62dc4bf",
+        "source_metadata_sha256": "d8274598d9ab07755b26fe16373747db630a944b448c4e7151357bc2a5d51466",
+        "source_basis": "Public BBC Archive1989 Wogan interview explicitly credits Leonard Nimoy on Spock; same intended actor instead of scored Star Trek opening narration."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/spock-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/spock-result.json"
+    },
+    {
+      "wav": "sarah-jane-smith-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "069609273ca36fcbe533cae0d6a973fef6961f1e79929c3092cadcb674a602ba",
+        "frames": 655360,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.653333333333334,
+        "peak": 0.07147216796875,
+        "rms": 0.005671546721031879,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "941b3834f28e3db12434eaecd0b6a381ce24050ba9541eb0ad6a420efe8828f3",
+        "frames": 310080,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.46,
+        "peak": 0.07147216796875,
+        "rms": 0.006399739452474027,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 48000,
+        "start_frame": 166080,
+        "end_frame_exclusive": 476160,
+        "start_s": 3.46,
+        "end_s": 9.92
+      },
+      "profiles": [
+        {
+          "path": "voices/sarah-jane-smith-qwen3-06b.json",
+          "old_reference_text": "I can't do this anymore. Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you and found a life of my own. Some things are worth getting your heart broken for.",
+          "new_reference_text": "Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you and found a life of my own.",
+          "old_segment_start_s": 63,
+          "new_segment_start_s": 66.81360416666666
+        },
+        {
+          "path": "voices/sarah-jane-smith.json",
+          "old_reference_text": "I can't do this anymore. Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you and found a life of my own. Some things are worth getting your heart broken for.",
+          "new_reference_text": "Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you and found a life of my own.",
+          "old_segment_start_s": 63,
+          "new_segment_start_s": 66.81360416666666
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=ypXgt6HJ9qk",
+      "adjudication": "Original hearing estimated2-3 speakers/acoustic takes and flagged utterance boundaries. First3.46-10.03 candidate was one speaker but newly revealed a musical cue at final tail; not admitted. Revised3.46-9.92 native edited review confirms one isolated voice, same literal two sentences, no music/crowd/effects/splices or cutoffs. ASR agrees except invented initial The before Time, which is absent in both native hearings. Source downloaded to verify intended relationship instead of relying on remembered dialogue or uncertain low-resolution reaction shots: full source ASR locates continuous answer67.1-73.16, frame64 shows preceding visible Sarah Jane speaker, later frames are Rose/Mickey reaction shots while same voice continues off-camera. Primary official School Reunion cast credits Elisabeth Sladen as Sarah Jane. Two separate existing-reference/source waveform correlations0.953/0.980 agree source-minus-local offset63.3536s to one24kHz sample, correcting legacy63s approximate metadata; result first frame maps to source66.8136s. Candidate is6.46s lossless local PCM slice, no DSP/splicing. Original estimated speaker count does not establish an actor substitution; verified source association and rendered one-speaker hearing control admission. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/sarah-jane-smith-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/sarah-jane-smith-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/sarah-jane-smith-result.json",
+      "source_corroboration": {
+        "source_frame": "qa/voice-reference-remediation/evidence/sarah-jane-smith-source-064.jpg",
+        "source_frame_s": 64,
+        "source_alignment": "qa/voice-reference-remediation/evidence/sarah-jane-smith-source-correlation.json",
+        "primary_cast_url": "https://www.doctorwho.tv/stories/school-reunion"
+      }
     }
   ],
   "exclusions": [

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-004-ref.wav",
+  "source_sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "0fdcc5a8-6cf1-4b63-8b3e-3eb24c00e4da",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0fdcc5a8-6cf1-4b63-8b3e-3eb24c00e4da",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Fine. I'm gonna go ahead and tell you how it ends.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.0]\n  ],\n  \"uncertainty\": \"Time boundaries are rough perceptual estimates as exact audio duration is not visible. High confidence in transcript wording and single-speaker isolation.\"\n}\n```\n",
+    "duration_seconds": 20.109622,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12292,
+      "output_tokens": 1797,
+      "thinking_tokens": 1491,
+      "cache_read_tokens": 24292,
+      "total_tokens": 14089
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

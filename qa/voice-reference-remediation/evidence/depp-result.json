@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "40a7e37b646e0539ad6659df113fafc6e42ef29d14270cab6288f6e02c28a083",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "51802b11-ff06-4a58-bc5c-9b389aef6b78",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "40a7e37b646e0539ad6659df113fafc6e42ef29d14270cab6288f6e02c28a083"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "40a7e37b646e0539ad6659df113fafc6e42ef29d14270cab6288f6e02c28a083"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "51802b11-ff06-4a58-bc5c-9b389aef6b78",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Makes this one here a bit superfluous, really.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.1, 3.0]\n  ],\n  \"uncertainty\": \"Speech transcript wording is highly certain. Timestamp boundaries are perceptual estimates without visual waveform rulers, assuming an overall clip duration of approximately 3.2 seconds with speech spanning roughly 0.1s to 3.0s.\"\n}\n",
+    "duration_seconds": 153.235053,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20271,
+      "output_tokens": 3230,
+      "thinking_tokens": 2912,
+      "cache_read_tokens": 16227,
+      "total_tokens": 23501
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

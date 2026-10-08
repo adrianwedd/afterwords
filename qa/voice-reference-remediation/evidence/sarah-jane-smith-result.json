@@ -1,0 +1,38 @@
+{
+  "wav": "clip-004-ref.wav",
+  "source_sha256": "941b3834f28e3db12434eaecd0b6a381ce24050ba9541eb0ad6a420efe8828f3",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "bfaac501-92d2-4e35-af2d-730f69fe97fc",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "941b3834f28e3db12434eaecd0b6a381ce24050ba9541eb0ad6a420efe8828f3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "941b3834f28e3db12434eaecd0b6a381ce24050ba9541eb0ad6a420efe8828f3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "bfaac501-92d2-4e35-af2d-730f69fe97fc",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Besides I've got a much bigger adventure ahead. Time I stopped waiting for you and found a life of my own.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.6]\n  ],\n  \"uncertainty\": \"Low uncertainty. Transcript and boundaries are clear. Perceptual estimate of duration is approximately 5.6 seconds.\"\n}\n```\n",
+    "duration_seconds": 22.589415,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12538,
+      "output_tokens": 1795,
+      "thinking_tokens": 1480,
+      "cache_read_tokens": 24222,
+      "total_tokens": 14333
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
