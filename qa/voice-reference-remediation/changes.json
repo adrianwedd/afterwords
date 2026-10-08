@@ -4834,7 +4834,8 @@
       "native_result_evidence": "qa/voice-reference-remediation/evidence/patsy-stone-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/patsy-stone-publisher-source.json",
       "prior_boundary_evidence": "qa/voice-reference-remediation/evidence/patsy-stone-prior_boundary_evidence.json",
-      "prior_wording_evidence": "qa/voice-reference-remediation/evidence/patsy-stone-prior_wording_evidence.json"
+      "prior_wording_evidence": "qa/voice-reference-remediation/evidence/patsy-stone-prior_wording_evidence.json",
+      "delivery_commit": "466e98409bf4f7fa2776b32577f4da720b89dd00"
     },
     {
       "wav": "victor-meldrew-ref.wav",
@@ -4913,7 +4914,8 @@
       "native_result_evidence": "qa/voice-reference-remediation/evidence/victor-meldrew-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/victor-meldrew-publisher-source.json",
       "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/victor-meldrew-native_secondary_result_evidence.json",
-      "native_independent_result_evidence": "qa/voice-reference-remediation/evidence/victor-meldrew-native_independent_result_evidence.json"
+      "native_independent_result_evidence": "qa/voice-reference-remediation/evidence/victor-meldrew-native_independent_result_evidence.json",
+      "delivery_commit": "466e98409bf4f7fa2776b32577f4da720b89dd00"
     }
   ],
   "exclusions": [
