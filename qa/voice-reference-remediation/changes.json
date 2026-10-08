@@ -3476,7 +3476,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/picard-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/picard-result.json",
-      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/picard-result-secondary.json"
+      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/picard-result-secondary.json",
+      "delivery_commit": "81ddd253c94c31847341f44a770e3c8cd68af871"
     },
     {
       "wav": "captain-mainwaring-ref.wav",
@@ -3549,7 +3550,8 @@
         "source_frame_s": 463
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/captain-mainwaring-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/captain-mainwaring-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/captain-mainwaring-result.json",
+      "delivery_commit": "81ddd253c94c31847341f44a770e3c8cd68af871"
     },
     {
       "wav": "edina-monsoon-ref.wav",
@@ -3623,7 +3625,69 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-result.json",
-      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-result-secondary.json"
+      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-result-secondary.json",
+      "delivery_commit": "81ddd253c94c31847341f44a770e3c8cd68af871"
+    },
+    {
+      "wav": "denny-crane-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "1dd651241a6e9dd9e2ed48501db4307047fa98e6f9914008191706f972b4f698",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10755457419795303,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "cf5f9ced82e899dbdac52a9b6c74b893a6acccda6422d994a9560d662300517d",
+        "frames": 151263,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.43,
+        "peak": 0.9000244140625,
+        "rms": 0.09113741634713227,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 366030,
+        "end_frame_exclusive": 517293,
+        "start_s": 8.3,
+        "end_s": 11.73
+      },
+      "profiles": [
+        {
+          "path": "voices/denny-crane-qwen3-06b.json",
+          "old_reference_text": "I feel like a busy one. So if you're gonna shoot me, let's do it. I have plans.",
+          "new_reference_text": "So if you're gonna shoot me, let's do it. I have plans.",
+          "old_segment_start_s": 3,
+          "new_segment_start_s": 11.3
+        },
+        {
+          "path": "voices/denny-crane.json",
+          "old_reference_text": "I feel like a busy one. So if you're gonna shoot me, let's do it. I have plans.",
+          "new_reference_text": "So if you're gonna shoot me, let's do it. I have plans.",
+          "old_segment_start_s": 3,
+          "new_segment_start_s": 11.3
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=Hfc7l1vz2jU",
+      "adjudication": "Original has initial grunt/dramatic background, uncertain first phrase, Foley transition after target and a second female voice at end. Native whole-file time estimates placed speech far too early; actual local word alignment locates complete target final clauses at8.66-11.48. Exact8.3-11.73 frame slice retains quiet pre-roll and natural last-word decay, removing opening noise/ambiguous phrase, later Foley and second speaker. Full edited native3.8 hearing confirms one isolated voice, no music/crowd/laughter/effects or clipped boundaries, only subtle nondestructive room tone; literal gonna agrees with subsequent ASR. Actual3.43s is shorter than preferred but contains two complete clauses with useful phonetic variety, preserves intended in-character delivery, no padding/splicing/cleanup. Clean original recovery preferred to the separately reviewed Shatner interview alternative, which remains unadmitted scratch evidence. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/denny-crane-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/denny-crane-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/denny-crane-result.json"
     }
   ],
   "exclusions": [

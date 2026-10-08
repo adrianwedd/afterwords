@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "cf5f9ced82e899dbdac52a9b6c74b893a6acccda6422d994a9560d662300517d",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c67efb28-2879-4e0f-a5e2-fa986b16f4df",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "cf5f9ced82e899dbdac52a9b6c74b893a6acccda6422d994a9560d662300517d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "cf5f9ced82e899dbdac52a9b6c74b893a6acccda6422d994a9560d662300517d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c67efb28-2879-4e0f-a5e2-fa986b16f4df",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So if you're gonna shoot me, let's do it. I have plans.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 5.1]\n  ],\n  \"uncertainty\": \"Boundaries are perceptual estimates with an estimated uncertainty of \u00b10.3s. Slight phonetic ambiguity between 'gonna' and 'going to', though 'gonna' is phonetically indicated. Subtle atmospheric room tone is audible in the background but does not interfere with vocal clarity.\"\n}\n```\n",
+    "duration_seconds": 29.568852,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20273,
+      "output_tokens": 3271,
+      "thinking_tokens": 2932,
+      "cache_read_tokens": 16222,
+      "total_tokens": 23544
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
