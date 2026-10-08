@@ -5314,7 +5314,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/kryten-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/kryten-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/kryten-publisher-source.json",
-      "source_frame_evidence": "qa/voice-reference-remediation/evidence/kryten-source-frame612.png"
+      "source_frame_evidence": "qa/voice-reference-remediation/evidence/kryten-source-frame612.png",
+      "delivery_commit": "2eba06dbbd2ff2672b880efd0843ebf0539f6c2b"
     }
   ],
   "exclusions": [
