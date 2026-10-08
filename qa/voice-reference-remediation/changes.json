@@ -7464,8 +7464,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/jarvis-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/final-evidence/051-e562d90309fff5c7-revision-1.json",
-      "delivery_commit": "3dcf54a78f3ff41e730cbadeefb2b04a3a07b2c0",
-      "profile_metadata_commit": "1516cda9c468d7aa9e07cdb59a609043d8ff4656",
+      "delivery_commit": "10a8d650d924b77ab682f72d742dc3c6b5c7cba2",
+      "profile_metadata_commit": "10a8d650d924b77ab682f72d742dc3c6b5c7cba2",
       "post_remediation_revisions": [
         {
           "previous_delivery_commit": "3dcf54a78f3ff41e730cbadeefb2b04a3a07b2c0",
@@ -7520,7 +7520,8 @@
           ],
           "discovery_native_evidence": [
             "qa/voice-reference-remediation/final-evidence/051-e562d90309fff5c7-discovery-1.json"
-          ]
+          ],
+          "delivery_commit": "10a8d650d924b77ab682f72d742dc3c6b5c7cba2"
         }
       ]
     },
