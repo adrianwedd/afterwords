@@ -1,0 +1,37 @@
+{
+  "wav": "the-cat-ref.wav",
+  "source_sha256": "669453b40bc264efed0b7719589a3362605dda144b704d2d5d9c6b9eeb8dbdf8",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "7bebd6d2-cbe8-4b96-97a8-d93b46509abc",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "669453b40bc264efed0b7719589a3362605dda144b704d2d5d9c6b9eeb8dbdf8"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "669453b40bc264efed0b7719589a3362605dda144b704d2d5d9c6b9eeb8dbdf8"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7bebd6d2-cbe8-4b96-97a8-d93b46509abc",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 1.0],\n    [1.1, 10.5]\n  ],\n  \"literal_transcript\": \"Ah! Hi, buddy. This is your judgment day, bud. I got to be cruel. There can be no favors. Now I'm hearing you on FM.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": true,\n  \"acoustic_changes\": \"Abrupt shift from an explosive, high-amplitude vocal shout with physical impact noise between 0.0s and 1.0s to a dry, close-mic studio dialogue acoustic profile from 1.1s through the end.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [2.0, 2.6]\n  ],\n  \"apparent_splices\": [\n    \"Possible scene transition or cut between the impact yell at ~1.0s and 'Hi, buddy' at ~1.1s\"\n  ],\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [1.1, 10.4],\n    [2.6, 8.2]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty of approximately \u00b10.2 seconds. There is minor ambiguity in whether the opening scream (0.0s\u20130.9s) originates from an unseen victim (making speaker_count 2) or an exertion by the main speaker (making speaker_count 1), though acoustic timbre indicates two distinct voices. In the final clause, 'Now I'm hearing you on FM' could perceptually be 'Am I hearing you on FM' due to subtle elision at the onset.\"\n}\n```\n",
+    "duration_seconds": 46.964672,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20617,
+      "output_tokens": 4278,
+      "thinking_tokens": 3740,
+      "cache_read_tokens": 15980,
+      "total_tokens": 24895
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

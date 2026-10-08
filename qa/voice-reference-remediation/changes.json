@@ -1050,7 +1050,8 @@
       "delivery_commit_locator": "git log -- voices/snape-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/snape-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/snape-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/snape-result.json",
+      "delivery_commit": "6fca1093af03dead117f339c173606847010c825"
     },
     {
       "wav": "stephen-fry-ref.wav",
@@ -1111,7 +1112,8 @@
       "delivery_commit_locator": "git log -- voices/stephen-fry-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/stephen-fry-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/stephen-fry-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/stephen-fry-result.json",
+      "delivery_commit": "6fca1093af03dead117f339c173606847010c825"
     },
     {
       "wav": "han-solo-ref.wav",
@@ -1167,7 +1169,8 @@
       "delivery_commit_locator": "git log -- voices/han-solo-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/han-solo-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/han-solo-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/han-solo-result.json",
+      "delivery_commit": "6fca1093af03dead117f339c173606847010c825"
     },
     {
       "wav": "feynman-ref.wav",
@@ -1228,7 +1231,8 @@
       "delivery_commit_locator": "git log -- voices/feynman-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/feynman-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/feynman-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/feynman-result.json",
+      "delivery_commit": "6fca1093af03dead117f339c173606847010c825"
     },
     {
       "wav": "jackie-chiles-ref.wav",
@@ -1289,7 +1293,8 @@
       "delivery_commit_locator": "git log -- voices/jackie-chiles-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/jackie-chiles-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/jackie-chiles-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/jackie-chiles-result.json",
+      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08"
     },
     {
       "wav": "geraldine-ref.wav",
@@ -1350,7 +1355,8 @@
       "delivery_commit_locator": "git log -- voices/geraldine-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/geraldine-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/geraldine-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/geraldine-result.json",
+      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08"
     },
     {
       "wav": "hal-9000-ref.wav",
@@ -1404,7 +1410,8 @@
       "delivery_commit_locator": "git log -- voices/hal-9000-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/hal-9000-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/hal-9000-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/hal-9000-result.json",
+      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08"
     },
     {
       "wav": "gulley-ref.wav",
@@ -1465,7 +1472,8 @@
       "delivery_commit_locator": "git log -- voices/gulley-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/gulley-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/gulley-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/gulley-result.json",
+      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08"
     },
     {
       "wav": "the-doctor-ref.wav",
@@ -1552,7 +1560,94 @@
         "original_source_metadata_sha256": "6424b0465faf0ee337f82f45b7db8deacdb0910116b462eb6e805a256b319912"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/the-doctor-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/the-doctor-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/the-doctor-result.json",
+      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08"
+    },
+    {
+      "wav": "the-cat-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "669453b40bc264efed0b7719589a3362605dda144b704d2d5d9c6b9eeb8dbdf8",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08767044092528847,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "53618673d42aa6fb60605a5c086cdba8331c9033266e55585e588d9a93f4a4d6",
+        "frames": 91920,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.83,
+        "peak": 0.35150146484375,
+        "rms": 0.05435642218026536,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "source_start_s": 36.6,
+        "source_end_s": 40.43,
+        "conversion": "Continuous source crop, downmix and resample to 24000 Hz mono PCM_16 via ffmpeg; no cleanup, normalization, separation or splicing",
+        "render_command": [
+          "ffmpeg",
+          "-i",
+          "SOURCE.wav",
+          "-ss",
+          "36.6",
+          "-t",
+          "3.83",
+          "-ac",
+          "1",
+          "-ar",
+          "24000",
+          "-c:a",
+          "pcm_s16le",
+          "RESULT.wav"
+        ]
+      },
+      "profiles": [
+        {
+          "path": "voices/the-cat-qwen3-06b.json",
+          "old_reference_text": "Hi buddy, this is your judgement day but I gotta be cruel, there can't be no favours. I'm hearing you on FM.",
+          "new_reference_text": "Some might say I'm a pretty shallow guy, but a shallow guy with a great ass.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 36.6
+        },
+        {
+          "path": "voices/the-cat.json",
+          "old_reference_text": "Hi buddy, this is your judgement day but I gotta be cruel, there can't be no favours. I'm hearing you on FM.",
+          "new_reference_text": "Some might say I'm a pretty shallow guy, but a shallow guy with a great ass.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 36.6
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=RfNJitORCVA",
+      "adjudication": "Original contains initial scream/impact and alternating voices; first trim still had two perceptually distinct speakers and was rejected. Re-extracted one continuous complete response from the intended fictional Cat elsewhere in the same project source. Actual 3.83s rendered candidate passes native review: one isolated speaker, complete phrase boundaries, no crowd/laughter, effects, music, acoustic transitions, long pause or splices. Secondary full-source ASR agrees every word. This shorter-than-preferred but several-second coherent phrase is selected over the other clean 3.52s candidate for greater duration and phonetic variety; no concatenation needed. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/the-cat-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=RfNJitORCVA",
+        "title": "MCM: Red Dwarf - Cat Justifies His Existence",
+        "uploader": "Maguire Comedy Moments",
+        "source_basis": "Re-extracted from the same source URL already referenced by the tracked project profile.",
+        "identity_basis": "Source scene and title establish intended fictional Cat; source frame at 38s shows him delivering the retained response, rather than the helmeted judge who dominates the original excerpt. Visual inspection corroborates fictional character relationship, not literal words. Native reviewer receives anonymous WAV only.",
+        "source_audio_sha256": "24f618028431af8af594bca51a37d2a568ee054fadee42e4590a22759fa3f0b2",
+        "source_metadata_sha256": "357e9ae0f0784ac866432446c7dd53aff4f9903b711908073ca29d973d47609b",
+        "visual_source_evidence": "qa/voice-reference-remediation/evidence/the-cat-source-038.jpg",
+        "visual_source_sha256": "e7256abf76d4e0c161ffc74bf12033fcbea983744bc363210c52d5a8c118d688"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/the-cat-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/the-cat-result.json"
     }
   ],
   "exclusions": [
