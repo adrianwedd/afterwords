@@ -4286,7 +4286,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/amy-pond-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/amy-pond-result.json",
-      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/amy-pond-result-secondary.json"
+      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/amy-pond-result-secondary.json",
+      "delivery_commit": "f05322577b475b283f0709c6404e6b46e19ca862"
     },
     {
       "wav": "bill-potts-ref.wav",
@@ -4361,7 +4362,8 @@
         "source_frame": "qa/voice-reference-remediation/evidence/bill-potts-source-042.jpg"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bill-potts-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/bill-potts-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bill-potts-result.json",
+      "delivery_commit": "f05322577b475b283f0709c6404e6b46e19ca862"
     },
     {
       "wav": "galadriel-ref.wav",
@@ -4440,7 +4442,83 @@
         "prior_archive_source_url": "https://www.youtube.com/watch?v=FY8I_wIJtm4"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/galadriel-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/galadriel-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/galadriel-result.json",
+      "delivery_commit": "f05322577b475b283f0709c6404e6b46e19ca862"
+    },
+    {
+      "wav": "donna-noble-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "3fa62e95e317a6edf233a9cf3eab1892a59007ecbdc096566cfed13dfa9de9ac",
+        "frames": 851968,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 17.749333333333333,
+        "peak": 0.278411865234375,
+        "rms": 0.041870669591671815,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2",
+        "frames": 286650,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.5,
+        "peak": 0.392547607421875,
+        "rms": 0.08689865623714411,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 321.65,
+        "source_end_s": 328.15,
+        "source_start_frame": 14184765,
+        "source_end_frame_exclusive": 14471415,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/donna-noble-qwen3-06b.json",
+          "old_reference_text": "Because I understand now. You said I was gonna die, but you mean this whole world is gonna blink out of existence. But that's not dying. Because a better world takes its place. The Doctor's world. And I'm still alive.",
+          "new_reference_text": "Um, I'm bringing the, uh, 'Am I bothered?' character back, which, um, I did kill off before I knew I was going on tour.",
+          "old_segment_start_s": 58,
+          "new_segment_start_s": 321.65
+        },
+        {
+          "path": "voices/donna-noble.json",
+          "old_reference_text": "Because I understand now. You said I was gonna die, but you mean this whole world is gonna blink out of existence. But that's not dying. Because a better world takes its place. The Doctor's world. And I'm still alive.",
+          "new_reference_text": "Um, I'm bringing the, uh, 'Am I bothered?' character back, which, um, I did kill off before I knew I was going on tour.",
+          "old_segment_start_s": 58,
+          "new_segment_start_s": 321.65
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=gW_L4ZlAKco",
+      "adjudication": "Original native reports scored dramatic speech. Initial BBC News highlight not selected. Radio1 trials64/67/71 retain host interjections/overlap;66 starts truncated; all remain unadmitted. Move to later complete solo statement321.65-328.15 rather than splice those failures. Full exact native77 confirms one isolated voice, complete boundaries and no music/crowd/laughter/effects/acoustic change/splices. Preserve initial Um, uh after the, and um after which, which native explicitly hears although ASR omits them. Catchphrase words come only from blind native observation, not source title/script correction. Actual6.5s complete varied statement, sensible level, no DSP cleanup/normalization/separation or splice. Actor interview delivery explicitly recorded. Fresh final corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_sample_exact_source_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/donna-noble-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=gW_L4ZlAKco",
+        "title": "Catherine Tate Grimmy BBC Radio 1 2016",
+        "uploader": "John Boston",
+        "upload_date": "20161018",
+        "source_audio_sha256": "54fd56e70ec94584600b996f94a6665cf82b8cad5433ad149937ac0ebbe6cd8a",
+        "source_metadata_sha256": "1288e4a54c785942857ec381da6f3414f15e6a40d33749dd5c6e94e8c7d995e7",
+        "source_basis": "Public BBC Radio1 interview archive names Catherine Tate; host repeatedly introduces named guest, who discusses her own upcoming tour and characters. Camera frame324 within selected answer shows same guest at studio microphone. Official DoctorWho credits Catherine Tate as Donna Noble.",
+        "role_credit_url": "https://www.doctorwho.tv/stories/turn-left",
+        "delivery_change": "Target actor speaks in interview register while naming a comedy catchphrase; no claim original Donna scene performance or its emotional register is preserved.",
+        "source_frame": "qa/voice-reference-remediation/evidence/donna-noble-source-324.jpg"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/donna-noble-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/donna-noble-result.json"
     }
   ],
   "exclusions": [

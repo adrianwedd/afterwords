@@ -1,0 +1,37 @@
+{
+  "wav": "donna-noble-ref.wav",
+  "source_sha256": "3fa62e95e317a6edf233a9cf3eab1892a59007ecbdc096566cfed13dfa9de9ac",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "2489a03a-ca0e-43c1-abfa-fff516d2b88c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3fa62e95e317a6edf233a9cf3eab1892a59007ecbdc096566cfed13dfa9de9ac"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3fa62e95e317a6edf233a9cf3eab1892a59007ecbdc096566cfed13dfa9de9ac"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "2489a03a-ca0e-43c1-abfa-fff516d2b88c",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"'Cause I understand now. You said I was going to die, but you mean this whole world is going to blink out of existence. But that's not dying, 'cause a better world takes its place. The Doctor's world. And I'm still alive.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": true,\n  \"acoustic_changes\": \"Dynamic shift in vocal intensity from quieter breathy delivery to passionate projection; cinematic reverberation and dramatic soundtrack crescendo throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Pervasive, prominent orchestral background music and cinematic sound design present continuously across the entire clip.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations (\u00b10.5s). Audio contains breathy/emotional vocal articulation mixed over a loud dramatic score, though speech content remains intelligible throughout. No clean vocal-only intervals exist as the background music is uninterrupted.\"\n}\n```\n",
+    "duration_seconds": 42.102641,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 23290,
+      "output_tokens": 2429,
+      "thinking_tokens": 2035,
+      "cache_read_tokens": 31831,
+      "total_tokens": 25719
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
