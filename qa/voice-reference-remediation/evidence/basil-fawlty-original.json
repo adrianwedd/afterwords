@@ -1,0 +1,36 @@
+{
+  "wav": "basil-fawlty-ref.wav",
+  "source_sha256": "dc10e5944836e6dd7ef076b65cf9f1ad4c6e32882a891a7ecbd6bea18a151719",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "65857ce5-2f68-4233-9cc9-2e83b91ff454",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc10e5944836e6dd7ef076b65cf9f1ad4c6e32882a891a7ecbd6bea18a151719"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc10e5944836e6dd7ef076b65cf9f1ad4c6e32882a891a7ecbd6bea18a151719"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "65857ce5-2f68-4233-9cc9-2e83b91ff454",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [8.5, 9.5],\n    [10.5, 11.5]\n  ],\n  \"literal_transcript\": \"Would you would you care for a rat sir? Just just the biscuits then please Polly. Ah. Oh hello Mrs. Richards. I'm doing it! I'm doing it now! Tell her I'm doing it now!\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Prominent studio audience laughter throughout that overlaps with speech; multiple speakers present with no single speaker having a sufficiently long, clean, and isolated segment suitable for cloning.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Moderate to high uncertainty on exact wording (e.g., whether he says 'rat' or another word, and the exact names 'Polly' or 'Mrs. Richards') due to audio quality and delivery. Boundary estimates in seconds are approximate because of overlapping laughter and the lack of a visual waveform.\"\n}\n```\n",
+    "duration_seconds": 34.350995,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12444,
+      "output_tokens": 3173,
+      "thinking_tokens": 2760,
+      "cache_read_tokens": 24038,
+      "total_tokens": 15617
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

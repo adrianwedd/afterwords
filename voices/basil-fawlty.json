@@ -1,8 +1,8 @@
 {
   "name": "basil-fawlty",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=gy7xPCImMXk",
+  "source_url": "https://www.youtube.com/watch?v=evEIeWbhd9c",
   "reference_audio": "basil-fawlty-ref.wav",
-  "reference_text": "Would you care for a rat? Just the biscuit. I'm doing it, I'm doing it now!",
-  "segment_start_s": 13
+  "reference_text": "First of all you have to sit round trying to get six people to agree on a script, which is crazy, absolutely crazy. You can't agree on a direction to go in so you keep writing, writing more and more and more and more material.",
+  "segment_start_s": 55.57
 }

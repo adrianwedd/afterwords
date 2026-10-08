@@ -2599,7 +2599,8 @@
       "delivery_commit_locator": "git log -- voices/dr-cox-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/dr-cox-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/dr-cox-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/dr-cox-result.json",
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
     },
     {
       "wav": "del-boy-ref.wav",
@@ -2660,7 +2661,8 @@
       "delivery_commit_locator": "git log -- voices/del-boy-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/del-boy-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/del-boy-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/del-boy-result.json",
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
     },
     {
       "wav": "michael-palin-ref.wav",
@@ -2732,7 +2734,8 @@
         "source_frame_s": 126
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/michael-palin-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/michael-palin-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/michael-palin-result.json",
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
     },
     {
       "wav": "depp-ref.wav",
@@ -2793,7 +2796,8 @@
       "delivery_commit_locator": "git log -- voices/depp-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/depp-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/depp-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/depp-result.json",
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
     },
     {
       "wav": "spock-ref.wav",
@@ -2863,7 +2867,8 @@
         "source_basis": "Public BBC Archive1989 Wogan interview explicitly credits Leonard Nimoy on Spock; same intended actor instead of scored Star Trek opening narration."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/spock-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/spock-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/spock-result.json",
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
     },
     {
       "wav": "sarah-jane-smith-ref.wav",
@@ -2930,6 +2935,305 @@
         "source_frame_s": 64,
         "source_alignment": "qa/voice-reference-remediation/evidence/sarah-jane-smith-source-correlation.json",
         "primary_cast_url": "https://www.doctorwho.tv/stories/school-reunion"
+      },
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
+    },
+    {
+      "wav": "basil-fawlty-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "dc10e5944836e6dd7ef076b65cf9f1ad4c6e32882a891a7ecbd6bea18a151719",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.13637975076931266,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "a37f62fc52ef46b3be6e47ca51183b42cda0ff99df6fa179edf014f10f264bbc",
+        "frames": 516480,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 10.76,
+        "peak": 0.605804443359375,
+        "rms": 0.09869596047291379,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 55.57,
+        "source_end_s": 66.33,
+        "source_start_frame": 2667360,
+        "source_end_frame_exclusive": 3183840,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/basil-fawlty-qwen3-06b.json",
+          "old_reference_text": "Would you care for a rat? Just the biscuit. I'm doing it, I'm doing it now!",
+          "new_reference_text": "First of all you have to sit round trying to get six people to agree on a script, which is crazy, absolutely crazy. You can't agree on a direction to go in so you keep writing, writing more and more and more and more material.",
+          "old_segment_start_s": 13,
+          "new_segment_start_s": 55.57
+        },
+        {
+          "path": "voices/basil-fawlty.json",
+          "old_reference_text": "Would you care for a rat? Just the biscuit. I'm doing it, I'm doing it now!",
+          "new_reference_text": "First of all you have to sit round trying to get six people to agree on a script, which is crazy, absolutely crazy. You can't agree on a direction to go in so you keep writing, writing more and more and more and more material.",
+          "old_segment_start_s": 13,
+          "new_segment_start_s": 55.57
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=evEIeWbhd9c",
+      "adjudication": "Original includes back-and-forth dialogue and audience laughter, unsuitable raw. Replaced with complete continuous10.76s Cleese interview statement. Initial55.35-66.33 candidate retained tail of previous hellish and failed second native boundary review. Start55.57 follows low-level decay valley before first onset55.62. First corrected3.1 review explicitly claimed text-based transcription layer; preserved but gate revoked, not accepted. Corrected full native3.8 review supplies actual hash-bound native listening, one isolated voice, clean phrase boundaries, no contaminants/splices. It hears sit round, writing repeated twice, more repeated four times. Prior shorter-boundary hearing had only three more; edited3.8 and ASR agree four, and two independent earlier native observations agree writing repetition omitted by ASR. Retain literal repetitions and round, not normalize to ASR around. Same actor in1982 interview rather than Basil comedic scene, explicitly sourced by broadcaster and frame. No DSP/normalization/splicing. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/basil-fawlty-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=evEIeWbhd9c",
+        "title": "1982: PALIN and CLEESE on THE MEANING OF LIFE | Film 82 | Classic Movie Interviews | BBC Archive",
+        "uploader": "BBC Archive",
+        "source_audio_sha256": "f52bcdfcfe12e0ec7e79e27332a78213fad74a74da556b745eb6b00c9ce70ce9",
+        "source_metadata_sha256": "553b8b0bc9ac7f4b274c76982cd41d7260512444cbf0b04af48434fda9e4807d",
+        "source_basis": "Public BBC Archive1982 Film82 interview explicitly credits John Cleese and Michael Palin. Source frame61 shows Cleese delivering retained answer; intended Basil actor, not his fellow interview guest.",
+        "source_frame": "qa/voice-reference-remediation/evidence/basil-fawlty-source-061.jpg",
+        "source_frame_s": 61
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/basil-fawlty-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/basil-fawlty-result.json"
+    },
+    {
+      "wav": "bernard-black-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "22f7c7036817f9bc06440e33c147bb6b5eddfe2948b96e08ab936786bab67d88",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.07486306347221834,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f",
+        "frames": 240000,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.0,
+        "peak": 0.221923828125,
+        "rms": 0.03910756159888425,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 178.94,
+        "source_end_s": 183.94,
+        "source_start_frame": 8589120,
+        "source_end_frame_exclusive": 8829120,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/bernard-black-qwen3-06b.json",
+          "old_reference_text": "Now, you know, they teach you to have to become a person really, because, you know, children are very over-protected now in lots of ways, very nervous about them, you know, people go, oh, don't go outside!",
+          "new_reference_text": "Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 178.94
+        },
+        {
+          "path": "voices/bernard-black.json",
+          "old_reference_text": "Now, you know, they teach you to have to become a person really, because, you know, children are very over-protected now in lots of ways, very nervous about them, you know, people go, oh, don't go outside!",
+          "new_reference_text": "Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 178.94
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=yQUSCuHhX3M",
+      "adjudication": "Original Dylan reference has overlapping live audience laughter and chopped last phrase. New ABC2023 childhood-answer candidate178.94-186.58 had trailing but um cut off, so not admitted. Revised continuous178.94-183.94 keeps three complete clauses,5.0s. Two native edited hearings agree isolation, complete boundaries and no music/crowd/effects/splices. One3.1 hearing added opening Uh, but earlier longer native hearing, current3.8 hearing and ASR all begin Yeah; omit unconfirmed filler instead of adding phantom speech. Full resulting literal words verified by native3.8. Same intended Dylan actor in broadcaster-credited interview, distinct from stage reference but original itself was not character dialogue. Natural speech, no cleanup/normalization/splicing. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/bernard-black-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=yQUSCuHhX3M",
+        "title": "Dylan Moran on sobriety, his childhood, and the internet | The Weekly | ABC TV + iview",
+        "uploader": "ABC Entertainment",
+        "upload_date": "20230422",
+        "source_audio_sha256": "fb8310bc12bdf2e32da44396efd36b7763fba2282270aa5422a1766106096a6c",
+        "source_metadata_sha256": "1cb683aa4ba702dd62a3731bdd9a8a29d143b6f33e15a21b088e18b3a69b5efc",
+        "source_basis": "Public broadcaster-published interview explicitly credits intended speaker; retained complete answer excludes interviewer and audience responses."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/bernard-black-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bernard-black-result.json"
+    },
+    {
+      "wav": "eartha-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "9387013f44a95f5ea85da5ec8e74315459238b841fcdd163015b2e1603d9da33",
+        "frames": 271131,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.297125,
+        "peak": 0.899993896484375,
+        "rms": 0.0842829023395196,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7",
+        "frames": 764160,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 15.92,
+        "peak": 0.36834716796875,
+        "rms": 0.037228153601407396,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 9.42,
+        "source_end_s": 25.34,
+        "source_start_frame": 452160,
+        "source_end_frame_exclusive": 1216320,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/eartha-qwen3-06b.json",
+          "old_reference_text": "A relationship is a relationship that has to be earned, not to compromise for. I love relationships. I think they're fantastic. They're wonderful. I think they're great. I think there's nothing in the world more beautiful.",
+          "new_reference_text": "Well, being born on a cotton plantation in the South, you know, and being, uh, poor, in that way, no, it was not very easy, because I remember times when we didn't have anything to eat for what seemed like an insurmountable amount of time.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": 9.42
+        },
+        {
+          "path": "voices/eartha.json",
+          "old_reference_text": "A relationship is a relationship that has to be earned, not to compromise for. I love relationships. I think they're fantastic. They're wonderful. I think they're great. I think there's nothing in the world more beautiful.",
+          "new_reference_text": "Well, being born on a cotton plantation in the South, you know, and being, uh, poor, in that way, no, it was not very easy, because I remember times when we didn't have anything to eat for what seemed like an insurmountable amount of time.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": 9.42
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=TEoAypCUdRI",
+      "adjudication": "Original dramatically projected interview reference has audible cackle and truncated last phrase. Three trim candidates failed native boundary/noise gates; not admitted. Re-sourced continuous15.92s answer from BBC1971 Late Call interview credited Eartha Kitt. Initial10-25.34 candidate had abrupt first word; revised9.42 start preserves complete Well onset. Native3.8 final hearing confirms single voice, complete boundaries, no music/crowd/laughter/effects/splices, consistent room ambience. Literal Well/you know/uh fillers retained. Final reviewer notes weak initial vowel permits unsurmountable/insurmountable; earlier native review and ASR both render insurmountable, so choose that orthography while preserving recorded phonetic uncertainty, not rewriting grammar or consulting quotations. Historic background noise is mild and nondestructive, accepted as room/noise floor, not scored contamination. No cleanup/normalization/splicing. Earlier1971 conversational delivery instead of dramatic projection explicitly sourced. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/eartha-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=TEoAypCUdRI",
+        "title": "1971: Emotional EARTHA KITT interview | Late Call | Classic Celebrity Interviews | BBC Archive",
+        "uploader": "BBC Archive",
+        "upload_date": "20220310",
+        "source_audio_sha256": "35ea24fb008c8ee84474013924ff53770f6777e4624c072306c0dbdcf1656b6d",
+        "source_metadata_sha256": "efb407d7060d09e649d6aff89ea569dee0506cfd83862285456dbd8a6e2a5935",
+        "source_basis": "Public broadcaster-published interview explicitly credits intended speaker; retained complete answer excludes interviewer and audience responses."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/eartha-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/eartha-result.json"
+    },
+    {
+      "wav": "jim-royle-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "12d2999b3c06d51c727e42dd41e53563e19d26f5f1011c09aebffd6471b95fbc",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06851364772777173,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
+        "frames": 390726,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 8.86,
+        "peak": 0.399139404296875,
+        "rms": 0.02961440251998484,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 104.12,
+        "source_end_s": 112.98,
+        "source_start_frame": 4591692,
+        "source_end_frame_exclusive": 4982418,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/jim-royle-qwen3-06b.json",
+          "old_reference_text": "Kiss my arse. Equaliser my arse. Preparation's my arse. Commuted my arse. Have a good time, my arse. Beast my arse.",
+          "new_reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you, you know, you've got no respect.' And I, and I, and I stood up, you know.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 104.12
+        },
+        {
+          "path": "voices/jim-royle.json",
+          "old_reference_text": "Kiss my arse. Equaliser my arse. Preparation's my arse. Commuted my arse. Have a good time, my arse. Beast my arse.",
+          "new_reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you, you know, you've got no respect.' And I, and I, and I stood up, you know.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 104.12
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=ctHvQ80KxCU",
+      "adjudication": "Original comedy montage has multiple hard scene cuts, second speaker and audience laughter; clean individual My arse utterances are under3s. Re-sourced actor interview. Initial6.72-16.23 candidate ended on incomplete continuation and was rejected. New104.12-112.68 candidate had complete words but short tail; extended real continuous source through112.98. Full native3.8 final review confirms one voice, no contaminants/splices, no boundary cutoffs, and literal main wording. Source ASR confirms he was saying and skint (ASR misrenders skinned), but collapses repetitions. Native full readings differ in exact hesitations; a separate exact last3.56s PCM probe was natively heard to resolve them, explicitly lexical-only rather than conditioning acceptance: You know, you, you know and and I three times. Use focused direct hearing for these counts; preserve probe and full conflicting observations rather than claim all instruments agree. Minor rapid-speech segmentation uncertainty remains recorded; fresh final corpus transcript review is still mandatory. Actor narrates quoted dialogue himself, not another speaker. Retains8.86s continuous useful speech, no cleanup/padding/normalization/splicing.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/jim-royle-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=ctHvQ80KxCU",
+        "title": "Ricky Tomlinson interview - Parkinson - BBC",
+        "uploader": "BBC Studios",
+        "source_audio_sha256": "be2879a9031a1e14dcfb83b40bf3c1c4b3218c323600515234a6f6c7796a8be8",
+        "source_metadata_sha256": "0567023370d260af6b00d9ec1756500a6608b9b3a6944b41914f9e41dcc44d70",
+        "source_basis": "Public BBC Studios Parkinson interview explicitly credits Ricky Tomlinson, intended Jim Royle actor. Standard public m4a stream downloaded successfully after opus CDN returned403; no account, geographic restriction or access gate bypass used."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/jim-royle-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/jim-royle-result.json",
+      "transcript_resolution": {
+        "source_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
+        "rendered_sha256": "3a7f0b2cebc03906cdcc8d418d9216f450a172ae3fcc7b1839c9de0524848c26",
+        "operation": {
+          "type": "lossless_pcm_frame_slice",
+          "sample_rate": 44100,
+          "start_frame": 233730,
+          "end_frame_exclusive": 390726,
+          "start_s": 5.3,
+          "end_s": 8.86
+        },
+        "evidence": "qa/voice-reference-remediation/evidence/jim-royle-hesitations.json",
+        "scope": "Literal hesitations in retained final3.56s only; full8.86s native acoustic acceptance separate."
       }
     }
   ],

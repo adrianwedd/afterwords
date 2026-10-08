@@ -1,0 +1,38 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "9fee57cc-3a4b-4445-bfaf-bdbd6626e61f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "9fee57cc-3a4b-4445-bfaf-bdbd6626e61f",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.0]\n  ],\n  \"uncertainty\": \"Timestamps and duration are perceptual estimates (+/- 0.5s) in the absence of absolute file metadata; high confidence in single-speaker isolation, clean acoustics, and transcript wording.\"\n}\n",
+    "duration_seconds": 93.179278,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36679,
+      "output_tokens": 3236,
+      "thinking_tokens": 2905,
+      "cache_read_tokens": 0,
+      "total_tokens": 39915
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

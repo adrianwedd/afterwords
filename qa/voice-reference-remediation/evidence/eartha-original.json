@@ -1,0 +1,37 @@
+{
+  "wav": "eartha-ref.wav",
+  "source_sha256": "9387013f44a95f5ea85da5ec8e74315459238b841fcdd163015b2e1603d9da33",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "d8666bb6-2b3b-428e-ac39-aaae11684f91",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "9387013f44a95f5ea85da5ec8e74315459238b841fcdd163015b2e1603d9da33"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "9387013f44a95f5ea85da5ec8e74315459238b841fcdd163015b2e1603d9da33"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d8666bb6-2b3b-428e-ac39-aaae11684f91",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"A relationship is a relationship that has to be earned! Not to compromise for. And I love relationships, I think they're fantastic, they're wonderful, I think they're great, I think there's nothing in the world more beautiful\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Moderate dynamic shift: the opening phrase is delivered with loud, theatrical emphasis and vocal projection followed by an amused cackle/gasp, whereas the second phrase transitions to a much faster, conversational, close-mic tempo.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": [],\n  \"apparent_splices\": [],\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [6.5, 11.2]\n  ],\n  \"uncertainty\": \"Boundaries are perceptual estimates with roughly \u00b10.5s uncertainty due to continuous room reverberation. The speaker exhibits extreme stylistic/pitch variation between the dramatic exclamation and the rapid conversational flow, but timbre indicates a single speaker. The clip ends abruptly mid-clause on 'beautiful'.\"\n}\n```\n",
+    "duration_seconds": 53.975006,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 21540,
+      "output_tokens": 5763,
+      "thinking_tokens": 5350,
+      "cache_read_tokens": 16073,
+      "total_tokens": 27303
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

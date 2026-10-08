@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "a37f62fc52ef46b3be6e47ca51183b42cda0ff99df6fa179edf014f10f264bbc",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "55a0ecda-913e-4e2f-abb6-b42f94d59137",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a37f62fc52ef46b3be6e47ca51183b42cda0ff99df6fa179edf014f10f264bbc"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a37f62fc52ef46b3be6e47ca51183b42cda0ff99df6fa179edf014f10f264bbc"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "55a0ecda-913e-4e2f-abb6-b42f94d59137",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"First of all you have to sit round trying to get six people to agree on a script, which is crazy, absolutely crazy. You can't agree on a direction to go in so you keep writing, writing more and more and more and more material.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [\n      0.0,\n      11.5\n    ]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations with an uncertainty of +/- 0.5 seconds in the absence of a waveform clock. Audio duration is estimated at approximately 11.5 seconds with speech starting around 0.0-0.2 seconds and trailing naturally around 11.3-11.5 seconds. Wording is transcribed with high perceptual confidence; slight phonetic uncertainty exists between 'sit round' and 'sit around' due to colloquial elision, but it is heard as 'sit round'. The speaker is completely isolated in a consistent acoustic space without competing speakers or background interference, providing complete and coherent phrases suitable for voice conditioning.\"\n}\n",
+    "duration_seconds": 130.25057,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20201,
+      "output_tokens": 5441,
+      "thinking_tokens": 4991,
+      "cache_read_tokens": 16062,
+      "total_tokens": 25642
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,8 +1,8 @@
 {
   "name": "jim-royle",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=pUQhN-S-jwM",
+  "source_url": "https://www.youtube.com/watch?v=ctHvQ80KxCU",
   "reference_audio": "jim-royle-ref.wav",
-  "reference_text": "Kiss my arse. Equaliser my arse. Preparation's my arse. Commuted my arse. Have a good time, my arse. Beast my arse.",
-  "segment_start_s": 30
+  "reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you, you know, you've got no respect.' And I, and I, and I stood up, you know.",
+  "segment_start_s": 104.12
 }
