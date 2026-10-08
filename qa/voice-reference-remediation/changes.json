@@ -7510,7 +7510,8 @@
         "publisher_metadata_sha256": "f689f92f44b70a4d3f2492459f15030071c9cc7ddd91ed323a1905dd135d2eaf"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/peter-kay-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/peter-kay-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/peter-kay-result.json",
+      "delivery_commit": "444c03160461fe5c5df9a950c605616b7a9381a9"
     }
   ],
   "exclusions": [
