@@ -6271,7 +6271,8 @@
         "publisher_metadata_sha256": "08f0a4b074ca23465d08e7b53d5471c603ee10b6324dd16acd728506ac3e087f"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/mrs-doyle-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/mrs-doyle-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/mrs-doyle-result.json",
+      "delivery_commit": "d49af69c204ad1ea1f310802fdf35f72b40a7342"
     }
   ],
   "exclusions": [
