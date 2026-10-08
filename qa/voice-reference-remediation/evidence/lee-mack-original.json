@@ -1,0 +1,37 @@
+{
+  "wav": "lee-mack-ref.wav",
+  "source_sha256": "7f86c4ab65d51a47c1ce9510c4ea6a714ba3fe398fbddb3e0799326069317e8f",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "edce9264-9b95-4d5e-ac62-0a26f68c4f55",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7f86c4ab65d51a47c1ce9510c4ea6a714ba3fe398fbddb3e0799326069317e8f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7f86c4ab65d51a47c1ce9510c4ea6a714ba3fe398fbddb3e0799326069317e8f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "edce9264-9b95-4d5e-ac62-0a26f68c4f55",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I just like to tell you a true story, right. This is this is what it's like living in London now, though. In fact, it's the same everywhere, really. What I hate is the hard sell. You know you get the hard sell, right. I got it the other day. You know when people ring you up and say, you know, do you want to combine the gas with the electric, right? And I always think, 'Oh, that sounds dangerous', right?\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent live venue/stage acoustics with room reverberation and PA microphone amplification throughout; no sudden acoustic changes or mic switches.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 16.0],\n    [6.5, 15.5]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual with an uncertainty margin of approximately \u00b10.5 seconds. In the transcript, the opening contraction ('I just like to' vs 'I'd just like to') and filler placement ('though' vs 'there' / 'now, though') have minor perceptual ambiguity due to casual delivery and room reverberation. The primary speaker is solo and isolated from other speech, but audience laughter overlaps from approximately 17.5s onwards, and ambient room reverberation from the live venue is present throughout.\"\n}\n```\n",
+    "duration_seconds": 42.258431,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20483,
+      "output_tokens": 3530,
+      "thinking_tokens": 3022,
+      "cache_read_tokens": 15977,
+      "total_tokens": 24013
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "0cb92c7a-6846-4ce3-8f1b-52ad3fcb580e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0cb92c7a-6846-4ce3-8f1b-52ad3fcb580e",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 11.0]],\n  \"uncertainty\": \"Interval timings are estimated as absolute clip duration was not provided. Minor uncertainty in literal transcript around 'me specific' vs 'me specifically' and 'it's struggle' vs 'it's a struggle'.\"\n}\n```\n",
+    "duration_seconds": 26.738219,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12540,
+      "output_tokens": 1851,
+      "thinking_tokens": 1496,
+      "cache_read_tokens": 24166,
+      "total_tokens": 14391
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

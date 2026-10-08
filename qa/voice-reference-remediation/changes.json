@@ -4916,6 +4916,85 @@
       "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/victor-meldrew-native_secondary_result_evidence.json",
       "native_independent_result_evidence": "qa/voice-reference-remediation/evidence/victor-meldrew-native_independent_result_evidence.json",
       "delivery_commit": "466e98409bf4f7fa2776b32577f4da720b89dd00"
+    },
+    {
+      "wav": "lee-mack-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "7f86c4ab65d51a47c1ce9510c4ea6a714ba3fe398fbddb3e0799326069317e8f",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.0689144359388516,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68",
+        "frames": 399105,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 9.05,
+        "peak": 0.37847900390625,
+        "rms": 0.032032093363117194,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 99.9,
+        "source_end_s": 108.95,
+        "source_start_frame": 4405590,
+        "source_end_frame_exclusive": 4804695,
+        "conversion": "Exact continuous decoded publisher PCM16 frame slice, preserves rate/channels; no cleanup, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/lee-mack-qwen3-06b.json",
+          "old_reference_text": "I'd just like to tell you a true story. This is what it's like living in London nowadays. In fact, it's the same everywhere really. What I hate is the hard sell. You know, you get the hard sell, right? I got it the other day. You know when people ring you up and say, you know, do you want to combine the gas with the electric, right? And I was like, oh, that sounds dangerous.",
+          "new_reference_text": "Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 99.9
+        },
+        {
+          "path": "voices/lee-mack.json",
+          "old_reference_text": "I'd just like to tell you a true story. This is what it's like living in London nowadays. In fact, it's the same everywhere really. What I hate is the hard sell. You know, you get the hard sell, right? I got it the other day. You know when people ring you up and say, you know, do you want to combine the gas with the electric, right? And I was like, oh, that sounds dangerous.",
+          "new_reference_text": "Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 99.9
+        }
+      ],
+      "source_url": "https://www.bbc.co.uk/programmes/b03bpxxq",
+      "adjudication": "Original native hears crowd/laughter and live venue reverberation; proposed timing estimates extend beyond actual file and cannot be used as edit authority. Earlier trial trimming did not resolve audience contamination, so prefer direct publisher BBC interview. Programme/audio introduction identify guest Lee Mack; selected continuous solo answer follows question about effort in comedy. Two independent full exact092 hearings3.8 and3.1 both agree literal transcript and all acoustic/boundary gates: one voice, no music/crowd/laughter/effects/acoustic change/splice/cutoffs/long pauses. Both explicitly render for me specific and its struggle, noting minor uncertainty whether specifically or faint elided a is present. Whole-source ASR renders specifically and a struggle; root retains both independent native renderings specific/no a rather than use grammatical completion or ASR as ears. Minor ambiguity explicitly preserved for fresh final listening reassessment, not represented as certain phonetic resolution. The remainder of transcript agrees native and ASR. Actual9.05s complete answer with varied phonemes/prosody, healthy RMS/peak/no clipping. Exact continuous publisher PCM16 frame slice; no cleanup/normalization/separation/padding/splice. Same comedian in natural interview delivery replaces live audience stage delivery; provenance records difference. Fresh final corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_source_frame_exact": true
+      },
+      "delivery_commit_locator": "git log -- voices/lee-mack-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.bbc.co.uk/programmes/b03bpxxq",
+        "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pnyhj.mp3",
+        "publisher": "BBC Radio 4",
+        "programme": "Desert Island Discs",
+        "guest": "Lee Mack",
+        "interviewer": "Kirsty Young",
+        "broadcast_date": "2013-09-29",
+        "source_mp3_sha256": "6c8fd7bb799658c0576df961fa581e9df32c24970fc799ff7ef8211112fef304",
+        "source_audio_sha256": "08cf836cf0d95799cd5eacff5672fd7761aa29df266afa4c47cbe987bbf93ed3",
+        "source_metadata_sha256": "2254d583bdcf505a7fc4210913198ef67d6313e57ffca5503a3ced5b7c893e46",
+        "source_basis": "Direct BBC publisher podcast names guest Lee Mack and interviewer; audible introduction and question-answer context attribute selected solo answer to guest.",
+        "delivery_change": "Same intended comedian in natural interview delivery replaces live audience stage comedy."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/lee-mack-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/lee-mack-result.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/lee-mack-publisher-source.json",
+      "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/lee-mack-secondary-result.json"
     }
   ],
   "exclusions": [
