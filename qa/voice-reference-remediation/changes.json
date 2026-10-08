@@ -3841,6 +3841,77 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-mortimer-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-mortimer-result.json",
       "delivery_commit": "3628f6921f1d76477ab6a31620a8846ba049e890"
+    },
+    {
+      "wav": "frasier-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "c7c280ff2b73c37aa15b123030a5def6862199e26523e771638b3f4d86367c25",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.10455680922949778,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "a5c6dd50a02cede822f1af01efec2b61a22d776a305edd21d6cce9b0a6015c4e",
+        "frames": 390285,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.85,
+        "peak": 0.899993896484375,
+        "rms": 0.09802838486430898,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 0,
+        "end_frame_exclusive": 390285,
+        "start_s": 0,
+        "end_s": 8.85
+      },
+      "profiles": [
+        {
+          "path": "voices/frasier-qwen3-06b.json",
+          "old_reference_text": "It may be the gulfs will wash us down It may be we shall touch the happy Isles and though we are not now that strength which in old days moved earth and heaven",
+          "new_reference_text": "It may be the gulfs will wash us down. It may be we shall touch the Happy Isles.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 0
+        },
+        {
+          "path": "voices/frasier.json",
+          "old_reference_text": "It may be the gulfs will wash us down It may be we shall touch the happy Isles and though we are not now that strength which in old days moved earth and heaven",
+          "new_reference_text": "It may be the gulfs will wash us down. It may be we shall touch the Happy Isles.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 0
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=JaiMmxH-ERw",
+      "adjudication": "Original native hearing flags two perceptually distinct timbres and acoustic change in the later passage. Source video shows intended Frasier character delivering opening speech at2s;9s shot is reaction/ensemble shot, not speaker identity proof. No claim that later timbre definitely belongs to another actor. Retain only the complete opening two phrases, exact0-8.85s PCM slice. Original native clock estimates were too early; subsequent word alignment locates Isles through8.8s, and resulting full native3.1 confirms one voice, both complete phrases, no music/crowd/laughter/effects/splices/acoustic change or clipped boundaries. Natural pause between two reading phrases retained; no artificial splice, padding, processing or script correction. Native literal the gulfs matches ASR; source-description extra that is not inserted. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/frasier-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/frasier-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/frasier-result.json",
+      "source_context": {
+        "source_url": "https://www.youtube.com/watch?v=JaiMmxH-ERw",
+        "title": "Frasier Speech",
+        "uploader": "nv52222",
+        "upload_date": "20080629",
+        "source_metadata_sha256": "2e938236aad8215519cf6da074673b400e495ac4e2609f34331eb48ebd08f56a",
+        "intended_speaker_basis": "Source title/description identifies Frasier finale speech; frame2 shows intended character delivering opening passage. Frame9 is a reaction/ensemble shot and does not establish a different speaker. Retained original first two phrases avoid later acoustic-change hypothesis without claiming actor swap proven.",
+        "speaker_frame": "qa/voice-reference-remediation/evidence/frasier-source-002.jpg",
+        "reaction_frame": "qa/voice-reference-remediation/evidence/frasier-reaction-shot-009.jpg"
+      }
     }
   ],
   "exclusions": [
