@@ -3,7 +3,7 @@
   "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=VYCngMTg8MY",
   "reference_audio": "jarvis-ref.wav",
-  "reference_text": "And forgiveness and understanding is is urgent right now and so I wanted to make a film that was about that.",
+  "reference_text": "Uh, and forgiveness and understanding is is urgent right now and so I wanted to make a film that was about that.",
   "segment_start_s": 130.52,
   "notes": "Paul Bettany natural interview, SAG-AFTRA Foundation, Conversations with Paul Bettany of SHELTER, 2015-11-24. Exact130.52–139.72s continuous source slice; no DSP. Dramatic processed JARVIS register differs; provenance/native evidence in qa/voice-reference-remediation/changes.json."
 }

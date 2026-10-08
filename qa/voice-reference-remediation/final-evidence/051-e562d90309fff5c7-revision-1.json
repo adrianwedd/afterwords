@@ -1,0 +1,38 @@
+{
+  "wav": "clip-051-ref.wav",
+  "source_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c2d110a4-258c-4d69-85e3-829aac5c73de",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c2d110a4-258c-4d69-85e3-829aac5c73de",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"uh and forgiveness and understanding is is urgent right now and so I wanted to make a film that was about that\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent quiet interior studio/room acoustics throughout; no shift in microphone proximity, background noise floor, or reverberation.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [],\n  \"apparent_splices\": [],\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [4.8, 7.6],\n    [0.4, 7.6]\n  ],\n  \"uncertainty\": \"Timings are perceptual estimates without visual waveform markers (estimated boundary uncertainty \u00b10.3 to 0.5 s). Initial utterance begins with a low vocalized filler/breath perceived as 'uh' around 0.0-0.4 s. The repetition 'is is' occurs around 3.2-3.8 s. The phrase 'and so I wanted to make a film that was about that' (~4.8 to 7.6 s) represents the most fluent continuous phrase without conversational restarts or disfluencies.\"\n}\n",
+    "duration_seconds": 48.299795,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 23099,
+      "output_tokens": 3096,
+      "thinking_tokens": 2661,
+      "cache_read_tokens": 32190,
+      "total_tokens": 26195
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

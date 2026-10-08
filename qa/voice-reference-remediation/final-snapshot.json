@@ -1566,12 +1566,12 @@
       "profiles": [
         {
           "path": "voices/jarvis.json",
-          "profile_sha256": "cc96ef515f9b7e6b44d14bf8b8cc2cf0703782ea690421d984b7b11fa8d06e02",
-          "reference_text": "And forgiveness and understanding is is urgent right now and so I wanted to make a film that was about that."
+          "profile_sha256": "eac55e96718eb283cd3207e8505b386dced517f43aa14737045cde954725be30",
+          "reference_text": "Uh, and forgiveness and understanding is is urgent right now and so I wanted to make a film that was about that."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {

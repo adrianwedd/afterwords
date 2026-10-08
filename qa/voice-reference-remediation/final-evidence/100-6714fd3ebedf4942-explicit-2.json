@@ -1,0 +1,38 @@
+{
+  "wav": "clip-100-ref.wav",
+  "source_sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "912c13ad-6e5d-47df-9bd5-4d1c29f912c0",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "912c13ad-6e5d-47df-9bd5-4d1c29f912c0",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I knew I felt pretty rough, and that if I was gonna be, x-rayed and checked over, the sooner the better.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Prominent continuous background noise and hiss throughout the entire recording.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Wording uncertainty is very low. Boundary estimate uncertainty is low; the uniform background noise makes it clear that there are no cleanly isolated intervals.\"\n}\n```\n",
+    "duration_seconds": 29.882867,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12526,
+      "output_tokens": 2445,
+      "thinking_tokens": 2125,
+      "cache_read_tokens": 24246,
+      "total_tokens": 14971
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

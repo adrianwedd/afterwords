@@ -1,0 +1,38 @@
+{
+  "wav": "clip-102-ref.wav",
+  "source_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "54d20400-edb2-44ca-a33b-8f0e59b0b285",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "54d20400-edb2-44ca-a33b-8f0e59b0b285",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yes, well, I just believe that the writer should be writing about today, just so that we we know what's going on in the society we're living in. So, I I'm slightly against the the classical playwrights in a way.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; consistent dry studio acoustic with subtle natural room resonance throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [1.5, 9.2],\n    [1.5, 13.8],\n    [0.0, 13.8]\n  ],\n  \"uncertainty\": \"Timings are perceptual estimates (+/- 0.3s). Small hesitation/glottal hitch between 'the the' and 'classical' around 10.8s, and conversational false-start repetition on 'we we' (~5.8s) and 'I I'm' (~9.7s). Overall vocal isolation is complete with no overlapping voices or background accompaniment.\"\n}\n```\n",
+    "duration_seconds": 42.59326,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20560,
+      "output_tokens": 3637,
+      "thinking_tokens": 3193,
+      "cache_read_tokens": 15967,
+      "total_tokens": 24197
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

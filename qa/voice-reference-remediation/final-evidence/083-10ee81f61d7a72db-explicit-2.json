@@ -1,0 +1,38 @@
+{
+  "wav": "clip-083-ref.wav",
+  "source_sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "e87c2e2e-1399-4352-b8e7-ce744346591f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e87c2e2e-1399-4352-b8e7-ce744346591f",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It appeals to such a wide age range, it appeals to such a wide culture range, it's one of those quirky odd programmes that somehow has managed to survive over time.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 11.8]\n  ],\n  \"uncertainty\": \"Mild perceptual uncertainty regarding possible elision in 'culture range' versus 'cultural range' (audibly produced as 'culture' without a final /l/). Boundary timestamps are perceptual estimates (+/- 0.5 s).\"\n}\n",
+    "duration_seconds": 53.807474,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 21081,
+      "output_tokens": 4373,
+      "thinking_tokens": 4022,
+      "cache_read_tokens": 16055,
+      "total_tokens": 25454
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
