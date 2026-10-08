@@ -7818,7 +7818,8 @@
         "publisher_metadata_sha256": "548aa294dcb82eb92c118045778557cf830073debbc7ac8c60dab02bc6a1246b"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/nanna-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/nanna-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/nanna-result.json",
+      "delivery_commit": "1fc34c31ae8bf71222ec8bff451ffe046a74ccdd"
     }
   ],
   "exclusions": [
