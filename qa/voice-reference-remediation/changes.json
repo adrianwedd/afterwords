@@ -7108,7 +7108,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/jarvis-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/jarvis-result.json",
-      "delivery_commit": "3dcf54a78f3ff41e730cbadeefb2b04a3a07b2c0"
+      "delivery_commit": "3dcf54a78f3ff41e730cbadeefb2b04a3a07b2c0",
+      "profile_metadata_commit": "1516cda9c468d7aa9e07cdb59a609043d8ff4656"
     },
     {
       "wav": "dave-bowman-ref.wav",
