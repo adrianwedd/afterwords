@@ -7716,7 +7716,8 @@
         "publisher_metadata_sha256": "8d3b6ab14699e9007782645b5f34086d7fa8dca4debf7aa0c7aa23910f1bf444"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/trigger-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/trigger-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/trigger-result.json",
+      "delivery_commit": "2ed0d5a1a8549a69b45332a3812f6659aa31ab58"
     }
   ],
   "exclusions": [
