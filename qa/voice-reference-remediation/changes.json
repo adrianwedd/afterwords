@@ -4593,7 +4593,8 @@
         "delivery_change": "Same intended actor, natural interview delivery replaces scored dramatic montage."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/martha-jones-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/martha-jones-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/martha-jones-result.json",
+      "delivery_commit": "ded164743f948d5a46d5dfe8b3ca83b7ec50de52"
     }
   ],
   "exclusions": [
