@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "7a95373c1c362b9ef50d6820c9f2a59f3c2508c93795b15da661840cebe3baa1",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "4d1e6120-5fa7-45e7-a509-6c172425d64f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7a95373c1c362b9ef50d6820c9f2a59f3c2508c93795b15da661840cebe3baa1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7a95373c1c362b9ef50d6820c9f2a59f3c2508c93795b15da661840cebe3baa1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4d1e6120-5fa7-45e7-a509-6c172425d64f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"you know using imagination rather than actually digging deep and and writing from my soul\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.0]\n  ],\n  \"uncertainty\": \"Boundary estimates are approximate as precise timing tools were not used. The entire clip appears clean and is estimated to be roughly 4 seconds long. There is a slight natural repetition of 'and' ('and and').\"\n}\n```\n",
+    "duration_seconds": 19.742434,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12501,
+      "output_tokens": 1747,
+      "thinking_tokens": 1421,
+      "cache_read_tokens": 24238,
+      "total_tokens": 14248
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

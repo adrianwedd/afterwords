@@ -1,0 +1,38 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "b4668b3aac12ba7d4a37c5612d7d2c19c5594cf96f8c19ab19f26ffa31936b11",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "7d6cc301-24ca-479d-ab25-2e724a889610",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b4668b3aac12ba7d4a37c5612d7d2c19c5594cf96f8c19ab19f26ffa31936b11"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b4668b3aac12ba7d4a37c5612d7d2c19c5594cf96f8c19ab19f26ffa31936b11"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7d6cc301-24ca-479d-ab25-2e724a889610",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Thanks to compound interest, you now own 98% of all the world's wealth.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.3]\n  ],\n  \"uncertainty\": \"Low uncertainty regarding speech content and isolation. The speech is clear and uninterrupted without background interference. Time interval boundaries are perceptual estimates with an uncertainty of approximately \u00b10.3 seconds.\"\n}\n",
+    "duration_seconds": 30.697072,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20443,
+      "output_tokens": 3324,
+      "thinking_tokens": 3007,
+      "cache_read_tokens": 16211,
+      "total_tokens": 23767
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

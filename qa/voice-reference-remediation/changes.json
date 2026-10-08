@@ -343,7 +343,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/ace-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/ace-result.json",
-      "secondary_asr_evidence": "qa/voice-reference-remediation/evidence/ace-result-asr-alignment.json"
+      "secondary_asr_evidence": "qa/voice-reference-remediation/evidence/ace-result-asr-alignment.json",
+      "delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383"
     },
     {
       "wav": "bardem-ref.wav",
@@ -404,7 +405,8 @@
       "delivery_commit_locator": "git log -- voices/bardem-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bardem-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/bardem-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bardem-result.json",
+      "delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383"
     },
     {
       "wav": "audrey-ref.wav",
@@ -465,7 +467,8 @@
       "delivery_commit_locator": "git log -- voices/audrey-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/audrey-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/audrey-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/audrey-result.json",
+      "delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383"
     },
     {
       "wav": "data-ref.wav",
@@ -1709,7 +1712,8 @@
       "delivery_commit_locator": "git log -- voices/k9-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/k9-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/k9-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/k9-result.json",
+      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9"
     },
     {
       "wav": "leela-ref.wav",
@@ -1770,7 +1774,8 @@
       "delivery_commit_locator": "git log -- voices/leela-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/leela-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/leela-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/leela-result.json",
+      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9"
     },
     {
       "wav": "k-ref.wav",
@@ -1819,7 +1824,8 @@
       "delivery_commit_locator": "git log -- voices/k-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/k-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/k-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/k-result.json",
+      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9"
     },
     {
       "wav": "yasmin-khan-ref.wav",
@@ -1880,7 +1886,8 @@
       "delivery_commit_locator": "git log -- voices/yasmin-khan-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/yasmin-khan-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/yasmin-khan-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/yasmin-khan-result.json",
+      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9"
     },
     {
       "wav": "carl-sagan-ref.wav",
@@ -1966,7 +1973,8 @@
         "rejected_download": "Initial yt-dlp download-sections120-240 yielded 129.9935s instead of120s. Not used for timing/admission. Downloaded full decoded source and re-extracted precisely150.60-164.35 from it."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/carl-sagan-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/carl-sagan-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/carl-sagan-result.json",
+      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9"
     },
     {
       "wav": "vesper-ref.wav",
@@ -2022,7 +2030,8 @@
       "delivery_commit_locator": "git log -- voices/vesper-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/vesper-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/vesper-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/vesper-result.json",
+      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5"
     },
     {
       "wav": "brian-cox-ref.wav",
@@ -2090,7 +2099,8 @@
         },
         "rendered_sha256": "65ee8a1f24391035a65a3b0d84d301c2ab44a3fe61281a9d34914cc4ebd532cc",
         "scope": "Opening wording only; remaining corpus audio verified by complete native observation. Probe is not production audio."
-      }
+      },
+      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5"
     },
     {
       "wav": "lister-ref.wav",
@@ -2151,7 +2161,8 @@
       "delivery_commit_locator": "git log -- voices/lister-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/lister-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/lister-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/lister-result.json",
+      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5"
     },
     {
       "wav": "mckenna-ref.wav",
@@ -2205,7 +2216,8 @@
       "delivery_commit_locator": "git log -- voices/mckenna-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/mckenna-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/mckenna-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/mckenna-result.json",
+      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5"
     },
     {
       "wav": "marla-ref.wav",
@@ -2266,7 +2278,263 @@
       "delivery_commit_locator": "git log -- voices/marla-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/marla-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/marla-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/marla-result.json",
+      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5"
+    },
+    {
+      "wav": "mark-corrigan-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "7a10eb0dcad5f84475bac04e5a846635620c617da7acc1452793767fcd0cc4a5",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08940990717406924,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "38bfa895ed8040510edd57f24e814176aa8e7af765edd6c350c6d763fb236fb7",
+        "frames": 168462,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.82,
+        "peak": 0.667633056640625,
+        "rms": 0.08224657629821623,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 283122,
+        "end_frame_exclusive": 451584,
+        "start_s": 6.42,
+        "end_s": 10.24
+      },
+      "profiles": [
+        {
+          "path": "voices/mark-corrigan-qwen3-06b.json",
+          "old_reference_text": "You can stop smoking your drugs, I'm making tea and toast for Sophie, I'm putting on Radio 4. Everything's normal. I'm not really high on drugs, so you can stop talking your nonsense on my time. What's the problem, man? Can't we just chill? No, you can't. You've been chilling long enough.",
+          "new_reference_text": "I'm not really high on drugs, so you can stop talking your nonsense on my time.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 6.42
+        },
+        {
+          "path": "voices/mark-corrigan.json",
+          "old_reference_text": "You can stop smoking your drugs, I'm making tea and toast for Sophie, I'm putting on Radio 4. Everything's normal. I'm not really high on drugs, so you can stop talking your nonsense on my time. What's the problem, man? Can't we just chill? No, you can't. You've been chilling long enough.",
+          "new_reference_text": "I'm not really high on drugs, so you can stop talking your nonsense on my time.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 6.42
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=LvkT9NBBc-4",
+      "adjudication": "Original has prior radio bleed, truncated outer dialogue and second speaker. Initial candidate6.23-10.24 retained a previous word fragment and failed boundary QA; revised start6.42 follows fragment's decay and precedes intended I'm onset around6.48. Full independent native3.1 review of exact revised3.82s slice confirms one voice, complete phrase, no contaminants, cutoff or splice, and literal wording. First3.8 attempt leaked prompt/reasoning and failed parser; preserved unaccepted rather than weakening gate. ASR corroborates entire retained utterance. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/mark-corrigan-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/mark-corrigan-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/mark-corrigan-result.json"
+    },
+    {
+      "wav": "holly-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "958473e1c5677ac4ee495a27f8f199e6738525e1d929811e1e682a2f3a63d194",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.07049591471986333,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "b4668b3aac12ba7d4a37c5612d7d2c19c5594cf96f8c19ab19f26ffa31936b11",
+        "frames": 175077,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.97,
+        "peak": 0.21893310546875,
+        "rms": 0.033415748222596964,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 359415,
+        "end_frame_exclusive": 534492,
+        "start_s": 8.15,
+        "end_s": 12.12
+      },
+      "profiles": [
+        {
+          "path": "voices/holly-qwen3-06b.json",
+          "old_reference_text": "all sausages Dave now cover seven eighths of the Earth's surface. Also you left 17 pounds 50 pets in your bank account thanks to compound interest you now owe 98 % of all the world's wealth. Because you hold it for three million years nobody",
+          "new_reference_text": "Thanks to compound interest, you now own 98% of all the world's wealth.",
+          "old_segment_start_s": 64,
+          "new_segment_start_s": 72.15
+        },
+        {
+          "path": "voices/holly.json",
+          "old_reference_text": "all sausages Dave now cover seven eighths of the Earth's surface. Also you left 17 pounds 50 pets in your bank account thanks to compound interest you now owe 98 % of all the world's wealth. Because you hold it for three million years nobody",
+          "new_reference_text": "Thanks to compound interest, you now own 98% of all the world's wealth.",
+          "old_segment_start_s": 64,
+          "new_segment_start_s": 72.15
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=elZfflKkfxM",
+      "adjudication": "Original has audience laughter between statements and a chopped final sentence. Retains continuous8.15-12.12s complete compound-interest statement, selected from post-listening ASR timing and verified by full native edited review. Actual3.97s one speaker has no residual crowd/laughter/music/effects or cutoffs; earlier native original rough timestamps inaccurately located laughter over this sentence, so exact rendered native observation controls acceptance. ASR and rendered native agree retained words. Shorter than preferred, but complete coherent sentence with sufficient phonetic variety; no padding or splicing. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/holly-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/holly-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/holly-result.json"
+    },
+    {
+      "wav": "ronan-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "951e2c987c81afac7cd105149e6f5be187a59f8f1a477de40a48c0d7af7306ef",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.05060219367173517,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "7a95373c1c362b9ef50d6820c9f2a59f3c2508c93795b15da661840cebe3baa1",
+        "frames": 136800,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 5.7,
+        "peak": 0.544097900390625,
+        "rms": 0.04239386369682168,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 24000,
+        "start_frame": 204000,
+        "end_frame_exclusive": 340800,
+        "start_s": 8.5,
+        "end_s": 14.2
+      },
+      "profiles": [
+        {
+          "path": "voices/ronan-qwen3-06b.json",
+          "old_reference_text": "I wasn't honest before, I was just writing, and I was still learning how to be a songwriter, and using imagination rather than actually digging deep and writing from my soul.",
+          "new_reference_text": "You know, using imagination rather than actually digging deep and, and writing from my soul.",
+          "old_segment_start_s": 20,
+          "new_segment_start_s": 28.5
+        },
+        {
+          "path": "voices/ronan.json",
+          "old_reference_text": "I wasn't honest before, I was just writing, and I was still learning how to be a songwriter, and using imagination rather than actually digging deep and writing from my soul.",
+          "new_reference_text": "You know, using imagination rather than actually digging deep and, and writing from my soul.",
+          "old_segment_start_s": 20,
+          "new_segment_start_s": 28.5
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=-mrmOTS6qrw",
+      "adjudication": "Original has cut-off opening word and omitted fillers/repetitions in JSON. First0.83-14.2s candidate retained tail of before, so not admitted despite reviewer raw-usable flag. Revised continuous8.5-14.2s begins in measured quiet pause before complete you know and preserves final coherent clause. Native3.1 edited hearing confirms literal words including repeated and, one voice, no contaminants/splices/cutoffs. Post-original-listening ASR corroborates content but compresses and repetition; use repeat heard independently in original and rendered reviews. No DSP/padding/splicing. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/ronan-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/ronan-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/ronan-result.json"
+    },
+    {
+      "wav": "rod-serling-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "c2cce6a396421d58ec54ee4e6e071d8b50ff41363c121b54e651cb79e66b9cb6",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06809894655643053,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "07e61a13774f749a568f1bb9896d3f32f6ba9c89f584e2d52512f6bd49f4c05c",
+        "frames": 334080,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.96,
+        "peak": 0.428436279296875,
+        "rms": 0.06086239805043414,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "source_start_s": 63.22,
+        "source_end_s": 70.18,
+        "sample_rate": 48000,
+        "source_start_frame": 3034560,
+        "source_end_frame_exclusive": 3368640,
+        "conversion": "Exact contiguous decoded PCM16 source frame slice, original channels/sample rate; no normalization, cleanup, splicing or separation"
+      },
+      "profiles": [
+        {
+          "path": "voices/rod-serling-qwen3-06b.json",
+          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
+          "new_reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 63.22
+        },
+        {
+          "path": "voices/rod-serling.json",
+          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
+          "new_reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 63.22
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=TghYXxm3wq8",
+      "adjudication": "Original scored/cut-off narration rejected using valid native acoustic excerpt review; failed full recitation preserved unaccepted. First interview candidate22.44-38.99 included a host Yeah missed by ASR and was rejected. Second64.62-70.18 candidate reviewed twice: isolated voice but second reviewer heard clipped opening conjunction; not admitted. Revised continuous63.22-70.18 includes preceding complete Well sentence. Full native3.1 edited hearing now confirms one speaker, complete boundaries, no music/crowd/effects/splices, and repeated I before can't and haven't. Earlier shorter native hearings misconstrued first I hesitation as And; current complete-boundary hearing supersedes those. ASR collapses repeats but corroborates remaining words. Historic radio timbre retained without heroic cleanup. Source publisher/foundation credits intended Serling. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/rod-serling-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=TghYXxm3wq8",
+        "title": "Rod Serling Talks to Bob Crane about \"The Shelter\"",
+        "uploader": "CONELRAD6401240",
+        "primary_source_page": "https://rodserling.com/media-audio/",
+        "source_basis": "Rod Serling Foundation public audio page directly links this Bob Crane interview and identifies intended interviewee; complete publicly accessible recording downloaded and exact contiguous answer retained.",
+        "source_audio_sha256": "0baf64ca00561f030d921a729a1f3564d06122d26b597079b561ea72286c1dd6",
+        "source_metadata_sha256": "6536b08d9bbe1e5127f7372577deda67fd69ce2692e077b52670b013f75f8962",
+        "primary_source_page_sha256": "3c1d1837463662edea905a34c328f51fe89182830d557727ada195cd12605ccd"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/rod-serling-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/rod-serling-result.json"
     }
   ],
   "exclusions": [
