@@ -1,0 +1,37 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "7bfd2ad7-37e6-4ae3-8c38-d5ee5206d5f6",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7bfd2ad7-37e6-4ae3-8c38-d5ee5206d5f6",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Seisan is a very interesting kata because it comes in at third degree, the teachers level. Also it is a kata, through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None detected; room acoustics remain consistent with slight indoor reverberation/room tone throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.8],\n    [5.5, 13.2]\n  ],\n  \"uncertainty\": \"Boundaries are perceptual time estimates (+/- 0.3-0.5s) derived purely from listening. For the transcript, 'Seisan' is transcribed phonetically based on pronunciation ('Say-san') in context of 'kata'; minor uncertainty exists between 'got in close enough' versus 'gotten close enough' due to rapid speech and elision; punctuation and phrasing boundaries are perceptual interpretations.\"\n}\n```\n",
+    "duration_seconds": 34.686989,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20652,
+      "output_tokens": 3413,
+      "thinking_tokens": 2976,
+      "cache_read_tokens": 15981,
+      "total_tokens": 24065
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

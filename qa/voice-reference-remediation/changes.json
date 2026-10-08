@@ -466,6 +466,522 @@
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/audrey-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/audrey-result.json"
+    },
+    {
+      "wav": "data-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "c77ed0ab9b455e2b71a00221ab6ecbb292f366c93dbb931da2e0d29733e20ca4",
+        "frames": 253488,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 10.562,
+        "peak": 0.9000244140625,
+        "rms": 0.08313100006932599,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "f745aedf7c04608e839c5a0f1523c822aa2a8a2e972585d9f3bfe64f9b42d6ae",
+        "frames": 207600,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.65,
+        "peak": 0.9000244140625,
+        "rms": 0.08314847163916805,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "start_frame": 0,
+        "end_frame_exclusive": 207600,
+        "start_s": 0,
+        "end_s": 8.65,
+        "sample_rate": 24000
+      },
+      "profiles": [
+        {
+          "path": "voices/data-qwen3-06b.json",
+          "old_reference_text": "I have asked myself that many times, as I have struggled to be more human. Until I realized, it is the struggle itself that is most important. We must strive to be more.",
+          "new_reference_text": "I have asked myself that many times, as I have struggled to be more human, until I realized, it is the struggle itself that is most important.",
+          "old_segment_start_s": 24,
+          "new_segment_start_s": 24
+        },
+        {
+          "path": "voices/data.json",
+          "old_reference_text": "I have asked myself that many times, as I have struggled to be more human. Until I realized, it is the struggle itself that is most important. We must strive to be more.",
+          "new_reference_text": "I have asked myself that many times, as I have struggled to be more human, until I realized, it is the struggle itself that is most important.",
+          "old_segment_start_s": 24,
+          "new_segment_start_s": 24
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=5PdVkA3HYYY",
+      "adjudication": "Excludes the trailing broken We must strive phrase. Native resulting-file review reports a complete sole-speaker utterance with no score, competing voice, effects, cutoffs or splices. Natural rhetorical pauses retained continuously. Perceptual timestamps exceed actual duration and are not used as edit authority; deterministic duration is 8.65s. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/data-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/data-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/data-result.json"
+    },
+    {
+      "wav": "patrick-moore-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "c84c6dce53f67cf135aff5c1be7f514938d17057c4f21d9a70644bc005bbb231",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06797330121956423,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "fc67f6b452f79a79f07d88c86e2bc5104a9cd47298d376f8d4f8d020fc1d1472",
+        "frames": 246078,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 5.58,
+        "peak": 0.5518798828125,
+        "rms": 0.04159656124050586,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "start_frame": 293265,
+        "end_frame_exclusive": 539343,
+        "start_s": 6.65,
+        "end_s": 12.23,
+        "sample_rate": 44100
+      },
+      "profiles": [
+        {
+          "path": "voices/patrick-moore-qwen3-06b.json",
+          "old_reference_text": "brilliant stars, the orange-red Betelgeuse in the upper left corner, and the brilliant white Rigel, 60,000 sun power to the lower right. Incidentally, this is a time exposure taken with a fixed camera, which is why the stars appear drawn out into trails. In mythology, Orion was",
+          "new_reference_text": "Incidentally, this is a time exposure taken with a fixed camera, which is why the stars appear drawn out into trails.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 36.65
+        },
+        {
+          "path": "voices/patrick-moore.json",
+          "old_reference_text": "brilliant stars, the orange-red Betelgeuse in the upper left corner, and the brilliant white Rigel, 60,000 sun power to the lower right. Incidentally, this is a time exposure taken with a fixed camera, which is why the stars appear drawn out into trails. In mythology, Orion was",
+          "new_reference_text": "Incidentally, this is a time exposure taken with a fixed camera, which is why the stars appear drawn out into trails.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 36.65
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=Ne09Thrp99U",
+      "adjudication": "Retains the complete Incidentally sentence between the partial opening star description and the broken In mythology clause. Native edited-file review finds one articulate isolated speaker with complete words, no music, audience, effects, acoustic changes or splices. Precise frame slice gives 5.58s, irrespective of perceptual timing estimates. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/patrick-moore-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/patrick-moore-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/patrick-moore-result.json"
+    },
+    {
+      "wav": "cleaver-greene-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "ef97b3af9faab48727e54ab9ccc7d44faf7880d0858162ce53e84ac79cfe460a",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08814872765277541,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "2659e75f3a0146fd700ebdfb6b421428c32929c8d60f778c3980ed02eda76aa5",
+        "frames": 325017,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 7.37,
+        "peak": 0.797882080078125,
+        "rms": 0.0798840568306418,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "start_frame": 17640,
+        "end_frame_exclusive": 342657,
+        "start_s": 0.4,
+        "end_s": 7.77,
+        "sample_rate": 44100
+      },
+      "profiles": [
+        {
+          "path": "voices/cleaver-greene-qwen3-06b.json",
+          "old_reference_text": "There is, is there not, ladies and gentlemen in the jury, so much we can learn about ourselves if we have the integrity, the courage to stand up and not only tell the truth...",
+          "new_reference_text": "There is, is there not, ladies and gentlemen of the jury, so much we can learn about ourselves.",
+          "old_segment_start_s": 8,
+          "new_segment_start_s": 8.4
+        },
+        {
+          "path": "voices/cleaver-greene.json",
+          "old_reference_text": "There is, is there not, ladies and gentlemen in the jury, so much we can learn about ourselves if we have the integrity, the courage to stand up and not only tell the truth...",
+          "new_reference_text": "There is, is there not, ladies and gentlemen of the jury, so much we can learn about ourselves.",
+          "old_segment_start_s": 8,
+          "new_segment_start_s": 8.4
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=AZMxERepQTE",
+      "adjudication": "The clip retains a complete phonetically intact rhetorical unit, including the actual opening false start, and ends at the measured low-energy boundary before if. Native result review explicitly reports ourselves completes without phonetic truncation, clean one-speaker acoustics and no contamination/splices. Intonation anticipates further argument but this retained unit is usable for conditioning. The natural opening rhetorical pause is accepted. Correction of in/of the jury follows two native hearings and ASR corroboration, not a courtroom script. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/cleaver-greene-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/cleaver-greene-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/cleaver-greene-result.json"
+    },
+    {
+      "wav": "bob-jones-sanchin-tensho-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "f1054343c4c3f4b5618db02a87f4ed3b7ca5f438a15c97c163692552fc0fe741",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 1.0,
+        "rms": 0.20517495497592983,
+        "samples_at_full_scale": 187
+      },
+      "resulting_audio": {
+        "sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512",
+        "frames": 254400,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 10.6,
+        "peak": 1.0,
+        "rms": 0.218691873124855,
+        "samples_at_full_scale": 181
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "start_frame": 43200,
+        "end_frame_exclusive": 297600,
+        "start_s": 1.8,
+        "end_s": 12.4,
+        "sample_rate": 24000
+      },
+      "profiles": [
+        {
+          "path": "voices/bob-jones-sanchin-qwen3-06b.json",
+          "old_reference_text": "Tensho now in contrast to Sanchin, which is the power guitar, and getting everything sent into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision. It also is full of fluidity, once again designed to",
+          "new_reference_text": "Tensho now, in contrast to Sanchin, which is the power kata, and getting everything centered into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        },
+        {
+          "path": "voices/bob-jones-sanchin.json",
+          "old_reference_text": "Tensho now in contrast to Sanchin, which is the power guitar, and getting everything sent into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision. It also is full of fluidity, once again designed to",
+          "new_reference_text": "Tensho now, in contrast to Sanchin, which is the power kata, and getting everything centered into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        }
+      ],
+      "source_url": null,
+      "adjudication": "Removes leading non-speech and the final incomplete sentence before It also. Native original and resulting-file observations independently agree on Tensho now, Sanchin, power kata, centered and thinks around; ASR corroborates thinks around while hallucinating Tincher, power guitar and a final nonexistent guitar phrase. Literal wording follows direct listening, with phonetic uncertainties recorded in the native evidence. The continuous 10.60s edited reference has one clear speaker, complete phrases, no music, audience, effects, cutoffs or splices. Light stable recording hiss is incidental and accepted. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/bob-jones-sanchin-tensho-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-sanchin-tensho-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-sanchin-tensho-result.json"
+    },
+    {
+      "wav": "bob-jones-ref.wav",
+      "remediation": "KEEP WITH TEXT FIX",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.405548095703125,
+        "rms": 0.058742285991689944,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.405548095703125,
+        "rms": 0.058742285991689944,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "text_only"
+      },
+      "profiles": [
+        {
+          "path": "voices/bob-jones-qwen3-06b.json",
+          "old_reference_text": "Saisam is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us.",
+          "new_reference_text": "Seisan is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us.",
+          "old_segment_start_s": 81,
+          "new_segment_start_s": 81
+        },
+        {
+          "path": "voices/bob-jones.json",
+          "old_reference_text": "Saisam is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us.",
+          "new_reference_text": "Seisan is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us.",
+          "old_segment_start_s": 81,
+          "new_segment_start_s": 81
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=jAJ_KFKo8A0",
+      "adjudication": "Audio retained unchanged: two independent native hearings find one clear isolated speaker, complete phrases and no score, crowd, effects, cutoffs or splices. Opening term ends in an audible n, not the old Saisam m. First native hearing renders Saisan, second renders Seisan and notes minor phonetic/orthographic ambiguity; ASR renders Say Sun. Seisan follows the second direct auditory transcription and the approximate ASR vowel sound, rather than an external dictionary or canonical quotation. All remaining spoken words agree across native observations and ASR. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/bob-jones-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-result.json"
+    },
+    {
+      "wav": "claudia-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "98dbcda67f3b69c97cbc7df3436cf5024980520b6b1c97c4eae5033b9489b991",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06721741584208606,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "5610e40bd04258df426cce280e72554098ec6cea00712934f8986456edd70fd4",
+        "frames": 171600,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 7.15,
+        "peak": 0.899993896484375,
+        "rms": 0.08436073526457961,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "start_frame": 90000,
+        "end_frame_exclusive": 261600,
+        "start_s": 3.75,
+        "end_s": 10.9,
+        "sample_rate": 24000
+      },
+      "profiles": [
+        {
+          "path": "voices/claudia-qwen3-06b.json",
+          "old_reference_text": "black, I play Morrigan in Dragon Age Inquisition. I love voice work because I can usually turn up without having bathed, except on days like this when there's cameras in the room. It's extremely playful and it allows actors to be",
+          "new_reference_text": "I love voice work because I can usually turn up without having bathed, except on days like this when there's cameras in the room.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        },
+        {
+          "path": "voices/claudia.json",
+          "old_reference_text": "black, I play Morrigan in Dragon Age Inquisition. I love voice work because I can usually turn up without having bathed, except on days like this when there's cameras in the room. It's extremely playful and it allows actors to be",
+          "new_reference_text": "I love voice work because I can usually turn up without having bathed, except on days like this when there's cameras in the room.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        }
+      ],
+      "source_url": null,
+      "adjudication": "Original begins with a clipped name and ends mid-clause. The first proposed replacement containing I play and I love was rejected by native review for an apparent take/acoustic change. The admitted 7.15s continuous voice-work answer excludes that transition and both broken boundaries. Exact resulting-file native review finds a single clear isolated speaker, complete phrase, no music, crowd, effects, cutoffs or splices and uniform acoustics. Grammar there is/there are is not standardized: audible there's cameras is retained. Source metadata absent in the original project; baseline Git audio plus exact relative frame slice provide provenance without inventing an absolute offset. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/claudia-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/claudia-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/claudia-result.json"
+    },
+    {
+      "wav": "blackadder-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "7125b16034eb407b2b8431e9a62ced914942f58db5b6480a459a185f54a8d228",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.1168218090661301,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "5b36c48e78ce0aec3786af6b2644714262412508059a62f2f873e7199e4af587",
+        "frames": 121200,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 5.05,
+        "peak": 0.27862548828125,
+        "rms": 0.03541374339678983,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "source_start_s": 73.35,
+        "source_end_s": 78.4,
+        "conversion": "ffmpeg: continuous source crop; stereo downmix to mono, 48000 to 24000 Hz, PCM_16; no denoising, separation, normalization or splicing",
+        "render_command": [
+          "ffmpeg",
+          "-i",
+          "SOURCE.wav",
+          "-ss",
+          "73.35",
+          "-t",
+          "5.05",
+          "-ac",
+          "1",
+          "-ar",
+          "24000",
+          "-c:a",
+          "pcm_s16le",
+          "RESULT.wav"
+        ]
+      },
+      "profiles": [
+        {
+          "path": "voices/blackadder-qwen3-06b.json",
+          "old_reference_text": "The rain beats down so hard, it makes your head bleed. So some sort of hat. There's probably an order. So did Bortig, actually. Only last year, my aunt.",
+          "new_reference_text": "Only last year, my aunt came to me to beg for help in the ransom of my uncle Osric.",
+          "old_segment_start_s": 60,
+          "new_segment_start_s": 73.35
+        },
+        {
+          "path": "voices/blackadder.json",
+          "old_reference_text": "The rain beats down so hard, it makes your head bleed. So some sort of hat. There's probably an order. So did Bortig, actually. Only last year, my aunt.",
+          "new_reference_text": "Only last year, my aunt came to me to beg for help in the ransom of my uncle Osric.",
+          "old_segment_start_s": 60,
+          "new_segment_start_s": 73.35
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=n-Zm8H6G108",
+      "adjudication": "Replaces the mostly-other-speaker rain/hat excerpt with a complete continuous 5.05s sentence from the intended character in the same existing source. Native edited-file review reports one clear isolated speaker, complete words/phrase boundaries, no music, audience/laughter, effects, acoustic transitions or splices. Subsequent full-source ASR corroborates the words, with the proper name Osric transcribed phonetically by native hearing; no external screenplay used. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/blackadder-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=n-Zm8H6G108",
+        "title": "Blackadder II's funniest and rudest put downs 😂 | Blackadder - BBC",
+        "uploader": "BBC",
+        "source_audio_sha256": "1c4cec712ed0abbe5eee1240e3e31a73240a6629f5cd1e94bada5260dc1ad86e",
+        "source_metadata_sha256": "c3639aa8e0c37b39b3b95a21a6aed7eb8edb7865201f608a040f9b0733b5c6ef",
+        "source_basis": "Re-extracted from the same BBC-published source URL already recorded in the original project profile.",
+        "identity_basis": "Publisher describes the clip as Edmund Blackadder one-liners and credits the character. Source video at 76s shows the intended fictional character delivering the retained aunt/uncle sentence; source footage corroborates intended-speaker relationship, not transcript wording. Native reviewer receives anonymous audio only. The two-voice rain/hat candidate was rejected before admission.",
+        "visual_source_evidence": "qa/voice-reference-remediation/evidence/blackadder-source-076.jpg",
+        "visual_source_sha256": "a00d99568b39ba46e8a58f7e328c68031098a34820ced7fc66cba5bd60694138"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/blackadder-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/blackadder-result.json"
+    },
+    {
+      "wav": "bob-jones-ibuki-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "f88085479e6d14654d0c168cdae1683841c3973559f3e8735f24d4b213009e3d",
+        "frames": 528000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 22.0,
+        "peak": 1.0,
+        "rms": 0.19680073673819207,
+        "samples_at_full_scale": 244
+      },
+      "resulting_audio": {
+        "sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.405548095703125,
+        "rms": 0.058742285991689944,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "conversion": "Byte-identical copy of the already project-available clean bob-jones-ref.wav; no DSP, resampling, denoising, normalization or splicing."
+      },
+      "profiles": [
+        {
+          "path": "voices/bob-jones-ibuki-qwen3-06b.json",
+          "old_reference_text": "The Kata Sanshin is designed basically for one-pointedness, bringing timing, coordination, aggression and channeling everything into one-point, which of course in time builds up the self-confidence of the martial artist. The important thing is with the heavy breathing, which is very similar to yoga breathing, but it's called ibuki, the breathing from Japan, is done very aggressively from the diaphragm.",
+          "new_reference_text": "Seisan is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": 81
+        },
+        {
+          "path": "voices/bob-jones-ibuki.json",
+          "old_reference_text": "The Kata Sanshin is designed basically for one-pointedness, bringing timing, coordination, aggression and channeling everything into one-point, which of course in time builds up the self-confidence of the martial artist. The important thing is with the heavy breathing, which is very similar to yoga breathing, but it's called ibuki, the breathing from Japan, is done very aggressively from the diaphragm.",
+          "new_reference_text": "Seisan is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": 81
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=jAJ_KFKo8A0",
+      "adjudication": "Original native review finds a continuous musical drone underneath the whole Ibuki recording, so no clean trim can isolate it. Replaced with the same intended instructor's already project-available clean reference, byte-identical to bob-jones-ref.wav. Independent native review of the actual replacement confirms one speaker, complete words, no music, audience, effects, cutoffs or splices. Three native hearings corroborate Seisan and the retained text; secondary ASR resolves got in rather than gotten. The alias remains named bob-jones-ibuki for compatibility; conditioning content no longer describes Ibuki. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/bob-jones-ibuki-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=jAJ_KFKo8A0",
+        "title": "WRATH OF THE PYTHON   3RD DEGREE FORM",
+        "uploader": "BJMA",
+        "source_description": "Forms with The Chief from 1984",
+        "source_basis": "Existing tracked Bob Jones reference from the same intended instructor, rather than retaining the continuous score in the Ibuki source. Variant name preserved as an existing voice alias; retained words are Seisan instruction, not Ibuki instruction.",
+        "source_project_path": "voices/bob-jones-ref.wav",
+        "source_project_baseline_commit": "20d207987eedbb470eaf28bc5af1566a2ee2179b",
+        "source_audio_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+        "source_metadata_sha256": "8c06e0fb8d979321011445a58feeb1781e88c656419f90d3bb4a25e1b34be6ef",
+        "source_segment_start_s": 81
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-ibuki-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-ibuki-result.json"
     }
   ],
   "exclusions": [

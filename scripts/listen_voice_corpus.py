@@ -39,8 +39,11 @@ def parsed_observation(result):
     response = result.get("response", "").strip()
     if "NATIVE_AUDIO_UNAVAILABLE" in response:
         return None
-    if response.startswith("```"):
-        response = response.split("\n", 1)[1].rsplit("```", 1)[0].strip()
+    if "```" in response:
+        blocks = re.findall(r"```(?:json)?\s*\n?(.*?)```", response, re.DOTALL)
+        if len(blocks) != 1:
+            return None
+        response = blocks[0].strip()
     try:
         value = json.loads(response)
     except (ValueError, TypeError):
@@ -80,9 +83,12 @@ def main():
                         help="1-based inclusive index in the sorted current WAV inventory")
     parser.add_argument("--end-index", type=int,
                         help="1-based inclusive end index; enables disjoint review batches")
+    parser.add_argument("--continue-on-failure", action="store_true",
+                        help="Collect independent later clips after failed gates; exit nonzero if any gate fails")
     args = parser.parse_args()
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
+    failures = []
     # No voice names or profile contents in the reviewer's workspace.
     for number, wav in enumerate(sorted((args.root / "voices").glob("*-ref.wav")), 1):
         if number < args.start_index or (args.end_index is not None and number > args.end_index):
@@ -126,8 +132,14 @@ def main():
         }
         frozen.write_text(json.dumps(observation, indent=2) + "\n")
         if result.returncode or not observation["native_audio_proven"] or final.get("status") != "SUCCESS":
+            if args.continue_on_failure:
+                failures.append(wav.name)
+                print(f"FAILED native listening gate: {wav.name}; no acceptance claim", flush=True)
+                continue
             raise RuntimeError(f"Native listening gate failed: {wav.name}; inspect {dest}")
         print(f"Frozen {number}: native attachment proven", flush=True)
+    if failures:
+        raise SystemExit(f"Failed native listening gates: {', '.join(failures)}")
 
 
 if __name__ == "__main__":

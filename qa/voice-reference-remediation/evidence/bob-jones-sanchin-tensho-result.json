@@ -1,0 +1,37 @@
+{
+  "wav": "clip-003-ref.wav",
+  "source_sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "831ba7fa-5e1e-4ab2-b3d8-19cf38619638",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "831ba7fa-5e1e-4ab2-b3d8-19cf38619638",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Tensho now, in contrast to Sanchin, which is the power kata, and getting everything centered into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 13.8]\n  ],\n  \"uncertainty\": \"Boundary timing is perceptually estimated (approx. 14s total duration, candidate window ~0.2s to 13.8s). Minor phonetic ambiguity between 'Tensho now' vs 'Tensho, you know' or 'Tenshin', and 'thinks around' vs 'sinks around' / 'looks around' due to informal enunciation.\"\n}\n```\n",
+    "duration_seconds": 28.366175,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20312,
+      "output_tokens": 2579,
+      "thinking_tokens": 2194,
+      "cache_read_tokens": 16068,
+      "total_tokens": 22891
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

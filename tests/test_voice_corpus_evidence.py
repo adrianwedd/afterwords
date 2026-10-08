@@ -60,6 +60,13 @@ def test_attachment_cannot_override_reviewer_reporting_native_audio_unavailable(
     assert listener.parsed_observation({"response": "I cannot hear this file."}) is None
 
 
+def test_review_parser_accepts_single_fenced_result_without_ambiguous_multiple_results():
+    listener = load_script("listen_voice_corpus")
+    payload = '{"speaker_count": 1, "literal_transcript": "hello"}'
+    assert listener.parsed_observation({"response": "女```json\n" + payload + "\n```"})
+    assert listener.parsed_observation({"response": "```json\n" + payload + "\n```\n```json\n" + payload + "\n```"}) is None
+
+
 def test_every_changed_reference_has_hash_bound_provenance():
     baseline = json.loads((ROOT / "qa/voice-reference-remediation/baseline.json").read_text())
     manifest = json.loads((ROOT / "qa/voice-reference-remediation/changes.json").read_text())

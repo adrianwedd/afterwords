@@ -1,0 +1,37 @@
+{
+  "wav": "claudia-ref.wav",
+  "source_sha256": "98dbcda67f3b69c97cbc7df3436cf5024980520b6b1c97c4eae5033b9489b991",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "54d06ee0-8bfa-42dd-bde0-170b182fdde5",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "98dbcda67f3b69c97cbc7df3436cf5024980520b6b1c97c4eae5033b9489b991"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "98dbcda67f3b69c97cbc7df3436cf5024980520b6b1c97c4eae5033b9489b991"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "54d06ee0-8bfa-42dd-bde0-170b182fdde5",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"...black. I play Morrigan in Dragon Age Inquisition. I love voice work because I can usually turn up without having bathed, except on days like this when there's cameras in the room. It's extremely playful and it... it allows actors to be...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.7, 11.5]\n  ],\n  \"uncertainty\": \"The start and end boundary timings are approximate perceptual estimates. The audio begins mid-word/sentence ('...black.') and cuts off mid-phrase ('...actors to be...'). The literal transcript reflects what is audibly present without substituting external knowledge. The candidate clean interval isolates the complete phrases from 'I play...' to '...cameras in the room.' to ensure usable conditioning.\"\n}\n```\n",
+    "duration_seconds": 27.860283,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12591,
+      "output_tokens": 2814,
+      "thinking_tokens": 2426,
+      "cache_read_tokens": 24042,
+      "total_tokens": 15405
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,36 @@
+{
+  "wav": "bob-jones-ibuki-ref.wav",
+  "source_sha256": "f88085479e6d14654d0c168cdae1683841c3973559f3e8735f24d4b213009e3d",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "f7205b2a-0052-444b-bb18-e33566e2654d",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f88085479e6d14654d0c168cdae1683841c3973559f3e8735f24d4b213009e3d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f88085479e6d14654d0c168cdae1683841c3973559f3e8735f24d4b213009e3d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f7205b2a-0052-444b-bb18-e33566e2654d",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"The kata Sanchin is designed basically for one-pointedness. Bringing timing, coordination, aggression, and channeling everything into one point, which of course in time builds up the self-confidence of the martial artist. The important thing is with the heavy breathing, which is very similar to yoga breathing, but it's called ibuki, the breathing from Japan, is done very aggressively from the diaphragm.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": true,\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"High confidence in the transcript and single-speaker count. There is a faint but continuous synthesized musical drone running beneath the entire speech. Because the background music is uninterrupted, no clean solo vocal intervals can be isolated via trimming. This is marked as a fatal defect for pristine voice cloning, though the speech itself is clearly articulated and the words at the boundaries ('The' and 'diaphragm') are fully intact despite the tight crop.\"\n}\n```\n",
+    "duration_seconds": 30.777067,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12860,
+      "output_tokens": 2691,
+      "thinking_tokens": 2276,
+      "cache_read_tokens": 23901,
+      "total_tokens": 15551
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

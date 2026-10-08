@@ -1,0 +1,37 @@
+{
+  "wav": "clip-005-ref.wav",
+  "source_sha256": "2659e75f3a0146fd700ebdfb6b421428c32929c8d60f778c3980ed02eda76aa5",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "fab57930-42d2-4526-97a8-ce5b8818ac85",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2659e75f3a0146fd700ebdfb6b421428c32929c8d60f778c3980ed02eda76aa5"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2659e75f3a0146fd700ebdfb6b421428c32929c8d60f778c3980ed02eda76aa5"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "fab57930-42d2-4526-97a8-ce5b8818ac85",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"There is, is there not, ladies and gentlemen of the jury, so much we can learn about ourselves\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [2.1, 7.5]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates have an uncertainty of +/- 0.2s. Transcript wording has very high perceptual confidence. There is a rhetorical pause and false start between 'There is' (~0.4s-1.2s) and 'is there not' (~2.1s), making [2.1, 7.5] the cleanest uninterrupted conditioning phrase. While the raw clip is acoustically clean and usable as-is, trimming that initial restart eliminates the pause. The final word 'ourselves' completes phonetically without abrupt cutoff, though intonation implies the beginning of a longer sentence.\"\n}\n```\n",
+    "duration_seconds": 51.842197,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20603,
+      "output_tokens": 4866,
+      "thinking_tokens": 4451,
+      "cache_read_tokens": 16141,
+      "total_tokens": 25469
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,36 @@
+{
+  "wav": "bob-jones-sanchin-tensho-ref.wav",
+  "source_sha256": "f1054343c4c3f4b5618db02a87f4ed3b7ca5f438a15c97c163692552fc0fe741",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "f0c1c30a-01f5-4477-86d0-4f5185e91e17",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f1054343c4c3f4b5618db02a87f4ed3b7ca5f438a15c97c163692552fc0fe741"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f1054343c4c3f4b5618db02a87f4ed3b7ca5f438a15c97c163692552fc0fe741"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f0c1c30a-01f5-4477-86d0-4f5185e91e17",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Tensho now in contrast to Sanchin which is the power kata and getting everything centered into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision. It also is full of fluidity once again design-\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [1.4, 15.0]\n  ],\n  \"uncertainty\": \"Timing boundaries are approximate perceptual estimates. The final word 'design-' is abruptly cut off mid-utterance. There is persistent broadband background noise (tape hiss or environmental sound) throughout the entire clip.\"\n}\n```\n",
+    "duration_seconds": 30.742548,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12494,
+      "output_tokens": 2954,
+      "thinking_tokens": 2599,
+      "cache_read_tokens": 24039,
+      "total_tokens": 15448
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
