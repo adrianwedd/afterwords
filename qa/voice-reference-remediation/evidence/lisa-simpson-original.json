@@ -1,0 +1,37 @@
+{
+  "wav": "lisa-simpson-ref.wav",
+  "source_sha256": "689b059dbb879e0c6dd8c4440a0425a7cc23a7e6c84312b67a5a1d02d8342664",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "bfd987d3-8892-4488-8816-7080b0011204",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "689b059dbb879e0c6dd8c4440a0425a7cc23a7e6c84312b67a5a1d02d8342664"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "689b059dbb879e0c6dd8c4440a0425a7cc23a7e6c84312b67a5a1d02d8342664"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "bfd987d3-8892-4488-8816-7080b0011204",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I still believe in God, I just think there's another path to him, or her. Look, I'm not just gonna pick a religion that seems cool. I'm gonna pick one that's right for me. [sigh/tch] Mr. Gere, I was hoping Buddhism could bring me inner peace, or is that just a pipe dream? I'm planting my own Bodhi tree. If I meditate under it, perhaps I can find inner peace.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.8],\n    [5.5, 10.8],\n    [11.8, 16.8],\n    [17.5, 23.5]\n  ],\n  \"uncertainty\": \"All boundary timestamps are perceptual estimates (+/- 0.3 to 0.5s) based on auditory listening. The address transcribed as 'Mr. Gere' phonetically sounds like /m\u026ast\u0259r \u0261\u026a\u0259r/ (could phonetically be 'Mr. Gear'). 'Bodhi tree' is perceived as /bo\u028adi tri\u02d0/. Four distinct dialogue phrases appear to be concatenated across edits with noticeable pauses (~0.5-0.8s) and an audible vocal sigh/click at approximately 11.5s prior to the third phrase; raw reference is flagged not directly usable due to length and multiple splice cuts, but individual segmented intervals provide clean, isolated, single-speaker conditioning speech.\"\n}\n```\n",
+    "duration_seconds": 53.083313,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20640,
+      "output_tokens": 4624,
+      "thinking_tokens": 4077,
+      "cache_read_tokens": 15818,
+      "total_tokens": 25264
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

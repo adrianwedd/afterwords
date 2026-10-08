@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "7b1a5e9aad623996190199fde0d0b19396ecca774d652e6103a0f50e9e39aace",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "de188fdb-ba14-4e6a-90d3-8f2d84047b08",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7b1a5e9aad623996190199fde0d0b19396ecca774d652e6103a0f50e9e39aace"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7b1a5e9aad623996190199fde0d0b19396ecca774d652e6103a0f50e9e39aace"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "de188fdb-ba14-4e6a-90d3-8f2d84047b08",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I still believe in God, I just think there's another path to Him... or Her.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Continuous background music underscore present beneath the entire vocal passage.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Perceptual timing estimates carry approximately +/- 0.2s uncertainty. Speech begins at ~0.4s and concludes at ~5.4s, with an intra-sentence pause between 'Him' (~3.8s) and 'or Her' (~4.6s). Wording is perceptually clear with low lexical uncertainty ('I still believe in God, I just think there's another path to Him... or Her'), but capitalisation and punctuation are interpretive. While a single speaker is isolated without crosstalk or overlaps, continuous musical score runs beneath all spoken audio, leaving zero completely clean vocal-only conditioning intervals.\"\n}\n```\n",
+    "duration_seconds": 52.122999,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20101,
+      "output_tokens": 4198,
+      "thinking_tokens": 3789,
+      "cache_read_tokens": 16182,
+      "total_tokens": 24299
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

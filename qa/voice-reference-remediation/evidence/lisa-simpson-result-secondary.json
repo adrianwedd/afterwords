@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "e4ae7b33-2150-4c12-a7d6-b17023ac9125",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e4ae7b33-2150-4c12-a7d6-b17023ac9125",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Look, I'm not just gonna pick a religion that seems cool. I'm gonna pick one that's right for me.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 5.0]],\n  \"uncertainty\": \"Low perceptual uncertainty. Time boundary estimates are approximate due to lack of an explicit visual timeline. The single speaker is perfectly isolated with complete, usable phrases for conditioning.\"\n}\n```\n",
+    "duration_seconds": 17.523207,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20565,
+      "output_tokens": 1357,
+      "thinking_tokens": 1036,
+      "cache_read_tokens": 16116,
+      "total_tokens": 21922
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

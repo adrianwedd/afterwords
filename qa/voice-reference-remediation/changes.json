@@ -5561,6 +5561,72 @@
       "native_result_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-publisher-source.json",
       "delivery_commit": "ed6e9d675dfbf293b43da76227af76953eac2c27"
+    },
+    {
+      "wav": "lisa-simpson-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "689b059dbb879e0c6dd8c4440a0425a7cc23a7e6c84312b67a5a1d02d8342664",
+        "frames": 1089600,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 22.7,
+        "peak": 0.173431396484375,
+        "rms": 0.012260515047666707,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6",
+        "frames": 271200,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 5.65,
+        "peak": 0.173431396484375,
+        "rms": 0.014898916178059777,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 48000,
+        "start_s": 5.75,
+        "end_s": 11.4,
+        "start_frame": 276000,
+        "end_frame_exclusive": 547200,
+        "conversion": "Exact continuous original tracked PCM16 frame slice preserving source rate/channels; no cleanup, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/lisa-simpson-qwen3-06b.json",
+          "old_reference_text": "I still believe in God. I just think there's another path to him or her. I'm not just going to pick a religion that seems cool. I'm going to pick one that's right for me. Mr. Gere, I was hoping Buddhism could bring me inner peace. Or is that just a pipe dream? I'm planting my own bodhi tree. If I meditate under it, perhaps I can find inner peace.",
+          "new_reference_text": "Look, I'm not just gonna pick a religion that seems cool. I'm gonna pick one that's right for me.",
+          "old_segment_start_s": 42,
+          "new_segment_start_s": 47.75
+        },
+        {
+          "path": "voices/lisa-simpson.json",
+          "old_reference_text": "I still believe in God. I just think there's another path to him or her. I'm not just going to pick a religion that seems cool. I'm going to pick one that's right for me. Mr. Gere, I was hoping Buddhism could bring me inner peace. Or is that just a pipe dream? I'm planting my own bodhi tree. If I meditate under it, perhaps I can find inner peace.",
+          "new_reference_text": "Look, I'm not just gonna pick a religion that seems cool. I'm gonna pick one that's right for me.",
+          "old_segment_start_s": 42,
+          "new_segment_start_s": 47.75
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=Z66IHEEiCAw",
+      "adjudication": "Original native hears1speaker but4apparent edited dialogue groups, pauses and audible sigh/click; original full music=false is preliminary only. First0-5.2 candidate107 fresh native detects continuous underscore and rejects conditioning; do not mechanically trust original clean intervals. Different later exact5.75-11.4 native1093.8 and independent109-pro3.1 both confirm1isolated speaker, no music/crowd/laughter/effects/acoustic change/splice/long pauses or either cutoff, usable complete two clauses with low wording uncertainty. Both agree Look and gonna in both clauses; preserve these instead of prior omitted Look and normalized going to or ASR normalization. Source ASR word alignment5.92-11.2 corroborates physical bounds, not ears; actual5.65s, nativeclockestimates not edit authority. Exact original baseline PCM16 frame slice checked automatically and independently; no DSP. Source URL and original archived22.7s hash preserved in baseline/Git history, segment_start_s47.75 is original recorded42 plus retained5.75 offset, not newly verified video timestamp. Same intended single character voice retained from original profile/source association, no actor/register substitution. Fresh entire resulting production corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/lisa-simpson-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/lisa-simpson-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/lisa-simpson-result.json",
+      "native_result_secondary_evidence": "qa/voice-reference-remediation/evidence/lisa-simpson-result-secondary.json",
+      "rejected_candidate_evidence": [
+        "qa/voice-reference-remediation/evidence/lisa-simpson-first-phrase-rejected.json"
+      ]
     }
   ],
   "exclusions": [
