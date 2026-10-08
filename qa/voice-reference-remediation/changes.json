@@ -5559,7 +5559,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-result.json",
-      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-publisher-source.json"
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-publisher-source.json",
+      "delivery_commit": "ed6e9d675dfbf293b43da76227af76953eac2c27"
     }
   ],
   "exclusions": [
