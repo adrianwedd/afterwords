@@ -7512,6 +7512,107 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/peter-kay-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/peter-kay-result.json",
       "delivery_commit": "444c03160461fe5c5df9a950c605616b7a9381a9"
+    },
+    {
+      "wav": "samantha-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "8ee4c69d8e166ed0285f1dd20a07ad1b22790975f72d433f6c195cf611fd9189",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08006794492436511,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95",
+        "frames": 264480,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.51,
+        "peak": 0.251495361328125,
+        "rms": 0.029663696338522897,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 159.18,
+        "source_end_s": 164.69,
+        "source_start_frame": 7640640,
+        "source_end_frame_exclusive": 7905120,
+        "conversion": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation."
+      },
+      "profiles": [
+        {
+          "path": "voices/samantha-qwen3-06b.json",
+          "old_reference_text": "You know what's interesting? I used to be so worried about not having a body, but now I truly love it. I'm growing in a way that I couldn't if I had a physical form. I mean, I'm not limited. I can be anywhere and everywhere, simultaneous.",
+          "new_reference_text": "and um it was so different than than the experience that I had had with him like a decade earlier.",
+          "old_segment_start_s": 22,
+          "new_segment_start_s": 159.18
+        },
+        {
+          "path": "voices/samantha.json",
+          "old_reference_text": "You know what's interesting? I used to be so worried about not having a body, but now I truly love it. I'm growing in a way that I couldn't if I had a physical form. I mean, I'm not limited. I can be anywhere and everywhere, simultaneous.",
+          "new_reference_text": "and um it was so different than than the experience that I had had with him like a decade earlier.",
+          "old_segment_start_s": 22,
+          "new_segment_start_s": 159.18
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=ZKSzrJkHtVg",
+      "adjudication": "Original native086 reports continuous musical pad; replacement157 SPYSCAPE also scored and unaccepted. Official Variety clean conversation identified by named publisher and selected-range direct-speaking frame159, independently corroborated actor/role by Apple TV Her synopsis. Earlier160 has wording/boundary disagreement;161 cuts beginning and ending; not admitted. Final165 full typedWAV native first listen reports clean1speaker/allcontaminants and cuts false, but uncertain I had versus I'd had. Initial165-pro explicitly inferred acoustics rather than hearing and is INVALID despite stored attachment/native flag; new parser regression rejects it, frozen invalid evidence retained without acceptance. Fresh165-retry3.8 and165-pro-retry3.1 both genuinely native, clean complete clip, agree literal I had had with repeated than than and initial and um. Secondary ASR also locates I had had but does not replace native evidence. Final text uses the two independently heard uncontracted words, preserving disfluency.5.51s connected phrase useful for conditioning. Exact decoded source frame bounds/sample equality verified; healthy level and zero full-scale samples.2019 natural actor register differs fictional2013 Samantha. Fresh whole resulting production acceptance mandatory.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/samantha-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=ZKSzrJkHtVg",
+        "publisher": "Variety",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCgRQHK8Ttr1j9xCEpCAlgbQ",
+        "title": "Chris Evans & Scarlett Johansson | Actors on Actors - Full Conversation",
+        "published_date": "20191111",
+        "source_info_sha256": "1d1f751caf44dda52c6ad6f34b031cf91828c4b6624ca6e4631cb272ddd38892",
+        "source_download_sha256": "b3beb1b2c0429985fccd6333b6c88d4c7cb4ea523d093bdf44156db90e7bcca3",
+        "source_audio_sha256": "5c75fd47c187660bf107414570f5128435f51eb3805767314fb8e67f604a5914",
+        "identity_section_sha256": "70118663de86943d904bbeadbb72d1b75c45e3dbee8ee2b5d29b899cc8408e06",
+        "identity_frame_sha256": "d59e2ab4b7e2f5739ee7d25bc8c6a964ff37cfccaacc7a85c7339318253304a6",
+        "role_credit_page": "https://tv.apple.com/us/movie/her/umc.cmc.4ky5qbtddgx232de23d3bqr6i",
+        "role_credit_page_sha256": "3085dd2314defcd5801c351765e5bf4977141957a73009d85edb58cd5946990a",
+        "source_basis": "Official Variety Actors on Actors interview names Chris Evans and Scarlett Johansson. Actual selected-range frame159 shows Johansson directly speaking. Apple TV licensed Her distribution synopsis names Samantha as Scarlett Johansson, independently supporting intended actor/role.",
+        "delivery_change": "Natural2019 actor conversation replaces fictional2013 Samantha speech; same actor, different performance/register.",
+        "decode": "Full ffmpeg decode to PCM16 preserving source rate/channels, exit0 and empty error log.",
+        "exact_edit": {
+          "start_s": 159.18,
+          "end_s": 164.69,
+          "sample_rate": 48000,
+          "start_frame": 7640640,
+          "end_frame_exclusive": 7905120,
+          "channel_index": null
+        },
+        "sample_exact_source_slice": true,
+        "candidate_audio": {
+          "sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95",
+          "frames": 264480,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 5.51,
+          "peak": 0.251495361328125,
+          "rms": 0.029663696338522897,
+          "samples_at_full_scale": 0
+        },
+        "changes": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation.",
+        "publisher_metadata_sha256": "dd9eb80f69daf9c54f235b3cc666628116aad751a4b0639201173a5282b70ede"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/samantha-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/samantha-result.json"
     }
   ],
   "exclusions": [

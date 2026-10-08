@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4a6761f2-6819-4ac9-8ea5-56f6a4d233a0",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4a6761f2-6819-4ac9-8ea5-56f6a4d233a0",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and um it was so different than than the experience that I had had with him like a decade earlier\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [1.1, 5.5],\n    [2.4, 5.5]\n  ],\n  \"uncertainty\": \"Timings are perceptual estimates subject to +/-0.2-0.3s variance. Transcript words are clearly audible with high confidence, though conversational disfluency ('and um' and repeated 'than') is present. Excellent single-speaker isolation without background noise.\"\n}\n",
+    "duration_seconds": 40.738635,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20243,
+      "output_tokens": 4048,
+      "thinking_tokens": 3700,
+      "cache_read_tokens": 16176,
+      "total_tokens": 24291
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

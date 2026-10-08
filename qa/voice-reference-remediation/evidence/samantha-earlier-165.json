@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "25724bf7-06ab-41d0-a5a3-e4f33150f27e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "25724bf7-06ab-41d0-a5a3-e4f33150f27e",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and um it was so different than than the experience that I'd had with him like a decade earlier\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [2.4, 5.4]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates within +/- 0.3s. Minor auditory uncertainty regarding whether the speaker says 'that I had' or 'that I'd had'. The raw clip is acoustically clean and isolated to a single speaker, but contains a filler ('um') and repetition ('than than'); the candidate clean interval is estimated around the continuous, fluent clause 'the experience that I'd had with him like a decade earlier'.\"\n}\n",
+    "duration_seconds": 43.349451,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20187,
+      "output_tokens": 3920,
+      "thinking_tokens": 3549,
+      "cache_read_tokens": 16176,
+      "total_tokens": 24107
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

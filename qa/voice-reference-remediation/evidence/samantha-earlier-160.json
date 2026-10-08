@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "7be068ee4cb299d31fc63ba69f7ee5a7da274f4c5de08795bc6811f76f637c8b",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "b5b3ae75-4b74-4b14-bbb4-5d810e3191bc",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7be068ee4cb299d31fc63ba69f7ee5a7da274f4c5de08795bc6811f76f637c8b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7be068ee4cb299d31fc63ba69f7ee5a7da274f4c5de08795bc6811f76f637c8b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b5b3ae75-4b74-4b14-bbb4-5d810e3191bc",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And, and so I I was so surprised when he called me 10 years later, more 15 years later, um, to meet and talk about something.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [1.1, 3.8],\n    [4.2, 7.3],\n    [8.0, 9.8]\n  ],\n  \"uncertainty\": \"Timings are perceptual estimates without waveform analysis tools (uncertainty roughly +/- 0.3s). Minor uncertainty on exact conversational wording around 'more 15 years later' vs 'more, 15 years later'. Candidate intervals omit the initial stuttered onset ('And, and so I') and the filler 'um' (~7.4-8.0s) to provide clean continuous conditioning phrases.\"\n}\n",
+    "duration_seconds": 39.379046,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36326,
+      "output_tokens": 3129,
+      "thinking_tokens": 2727,
+      "cache_read_tokens": 0,
+      "total_tokens": 39455
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=ZKSzrJkHtVg",
+  "publisher": "Variety",
+  "publisher_channel_url": "https://www.youtube.com/channel/UCgRQHK8Ttr1j9xCEpCAlgbQ",
+  "title": "Chris Evans & Scarlett Johansson | Actors on Actors - Full Conversation",
+  "published_date": "20191111",
+  "source_info_sha256": "1d1f751caf44dda52c6ad6f34b031cf91828c4b6624ca6e4631cb272ddd38892",
+  "source_download_sha256": "b3beb1b2c0429985fccd6333b6c88d4c7cb4ea523d093bdf44156db90e7bcca3",
+  "source_audio_sha256": "5c75fd47c187660bf107414570f5128435f51eb3805767314fb8e67f604a5914",
+  "identity_section_sha256": "70118663de86943d904bbeadbb72d1b75c45e3dbee8ee2b5d29b899cc8408e06",
+  "identity_frame_sha256": "d59e2ab4b7e2f5739ee7d25bc8c6a964ff37cfccaacc7a85c7339318253304a6",
+  "role_credit_page": "https://tv.apple.com/us/movie/her/umc.cmc.4ky5qbtddgx232de23d3bqr6i",
+  "role_credit_page_sha256": "3085dd2314defcd5801c351765e5bf4977141957a73009d85edb58cd5946990a",
+  "source_basis": "Official Variety Actors on Actors interview names Chris Evans and Scarlett Johansson. Actual selected-range frame159 shows Johansson directly speaking. Apple TV licensed Her distribution synopsis names Samantha as Scarlett Johansson, independently supporting intended actor/role.",
+  "delivery_change": "Natural2019 actor conversation replaces fictional2013 Samantha speech; same actor, different performance/register.",
+  "decode": "Full ffmpeg decode to PCM16 preserving source rate/channels, exit0 and empty error log.",
+  "exact_edit": {
+    "start_s": 159.18,
+    "end_s": 164.69,
+    "sample_rate": 48000,
+    "start_frame": 7640640,
+    "end_frame_exclusive": 7905120,
+    "channel_index": null
+  },
+  "sample_exact_source_slice": true,
+  "candidate_audio": {
+    "sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95",
+    "frames": 264480,
+    "sample_rate": 48000,
+    "channels": 2,
+    "subtype": "PCM_16",
+    "duration_s": 5.51,
+    "peak": 0.251495361328125,
+    "rms": 0.029663696338522897,
+    "samples_at_full_scale": 0
+  },
+  "changes": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation."
+}
