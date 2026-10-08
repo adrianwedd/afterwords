@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "313a710c-033c-40b6-93de-9c7643ede10c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "313a710c-033c-40b6-93de-9c7643ede10c",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"We wanted to explore those things with real transparency. So\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.2]\n  ],\n  \"uncertainty\": \"Interval boundaries and total duration are approximate perceptual estimates based on speech rate. The ending is cut off during the word 'So'.\"\n}\n```\n",
+    "duration_seconds": 20.349299,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12098,
+      "output_tokens": 1248,
+      "thinking_tokens": 945,
+      "cache_read_tokens": 24261,
+      "total_tokens": 13346
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

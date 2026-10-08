@@ -1,0 +1,11 @@
+{
+  "programme_url": "https://www.bbc.co.uk/programmes/m000vy1j",
+  "download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p09gvdmn.mp3",
+  "title": "Billie Piper, actor",
+  "publisher": "BBC Radio 4",
+  "interviewer": "Lauren Laverne",
+  "source_mp3_sha256": "3003e6ab59f06847651d5958593227c238dc45dc6420bc88b0648bf05077a07c",
+  "source_audio_sha256": "32c72f7c048b2d35be825e66f19939f9b4e6f42a116039d6e8cc179d11915191",
+  "decode": "ffmpeg to PCM16 WAV, preserves decoded source rate/channels; no cleanup or normalization",
+  "metadata_recorded_utc": "2026-10-08T06:53:04.610076+00:00"
+}

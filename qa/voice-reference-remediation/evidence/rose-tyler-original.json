@@ -1,0 +1,37 @@
+{
+  "wav": "rose-tyler-ref.wav",
+  "source_sha256": "e681ca7ec43f8baa14c80179024a376a66d2e440f1b970cfa2a0aac7a955e874",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "3906f01b-c8f4-4b7c-8511-457f8896d3cd",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e681ca7ec43f8baa14c80179024a376a66d2e440f1b970cfa2a0aac7a955e874"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e681ca7ec43f8baa14c80179024a376a66d2e440f1b970cfa2a0aac7a955e874"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3906f01b-c8f4-4b7c-8511-457f8896d3cd",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Planet Earth. This is where I was born. And this is where I died. The first nineteen years of my life, nothing happened. Nothing at all.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": true,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": true,\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Boundary estimates are perceptual and approximate to \u00b10.2s: phrase 1 [0.0s, 1.2s], phrase 2 [2.0s, 3.8s], phrase 3 [4.8s, 6.6s], phrase 4 [8.3s, 12.0s], phrase 5 [13.0s, 14.6s], with long pauses occurring between these intervals (most notably ~6.6s to 8.3s). The fourth phrase onset is heard as 'The first nineteen years...' without an introductory preposition 'For', though low-level breath onset introduces slight transcript ambiguity. Fatal defect is the presence of continuous atmospheric synth pads/musical score and low ambient sound design throughout the entire recording; because this background bed persists under all vocal segments, trimming cannot yield clean isolated speech for conditioning, resulting in empty candidate_clean_intervals_s.\"\n}\n```\n",
+    "duration_seconds": 69.419219,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20196,
+      "output_tokens": 8020,
+      "thinking_tokens": 7545,
+      "cache_read_tokens": 15971,
+      "total_tokens": 28216
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

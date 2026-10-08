@@ -303,14 +303,14 @@
       "profiles": [
         {
           "path": "voices/ace-qwen3-06b.json",
-          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although\u2014",
+          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
           "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
           "old_segment_start_s": 90,
           "new_segment_start_s": 152.98
         },
         {
           "path": "voices/ace.json",
-          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although\u2014",
+          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
           "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
           "old_segment_start_s": 90,
           "new_segment_start_s": 152.98
@@ -911,7 +911,7 @@
       "final_corpus_acceptance": "pending",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=n-Zm8H6G108",
-        "title": "Blackadder II's funniest and rudest put downs \ud83d\ude02 | Blackadder - BBC",
+        "title": "Blackadder II's funniest and rudest put downs 😂 | Blackadder - BBC",
         "uploader": "BBC",
         "source_audio_sha256": "1c4cec712ed0abbe5eee1240e3e31a73240a6629f5cd1e94bada5260dc1ad86e",
         "source_metadata_sha256": "c3639aa8e0c37b39b3b95a21a6aed7eb8edb7865201f608a040f9b0733b5c6ef",
@@ -2505,14 +2505,14 @@
       "profiles": [
         {
           "path": "voices/rod-serling-qwen3-06b.json",
-          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner \u2014 a strange intersection in a shadow land called the Twilight Zone.",
+          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
           "new_reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet.",
           "old_segment_start_s": 30,
           "new_segment_start_s": 63.22
         },
         {
           "path": "voices/rod-serling.json",
-          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner \u2014 a strange intersection in a shadow land called the Twilight Zone.",
+          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
           "new_reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet.",
           "old_segment_start_s": 30,
           "new_segment_start_s": 63.22
@@ -4595,6 +4595,84 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/martha-jones-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/martha-jones-result.json",
       "delivery_commit": "ded164743f948d5a46d5dfe8b3ca83b7ec50de52"
+    },
+    {
+      "wav": "rose-tyler-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "e681ca7ec43f8baa14c80179024a376a66d2e440f1b970cfa2a0aac7a955e874",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.09041425078394733,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4",
+        "frames": 194040,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.4,
+        "peak": 0.526397705078125,
+        "rms": 0.08676628466259126,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 175.45,
+        "source_end_s": 179.85,
+        "source_start_frame": 7737345,
+        "source_end_frame_exclusive": 7931385,
+        "conversion": "Exact continuous decoded PCM16 publisher source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/rose-tyler-qwen3-06b.json",
+          "old_reference_text": "Planet Earth. This is where I was born. And this is where I died. For the first nineteen years of my life, nothing happened. Nothing at all.",
+          "new_reference_text": "We wanted to explore those things with real transparency.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 175.45
+        },
+        {
+          "path": "voices/rose-tyler.json",
+          "old_reference_text": "Planet Earth. This is where I was born. And this is where I died. For the first nineteen years of my life, nothing happened. Nothing at all.",
+          "new_reference_text": "We wanted to explore those things with real transparency.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 175.45
+        }
+      ],
+      "source_url": "https://www.bbc.co.uk/programmes/m000vy1j",
+      "adjudication": "Original native finds continuous musical score/effects and no recoverable clean interval. Direct publisher podcast retains same intended actor in natural interview register. Initial080 malformed output rejected; valid retry flags abrupt female end. Alternate081 has interviewer/laughter; revised082 and longer083 native3.1 flag trailing and, none admitted. Selected shorter175.45-179.85 utterance ends at natural pause. Exact native0863.1 claims trailing So/cutoff; disagreement retained explicitly. Two independent full same-hash native3.8 hearings secondary086 and independent086 both hear complete statement ending transparency with no next word/cutoff, one voice and no music/crowd/laughter/effects/acoustic change/splice. Independent candidate ASR and independently aligned source ASR likewise end transparency; source next utterance is in a way, not So. Root adjudicates alleged So not corroborated as audible material and accepts complete statement on two independent exact native hearings plus source/candidate alignment, rather than silently dropping adverse evidence. Second3.8 minor those/these ambiguity resolved by first native3.8 explicit those and both ASR; retain those. Actual4.4s, healthy RMS/peak, no clipping. Exact decoded publisher PCM slice, no cleanup/normalization/separation/padding/splice. Fresh final corpus pass must reassess boundary disagreement; individual admission is not final acceptance.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_source_frame_exact": true
+      },
+      "delivery_commit_locator": "git log -- voices/rose-tyler-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.bbc.co.uk/programmes/m000vy1j",
+        "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p09gvdmn.mp3",
+        "title": "Billie Piper, actor",
+        "publisher": "BBC Radio 4",
+        "interviewer": "Lauren Laverne",
+        "source_mp3_sha256": "3003e6ab59f06847651d5958593227c238dc45dc6420bc88b0648bf05077a07c",
+        "source_audio_sha256": "32c72f7c048b2d35be825e66f19939f9b4e6f42a116039d6e8cc179d11915191",
+        "source_metadata_sha256": "238fec2c0b9a7251b3279d5bc55e72aacb4f534ebf75fc141ac0c5441d673394",
+        "source_basis": "Direct publisher podcast; BBC programme credits guest Billie Piper, interviewer and Rose Tyler role; guest answer follows identified introduction and presenter question.",
+        "delivery_change": "Same intended actor; natural interview delivery replaces scored dramatic character narration."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-result.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-publisher-source.json",
+      "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-secondary-result.json",
+      "native_boundary_disagreement_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-boundary-disagreement.json"
     }
   ],
   "exclusions": [
