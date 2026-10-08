@@ -1,0 +1,35 @@
+{
+  "source_url": "https://www.bbc.co.uk/programmes/m002h9wp",
+  "publisher": "BBC Radio4, Front Row",
+  "title": "Tom Hiddleston on becoming a dancing accountant in new Stephen King film, The Life of Chuck",
+  "published_date": "2025-08-19",
+  "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0lxw99w.mp3",
+  "source_download_sha256": "12eaa6962a1fb600f193790c5d534b0fad958bf84dfab651318d21d5577139b9",
+  "source_page_sha256": "3cd9daeb7512abbf87853b96c9e74aef1a2867c44448e94a17e5add8caa35bdf",
+  "source_basis": "BBC programme title/description credits Tom Hiddleston. Source aligned ASR reports guest self-identification in programme opening4.84-9.86, host introduces career/role25.72-79.34 then addresses Tom at113.86 and asks script question123.24-126.48. Continuous guest first-person answer discusses reading script and playing Chuck; selected175.1-180.81 belongs to that answer.",
+  "delivery_change": "Same intended actor Tom Hiddleston in natural interview delivery replaces dramatic Loki reference; in-character register is not claimed preserved.",
+  "licensing_note": "BBC programme copyright remains separate; public official download URL is recorded, no Creative Commons licence claimed.",
+  "source_audio_sha256": "ab74c389465ca2ed12f6765e8bfb0e11698b155bc013936e5bdaa43d92161ac8",
+  "retrieved_utc": "2026-10-08T08:49:17.282847+00:00",
+  "decode": "Full source ffmpeg PCM16 preserving decoded rate/channels, exit0 with empty errorlog",
+  "exact_edit": {
+    "start_s": 175.1,
+    "end_s": 180.81,
+    "sample_rate": 44100,
+    "start_frame": 7721910,
+    "end_frame_exclusive": 7973721
+  },
+  "candidate_audio": {
+    "sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d",
+    "frames": 251811,
+    "sample_rate": 44100,
+    "channels": 2,
+    "subtype": "PCM_16",
+    "duration_s": 5.71,
+    "peak": 0.551605224609375,
+    "rms": 0.07564929843031053,
+    "samples_at_full_scale": 0
+  },
+  "sample_exact_source_slice": true,
+  "changes": "One continuous decoded source PCM16 frame slice; no DSP, normalization, separation, padding or concatenation"
+}

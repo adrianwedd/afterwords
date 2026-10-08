@@ -2,6 +2,8 @@
   "name": "loki-qwen3-06b",
   "backend": "qwen3-0.6b",
   "reference_audio": "loki-ref.wav",
-  "reference_text": "Is not this simpler? Is this not your natural state?",
-  "family": "loki"
+  "reference_text": "And then when I understood what was going on, I felt a physical sensation of excitement.",
+  "family": "loki",
+  "segment_start_s": 175.1,
+  "source_url": "https://www.bbc.co.uk/programmes/m002h9wp"
 }

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "d2378c2b-690e-436d-b9b5-b1976242c763",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d2378c2b-690e-436d-b9b5-b1976242c763",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And then when I understood what was going on, I felt a physical sensation of excitement.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.2]\n  ],\n  \"uncertainty\": \"High confidence in transcript wording due to clear solo speech and clean acoustic conditions. Candidate interval boundaries are perceptual estimates based on normal conversational cadence (~6.0\u20136.5s total duration) with an uncertainty margin of approximately \u00b10.5s.\"\n}\n```\n",
+    "duration_seconds": 31.379818,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20260,
+      "output_tokens": 2642,
+      "thinking_tokens": 2307,
+      "cache_read_tokens": 16172,
+      "total_tokens": 22902
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

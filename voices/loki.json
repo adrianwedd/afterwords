@@ -1,6 +1,8 @@
 {
   "name": "loki",
   "reference_audio": "loki-ref.wav",
-  "reference_text": "Is not this simpler? Is this not your natural state?",
-  "notes": "[WONTFIX v1.0.0: trim-threshold sweep deferred 2026-05-16 — current state acceptable for ship; revisit in Phase 4 with per-voice threshold tuning if listen-tests surface issues]"
+  "reference_text": "And then when I understood what was going on, I felt a physical sensation of excitement.",
+  "notes": "Reference remediated; see qa/voice-reference-remediation/changes.json for provenance and native listening evidence.",
+  "segment_start_s": 175.1,
+  "source_url": "https://www.bbc.co.uk/programmes/m002h9wp"
 }

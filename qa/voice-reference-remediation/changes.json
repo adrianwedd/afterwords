@@ -6070,6 +6070,104 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/harvey-specter-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/harvey-specter-result.json",
       "delivery_commit": "da0c17d7268dd5c63e9f664a15c852a1d7b3e502"
+    },
+    {
+      "wav": "loki-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "dd905c8724272e1d1562af478da688cfb719a9de40046df7c12fe70fdfaa9fab",
+        "frames": 187200,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 7.8,
+        "peak": 0.899993896484375,
+        "rms": 0.06960188555704927,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d",
+        "frames": 251811,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.71,
+        "peak": 0.551605224609375,
+        "rms": 0.07564929843031053,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 175.1,
+        "source_end_s": 180.81,
+        "source_start_frame": 7721910,
+        "source_end_frame_exclusive": 7973721,
+        "conversion": "One continuous decoded BBC source PCM16 frame slice, preserving decoded rate/channels; no DSP, normalization, separation, concatenation or padding"
+      },
+      "profiles": [
+        {
+          "path": "voices/loki-qwen3-06b.json",
+          "old_reference_text": "Is not this simpler? Is this not your natural state?",
+          "new_reference_text": "And then when I understood what was going on, I felt a physical sensation of excitement.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": 175.1
+        },
+        {
+          "path": "voices/loki.json",
+          "old_reference_text": "Is not this simpler? Is this not your natural state?",
+          "new_reference_text": "And then when I understood what was going on, I felt a physical sensation of excitement.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": 175.1
+        }
+      ],
+      "source_url": "https://www.bbc.co.uk/programmes/m002h9wp",
+      "adjudication": "Original native0641voice/completewording but faint cinematic drone/ambient rumble uncertain scorevsroomtone and longpauses; no heavycontamination claim. Prefer clean attributable actor replacement. BBCFrontRow programme page credits Tom Hiddleston discussing LifeofChuck, hostintroducescareer/role then addressesTom and question leads continuous firstperson reading-script answer. Source alignedASR corroboratesattribution and boundaries; actorinterviewregister replaces dramaticLoki, characterdeliverynotclaimedpreserved. Longer126firstnativeclean but independent3.1 flags initial/endcutoffs with partialbecause and hair/hairsuncertainty; both observations preserved, candidate notadmitted. Revised128 starts200ms earlier and ends after completefirstsentence, excludes disputedlatermaterial. Actual fullWAV128 native1voice/allcontaminantsfalse/no acousticchange/splice/longpauses/bothcutoffsfalse, highliteralconfidence. Literalfirstsentence agrees both longerindependenthearings and sourceASR. Exactsourceframes7721910:7973721 independently equal candidate,actual5.71s; perceptualduration6-6.5s noteditingauthority. Fullsourcedecodeexit0/emptyerrorlog, healthy0.5516peak/no fullscale. Sameactor naturalinterview delivery; sourcecopyrightnoCCclaim. Fresh full resulting corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/loki-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.bbc.co.uk/programmes/m002h9wp",
+        "publisher": "BBC Radio4, Front Row",
+        "title": "Tom Hiddleston on becoming a dancing accountant in new Stephen King film, The Life of Chuck",
+        "published_date": "2025-08-19",
+        "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0lxw99w.mp3",
+        "source_download_sha256": "12eaa6962a1fb600f193790c5d534b0fad958bf84dfab651318d21d5577139b9",
+        "source_page_sha256": "3cd9daeb7512abbf87853b96c9e74aef1a2867c44448e94a17e5add8caa35bdf",
+        "source_basis": "BBC programme title/description credits Tom Hiddleston. Source aligned ASR reports guest self-identification in programme opening4.84-9.86, host introduces career/role25.72-79.34 then addresses Tom at113.86 and asks script question123.24-126.48. Continuous guest first-person answer discusses reading script and playing Chuck; selected175.1-180.81 belongs to that answer.",
+        "delivery_change": "Same intended actor Tom Hiddleston in natural interview delivery replaces dramatic Loki reference; in-character register is not claimed preserved.",
+        "licensing_note": "BBC programme copyright remains separate; public official download URL is recorded, no Creative Commons licence claimed.",
+        "source_audio_sha256": "ab74c389465ca2ed12f6765e8bfb0e11698b155bc013936e5bdaa43d92161ac8",
+        "retrieved_utc": "2026-10-08T08:49:17.282847+00:00",
+        "decode": "Full source ffmpeg PCM16 preserving decoded rate/channels, exit0 with empty errorlog",
+        "exact_edit": {
+          "start_s": 175.1,
+          "end_s": 180.81,
+          "sample_rate": 44100,
+          "start_frame": 7721910,
+          "end_frame_exclusive": 7973721
+        },
+        "candidate_audio": {
+          "sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d",
+          "frames": 251811,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 5.71,
+          "peak": 0.551605224609375,
+          "rms": 0.07564929843031053,
+          "samples_at_full_scale": 0
+        },
+        "sample_exact_source_slice": true,
+        "changes": "One continuous decoded source PCM16 frame slice; no DSP, normalization, separation, padding or concatenation",
+        "publisher_metadata_sha256": "7d05f0ac98a47ee70994be177114b2b98b37106f10e421a7caf3f569c66c717a"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/loki-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/loki-result.json"
     }
   ],
   "exclusions": [
