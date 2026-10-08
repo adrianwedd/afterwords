@@ -6167,7 +6167,8 @@
         "publisher_metadata_sha256": "7d05f0ac98a47ee70994be177114b2b98b37106f10e421a7caf3f569c66c717a"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/loki-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/loki-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/loki-result.json",
+      "delivery_commit": "7af14e5d977a10d7d6ed482cf78b905cc33c6522"
     }
   ],
   "exclusions": [
