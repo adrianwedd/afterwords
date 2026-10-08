@@ -2340,7 +2340,8 @@
       "delivery_commit_locator": "git log -- voices/mark-corrigan-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/mark-corrigan-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/mark-corrigan-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/mark-corrigan-result.json",
+      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203"
     },
     {
       "wav": "holly-ref.wav",
@@ -2401,7 +2402,8 @@
       "delivery_commit_locator": "git log -- voices/holly-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/holly-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/holly-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/holly-result.json",
+      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203"
     },
     {
       "wav": "ronan-ref.wav",
@@ -2462,7 +2464,8 @@
       "delivery_commit_locator": "git log -- voices/ronan-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/ronan-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/ronan-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/ronan-result.json",
+      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203"
     },
     {
       "wav": "rod-serling-ref.wav",
@@ -2534,7 +2537,8 @@
         "primary_source_page_sha256": "3c1d1837463662edea905a34c328f51fe89182830d557727ada195cd12605ccd"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/rod-serling-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/rod-serling-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/rod-serling-result.json",
+      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203"
     }
   ],
   "exclusions": [
