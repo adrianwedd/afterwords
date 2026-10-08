@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "91571c60-3cd5-43f7-98a2-8f0845f795f1",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "91571c60-3cd5-43f7-98a2-8f0845f795f1",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yes, well, I just believe that the writer should be writing about today, just so that we we know what's going on in the society we're living in. So, I I'm slightly against the the classical playwrights, in a way.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; room acoustics, background noise floor, and microphone response remain consistent throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": \"None; conversational pauses are brief and natural (~0.5s after 'Yes, well' and ~0.7s before 'So').\",\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 13.2]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates within approximately \u00b10.5s due to unassisted auditory evaluation without waveform timecodes. Minor uncertainty in whether subtle hesitations ('we we', 'I I'm', 'the the') represent deliberate repetitions or minor stammers.\"\n}\n",
+    "duration_seconds": 41.182751,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20404,
+      "output_tokens": 3102,
+      "thinking_tokens": 2689,
+      "cache_read_tokens": 15966,
+      "total_tokens": 23506
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

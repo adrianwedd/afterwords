@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "38d01bdd2f43b98eaa7e50716776cad04e71d14925ed669e1716a5439aab8fe1",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "cec7339a-a62f-4bb3-b86e-e920585e9251",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "38d01bdd2f43b98eaa7e50716776cad04e71d14925ed669e1716a5439aab8fe1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "38d01bdd2f43b98eaa7e50716776cad04e71d14925ed669e1716a5439aab8fe1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "cec7339a-a62f-4bb3-b86e-e920585e9251",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And age doesn't really matter to me. I mean people, um, people I think are much more exercised about your age than you really are. I mean I think it's just terribly funny to be able to muck around with age.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 12.5]\n  ],\n  \"uncertainty\": \"Timestamps and durations are perceptual approximations with an estimated margin of +/- 0.5 s. The clip begins immediately on 'And' with very tight lead-in headroom but no severed phonetic onset. Conversational disfluency ('people, um, people') is organic speech rather than an edit splice.\"\n}\n",
+    "duration_seconds": 33.243223,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20083,
+      "output_tokens": 2808,
+      "thinking_tokens": 2436,
+      "cache_read_tokens": 16083,
+      "total_tokens": 22891
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

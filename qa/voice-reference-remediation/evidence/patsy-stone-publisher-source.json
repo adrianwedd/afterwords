@@ -1,0 +1,15 @@
+{
+  "programme_url": "https://www.bbc.co.uk/programmes/b007gtsn",
+  "download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pp06f.mp3",
+  "guest": "Joanna Lumley",
+  "publisher": "BBC Radio 4",
+  "programme": "Desert Island Discs",
+  "interviewer": "Kirsty Young",
+  "broadcast_date": "2007-05-13",
+  "source_mp3_sha256": "318a0e61ceef4532c22dc248d4b9b80b39d7f619e39a492e34f3904cb737b9d6",
+  "source_audio_sha256": "9c99878dc3eef139f16d0946a3e7679ebacef495cb03544e029d0076dee2801d",
+  "programme_html_sha256": "4e3d7f0f20538b18c91609bff435bccca6eaca83f23b12cbe141adff216e8dff",
+  "decode": "ffmpeg to PCM16 WAV preserving decoded rate and channels; no cleanup or normalization",
+  "retrieved_utc": "2026-10-08T07:07:47.253933+00:00",
+  "identity_basis": "BBC publisher programme and audio introduction identify guest Joanna Lumley and her Patsy role; solo guest answer follows presenter question about her first music choice."
+}
