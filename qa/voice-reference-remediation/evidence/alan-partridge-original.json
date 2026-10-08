@@ -1,0 +1,36 @@
+{
+  "wav": "alan-partridge-ref.wav",
+  "source_sha256": "c29ef88565804247d45b6c42201598a6937cfe67f5fd962de95764968aee9420",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "523fc9f0-217e-4585-90ce-06f6febdaf5f",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c29ef88565804247d45b6c42201598a6937cfe67f5fd962de95764968aee9420"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c29ef88565804247d45b6c42201598a6937cfe67f5fd962de95764968aee9420"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "523fc9f0-217e-4585-90ce-06f6febdaf5f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 1.5],\n    [1.5, 2.5],\n    [2.5, 11.0]\n  ],\n  \"literal_transcript\": \"...[unclear] five chaps. / Five chaps? / Not five chaps. You come here to get away from the chaps. Oh, fuck your council houses. [echo: council houses, council houses, council houses...] / I knew I was in trouble.\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": true,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Speech is heavily overlapped by audience laughter, features a prominent delay/echo sound effect, and abruptly splices to a dry studio voiceover. Lacks cleanly isolated phrases of a single speaker for conditioning.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"High uncertainty on the initial words due to the clip starting mid-sentence. Ambiguity between 'chaps' and 'chavs'. Boundary timestamps are approximate (\u00b10.5s margin) due to overlapping audience laughter and reverb.\"\n}\n```\n",
+    "duration_seconds": 47.708013,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12699,
+      "output_tokens": 4937,
+      "thinking_tokens": 4507,
+      "cache_read_tokens": 24044,
+      "total_tokens": 17636
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

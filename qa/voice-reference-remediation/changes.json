@@ -5479,6 +5479,87 @@
       "native_result_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-publisher-source.json",
       "delivery_commit": "80eb126b7c777d04891459ebb6500eb07c5cc654"
+    },
+    {
+      "wav": "alan-partridge-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "c29ef88565804247d45b6c42201598a6937cfe67f5fd962de95764968aee9420",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.07568684880025338,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca",
+        "frames": 271215,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.15,
+        "peak": 0.533050537109375,
+        "rms": 0.0730938223590665,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 97.55,
+        "source_end_s": 103.7,
+        "source_start_frame": 4301955,
+        "source_end_frame_exclusive": 4573170,
+        "conversion": "Exact continuous decoded publisher PCM16 frame slice preserving source rate/channels; no cleanup, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/alan-partridge-qwen3-06b.json",
+          "old_reference_text": "I'm chatting with five chaps. Fights chaps? Not fight chaps. You're coming here to get away from the chaps. Oh, back to your council houses. Council houses, council houses, council houses, council houses. I knew I was in trouble.",
+          "new_reference_text": "Yeah, I remember it very clearly because, um, I started thinking about all the people I admired on television, all the creative people I admired.",
+          "old_segment_start_s": 10,
+          "new_segment_start_s": 97.55
+        },
+        {
+          "path": "voices/alan-partridge.json",
+          "old_reference_text": "I'm chatting with five chaps. Fights chaps? Not fight chaps. You're coming here to get away from the chaps. Oh, back to your council houses. Council houses, council houses, council houses, council houses. I knew I was in trouble.",
+          "new_reference_text": "Yeah, I remember it very clearly because, um, I started thinking about all the people I admired on television, all the creative people I admired.",
+          "old_segment_start_s": 10,
+          "new_segment_start_s": 97.55
+        }
+      ],
+      "source_url": "https://www.bbc.co.uk/programmes/b00n4754",
+      "adjudication": "Original native reports2voices, crowd/laughter, prominent delay/echo, abrupt splice and both cutoffs; no clean isolated useful segment. Primary BBC programme credit and source introduction/host address identify Steve Coogan, describing career planning. Longer97.55-111.1 native106 acoustically clean but later and we one false start absent from ASR, not guessed/normalized: retain earlier complete phrase instead. Exact97.55-103.7 result native108 confirms1voice, no music/crowd/laughter/effects/acoustic change/splice/long pauses or either cutoff; final admired acoustically complete even though broader thought continues later. Retained initial affirmation and because-clause plus appositional all the creative people I admired form a complete usable phrase. Literal transcript agrees overlapping native106; both hear um which ASR omits, retained faithfully. Actual6.15s, source ASR words97.72-103.54 corroborate bounds; native7.6 estimate not edit authority. Exact decoded publisher PCM16 frame slice independently verified. Full ffmpeg decode successful; ID3 lyrics metadata skipped only, no audio packet error. Same actor natural interview register replaces contaminated Alan Partridge scene; in-character delivery not claimed preserved. Fresh entire final corpus native acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "sample_exact_publisher_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/alan-partridge-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "publisher": "BBC Radio 4",
+        "programme": "Desert Island Discs",
+        "guest": "Steve Coogan",
+        "interviewer": "Kirsty Young",
+        "source_mp3_sha256": "a63c68ef7b1a49b98efd29656433737204752d441a2b239901c21e63f720a00e",
+        "source_audio_sha256": "396f7b9b284019e48de126e253c373a0d1230ca3c1b42b047c734aa15610cce0",
+        "programme_html_sha256": "9cb2d48fc19c8e17077a82088fe8a0340c4e46483a872f28eb0189a9d401e69e",
+        "retrieved_utc": "2026-10-08T07:55:59.380605+00:00",
+        "decode": "ffmpeg PCM16 preserving decoded source rate/channels; no cleanup or normalization",
+        "delivery_change": "Same intended actor Steve Coogan in natural interview delivery replaces audience-contaminated edited Alan Partridge scene; character delivery is not claimed preserved.",
+        "decode_integrity": "Full ffmpeg decode exited0; sole Error reading lyrics skipped concerns ID3 metadata, no audio packet errors observed.",
+        "source_url": "https://www.bbc.co.uk/programmes/b00n4754",
+        "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pnzvk.mp3",
+        "source_metadata_sha256": "2c5a4a9caafb68ce4d2349c046079560f6581ef9ed368f8bd7166733b8e637d7",
+        "source_basis": "Primary BBC programme page names Steve Coogan; audible programme introduction27.48-31.16 names castaway comedian/actor Steve Coogan, mentions Alan Partridge49.52-52.94, and host directly addresses Steve Coogan91.1-93.4 before selected answer about planning his career."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-result.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-publisher-source.json"
     }
   ],
   "exclusions": [

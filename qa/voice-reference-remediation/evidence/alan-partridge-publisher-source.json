@@ -1,0 +1,17 @@
+{
+  "programme_url": "https://www.bbc.co.uk/programmes/b00n4754",
+  "download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pnzvk.mp3",
+  "publisher": "BBC Radio 4",
+  "programme": "Desert Island Discs",
+  "guest": "Steve Coogan",
+  "interviewer": "Kirsty Young",
+  "source_mp3_sha256": "a63c68ef7b1a49b98efd29656433737204752d441a2b239901c21e63f720a00e",
+  "source_audio_sha256": "396f7b9b284019e48de126e253c373a0d1230ca3c1b42b047c734aa15610cce0",
+  "programme_html_sha256": "9cb2d48fc19c8e17077a82088fe8a0340c4e46483a872f28eb0189a9d401e69e",
+  "retrieved_utc": "2026-10-08T07:55:59.380605+00:00",
+  "decode": "ffmpeg PCM16 preserving decoded source rate/channels; no cleanup or normalization",
+  "delivery_change": "Same intended actor Steve Coogan in natural interview delivery replaces audience-contaminated edited Alan Partridge scene; character delivery is not claimed preserved.",
+  "status": "Source attribution checked; exact97.55-103.7 candidate full native passed",
+  "identity_basis": "Primary BBC programme page names Steve Coogan; audible programme introduction27.48-31.16 names castaway comedian/actor Steve Coogan, mentions Alan Partridge49.52-52.94, and host directly addresses Steve Coogan91.1-93.4 before selected answer about planning his career.",
+  "decode_integrity": "Full ffmpeg decode exited0; sole Error reading lyrics skipped concerns ID3 metadata, no audio packet errors observed."
+}
