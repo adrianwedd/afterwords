@@ -76,17 +76,23 @@ def main():
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--model", default="gemini-3.1-pro-high")
+    parser.add_argument("--start-index", type=int, default=1,
+                        help="1-based inclusive index in the sorted current WAV inventory")
+    parser.add_argument("--end-index", type=int,
+                        help="1-based inclusive end index; enables disjoint review batches")
     args = parser.parse_args()
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     # No voice names or profile contents in the reviewer's workspace.
     for number, wav in enumerate(sorted((args.root / "voices").glob("*-ref.wav")), 1):
+        if number < args.start_index or (args.end_index is not None and number > args.end_index):
+            continue
         sha = digest(wav)
         dest = output / f"{number:03d}-{sha[:16]}"
         frozen = dest / "observation.json"
         if frozen.exists():
             existing = json.loads(frozen.read_text())
-            if existing.get("source_sha256") == sha and existing.get("native_audio_proven") and parsed_observation(existing.get("result", {})):
+            if existing.get("source_sha256") == sha and existing.get("native_audio_proven") and existing.get("result", {}).get("status") == "SUCCESS" and parsed_observation(existing.get("result", {})):
                 continue
         dest.mkdir(exist_ok=True)
         clip = dest / "clip.wav"
@@ -111,7 +117,9 @@ def main():
             "wav": wav.name, "source_sha256": sha, "model": args.model,
             "conversation_id": conversation,
             "waveform_attachment_proven": bool(proof),
-            "native_audio_proven": bool(proof) and clean and parsed_observation(final) is not None,
+            "native_audio_proven": bool(proof) and clean and result.returncode == 0
+                                   and final.get("status") == "SUCCESS"
+                                   and parsed_observation(final) is not None,
             "audio_first_protocol": clean, "attachment_evidence": proof,
             "exit_code": result.returncode, "result": final,
             "acceptance": "pending orchestrator adjudication",

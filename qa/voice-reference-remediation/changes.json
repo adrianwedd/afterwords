@@ -62,7 +62,8 @@
         "pcm_subtype_preserved": true
       },
       "delivery_commit_locator": "git log -- voices/alan-bennett-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending"
+      "final_corpus_acceptance": "pending",
+      "delivery_commit": "33bf4c448ba9ae6fa0df180e4e2d2f7bf6f7190c"
     },
     {
       "wav": "alan-shore-ref.wav",
@@ -123,7 +124,8 @@
       "delivery_commit_locator": "git log -- voices/alan-shore-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/alan-shore-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/alan-shore-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/alan-shore-result.json",
+      "delivery_commit": "1fd0de66742310e7e3f9b51e6413c9b313367a6e"
     },
     {
       "wav": "alan-bstard-ref.wav",
@@ -184,7 +186,8 @@
       "delivery_commit_locator": "git log -- voices/alan-bstard-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/alan-bstard-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/alan-bstard-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/alan-bstard-result.json",
+      "delivery_commit": "1fd0de66742310e7e3f9b51e6413c9b313367a6e"
     },
     {
       "wav": "attenborough-ref.wav",
@@ -245,7 +248,249 @@
       "delivery_commit_locator": "git log -- voices/attenborough-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/attenborough-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/attenborough-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/attenborough-result.json",
+      "delivery_commit": "1fd0de66742310e7e3f9b51e6413c9b313367a6e"
+    },
+    {
+      "wav": "ace-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "f43b5f052a2e20e653b1aac550d47fd213b4e9d492077e01af612c2a84c2ad7a",
+        "frames": 192000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.0,
+        "peak": 0.780731201171875,
+        "rms": 0.11291387611630117,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6",
+        "frames": 320880,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.37,
+        "peak": 0.37835693359375,
+        "rms": 0.039614289571060224,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "source_start_s": 152.98,
+        "source_end_s": 166.35,
+        "source_duration_s": 4846,
+        "conversion": "ffmpeg PCM_16; stereo downmix to mono; resample 48000 Hz to 24000 Hz; no denoising, separation, time stretching or normalization",
+        "render_command": [
+          "ffmpeg",
+          "-i",
+          "SOURCE.wav",
+          "-ss",
+          "152.98",
+          "-t",
+          "13.37",
+          "-ac",
+          "1",
+          "-ar",
+          "24000",
+          "-c:a",
+          "pcm_s16le",
+          "RESULT.wav"
+        ]
+      },
+      "profiles": [
+        {
+          "path": "voices/ace-qwen3-06b.json",
+          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
+          "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
+          "old_segment_start_s": 90,
+          "new_segment_start_s": 152.98
+        },
+        {
+          "path": "voices/ace.json",
+          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
+          "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
+          "old_segment_start_s": 90,
+          "new_segment_start_s": 152.98
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=mIw6XAhcUbQ",
+      "adjudication": "Replaces a music/effects-contaminated cut containing other voices with a continuous 13.37s interview answer by the intended performer. Native candidate review reports one clear isolated speaker, no music, crowd, laughter or effects, no cutoffs and no splices. Natural hesitations and word repetitions retained; the conversational pause is not inserted silence. Subsequent candidate ASR omits um, quite, and repeated and/in; those details are retained from direct native hearing, with source ASR independently supporting quite and repeated in. A prior replacement candidate was rejected for interviewer interjections. Final corpus pass remains pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/ace-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=mIw6XAhcUbQ",
+        "title": "POWER OF THE DOCTOR SECRETS! Sophie Aldred Returns to WHOC2C!",
+        "uploader": "WHO Corner to Corner - a Doctor Who Podcast",
+        "upload_date": "20230112",
+        "source_audio_sha256": "42f1b78f77f46ab1499fb8077d7c1fe2e0b3bd9a9c6591593db7674fa82bfe7a",
+        "source_metadata_sha256": "61a901242b8aad3ad101b2c696c4a6f5ac95188bc37726ecb1a3300daed99286",
+        "identity_basis": "Creator-published interview with Sophie Aldred, the intended Ace performer. Retained answer is from the primary female guest, with the male interviewer turns excluded. Actor identity was not supplied to the native reviewer.",
+        "source_basis": "Public original interview upload by WHO Corner to Corner; short continuous guest answer used for conditioning. No claim of an open license or exclusive rights.",
+        "rejected_candidate": {
+          "source_start_s": 166.45,
+          "source_end_s": 185.3,
+          "reason": "Native reviewer detected two interviewer interjections missed by ASR; candidate not admitted.",
+          "evidence_sha256": "ef74f7b8db8b8fcf50b239fd24f3e80c85a31317e655551cf38438bbc9e999d4",
+          "native_evidence": "qa/voice-reference-remediation/evidence/ace-rejected-interviewer-interjections.json"
+        }
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/ace-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/ace-result.json",
+      "secondary_asr_evidence": "qa/voice-reference-remediation/evidence/ace-result-asr-alignment.json"
+    },
+    {
+      "wav": "bardem-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "fc7b7f956d8c11cc7988669f51c43c84aad41623e48d82bec806f72fc52b5f25",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.04828303385017435,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "563e1b247eb08f63a668a0a31c0a15c051ec1b0abeed6372fde0207436f617ff",
+        "frames": 149940,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.4,
+        "peak": 0.605133056640625,
+        "rms": 0.07243067300819549,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "start_frame": 341775,
+        "end_frame_exclusive": 491715,
+        "start_s": 7.75,
+        "end_s": 11.15,
+        "sample_rate": 44100
+      },
+      "profiles": [
+        {
+          "path": "voices/bardem-qwen3-06b.json",
+          "old_reference_text": "What's the most you ever lost on a coin toss? Sarah? The most you ever lost.",
+          "new_reference_text": "What's the most you ever lost on a coin toss?",
+          "old_segment_start_s": 155,
+          "new_segment_start_s": 162.75
+        },
+        {
+          "path": "voices/bardem.json",
+          "old_reference_text": "What's the most you ever lost on a coin toss? Sarah? The most you ever lost.",
+          "new_reference_text": "What's the most you ever lost on a coin toss?",
+          "old_segment_start_s": 155,
+          "new_segment_start_s": 162.75
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=ZY0DG8rUnCA",
+      "adjudication": "The complete primary-speaker question is isolated after the leading wrapper foley and before the ambiguous Sir utterance and subsequent exchange. This avoids deciding speaker identity from scene knowledge. Native edited-file review reports one speaker, complete beginning/end, no music, crowd, effects or acoustic changes and clear literal wording. The resulting 3.40s reference is shorter than preferred but supplies several seconds of one complete usable phrase with varied phonemes; its natural intra-phrase pause is retained. Original native timestamps were contradicted by ASR (first speech begins around 8s, not 2.8s); precise edit uses ASR/waveform localisation, with final native audition determining acceptance. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/bardem-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/bardem-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bardem-result.json"
+    },
+    {
+      "wav": "audrey-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "044c38f68ab809aa5e11b9dab2421ba5dfefa0bf7a073944ccb3f20d54348e9a",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.1317821784803363,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "e58ef59d1bb3155facc873614ffe5f899daedd372741af9948fec6cb06364480",
+        "frames": 103440,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.31,
+        "peak": 0.66021728515625,
+        "rms": 0.10924430789888029,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "start_frame": 211680,
+        "end_frame_exclusive": 315120,
+        "start_s": 8.82,
+        "end_s": 13.13,
+        "sample_rate": 24000
+      },
+      "profiles": [
+        {
+          "path": "voices/audrey-qwen3-06b.json",
+          "old_reference_text": "Well, because I only just left for the night to come here and to aid this  wonderful charity for muscular dystrophy. And I cannot leave my young son any  longer because he has no nurse at the moment. And my husband and a friend.",
+          "new_reference_text": "And I can't leave my young son any longer because he has no nurse at the moment.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        },
+        {
+          "path": "voices/audrey.json",
+          "old_reference_text": "Well, because I only just left for the night to come here and to aid this  wonderful charity for muscular dystrophy. And I cannot leave my young son any  longer because he has no nurse at the moment. And my husband and a friend.",
+          "new_reference_text": "And I can't leave my young son any longer because he has no nurse at the moment.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        }
+      ],
+      "source_url": null,
+      "adjudication": "Isolates the complete primary-speaker clause from the existing project reference, removing the trailing incomplete husband/friend clause and any disputed secondary vocalization. Native edited-file review reports one speaker, fully vocalized initial And, intact ending and no crowd, music, laughter, effects or acoustic discontinuity. Original source URL and absolute segment position are absent from the project; provenance is therefore the original tracked file and its baseline Git commit, with exact relative frame boundaries recorded rather than invented source metadata. The 4.31s solo clause supplies continuous usable speech. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/audrey-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/audrey-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/audrey-result.json"
+    }
+  ],
+  "exclusions": [
+    {
+      "wav": "vixen-ref.wav",
+      "original_audio": {
+        "sha256": "d9962b4ca825b9aa386c787e520e2ddaff97f373a710529964ef48b84433b43c",
+        "frames": 298800,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 12.45,
+        "peak": 0.272857666015625,
+        "rms": 0.024248550033892875,
+        "samples_at_full_scale": 0
+      },
+      "original_disposition": "REJECT",
+      "production_disposition": "excluded",
+      "remediation": "ARCHIVE PRIVATE ORPHAN",
+      "reason": "Unindexed private voice asset: no profile refers to it; repository .gitignore and STRATEGY.md classify vixen assets as private and not distributable. Archived outside production in the ignored private scratch area; no invented public profile.",
+      "local_archive": "scratch_v/private-reference-archive/vixen-ref.wav",
+      "archive_sha256": "d9962b4ca825b9aa386c787e520e2ddaff97f373a710529964ef48b84433b43c",
+      "reconstruct_from_commit": "20d207987eedbb470eaf28bc5af1566a2ee2179b",
+      "native_listening": "not required for excluded non-production orphan; no quality claim",
+      "delivery_commit_locator": "git log -- voices/vixen-ref.wav qa/voice-reference-remediation/changes.json"
     }
   ]
 }

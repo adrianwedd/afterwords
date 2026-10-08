@@ -64,11 +64,21 @@ def test_every_changed_reference_has_hash_bound_provenance():
     baseline = json.loads((ROOT / "qa/voice-reference-remediation/baseline.json").read_text())
     manifest = json.loads((ROOT / "qa/voice-reference-remediation/changes.json").read_text())
     changes = {c["wav"]: c for c in manifest["changes"]}
+    exclusions = {c["wav"]: c for c in manifest.get("exclusions", [])}
     audio = load_script("voice_corpus")
     for record in baseline["records"]:
         path = ROOT / "voices" / record["wav"]
+        if not path.exists():
+            exclusion = exclusions[record["wav"]]
+            assert exclusion["original_audio"] == record["audio"]
+            assert exclusion["reason"].strip()
+            assert exclusion["production_disposition"] == "excluded"
+            assert not record["profiles"], "profile exclusion needs explicit migration coverage"
+            continue
         actual = audio.inspect_audio(path)
-        if actual["sha256"] == record["audio"]["sha256"]:
+        text_changed = any(json.loads((ROOT / p["path"]).read_text()).get("reference_text") != p["reference_text"]
+                           for p in record["profiles"])
+        if actual["sha256"] == record["audio"]["sha256"] and not text_changed:
             continue
         change = changes[record["wav"]]
         assert change["original_audio"] == record["audio"]
@@ -83,7 +93,7 @@ def test_every_changed_reference_has_hash_bound_provenance():
             current = json.loads((ROOT / profile["path"]).read_text())
             assert current["reference_audio"] == record["wav"]
             assert current["reference_text"] == profile["new_reference_text"]
-            assert current["segment_start_s"] == profile["new_segment_start_s"]
+            assert current.get("segment_start_s") == profile["new_segment_start_s"]
         assert {p["path"] for p in change["profiles"]} == {p["path"] for p in record["profiles"]}
         operation = change["operation"]
         if operation["type"] == "lossless_pcm_frame_slice":
@@ -94,3 +104,11 @@ def test_every_changed_reference_has_hash_bound_provenance():
             assert new_rate == rate == operation["sample_rate"]
             np.testing.assert_array_equal(
                 new, old[operation["start_frame"]:operation["end_frame_exclusive"]])
+
+
+def test_no_unexplained_production_orphan_or_missing_reference():
+    inventory = load_script("voice_corpus").inventory(ROOT)
+    assert not [r["wav"] for r in inventory["records"] if r["orphan"]]
+    for record in inventory["records"]:
+        assert record["audio"]["duration_s"] >= 3
+        assert record["audio"]["rms"] > 0
