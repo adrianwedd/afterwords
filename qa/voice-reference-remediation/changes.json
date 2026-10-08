@@ -3969,7 +3969,8 @@
       "adjudication": "Original native hearing reports intrusive stage audience/laughter. Multiple longer interview trials retain host backchannels or unclear false starts and remain unadmitted. Trial55 has host Mm;57 still initial Mmm;59 shortened incorrectly, native3.1 flags boundaries despite3.8 not flagging. Source RMS quiet valley67.52 before conjunction onset67.54 and quiet72.25-72.31 before next voiced onset72.33 guide final67.52-72.29. Resulting full exact native3.8 hearing confirms one isolated voice, complete boundaries, no music/crowd/laughter/effects/acoustic change/splice. Final native hears two and-er fillers; independent3.1 hearing of containing59 also hears two and-uh fillers, while3.8 prior59 omits them; preserve fillers from new exact hearing and use er as orthography for uncertain uh/er. Dialectal me head heard by new native and all three prior readings, retained despite ASR my head. Actual4.77s contains complete connected clauses with useful phonetic variety; no padding or splice. Fresh final corpus pass pending.",
       "deterministic_qa": {
         "audio_integrity": true,
-        "sample_exact_slice": false
+        "sample_exact_slice": false,
+        "replacement_sample_exact_source_slice": true
       },
       "delivery_commit_locator": "git log -- voices/bill-bailey-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
@@ -3989,7 +3990,8 @@
         "operation": "Source67.6-72.43, superseded by admitted67.52-72.29; never production acceptance",
         "native_3_1": "qa/voice-reference-remediation/evidence/bill-bailey-prior-boundary-3.1.json",
         "native_3_8": "qa/voice-reference-remediation/evidence/bill-bailey-prior-boundary-3.8.json"
-      }
+      },
+      "delivery_commit": "7c1e49162100acdcf1f812eda4abc4c4218b9249"
     }
   ],
   "exclusions": [
