@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "a4b32d50ce456624cc9d4eef1b8afbf6b5085f683d3258a472985978953a5edb",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "bf2ea1af-74f6-4337-866a-bdb9500f1898",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a4b32d50ce456624cc9d4eef1b8afbf6b5085f683d3258a472985978953a5edb"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a4b32d50ce456624cc9d4eef1b8afbf6b5085f683d3258a472985978953a5edb"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "bf2ea1af-74f6-4337-866a-bdb9500f1898",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Also, this film got terrible reviews for the most part. More than 50% 60 or 70% were terrible and MGM was really worried that um they might have to pull it.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.3],\n    [7.0, 11.2]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates within +/- 0.3s. Total duration is estimated at ~11.2s. Transcript wording has low uncertainty; minor mid-sentence hesitation/self-correction ('50% 60 or 70%') and filler ('um') present between 3.3s and 9.5s, but audio remains clean, isolated, and free of background interference throughout.\"\n}\n",
+    "duration_seconds": 38.884376,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20432,
+      "output_tokens": 2957,
+      "thinking_tokens": 2554,
+      "cache_read_tokens": 15991,
+      "total_tokens": 23389
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

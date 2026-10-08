@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c94bf707-51a0-47c8-acc5-5868c7e93c9b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c94bf707-51a0-47c8-acc5-5868c7e93c9b",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Also, this film got terrible reviews, for the most part. More than 50%, 60 or 70% were terrible. And MGM was really worried that, um, they might have to pull it.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"none detected; consistent indoor room acoustics throughout\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 11.5]\n  ],\n  \"uncertainty\": \"Boundary estimates are perceptual approximations (\u00b10.5s) based on native auditory playback without waveform inspection tools. Wording has high perceptual confidence; slight uncertainty exists regarding exact punctuation/delivery around the self-correction ('50%, 60 or 70%') and whether the hesitation between 'that' and 'they' is a subtle vocalized 'um' or an unvoiced hesitation/breath.\"\n}\n",
+    "duration_seconds": 43.183342,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20509,
+      "output_tokens": 3179,
+      "thinking_tokens": 2778,
+      "cache_read_tokens": 15989,
+      "total_tokens": 23688
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

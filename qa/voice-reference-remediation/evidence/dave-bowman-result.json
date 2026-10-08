@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "ac23d40f-e16f-4ed4-8e05-4ebdd34ce52a",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ac23d40f-e16f-4ed4-8e05-4ebdd34ce52a",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Also, this film got terrible reviews for the most part. More than 50 percent, 60 or 70 percent were terrible. And MGM was really worried that, um, they might have to pull it.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 9.0]],\n  \"uncertainty\": \"Timings are perceptual estimates. The audio appears to be a single isolated speaker with no noticeable background interference.\"\n}\n",
+    "duration_seconds": 51.483052,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12497,
+      "output_tokens": 4850,
+      "thinking_tokens": 4528,
+      "cache_read_tokens": 24051,
+      "total_tokens": 17347
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

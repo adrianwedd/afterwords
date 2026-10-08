@@ -7109,6 +7109,110 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/jarvis-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/jarvis-result.json",
       "delivery_commit": "3dcf54a78f3ff41e730cbadeefb2b04a3a07b2c0"
+    },
+    {
+      "wav": "dave-bowman-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "3df5c8ec42f965e8f129ba1ae0c44baaa8d29a97bb5048999a738598cb56dbc3",
+        "frames": 720000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.864654541015625,
+        "rms": 0.07499011501683456,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896",
+        "frames": 636363,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 14.43,
+        "peak": 1.0,
+        "rms": 0.10356113054998306,
+        "samples_at_full_scale": 254
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 179.85,
+        "source_end_s": 194.28,
+        "source_start_frame": 7931385,
+        "source_end_frame_exclusive": 8567748,
+        "conversion": "Exact continuous decoded source PCM16 frame slice; no DSP, mixing, gain, padding, splicing or concatenation."
+      },
+      "profiles": [
+        {
+          "path": "voices/dave-bowman.json",
+          "old_reference_text": "Rumors about something being dug up on the moon. I never gave these stories much credence, but particularly in view of some of the other things that have happened, I find them difficult to put out of my mind.",
+          "new_reference_text": "Also, this film got terrible reviews for the most part. More than 50 percent, 60 or 70 percent were terrible. And MGM was really worried that, um, they might have to pull it.",
+          "old_segment_start_s": 94.46,
+          "new_segment_start_s": 179.85
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=dr0c0FEfDkQ",
+      "adjudication": "Earlier original030 returned native unavailable, so not an acoustic/speaker judgement. New full actual original149 proofvalid hears one voice, clean acoustics, complete boundaries and literal words. Original local-file source provenance does not independently establish intended Keir Dullea identity. Prior blind HAL comparison reports different voices but cannot establish actor physiology across delivery registers; remembered film dialogue is not evidence of wrong actor. Re-source establishes intended actor via original theatre publisher page/direct embed, named continuous guest introduction and actual selected-range video185. Initial147180.03 start got conflicting opening-cutoff verdict; rejected. Expanded150179.85–194.28 exact14.43s has two independent full actual-WAV native hearings, both1speaker/all acoustic contaminants/splices/longpauses/cutoffsfalse/usabletrue. Both agree all words including percentage self-correction and um; secondary3.1 explicitly hears um, primary slight filler/breath uncertainty preserved. Spell percent literally rather than numeric symbol, preserve 50/60/70 sequence without grammar editing. Exact decoded source PCM/frame counts/bounds independently verified; RMS0.10356/peak1.0; deterministic inspector254negative full-scale samples, detailed signed-int16 gate450positive-or-negative channel samples outof1272726(0.03536%), longest15frames0.340ms, allwithin2.8235–2.8667s. Sparse extrema explicitly accepted with two clean native hearings, not called zero-clipping; fresh final must verify no perceptible damage. Natural2018 older actor interview differs1968 character; not a claim original wrong actor. Fresh whole resulting production acceptance mandatory.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/dave-bowman-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=dr0c0FEfDkQ",
+        "publisher": "thecoolidge",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCcGBt26HbLeBzsB8pCVR1PA",
+        "title": "Keir Dullea on 2001: A Space Odyssey | Full Q&A [HD] | Coolidge Corner Theatre",
+        "published_date": "20180717",
+        "source_info_sha256": "d67c40fad5dc332297ea8e44e6d31e3fa42d8036eaf190ccbc1eba4ead89f8c2",
+        "source_download_sha256": "6fb921ae1bd90c9b50c0f4f904f23422f47a5e1d9405a00da48c542320d62786",
+        "source_audio_sha256": "54374d34d32e597364141160a0eb2c9f91513b7c8654b8ccbdb67595ce3e829a",
+        "identity_section_sha256": "982c1aca8dd494d5fd11aadb465912fc86c5aa78c8169ef277be64654bbbe94c",
+        "identity_frame_sha256": "fb67c486661d41fb8db448238b44825abb49cd938366506d06d8157363b8e232",
+        "publisher_page": "https://coolidge.org/about-us/news-media/watch-full-qa-keir-dullea-now-available",
+        "publisher_page_sha256": "13608f5eea19331ea61d2888b55dd87e36ee2ffc9a601b18ae0f4f938d9f3e4f",
+        "source_basis": "Coolidge Corner Theatre primary page directly embeds dr0c0FEfDkQ and names Keir Dullea at its June23 2018 2001 screening/Q&A. Continuous source introduction brings the named guest down to speak, followed by his film introduction; actual selected-range frame185 shows that guest speaking alone into microphone. BFI film page credits David Bowman to Keir Dullea.",
+        "role_credit_url": "https://www.bfi.org.uk/film/cefccdb2-b558-5623-9c17-72b4be7bd4c1/2001-a-space-odyssey",
+        "delivery_change": "Natural 2018 older Keir Dullea film-introduction register differs the 1968 dramatic David Bowman role. Replacement establishes an attributed intended-actor reference; original identity was unverified, not proven wrong by dialogue memory or voice comparison.",
+        "decode": "Public233 HLS audio fallback fully downloaded after251HTTP403; all450fragments complete. Full ffmpeg decode to PCM16 preserving decoded rate/channels, exit0 and empty error log.",
+        "exact_edit": {
+          "start_s": 179.85,
+          "end_s": 194.28,
+          "sample_rate": 44100,
+          "start_frame": 7931385,
+          "end_frame_exclusive": 8567748,
+          "channel_index": null
+        },
+        "sample_exact_source_slice": true,
+        "candidate_audio": {
+          "sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896",
+          "frames": 636363,
+          "sample_rate": 44100,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 14.43,
+          "peak": 1.0,
+          "rms": 0.10356113054998306,
+          "samples_at_full_scale": 254
+        },
+        "changes": "Exact continuous decoded source PCM16 frame slice; no DSP, mixing, gain, padding, splicing or concatenation.",
+        "full_scale_extrema": {
+          "positive_or_negative_count": 450,
+          "fraction_of_channel_samples": 0.0003535717821432107,
+          "longest_run_frames": 15,
+          "longest_run_ms": 0.3401360544217687,
+          "first_position_s": 2.8234920634920635,
+          "last_position_s": 2.8667120181405896,
+          "adjudication": "Sparse extrema only in a 44ms region of the first sentence, longest plateau0.340ms. Both native hearings report clean acoustics and no defect; no severe/perceptibly damaged clipping established. Accepted explicitly, not a zero-clipping claim; verify again in fresh corpus listening."
+        },
+        "publisher_metadata_sha256": "b24c7b9dcbf411f0f23d14bd80e6f4d646b29cfd1ccf9c8a073658a0bbe68dca"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/dave-bowman-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/dave-bowman-result.json"
     }
   ],
   "exclusions": [
