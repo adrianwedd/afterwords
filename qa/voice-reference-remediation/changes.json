@@ -527,7 +527,7 @@
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/data-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/data-result.json",
-      "delivery_commit": "ce6be35"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
     },
     {
       "wav": "patrick-moore-ref.wav",
@@ -589,7 +589,7 @@
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/patrick-moore-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/patrick-moore-result.json",
-      "delivery_commit": "ce6be35"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
     },
     {
       "wav": "cleaver-greene-ref.wav",
@@ -651,7 +651,7 @@
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/cleaver-greene-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/cleaver-greene-result.json",
-      "delivery_commit": "ce6be35"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
     },
     {
       "wav": "bob-jones-sanchin-tensho-ref.wav",
@@ -713,7 +713,7 @@
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-sanchin-tensho-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-sanchin-tensho-result.json",
-      "delivery_commit": "ce6be35"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
     },
     {
       "wav": "bob-jones-ref.wav",
@@ -770,7 +770,7 @@
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-result.json",
-      "delivery_commit": "ce6be35"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
     },
     {
       "wav": "claudia-ref.wav",
@@ -832,7 +832,7 @@
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/claudia-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/claudia-result.json",
-      "delivery_commit": "ce6be35"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
     },
     {
       "wav": "blackadder-ref.wav",
@@ -919,7 +919,7 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/blackadder-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/blackadder-result.json",
-      "delivery_commit": "ce6be35"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
     },
     {
       "wav": "bob-jones-ibuki-ref.wav",
@@ -989,7 +989,7 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-ibuki-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-ibuki-result.json",
-      "delivery_commit": "ce6be35"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
     },
     {
       "wav": "snape-ref.wav",
@@ -1647,7 +1647,8 @@
         "visual_source_sha256": "e7256abf76d4e0c161ffc74bf12033fcbea983744bc363210c52d5a8c118d688"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/the-cat-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/the-cat-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/the-cat-result.json",
+      "delivery_commit": "1dd8d6577944311497de122f5bc22c21bf8480a4"
     }
   ],
   "exclusions": [
