@@ -1,0 +1,38 @@
+{
+  "wav": "nyssa-of-traken-ref.wav",
+  "source_sha256": "984808a1f8974078a4157e0950388ab2e60bda737dab590dbeec79f34091b5ee",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c21d54c2-b865-4acc-8841-aa27ceb7c071",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "984808a1f8974078a4157e0950388ab2e60bda737dab590dbeec79f34091b5ee"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "984808a1f8974078a4157e0950388ab2e60bda737dab590dbeec79f34091b5ee"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c21d54c2-b865-4acc-8841-aa27ceb7c071",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [18.8, 20.0]\n  ],\n  \"literal_transcript\": \"I'm not coming with you. There's too much to be done here. And with my skills I can help them. I've enjoyed every moment of my time on the TARDIS and I'll miss you both. But here I have a chance to put into practice the skills I learned on Traken. Please, Nyssa. I'm adamant. I'm fully aware of that, but I want to stay.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Audible background synthesizer/dramatic music score present throughout the audio, combined with a second speaker interjection between approximately 18.8s and 20.0s.\",\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.5],\n    [8.2, 13.0],\n    [13.5, 18.5]\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual estimates with an uncertainty of +/- 0.5s. Second speaker interjection at ~18.8s-20.0s is quiet and perceptually ambiguous between 'Please, Nyssa' and 'Please, listen'. Phonetic proper nouns in primary speaker delivery sound like 'TARDIS' and 'Traken' (or 'Tracon'). While the candidate intervals isolate complete phrases spoken solely by the primary speaker, background music/ambient score is present throughout the entire clip (swelling noticeably from ~14.0s onward), rendering the audio unsuitable for clean zero-shot voice conditioning without music removal.\"\n}\n```\n",
+    "duration_seconds": 53.044569,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20549,
+      "output_tokens": 5116,
+      "thinking_tokens": 4547,
+      "cache_read_tokens": 15927,
+      "total_tokens": 25665
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

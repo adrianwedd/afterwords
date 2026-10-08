@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d701fc8235200ef6a881f5cc1d3958aeff85d1c0e18180916d9901178548f48b",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "67405a3f-befa-424b-b1a6-3e820652118d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d701fc8235200ef6a881f5cc1d3958aeff85d1c0e18180916d9901178548f48b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d701fc8235200ef6a881f5cc1d3958aeff85d1c0e18180916d9901178548f48b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "67405a3f-befa-424b-b1a6-3e820652118d",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So, I watched that completely fresh, and what you've both said was so apparent to me.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.0]\n  ],\n  \"uncertainty\": \"Minimal uncertainty; the clip features a single clear speaker with no interfering noise or overlapping speech. Interval boundaries are rough estimates as exact timestamps are not provided, but the entire clip appears usable.\"\n}\n```\n",
+    "duration_seconds": 19.833664,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12297,
+      "output_tokens": 1249,
+      "thinking_tokens": 924,
+      "cache_read_tokens": 24237,
+      "total_tokens": 13546
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

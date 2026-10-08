@@ -6583,6 +6583,109 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/romana-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/romana-result.json"
+    },
+    {
+      "wav": "nyssa-of-traken-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "984808a1f8974078a4157e0950388ab2e60bda737dab590dbeec79f34091b5ee",
+        "frames": 835584,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 17.408,
+        "peak": 0.269256591796875,
+        "rms": 0.035078017111224394,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "d701fc8235200ef6a881f5cc1d3958aeff85d1c0e18180916d9901178548f48b",
+        "frames": 267600,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.575,
+        "peak": 0.257568359375,
+        "rms": 0.024710719729489725,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 916.88,
+        "source_end_s": 922.455,
+        "source_start_frame": 44010240,
+        "source_end_frame_exclusive": 44277840,
+        "conversion": "Exact continuous decodedsource PCM16 frame slice; no DSP/remixing/normalization/separation/padding/concatenation"
+      },
+      "profiles": [
+        {
+          "path": "voices/nyssa-of-traken-qwen3-06b.json",
+          "old_reference_text": "I'm not coming with you there's too much to be done here and with my skills I can help them I've enjoyed every moment of my time on the TARDIS now miss you both But here I have a chance to put into practice the skills I learned on Traken Please miss I'm adamant. I'm fully aware of that, but I want to stay",
+          "new_reference_text": "So, I watched that completely fresh, and what you've both said was so apparent to me.",
+          "old_segment_start_s": 56,
+          "new_segment_start_s": 916.88
+        },
+        {
+          "path": "voices/nyssa-of-traken.json",
+          "old_reference_text": "I'm not coming with you there's too much to be done here and with my skills I can help them I've enjoyed every moment of my time on the TARDIS now miss you both But here I have a chance to put into practice the skills I learned on Traken Please miss I'm adamant. I'm fully aware of that, but I want to stay",
+          "new_reference_text": "So, I watched that completely fresh, and what you've both said was so apparent to me.",
+          "old_segment_start_s": 56,
+          "new_segment_start_s": 916.88
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=NSxsSf1RGhg",
+      "adjudication": "Originalnative074musicthroughout andsecondvoiceinterjection; cannottrimmusicaway. ReplacementBFI2013officialpublishercreditsSarahSuttonandothers; actualHDframe918withinretainedphrase showsSarahthirdfromleft speaking andJanetfourthsilent. Naturalactorpanelinterviewdelivery explicitlydifferentfrom1983dramaticNyssa. Rejectlong139and141quietmaterial:139threehearings1voice but141claimssecondspeaker/acousticchangeonconnectedDoctorWho. This perceptual disagreement remainsunresolved, so final143 completely excludes that entirelatermaterial plus alluncertainstuttering/tailclauses. Final143916.88-922.455 continuous5.575s actualfullWAV hasthreeindependentnativehearings all1voice/no music/crowd/laugh/effects/acousticchanges/splices/longpauses/bothcutoffs/usabletrue. Complete20word naturalfirstsentence and intactSo/meconfirmed. RootsourcePCM equality independentlyverified, 10msRMSvalley before nextutterance usedforlocalizationonly; actualnativeboundariesaregate. First1433.8 hearsyou insteadyouve withminimaluncertainty; independent1433.1 plus third1433.8 bothyouve withminimal/negligibleuncertainty, thirdexplicitlyclearlyaudible. Threeearlierlong139nativehearings alsoyouve onidenticalsourcephrase, whereas141you. Rootretains confidentlyindependentlyconfirmedyouve, disagreementpreservedallresultphases; sourceASRyou issecondaryanddoesnotoverride actualnativecontraction. Candidatehealthyquietlevel0.2576peak/no fullscale, no normalization/processing. Fresh whole resulting production native acceptance mandatory, verifycontractionagain.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/nyssa-of-traken-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=NSxsSf1RGhg",
+        "publisher": "BFI / BFIEvents",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCjhmzXTpOMxUNNL5dsGSAog",
+        "title": "Doctor Who: The Caves of Androzani Event & Q&A | BFI",
+        "published_date": "20130514",
+        "publisher_page_url": "https://www.bfi.org.uk/videos/doctor-who-caves-androzani-discussion",
+        "publisher_page_sha256": "31fd5e9c08f8777ddd8c5b8d702111584d3aba91a11011ef8c43d031102d42fd",
+        "source_info_sha256": "93edb485cdecc2a7f77a343cf9423e03bc31f2a83ab96a35976d8e645e69ce4e",
+        "source_download_sha256": "a9a062cef378632527443cc4813b8be6666febbea744867f9ca9fc4a8bed10b9",
+        "source_audio_sha256": "6de25489ab1b1f9de70cb2f23ce69a8ecc7c858374df380774c4f133c7230278",
+        "identity_section_sha256": "a951f59dbf59bac1d3ab72efcff3fe73afc4dd2e0c5df5242a8acd9b7b6604e2",
+        "identity_frame_sha256": "4931f8fd5b865abc277c02ae76ece5890aace715b38a9a343f8a6c669b7a849f",
+        "source_basis": "BFI primarypublisherpage names SarahSutton, JanetFielding, MatthewWaterhouse, PeterDavison and GraemeHarper, discussionhostJustinJohnson, and directlyembeds thisvideoID. ActualHDvideo905-940/frame918 shows SarahSutton thirdfromleft speaking firstperson answer about watchingCavesfresh afterleavingshow; JanetFielding fourthfromleft is silent. Earlierhost asks Matthew/Sarah/Janet aboutcompanionwork; sourcecastcredit, visibleguest and continuousanswercorroborate intendedSarah. OfficialDoctorWho characterpage creditsNyssa playedbySarahSutton. No scene-memory inference used to derive transcript.",
+        "role_credit_url": "https://www.doctorwho.tv/characters/nyssa",
+        "delivery_change": "Same intendedactor SarahSutton in2013 panelinterview delivery replacesdramatic1983Nyssa speech with score/secondvoice. Characterperformance andearlierage register notclaimedpreserved.",
+        "decode": "Fullsource ffmpeg PCM16 preserving decodedrate/channels; exit0/emptyerrorlog",
+        "exact_edit": {
+          "start_s": 916.88,
+          "end_s": 922.455,
+          "sample_rate": 48000,
+          "start_frame": 44010240,
+          "end_frame_exclusive": 44277840,
+          "channel_index": null
+        },
+        "candidate_audio": {
+          "sha256": "d701fc8235200ef6a881f5cc1d3958aeff85d1c0e18180916d9901178548f48b",
+          "frames": 267600,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 5.575,
+          "peak": 0.257568359375,
+          "rms": 0.024710719729489725,
+          "samples_at_full_scale": 0
+        },
+        "sample_exact_source_slice": true,
+        "changes": "Exact continuous decodedsource PCM16 frame slice; no DSP, remixing, normalization, separation, padding or concatenation",
+        "boundary_localization": "Word-alignedsourceASR plus10msPCM RMS identifies firstcompleteSo phrase afterpriorum hesitation, lowRMSvalley922.44-922.45 beforefollowingvoicing922.46; actualresultnativeboundary acceptance mandatory, quantitative locationsalone notproof.",
+        "publisher_metadata_sha256": "4aac06907601732eaf77a97b133cc3bbac9399b88452618d6fe35ed2442b6ddd"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/nyssa-of-traken-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/nyssa-of-traken-result.json"
     }
   ],
   "exclusions": [

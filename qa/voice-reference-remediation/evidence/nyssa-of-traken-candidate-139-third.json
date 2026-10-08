@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "83fda7102fb1b1967b77b91e091a449c1e207559684ced39d0c2742652a27eac",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "8a9eac79-660a-45de-9966-2036fbd0a75c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "83fda7102fb1b1967b77b91e091a449c1e207559684ced39d0c2742652a27eac"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "83fda7102fb1b1967b77b91e091a449c1e207559684ced39d0c2742652a27eac"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8a9eac79-660a-45de-9966-2036fbd0a75c",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So I watched that completely fresh and what you've both said was so apparent to me. It looked so different from anything that I had done, connected to Doctor Who. It had a completely different feel to it. It it looked like it had moved on leaps and bounds, the whole thing, since I'd left. And yet it wasn't really that long. But it I thought it looked great.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.8],\n    [9.0, 16.5],\n    [16.6, 19.2]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty margin of approximately +/- 0.5 seconds. Minor hesitation and lower vocal projection during 'connected to Doctor Who' around 7.5s-9.0s makes boundaries slightly soft. Wording uncertainty is low, though minor stuttering/false starts ('It it', 'But it I') occur naturally in conversational delivery.\"\n}\n",
+    "duration_seconds": 65.635435,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20827,
+      "output_tokens": 3871,
+      "thinking_tokens": 3422,
+      "cache_read_tokens": 15836,
+      "total_tokens": 24698
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

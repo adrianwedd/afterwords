@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "83fda7102fb1b1967b77b91e091a449c1e207559684ced39d0c2742652a27eac",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "171412ec-b1e9-4308-b14b-5c2048da3553",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "83fda7102fb1b1967b77b91e091a449c1e207559684ced39d0c2742652a27eac"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "83fda7102fb1b1967b77b91e091a449c1e207559684ced39d0c2742652a27eac"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "171412ec-b1e9-4308-b14b-5c2048da3553",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So I watched that completely fresh, and what you've both said was so apparent to me. It looked so different from anything that I had done connected to Doctor Who. It had a completely different feel to it. It it looked like it had moved on leaps and bounds, the whole thing, since I'd left. And it wasn't really that long, but it I thought it looked great.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 20.5]\n  ],\n  \"uncertainty\": \"Timestamps and duration are perceptual estimates with approximately \u00b10.5 s boundary uncertainty. Slight uncertainty regarding micro-hesitations/repetitions ('It it looked', 'but it I thought').\"\n}\n```\n",
+    "duration_seconds": 49.767807,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20415,
+      "output_tokens": 2716,
+      "thinking_tokens": 2328,
+      "cache_read_tokens": 15824,
+      "total_tokens": 23131
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
