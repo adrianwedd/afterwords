@@ -1229,6 +1229,330 @@
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/feynman-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/feynman-result.json"
+    },
+    {
+      "wav": "jackie-chiles-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "5105b48287f9cb841390a2c89a17ba40aa13f4281189a98f2403d0bcf4c97274",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08506433113827924,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "6d41ce5a2978fe30e8de1af4e6b7f7137078a6e27ad3f58e0db79e81820f6271",
+        "frames": 183015,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.15,
+        "peak": 0.9000244140625,
+        "rms": 0.10803155685425328,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 79380,
+        "end_frame_exclusive": 262395,
+        "start_s": 1.8,
+        "end_s": 5.95
+      },
+      "profiles": [
+        {
+          "path": "voices/jackie-chiles-qwen3-06b.json",
+          "old_reference_text": "Who told you to put a bomb on? Let a doctor put a bomb. Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it. A power? Who told you to have a power? I didn't tell you to have a power. Who told you to put the cheese on? Did I tell you to put the cheese on? I didn't tell you to put the cheese on.",
+          "new_reference_text": "Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 6.8
+        },
+        {
+          "path": "voices/jackie-chiles.json",
+          "old_reference_text": "Who told you to put a bomb on? Let a doctor put a bomb. Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it. A power? Who told you to have a power? I didn't tell you to have a power. Who told you to put the cheese on? Did I tell you to put the cheese on? I didn't tell you to put the cheese on.",
+          "new_reference_text": "Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 6.8
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=PeAHBiUgoD8",
+      "adjudication": "Extracts one continuous take from the original montage: 1.80-5.95s, complete rhetorical questions and answer. Excludes original chopped opening, subsequent powwow/cheese scene splices and clipped tail. Original and edited native hearings agree on all retained words; ASR corroborates them. Edited native review confirms one speaker including self-answered No in matching timbre/acoustics, no soundtrack, laughter, crowd, effects, cutoff, long pause or splice. Consistent moderate indoor room resonance accepted as incidental, not destructive. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/jackie-chiles-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/jackie-chiles-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/jackie-chiles-result.json"
+    },
+    {
+      "wav": "geraldine-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "1ca8639c620d666d3440ec046ad421ff50e7607a6dc7b391f6fafb1210f8558a",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.12567946554632053,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "a2c472bce3832ec9bbfae1ec4df6da5d3390a1178bc6860d39f2d6f4e3990b12",
+        "frames": 290619,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.59,
+        "peak": 0.739105224609375,
+        "rms": 0.11196289457884218,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 60858,
+        "end_frame_exclusive": 351477,
+        "start_s": 1.38,
+        "end_s": 7.97
+      },
+      "profiles": [
+        {
+          "path": "voices/geraldine-qwen3-06b.json",
+          "old_reference_text": "tidying. Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling. And now, voila, just the one left. So that was very thorough tidying by me there.",
+          "new_reference_text": "Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling.",
+          "old_segment_start_s": 20,
+          "new_segment_start_s": 21.38
+        },
+        {
+          "path": "voices/geraldine.json",
+          "old_reference_text": "tidying. Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling. And now, voila, just the one left. So that was very thorough tidying by me there.",
+          "new_reference_text": "Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling.",
+          "old_segment_start_s": 20,
+          "new_segment_start_s": 21.38
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=mVmzuMKluso",
+      "adjudication": "Retains complete Easter-eggs sentence from 1.38 to 7.97s, removing the clipped tidying opening and audience laughter after the sentence. First 1.38-8.15 candidate had a tail chuckle in native review and was rejected despite overall usable flag. Tighter rendered candidate natively confirms one speaker, complete phrase, no laughter, crowd, effects, music, cutoff or splice. Secondary ASR corroborates every retained word and locates the complete ceiling ending before the new boundary. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/geraldine-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/geraldine-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/geraldine-result.json"
+    },
+    {
+      "wav": "hal-9000-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "74473f055ef3e3781ae622935a5493facb805b81155227f48b8849f8d6f957af",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06352447895171508,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "f85d9f1db3c15fee6698950fa70f21bc53874c099660b13b1ac62b44911059cf",
+        "frames": 191835,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.35,
+        "peak": 0.899993896484375,
+        "rms": 0.07667602894150696,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 297675,
+        "end_frame_exclusive": 489510,
+        "start_s": 6.75,
+        "end_s": 11.1
+      },
+      "profiles": [
+        {
+          "path": "voices/hal-9000.json",
+          "old_reference_text": "Good afternoon, Mr. Raymer. Everything is going extremely well. Let me put it this way, Mr. Raymer. The 9000 series is the most reliable computer ever made. No 9000 computer has ever made a mistake or",
+          "new_reference_text": "The 9000 series is the most reliable computer ever made.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 6.75
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=9wrjl-H4Hs8",
+      "adjudication": "Retains one continuous complete 4.35s sentence, The 9000 series...ever made, at natural silence boundaries. Excludes the clipped ending or, surname whose orthographic transcription is uncertain, and extended gaps between other lines. Original and edited native review and subsequent ASR agree all retained words. Edited native review confirms one isolated speaker, complete articulation, no music, crowd, effects, splices or cutoffs. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/hal-9000-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/hal-9000-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/hal-9000-result.json"
+    },
+    {
+      "wav": "gulley-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "c508edba4c4c63134843513f88844534844d8f928a50e4feb5b412218bda2235",
+        "frames": 321600,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.4,
+        "peak": 0.823150634765625,
+        "rms": 0.07593569139830479,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "66fe86e058819afcef8b9226b04be565fc20979bf6d28a24525df09443d29480",
+        "frames": 112800,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.7,
+        "peak": 0.823150634765625,
+        "rms": 0.09048373655781833,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 24000,
+        "start_frame": 0,
+        "end_frame_exclusive": 112800,
+        "start_s": 0,
+        "end_s": 4.7
+      },
+      "profiles": [
+        {
+          "path": "voices/gulley-qwen3-06b.json",
+          "old_reference_text": "Thank you very much for surprising me with that. That's just, yeah, impressive. I don't know what to say, but other than thank you so much.",
+          "new_reference_text": "Thank you very much for surprising me with that.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        },
+        {
+          "path": "voices/gulley.json",
+          "old_reference_text": "Thank you very much for surprising me with that. That's just, yeah, impressive. I don't know what to say, but other than thank you so much.",
+          "new_reference_text": "Thank you very much for surprising me with that.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        }
+      ],
+      "source_url": null,
+      "adjudication": "Retains the complete unambiguous first gratitude phrase (4.70s), removing the clipped terminal filler and later disputed but other than versus but um wording. First longer candidate was not admitted due contradictory native transcriptions despite clean acoustics. Native rendered-file review confirms one isolated speaker, complete words, no music, crowd, effects, splices or cutoffs; original hearing and ASR agree retained words. Natural hesitation between for and surprising preserved rather than spliced away. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/gulley-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/gulley-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/gulley-result.json"
+    },
+    {
+      "wav": "the-doctor-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "0e4532a045b7d8fa106701a3340920a1e42daa4ef0c482a7b4a7f1d4e3c09a1d",
+        "frames": 412800,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.6,
+        "peak": 0.126617431640625,
+        "rms": 0.01625815660099771,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b",
+        "frames": 352800,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.7,
+        "peak": 0.5377197265625,
+        "rms": 0.07521642958512037,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "source_start_s": 64.45,
+        "source_end_s": 79.15,
+        "conversion": "ffmpeg continuous crop, stereo-to-mono downmix/resample to 24000 Hz PCM_16; no separation, denoising, normalization or splicing",
+        "render_command": [
+          "ffmpeg",
+          "-i",
+          "SOURCE.wav",
+          "-ss",
+          "64.45",
+          "-t",
+          "14.7",
+          "-ac",
+          "1",
+          "-ar",
+          "24000",
+          "-c:a",
+          "pcm_s16le",
+          "RESULT.wav"
+        ]
+      },
+      "profiles": [
+        {
+          "path": "voices/the-doctor-qwen3-06b.json",
+          "old_reference_text": "It's all one title. Gallifrey falls no more. Now, what would you think that means? It's entirely up to you. Your choice.",
+          "new_reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been.",
+          "old_segment_start_s": 156,
+          "new_segment_start_s": 64.45
+        },
+        {
+          "path": "voices/the-doctor.json",
+          "old_reference_text": "It's all one title. Gallifrey falls no more. Now, what would you think that means? It's entirely up to you. Your choice.",
+          "new_reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been.",
+          "old_segment_start_s": 156,
+          "new_segment_start_s": 64.45
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=xszeU-yTSfg",
+      "adjudication": "Original has two speakers, continuous score, clipped fragments and prior splicing. Replaced with a single continuous 14.70s interview answer from the intended Tom Baker, explicitly credited in both BBC source titles. Native actual-candidate review confirms one speaker, complete usable words, no music, crowd, effects, acoustic discontinuity, splices or cutoffs. Secondary ASR corroborates the substantive words; native hearing adds audible er hesitation omitted by ASR, retained literally. Mild natural hesitation accepted. Native guessed studio/interior context although BBC metadata places interview outdoors; location guess is not relied on, while observed clean isolated acoustics are. Younger recording age explicitly disclosed in provenance. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/the-doctor-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=xszeU-yTSfg",
+        "title": "1975: TOM BAKER on DOCTOR WHO | South Today | Classic Interviews | BBC Archive",
+        "uploader": "BBC Archive",
+        "original_broadcast_date": "1975-03-18",
+        "source_basis": "Publisher-uploaded BBC Archive interview; original project source is BBC Doctor Who clip explicitly titled The Eleventh Doctor Meets The Curator (Tom Baker). Replaces scored multi-speaker montage with a continuous response from the same intended actor.",
+        "identity_basis": "Both original and replacement publisher titles explicitly credit Tom Baker. Reviewer receives anonymous audio only.",
+        "age_context": "Replacement is a younger 1975 interview voice; original is the older Curator performance. Preserves intended actor rather than exact scene/age delivery.",
+        "source_audio_sha256": "bbe690b3fdddee5948d01f04c64b649b6d2a51df4507c4c118d44230fbf2da76",
+        "source_metadata_sha256": "0e71b6782778fa40e84208d2a7cb7b2600828bb563154f99ea823458fb8c7b51",
+        "original_source_metadata_sha256": "6424b0465faf0ee337f82f45b7db8deacdb0910116b462eb6e805a256b319912"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/the-doctor-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/the-doctor-result.json"
     }
   ],
   "exclusions": [

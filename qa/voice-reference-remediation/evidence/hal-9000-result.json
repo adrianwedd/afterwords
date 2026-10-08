@@ -1,0 +1,37 @@
+{
+  "wav": "clip-006-ref.wav",
+  "source_sha256": "f85d9f1db3c15fee6698950fa70f21bc53874c099660b13b1ac62b44911059cf",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "2ba79382-6122-4397-a512-c696572b022b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f85d9f1db3c15fee6698950fa70f21bc53874c099660b13b1ac62b44911059cf"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f85d9f1db3c15fee6698950fa70f21bc53874c099660b13b1ac62b44911059cf"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "2ba79382-6122-4397-a512-c696572b022b",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"The 9000 series is the most reliable computer ever made.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.3, 5.8]\n  ],\n  \"uncertainty\": \"Timing boundaries are perceptual estimates subject to \u00b10.3s uncertainty due to human auditory estimation without digital waveform markers. Wording uncertainty is extremely low; articulation is distinct, measured, and free from masking noise.\"\n}\n```\n",
+    "duration_seconds": 23.996869,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20123,
+      "output_tokens": 2195,
+      "thinking_tokens": 1873,
+      "cache_read_tokens": 16200,
+      "total_tokens": 22318
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

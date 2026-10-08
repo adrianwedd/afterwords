@@ -1,0 +1,37 @@
+{
+  "wav": "hal-9000-ref.wav",
+  "source_sha256": "74473f055ef3e3781ae622935a5493facb805b81155227f48b8849f8d6f957af",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "994da5d2-07d0-4b1c-9b42-acdf92fe7145",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "74473f055ef3e3781ae622935a5493facb805b81155227f48b8849f8d6f957af"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "74473f055ef3e3781ae622935a5493facb805b81155227f48b8849f8d6f957af"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "994da5d2-07d0-4b1c-9b42-acdf92fe7145",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Good afternoon, Mr. Amer. Everything is going extremely well. Let me put it this way, Mr. Amer. The 9000 series is the most reliable computer ever made. No 9000 computer has ever made a mistake or\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 16.8]\n  ],\n  \"uncertainty\": \"Boundary timings are perceptual estimates (+/- 0.8s) derived without a visual waveform display or timeline clock. The surname transcript is phonetically rendered as 'Mr. Amer' (could alternatively be 'Mr. Amor' or 'Mr. Aymor'). The deliberate pauses between phrases (~0.8 to 1.2s) appear to be natural measured cadence rather than editorial splices, but could be assembled lines. The ending cutoff is definite, with speech stopping mid-conjunction on 'or' without sentence completion.\"\n}\n```\n",
+    "duration_seconds": 34.655587,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20433,
+      "output_tokens": 2918,
+      "thinking_tokens": 2495,
+      "cache_read_tokens": 15976,
+      "total_tokens": 23351
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

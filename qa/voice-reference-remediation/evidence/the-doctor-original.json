@@ -1,0 +1,37 @@
+{
+  "wav": "the-doctor-ref.wav",
+  "source_sha256": "0e4532a045b7d8fa106701a3340920a1e42daa4ef0c482a7b4a7f1d4e3c09a1d",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "fd9dc49e-0059-40ec-b420-33f96a5c6e0d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0e4532a045b7d8fa106701a3340920a1e42daa4ef0c482a7b4a7f1d4e3c09a1d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0e4532a045b7d8fa106701a3340920a1e42daa4ef0c482a7b4a7f1d4e3c09a1d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "fd9dc49e-0059-40ec-b420-33f96a5c6e0d",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 1\",\n      \"interval_s\": [0.0, 4.8]\n    },\n    {\n      \"speaker\": \"Speaker 2\",\n      \"interval_s\": [4.8, 7.8]\n    },\n    {\n      \"speaker\": \"Speaker 1\",\n      \"interval_s\": [7.8, 12.2]\n    }\n  ],\n  \"literal_transcript\": \"It's all one ti... Gallifrey falls no more. What would you think that means? Well, that's entirely up to you. Your choice, eh?\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Multiple speakers across dialogue, persistent background musical underscore throughout the clip, and truncated audio with an apparent splice at the start.\",\n  \"candidate_clean_intervals_s\": [\n    [1.8, 4.6],\n    [5.0, 7.6],\n    [7.8, 12.2]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty margin of approximately \u00b10.3s. The initial truncated token sounds like 'ti...' (cut off mid-word). There is slight uncertainty whether Speaker 1 in the opening line and the final speaker ('Well, that's entirely up to you...') are the same person shifting intonation or two separate older male speakers, though both are distinctly different from Speaker 2. While the interval [7.8, 12.2] contains a coherent single-speaker phrase, background musical score persists beneath the voice, making simple trimming insufficient for clean conditioning without music removal.\"\n}\n```\n",
+    "duration_seconds": 50.745181,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20286,
+      "output_tokens": 5503,
+      "thinking_tokens": 4930,
+      "cache_read_tokens": 16111,
+      "total_tokens": 25789
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
