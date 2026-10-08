@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "snapshot": "qa/voice-reference-remediation/final-snapshot.json",
-  "production_commit": "e71e7458bd899dcfe229f9aba356a3e25091ee49",
+  "production_commit": "fc37d8c7a2e4381f3dbaf2923206c06327526eb9",
   "corpus_status": "pending",
   "required_production_count": 104,
   "records": [
@@ -361,7 +361,8 @@
         "audio_integrity": true,
         "production_hash_match": true,
         "profile_relationships_consistent": true,
-        "samples_at_full_scale": 0
+        "samples_at_full_scale": 0,
+        "production_and_git_hash_match": true
       }
     },
     {
