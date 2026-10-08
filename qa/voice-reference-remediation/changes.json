@@ -3312,7 +3312,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-result.json",
-      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-result-secondary.json"
+      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-result-secondary.json",
+      "delivery_commit": "3443a008781de7fead43954b64e183f2526f202f"
     },
     {
       "wav": "seven-of-nine-picard-ref.wav",
@@ -3386,7 +3387,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-result.json",
-      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-result-secondary.json"
+      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-result-secondary.json",
+      "delivery_commit": "3443a008781de7fead43954b64e183f2526f202f"
     }
   ],
   "exclusions": [
