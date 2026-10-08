@@ -67,6 +67,30 @@ def test_review_parser_accepts_single_fenced_result_without_ambiguous_multiple_r
     assert listener.parsed_observation({"response": "```json\n" + payload + "\n```\n```json\n" + payload + "\n```"}) is None
 
 
+def test_excerpt_only_result_cannot_admit_reference(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(ROOT / "scripts"))
+    admission = load_script("admit_voice_reference")
+    baseline = json.loads((ROOT / "qa/voice-reference-remediation/baseline.json").read_text())
+    record = next(r for r in baseline["records"] if r["wav"] == "bob-jones-ref.wav")
+    qa = tmp_path / "qa/voice-reference-remediation"
+    qa.mkdir(parents=True)
+    (qa / "baseline.json").write_text(json.dumps({"records": [record]}))
+    (tmp_path / "voices").mkdir()
+    wav = tmp_path / "voices/bob-jones-ref.wav"
+    wav.write_bytes((ROOT / "voices/bob-jones-ref.wav").read_bytes())
+    original = ROOT / "qa/voice-reference-remediation/evidence/bob-jones-original.json"
+    evidence = json.loads(original.read_text())
+    evidence["transcript_scope"] = "excerpt"
+    result = tmp_path / "excerpt.json"
+    result.write_text(json.dumps(evidence))
+    plan = {"wav": record["wav"], "approved": True, "adjudication": "must reject before mutation",
+            "candidate": str(wav), "native_original_evidence": str(original),
+            "native_result_evidence": str(result)}
+    with pytest.raises(AssertionError, match="excerpt review cannot admit"):
+        admission.admit(tmp_path, plan)
+    assert wav.read_bytes() == (ROOT / "voices/bob-jones-ref.wav").read_bytes()
+
+
 def test_every_changed_reference_has_hash_bound_provenance():
     baseline = json.loads((ROOT / "qa/voice-reference-remediation/baseline.json").read_text())
     manifest = json.loads((ROOT / "qa/voice-reference-remediation/changes.json").read_text())
@@ -94,6 +118,10 @@ def test_every_changed_reference_has_hash_bound_provenance():
                                 ("native_result_evidence", actual["sha256"])]:
             evidence = json.loads((ROOT / change[field]).read_text())
             assert evidence["native_audio_proven"]
+            assert evidence["result"]["status"] == "SUCCESS"
+            assert load_script("listen_voice_corpus").parsed_observation(evidence["result"])
+            if field == "native_result_evidence":
+                assert evidence.get("transcript_scope", "full") == "full"
             assert evidence["source_sha256"] == expected
             assert all(e["media_sha256"] == expected for e in evidence["attachment_evidence"])
         for profile in change["profiles"]:

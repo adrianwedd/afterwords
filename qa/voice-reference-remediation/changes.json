@@ -1649,6 +1649,324 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/the-cat-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/the-cat-result.json",
       "delivery_commit": "1dd8d6577944311497de122f5bc22c21bf8480a4"
+    },
+    {
+      "wav": "k9-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "5a484e11e965797c29859a7ca45d4407f5198ab91b000b3db2ad5ef27b60a5ac",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10425407953576739,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "71b4ae8d4d71716193ec4c119da64691fdb97d53d74ccaf4a38c5aecbd7927a4",
+        "frames": 277200,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.55,
+        "peak": 0.744781494140625,
+        "rms": 0.09257545975952836,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 24000,
+        "start_frame": 0,
+        "end_frame_exclusive": 277200,
+        "start_s": 0.0,
+        "end_s": 11.55
+      },
+      "profiles": [
+        {
+          "path": "voices/k9-qwen3-06b.json",
+          "old_reference_text": "Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded. Oh, I was just getting onto that. What? Negative.",
+          "new_reference_text": "Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded.",
+          "old_segment_start_s": 35,
+          "new_segment_start_s": 35.0
+        },
+        {
+          "path": "voices/k9.json",
+          "old_reference_text": "Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded. Oh, I was just getting onto that. What? Negative.",
+          "new_reference_text": "Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded.",
+          "old_segment_start_s": 35,
+          "new_segment_start_s": 35.0
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=0L2oWjsSA_Y",
+      "adjudication": "Retains the complete continuous two-sentence robotic utterance (0-11.55s), ending before the second speaker enters. Both native hearings and secondary ASR agree all retained words. Rendered native review confirms single speaker, complete words/phrases, no soundtrack, crowd, effects, splices or cutoffs. Consistent electronic filtering is the intended K9 character voice itself, explicitly accepted as target timbre rather than unrelated effects contamination. Natural sentence pause retained. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/k9-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/k9-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/k9-result.json"
+    },
+    {
+      "wav": "leela-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "f9f919ada66fe111131f4ed0f1507bfe1924caddb41cb8eb54f8a29862c0748d",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06033182750845504,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "e4663f99fb4c34e830d7c9a65950c338164b8602cfc608536ee3a00b3b539d72",
+        "frames": 161280,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.72,
+        "peak": 0.63616943359375,
+        "rms": 0.05592724840634294,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 24000,
+        "start_frame": 172800,
+        "end_frame_exclusive": 334080,
+        "start_s": 7.2,
+        "end_s": 13.92
+      },
+      "profiles": [
+        {
+          "path": "voices/leela-qwen3-06b.json",
+          "old_reference_text": "All right. I do not fear you and I am not your guest. Maybe not. Speak plainly. I am your prisoner and this is an interrogation at the end.",
+          "new_reference_text": "Speak plainly. I am your prisoner, and this is an interrogation.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 37.2
+        },
+        {
+          "path": "voices/leela.json",
+          "old_reference_text": "All right. I do not fear you and I am not your guest. Maybe not. Speak plainly. I am your prisoner and this is an interrogation at the end.",
+          "new_reference_text": "Speak plainly. I am your prisoner, and this is an interrogation.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 37.2
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=NNtNawM3FdQ",
+      "adjudication": "Keeps the intended speaker's complete Speak plainly/prisoner/interrogation passage (7.20-13.92s), excluding the lower male speaker and clipped At the tail. Native candidate review confirms one speaker, complete phrases, no audience, effects, laughter or splices. Original hearing finds no music; candidate hears only very faint low-frequency room hum with no distinct instruments or score, accepted as incidental room tone with uncertainty recorded. Native words agree with ASR except ASR invents end beyond the physical file, which is rejected. Natural pause between sentences preserved. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/leela-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/leela-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/leela-result.json"
+    },
+    {
+      "wav": "k-ref.wav",
+      "remediation": "KEEP WITH TEXT FIX",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e",
+        "frames": 714240,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.88,
+        "peak": 0.777008056640625,
+        "rms": 0.07498495537051476,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e",
+        "frames": 714240,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.88,
+        "peak": 0.777008056640625,
+        "rms": 0.07498495537051476,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "text_only"
+      },
+      "profiles": [
+        {
+          "path": "voices/k.json",
+          "old_reference_text": "You give me a time in a place. I give you a five-minute window Anything happens in that five minutes and I'm yours No matter what Anything happens a minute either side of that and you're on your own",
+          "new_reference_text": "You give me a time and a place, I give you a five-minute window. Anything happens in that five minutes and I'm yours. No matter what. Anything happens a minute either side of that and you're on your own.",
+          "old_segment_start_s": 7.8,
+          "new_segment_start_s": 7.8
+        }
+      ],
+      "source_url": "local-file",
+      "adjudication": "Audio preserved byte-identically. Native audio-first hearing finds one isolated intended speaker, complete words/phrases, no score/crowd/effects/splices/cutoffs. Subsequent ASR independently agrees a time and a place; old JSON has incorrect in a place. Corrected the actual conjunction and punctuation across both linked profiles. Natural deliberate gaps of roughly 1-1.5 seconds are explicitly accepted as cadence, not editorial artifacts. Same frozen audio hearing supports original/result because only text changes; fresh complete corpus listening still required. Historical local-file provenance notes retained unchanged rather than inventing a public source. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/k-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/k-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/k-result.json"
+    },
+    {
+      "wav": "yasmin-khan-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "4cffa3e2a5c56bc1974191f2931cd619f03cae413dc77dcc4c8d4c0ac2977bee",
+        "frames": 556800,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.6,
+        "peak": 0.2169189453125,
+        "rms": 0.016019240218627648,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "a4665f08d9b65f6b9ff51c1be8ec303f6aa487253c81c7f285b36cff8d0adcd9",
+        "frames": 408000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.5,
+        "peak": 0.2169189453125,
+        "rms": 0.01737700014977763,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 48000,
+        "start_frame": 19200,
+        "end_frame_exclusive": 427200,
+        "start_s": 0.4,
+        "end_s": 8.9
+      },
+      "profiles": [
+        {
+          "path": "voices/yasmin-khan-qwen3-06b.json",
+          "old_reference_text": "A wise person once said to me, goodbye only hurts because what came before was so special. Oh, it's been so special.",
+          "new_reference_text": "A wise person once said to me, goodbyes only hurt because what came before was so special.",
+          "old_segment_start_s": 143,
+          "new_segment_start_s": 143.4
+        },
+        {
+          "path": "voices/yasmin-khan.json",
+          "old_reference_text": "A wise person once said to me, goodbye only hurts because what came before was so special. Oh, it's been so special.",
+          "new_reference_text": "A wise person once said to me, goodbyes only hurt because what came before was so special.",
+          "old_segment_start_s": 143,
+          "new_segment_start_s": 143.4
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=-0pu__AvBSk",
+      "adjudication": "Keeps complete unambiguous first reflective sentence (0.40-8.90s), excluding the disputed final clause and replacing incorrect singular goodbye only hurts with actual plural goodbyes only hurt. Original and rendered native hearings and subsequent ASR agree all retained words. Resulting native review confirms solo complete speech, no score/crowd/effects/splices/cutoffs. Natural reflective pause and soft breath retained. Original faint background warmth is not perceptible as music in edited-file review; no known score retained. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/yasmin-khan-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/yasmin-khan-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/yasmin-khan-result.json"
+    },
+    {
+      "wav": "carl-sagan-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "99d09b3ae4c7d959fd975b8b00fa3a98893d636273526e29ea5026bb623028bb",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.09543879646720993,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36",
+        "frames": 330000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.75,
+        "peak": 0.685089111328125,
+        "rms": 0.06615400180847875,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "source_start_s": 150.6,
+        "source_end_s": 164.35,
+        "conversion": "ffmpeg continuous crop of complete decoded source WAV, downmix to mono and resample to 24000 Hz PCM_16; no cleanup, normalization, separation or splicing",
+        "render_command": [
+          "ffmpeg",
+          "-i",
+          "SOURCE.wav",
+          "-ss",
+          "150.60",
+          "-t",
+          "13.75",
+          "-ac",
+          "1",
+          "-ar",
+          "24000",
+          "-c:a",
+          "pcm_s16le",
+          "RESULT.wav"
+        ]
+      },
+      "profiles": [
+        {
+          "path": "voices/carl-sagan-qwen3-06b.json",
+          "old_reference_text": "forever will be. Our contemplations of the cosmos stirs. There is a tingling in the spine that catch in the voice of faint sensation as if a distant memory of",
+          "new_reference_text": "Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 150.6
+        },
+        {
+          "path": "voices/carl-sagan.json",
+          "old_reference_text": "forever will be. Our contemplations of the cosmos stirs. There is a tingling in the spine that catch in the voice of faint sensation as if a distant memory of",
+          "new_reference_text": "Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 150.6
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=Wp-WiNXH6hI",
+      "adjudication": "Original full-transcription provider response failed; preserved unaccepted. New blind native excerpt-only acoustic review has actual hash-matched WAV attachment and valid observations: score beneath speech, clipped outer fragments. This original evidence supports rejection of raw audio, not a full transcript. Replaced with a complete continuous 13.75s congressional testimony passage. Full native candidate review confirms one isolated speaker, complete words, no music, crowd, effects, acoustic transitions, splices or cutoffs. Native hearing says then they are nobody's problem, whereas ASR renders then there are; retain native they based on direct perception. Natural breaths/pauses retained. Publisher credits intended speaker and provenance fixes source timing issue by using full download. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/carl-sagan-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=Wp-WiNXH6hI",
+        "title": "Carl Sagan testifying before Congress in 1985 on climate change",
+        "uploader": "carlsagandotcom",
+        "source_original_url": "https://www.c-span.org/video/?125856-1/greenhouse-effect",
+        "event_date": "1985-12-10",
+        "source_basis": "Public congressional testimony uploaded by verified carlsagandotcom channel, linking the original C-SPAN recording; same intended speaker credited by publisher.",
+        "source_audio_sha256": "36699270df0cbb140e9a24fb17df172567112bc6efd42894d5b84beee2c668cb",
+        "source_metadata_sha256": "21f9275db353d45124a3412ac8e25f5152cf50439514bb6041df5893bee5b078",
+        "rejected_download": "Initial yt-dlp download-sections120-240 yielded 129.9935s instead of120s. Not used for timing/admission. Downloaded full decoded source and re-extracted precisely150.60-164.35 from it."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/carl-sagan-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/carl-sagan-result.json"
     }
   ],
   "exclusions": [

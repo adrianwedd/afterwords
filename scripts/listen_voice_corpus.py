@@ -28,6 +28,7 @@ fatal_defect, candidate_clean_intervals_s, uncertainty. State uncertainty in
 wording and boundary estimates explicitly. Do not identify actors/characters
 or substitute remembered scripts. Assess isolation of a single speaker and
 complete usable phrases for conditioning. These are perceptual estimates.
+Return only the JSON object; do not repeat these instructions.
 """
 
 
@@ -85,6 +86,8 @@ def main():
                         help="1-based inclusive end index; enables disjoint review batches")
     parser.add_argument("--continue-on-failure", action="store_true",
                         help="Collect independent later clips after failed gates; exit nonzero if any gate fails")
+    parser.add_argument("--excerpt-only", action="store_true",
+                        help="Blind acoustic review with at most ten quoted words; not full transcript acceptance")
     args = parser.parse_args()
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
@@ -98,16 +101,21 @@ def main():
         frozen = dest / "observation.json"
         if frozen.exists():
             existing = json.loads(frozen.read_text())
-            if existing.get("source_sha256") == sha and existing.get("native_audio_proven") and existing.get("result", {}).get("status") == "SUCCESS" and parsed_observation(existing.get("result", {})):
+            if existing.get("source_sha256") == sha and existing.get("transcript_scope", "full") == ("excerpt" if args.excerpt_only else "full") and existing.get("native_audio_proven") and existing.get("result", {}).get("status") == "SUCCESS" and parsed_observation(existing.get("result", {})):
                 continue
         dest.mkdir(exist_ok=True)
         clip = dest / "clip.wav"
         shutil.copyfile(wav, clip)
         print(f"Listening {number}: {wav.name} {sha}", flush=True)
+        prompt = PROMPT.format(path=clip)
+        if args.excerpt_only:
+            prompt += ("\nFor literal_transcript provide only an opening excerpt of at most ten words. "
+                       "Do not transcribe or quote the remainder. Assess the whole WAV's acoustic "
+                       "properties and boundaries. This is acoustic QA, not full transcript verification.\n")
         with (dest / "events.jsonl").open("w") as events, (dest / "stderr.log").open("w") as errors:
             result = subprocess.run([
                 "agy", "--model", args.model, "--mode", "plan",
-                "--output-format", "stream-json", "--print", PROMPT.format(path=clip)
+                "--output-format", "stream-json", "--print", prompt
             ], cwd=dest, stdout=events, stderr=errors)
         records = [json.loads(line) for line in (dest / "events.jsonl").read_text().splitlines()]
         final = next((r["result"] for r in reversed(records) if r.get("event") == "result"), {})
@@ -121,6 +129,7 @@ def main():
                     for t in tool_calls)
         observation = {
             "wav": wav.name, "source_sha256": sha, "model": args.model,
+            "transcript_scope": "excerpt" if args.excerpt_only else "full",
             "conversation_id": conversation,
             "waveform_attachment_proven": bool(proof),
             "native_audio_proven": bool(proof) and clean and result.returncode == 0
@@ -128,7 +137,8 @@ def main():
                                    and parsed_observation(final) is not None,
             "audio_first_protocol": clean, "attachment_evidence": proof,
             "exit_code": result.returncode, "result": final,
-            "acceptance": "pending orchestrator adjudication",
+            "acceptance": ("acoustic observation only; full transcript unverified"
+                           if args.excerpt_only else "pending orchestrator adjudication"),
         }
         frozen.write_text(json.dumps(observation, indent=2) + "\n")
         if result.returncode or not observation["native_audio_proven"] or final.get("status") != "SUCCESS":

@@ -35,6 +35,8 @@ def admit(root: Path, plan: dict):
         assert data["native_audio_proven"] and data["source_sha256"] == expected
         assert data["result"]["status"] == "SUCCESS"
         assert parsed_observation(data["result"]) is not None, "reviewer did not return native observations"
+        if phase == "result":
+            assert data.get("transcript_scope", "full") == "full", "excerpt review cannot admit a full transcript"
         assert data["attachment_evidence"]
         assert all(e["media_sha256"] == expected for e in data["attachment_evidence"])
         evidence_paths[phase] = (source, qa / "evidence" / f"{plan['wav'].removesuffix('-ref.wav')}-{phase}.json")

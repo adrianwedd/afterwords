@@ -1,0 +1,37 @@
+{
+  "wav": "leela-ref.wav",
+  "source_sha256": "f9f919ada66fe111131f4ed0f1507bfe1924caddb41cb8eb54f8a29862c0748d",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "cccfdd00-756f-42a2-889e-52cd42818c88",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f9f919ada66fe111131f4ed0f1507bfe1924caddb41cb8eb54f8a29862c0748d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f9f919ada66fe111131f4ed0f1507bfe1924caddb41cb8eb54f8a29862c0748d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "cccfdd00-756f-42a2-889e-52cd42818c88",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 2 (lower male voice)\",\n      \"interval\": [7.4, 8.5]\n    }\n  ],\n  \"literal_transcript\": \"All right. I do not fear you, and I am not your guest. Maybe not. Speak plainly. I am your prisoner, and this is an interrogation. At the\u2014\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": \"Mild ironic exhalation / soft breathy chuckle between 14.3s and 14.8s before the final phrase.\",\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Speaker 1 is consistently recorded in a dry, close-mic vocal setting with minimal room resonance. Speaker 2 appears at a slightly lower volume level / different mic perspective around 7.4s\u20138.5s.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": [\n    [0.9, 1.8],\n    [7.0, 7.4],\n    [9.5, 10.1],\n    [13.8, 14.8]\n  ],\n  \"apparent_splices\": \"Abrupt cut at the end truncating 'At the\u2014'. Dialogue boundaries around Speaker 2's line may be spliced dialogue turns.\",\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.2],\n    [8.6, 13.8]\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual estimates with an uncertainty of approximately \u00b10.3 to 0.5 seconds. Literal wording for Speaker 2 ('Maybe not') is brief and spoken softly. The final cut-off syllable is perceptually identifiable as 'At the...' before hard clipping.\"\n}\n```\n",
+    "duration_seconds": 31.173624,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20433,
+      "output_tokens": 2858,
+      "thinking_tokens": 2303,
+      "cache_read_tokens": 15977,
+      "total_tokens": 23291
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,8 +1,8 @@
 {
   "name": "carl-sagan",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=pV2e3e5MAYI",
+  "source_url": "https://www.youtube.com/watch?v=Wp-WiNXH6hI",
   "reference_audio": "carl-sagan-ref.wav",
-  "reference_text": "forever will be. Our contemplations of the cosmos stirs. There is a tingling in the spine that catch in the voice of faint sensation as if a distant memory of",
-  "segment_start_s": 5
+  "reference_text": "Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem.",
+  "segment_start_s": 150.6
 }

@@ -25,6 +25,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
+import shlex
 import stat
 import subprocess
 import textwrap
@@ -248,8 +249,18 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
         env["HERMES_SESSION_PLATFORM"] = platform
     env["AFTERWORDS_REPO"] = str(REPO)
 
+    # Exercise the real provider logic with private lock paths. Sharing the
+    # user's live playback lock makes a stubbed short-turn test wait behind
+    # unrelated speech and lets fixture cleanup touch an operational resource.
+    # Static source-contract tests above still inspect COMMAND_SCRIPT itself.
+    provider = tmp_path / "provider.sh"
+    source = COMMAND_SCRIPT.read_text()
+    for filename in ("afterwords-play.lock", "afterwords-play.pid"):
+        source = source.replace(f'"/tmp/{filename}"', shlex.quote(str(tmp_path / filename)))
+    provider.write_text(source)
+
     result = subprocess.run(
-        ["bash", str(COMMAND_SCRIPT), str(text_path), str(out), voice],
+        ["bash", str(provider), str(text_path), str(out), voice],
         capture_output=True, text=True, env=env, timeout=300,
     )
     return result, {

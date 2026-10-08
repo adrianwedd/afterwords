@@ -14,6 +14,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
+import shlex
 import stat
 import subprocess
 import sys
@@ -115,8 +116,20 @@ def _run_shell_hook(tmp_path: Path, response: str, platform: str = "cli"):
     env.pop("AFTERWORDS_REPO", None)
     env["HERMES_SESSION_PLATFORM"] = platform
 
+    # Keep walk-up helper discovery under test, but give the stubbed hook its
+    # own playback resources instead of waiting on or cleaning the user's lock.
+    hook_dir = tmp_path / "scripts"
+    hook_dir.mkdir()
+    for module in (STRIP_MODULE, CHUNKS_MODULE):
+        (tmp_path / module.name).symlink_to(module)
+    hook = hook_dir / SHELL_HOOK.name
+    source = SHELL_HOOK.read_text()
+    for filename in ("afterwords-play.lock", "afterwords-play.pid"):
+        source = source.replace(f'"/tmp/{filename}"', shlex.quote(str(tmp_path / filename)))
+    hook.write_text(source)
+
     result = subprocess.run(
-        ["bash", str(SHELL_HOOK)], input=payload, capture_output=True, text=True, env=env, timeout=180,
+        ["bash", str(hook)], input=payload, capture_output=True, text=True, env=env, timeout=180,
     )
     return _parse_records(log), result
 
