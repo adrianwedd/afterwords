@@ -88,6 +88,13 @@ def test_review_parser_accepts_single_fenced_result_without_ambiguous_multiple_r
     assert listener.parsed_observation({"response": "```json\n" + payload + "\n```\n```json\n" + payload + "\n```"}) is None
 
 
+def test_attachment_cannot_override_explicit_inferred_acoustics():
+    listener = load_script("listen_voice_corpus")
+    payload = {"speaker_count": 1, "literal_transcript": "hello",
+               "uncertainty": "Acoustic features were inferred from available representation rather than direct auditory waveform analysis."}
+    assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None
+
+
 def test_excerpt_only_result_cannot_admit_reference(tmp_path, monkeypatch):
     monkeypatch.syspath_prepend(str(ROOT / "scripts"))
     admission = load_script("admit_voice_reference")

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "923d3cce00cf5c85d254f3ee5511ee17a7d64162b86b9f4e537198d789e53c21",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "7e2bf4fe-8a09-48ee-9aee-18ec28f8bbd6",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "923d3cce00cf5c85d254f3ee5511ee17a7d64162b86b9f4e537198d789e53c21"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "923d3cce00cf5c85d254f3ee5511ee17a7d64162b86b9f4e537198d789e53c21"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7e2bf4fe-8a09-48ee-9aee-18ec28f8bbd6",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Unfortunately, everyone knows someone who's been affected by those cancers on that list. I hope you can come to the show, even if you don't like me. Just come for a night out and support the charity.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [3.9, 4.8],\n    [7.9, 8.8]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 11.8]\n  ],\n  \"uncertainty\": \"Boundary timings are perceptual estimates with +/- 0.5s uncertainty. Transcript wording has high auditory clarity; minor uncertainty between 'who has' vs 'who's'.\"\n}\n",
+    "duration_seconds": 42.633447,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20427,
+      "output_tokens": 3234,
+      "thinking_tokens": 2866,
+      "cache_read_tokens": 16036,
+      "total_tokens": 23661
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

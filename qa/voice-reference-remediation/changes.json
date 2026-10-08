@@ -7412,6 +7412,105 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/leia-organa-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/leia-organa-result.json",
       "delivery_commit": "ce10313e189907f3260f0e87998c1e289ba35e6d"
+    },
+    {
+      "wav": "peter-kay-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "5b683aa88baac4dab31241541072a9a1c96ce51f174f1118de6d22c163c1e3c5",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08690252422320464,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "7809ed5cf3746d277eeb7977065f4c1a2cceeb10da49d46de3c877c397e2fe43",
+        "frames": 236160,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.92,
+        "peak": 0.380279541015625,
+        "rms": 0.05448064454783461,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 273.2,
+        "source_end_s": 278.12,
+        "source_start_frame": 13113600,
+        "source_end_frame_exclusive": 13349760,
+        "conversion": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation."
+      },
+      "profiles": [
+        {
+          "path": "voices/peter-kay-qwen3-06b.json",
+          "old_reference_text": "I mean, that's fantastic. At 19 December, she's still in a warden control flat. She loves it there. She's got a red rope hanging from a ceiling in front room still for emergencies. She only pulled it once, but she had a wasp in the front room flying around.",
+          "new_reference_text": "Unfortunately, everyone knows someone who's been affected by those cancers on that list.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 273.2
+        },
+        {
+          "path": "voices/peter-kay.json",
+          "old_reference_text": "I mean, that's fantastic. At 19 December, she's still in a warden control flat. She loves it there. She's got a red rope hanging from a ceiling in front room still for emergencies. She only pulled it once, but she had a wasp in the front room flying around.",
+          "new_reference_text": "Unfortunately, everyone knows someone who's been affected by those cancers on that list.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 273.2
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=SLzfteKoARw",
+      "adjudication": "Original native077 reports audience laughter/crowd and cut beginning/end. Earlier original trims115/117 retain wording/music uncertainty and were not admitted. Official ITV replacement identifies intended comedian by host introduction, metadata and selected-range speaking frame277.5. Two independent full native listens162/162-pro to wider answer both hear contracted who's and establish clean first sentence; the later statement has natural long pauses and charity/charities disagreement, not proven cutoff. Final166 isolated complete first sentence is4.92s,15 words with useful connected speech. Actual typedWAV native full-scope proof valid, one speaker, no music/crowd/laughter/effects/acoustic changes/cuts/long pauses/splices. Final166 minor who has/who's uncertainty resolved to who's by both independent wider listens plus secondary ASR. Healthy level and zero full-scale samples; exact source frame/sample equality independently verified. Later-life natural interview delivery differs stand-up style. Fresh whole resulting production acceptance still mandatory.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/peter-kay-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=SLzfteKoARw",
+        "publisher": "This Morning",
+        "publisher_channel_url": "https://www.youtube.com/channel/UChFsYLqPUyLiZnfRog6wiZA",
+        "title": "Peter Kay Reflects on 30 Years of Laughter and His Biggest Tour Ever | This Morning",
+        "published_date": "20251127",
+        "source_info_sha256": "c0f41c30a78782cb7d009032b38bf12d8783b20d30b06b0dff6c5ed8f7b8d965",
+        "source_download_sha256": "aeb97c62bd8644d82ff56ba8e1dc22bf57d982b31c6a0affc0042d4488fc6e07",
+        "source_audio_sha256": "a9d0f528589ce9e59664345fbe13d321b8299d905c9cffa5feafdb9c43ecbc76",
+        "identity_section_sha256": "c8fdb19094706e75e465fa45e867b610969b1c1637133186404645978b8c289b",
+        "identity_frame_sha256": "1d09efda738158f2c1e4860f1fd46ecc8a15df15de838172fdf3744820e359c8",
+        "source_basis": "Official ITV This Morning channel names comedian Peter Kay. Hosts introduce Kay at17.58–31.62s. Actual selected-range frame277.5 shows named guest directly speaking with lower third COMEDY LEGEND PETER KAY. Continuous interview answer supplies this sentence.",
+        "delivery_change": "Natural later-life studio interview replaces noisy stand-up material; same intended real comedian, different delivery context.",
+        "decode": "Full ffmpeg decode to PCM16 preserving source rate/channels, exit0 and empty error log.",
+        "exact_edit": {
+          "start_s": 273.2,
+          "end_s": 278.12,
+          "sample_rate": 48000,
+          "start_frame": 13113600,
+          "end_frame_exclusive": 13349760,
+          "channel_index": null
+        },
+        "sample_exact_source_slice": true,
+        "candidate_audio": {
+          "sha256": "7809ed5cf3746d277eeb7977065f4c1a2cceeb10da49d46de3c877c397e2fe43",
+          "frames": 236160,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 4.92,
+          "peak": 0.380279541015625,
+          "rms": 0.05448064454783461,
+          "samples_at_full_scale": 0
+        },
+        "changes": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation.",
+        "publisher_metadata_sha256": "f689f92f44b70a4d3f2492459f15030071c9cc7ddd91ed323a1905dd135d2eaf"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/peter-kay-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/peter-kay-result.json"
     }
   ],
   "exclusions": [
