@@ -1,0 +1,37 @@
+{
+  "wav": "columbo-ref.wav",
+  "source_sha256": "fc7cfa437ee0b6fbef802d82852e3aa2ac92197ff419d2ee6772dcd4f620610a",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "bf529de4-e6df-4adf-b60a-76bce1fa7600",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc7cfa437ee0b6fbef802d82852e3aa2ac92197ff419d2ee6772dcd4f620610a"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc7cfa437ee0b6fbef802d82852e3aa2ac92197ff419d2ee6772dcd4f620610a"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "bf529de4-e6df-4adf-b60a-76bce1fa7600",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"about um the fella that Lisson worked with, Dr. Murchison. Uh, I can't find him, and I was wondering whether you can help me. Apparently, he goofed up on some expensive project that he was working on. Gee I've seen this picture every day\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Background music is present underneath the speaker throughout the entire clip, preventing clean voice isolation.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Slight uncertainty on the spelling of the name 'Lisson' (could be Listen or another variant). The beginning cutoff is immediate at 0.0s, starting mid-sentence. The ending cutoff is abrupt at the very end of the file. No clean phrases are usable for conditioning due to the persistent background music.\"\n}\n```\n",
+    "duration_seconds": 28.296224,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12579,
+      "output_tokens": 2424,
+      "thinking_tokens": 2040,
+      "cache_read_tokens": 24041,
+      "total_tokens": 15003
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

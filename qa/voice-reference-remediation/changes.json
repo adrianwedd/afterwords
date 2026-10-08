@@ -3688,6 +3688,81 @@
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/denny-crane-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/denny-crane-result.json"
+    },
+    {
+      "wav": "columbo-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "fc7cfa437ee0b6fbef802d82852e3aa2ac92197ff419d2ee6772dcd4f620610a",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08125599087915711,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "ccb43d59d1c13d6d7cab47a8b70a9bc3467c0ea39b0098512af3c2927b8da081",
+        "frames": 250488,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.68,
+        "peak": 0.1854248046875,
+        "rms": 0.023920086402685548,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 226.2,
+        "source_end_s": 231.88,
+        "source_start_frame": 9975420,
+        "source_end_frame_exclusive": 10225908,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/columbo-qwen3-06b.json",
+          "old_reference_text": "I can't find him and I was wondering whether you can help me. Apparently he goofed up on some expensive project that he was working on. Gee, I've seen this picture every day.",
+          "new_reference_text": "Yeah, I did. I think down, you know, down through the years, uh, I always liked that character.",
+          "old_segment_start_s": 2,
+          "new_segment_start_s": 226.2
+        },
+        {
+          "path": "voices/columbo.json",
+          "old_reference_text": "I can't find him and I was wondering whether you can help me. Apparently he goofed up on some expensive project that he was working on. Gee, I've seen this picture every day.",
+          "new_reference_text": "Yeah, I did. I think down, you know, down through the years, uh, I always liked that character.",
+          "old_segment_start_s": 2,
+          "new_segment_start_s": 226.2
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=ZtboufXPj2A",
+      "adjudication": "Original full native hearing finds music underneath all speech plus abrupt boundaries; prior text-only hypothesis rejected. Earlier dog-story trial had disputed hesitations; makeup-story trials had conflicting final conjunctions and possible laughter, none admitted. Another answer226.2-234.6 had sharply conflicting last-word hearings (part of/polite versus ASR poor), so do not infer intended script or rewrite that unclear ending. Retain only its complete first statement226.2-231.88. Full revised native3.8 hearing confirms one isolated voice, no music/crowd/laughter/effects/splices or clipped words. Native hearing of both longer and resulting exact5.68s passage agrees Yeah I did, down you know down and uh before I always liked that character; ASR and native3.1 longer passage omit uh, so preserve the explicitly heard hesitation rather than normalize. Several seconds of complete multi-clause speech with useful phonetic variety, no padding or splicing. Interview introduction and directly answering guest context support intended PeterFalk; selected audio continues over illustrative B-roll, whose pictured dialogue is not audible in the reference. Do not mistake that B-roll for a camera view of this interview answer. Conversational interview rather than character scene explicitly sourced. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/columbo-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=ZtboufXPj2A",
+        "title": "Interview with Peter Falk",
+        "uploader": "Don Cooley",
+        "upload_date": "20171123",
+        "source_audio_sha256": "e8f31cb1ef24cc9665bb32d762644cef56ef9b7dc758755af33a5557b5a63fe4",
+        "source_metadata_sha256": "71d51e1e738ee550dad8b115f6c59125ec9acc7f049ecad3617419abec04e4d5",
+        "source_basis": "Public broadcast interview archive explicitly credits PeterFalk in presenter introduction. Interview camera at120s shows the credited guest; selected answer follows interviewer question about personal contribution to the Columbo role and continues as guest voiceover while illustrative scene B-roll is shown. Native selected-audio observation finds one continuous voice with no pictured-scene dialogue or acoustic splice. The230s frame is B-roll, not proof of lip synchronization for the selected interview answer.",
+        "source_frame_evidence": "qa/voice-reference-remediation/evidence/columbo-interview-source-120.jpg",
+        "source_frame_s": 120,
+        "b_roll_frame_evidence": "qa/voice-reference-remediation/evidence/columbo-source-230.jpg",
+        "b_roll_frame_s": 230
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/columbo-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/columbo-result.json"
     }
   ],
   "exclusions": [
