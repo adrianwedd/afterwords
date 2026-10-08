@@ -1,0 +1,37 @@
+{
+  "wav": "kitt-ref.wav",
+  "source_sha256": "1913fdfe56f156ebc860e696827f72c7b1a375be0af53b22429efe34501618ab",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "81a0d527-32c0-4fe6-afbc-02592f2e2fe3",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1913fdfe56f156ebc860e696827f72c7b1a375be0af53b22429efe34501618ab"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1913fdfe56f156ebc860e696827f72c7b1a375be0af53b22429efe34501618ab"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "81a0d527-32c0-4fe6-afbc-02592f2e2fe3",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 3.5],\n    [5.8, 13.8]\n  ],\n  \"literal_transcript\": \"...ing an action-filled NBC television series Knight Rider. [music interlude] I must say that I'm truly delighted to meet all of you today. Filming a television series is a demanding and challeng-\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": [\n    \"Opening voiceover begins dry and without accompaniment.\",\n    \"Prominent rhythmic electronic synthesizer music enters around 3.2s\u20133.5s and plays solo across the interlude (3.5s\u20135.8s).\",\n    \"Second speaker enters at ~5.8s layered directly over persistent background music, with a shift in vocal timbre, equalization, and acoustics.\",\n    \"Hard cut at end terminating both voice and background track simultaneously.\"\n  ],\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": true,\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Timestamps are perceptual estimates with an uncertainty of approximately \u00b10.2 to 0.4 seconds. The initial word is truncated to its final syllable ('...ing', possibly from 'starring' or 'featuring'). The terminal word cuts off abruptly mid-syllable at 'challeng-' (presumably 'challenging'). Neither speaker can be isolated cleanly: the first speaker is severely truncated and brief, while the second speaker is contaminated throughout by loud background music, yielding zero clean intervals for conditioning.\"\n}\n```\n",
+    "duration_seconds": 47.010919,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20280,
+      "output_tokens": 4255,
+      "thinking_tokens": 3737,
+      "cache_read_tokens": 15973,
+      "total_tokens": 24535
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

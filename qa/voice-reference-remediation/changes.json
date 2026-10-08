@@ -6379,6 +6379,108 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/avasarala-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/avasarala-result.json",
       "delivery_commit": "ef261a7334b12f7da6577954db1263746220d6d1"
+    },
+    {
+      "wav": "kitt-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "1913fdfe56f156ebc860e696827f72c7b1a375be0af53b22429efe34501618ab",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10442624350995901,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+        "frames": 391680,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 8.16,
+        "peak": 0.384918212890625,
+        "rms": 0.05200875648412544,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 70.0,
+        "source_end_s": 78.16,
+        "source_start_frame": 3360000,
+        "source_end_frame_exclusive": 3751680,
+        "conversion": "Exact continuous decoded source PCM16 frame slice; no DSP, remixing, normalization, separation, padding or concatenation"
+      },
+      "profiles": [
+        {
+          "path": "voices/kitt-qwen3-06b.json",
+          "old_reference_text": "an action-filled NBC television series, Knight Rider. I must say that I'm truly delighted to meet all of you today. Filming a television series is a demanding and challenging",
+          "new_reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 70.0
+        },
+        {
+          "path": "voices/kitt.json",
+          "old_reference_text": "an action-filled NBC television series, Knight Rider. I must say that I'm truly delighted to meet all of you today. Filming a television series is a demanding and challenging",
+          "new_reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 70.0
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=S2-cnKDmB0w",
+      "adjudication": "Original native057 confirms2voices/narration, loudpersistent electronicmusic, splice andcutoffs; prioraudit proposedtrim cannotisolate target withoutscore. Replaced usingofficialTelevisionAcademyFoundation interview, credit/title and selectedsourcevideocorroborate intendedWilliamDaniels. Natural later-life2017actorinterviewdelivery explicit, notroboticKITTperformance/earlier-age timbre claim. Candidate138 firstnativecleanbutsecondary word/fillerdisagreements, hesitations/longpause concern; rejected and preserved. Final14070-78.16,8.16s fullactualWAV twoindependent3.8+3.1 nativehearings agree1voice/noallcontaminants/acousticchanges/splices/longpauses/cutoffs, usabletrue. Both agree audible Id Id and a a repetitions retained. First140 uncertainandmaybe versusinmaybe; second140 lowuncertainty explicitlyinmaybe, sourceASRinmaybe corroborates only, rootretainsconfidentnative reading. Complete two phrases, nohonorific/narrator/host. ExactsourcePCM frame equality independentlyverified; healthyamplitude/no fullscale. Freshwholeproduction nativeacceptancepending andmustverify literal microrepetitions again.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/kitt-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=S2-cnKDmB0w",
+        "publisher": "FoundationINTERVIEWS",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCj4PxzfWBNV9vIdEPkglrrg",
+        "title": "William Daniels on getting cast on \"Knight Rider\" - TelevisionAcademy.com/Interviews",
+        "description": "For his full interview, see https://interviews.televisionacademy.com/interviews/william-daniels",
+        "published_date": "20180525",
+        "publisher_page_url": "https://interviews.televisionacademy.com/interviews/william-daniels",
+        "publisher_page_sha256": "355468e1395fd639839e45ae186df8f5e35da60539492483be229d47a053de35",
+        "source_info_sha256": "0140a4976125b3c2f221e64b05b2303253a7c17286d4707106a8ae752e2d0dab",
+        "source_download_sha256": "0d09f15ccceaecbad657d06b59b71203f07f11bb8732be4f5bbf3618666fbbce",
+        "source_audio_sha256": "08f495e77479f3e5755b4c6e5495da9a82a111fc6952a47ba12384dcb2fac76a",
+        "identity_section_sha256": "4310fc1192fe8e17abe41c3465c9212598e03e46a656bfad4e6003f156ab66b8",
+        "identity_frame_sha256": "2e8721ded205b8e52a8b13917d3ac469e0abe97e35d0171bba8a9a6808b1f33e",
+        "source_basis": "Television Academy interview credits William Daniels interviewed by Amy Harrington on29Aug2017 in StudioCity; its officialFoundationINTERVIEWS clip is titled WilliamDaniels ongettingcast onKnightRider and links canonicalfullinterview. Actualvideo69-79/frame74 shows sole guest speaking selected answer about recording his lines. Introvideo0-50/frame10 shows same guest. Native reviewed actual isolatedWAV confirmsonevoice.",
+        "delivery_change": "Same intended actor William Daniels in2017 natural later-life interview delivery replaces1980s KITT presentation with narrator/music. Earlier-age timbre and robotic character delivery are not claimed preserved.",
+        "decode": "Fullsource ffmpeg PCM16 preserving decoded rate/channels; exit0/emptyerrorlog",
+        "exact_edit": {
+          "start_s": 70.0,
+          "end_s": 78.16,
+          "sample_rate": 48000,
+          "start_frame": 3360000,
+          "end_frame_exclusive": 3751680,
+          "channel_index": null
+        },
+        "candidate_audio": {
+          "sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+          "frames": 391680,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 8.16,
+          "peak": 0.384918212890625,
+          "rms": 0.05200875648412544,
+          "samples_at_full_scale": 0
+        },
+        "sample_exact_source_slice": true,
+        "changes": "Exact continuous decoded source PCM16 frame slice, no DSP/remixing/normalization/separation/padding/concatenation",
+        "publisher_metadata_sha256": "0586f00d603b57dc938c54bc6ee32a1e1c84a098eca43cb0f9418ef3faac778f"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/kitt-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/kitt-result.json"
     }
   ],
   "exclusions": [

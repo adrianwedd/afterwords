@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "ca5831fd-177b-4b6e-a7fd-c1148ff88495",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ca5831fd-177b-4b6e-a7fd-c1148ff88495",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.5]\n  ],\n  \"uncertainty\": \"Low uncertainty. Single clear speaker, clean audio, straightforward phrasing. Boundary estimates are approximate.\"\n}\n```\n",
+    "duration_seconds": 26.285288,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12478,
+      "output_tokens": 1657,
+      "thinking_tokens": 1336,
+      "cache_read_tokens": 24185,
+      "total_tokens": 14135
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,8 +1,8 @@
 {
   "name": "kitt",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=jiZXnHAffuA",
+  "source_url": "https://www.youtube.com/watch?v=S2-cnKDmB0w",
   "reference_audio": "kitt-ref.wav",
-  "reference_text": "an action-filled NBC television series, Knight Rider. I must say that I'm truly delighted to meet all of you today. Filming a television series is a demanding and challenging",
-  "segment_start_s": 5
+  "reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show.",
+  "segment_start_s": 70.0
 }
