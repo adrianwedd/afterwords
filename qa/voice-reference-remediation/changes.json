@@ -330,7 +330,7 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/ace-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/final-evidence/001-f97f19398ec42419-revision-1.json",
       "secondary_asr_evidence": "qa/voice-reference-remediation/evidence/ace-result-asr-alignment.json",
-      "delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383",
+      "delivery_commit": "cd813e7089498ed55de442d6dc2b7754bdc495d7",
       "post_remediation_revisions": [
         {
           "previous_delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383",
@@ -417,7 +417,8 @@
             "qa/voice-reference-remediation/final-evidence/001-d64d81fb4c41a8d9-discovery-1.json",
             "qa/voice-reference-remediation/final-evidence/001-d64d81fb4c41a8d9-discovery-2.json",
             "qa/voice-reference-remediation/final-evidence/001-d64d81fb4c41a8d9-discovery-3.json"
-          ]
+          ],
+          "delivery_commit": "cd813e7089498ed55de442d6dc2b7754bdc495d7"
         }
       ]
     },
