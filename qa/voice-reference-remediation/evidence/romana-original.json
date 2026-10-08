@@ -1,0 +1,37 @@
+{
+  "wav": "romana-ref.wav",
+  "source_sha256": "72f8975c8bdca9a8d235acf0ea27c628c4da2f8823de02457025043706943832",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "d2bc7e80-de50-4802-8574-826d10659d32",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "72f8975c8bdca9a8d235acf0ea27c628c4da2f8823de02457025043706943832"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "72f8975c8bdca9a8d235acf0ea27c628c4da2f8823de02457025043706943832"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d2bc7e80-de50-4802-8574-826d10659d32",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 3,\n  \"speaker_change_intervals_s\": [\n    [0.0, 3.3],\n    [3.5, 6.4],\n    [6.6, 14.8]\n  ],\n  \"literal_transcript\": \"My name is Romana, baratnalun. I once worked in the Bureau of Ancient Records. Doctor, I don't want to spend the rest of my life on Gallifrey. After all this, my destiny is here. In this place.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": true,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": true,\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Timings are perceptual estimates with an uncertainty of approximately \u00b10.2\u20130.4 seconds. Speaker count is estimated between 2 and 3: the second interval (~3.5\u20136.4s) has a noticeably lower pitch, older vocal texture, and hollow acoustic compared to both the opening phrase (~0.0\u20133.3s) and the final section (~6.6\u201314.8s), which features a higher, younger female vocal delivery. Wording uncertainty: the multi-syllabic name/title following 'Romana' in the first segment is phonetically perceived as 'baratnalun' or 'voratrelun(dar)' with unclear final consonants; the fictional proper nouns ('Romana', 'Gallifrey') are transcribed phonetically as heard without script verification. None of the segments provide isolated, dry, music-free conditioning speech.\"\n}\n```\n",
+    "duration_seconds": 54.767164,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36718,
+      "output_tokens": 5248,
+      "thinking_tokens": 4727,
+      "cache_read_tokens": 0,
+      "total_tokens": 41966
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

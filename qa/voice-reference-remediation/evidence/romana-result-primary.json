@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "3a645bed-6556-4488-b665-a118239a6e4b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3a645bed-6556-4488-b665-a118239a6e4b",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It appeals to such a wide age range, it appeals to such a wide culture range. It's one of those quirky, odd programs that somehow has managed to survive over time.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 10.5]\n  ],\n  \"uncertainty\": \"Timestamps and duration (~10.5s total) are perceptual estimates with approximately +/- 0.5s uncertainty. Slight wording uncertainty regarding whether 'culture range' was spoken as 'culture range' or a lightly articulated 'cultural range', and whether 'quirky, odd' has a micro-pause or hesitation.\"\n}\n```\n",
+    "duration_seconds": 50.591524,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20485,
+      "output_tokens": 3382,
+      "thinking_tokens": 3013,
+      "cache_read_tokens": 16047,
+      "total_tokens": 23867
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

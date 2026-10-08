@@ -6482,6 +6482,107 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/kitt-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/kitt-result.json",
       "delivery_commit": "138e11dbae99fc333304e535d2fda080a316fa57"
+    },
+    {
+      "wav": "romana-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "72f8975c8bdca9a8d235acf0ea27c628c4da2f8823de02457025043706943832",
+        "frames": 696320,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.789569160997733,
+        "peak": 0.58428955078125,
+        "rms": 0.05354417439763218,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b",
+        "frames": 561600,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 11.7,
+        "peak": 0.745941162109375,
+        "rms": 0.14808768844552983,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 45.6,
+        "source_end_s": 57.3,
+        "source_start_frame": 2188800,
+        "source_end_frame_exclusive": 2750400,
+        "conversion": "Exact continuous decodedsource PCM16 frame slice, no DSP/remixing/normalization/separation/padding/concatenation"
+      },
+      "profiles": [
+        {
+          "path": "voices/romana-qwen3-06b.json",
+          "old_reference_text": "My name is Romanadvoratrelundar. I once worked in the Bureau of Ancient Records. Doctor, I don't want to spend the rest of my life on Gallifrey. After all this, my destiny is here. In this place.",
+          "new_reference_text": "It appeals to such a wide age range, it appeals to such a wide culture range. It's one of those quirky, odd programmes that somehow has managed to survive over time.",
+          "old_segment_start_s": 12,
+          "new_segment_start_s": 45.6
+        },
+        {
+          "path": "voices/romana.json",
+          "old_reference_text": "My name is Romanadvoratrelundar. I once worked in the Bureau of Ancient Records. Doctor, I don't want to spend the rest of my life on Gallifrey. After all this, my destiny is here. In this place.",
+          "new_reference_text": "It appeals to such a wide age range, it appeals to such a wide culture range. It's one of those quirky, odd programmes that somehow has managed to survive over time.",
+          "old_segment_start_s": 12,
+          "new_segment_start_s": 45.6
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=CPyv2UzVsuU",
+      "adjudication": "Original native0832-3perceptualvoices/differenttimbres/acoustics/splices/score/SFX anduncertainpropername; no actor-switch claim fromtimbralobservation alone. Replaced fromattributedFlicksAndTheCity LallaWard interview, publisherrole/interviewercredit andactualselectedvideoconfirmguest. Final14245.6-57.3,11.7s,actualfullWAV hasthreeindependentnativehearings, all1foregroundvoice/noscore/laughter/effects/acousticchanges/splices/longpauses/usabletrue. Primary3.8noCrowd/bothcutoffsfalse; secondary3.1roommurmur/crowdtrue withslightlyabruptinitialIt butcleanstopaftertime. Dedicatedblindthird142roomdetail asksintelligibility/relativelevel/interference withoutfeedingpriorobservations; itconfirms completeinitialIt/finaltime, faintdiffuseunintelligibleroommurmur farbelowforeground, no materialsecondspeaker/words/competition/obscuration. Incidental roomambience explicitlyaccepted; notassertingabsolutesilence or acceptingheavycrowd. First/thirdculturevsculturalminoruncertainty, bothrenderculture; secondaryindependentnativeconfidentculture, sourceASRculturecorroboratesbutnotauthority; retainspokenculturewithoutgrammaticalcorrection. Britishprogrammes orthographydoesnotchangeaudiblewords. Natural2013actorinterviewregisterexplicit, no dramaticRomana/earlierageperformanceclaim. SourcePCMexactverified/healthyamplitude/nofullscale. Contradictoryacoustic flags preserved in result-primary/result-secondary plus roomdetailprompt. Fresh whole final native pass mandatory, especially ambientnoiselevel and literalculture.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/romana-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=CPyv2UzVsuU",
+        "publisher": "Flicks And The City",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCS5C4dC1Vc3EzgeDO-Wu3Mg",
+        "title": "Lalla Ward Doctor Who 50th Anniversary Interview",
+        "published_date": "20131119",
+        "interviewer": "Jan Gilbert",
+        "source_info_sha256": "d29114aa0a40f1a6cd13bc9a7ef7a569ce7eeccb6cf8f82de7d125515b47b570",
+        "source_download_sha256": "546979d4041ba80166cc738b7d105c5dfa445f2608669078e89eda2ca8e82929",
+        "source_audio_sha256": "ef4e77817d2621e6f623a316b4df1528dde8ef203b832eea1013898f81716730",
+        "identity_section_sha256": "f22a0202d13014db66dc93534ad4aa7d308f8e430dd7b4dc12a66c1b0cd9593d",
+        "identity_frame_sha256": "2d720c49dc47f9da2074ba054b9f6a8a08e71e37a2501484e3b03760ef6418e3",
+        "source_basis": "Originalinterview publisherFlicksAndTheCity title/description explicitlyidentify LallaWard akaRomana; descriptioncreditsinterviewerJanGilbert. Actualsourcevideo44-58/frame51 showsguesttalkingonFlicksCitymicrophone throughoutselectedanswer. Answerfollows hostquestionaboutDoctorWhofan appeal. READMEintendedRomanaactor is LallaWard.",
+        "delivery_change": "Same intendedactor LallaWard in2013 interviewdelivery replaces scored dramaticmontage. Characterperformance/earlierage timbre notclaimedpreserved.",
+        "decode": "Fullsource ffmpeg PCM16 preserving decodedrate/channels; exit0/emptyerrorlog",
+        "exact_edit": {
+          "start_s": 45.6,
+          "end_s": 57.3,
+          "sample_rate": 48000,
+          "start_frame": 2188800,
+          "end_frame_exclusive": 2750400,
+          "channel_index": null
+        },
+        "candidate_audio": {
+          "sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b",
+          "frames": 561600,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 11.7,
+          "peak": 0.745941162109375,
+          "rms": 0.14808768844552983,
+          "samples_at_full_scale": 0
+        },
+        "sample_exact_source_slice": true,
+        "changes": "Exact continuous decodedsource PCM16 frame slice; no DSP/remixing/normalization/separation/padding/concatenation",
+        "accepted_ambient_noise": "142secondaryreportscrowdtrue/roomchatter; dedicatedblind142roomdetail hears faint diffuse unintelligiblemurmur farbelowforeground, no words/materialsecondvoice/interference. Incidental roomambience accepted explicitly, notheavycrowd nor claimofabsolute silence.",
+        "publisher_metadata_sha256": "f0cf2a31ec295dbafef6c47309044b3dedc6e4f16ba44ff33d0ac47cb853a2fa"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/romana-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/romana-result.json"
     }
   ],
   "exclusions": [
