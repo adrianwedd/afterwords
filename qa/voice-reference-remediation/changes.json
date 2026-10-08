@@ -5626,7 +5626,8 @@
       "native_result_secondary_evidence": "qa/voice-reference-remediation/evidence/lisa-simpson-result-secondary.json",
       "rejected_candidate_evidence": [
         "qa/voice-reference-remediation/evidence/lisa-simpson-first-phrase-rejected.json"
-      ]
+      ],
+      "delivery_commit": "e291e53d714c0f228502f7cbb6b10b12ffd4eae7"
     }
   ],
   "exclusions": [
