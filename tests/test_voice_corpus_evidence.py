@@ -112,6 +112,32 @@ def test_excerpt_only_result_cannot_admit_reference(tmp_path, monkeypatch):
     assert wav.read_bytes() == (ROOT / "voices/bob-jones-ref.wav").read_bytes()
 
 
+@pytest.mark.parametrize("kind", ["replacement", "lossless_pcm_frame_slice"])
+def test_admission_rejects_silently_clamped_frame_interval(tmp_path, monkeypatch, kind):
+    monkeypatch.syspath_prepend(str(ROOT / "scripts"))
+    admission = load_script("admit_voice_reference")
+    baseline = json.loads((ROOT / "qa/voice-reference-remediation/baseline.json").read_text())
+    record = next(r for r in baseline["records"] if r["wav"] == "bob-jones-ref.wav")
+    qa = tmp_path / "qa/voice-reference-remediation"
+    qa.mkdir(parents=True)
+    (qa / "baseline.json").write_text(json.dumps({"records": [record]}))
+    (tmp_path / "voices").mkdir()
+    wav = tmp_path / "voices" / record["wav"]
+    original_bytes = (ROOT / "voices" / record["wav"]).read_bytes()
+    wav.write_bytes(original_bytes)
+    evidence = ROOT / "qa/voice-reference-remediation/evidence/bob-jones-original.json"
+    prefix = "source_" if kind == "replacement" else ""
+    operation = {"type": kind, prefix + "start_frame": 0,
+                 prefix + "end_frame_exclusive": record["audio"]["frames"] + 1}
+    plan = {"wav": record["wav"], "approved": True, "adjudication": "reject before mutation",
+            "candidate": str(wav), "native_original_evidence": str(evidence),
+            "native_result_evidence": str(evidence), "operation": operation}
+    with pytest.raises(AssertionError, match="slice"):
+        admission.admit(tmp_path, plan)
+    assert wav.read_bytes() == original_bytes
+    assert not (qa / "changes.json").exists()
+
+
 def test_every_changed_reference_has_hash_bound_provenance():
     baseline = json.loads((ROOT / "qa/voice-reference-remediation/baseline.json").read_text())
     manifest = json.loads((ROOT / "qa/voice-reference-remediation/changes.json").read_text())
@@ -165,7 +191,13 @@ def test_every_changed_reference_has_hash_bound_provenance():
                      rate, format="WAV", subtype="PCM_16")
             assert hashlib.sha256(probe.getvalue()).hexdigest() == resolution["rendered_sha256"]
         operation = change["operation"]
+        start = operation.get("source_start_frame", operation.get("start_frame"))
+        end = operation.get("source_end_frame_exclusive", operation.get("end_frame_exclusive"))
+        if start is not None or end is not None:
+            assert 0 <= start < end
+            assert end - start == actual["frames"], "declared interval must not silently clamp"
         if operation["type"] == "lossless_pcm_frame_slice":
+            assert end <= record["audio"]["frames"]
             old_bytes = subprocess.check_output([
                 "git", "show", f"{baseline['baseline_commit']}:voices/{record['wav']}"], cwd=ROOT)
             old, rate = sf.read(io.BytesIO(old_bytes), dtype="int16", always_2d=True)

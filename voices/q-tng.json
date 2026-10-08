@@ -1,8 +1,8 @@
 {
   "name": "q-tng",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=-UqNIOc8rgc",
+  "source_url": "https://www.youtube.com/watch?v=Te8vCFkFHg8",
   "reference_audio": "q-tng-ref.wav",
-  "reference_text": "The trial never ended, Captain. We never reached a verdict. But now we have. You're guilty. Guilty of what? Being inferior. Seven years ago.",
-  "segment_start_s": 30
+  "reference_text": "I'm just concerned about it because we're talking about an audience that is exceedingly on point about the show. They don't miss anything.",
+  "segment_start_s": 1845.16
 }

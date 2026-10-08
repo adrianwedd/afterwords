@@ -5628,6 +5628,176 @@
         "qa/voice-reference-remediation/evidence/lisa-simpson-first-phrase-rejected.json"
       ],
       "delivery_commit": "e291e53d714c0f228502f7cbb6b10b12ffd4eae7"
+    },
+    {
+      "wav": "q-tng-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "704542399930767b5c80a222422fc50f2ba36b88b68613461f3196e44bf1fb5c",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.07443376786458861,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "8fa02b3a6fb6ffd06135e49ee193f474aff9cb30663df97c3694fe9d084768d2",
+        "frames": 562560,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 11.72,
+        "peak": 0.438812255859375,
+        "rms": 0.047204684726420316,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 1845.16,
+        "source_end_s": 1856.88,
+        "source_start_frame": 88567680,
+        "source_end_frame_exclusive": 89130240,
+        "conversion": "Exact continuous decoded source PCM16 frame slice preserving source rate/channels; no cleanup, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/q-tng-qwen3-06b.json",
+          "old_reference_text": "The trial never ended, Captain. We never reached a verdict. But now we have. You're guilty. Guilty of what? Being inferior. Seven years ago.",
+          "new_reference_text": "I'm just concerned about it because we're talking about an audience that is exceedingly on point about the show. They don't miss anything.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 1845.16
+        },
+        {
+          "path": "voices/q-tng.json",
+          "old_reference_text": "The trial never ended, Captain. We never reached a verdict. But now we have. You're guilty. Guilty of what? Being inferior. Seven years ago.",
+          "new_reference_text": "I'm just concerned about it because we're talking about an audience that is exceedingly on point about the show. They don't miss anything.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 1845.16
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=Te8vCFkFHg8",
+      "adjudication": "Original native reports2speakers, truncated initial word/end, crowd/laughter and pauses; do not blindly execute proposed interval. TrekMovie publisher credits and explicit host handoff/welcome identify John de Lancie; guest own FanFair business/son narrative and Q/Picard scene discussion corroborate attribution. Exact1845.16-1856.88 native111 full actual-WAV review confirms1voice, no music/crowd/laughter/effects/acoustic change/splice/long pauses or either cutoff; very low wording uncertainty, two complete clauses. Transcript agrees aligned source ASR; actual11.72s, native7.2 clock estimate not edit authority. Source decodeexit0/errorsearchnone, healthy levels/no fullscale samples. Exact decoded publisher PCM16 frame slice independently verified, no DSP. Same intended actor natural interview register replaces contaminated Q dialogue; in-character delivery not claimed preserved. Fresh entire resulting production corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "sample_exact_publisher_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/q-tng-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=Te8vCFkFHg8",
+        "publisher": "TrekMovie",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCy_izLS7TgKhMlh7x8n-g5g",
+        "title": "PODCAST: John de Lancie Interview & Star Trek News Wrapup",
+        "description": "ews: Byron Allen’s company is interested in buying Paramount, Michelle Yeoh’s Section 31 co-stars have finally been announced, Dave Blass says the Picard spin-off is still not in the works, the TNG cast is set to receive a lifetime achievement award at the Saturns, Patrick Stewart stars in a new Super Bowl ad for Paramount Plus, Zoe Saldana thinks the Kelvin crew might get one last film together, and William Shatner’s new biographical documentary has a trailer.\n\nAfter that, they chat with actor John de Lancie about FanFair, the company he and his son have to get digitally signed unique artwork to fans who can’t make it to conventions. He also talks about some of his early choices as he played Q in the Next Gen series premiere and beyond, his conversations with Gene Roddenberry about how often Q would be on the show, his surprise at finding out Q would die in Picard season 2, and that post-credits finale scene in Picard season 3.\n\nThey wrap up with John Larroquette playing a Klingon again on Night Court, and a fun thread about “Threshold” salamander sex from The Vagina Museum.",
+        "guest": "John de Lancie",
+        "source_download_sha256": "c047a9a91ae78f7a8fc0fb2f8e9c7e91c8a9d2c56fc765ede51638748f6714b1",
+        "source_audio_sha256": "fe4f44260615e53d6bd28b22883bf30a762a9d278161ac1bfa61eb47a8a8dee9",
+        "source_info_sha256": "f50274a5b7e2cdee751e62bf3f7b458a5295f18f67460ea67827226efb03e1c0",
+        "retrieved_utc": "2026-10-08T08:10:34.867504+00:00",
+        "decode": "ffmpeg PCM16 preserving decoded rate/channels, no DSP",
+        "delivery_change": "Same intended actor John de Lancie in natural interview delivery replaces contaminated multi-person Q dialogue; character delivery is not claimed preserved.",
+        "identity_basis": "TrekMovie publisher title/description identifies guest John de Lancie; source host handoff1087.3-1090.52 and welcome1104.5-1114.72 explicitly name him, followed by guest autobiographical FanFair/son answers and discussion of his Q scenes/death in Picard. Selected continuous guest answer concerns audience noticing story inconsistencies.",
+        "publisher_metadata_sha256": "81a4d44e3553543837806db97b97645f36e5bd8a4dbfbb2caa55d158dc1349e6",
+        "source_basis": "TrekMovie publisher title/description identifies guest John de Lancie; source host handoff1087.3-1090.52 and welcome1104.5-1114.72 explicitly name him, followed by guest autobiographical FanFair/son answers and discussion of his Q scenes/death in Picard. Selected continuous guest answer concerns audience noticing story inconsistencies."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/q-tng-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/q-tng-result.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/q-tng-publisher-source.json"
+    },
+    {
+      "wav": "sherlock-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "977db70a6dd6fea9fb58c209aa8824434fca87cd0859b0a97d440c8f0b188f62",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.07611452055752274,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "afeafac7d66cd1eb715da76500cae5ecc8a72486238bba0873a6b3d834676992",
+        "frames": 318511,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.635645833333333,
+        "peak": 0.555694580078125,
+        "rms": 0.09206829368869349,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 36.2,
+        "source_end_s": 42.83564583333333,
+        "source_start_frame": 1737600,
+        "source_end_frame_exclusive": 2056111,
+        "conversion": "Exact continuous decoded source PCM16 frame slice preserving source rate/channels; no cleanup, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/sherlock-qwen3-06b.json",
+          "old_reference_text": "What have we got? We know this footprint is Henry found them so did the tour guide but we all heard something",
+          "new_reference_text": "So I came on set pretty bleary-eyed, but kind of high on the whole adventure that was about to take over my life.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 36.2
+        },
+        {
+          "path": "voices/sherlock.json",
+          "old_reference_text": "What have we got? We know this footprint is Henry found them so did the tour guide but we all heard something",
+          "new_reference_text": "So I came on set pretty bleary-eyed, but kind of high on the whole adventure that was about to take over my life.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 36.2
+        }
+      ],
+      "source_url": "https://commons.wikimedia.org/wiki/File:Benedict_cumberbatch_in_front_row_b00wqfnd-crop.flac",
+      "adjudication": "Original native reports2voices, dramatic drone/possible score and heavy creature breathing/foley; proposed interval does not prove target actor identity or remove underlying drone. Commons BBC voice project FLAC explicitly identifies speaking voice of Benedict Cumberbatch, credits BBC and CC BY3.0; original BBC programme title also names him. Use licensed Commons excerpt only; do not assume full BBC programme has same open licence. Initial30.4-42.9 candidate110 native reports clipped initial I/got, not admitted. Later exact36.2-42.83564583333333 native112 full actual-WAV review confirms1voice, no music/crowd/laughter/effects/acoustic change/splice/long pauses or either cutoff, clear complete sentence with negligible wording uncertainty; literal words agree overlapping110 and independently aligned source ASR. Actual6.635645833333333s, native7.5 estimate not edit authority. Exact decoded Commons PCM16 frame equality independently verified, no DSP. Source attribution/licence/link/change preserved in manifest/evidence and README; source_start36.2 refers to this43s Commons excerpt, not unverified time in full BBC programme. Same actor natural interview register replaces contaminated Sherlock dialogue; in-character delivery not claimed preserved. Fresh entire resulting production corpus acceptance pending. Initial requested42.99 endpoint exceeded source length and Python clamped slice; authoritative end now recorded as actual source frame2056111. No production sample changes needed; declared interval repaired to match accepted WAV.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "sample_exact_publisher_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/sherlock-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:Benedict_cumberbatch_in_front_row_b00wqfnd-crop.flac",
+        "source_download_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Benedict_cumberbatch_in_front_row_b00wqfnd-crop.flac",
+        "publisher": "BBC via Wikimedia Commons BBC voice project",
+        "author": "BBC",
+        "guest": "Benedict Cumberbatch",
+        "programme": "Front Row",
+        "programme_url": "https://www.bbc.co.uk/programmes/b00wqfnd",
+        "source_flac_sha256": "f664eac13d7e00eda8937f7257bb78b388dc05e4aed2f76d2e32479f72972d4c",
+        "source_audio_sha256": "d8dc9ddef35d88dae674e5fb351b8015044a85b206e8aee6d3c7aae9f212e33d",
+        "source_metadata_sha256": "5d245afefc15266c766f3b8cb6631a9220b2501049f30f90d8f13103e5dd905a",
+        "retrieved_utc": "2026-10-08T08:11:11.650603+00:00",
+        "license": "Creative Commons Attribution 3.0 Unported",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "license_basis": "Commons file page credits BBC and says excerpt explicitly released through BBC voice project; full BBC programme copyright is separate. License applies to this Commons FLAC excerpt, not assumed for whole podcast.",
+        "attribution": "BBC, Benedict cumberbatch in front row b00wqfnd-crop.flac, via Wikimedia Commons BBC voice project, CC BY 3.0. Changed by trimming decoded audio to36.2-42.83564583333333s; no endorsement implied.",
+        "decode": "ffmpeg to PCM16 preserving decoded source rate/channels; no cleanup or normalization",
+        "delivery_change": "Same intended actor Benedict Cumberbatch in natural interview delivery replaces contaminated multi-person Sherlock dialogue; character register is not claimed preserved.",
+        "identity_basis": "Commons file explicitly identifies speaking voice of Benedict Cumberbatch, credits BBC, and links originating Front Row programme b00wqfnd whose primary BBC title also lists him as guest.",
+        "publisher_metadata_sha256": "f44e410752155d955129347ea645d2386c2bb1a6de3beda80001e0e98f69e979",
+        "source_basis": "Commons file explicitly identifies speaking voice of Benedict Cumberbatch, credits BBC, and links originating Front Row programme b00wqfnd whose primary BBC title also lists him as guest."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/sherlock-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/sherlock-result.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/sherlock-publisher-source.json",
+      "rejected_candidate_evidence": [
+        "qa/voice-reference-remediation/evidence/sherlock-initial-cutoff-rejected.json"
+      ]
     }
   ],
   "exclusions": [

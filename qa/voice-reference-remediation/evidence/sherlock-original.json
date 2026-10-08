@@ -1,0 +1,37 @@
+{
+  "wav": "sherlock-ref.wav",
+  "source_sha256": "977db70a6dd6fea9fb58c209aa8824434fca87cd0859b0a97d440c8f0b188f62",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "53d91a95-f3e4-45f9-952f-04e4f3f04903",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "977db70a6dd6fea9fb58c209aa8824434fca87cd0859b0a97d440c8f0b188f62"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "977db70a6dd6fea9fb58c209aa8824434fca87cd0859b0a97d440c8f0b188f62"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "53d91a95-f3e4-45f9-952f-04e4f3f04903",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 0.9],\n    [1.1, 7.2]\n  ],\n  \"literal_transcript\": \"Speaker 1: What have we got? Speaker 2: We know there's footprints, 'cause Henry found them, so did the tour guide, but... we all heard something. [Heavy labored breathing / creature panting sound effects]\",\n  \"music\": \"Low dramatic background drone / atmospheric tension underscore throughout, particularly noticeable during pauses and under the tail segment.\",\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": \"Distinct, heavy, raspy breathing / guttural panting Foley or creature sound effects from approximately 7.2s to the end (~11.6s).\",\n  \"acoustic_changes\": \"Perspective and acoustic change across speaker transition at ~0.9s\u20131.1s; significant shift from dialogue to heavy breathing sound effects and low ambient drone starting around 7.2s.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"interval_s\": [4.8, 5.5],\n      \"duration_s\": 0.7,\n      \"description\": \"Dramatic pause by Speaker 2 between '...tour guide, but' and 'we all heard something.'\"\n    },\n    {\n      \"interval_s\": [7.2, 11.6],\n      \"duration_s\": 4.4,\n      \"description\": \"Extended post-speech interval containing no dialogue, occupied by breathing SFX and ambient drone.\"\n    }\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [1.1, 7.1]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations within +/- 0.1 to 0.2 seconds. In the transcript of Speaker 2, the conjunction is phonetically contracted ('cuz' / ''cause'). The tail sounds from ~7.2s to 11.6s are perceptually ambiguous between heavily processed Foley panting, creature vocal sound effects, or an off-mic actor panting. The low-frequency background ambience may be subtle cinematic sub-bass underscore or environmental rumble.\"\n}\n```\n",
+    "duration_seconds": 43.39697,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20777,
+      "output_tokens": 3937,
+      "thinking_tokens": 3285,
+      "cache_read_tokens": 15984,
+      "total_tokens": 24714
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

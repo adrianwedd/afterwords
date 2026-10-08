@@ -42,6 +42,16 @@ def admit(root: Path, plan: dict):
         evidence_paths[phase] = (source, qa / "evidence" / f"{plan['wav'].removesuffix('-ref.wav')}-{phase}.json")
     operation = plan["operation"]
     if operation["type"] == "lossless_pcm_frame_slice":
+        start, end = operation["start_frame"], operation["end_frame_exclusive"]
+        assert 0 <= start < end <= original["audio"]["frames"], "slice exceeds original source bounds"
+        assert end - start == result_audio["frames"], "declared slice frame count differs from candidate"
+    elif operation["type"] == "replacement" and (
+        "source_start_frame" in operation or "source_end_frame_exclusive" in operation
+    ):
+        start, end = operation["source_start_frame"], operation["source_end_frame_exclusive"]
+        assert 0 <= start < end
+        assert end - start == result_audio["frames"], "declared slice frame count differs from candidate"
+    if operation["type"] == "lossless_pcm_frame_slice":
         old, rate = sf.read(destination, dtype="int16", always_2d=True)
         new, new_rate = sf.read(candidate, dtype="int16", always_2d=True)
         assert original["audio"]["subtype"] == result_audio["subtype"] == "PCM_16"

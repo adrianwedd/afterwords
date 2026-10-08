@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "afeafac7d66cd1eb715da76500cae5ecc8a72486238bba0873a6b3d834676992",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "549065d4-4ed8-4392-8a69-2b002200f4bd",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "afeafac7d66cd1eb715da76500cae5ecc8a72486238bba0873a6b3d834676992"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "afeafac7d66cd1eb715da76500cae5ecc8a72486238bba0873a6b3d834676992"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "549065d4-4ed8-4392-8a69-2b002200f4bd",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So I came on set pretty bleary-eyed, but kind of high on the whole adventure that was about to take over my life.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.5]\n  ],\n  \"uncertainty\": \"Exact boundary timestamps are perceptual estimates (+/- 0.3s) as native waveform timecodes are not measured via tools. The spoken wording is clear and highly intelligible with negligible perceptual uncertainty.\"\n}\n```\n",
+    "duration_seconds": 37.69346,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20259,
+      "output_tokens": 2503,
+      "thinking_tokens": 2175,
+      "cache_read_tokens": 16152,
+      "total_tokens": 22762
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
