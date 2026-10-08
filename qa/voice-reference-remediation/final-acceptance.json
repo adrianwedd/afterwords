@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "snapshot": "qa/voice-reference-remediation/final-snapshot.json",
-  "production_commit": "10a8d650d924b77ab682f72d742dc3c6b5c7cba2",
+  "production_commit": "835049e89cc36d70aec487dbcec4809da127658b",
   "corpus_status": "pending",
   "required_production_count": 104,
   "records": [
@@ -94,7 +94,8 @@
         "audio_integrity": true,
         "production_hash_match": true,
         "profile_relationships_consistent": true,
-        "samples_at_full_scale": 0
+        "samples_at_full_scale": 0,
+        "production_and_git_hash_match": true
       }
     },
     {
@@ -442,7 +443,8 @@
         "audio_integrity": true,
         "production_hash_match": true,
         "profile_relationships_consistent": true,
-        "samples_at_full_scale": 0
+        "samples_at_full_scale": 0,
+        "production_and_git_hash_match": true
       }
     },
     {

@@ -126,7 +126,7 @@
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/alan-shore-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/final-evidence/005-ca4a85963742a4ae-revision-1.json",
-      "delivery_commit": "1fd0de66742310e7e3f9b51e6413c9b313367a6e",
+      "delivery_commit": "835049e89cc36d70aec487dbcec4809da127658b",
       "post_remediation_revisions": [
         {
           "previous_delivery_commit": "1fd0de66742310e7e3f9b51e6413c9b313367a6e",
@@ -202,7 +202,8 @@
           "discovery_native_evidence": [
             "qa/voice-reference-remediation/final-evidence/005-73b7e41b2d12b7f2-discovery-1.json",
             "qa/voice-reference-remediation/final-evidence/005-73b7e41b2d12b7f2-discovery-2.json"
-          ]
+          ],
+          "delivery_commit": "835049e89cc36d70aec487dbcec4809da127658b"
         }
       ]
     },
@@ -4580,7 +4581,7 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/clara-oswald-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/final-evidence/024-fc6e77cc7d7a16eb-revision-1.json",
-      "delivery_commit": "059508fb0b484a8e2083be361c69f1cd233c5f4c",
+      "delivery_commit": "835049e89cc36d70aec487dbcec4809da127658b",
       "post_remediation_revisions": [
         {
           "previous_delivery_commit": "059508fb0b484a8e2083be361c69f1cd233c5f4c",
@@ -4643,7 +4644,8 @@
           "discovery_native_evidence": [
             "qa/voice-reference-remediation/final-evidence/024-fc6e77cc7d7a16eb-discovery-1.json",
             "qa/voice-reference-remediation/final-evidence/024-fc6e77cc7d7a16eb-discovery-2.json"
-          ]
+          ],
+          "delivery_commit": "835049e89cc36d70aec487dbcec4809da127658b"
         }
       ]
     },
