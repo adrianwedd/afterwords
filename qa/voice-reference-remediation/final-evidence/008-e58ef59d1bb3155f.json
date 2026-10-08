@@ -1,0 +1,38 @@
+{
+  "wav": "clip-008-ref.wav",
+  "source_sha256": "e58ef59d1bb3155facc873614ffe5f899daedd372741af9948fec6cb06364480",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "141b3960-19c0-4b8c-adf8-9feb8f7f7905",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e58ef59d1bb3155facc873614ffe5f899daedd372741af9948fec6cb06364480"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e58ef59d1bb3155facc873614ffe5f899daedd372741af9948fec6cb06364480"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "141b3960-19c0-4b8c-adf8-9feb8f7f7905",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and I can't leave my young son any longer, because he has no nurse at the moment.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.6]\n  ],\n  \"uncertainty\": \"High confidence in literal transcript wording due to clear enunciation and absence of masking noise. Time boundaries and durations are perceptual estimates within +/- 0.3 seconds. The clip begins mid-sentence with 'and', but initial phonemes are intact without an abrupt acoustic cutoff.\"\n}\n",
+    "duration_seconds": 23.602504,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20170,
+      "output_tokens": 2455,
+      "thinking_tokens": 2118,
+      "cache_read_tokens": 16202,
+      "total_tokens": 22625
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -38,13 +38,21 @@
       "index": 3,
       "wav": "alan-bstard-ref.wav",
       "sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh listener reports ambiguous post-speech laughter/end cutoff",
-      "transcript_status": "literal words match",
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root adjudication",
+      "transcript_status": "matched literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/003-4a44548b8f7d224a.json"
+        "qa/voice-reference-remediation/final-evidence/003-4a44548b8f7d224a.json",
+        "qa/voice-reference-remediation/final-evidence/003-4a44548b8f7d224a-retry.json",
+        "qa/voice-reference-remediation/final-evidence/003-4a44548b8f7d224a-detail.json"
       ],
-      "adjudication": "Independent fresh native hearing pending; do not confirm a defect from ambiguous attendee versus self-chuckle alone."
+      "adjudication": "Fresh primary notes possible laugh after speech and tight ending, uncertain speaker/self-chuckle. Independent fresh3.1 hears no laughter and all words fully intelligible, labels tight padding cutoffs rather than missing phonemes. Third fresh detailed native explicitly checks phonemes versus padding and possible laughter: one speaker, all phonemes distinctly audible, no laughter/music/crowd/effects/splice/acoustic change; beginning/end complete. Primary laugh cannot be reproduced in either independent new hearing; do not invent a confirmed audience defect. Literal words agree in all3 fresh hearings. Uniform room tone/tight padding accepted; no phonemic cutoff established.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 4,
@@ -70,28 +78,55 @@
       "index": 6,
       "wav": "amy-pond-ref.wav",
       "sha256": "18d9f5b8b14f2d1ddc78d9033874078e1e3e1aad88e1e3188a18e47e50a3c147",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed with root rationale",
+      "transcript_status": "matched audible words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/006-18d9f5b8b14f2d1d.json"
+      ],
+      "adjudication": "Fresh full native hearing:1speaker, no music/crowd/laughter/effects/change/cutoff/pause/splice; consistent recording described explicitly. Clear literal words match all profiles. Timing uncertainty is not a wording or isolation limitation.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 7,
       "wav": "attenborough-ref.wav",
       "sha256": "745f3e4e47f3b1f3fe9cf4160ae3b17dcaf716c60854af60177ca635aa1c068c",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed with root rationale",
+      "transcript_status": "matched audible words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/007-745f3e4e47f3b1f3.json"
+      ],
+      "adjudication": "Fresh full native hearing:1well-isolated speaker, no music/crowd/laughter/splices/cutoffs. Faint natural background ambience/room tone explicitly non-intrusive; uniform dry acoustic and natural0.6\u20130.7s phrase pauses accepted. Literal words match all profiles with negligible lexical uncertainty. Do not misclassify incidental room tone as material sound-effect contamination.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 8,
       "wav": "audrey-ref.wav",
       "sha256": "e58ef59d1bb3155facc873614ffe5f899daedd372741af9948fec6cb06364480",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed with root rationale",
+      "transcript_status": "matched audible words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/008-e58ef59d1bb3155f.json"
+      ],
+      "adjudication": "Fresh full native hearing:1speaker, all contamination/change/cutoff/pause/splice flags false. Exact literal words match all profiles after punctuation/case normalization. Initial and is audible in full with intact phonemes; conversational clause beginning is not a cut word.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 9,
@@ -547,12 +582,19 @@
       "index": 56,
       "wav": "k9-ref.wav",
       "sha256": "71b4ae8d4d71716193ec4c119da64691fdb97d53d74ccaf4a38c5aecbd7927a4",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root adjudication",
+      "transcript_status": "matched literal words",
       "evidence": [
         "qa/voice-reference-remediation/final-evidence/056-71b4ae8d4d717161.json"
-      ]
+      ],
+      "adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false; literal words exactly match every frozen profile. Specifically hears planet history rather than grammar-correct planetary history; preserve audible wording.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 57,
@@ -569,10 +611,19 @@
       "index": 58,
       "wav": "kryten-ref.wav",
       "sha256": "abd923248878782c3ce582b478363ceb9e9d1998fb0403ea8f1c8564e0e8349f",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root adjudication",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/058-abd923248878782c.json"
+      ],
+      "adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false; literal words match all profiles apart from capitalization/punctuation/hyphenation. Reviewer explicitly hears complete initial for fricative despite short lead-in; clear phrase complete. Orthographic mechanoid/hyphenation does not change spoken text.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 59,
@@ -587,19 +638,37 @@
       "index": 60,
       "wav": "leela-ref.wav",
       "sha256": "e4663f99fb4c34e830d7c9a65950c338164b8602cfc608536ee3a00b3b539d72",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed with root rationale",
+      "transcript_status": "matched audible words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/060-e4663f99fb4c34e8.json"
+      ],
+      "adjudication": "Fresh full native hearing:1speaker, all contamination/change/cutoff/splice flags false. Exact literal words match all profiles. Deliberate approximately0.9s dramatic pause between complete phrases is natural cadence, not dead air/edit; clean conditioning accepted.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 61,
       "wav": "leia-organa-ref.wav",
       "sha256": "879ea3d7ae13542c395a6f8a3a949f7d44eb55da66d33866a098f4cab18ed299",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed with root rationale",
+      "transcript_status": "matched audible words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/061-879ea3d7ae13542c.json"
+      ],
+      "adjudication": "Fresh full native hearing:1speaker, all contamination/change/cutoff/pause/splice flags false. All literal words match except cause versus cuz spelling; reviewer explicitly hears colloquial reduced contraction, same audible word, not a proposed grammar expansion to because. Natural conversational restart And that retained. Clean dry recording and complete words/phrases.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 62,

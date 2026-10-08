@@ -260,3 +260,35 @@ def test_final_snapshot_covers_tracked_corpus_without_private_disk_assets(tmp_pa
     for record in snapshot['records']:
         assert hashlib.sha256((mirror / 'voices' / record['anonymous_wav']).read_bytes()).hexdigest() == record['audio']['sha256']
         assert record['native_listening'] == 'pending'
+
+
+def test_final_acceptance_is_bound_to_complete_fresh_production_scope(monkeypatch):
+    monkeypatch.syspath_prepend(str(ROOT / 'scripts'))
+    listener = load_script('listen_voice_corpus')
+    snapshot = json.loads((ROOT / 'qa/voice-reference-remediation/final-snapshot.json').read_text())
+    decisions = json.loads((ROOT / 'qa/voice-reference-remediation/final-acceptance.json').read_text())
+    assert snapshot['known_baseline_count'] == 105
+    assert snapshot['production_count'] == len(snapshot['records']) == 104
+    assert sum(len(r['profiles']) for r in snapshot['records']) == 198
+    expected = {r['wav']: r for r in snapshot['records']}
+    assert {r['wav'] for r in decisions['records']} == set(expected)
+    assert decisions['production_commit'] == snapshot['production_commit']
+    for decision in decisions['records']:
+        record = expected[decision['wav']]
+        assert decision['sha256'] == record['audio']['sha256']
+        assert hashlib.sha256((ROOT / 'voices' / decision['wav']).read_bytes()).hexdigest() == decision['sha256']
+        if decision['status'] != 'accepted':
+            continue
+        assert decision['adjudication'].strip() and decision['evidence']
+        for path in decision['evidence']:
+            assert path.startswith('qa/voice-reference-remediation/final-evidence/')
+            evidence = json.loads((ROOT / path).read_text())
+            assert evidence['wav'] == record['anonymous_wav']
+            assert evidence['source_sha256'] == decision['sha256']
+            assert evidence['transcript_scope'] == 'full'
+            assert evidence['native_audio_proven'] and evidence['exit_code'] == 0
+            assert evidence['result']['status'] == 'SUCCESS'
+            assert listener.parsed_observation(evidence['result']) is not None
+            assert all(e['media_sha256'] == decision['sha256'] for e in evidence['attachment_evidence'])
+    if decisions['corpus_status'] == 'accepted':
+        assert all(r['status'] == 'accepted' for r in decisions['records'])

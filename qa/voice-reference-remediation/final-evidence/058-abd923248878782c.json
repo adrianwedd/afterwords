@@ -1,0 +1,38 @@
+{
+  "wav": "clip-058-ref.wav",
+  "source_sha256": "abd923248878782c3ce582b478363ceb9e9d1998fb0403ea8f1c8564e0e8349f",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "64a63b9a-1a13-4c16-b9c4-29cb5cc91104",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "abd923248878782c3ce582b478363ceb9e9d1998fb0403ea8f1c8564e0e8349f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "abd923248878782c3ce582b478363ceb9e9d1998fb0403ea8f1c8564e0e8349f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "64a63b9a-1a13-4c16-b9c4-29cb5cc91104",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"for me playing a three million year old mechanoid is alarmingly familiar and close to my own experience\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.6]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty of approximately \u00b10.3 seconds on the total duration (estimated around 7.5 to 7.8 seconds). The initial fricative 'for' starts almost immediately at 0.0s without clipping, though lead-in room tone is very brief. Word enunciation is exceptionally clear, with minor orthographic variation possible ('three-million-year-old' vs 'three million year old', 'mechanoid'). No other acoustic or background noise ambiguity detected.\"\n}\n",
+    "duration_seconds": 29.056505,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20138,
+      "output_tokens": 2308,
+      "thinking_tokens": 1920,
+      "cache_read_tokens": 16153,
+      "total_tokens": 22446
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

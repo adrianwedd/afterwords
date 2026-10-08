@@ -1,0 +1,38 @@
+{
+  "wav": "clip-060-ref.wav",
+  "source_sha256": "e4663f99fb4c34e830d7c9a65950c338164b8602cfc608536ee3a00b3b539d72",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "9791802c-ad48-4b3b-bfb7-ed5d94fb346e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e4663f99fb4c34e830d7c9a65950c338164b8602cfc608536ee3a00b3b539d72"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e4663f99fb4c34e830d7c9a65950c338164b8602cfc608536ee3a00b3b539d72"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "9791802c-ad48-4b3b-bfb7-ed5d94fb346e",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Speak plainly. I am your prisoner, and this is an interrogation.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.3, 7.2]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of \u00b10.3 s. Transcript wording has very high confidence with no auditory ambiguity. A deliberate dramatic pause of approximately 0.9 s occurs between 'plainly' and 'I am' (~1.6 s to 2.5 s), but it represents natural dramatic cadence rather than dead air or a defect. The audio is fully isolated and clean throughout.\"\n}\n```\n",
+    "duration_seconds": 52.062457,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20181,
+      "output_tokens": 5281,
+      "thinking_tokens": 4913,
+      "cache_read_tokens": 16150,
+      "total_tokens": 25462
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-003-ref.wav",
+  "source_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "1f253908-00fd-44b1-953d-89d4626c1786",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "1f253908-00fd-44b1-953d-89d4626c1786",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"We hear an awful lot of lefty whinging about the NHS waiting lists.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.8]\n  ],\n  \"uncertainty\": \"Timing estimates are approximate. The clip boundaries are very tight, with speech starting immediately at 0.0s and ending abruptly, leaving no room tone padding, but all words are fully intelligible.\"\n}\n```\n",
+    "duration_seconds": 23.425105,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12551,
+      "output_tokens": 2021,
+      "thinking_tokens": 1696,
+      "cache_read_tokens": 24248,
+      "total_tokens": 14572
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
