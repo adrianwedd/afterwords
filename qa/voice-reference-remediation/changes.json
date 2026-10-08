@@ -4994,7 +4994,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/lee-mack-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/lee-mack-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/lee-mack-publisher-source.json",
-      "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/lee-mack-secondary-result.json"
+      "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/lee-mack-secondary-result.json",
+      "delivery_commit": "8eeedca521c7f298f256df983921d5f6bb88af4b"
     }
   ],
   "exclusions": [
