@@ -1,0 +1,38 @@
+{
+  "wav": "clip-031-ref.wav",
+  "source_sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "69b78411-a7f3-472d-bec3-652e6319642b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "69b78411-a7f3-472d-bec3-652e6319642b",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And then you announce that you've changed your mind about having a chavvy, and then you go late night shopping at Family Planning.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.5]\n  ],\n  \"uncertainty\": \"Timing boundaries are approximate perceptual estimates. Some syllables like 'your' and 'having' may feature dropped consonants characteristic of the speaker's accent ('yer', 'avin').\"\n}\n```\n",
+    "duration_seconds": 31.959439,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12542,
+      "output_tokens": 3136,
+      "thinking_tokens": 2804,
+      "cache_read_tokens": 24214,
+      "total_tokens": 15678
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

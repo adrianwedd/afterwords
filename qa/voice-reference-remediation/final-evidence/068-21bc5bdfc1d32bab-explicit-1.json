@@ -1,0 +1,38 @@
+{
+  "wav": "clip-068-ref.wav",
+  "source_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "a2e02844-a40c-447c-8d70-2e5b45379472",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "a2e02844-a40c-447c-8d70-2e5b45379472",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I just thought, I would love a little part in that. It was just everything I wanted.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"continuous background music throughout speech\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty of approximately +/- 0.2 to 0.3 seconds. Wording confidence is high due to clear speech articulation, but continuous background music is audible across the entire duration.\"\n}\n",
+    "duration_seconds": 42.426908,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20143,
+      "output_tokens": 4264,
+      "thinking_tokens": 3952,
+      "cache_read_tokens": 16207,
+      "total_tokens": 24407
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

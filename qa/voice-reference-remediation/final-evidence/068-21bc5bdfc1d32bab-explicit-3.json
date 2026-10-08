@@ -1,0 +1,38 @@
+{
+  "wav": "clip-068-ref.wav",
+  "source_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "f06c95e7-f6ec-497a-b16a-3ea9efd78c63",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f06c95e7-f6ec-497a-b16a-3ea9efd78c63",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I just thought I would love a little part in that. It was just everything I wanted\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.5]\n  ],\n  \"uncertainty\": \"Low overall uncertainty. Boundary timestamps are perceptual estimates within +/- 0.2 s across an approximate 4.5 s clip duration. Wording uncertainty is minimal: 'I would love' is articulated clearly with slight reduction on 'would'; the final alveolar stop in 'wanted' is softly articulated but audible without truncation. Vocal tone and room acoustics remain uniform throughout with a single isolated speaker.\"\n}\n",
+    "duration_seconds": 36.816436,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20329,
+      "output_tokens": 4030,
+      "thinking_tokens": 3665,
+      "cache_read_tokens": 16207,
+      "total_tokens": 24359
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

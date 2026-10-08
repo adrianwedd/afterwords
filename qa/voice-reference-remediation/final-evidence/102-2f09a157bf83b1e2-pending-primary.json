@@ -1,0 +1,38 @@
+{
+  "wav": "clip-102-ref.wav",
+  "source_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "692654da-a2e5-4ff9-a79a-423f0538dac2",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "692654da-a2e5-4ff9-a79a-423f0538dac2",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yes, well, I just believe that the writer should be writing about today, just so that we, we know what's going on in the society we're living in. So, I- I'm slightly against the, the classical, uh, playwrights, in a way.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 13.5]\n  ],\n  \"uncertainty\": \"Perceptual timing boundary estimates carry an uncertainty of approximately \u00b10.5s. In the literal transcript, there is minor wording uncertainty regarding whether the false start on 'we' is a distinct repetition ('we, we'), the exact transcription of the hesitation on 'I- I'm', and whether the brief pause before 'playwrights' contains a subtle vocalized filler ('uh') or breath.\"\n}\n",
+    "duration_seconds": 153.917585,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36844,
+      "output_tokens": 19921,
+      "thinking_tokens": 19518,
+      "cache_read_tokens": 0,
+      "total_tokens": 56765
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

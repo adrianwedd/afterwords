@@ -1,0 +1,38 @@
+{
+  "wav": "clip-036-ref.wav",
+  "source_sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "11049d5d-3cb2-4d5c-bda6-2b83aa6ea688",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "11049d5d-3cb2-4d5c-bda6-2b83aa6ea688",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Ah, being born on a cotton plantation in the South, you know, and being, uh, poor, uh, in that way, no, it was not very easy, because I remember, uh, times when we didn't have anything to eat for what seemed like an unsurmountable amount of time.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.2],\n    [6.8, 17.5]\n  ],\n  \"uncertainty\": \"Initial utterance onset has mild perceptual ambiguity between 'Ah' and 'Well' due to soft vocal attack. The word 'unsurmountable' is audibly articulated with an 'un-' prefix rather than 'in-'. Time boundary estimates are perceptual approximations within +/- 0.3 seconds; the pause between 'poor' and 'in that way' contains audible breath and hesitation spanning approximately 5.2s to 6.8s.\"\n}\n",
+    "duration_seconds": 49.319786,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20378,
+      "output_tokens": 3625,
+      "thinking_tokens": 3200,
+      "cache_read_tokens": 15955,
+      "total_tokens": 24003
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

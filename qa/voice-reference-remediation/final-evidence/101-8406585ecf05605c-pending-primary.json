@@ -1,0 +1,38 @@
+{
+  "wav": "clip-101-ref.wav",
+  "source_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "2a3bdc9c-bf98-4d4f-a45c-537282923ba6",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "2a3bdc9c-bf98-4d4f-a45c-537282923ba6",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [4.8, 5.5]\n  ],\n  \"literal_transcript\": \"Now, having just met you, I wouldn't go as far as calling you a cold-hearted bastard, but it wouldn't be a stretch to imagine you think of women as disposable pleasures rather than meaningful pursuits.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"multiple_speakers\",\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.8],\n    [5.5, 13.8]\n  ],\n  \"uncertainty\": \"Perceptual boundary estimates carry an uncertainty margin of approximately +/- 0.5s due to auditory estimation without waveform alignment. The transition from the initial female speaker to the subsequent male speaker occurs around 4.8s to 5.5s, overlapping with a light chuckle/exhalation whose exact speaker attribution is slightly ambiguous. Wording of the transcript is high confidence with minimal lexical ambiguity.\"\n}\n",
+    "duration_seconds": 39.488327,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20643,
+      "output_tokens": 4472,
+      "thinking_tokens": 4055,
+      "cache_read_tokens": 16017,
+      "total_tokens": 25115
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

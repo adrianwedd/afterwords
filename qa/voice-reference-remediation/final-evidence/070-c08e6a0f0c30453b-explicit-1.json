@@ -1,0 +1,38 @@
+{
+  "wav": "clip-070-ref.wav",
+  "source_sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "74771629-12bd-4a29-8f91-6903d383adfb",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "74771629-12bd-4a29-8f91-6903d383adfb",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, I was extremely surprised in the latest film that we did that John probably had the single most uncomfortable role of anyone in the film.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None detected; uniform room acoustics and microphone response throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 8.2]\n  ],\n  \"uncertainty\": \"High confidence in literal transcript; minor phonetic uncertainty on whether the proper noun is 'John' or a phonetically similar monosyllabic name. Boundary timestamps are perceptual estimates with an uncertainty margin of approximately +/- 0.3 seconds.\"\n}\n",
+    "duration_seconds": 29.831891,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20170,
+      "output_tokens": 2237,
+      "thinking_tokens": 1892,
+      "cache_read_tokens": 16129,
+      "total_tokens": 22407
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

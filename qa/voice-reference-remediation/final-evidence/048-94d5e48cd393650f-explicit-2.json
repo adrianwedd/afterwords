@@ -1,0 +1,38 @@
+{
+  "wav": "clip-048-ref.wav",
+  "source_sha256": "94d5e48cd393650fd0ee67186ff88439e620b0b83f4dad3fe17918b04e8cb7e4",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "8c81aa24-db6e-45b6-8644-2fb33a3eeb80",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d5e48cd393650fd0ee67186ff88439e620b0b83f4dad3fe17918b04e8cb7e4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d5e48cd393650fd0ee67186ff88439e620b0b83f4dad3fe17918b04e8cb7e4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8c81aa24-db6e-45b6-8644-2fb33a3eeb80",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I wish to place a large order, a very important order. I have the new vicar calling this afternoon for tea and light refreshments, so how soon can you deliver? Yes, I know it's Saturday, and I'm very happy that you're busy.\",\n  \"music\": null,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": null,\n  \"acoustic_changes\": \"None detected; consistent indoor studio acoustics and mic distance throughout, with a slight natural vocal register drop after the conversational pause.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [8.8, 10.4]\n  ],\n  \"apparent_splices\": [],\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 8.8],\n    [10.4, 14.8]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates within +/- 0.3 seconds. Wording is transcribed with high confidence. The pause at approximately 8.8s to 10.4s represents an unedited conversational listening pause rather than an edit splice or separate speaker.\"\n}\n",
+    "duration_seconds": 35.604914,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20553,
+      "output_tokens": 3274,
+      "thinking_tokens": 2845,
+      "cache_read_tokens": 15976,
+      "total_tokens": 23827
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

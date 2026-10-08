@@ -1,0 +1,38 @@
+{
+  "wav": "clip-019-ref.wav",
+  "source_sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "dcd5177c-ded9-4bc4-a4df-a9161da4b8da",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "dcd5177c-ded9-4bc4-a4df-a9161da4b8da",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Tensho now in contrast to Sanchin, which is a power kata and getting everything centered into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent room reverberation typical of an indoor training space or hall throughout; no sudden acoustic shifts or mic movement.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [6.5, 7.5]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.5],\n    [7.5, 14.5]\n  ],\n  \"uncertainty\": \"Boundary estimates are perceptual with an uncertainty margin of approximately \u00b10.3 to 0.5 seconds. Minor wording ambiguity between 'a power kata' vs 'the power kata' due to soft unstressed articulation. Audible exertion/breath intake occurs around 6.5s\u20137.5s between clauses.\"\n}\n",
+    "duration_seconds": 33.102187,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20383,
+      "output_tokens": 3180,
+      "thinking_tokens": 2763,
+      "cache_read_tokens": 16069,
+      "total_tokens": 23563
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

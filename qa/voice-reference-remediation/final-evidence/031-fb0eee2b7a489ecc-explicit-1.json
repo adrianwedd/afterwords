@@ -1,0 +1,38 @@
+{
+  "wav": "clip-031-ref.wav",
+  "source_sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "abfc9f24-7a75-47a2-9918-4be279a38a17",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "abfc9f24-7a75-47a2-9918-4be279a38a17",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And then you announce that you've changed your mind about having a chavvy, and then you go late night shopping at family planning.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 8.0]\n  ],\n  \"uncertainty\": \"Minor lexical uncertainty on 'chavvy' versus 'chivvy' (perceptually leans toward dialectal 'chavvy' meaning baby/child given the subsequent 'family planning' reference). Timestamp boundaries are perceptual approximations within approximately +/- 0.3 seconds.\"\n}\n",
+    "duration_seconds": 35.078378,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36233,
+      "output_tokens": 3323,
+      "thinking_tokens": 2984,
+      "cache_read_tokens": 0,
+      "total_tokens": 39556
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

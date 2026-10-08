@@ -1,0 +1,38 @@
+{
+  "wav": "clip-005-ref.wav",
+  "source_sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "60df9caf-f6d6-40e7-8e08-17d3819e0747",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "60df9caf-f6d6-40e7-8e08-17d3819e0747",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"...expected the American people to rise up. Huh. They didn't.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.4, 2.6],\n    [4.8, 5.8]\n  ],\n  \"uncertainty\": \"Boundary timings are perceptual estimates with approximately \u00b10.1 to 0.2s uncertainty. The initial utterance begins abruptly with the onset of 'expected', likely missing an opening subject or syllable. The vocalization at ~3.8-4.1s is a brief exhalation/scoff ('Huh'). Segment [0.4, 2.6] ('the American people to rise up') is acoustically clean and isolated but syntactically incomplete due to the beginning cutoff. Segment [4.8, 5.8] ('They didn't.') is an isolated, complete grammatical phrase but short (~1.0s), creating uncertainty over whether duration alone suffices for conditioning without concatenation.\"\n}\n",
+    "duration_seconds": 103.376191,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20163,
+      "output_tokens": 11889,
+      "thinking_tokens": 11458,
+      "cache_read_tokens": 16140,
+      "total_tokens": 32052
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

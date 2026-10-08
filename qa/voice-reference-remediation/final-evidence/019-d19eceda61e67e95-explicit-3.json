@@ -1,0 +1,38 @@
+{
+  "wav": "clip-019-ref.wav",
+  "source_sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "5ee205cf-f4c0-4f11-9d0f-8186c8847441",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "5ee205cf-f4c0-4f11-9d0f-8186c8847441",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Tensho now in contrast to Sanchin which is the power kata and getting everything centered into one point Tensho now has a more expanding attitude it moves out and thinks around with peripheral vision\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 12.8]\n  ],\n  \"uncertainty\": \"Low uncertainty. Single clear speaker; boundaries are perceptually confident.\"\n}\n```\n",
+    "duration_seconds": 29.872513,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12821,
+      "output_tokens": 3126,
+      "thinking_tokens": 2800,
+      "cache_read_tokens": 24137,
+      "total_tokens": 15947
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

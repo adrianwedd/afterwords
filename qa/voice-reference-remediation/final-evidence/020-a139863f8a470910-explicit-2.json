@@ -1,0 +1,38 @@
+{
+  "wav": "clip-020-ref.wav",
+  "source_sha256": "a139863f8a4709104810ae3346804c47151cf10e4d129c24be775f9ae8a48230",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "cc035466-1a5f-4335-948b-411903b1e8ee",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a139863f8a4709104810ae3346804c47151cf10e4d129c24be775f9ae8a48230"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a139863f8a4709104810ae3346804c47151cf10e4d129c24be775f9ae8a48230"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "cc035466-1a5f-4335-948b-411903b1e8ee",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and you start thinking, oh I better make the world around me miserable, then I won't mind leaving so much\",\n  \"music\": null,\n  \"crowd\": null,\n  \"laughter\": null,\n  \"sound_effects\": null,\n  \"acoustic_changes\": null,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.8]\n  ],\n  \"uncertainty\": \"Boundary timing is estimated at approximately 0.0s to 5.8s (\u00b10.4s). Slight perceptual ambiguity between 'I better' and an elided contraction 'I'd better', but phonetically realized as 'I better'. Audio exhibits complete speaker isolation with no competing background acoustics or musical accompaniment.\"\n}\n",
+    "duration_seconds": 26.026461,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20510,
+      "output_tokens": 2204,
+      "thinking_tokens": 1842,
+      "cache_read_tokens": 16198,
+      "total_tokens": 22714
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
