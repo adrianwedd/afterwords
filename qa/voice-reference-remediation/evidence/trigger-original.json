@@ -1,0 +1,37 @@
+{
+  "wav": "trigger-ref.wav",
+  "source_sha256": "6569dfeeacf0d721a04cc49d0663bee2781c631e4108ec909793c571d0c86b91",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "cc9b0648-036d-4d33-b600-b0907f431703",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6569dfeeacf0d721a04cc49d0663bee2781c631e4108ec909793c571d0c86b91"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6569dfeeacf0d721a04cc49d0663bee2781c631e4108ec909793c571d0c86b91"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "cc9b0648-036d-4d33-b600-b0907f431703",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"speaker\": 1,\n      \"start_s\": 0.0,\n      \"end_s\": 1.8\n    },\n    {\n      \"speaker\": 2,\n      \"start_s\": 1.8,\n      \"end_s\": 6.6\n    },\n    {\n      \"speaker\": 1,\n      \"start_s\": 6.6,\n      \"end_s\": 7.8\n    }\n  ],\n  \"literal_transcript\": \"Speaker 1: ...councillor Murray. See? That's me. / Speaker 2: [chuckle] Oh bless you... Well, I'm glad you cleared that up. Here, have a look at that menu, will ya? / Speaker 1: Oh, right.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; uniform dry indoor room tone throughout the clip without discernible shifts in reverberation or equalization.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Multiple alternating conversational speakers and an initial speech cutoff. Neither speaker provides sufficient continuous, isolated audio duration to satisfy conditioning requirements.\",\n  \"candidate_clean_intervals_s\": [\n    {\n      \"speaker\": 2,\n      \"start_s\": 2.5,\n      \"end_s\": 6.5,\n      \"phrase\": \"Well, I'm glad you cleared that up. Here, have a look at that menu, will ya?\"\n    }\n  ],\n  \"uncertainty\": \"Boundary timings are perceptual estimates subject to an uncertainty of approximately \u00b10.2 to \u00b10.3 seconds. Wording uncertainty: the initial utterance cuts in mid-syllable (perceived as '...councillor Murray'); Speaker 2's murmured remark under the chuckle is perceived as 'Oh bless you' or 'Ah bless ya'; the colloquial tag at the end of Speaker 2's request is perceived as 'will ya' (alternatively 'would you'). Speaker 2's isolated window (~2.5s\u20136.5s) is clean but limited to ~4.0 seconds, which is below standard reference conditioning length.\"\n}\n```\n",
+    "duration_seconds": 49.413514,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20382,
+      "output_tokens": 4607,
+      "thinking_tokens": 3940,
+      "cache_read_tokens": 15975,
+      "total_tokens": 24989
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -7614,6 +7614,109 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/samantha-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/samantha-result.json",
       "delivery_commit": "ebdc75c1f250129ebd891977cda60e1f6050105d"
+    },
+    {
+      "wav": "trigger-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "6569dfeeacf0d721a04cc49d0663bee2781c631e4108ec909793c571d0c86b91",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.07808078253166588,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48",
+        "frames": 252000,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.25,
+        "peak": 0.389801025390625,
+        "rms": 0.03443572608951174,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 15.8,
+        "source_end_s": 21.05,
+        "source_start_frame": 758400,
+        "source_end_frame_exclusive": 1010400,
+        "conversion": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation."
+      },
+      "profiles": [
+        {
+          "path": "voices/trigger-qwen3-06b.json",
+          "old_reference_text": "Councillor Murray. See, that's me. Unless you've cleared that up. I'm glad you cleared that up. If you have a look at that meat, shouldn't you? All right.",
+          "new_reference_text": "I knew I felt pretty rough and that if I was going to be x-rayed and checked over the sooner the better.",
+          "old_segment_start_s": 20,
+          "new_segment_start_s": 15.8
+        },
+        {
+          "path": "voices/trigger.json",
+          "old_reference_text": "Councillor Murray. See, that's me. Unless you've cleared that up. I'm glad you cleared that up. If you have a look at that meat, shouldn't you? All right.",
+          "new_reference_text": "I knew I felt pretty rough and that if I was going to be x-rayed and checked over the sooner the better.",
+          "old_segment_start_s": 20,
+          "new_segment_start_s": 15.8
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=NHFvkBmhfOw",
+      "adjudication": "Original native100 reports two speakers/laughter/opening cutoff; target interval inadequate. Official iFL replacement158/159 rejected crowd murmur and cut ending; wider BBC-derived164 is one clean speaker but later pause/fillers and service/services uncertainty. Final167 preserves complete first sentence5.25s, useful connected speech, excludes later hesitation without DSP. All four full native167/167-pro/167-retry/167-detail report one speaker, no contamination or word cutoffs. First167 hears if and gonna; two independent full167-pro/167-retry hear that if and going to. Detailed fresh full native167-detail explicitly rechecks small connecting words without supplied alternatives and again hears that if, slightly reduced going to, no unintelligible words. Earlier wider164 hearings omit that; secondary ASR hears that but omits if. Resolve literal wording to repeated high-confidence full candidate and detailed auditory result, not ASR or grammar. Targeted short169 gives incompatible I knew in middle versus all full candidates and source alignment, so is not promoted; retain disagreement evidence. Exact source frame bounds/count/sample equality verified; healthy level/no full-scale samples. Posting publisher distinguished from original BBC broadcaster. Actor identity established source/frame and independent iFL role credit; natural news voice differs fictional Trigger. Fresh whole resulting production acceptance mandatory.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/trigger-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=NHFvkBmhfOw",
+        "publisher": "North Norfolk Labour Party",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCDfiTA9a1EZOfAg3NBXzUlA",
+        "title": "Roger Lloyd Pack speaks out against ambulance cuts",
+        "published_date": "20120830",
+        "source_info_sha256": "fefe9ff7899df77050822f959ac738dc163934062a28783e86d129df9890c6bd",
+        "source_download_sha256": "dea9390e852a7317d4c9c492c38d2e0e2140179b79de0822539964e104572479",
+        "source_audio_sha256": "4fa8cd261424512a19812ac5745f43c056316b1e023e1ab28ff03f5367296919",
+        "identity_section_sha256": "f3c0b438350639990d8bc3470c286201f652508f80d4568ae01065a0af023e27",
+        "identity_frame_sha256": "ba90be79517acce803aea2ff83237ccee80a55ae47aba0bdf96a5bc3bfe92579",
+        "original_broadcaster": "BBC Look East; the YouTube posting is North Norfolk Labour Party, not a BBC-owned channel.",
+        "role_credit_source": "https://www.youtube.com/watch?v=O1IBoUHFNao",
+        "role_credit_publisher": "iFL TV",
+        "role_credit_info_sha256": "71183539268a4c4024e4e393ead727708c03e21e855ee9fb9b2b6edd7fded95a",
+        "source_basis": "Posting title/description identify Roger Lloyd-Pack discussing ambulance cuts on BBC Look East. Actual selected-range frame19 shows the actor directly speaking indoors with BBC onscreen branding. Independent official iFL TV anniversary-convention interview title/description credits Roger Lloyd-Pack as Trigger in Only Fools and Horses.",
+        "delivery_change": "Natural older actor news interview replaces multi-speaker sitcom performance; same intended actor, different fictional performance/register.",
+        "decode": "Full ffmpeg decode to PCM16 preserving source rate/channels, exit0 and empty error log.",
+        "exact_edit": {
+          "start_s": 15.8,
+          "end_s": 21.05,
+          "sample_rate": 48000,
+          "start_frame": 758400,
+          "end_frame_exclusive": 1010400,
+          "channel_index": null
+        },
+        "sample_exact_source_slice": true,
+        "candidate_audio": {
+          "sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48",
+          "frames": 252000,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 5.25,
+          "peak": 0.389801025390625,
+          "rms": 0.03443572608951174,
+          "samples_at_full_scale": 0
+        },
+        "changes": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation.",
+        "publisher_metadata_sha256": "8d3b6ab14699e9007782645b5f34086d7fa8dca4debf7aa0c7aa23910f1bf444"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/trigger-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/trigger-result.json"
     }
   ],
   "exclusions": [

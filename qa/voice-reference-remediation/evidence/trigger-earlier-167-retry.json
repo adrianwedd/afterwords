@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "0a920c59-20ca-43dc-84c5-085e1b405920",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0a920c59-20ca-43dc-84c5-085e1b405920",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I knew I felt pretty rough, and that if I was going to be x-rayed and checked over the sooner the better.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.5]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual approximations (+/- 0.5s) based solely on auditory playback without waveform or spectral visualization. Transcript wording has very low uncertainty, with high speech clarity and an isolated, clean single speaker throughout.\"\n}\n",
+    "duration_seconds": 22.59333,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36376,
+      "output_tokens": 1901,
+      "thinking_tokens": 1568,
+      "cache_read_tokens": 0,
+      "total_tokens": 38277
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,8 +1,9 @@
 {
   "name": "trigger",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=56yN2zHtofM",
+  "source_url": "https://www.youtube.com/watch?v=NHFvkBmhfOw",
   "reference_audio": "trigger-ref.wav",
-  "reference_text": "Councillor Murray. See, that's me. Unless you've cleared that up. I'm glad you cleared that up. If you have a look at that meat, shouldn't you? All right.",
-  "segment_start_s": 20
+  "reference_text": "I knew I felt pretty rough and that if I was going to be x-rayed and checked over the sooner the better.",
+  "segment_start_s": 15.8,
+  "notes": "Roger Lloyd-Pack natural BBC Look East interview, posted publicly by North Norfolk Labour Party. Exact15.80–21.05s continuous decoded-source slice without DSP. Same actor as Trigger, but later-life news register differs fictional character performance. Provenance and native evidence in qa/voice-reference-remediation/changes.json."
 }

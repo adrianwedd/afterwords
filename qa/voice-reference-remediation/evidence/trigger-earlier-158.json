@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "cfa6eff7103365c04e9c1dd8735f4a7b2f00c31d0d51b5750a8e6bd9533f299d",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "5621912b-7b86-47a6-b3ac-8b45ab950881",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "cfa6eff7103365c04e9c1dd8735f4a7b2f00c31d0d51b5750a8e6bd9533f299d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "cfa6eff7103365c04e9c1dd8735f4a7b2f00c31d0d51b5750a8e6bd9533f299d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "5621912b-7b86-47a6-b3ac-8b45ab950881",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"well it it lives on in the work he's done and I'm very sorry that he's not here with us to to continue to share it with us and uh write us more lovely stuff no I'm\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [2.6, 5.5],\n    [9.0, 10.8]\n  ],\n  \"uncertainty\": \"Timings are perceptual estimates (+/- 0.3s). The ending cuts off abruptly mid-utterance during 'no I'm'. Wording around 'write us more lovely stuff' has minor hesitation ('and uh'), and there are false-start stutters on 'it it' and 'to to'. Low-level room reverberation and ambient crowd murmur persist across the entire recording, which may reduce conditioning isolation even within candidate intervals.\"\n}\n",
+    "duration_seconds": 50.850611,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20392,
+      "output_tokens": 4984,
+      "thinking_tokens": 4574,
+      "cache_read_tokens": 16084,
+      "total_tokens": 25376
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,40 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=NHFvkBmhfOw",
+  "publisher": "North Norfolk Labour Party",
+  "publisher_channel_url": "https://www.youtube.com/channel/UCDfiTA9a1EZOfAg3NBXzUlA",
+  "title": "Roger Lloyd Pack speaks out against ambulance cuts",
+  "published_date": "20120830",
+  "source_info_sha256": "fefe9ff7899df77050822f959ac738dc163934062a28783e86d129df9890c6bd",
+  "source_download_sha256": "dea9390e852a7317d4c9c492c38d2e0e2140179b79de0822539964e104572479",
+  "source_audio_sha256": "4fa8cd261424512a19812ac5745f43c056316b1e023e1ab28ff03f5367296919",
+  "identity_section_sha256": "f3c0b438350639990d8bc3470c286201f652508f80d4568ae01065a0af023e27",
+  "identity_frame_sha256": "ba90be79517acce803aea2ff83237ccee80a55ae47aba0bdf96a5bc3bfe92579",
+  "original_broadcaster": "BBC Look East; the YouTube posting is North Norfolk Labour Party, not a BBC-owned channel.",
+  "role_credit_source": "https://www.youtube.com/watch?v=O1IBoUHFNao",
+  "role_credit_publisher": "iFL TV",
+  "role_credit_info_sha256": "71183539268a4c4024e4e393ead727708c03e21e855ee9fb9b2b6edd7fded95a",
+  "source_basis": "Posting title/description identify Roger Lloyd-Pack discussing ambulance cuts on BBC Look East. Actual selected-range frame19 shows the actor directly speaking indoors with BBC onscreen branding. Independent official iFL TV anniversary-convention interview title/description credits Roger Lloyd-Pack as Trigger in Only Fools and Horses.",
+  "delivery_change": "Natural older actor news interview replaces multi-speaker sitcom performance; same intended actor, different fictional performance/register.",
+  "decode": "Full ffmpeg decode to PCM16 preserving source rate/channels, exit0 and empty error log.",
+  "exact_edit": {
+    "start_s": 15.8,
+    "end_s": 21.05,
+    "sample_rate": 48000,
+    "start_frame": 758400,
+    "end_frame_exclusive": 1010400,
+    "channel_index": null
+  },
+  "sample_exact_source_slice": true,
+  "candidate_audio": {
+    "sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48",
+    "frames": 252000,
+    "sample_rate": 48000,
+    "channels": 2,
+    "subtype": "PCM_16",
+    "duration_s": 5.25,
+    "peak": 0.389801025390625,
+    "rms": 0.03443572608951174,
+    "samples_at_full_scale": 0
+  },
+  "changes": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation."
+}

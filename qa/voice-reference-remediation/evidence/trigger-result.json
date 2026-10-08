@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "ff00fd18-0bc1-477f-be71-1066f65983e7",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ff00fd18-0bc1-477f-be71-1066f65983e7",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I knew I felt pretty rough and that if I was going to be x-rayed and checked over the sooner the better.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [[0.0, 4.5]],\n  \"uncertainty\": \"Interval timings are perceptual estimates. The phrase 'going to' is slightly reduced in natural speech but transcribed fully. No missing or unintelligible words.\"\n}\n```\n",
+    "duration_seconds": 31.892631,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12537,
+      "output_tokens": 3066,
+      "thinking_tokens": 2752,
+      "cache_read_tokens": 24247,
+      "total_tokens": 15603
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
