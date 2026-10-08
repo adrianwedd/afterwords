@@ -61,7 +61,8 @@ def parsed_observation(result):
                  r"(?:cannot|can't|unable to) (?:hear|listen)|rather than native acoustic|"
                  r"(?:provided|supplied|returned) (?:only )?(?:a )?(?:textual|text[- ]based) transcript|"
                  r"(?:extrapolated|inferred) from (?:the |significant )?(?:text layout|line breaks)|"
-                 r"inferred from (?:the )?available representation rather than direct auditory",
+                 r"inferred from (?:the )?available representation rather than direct auditory|"
+                 r"presented as (?:a )?text transcript rather than raw playable audio",
                  limitations, re.IGNORECASE):
         return None
     return value

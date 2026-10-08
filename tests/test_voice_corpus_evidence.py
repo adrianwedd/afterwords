@@ -70,6 +70,11 @@ def test_valid_json_cannot_override_reviewer_reporting_transcript_only_review():
         "Audio was interpreted through a text-based transcription layer "
         "rather than native acoustic signal analysis.")
     assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None
+
+    payload['uncertainty'] = (
+        'High uncertainty because the audio was ingested and presented as a text transcript '
+        'rather than raw playable audio with timing information.')
+    assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None
     payload["uncertainty"] = (
         "Acoustic properties, overlap, and timing boundaries are highly uncertain "
         "as the ingestion tool provided a textual transcript rather than granular "
@@ -220,3 +225,38 @@ def test_no_unexplained_production_orphan_or_missing_reference():
     for record in inventory["records"]:
         assert record["audio"]["duration_s"] >= 3
         assert record["audio"]["rms"] > 0
+
+
+def test_final_snapshot_covers_tracked_corpus_without_private_disk_assets(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(ROOT / 'scripts'))
+    preparation = load_script('prepare_voice_acceptance')
+    qa = tmp_path / 'qa/voice-reference-remediation'
+    qa.mkdir(parents=True)
+    voices = tmp_path / 'voices'
+    voices.mkdir()
+    names = ['repaired-ref.wav', 'kept-ref.wav', 'excluded-ref.wav']
+    (qa / 'baseline.json').write_text(json.dumps({'records': [{'wav': n} for n in names]}))
+    (qa / 'changes.json').write_text(json.dumps({
+        'changes': [{'wav': names[0]}],
+        'exclusions': [{'wav': names[2], 'production_disposition': 'excluded'}]}))
+    tracked = []
+    for name in names[:2]:
+        sf.write(voices / name, np.full(32000, 0.1), 8000)
+        profile = name.replace('-ref.wav', '.json')
+        (voices / profile).write_text(json.dumps({'reference_audio': name, 'reference_text': 'hello there'}))
+        tracked.extend(['voices/' + name, 'voices/' + profile])
+    sf.write(voices / 'private-ref.wav', np.full(32000, 0.2), 8000)
+    monkeypatch.setattr(preparation.subprocess, 'check_output',
+                        lambda args, **kwargs: '\n'.join(tracked) if args[1] == 'ls-files' else 'a' * 40)
+    mirror, output = tmp_path / 'mirror', tmp_path / 'snapshot.json'
+    with pytest.raises(AssertionError, match='Finish every individual disposition'):
+        preparation.prepare(tmp_path, mirror, output, [])
+    assert not mirror.exists()
+    preparation.prepare(tmp_path, mirror, output, [names[1]])
+    snapshot = json.loads(output.read_text())
+    assert snapshot['production_count'] == 2
+    assert {r['wav'] for r in snapshot['records']} == set(names[:2])
+    assert len(list((mirror / 'voices').glob('*.wav'))) == 2
+    for record in snapshot['records']:
+        assert hashlib.sha256((mirror / 'voices' / record['anonymous_wav']).read_bytes()).hexdigest() == record['audio']['sha256']
+        assert record['native_listening'] == 'pending'
