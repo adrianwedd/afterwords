@@ -5477,7 +5477,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-result.json",
-      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-publisher-source.json"
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-publisher-source.json",
+      "delivery_commit": "80eb126b7c777d04891459ebb6500eb07c5cc654"
     }
   ],
   "exclusions": [
