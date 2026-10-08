@@ -3389,6 +3389,241 @@
       "native_result_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-result.json",
       "native_secondary_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-result-secondary.json",
       "delivery_commit": "3443a008781de7fead43954b64e183f2526f202f"
+    },
+    {
+      "wav": "picard-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "0dfabf6f33026ad50b937424ab6e8edeab95af89d50af520212765952b45c3fa",
+        "frames": 287808,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.992,
+        "peak": 0.899993896484375,
+        "rms": 0.07610458169140173,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "26ee4fd08dad50320ebd4f71001dd3898ecfcfdf6f1a1c1d565d11f5972c53f5",
+        "frames": 642537,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 14.57,
+        "peak": 1.0,
+        "rms": 0.1798742430973439,
+        "samples_at_full_scale": 57
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 89.75,
+        "source_end_s": 104.32,
+        "source_start_frame": 3957975,
+        "source_end_frame_exclusive": 4600512,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/picard-qwen3-06b.json",
+          "old_reference_text": "With the first link the chain is forged. The first speech censured, the first thought forbidden, the first freedom denied, chains us all irrevocably.",
+          "new_reference_text": "It was in that we were in fairly exposed conditions most of the time, you know. It was, um, actually, we had finished principal photography by this time last year, but we were filming through late April, May, and June, and into July.",
+          "old_segment_start_s": 57,
+          "new_segment_start_s": 89.75
+        },
+        {
+          "path": "voices/picard.json",
+          "old_reference_text": "With the first link the chain is forged. The first speech censured, the first thought forbidden, the first freedom denied, chains us all irrevocably.",
+          "new_reference_text": "It was in that we were in fairly exposed conditions most of the time, you know. It was, um, actually, we had finished principal photography by this time last year, but we were filming through late April, May, and June, and into July.",
+          "old_segment_start_s": 57,
+          "new_segment_start_s": 89.75
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=9bavz335DQQ",
+      "adjudication": "Original full native hearing confirms continuous prominent orchestral score and possible abrupt first onset; prior KEEP hypothesis rejected. Re-sourced continuous14.57s answer by Patrick Stewart in1998 Today interview. Two full blind native hearings3.8 and3.1 confirm one voice, complete boundaries, no music/crowd/laughter/effects/acoustic shifts/splices. First hearing flags It was in that vs and that; independent3.1 hears in that with very low uncertainty, matching subsequent ASR. Both native hearings retain um after It was, while ASR omits it. Preserve actual hesitation and grammar. Camera and presenter introduction support intended actor. This is conversational1998 actor delivery rather than quoted in-character performance; explicitly sourced. No cleanup/normalization/splicing. Fresh corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "fullscale_pcm_extrema": {
+          "definition": "PCM16 samples equal -32768 or32767 in each channel, distinct from float negative-fullscale-only inventory counter",
+          "counts_per_channel": [
+            84,
+            15
+          ],
+          "max_consecutive_samples_per_channel": [
+            11,
+            6
+          ],
+          "max_run_ms": 0.24943310657596374,
+          "sample_fraction": 7.70383651058227e-05,
+          "adjudication": "Sparse historic broadcast saturation, longest plateau0.25ms; both independent native reviews report fully usable clear speech without audible distortion. Retained source PCM unchanged; normalizing cannot restore clipped samples. Accepted as nondestructive source limitation, fresh final native check remains mandatory."
+        }
+      },
+      "delivery_commit_locator": "git log -- voices/picard-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=9bavz335DQQ",
+        "title": "Patrick Stewart on The Today Show talking about Moby Dick miniseries (1998)",
+        "uploader": "The Geoffro VHS Archive",
+        "upload_date": "20170502",
+        "source_audio_sha256": "2985d20091e69129eeaa56e922c638ddee74d688c371197763516cf6a6580462",
+        "source_metadata_sha256": "d065502a2b56e55abca6cffc026f6ac643083f305c06bc7f5502e6e02e2c6a2f",
+        "source_basis": "Public archive of Today1998 interview, presenter introduces Patrick Stewart by name and camera identifies the speaking interviewee. Dramatic MobyDick opening and presenter turns excluded.",
+        "source_frame_evidence": "qa/voice-reference-remediation/evidence/picard-source-100.jpg",
+        "source_frame_s": 100
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/picard-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/picard-result.json",
+      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/picard-result-secondary.json"
+    },
+    {
+      "wav": "captain-mainwaring-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "6062b96274b81ceaa4c686c0a7943004b3cc05215268b7b6f10aa31a6cb5a80f",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10499791815241787,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "1d2ff3aea18d0c8805efa37190304a365b24fd9b308f997731bbd7dbf3001556",
+        "frames": 381906,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 8.66,
+        "peak": 0.635101318359375,
+        "rms": 0.09115737651919321,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 459.2,
+        "source_end_s": 467.86,
+        "source_start_frame": 20250720,
+        "source_end_frame_exclusive": 20632626,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/captain-mainwaring-qwen3-06b.json",
+          "old_reference_text": "war you will be brought to account all right what you like you're not going to win this war oh yes we are oh no you're not oh yes we are whistle while you work he's half army so these are",
+          "new_reference_text": "And, uh, we were changing in, in '40 from losing the horses and becoming medium artillery.",
+          "old_segment_start_s": 20,
+          "new_segment_start_s": 459.2
+        },
+        {
+          "path": "voices/captain-mainwaring.json",
+          "old_reference_text": "war you will be brought to account all right what you like you're not going to win this war oh yes we are oh no you're not oh yes we are whistle while you work he's half army so these are",
+          "new_reference_text": "And, uh, we were changing in, in '40 from losing the horses and becoming medium artillery.",
+          "old_segment_start_s": 20,
+          "new_segment_start_s": 459.2
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=dRtCsNhxO3o",
+      "adjudication": "Original rapid two-speaker scene has prominent overlapping audience laughter and truncated boundaries; no usable continuous solo take. PebbleMill candidate trials were not admitted due to boundary/wording problems, pronounced stutters or opening-voice uncertainty. Re-sourced continuous8.66s complete clause from separate LooksFamiliar broadcast archive. Longer answer452.05-467.86 had indistinct preceding phrasing and pauses, not admitted. Revised459.2-467.86 retains just complete fluent final clause. Full native3.8 review confirms one voice, no music/crowd/laughter/effects/splices, complete beginnings/endings, mild nondestructive tape hiss. Natural0.5-1s hesitations retained without splicing. Retain audible uh and repeated in in forty, supported by earlier blind native hearing of longer answer; ASR normalizes to in1940 and omits filler, rejected. Spoken forty represented as 40, not invented nineteen. Intended ArthurLowe identity corroborated by introduction, addressed answer and camera. Interview delivery rather than original comedic scene explicitly sourced. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/captain-mainwaring-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=dRtCsNhxO3o",
+        "title": "Looks Familiar - Arthur Lowe, Bob Monkhouse, Noel Gordon 19.04.82 (Complete Episode)",
+        "uploader": "VHS Rewinds",
+        "upload_date": "20231013",
+        "source_audio_sha256": "07cd1411bbc883002167127d5baa254c2605e48909e5059f5256a18dea296cac",
+        "source_metadata_sha256": "f56ca82052c946cef33b7979c647df96ea9f37c2d41c631268874a612d18f907",
+        "source_basis": "Public archive of LooksFamiliar episode credits Arthur Lowe. Presenter names him at introduction and addresses Arthur before this wartime-service answer; speaking-camera context identifies Lowe. Other panelists and presenter turns excluded.",
+        "source_frame_evidence": "qa/voice-reference-remediation/evidence/captain-mainwaring-source-463.jpg",
+        "source_frame_s": 463
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/captain-mainwaring-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/captain-mainwaring-result.json"
+    },
+    {
+      "wav": "edina-monsoon-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "a2643237958b1776812508be029e622026047d20897028405858add010028801",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08407459252256684,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d",
+        "frames": 480249,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 10.89,
+        "peak": 0.22100830078125,
+        "rms": 0.03362436093685624,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 100.1,
+        "source_end_s": 110.99,
+        "source_start_frame": 4414410,
+        "source_end_frame_exclusive": 4894659,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/edina-monsoon-qwen3-06b.json",
+          "old_reference_text": "hands on a certain white powder, because it's the only thing that'll make time in an isolated French cottage bearable. During a game of doubles ping pong, she slips away to indulge. Whose bag is this?",
+          "new_reference_text": "And so a friend of mine said, 'I know someone, and he's just trained and he's, he's like a life coach thing. And what his good thing is, he'll teach you what's stopping you moving forward.'",
+          "old_segment_start_s": 600,
+          "new_segment_start_s": 100.1
+        },
+        {
+          "path": "voices/edina-monsoon.json",
+          "old_reference_text": "hands on a certain white powder, because it's the only thing that'll make time in an isolated French cottage bearable. During a game of doubles ping pong, she slips away to indulge. Whose bag is this?",
+          "new_reference_text": "And so a friend of mine said, 'I know someone, and he's just trained and he's, he's like a life coach thing. And what his good thing is, he'll teach you what's stopping you moving forward.'",
+          "old_segment_start_s": 600,
+          "new_segment_start_s": 100.1
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=cxilv-bZAkw",
+      "adjudication": "Original KEEP hypothesis overturned: full native hearing finds long male video-essay narration then two other scene voices, with target not sufficiently isolated. Re-sourced continuous10.89s JenniferSaunders speech from AudibleUK2024 TittingAbout studio conversation. Initial100.1-113 candidate had an uncertain softer trailing Yeah, not admitted. Revised100.1-110.99 ends on complete moving forward phrase before trailing closure/backchannel. Two full blind native hearings3.8 and3.1 agree every word including hesitated hes hes and awkward his good thing is, with one voice, no music/crowd/laughter/effects/splices or clipped boundaries. Do not improve the wording to whole thing or correct reported speech grammar. ASR misrenders hes just trained as I just trained; two independent native hearings agree hes, so retain audio-based wording. Source camera and publisher credits corroborate intended JenniferSaunders. Conversational interview rather than Edina-character performance explicitly sourced. No cleanup/normalization/splicing. Fresh corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/edina-monsoon-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=cxilv-bZAkw",
+        "title": "Jennifer Saunders On Fighting the Procrastination Demon Named Susan | Titting About Series 5",
+        "uploader": "Audible UK ",
+        "upload_date": "20240502",
+        "source_audio_sha256": "72df55cfcc513d4b0e5a307f5dd250acf01487c73ca57413483e4bcdebc3d8a6",
+        "source_metadata_sha256": "e66cad67c11e0063080cba7e20f4c79fdce2b7d89acf4c7b28e669499dce191b",
+        "source_basis": "Publisher AudibleUK interview explicitly credits Jennifer Saunders; camera identifies Saunders as the speaker in selected passage. DawnFrench turns/backchannels excluded.",
+        "source_frame_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-source-100.jpg",
+        "source_frame_s": 100
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-result.json",
+      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-result-secondary.json"
     }
   ],
   "exclusions": [

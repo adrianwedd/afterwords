@@ -1,0 +1,38 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "26ee4fd08dad50320ebd4f71001dd3898ecfcfdf6f1a1c1d565d11f5972c53f5",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "2ff16fb3-afdc-4c69-8fbc-a29fa12e7299",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "26ee4fd08dad50320ebd4f71001dd3898ecfcfdf6f1a1c1d565d11f5972c53f5"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "26ee4fd08dad50320ebd4f71001dd3898ecfcfdf6f1a1c1d565d11f5972c53f5"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "2ff16fb3-afdc-4c69-8fbc-a29fa12e7299",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It was, in that, we were in fairly exposed conditions most of the time, you know. It was, um, actually, we had finished principal photography by this time last year, but we were filming through late April, May, and June, and into July.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.8],\n    [5.3, 13.0]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately \u00b10.3 s. Slight uncertainty in the exact transcription of the initial false start / phrase transition ('It was, in that' vs 'It was... and that') due to conversational hesitation, and filler vocalization ('um') occurring between approximately 4.5 s and 5.2 s.\"\n}\n",
+    "duration_seconds": 54.786891,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20335,
+      "output_tokens": 2802,
+      "thinking_tokens": 2401,
+      "cache_read_tokens": 15982,
+      "total_tokens": 23137
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

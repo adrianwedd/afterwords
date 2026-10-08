@@ -1,0 +1,36 @@
+{
+  "wav": "captain-mainwaring-ref.wav",
+  "source_sha256": "6062b96274b81ceaa4c686c0a7943004b3cc05215268b7b6f10aa31a6cb5a80f",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "dbed6afb-fa7b-42fd-b75f-1d441a2cfe6e",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6062b96274b81ceaa4c686c0a7943004b3cc05215268b7b6f10aa31a6cb5a80f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6062b96274b81ceaa4c686c0a7943004b3cc05215268b7b6f10aa31a6cb5a80f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "dbed6afb-fa7b-42fd-b75f-1d441a2cfe6e",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 2.5],\n    [2.5, 4.5],\n    [4.5, 5.5],\n    [5.5, 6.5],\n    [6.5, 15.0]\n  ],\n  \"literal_transcript\": \"...the war, you will be brought to account. Right what you like, you're not going to win this war. Oh yes we are. Oh no you're not. Oh yes we are. [laughter] We so value work. Larry's a twerp. He's half balmy, so's his other-\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Contains rapid back-and-forth dialogue between multiple speakers, prominent audience laughter overlapping with speech, and lacks any isolated, clean single-speaker segment long enough for conditioning. Both the beginning and end of the clip are abruptly cut off mid-sentence.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Timing boundaries are perceptual estimates and approximate due to the rapid, overlapping nature of the back-and-forth dialogue. The literal transcript for the final sentence is highly uncertain due to the speaker's comedic enunciation, the lingering audience laughter, and the abrupt cutoff. Assessment of complete usable phrases confirms there are no viable continuous segments for a single speaker without intrusion.\"\n}\n```\n",
+    "duration_seconds": 37.921122,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12536,
+      "output_tokens": 3511,
+      "thinking_tokens": 3011,
+      "cache_read_tokens": 24041,
+      "total_tokens": 16047
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

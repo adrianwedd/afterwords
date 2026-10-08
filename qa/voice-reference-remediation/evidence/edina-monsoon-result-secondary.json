@@ -1,0 +1,38 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "cf69d9f4-fbc7-4b2c-b488-b391cfa58f29",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "cf69d9f4-fbc7-4b2c-b488-b391cfa58f29",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And so a friend of mine said, I know someone, and he's just trained and he's, he's like a life coach thing. And what his good thing is, he'll teach you what's stopping you moving forward.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 12.0]\n  ],\n  \"uncertainty\": \"Exact boundary estimates for candidate clean intervals are perceptual approximations. The entire clip appears to be clean speech from a single speaker.\"\n}\n```\n",
+    "duration_seconds": 28.061294,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 28825,
+      "output_tokens": 1648,
+      "thinking_tokens": 1307,
+      "cache_read_tokens": 8004,
+      "total_tokens": 30473
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

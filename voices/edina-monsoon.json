@@ -1,8 +1,8 @@
 {
   "name": "edina-monsoon",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=UG6jri4OdaQ",
+  "source_url": "https://www.youtube.com/watch?v=cxilv-bZAkw",
   "reference_audio": "edina-monsoon-ref.wav",
-  "reference_text": "hands on a certain white powder, because it's the only thing that'll make time in an isolated French cottage bearable. During a game of doubles ping pong, she slips away to indulge. Whose bag is this?",
-  "segment_start_s": 600
+  "reference_text": "And so a friend of mine said, 'I know someone, and he's just trained and he's, he's like a life coach thing. And what his good thing is, he'll teach you what's stopping you moving forward.'",
+  "segment_start_s": 100.1
 }

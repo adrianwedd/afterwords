@@ -1,0 +1,37 @@
+{
+  "wav": "picard-ref.wav",
+  "source_sha256": "0dfabf6f33026ad50b937424ab6e8edeab95af89d50af520212765952b45c3fa",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "137b7f62-06ad-4fff-846c-6ade7e868147",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0dfabf6f33026ad50b937424ab6e8edeab95af89d50af520212765952b45c3fa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0dfabf6f33026ad50b937424ab6e8edeab95af89d50af520212765952b45c3fa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "137b7f62-06ad-4fff-846c-6ade7e868147",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"with the first link, the chain is forged. The first speech censured, the first thought forbidden, the first freedom denied, chains us all irrevocably.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Prominent orchestral background music plays continuously underneath the speech throughout the entire clip.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"The speech starts extremely close to the beginning of the audio file, possibly cutting off the very start of the first word. Highly confident that the entire clip is contaminated by background music and contains no clean intervals for conditioning.\"\n}\n```\n",
+    "duration_seconds": 24.673144,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12474,
+      "output_tokens": 2160,
+      "thinking_tokens": 1827,
+      "cache_read_tokens": 24103,
+      "total_tokens": 14634
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

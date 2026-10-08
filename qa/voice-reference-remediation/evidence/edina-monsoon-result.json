@@ -1,0 +1,38 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "7b444246-e3a0-45de-8736-8b07549d9dba",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7b444246-e3a0-45de-8736-8b07549d9dba",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And so a friend of mine said, I know someone, and he's just trained and he's he's like a life coach thing. And what his good thing is, he'll teach you what's stopping you moving forward.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": null,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 10.6]\n  ],\n  \"uncertainty\": \"Boundary timing has an estimated margin of +/- 0.5s due to perceptual auditory estimation without a timeline ruler. Wording confidence is very high, with minor uncertainty on whether the contraction is 'he's just trained' vs 'he just trained' and the exact repetition cadence of 'he's he's like'.\"\n}\n",
+    "duration_seconds": 32.044383,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20494,
+      "output_tokens": 2729,
+      "thinking_tokens": 2349,
+      "cache_read_tokens": 16064,
+      "total_tokens": 23223
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
