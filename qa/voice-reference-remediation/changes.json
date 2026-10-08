@@ -6377,7 +6377,8 @@
         "publisher_metadata_sha256": "78d7cd2427934e9b38fb6147fc10adaea09cbe38efa0b2a590ee6f488042a87c"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/avasarala-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/avasarala-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/avasarala-result.json",
+      "delivery_commit": "ef261a7334b12f7da6577954db1263746220d6d1"
     }
   ],
   "exclusions": [
