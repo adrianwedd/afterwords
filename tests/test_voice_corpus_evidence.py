@@ -3,6 +3,8 @@ import importlib.util
 import json
 from pathlib import Path
 import sqlite3
+import io
+import subprocess
 
 import numpy as np
 import pytest
@@ -50,3 +52,39 @@ def test_native_evidence_rejects_wrong_audio_bytes(tmp_path, monkeypatch):
                    (2, b"audio/wav\x00" + str(media).encode() + b"\x00"))
     assert not listener.attachment_evidence("test", "0" * 64)
     assert listener.attachment_evidence("test", listener.digest(media))
+
+
+def test_every_changed_reference_has_hash_bound_provenance():
+    baseline = json.loads((ROOT / "qa/voice-reference-remediation/baseline.json").read_text())
+    manifest = json.loads((ROOT / "qa/voice-reference-remediation/changes.json").read_text())
+    changes = {c["wav"]: c for c in manifest["changes"]}
+    audio = load_script("voice_corpus")
+    for record in baseline["records"]:
+        path = ROOT / "voices" / record["wav"]
+        actual = audio.inspect_audio(path)
+        if actual["sha256"] == record["audio"]["sha256"]:
+            continue
+        change = changes[record["wav"]]
+        assert change["original_audio"] == record["audio"]
+        assert actual == change["resulting_audio"]
+        for field, expected in [("native_original_evidence", record["audio"]["sha256"]),
+                                ("native_result_evidence", actual["sha256"])]:
+            evidence = json.loads((ROOT / change[field]).read_text())
+            assert evidence["native_audio_proven"]
+            assert evidence["source_sha256"] == expected
+            assert all(e["media_sha256"] == expected for e in evidence["attachment_evidence"])
+        for profile in change["profiles"]:
+            current = json.loads((ROOT / profile["path"]).read_text())
+            assert current["reference_audio"] == record["wav"]
+            assert current["reference_text"] == profile["new_reference_text"]
+            assert current["segment_start_s"] == profile["new_segment_start_s"]
+        assert {p["path"] for p in change["profiles"]} == {p["path"] for p in record["profiles"]}
+        operation = change["operation"]
+        if operation["type"] == "lossless_pcm_frame_slice":
+            old_bytes = subprocess.check_output([
+                "git", "show", f"{baseline['baseline_commit']}:voices/{record['wav']}"], cwd=ROOT)
+            old, rate = sf.read(io.BytesIO(old_bytes), dtype="int16", always_2d=True)
+            new, new_rate = sf.read(path, dtype="int16", always_2d=True)
+            assert new_rate == rate == operation["sample_rate"]
+            np.testing.assert_array_equal(
+                new, old[operation["start_frame"]:operation["end_frame_exclusive"]])

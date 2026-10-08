@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "20d207987eedbb470eaf28bc5af1566a2ee2179b",
+  "changes": [
+    {
+      "wav": "alan-bennett-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "bb836905333788dee27cc0d9d1f9eeb59c16435a3f4c62a97eb630f3ed294820",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.06062561018627902,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "80c47d9cd909b85e87638f599f54397938a85d765480a6a66a80fb442962c3e1",
+        "frames": 487305,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.05,
+        "peak": 0.9000244140625,
+        "rms": 0.06550375424076013,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "start_frame": 79380,
+        "end_frame_exclusive": 566685,
+        "start_s": 1.8,
+        "end_s": 12.85,
+        "sample_rate": 44100
+      },
+      "profiles": [
+        {
+          "path": "voices/alan-bennett-qwen3-06b.json",
+          "old_reference_text": "feeling baffled. He and occasionally she is overwhelmed by the amount of stuff that has been written and the ground still to be covered. How shall I ever catch up? wails the young Joe Orton in the film's",
+          "new_reference_text": "He, and occasionally she, is overwhelmed by the amount of stuff that has been written and the ground still to be covered. How shall I ever catch up?",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 31.8
+        },
+        {
+          "path": "voices/alan-bennett.json",
+          "old_reference_text": "feeling baffled. He and occasionally she is overwhelmed by the amount of stuff that has been written and the ground still to be covered. How shall I ever catch up? wails the young Joe Orton in the film's",
+          "new_reference_text": "He, and occasionally she, is overwhelmed by the amount of stuff that has been written and the ground still to be covered. How shall I ever catch up?",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 31.8
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=8xiDpJGid1E",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/alan-bennett-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/alan-bennett-result.json",
+      "adjudication": "Accepted individual edit: one isolated speaker, complete phrases, no perceived contamination or cutoffs; audible pause between sentences is natural reading prosody (ASR estimate 1.44s), retained without splicing. Final corpus pass remains pending.",
+      "deterministic_qa": {
+        "sample_exact_slice": true,
+        "sample_rate_preserved": true,
+        "pcm_subtype_preserved": true
+      },
+      "delivery_commit_locator": "git log -- voices/alan-bennett-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending"
+    }
+  ]
+}
