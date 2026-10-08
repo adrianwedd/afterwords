@@ -5905,7 +5905,8 @@
         "source_basis": "File description names Dalai Lama interview with VOA Mandarin Service; English retirement question followed by autobiographical answer; source video frame at40s shows target speaking. Candidate is uninterrupted38.4-45.05 answer segment."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/dalai-lama-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/dalai-lama-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/dalai-lama-result.json",
+      "delivery_commit": "01f1c94bb3ba97b871a337c3b4ee9ed96349de44"
     }
   ],
   "exclusions": [
