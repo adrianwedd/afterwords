@@ -1,0 +1,38 @@
+{
+  "wav": "clip-098-ref.wav",
+  "source_sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "6681a35f-4d85-4f48-ac47-a24ec67f8e97",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "6681a35f-4d85-4f48-ac47-a24ec67f8e97",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well I don't think I can really comment sensibly on how I do it, it's really up to you to comment on how I do it. I know that uh, I get a certain uh, favorable response, the figures are curiously higher than they've ever been.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 11.0]\n  ],\n  \"uncertainty\": \"Interval estimates are approximate as they are derived from perceptual listening without access to explicit waveform timings. Transcript represents literal audible syllables and hesitation markers.\"\n}\n```\n",
+    "duration_seconds": 22.131308,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12742,
+      "output_tokens": 1713,
+      "thinking_tokens": 1358,
+      "cache_read_tokens": 24048,
+      "total_tokens": 14455
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

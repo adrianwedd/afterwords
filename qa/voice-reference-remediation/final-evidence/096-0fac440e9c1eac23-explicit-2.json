@@ -1,0 +1,38 @@
+{
+  "wav": "clip-096-ref.wav",
+  "source_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "8a5f9372-d6a8-410f-bb74-2559f639460f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8a5f9372-d6a8-410f-bb74-2559f639460f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, um, mum flew down from Cloncurry to have me actually, because, uh, my father, um, who who was a parasitologist, um, was based up in Cloncurry\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 12.0]\n  ],\n  \"uncertainty\": \"Exact millisecond timings are estimated. The ending is slightly abrupt after the final word, so ending_cutoff is marked true. Long pauses are marked true due to the hesitations ('um', 'uh'). The word 'who' is repeated as spoken.\"\n}\n```\n",
+    "duration_seconds": 51.513593,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12752,
+      "output_tokens": 3932,
+      "thinking_tokens": 3568,
+      "cache_read_tokens": 24089,
+      "total_tokens": 16684
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

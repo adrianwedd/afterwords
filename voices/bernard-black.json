@@ -3,6 +3,6 @@
   "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=yQUSCuHhX3M",
   "reference_audio": "bernard-black-ref.wav",
-  "reference_text": "Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is.",
+  "reference_text": "Uh, yeah, I think I was, I didn't get in any major trouble, you know, if that's what a good kid is.",
   "segment_start_s": 178.94
 }

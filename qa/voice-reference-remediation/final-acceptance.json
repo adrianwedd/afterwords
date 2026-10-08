@@ -214,10 +214,20 @@
       "index": 13,
       "wav": "bernard-black-ref.wav",
       "sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root correction",
+      "transcript_status": "matched root-adjudicated literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/013-0930c20cd609fdda-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/013-0930c20cd609fdda-revision-2.json"
+      ],
+      "adjudication": "Two independent fresh full native hearings agree an initial uh is audible before yeah, and the remainder of the existing transcript is literal. Both hear one isolated clean speaker, complete boundaries and no contamination. Restore the actual initial filler in both profiles; no audio or source provenance changes.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 14,
@@ -540,10 +550,21 @@
       "index": 35,
       "wav": "dr-cox-ref.wav",
       "sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after explicit fresh root adjudication",
+      "transcript_status": "matched root-adjudicated literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/035-899aea7fe329ca6c-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/035-899aea7fe329ca6c-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/035-899aea7fe329ca6c-explicit-3.json"
+      ],
+      "adjudication": "Primary hears two speakers with a shift after Fine; independent fresh3.1 and careful fresh3.8 both positively hear one speaker with stable acoustics, no splice or competing sound and complete words. Two independent observations outweigh the isolated identity-shift claim; natural acting prosody alone does not establish a new person. For reduced onset, primary hears Im going to,3.1 explicitly hears Im gonna, careful3.8 hears gonna with a swallowed Im possibility. Retain positively heard Im and colloquial gonna, corroborated independently, without expanding into canonical grammar.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 36,
@@ -702,10 +723,20 @@
       "index": 45,
       "wav": "han-solo-ref.wav",
       "sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after explicit fresh root adjudication",
+      "transcript_status": "matched root-adjudicated literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/045-db196b014d86555e-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/045-db196b014d86555e-explicit-2.json"
+      ],
+      "adjudication": "Both fresh full hearings agree one isolated clean voice, complete words and no contamination. Primary flags minor elision uncertainty in Ive versus I; targeted fresh observation positively hears faint labiodental fricative off-glides in these contractions and confirms Ive. Retain Kid and literal final sentence without adding a relative pronoun from scene memory.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 46,
@@ -1535,10 +1566,20 @@
       "index": 96,
       "wav": "tegan-jovanka-ref.wav",
       "sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after explicit fresh root adjudication",
+      "transcript_status": "matched root-adjudicated literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/096-0fac440e9c1eac23-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/096-0fac440e9c1eac23-explicit-2.json"
+      ],
+      "adjudication": "Both fresh full hearings agree all literal words, one isolated clear voice, no music/crowd/SFX or discontinuity. Independent3.1 ending-cutoff label explicitly means slightly abrupt after the final word and it still finds raw speech usable; primary hears no cutoff. No actual missing final phoneme is reported. Natural fillers, repeated who and pauses are retained; minor w onset versus breath does not supply an additional complete word.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 97,
@@ -1562,10 +1603,20 @@
       "index": 98,
       "wav": "the-doctor-ref.wav",
       "sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root correction",
+      "transcript_status": "matched root-adjudicated literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/098-97247a828be1aaeb-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/098-97247a828be1aaeb-revision-2.json"
+      ],
+      "adjudication": "Two independent fresh full native hearings agree there are two audible hesitation vowels in the third sentence: after that and after certain. Existing profiles omitted the second. Er and uh represent the same unstressed British filler; retain the project orthography er while adding the actually heard second filler to every associated profile. Both hearings agree one isolated clear voice, no contamination or acoustic discontinuity, complete boundaries and usable full speech.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 99,

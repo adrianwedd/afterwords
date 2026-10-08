@@ -1,0 +1,38 @@
+{
+  "wav": "clip-096-ref.wav",
+  "source_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "a07c4060-88ae-4e04-a1b0-706739007070",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "a07c4060-88ae-4e04-a1b0-706739007070",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, um, Mum flew down from Cloncurry to have me actually, because, uh, my father, um, who, who was a parasitologist, um, was based up in Cloncurry\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": null,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"interval_s\": [4.0, 4.8],\n      \"description\": \"Natural conversational hesitation before 'because, uh'\"\n    },\n    {\n      \"interval_s\": [5.8, 6.5],\n      \"description\": \"Hesitation pause with 'um' before 'who, who'\"\n    },\n    {\n      \"interval_s\": [8.2, 9.0],\n      \"description\": \"Hesitation pause with 'um' before predicate\"\n    }\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 10.8]\n  ],\n  \"uncertainty\": \"All boundary timestamps and durations are perceptual estimates (+/- 0.5s) derived from native auditory listening without waveform visualization or automated alignment tools. Slight uncertainty whether the onset to 'was based' includes a minor acoustic false-start 'w- was' or a soft breath onset, and capitalization of proper nouns ('Cloncurry') is inferred phonetically.\"\n}\n",
+    "duration_seconds": 38.544164,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20469,
+      "output_tokens": 3098,
+      "thinking_tokens": 2601,
+      "cache_read_tokens": 16023,
+      "total_tokens": 23567
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

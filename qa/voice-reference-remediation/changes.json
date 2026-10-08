@@ -1606,20 +1606,20 @@
         {
           "path": "voices/the-doctor-qwen3-06b.json",
           "old_reference_text": "It's all one title. Gallifrey falls no more. Now, what would you think that means? It's entirely up to you. Your choice.",
-          "new_reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been.",
+          "new_reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain, er, favorable response. The figures are curiously higher than they've ever been.",
           "old_segment_start_s": 156,
           "new_segment_start_s": 64.45
         },
         {
           "path": "voices/the-doctor.json",
           "old_reference_text": "It's all one title. Gallifrey falls no more. Now, what would you think that means? It's entirely up to you. Your choice.",
-          "new_reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been.",
+          "new_reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain, er, favorable response. The figures are curiously higher than they've ever been.",
           "old_segment_start_s": 156,
           "new_segment_start_s": 64.45
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=xszeU-yTSfg",
-      "adjudication": "Original has two speakers, continuous score, clipped fragments and prior splicing. Replaced with a single continuous 14.70s interview answer from the intended Tom Baker, explicitly credited in both BBC source titles. Native actual-candidate review confirms one speaker, complete usable words, no music, crowd, effects, acoustic discontinuity, splices or cutoffs. Secondary ASR corroborates the substantive words; native hearing adds audible er hesitation omitted by ASR, retained literally. Mild natural hesitation accepted. Native guessed studio/interior context although BBC metadata places interview outdoors; location guess is not relied on, while observed clean isolated acoustics are. Younger recording age explicitly disclosed in provenance. Final corpus pass pending.",
+      "adjudication": "Original has two speakers, continuous score, clipped fragments and prior splicing. Replaced with a single continuous 14.70s interview answer from the intended Tom Baker, explicitly credited in both BBC source titles. Native actual-candidate review confirms one speaker, complete usable words, no music, crowd, effects, acoustic discontinuity, splices or cutoffs. Secondary ASR corroborates the substantive words; native hearing adds audible er hesitation omitted by ASR, retained literally. Mild natural hesitation accepted. Native guessed studio/interior context although BBC metadata places interview outdoors; location guess is not relied on, while observed clean isolated acoustics are. Younger recording age explicitly disclosed in provenance. Final corpus pass pending.\nFresh final correction: Two independent fresh full native hearings agree there are two audible hesitation vowels in the third sentence: after that and after certain. Existing profiles omitted the second. Er and uh represent the same unstressed British filler; retain the project orthography er while adding the actually heard second filler to every associated profile. Both hearings agree one isolated clear voice, no contamination or acoustic discontinuity, complete boundaries and usable full speech.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false
@@ -1639,8 +1639,83 @@
         "original_source_metadata_sha256": "6424b0465faf0ee337f82f45b7db8deacdb0910116b462eb6e805a256b319912"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/the-doctor-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/the-doctor-result.json",
-      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08"
+      "native_result_evidence": "qa/voice-reference-remediation/final-evidence/098-97247a828be1aaeb-revision-1.json",
+      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08",
+      "post_remediation_revisions": [
+        {
+          "previous_delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08",
+          "previous_audio": {
+            "sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b",
+            "frames": 352800,
+            "sample_rate": 24000,
+            "channels": 1,
+            "subtype": "PCM_16",
+            "duration_s": 14.7,
+            "peak": 0.5377197265625,
+            "rms": 0.07521642958512037,
+            "samples_at_full_scale": 0
+          },
+          "previous_operation": {
+            "type": "replacement",
+            "source_start_s": 64.45,
+            "source_end_s": 79.15,
+            "conversion": "ffmpeg continuous crop, stereo-to-mono downmix/resample to 24000 Hz PCM_16; no separation, denoising, normalization or splicing",
+            "render_command": [
+              "ffmpeg",
+              "-i",
+              "SOURCE.wav",
+              "-ss",
+              "64.45",
+              "-t",
+              "14.7",
+              "-ac",
+              "1",
+              "-ar",
+              "24000",
+              "-c:a",
+              "pcm_s16le",
+              "RESULT.wav"
+            ]
+          },
+          "previous_profiles": [
+            {
+              "path": "voices/the-doctor-qwen3-06b.json",
+              "old_reference_text": "It's all one title. Gallifrey falls no more. Now, what would you think that means? It's entirely up to you. Your choice.",
+              "new_reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been.",
+              "old_segment_start_s": 156,
+              "new_segment_start_s": 64.45
+            },
+            {
+              "path": "voices/the-doctor.json",
+              "old_reference_text": "It's all one title. Gallifrey falls no more. Now, what would you think that means? It's entirely up to you. Your choice.",
+              "new_reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been.",
+              "old_segment_start_s": 156,
+              "new_segment_start_s": 64.45
+            }
+          ],
+          "previous_native_result_evidence": "qa/voice-reference-remediation/evidence/the-doctor-result.json",
+          "operation": {
+            "type": "text_only"
+          },
+          "resulting_audio": {
+            "sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b",
+            "frames": 352800,
+            "sample_rate": 24000,
+            "channels": 1,
+            "subtype": "PCM_16",
+            "duration_s": 14.7,
+            "peak": 0.5377197265625,
+            "rms": 0.07521642958512037,
+            "samples_at_full_scale": 0
+          },
+          "adjudication": "Two independent fresh full native hearings agree there are two audible hesitation vowels in the third sentence: after that and after certain. Existing profiles omitted the second. Er and uh represent the same unstressed British filler; retain the project orthography er while adding the actually heard second filler to every associated profile. Both hearings agree one isolated clear voice, no contamination or acoustic discontinuity, complete boundaries and usable full speech.",
+          "native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/098-97247a828be1aaeb-revision-1.json",
+            "qa/voice-reference-remediation/final-evidence/098-97247a828be1aaeb-revision-2.json"
+          ],
+          "discovery_native_evidence": []
+        }
+      ]
     },
     {
       "wav": "the-cat-ref.wav",
@@ -3202,20 +3277,20 @@
         {
           "path": "voices/bernard-black-qwen3-06b.json",
           "old_reference_text": "Now, you know, they teach you to have to become a person really, because, you know, children are very over-protected now in lots of ways, very nervous about them, you know, people go, oh, don't go outside!",
-          "new_reference_text": "Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is.",
+          "new_reference_text": "Uh, yeah, I think I was, I didn't get in any major trouble, you know, if that's what a good kid is.",
           "old_segment_start_s": 0,
           "new_segment_start_s": 178.94
         },
         {
           "path": "voices/bernard-black.json",
           "old_reference_text": "Now, you know, they teach you to have to become a person really, because, you know, children are very over-protected now in lots of ways, very nervous about them, you know, people go, oh, don't go outside!",
-          "new_reference_text": "Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is.",
+          "new_reference_text": "Uh, yeah, I think I was, I didn't get in any major trouble, you know, if that's what a good kid is.",
           "old_segment_start_s": 0,
           "new_segment_start_s": 178.94
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=yQUSCuHhX3M",
-      "adjudication": "Original Dylan reference has overlapping live audience laughter and chopped last phrase. New ABC2023 childhood-answer candidate178.94-186.58 had trailing but um cut off, so not admitted. Revised continuous178.94-183.94 keeps three complete clauses,5.0s. Two native edited hearings agree isolation, complete boundaries and no music/crowd/effects/splices. One3.1 hearing added opening Uh, but earlier longer native hearing, current3.8 hearing and ASR all begin Yeah; omit unconfirmed filler instead of adding phantom speech. Full resulting literal words verified by native3.8. Same intended Dylan actor in broadcaster-credited interview, distinct from stage reference but original itself was not character dialogue. Natural speech, no cleanup/normalization/splicing. Fresh final corpus pass pending.",
+      "adjudication": "Original Dylan reference has overlapping live audience laughter and chopped last phrase. New ABC2023 childhood-answer candidate178.94-186.58 had trailing but um cut off, so not admitted. Revised continuous178.94-183.94 keeps three complete clauses,5.0s. Two native edited hearings agree isolation, complete boundaries and no music/crowd/effects/splices. One3.1 hearing added opening Uh, but earlier longer native hearing, current3.8 hearing and ASR all begin Yeah; omit unconfirmed filler instead of adding phantom speech. Full resulting literal words verified by native3.8. Same intended Dylan actor in broadcaster-credited interview, distinct from stage reference but original itself was not character dialogue. Natural speech, no cleanup/normalization/splicing. Fresh final corpus pass pending.\nFresh final correction: Two independent fresh full native hearings agree an initial uh is audible before yeah, and the remainder of the existing transcript is literal. Both hear one isolated clean speaker, complete boundaries and no contamination. Restore the actual initial filler in both profiles; no audio or source provenance changes.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false
@@ -3232,8 +3307,70 @@
         "source_basis": "Public broadcaster-published interview explicitly credits intended speaker; retained complete answer excludes interviewer and audience responses."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bernard-black-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/bernard-black-result.json",
-      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb"
+      "native_result_evidence": "qa/voice-reference-remediation/final-evidence/013-0930c20cd609fdda-revision-1.json",
+      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
+      "post_remediation_revisions": [
+        {
+          "previous_delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
+          "previous_audio": {
+            "sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f",
+            "frames": 240000,
+            "sample_rate": 48000,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 5.0,
+            "peak": 0.221923828125,
+            "rms": 0.03910756159888425,
+            "samples_at_full_scale": 0
+          },
+          "previous_operation": {
+            "type": "replacement",
+            "sample_rate": 48000,
+            "source_start_s": 178.94,
+            "source_end_s": 183.94,
+            "source_start_frame": 8589120,
+            "source_end_frame_exclusive": 8829120,
+            "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+          },
+          "previous_profiles": [
+            {
+              "path": "voices/bernard-black-qwen3-06b.json",
+              "old_reference_text": "Now, you know, they teach you to have to become a person really, because, you know, children are very over-protected now in lots of ways, very nervous about them, you know, people go, oh, don't go outside!",
+              "new_reference_text": "Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is.",
+              "old_segment_start_s": 0,
+              "new_segment_start_s": 178.94
+            },
+            {
+              "path": "voices/bernard-black.json",
+              "old_reference_text": "Now, you know, they teach you to have to become a person really, because, you know, children are very over-protected now in lots of ways, very nervous about them, you know, people go, oh, don't go outside!",
+              "new_reference_text": "Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is.",
+              "old_segment_start_s": 0,
+              "new_segment_start_s": 178.94
+            }
+          ],
+          "previous_native_result_evidence": "qa/voice-reference-remediation/evidence/bernard-black-result.json",
+          "operation": {
+            "type": "text_only"
+          },
+          "resulting_audio": {
+            "sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f",
+            "frames": 240000,
+            "sample_rate": 48000,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 5.0,
+            "peak": 0.221923828125,
+            "rms": 0.03910756159888425,
+            "samples_at_full_scale": 0
+          },
+          "adjudication": "Two independent fresh full native hearings agree an initial uh is audible before yeah, and the remainder of the existing transcript is literal. Both hear one isolated clean speaker, complete boundaries and no contamination. Restore the actual initial filler in both profiles; no audio or source provenance changes.",
+          "native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/013-0930c20cd609fdda-revision-1.json",
+            "qa/voice-reference-remediation/final-evidence/013-0930c20cd609fdda-revision-2.json"
+          ],
+          "discovery_native_evidence": []
+        }
+      ]
     },
     {
       "wav": "eartha-ref.wav",

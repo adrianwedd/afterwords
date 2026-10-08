@@ -294,6 +294,32 @@ def test_final_acceptance_is_bound_to_complete_fresh_production_scope(monkeypatc
         assert all(r['status'] == 'accepted' for r in decisions['records'])
 
 
+def test_final_signed_pcm_measurements_cover_both_endpoints():
+    """Positive PCM16 saturation must not disappear behind normalized abs>=1."""
+    snapshot = json.loads((ROOT / 'qa/voice-reference-remediation/final-snapshot.json').read_text())
+    checks = json.loads((ROOT / 'qa/voice-reference-remediation/final-deterministic-checks.json').read_text())
+    expected = {r['wav']: r for r in snapshot['records']}
+    assert checks['scope_count'] == len(checks['records']) == len(expected) == 104
+    assert {r['wav'] for r in checks['records']} == set(expected)
+    for measurement in checks['records']:
+        path = ROOT / 'voices' / measurement['wav']
+        assert measurement['sha256'] == expected[measurement['wav']]['audio']['sha256']
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == measurement['sha256']
+        samples, rate = sf.read(path, dtype='int16', always_2d=True)
+        negative = int(np.count_nonzero(samples == -32768))
+        positive = int(np.count_nonzero(samples == 32767))
+        assert measurement['negative_fullscale_samples'] == negative
+        assert measurement['positive_fullscale_samples'] == positive
+        assert measurement['signed_fullscale_samples'] == negative + positive
+        assert measurement['signed_fullscale_fraction'] == (negative + positive) / samples.size
+        frame_mask = np.any((samples == -32768) | (samples == 32767), axis=1)
+        edges = np.diff(np.r_[False, frame_mask, False].astype(np.int8))
+        lengths = np.flatnonzero(edges == -1) - np.flatnonzero(edges == 1)
+        longest = int(lengths.max()) if lengths.size else 0
+        assert measurement['longest_fullscale_run_frames'] == longest
+        assert measurement['longest_fullscale_run_ms'] == pytest.approx(longest * 1000 / rate)
+
+
 def test_fresh_revision_rejects_clamped_current_slice_before_mutation(tmp_path, monkeypatch):
     monkeypatch.syspath_prepend(str(ROOT / 'scripts'))
     revision = load_script('revise_voice_reference')

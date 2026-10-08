@@ -2,7 +2,7 @@
   "name": "the-doctor",
   "source_url": "https://www.youtube.com/watch?v=xszeU-yTSfg",
   "reference_audio": "the-doctor-ref.wav",
-  "reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been.",
+  "reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain, er, favorable response. The figures are curiously higher than they've ever been.",
   "segment_start_s": 64.45,
   "notes": "Reference remediated; see qa/voice-reference-remediation/changes.json for provenance and native listening evidence."
 }

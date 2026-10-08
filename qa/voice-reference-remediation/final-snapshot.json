@@ -403,17 +403,17 @@
       "profiles": [
         {
           "path": "voices/bernard-black-qwen3-06b.json",
-          "profile_sha256": "f8eb214350bfe18e6e210dea3db12423e9daf027a6e84ec1d5761cabe3cde42a",
-          "reference_text": "Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is."
+          "profile_sha256": "0fd47594daeafd501799372f5396c98e9578ef66514e536e69435c5e54b6b8e7",
+          "reference_text": "Uh, yeah, I think I was, I didn't get in any major trouble, you know, if that's what a good kid is."
         },
         {
           "path": "voices/bernard-black.json",
-          "profile_sha256": "6ee1a6d79c2166cef3ad0ea1d0c9d03f5f087f38c18e31ead153e55db26dea6f",
-          "reference_text": "Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is."
+          "profile_sha256": "101afebb315268d16f918b6248f84a688fe522f984d3b3f936de7095c0054cf2",
+          "reference_text": "Uh, yeah, I think I was, I didn't get in any major trouble, you know, if that's what a good kid is."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {
@@ -2988,17 +2988,17 @@
       "profiles": [
         {
           "path": "voices/the-doctor-qwen3-06b.json",
-          "profile_sha256": "2e9dad74e7d17e1c4e4eac799472fa0a05a87d2cd28d40919dd62541692b9651",
-          "reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been."
+          "profile_sha256": "65cdbe7f3fee1fae008d1a971dee68de0049a4e502a0b3bae75c4009cb1737da",
+          "reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain, er, favorable response. The figures are curiously higher than they've ever been."
         },
         {
           "path": "voices/the-doctor.json",
-          "profile_sha256": "ada00ceb66aeddeeaa37ec5f49fb264cfb55043157c6a2b89e19496a928a0326",
-          "reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been."
+          "profile_sha256": "55e7d133e9c59bc4bd7e5e4e9e337ec811e6853bbcc36cba5921da15111a7a78",
+          "reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain, er, favorable response. The figures are curiously higher than they've ever been."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {
