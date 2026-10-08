@@ -1,8 +1,8 @@
 {
   "name": "victoria-wood",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=r2XOxVruFZc",
+  "source_url": "https://www.bbc.co.uk/programmes/b008kkcg",
   "reference_audio": "victoria-wood-ref.wav",
-  "reference_text": "No, this is really, really tall and just pierce up as I as he could reach me. This is ready to follow that side, but there are that big dog sniffing up at me.",
-  "segment_start_s": 60
+  "reference_text": "I don't want to pretend I don't enjoy it. I was really happy to be on the front page of the newspapers with my two BAFTAs.",
+  "segment_start_s": 163.6
 }

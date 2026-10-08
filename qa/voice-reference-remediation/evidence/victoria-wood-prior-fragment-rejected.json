@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "3035f36de7a988e1be049cc8046e2184a1d2d67f1b20a9cb30a1aed3130c9303",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4b423964-9de7-4eaf-93de-cb2c6cf8970c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3035f36de7a988e1be049cc8046e2184a1d2d67f1b20a9cb30a1aed3130c9303"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3035f36de7a988e1be049cc8046e2184a1d2d67f1b20a9cb30a1aed3130c9303"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4b423964-9de7-4eaf-93de-cb2c6cf8970c",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"...tion. I don't want to pretend I don't enjoy it. I was really happy to be on the front page of the newspapers with my two BAFTAs.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.4, 8.3]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty margin of approximately \u00b10.2\u20130.3 seconds. The opening fragment is a clipped suffix of an incomplete word (perceived as '-tion' or '-shun' ending at ~0.3s). The remainder of the speech from 'I don't want...' through '...two BAFTAs' is isolated, clear, and cleanly intelligible.\"\n}\n",
+    "duration_seconds": 34.089417,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20076,
+      "output_tokens": 2936,
+      "thinking_tokens": 2555,
+      "cache_read_tokens": 16167,
+      "total_tokens": 23012
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

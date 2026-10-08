@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "a569c765cebde2f0b98856fdbcf64bed903c49bb541d0528c5d17e85831e8895",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c9f62d2d-3296-4072-b8df-2986bf66521b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a569c765cebde2f0b98856fdbcf64bed903c49bb541d0528c5d17e85831e8895"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a569c765cebde2f0b98856fdbcf64bed903c49bb541d0528c5d17e85831e8895"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c9f62d2d-3296-4072-b8df-2986bf66521b",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I don't want to pretend I don't enjoy it. I was really happy to be on the front page of the newspapers with my two BAFTAs.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.8]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations (+/- 0.3s) without waveform alignment tools. Wording confidence is very high with clear speech articulation.\"\n}\n",
+    "duration_seconds": 27.393486,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36561,
+      "output_tokens": 2540,
+      "thinking_tokens": 2215,
+      "cache_read_tokens": 0,
+      "total_tokens": 39101
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

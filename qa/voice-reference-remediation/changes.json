@@ -5074,6 +5074,87 @@
       "native_result_evidence": "qa/voice-reference-remediation/evidence/mark-steel-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/mark-steel-publisher-source.json",
       "delivery_commit": "4bd98896138c709a58233c7d4d3f2f223fa7bd11"
+    },
+    {
+      "wav": "victoria-wood-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "43bf0798214e7eb199eae5e4c98eafef3c32956f6c255efc5fb98cd68125d343",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.15456115324859462,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "a569c765cebde2f0b98856fdbcf64bed903c49bb541d0528c5d17e85831e8895",
+        "frames": 249165,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 5.65,
+        "peak": 0.3309326171875,
+        "rms": 0.0561887813398363,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 163.6,
+        "source_end_s": 169.25,
+        "source_start_frame": 7214760,
+        "source_end_frame_exclusive": 7463925,
+        "conversion": "Exact continuous decoded publisher PCM16 frame slice preserving source rate/channels; no cleanup, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/victoria-wood-qwen3-06b.json",
+          "old_reference_text": "No, this is really, really tall and just pierce up as I as he could reach me. This is ready to follow that side, but there are that big dog sniffing up at me.",
+          "new_reference_text": "I don't want to pretend I don't enjoy it. I was really happy to be on the front page of the newspapers with my two BAFTAs.",
+          "old_segment_start_s": 60,
+          "new_segment_start_s": 163.6
+        },
+        {
+          "path": "voices/victoria-wood.json",
+          "old_reference_text": "No, this is really, really tall and just pierce up as I as he could reach me. This is ready to follow that side, but there are that big dog sniffing up at me.",
+          "new_reference_text": "I don't want to pretend I don't enjoy it. I was really happy to be on the front page of the newspapers with my two BAFTAs.",
+          "old_segment_start_s": 60,
+          "new_segment_start_s": 163.6
+        }
+      ],
+      "source_url": "https://www.bbc.co.uk/programmes/b008kkcg",
+      "adjudication": "Original native reports audience laughter, possible second-speaker interjection, live room variation and difficult disputed wording; earlier trimming trial retained contamination. Direct BBC publisher interview names guest Victoria Wood and interviewer, selected guest answer discusses awards and newspaper attention. First094 native hears abrupt and-like fragment; earlier-expanded095 valid secondary native identifies preceding -tion suffix, both rejected. 0953.1 claimed ingestion tool provided textual transcript, rejected despite historical attachment/nativeproof bool; current parser rejects explicit denial after regression-tested guard update, negative evidence committed. New exact163.6-169.25 slice096 full native confirms clear complete two statements, no prior-word fragment, one speaker, no music/crowd/laughter/effects/acoustic changes/splices/cutoffs/long pauses; high literal-word confidence. Transcript matches independent source and overlapping candidate095 ASR, including it after enjoy. Actual5.65s complete statements, useful varied phonemes/prosody, healthy level/no clipping. Full programme decode reported invalid packet, independently decoding first240s found no audio packet error and selected region is within that check; native result has no codec-artifact report. Exact continuous decoded publisher PCM16 frame slice, no cleanup/normalization/separation/padding/splice. Same comedian natural interview register replaces audience performance, explicitly recorded. Fresh final corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_source_frame_exact": true
+      },
+      "delivery_commit_locator": "git log -- voices/victoria-wood-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.bbc.co.uk/programmes/b008kkcg",
+        "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pp03b.mp3",
+        "publisher": "BBC Radio 4",
+        "programme": "Desert Island Discs",
+        "guest": "Victoria Wood",
+        "interviewer": "Kirsty Young",
+        "source_mp3_sha256": "35e9dd9c5bbf76285a702a32fc752d3173318e180cc8929aa1f365e5441a9dba",
+        "source_audio_sha256": "8d4453ee337111838224edcf35536d3b3e3647b917af185a41df8c993a8055cc",
+        "source_metadata_sha256": "cfebb8b63f86328433bf1f5ced664d4ba5b703d9bb37be93fa5a9e390f5672a0",
+        "source_basis": "BBC publisher programme names Victoria Wood and Kirsty Young; selected guest answer follows presenter question about receiving awards and attention.",
+        "delivery_change": "Same intended comedian in natural interview delivery replaces audience performance.",
+        "decode_limit": "Independent ffmpeg first240s decode completed without audio packet errors; selected163.6-169.25 lies inside checked region. Only lyrics BOM metadata and estimated bitrate-duration notices remain."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-result.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-publisher-source.json",
+      "source_decode_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-first240-decode.log",
+      "prior_fragment_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-prior-fragment-rejected.json",
+      "transcript_only_rejected_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-text-layer-rejected.json"
     }
   ],
   "exclusions": [

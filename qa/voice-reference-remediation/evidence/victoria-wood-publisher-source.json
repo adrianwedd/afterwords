@@ -1,0 +1,17 @@
+{
+  "programme_url": "https://www.bbc.co.uk/programmes/b008kkcg",
+  "download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pp03b.mp3",
+  "guest": "Victoria Wood",
+  "publisher": "BBC Radio 4",
+  "programme": "Desert Island Discs",
+  "interviewer": "Kirsty Young",
+  "source_mp3_sha256": "35e9dd9c5bbf76285a702a32fc752d3173318e180cc8929aa1f365e5441a9dba",
+  "source_audio_sha256": "8d4453ee337111838224edcf35536d3b3e3647b917af185a41df8c993a8055cc",
+  "programme_html_sha256": "b2fdc5026931b0a9e4f28b87164f3191186c7379ba0625e21b16bb322ab88bac",
+  "decode": "ffmpeg to PCM16 WAV preserving decoded rate/channels, no cleanup or normalization; decoder reported one invalid packet in full programme, selected excerpt requires native integrity review",
+  "retrieved_utc": "2026-10-08T07:22:23.740887+00:00",
+  "identity_basis": "BBC publisher programme names Victoria Wood and Kirsty Young; selected guest answer follows presenter question about receiving awards and attention.",
+  "delivery_change": "Same intended comedian in natural interview delivery replaces audience performance.",
+  "decode_check": "Independent ffmpeg first240s decode completed without audio packet errors; selected163.6-169.25 lies inside checked region. Only lyrics BOM metadata and estimated bitrate-duration notices remain.",
+  "first240_decode_log_sha256": "34ca75da5b80da165d2655ec51c88b8e460581de40552f04d6cf5ca797f061ee"
+}
