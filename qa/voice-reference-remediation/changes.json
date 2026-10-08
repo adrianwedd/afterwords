@@ -4754,7 +4754,8 @@
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/river-song-publisher-source.json",
       "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/river-song-secondary-result.json",
       "native_tight_opening_disagreement_evidence": "qa/voice-reference-remediation/evidence/river-song-tight-opening-disagreement.json",
-      "native_expanded_trial_rejected_evidence": "qa/voice-reference-remediation/evidence/river-song-expanded-trial-rejected.json"
+      "native_expanded_trial_rejected_evidence": "qa/voice-reference-remediation/evidence/river-song-expanded-trial-rejected.json",
+      "delivery_commit": "0da3843d47cb5b61bbd86af9b44a178868a34680"
     }
   ],
   "exclusions": [
