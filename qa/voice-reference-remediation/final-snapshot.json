@@ -18,30 +18,30 @@
       "wav": "ace-ref.wav",
       "anonymous_wav": "clip-001-ref.wav",
       "audio": {
-        "sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6",
-        "frames": 320880,
+        "sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5",
+        "frames": 183360,
         "sample_rate": 24000,
         "channels": 1,
         "subtype": "PCM_16",
-        "duration_s": 13.37,
-        "peak": 0.37835693359375,
-        "rms": 0.039614289571060224,
+        "duration_s": 7.64,
+        "peak": 0.348602294921875,
+        "rms": 0.034640407328841785,
         "samples_at_full_scale": 0
       },
       "profiles": [
         {
           "path": "voices/ace-qwen3-06b.json",
-          "profile_sha256": "d438bc5a39bba4f38dd0eef0ea45bdc7a51b3e8049e1f38b0b5249373d8a5c43",
-          "reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave."
+          "profile_sha256": "52be892ac767a4c60ee88a2ab9d1bd8ca133ae49a4a570ac4b937df1a51d2f04",
+          "reference_text": "It meant scrambling over some rocks, and um, and getting into this little tiny gap in in the cave."
         },
         {
           "path": "voices/ace.json",
-          "profile_sha256": "f0f87a277c358925b22359e51c3d2f2f1225bcdc26d4f9649dbe5943b1c27d9f",
-          "reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave."
+          "profile_sha256": "fe845491b462d4c13927fb13ad5d11f7e4bf2edbff79581d9653df7767c90078",
+          "reference_text": "It meant scrambling over some rocks, and um, and getting into this little tiny gap in in the cave."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "d06661a4-41d1-462c-8dba-2322c20065e0",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d06661a4-41d1-462c-8dba-2322c20065e0",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, for the first bit of it, for my bit in the cave, um, it was actually, qu\u2014 it meant scrambling over some rocks and, um, and getting into this little tiny gap in in the cave,\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 2.7],\n    [4.6, 6.3]\n  ],\n  \"uncertainty\": \"Perceptual timing boundary estimates carry an uncertainty of approximately \u00b10.2 to 0.4 seconds. The onset of 'Well' starts cleanly with no truncation. The disfluency near 4.3\u20134.5s is an auditory false start ('qu\u2014' or partial 'quite') followed by an ordinary conversational restart ('it meant'), with continuous acoustic ambiance rather than a physical edit splice. The final word 'cave' has a complete phonetic closure (/ke\u026av/ with audible final fricative release) followed by brief ambient decay, making ending_cutoff false phonetically despite ending on a syntactically incomplete clause. Raw reference is marked unusable due to disfluencies ('um', false start, 'in in' repetition) degrading conditioning flow, but clean sub-phrases ('for the first bit of it, for my bit in the cave' and 'it meant scrambling over some rocks') are cleanly isolated.\"\n}\n",
+    "duration_seconds": 56.933915999999996,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 21010,
+      "output_tokens": 5890,
+      "thinking_tokens": 5376,
+      "cache_read_tokens": 16019,
+      "total_tokens": 26900
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

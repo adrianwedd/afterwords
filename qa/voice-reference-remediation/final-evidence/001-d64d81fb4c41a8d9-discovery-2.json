@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "73d87463-dbcd-4982-aa0a-04f8db5b78ed",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "73d87463-dbcd-4982-aa0a-04f8db5b78ed",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well for the first bit of it, for my bit in the cave, um, it was actually quite- it meant scrambling over some rocks, and um, and getting into this little tiny gap in, in the cave.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 10.7]\n  ],\n  \"uncertainty\": \"Low uncertainty. Transcript and boundaries are clear. Audio contains a single isolated speaker with normal conversational disfluencies but no background interference.\"\n}\n```\n",
+    "duration_seconds": 21.178081,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20657,
+      "output_tokens": 1580,
+      "thinking_tokens": 1238,
+      "cache_read_tokens": 15952,
+      "total_tokens": 22237
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

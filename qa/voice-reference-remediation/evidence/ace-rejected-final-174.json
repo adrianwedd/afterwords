@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "fdd5d05c743371b4bfe9a36aab182505472104d67feb3440adbf126803d6252c",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "5a985bb3-b768-4d91-b936-4939cc089d03",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fdd5d05c743371b4bfe9a36aab182505472104d67feb3440adbf126803d6252c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fdd5d05c743371b4bfe9a36aab182505472104d67feb3440adbf126803d6252c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "5a985bb3-b768-4d91-b936-4939cc089d03",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"...quite a sc- it meant scrambling over some rocks and um and getting into this little tiny gap in in the cave\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.7, 5.8]\n  ],\n  \"uncertainty\": \"Initial chopped speech fragment at ~0.0-0.7s is clipped mid-word (sounds like 'quite a sc-' or 'cut a sc-') and may represent either a false start or an abrupt edit boundary. The segment contains natural disfluencies ('um', repetition of 'in'). All time boundaries are perceptual estimates within +/- 0.2s.\"\n}\n",
+    "duration_seconds": 51.228558,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20221,
+      "output_tokens": 5803,
+      "thinking_tokens": 5441,
+      "cache_read_tokens": 16113,
+      "total_tokens": 26024
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

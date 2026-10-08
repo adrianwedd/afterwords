@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "fdd5d05c743371b4bfe9a36aab182505472104d67feb3440adbf126803d6252c",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "b8cdc81f-d1c6-490d-98c1-81f2f568792e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fdd5d05c743371b4bfe9a36aab182505472104d67feb3440adbf126803d6252c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fdd5d05c743371b4bfe9a36aab182505472104d67feb3440adbf126803d6252c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b8cdc81f-d1c6-490d-98c1-81f2f568792e",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"quite uh s- it meant scrambling over some rocks and um and getting into this little tiny gap in in the cave.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [1.5, 3.5],\n    [4.5, 6.5]\n  ],\n  \"uncertainty\": \"Boundary timestamps are approximate perceptual estimates. The transcript includes several natural disfluencies (stammers, repeated words, fillers) which makes raw usage difficult without trimming, but the acoustic quality itself is clean.\"\n}\n```\n",
+    "duration_seconds": 18.990958,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20458,
+      "output_tokens": 1607,
+      "thinking_tokens": 1264,
+      "cache_read_tokens": 16054,
+      "total_tokens": 22065
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

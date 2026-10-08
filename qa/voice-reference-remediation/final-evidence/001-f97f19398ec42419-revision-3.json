@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c6ea02de-68e0-4236-802d-8f82a1f5bc81",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c6ea02de-68e0-4236-802d-8f82a1f5bc81",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"it meant scrambling over some rocks and um and getting into this little tiny gap in in the cave\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.5]\n  ],\n  \"uncertainty\": \"Exact boundary timestamps are perceptual estimates based on an approximate total clip duration of 6.5 seconds. The speaker exhibits natural disfluency including a filler 'um' (around 2.5\u20133.2s) and a repeated preposition 'in in' (around 5.2\u20135.7s), but speech is fully intelligible and clean with no audible phoneme clipping at the boundaries.\"\n}\n```\n",
+    "duration_seconds": 49.696454,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20791,
+      "output_tokens": 3711,
+      "thinking_tokens": 3340,
+      "cache_read_tokens": 16137,
+      "total_tokens": 24502
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

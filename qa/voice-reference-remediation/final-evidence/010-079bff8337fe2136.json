@@ -1,0 +1,38 @@
+{
+  "wav": "clip-010-ref.wav",
+  "source_sha256": "079bff8337fe21360862ed6ddf6c70fbe1b7b2b9eb7beecb6813532d588dabfa",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "0029d3f6-c339-4411-89e3-242088df2a85",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "079bff8337fe21360862ed6ddf6c70fbe1b7b2b9eb7beecb6813532d588dabfa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "079bff8337fe21360862ed6ddf6c70fbe1b7b2b9eb7beecb6813532d588dabfa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0029d3f6-c339-4411-89e3-242088df2a85",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I can proudly say that I have a feeling that we all did a good job on this series.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.6]\n  ],\n  \"uncertainty\": \"Timing boundaries are perceptual estimates (approx. +/- 0.3s) based on native auditory playback. The phrase has high clarity with a natural breath pause between 'that' (~2.0s) and 'I have' (~2.4s), and no audible background interference or clipping.\"\n}\n",
+    "duration_seconds": 26.066411,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20247,
+      "output_tokens": 2300,
+      "thinking_tokens": 1960,
+      "cache_read_tokens": 16188,
+      "total_tokens": 22547
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-016-ref.wav",
+  "source_sha256": "5b36c48e78ce0aec3786af6b2644714262412508059a62f2f873e7199e4af587",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4109f2a5-030a-407b-86b0-6df71ceea330",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5b36c48e78ce0aec3786af6b2644714262412508059a62f2f873e7199e4af587"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5b36c48e78ce0aec3786af6b2644714262412508059a62f2f873e7199e4af587"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4109f2a5-030a-407b-86b0-6df71ceea330",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Only last year, my aunt came to me to beg for help in the ransom of my uncle Osric.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.5]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately +/- 0.3s. The final proper name is rendered phonetically as 'Osric' (or alternately 'Osrick'). The speaker isolation is complete and uninterrupted throughout the entire phrase.\"\n}\n",
+    "duration_seconds": 25.349301,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36506,
+      "output_tokens": 2740,
+      "thinking_tokens": 2411,
+      "cache_read_tokens": 0,
+      "total_tokens": 39246
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

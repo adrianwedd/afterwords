@@ -292,3 +292,53 @@ def test_final_acceptance_is_bound_to_complete_fresh_production_scope(monkeypatc
             assert all(e['media_sha256'] == decision['sha256'] for e in evidence['attachment_evidence'])
     if decisions['corpus_status'] == 'accepted':
         assert all(r['status'] == 'accepted' for r in decisions['records'])
+
+
+def test_fresh_revision_rejects_clamped_current_slice_before_mutation(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(ROOT / 'scripts'))
+    revision = load_script('revise_voice_reference')
+    qa = tmp_path / 'qa/voice-reference-remediation'
+    qa.mkdir(parents=True)
+    (tmp_path / 'voices').mkdir()
+    wav = tmp_path / 'voices/clip-ref.wav'
+    sf.write(wav, np.full(32000, 0.1), 8000)
+    before = wav.read_bytes()
+    audio = revision.inspect_audio(wav)
+    manifest = {'changes': [{'wav': wav.name, 'resulting_audio': audio, 'delivery_commit': 'a' * 40}]}
+    (qa / 'changes.json').write_text(json.dumps(manifest))
+    (qa / 'final-snapshot.json').write_text(json.dumps({'records': [{'wav': wav.name, 'audio': audio}]}))
+    monkeypatch.setattr(revision.subprocess, 'check_output', lambda *args, **kwargs: before)
+    plan = {'wav': wav.name, 'expected_sha256': audio['sha256'], 'approved': True,
+            'adjudication': 'reject before mutation', 'candidate': str(wav),
+            'operation': {'type': 'lossless_current_pcm_slice', 'start_frame': 0,
+                          'end_frame_exclusive': audio['frames']+1, 'sample_rate': 8000}}
+    with pytest.raises(AssertionError):
+        revision.revise(tmp_path, plan)
+    assert wav.read_bytes() == before
+    assert json.loads((qa / 'changes.json').read_text()) == manifest
+
+
+def test_post_remediation_revisions_preserve_reconstructable_operations():
+    manifest = json.loads((ROOT / 'qa/voice-reference-remediation/changes.json').read_text())
+    listener = load_script('listen_voice_corpus')
+    for change in manifest['changes']:
+        for revision in change.get('post_remediation_revisions', []):
+            previous = subprocess.check_output(['git', 'show', revision['previous_delivery_commit'] + ':voices/' + change['wav']], cwd=ROOT)
+            assert hashlib.sha256(previous).hexdigest() == revision['previous_audio']['sha256']
+            assert revision['adjudication'].strip()
+            op = revision['operation']
+            if op['type'] == 'lossless_current_pcm_slice':
+                samples, rate = sf.read(io.BytesIO(previous), dtype='int16', always_2d=True)
+                assert 0 <= op['start_frame'] < op['end_frame_exclusive'] <= len(samples)
+                assert rate == op['sample_rate']
+                buffer = io.BytesIO()
+                sf.write(buffer, samples[op['start_frame']:op['end_frame_exclusive']], rate, format='WAV', subtype='PCM_16')
+                assert hashlib.sha256(buffer.getvalue()).hexdigest() == revision['resulting_audio']['sha256']
+            else:
+                assert op['type'] == 'text_only'
+                assert revision['resulting_audio'] == revision['previous_audio']
+            for path in revision['native_evidence']:
+                evidence = json.loads((ROOT / path).read_text())
+                assert evidence['source_sha256'] == revision['resulting_audio']['sha256']
+                assert evidence['native_audio_proven'] and evidence['transcript_scope'] == 'full'
+                assert listener.parsed_observation(evidence['result'])

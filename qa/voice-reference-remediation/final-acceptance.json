@@ -8,13 +8,22 @@
     {
       "index": 1,
       "wav": "ace-ref.wav",
-      "sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh listener reports ending cutoff/possible splice",
-      "transcript_status": "possible extra a after quite; independent native retry pending",
+      "sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5",
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root correction",
+      "transcript_status": "matched root-adjudicated literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/001-d64d81fb4c41a8d9.json"
-      ]
+        "qa/voice-reference-remediation/final-evidence/001-f97f19398ec42419-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/001-f97f19398ec42419-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/001-f97f19398ec42419-revision-3.json"
+      ],
+      "adjudication": "Fresh final primary1 hears quite a/possible splice/ending cutoff. Independent fresh3.1 and detailed3.8 establish complete final cave with audible /v/ and room decay, no splice; they disagree about partially uttered quite/qu false start. Remove only that unresolved first portion by keeping complete continuous final sentence. Trial1744.96s starts in the quite false start and was rejected by both fresh models (frozen ace-rejected-final174 evidence). Secondary ASR combined false-start sounds in word alignment, so boundaries were not executed mechanically. Locate quiet gap5.72–5.76s and render175 exact5.73–13.37s7.64s,183360frames PCM16 from previous committed admitted reference, no DSP. Three full actual typedWAV new native175 hearings agree every literal word, including It, um, repeated and/in in; all music/crowd/laugh/effect/acoustic change/endingcut/splice/pause flags false.1753.8 and detailed1753.8 explicitly report no phoneme clipping and intact It.1753.1 marks beginningcutoff only because very beginning slightly abrupt, without reporting a missing word/phoneme; detailed independent new boundary hearing explicitly distinguishes padding and confirms no clipped phoneme. Exact source has pre-onset quiet samples, supporting brief pre-roll rather than cutting a vowel. Accept complete natural phrase with short buffer, preserve conversational disfluency. Final native evidence is for exact new shipping bytes after this correction, not pre-remediation Ace conclusion. All associated profiles updated consistently; original/intermediate hashes, operation and native conflicts retained.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 2,
@@ -102,7 +111,7 @@
       "evidence": [
         "qa/voice-reference-remediation/final-evidence/007-745f3e4e47f3b1f3.json"
       ],
-      "adjudication": "Fresh full native hearing:1well-isolated speaker, no music/crowd/laughter/splices/cutoffs. Faint natural background ambience/room tone explicitly non-intrusive; uniform dry acoustic and natural0.6\u20130.7s phrase pauses accepted. Literal words match all profiles with negligible lexical uncertainty. Do not misclassify incidental room tone as material sound-effect contamination.",
+      "adjudication": "Fresh full native hearing:1well-isolated speaker, no music/crowd/laughter/splices/cutoffs. Faint natural background ambience/room tone explicitly non-intrusive; uniform dry acoustic and natural0.6–0.7s phrase pauses accepted. Literal words match all profiles with negligible lexical uncertainty. Do not misclassify incidental room tone as material sound-effect contamination.",
       "deterministic_qa": {
         "audio_integrity": true,
         "production_and_git_hash_match": true,
@@ -132,37 +141,73 @@
       "index": 9,
       "wav": "aurora-ref.wav",
       "sha256": "68053366e95bd08b8930dcddfb4b8f1dedd595192a1e838f6e61f634a8df841d",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/009-68053366e95bd08b.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one solo clear uninterrupted speaker, complete words/boundaries, no music/crowd/laugh/effects/splices; acoustic_changes null with no acoustic uncertainty or shift reported. Literal words exactly match all profiles; only clock uncertainty, not auditory limitation.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 10,
       "wav": "avasarala-ref.wav",
       "sha256": "079bff8337fe21360862ed6ddf6c70fbe1b7b2b9eb7beecb6813532d588dabfa",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/010-079bff8337fe2136.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one isolated speaker and all contamination/change/cutoff/pause/splice flags false. Exact literal words match all profiles, including natural brief breath after that. High clarity, no background interference.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 11,
       "wav": "bardem-ref.wav",
       "sha256": "563e1b247eb08f63a668a0a31c0a15c051ec1b0abeed6372fde0207436f617ff",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/011-563e1b247eb08f63.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one isolated speaker, complete boundaries, no contamination/change/splice. Exact literal question matches all profiles. Natural dramatic0.6–0.7s pause is not damaged speech or inserted silence. Several seconds of clear complete speech; no need to alter good audio.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 12,
       "wav": "basil-fawlty-ref.wav",
       "sha256": "a37f62fc52ef46b3be6e47ca51183b42cda0ff99df6fa179edf014f10f264bbc",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/012-a37f62fc52ef46b3.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one isolated speaker, uniform room acoustics, no contamination/splice/cutoff. Literal words match all profiles including writing repetition and four more words. Sit round strongly favored by hearing; no grammar expansion to sit around.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 13,
@@ -186,19 +231,37 @@
       "index": 15,
       "wav": "bill-potts-ref.wav",
       "sha256": "dbda10009b02730fdbb9dff2b9adea66432404a181090c5e6051311931304cf3",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/015-dbda10009b02730f.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one isolated speaker, uniform dry recording, no contamination/splice/cutoff/pause. All literal words match every profile; high lexical confidence and intact boundaries.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 16,
       "wav": "blackadder-ref.wav",
       "sha256": "5b36c48e78ce0aec3786af6b2644714262412508059a62f2f873e7199e4af587",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/016-5b36c48e78ce0aec.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles; Osric versus Osrick is orthographic spelling of the same heard proper name, not an added word. Complete uninterrupted conditioning phrase.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 17,
@@ -674,55 +737,109 @@
       "index": 62,
       "wav": "lisa-simpson-ref.wav",
       "sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/062-730ba749157fd8c7.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match all profiles; gonna acoustically preferred reduced form retained, no expansion to canonical going to.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 63,
       "wav": "lister-ref.wav",
       "sha256": "222c14364b896cc31ce3cfd742a7b4a5e368a683ca9a054defeb79a39068a9e5",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/063-222c14364b896cc3.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one isolated speaker, complete boundaries, no contamination/change/pause/splice. Literal words match all profiles; sentence punctuation and Mayday/May Day spelling do not change audible words.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 64,
       "wav": "loki-ref.wav",
       "sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/064-c0fde205f811f4b0.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one isolated clean speaker, complete boundaries and all contamination/pause/splice flags false; acoustic_changes null and no change/limitation asserted. Literal words match all profiles with low uncertainty.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 65,
       "wav": "mark-corrigan-ref.wav",
       "sha256": "38bfa895ed8040510edd57f24e814176aa8e7af765edd6c350c6d763fb236fb7",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/065-38bfa895ed804051.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one completely isolated speaker, dry/clean/distinct speech, all contamination/change/cutoff/pause/splice flags false. Literal words match all profiles with low uncertainty.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 66,
       "wav": "mark-steel-ref.wav",
       "sha256": "895e5d0826986ac969972f8ca2173ed2e66d2c0255fab324a53d57a0c4337330",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/066-895e5d0826986ac9.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match all profiles with very high confidence; only timestamp approximation.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 67,
       "wav": "marla-ref.wav",
       "sha256": "e534d2b9f7fc0432e48888c57c41dbef5c5a754fed9c2809a4699503cd89277f",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root review",
+      "transcript_status": "matched literal words",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/067-e534d2b9f7fc0432.json"
+      ],
+      "adjudication": "Fresh full native hearing reports one fully isolated speaker, no overlapping dialogue/music/crowd/effects/change/splice/cutoff. Literal words match all profiles. Approximately1.6s between-sentence breathing pause is natural delivery, not inserted silence or destructive conditioning; rawusabletrue. Accepted without pretending pause-free.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 68,

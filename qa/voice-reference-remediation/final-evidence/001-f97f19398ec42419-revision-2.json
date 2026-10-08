@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "a709796b-18fc-4d94-8a94-0fb38fd285ad",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "a709796b-18fc-4d94-8a94-0fb38fd285ad",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"it meant scrambling over some rocks and um and getting into this little tiny gap in in the cave.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.5, 5.5]],\n  \"uncertainty\": \"Word boundary estimates are approximate (+/- 0.5s). The very beginning is slightly abrupt, leading to the beginning_cutoff assessment.\"\n}\n",
+    "duration_seconds": 20.236451,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12529,
+      "output_tokens": 1788,
+      "thinking_tokens": 1484,
+      "cache_read_tokens": 24197,
+      "total_tokens": 14317
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-062-ref.wav",
+  "source_sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "39c830b8-dfe1-4417-89a7-975582f7d9e1",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "39c830b8-dfe1-4417-89a7-975582f7d9e1",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Look, I'm not just gonna pick a religion that seems cool. I'm gonna pick one that's right for me.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.6]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates are approximate to within +/- 0.3s without waveform display tools. Minor uncertainty in transcription between informal contraction 'gonna' versus rapid phonological reduction of 'going to', though 'gonna' matches the acoustic delivery most closely. Audio presents as clean, isolated dialogue with dry studio acoustics and no detectable background noise or overlapping sounds.\"\n}\n```\n",
+    "duration_seconds": 27.284058,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20249,
+      "output_tokens": 2643,
+      "thinking_tokens": 2275,
+      "cache_read_tokens": 16173,
+      "total_tokens": 22892
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

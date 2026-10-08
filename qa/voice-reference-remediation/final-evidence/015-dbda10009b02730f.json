@@ -1,0 +1,38 @@
+{
+  "wav": "clip-015-ref.wav",
+  "source_sha256": "dbda10009b02730fdbb9dff2b9adea66432404a181090c5e6051311931304cf3",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4b3686f8-287c-443d-8b57-0aac8f18c254",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dbda10009b02730fdbb9dff2b9adea66432404a181090c5e6051311931304cf3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dbda10009b02730fdbb9dff2b9adea66432404a181090c5e6051311931304cf3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4b3686f8-287c-443d-8b57-0aac8f18c254",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, I think arguably there have been lots of gay characters on Doctor Who previously.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None observed; consistent dry studio/interview acoustic profile and room tone throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.6]\n  ],\n  \"uncertainty\": \"Boundary interval estimated perceptually at 0.0s to 5.6s with an approximate uncertainty of \u00b10.3s due to perceptual estimation without waveform sample meters. Wording is clearly articulated and high-confidence with negligible lexical ambiguity.\"\n}\n",
+    "duration_seconds": 22.301117,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36212,
+      "output_tokens": 1921,
+      "thinking_tokens": 1580,
+      "cache_read_tokens": 0,
+      "total_tokens": 38133
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

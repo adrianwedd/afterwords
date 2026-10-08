@@ -267,60 +267,46 @@
         "samples_at_full_scale": 0
       },
       "resulting_audio": {
-        "sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6",
-        "frames": 320880,
+        "sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5",
+        "frames": 183360,
         "sample_rate": 24000,
         "channels": 1,
         "subtype": "PCM_16",
-        "duration_s": 13.37,
-        "peak": 0.37835693359375,
-        "rms": 0.039614289571060224,
+        "duration_s": 7.64,
+        "peak": 0.348602294921875,
+        "rms": 0.034640407328841785,
         "samples_at_full_scale": 0
       },
       "operation": {
         "type": "replacement",
-        "source_start_s": 152.98,
-        "source_end_s": 166.35,
-        "source_duration_s": 4846,
-        "conversion": "ffmpeg PCM_16; stereo downmix to mono; resample 48000 Hz to 24000 Hz; no denoising, separation, time stretching or normalization",
-        "render_command": [
-          "ffmpeg",
-          "-i",
-          "SOURCE.wav",
-          "-ss",
-          "152.98",
-          "-t",
-          "13.37",
-          "-ac",
-          "1",
-          "-ar",
-          "24000",
-          "-c:a",
-          "pcm_s16le",
-          "RESULT.wav"
-        ]
+        "sample_rate": 24000,
+        "source_start_frame": 137520,
+        "source_end_frame_exclusive": 320880,
+        "source_frame_origin": "previous committed admitted reference: 7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383",
+        "source_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6",
+        "conversion": "Lossless PCM16 slice of previous admitted reference; original publisher/render recipe retained in post_remediation_revisions."
       },
       "profiles": [
         {
           "path": "voices/ace-qwen3-06b.json",
           "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
-          "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
+          "new_reference_text": "It meant scrambling over some rocks, and um, and getting into this little tiny gap in in the cave.",
           "old_segment_start_s": 90,
-          "new_segment_start_s": 152.98
+          "new_segment_start_s": 158.71
         },
         {
           "path": "voices/ace.json",
           "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
-          "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
+          "new_reference_text": "It meant scrambling over some rocks, and um, and getting into this little tiny gap in in the cave.",
           "old_segment_start_s": 90,
-          "new_segment_start_s": 152.98
+          "new_segment_start_s": 158.71
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=mIw6XAhcUbQ",
-      "adjudication": "Replaces a music/effects-contaminated cut containing other voices with a continuous 13.37s interview answer by the intended performer. Native candidate review reports one clear isolated speaker, no music, crowd, laughter or effects, no cutoffs and no splices. Natural hesitations and word repetitions retained; the conversational pause is not inserted silence. Subsequent candidate ASR omits um, quite, and repeated and/in; those details are retained from direct native hearing, with source ASR independently supporting quite and repeated in. A prior replacement candidate was rejected for interviewer interjections. Final corpus pass remains pending.",
+      "adjudication": "Replaces a music/effects-contaminated cut containing other voices with a continuous 13.37s interview answer by the intended performer. Native candidate review reports one clear isolated speaker, no music, crowd, laughter or effects, no cutoffs and no splices. Natural hesitations and word repetitions retained; the conversational pause is not inserted silence. Subsequent candidate ASR omits um, quite, and repeated and/in; those details are retained from direct native hearing, with source ASR independently supporting quite and repeated in. A prior replacement candidate was rejected for interviewer interjections. Final corpus pass remains pending.\nFresh final correction: Fresh final primary1 hears quite a/possible splice/ending cutoff. Independent fresh3.1 and detailed3.8 establish complete final cave with audible /v/ and room decay, no splice; they disagree about partially uttered quite/qu false start. Remove only that unresolved first portion by keeping complete continuous final sentence. Trial1744.96s starts in the quite false start and was rejected by both fresh models (frozen ace-rejected-final174 evidence). Secondary ASR combined false-start sounds in word alignment, so boundaries were not executed mechanically. Locate quiet gap5.72–5.76s and render175 exact5.73–13.37s7.64s,183360frames PCM16 from previous committed admitted reference, no DSP. Three full actual typedWAV new native175 hearings agree every literal word, including It, um, repeated and/in in; all music/crowd/laugh/effect/acoustic change/endingcut/splice/pause flags false.1753.8 and detailed1753.8 explicitly report no phoneme clipping and intact It.1753.1 marks beginningcutoff only because very beginning slightly abrupt, without reporting a missing word/phoneme; detailed independent new boundary hearing explicitly distinguishes padding and confirms no clipped phoneme. Exact source has pre-onset quiet samples, supporting brief pre-roll rather than cutting a vowel. Accept complete natural phrase with short buffer, preserve conversational disfluency. Final native evidence is for exact new shipping bytes after this correction, not pre-remediation Ace conclusion. All associated profiles updated consistently; original/intermediate hashes, operation and native conflicts retained.",
       "deterministic_qa": {
         "audio_integrity": true,
-        "sample_exact_slice": false
+        "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/ace-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
@@ -342,9 +328,98 @@
         }
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/ace-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/ace-result.json",
+      "native_result_evidence": "qa/voice-reference-remediation/final-evidence/001-f97f19398ec42419-revision-1.json",
       "secondary_asr_evidence": "qa/voice-reference-remediation/evidence/ace-result-asr-alignment.json",
-      "delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383"
+      "delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383",
+      "post_remediation_revisions": [
+        {
+          "previous_delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383",
+          "previous_audio": {
+            "sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6",
+            "frames": 320880,
+            "sample_rate": 24000,
+            "channels": 1,
+            "subtype": "PCM_16",
+            "duration_s": 13.37,
+            "peak": 0.37835693359375,
+            "rms": 0.039614289571060224,
+            "samples_at_full_scale": 0
+          },
+          "previous_operation": {
+            "type": "replacement",
+            "source_start_s": 152.98,
+            "source_end_s": 166.35,
+            "source_duration_s": 4846,
+            "conversion": "ffmpeg PCM_16; stereo downmix to mono; resample 48000 Hz to 24000 Hz; no denoising, separation, time stretching or normalization",
+            "render_command": [
+              "ffmpeg",
+              "-i",
+              "SOURCE.wav",
+              "-ss",
+              "152.98",
+              "-t",
+              "13.37",
+              "-ac",
+              "1",
+              "-ar",
+              "24000",
+              "-c:a",
+              "pcm_s16le",
+              "RESULT.wav"
+            ]
+          },
+          "previous_profiles": [
+            {
+              "path": "voices/ace-qwen3-06b.json",
+              "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
+              "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
+              "old_segment_start_s": 90,
+              "new_segment_start_s": 152.98
+            },
+            {
+              "path": "voices/ace.json",
+              "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
+              "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
+              "old_segment_start_s": 90,
+              "new_segment_start_s": 152.98
+            }
+          ],
+          "previous_native_result_evidence": "qa/voice-reference-remediation/evidence/ace-result.json",
+          "operation": {
+            "type": "lossless_current_pcm_slice",
+            "start_frame": 137520,
+            "end_frame_exclusive": 320880,
+            "sample_rate": 24000,
+            "start_s": 5.73,
+            "end_s": 13.37,
+            "publisher_start_s": 158.71,
+            "publisher_end_s": 166.35,
+            "recipe": "Exact PCM16 frames137520:320880 from previously admitted13.37s source reference; prior publisher/render operation preserved, no additional DSP."
+          },
+          "resulting_audio": {
+            "sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5",
+            "frames": 183360,
+            "sample_rate": 24000,
+            "channels": 1,
+            "subtype": "PCM_16",
+            "duration_s": 7.64,
+            "peak": 0.348602294921875,
+            "rms": 0.034640407328841785,
+            "samples_at_full_scale": 0
+          },
+          "adjudication": "Fresh final primary1 hears quite a/possible splice/ending cutoff. Independent fresh3.1 and detailed3.8 establish complete final cave with audible /v/ and room decay, no splice; they disagree about partially uttered quite/qu false start. Remove only that unresolved first portion by keeping complete continuous final sentence. Trial1744.96s starts in the quite false start and was rejected by both fresh models (frozen ace-rejected-final174 evidence). Secondary ASR combined false-start sounds in word alignment, so boundaries were not executed mechanically. Locate quiet gap5.72–5.76s and render175 exact5.73–13.37s7.64s,183360frames PCM16 from previous committed admitted reference, no DSP. Three full actual typedWAV new native175 hearings agree every literal word, including It, um, repeated and/in in; all music/crowd/laugh/effect/acoustic change/endingcut/splice/pause flags false.1753.8 and detailed1753.8 explicitly report no phoneme clipping and intact It.1753.1 marks beginningcutoff only because very beginning slightly abrupt, without reporting a missing word/phoneme; detailed independent new boundary hearing explicitly distinguishes padding and confirms no clipped phoneme. Exact source has pre-onset quiet samples, supporting brief pre-roll rather than cutting a vowel. Accept complete natural phrase with short buffer, preserve conversational disfluency. Final native evidence is for exact new shipping bytes after this correction, not pre-remediation Ace conclusion. All associated profiles updated consistently; original/intermediate hashes, operation and native conflicts retained.",
+          "native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/001-f97f19398ec42419-revision-1.json",
+            "qa/voice-reference-remediation/final-evidence/001-f97f19398ec42419-revision-2.json",
+            "qa/voice-reference-remediation/final-evidence/001-f97f19398ec42419-revision-3.json"
+          ],
+          "discovery_native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/001-d64d81fb4c41a8d9-discovery-1.json",
+            "qa/voice-reference-remediation/final-evidence/001-d64d81fb4c41a8d9-discovery-2.json",
+            "qa/voice-reference-remediation/final-evidence/001-d64d81fb4c41a8d9-discovery-3.json"
+          ]
+        }
+      ]
     },
     {
       "wav": "bardem-ref.wav",
