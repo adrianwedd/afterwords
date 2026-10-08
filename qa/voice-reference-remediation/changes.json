@@ -7107,7 +7107,8 @@
         "publisher_metadata_sha256": "7ce6d1c1d907f34db9ec0d93c336d5fd4f67af6bd0f62ad7c694182dc8519d1a"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/jarvis-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/jarvis-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/jarvis-result.json",
+      "delivery_commit": "3dcf54a78f3ff41e730cbadeefb2b04a3a07b2c0"
     }
   ],
   "exclusions": [
