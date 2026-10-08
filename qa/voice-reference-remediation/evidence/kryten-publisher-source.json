@@ -1,0 +1,34 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=3hFhUk6DbJ8",
+  "publisher": "Comic-Con International",
+  "publisher_channel_url": "https://www.youtube.com/channel/UCnKFQ3qLokC-6OS3YHNgGpw",
+  "title": "Red Dwarf: The Promised Land | Comic-Con@Home 2020",
+  "description": "Chris Barrie (Lara Croft: Tomb Raider), Craig Charles (Coronation Street), Robert Llewellyn (MI: High), and creator/director Doug Naylor (Spitting Image) discuss all things Red Dwarf including the upcoming Red Dwarf: The Promised Land launching on BritBox July 26, in a Q&A moderated by Kyle Anderson (senior editor) from The Nerdist.\n\nDISCLAIMER: Due to the copyrighted nature of some of the material in this panel, YouTube Ads may appear on your screen in accordance with their YouTube agreements.",
+  "source_download_sha256": "281c6b9c2c843cd2376e2d089cf33c62e9a5a7c03676ff9a776b77bd516dffc5",
+  "source_audio_sha256": "d4ae541ebea0428a670190f62de1f11d1e3a1dce0af4e03d28a50f6f43b38c80",
+  "source_info_sha256": "7a73679ab7946425358d31df9dfa128a773c84a2fe300c563b16d8d41c5c39e9",
+  "decode": "ffmpeg PCM16 preserving decoded source rate/channels; no DSP",
+  "retrieved_utc": "2026-10-08T07:38:48.902180+00:00",
+  "status": "unaccepted source; panel roster identifies possible intended actors, individual answer speaker attribution and native result hearing still required",
+  "source_video_sha256": "07011392d662fc070a7203c12cf713732a06ad746ac5962c74d5affb63ca0c8a",
+  "video_frames": [
+    {
+      "source_time_s": 430,
+      "path": "scratch/dwarf-comiccon-chris430.png",
+      "sha256": "e3b247083f2b6daed4d8cc77df101d3ca81b1fe180ba4a4d6525659faabaa102",
+      "observation": "Full-screen Chris Barrie speaking, matching moderator Chris handoff398-412 and cast introduction67.74."
+    },
+    {
+      "source_time_s": 580,
+      "path": "scratch/dwarf-comiccon-robert580.png",
+      "sha256": "a096a67804a4ae402148a40a20581214ffa894c87b461748c34799c7787eb7fe",
+      "observation": "Panel grid with labels; Robert Llewellyn top-middle smiling, following moderator Robert handoff561-570.56. Single still does not alone prove synchronized speaker."
+    },
+    {
+      "source_time_s": 612,
+      "path": "scratch/dwarf-comiccon-robert612.png",
+      "sha256": "62f1f761c838faa49b8c8c2827c2e44f771b6d6e4235846c8e4b04a095d1a35c",
+      "observation": "Named panel grid: Robert Llewellyn top-middle gesturing with open mouth during continuous answer about his mechanoid role; corroborates introduction and moderator Robert handoff, not standalone identity inference."
+    }
+  ]
+}

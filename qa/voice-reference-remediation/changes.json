@@ -5237,6 +5237,84 @@
       "native_result_secondary_evidence": "qa/voice-reference-remediation/evidence/jack-dee-result-secondary.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/jack-dee-publisher-source.json",
       "delivery_commit": "2d18f8f845a09244f18aae7cf8faac59be68876f"
+    },
+    {
+      "wav": "kryten-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "a6873d82f23e73812a5f365b6364eda8b7e61deb91610fea4f60bae272da155e",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.10734520137041753,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "abd923248878782c3ce582b478363ceb9e9d1998fb0403ea8f1c8564e0e8349f",
+        "frames": 312960,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.52,
+        "peak": 0.659210205078125,
+        "rms": 0.07604477442286627,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 611.38,
+        "source_end_s": 617.9,
+        "source_start_frame": 29346240,
+        "source_end_frame_exclusive": 29659200,
+        "conversion": "Exact continuous decoded publisher PCM16 frame slice preserving source rate/channels; no cleanup, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/kryten-qwen3-06b.json",
+          "old_reference_text": "Listen, have you got quite in there with you? Yeah, what's the problem? The problem is, I've been waiting fully 20 minutes for him in the hangar. Oh, spin my nipple nuts and send me to Alaska. I'm supposed to take you Asteroid Sputting. I'll be right down, sir.",
+          "new_reference_text": "For me, playing a three-million-year-old mechanoid is alarmingly familiar and close to my own experience.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 611.38
+        },
+        {
+          "path": "voices/kryten.json",
+          "old_reference_text": "Listen, have you got quite in there with you? Yeah, what's the problem? The problem is, I've been waiting fully 20 minutes for him in the hangar. Oh, spin my nipple nuts and send me to Alaska. I'm supposed to take you Asteroid Sputting. I'll be right down, sir.",
+          "new_reference_text": "For me, playing a three-million-year-old mechanoid is alarmingly familiar and close to my own experience.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 611.38
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=3hFhUk6DbJ8",
+      "adjudication": "Original native reports two alternating speakers and intrusive overlapping audience laughter; candidate original intervals short and speaker identity not established, so do not blindly trim another role. Public official Comic-Con2020 panel credits, cast introduction, moderator Robert handoff and named panel video corroborate Robert Llewellyn continuous answer about his own mechanoid role. Longer576.05-585.95 native099 rejected for chuckle and cut-off er. Longer600-617.9 native101 acoustics clean but uncertain repetition counts; do not normalize/guess those. Exact final611.38-617.9 native102 full audio review confirms1voice, no music/crowd/laughter/effects/acoustic changes/splices/long pauses/beginning or ending cutoff; high perceptual confidence in complete literal sentence. ASR words for611.42 through experience617.66 corroborate actual6.52s frame slice and text; reviewer estimated8.5s is not edit authority. Exact decoded PCM16 source frame equality independently verified. Same actor natural interview register replaces contaminated character dialogue, not asserted robotic register preserved. Fresh final full-corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "sample_exact_publisher_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/kryten-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=3hFhUk6DbJ8",
+        "publisher": "Comic-Con International",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCnKFQ3qLokC-6OS3YHNgGpw",
+        "title": "Red Dwarf: The Promised Land | Comic-Con@Home 2020",
+        "source_download_sha256": "281c6b9c2c843cd2376e2d089cf33c62e9a5a7c03676ff9a776b77bd516dffc5",
+        "source_audio_sha256": "d4ae541ebea0428a670190f62de1f11d1e3a1dce0af4e03d28a50f6f43b38c80",
+        "source_info_sha256": "7a73679ab7946425358d31df9dfa128a773c84a2fe300c563b16d8d41c5c39e9",
+        "source_video_sha256": "07011392d662fc070a7203c12cf713732a06ad746ac5962c74d5affb63ca0c8a",
+        "source_metadata_sha256": "1b581b586cde2ec8335162631de33f2821945ca22f7746a51ef3c4be3a78cb0d",
+        "source_basis": "Official Comic-Con International panel names Robert Llewellyn as Kryten; moderator addresses Robert561-570.56, uninterrupted guest answer continues through617.66 describing playing the mechanoid; panel frame612 shows named Robert gesturing/speaking. Native checks isolation independently of identity.",
+        "delivery_change": "Same intended actor Robert Llewellyn in natural interview delivery replaces multi-person character dialogue; robotic character register is not claimed preserved."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/kryten-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/kryten-result.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/kryten-publisher-source.json",
+      "source_frame_evidence": "qa/voice-reference-remediation/evidence/kryten-source-frame612.png"
     }
   ],
   "exclusions": [
