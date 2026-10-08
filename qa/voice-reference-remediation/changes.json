@@ -6919,6 +6919,99 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/tegan-jovanka-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/tegan-jovanka-result.json",
       "delivery_commit": "a4028eb2a15f79646c370c898d42030d7719e468"
+    },
+    {
+      "wav": "joi-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "7ca7d85b14c883d98d9429f941914049a27aeea1d727de2840451a2c665fd966",
+        "frames": 701280,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.61,
+        "peak": 0.999969482421875,
+        "rms": 0.07498980650664303,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "4b4879ce9fed55f81eeb91b6e28a720f6f676625dd4ed3ec013300793e805d84",
+        "frames": 335520,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.99,
+        "peak": 0.5428466796875,
+        "rms": 0.12324708034468182,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 23.85,
+        "source_end_s": 30.84,
+        "source_start_frame": 1144800,
+        "source_end_frame_exclusive": 1480320,
+        "conversion": "One continuous exact decoded source PCM16 frame slice; no DSP, mixing, padding, concatenation or normalization."
+      },
+      "profiles": [
+        {
+          "path": "voices/joi.json",
+          "old_reference_text": "How was your meeting? I'm getting cabin fever. I had an accident at work. I think I ruined my shirt. Let me take a look at it. You want to drink first? I just need a bit more practice. Don't fuss. I should have marinated it longer.",
+          "new_reference_text": "Okay, so I think, uh, I discovered that I'm really good, uh, with high kicks.",
+          "old_segment_start_s": 23.88,
+          "new_segment_start_s": 23.85
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=MhuOBP7EkwM",
+      "adjudication": "Original full native054 reports two distinct speakers, frequent alternation, room/noise-floor changes, splices and wording uncertainty; short individual lines do not offer a useful continuous isolated reference. Replacement candidate146 is a continuous 6.99s first answer from identified Ana de Armas in official Collider interview. Actual video frame26 names her while she speaks. Full actual WAV typed native proof matches hash; native146 reports one isolated speaker, no music/crowd/laughter/effects/acoustic changes/pauses/splices or either cutoff, raw usable true. High confidence literal wording explicitly hears both uh hesitations; preserved despite secondary Whisper omissions. Native approximate 6.2s interval is not an edit instruction; actual whole reviewed WAV is 6.99s. Exact decoded source PCM equality independently verified with frame bounds/counts and healthy amplitude, no full-scale samples. Natural actor interview register differs dramatic Joi; role credited by official Universal featurette. Fresh whole resulting production native acceptance mandatory.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/joi-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=MhuOBP7EkwM",
+        "publisher": "Collider Interviews",
+        "publisher_channel_url": "https://www.youtube.com/channel/UC5KD40UCDRUbR-od7sp9cuA",
+        "title": "\"Fighting Like a Girl\" Is Ana de Armas' Superpower in John Wick Spin-off",
+        "published_date": "20250602",
+        "source_info_sha256": "d1d775b83adeeb7bb5dbf8148f3b475ca3c8ffb88101d76291a49c67a2eb3583",
+        "source_download_sha256": "48b74ed115527661cbec238a3be46b6bca7d9311d7eb43c457027ca44b16e96a",
+        "source_audio_sha256": "c7a09495d6af23d6674a640005cbfab0967edda100e047c663d5f790da2795c0",
+        "source_video_sha256": "fef3ef4dc3678ad65b0febee46942fdfd8c52988a397e3dbdd5563e04fdd2183",
+        "identity_frame_sha256": "6fa1fbeb959f9a9cfad7245ff9304eef82be59414bef9efa57db63db3deb3fa0",
+        "source_basis": "Collider Interviews original channel/title/description identify Ana de Armas interviewed by Perri Nemiroff about Ballerina. Actual video frame at 26 seconds shows the named ANA DE ARMAS guest speaking during the selected first answer. Official Universal Pictures International Netherlands featurette credits Ana de Armas as Joi.",
+        "role_credit_url": "https://www.youtube.com/watch?v=EZYBs3jR6x4",
+        "delivery_change": "Natural 2025 Ana de Armas interview delivery replaces the earlier dramatic Joi dialogue montage. This preserves the intended actor but does not promise the exact fictional performance or age/register.",
+        "decode": "Full-source ffmpeg decode to PCM16 preserving decoded sample rate/channels, exit0 and empty error log.",
+        "exact_edit": {
+          "start_s": 23.85,
+          "end_s": 30.84,
+          "sample_rate": 48000,
+          "start_frame": 1144800,
+          "end_frame_exclusive": 1480320,
+          "channel_index": null
+        },
+        "sample_exact_source_slice": true,
+        "candidate_audio": {
+          "sha256": "4b4879ce9fed55f81eeb91b6e28a720f6f676625dd4ed3ec013300793e805d84",
+          "frames": 335520,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 6.99,
+          "peak": 0.5428466796875,
+          "rms": 0.12324708034468182,
+          "samples_at_full_scale": 0
+        },
+        "changes": "One continuous exact decoded source PCM16 frame slice; no DSP, mixing, padding, concatenation or normalization.",
+        "publisher_metadata_sha256": "5ecc4c7eb7bbdb4f90177b921d09eca4e60d5d9c465e6b5c82d056d8249eda00"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/joi-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/joi-result.json"
     }
   ],
   "exclusions": [
