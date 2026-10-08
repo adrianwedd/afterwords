@@ -1,0 +1,38 @@
+{
+  "wav": "clip-093-ref.wav",
+  "source_sha256": "08a2fe5f345bd8efe5bb66756f2091c3b2bc728c3e26d20cdd5df53354498e48",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "00e21c94-0e73-46d1-b761-6b1d8356fe16",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "08a2fe5f345bd8efe5bb66756f2091c3b2bc728c3e26d20cdd5df53354498e48"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "08a2fe5f345bd8efe5bb66756f2091c3b2bc728c3e26d20cdd5df53354498e48"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "00e21c94-0e73-46d1-b761-6b1d8356fe16",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"There will be no foolish wand-waving or silly incantations in this class.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 7.0]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates (total duration estimated around 7.2 seconds, with speech onset near 0.2s and natural reverberant decay completing around 7.0s). Transcript wording is heard with high perceptual certainty, with minor ambiguity limited to hyphenation in 'wand-waving'.\"\n}\n",
+    "duration_seconds": 26.047946,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20106,
+      "output_tokens": 2572,
+      "thinking_tokens": 2235,
+      "cache_read_tokens": 16193,
+      "total_tokens": 22678
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

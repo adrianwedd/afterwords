@@ -1,0 +1,38 @@
+{
+  "wav": "clip-076-ref.wav",
+  "source_sha256": "38d01bdd2f43b98eaa7e50716776cad04e71d14925ed669e1716a5439aab8fe1",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "e6c93856-b6c0-4d26-859f-7b06fcb07ff7",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "38d01bdd2f43b98eaa7e50716776cad04e71d14925ed669e1716a5439aab8fe1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "38d01bdd2f43b98eaa7e50716776cad04e71d14925ed669e1716a5439aab8fe1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e6c93856-b6c0-4d26-859f-7b06fcb07ff7",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And age doesn't really matter to me. I mean, people, um, people I think are much more exercised about your age than you really are. I mean, I think it's just terribly funny to be able to muck around with age.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 11.5]\n  ],\n  \"uncertainty\": \"Time boundaries are perceptual estimates (+/- 0.5s) without waveform alignment. Minor uncertainty in exact transcription of filler vocalization ('um') during mid-sentence hesitation.\"\n}\n```\n",
+    "duration_seconds": 36.142187,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20267,
+      "output_tokens": 4069,
+      "thinking_tokens": 3715,
+      "cache_read_tokens": 16086,
+      "total_tokens": 24336
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

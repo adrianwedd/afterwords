@@ -1,0 +1,38 @@
+{
+  "wav": "clip-072-ref.wav",
+  "source_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "0b78e3e7-b46f-404b-9aa0-dead661d44e7",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0b78e3e7-b46f-404b-9aa0-dead661d44e7",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, in Finland I think I used more grayish, bluish, more dark...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.5, 5.4]\n  ],\n  \"uncertainty\": \"Perceptual boundary estimates have an uncertainty of roughly \u00b10.3s. The opening conversational 'Yeah' sits near 0.0\u20130.4s. 'Grayish' and 'bluish' are elongated with deliberate hesitation pauses (~0.4\u20130.6s). The ending 'more dark' trails off incomplete without a final noun or resolution, cutting off around 6.5\u20137.0s.\"\n}\n```\n",
+    "duration_seconds": 44.552128,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20127,
+      "output_tokens": 4046,
+      "thinking_tokens": 3675,
+      "cache_read_tokens": 16150,
+      "total_tokens": 24173
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

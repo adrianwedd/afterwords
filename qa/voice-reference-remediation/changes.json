@@ -2017,20 +2017,20 @@
         {
           "path": "voices/carl-sagan-qwen3-06b.json",
           "old_reference_text": "forever will be. Our contemplations of the cosmos stirs. There is a tingling in the spine that catch in the voice of faint sensation as if a distant memory of",
-          "new_reference_text": "Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem.",
+          "new_reference_text": "Because the effects occupy more than a human generation, there is a, uh, tendency to, uh, say that they, uh, are not our problem. Uh, of course, then they are nobody's problem.",
           "old_segment_start_s": 5,
           "new_segment_start_s": 150.6
         },
         {
           "path": "voices/carl-sagan.json",
           "old_reference_text": "forever will be. Our contemplations of the cosmos stirs. There is a tingling in the spine that catch in the voice of faint sensation as if a distant memory of",
-          "new_reference_text": "Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem.",
+          "new_reference_text": "Because the effects occupy more than a human generation, there is a, uh, tendency to, uh, say that they, uh, are not our problem. Uh, of course, then they are nobody's problem.",
           "old_segment_start_s": 5,
           "new_segment_start_s": 150.6
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=Wp-WiNXH6hI",
-      "adjudication": "Original full-transcription provider response failed; preserved unaccepted. New blind native excerpt-only acoustic review has actual hash-matched WAV attachment and valid observations: score beneath speech, clipped outer fragments. This original evidence supports rejection of raw audio, not a full transcript. Replaced with a complete continuous 13.75s congressional testimony passage. Full native candidate review confirms one isolated speaker, complete words, no music, crowd, effects, acoustic transitions, splices or cutoffs. Native hearing says then they are nobody's problem, whereas ASR renders then there are; retain native they based on direct perception. Natural breaths/pauses retained. Publisher credits intended speaker and provenance fixes source timing issue by using full download. Final corpus pass pending.",
+      "adjudication": "Original full-transcription provider response failed; preserved unaccepted. New blind native excerpt-only acoustic review has actual hash-matched WAV attachment and valid observations: score beneath speech, clipped outer fragments. This original evidence supports rejection of raw audio, not a full transcript. Replaced with a complete continuous 13.75s congressional testimony passage. Full native candidate review confirms one isolated speaker, complete words, no music, crowd, effects, acoustic transitions, splices or cutoffs. Native hearing says then they are nobody's problem, whereas ASR renders then there are; retain native they based on direct perception. Natural breaths/pauses retained. Publisher credits intended speaker and provenance fixes source timing issue by using full download. Final corpus pass pending.\nFresh final correction: Two independent fresh full native hearings (3.8 and 3.1) agree on four audible uh fillers after a, after to, after they, and before of course. Both hear one isolated speaker, no music/crowd/SFX/acoustic change, complete words and continuous usable speech. Restore these actually heard fillers in every associated profile without recitation or grammar normalization. No audio bytes or provenance operation change.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false
@@ -2049,8 +2049,83 @@
         "rejected_download": "Initial yt-dlp download-sections120-240 yielded 129.9935s instead of120s. Not used for timing/admission. Downloaded full decoded source and re-extracted precisely150.60-164.35 from it."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/carl-sagan-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/carl-sagan-result.json",
-      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9"
+      "native_result_evidence": "qa/voice-reference-remediation/final-evidence/023-442114b442a69f03-revision-1.json",
+      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9",
+      "post_remediation_revisions": [
+        {
+          "previous_delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9",
+          "previous_audio": {
+            "sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36",
+            "frames": 330000,
+            "sample_rate": 24000,
+            "channels": 1,
+            "subtype": "PCM_16",
+            "duration_s": 13.75,
+            "peak": 0.685089111328125,
+            "rms": 0.06615400180847875,
+            "samples_at_full_scale": 0
+          },
+          "previous_operation": {
+            "type": "replacement",
+            "source_start_s": 150.6,
+            "source_end_s": 164.35,
+            "conversion": "ffmpeg continuous crop of complete decoded source WAV, downmix to mono and resample to 24000 Hz PCM_16; no cleanup, normalization, separation or splicing",
+            "render_command": [
+              "ffmpeg",
+              "-i",
+              "SOURCE.wav",
+              "-ss",
+              "150.60",
+              "-t",
+              "13.75",
+              "-ac",
+              "1",
+              "-ar",
+              "24000",
+              "-c:a",
+              "pcm_s16le",
+              "RESULT.wav"
+            ]
+          },
+          "previous_profiles": [
+            {
+              "path": "voices/carl-sagan-qwen3-06b.json",
+              "old_reference_text": "forever will be. Our contemplations of the cosmos stirs. There is a tingling in the spine that catch in the voice of faint sensation as if a distant memory of",
+              "new_reference_text": "Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem.",
+              "old_segment_start_s": 5,
+              "new_segment_start_s": 150.6
+            },
+            {
+              "path": "voices/carl-sagan.json",
+              "old_reference_text": "forever will be. Our contemplations of the cosmos stirs. There is a tingling in the spine that catch in the voice of faint sensation as if a distant memory of",
+              "new_reference_text": "Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem.",
+              "old_segment_start_s": 5,
+              "new_segment_start_s": 150.6
+            }
+          ],
+          "previous_native_result_evidence": "qa/voice-reference-remediation/evidence/carl-sagan-result.json",
+          "operation": {
+            "type": "text_only"
+          },
+          "resulting_audio": {
+            "sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36",
+            "frames": 330000,
+            "sample_rate": 24000,
+            "channels": 1,
+            "subtype": "PCM_16",
+            "duration_s": 13.75,
+            "peak": 0.685089111328125,
+            "rms": 0.06615400180847875,
+            "samples_at_full_scale": 0
+          },
+          "adjudication": "Two independent fresh full native hearings (3.8 and 3.1) agree on four audible uh fillers after a, after to, after they, and before of course. Both hear one isolated speaker, no music/crowd/SFX/acoustic change, complete words and continuous usable speech. Restore these actually heard fillers in every associated profile without recitation or grammar normalization. No audio bytes or provenance operation change.",
+          "native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/023-442114b442a69f03-revision-1.json",
+            "qa/voice-reference-remediation/final-evidence/023-442114b442a69f03-revision-2.json"
+          ],
+          "discovery_native_evidence": []
+        }
+      ]
     },
     {
       "wav": "vesper-ref.wav",

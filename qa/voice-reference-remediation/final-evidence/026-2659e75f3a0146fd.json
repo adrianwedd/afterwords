@@ -1,0 +1,38 @@
+{
+  "wav": "clip-026-ref.wav",
+  "source_sha256": "2659e75f3a0146fd700ebdfb6b421428c32929c8d60f778c3980ed02eda76aa5",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "187ee477-8eb6-435d-abc2-d6170515a190",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2659e75f3a0146fd700ebdfb6b421428c32929c8d60f778c3980ed02eda76aa5"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2659e75f3a0146fd700ebdfb6b421428c32929c8d60f778c3980ed02eda76aa5"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "187ee477-8eb6-435d-abc2-d6170515a190",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"There is, is there not, ladies and gentlemen of the jury, so much we can learn about ourselves\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 8.5]\n  ],\n  \"uncertainty\": \"Timings are perceptual estimates with an uncertainty of approximately +/- 0.3 seconds. The literal transcript is heard with high confidence. A dramatic pause with audible breathing occurs between roughly 1.1s and 2.2s; the continuous sub-interval [2.2, 8.5] is an alternative candidate if the initial phrase and pause are trimmed.\"\n}\n",
+    "duration_seconds": 27.603006,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20212,
+      "output_tokens": 2693,
+      "thinking_tokens": 2333,
+      "cache_read_tokens": 16135,
+      "total_tokens": 22905
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -713,17 +713,17 @@
       "profiles": [
         {
           "path": "voices/carl-sagan-qwen3-06b.json",
-          "profile_sha256": "3ed860acc39c6121c65124431b3eea3af66b10efb02ef045b2ec2f4933b83d70",
-          "reference_text": "Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem."
+          "profile_sha256": "18808f212140006ea51169e6674e8cb686bbdfdd30039752a26e3ee374ad0300",
+          "reference_text": "Because the effects occupy more than a human generation, there is a, uh, tendency to, uh, say that they, uh, are not our problem. Uh, of course, then they are nobody's problem."
         },
         {
           "path": "voices/carl-sagan.json",
-          "profile_sha256": "7bee6c5d3ebdc236dd6c6ddca3dfeefa28e303f7d01b5708e4fa620dcb7a9bc9",
-          "reference_text": "Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem."
+          "profile_sha256": "1d1d5d24c06ea7501388f29555f1ecd2882a02a4fce163f0a0574a736e6ab5bd",
+          "reference_text": "Because the effects occupy more than a human generation, there is a, uh, tendency to, uh, say that they, uh, are not our problem. Uh, of course, then they are nobody's problem."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {

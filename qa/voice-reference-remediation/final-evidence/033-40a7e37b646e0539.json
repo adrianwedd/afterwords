@@ -1,0 +1,38 @@
+{
+  "wav": "clip-033-ref.wav",
+  "source_sha256": "40a7e37b646e0539ad6659df113fafc6e42ef29d14270cab6288f6e02c28a083",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "74201492-4c98-41da-ae4b-1b2d4dcd313d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "40a7e37b646e0539ad6659df113fafc6e42ef29d14270cab6288f6e02c28a083"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "40a7e37b646e0539ad6659df113fafc6e42ef29d14270cab6288f6e02c28a083"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "74201492-4c98-41da-ae4b-1b2d4dcd313d",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Makes this one here a bit superfluous, really.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 2.8]\n  ],\n  \"uncertainty\": \"Low uncertainty on literal wording; phrase is clearly articulated by a single speaker. Temporal boundaries are perceptual estimates with an uncertainty of approximately +/- 0.2 seconds. High confidence in single-speaker isolation and clean acoustics suitable for conditioning.\"\n}\n```\n",
+    "duration_seconds": 29.459502,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20064,
+      "output_tokens": 3105,
+      "thinking_tokens": 2780,
+      "cache_read_tokens": 16225,
+      "total_tokens": 23169
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

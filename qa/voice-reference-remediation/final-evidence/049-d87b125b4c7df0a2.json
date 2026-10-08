@@ -1,0 +1,38 @@
+{
+  "wav": "clip-049-ref.wav",
+  "source_sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "7c855e26-a4f3-4ae8-815d-6c0441eb6769",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7c855e26-a4f3-4ae8-815d-6c0441eb6769",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"But, uh, I still think that comedy is a lens through which I see everything, and, uh, I think almost to to some extent the better things go in your life, the more fearful you can become that they will cease to be that way.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None detected; uniform dry close-mic studio acoustics throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": \"Natural conversational hesitations present (approx. 0.5\u20130.8s between major clauses), but no disruptive dead air.\",\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 13.5]\n  ],\n  \"uncertainty\": \"Timing boundaries are perceptual auditory estimates (+/- 0.5s) without waveform inspection. Transcript wording has very high perceptual confidence, with slight phonetic ambiguity on whether fillers are 'uh' or 'er'.\"\n}\n",
+    "duration_seconds": 36.24465,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20400,
+      "output_tokens": 2538,
+      "thinking_tokens": 2145,
+      "cache_read_tokens": 15947,
+      "total_tokens": 22938
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

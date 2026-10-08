@@ -1,0 +1,38 @@
+{
+  "wav": "clip-043-ref.wav",
+  "source_sha256": "66fe86e058819afcef8b9226b04be565fc20979bf6d28a24525df09443d29480",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "93c8abd2-7b9a-4e3e-92a5-7674cb640ca1",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "66fe86e058819afcef8b9226b04be565fc20979bf6d28a24525df09443d29480"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "66fe86e058819afcef8b9226b04be565fc20979bf6d28a24525df09443d29480"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "93c8abd2-7b9a-4e3e-92a5-7674cb640ca1",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Thank you very much for surprising me with that.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.4]\n  ],\n  \"uncertainty\": \"Timing boundaries are perceptual estimates with an uncertainty of approximately \u00b10.2 seconds. Wording is clear with high confidence. The speaker exhibits a subtle hesitation and amused inflection between 'for' and 'surprising', but no overlapping noise or defect is present.\"\n}\n",
+    "duration_seconds": 32.351284,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20028,
+      "output_tokens": 3131,
+      "thinking_tokens": 2808,
+      "cache_read_tokens": 16191,
+      "total_tokens": 23159
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

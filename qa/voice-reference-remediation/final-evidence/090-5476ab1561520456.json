@@ -1,0 +1,38 @@
+{
+  "wav": "clip-090-ref.wav",
+  "source_sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "28f7f99f-8210-4899-bc42-603f005c1068",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "28f7f99f-8210-4899-bc42-603f005c1068",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I really believe that. I think that every part of this story is just, um, so beautifully done, for all of these characters. The arcs for all of these characters, I think, is so respectfully and beautifully done.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 1.4],\n    [1.8, 4.0],\n    [5.1, 11.8],\n    [6.8, 11.8]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual approximations (+/- 0.3s) without visual waveform alignment. Phrasing uncertainty is minimal: the speaker uses grammatical mismatch ('arcs... I think is') rather than 'are', and there is a mild hesitation filler ('um') around 4.2s-4.8s. The single speaker is cleanly isolated with no competing acoustics, providing multiple complete, usable phrases for voice conditioning.\"\n}\n",
+    "duration_seconds": 47.346431,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36344,
+      "output_tokens": 4081,
+      "thinking_tokens": 3651,
+      "cache_read_tokens": 0,
+      "total_tokens": 40425
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

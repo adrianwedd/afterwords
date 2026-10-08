@@ -1,0 +1,38 @@
+{
+  "wav": "clip-029-ref.wav",
+  "source_sha256": "f745aedf7c04608e839c5a0f1523c822aa2a8a2e972585d9f3bfe64f9b42d6ae",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "f40ed5db-ed51-4699-afae-df4281222d4e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f745aedf7c04608e839c5a0f1523c822aa2a8a2e972585d9f3bfe64f9b42d6ae"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f745aedf7c04608e839c5a0f1523c822aa2a8a2e972585d9f3bfe64f9b42d6ae"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f40ed5db-ed51-4699-afae-df4281222d4e",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I have asked myself that many times, as I have struggled to be more human, until I realized it is the struggle itself that is most important.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.3, 12.8]\n  ],\n  \"uncertainty\": \"Timing boundary estimates are perceptual approximations within approximately +/- 0.3 seconds. Wording uncertainty is minimal due to clear vocal articulation and complete acoustic isolation.\"\n}\n",
+    "duration_seconds": 35.416819,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20170,
+      "output_tokens": 3701,
+      "thinking_tokens": 3381,
+      "cache_read_tokens": 16107,
+      "total_tokens": 23871
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-072-ref.wav",
+  "source_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "b616d669-2f0a-4b16-b51e-2bea53c13ef7",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b616d669-2f0a-4b16-b51e-2bea53c13ef7",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah. In Finland I think I used more greyish, bluish, more dark\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.8, 2.8]\n  ],\n  \"uncertainty\": \"Wording uncertainty: The initial interjection is audibly a casual 'Yeah' (alternatively 'Yeah,'). Orthography for 'greyish' vs 'grayish' is ambiguous phonetically. The clip terminates on 'more dark' with complete consonant release but an unfinished grammatical thought. Boundary uncertainty: Time estimates have a perceptual tolerance of approximately \u00b10.2 seconds. A conversational hesitation pause of roughly 0.8 seconds occurs between 'more' (ending ~2.8s) and 'greyish' (onset ~3.6s); whether this qualifies as a long pause depends on whether one defines it as a conversational hesitation vs dead air. Candidate clean interval is bounded at [0.8, 2.8] ('In Finland I think I used more') as the primary uninterrupted continuous speech segment, though [0.8, 5.2] could be considered if the mid-utterance pause is tolerated. Raw reference is evaluated as unusable as-is due to the leading filler, thinking pause, and incomplete trailing phrase, but acoustic quality is clean with no background interference, making it readily salvageable by trim.\"\n}\n",
+    "duration_seconds": 124.359337,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20558,
+      "output_tokens": 14572,
+      "thinking_tokens": 14061,
+      "cache_read_tokens": 16154,
+      "total_tokens": 35130
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

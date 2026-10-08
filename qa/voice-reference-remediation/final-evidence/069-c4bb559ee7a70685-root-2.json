@@ -1,0 +1,38 @@
+{
+  "wav": "clip-069-ref.wav",
+  "source_sha256": "c4bb559ee7a70685e0a77e0b8ddfcf11604d1374996270f3c0b1985ef5c42c6c",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "487611aa-3b6f-4d26-a2cc-1f1df3e5dbf3",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c4bb559ee7a70685e0a77e0b8ddfcf11604d1374996270f3c0b1985ef5c42c6c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c4bb559ee7a70685e0a77e0b8ddfcf11604d1374996270f3c0b1985ef5c42c6c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "487611aa-3b6f-4d26-a2cc-1f1df3e5dbf3",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"We can't really even imagine a world like that. Uh there hasn't been a world like that since late Roman times. I mean the Roman hegemony was quite cohesive\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"start_s\": 4.1,\n      \"end_s\": 4.7,\n      \"duration_s\": 0.6,\n      \"description\": \"Conversational pause with 'uh' hesitation between sentences\"\n    },\n    {\n      \"start_s\": 7.8,\n      \"end_s\": 8.4,\n      \"duration_s\": 0.6,\n      \"description\": \"Brief conversational pause before discourse marker 'I mean'\"\n    }\n  ],\n  \"apparent_splices\": [],\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.1],\n    [4.7, 7.8],\n    [8.4, 11.5]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates with an uncertainty of approximately \u00b10.2 to 0.4 seconds. The word 'cohesive' at the end completes its final fricative /v/ before natural room decay with short trailing padding, but without audible phonemic truncation. Wording is clearly resolved throughout with no overlapping speakers or background interference.\"\n}\n",
+    "duration_seconds": 39.687365,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20664,
+      "output_tokens": 4283,
+      "thinking_tokens": 3769,
+      "cache_read_tokens": 16034,
+      "total_tokens": 24947
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

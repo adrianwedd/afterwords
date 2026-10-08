@@ -1,0 +1,38 @@
+{
+  "wav": "clip-071-ref.wav",
+  "source_sha256": "d11bd37ea2c1630129084245c2c16c60a271d75f856746d2f080d1bc61fd1adb",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "805ade6b-c251-4f5f-aa63-d29dc05617ec",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d11bd37ea2c1630129084245c2c16c60a271d75f856746d2f080d1bc61fd1adb"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d11bd37ea2c1630129084245c2c16c60a271d75f856746d2f080d1bc61fd1adb"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "805ade6b-c251-4f5f-aa63-d29dc05617ec",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, well, actually all my family are from Sligo. You know, my mother and father grew up there and I was born in Sligo. Um so, I think I'm related to everyone in the town, um as well. But when I was six months old we moved to Galway, and that's where we've been ever since.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None observed; consistent close-mic vocal acoustics and room reverberation throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"interval_s\": [6.2, 7.0],\n      \"description\": \"Brief conversational pause/hesitation before 'Um so'\"\n    },\n    {\n      \"interval_s\": [9.8, 10.6],\n      \"description\": \"Conversational pause between 'town' and 'um as well'\"\n    },\n    {\n      \"interval_s\": [11.2, 11.9],\n      \"description\": \"Pause before starting 'But when I was...'\"\n    }\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.2],\n    [7.0, 9.8],\n    [11.9, 15.5]\n  ],\n  \"uncertainty\": \"Timings are perceptual estimates without visual waveform rulers or absolute timecode markers (total duration estimated around 15.5 seconds with ~0.5s boundary tolerance). Wording has very low uncertainty as speech is clear and isolated, with slight uncertainty around conversational hesitation tokens ('um so', 'um as well') and exact pause durations.\"\n}\n```\n",
+    "duration_seconds": 28.64186,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20303,
+      "output_tokens": 2425,
+      "thinking_tokens": 1853,
+      "cache_read_tokens": 15967,
+      "total_tokens": 22728
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

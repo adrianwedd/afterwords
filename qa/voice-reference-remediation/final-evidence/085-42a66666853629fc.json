@@ -1,0 +1,38 @@
+{
+  "wav": "clip-085-ref.wav",
+  "source_sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "d36c68f5-a901-4238-8f14-048daf83bac2",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d36c68f5-a901-4238-8f14-048daf83bac2",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"We wanted to explore those things with real transparency\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.5]\n  ],\n  \"uncertainty\": \"Low uncertainty on transcript wording; the utterance is clearly articulated and intelligible. Boundary estimates are perceptual with an uncertainty of approximately \u00b10.2 to 0.3 seconds.\"\n}\n",
+    "duration_seconds": 83.268676,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20269,
+      "output_tokens": 9760,
+      "thinking_tokens": 9456,
+      "cache_read_tokens": 16201,
+      "total_tokens": 30029
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-041-ref.wav",
+  "source_sha256": "1516b7502f1b08442011e6b02229798c620080445718c48c797990478e430f94",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "79ab0805-9ec4-4d12-b243-c630f17cc066",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1516b7502f1b08442011e6b02229798c620080445718c48c797990478e430f94"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1516b7502f1b08442011e6b02229798c620080445718c48c797990478e430f94"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "79ab0805-9ec4-4d12-b243-c630f17cc066",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"something in my brain shifted, and I suddenly understood, and now I'm a coin collector too.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.0]\n  ],\n  \"uncertainty\": \"Exact time boundaries and total clip duration are perceptual estimates (+/- 0.5s) made without waveform visualization or timecode display. Transcript wording confidence is very high as speech is clear, dry, and fully isolated.\"\n}\n```\n",
+    "duration_seconds": 36.239234,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20444,
+      "output_tokens": 3454,
+      "thinking_tokens": 3120,
+      "cache_read_tokens": 16181,
+      "total_tokens": 23898
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

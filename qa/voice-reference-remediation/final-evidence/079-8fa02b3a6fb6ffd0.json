@@ -1,0 +1,38 @@
+{
+  "wav": "clip-079-ref.wav",
+  "source_sha256": "8fa02b3a6fb6ffd06135e49ee193f474aff9cb30663df97c3694fe9d084768d2",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "7811e474-f6ca-42de-b655-9b97f35d772b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8fa02b3a6fb6ffd06135e49ee193f474aff9cb30663df97c3694fe9d084768d2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8fa02b3a6fb6ffd06135e49ee193f474aff9cb30663df97c3694fe9d084768d2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7811e474-f6ca-42de-b655-9b97f35d772b",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I'm just concerned about it because we're talking about an audience that is exceedingly on point about the show. They don't miss anything.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 9.8]\n  ],\n  \"uncertainty\": \"Boundary interval estimates carry perceptual uncertainty of approximately +/- 0.5s due to unmeasured waveform boundaries. Transcript wording has very low uncertainty; pauses are rhetorical/dramatic cadence rather than excessive silence.\"\n}\n",
+    "duration_seconds": 48.753474,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20312,
+      "output_tokens": 4417,
+      "thinking_tokens": 4089,
+      "cache_read_tokens": 16044,
+      "total_tokens": 24729
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

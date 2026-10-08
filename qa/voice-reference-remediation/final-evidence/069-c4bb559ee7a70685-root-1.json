@@ -1,0 +1,38 @@
+{
+  "wav": "clip-069-ref.wav",
+  "source_sha256": "c4bb559ee7a70685e0a77e0b8ddfcf11604d1374996270f3c0b1985ef5c42c6c",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4deb7c64-f566-4928-9d9a-19b8691ae99f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c4bb559ee7a70685e0a77e0b8ddfcf11604d1374996270f3c0b1985ef5c42c6c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c4bb559ee7a70685e0a77e0b8ddfcf11604d1374996270f3c0b1985ef5c42c6c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4deb7c64-f566-4928-9d9a-19b8691ae99f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"We can't really even imagine a world like that. Uh there hasn't been a world like that since late Roman times. I mean the Roman hegemony was quite cohesive\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.5],\n    [0.0, 11.2]\n  ],\n  \"uncertainty\": \"Timings are perceptual estimates subject to +/- 0.3s uncertainty. The final syllable of 'cohesive' appears abruptly truncated right at the file boundary, making raw reference use marginal without trimming the terminal fraction of a second or stopping after 'Roman times' (~7.5s). Vocal isolation is otherwise clean with consistent room tone and no background music or secondary speaker bleed.\"\n}\n```\n",
+    "duration_seconds": 27.080613,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20512,
+      "output_tokens": 2908,
+      "thinking_tokens": 2516,
+      "cache_read_tokens": 16033,
+      "total_tokens": 23420
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

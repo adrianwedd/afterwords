@@ -1,0 +1,38 @@
+{
+  "wav": "clip-086-ref.wav",
+  "source_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "fc7f326a-8a36-45ee-a246-0c953b53fe50",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "fc7f326a-8a36-45ee-a246-0c953b53fe50",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And, um, it was so different than than the experience that I had had with him like a decade earlier.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.7],\n    [1.3, 6.7],\n    [2.8, 6.7]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately \u00b10.3s. Transcript certainty is high; the speaker stumbles slightly with a repeated word ('than than') and opens with a filler phrase ('And, um').\"\n}\n",
+    "duration_seconds": 34.20442,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20132,
+      "output_tokens": 3229,
+      "thinking_tokens": 2877,
+      "cache_read_tokens": 16175,
+      "total_tokens": 23361
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

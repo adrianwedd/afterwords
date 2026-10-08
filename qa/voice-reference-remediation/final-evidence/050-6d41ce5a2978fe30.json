@@ -1,0 +1,38 @@
+{
+  "wav": "clip-050-ref.wav",
+  "source_sha256": "6d41ce5a2978fe30e8de1af4e6b7f7137078a6e27ad3f58e0db79e81820f6271",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "993b163e-d1b7-4871-9d21-6aaf3f0ea096",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6d41ce5a2978fe30e8de1af4e6b7f7137078a6e27ad3f58e0db79e81820f6271"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6d41ce5a2978fe30e8de1af4e6b7f7137078a6e27ad3f58e0db79e81820f6271"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "993b163e-d1b7-4871-9d21-6aaf3f0ea096",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.2]\n  ],\n  \"uncertainty\": \"Interval boundaries and duration markers are perceptual estimates (+/- 0.3s) without sample-accurate visual waveform inspection. Minor phonetic ambiguity on unstressed syllables in the phrase cadence ('to take it'), but speech clarity and speaker isolation are high with no background acoustic interference.\"\n}\n",
+    "duration_seconds": 30.478093,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20009,
+      "output_tokens": 3322,
+      "thinking_tokens": 2976,
+      "cache_read_tokens": 16204,
+      "total_tokens": 23331
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

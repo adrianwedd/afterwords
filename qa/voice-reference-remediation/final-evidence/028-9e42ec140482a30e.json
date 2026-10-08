@@ -1,0 +1,38 @@
+{
+  "wav": "clip-028-ref.wav",
+  "source_sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "2af56ecb-c0af-406d-b956-a000e9bf81d2",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "2af56ecb-c0af-406d-b956-a000e9bf81d2",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Uh, I usually describe my position since then, semi-retired position.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.8, 5.8]\n  ],\n  \"uncertainty\": \"Perceptual timing boundary estimates have an uncertainty of +/- 0.3 seconds. Total clip duration is estimated at approximately 5.8 seconds. The leading vocal hesitation between ~0.0s and ~0.3s may be transcribed as 'Uh' or 'Er', followed by an approximately 0.5s pause before fluent speech begins. The entire recording is acoustically clean and usable, but trimming to [0.8, 5.8] isolates the fluent conditioning phrase.\"\n}\n",
+    "duration_seconds": 36.61298,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20341,
+      "output_tokens": 3559,
+      "thinking_tokens": 3183,
+      "cache_read_tokens": 16152,
+      "total_tokens": 23900
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

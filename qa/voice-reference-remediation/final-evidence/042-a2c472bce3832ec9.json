@@ -1,0 +1,38 @@
+{
+  "wav": "clip-042-ref.wav",
+  "source_sha256": "a2c472bce3832ec9bbfae1ec4df6da5d3390a1178bc6860d39f2d6f4e3990b12",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "ac377545-5565-464c-8f2d-39a29f526960",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a2c472bce3832ec9bbfae1ec4df6da5d3390a1178bc6860d39f2d6f4e3990b12"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a2c472bce3832ec9bbfae1ec4df6da5d3390a1178bc6860d39f2d6f4e3990b12"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ac377545-5565-464c-8f2d-39a29f526960",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 8.0]\n  ],\n  \"uncertainty\": \"Boundary interval (0.0 to 8.0s) is a perceptual estimate derived solely from native listening without waveform timecodes (estimated total duration ~7.5-8.2s). Transcribed wording is clear with high confidence; speaker isolation is complete with no perceptible background music, crowd, or sound effects.\"\n}\n",
+    "duration_seconds": 26.8045,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20363,
+      "output_tokens": 2592,
+      "thinking_tokens": 2239,
+      "cache_read_tokens": 16154,
+      "total_tokens": 22955
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
