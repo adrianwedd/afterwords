@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "895e5d0826986ac969972f8ca2173ed2e66d2c0255fab324a53d57a0c4337330",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "bca1d50b-7c43-45de-a2a6-110ca3084cb9",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "895e5d0826986ac969972f8ca2173ed2e66d2c0255fab324a53d57a0c4337330"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "895e5d0826986ac969972f8ca2173ed2e66d2c0255fab324a53d57a0c4337330"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "bca1d50b-7c43-45de-a2a6-110ca3084cb9",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"There's not really a formula. I just go somewhere and think there will be something funny in this place.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.1, 6.7]\n  ],\n  \"uncertainty\": \"Wording transcription confidence is very high with no ambiguous phonemes detected. Boundary estimates are perceptual with an estimated uncertainty of +/- 0.3s: vocal onset begins at approximately 0.1s-0.2s, a natural conversational pause between sentences occurs between ~1.6s and ~2.4s, and final utterance completion is at approximately 6.5s with room decay concluding by ~6.7s.\"\n}\n",
+    "duration_seconds": 43.858918,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20945,
+      "output_tokens": 4542,
+      "thinking_tokens": 4168,
+      "cache_read_tokens": 16142,
+      "total_tokens": 25487
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

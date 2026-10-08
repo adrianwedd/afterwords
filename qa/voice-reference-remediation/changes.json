@@ -4996,6 +4996,83 @@
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/lee-mack-publisher-source.json",
       "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/lee-mack-secondary-result.json",
       "delivery_commit": "8eeedca521c7f298f256df983921d5f6bb88af4b"
+    },
+    {
+      "wav": "mark-steel-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "0fd0d119ea33013e37406d25999528796012e48aeae2412a5ad86fc58c2efee3",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.10158299046356217,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "895e5d0826986ac969972f8ca2173ed2e66d2c0255fab324a53d57a0c4337330",
+        "frames": 330750,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 7.5,
+        "peak": 0.68353271484375,
+        "rms": 0.07203964891929208,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 130.85,
+        "source_end_s": 138.35,
+        "source_start_frame": 5770485,
+        "source_end_frame_exclusive": 6101235,
+        "conversion": "Exact continuous decoded publisher PCM16 frame slice preserving source rate/channels; no cleanup, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/mark-steel-qwen3-06b.json",
+          "old_reference_text": "There are no people. The lady who did the unmade bed. Tracey Ann, NCMN. She's amazing. She's policy. We've got the Turner Contemporary. You've got T.S. Eliot, he wrote a very famous poem. Wrote part of the Wasteland at the bandstand there. Dreamland. Dreamland. You can still see the big...",
+          "new_reference_text": "There's not really a formula. I just go somewhere and think there will be something funny in this place.",
+          "old_segment_start_s": 15,
+          "new_segment_start_s": 130.85
+        },
+        {
+          "path": "voices/mark-steel.json",
+          "old_reference_text": "There are no people. The lady who did the unmade bed. Tracey Ann, NCMN. She's amazing. She's policy. We've got the Turner Contemporary. You've got T.S. Eliot, he wrote a very famous poem. Wrote part of the Wasteland at the bandstand there. Dreamland. Dreamland. You can still see the big...",
+          "new_reference_text": "There's not really a formula. I just go somewhere and think there will be something funny in this place.",
+          "old_segment_start_s": 15,
+          "new_segment_start_s": 130.85
+        }
+      ],
+      "source_url": "https://www.bbc.co.uk/programmes/m0025l9s",
+      "adjudication": "Original native reports rapid multi-speaker conversation, overlaps, laughter and both cutoffs; each isolated fragment too short for useful conditioning. Direct BBC publisher interview names guest Mark Steel and interviewer in credits and audio introduction, with selected answer explaining location-comedy method. Exact continuous130.85-138.35 result native093 confirms one isolated voice, no music/crowd/laughter/effects/acoustic change/splice/cutoffs/long pauses, full two complete sentences with high wording confidence. Literal transcript matches independently aligned source ASR; no canonical script substitution. Actual7.5s with useful varied phonemes/prosody and natural pause. Exact decoded publisher PCM16 slice, no cleanup/normalization/separation/padding/splice. Same intended comedian in natural interview delivery replaces multi-person location conversation. Fresh final corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_source_frame_exact": true
+      },
+      "delivery_commit_locator": "git log -- voices/mark-steel-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.bbc.co.uk/programmes/m0025l9s",
+        "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0k8y4w1.mp3",
+        "publisher": "BBC Radio 4",
+        "programme": "Desert Island Discs",
+        "guest": "Mark Steel",
+        "interviewer": "Lauren Laverne",
+        "source_mp3_sha256": "d4beb95068dc2b7ac6a0f9d07315d9cc424d651b1ce036c6337ca02bf45a2fc9",
+        "source_audio_sha256": "e59001b21d02ba09373b36f987e2b6974b57c61aebce405d81ea968aaae9c727",
+        "source_metadata_sha256": "a5ac3de03ee845b3099a7526077e858236ff5d916039512cb7202eeb3c84c0d2",
+        "source_basis": "BBC publisher programme and audible introduction identify Mark Steel and interviewer; selected continuous guest answer describes his method for writing comedy about places.",
+        "delivery_change": "Same intended comedian in natural interview delivery replaces multi-person location conversation."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/mark-steel-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/mark-steel-result.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/mark-steel-publisher-source.json"
     }
   ],
   "exclusions": [
