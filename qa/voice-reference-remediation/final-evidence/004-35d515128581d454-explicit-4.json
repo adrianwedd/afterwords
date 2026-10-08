@@ -1,0 +1,38 @@
+{
+  "wav": "clip-004-ref.wav",
+  "source_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "d5519950-ffe2-468c-9d18-b82428aca0a4",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d5519950-ffe2-468c-9d18-b82428aca0a4",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, I remember it very clearly because um I start thinking about all the people I admired on television. All the creative people I admired\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.5, 2.1],\n    [3.3, 6.3],\n    [6.9, 8.7]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an estimated margin of +/- 0.3s without waveform alignment. In the transcript, 'start thinking' may be a phonetically reduced/elided 'started thinking' where the dental suffix merges into the initial consonant of 'thinking'. Background consists solely of uniform low room tone without musical instruments or melodic artifacts. Raw reference is marked unusable due to the mid-sentence hesitation ('because um') and repetition/restart, but the voice is isolated and of high SNR, making candidate sub-intervals highly salvageable for TTS conditioning.\"\n}\n",
+    "duration_seconds": 106.005892,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20523,
+      "output_tokens": 12972,
+      "thinking_tokens": 12539,
+      "cache_read_tokens": 16165,
+      "total_tokens": 33495
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

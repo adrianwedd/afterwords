@@ -1,0 +1,38 @@
+{
+  "wav": "clip-021-ref.wav",
+  "source_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "fcb31aa4-e9f9-427d-8be0-8163d94e7f09",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "fcb31aa4-e9f9-427d-8be0-8163d94e7f09",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"See back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water? Should it be something else?\",\n  \"music\": \"None detected; background consists of uniform room tone without audible musical instruments or tonal score.\",\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent acoustic environment and mic placement throughout with natural speech dynamics.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [5.8, 6.7]\n  ],\n  \"apparent_splices\": [],\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.8],\n    [6.7, 15.2]\n  ],\n  \"uncertainty\": \"Timings are perceptual estimates without digital waveform inspection. Regarding the disputed phonetic items: (1) An initial lexical filler is positively audible before 'Back', heard as 'See' ([si\u02d0]) rather than beginning cleanly on the plosive /b/ of 'Back'. (2) Between the final two questions ('Should it be water?' and 'Should it be something else?'), no conjunction or connector ('or') is audible; the speaker moves directly into the repeated question phrase 'Should it be'.\"\n}\n",
+    "duration_seconds": 44.304085,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20797,
+      "output_tokens": 4423,
+      "thinking_tokens": 3949,
+      "cache_read_tokens": 15980,
+      "total_tokens": 25220
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

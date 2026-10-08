@@ -651,17 +651,17 @@
       "profiles": [
         {
           "path": "voices/brian-cox-qwen3-06b.json",
-          "profile_sha256": "6d2dff5a04c75eb13eb0bc5fbf3d3484131718b20c99c9ffd982ba85bb569fdb",
-          "reference_text": "Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?"
+          "profile_sha256": "680662ded62a61c8e082cbc951cfea01dbbd1fd90e37f5b966bfd0b4a20a5921",
+          "reference_text": "See, Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?"
         },
         {
           "path": "voices/brian-cox.json",
-          "profile_sha256": "624439a445140b67c90cc832122a67d34ca97867afb9cdc3414b0197053b987a",
-          "reference_text": "Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?"
+          "profile_sha256": "4aff90e7b16ed54bf8f20deb3d01a8460d4697f80f56d98b5503937179f36f7e",
+          "reference_text": "See, Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?"
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {
@@ -1106,17 +1106,17 @@
       "profiles": [
         {
           "path": "voices/eartha-qwen3-06b.json",
-          "profile_sha256": "82150896972add6b35a7079ff0bc1a94a4ea2a883532aa185027ced158a90584",
-          "reference_text": "Well, being born on a cotton plantation in the South, you know, and being, uh, poor, in that way, no, it was not very easy, because I remember times when we didn't have anything to eat for what seemed like an insurmountable amount of time."
+          "profile_sha256": "7f5b4fb214c35efd681e2ac16449bce1086a583e0dbfd76e7b5766f51d16a407",
+          "reference_text": "Ah, being born on a cotton plantation in the South, you know, and being, uh, poor, uh, in that way, no, it was not very easy, because I remember, uh, times when we didn't have anything to eat for what seemed like an unsurmountable amount of time."
         },
         {
           "path": "voices/eartha.json",
-          "profile_sha256": "108bfa6f417b95eae52ff708cbe343b0d0e7809ed0eb59c8194f0c3628a24c64",
-          "reference_text": "Well, being born on a cotton plantation in the South, you know, and being, uh, poor, in that way, no, it was not very easy, because I remember times when we didn't have anything to eat for what seemed like an insurmountable amount of time."
+          "profile_sha256": "1afadeb5e6ce866f7006a8ec6845e334d7bcf820686f22e969a6fe158d49b93c",
+          "reference_text": "Ah, being born on a cotton plantation in the South, you know, and being, uh, poor, uh, in that way, no, it was not very easy, because I remember, uh, times when we didn't have anything to eat for what seemed like an unsurmountable amount of time."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {
@@ -1592,17 +1592,17 @@
       "profiles": [
         {
           "path": "voices/jim-royle-qwen3-06b.json",
-          "profile_sha256": "9696ba99a6aa85e3e2f665a248cc11f8aa29d27d1a0524499c1af7b54c7a4763",
-          "reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you, you know, you've got no respect.' And I, and I, and I stood up, you know."
+          "profile_sha256": "14d49b5bf9bdaeff9c5a8965647ca4023477cc8d69a7c3a4c79c079f80f1d9c7",
+          "reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you what you know you've got no respect.' And I, and I, I stood up, you know."
         },
         {
           "path": "voices/jim-royle.json",
-          "profile_sha256": "d4e4bb72e87fa19c16001c96d8b500b5af55d4e9c0af4e843e1a8fd9b4e55443",
-          "reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you, you know, you've got no respect.' And I, and I, and I stood up, you know."
+          "profile_sha256": "843b4d3dd435dcaf12182ad2707d771757c42abc2d0449f92832933dfdd682b3",
+          "reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you what you know you've got no respect.' And I, and I, I stood up, you know."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {
@@ -1732,17 +1732,17 @@
       "profiles": [
         {
           "path": "voices/kitt-qwen3-06b.json",
-          "profile_sha256": "feba4dc722a84d515df58d61c0216af14ec3cacc4e15e2c82f29c95e2b5ea333",
-          "reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show."
+          "profile_sha256": "141b0b95765bc5187d4003ce32a5ec22e9ea125a1ae42f10c39a2750b7b93ff2",
+          "reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes, uh, a show."
         },
         {
           "path": "voices/kitt.json",
-          "profile_sha256": "0d786ec2d42cf6423354cdfe4ac8fc351a04b0bb513a35af14b3f17012b6e8ab",
-          "reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show."
+          "profile_sha256": "79b897f0f322926dd75c6f0a27c96af81fda88a5984643e9b850fcb05a51c231",
+          "reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes, uh, a show."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {

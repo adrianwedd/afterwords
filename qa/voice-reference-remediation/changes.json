@@ -2374,20 +2374,20 @@
         {
           "path": "voices/brian-cox-qwen3-06b.json",
           "old_reference_text": "We're back in the 19th century. Engineers were concerned with the efficiency of steam engines. How hot should the fire be? What substance should you boil in the steam engine? Should it be water? Should it be something else?",
-          "new_reference_text": "Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?",
+          "new_reference_text": "See, Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?",
           "old_segment_start_s": 0,
           "new_segment_start_s": 0
         },
         {
           "path": "voices/brian-cox.json",
           "old_reference_text": "We're back in the 19th century. Engineers were concerned with the efficiency of steam engines. How hot should the fire be? What substance should you boil in the steam engine? Should it be water? Should it be something else?",
-          "new_reference_text": "Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?",
+          "new_reference_text": "See, Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?",
           "old_segment_start_s": 0,
           "new_segment_start_s": 0
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=uQSoaiubuA0",
-      "adjudication": "Audio preserved byte-identically. Complete audio-first native review finds one isolated speaker, complete phrases and no soundtrack, audience, effects, splices or cutoffs. The first particle If was explicitly uncertain; independent native review of an exact opening3-second slice hears Back in the nineteenth century, without leading particle, agreeing with ASR and contradicting old We're back. For the remaining wording, ASR omits You know and recasts the repeated final question as water or something else (or confidence0.45, something0.55). Complete native hearing explicitly hears You know and Should it be water, should it be something else with uncertainty restricted to opening, so these audible words are retained over ASR simplification. Most substantive words otherwise agree. Probe has a deliberate end cutoff and is not production audio or full-corpus acceptance. Failed provider second-transcript output not used. Scoped hash-bound resolution is recorded separately; fresh complete corpus native pass remains mandatory. Final corpus pass pending.",
+      "adjudication": "Audio preserved byte-identically. Complete audio-first native review finds one isolated speaker, complete phrases and no soundtrack, audience, effects, splices or cutoffs. The first particle If was explicitly uncertain; independent native review of an exact opening3-second slice hears Back in the nineteenth century, without leading particle, agreeing with ASR and contradicting old We're back. For the remaining wording, ASR omits You know and recasts the repeated final question as water or something else (or confidence0.45, something0.55). Complete native hearing explicitly hears You know and Should it be water, should it be something else with uncertainty restricted to opening, so these audible words are retained over ASR simplification. Most substantive words otherwise agree. Probe has a deliberate end cutoff and is not production audio or full-corpus acceptance. Failed provider second-transcript output not used. Scoped hash-bound resolution is recorded separately; fresh complete corpus native pass remains mandatory. Final corpus pass pending.\nFresh final correction: Resolve the initial weak lexical onset from targeted positive phonemic hearing: [si:] See precedes Back, rather than uncertain primary You or the omitted onset in another broad pass. Restore See in every associated profile. Primary and targeted positive full hearings agree no or between the final questions; retain direct repeated Should it be rather than add grammar. Both careful full3.8 hearings explicitly hear one isolated clear voice, no score/instruments (uniform room air only), no contaminants/splice and complete boundaries. The failed3.1 recitation attempt is excluded, not acoustic evidence. Preserve ordinary 19th orthography and the natural pause.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false
@@ -2395,20 +2395,77 @@
       "delivery_commit_locator": "git log -- voices/brian-cox-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/brian-cox-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/brian-cox-result.json",
-      "transcript_resolution": {
-        "evidence": "qa/voice-reference-remediation/evidence/brian-cox-opening.json",
-        "source_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
-        "operation": {
-          "type": "lossless_pcm_frame_slice",
-          "start_frame": 0,
-          "end_frame_exclusive": 132300,
-          "sample_rate": 44100
-        },
-        "rendered_sha256": "65ee8a1f24391035a65a3b0d84d301c2ab44a3fe61281a9d34914cc4ebd532cc",
-        "scope": "Opening wording only; remaining corpus audio verified by complete native observation. Probe is not production audio."
-      },
-      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5"
+      "native_result_evidence": "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-revision-1.json",
+      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5",
+      "post_remediation_revisions": [
+        {
+          "previous_delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5",
+          "previous_audio": {
+            "sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+            "frames": 661500,
+            "sample_rate": 44100,
+            "channels": 1,
+            "subtype": "PCM_16",
+            "duration_s": 15.0,
+            "peak": 0.9000244140625,
+            "rms": 0.10278410763990728,
+            "samples_at_full_scale": 0
+          },
+          "previous_operation": {
+            "type": "text_only"
+          },
+          "previous_profiles": [
+            {
+              "path": "voices/brian-cox-qwen3-06b.json",
+              "old_reference_text": "We're back in the 19th century. Engineers were concerned with the efficiency of steam engines. How hot should the fire be? What substance should you boil in the steam engine? Should it be water? Should it be something else?",
+              "new_reference_text": "Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?",
+              "old_segment_start_s": 0,
+              "new_segment_start_s": 0
+            },
+            {
+              "path": "voices/brian-cox.json",
+              "old_reference_text": "We're back in the 19th century. Engineers were concerned with the efficiency of steam engines. How hot should the fire be? What substance should you boil in the steam engine? Should it be water? Should it be something else?",
+              "new_reference_text": "Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?",
+              "old_segment_start_s": 0,
+              "new_segment_start_s": 0
+            }
+          ],
+          "previous_native_result_evidence": "qa/voice-reference-remediation/evidence/brian-cox-result.json",
+          "operation": {
+            "type": "text_only"
+          },
+          "resulting_audio": {
+            "sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+            "frames": 661500,
+            "sample_rate": 44100,
+            "channels": 1,
+            "subtype": "PCM_16",
+            "duration_s": 15.0,
+            "peak": 0.9000244140625,
+            "rms": 0.10278410763990728,
+            "samples_at_full_scale": 0
+          },
+          "adjudication": "Resolve the initial weak lexical onset from targeted positive phonemic hearing: [si:] See precedes Back, rather than uncertain primary You or the omitted onset in another broad pass. Restore See in every associated profile. Primary and targeted positive full hearings agree no or between the final questions; retain direct repeated Should it be rather than add grammar. Both careful full3.8 hearings explicitly hear one isolated clear voice, no score/instruments (uniform room air only), no contaminants/splice and complete boundaries. The failed3.1 recitation attempt is excluded, not acoustic evidence. Preserve ordinary 19th orthography and the natural pause.",
+          "native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-revision-1.json",
+            "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-revision-2.json",
+            "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-revision-3.json"
+          ],
+          "discovery_native_evidence": [],
+          "previous_transcript_resolution": {
+            "evidence": "qa/voice-reference-remediation/evidence/brian-cox-opening.json",
+            "source_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+            "operation": {
+              "type": "lossless_pcm_frame_slice",
+              "start_frame": 0,
+              "end_frame_exclusive": 132300,
+              "sample_rate": 44100
+            },
+            "rendered_sha256": "65ee8a1f24391035a65a3b0d84d301c2ab44a3fe61281a9d34914cc4ebd532cc",
+            "scope": "Opening wording only; remaining corpus audio verified by complete native observation. Probe is not production audio."
+          }
+        }
+      ]
     },
     {
       "wav": "lister-ref.wav",
@@ -3493,20 +3550,20 @@
         {
           "path": "voices/eartha-qwen3-06b.json",
           "old_reference_text": "A relationship is a relationship that has to be earned, not to compromise for. I love relationships. I think they're fantastic. They're wonderful. I think they're great. I think there's nothing in the world more beautiful.",
-          "new_reference_text": "Well, being born on a cotton plantation in the South, you know, and being, uh, poor, in that way, no, it was not very easy, because I remember times when we didn't have anything to eat for what seemed like an insurmountable amount of time.",
+          "new_reference_text": "Ah, being born on a cotton plantation in the South, you know, and being, uh, poor, uh, in that way, no, it was not very easy, because I remember, uh, times when we didn't have anything to eat for what seemed like an unsurmountable amount of time.",
           "old_segment_start_s": null,
           "new_segment_start_s": 9.42
         },
         {
           "path": "voices/eartha.json",
           "old_reference_text": "A relationship is a relationship that has to be earned, not to compromise for. I love relationships. I think they're fantastic. They're wonderful. I think they're great. I think there's nothing in the world more beautiful.",
-          "new_reference_text": "Well, being born on a cotton plantation in the South, you know, and being, uh, poor, in that way, no, it was not very easy, because I remember times when we didn't have anything to eat for what seemed like an insurmountable amount of time.",
+          "new_reference_text": "Ah, being born on a cotton plantation in the South, you know, and being, uh, poor, uh, in that way, no, it was not very easy, because I remember, uh, times when we didn't have anything to eat for what seemed like an unsurmountable amount of time.",
           "old_segment_start_s": null,
           "new_segment_start_s": 9.42
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=TEoAypCUdRI",
-      "adjudication": "Original dramatically projected interview reference has audible cackle and truncated last phrase. Three trim candidates failed native boundary/noise gates; not admitted. Re-sourced continuous15.92s answer from BBC1971 Late Call interview credited Eartha Kitt. Initial10-25.34 candidate had abrupt first word; revised9.42 start preserves complete Well onset. Native3.8 final hearing confirms single voice, complete boundaries, no music/crowd/laughter/effects/splices, consistent room ambience. Literal Well/you know/uh fillers retained. Final reviewer notes weak initial vowel permits unsurmountable/insurmountable; earlier native review and ASR both render insurmountable, so choose that orthography while preserving recorded phonetic uncertainty, not rewriting grammar or consulting quotations. Historic background noise is mild and nondestructive, accepted as room/noise floor, not scored contamination. No cleanup/normalization/splicing. Earlier1971 conversational delivery instead of dramatic projection explicitly sourced. Fresh final corpus pass pending.",
+      "adjudication": "Original dramatically projected interview reference has audible cackle and truncated last phrase. Three trim candidates failed native boundary/noise gates; not admitted. Re-sourced continuous15.92s answer from BBC1971 Late Call interview credited Eartha Kitt. Initial10-25.34 candidate had abrupt first word; revised9.42 start preserves complete Well onset. Native3.8 final hearing confirms single voice, complete boundaries, no music/crowd/laughter/effects/splices, consistent room ambience. Literal Well/you know/uh fillers retained. Final reviewer notes weak initial vowel permits unsurmountable/insurmountable; earlier native review and ASR both render insurmountable, so choose that orthography while preserving recorded phonetic uncertainty, not rewriting grammar or consulting quotations. Historic background noise is mild and nondestructive, accepted as room/noise floor, not scored contamination. No cleanup/normalization/splicing. Earlier1971 conversational delivery instead of dramatic projection explicitly sourced. Fresh final corpus pass pending.\nFresh final correction: All three fresh full hearings positively render an open Ah onset; Well is merely an unresolved softened-glide alternative, with no positively heard w or l, so restore Ah. Primary and targeted phonemic hearing positively hear central/back [un-] in unsurmountable, not canonical in-; independent3.1 in- is outweighed by the explicit vowel observation corroborating primary. Restore actual nonstandard unsurmountable and the two omitted uh fillers after poor and remember, positively heard in both primary and3.1. Targeted schwa before times could be article a; the two independent positive filler hearings support uh, without grammar completion. Targeted doubled uh after being describes two vowel pulses in that hesitation; both earlier full hearings transcribe one uh, retained as one vocalized hesitation rather than invent a new lexical utterance. All hear isolated clear voice without contamination/splice.3.1 abrupt-initial label concerns indistinct onset, while both3.8 hear complete vowels/words; latest raw-unusable label concerns natural pauses/fillers only, not damaged or competing speech.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false
@@ -3523,8 +3580,71 @@
         "source_basis": "Public broadcaster-published interview explicitly credits intended speaker; retained complete answer excludes interviewer and audience responses."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/eartha-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/eartha-result.json",
-      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb"
+      "native_result_evidence": "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-1.json",
+      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
+      "post_remediation_revisions": [
+        {
+          "previous_delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
+          "previous_audio": {
+            "sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7",
+            "frames": 764160,
+            "sample_rate": 48000,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 15.92,
+            "peak": 0.36834716796875,
+            "rms": 0.037228153601407396,
+            "samples_at_full_scale": 0
+          },
+          "previous_operation": {
+            "type": "replacement",
+            "sample_rate": 48000,
+            "source_start_s": 9.42,
+            "source_end_s": 25.34,
+            "source_start_frame": 452160,
+            "source_end_frame_exclusive": 1216320,
+            "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+          },
+          "previous_profiles": [
+            {
+              "path": "voices/eartha-qwen3-06b.json",
+              "old_reference_text": "A relationship is a relationship that has to be earned, not to compromise for. I love relationships. I think they're fantastic. They're wonderful. I think they're great. I think there's nothing in the world more beautiful.",
+              "new_reference_text": "Well, being born on a cotton plantation in the South, you know, and being, uh, poor, in that way, no, it was not very easy, because I remember times when we didn't have anything to eat for what seemed like an insurmountable amount of time.",
+              "old_segment_start_s": null,
+              "new_segment_start_s": 9.42
+            },
+            {
+              "path": "voices/eartha.json",
+              "old_reference_text": "A relationship is a relationship that has to be earned, not to compromise for. I love relationships. I think they're fantastic. They're wonderful. I think they're great. I think there's nothing in the world more beautiful.",
+              "new_reference_text": "Well, being born on a cotton plantation in the South, you know, and being, uh, poor, in that way, no, it was not very easy, because I remember times when we didn't have anything to eat for what seemed like an insurmountable amount of time.",
+              "old_segment_start_s": null,
+              "new_segment_start_s": 9.42
+            }
+          ],
+          "previous_native_result_evidence": "qa/voice-reference-remediation/evidence/eartha-result.json",
+          "operation": {
+            "type": "text_only"
+          },
+          "resulting_audio": {
+            "sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7",
+            "frames": 764160,
+            "sample_rate": 48000,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 15.92,
+            "peak": 0.36834716796875,
+            "rms": 0.037228153601407396,
+            "samples_at_full_scale": 0
+          },
+          "adjudication": "All three fresh full hearings positively render an open Ah onset; Well is merely an unresolved softened-glide alternative, with no positively heard w or l, so restore Ah. Primary and targeted phonemic hearing positively hear central/back [un-] in unsurmountable, not canonical in-; independent3.1 in- is outweighed by the explicit vowel observation corroborating primary. Restore actual nonstandard unsurmountable and the two omitted uh fillers after poor and remember, positively heard in both primary and3.1. Targeted schwa before times could be article a; the two independent positive filler hearings support uh, without grammar completion. Targeted doubled uh after being describes two vowel pulses in that hesitation; both earlier full hearings transcribe one uh, retained as one vocalized hesitation rather than invent a new lexical utterance. All hear isolated clear voice without contamination/splice.3.1 abrupt-initial label concerns indistinct onset, while both3.8 hear complete vowels/words; latest raw-unusable label concerns natural pauses/fillers only, not damaged or competing speech.",
+          "native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-1.json",
+            "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-2.json",
+            "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-3.json"
+          ],
+          "discovery_native_evidence": []
+        }
+      ]
     },
     {
       "wav": "jim-royle-ref.wav",
@@ -3565,20 +3685,20 @@
         {
           "path": "voices/jim-royle-qwen3-06b.json",
           "old_reference_text": "Kiss my arse. Equaliser my arse. Preparation's my arse. Commuted my arse. Have a good time, my arse. Beast my arse.",
-          "new_reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you, you know, you've got no respect.' And I, and I, and I stood up, you know.",
+          "new_reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you what you know you've got no respect.' And I, and I, I stood up, you know.",
           "old_segment_start_s": 30,
           "new_segment_start_s": 104.12
         },
         {
           "path": "voices/jim-royle.json",
           "old_reference_text": "Kiss my arse. Equaliser my arse. Preparation's my arse. Commuted my arse. Have a good time, my arse. Beast my arse.",
-          "new_reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you, you know, you've got no respect.' And I, and I, and I stood up, you know.",
+          "new_reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you what you know you've got no respect.' And I, and I, I stood up, you know.",
           "old_segment_start_s": 30,
           "new_segment_start_s": 104.12
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=ctHvQ80KxCU",
-      "adjudication": "Original comedy montage has multiple hard scene cuts, second speaker and audience laughter; clean individual My arse utterances are under3s. Re-sourced actor interview. Initial6.72-16.23 candidate ended on incomplete continuation and was rejected. New104.12-112.68 candidate had complete words but short tail; extended real continuous source through112.98. Full native3.8 final review confirms one voice, no contaminants/splices, no boundary cutoffs, and literal main wording. Source ASR confirms he was saying and skint (ASR misrenders skinned), but collapses repetitions. Native full readings differ in exact hesitations; a separate exact last3.56s PCM probe was natively heard to resolve them, explicitly lexical-only rather than conditioning acceptance: You know, you, you know and and I three times. Use focused direct hearing for these counts; preserve probe and full conflicting observations rather than claim all instruments agree. Minor rapid-speech segmentation uncertainty remains recorded; fresh final corpus transcript review is still mandatory. Actor narrates quoted dialogue himself, not another speaker. Retains8.86s continuous useful speech, no cleanup/padding/normalization/splicing.",
+      "adjudication": "Original comedy montage has multiple hard scene cuts, second speaker and audience laughter; clean individual My arse utterances are under3s. Re-sourced actor interview. Initial6.72-16.23 candidate ended on incomplete continuation and was rejected. New104.12-112.68 candidate had complete words but short tail; extended real continuous source through112.98. Full native3.8 final review confirms one voice, no contaminants/splices, no boundary cutoffs, and literal main wording. Source ASR confirms he was saying and skint (ASR misrenders skinned), but collapses repetitions. Native full readings differ in exact hesitations; a separate exact last3.56s PCM probe was natively heard to resolve them, explicitly lexical-only rather than conditioning acceptance: You know, you, you know and and I three times. Use focused direct hearing for these counts; preserve probe and full conflicting observations rather than claim all instruments agree. Minor rapid-speech segmentation uncertainty remains recorded; fresh final corpus transcript review is still mandatory. Actor narrates quoted dialogue himself, not another speaker. Retains8.86s continuous useful speech, no cleanup/padding/normalization/splicing.\nFresh final correction: Targeted positive phonemic hearing confirms didnt with front lax vowel/nasal/glottal transition, agreeing primary rather than the intervening dont interpretation. It explicitly counts two and I restarts followed by a solitary I; primary independently hears the same pattern. Remove the phantom third and while preserving all three audible I tokens. Primary and targeted literal observations both hear what within the quoted you ... you know restart; restore that audible ungrammatical word, rather than regularize the quote. Targeted also offers starts to wind and when he was saying in rapid speech; the other two independent full observations positively hear started winding and and he was saying, retained instead of replacing established words with that uncorroborated alternative. All hear one isolated clear voice, no contamination/cutoff/splice. Acting pitch shifts, glottal restarts and natural repetitions are useful spontaneous speech.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false
@@ -3594,22 +3714,85 @@
         "source_basis": "Public BBC Studios Parkinson interview explicitly credits Ricky Tomlinson, intended Jim Royle actor. Standard public m4a stream downloaded successfully after opus CDN returned403; no account, geographic restriction or access gate bypass used."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/jim-royle-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/jim-royle-result.json",
-      "transcript_resolution": {
-        "source_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
-        "rendered_sha256": "3a7f0b2cebc03906cdcc8d418d9216f450a172ae3fcc7b1839c9de0524848c26",
-        "operation": {
-          "type": "lossless_pcm_frame_slice",
-          "sample_rate": 44100,
-          "start_frame": 233730,
-          "end_frame_exclusive": 390726,
-          "start_s": 5.3,
-          "end_s": 8.86
-        },
-        "evidence": "qa/voice-reference-remediation/evidence/jim-royle-hesitations.json",
-        "scope": "Literal hesitations in retained final3.56s only; full8.86s native acoustic acceptance separate."
-      },
-      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb"
+      "native_result_evidence": "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-revision-1.json",
+      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
+      "post_remediation_revisions": [
+        {
+          "previous_delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
+          "previous_audio": {
+            "sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
+            "frames": 390726,
+            "sample_rate": 44100,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 8.86,
+            "peak": 0.399139404296875,
+            "rms": 0.02961440251998484,
+            "samples_at_full_scale": 0
+          },
+          "previous_operation": {
+            "type": "replacement",
+            "sample_rate": 44100,
+            "source_start_s": 104.12,
+            "source_end_s": 112.98,
+            "source_start_frame": 4591692,
+            "source_end_frame_exclusive": 4982418,
+            "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+          },
+          "previous_profiles": [
+            {
+              "path": "voices/jim-royle-qwen3-06b.json",
+              "old_reference_text": "Kiss my arse. Equaliser my arse. Preparation's my arse. Commuted my arse. Have a good time, my arse. Beast my arse.",
+              "new_reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you, you know, you've got no respect.' And I, and I, and I stood up, you know.",
+              "old_segment_start_s": 30,
+              "new_segment_start_s": 104.12
+            },
+            {
+              "path": "voices/jim-royle.json",
+              "old_reference_text": "Kiss my arse. Equaliser my arse. Preparation's my arse. Commuted my arse. Have a good time, my arse. Beast my arse.",
+              "new_reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you, you know, you've got no respect.' And I, and I, and I stood up, you know.",
+              "old_segment_start_s": 30,
+              "new_segment_start_s": 104.12
+            }
+          ],
+          "previous_native_result_evidence": "qa/voice-reference-remediation/evidence/jim-royle-result.json",
+          "operation": {
+            "type": "text_only"
+          },
+          "resulting_audio": {
+            "sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
+            "frames": 390726,
+            "sample_rate": 44100,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 8.86,
+            "peak": 0.399139404296875,
+            "rms": 0.02961440251998484,
+            "samples_at_full_scale": 0
+          },
+          "adjudication": "Targeted positive phonemic hearing confirms didnt with front lax vowel/nasal/glottal transition, agreeing primary rather than the intervening dont interpretation. It explicitly counts two and I restarts followed by a solitary I; primary independently hears the same pattern. Remove the phantom third and while preserving all three audible I tokens. Primary and targeted literal observations both hear what within the quoted you ... you know restart; restore that audible ungrammatical word, rather than regularize the quote. Targeted also offers starts to wind and when he was saying in rapid speech; the other two independent full observations positively hear started winding and and he was saying, retained instead of replacing established words with that uncorroborated alternative. All hear one isolated clear voice, no contamination/cutoff/splice. Acting pitch shifts, glottal restarts and natural repetitions are useful spontaneous speech.",
+          "native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-revision-1.json",
+            "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-revision-2.json",
+            "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-revision-3.json"
+          ],
+          "discovery_native_evidence": [],
+          "previous_transcript_resolution": {
+            "source_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
+            "rendered_sha256": "3a7f0b2cebc03906cdcc8d418d9216f450a172ae3fcc7b1839c9de0524848c26",
+            "operation": {
+              "type": "lossless_pcm_frame_slice",
+              "sample_rate": 44100,
+              "start_frame": 233730,
+              "end_frame_exclusive": 390726,
+              "start_s": 5.3,
+              "end_s": 8.86
+            },
+            "evidence": "qa/voice-reference-remediation/evidence/jim-royle-hesitations.json",
+            "scope": "Literal hesitations in retained final3.56s only; full8.86s native acoustic acceptance separate."
+          }
+        }
+      ]
     },
     {
       "wav": "seven-of-nine-ref.wav",
@@ -6985,20 +7168,20 @@
         {
           "path": "voices/kitt-qwen3-06b.json",
           "old_reference_text": "an action-filled NBC television series, Knight Rider. I must say that I'm truly delighted to meet all of you today. Filming a television series is a demanding and challenging",
-          "new_reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show.",
+          "new_reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes, uh, a show.",
           "old_segment_start_s": 5,
           "new_segment_start_s": 70.0
         },
         {
           "path": "voices/kitt.json",
           "old_reference_text": "an action-filled NBC television series, Knight Rider. I must say that I'm truly delighted to meet all of you today. Filming a television series is a demanding and challenging",
-          "new_reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show.",
+          "new_reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes, uh, a show.",
           "old_segment_start_s": 5,
           "new_segment_start_s": 70.0
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=S2-cnKDmB0w",
-      "adjudication": "Original native057 confirms2voices/narration, loudpersistent electronicmusic, splice andcutoffs; prioraudit proposedtrim cannotisolate target withoutscore. Replaced usingofficialTelevisionAcademyFoundation interview, credit/title and selectedsourcevideocorroborate intendedWilliamDaniels. Natural later-life2017actorinterviewdelivery explicit, notroboticKITTperformance/earlier-age timbre claim. Candidate138 firstnativecleanbutsecondary word/fillerdisagreements, hesitations/longpause concern; rejected and preserved. Final14070-78.16,8.16s fullactualWAV twoindependent3.8+3.1 nativehearings agree1voice/noallcontaminants/acousticchanges/splices/longpauses/cutoffs, usabletrue. Both agree audible Id Id and a a repetitions retained. First140 uncertainandmaybe versusinmaybe; second140 lowuncertainty explicitlyinmaybe, sourceASRinmaybe corroborates only, rootretainsconfidentnative reading. Complete two phrases, nohonorific/narrator/host. ExactsourcePCM frame equality independentlyverified; healthyamplitude/no fullscale. Freshwholeproduction nativeacceptancepending andmustverify literal microrepetitions again.",
+      "adjudication": "Original native057 confirms2voices/narration, loudpersistent electronicmusic, splice andcutoffs; prioraudit proposedtrim cannotisolate target withoutscore. Replaced usingofficialTelevisionAcademyFoundation interview, credit/title and selectedsourcevideocorroborate intendedWilliamDaniels. Natural later-life2017actorinterviewdelivery explicit, notroboticKITTperformance/earlier-age timbre claim. Candidate138 firstnativecleanbutsecondary word/fillerdisagreements, hesitations/longpause concern; rejected and preserved. Final14070-78.16,8.16s fullactualWAV twoindependent3.8+3.1 nativehearings agree1voice/noallcontaminants/acousticchanges/splices/longpauses/cutoffs, usabletrue. Both agree audible Id Id and a a repetitions retained. First140 uncertainandmaybe versusinmaybe; second140 lowuncertainty explicitlyinmaybe, sourceASRinmaybe corroborates only, rootretainsconfidentnative reading. Complete two phrases, nohonorific/narrator/host. ExactsourcePCM frame equality independentlyverified; healthyamplitude/no fullscale. Freshwholeproduction nativeacceptancepending andmustverify literal microrepetitions again.\nFresh final correction: Two careful fresh full hearings positively render Id Id; the targeted phonemic hearing detects a first-token unreleased/glottalized closure, supporting the retained repeated contraction rather than dropping its weak d. Two focused whole-clip observations hear in before maybe, corroborated by the targeted reduced nasal closest to in; primary and is uncertain and not adopted. All hear fifty, with one minor fifteen alternative not supported by the other full hearings. Targeted phonemic hearing positively counts two central-vowel pulses before show, separated by a glottal pause, and renders them uh a. Replace a a with that literal hesitation-plus-article rendering, preserving both audible syllables rather than omit the weak first pulse as two broad hearings did. All observations hear one isolated clear voice with no contamination or actual truncated word; the primary tail flag is grammatical/padding expectation, disproved by the three complete-boundary hearings. Latest raw-unusable label concerns stutter/hesitation rather than damaged speech; retain the natural full useful phrase.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false
@@ -7046,8 +7229,72 @@
         "publisher_metadata_sha256": "0586f00d603b57dc938c54bc6ee32a1e1c84a098eca43cb0f9418ef3faac778f"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/kitt-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/kitt-result.json",
-      "delivery_commit": "138e11dbae99fc333304e535d2fda080a316fa57"
+      "native_result_evidence": "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-1.json",
+      "delivery_commit": "138e11dbae99fc333304e535d2fda080a316fa57",
+      "post_remediation_revisions": [
+        {
+          "previous_delivery_commit": "138e11dbae99fc333304e535d2fda080a316fa57",
+          "previous_audio": {
+            "sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+            "frames": 391680,
+            "sample_rate": 48000,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 8.16,
+            "peak": 0.384918212890625,
+            "rms": 0.05200875648412544,
+            "samples_at_full_scale": 0
+          },
+          "previous_operation": {
+            "type": "replacement",
+            "sample_rate": 48000,
+            "source_start_s": 70.0,
+            "source_end_s": 78.16,
+            "source_start_frame": 3360000,
+            "source_end_frame_exclusive": 3751680,
+            "conversion": "Exact continuous decoded source PCM16 frame slice; no DSP, remixing, normalization, separation, padding or concatenation"
+          },
+          "previous_profiles": [
+            {
+              "path": "voices/kitt-qwen3-06b.json",
+              "old_reference_text": "an action-filled NBC television series, Knight Rider. I must say that I'm truly delighted to meet all of you today. Filming a television series is a demanding and challenging",
+              "new_reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show.",
+              "old_segment_start_s": 5,
+              "new_segment_start_s": 70.0
+            },
+            {
+              "path": "voices/kitt.json",
+              "old_reference_text": "an action-filled NBC television series, Knight Rider. I must say that I'm truly delighted to meet all of you today. Filming a television series is a demanding and challenging",
+              "new_reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show.",
+              "old_segment_start_s": 5,
+              "new_segment_start_s": 70.0
+            }
+          ],
+          "previous_native_result_evidence": "qa/voice-reference-remediation/evidence/kitt-result.json",
+          "operation": {
+            "type": "text_only"
+          },
+          "resulting_audio": {
+            "sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+            "frames": 391680,
+            "sample_rate": 48000,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 8.16,
+            "peak": 0.384918212890625,
+            "rms": 0.05200875648412544,
+            "samples_at_full_scale": 0
+          },
+          "adjudication": "Two careful fresh full hearings positively render Id Id; the targeted phonemic hearing detects a first-token unreleased/glottalized closure, supporting the retained repeated contraction rather than dropping its weak d. Two focused whole-clip observations hear in before maybe, corroborated by the targeted reduced nasal closest to in; primary and is uncertain and not adopted. All hear fifty, with one minor fifteen alternative not supported by the other full hearings. Targeted phonemic hearing positively counts two central-vowel pulses before show, separated by a glottal pause, and renders them uh a. Replace a a with that literal hesitation-plus-article rendering, preserving both audible syllables rather than omit the weak first pulse as two broad hearings did. All observations hear one isolated clear voice with no contamination or actual truncated word; the primary tail flag is grammatical/padding expectation, disproved by the three complete-boundary hearings. Latest raw-unusable label concerns stutter/hesitation rather than damaged speech; retain the natural full useful phrase.",
+          "native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-1.json",
+            "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-2.json",
+            "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-3.json",
+            "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-4.json"
+          ],
+          "discovery_native_evidence": []
+        }
+      ]
     },
     {
       "wav": "romana-ref.wav",

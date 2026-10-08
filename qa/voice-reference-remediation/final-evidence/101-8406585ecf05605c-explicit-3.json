@@ -1,0 +1,38 @@
+{
+  "wav": "clip-101-ref.wav",
+  "source_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "092117b4-3e4c-4593-b86b-49a54a89f93d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "092117b4-3e4c-4593-b86b-49a54a89f93d",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Now having just met you, I wouldn't go as far as calling you a cold-hearted bastard, but it wouldn't be a stretch to imagine you think of women as disposable pleasures rather than meaningful pursuits.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.1, 5.7],\n    [6.5, 13.3]\n  ],\n  \"uncertainty\": \"Boundary timing estimates carry perceptual uncertainty of approximately +/- 0.2 to 0.3s. Laughter is reported true due to a soft, amused chuckle/exhalation occurring at ~5.8s-6.4s following 'bastard'. While the full clip (~0.0s to 13.4s) is single-speaker and usable as raw conditioning audio, candidate clean intervals are partitioned into [0.1, 5.7] and [6.5, 13.3] to isolate complete syntactic phrases from the mid-utterance chuckle. Transcript wording and phonemic boundaries are perceived with high confidence.\"\n}\n```\n",
+    "duration_seconds": 97.641102,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20631,
+      "output_tokens": 11769,
+      "thinking_tokens": 11305,
+      "cache_read_tokens": 16015,
+      "total_tokens": 32400
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

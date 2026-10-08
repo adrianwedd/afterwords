@@ -1,0 +1,38 @@
+{
+  "wav": "clip-046-ref.wav",
+  "source_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "75bce198-4fdc-49c9-ad17-3032f9df1be3",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "75bce198-4fdc-49c9-ad17-3032f9df1be3",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? They cut the check. End of story.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.25, 8.75]\n  ],\n  \"uncertainty\": \"High confidence in literal transcript wording given clear phonemic boundaries and dry, isolated vocal delivery. Perceptual speech boundary estimates have an estimated uncertainty of \u00b10.2 seconds.\"\n}\n",
+    "duration_seconds": 151.713589,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20476,
+      "output_tokens": 19808,
+      "thinking_tokens": 19470,
+      "cache_read_tokens": 16112,
+      "total_tokens": 40284
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

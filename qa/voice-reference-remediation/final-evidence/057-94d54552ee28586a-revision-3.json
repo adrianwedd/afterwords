@@ -1,0 +1,38 @@
+{
+  "wav": "clip-057-ref.wav",
+  "source_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "44517e5e-1d11-4303-9a3f-ac0494af2967",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "44517e5e-1d11-4303-9a3f-ac0494af2967",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So, that's what we did, and with that I'd I'd go in there and knock it off in maybe 50 minutes, a show.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.3, 6.7]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty of approximately +/- 0.2 to 0.3 seconds. In the transcript, the numerical token is heard predominantly as '50' ('fifty') based on vowel duration and initial syllable stress, though '15' ('fifteen') cannot be completely ruled out phonetically. The stuttered pronoun contraction is heard as a repeated 'I'd I'd' with a slight glottal break. Speaker isolation is complete with consistent studio/room background tone and no competing voices or music throughout.\"\n}\n",
+    "duration_seconds": 60.121346,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20394,
+      "output_tokens": 4007,
+      "thinking_tokens": 3593,
+      "cache_read_tokens": 16120,
+      "total_tokens": 24401
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

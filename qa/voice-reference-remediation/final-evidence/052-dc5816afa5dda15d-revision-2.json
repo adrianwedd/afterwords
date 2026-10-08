@@ -1,0 +1,38 @@
+{
+  "wav": "clip-052-ref.wav",
+  "source_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c9b2a77b-eb50-4d48-96ac-ea42e536e20e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c9b2a77b-eb50-4d48-96ac-ea42e536e20e",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And he started winding me up and I don't know and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you- you know, you've got no respect.' And I- and I stood up, you know.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [2.8, 4.3],\n    [4.4, 5.7]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty margin of approximately +/- 0.2s. Rapid, weakly articulated elisions occur around 1.8s\u20132.6s ('and I don't know and he was saying'), where the reduction of 'was saying' / 'he's saying' carries minor phonetic ambiguity. Mid-sentence stutters and false starts ('you- you know' and 'and I- and I') are natural speaker hesitations with glottal stops rather than digital splices. Quoted dialogue exhibits an intentional pitch and intensity shift but remains identifiable as the same speaker. Audio tail after 'know' terminates promptly with slight room decay truncation but does not clip speech phonemes.\"\n}\n",
+    "duration_seconds": 51.28973,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20465,
+      "output_tokens": 5177,
+      "thinking_tokens": 4687,
+      "cache_read_tokens": 16106,
+      "total_tokens": 25642
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

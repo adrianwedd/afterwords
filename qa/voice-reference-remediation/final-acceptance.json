@@ -68,14 +68,22 @@
       "index": 4,
       "wav": "alan-partridge-ref.wav",
       "sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh primary observation frozen; final root adjudication pending",
-      "transcript_status": "pending",
+      "status": "accepted",
+      "native_qa_verdict": "passed after explicit fresh root adjudication",
+      "transcript_status": "matched root-adjudicated literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/004-35d515128581d454.json",
-        "qa/voice-reference-remediation/final-evidence/004-35d515128581d454-pending-primary.json"
+        "qa/voice-reference-remediation/final-evidence/004-35d515128581d454-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/004-35d515128581d454-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/004-35d515128581d454-explicit-3.json",
+        "qa/voice-reference-remediation/final-evidence/004-35d515128581d454-explicit-4.json"
       ],
-      "adjudication": "Fresh full production observation is frozen. Resolve any transcript, contamination or boundary disagreement before acceptance; this pending row does not assert acoustic suitability."
+      "adjudication": "Primary and independent3.1 positively transcribe started thinking. Two focused3.8 observations render start but explicitly acknowledge a reduced/elided started whose dental suffix merges into thinking. Retain the twice-positive started rather than treating phonetic coarticulation as a new word.3.1 alone appends and at the tail; the other three full observations end on complete admired, and both boundary-focused hearings explicitly find no missing phoneme/cutoff. No terminal and is established. All hear one isolated clear voice without contamination. Final raw-unusable label concerns natural because um hesitation/restart only, not damaged words; retain useful full spontaneous material rather than shrink to isolated fragments.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 5,
@@ -381,13 +389,21 @@
       "index": 21,
       "wav": "brian-cox-ref.wav",
       "sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh primary observation frozen; final root adjudication pending",
-      "transcript_status": "pending",
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root correction",
+      "transcript_status": "matched root-adjudicated literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-pending-primary.json"
+        "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-revision-3.json"
       ],
-      "adjudication": "Fresh full production observation is frozen. Resolve any transcript, contamination or boundary disagreement before acceptance; this pending row does not assert acoustic suitability."
+      "adjudication": "Resolve the initial weak lexical onset from targeted positive phonemic hearing: [si:] See precedes Back, rather than uncertain primary You or the omitted onset in another broad pass. Restore See in every associated profile. Primary and targeted positive full hearings agree no or between the final questions; retain direct repeated Should it be rather than add grammar. Both careful full3.8 hearings explicitly hear one isolated clear voice, no score/instruments (uniform room air only), no contaminants/splice and complete boundaries. The failed3.1 recitation attempt is excluded, not acoustic evidence. Preserve ordinary 19th orthography and the natural pause.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 22,
@@ -655,13 +671,21 @@
       "index": 36,
       "wav": "eartha-ref.wav",
       "sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh primary observation frozen; final root adjudication pending",
-      "transcript_status": "pending",
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root correction",
+      "transcript_status": "matched root-adjudicated literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-pending-primary.json"
+        "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-3.json"
       ],
-      "adjudication": "Fresh full production observation is frozen. Resolve any transcript, contamination or boundary disagreement before acceptance; this pending row does not assert acoustic suitability."
+      "adjudication": "All three fresh full hearings positively render an open Ah onset; Well is merely an unresolved softened-glide alternative, with no positively heard w or l, so restore Ah. Primary and targeted phonemic hearing positively hear central/back [un-] in unsurmountable, not canonical in-; independent3.1 in- is outweighed by the explicit vowel observation corroborating primary. Restore actual nonstandard unsurmountable and the two omitted uh fillers after poor and remember, positively heard in both primary and3.1. Targeted schwa before times could be article a; the two independent positive filler hearings support uh, without grammar completion. Targeted doubled uh after being describes two vowel pulses in that hesitation; both earlier full hearings transcribe one uh, retained as one vocalized hesitation rather than invent a new lexical utterance. All hear isolated clear voice without contamination/splice.3.1 abrupt-initial label concerns indistinct onset, while both3.8 hear complete vowels/words; latest raw-unusable label concerns natural pauses/fillers only, not damaged or competing speech.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 37,
@@ -830,13 +854,22 @@
       "index": 46,
       "wav": "harvey-specter-ref.wav",
       "sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh primary observation frozen; final root adjudication pending",
-      "transcript_status": "pending",
+      "status": "accepted",
+      "native_qa_verdict": "passed after explicit fresh root adjudication",
+      "transcript_status": "matched root-adjudicated literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/046-23a3787658a79962-pending-primary.json"
+        "qa/voice-reference-remediation/final-evidence/046-23a3787658a79962-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/046-23a3787658a79962-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/046-23a3787658a79962-explicit-3.json",
+        "qa/voice-reference-remediation/final-evidence/046-23a3787658a79962-explicit-4.json"
       ],
-      "adjudication": "Fresh full production observation is frozen. Resolve any transcript, contamination or boundary disagreement before acceptance; this pending row does not assert acoustic suitability."
+      "adjudication": "Primary and later careful full observation both transcribe No; targeted phonemic hearing positively identifies a quietly voiced lexical [nou] No coincident with breath, not Look. One intermediate observation omits it. Retain the positively heard word, corroborated in three full observations, rather than delete it because the nasal vowel overlaps inhalation. Minor nonlexical-inhalation alternative remains ordinary weak-word uncertainty, not a positive alternate word. All hear one isolated clear voice, complete boundaries, no contaminants or splice. Signed the has ordinary dental assimilation; every literal observation positively retains signed, not canonical substitution. Reduced kay is normal realization of okay, retained. Natural clause pause is usable continuous speech.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 47,
@@ -935,13 +968,21 @@
       "index": 52,
       "wav": "jim-royle-ref.wav",
       "sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh primary observation frozen; final root adjudication pending",
-      "transcript_status": "pending",
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root correction",
+      "transcript_status": "matched root-adjudicated literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-pending-primary.json"
+        "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-revision-3.json"
       ],
-      "adjudication": "Fresh full production observation is frozen. Resolve any transcript, contamination or boundary disagreement before acceptance; this pending row does not assert acoustic suitability."
+      "adjudication": "Targeted positive phonemic hearing confirms didnt with front lax vowel/nasal/glottal transition, agreeing primary rather than the intervening dont interpretation. It explicitly counts two and I restarts followed by a solitary I; primary independently hears the same pattern. Remove the phantom third and while preserving all three audible I tokens. Primary and targeted literal observations both hear what within the quoted you ... you know restart; restore that audible ungrammatical word, rather than regularize the quote. Targeted also offers starts to wind and when he was saying in rapid speech; the other two independent full observations positively hear started winding and and he was saying, retained instead of replacing established words with that uncorroborated alternative. All hear one isolated clear voice, no contamination/cutoff/splice. Acting pitch shifts, glottal restarts and natural repetitions are useful spontaneous speech.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 53,
@@ -1019,14 +1060,22 @@
       "index": 57,
       "wav": "kitt-ref.wav",
       "sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh primary observation frozen; final root adjudication pending",
-      "transcript_status": "pending",
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root correction",
+      "transcript_status": "matched root-adjudicated literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a.json",
-        "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-pending-primary.json"
+        "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-3.json",
+        "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-4.json"
       ],
-      "adjudication": "Fresh full production observation is frozen. Resolve any transcript, contamination or boundary disagreement before acceptance; this pending row does not assert acoustic suitability."
+      "adjudication": "Two careful fresh full hearings positively render Id Id; the targeted phonemic hearing detects a first-token unreleased/glottalized closure, supporting the retained repeated contraction rather than dropping its weak d. Two focused whole-clip observations hear in before maybe, corroborated by the targeted reduced nasal closest to in; primary and is uncertain and not adopted. All hear fifty, with one minor fifteen alternative not supported by the other full hearings. Targeted phonemic hearing positively counts two central-vowel pulses before show, separated by a glottal pause, and renders them uh a. Replace a a with that literal hesitation-plus-article rendering, preserving both audible syllables rather than omit the weak first pulse as two broad hearings did. All observations hear one isolated clear voice with no contamination or actual truncated word; the primary tail flag is grammatical/padding expectation, disproved by the three complete-boundary hearings. Latest raw-unusable label concerns stutter/hesitation rather than damaged speech; retain the natural full useful phrase.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 58,
@@ -1824,13 +1873,21 @@
       "index": 101,
       "wav": "vesper-ref.wav",
       "sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh primary observation frozen; final root adjudication pending",
-      "transcript_status": "pending",
+      "status": "accepted",
+      "native_qa_verdict": "passed after explicit fresh root adjudication",
+      "transcript_status": "matched root-adjudicated literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/101-8406585ecf05605c-pending-primary.json"
+        "qa/voice-reference-remediation/final-evidence/101-8406585ecf05605c-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/101-8406585ecf05605c-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/101-8406585ecf05605c-explicit-3.json"
       ],
-      "adjudication": "Fresh full production observation is frozen. Resolve any transcript, contamination or boundary disagreement before acceptance; this pending row does not assert acoustic suitability."
+      "adjudication": "Primary reports a second voice after bastard and a chuckle. Independent3.1 and careful3.8 full hearings positively hear one isolated speaker with stable acoustics and no competing speech. All agree the entire literal transcript and complete word boundaries. Careful3.8 identifies a soft amused chuckle/exhalation between clauses, but explicitly finds the full clip single-speaker and usable. Nonlexical same-performance breath/chuckle is accepted as natural vocal delivery; no material second-person speech is established by the two independent full hearings. Uniform low room rumble is incidental, with no music/SFX/crowd or destructive interference. Retain continuous useful phrases.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_and_git_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 102,

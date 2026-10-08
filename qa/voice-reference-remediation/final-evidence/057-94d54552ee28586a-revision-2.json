@@ -1,0 +1,38 @@
+{
+  "wav": "clip-057-ref.wav",
+  "source_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "d52f8d07-5209-4c62-8ace-54baf88eda26",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d52f8d07-5209-4c62-8ace-54baf88eda26",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So, that's what we did. And with that, I'd I'd go in there and knock it off in maybe fifty minutes, a show.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": null,\n  \"sound_effects\": null,\n  \"acoustic_changes\": null,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 8.3]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty of approximately \u00b10.3 seconds due to absence of waveform inspection tools. In the literal transcript, the repetition around 3.2s is perceptually estimated as 'I'd I'd' but could be a rapid 'I I'd'; the numeral 'fifty' is phonetically clear. End decay finishes naturally with no truncation.\"\n}\n",
+    "duration_seconds": 38.883553,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36564,
+      "output_tokens": 3677,
+      "thinking_tokens": 3298,
+      "cache_read_tokens": 0,
+      "total_tokens": 40241
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
