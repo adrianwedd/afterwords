@@ -614,13 +614,21 @@
       "index": 34,
       "wav": "donna-noble-ref.wav",
       "sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh primary observation frozen; final root adjudication pending",
-      "transcript_status": "pending",
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root correction",
+      "transcript_status": "matched root-adjudicated literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/034-32e83a5716544237-pending-primary.json"
+        "qa/voice-reference-remediation/final-evidence/034-32e83a5716544237-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/034-32e83a5716544237-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/034-32e83a5716544237-revision-3.json"
       ],
-      "adjudication": "Fresh full production observation is frozen. Resolve any transcript, contamination or boundary disagreement before acceptance; this pending row does not assert acoustic suitability."
+      "adjudication": "The existing Am I bothered is a canonical-phrase substitution contradicted by three fresh full native observations. Primary hears Im a bovvered, independent3.1 hears the same /aim a/ sequence with phonetic bovid spelling, and targeted3.8 explicitly identifies /ai/ preceding /m/ and schwa, not the /am ai/ ordering of Am I. Restore actual contracted Im a in every profile, without the famous catchphrase. Preserve bovvered as phonetic spelling of heard th-fronting /v/, rather than normalize the performance to a dental consonant. Er/uh describes the same filler vowel; retain existing uh orthography. All observations hear one isolated clean voice, complete boundaries and no contamination or splice. Targeted raw-unusable label concerns natural filler hesitations only, not damaged speech or a competing voice; retain the useful full spontaneous utterance. No audio or source provenance change.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 35,

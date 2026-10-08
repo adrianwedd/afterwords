@@ -4921,20 +4921,20 @@
         {
           "path": "voices/donna-noble-qwen3-06b.json",
           "old_reference_text": "Because I understand now. You said I was gonna die, but you mean this whole world is gonna blink out of existence. But that's not dying. Because a better world takes its place. The Doctor's world. And I'm still alive.",
-          "new_reference_text": "Um, I'm bringing the, uh, 'Am I bothered?' character back, which, um, I did kill off before I knew I was going on tour.",
+          "new_reference_text": "Um, I'm bringing the, uh, 'I'm a bovvered' character back, which, um, I did kill off before I knew I was going on tour.",
           "old_segment_start_s": 58,
           "new_segment_start_s": 321.65
         },
         {
           "path": "voices/donna-noble.json",
           "old_reference_text": "Because I understand now. You said I was gonna die, but you mean this whole world is gonna blink out of existence. But that's not dying. Because a better world takes its place. The Doctor's world. And I'm still alive.",
-          "new_reference_text": "Um, I'm bringing the, uh, 'Am I bothered?' character back, which, um, I did kill off before I knew I was going on tour.",
+          "new_reference_text": "Um, I'm bringing the, uh, 'I'm a bovvered' character back, which, um, I did kill off before I knew I was going on tour.",
           "old_segment_start_s": 58,
           "new_segment_start_s": 321.65
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=gW_L4ZlAKco",
-      "adjudication": "Original native reports scored dramatic speech. Initial BBC News highlight not selected. Radio1 trials64/67/71 retain host interjections/overlap;66 starts truncated; all remain unadmitted. Move to later complete solo statement321.65-328.15 rather than splice those failures. Full exact native77 confirms one isolated voice, complete boundaries and no music/crowd/laughter/effects/acoustic change/splices. Preserve initial Um, uh after the, and um after which, which native explicitly hears although ASR omits them. Catchphrase words come only from blind native observation, not source title/script correction. Actual6.5s complete varied statement, sensible level, no DSP cleanup/normalization/separation or splice. Actor interview delivery explicitly recorded. Fresh final corpus acceptance pending.",
+      "adjudication": "Original native reports scored dramatic speech. Initial BBC News highlight not selected. Radio1 trials64/67/71 retain host interjections/overlap;66 starts truncated; all remain unadmitted. Move to later complete solo statement321.65-328.15 rather than splice those failures. Full exact native77 confirms one isolated voice, complete boundaries and no music/crowd/laughter/effects/acoustic change/splices. Preserve initial Um, uh after the, and um after which, which native explicitly hears although ASR omits them. Catchphrase words come only from blind native observation, not source title/script correction. Actual6.5s complete varied statement, sensible level, no DSP cleanup/normalization/separation or splice. Actor interview delivery explicitly recorded. Fresh final corpus acceptance pending.\nFresh final correction: The existing Am I bothered is a canonical-phrase substitution contradicted by three fresh full native observations. Primary hears Im a bovvered, independent3.1 hears the same /aim a/ sequence with phonetic bovid spelling, and targeted3.8 explicitly identifies /ai/ preceding /m/ and schwa, not the /am ai/ ordering of Am I. Restore actual contracted Im a in every profile, without the famous catchphrase. Preserve bovvered as phonetic spelling of heard th-fronting /v/, rather than normalize the performance to a dental consonant. Er/uh describes the same filler vowel; retain existing uh orthography. All observations hear one isolated clean voice, complete boundaries and no contamination or splice. Targeted raw-unusable label concerns natural filler hesitations only, not damaged speech or a competing voice; retain the useful full spontaneous utterance. No audio or source provenance change.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false,
@@ -4955,8 +4955,71 @@
         "source_frame": "qa/voice-reference-remediation/evidence/donna-noble-source-324.jpg"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/donna-noble-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/donna-noble-result.json",
-      "delivery_commit": "a24083013b056c5a83bee061727a1a2e0a0265da"
+      "native_result_evidence": "qa/voice-reference-remediation/final-evidence/034-32e83a5716544237-revision-1.json",
+      "delivery_commit": "a24083013b056c5a83bee061727a1a2e0a0265da",
+      "post_remediation_revisions": [
+        {
+          "previous_delivery_commit": "a24083013b056c5a83bee061727a1a2e0a0265da",
+          "previous_audio": {
+            "sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2",
+            "frames": 286650,
+            "sample_rate": 44100,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 6.5,
+            "peak": 0.392547607421875,
+            "rms": 0.08689865623714411,
+            "samples_at_full_scale": 0
+          },
+          "previous_operation": {
+            "type": "replacement",
+            "sample_rate": 44100,
+            "source_start_s": 321.65,
+            "source_end_s": 328.15,
+            "source_start_frame": 14184765,
+            "source_end_frame_exclusive": 14471415,
+            "conversion": "Exact continuous decoded PCM16 source frame slice, preserves rate/channels; no cleanup, normalization, separation or splicing"
+          },
+          "previous_profiles": [
+            {
+              "path": "voices/donna-noble-qwen3-06b.json",
+              "old_reference_text": "Because I understand now. You said I was gonna die, but you mean this whole world is gonna blink out of existence. But that's not dying. Because a better world takes its place. The Doctor's world. And I'm still alive.",
+              "new_reference_text": "Um, I'm bringing the, uh, 'Am I bothered?' character back, which, um, I did kill off before I knew I was going on tour.",
+              "old_segment_start_s": 58,
+              "new_segment_start_s": 321.65
+            },
+            {
+              "path": "voices/donna-noble.json",
+              "old_reference_text": "Because I understand now. You said I was gonna die, but you mean this whole world is gonna blink out of existence. But that's not dying. Because a better world takes its place. The Doctor's world. And I'm still alive.",
+              "new_reference_text": "Um, I'm bringing the, uh, 'Am I bothered?' character back, which, um, I did kill off before I knew I was going on tour.",
+              "old_segment_start_s": 58,
+              "new_segment_start_s": 321.65
+            }
+          ],
+          "previous_native_result_evidence": "qa/voice-reference-remediation/evidence/donna-noble-result.json",
+          "operation": {
+            "type": "text_only"
+          },
+          "resulting_audio": {
+            "sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2",
+            "frames": 286650,
+            "sample_rate": 44100,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 6.5,
+            "peak": 0.392547607421875,
+            "rms": 0.08689865623714411,
+            "samples_at_full_scale": 0
+          },
+          "adjudication": "The existing Am I bothered is a canonical-phrase substitution contradicted by three fresh full native observations. Primary hears Im a bovvered, independent3.1 hears the same /aim a/ sequence with phonetic bovid spelling, and targeted3.8 explicitly identifies /ai/ preceding /m/ and schwa, not the /am ai/ ordering of Am I. Restore actual contracted Im a in every profile, without the famous catchphrase. Preserve bovvered as phonetic spelling of heard th-fronting /v/, rather than normalize the performance to a dental consonant. Er/uh describes the same filler vowel; retain existing uh orthography. All observations hear one isolated clean voice, complete boundaries and no contamination or splice. Targeted raw-unusable label concerns natural filler hesitations only, not damaged speech or a competing voice; retain the useful full spontaneous utterance. No audio or source provenance change.",
+          "native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/034-32e83a5716544237-revision-1.json",
+            "qa/voice-reference-remediation/final-evidence/034-32e83a5716544237-revision-2.json",
+            "qa/voice-reference-remediation/final-evidence/034-32e83a5716544237-revision-3.json"
+          ],
+          "discovery_native_evidence": []
+        }
+      ]
     },
     {
       "wav": "martha-jones-ref.wav",

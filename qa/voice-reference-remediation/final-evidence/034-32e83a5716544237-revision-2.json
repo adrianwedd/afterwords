@@ -1,0 +1,38 @@
+{
+  "wav": "clip-034-ref.wav",
+  "source_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "d1d1995a-e3a8-419c-9df8-e5272fc42cd3",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d1d1995a-e3a8-419c-9df8-e5272fc42cd3",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Um I'm bringing the uh I'm a bovid character back which um I did kill off before I knew I was going on tour\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.0]\n  ],\n  \"uncertainty\": \"Interval timestamps are approximate perceptual estimates. The syllables sound phonetically like 'I'm a bovid' and are transcribed literally without substituting any remembered scripts or identifying characters. High confidence in single-speaker isolation and clean audio.\"\n}\n```\n",
+    "duration_seconds": 47.473491,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12636,
+      "output_tokens": 4613,
+      "thinking_tokens": 4265,
+      "cache_read_tokens": 24221,
+      "total_tokens": 17249
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-034-ref.wav",
+  "source_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c125ed53-cea0-42f1-b709-1497c6048fb0",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c125ed53-cea0-42f1-b709-1497c6048fb0",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Um, I'm bringing the, uh, 'I'm a bothered' [phonetically: /a\u026am \u0259 \u02c8b\u0252v\u0259d/ ~ /a\u026am \u0259 \u02c8b\u0252\u00f0\u0259d/] character back, which, um, I did kill off before I knew I was going on tour.\",\n  \"music\": \"none\",\n  \"crowd\": \"none\",\n  \"laughter\": \"none\",\n  \"sound_effects\": \"none\",\n  \"acoustic_changes\": \"none; consistent near-field studio/indoor acoustic response and room tone throughout\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"interval_s\": [1.8, 2.5],\n      \"description\": \"Hesitation pause with filler 'uh' between 'the' and the quoted phrase\"\n    },\n    {\n      \"interval_s\": [4.0, 4.8],\n      \"description\": \"Hesitation pause with filler 'um' between 'which' and 'I did kill off'\"\n    }\n  ],\n  \"apparent_splices\": \"none detected; continuous ambient room tone with natural vocal decay\",\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [4.8, 7.5],\n    [5.9, 7.5]\n  ],\n  \"uncertainty\": {\n    \"quoted_phrase_phonetics\": \"The speaker audibly utters a contracted 'I'm a' (/a\u026am \u0259/), consisting of a single diphthong [a\u026a] leading into the bilabial nasal [m] and schwa [\u0259]. No separate second vowel (/\u00e6/ or /\u0259/) is present between the pronoun and nasal, ruling out uncontracted 'I am a' (/a\u026a \u00e6m \u0259/). While grammar and remembered catchphrases might suggest 'Am I bothered', acoustically the diphthong [a\u026a] precedes the nasal [m] rather than an [\u00e6] onset into [m a\u026a]; however, slight coarticulation with the preceding 'uh' may leave an unresolved perceptual ambiguity for some listeners between 'I'm a' and 'Am I'. Medial consonant in 'bothered' displays th-fronting (/v/ or soft dental fricative /\u00f0/).\",\n    \"timing_boundaries\": \"Interval timestamps are perceptual estimates with an uncertainty of approximately \u00b10.15 seconds.\"\n  }\n}\n",
+    "duration_seconds": 69.320471,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20705,
+      "output_tokens": 7068,
+      "thinking_tokens": 6370,
+      "cache_read_tokens": 16158,
+      "total_tokens": 27773
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

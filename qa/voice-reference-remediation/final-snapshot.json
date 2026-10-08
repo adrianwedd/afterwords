@@ -1044,17 +1044,17 @@
       "profiles": [
         {
           "path": "voices/donna-noble-qwen3-06b.json",
-          "profile_sha256": "76a5839b87698fb14527af61fb40708c25ae94a094692c286036ea60853a55fc",
-          "reference_text": "Um, I'm bringing the, uh, 'Am I bothered?' character back, which, um, I did kill off before I knew I was going on tour."
+          "profile_sha256": "b347fef45d435289d963347fa3ac75372d6fcc231d4debaa48f11d848462c559",
+          "reference_text": "Um, I'm bringing the, uh, 'I'm a bovvered' character back, which, um, I did kill off before I knew I was going on tour."
         },
         {
           "path": "voices/donna-noble.json",
-          "profile_sha256": "0834d74fb6d270b07ce4feb489c4014875062ebfd6c8d9410d15a4abf72c09ca",
-          "reference_text": "Um, I'm bringing the, uh, 'Am I bothered?' character back, which, um, I did kill off before I knew I was going on tour."
+          "profile_sha256": "677901959c872a658a0f720d7ec70ca21f3353820fffbd28b9186b2d20f0c29e",
+          "reference_text": "Um, I'm bringing the, uh, 'I'm a bovvered' character back, which, um, I did kill off before I knew I was going on tour."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {
