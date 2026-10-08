@@ -59,6 +59,7 @@ def parsed_observation(result):
     limitations = json.dumps({k: value.get(k) for k in ("uncertainty", "fatal_defect")})
     if re.search(r"text[- ]based (?:transcription|transcript)|"
                  r"(?:cannot|can't|unable to) (?:hear|listen)|rather than native acoustic|"
+                 r"(?:provided|supplied|returned) (?:only )?(?:a )?(?:textual|text[- ]based) transcript|"
                  r"(?:extrapolated|inferred) from (?:the |significant )?(?:text layout|line breaks)",
                  limitations, re.IGNORECASE):
         return None

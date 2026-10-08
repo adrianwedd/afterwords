@@ -71,6 +71,11 @@ def test_valid_json_cannot_override_reviewer_reporting_transcript_only_review():
         "rather than native acoustic signal analysis.")
     assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None
     payload["uncertainty"] = (
+        "Acoustic properties, overlap, and timing boundaries are highly uncertain "
+        "as the ingestion tool provided a textual transcript rather than granular "
+        "auditory features or timestamps.")
+    assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None
+    payload["uncertainty"] = (
         "Exact boundary estimates are extrapolated from the text layout. "
         "The presence of long pauses is inferred from significant line breaks.")
     assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None

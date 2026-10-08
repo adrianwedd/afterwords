@@ -5072,7 +5072,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/mark-steel-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/mark-steel-result.json",
-      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/mark-steel-publisher-source.json"
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/mark-steel-publisher-source.json",
+      "delivery_commit": "4bd98896138c709a58233c7d4d3f2f223fa7bd11"
     }
   ],
   "exclusions": [
