@@ -5981,7 +5981,94 @@
         "source_basis": "Publisher identifies interview guest Joe Flanigan as John Sheppard; section290-318s video labels David Read HOST and Joe Flanigan JOHN SHEPPARD, with guest delivering matching retirement/pandemic answer. Source ASR300-314.8 matches reference wording; original reference correlation to source verified below."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/john-sheppard-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/john-sheppard-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/john-sheppard-result.json",
+      "delivery_commit": "b47cd2a8eea3cc138fb1022b467bceb20ea465b3"
+    },
+    {
+      "wav": "harvey-specter-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "03eda4492c4e36417024b355225c7b64d04a25d92f21907cadefbc184f38ba4b",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08028738754793481,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979",
+        "frames": 377055,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.55,
+        "peak": 0.899993896484375,
+        "rms": 0.08941420418720267,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 229320,
+        "end_frame_exclusive": 606375,
+        "start_s": 5.2,
+        "end_s": 13.75
+      },
+      "profiles": [
+        {
+          "path": "voices/harvey-specter-qwen3-06b.json",
+          "old_reference_text": "I need a grown god damn man. I'm inclined to give you a shot, but what if I decide to go another way? They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story. I'm in court right now.",
+          "new_reference_text": "They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story.",
+          "old_segment_start_s": 10,
+          "new_segment_start_s": 15.2
+        },
+        {
+          "path": "voices/harvey-specter.json",
+          "old_reference_text": "I need a grown god damn man. I'm inclined to give you a shot, but what if I decide to go another way? They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story. I'm in court right now.",
+          "new_reference_text": "They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story.",
+          "old_segment_start_s": 10,
+          "new_segment_start_s": 15.2
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=hacr7EI-1JA",
+      "adjudication": "Original native046 reports2perceptualvoices/acoustic montage/bothcutoffs. OfficialSuits source video frames12,14,18 show same intended Harvey character speaking across separate scenes; original wrongactor is not considered confirmed. Source waveform correlation afterdownmix/resampling aligns originalstart10.0s Pearson0.9576, corroborating recordedoffset. Candidate122 contains office-acoustic transition and native2perceptualvoices; rejected for discontinuous conditioning even though video suggests sameactor. Final1235.2-13.75 exact original PCM16 slice retains single continuous phone monologue and removes clippedfirst/lastphrases and office transition. Two independent native reviews of identicalfinalhash agree1voice/allcontaminantsfalse/no acousticchanges/splice/longpauses/bothcutoffsfalse. Transcript agrees all substantive words including signed (sourceASRsign notauthority). Disputed brief pre-theycutthecheck word: first123 uncertain Look vs No; independent3.1 actualfullWAV123 hears No with highwordcertainty. Original046 mentions subtle No/breath ambiguity; chosen No from confidentindependent native, preserves informalinterjection instead of droppingASRomission. Firstreview uncertainty and originalnegative remain recorded; freshfinalmustverify wordingagain. Actual8.55s, nativeclock6/8.2 noteditauthority. Healthy levels/no fullscale, exact frame equality verifiedbyadmission. Intended in-character delivery retained. Fresh entire resulting production corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/harvey-specter-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=hacr7EI-1JA",
+        "publisher": "Suits Official",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCoSwRgn1R8fPBNI-c4yjWUw",
+        "title": "The Best of Harvey Specter | NBC",
+        "description": "Don't miss Harvey Specter's return. \n\nAll-new Suits LA - watch NBC on Peacock.\n\n#NBC #SuitsLA\n\n» Subscribe for More: http://bit.ly/NBCSub\n\nNBC ON SOCIAL:\nYouTube: http://www.youtube.com/nbc\nTwitter: http://Twitter.com/NBC\nFacebook: http://Facebook.com/NBC\nInstagram: http://instagram.com/nbc\n\nFind NBC trailers, full episode highlights, previews, promos, clips, and digital exclusives here. \n\nABOUT SUITS LA:\nTed Black, a former federal prosecutor from New York, has reinvented himself to represent the most powerful clients in Los Angeles. His firm is at a crisis point, and in order to survive, he must embrace a role he held in contempt his entire career. Ted is surrounded by a stellar group of characters who test their loyalties to both Ted and each other while they can’t help but mix their personal and professional lives. All of this is going on while we slowly unravel the events that years ago led Ted to leave behind everything and everyone he loved.\n\nThe series stars Stephen Amell, Lex Scott Davis, Josh McDermitt and Bryan Greenberg. Aaron Korsh is writer and executive producer. David Bartis, Doug Liman, Gene Klein, Anton Cropper, Genevieve Sparling, Rick Muirragui and Jon Cowan also executive produce. “Suits LA” is produced by UCP, a division of Universal Studio Group.\n\nThe Best of Harvey Specter | NBC\nhttps://youtu.be/hacr7EI-1JA\n\nNBC on YouTube\nhttp://www.youtube.com/user/nbc",
+        "source_video_sha256": "900065e0ed36cc9ca92948e3186da7af7839d460b4fec719da4d80b0eed97c06",
+        "source_audio_download_sha256": "5b67a210816599bfd58f4d09f8e38dff897ee21c2d2773ffb29c69d830f5d639",
+        "source_audio_sha256": "2d0f17e2763b70427ce9b720c2f73dae8ea0d0ccd59a73b6790f237e6b87661a",
+        "source_info_sha256": "c81d5ae7839a58c24e5735a3dd4ccef03daa4727b1dd2ede666ba2a3428d8d44",
+        "identity_frames": {
+          "scratch/harvey-source-12s.png": "15a6279c176ba2a84e55af4cc40e50c8d0a57319248b0d1c72803128a1771251",
+          "scratch/harvey-source-14s.png": "4e2020c314841806ae4f8ef7208413f123c435dab85eddc5dcdf6c05f1d07d59",
+          "scratch/harvey-source-18s.png": "9a2934b931bc7d85e5d99220cc7e812d78582950cb3be6287c4f8792b3c98f3f"
+        },
+        "identity_basis": "Suits Official publisher title The Best of Harvey Specter | NBC; source frames12,14,18 show same intended character speaking across separate office and phone scenes. Source audio aligned wording at15.32-23.42 matches chosen phone monologue. Original native2voices is a perceptual timbre estimate; actual footage supports same actor across acoustically distinct scenes, so wrong actor is not presented as confirmed. Trim still needed for interrupted opening/end and acoustic montage.",
+        "reference_source_correlation": {
+          "source_start_s": 10.0,
+          "pearson": 0.9576231539402964,
+          "method": "Decodedsource downmixed/resampled to44100, both1-in10sampled, original fullreference FFTcrosscorrelation in9.5-26seconds; provenance only, not native acceptance"
+        },
+        "operation": "Lossless original reference trim; source download corroborates attribution and source timing, not original source processing.",
+        "publisher_metadata_sha256": "d37aa3e2189aded5cc85c129658e222f665dee2de304ef0a72a206f2e166c50a",
+        "source_basis": "Suits Official publisher title The Best of Harvey Specter | NBC; source frames12,14,18 show same intended character speaking across separate office and phone scenes. Source audio aligned wording at15.32-23.42 matches chosen phone monologue. Original native2voices is a perceptual timbre estimate; actual footage supports same actor across acoustically distinct scenes, so wrong actor is not presented as confirmed. Trim still needed for interrupted opening/end and acoustic montage."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/harvey-specter-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/harvey-specter-result.json"
     }
   ],
   "exclusions": [

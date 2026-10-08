@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "63cfce58465c18049e7435a428254c2f1b8526a67c3fcd430299f6f33741f5e3",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "823a8388-ef89-432a-bcf8-0907f8261869",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "63cfce58465c18049e7435a428254c2f1b8526a67c3fcd430299f6f33741f5e3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "63cfce58465c18049e7435a428254c2f1b8526a67c3fcd430299f6f33741f5e3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "823a8388-ef89-432a-bcf8-0907f8261869",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"speaker\": 1,\n      \"start_s\": 0.0,\n      \"end_s\": 1.9\n    },\n    {\n      \"speaker\": 2,\n      \"start_s\": 2.2,\n      \"end_s\": 6.0\n    }\n  ],\n  \"literal_transcript\": \"Speaker 1: I need a grown goddamn man. Speaker 2: I'm inclined to give you a shot, but what if I decide to go another way?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"multiple speakers present in raw clip\",\n  \"candidate_clean_intervals_s\": [\n    {\n      \"speaker_label\": \"Speaker 1\",\n      \"start_s\": 0.0,\n      \"end_s\": 1.9,\n      \"notes\": \"Isolated speech ('I need a grown goddamn man.'), though short duration (~1.9s) may limit conditioning quality.\"\n    },\n    {\n      \"speaker_label\": \"Speaker 2\",\n      \"start_s\": 2.2,\n      \"end_s\": 6.0,\n      \"notes\": \"Clean isolated speech ('I'm inclined to give you a shot, but what if I decide to go another way?') with sufficient duration (~3.8s) for conditioning.\"\n    }\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates subject to +/- 0.15s margin of uncertainty around speech onsets and conversational handover (1.9s-2.2s). Confidence in literal transcript text is high for both speakers. Background acoustic ambiance is subtle with no overt music or SFX detected.\"\n}\n",
+    "duration_seconds": 34.207004,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20575,
+      "output_tokens": 3307,
+      "thinking_tokens": 2722,
+      "cache_read_tokens": 16194,
+      "total_tokens": 23882
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

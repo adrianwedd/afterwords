@@ -1,0 +1,23 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=hacr7EI-1JA",
+  "publisher": "Suits Official",
+  "publisher_channel_url": "https://www.youtube.com/channel/UCoSwRgn1R8fPBNI-c4yjWUw",
+  "title": "The Best of Harvey Specter | NBC",
+  "description": "Don't miss Harvey Specter's return. \n\nAll-new Suits LA - watch NBC on Peacock.\n\n#NBC #SuitsLA\n\n\u00bb Subscribe for More: http://bit.ly/NBCSub\n\nNBC ON SOCIAL:\nYouTube: http://www.youtube.com/nbc\nTwitter: http://Twitter.com/NBC\nFacebook: http://Facebook.com/NBC\nInstagram: http://instagram.com/nbc\n\nFind NBC trailers, full episode highlights, previews, promos, clips, and digital exclusives here. \n\nABOUT SUITS LA:\nTed Black, a former federal prosecutor from New York, has reinvented himself to represent the most powerful clients in Los Angeles. His firm is at a crisis point, and in order to survive, he must embrace a role he held in contempt his entire career. Ted is surrounded by a stellar group of characters who test their loyalties to both Ted and each other while they can\u2019t help but mix their personal and professional lives. All of this is going on while we slowly unravel the events that years ago led Ted to leave behind everything and everyone he loved.\n\nThe series stars Stephen Amell, Lex Scott Davis, Josh McDermitt and Bryan Greenberg. Aaron Korsh is writer and executive producer. David Bartis, Doug Liman, Gene Klein, Anton Cropper, Genevieve Sparling, Rick Muirragui and Jon Cowan also executive produce. \u201cSuits LA\u201d is produced by UCP, a division of Universal Studio Group.\n\nThe Best of Harvey Specter | NBC\nhttps://youtu.be/hacr7EI-1JA\n\nNBC on YouTube\nhttp://www.youtube.com/user/nbc",
+  "source_video_sha256": "900065e0ed36cc9ca92948e3186da7af7839d460b4fec719da4d80b0eed97c06",
+  "source_audio_download_sha256": "5b67a210816599bfd58f4d09f8e38dff897ee21c2d2773ffb29c69d830f5d639",
+  "source_audio_sha256": "2d0f17e2763b70427ce9b720c2f73dae8ea0d0ccd59a73b6790f237e6b87661a",
+  "source_info_sha256": "c81d5ae7839a58c24e5735a3dd4ccef03daa4727b1dd2ede666ba2a3428d8d44",
+  "identity_frames": {
+    "scratch/harvey-source-12s.png": "15a6279c176ba2a84e55af4cc40e50c8d0a57319248b0d1c72803128a1771251",
+    "scratch/harvey-source-14s.png": "4e2020c314841806ae4f8ef7208413f123c435dab85eddc5dcdf6c05f1d07d59",
+    "scratch/harvey-source-18s.png": "9a2934b931bc7d85e5d99220cc7e812d78582950cb3be6287c4f8792b3c98f3f"
+  },
+  "identity_basis": "Suits Official publisher title The Best of Harvey Specter | NBC; source frames12,14,18 show same intended character speaking across separate office and phone scenes. Source audio aligned wording at15.32-23.42 matches chosen phone monologue. Original native2voices is a perceptual timbre estimate; actual footage supports same actor across acoustically distinct scenes, so wrong actor is not presented as confirmed. Trim still needed for interrupted opening/end and acoustic montage.",
+  "reference_source_correlation": {
+    "source_start_s": 10.0,
+    "pearson": 0.9576231539402964,
+    "method": "Decodedsource downmixed/resampled to44100, both1-in10sampled, original fullreference FFTcrosscorrelation in9.5-26seconds; provenance only, not native acceptance"
+  },
+  "operation": "Lossless original reference trim; source download corroborates attribution and source timing, not original source processing."
+}
