@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "be08164b-440a-43f3-a513-6608014d8349",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "be08164b-440a-43f3-a513-6608014d8349",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"but uh I still think that comedy is a lens through which I see everything and uh I think almost to to some extent the better things go in your life the more fearful you can become that they will cease to be that way\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 12.0]\n  ],\n  \"uncertainty\": \"Precise boundary estimates and total duration are approximate perceptual estimates, as exact timestamps are not provided by native listening. The start begins with a conjunction, indicating it is likely extracted from a longer sentence, but the phrase itself remains fully usable.\"\n}\n```\n",
+    "duration_seconds": 40.696392,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20654,
+      "output_tokens": 2806,
+      "thinking_tokens": 2444,
+      "cache_read_tokens": 15889,
+      "total_tokens": 23460
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

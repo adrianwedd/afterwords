@@ -1,0 +1,15 @@
+{
+  "programme_url": "https://www.bbc.co.uk/programmes/b042z660",
+  "download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pnydr.mp3",
+  "guest": "Jack Dee",
+  "publisher": "BBC Radio 4",
+  "programme": "Desert Island Discs",
+  "interviewer": "Kirsty Young",
+  "source_mp3_sha256": "a4d55cb2011037cb3c688b60534489bc0634585f7d379e51749ac2c5bb9c96af",
+  "source_audio_sha256": "8f227dd61a2166aa99a4d9aac32c86b74c953ab756392cba1a0716aa848539ad",
+  "programme_html_sha256": "a5590006c0a647c8cb74dd618ec3f89d3ed73dff05b4faa14c9d7fb130171a9b",
+  "decode": "ffmpeg to PCM16 WAV preserving decoded source rate/channels; no cleanup or normalization",
+  "retrieved_utc": "2026-10-08T07:31:31.785527+00:00",
+  "identity_basis": "BBC publisher programme and audible introduction identify Jack Dee and interviewer; continuous guest answer follows presenter question about his comedy and life.",
+  "delivery_change": "Same intended comedian in natural interview delivery replaces audience-interactive stage comedy."
+}

@@ -303,14 +303,14 @@
       "profiles": [
         {
           "path": "voices/ace-qwen3-06b.json",
-          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although\u2014",
+          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
           "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
           "old_segment_start_s": 90,
           "new_segment_start_s": 152.98
         },
         {
           "path": "voices/ace.json",
-          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although\u2014",
+          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
           "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
           "old_segment_start_s": 90,
           "new_segment_start_s": 152.98
@@ -911,7 +911,7 @@
       "final_corpus_acceptance": "pending",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=n-Zm8H6G108",
-        "title": "Blackadder II's funniest and rudest put downs \ud83d\ude02 | Blackadder - BBC",
+        "title": "Blackadder II's funniest and rudest put downs 😂 | Blackadder - BBC",
         "uploader": "BBC",
         "source_audio_sha256": "1c4cec712ed0abbe5eee1240e3e31a73240a6629f5cd1e94bada5260dc1ad86e",
         "source_metadata_sha256": "c3639aa8e0c37b39b3b95a21a6aed7eb8edb7865201f608a040f9b0733b5c6ef",
@@ -2505,14 +2505,14 @@
       "profiles": [
         {
           "path": "voices/rod-serling-qwen3-06b.json",
-          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner \u2014 a strange intersection in a shadow land called the Twilight Zone.",
+          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
           "new_reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet.",
           "old_segment_start_s": 30,
           "new_segment_start_s": 63.22
         },
         {
           "path": "voices/rod-serling.json",
-          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner \u2014 a strange intersection in a shadow land called the Twilight Zone.",
+          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
           "new_reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet.",
           "old_segment_start_s": 30,
           "new_segment_start_s": 63.22
@@ -5156,6 +5156,86 @@
       "prior_fragment_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-prior-fragment-rejected.json",
       "transcript_only_rejected_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-text-layer-rejected.json",
       "delivery_commit": "13bf1dcea6566e38746de578000c7465d019115b"
+    },
+    {
+      "wav": "jack-dee-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "c72a6f3a8e13290f3f5601030c7158315227954de7ccf55a963409ed7414a51e",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.10745782434097266,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96",
+        "frames": 718830,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 16.3,
+        "peak": 0.415679931640625,
+        "rms": 0.04665983156186698,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 91.0,
+        "source_end_s": 107.3,
+        "source_start_frame": 4013100,
+        "source_end_frame_exclusive": 4731930,
+        "conversion": "Exact continuous decoded publisher PCM16 frame slice preserving source rate/channels; no cleanup, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/jack-dee-qwen3-06b.json",
+          "old_reference_text": "just to help them see it, because, no, okay, forget it then, you know, I don't know. What was the problem? Why were you late? You went to the wrong Apollo? Which one? Oxford? Manchester? Oh, fucks sake.",
+          "new_reference_text": "But uh I still think that comedy is a lens through which I see everything. And uh I think almost to to some extent, the better things go in your life, the more fearful you can become that they will cease to be that way.",
+          "old_segment_start_s": 60,
+          "new_segment_start_s": 91.0
+        },
+        {
+          "path": "voices/jack-dee.json",
+          "old_reference_text": "just to help them see it, because, no, okay, forget it then, you know, I don't know. What was the problem? Why were you late? You went to the wrong Apollo? Which one? Oxford? Manchester? Oh, fucks sake.",
+          "new_reference_text": "But uh I still think that comedy is a lens through which I see everything. And uh I think almost to to some extent, the better things go in your life, the more fearful you can become that they will cease to be that way.",
+          "old_segment_start_s": 60,
+          "new_segment_start_s": 91.0
+        }
+      ],
+      "source_url": "https://www.bbc.co.uk/programmes/b042z660",
+      "adjudication": "Original native reports two voices including off-mic audience interruption, crowd/laughter, PA reverb and cutoffs; no sufficiently long clean useful interval. BBC credits and audible introduction identify Jack Dee; selected continuous guest answer describes comedy as a lens and fear when life goes well. Two independent blind full native hearings of exact91.0-107.3 result agree one voice, no music/crowd/laughter/effects/acoustic changes/splices/long pauses and identical literal wording including uh and repeated to, which source ASR omits. Retain native consensus disfluencies; do not grammatically normalize. Secondary review beginning_cutoff=true explicitly means opening conjunction implies extraction from longer sentence, not damaged phoneme; primary says no cutoff, source word alignment begins But91.14 after91.0 boundary, complete spoken But retained and complete final way107.16 before107.3 endpoint and host107.5. Root accepts grammatical conjunction as complete audible word/phrase, not physical cutoff. Reviewer clock estimates are inaccurate and not edit authority; actual duration16.3s. Same comedian natural interview delivery replaces audience-interactive stage comedy. Exact decoded publisher PCM16 slice preserving source channels/rate, no DSP. Fresh final corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "sample_exact_publisher_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/jack-dee-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "guest": "Jack Dee",
+        "publisher": "BBC Radio 4",
+        "programme": "Desert Island Discs",
+        "interviewer": "Kirsty Young",
+        "source_mp3_sha256": "a4d55cb2011037cb3c688b60534489bc0634585f7d379e51749ac2c5bb9c96af",
+        "source_audio_sha256": "8f227dd61a2166aa99a4d9aac32c86b74c953ab756392cba1a0716aa848539ad",
+        "decode": "ffmpeg to PCM16 WAV preserving decoded source rate/channels; no cleanup or normalization",
+        "retrieved_utc": "2026-10-08T07:31:31.785527+00:00",
+        "delivery_change": "Same intended comedian in natural interview delivery replaces audience-interactive stage comedy.",
+        "source_url": "https://www.bbc.co.uk/programmes/b042z660",
+        "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pnydr.mp3",
+        "source_metadata_sha256": "72a33ada05cd3998c2ad59e7a63af279ab9dcc9ac731be866df124d149eecdd9",
+        "source_basis": "BBC publisher programme and audible introduction identify Jack Dee and interviewer; continuous guest answer follows presenter question about his comedy and life."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/jack-dee-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/jack-dee-result.json",
+      "native_result_secondary_evidence": "qa/voice-reference-remediation/evidence/jack-dee-result-secondary.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/jack-dee-publisher-source.json"
     }
   ],
   "exclusions": [

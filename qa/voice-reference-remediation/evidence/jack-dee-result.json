@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "d761aef2-55af-4535-aa5c-67a6b60728f3",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d761aef2-55af-4535-aa5c-67a6b60728f3",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"but uh I still think that comedy is a lens through which I see everything and uh I think almost to to some extent the better things go in your life the more fearful you can become that they will cease to be that way\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.8, 12.5]\n  ],\n  \"uncertainty\": \"Timestamps and duration boundaries are perceptual estimates (\u00b10.5s). Minor hesitation uncertainty on whether 'to' was repeated ('to to some extent') or stuttered/prolonged. The entire clip is clean and isolated, but the candidate interval [0.8, 12.5] trims the initial 'but uh' filler to provide a clean, complete conditioning phrase.\"\n}\n",
+    "duration_seconds": 45.343431,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20525,
+      "output_tokens": 3131,
+      "thinking_tokens": 2743,
+      "cache_read_tokens": 15950,
+      "total_tokens": 23656
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

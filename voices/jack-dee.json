@@ -1,8 +1,8 @@
 {
   "name": "jack-dee",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=LW60m5gwQPY",
+  "source_url": "https://www.bbc.co.uk/programmes/b042z660",
   "reference_audio": "jack-dee-ref.wav",
-  "reference_text": "just to help them see it, because, no, okay, forget it then, you know, I don't know. What was the problem? Why were you late? You went to the wrong Apollo? Which one? Oxford? Manchester? Oh, fucks sake.",
-  "segment_start_s": 60
+  "reference_text": "But uh I still think that comedy is a lens through which I see everything. And uh I think almost to to some extent, the better things go in your life, the more fearful you can become that they will cease to be that way.",
+  "segment_start_s": 91.0
 }
