@@ -1,0 +1,37 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "c49a1fac447d348fc7e8c338a628d2e24ec9e724ec2bc26388719e934f1cf47e",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "bee5346d-a360-4e33-af27-880061c562e8",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c49a1fac447d348fc7e8c338a628d2e24ec9e724ec2bc26388719e934f1cf47e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c49a1fac447d348fc7e8c338a628d2e24ec9e724ec2bc26388719e934f1cf47e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "bee5346d-a360-4e33-af27-880061c562e8",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.5]\n  ],\n  \"uncertainty\": \"Time boundaries are perceptual approximations (+/- 0.5s) as native playback does not provide visual waveform timestamps. Wording confidence is high; all words are clearly articulated with no masking noise or competing audio.\"\n}\n```\n",
+    "duration_seconds": 26.337937,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20361,
+      "output_tokens": 2359,
+      "thinking_tokens": 2022,
+      "cache_read_tokens": 16147,
+      "total_tokens": 22720
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

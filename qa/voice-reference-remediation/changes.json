@@ -526,7 +526,8 @@
       "delivery_commit_locator": "git log -- voices/data-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/data-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/data-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/data-result.json",
+      "delivery_commit": "ce6be35"
     },
     {
       "wav": "patrick-moore-ref.wav",
@@ -587,7 +588,8 @@
       "delivery_commit_locator": "git log -- voices/patrick-moore-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/patrick-moore-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/patrick-moore-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/patrick-moore-result.json",
+      "delivery_commit": "ce6be35"
     },
     {
       "wav": "cleaver-greene-ref.wav",
@@ -648,7 +650,8 @@
       "delivery_commit_locator": "git log -- voices/cleaver-greene-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/cleaver-greene-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/cleaver-greene-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/cleaver-greene-result.json",
+      "delivery_commit": "ce6be35"
     },
     {
       "wav": "bob-jones-sanchin-tensho-ref.wav",
@@ -709,7 +712,8 @@
       "delivery_commit_locator": "git log -- voices/bob-jones-sanchin-tensho-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-sanchin-tensho-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-sanchin-tensho-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-sanchin-tensho-result.json",
+      "delivery_commit": "ce6be35"
     },
     {
       "wav": "bob-jones-ref.wav",
@@ -765,7 +769,8 @@
       "delivery_commit_locator": "git log -- voices/bob-jones-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-result.json",
+      "delivery_commit": "ce6be35"
     },
     {
       "wav": "claudia-ref.wav",
@@ -826,7 +831,8 @@
       "delivery_commit_locator": "git log -- voices/claudia-ref.wav qa/voice-reference-remediation/changes.json",
       "final_corpus_acceptance": "pending",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/claudia-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/claudia-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/claudia-result.json",
+      "delivery_commit": "ce6be35"
     },
     {
       "wav": "blackadder-ref.wav",
@@ -912,7 +918,8 @@
         "visual_source_sha256": "a00d99568b39ba46e8a58f7e328c68031098a34820ced7fc66cba5bd60694138"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/blackadder-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/blackadder-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/blackadder-result.json",
+      "delivery_commit": "ce6be35"
     },
     {
       "wav": "bob-jones-ibuki-ref.wav",
@@ -981,7 +988,247 @@
         "source_segment_start_s": 81
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-ibuki-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-ibuki-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-ibuki-result.json",
+      "delivery_commit": "ce6be35"
+    },
+    {
+      "wav": "snape-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "7360091823e20b716bfbfe053aa1f80561c4148eb540e7b629946242df13753b",
+        "frames": 168000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 7.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08060917253890718,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "08a2fe5f345bd8efe5bb66756f2091c3b2bc728c3e26d20cdd5df53354498e48",
+        "frames": 111600,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.65,
+        "peak": 0.482666015625,
+        "rms": 0.0713183851545345,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 24000,
+        "start_frame": 56400,
+        "end_frame_exclusive": 168000,
+        "start_s": 2.35,
+        "end_s": 7.0
+      },
+      "profiles": [
+        {
+          "path": "voices/snape-qwen3-06b.json",
+          "old_reference_text": "There will be no foolish wand waving or silly incantations in this class.",
+          "new_reference_text": "There will be no foolish wand waving or silly incantations in this class.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        },
+        {
+          "path": "voices/snape.json",
+          "old_reference_text": "There will be no foolish wand waving or silly incantations in this class.",
+          "new_reference_text": "There will be no foolish wand waving or silly incantations in this class.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        }
+      ],
+      "source_url": null,
+      "adjudication": "Removes opening door/footstep effects with an exact PCM slice starting at 2.35s, leaving 4.65s of complete isolated speech. Native edited-file review confirms one speaker, fully articulated words, no sound effects, music, crowd, splices or cutoffs. Native perceptual timing overestimates actual file length; measured sample bounds and secondary ASR establish the edit duration. Transcript agrees with both original and edited native hearings. No source URL or original source offset existed, so none invented. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/snape-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/snape-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/snape-result.json"
+    },
+    {
+      "wav": "stephen-fry-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "5457bea1f705e2f770a45f8636e393435bc458f85eb433de2d0200a2e1dafaa5",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.07560316521890431,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685",
+        "frames": 584325,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.25,
+        "peak": 0.899993896484375,
+        "rms": 0.07105284441230669,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 77175,
+        "end_frame_exclusive": 661500,
+        "start_s": 1.75,
+        "end_s": 15.0
+      },
+      "profiles": [
+        {
+          "path": "voices/stephen-fry-qwen3-06b.json",
+          "old_reference_text": "extraordinary figure. You probably know the basic outline that he was born in 1854 on October the 16th. I'm boringly with things you so know and don't need to be retold so it is in fact just past his 160th birthday.",
+          "new_reference_text": "You probably know the basic outline, that he was born in 1854, on October the 16th. I'm boring you with things you so know and don't need to be retold, so it is, in fact, just past his 160th birthday.",
+          "old_segment_start_s": 150,
+          "new_segment_start_s": 151.75
+        },
+        {
+          "path": "voices/stephen-fry.json",
+          "old_reference_text": "extraordinary figure. You probably know the basic outline that he was born in 1854 on October the 16th. I'm boringly with things you so know and don't need to be retold so it is in fact just past his 160th birthday.",
+          "new_reference_text": "You probably know the basic outline, that he was born in 1854, on October the 16th. I'm boring you with things you so know and don't need to be retold, so it is, in fact, just past his 160th birthday.",
+          "old_segment_start_s": 150,
+          "new_segment_start_s": 151.75
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=IporlmXXDeY",
+      "adjudication": "Removes clipped extraordinary figure opening at a natural pause before You probably know. Keeps the continuous complete remaining speech, including actual nonstandard things you so know wording rather than rewriting it. Two native hearings and secondary ASR favor so know, with explicit residual phonetic uncertainty recorded. Native rendered-file review finds one isolated speaker, no music, crowd, effects, splices or cutoffs. Moderate consistent hall resonance and natural rhetorical pauses accepted; not destructive reverb. Corrects phantom boringly to audible boring you. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/stephen-fry-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/stephen-fry-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/stephen-fry-result.json"
+    },
+    {
+      "wav": "han-solo-ref.wav",
+      "remediation": "KEEP WITH TEXT FIX",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13",
+        "frames": 608580,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.8,
+        "peak": 0.729827880859375,
+        "rms": 0.04668299379117787,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13",
+        "frames": 608580,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.8,
+        "peak": 0.729827880859375,
+        "rms": 0.04668299379117787,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "text_only"
+      },
+      "profiles": [
+        {
+          "path": "voices/han-solo-qwen3-06b.json",
+          "old_reference_text": "I've flown from one side of this galaxy to the other, I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful force controlling everything. There's no mystical energy field that controls my destiny.",
+          "new_reference_text": "Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful force controlling everything. There's no mystical energy field controls my destiny.",
+          "old_segment_start_s": 122,
+          "new_segment_start_s": 122
+        },
+        {
+          "path": "voices/han-solo.json",
+          "old_reference_text": "I've flown from one side of this galaxy to the other, I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful force controlling everything. There's no mystical energy field that controls my destiny.",
+          "new_reference_text": "Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful force controlling everything. There's no mystical energy field controls my destiny.",
+          "old_segment_start_s": 122,
+          "new_segment_start_s": 122
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=_zW4em75r_E",
+      "adjudication": "Good audio retained byte-identically. Two independent audio-first native hearings agree the omitted opening word is Kid and no relative pronoun that is audible before controls. Secondary ASR inserts that; direct native hearings explicitly reject that insertion, so it is removed. Elided contractions are retained as Ive based on both auditory transcriptions, with uncertainty recorded in native evidence. Both hearings report solo complete speech, no music/crowd/splice/cutoffs; faint steady room ambience and natural cadence pauses are accepted. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/han-solo-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/han-solo-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/han-solo-result.json"
+    },
+    {
+      "wav": "feynman-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "3749fa4923d78d733000977bb2897cbddc1d86ce23b8abe08d01e56854c8c516",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.061865168530182986,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "c49a1fac447d348fc7e8c338a628d2e24ec9e724ec2bc26388719e934f1cf47e",
+        "frames": 306495,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.95,
+        "peak": 0.9000244140625,
+        "rms": 0.06883143591866012,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 332955,
+        "end_frame_exclusive": 639450,
+        "start_s": 7.55,
+        "end_s": 14.5
+      },
+      "profiles": [
+        {
+          "path": "voices/feynman-qwen3-06b.json",
+          "old_reference_text": "I lose a great deal of pleasure out of that, and I think people lose a lot of pleasure who find the science dull. In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination.",
+          "new_reference_text": "In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 37.55
+        },
+        {
+          "path": "voices/feynman.json",
+          "old_reference_text": "I lose a great deal of pleasure out of that, and I think people lose a lot of pleasure who find the science dull. In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination.",
+          "new_reference_text": "In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination.",
+          "old_segment_start_s": 30,
+          "new_segment_start_s": 37.55
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=P1ww1IXRfTA",
+      "adjudication": "Retains a continuous complete second sentence from 7.55 to 14.50s, removing both truncated outer fragments and the uncertain get/lose wording rather than guessing it. Native rendered-file review finds one isolated speaker, complete words and phrase boundaries, no music, audience, effects, acoustic change or splices. Secondary ASR matches every retained word. Natural hesitation before that make is preserved; stable low analog room noise is incidental. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/feynman-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/feynman-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/feynman-result.json"
     }
   ],
   "exclusions": [

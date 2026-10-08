@@ -1,0 +1,37 @@
+{
+  "wav": "stephen-fry-ref.wav",
+  "source_sha256": "5457bea1f705e2f770a45f8636e393435bc458f85eb433de2d0200a2e1dafaa5",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "bf93fb81-6a22-479c-a419-2098bd9887e8",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5457bea1f705e2f770a45f8636e393435bc458f85eb433de2d0200a2e1dafaa5"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5457bea1f705e2f770a45f8636e393435bc458f85eb433de2d0200a2e1dafaa5"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "bf93fb81-6a22-479c-a419-2098bd9887e8",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"...traordinary figure. You probably know the basic outline, that he was born in 1854 on October the 16th. I'm boring you with things you so know and don't need to be retold, so it is in fact just past his 160th birthday.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; stable acoustic environment with moderate hall/room reverberation and consistent microphone distance throughout.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [2.0, 8.0],\n    [9.0, 17.5]\n  ],\n  \"uncertainty\": \"The clip begins mid-word with '...traordinary' (the leading 'ex-' syllable is cut off at ~0.0s). In the phrase 'things you so know', there is minor phonetic ambiguity between 'so know' and 'well know'. Timestamp boundary estimates are perceptual approximations (+/- 0.5s). The ending cleanly concludes with 'birthday' followed by natural acoustic decay.\"\n}\n```\n",
+    "duration_seconds": 39.472288,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20328,
+      "output_tokens": 3693,
+      "thinking_tokens": 3256,
+      "cache_read_tokens": 15974,
+      "total_tokens": 24021
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

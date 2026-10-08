@@ -1,0 +1,37 @@
+{
+  "wav": "feynman-ref.wav",
+  "source_sha256": "3749fa4923d78d733000977bb2897cbddc1d86ce23b8abe08d01e56854c8c516",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "b1a71c36-a55e-4cef-b7bb-98c2804c8296",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3749fa4923d78d733000977bb2897cbddc1d86ce23b8abe08d01e56854c8c516"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3749fa4923d78d733000977bb2897cbddc1d86ce23b8abe08d01e56854c8c516"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b1a71c36-a55e-4cef-b7bb-98c2804c8296",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It's... I get [or lose] a great deal of pleasure out of that. And I think people lose a lot of pleasure who find science dull. In the case of science, I think that one of the things... that make it very difficult, is it takes a lot of imagination. It's\u2014\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None significant; consistent room acoustics with subtle vintage room tone and low-level analog hiss across the recording.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.8, 6.0],\n    [7.5, 15.0]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately \u00b10.3 to 0.5 seconds. Wording ambiguity: the verb in the opening clause ('I get a great deal of pleasure' vs 'I lose a great deal of pleasure') is slightly slurred and phonetically ambiguous between 'get' and 'lose'. The start begins abruptly on 'It's' with an incomplete thought, and the ending truncates sharply mid-word/phrase on 'It's\u2014'.\"\n}\n```\n",
+    "duration_seconds": 52.969444,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20368,
+      "output_tokens": 4250,
+      "thinking_tokens": 3789,
+      "cache_read_tokens": 15975,
+      "total_tokens": 24618
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,37 @@
+{
+  "wav": "snape-ref.wav",
+  "source_sha256": "7360091823e20b716bfbfe053aa1f80561c4148eb540e7b629946242df13753b",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "f88294ac-6c71-48c0-a7b4-ada032fd2bc2",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7360091823e20b716bfbfe053aa1f80561c4148eb540e7b629946242df13753b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7360091823e20b716bfbfe053aa1f80561c4148eb540e7b629946242df13753b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f88294ac-6c71-48c0-a7b4-ada032fd2bc2",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"There will be no foolish wand waving, or silly incantations in this class.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": true,\n  \"acoustic_changes\": \"Loud door slam impact and footstep sound effects dominate 0.0s to ~2.8s; transitions to dry room acoustics with subtle room reverberation once speech begins at ~2.9s, remaining stable through the end.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [2.9, 9.9]\n  ],\n  \"uncertainty\": \"Boundary timing estimates carry perceptual uncertainty of approximately +/- 0.2s: the speech onset is estimated at 2.8s-3.0s following footsteps, an intra-sentence rhetorical pause occurs between 'waving' (~5.8s) and 'or' (~6.4s), and speech ends around 9.8s-10.0s with slight room reverb decay. Wording uncertainty is minimal as articulation is clear and unobstructed by background noise once speech begins.\"\n}\n```\n",
+    "duration_seconds": 31.562475,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20400,
+      "output_tokens": 3279,
+      "thinking_tokens": 2851,
+      "cache_read_tokens": 16147,
+      "total_tokens": 23679
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
