@@ -2,8 +2,8 @@
   "name": "river-song-qwen3-06b",
   "backend": "qwen3-0.6b",
   "reference_audio": "river-song-ref.wav",
-  "reference_text": "When you love the Doctor, it's like loving the stars themselves. You don't expect a sunset to admire you back. And if I happen to find myself in danger, let me tell you, the Doctor is not stupid enough or sentimental enough.",
+  "reference_text": "But it feels like I was only here last week. That's the strange, um, the strange tricks that time plays on you.",
   "family": "river-song",
-  "source_url": "https://www.youtube.com/watch?v=BgVJDd5vHfw",
-  "segment_start_s": 133
+  "source_url": "https://www.bbc.co.uk/programmes/m001hnlk",
+  "segment_start_s": 3080.75
 }

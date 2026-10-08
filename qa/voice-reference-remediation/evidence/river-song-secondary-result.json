@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "64b1171c-a6ee-4af5-bb1f-1593d30d55f9",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "64b1171c-a6ee-4af5-bb1f-1593d30d55f9",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"but it feels like I was only here last week, that's the strange... um... the strange tricks that time plays on you.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 2.6],\n    [5.0, 7.5]\n  ],\n  \"uncertainty\": \"Perceptual boundary estimates carry an uncertainty of approximately \u00b10.2\u20130.3s. 'long_pauses' is evaluated as true due to the ~0.8s hesitation and pause surrounding the filler 'um'. 'raw_reference_usable' is considered false because of the mid-utterance false start and disfluency ('that's the strange... um...'), though audio quality is clean and isolated; trimming either candidate interval isolates a complete, usable phrase for conditioning.\"\n}\n",
+    "duration_seconds": 81.802971,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20173,
+      "output_tokens": 8779,
+      "thinking_tokens": 8376,
+      "cache_read_tokens": 16123,
+      "total_tokens": 28952
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

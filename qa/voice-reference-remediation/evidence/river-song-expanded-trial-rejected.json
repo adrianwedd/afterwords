@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "7d3e28dfcc299954fb744902345765da66ac5aafe1f9e16e48cb7def3650d2af",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "e3162c9f-5a53-4a68-a13d-4ceeaf9892ea",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7d3e28dfcc299954fb744902345765da66ac5aafe1f9e16e48cb7def3650d2af"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7d3e28dfcc299954fb744902345765da66ac5aafe1f9e16e48cb7def3650d2af"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e3162c9f-5a53-4a68-a13d-4ceeaf9892ea",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"um, but it feels like I was only here last week. That's the strange, um, the strange tricks that time plays on you.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.5, 8.5]\n  ],\n  \"uncertainty\": \"The initial 'um' may overlap with a breath or faint background noise, and the recording ends with a slight chuckle. Boundary estimates are approximate perceptual estimates.\"\n}\n```\n",
+    "duration_seconds": 29.915121,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12602,
+      "output_tokens": 2159,
+      "thinking_tokens": 1832,
+      "cache_read_tokens": 24184,
+      "total_tokens": 14761
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

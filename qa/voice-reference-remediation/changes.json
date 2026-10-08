@@ -303,14 +303,14 @@
       "profiles": [
         {
           "path": "voices/ace-qwen3-06b.json",
-          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
+          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although\u2014",
           "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
           "old_segment_start_s": 90,
           "new_segment_start_s": 152.98
         },
         {
           "path": "voices/ace.json",
-          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
+          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although\u2014",
           "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
           "old_segment_start_s": 90,
           "new_segment_start_s": 152.98
@@ -911,7 +911,7 @@
       "final_corpus_acceptance": "pending",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=n-Zm8H6G108",
-        "title": "Blackadder II's funniest and rudest put downs 😂 | Blackadder - BBC",
+        "title": "Blackadder II's funniest and rudest put downs \ud83d\ude02 | Blackadder - BBC",
         "uploader": "BBC",
         "source_audio_sha256": "1c4cec712ed0abbe5eee1240e3e31a73240a6629f5cd1e94bada5260dc1ad86e",
         "source_metadata_sha256": "c3639aa8e0c37b39b3b95a21a6aed7eb8edb7865201f608a040f9b0733b5c6ef",
@@ -2505,14 +2505,14 @@
       "profiles": [
         {
           "path": "voices/rod-serling-qwen3-06b.json",
-          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
+          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner \u2014 a strange intersection in a shadow land called the Twilight Zone.",
           "new_reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet.",
           "old_segment_start_s": 30,
           "new_segment_start_s": 63.22
         },
         {
           "path": "voices/rod-serling.json",
-          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
+          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner \u2014 a strange intersection in a shadow land called the Twilight Zone.",
           "new_reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet.",
           "old_segment_start_s": 30,
           "new_segment_start_s": 63.22
@@ -4672,7 +4672,89 @@
       "native_result_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-publisher-source.json",
       "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-secondary-result.json",
-      "native_boundary_disagreement_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-boundary-disagreement.json"
+      "native_boundary_disagreement_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-boundary-disagreement.json",
+      "delivery_commit": "e45839ac97427dac4b4d400e7adfb14275f88da5"
+    },
+    {
+      "wav": "river-song-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "8e203915f8258bc6b72bdafbd7397faf41f2bdd771a76153a9a92d533fccee03",
+        "frames": 638400,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.3,
+        "peak": 0.12298583984375,
+        "rms": 0.014403772109551427,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4",
+        "frames": 349272,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 7.92,
+        "peak": 0.517303466796875,
+        "rms": 0.06743212637012891,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 3080.75,
+        "source_end_s": 3088.67,
+        "source_start_frame": 135861075,
+        "source_end_frame_exclusive": 136210347,
+        "conversion": "Exact continuous decoded PCM16 publisher source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/river-song-qwen3-06b.json",
+          "old_reference_text": "When you love the Doctor, it's like loving the stars themselves. You don't expect a sunset to admire you back. And if I happen to find myself in danger, let me tell you, the Doctor is not stupid enough or sentimental enough.",
+          "new_reference_text": "But it feels like I was only here last week. That's the strange, um, the strange tricks that time plays on you.",
+          "old_segment_start_s": 133,
+          "new_segment_start_s": 3080.75
+        },
+        {
+          "path": "voices/river-song.json",
+          "old_reference_text": "When you love the Doctor, it's like loving the stars themselves. You don't expect a sunset to admire you back. And if I happen to find myself in danger, let me tell you, the Doctor is not stupid enough or sentimental enough.",
+          "new_reference_text": "But it feels like I was only here last week. That's the strange, um, the strange tricks that time plays on you.",
+          "old_segment_start_s": 133,
+          "new_segment_start_s": 3080.75
+        }
+      ],
+      "source_url": "https://www.bbc.co.uk/programmes/m001hnlk",
+      "adjudication": "Original native finds continuous score and beginning/end cutoffs, unsalvageable by trim. Direct publisher BBC interview attributes guest Alex Kingston through programme credits and question-answer context, same intended actor in natural interview register. Trial084 acoustically clean but multiple repeated fillers; not admitted. Chosen085 actual7.92s contains two complete clauses with natural mid-utterance self-repair and um; preserve literal hesitation. Exact085 native3.8 original and independent plus3.1 all agree every word, isolated single voice, no music/crowd/laughter/effects/acoustic change/splice, ending complete. First3.8 subjective raw-usability false solely for hesitation, independent3.8 raw-usability true; root accepts natural self-repair rather than rewriting or splicing it, consistent with literal-transcript requirement. 3.1 beginning-cutoff flag explicitly inferred from starting on But without leading pause suggesting tightly excerpted, not identified clipped phoneme; both exact3.8 hearings find full beginning, all three hear complete But. Root adjudicates tight opening acceptable with whole initial word and sentence. Earlier-expanded087 adds partial initial um and reports tail chuckle/cutoff, rejected; its alleged tail chuckle is not corroborated by three exact085 hearings, all laughter false and complete ending. Measured healthy RMS/peak/no clipping, exact continuous decoded publisher PCM slice, no cleanup/normalization/separation/padding/splice. Preserve adverse evidence rather than hide disagreement. Final fresh corpus pass pending and must revisit tight opening and natural hesitation.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_source_frame_exact": true
+      },
+      "delivery_commit_locator": "git log -- voices/river-song-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.bbc.co.uk/programmes/m001hnlk",
+        "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0f0k099.mp3",
+        "programme": "Womans Hour",
+        "publisher": "BBC Radio 4",
+        "interviewer": "Anita Rani",
+        "guest": "Alex Kingston",
+        "broadcast_date": "2023-02-02",
+        "source_mp3_sha256": "ac1cee9bebe5fd7891a073bcb60cc9a7f16e5589d64601c64164864c32eb19b3",
+        "source_audio_sha256": "07225e177ed061c71ea70abf2c71a0370f5ef2d1ab5e43a087d8c101841c0002",
+        "source_metadata_sha256": "2a1673625318e869b18ffae04e86e25131dc15c3cc10b3750a6b3397b0a3376f",
+        "source_basis": "Publisher programme names Alex Kingston and credits River Song role; solo guest answer follows introduction and questions about her Prospero portrayal.",
+        "delivery_change": "Same intended actor, natural interview delivery replaces scored dramatic character dialogue."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/river-song-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/river-song-result.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/river-song-publisher-source.json",
+      "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/river-song-secondary-result.json",
+      "native_tight_opening_disagreement_evidence": "qa/voice-reference-remediation/evidence/river-song-tight-opening-disagreement.json",
+      "native_expanded_trial_rejected_evidence": "qa/voice-reference-remediation/evidence/river-song-expanded-trial-rejected.json"
     }
   ],
   "exclusions": [
