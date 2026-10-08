@@ -5316,6 +5316,86 @@
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/kryten-publisher-source.json",
       "source_frame_evidence": "qa/voice-reference-remediation/evidence/kryten-source-frame612.png",
       "delivery_commit": "2eba06dbbd2ff2672b880efd0843ebf0539f6c2b"
+    },
+    {
+      "wav": "rimmer-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "0bb9bc9083925b1bd3ddbc0611c2156f55aa4bae83d02faf0a18d997097f1045",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.09232004043068623,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "b5ec1e9e30984307c10eb18cd80f888b7bf0786451658e98559c92ec4d08e52c",
+        "frames": 352800,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 7.35,
+        "peak": 0.6162109375,
+        "rms": 0.08774908357299556,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 499.5,
+        "source_end_s": 506.85,
+        "source_start_frame": 23976000,
+        "source_end_frame_exclusive": 24328800,
+        "conversion": "Exact continuous decoded publisher PCM16 frame slice preserving source rate/channels; no cleanup, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/rimmer-qwen3-06b.json",
+          "old_reference_text": "We are gathered here today to say our final farewells to Mr. River. On occasion he was a small -minded bureaucratic and competent cowardid little person. But he also had his good qualities. Those were his good qualities.",
+          "new_reference_text": "So, yeah, I think, um, I think the the friction is still there, and that's that's the petrol for for a lot of the comedy in Red Dwarf, you know?",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 499.5
+        },
+        {
+          "path": "voices/rimmer.json",
+          "old_reference_text": "We are gathered here today to say our final farewells to Mr. River. On occasion he was a small -minded bureaucratic and competent cowardid little person. But he also had his good qualities. Those were his good qualities.",
+          "new_reference_text": "So, yeah, I think, um, I think the the friction is still there, and that's that's the petrol for for a lot of the comedy in Red Dwarf, you know?",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 499.5
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=3hFhUk6DbJ8",
+      "adjudication": "Original native reports two voices, loud audience laughter, end cutoff and insufficient clean useful audio; original individual role identity unproven so do not blindly salvage another actor. Official Comic-Con credits, cast introduction, moderator Chris handoff and full-screen video500 corroborate Chris Barrie. Longer413-433.5 native098 clean acoustics but uncertain disfluencies/pauses, not admitted. Candidate494.98-506.6 native100 malformed all-zero stream explicitly terminated after17743zerocharacters, failed gate and not hearing evidence. Independent100-pro review hears opening that and flags mid-sentence extraction; revised499.5-506.85 complete final sentence native103-pro and103-secondary both1voice/no music/crowd/laughter/effects/acoustic change/splice/long pause/cutoffs, usable. Transcript disagreement:103-pro hears three the tokens,103-secondary hears two with explicit high confidence;100-pro overlapping passage also hears two. Root retains two supported by independent overlapping native hearings instead of three from one rendition. All hearings agree other repetitions thats thats and for for, plus um and you know omitted by ASR; preserve them. Orthography/punctuation does not normalize audible words. Actual7.35s, exact source PCM16 frame slice independently verified; perceptual clock estimates not edit authority. Same actor natural interview register replaces contaminated character dialogue. Fresh entire final production review pending, including rechecking the minor repetition-count disagreement.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "sample_exact_publisher_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/rimmer-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=3hFhUk6DbJ8",
+        "publisher": "Comic-Con International",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCnKFQ3qLokC-6OS3YHNgGpw",
+        "title": "Red Dwarf: The Promised Land | Comic-Con@Home 2020",
+        "source_download_sha256": "281c6b9c2c843cd2376e2d089cf33c62e9a5a7c03676ff9a776b77bd516dffc5",
+        "source_audio_sha256": "d4ae541ebea0428a670190f62de1f11d1e3a1dce0af4e03d28a50f6f43b38c80",
+        "source_info_sha256": "7a73679ab7946425358d31df9dfa128a773c84a2fe300c563b16d8d41c5c39e9",
+        "source_video_sha256": "07011392d662fc070a7203c12cf713732a06ad746ac5962c74d5affb63ca0c8a",
+        "source_metadata_sha256": "1b581b586cde2ec8335162631de33f2821945ca22f7746a51ef3c4be3a78cb0d",
+        "source_basis": "Official Comic-Con International panel credits and cast introduction identify Chris Barrie as Rimmer; moderator Chris handoff398-412 precedes uninterrupted guest answer. Full-screen video500 shows Chris Barrie speaking in selected passage about friction with Lister, corroborating attribution independently of native isolation.",
+        "delivery_change": "Same intended actor Chris Barrie in natural interview delivery replaces multi-person character dialogue; in-character delivery is not claimed preserved."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/rimmer-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/rimmer-result.json",
+      "result_secondary_evidence": "qa/voice-reference-remediation/evidence/rimmer-result-secondary.json",
+      "result_overlapping_evidence": "qa/voice-reference-remediation/evidence/rimmer-result-overlapping.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/rimmer-publisher-source.json",
+      "source_frame_evidence": "qa/voice-reference-remediation/evidence/rimmer-source-frame500.png"
     }
   ],
   "exclusions": [

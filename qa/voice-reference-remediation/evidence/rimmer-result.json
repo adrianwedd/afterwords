@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "b5ec1e9e30984307c10eb18cd80f888b7bf0786451658e98559c92ec4d08e52c",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "e31da6aa-7862-4568-ac50-ab0241e22e4f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b5ec1e9e30984307c10eb18cd80f888b7bf0786451658e98559c92ec4d08e52c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b5ec1e9e30984307c10eb18cd80f888b7bf0786451658e98559c92ec4d08e52c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e31da6aa-7862-4568-ac50-ab0241e22e4f",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So, yeah, I think, um, I think the the friction is still there, and that's that's the petrol for for a lot of the comedy in Red Dwarf, you know?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None observed; consistent indoor interview acoustics and room reverberation throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.5]\n  ],\n  \"uncertainty\": \"Timestamps and total duration (estimated around 7.5 seconds) are perceptual estimates without waveform inspection. High confidence in literal transcript and repetitions ('the the', 'that's that's', 'for for'); minor uncertainty regarding micro-pause durations and punctuation placement.\"\n}\n",
+    "duration_seconds": 33.193233,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20539,
+      "output_tokens": 2630,
+      "thinking_tokens": 2258,
+      "cache_read_tokens": 16140,
+      "total_tokens": 23169
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
