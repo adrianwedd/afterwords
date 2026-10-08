@@ -35,6 +35,23 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def parsed_observation(result):
+    response = result.get("response", "").strip()
+    if "NATIVE_AUDIO_UNAVAILABLE" in response:
+        return None
+    if response.startswith("```"):
+        response = response.split("\n", 1)[1].rsplit("```", 1)[0].strip()
+    try:
+        value = json.loads(response)
+    except (ValueError, TypeError):
+        return None
+    if not isinstance(value, dict) or not isinstance(value.get("speaker_count"), int):
+        return None
+    if not isinstance(value.get("literal_transcript"), str):
+        return None
+    return value
+
+
 def attachment_evidence(conversation, expected_hash):
     base = Path.home() / ".gemini/antigravity-cli"
     db = base / "conversations" / f"{conversation}.db"
@@ -69,7 +86,7 @@ def main():
         frozen = dest / "observation.json"
         if frozen.exists():
             existing = json.loads(frozen.read_text())
-            if existing.get("source_sha256") == sha and existing.get("native_audio_proven"):
+            if existing.get("source_sha256") == sha and existing.get("native_audio_proven") and parsed_observation(existing.get("result", {})):
                 continue
         dest.mkdir(exist_ok=True)
         clip = dest / "clip.wav"
@@ -92,13 +109,15 @@ def main():
                     for t in tool_calls)
         observation = {
             "wav": wav.name, "source_sha256": sha, "model": args.model,
-            "conversation_id": conversation, "native_audio_proven": bool(proof) and clean,
+            "conversation_id": conversation,
+            "waveform_attachment_proven": bool(proof),
+            "native_audio_proven": bool(proof) and clean and parsed_observation(final) is not None,
             "audio_first_protocol": clean, "attachment_evidence": proof,
             "exit_code": result.returncode, "result": final,
             "acceptance": "pending orchestrator adjudication",
         }
         frozen.write_text(json.dumps(observation, indent=2) + "\n")
-        if result.returncode or not proof or not clean or final.get("status") != "SUCCESS":
+        if result.returncode or not observation["native_audio_proven"] or final.get("status") != "SUCCESS":
             raise RuntimeError(f"Native listening gate failed: {wav.name}; inspect {dest}")
         print(f"Frozen {number}: native attachment proven", flush=True)
 

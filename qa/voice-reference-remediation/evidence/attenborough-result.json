@@ -1,0 +1,36 @@
+{
+  "wav": "clip-003-ref.wav",
+  "source_sha256": "745f3e4e47f3b1f3fe9cf4160ae3b17dcaf716c60854af60177ca635aa1c068c",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "09327bbf-62f9-4eee-90f7-11ad1085d18a",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "745f3e4e47f3b1f3fe9cf4160ae3b17dcaf716c60854af60177ca635aa1c068c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "745f3e4e47f3b1f3fe9cf4160ae3b17dcaf716c60854af60177ca635aa1c068c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "09327bbf-62f9-4eee-90f7-11ad1085d18a",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It's a sloth. It's not exactly an enthusiastic leaf eater. A couple of half-hearted chews, and the leaves go straight down to its stomach.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": \"Subtle ambient nature or rustling/chewing sounds in the background.\",\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": \"The speech starts abruptly on 'It's' with almost no lead-in silence.\",\n  \"ending_cutoff\": \"The clip ends shortly after the word 'stomach' with minimal trailing silence.\",\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": \"Not applicable; the entire clip appears usable as-is without further trimming.\",\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, \"end\"]],\n  \"uncertainty\": \"Boundary intervals and cutoffs are perceptual approximations based on listening. The faint background rustling/ambient noise makes the 'clean' designation slightly subjective, though the solo speaker's voice is well-isolated and clearly dominant.\"\n}\n```\n",
+    "duration_seconds": 20.849645,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12397,
+      "output_tokens": 1801,
+      "thinking_tokens": 1402,
+      "cache_read_tokens": 24119,
+      "total_tokens": 14198
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

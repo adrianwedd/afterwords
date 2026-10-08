@@ -54,6 +54,12 @@ def test_native_evidence_rejects_wrong_audio_bytes(tmp_path, monkeypatch):
     assert listener.attachment_evidence("test", listener.digest(media))
 
 
+def test_attachment_cannot_override_reviewer_reporting_native_audio_unavailable():
+    listener = load_script("listen_voice_corpus")
+    assert listener.parsed_observation({"status": "SUCCESS", "response": "NATIVE_AUDIO_UNAVAILABLE"}) is None
+    assert listener.parsed_observation({"response": "I cannot hear this file."}) is None
+
+
 def test_every_changed_reference_has_hash_bound_provenance():
     baseline = json.loads((ROOT / "qa/voice-reference-remediation/baseline.json").read_text())
     manifest = json.loads((ROOT / "qa/voice-reference-remediation/changes.json").read_text())

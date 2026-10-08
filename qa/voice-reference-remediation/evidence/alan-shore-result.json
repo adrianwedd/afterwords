@@ -1,0 +1,36 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "1b2b2007-e0ef-4337-b649-a610036ef74a",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "1b2b2007-e0ef-4337-b649-a610036ef74a",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"They expected the American people to rise up. They didn't.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 4.0]],\n  \"uncertainty\": \"Low uncertainty. The speech is clear, isolated, and belongs to a single speaker. Boundary estimates are approximate perceptual estimates.\"\n}\n```\n",
+    "duration_seconds": 22.914903,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12381,
+      "output_tokens": 1372,
+      "thinking_tokens": 1072,
+      "cache_read_tokens": 24205,
+      "total_tokens": 13753
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

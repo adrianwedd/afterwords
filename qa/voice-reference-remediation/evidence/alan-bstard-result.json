@@ -1,0 +1,36 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "1d47cb9a-68a4-4d09-85c5-116acbcd0442",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "1d47cb9a-68a4-4d09-85c5-116acbcd0442",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"We hear an awful lot of leftie whinging about the NHS waiting lists.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 4.0]],\n  \"uncertainty\": \"Low uncertainty. Literal transcript wording is clear. Boundary estimates are perceptual approximations. The single speaker is completely isolated with no background interference, and the phrase is complete and usable for conditioning.\"\n}\n```\n",
+    "duration_seconds": 28.732079,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12400,
+      "output_tokens": 2792,
+      "thinking_tokens": 2478,
+      "cache_read_tokens": 24246,
+      "total_tokens": 15192
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
