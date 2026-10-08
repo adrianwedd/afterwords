@@ -86,6 +86,17 @@ def test_valid_json_cannot_override_reviewer_reporting_transcript_only_review():
     assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None
 
 
+def test_review_parser_rejects_text_only_ingestion_without_acoustic_tags():
+    listener = load_script("listen_voice_corpus")
+    payload = {"speaker_count": 1, "literal_transcript": "hello",
+               "uncertainty": "Native ingestion yielded only a textual transcription without timestamps, acoustic tags, or duration metadata. Therefore, boundaries, cutoffs, background noise, and pacing are highly uncertain perceptual estimates derived purely from the available text."}
+    assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None
+    payload['uncertainty'] = 'Timings are estimated; spoken words are derived solely from text.'
+    assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None
+    payload['uncertainty'] = 'Timing estimates are approximate; the words are heard through native audio.'
+    assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)})
+
+
 def test_review_parser_accepts_single_fenced_result_without_ambiguous_multiple_results():
     listener = load_script("listen_voice_corpus")
     payload = '{"speaker_count": 1, "literal_transcript": "hello"}'
