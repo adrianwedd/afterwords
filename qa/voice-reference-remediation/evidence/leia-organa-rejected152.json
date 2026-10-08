@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d6c1747c1469c75921e95b04f5d4d54129694fe0c00248f99d5de1c593752338",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "ee66fc04-8686-42a1-ad08-a12264317bfd",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d6c1747c1469c75921e95b04f5d4d54129694fe0c00248f99d5de1c593752338"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d6c1747c1469c75921e95b04f5d4d54129694fe0c00248f99d5de1c593752338"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ee66fc04-8686-42a1-ad08-a12264317bfd",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah. I looked at that costume when he showed it to me and I thought, A, he's joking. B, how do I, how am I going to look in that? How am I going to, I have to make myself look better to be able to wear that.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.6, 5.5],\n    [10.2, 13.2]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately +/- 0.4 seconds. Transcript wording has high auditory confidence, with slight uncertainty regarding exact punctuation and pause delineation during the mid-utterance conversational restarts.\"\n}\n",
+    "duration_seconds": 63.147286,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36626,
+      "output_tokens": 5315,
+      "thinking_tokens": 4937,
+      "cache_read_tokens": 0,
+      "total_tokens": 41941
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

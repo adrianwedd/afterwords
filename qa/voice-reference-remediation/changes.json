@@ -7316,6 +7316,100 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/neil-degrasse-tyson-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/neil-degrasse-tyson-result.json",
       "delivery_commit": "7922eee447ffe2011718fe988a35044f634e74f0"
+    },
+    {
+      "wav": "leia-organa-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "c902eb7e60a0984a7f0211b1ac47819c54593b82cbdc7d6964188bcba700b7a4",
+        "frames": 728160,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.17,
+        "peak": 0.999969482421875,
+        "rms": 0.0731654369965972,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "879ea3d7ae13542c395a6f8a3a949f7d44eb55da66d33866a098f4cab18ed299",
+        "frames": 477600,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 9.95,
+        "peak": 0.23394775390625,
+        "rms": 0.025692236529999635,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 147.3,
+        "source_end_s": 157.25,
+        "source_start_frame": 7070400,
+        "source_end_frame_exclusive": 7548000,
+        "conversion": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation."
+      },
+      "profiles": [
+        {
+          "path": "voices/leia-organa.json",
+          "old_reference_text": "General Kenobi, years ago you served my father in the Clone Wars. Now he begs you to help him and his struggle against the Empire. I regret that I am unable to present my father's request to you in person, but my ship has fallen under attack, and I'm afraid my mission to bring you to Obi-Wan has failed.",
+          "new_reference_text": "And that, I didn't like that, cuz you have to live up to something there, and I forget what it is, but it wasn't something I was really focused on in that way.",
+          "old_segment_start_s": 10.3,
+          "new_segment_start_s": 147.3
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=wuW7vNrgT_g",
+      "adjudication": "Original native061 reports intended single voice but continuous orchestral score; no score-free salvage interval established. Replacement from official Star Wars publisher with host-introduced Carrie Fisher, role credit and actual frame152 directly speaking. Earlier152 conversational restarts/initialYeah,153 letterA/filler ambiguity and syntactic unfinished list,154 native two-speaker overlap/entry cutoff were not admitted. Final156147.30–157.25 exact9.95s full actual typedWAV native proofvalid: one speaker, no music/crowd/laughter/effects/acoustic changes/pauses/splices/either cutoff, rawusabletrue. Full literal wording high confidence, preserve opening And that restart and shortened cuz; minor cuz/cause difference is spelling of the same audible reduced word, not expansion to grammar-correct because. Secondary sourceASR corroborates remaining words, no auditory substitution. Complete And/way excludes host before147.30 and after157.25. Exact decoded source PCM/frame bounds/count equality verified, healthy level/no full-scale. Natural2015 actor register differs dramatic1977 Leia. Fresh whole resulting production acceptance mandatory.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/leia-organa-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=wuW7vNrgT_g",
+        "publisher": "Star Wars",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCZGYJFUizSax-yElQaFDp5Q",
+        "title": "Carrie Fisher Interview with StarWars.com | Star Wars Celebration Anaheim",
+        "published_date": "20150429",
+        "source_info_sha256": "0e7822fadd047e8e5acbcc508852a28e22bc3ea037dfd663a4bbc040e1cb6057",
+        "source_download_sha256": "9516c0e832782ad3c18394a1a881416c3a1c957006b69e2b9b500f14f2434c08",
+        "source_audio_sha256": "637c85e83e87fc91565f4e6b808ee649199293fe444b3919c06d7a918c669eaf",
+        "identity_section_sha256": "c51b7497458ce089a63d41f297920a300e611ce4ace78d5acfa441718aca0fea",
+        "identity_frame_sha256": "bac7875432286a3722c8384c9d3efbd918b26a95a3d9f12466985e4f9efd5d44",
+        "publisher_page": "https://www.starwars.com/video/carrie-fisher-interview-star-wars-celebration-anaheim",
+        "publisher_page_sha256": "4ff22ea73b9eafc0407e0079ca7826c9ea5c79d2375384672ba391591bbf91af",
+        "source_basis": "Official Star Wars channel and original StarWars.com matching-title page identify Carrie Fisher as Princess Leia and interviewer context Celebration Anaheim. Opening host James Arnold Taylor explicitly introduces Carrie Fisher, speaks to her; actual selected-range frame152 shows guest directly speaking. Publisher video/page independently credits intended actor/role.",
+        "delivery_change": "Natural later-life2015 Carrie Fisher interview replaces score-backed dramatic1977 Leia hologram dialogue; preserves intended actor but differs age/register/fictional performance.",
+        "decode": "Full ffmpeg decode to PCM16 preserving source rate/channels, exit0 and empty error log.",
+        "exact_edit": {
+          "start_s": 147.3,
+          "end_s": 157.25,
+          "sample_rate": 48000,
+          "start_frame": 7070400,
+          "end_frame_exclusive": 7548000,
+          "channel_index": null
+        },
+        "sample_exact_source_slice": true,
+        "candidate_audio": {
+          "sha256": "879ea3d7ae13542c395a6f8a3a949f7d44eb55da66d33866a098f4cab18ed299",
+          "frames": 477600,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 9.95,
+          "peak": 0.23394775390625,
+          "rms": 0.025692236529999635,
+          "samples_at_full_scale": 0
+        },
+        "changes": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation.",
+        "publisher_metadata_sha256": "9caebb89eb50d6a89359f7d8b7be8d77ff754d1bbc1ec9b4c6553dd05e332c2c"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/leia-organa-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/leia-organa-result.json"
     }
   ],
   "exclusions": [

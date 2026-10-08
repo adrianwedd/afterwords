@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d88517e3fe8f9e3ff789c424b540466ad9258b90c4a553b3c7f9aefee6bd28a4",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "8ec14043-c903-4d2d-97e2-8959df15752a",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d88517e3fe8f9e3ff789c424b540466ad9258b90c4a553b3c7f9aefee6bd28a4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d88517e3fe8f9e3ff789c424b540466ad9258b90c4a553b3c7f9aefee6bd28a4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8ec14043-c903-4d2d-97e2-8959df15752a",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [1.2, 2.5],\n    [3.4, 4.0]\n  ],\n  \"literal_transcript\": \"[Speaker 1]: ...feel like that, someone that makes an impact on you [Speaker 2 overlaps: It's not just the beginning] [Speaker 2: Yeah] [Speaker 1]: at that time in your life, uh, is a profound thing.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"overlapping speech/crosstalk over primary phrase and beginning cutoff\",\n  \"candidate_clean_intervals_s\": [\n    [4.0, 7.6]\n  ],\n  \"uncertainty\": \"Initial utterance is abruptly cut off on entry, making the first word uncertain ('feel' vs 'thing'). Secondary speaker overlap boundaries (estimated around 1.2\u20132.5s and 3.4\u20134.0s) have perceptual boundary uncertainty due to conversational cross-talk. Candidate clean interval [4.0, 7.6]s lacks a complete standalone sentence/phrase, begins mid-clause, and includes a vocal hesitation ('uh'), making it inadequate for clean voice conditioning.\"\n}\n",
+    "duration_seconds": 42.648524,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20361,
+      "output_tokens": 3837,
+      "thinking_tokens": 3376,
+      "cache_read_tokens": 16099,
+      "total_tokens": 24198
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

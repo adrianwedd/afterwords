@@ -1,0 +1,37 @@
+{
+  "wav": "leia-organa-ref.wav",
+  "source_sha256": "c902eb7e60a0984a7f0211b1ac47819c54593b82cbdc7d6964188bcba700b7a4",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "1f3687c4-b549-4421-a581-5488c25c4127",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c902eb7e60a0984a7f0211b1ac47819c54593b82cbdc7d6964188bcba700b7a4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c902eb7e60a0984a7f0211b1ac47819c54593b82cbdc7d6964188bcba700b7a4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "1f3687c4-b549-4421-a581-5488c25c4127",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"General Kenobi. Years ago you served my father in the Clone Wars. Now he begs you to help him in his struggle against the Empire. I regret that I am unable to present my father's request to you in person, but my ship has fallen under attack and I'm afraid my mission to bring you to Alderaan has failed.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": true,\n  \"candidate_clean_intervals_s\": [\n    [3.5, 6.8],\n    [8.0, 11.5],\n    [12.7, 17.5],\n    [18.2, 24.5]\n  ],\n  \"uncertainty\": \"Boundary estimates are perceptual approximations with an uncertainty margin of approximately \u00b10.3 to 0.5 seconds, especially around initial consonants, breath pauses, and trailing vocal decays. The compound sentence spanning ~12.7s to 24.5s may either be segmented into two phrases around the ~0.7s breath/pause ([12.7, 17.5] and [18.2, 24.5]) or kept as a single continuous interval ([12.7, 24.5]). In wording, subtle aspiration on 'in his struggle' could perceptually be heard as 'in this struggle', and 'Alderaan' is a phonetic proper-noun estimate. Importantly, background orchestral music persists across the entire recording; while the candidate intervals represent isolated single-speaker speech with complete syntactic phrases free from vocal interruptions or splices, none are strictly free of background music. If candidate clean intervals strictly require complete absence of background music without stem demixing, the set is empty ([]).\"\n}\n```\n",
+    "duration_seconds": 145.474309,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20623,
+      "output_tokens": 17155,
+      "thinking_tokens": 16570,
+      "cache_read_tokens": 15976,
+      "total_tokens": 37778
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
