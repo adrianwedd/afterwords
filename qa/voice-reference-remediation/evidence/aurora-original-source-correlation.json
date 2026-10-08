@@ -1,0 +1,7 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=GUL2HC3l_wg",
+  "original_sha256": "e04d12523ed05255741dbe8f958d82ba24f7e901a4b5a151e2f2f84b5aab74bd",
+  "candidate_source_offset_s": 75.6,
+  "pearson_correlation": 0.9663695724137565,
+  "analysis": "Bothdownmix/resample16k/decimate10, meanremoved, FFTcrosscorrelation thenPearson; diagnosticonly notnativeacceptance or originalprocessingreconstruction"
+}

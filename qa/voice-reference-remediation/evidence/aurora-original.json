@@ -1,0 +1,36 @@
+{
+  "wav": "aurora-ref.wav",
+  "source_sha256": "e04d12523ed05255741dbe8f958d82ba24f7e901a4b5a151e2f2f84b5aab74bd",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "d662736f-1584-447d-be98-ed011d28c568",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e04d12523ed05255741dbe8f958d82ba24f7e901a4b5a151e2f2f84b5aab74bd"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e04d12523ed05255741dbe8f958d82ba24f7e901a4b5a151e2f2f84b5aab74bd"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d662736f-1584-447d-be98-ed011d28c568",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"There is one thing I always think about when I shower is the fact that your body is constantly always touching something. You know? I mean, you're lying in bed and you feel that your body is touching the bed and the\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Constant and significant background noise (traffic or wind) is present throughout the entire clip. Additionally, the clip ends with an abrupt cutoff mid-sentence.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"High confidence in the wording, though the background noise slightly obscures the crispness of some consonants. The ending cutoff is definitive. The speaker is isolated from other human voices but not isolated from environmental noise. There are no complete usable phrases for conditioning due to the pervasive noise floor.\"\n}\n```\n",
+    "duration_seconds": 27.129956,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12521,
+      "output_tokens": 2605,
+      "thinking_tokens": 2227,
+      "cache_read_tokens": 24040,
+      "total_tokens": 15126
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

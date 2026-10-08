@@ -6688,6 +6688,116 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/nyssa-of-traken-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/nyssa-of-traken-result.json",
       "delivery_commit": "8e1306c91b6ecd3f3b8e6202dcb490e5bb3a3c9a"
+    },
+    {
+      "wav": "aurora-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "e04d12523ed05255741dbe8f958d82ba24f7e901a4b5a151e2f2f84b5aab74bd",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.11320135247062602,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "68053366e95bd08b8930dcddfb4b8f1dedd595192a1e838f6e61f634a8df841d",
+        "frames": 224640,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.68,
+        "peak": 0.465362548828125,
+        "rms": 0.04936000981197517,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 15.42,
+        "source_end_s": 20.1,
+        "source_start_frame": 740160,
+        "source_end_frame_exclusive": 964800,
+        "conversion": "Exactcontinuous decodedsource PCM16 frameslice; noDSP/remixing/normalization/separation/padding/concatenation"
+      },
+      "profiles": [
+        {
+          "path": "voices/aurora-qwen3-06b.json",
+          "old_reference_text": "There is one thing I always think about when I shower, it is the fact that  your body is constantly always touching something. You know? And when you are  lying in bed and you feel that your body is touching the bed, and the",
+          "new_reference_text": "Well, I wrote melodies when I was six, but I didn't add words to them before I was nine.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": 15.42
+        },
+        {
+          "path": "voices/aurora.json",
+          "old_reference_text": "There is one thing I always think about when I shower, it is the fact that  your body is constantly always touching something. You know? And when you are  lying in bed and you feel that your body is touching the bed, and the",
+          "new_reference_text": "Well, I wrote melodies when I was six, but I didn't add words to them before I was nine.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": 15.42
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=db9gHZIoATk",
+      "adjudication": "Originalnative009confirmsoneintendedvoice butconstant significanttraffic/windlike environmentalnoise plusunfinishedtrailingandthe. Originalsourcepreviouslyunknownnowidentified byiHeartRadio ShowerThoughtsvideoGUL2HC3l_wg; currentbaseline15s PCM correlateswithsource75.6s atPearson0.96637 afterdiagnosticonlydownmix/resample/decimation; matchingASR words corroborate, notnativeacceptance nororiginalprocessingreconstruction. ReplacementfromofficialCBCqStudioqinterview, hostintroducesAurora andaskswritingage; actualselectedvideoframe17showsheranswer. Final14415.42-20.10 exact4.68s actualfullnativeWAV proofvalid,1voice/noscore/crowd/laugh/effects/longpauses/splices/bothcutoffsfalse, consistentdrynearfieldacoustics, usabletrue. Nativefull19word two-clause answer clear withverylowwordinguncertainty, agreesafterwardscheckedsourceASR; sourceASRnotused asauditorygate. CompleteWell/nine withoutnextmaleWerequestion confirmednative, laterhostremovedbyendbefore20.28. ExactsourcePCM frameequality independentlyverified/healthyamplitude/no fullscale. NoDSP. Naturalstudiointerviewofsamereal2016singer, nocharacterproxy. Fresh wholeproduction nativeacceptance mandatory.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/aurora-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=db9gHZIoATk",
+        "publisher": "CBC / Q with Tom Power",
+        "publisher_channel_url": "https://www.youtube.com/channel/UC1nw_szfrEsDWcwD32wHE_w",
+        "title": "Aurora is on the hunt for the right songs | The q Interview",
+        "published_date": "20161129",
+        "source_info_sha256": "028001d4b4dc005535bf3c6b545566a23f1521286776dc35666c054d9d681ad8",
+        "source_download_sha256": "7410987df43643ea2609c2ea6b83fef77ce0192abaa814475c9134fd0ea791f0",
+        "source_audio_sha256": "c1c78c90a7436433dd30726c02ac56330464361c4b8231d186fed9925472c488",
+        "identity_section_sha256": "0c30eebaf8903ccb86e2495fa084453faa9e95fdbef3f7a25ef7b8dd5f746702",
+        "identity_frame_sha256": "ee3e1a56409d2a0c8edbcdfbc11b41cb3179dd7609ef852de694b9da6039af25",
+        "source_basis": "CBC q originalpublisherchannel/title/descriptionidentify Aurora joiningTomPower inStudioq. OpeninghostdirectlygreetsAurora andasksatwhatageshebeganwriting; selectedcontinuousfirstguestanswer givesages6/9. Actualselectedsourcevideo13-21/frame17 showscreditedAurora speakingintomicrophone.",
+        "delivery_change": "Same intendedsingerAuroraAksnes in2016 naturalstudiointerviewdelivery replaces2016iHeartShowerThoughtsclip with environmentalnoise. Notusinganactor/characterproxy.",
+        "original_source_corroboration": {
+          "source_url": "https://www.youtube.com/watch?v=GUL2HC3l_wg",
+          "original_sha256": "e04d12523ed05255741dbe8f958d82ba24f7e901a4b5a151e2f2f84b5aab74bd",
+          "candidate_source_offset_s": 75.6,
+          "pearson_correlation": 0.9663695724137565,
+          "analysis": "Bothdownmix/resample16k/decimate10, meanremoved, FFTcrosscorrelation thenPearson; diagnosticonly notnativeacceptance or originalprocessingreconstruction"
+        },
+        "original_source_publisher": "iHeartRadio",
+        "original_source_title": "AURORA - Shower Thoughts",
+        "original_source_info_sha256": "e4b9aa38f65a8bc405ab692b69ac268b95220278b49dcb4333638fc25becdf06",
+        "original_source_download_sha256": "3f80ade172093ba84f04bb99992bb98251af54b9f9d5fd0f42724ae21709132b",
+        "decode": "Fullsourceffmpeg preserving decodedrate/channels PCM16, exit0/emptyerrorlog",
+        "exact_edit": {
+          "start_s": 15.42,
+          "end_s": 20.1,
+          "sample_rate": 48000,
+          "start_frame": 740160,
+          "end_frame_exclusive": 964800,
+          "channel_index": null
+        },
+        "candidate_audio": {
+          "sha256": "68053366e95bd08b8930dcddfb4b8f1dedd595192a1e838f6e61f634a8df841d",
+          "frames": 224640,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 4.68,
+          "peak": 0.465362548828125,
+          "rms": 0.04936000981197517,
+          "samples_at_full_scale": 0
+        },
+        "sample_exact_source_slice": true,
+        "changes": "Exactcontinuous decodedsource PCM16 frame slice; noDSP/remixing/normalization/separation/padding/concatenation",
+        "publisher_metadata_sha256": "353c3f302863f20a91242fbc15e1caa635bbca6893e5d4c8fbeca2b0107457dd"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/aurora-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/aurora-result.json"
     }
   ],
   "exclusions": [
