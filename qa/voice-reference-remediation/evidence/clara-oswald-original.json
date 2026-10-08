@@ -1,0 +1,37 @@
+{
+  "wav": "clara-oswald-ref.wav",
+  "source_sha256": "d9e2323e09a6c91f66ca72d214f07489dab314012e0d4836b30f666d380c90af",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "92e24c2e-2408-48d1-9f5d-8c8c986523d7",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d9e2323e09a6c91f66ca72d214f07489dab314012e0d4836b30f666d380c90af"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d9e2323e09a6c91f66ca72d214f07489dab314012e0d4836b30f666d380c90af"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "92e24c2e-2408-48d1-9f5d-8c8c986523d7",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Run you clever boy. And remember. Run you clever boy and remember. Merry Christmas doctor. Hello stupid old man.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": true,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"The audio is a montage of short, heavily spliced phrases originating from different acoustic environments. It contains pervasive background music and dramatic sound effects across the cuts, providing no continuous, isolated speech segments suitable for voice conditioning.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Splicing boundaries and exact interval timings are perceptual estimates. However, there is high certainty that persistent background music and structural inconsistencies render all segments unusable.\"\n}\n```\n",
+    "duration_seconds": 44.355192,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12474,
+      "output_tokens": 4022,
+      "thinking_tokens": 3681,
+      "cache_read_tokens": 24006,
+      "total_tokens": 16496
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

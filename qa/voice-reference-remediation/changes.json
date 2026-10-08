@@ -4061,7 +4061,8 @@
         "source_metadata_sha256": "2152000ae0b260d100c3d1970c2cc909135d73c6abd303c3c52999acfe329567",
         "source_frame": "qa/voice-reference-remediation/evidence/saul-goodman-source-009.jpg",
         "speaker_basis": "Official amc+ named Saul Goodman webisode and camera-visible intended character delivering source passage; legacy source offset2 used for source-context frame, production trim remains exact original PCM."
-      }
+      },
+      "delivery_commit": "ef9a0e11124696600cf075d4a1b97d37e3bc406b"
     },
     {
       "wav": "scotty-ref.wav",
@@ -4132,7 +4133,83 @@
       "native_result_evidence": "qa/voice-reference-remediation/evidence/scotty-result.json",
       "native_secondary_evidence": "qa/voice-reference-remediation/evidence/scotty-result-secondary.json",
       "native_disagreement_evidence": "qa/voice-reference-remediation/evidence/scotty-faint-bed-disagreement.json",
-      "rejected_non_native_evidence": "qa/voice-reference-remediation/evidence/scotty-text-layout-rejected.json"
+      "rejected_non_native_evidence": "qa/voice-reference-remediation/evidence/scotty-text-layout-rejected.json",
+      "delivery_commit": "ef9a0e11124696600cf075d4a1b97d37e3bc406b"
+    },
+    {
+      "wav": "clara-oswald-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "d9e2323e09a6c91f66ca72d214f07489dab314012e0d4836b30f666d380c90af",
+        "frames": 792000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 16.5,
+        "peak": 0.214324951171875,
+        "rms": 0.0251043881471308,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf",
+        "frames": 398223,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 9.03,
+        "peak": 0.996673583984375,
+        "rms": 0.16385337289419266,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 19.68,
+        "source_end_s": 28.71,
+        "source_start_frame": 867888,
+        "source_end_frame_exclusive": 1266111,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/clara-oswald-qwen3-06b.json",
+          "old_reference_text": "Run, you clever boy, and remember. Run, you clever boy, and remember. Merry Christmas, Doctor. Hello. You stupid old man.",
+          "new_reference_text": "And then it's that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 19.68
+        },
+        {
+          "path": "voices/clara-oswald.json",
+          "old_reference_text": "Run, you clever boy, and remember. Run, you clever boy, and remember. Merry Christmas, Doctor. Hello. You stupid old man.",
+          "new_reference_text": "And then it's that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 19.68
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=4FqH8GvxVzA",
+      "adjudication": "Original native reports heavily spliced montage, persistent score and effects, cutoffs; no clean continuous target to recover. Longer19.68-31.87 candidate63 has host Mhm between target phrases; shorten to complete first statement19.68-28.71 before that backchannel. Full exact edited native65 confirms one voice, complete boundaries, no music/crowd/laughter/effects/acoustic change/splices. Native current65 hears and then its that weird thing, matching independent ASR its; earlier longer63 heard it was. Current exact-result wording governs; do not import prior script/profile or grammatically improve repeated like. Actual9.03s continuous statement provides useful variety; no denoise, normalization, separation, padding or splice. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_sample_exact_source_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/clara-oswald-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=4FqH8GvxVzA",
+        "title": "\"A clockwork squirrel!?\" Jenna Coleman on what she took from Doctor Who",
+        "uploader": "BBC Radio 1",
+        "upload_date": "20201228",
+        "source_audio_sha256": "238604b8cee6e0a7a0d0430feba28d375c613ea3a37c415ab507044ec4a21248",
+        "source_metadata_sha256": "afa3abb8643a285ae2ef1af89e8e4a36818352d476c3858b8d557d5c83ef96c1",
+        "source_basis": "Official BBC Radio1 interview explicitly credits Jenna Coleman, discussing Doctor Who with Ali Plumb. Camera frame23 within selected answer shows named guest speaking. Official DoctorWho episode cast credits Jenna Coleman as Clara.",
+        "role_credit_url": "https://www.doctorwho.tv/stories/face-the-raven",
+        "delivery_change": "Actor interview delivery replaces spliced dramatic character lines; target actor retained, original performance register not claimed preserved.",
+        "source_frame": "qa/voice-reference-remediation/evidence/clara-oswald-source-023.jpg"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/clara-oswald-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/clara-oswald-result.json"
     }
   ],
   "exclusions": [
