@@ -1,0 +1,37 @@
+{
+  "wav": "saul-goodman-ref.wav",
+  "source_sha256": "47b842126fbd50c32152b0f1d2779073588180a2860c805f647c7d676ebfbb0b",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "2a0b6540-4070-4292-8a72-9813536f2197",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "47b842126fbd50c32152b0f1d2779073588180a2860c805f647c7d676ebfbb0b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "47b842126fbd50c32152b0f1d2779073588180a2860c805f647c7d676ebfbb0b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "2a0b6540-4070-4292-8a72-9813536f2197",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Oh, hello. I was just working on a multimillion-dollar lawsuit for one of my clients. I know what you're thinking: 'Yeah, a lawsuit sounds good, Saul, but, uh, who can I--'\",\n  \"music\": \"Prominent synthetic music sting/fanfare from 0.0s to ~0.9s, tail decaying by ~1.2s.\",\n  \"crowd\": \"None detected.\",\n  \"laughter\": \"None detected.\",\n  \"sound_effects\": \"Distinct paper handling/sliding Foley effect between ~5.35s and ~5.9s.\",\n  \"acoustic_changes\": \"Acoustic environment is dry studio dialogue; vocal delivery shifts from direct address to an imitated/quoted perspective starting at ~7.55s.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": \"Abrupt audio cutoff mid-phrase at ~10.5s, consistent with a clipped excerpt or commercial cut.\",\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [2.1, 5.3],\n    [6.0, 7.15]\n  ],\n  \"uncertainty\": \"All temporal boundaries are perceptual estimates with +/- 0.25s uncertainty. Speaker count is evaluated as 1 because the segment from ~7.55s to 10.5s is perceived as the primary speaker modulating pitch and cadence to act out a quoted thought, though perceptually it could be mistaken for a separate speaker. The final word before the hard cutoff is perceptually estimated as 'I' cut off mid-phoneme.\"\n}\n```\n",
+    "duration_seconds": 66.164205,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20960,
+      "output_tokens": 6131,
+      "thinking_tokens": 5614,
+      "cache_read_tokens": 15987,
+      "total_tokens": 27091
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

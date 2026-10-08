@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "83ea8ab7-873d-4da7-863e-2994412cc4a9",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "83ea8ab7-873d-4da7-863e-2994412cc4a9",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Eight years later, I get a letter saying, I do want to thank you so much for what you did for me.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": null,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [1.5, 2.6],\n    [3.8, 4.6]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.1, 9.3],\n    [4.6, 9.3]\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual estimates with an uncertainty margin of approximately \u00b10.2 seconds. Lexical confidence is very high with negligible transcript uncertainty across all spoken tokens.\"\n}\n```\n",
+    "duration_seconds": 50.020143,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20734,
+      "output_tokens": 4476,
+      "thinking_tokens": 4112,
+      "cache_read_tokens": 16097,
+      "total_tokens": 25210
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

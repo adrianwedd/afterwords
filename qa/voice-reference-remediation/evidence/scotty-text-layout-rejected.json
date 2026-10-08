@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "dad427d1-2982-4a06-8b8d-9a6e73f54f9c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "dad427d1-2982-4a06-8b8d-9a6e73f54f9c",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Eight years later. I get a letter saying I do want to thank you so much for what you did for me.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 7.0]],\n  \"uncertainty\": \"Exact boundary estimates in seconds are highly uncertain as they are extrapolated from the text layout without a provided timeline. The presence of long pauses is inferred from significant line breaks.\"\n}\n```\n",
+    "duration_seconds": 27.010473,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12469,
+      "output_tokens": 1687,
+      "thinking_tokens": 1370,
+      "cache_read_tokens": 24155,
+      "total_tokens": 14156
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

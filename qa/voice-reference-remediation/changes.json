@@ -3992,6 +3992,147 @@
         "native_3_8": "qa/voice-reference-remediation/evidence/bill-bailey-prior-boundary-3.8.json"
       },
       "delivery_commit": "7c1e49162100acdcf1f812eda4abc4c4218b9249"
+    },
+    {
+      "wav": "saul-goodman-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "47b842126fbd50c32152b0f1d2779073588180a2860c805f647c7d676ebfbb0b",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.0779054569495471,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "d757105cf38d3da7d14e917a594cc9188810daac71933de41283decff87a7244",
+        "frames": 176400,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.0,
+        "peak": 0.754425048828125,
+        "rms": 0.07358441522226052,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 233730,
+        "end_frame_exclusive": 410130,
+        "start_s": 5.3,
+        "end_s": 9.3
+      },
+      "profiles": [
+        {
+          "path": "voices/saul-goodman-qwen3-06b.json",
+          "old_reference_text": "Oh, hello. I was just working on a multi-million dollar lawsuit for one of my clients. I know what you're thinking. Yeah, a lawsuit sounds good, Saul, but who can you call?",
+          "new_reference_text": "I was just working on a multi-million dollar lawsuit for one of my clients.",
+          "old_segment_start_s": 2,
+          "new_segment_start_s": 7.3
+        },
+        {
+          "path": "voices/saul-goodman.json",
+          "old_reference_text": "Oh, hello. I was just working on a multi-million dollar lawsuit for one of my clients. I know what you're thinking. Yeah, a lawsuit sounds good, Saul, but who can you call?",
+          "new_reference_text": "I was just working on a multi-million dollar lawsuit for one of my clients.",
+          "old_segment_start_s": 2,
+          "new_segment_start_s": 7.3
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=pPd67CEL54E",
+      "adjudication": "Original native review identifies opening music, later paper-handling Foley and ending cut. Native whole-file clock estimates are too early; subsequent actual word alignment locates this complete sentence5.5-9.16. Exact5.3-9.3 lossless original PCM slice retains pre-roll/word decay and removes opening music, Oh hello, paper Foley and later truncated quoted question. Full edited native3.8 confirms one isolated voice, complete boundaries and no music/crowd/laughter/effects/acoustic change/splice. Literal sentence agrees with subsequent ASR; no canonical dialogue inserted. Actual4s provides one complete varied sentence, original character delivery preferred to replacement interview. Original source is amc+ named Saul webisode, camera frame9 supports intended character delivering this passage at legacy source offset2. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/saul-goodman-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/saul-goodman-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/saul-goodman-result.json",
+      "source_context": {
+        "source_url": "https://www.youtube.com/watch?v=pPd67CEL54E",
+        "title": "Saul Says: \"Sue 'Em Now\" -- Better Call Saul Webisode",
+        "uploader": "amc+",
+        "upload_date": "20120315",
+        "source_metadata_sha256": "2152000ae0b260d100c3d1970c2cc909135d73c6abd303c3c52999acfe329567",
+        "source_frame": "qa/voice-reference-remediation/evidence/saul-goodman-source-009.jpg",
+        "speaker_basis": "Official amc+ named Saul Goodman webisode and camera-visible intended character delivering source passage; legacy source offset2 used for source-context frame, production trim remains exact original PCM."
+      }
+    },
+    {
+      "wav": "scotty-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "0a90be98424029459e9ce62c8ad59d65d16f4a65f190354da7f308dd70b32b09",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.07358985948263486,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa",
+        "frames": 418950,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 9.5,
+        "peak": 0.6927490234375,
+        "rms": 0.04854964334603695,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 92.05,
+        "source_end_s": 101.55,
+        "source_start_frame": 4059405,
+        "source_end_frame_exclusive": 4478355,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/scotty.json",
+          "old_reference_text": "Oh, uh, four in all, sir. Captain, what is it? He's turned the engines off, completely cold. It'll take 30 minutes to regenerate them. Ships out of skin is beginning to heat.",
+          "new_reference_text": "Eight years later, I get a letter saying, I do want to thank you so much for what you did for me.",
+          "old_segment_start_s": 60,
+          "new_segment_start_s": 92.05
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=COJuF7n9gGA",
+      "adjudication": "Original has four speakers, continuous orchestral score, effects and ending cutoff; trimming cannot isolate clean target. Replace with continuous9.5s intended-actor interview statement, preserving two natural narrative pauses rather than artificial splicing. Longer53/56 trials contain unresolved hesitations and are not admitted. Initial exact58 native3.8 claims subtle low-level pad under speech; preserve this disagreement. Subsequent blind exact3.8 and independent exact3.1 hearings both report no music or other interference and complete boundaries; earlier overlapping53/56 also report no music. Root accepts current clear solo source on corroborated full native exact-result hearings; initial faint-bed claim is not corroborated as material contamination, and remains explicitly recorded for mandatory fresh final re-evaluation. One earlier3.1 retry says pauses inferred from text layout; REJECTED by current native parser and never used as listening acceptance despite its historical attachment flag. Valid independent3.1 specifically states audio playback and natural pauses, agreeing literal transcript with valid3.8 hearings and ASR. No severe recording damage, no other speakers or unwanted Foley. Conversational actor voice differs from character accent/delivery as provenance states. Fresh final corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_sample_exact_source_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/scotty-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=COJuF7n9gGA",
+        "title": "James Doohan Discusses How He Helped A Suicidal Star Trek Fan",
+        "uploader": "William Forsche",
+        "upload_date": "20131027",
+        "source_audio_sha256": "9b25486fd8da16917cb9b2998b34cd2843c88ca90ae0de88570dc6810bc6a74a",
+        "source_metadata_sha256": "e0eea8e26b65938e5d142d86cb36e11b342571c5dfca40d2fda047799564d43c",
+        "source_basis": "Public interview archive names James Doohan; speaker recounts introducing himself as Jimmy Doohan, Scotty of Star Trek earlier in continuous interview. Frame98 within retained answer shows same guest speaking. Official StarTrek role credit independently maps James Doohan to intended Scotty.",
+        "role_credit_url": "https://www.startrek.com/en-un/news/celebrating-james-doohans-life-on-the-9th-anniversary-of-his-death",
+        "delivery_change": "Natural actor interview delivery replaces Scottish-accented in-character scene performance. Intended actor retained; character accent/prosody is not claimed preserved.",
+        "source_frame": "qa/voice-reference-remediation/evidence/scotty-source-098.jpg"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/scotty-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/scotty-result.json",
+      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/scotty-result-secondary.json",
+      "native_disagreement_evidence": "qa/voice-reference-remediation/evidence/scotty-faint-bed-disagreement.json",
+      "rejected_non_native_evidence": "qa/voice-reference-remediation/evidence/scotty-text-layout-rejected.json"
     }
   ],
   "exclusions": [
