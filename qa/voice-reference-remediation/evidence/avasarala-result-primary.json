@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "079bff8337fe21360862ed6ddf6c70fbe1b7b2b9eb7beecb6813532d588dabfa",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "597c3547-3580-4058-8873-efe7dba5b884",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "079bff8337fe21360862ed6ddf6c70fbe1b7b2b9eb7beecb6813532d588dabfa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "079bff8337fe21360862ed6ddf6c70fbe1b7b2b9eb7beecb6813532d588dabfa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "597c3547-3580-4058-8873-efe7dba5b884",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I can proudly say that I have a feeling that we all did a good job on this series.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 4.0]],\n  \"uncertainty\": \"Exact temporal boundaries are estimates based on word count and average speaking rate. Background noise and precise acoustic features cannot be verified with absolute certainty without explicit timestamps or visual waveforms.\"\n}\n```\n",
+    "duration_seconds": 26.299841,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12380,
+      "output_tokens": 2409,
+      "thinking_tokens": 2097,
+      "cache_read_tokens": 24252,
+      "total_tokens": 14789
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

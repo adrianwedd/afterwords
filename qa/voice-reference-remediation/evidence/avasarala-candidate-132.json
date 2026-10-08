@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "8600d904850e11a4387e6fa39f65328c980aad5b0c04e5a3d7a70fb520122f20",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "31791ac4-9d01-4950-8be6-e11ce01d8dfb",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8600d904850e11a4387e6fa39f65328c980aad5b0c04e5a3d7a70fb520122f20"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8600d904850e11a4387e6fa39f65328c980aad5b0c04e5a3d7a70fb520122f20"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "31791ac4-9d01-4950-8be6-e11ce01d8dfb",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"One thing she's... she's sure... she has to make sure about is that, uh, this is a genuine decision that she's making, and she thoroughly believes in it.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None observed; consistent indoor room acoustics and vocal proximity throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [5.0, 11.8]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates (+/- 0.5s). Minor perceptual uncertainty around the initial false starts and repetition ('she's... she's sure...'). Raw reference is marked not usable without trim due to hesitations and filler, but can be salvaged by trimming to the fluent complete phrase from approximately 5.0s to 11.8s ('this is a genuine decision that she's making, and she thoroughly believes in it.').\"\n}\n```\n",
+    "duration_seconds": 56.00188,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20409,
+      "output_tokens": 4222,
+      "thinking_tokens": 3806,
+      "cache_read_tokens": 16050,
+      "total_tokens": 24631
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

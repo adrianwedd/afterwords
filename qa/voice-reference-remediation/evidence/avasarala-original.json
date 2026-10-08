@@ -1,0 +1,37 @@
+{
+  "wav": "clip-ref.wav",
+  "source_sha256": "6aae4349dce967eaef737d05d3a6e28bdf8a5e1c9fcad9fac93a5f7d8c3cef91",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "eeada3ec-22f8-498d-9790-684d0c453c2f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6aae4349dce967eaef737d05d3a6e28bdf8a5e1c9fcad9fac93a5f7d8c3cef91"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6aae4349dce967eaef737d05d3a6e28bdf8a5e1c9fcad9fac93a5f7d8c3cef91"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "eeada3ec-22f8-498d-9790-684d0c453c2f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I sent you to that planet to be my eyes and ears. And now, large ruins that were supposed to be inert are shooting out lightning. And there is nothing but radio silence from you.\",\n  \"music\": \"Very faint, low-level atmospheric synth drone / subtle ambient sci-fi score underneath dialogue.\",\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None detected; acoustic environment, equalization, vocal proximity, and reverberation remain consistent throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [3.3, 4.3],\n    [9.1, 10.1]\n  ],\n  \"apparent_splices\": \"None apparent; breathing, room tone, and background drone transition smoothly across dramatic pauses without audible clicks or abrupt shifts.\",\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.3],\n    [4.3, 9.1],\n    [10.1, 13.8],\n    [0.0, 13.8]\n  ],\n  \"uncertainty\": \"Perceptual timing boundary estimates carry an estimated margin of +/- 0.2 to 0.3 seconds. Wording is transcribed with high auditory confidence ('inert' has a distinct theatrical/stylized pronunciation /\u026a\u02c8n\u025c\u02d0rt/, and 'nothing' receives strong dramatic stress). Background ambience is subtle enough that it may be either intentional atmospheric score or room drone.\"\n}\n```\n",
+    "duration_seconds": 42.563348,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20365,
+      "output_tokens": 3776,
+      "thinking_tokens": 3273,
+      "cache_read_tokens": 15975,
+      "total_tokens": 24141
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

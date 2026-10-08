@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d8eb746e2e7994478a1f9038033fb4ebc8e28aaa1ea59f2188d871435918fae9",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "21cc3be3-d8d0-4103-a2b5-87e29950fdd4",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d8eb746e2e7994478a1f9038033fb4ebc8e28aaa1ea59f2188d871435918fae9"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d8eb746e2e7994478a1f9038033fb4ebc8e28aaa1ea59f2188d871435918fae9"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "21cc3be3-d8d0-4103-a2b5-87e29950fdd4",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"This is a genuine decision that she is making and she entirely believes in it.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.0]\n  ],\n  \"uncertainty\": \"Very low uncertainty regarding content and quality. Boundary estimates are approximate perceptual estimates due to lack of precise timecodes, but the entirety of the clip is a clean, continuous phrase by a single speaker.\"\n}\n```\n",
+    "duration_seconds": 23.579,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12434,
+      "output_tokens": 1459,
+      "thinking_tokens": 1136,
+      "cache_read_tokens": 24229,
+      "total_tokens": 13893
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
