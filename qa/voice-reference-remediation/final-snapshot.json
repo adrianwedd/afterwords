@@ -1794,17 +1794,17 @@
       "profiles": [
         {
           "path": "voices/lee-mack-qwen3-06b.json",
-          "profile_sha256": "8dc2b1c1dffa92c9fc2a9a0366d1d248806615f57b1f2520ee763cd0ba2406c9",
-          "reference_text": "Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world."
+          "profile_sha256": "7b9179d46ae6e0e560d0fb5d692508be3e7f0423ca1e43015e51cf02fb58f176",
+          "reference_text": "Yeah, I wouldn't say necessarily for me specifically, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world."
         },
         {
           "path": "voices/lee-mack.json",
-          "profile_sha256": "bb0aac95d6269883652b89a878db9870aa21e29c89caedfdbda01f8b87370102",
-          "reference_text": "Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world."
+          "profile_sha256": "fb67c25a7d95c2834913fb75a11d7983453619de69c7588dea23c7db5143b534",
+          "reference_text": "Yeah, I wouldn't say necessarily for me specifically, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "Corrected specifically from three fresh hearings; reduced article remains unresolved.",
       "final_disposition": "pending"
     },
     {

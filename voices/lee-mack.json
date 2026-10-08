@@ -3,6 +3,6 @@
   "backend": "qwen3-0.6b",
   "source_url": "https://www.bbc.co.uk/programmes/b03bpxxq",
   "reference_audio": "lee-mack-ref.wav",
-  "reference_text": "Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.",
+  "reference_text": "Yeah, I wouldn't say necessarily for me specifically, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.",
   "segment_start_s": 99.9
 }

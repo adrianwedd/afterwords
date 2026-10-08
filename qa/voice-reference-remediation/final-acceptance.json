@@ -693,10 +693,20 @@
       "index": 59,
       "wav": "lee-mack-ref.wav",
       "sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68",
-      "status": "pending",
-      "native_qa_verdict": "pending",
-      "transcript_status": "pending",
-      "evidence": []
+      "status": "needs adjudication",
+      "native_qa_verdict": "Two independent fresh listeners hear one speaker; primary two-speaker claim remains explicitly under adjudication.",
+      "transcript_status": "Corrected specifically from three fresh hearings; reduced article remains unresolved.",
+      "evidence": [
+        "qa/voice-reference-remediation/final-evidence/059-f55af008924bce46-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/059-f55af008924bce46-revision-2.json"
+      ],
+      "adjudication": "All three fresh full native hearings render specifically rather than previous specific, including first broad3.8, independent3.1, and precise word-focused3.8. Correct that confirmed syllabic ending in every associated profile, retaining previously delivered text and evidence in revision history. Do not use grammar/ASR as ears. Primary3.8 reports two speakers near5.3s; independent fresh3.1 and word-focused3.8 both confidently report one isolated speaker/acoustically uniform, with no contamination/cuts. Source is direct BBC Desert Island Discs solo guest Lee Mack answer to Kirsty Young; source continuity corroborates one guest but does not itself replace auditory counts. Fresh lexical uncertainty remains on reduced article in its struggle versus its a struggle: first3.8/3.1 hear a, word-focused3.8 hears elided/no a and explicitly cannot distinguish a faint unstressed vowel; secondary ASR uses a. This revision does not claim that ambiguity resolved and does not mark final acceptance. Continue targeted native checking or retain another complete clear source statement if unresolved. Audio bytes/operation/source provenance unchanged; this is delivery of a confirmed text correction, not final corpus certification.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 60,

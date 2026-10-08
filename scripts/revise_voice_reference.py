@@ -26,6 +26,8 @@ def revise(root, plan):
     wav = root / 'voices' / plan['wav']
     before = inspect_audio(wav)
     assert plan['approved'] is True and plan['adjudication'].strip()
+    final_status = plan.get('final_status', 'accepted')
+    assert final_status in ('accepted', 'pending', 'needs adjudication')
     assert before == change['resulting_audio'] and before['sha256'] == plan['expected_sha256']
     snapshot_path = qa / 'final-snapshot.json'
     snapshot = json.loads(snapshot_path.read_text())
@@ -108,12 +110,13 @@ def revise(root, plan):
         pr['profile_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
         pr['reference_text'] = json.loads(path.read_text())['reference_text']
     record['native_listening'] = 'fresh revision reviewed'
-    record['transcript_verification'] = 'root adjudicated fresh literal text'
+    record['transcript_verification'] = plan.get('transcript_status', 'root adjudicated fresh literal text')
     decisions_path = qa / 'final-acceptance.json'
     decisions = json.loads(decisions_path.read_text())
     verdict = next(r for r in decisions['records'] if r['wav'] == plan['wav'])
-    verdict.update({'sha256': after['sha256'], 'status': 'accepted', 'native_qa_verdict': 'passed after fresh root correction',
-        'transcript_status': 'matched root-adjudicated literal words', 'evidence': revision['native_evidence'],
+    verdict.update({'sha256': after['sha256'], 'status': final_status,
+        'native_qa_verdict': plan.get('native_qa_verdict', 'passed after fresh root correction'),
+        'transcript_status': plan.get('transcript_status', 'matched root-adjudicated literal words'), 'evidence': revision['native_evidence'],
         'adjudication': plan['adjudication'], 'deterministic_qa': {'audio_integrity': True,
             'production_hash_match': True, 'profile_relationships_consistent': True,
             'samples_at_full_scale': after['samples_at_full_scale']}})

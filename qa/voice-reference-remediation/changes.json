@@ -5032,20 +5032,20 @@
         {
           "path": "voices/lee-mack-qwen3-06b.json",
           "old_reference_text": "I'd just like to tell you a true story. This is what it's like living in London nowadays. In fact, it's the same everywhere really. What I hate is the hard sell. You know, you get the hard sell, right? I got it the other day. You know when people ring you up and say, you know, do you want to combine the gas with the electric, right? And I was like, oh, that sounds dangerous.",
-          "new_reference_text": "Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.",
+          "new_reference_text": "Yeah, I wouldn't say necessarily for me specifically, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.",
           "old_segment_start_s": 0,
           "new_segment_start_s": 99.9
         },
         {
           "path": "voices/lee-mack.json",
           "old_reference_text": "I'd just like to tell you a true story. This is what it's like living in London nowadays. In fact, it's the same everywhere really. What I hate is the hard sell. You know, you get the hard sell, right? I got it the other day. You know when people ring you up and say, you know, do you want to combine the gas with the electric, right? And I was like, oh, that sounds dangerous.",
-          "new_reference_text": "Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.",
+          "new_reference_text": "Yeah, I wouldn't say necessarily for me specifically, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.",
           "old_segment_start_s": 0,
           "new_segment_start_s": 99.9
         }
       ],
       "source_url": "https://www.bbc.co.uk/programmes/b03bpxxq",
-      "adjudication": "Original native hears crowd/laughter and live venue reverberation; proposed timing estimates extend beyond actual file and cannot be used as edit authority. Earlier trial trimming did not resolve audience contamination, so prefer direct publisher BBC interview. Programme/audio introduction identify guest Lee Mack; selected continuous solo answer follows question about effort in comedy. Two independent full exact092 hearings3.8 and3.1 both agree literal transcript and all acoustic/boundary gates: one voice, no music/crowd/laughter/effects/acoustic change/splice/cutoffs/long pauses. Both explicitly render for me specific and its struggle, noting minor uncertainty whether specifically or faint elided a is present. Whole-source ASR renders specifically and a struggle; root retains both independent native renderings specific/no a rather than use grammatical completion or ASR as ears. Minor ambiguity explicitly preserved for fresh final listening reassessment, not represented as certain phonetic resolution. The remainder of transcript agrees native and ASR. Actual9.05s complete answer with varied phonemes/prosody, healthy RMS/peak/no clipping. Exact continuous publisher PCM16 frame slice; no cleanup/normalization/separation/padding/splice. Same comedian in natural interview delivery replaces live audience stage delivery; provenance records difference. Fresh final corpus acceptance pending.",
+      "adjudication": "Original native hears crowd/laughter and live venue reverberation; proposed timing estimates extend beyond actual file and cannot be used as edit authority. Earlier trial trimming did not resolve audience contamination, so prefer direct publisher BBC interview. Programme/audio introduction identify guest Lee Mack; selected continuous solo answer follows question about effort in comedy. Two independent full exact092 hearings3.8 and3.1 both agree literal transcript and all acoustic/boundary gates: one voice, no music/crowd/laughter/effects/acoustic change/splice/cutoffs/long pauses. Both explicitly render for me specific and its struggle, noting minor uncertainty whether specifically or faint elided a is present. Whole-source ASR renders specifically and a struggle; root retains both independent native renderings specific/no a rather than use grammatical completion or ASR as ears. Minor ambiguity explicitly preserved for fresh final listening reassessment, not represented as certain phonetic resolution. The remainder of transcript agrees native and ASR. Actual9.05s complete answer with varied phonemes/prosody, healthy RMS/peak/no clipping. Exact continuous publisher PCM16 frame slice; no cleanup/normalization/separation/padding/splice. Same comedian in natural interview delivery replaces live audience stage delivery; provenance records difference. Fresh final corpus acceptance pending.\nFresh final correction: All three fresh full native hearings render specifically rather than previous specific, including first broad3.8, independent3.1, and precise word-focused3.8. Correct that confirmed syllabic ending in every associated profile, retaining previously delivered text and evidence in revision history. Do not use grammar/ASR as ears. Primary3.8 reports two speakers near5.3s; independent fresh3.1 and word-focused3.8 both confidently report one isolated speaker/acoustically uniform, with no contamination/cuts. Source is direct BBC Desert Island Discs solo guest Lee Mack answer to Kirsty Young; source continuity corroborates one guest but does not itself replace auditory counts. Fresh lexical uncertainty remains on reduced article in its struggle versus its a struggle: first3.8/3.1 hear a, word-focused3.8 hears elided/no a and explicitly cannot distinguish a faint unstressed vowel; secondary ASR uses a. This revision does not claim that ambiguity resolved and does not mark final acceptance. Continue targeted native checking or retain another complete clear source statement if unresolved. Audio bytes/operation/source provenance unchanged; this is delivery of a confirmed text correction, not final corpus certification.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false,
@@ -5068,10 +5068,74 @@
         "delivery_change": "Same intended comedian in natural interview delivery replaces live audience stage comedy."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/lee-mack-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/lee-mack-result.json",
+      "native_result_evidence": "qa/voice-reference-remediation/final-evidence/059-f55af008924bce46-revision-1.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/lee-mack-publisher-source.json",
       "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/lee-mack-secondary-result.json",
-      "delivery_commit": "8eeedca521c7f298f256df983921d5f6bb88af4b"
+      "delivery_commit": "8eeedca521c7f298f256df983921d5f6bb88af4b",
+      "post_remediation_revisions": [
+        {
+          "previous_delivery_commit": "8eeedca521c7f298f256df983921d5f6bb88af4b",
+          "previous_audio": {
+            "sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68",
+            "frames": 399105,
+            "sample_rate": 44100,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 9.05,
+            "peak": 0.37847900390625,
+            "rms": 0.032032093363117194,
+            "samples_at_full_scale": 0
+          },
+          "previous_operation": {
+            "type": "replacement",
+            "sample_rate": 44100,
+            "source_start_s": 99.9,
+            "source_end_s": 108.95,
+            "source_start_frame": 4405590,
+            "source_end_frame_exclusive": 4804695,
+            "conversion": "Exact continuous decoded publisher PCM16 frame slice, preserves rate/channels; no cleanup, normalization, separation, padding or splicing"
+          },
+          "previous_profiles": [
+            {
+              "path": "voices/lee-mack-qwen3-06b.json",
+              "old_reference_text": "I'd just like to tell you a true story. This is what it's like living in London nowadays. In fact, it's the same everywhere really. What I hate is the hard sell. You know, you get the hard sell, right? I got it the other day. You know when people ring you up and say, you know, do you want to combine the gas with the electric, right? And I was like, oh, that sounds dangerous.",
+              "new_reference_text": "Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.",
+              "old_segment_start_s": 0,
+              "new_segment_start_s": 99.9
+            },
+            {
+              "path": "voices/lee-mack.json",
+              "old_reference_text": "I'd just like to tell you a true story. This is what it's like living in London nowadays. In fact, it's the same everywhere really. What I hate is the hard sell. You know, you get the hard sell, right? I got it the other day. You know when people ring you up and say, you know, do you want to combine the gas with the electric, right? And I was like, oh, that sounds dangerous.",
+              "new_reference_text": "Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.",
+              "old_segment_start_s": 0,
+              "new_segment_start_s": 99.9
+            }
+          ],
+          "previous_native_result_evidence": "qa/voice-reference-remediation/evidence/lee-mack-result.json",
+          "operation": {
+            "type": "text_only"
+          },
+          "resulting_audio": {
+            "sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68",
+            "frames": 399105,
+            "sample_rate": 44100,
+            "channels": 2,
+            "subtype": "PCM_16",
+            "duration_s": 9.05,
+            "peak": 0.37847900390625,
+            "rms": 0.032032093363117194,
+            "samples_at_full_scale": 0
+          },
+          "adjudication": "All three fresh full native hearings render specifically rather than previous specific, including first broad3.8, independent3.1, and precise word-focused3.8. Correct that confirmed syllabic ending in every associated profile, retaining previously delivered text and evidence in revision history. Do not use grammar/ASR as ears. Primary3.8 reports two speakers near5.3s; independent fresh3.1 and word-focused3.8 both confidently report one isolated speaker/acoustically uniform, with no contamination/cuts. Source is direct BBC Desert Island Discs solo guest Lee Mack answer to Kirsty Young; source continuity corroborates one guest but does not itself replace auditory counts. Fresh lexical uncertainty remains on reduced article in its struggle versus its a struggle: first3.8/3.1 hear a, word-focused3.8 hears elided/no a and explicitly cannot distinguish a faint unstressed vowel; secondary ASR uses a. This revision does not claim that ambiguity resolved and does not mark final acceptance. Continue targeted native checking or retain another complete clear source statement if unresolved. Audio bytes/operation/source provenance unchanged; this is delivery of a confirmed text correction, not final corpus certification.",
+          "native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/059-f55af008924bce46-revision-1.json",
+            "qa/voice-reference-remediation/final-evidence/059-f55af008924bce46-revision-2.json"
+          ],
+          "discovery_native_evidence": [
+            "qa/voice-reference-remediation/final-evidence/059-f55af008924bce46-discovery-1.json"
+          ]
+        }
+      ]
     },
     {
       "wav": "mark-steel-ref.wav",
