@@ -7011,7 +7011,8 @@
         "publisher_metadata_sha256": "5ecc4c7eb7bbdb4f90177b921d09eca4e60d5d9c465e6b5c82d056d8249eda00"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/joi-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/joi-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/joi-result.json",
+      "delivery_commit": "44c4a6354086316223ae7619dd75f2caf735c2a5"
     }
   ],
   "exclusions": [
