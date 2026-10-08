@@ -6582,7 +6582,8 @@
         "publisher_metadata_sha256": "f0cf2a31ec295dbafef6c47309044b3dedc6e4f16ba44ff33d0ac47cb853a2fa"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/romana-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/romana-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/romana-result.json",
+      "delivery_commit": "de5502a76ee870c7553a8aa15079d0d1144fdb6d"
     },
     {
       "wav": "nyssa-of-traken-ref.wav",
@@ -6636,7 +6637,7 @@
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=NSxsSf1RGhg",
-      "adjudication": "Originalnative074musicthroughout andsecondvoiceinterjection; cannottrimmusicaway. ReplacementBFI2013officialpublishercreditsSarahSuttonandothers; actualHDframe918withinretainedphrase showsSarahthirdfromleft speaking andJanetfourthsilent. Naturalactorpanelinterviewdelivery explicitlydifferentfrom1983dramaticNyssa. Rejectlong139and141quietmaterial:139threehearings1voice but141claimssecondspeaker/acousticchangeonconnectedDoctorWho. This perceptual disagreement remainsunresolved, so final143 completely excludes that entirelatermaterial plus alluncertainstuttering/tailclauses. Final143916.88-922.455 continuous5.575s actualfullWAV hasthreeindependentnativehearings all1voice/no music/crowd/laugh/effects/acousticchanges/splices/longpauses/bothcutoffs/usabletrue. Complete20word naturalfirstsentence and intactSo/meconfirmed. RootsourcePCM equality independentlyverified, 10msRMSvalley before nextutterance usedforlocalizationonly; actualnativeboundariesaregate. First1433.8 hearsyou insteadyouve withminimaluncertainty; independent1433.1 plus third1433.8 bothyouve withminimal/negligibleuncertainty, thirdexplicitlyclearlyaudible. Threeearlierlong139nativehearings alsoyouve onidenticalsourcephrase, whereas141you. Rootretains confidentlyindependentlyconfirmedyouve, disagreementpreservedallresultphases; sourceASRyou issecondaryanddoesnotoverride actualnativecontraction. Candidatehealthyquietlevel0.2576peak/no fullscale, no normalization/processing. Fresh whole resulting production native acceptance mandatory, verifycontractionagain.",
+      "adjudication": "Originalnative074musicthroughout andsecondvoiceinterjection; cannottrimmusicaway. ReplacementBFI2013officialpublishercreditsSarahSuttonandothers; actualHDframe918withinretainedphrase showsSarahthirdfromleft speaking andJanetfourthsilent. Naturalactorpanelinterviewdelivery explicitlydifferentfrom1983dramaticNyssa. Rejectlong139and141quietmaterial:139threehearings1voice but141claimssecondspeaker/acousticchangeonconnectedDoctorWho. This perceptual disagreement remainsunresolved, so final143 completely excludes that entirelatermaterial plus alluncertainstuttering/tailclauses. Final143916.88-922.455 continuous5.575s actualfullWAV hasthreeindependentnativehearings all1voice/no music/crowd/laugh/effects/acousticchanges/splices/longpauses/bothcutoffs/usabletrue. Complete16word naturalfirstsentence and intactSo/meconfirmed. RootsourcePCM equality independentlyverified, 10msRMSvalley before nextutterance usedforlocalizationonly; actualnativeboundariesaregate. First1433.8 hearsyou insteadyouve withminimaluncertainty; independent1433.1 plus third1433.8 bothyouve withminimal/negligibleuncertainty, thirdexplicitlyclearlyaudible. Threeearlierlong139nativehearings alsoyouve onidenticalsourcephrase, whereas141you. Rootretains confidentlyindependentlyconfirmedyouve, disagreementpreservedallresultphases; sourceASRyou issecondaryanddoesnotoverride actualnativecontraction. Candidatehealthyquietlevel0.2576peak/no fullscale, no normalization/processing. Fresh whole resulting production native acceptance mandatory, verifycontractionagain.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false
@@ -6685,7 +6686,8 @@
         "publisher_metadata_sha256": "4aac06907601732eaf77a97b133cc3bbac9399b88452618d6fe35ed2442b6ddd"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/nyssa-of-traken-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/nyssa-of-traken-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/nyssa-of-traken-result.json",
+      "delivery_commit": "8e1306c91b6ecd3f3b8e6202dcb490e5bb3a3c9a"
     }
   ],
   "exclusions": [
