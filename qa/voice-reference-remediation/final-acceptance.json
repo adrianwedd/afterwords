@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "snapshot": "qa/voice-reference-remediation/final-snapshot.json",
-  "production_commit": "cd813e7089498ed55de442d6dc2b7754bdc495d7",
+  "production_commit": "e71e7458bd899dcfe229f9aba356a3e25091ee49",
   "corpus_status": "pending",
   "required_production_count": 104,
   "records": [
