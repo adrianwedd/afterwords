@@ -5708,7 +5708,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/q-tng-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/q-tng-result.json",
-      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/q-tng-publisher-source.json"
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/q-tng-publisher-source.json",
+      "delivery_commit": "644d40337442a32d0623474b35efb4a45fad4e37"
     },
     {
       "wav": "sherlock-ref.wav",
@@ -5797,7 +5798,8 @@
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/sherlock-publisher-source.json",
       "rejected_candidate_evidence": [
         "qa/voice-reference-remediation/evidence/sherlock-initial-cutoff-rejected.json"
-      ]
+      ],
+      "delivery_commit": "644d40337442a32d0623474b35efb4a45fad4e37"
     }
   ],
   "exclusions": [
