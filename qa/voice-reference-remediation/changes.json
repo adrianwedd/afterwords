@@ -6068,7 +6068,8 @@
         "source_basis": "Suits Official publisher title The Best of Harvey Specter | NBC; source frames12,14,18 show same intended character speaking across separate office and phone scenes. Source audio aligned wording at15.32-23.42 matches chosen phone monologue. Original native2voices is a perceptual timbre estimate; actual footage supports same actor across acoustically distinct scenes, so wrong actor is not presented as confirmed. Trim still needed for interrupted opening/end and acoustic montage."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/harvey-specter-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/harvey-specter-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/harvey-specter-result.json",
+      "delivery_commit": "da0c17d7268dd5c63e9f664a15c852a1d7b3e502"
     }
   ],
   "exclusions": [
