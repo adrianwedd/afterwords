@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "906d9213-bc92-4377-916b-b6444a650f81",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "906d9213-bc92-4377-916b-b6444a650f81",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I just thought, I would love a little part in that. It was just everything I wanted\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.8]\n  ],\n  \"uncertainty\": \"Timings and boundaries are perceptual estimates based on conversational tempo (~4.8s total duration without visual waveform tools). Wording confidence is high; minor perceptual ambiguity between 'I would love' versus contracted 'I'd love'. Single speaker is cleanly isolated throughout with complete grammatical phrases suitable for conditioning.\"\n}\n",
+    "duration_seconds": 104.648131,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20110,
+      "output_tokens": 13029,
+      "thinking_tokens": 12691,
+      "cache_read_tokens": 16206,
+      "total_tokens": 33139
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

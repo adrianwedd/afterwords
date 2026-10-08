@@ -4518,7 +4518,82 @@
         "source_frame": "qa/voice-reference-remediation/evidence/donna-noble-source-324.jpg"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/donna-noble-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/donna-noble-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/donna-noble-result.json",
+      "delivery_commit": "a24083013b056c5a83bee061727a1a2e0a0265da"
+    },
+    {
+      "wav": "martha-jones-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "c0221e327062b9a7ce9b0318384b5a39e445c77357d80cb63a6c92b9d42aa290",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.0776045237620723,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7",
+        "frames": 179928,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.08,
+        "peak": 0.245758056640625,
+        "rms": 0.037015355146711344,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 80.28,
+        "source_end_s": 84.36,
+        "source_start_frame": 3540348,
+        "source_end_frame_exclusive": 3720276,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/martha-jones-qwen3-06b.json",
+          "old_reference_text": "I told a story. That's all. No weapons, just words. I did just what the doctor said. I went across the continents all on my own And everywhere I went I found the people and I told them my story He has saved your lives so many times",
+          "new_reference_text": "I just thought, I would love a little part in that. It was just everything I wanted.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 80.28
+        },
+        {
+          "path": "voices/martha-jones.json",
+          "old_reference_text": "I told a story. That's all. No weapons, just words. I did just what the doctor said. I went across the continents all on my own And everywhere I went I found the people and I told them my story He has saved your lives so many times",
+          "new_reference_text": "I just thought, I would love a little part in that. It was just everything I wanted.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 80.28
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=MNIWA2RE_rQ",
+      "adjudication": "Original has other-speaker tail, continuous underscore, effects/acoustic shifts and cutoffs. Radio1 Nihal trial70 has persistent crowd/room chatter and is not admitted. Radio5Live longer trial76 acoustically clean but native3.8 and3.1 disagree on Saturday night is/nights are, cause/because and whether trailing so is cut; not admitted. Select different complete two-sentence statement80.28-84.36 rather than force those disputed words. New exact native78 confirms one isolated voice, full beginning/end, no music/crowd/laughter/effects/acoustic change/splice. Native explicitly renders I would love with minor contraction uncertainty; independent ASR also renders I would love, so root preserves expanded audible form instead of rewriting to Id. Actual4.08s includes two full sentences and varied phonemes/prosody; no source cleanup, splice, padding or normalization. Source interview introduction/context establishes guest attribution, not actor identification requested of reviewer. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_sample_exact_source_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/martha-jones-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=MNIWA2RE_rQ",
+        "title": "Freema Agyeman on Radio 5 Live 30th March 2007 (1 of 3)",
+        "uploader": "torchwood1970",
+        "upload_date": "20070331",
+        "source_audio_sha256": "b0a07d05be99df80a4d36903ce7df0a06420473ca8460de32beb460a6a92d411",
+        "source_metadata_sha256": "edb29c72c8a251ec955e3212889ceb1f486abff15694578b75ce4ea294b4be29",
+        "source_basis": "Public BBC Radio5Live interview archive introduces Freema Agyeman and Martha Jones, guest addresses Simon and discusses auditioning/acting in show. Selected continuous answer follows guest account of hoping for a part. Official DoctorWho cast credits Freema Agyeman as Martha.",
+        "role_credit_url": "https://www.doctorwho.tv/characters/martha-jones",
+        "delivery_change": "Same intended actor, natural interview delivery replaces scored dramatic montage."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/martha-jones-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/martha-jones-result.json"
     }
   ],
   "exclusions": [
