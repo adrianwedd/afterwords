@@ -7314,7 +7314,8 @@
         "publisher_metadata_sha256": "dbfacbf01d5d4e6eedc8fa78bd4c6507b6bc8b5b1d2236323bec325bcc82b4d1"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/neil-degrasse-tyson-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/neil-degrasse-tyson-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/neil-degrasse-tyson-result.json",
+      "delivery_commit": "7922eee447ffe2011718fe988a35044f634e74f0"
     }
   ],
   "exclusions": [
