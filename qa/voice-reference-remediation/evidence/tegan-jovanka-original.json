@@ -1,0 +1,37 @@
+{
+  "wav": "tegan-jovanka-ref.wav",
+  "source_sha256": "e5d63e2910aebaa4c49f4f3279431b8e1bf0b0091372fd9ed1a8be8373169ee1",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "8c92166b-790b-4a52-9ed1-fe64e996698f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e5d63e2910aebaa4c49f4f3279431b8e1bf0b0091372fd9ed1a8be8373169ee1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e5d63e2910aebaa4c49f4f3279431b8e1bf0b0091372fd9ed1a8be8373169ee1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8c92166b-790b-4a52-9ed1-fe64e996698f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [13.8, 15.2]\n  ],\n  \"literal_transcript\": \"Speaker 1: I'm not coming with you. I'm tired of it. A lot of good people have died today. Just... I don't think I can go on. It's stopped being fun, Doctor. Speaker 2: ... I'm... I'm sorry.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Speaker 1 maintains consistent vocal presence, close-mic staging, and room acoustics throughout 0.0s to 13.3s. At approximately 13.8s, Speaker 2 enters with a different vocal timbre, lower presence, and different spatial distance.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Persistent background music/ambient score drone throughout the recording; secondary speaker intrusion and abrupt cutoff at the tail end.\",\n  \"candidate_clean_intervals_s\": [\n    [0.0, 1.7],\n    [2.5, 3.9],\n    [4.8, 7.3],\n    [8.0, 10.5],\n    [11.1, 13.3]\n  ],\n  \"uncertainty\": {\n    \"boundary_estimates\": \"Timestamps are perceptual estimates with an uncertainty margin of approximately \u00b10.2s to \u00b10.3s.\",\n    \"wording\": \"Speaker 1's dialogue is clearly intelligible with high confidence. Speaker 2's initial syllable preceding 'I'm sorry' (~13.8s) is indistinct and cut off, with moderate uncertainty whether it is a stuttered onset ('I'm...') or another word ('I must...').\",\n    \"trim_salvageability\": \"Trimming to [0.0, 13.3] cleanly isolates Speaker 1 and removes Speaker 2 and the ending truncation, but cannot eliminate the underlying musical score, which remains a conditioning defect for clean voice cloning.\"\n  }\n}\n```\n",
+    "duration_seconds": 48.743443,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20745,
+      "output_tokens": 4981,
+      "thinking_tokens": 4348,
+      "cache_read_tokens": 16030,
+      "total_tokens": 25726
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

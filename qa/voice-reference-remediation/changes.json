@@ -6799,6 +6799,125 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/aurora-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/aurora-result.json",
       "delivery_commit": "269564ad1329c649065a667ca60d37250abf3813"
+    },
+    {
+      "wav": "tegan-jovanka-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "e5d63e2910aebaa4c49f4f3279431b8e1bf0b0091372fd9ed1a8be8373169ee1",
+        "frames": 612000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 12.75,
+        "peak": 0.899993896484375,
+        "rms": 0.08708721027068927,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453",
+        "frames": 614400,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 12.8,
+        "peak": 0.37359619140625,
+        "rms": 0.035486208037918375,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 54.4,
+        "source_end_s": 67.2,
+        "source_start_frame": 2611200,
+        "source_end_frame_exclusive": 3225600,
+        "conversion": "Exact continuous decodedsource PCM16 frameslice; noDSP/remixing/normalization/separation/padding/concatenation"
+      },
+      "profiles": [
+        {
+          "path": "voices/tegan-jovanka-qwen3-06b.json",
+          "old_reference_text": "I'm not coming with you. I'm tired of it. A lot of good people have died today. It's just that I don't think I can go on. If you stop enjoying it, give it up. It's stopped being fun, Doctor. I'm sorry.",
+          "new_reference_text": "Well, um, Mum flew down from Cloncurry to have me actually, because, uh, my father, um, who who was a parasitologist, um, was based up in Cloncurry.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 54.4
+        },
+        {
+          "path": "voices/tegan-jovanka.json",
+          "old_reference_text": "I'm not coming with you. I'm tired of it. A lot of good people have died today. It's just that I don't think I can go on. It's stopping fun, Doctor. I must, I'm sorry.",
+          "new_reference_text": "Well, um, Mum flew down from Cloncurry to have me actually, because, uh, my father, um, who who was a parasitologist, um, was based up in Cloncurry.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 54.4
+        }
+      ],
+      "source_url": "https://hdl.handle.net/10462/mp3/1025",
+      "adjudication": "Originalnative0962perceptualvoices/scorethroughout plus tailcutoff; trimmingcannotremovebackgroundscore. ReplacedusingpublicStateLibraryJanetFielding oralhistory bySpencerHowson, bothprimaryrecordsidentifiedactor/Teganrole withopeningexplicittapeidentification. SourcepublisherexplicitCCBYNC4.0licence/creator/title/collection/sourceURL preservedinmetadata, dedicatedattributionfile andbothprofilesnotes; notclaimingMIT/commercial-usepermission forreferenceaudio. CompletefullsourceHTTPdownloadexit0/180591405bytes, fullffmpegdecodeexit0/emptyerrorlog; catalogue101min47vsactual94min3durationdiscrepancyrecorded, actualdownloadmatchesviewerresource5643475mswithinMP3codecprecision, no silentdurationclaim. Final14554.4-67.2,12.8s actualfullWAV twoindependentnativehearings3.8+3.1 agreeallliteralwords/fillers: Well um Mum...because uh myfather um who who wasaparasitologist um wasbasedupinCloncurry. Firstsmallwhorepetitionambiguity resolvedbyindependentsecondalsoexplicitdoublewho. Preserve3um/1uh/doublewho, no grammaticalcleanup. Both1voice/allcontaminants/acousticchanges/splices/longpauses/cutoffsfalse/usabletrue. Secondnotesrecording mayendimmediatelyafterfinalwordbutword/naturalcadence complete, matchingfirstendingfalse; nofollowingandorpartialphonemeheard. Healthyamplitude/nofullscale, exactsourcePCM reproducedindependently/noDSP. Natural2016actororalhistorydeliveryexplicitlydiffers1984characterperformance. Fresh whole resulting production nativeacceptance mandatory.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/tegan-jovanka-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "catalogue_api_url": "https://onesearch.slq.qld.gov.au/primaws/rest/pub/pnxs/L/alma99183376220102061?vid=61SLQ_INST:SLQ_NDE&lang=en",
+        "catalogue_api_sha256": "c4192874a56cb1cc13e5cf6f38667ed0151778fcba8df9860acfdcfd91390954",
+        "viewer_url": "https://collections.slq.qld.gov.au/viewer/IE5608413",
+        "viewer_api_url": "https://collections.slq.qld.gov.au/api/IE5608413",
+        "viewer_api_sha256": "d633fd302f52be623757b7d64adf88854242ac981c36f186d6cd4d8422e06c31",
+        "download_url": "https://digital.slq.qld.gov.au/delivery/DeliveryManagerServlet?dps_func=stream&dps_pid=FL5608419",
+        "download_sha256": "59bdad66566ece2b6813afa82826acb00f06d1562e7b98aa59926077ab6fa134",
+        "download_bytes": 180591405,
+        "decoded_audio_sha256": "e7095d11fbd8c68aaa0942b959443ccd74d7817f9805adc8ff4b1d95b2fa9140",
+        "decoded_audio": {
+          "frames": 270884736,
+          "sample_rate": 48000,
+          "channels": 2,
+          "duration_s": 5643.432,
+          "subtype": "PCM_16"
+        },
+        "decode": "Fullsourceffmpegexit0/emptyerrorlog; noargument alteration to samplerate/channels",
+        "duration_discrepancy": "Catalogueformatdeclares1hr41min47sec whileviewerresource5643475ms/actualdownloaddecoded5643432ms (~1hr34min3s). RetrievedcompleteHTTPdownloadexit0,180591405bytes, metadatafilelength172.23MB. Do notclaimmatchescatalogue101min47s; retainbothmetadata and actualsourceidentity.",
+        "retrieved_utc": "2026-10-08T09:45:52.056359+00:00",
+        "source_url": "https://hdl.handle.net/10462/mp3/1025",
+        "publisher": "State Library of Queensland / John Oxley Library",
+        "title": "Janet Fielding oral history",
+        "creator": "Spencer Howson",
+        "recorded_date": "September 2016",
+        "collection": "30716 Janet Fielding oral history",
+        "licence": "CC BY-NC 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "copyright": "In copyright; as recorded by the State Library catalogue",
+        "attribution_evidence": "Both primarycataloguePNX lds03/lds31 andpublicviewer licence explicitlylabelCCBYNC4.0; viewercreditsHowsonSpencer andaccession30716.",
+        "source_basis": "PublicStateLibrarydigitalrecord identifies interview with JanetFielding bySpencerHowson, actorroleTeganJovanka. Opening tapeidentification explicitlyThisisJanetFielding forStateLibraryOralHistoryProject; intervieweraddressesJanet andaskschildhoodBrisbane; guest continuousbirthstory54.4-67.2 selectedwithoutnextconjunction.",
+        "delivery_change": "Same intendedactor JanetFielding in2016 oralhistoryinterview replaces1984 dramaticTegan withscore/secondvoice. Earlierage/characterperformance notclaimedpreserved.",
+        "exact_edit": {
+          "start_s": 54.4,
+          "end_s": 67.2,
+          "sample_rate": 48000,
+          "start_frame": 2611200,
+          "end_frame_exclusive": 3225600,
+          "channel_index": null
+        },
+        "candidate_audio": {
+          "sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453",
+          "frames": 614400,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 12.8,
+          "peak": 0.37359619140625,
+          "rms": 0.035486208037918375,
+          "samples_at_full_scale": 0
+        },
+        "sample_exact_source_slice": true,
+        "changes": "Exact continuous decodedsource PCM16 frameslice; noDSP/remixing/normalization/separation/padding/concatenation",
+        "source_audio_sha256": "e7095d11fbd8c68aaa0942b959443ccd74d7817f9805adc8ff4b1d95b2fa9140",
+        "source_download_sha256": "59bdad66566ece2b6813afa82826acb00f06d1562e7b98aa59926077ab6fa134",
+        "publisher_metadata_sha256": "fb5c0ae4485567b89799fe10048566d68c445ae0ffaeb1b386fa411b400412ac"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/tegan-jovanka-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/tegan-jovanka-result.json"
     }
   ],
   "exclusions": [

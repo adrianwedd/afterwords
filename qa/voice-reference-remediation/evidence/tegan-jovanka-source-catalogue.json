@@ -1,0 +1,119 @@
+{"beaconO22":"421",
+  "context" : "L",
+  "@id" : "https://ap02.alma.exlibrisgroup.com/primaws/rest/pub/pnxs/L/99183376220102061",
+  "adaptor" : "Local Search Engine",
+  "pnx" : {
+    "display" : {
+      "source" : [ "Alma" ],
+      "type" : [ "audio" ],
+      "language" : [ "eng" ],
+      "title" : [ "Janet Fielding oral history September 2016" ],
+      "format" : [ "1 digital sound recording (1 hr. 41 min. 47 sec.)", "digital stereo", "audio file MP3" ],
+      "creationdate" : [ "2016 - 09??" ],
+      "lds05" : [ "Janet Fielding (born Janet Claire Mahoney, 9 September 1953) is an Australian actress, known for her role in the BBC science fiction television series Doctor Who as companion Tegan Jovanka. Born in Brisbane, Fielding made her UK TV debut in 1980. From 1981 to 1984 she portrayed the part of Tegan Jovanka, offsider to Tom Baker's fourth Doctor Who and later Peter Davison, the fifth Doctor. Fielding continued acting until 1991. in the mid 2000s she revised the role of Tegan for a number of Doctor Who radio plays. In addition to acting, she has worked as a theatrical agent and for a number of charities. Janet Fielding currently resides in the UK." ],
+      "lds07" : [ "30716, Janet Fielding oral history, John Oxley Library, State Library of Queensland." ],
+      "lds02" : [ "In copyright. For further information http://www.slq.qld.gov.au/home/copyright." ],
+      "lds03" : [ "Licensed under Creative Commons CC-BY-NC http://creativecommons.org/licenses/by-nc/4.0" ],
+      "creator" : [ "Howson, Spencer, 1972-$$QHowson, Spencer" ],
+      "description" : [ "An oral history interview with Australian born actor Janet Fielding by ABC radio presenter Spencer Howson. Janet Fielding discusses growing up in Brisbane, her acting career, moving to London, portraying a Queenslander in Doctor Who, life in the UK." ],
+      "mms" : [ "99183376220102061" ],
+      "genre" : [ "Interviews", "oral histories (literary works)", "interviews", "sound recordings" ],
+      "version" : [ "0" ],
+      "lds01" : [ "Unrestricted access" ],
+      "lds27" : [ "An oral history interview with Australian born actor Janet Fielding by ABC radio presenter Spencer Howson. Janet Fielding discusses growing up in Brisbane, her acting career, moving to London, portraying a Queenslander in Doctor Who, life in the UK." ],
+      "lds29" : [ "MP3" ],
+      "lds30" : [ "1 digital sound recording (1 hr. 41 min. 47 sec.)" ],
+      "lds31" : [ "Licensed under Creative Commons CC-BY-NC http://creativecommons.org/licenses/by-nc/4.0" ],
+      "lds33" : [ "Unrestricted access" ],
+      "lds37" : [ "audio file" ],
+      "lds48" : [ "30716 Janet Fielding oral history" ],
+      "subject" : [ "Fielding, Janet, 1953-$$QFielding, Janet, 1953- -- Interviews", "Doctor Who (Television program : 1963-1989)", "Actresses -- Queensland -- Brisbane$$QActresses -- Queensland -- Brisbane -- Interviews", "Australians -- England -- London$$QAustralians -- England -- London -- Interviews" ]
+    },
+    "control" : {
+      "sourcerecordid" : [ "99183376220102061" ],
+      "recordid" : [ "alma99183376220102061" ],
+      "sourceid" : "alma",
+      "originalsourceid" : [ "99183376220102061" ],
+      "sourcesystem" : [ "61SLQ_INST" ],
+      "sourceformat" : [ "MARC21" ],
+      "score" : [ "1.0" ],
+      "colldiscovery" : [ "$$Titem$$D81367442940002061$$I61SLQ_INST", "$$Titem$$D81367442950002061$$I61SLQ_INST" ],
+      "isDedup" : false
+    },
+    "addata" : {
+      "originatingSystemIDSubject" : [ "98183376106202061" ],
+      "aulast" : [ "Howson" ],
+      "aufirst" : [ "Spencer" ],
+      "auinit" : [ "S" ],
+      "au" : [ "Howson, Spencer" ],
+      "creatorfull" : [ "$$NHowson, Spencer$$LHowson$$FSpencer$$Rauthor" ],
+      "date" : [ "2016 - 09??" ],
+      "abstract" : [ "An oral history interview with Australian born actor Janet Fielding by ABC radio presenter Spencer Howson. Janet Fielding discusses growing up in Brisbane, her acting career, moving to London, portraying a Queenslander in Doctor Who, life in the UK." ],
+      "oclcid" : [ "30716" ],
+      "format" : [ "book" ],
+      "genre" : [ "audio" ],
+      "ristype" : [ "SOUND" ],
+      "btitle" : [ "Janet Fielding oral history September 2016" ],
+      "url" : [ "http://hdl.handle.net/10462/mp3/1025" ]
+    },
+    "sort" : {
+      "title" : [ "Janet Fielding oral history September 2016" ],
+      "author" : [ "Howson, Spencer, 1972-" ],
+      "creationdate" : [ "2016-09-00" ]
+    },
+    "facets" : {
+      "frbrtype" : [ "6" ]
+    }
+  },
+  "delivery" : {
+    "bestlocation" : null,
+    "holding" : null,
+    "electronicServices" : null,
+    "additionalElectronicServices" : null,
+    "filteredByGroupServices" : null,
+    "quickAccessService" : null,
+    "deliveryCategory" : [ "Alma-D" ],
+    "serviceMode" : [ "Viewit", "quickaccess" ],
+    "availability" : [ "not_restricted" ],
+    "availabilityLinks" : null,
+    "availabilityLinksUrl" : null,
+    "displayedAvailability" : "Not available",
+    "displayLocation" : null,
+    "additionalLocations" : null,
+    "titleRequestableAtItemLevel" : null,
+    "physicalItemTextCodes" : null,
+    "feDisplayOtherLocations" : null,
+    "almaInstitutionsList" : [ ],
+    "recordInstitutionCode" : null,
+    "recordOwner" : "61SLQ_INST",
+    "hasFilteredServices" : null,
+    "digitalAuxiliaryMode" : false,
+    "digitalAuxiliaryThumbnail" : false,
+    "hideResourceSharing" : false,
+    "sharedDigitalCandidates" : null,
+    "consolidatedCoverage" : null,
+    "electronicContextObjectId" : null,
+    "almaOpenurl" : null,
+    "GetIt1" : [ ],
+    "physicalServiceId" : null,
+    "link" : [ {
+      "@id" : ":_0",
+      "linkType" : "linktorsrc",
+      "linkURL" : "http://hdl.handle.net/10462/mp3/1025",
+      "displayLabel" : "Listen to the audio"
+    }, {
+      "@id" : ":_1",
+      "linkType" : "linktorsrc",
+      "linkURL" : "https://amplify.gov.au/slq",
+      "displayLabel" : "Help transcribe the voices of Queensland."
+    } ],
+    "hasD" : true
+  },
+  "enrichment" : {
+    "virtualBrowseObject" : {
+      "isVirtualBrowseEnabled" : false,
+      "callNumber" : "",
+      "callNumberBrowseField" : ""
+    }
+  }
+}
