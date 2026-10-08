@@ -7409,7 +7409,8 @@
         "publisher_metadata_sha256": "9caebb89eb50d6a89359f7d8b7be8d77ff754d1bbc1ec9b4c6553dd05e332c2c"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/leia-organa-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/leia-organa-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/leia-organa-result.json",
+      "delivery_commit": "ce10313e189907f3260f0e87998c1e289ba35e6d"
     }
   ],
   "exclusions": [
