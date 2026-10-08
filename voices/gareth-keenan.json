@@ -1,8 +1,8 @@
 {
   "name": "gareth-keenan",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=XZMqOMtl5C0",
+  "source_url": "https://www.bbc.co.uk/programmes/m0023ygl",
   "reference_audio": "gareth-keenan-ref.wav",
-  "reference_text": "three o 'clock today. Three o 'clock today please. All right then we'll say no I'm done. All right. Okay see ya. There's Keenan. Who's that?",
-  "segment_start_s": 5
+  "reference_text": "Something in my brain shifted and I suddenly understood, and now I'm a coin collector too.",
+  "segment_start_s": 2129.1
 }

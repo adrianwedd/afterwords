@@ -5397,6 +5397,87 @@
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/rimmer-publisher-source.json",
       "source_frame_evidence": "qa/voice-reference-remediation/evidence/rimmer-source-frame500.png",
       "delivery_commit": "fe8767fdb26a898bc5c009becbb69ed7f661f920"
+    },
+    {
+      "wav": "gareth-keenan-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "f5499b10a01c190e338677d37f89898c521b0fe683f1f28b74ef77292aa09eea",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08090773490960503,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "1516b7502f1b08442011e6b02229798c620080445718c48c797990478e430f94",
+        "frames": 237258,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.38,
+        "peak": 0.71112060546875,
+        "rms": 0.06435055500179661,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 2129.1,
+        "source_end_s": 2134.48,
+        "source_start_frame": 93893310,
+        "source_end_frame_exclusive": 94130568,
+        "conversion": "Exact continuous decoded publisher PCM16 frame slice preserving source rate/channels; no cleanup, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/gareth-keenan-qwen3-06b.json",
+          "old_reference_text": "three o 'clock today. Three o 'clock today please. All right then we'll say no I'm done. All right. Okay see ya. There's Keenan. Who's that?",
+          "new_reference_text": "Something in my brain shifted and I suddenly understood, and now I'm a coin collector too.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 2129.1
+        },
+        {
+          "path": "voices/gareth-keenan.json",
+          "old_reference_text": "three o 'clock today. Three o 'clock today please. All right then we'll say no I'm done. All right. Okay see ya. There's Keenan. Who's that?",
+          "new_reference_text": "Something in my brain shifted and I suddenly understood, and now I'm a coin collector too.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 2129.1
+        }
+      ],
+      "source_url": "https://www.bbc.co.uk/programmes/m0023ygl",
+      "adjudication": "Original native reports4or5voices, rapid turn-taking, door chime, scene splice and distorted processed utterance; no useful isolated clean intended voice. Public BBC Screenshot Archaeology programme names guest Mackenzie Crook, introduction1792.4-1796.42 precedes autobiographical answers about writing Detectorists, knowing Toby Jones and collecting coins. Primary publisher attribution plus continuous answer establishes intended actor, independently of acoustic review. Longer2121.2-2134.48 native104 acoustics clear1voice but explicit interesting/interested uncertainty; avoid guessing or normalizing that wording by retaining complete later sentence. Exact2129.1-2134.48 native105 full actual-WAV review confirms1voice/no music/crowd/laughter/effects/acoustic changes/splices/long pauses or either cutoff, low wording uncertainty. Complete sentence literal words agree overlapping native104 and independently aligned source ASR. Actual5.38s useful varied phonemes; native5.8 estimate not edit authority. Exact source PCM16 frame slice equality independently verified, no DSP. Same intended actor natural interview register replaces multi-person edited character scene; Gareth character delivery not claimed preserved. Fresh final entire resulting production corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "sample_exact_publisher_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/gareth-keenan-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "publisher": "BBC Radio4",
+        "programme": "Screenshot: Archaeology",
+        "guest": "Mackenzie Crook",
+        "interviewer": "Ellen E Jones",
+        "source_mp3_sha256": "77f62059b81cfb568852e0b03312aa6f85536ae60fa98cc95c87f16b2fde7625",
+        "source_audio_sha256": "ee45b90f770a9682595f704765882efd87c68a967a58b34aad30f52e807613ad",
+        "programme_html_sha256": "0f9134e1594122777addebba0ab96a530ef0c0477cf702f2cc50bcf7b33f6ed3",
+        "retrieved_utc": "2026-10-08T07:47:51.848069+00:00",
+        "decode": "ffmpeg PCM16 preserving source rate/channels, no cleanup or normalization",
+        "delivery_change": "Same intended actor Mackenzie Crook in natural interview delivery replaces multi-person edited Gareth Keenan scene; in-character delivery is not claimed preserved.",
+        "decode_integrity": "Full ffmpeg decode exited0; no error/invalid/corrupt messages; selected native result reports no effects/acoustic changes.",
+        "source_url": "https://www.bbc.co.uk/programmes/m0023ygl",
+        "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0jyqyrw.mp3",
+        "source_metadata_sha256": "4c4a552efbcecd29f8631e8cfad7a54eeb803f77123e1df64e1d59aa31d4a932",
+        "source_basis": "BBC publisher description explicitly identifies Mackenzie Crook guest and Ellen E Jones interviewer; source introduction1792.4-1796.42 names Mackenzie Crook before his continuous interview about writing Detectorists and personal collecting history; selected sentence answers hobby personality question. Source ASR locates introduction and passage, not acoustic acceptance."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-result.json",
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-publisher-source.json"
     }
   ],
   "exclusions": [

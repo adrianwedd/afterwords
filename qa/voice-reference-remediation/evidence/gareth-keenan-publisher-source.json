@@ -1,0 +1,17 @@
+{
+  "programme_url": "https://www.bbc.co.uk/programmes/m0023ygl",
+  "download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0jyqyrw.mp3",
+  "publisher": "BBC Radio4",
+  "programme": "Screenshot: Archaeology",
+  "guest": "Mackenzie Crook",
+  "interviewer": "Ellen E Jones",
+  "source_mp3_sha256": "77f62059b81cfb568852e0b03312aa6f85536ae60fa98cc95c87f16b2fde7625",
+  "source_audio_sha256": "ee45b90f770a9682595f704765882efd87c68a967a58b34aad30f52e807613ad",
+  "programme_html_sha256": "0f9134e1594122777addebba0ab96a530ef0c0477cf702f2cc50bcf7b33f6ed3",
+  "retrieved_utc": "2026-10-08T07:47:51.848069+00:00",
+  "decode": "ffmpeg PCM16 preserving source rate/channels, no cleanup or normalization",
+  "status": "unaccepted source; primary programme page identifies guest, selected excerpt identity and native result acceptance still required",
+  "identity_basis": "BBC publisher description explicitly identifies Mackenzie Crook guest and Ellen E Jones interviewer; source introduction1792.4-1796.42 names Mackenzie Crook before his continuous interview about writing Detectorists and personal collecting history; selected sentence answers hobby personality question. Source ASR locates introduction and passage, not acoustic acceptance.",
+  "delivery_change": "Same intended actor Mackenzie Crook in natural interview delivery replaces multi-person edited Gareth Keenan scene; in-character delivery is not claimed preserved.",
+  "decode_integrity": "Full ffmpeg decode exited0; no error/invalid/corrupt messages; selected native result reports no effects/acoustic changes."
+}

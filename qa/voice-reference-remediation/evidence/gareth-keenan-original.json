@@ -1,0 +1,37 @@
+{
+  "wav": "gareth-keenan-ref.wav",
+  "source_sha256": "f5499b10a01c190e338677d37f89898c521b0fe683f1f28b74ef77292aa09eea",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "ee278fda-820c-4cf5-9ec2-932da0be16d3",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f5499b10a01c190e338677d37f89898c521b0fe683f1f28b74ef77292aa09eea"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f5499b10a01c190e338677d37f89898c521b0fe683f1f28b74ef77292aa09eea"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ee278fda-820c-4cf5-9ec2-932da0be16d3",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 4,\n  \"speaker_change_intervals_s\": [\n    [0.0, 1.1],\n    [1.1, 2.4],\n    [2.4, 4.0],\n    [4.0, 4.8],\n    [4.8, 5.8],\n    [7.2, 8.5],\n    [8.5, 9.8],\n    [9.8, 12.5]\n  ],\n  \"literal_transcript\": \"Speaker 1: Mate, 3:00 today? Speaker 2: 3:00 today, please. Speaker 1: All right, then we'll say no on that. All right? Speaker 2: All right. Speaker 1: Okay, see ya. [door chime] Speaker 3: Gary Skeenan? Speaker 4: Who's that? Speaker 5 (distorted): Oooooh-eeeeee\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": \"Shop door bell / chimes ringing between ~5.8s and ~7.2s; heavy pitch-shifted / distorted monster vocal processing effect between ~9.8s and ~12.5s.\",\n  \"acoustic_changes\": \"Acoustic space changes around 5.8s - 7.2s across a scene transition from a counter/shop interior to an office/room environment, followed by unnatural digital audio processing/distortion at 9.8s.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": \"Non-vocal interval of approximately 1.4 seconds (~5.8s - ~7.2s) during door chime sound effect between speech segments.\",\n  \"apparent_splices\": \"Obvious scene cut / splice between ~5.8s and ~7.2s indicated by door chime and sudden change in acoustic ambience and speakers.\",\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Multi-speaker dialogue with frequent rapid turn-taking, sound effects (door chimes), scene splice, and no single isolated speaker with adequate duration or complete phrases for TTS reference conditioning.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately \u00b10.3 seconds. Exact transcript wording is subject to perceptual ambiguity (e.g., 'Mate, 3:00 today' vs 'Right, 3:00 today'; 'no on that' vs 'nine on that'; the specific proper noun in 'Gary Skeenan' / 'Gareth Keenan'; whether the final distorted utterance represents a 5th speaker or processed speech from Speaker 4). Candidate clean intervals are marked empty because individual speech segments (e.g., 2.4s - 4.0s) are under 2 seconds, fragmented, and insufficient for conditioning.\"\n}\n```\n",
+    "duration_seconds": 56.48653,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20760,
+      "output_tokens": 5693,
+      "thinking_tokens": 4923,
+      "cache_read_tokens": 15984,
+      "total_tokens": 26453
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
