@@ -1,0 +1,38 @@
+{
+  "wav": "clip-005-ref.wav",
+  "source_sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "043b0bb5-7c70-4045-aea9-43ede324f444",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "043b0bb5-7c70-4045-aea9-43ede324f444",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I expected the American people to rise up.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": true,\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Low uncertainty on transcript wording; speech is clearly articulated. Perceptual speech boundary estimates are approximately 0.2s to 3.4s with trailing room reverb and musical tail extending to ~4.0s (moderate boundary uncertainty of \u00b10.2s). High certainty that pervasive orchestral/synth background music underlies the entire utterance, preventing any clean conditioning interval from being salvaged by trimming.\"\n}\n",
+    "duration_seconds": 62.197342,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20426,
+      "output_tokens": 7301,
+      "thinking_tokens": 6967,
+      "cache_read_tokens": 16207,
+      "total_tokens": 27727
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

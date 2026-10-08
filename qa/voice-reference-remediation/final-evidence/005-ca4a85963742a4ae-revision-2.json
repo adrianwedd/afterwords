@@ -1,0 +1,38 @@
+{
+  "wav": "clip-005-ref.wav",
+  "source_sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "ae835624-bbc6-4707-9586-250c9edef9b4",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ae835624-bbc6-4707-9586-250c9edef9b4",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I expected the American people to rise up.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.0]\n  ],\n  \"uncertainty\": \"Low uncertainty. Transcript is clear. Boundary estimates are approximate but cover the entire spoken phrase. Single speaker is isolated and provides a complete usable phrase for conditioning.\"\n}\n```\n",
+    "duration_seconds": 19.993944,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20622,
+      "output_tokens": 1450,
+      "thinking_tokens": 1143,
+      "cache_read_tokens": 16148,
+      "total_tokens": 22072
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

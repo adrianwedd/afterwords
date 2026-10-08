@@ -38,10 +38,18 @@ def revise(root, plan):
     operation = plan['operation']
     old_bytes = subprocess.check_output(['git', 'show', change['delivery_commit'] + ':voices/' + plan['wav']], cwd=root)
     assert hashlib.sha256(old_bytes).hexdigest() == before['sha256']
-    if operation['type'] == 'lossless_current_pcm_slice':
+    slice_types = ('lossless_current_pcm_slice', 'lossless_publisher_pcm_slice')
+    if operation['type'] in slice_types:
         s, e = operation['start_frame'], operation['end_frame_exclusive']
-        assert 0 <= s < e <= before['frames'] and e-s == after['frames']
-        x, rate = sf.read(io.BytesIO(old_bytes), dtype='int16', always_2d=True)
+        slice_bytes = old_bytes
+        if operation['type'] == 'lossless_publisher_pcm_slice':
+            assert operation['source_url'] and operation['decode_recipe']
+            slice_bytes = Path(plan['publisher_pcm']).read_bytes()
+            assert hashlib.sha256(slice_bytes).hexdigest() == operation['source_sha256']
+        info = sf.info(io.BytesIO(slice_bytes))
+        assert info.subtype == 'PCM_16'
+        assert 0 <= s < e <= info.frames and e-s == after['frames']
+        x, rate = sf.read(io.BytesIO(slice_bytes), dtype='int16', always_2d=True)
         y, yr = sf.read(candidate, dtype='int16', always_2d=True)
         assert rate == yr == operation['sample_rate'] and before['subtype'] == after['subtype'] == 'PCM_16'
         assert np.array_equal(y, x[s:e])
@@ -91,11 +99,15 @@ def revise(root, plan):
     change['resulting_audio'] = after
     change['native_result_evidence'] = revision['native_evidence'][0]
     change['adjudication'] += '\nFresh final correction: ' + plan['adjudication']
-    if operation['type'] == 'lossless_current_pcm_slice':
+    if operation['type'] in slice_types:
         change['operation'] = {'type': 'replacement', 'sample_rate': after['sample_rate'],
             'source_start_frame': operation['start_frame'], 'source_end_frame_exclusive': operation['end_frame_exclusive'],
             'source_frame_origin': 'previous committed admitted reference: ' + revision['previous_delivery_commit'],
             'source_sha256': before['sha256'], 'conversion': 'Lossless PCM16 slice of previous admitted reference; original publisher/render recipe retained in post_remediation_revisions.'}
+        if operation['type'] == 'lossless_publisher_pcm_slice':
+            change['operation'].update(source_frame_origin=operation['source_url'],
+                source_sha256=operation['source_sha256'], conversion=operation['decode_recipe'])
+            change['source_url'] = operation['source_url']
         change['deterministic_qa']['sample_exact_slice'] = True
         shutil.copyfile(candidate, wav)
     for source, dest in evidence + discovery:

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "production_commit": "e71e7458bd899dcfe229f9aba356a3e25091ee49",
+  "production_commit": "10a8d650d924b77ab682f72d742dc3c6b5c7cba2",
   "scope_count": 104,
   "method": "PCM16 signed integer extrema count both -32768 and +32767. Historical inspect_audio samples_at_full_scale uses normalized abs>=1 and counts only the negative endpoint for PCM16. This addendum corrects that measurement limitation without rewriting historical baseline measurements.",
   "records": [
@@ -66,11 +66,11 @@
     },
     {
       "wav": "alan-shore-ref.wav",
-      "sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d",
-      "frames": 315315,
+      "sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2",
+      "frames": 185220,
       "sample_rate": 44100,
-      "channels": 1,
-      "duration_s": 7.15,
+      "channels": 2,
+      "duration_s": 4.2,
       "negative_fullscale_samples": 0,
       "positive_fullscale_samples": 0,
       "signed_fullscale_samples": 0,

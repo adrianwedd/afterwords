@@ -331,7 +331,8 @@ def test_final_signed_pcm_measurements_cover_both_endpoints():
         assert measurement['longest_fullscale_run_ms'] == pytest.approx(longest * 1000 / rate)
 
 
-def test_fresh_revision_rejects_clamped_current_slice_before_mutation(tmp_path, monkeypatch):
+@pytest.mark.parametrize('slice_type', ['lossless_current_pcm_slice', 'lossless_publisher_pcm_slice'])
+def test_fresh_revision_rejects_clamped_slice_before_mutation(tmp_path, monkeypatch, slice_type):
     monkeypatch.syspath_prepend(str(ROOT / 'scripts'))
     revision = load_script('revise_voice_reference')
     qa = tmp_path / 'qa/voice-reference-remediation'
@@ -347,8 +348,13 @@ def test_fresh_revision_rejects_clamped_current_slice_before_mutation(tmp_path, 
     monkeypatch.setattr(revision.subprocess, 'check_output', lambda *args, **kwargs: before)
     plan = {'wav': wav.name, 'expected_sha256': audio['sha256'], 'approved': True,
             'adjudication': 'reject before mutation', 'candidate': str(wav),
-            'operation': {'type': 'lossless_current_pcm_slice', 'start_frame': 0,
+            'operation': {'type': slice_type, 'start_frame': 0,
                           'end_frame_exclusive': audio['frames']+1, 'sample_rate': 8000}}
+    if slice_type == 'lossless_publisher_pcm_slice':
+        plan['publisher_pcm'] = str(wav)
+        plan['operation'].update(source_url='https://example.com/source',
+                                 decode_recipe='Decoded to PCM16 without further DSP',
+                                 source_sha256=hashlib.sha256(before).hexdigest())
     with pytest.raises(AssertionError):
         revision.revise(tmp_path, plan)
     assert wav.read_bytes() == before
@@ -371,6 +377,13 @@ def test_post_remediation_revisions_preserve_reconstructable_operations():
                 buffer = io.BytesIO()
                 sf.write(buffer, samples[op['start_frame']:op['end_frame_exclusive']], rate, format='WAV', subtype='PCM_16')
                 assert hashlib.sha256(buffer.getvalue()).hexdigest() == revision['resulting_audio']['sha256']
+            elif op['type'] == 'lossless_publisher_pcm_slice':
+                assert op['source_url'].startswith('https://')
+                assert len(op['source_sha256']) == len(op['download_sha256']) == 64
+                assert op['decode_recipe'].strip()
+                assert 0 <= op['start_frame'] < op['end_frame_exclusive']
+                assert op['end_frame_exclusive'] - op['start_frame'] == revision['resulting_audio']['frames']
+                assert op['sample_rate'] == revision['resulting_audio']['sample_rate']
             else:
                 assert op['type'] == 'text_only'
                 assert revision['resulting_audio'] == revision['previous_audio']

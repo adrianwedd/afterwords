@@ -80,14 +80,22 @@
     {
       "index": 5,
       "wav": "alan-shore-ref.wav",
-      "sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh primary observation frozen; final root adjudication pending",
-      "transcript_status": "pending",
+      "sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2",
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root correction",
+      "transcript_status": "matched root-adjudicated literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/005-73b7e41b2d12b7f2-pending-primary.json"
+        "qa/voice-reference-remediation/final-evidence/005-ca4a85963742a4ae-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/005-ca4a85963742a4ae-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/005-ca4a85963742a4ae-revision-3.json"
       ],
-      "adjudication": "Fresh full production observation is frozen. Resolve any transcript, contamination or boundary disagreement before acceptance; this pending row does not assert acoustic suitability."
+      "adjudication": "Fresh existing-crop hearings disagree They/He/ey and a clipped opening is confirmed. Recover the preceding first-person onset directly from the same publisher source: wider newly decoded window177 has two independent native hearings positively hearing I expected, plus a later same-speaker scoff. Retain only the complete4.20s sentence from11.70 to15.90, lossless44100Hz PCM16 publisher frames515970:701190, no DSP/resampling/channel mixing; this excludes the scoff rather than guessing whether to transcribe Huh. All three current-candidate178 full hearings positively hear I expected and complete final up with no cutoff, one speaker and no laughter/crowd/SFX/splice. First3.8 reports music; independent3.1 and targeted3.8 explicitly hear no music, with targeted inspection identifying uniform low room air, no instrument or melodic/rhythmic movement. Resolve the outlying soundtrack label from those two independent exact-file observations. Admit complete isolated sentence with useful phonetic variety and full pronoun rather than the damaged crop. Publisher URL, compressed/download SHA, decoded source SHA, exact frames, decoding recipe, wider native context and prior Git delivery are all retained. Whole-corpus status remains pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 6,
@@ -422,13 +430,20 @@
       "index": 24,
       "wav": "clara-oswald-ref.wav",
       "sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf",
-      "status": "needs adjudication",
-      "native_qa_verdict": "fresh primary observation frozen; final root adjudication pending",
-      "transcript_status": "pending",
+      "status": "accepted",
+      "native_qa_verdict": "passed after fresh root correction",
+      "transcript_status": "matched root-adjudicated literal words",
       "evidence": [
-        "qa/voice-reference-remediation/final-evidence/024-fc6e77cc7d7a16eb-pending-primary.json"
+        "qa/voice-reference-remediation/final-evidence/024-fc6e77cc7d7a16eb-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/024-fc6e77cc7d7a16eb-revision-2.json"
       ],
-      "adjudication": "Fresh full production observation is frozen. Resolve any transcript, contamination or boundary disagreement before acceptance; this pending row does not assert acoustic suitability."
+      "adjudication": "Primary and independent3.1 positively hear it was rather than existing its. Another broad3.8 hears its, but targeted phonemic full3.8 positively distinguishes two syllables [it wez] with an actual labiovelar w glide and reduced vowel, corroborating the first two hearings. Correct it was in every associated profile, retaining people are looking which all hear.3.1 start-cutoff label explicitly concerns abrupt intact and then, while primary and both careful3.8 hear complete initial words with no phonemic clipping. All hear one isolated clear voice and no contamination/splice; no audio or source provenance changes.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "production_hash_match": true,
+        "profile_relationships_consistent": true,
+        "samples_at_full_scale": 0
+      }
     },
     {
       "index": 25,

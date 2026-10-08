@@ -142,30 +142,30 @@
       "wav": "alan-shore-ref.wav",
       "anonymous_wav": "clip-005-ref.wav",
       "audio": {
-        "sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d",
-        "frames": 315315,
+        "sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2",
+        "frames": 185220,
         "sample_rate": 44100,
-        "channels": 1,
+        "channels": 2,
         "subtype": "PCM_16",
-        "duration_s": 7.15,
-        "peak": 0.9000244140625,
-        "rms": 0.10925076510370772,
+        "duration_s": 4.2,
+        "peak": 0.9696044921875,
+        "rms": 0.18319985392050794,
         "samples_at_full_scale": 0
       },
       "profiles": [
         {
           "path": "voices/alan-shore-qwen3-06b.json",
-          "profile_sha256": "a94734e0db469ba7af52bc6d9b132b026dc117d2d91776715ac5b2066446b59b",
-          "reference_text": "They expected the American people to rise up. They didn't."
+          "profile_sha256": "f549c29cb5fdac09b97c6a0aea97a7597438e9b5bbbfa17226a16348cc170551",
+          "reference_text": "I expected the American people to rise up."
         },
         {
           "path": "voices/alan-shore.json",
-          "profile_sha256": "38f22613eb36d6bb26b22a611cbae65868cec518e54c05df8f8382b8ecb8f41f",
-          "reference_text": "They expected the American people to rise up. They didn't."
+          "profile_sha256": "e4212bc8b4ea1111413089cf1ee27435bc8362aa1ff6a6d3889f387fa394a5c4",
+          "reference_text": "I expected the American people to rise up."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {
@@ -744,17 +744,17 @@
       "profiles": [
         {
           "path": "voices/clara-oswald-qwen3-06b.json",
-          "profile_sha256": "3465ed8ee6e80e0be5e7819c18cf399bd973d9774708e3b801b59349f5b93948",
-          "reference_text": "And then it's that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at."
+          "profile_sha256": "894d1a4b0de97453ec462347fda8a2af8eca9ff76c0689edec0729cff924a15c",
+          "reference_text": "And then it was that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at."
         },
         {
           "path": "voices/clara-oswald.json",
-          "profile_sha256": "31e50c359d234864efb186f81c7d15e8de2fff1e9f1d7ce146c3c52c37e59bc8",
-          "reference_text": "And then it's that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at."
+          "profile_sha256": "18afe146d759f20e26f55b04773d50c272fdaa7771408c85c5ccb97896253a1e",
+          "reference_text": "And then it was that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
+      "native_listening": "fresh revision reviewed",
+      "transcript_verification": "root adjudicated fresh literal text",
       "final_disposition": "pending"
     },
     {

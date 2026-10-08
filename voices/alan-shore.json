@@ -2,7 +2,7 @@
   "name": "alan-shore",
   "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=qd5vRphPqnk",
-  "segment_start_s": 12,
-  "reference_text": "They expected the American people to rise up. They didn't.",
+  "segment_start_s": 11.7,
+  "reference_text": "I expected the American people to rise up.",
   "reference_audio": "alan-shore-ref.wav"
 }

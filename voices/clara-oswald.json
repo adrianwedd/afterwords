@@ -2,7 +2,7 @@
   "name": "clara-oswald",
   "source_url": "https://www.youtube.com/watch?v=4FqH8GvxVzA",
   "reference_audio": "clara-oswald-ref.wav",
-  "reference_text": "And then it's that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at.",
+  "reference_text": "And then it was that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at.",
   "notes": "Reference remediated; see qa/voice-reference-remediation/changes.json for provenance and native listening evidence.",
   "segment_start_s": 19.68
 }
