@@ -6480,7 +6480,8 @@
         "publisher_metadata_sha256": "0586f00d603b57dc938c54bc6ee32a1e1c84a098eca43cb0f9418ef3faac778f"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/kitt-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/kitt-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/kitt-result.json",
+      "delivery_commit": "138e11dbae99fc333304e535d2fda080a316fa57"
     }
   ],
   "exclusions": [
