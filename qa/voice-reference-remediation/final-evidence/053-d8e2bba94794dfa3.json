@@ -1,0 +1,38 @@
+{
+  "wav": "clip-053-ref.wav",
+  "source_sha256": "d8e2bba94794dfa32420186c1ea7805cad648224af496e3e4547c54d6a6c2691",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "b87a52bb-58ee-424e-8f05-c963fddb905c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d8e2bba94794dfa32420186c1ea7805cad648224af496e3e4547c54d6a6c2691"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d8e2bba94794dfa32420186c1ea7805cad648224af496e3e4547c54d6a6c2691"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b87a52bb-58ee-424e-8f05-c963fddb905c",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"But this thing is going to go on until springtime, so maybe we'll recalibrate and realize that we are all in it together, so who knows?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; consistent close-mic studio/room acoustic throughout\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.1, 8.7]\n  ],\n  \"uncertainty\": \"Low uncertainty on transcript and speaker isolation; minor phonetic reduction between 'going to' and 'gonna'; temporal boundary estimates are perceptual approximations within \u00b10.3s.\"\n}\n```\n",
+    "duration_seconds": 24.323819,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20139,
+      "output_tokens": 2258,
+      "thinking_tokens": 1917,
+      "cache_read_tokens": 16145,
+      "total_tokens": 22397
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

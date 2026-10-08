@@ -1,0 +1,38 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "80c47d9cd909b85e87638f599f54397938a85d765480a6a66a80fb442962c3e1",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "9dc68fb5-9230-449d-9748-37eed000e708",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "80c47d9cd909b85e87638f599f54397938a85d765480a6a66a80fb442962c3e1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "80c47d9cd909b85e87638f599f54397938a85d765480a6a66a80fb442962c3e1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "9dc68fb5-9230-449d-9748-37eed000e708",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"He, and occasionally she, is overwhelmed by the amount of stuff that has been written, and the ground still to be covered. How shall I ever catch up?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 7.5],\n    [8.7, 11.2]\n  ],\n  \"uncertainty\": \"Low lexical uncertainty; words are clearly articulated. Boundary estimates carry perceptual uncertainty of approximately \u00b10.3s due to room reverberance and trailing decay. A perceptible pause of ~1.2s occurs between the two sentences (~7.5s to 8.7s). Noticeable room/hall reverberation is present throughout but remains acoustically consistent with no overlapping speakers or background sound.\"\n}\n",
+    "duration_seconds": 47.750822,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20316,
+      "output_tokens": 4941,
+      "thinking_tokens": 4556,
+      "cache_read_tokens": 16057,
+      "total_tokens": 25257
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

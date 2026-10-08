@@ -1,0 +1,38 @@
+{
+  "wav": "clip-003-ref.wav",
+  "source_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "3e80afb7-5410-4bec-a3a3-2b206ed82a84",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3e80afb7-5410-4bec-a3a3-2b206ed82a84",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"We hear an awful lot of lefty whinging about the NHS waiting lists\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None detected; consistent room and microphone acoustics throughout\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 4.3]\n  ],\n  \"uncertainty\": \"Wording is high confidence with clear enunciation. Timestamps are perceptual estimates with +/-0.15s margin: speech starts cleanly at ~0.2s and concludes at ~4.3s. The laughter/chuckle between ~4.4s and ~5.3s is ambiguous as to whether it originates from the speaker's own breathy chortle or a nearby attendee reaction. The audio cuts off abruptly during this post-utterance laughter around ~5.3s.\"\n}\n",
+    "duration_seconds": 33.185155,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20057,
+      "output_tokens": 3514,
+      "thinking_tokens": 3124,
+      "cache_read_tokens": 16179,
+      "total_tokens": 23571
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "025eab1f-f69b-4c63-b40f-5b0bb8298f45",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "025eab1f-f69b-4c63-b40f-5b0bb8298f45",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, for the first bit of it, for my bit in the cave, um, it was actually quite a It meant scrambling over some rocks, and um, and getting into this little tiny gap in in the cave\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent indoor interview acoustics throughout with minor room reflection; no perceptible shifts in microphone position or room reverberation.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": \"Possible splice or natural self-correction/false start between 'quite a' and 'It meant' (~4.5s-4.8s); repetition of 'in in' near the end (~8.7s).\",\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.2],\n    [4.8, 6.4]\n  ],\n  \"uncertainty\": \"Boundaries are perceptual estimates with an uncertainty of \u00b10.3 to 0.5 seconds. Wording between 'quite a' and 'It meant' contains a false start or conversational restart that could be a minor edit, and 'in in' repeats right before the abrupt finish at ~9.3s.\"\n}\n",
+    "duration_seconds": 30.060458,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20266,
+      "output_tokens": 2955,
+      "thinking_tokens": 2506,
+      "cache_read_tokens": 16007,
+      "total_tokens": 23221
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
