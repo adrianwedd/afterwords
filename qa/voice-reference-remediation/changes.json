@@ -7212,7 +7212,8 @@
         "publisher_metadata_sha256": "b24c7b9dcbf411f0f23d14bd80e6f4d646b29cfd1ccf9c8a073658a0bbe68dca"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/dave-bowman-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/dave-bowman-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/dave-bowman-result.json",
+      "delivery_commit": "557b9369265d547275ca6e82c0a5b1d95cb6e582"
     }
   ],
   "exclusions": [
