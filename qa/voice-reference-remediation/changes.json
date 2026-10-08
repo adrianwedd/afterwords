@@ -7612,7 +7612,8 @@
         "publisher_metadata_sha256": "dd9eb80f69daf9c54f235b3cc666628116aad751a4b0639201173a5282b70ede"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/samantha-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/samantha-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/samantha-result.json",
+      "delivery_commit": "ebdc75c1f250129ebd891977cda60e1f6050105d"
     }
   ],
   "exclusions": [
