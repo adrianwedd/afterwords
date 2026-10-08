@@ -1,0 +1,8 @@
+{
+  "archive_candidate": "/tmp/afterwords-candidates-batch-069/voices/clip-001-ref.wav",
+  "source": "scratch/voice-replacement-sources/blanchett-desert-island-bbc.wav",
+  "analysis_rate": 8000,
+  "source_start_s": 123.28225,
+  "normalized_pcm_correlation": 0.9846434009272765,
+  "analysis_only": "Downmix/resample only to locate corresponding source speech; no production audio transformed"
+}

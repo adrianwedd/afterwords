@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "18d9f5b8b14f2d1ddc78d9033874078e1e3e1aad88e1e3188a18e47e50a3c147",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "b096700b-e67e-4009-b4ed-6a5f417c860c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "18d9f5b8b14f2d1ddc78d9033874078e1e3e1aad88e1e3188a18e47e50a3c147"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "18d9f5b8b14f2d1ddc78d9033874078e1e3e1aad88e1e3188a18e47e50a3c147"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b096700b-e67e-4009-b4ed-6a5f417c860c",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I guess the biggest challenge is the fact that I've become so accustomed to working with a camera and on a set and being able to do it again if it wasn't quite good enough or if I forgot my line.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 10.5]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty of approximately +/- 0.5s as no timecode metadata was consulted. Wording is clear with minor phonetic ambiguity between singular 'line' versus plural 'lines' at the conclusion.\"\n}\n",
+    "duration_seconds": 35.742174,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20445,
+      "output_tokens": 2798,
+      "thinking_tokens": 2439,
+      "cache_read_tokens": 16111,
+      "total_tokens": 23243
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

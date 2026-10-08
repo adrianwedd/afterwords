@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "18d9f5b8b14f2d1ddc78d9033874078e1e3e1aad88e1e3188a18e47e50a3c147",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "c2131b65-8d62-49a9-9654-28dbb2f1fcf8",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "18d9f5b8b14f2d1ddc78d9033874078e1e3e1aad88e1e3188a18e47e50a3c147"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "18d9f5b8b14f2d1ddc78d9033874078e1e3e1aad88e1e3188a18e47e50a3c147"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c2131b65-8d62-49a9-9654-28dbb2f1fcf8",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I guess the biggest challenge is the fact that I've become so accustomed to working with a camera and on a set and being able to do it again if it wasn't quite good enough or I forgot my line.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [[0.0, 11.0]],\n  \"uncertainty\": \"Wording uncertainty is very low as the speech is highly intelligible and clear. Boundary estimate uncertainty is high (duration estimated around 10-12s based on speech pacing) because no exact timing tools were used. The audio features a single, well-isolated speaker delivering complete, unbroken phrases suitable for conditioning.\"\n}\n```\n",
+    "duration_seconds": 25.730008,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20577,
+      "output_tokens": 1746,
+      "thinking_tokens": 1375,
+      "cache_read_tokens": 16051,
+      "total_tokens": 22323
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

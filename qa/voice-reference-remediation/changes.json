@@ -4209,7 +4209,238 @@
         "source_frame": "qa/voice-reference-remediation/evidence/clara-oswald-source-023.jpg"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/clara-oswald-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/clara-oswald-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/clara-oswald-result.json",
+      "delivery_commit": "059508fb0b484a8e2083be361c69f1cd233c5f4c"
+    },
+    {
+      "wav": "amy-pond-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "f63f2ecf0b4d27a087b65daf24b4a9311be5febbf5e9bf99a1cca542679ee979",
+        "frames": 211383,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.807625,
+        "peak": 0.899993896484375,
+        "rms": 0.07036017082435435,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "18d9f5b8b14f2d1ddc78d9033874078e1e3e1aad88e1e3188a18e47e50a3c147",
+        "frames": 381906,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 8.66,
+        "peak": 0.54425048828125,
+        "rms": 0.08660175655471726,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 70.4,
+        "source_end_s": 79.06,
+        "source_start_frame": 3104640,
+        "source_end_frame_exclusive": 3486546,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/amy-pond-qwen3-06b.json",
+          "old_reference_text": "That you'll be safe, cared for and protected, but this isn't the time for lies, what you're going to be Melody.",
+          "new_reference_text": "I guess the biggest challenge is the fact that I've become so accustomed to working with a camera and on a set and being able to do it again if it wasn't quite good enough or if I forgot my line.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 70.4
+        },
+        {
+          "path": "voices/amy-pond.json",
+          "old_reference_text": "That you'll be safe, cared for and protected, but this isn't the time for lies, what you're going to be Melody.",
+          "new_reference_text": "I guess the biggest challenge is the fact that I've become so accustomed to working with a camera and on a set and being able to do it again if it wasn't quite good enough or if I forgot my line.",
+          "old_segment_start_s": 5,
+          "new_segment_start_s": 70.4
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=He_qwkw0v7g",
+      "adjudication": "Original native reports emotional sniffling/breaths and cutoff; other Radio1 replacement trial62 has persistent music and chuckle and is not admitted. Radio2 archive current exact70.4-79.06 provides continuous complete answer. Full exact native3.8 and independent3.1 both confirm one isolated voice, no music/crowd/laughter/effects/changes/splices/cuts. Both hear forgot my line, superseding ASR got my line and retaining singular line. Native3.8 hears or if I, native3.1 omits second if; ASR also aligns or if, so root retains softly connected if from explicit first native hearing rather than imposing grammar. Actual8.66s complete answer with useful variety, source rate/channels/PCM retained; no cleanup, splice or padding. Conversational actor delivery replaces emotional character speech; no claim original performance register preserved. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_sample_exact_source_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/amy-pond-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=He_qwkw0v7g",
+        "title": "Karen Gillan Graham Norton Radio 2 (29 Oct 2011)",
+        "uploader": "Cult Fix",
+        "upload_date": "20111030",
+        "source_audio_sha256": "09a372ba185c24d9b1ee41d1816367593557cbaca1d0f45c012f8698e2721bdf",
+        "source_metadata_sha256": "007afcc03cf36115acab3877cdd8e0444bcf6008e0afdabeb710b3b3b4a20234",
+        "source_basis": "Public BBC Radio2 Graham Norton interview archive explicitly introduces Karen Gillan at beginning and addresses guest about West End debut; selected continuous answer concerns stage vs camera work. Official DoctorWho credits Karen Gillan as Amy Pond.",
+        "role_credit_url": "https://www.doctorwho.tv/characters/amy-pond",
+        "source_download_format": "Public HLS audio format233 after ordinary140 download returned403; no authentication or geography workaround. Cached video metadata identifies same public source; fallback log records actual download format.",
+        "delivery_change": "Same intended actor, natural interview delivery instead of emotional in-character scene."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/amy-pond-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/amy-pond-result.json",
+      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/amy-pond-result-secondary.json"
+    },
+    {
+      "wav": "bill-potts-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "7bfcacd7753db4b83963e5167856ef5646a2a2c6dff449714d8e3000ddc69ec3",
+        "frames": 637760,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.286666666666667,
+        "peak": 0.262115478515625,
+        "rms": 0.025172383147474994,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "dbda10009b02730fdbb9dff2b9adea66432404a181090c5e6051311931304cf3",
+        "frames": 179928,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.08,
+        "peak": 0.121734619140625,
+        "rms": 0.01738206715707727,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 40.5,
+        "source_end_s": 44.58,
+        "source_start_frame": 1786050,
+        "source_end_frame_exclusive": 1965978,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/bill-potts-qwen3-06b.json",
+          "old_reference_text": "I am the real Bill! Our life is just memories. Our more rare memories. So I'm her. Okay. I'm gonna prove to you how important memories are. And don't go forgetting me again because... ...quite frankly, that was a fence.",
+          "new_reference_text": "Well, I think arguably there have been lots of gay characters on Doctor Who previously.",
+          "old_segment_start_s": 27,
+          "new_segment_start_s": 40.5
+        },
+        {
+          "path": "voices/bill-potts.json",
+          "old_reference_text": "I am the real Bill! Our life is just memories. Our more rare memories. So I'm her. Okay. I'm gonna prove to you how important memories are. And don't go forgetting me again because... ...quite frankly, that was a fence.",
+          "new_reference_text": "Well, I think arguably there have been lots of gay characters on Doctor Who previously.",
+          "old_segment_start_s": 27,
+          "new_segment_start_s": 40.5
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=c9i7_Jcoa1s",
+      "adjudication": "Original is spliced character montage with continuous score and cutoffs. First interview candidates68/72 retain repetitions and uncertain cutoff at round/loads; not admitted. Select complete subsequent statement40.5-44.58 from official Good Morning Britain interview. Full exact native3.8 confirms one isolated voice, complete boundaries, no music/crowd/laughter/effects/acoustic change/splice; literal transcript agrees with independent ASR after native review. Actual4.08s shorter than preferred but one full varied sentence, no padded silence/splicing. Camera frame42 shows named interview guest speaking with DoctorWhoReturns lower-third; source credits Pearl Mackie and official DoctorWho maps her to intended Bill. Actor interview delivery differs from dramatic scene, recorded explicitly. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_sample_exact_source_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/bill-potts-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=c9i7_Jcoa1s",
+        "title": "Pearl Mackie on Playing the First Gay Doctor Who Companion | Good Morning Britain",
+        "uploader": "Good Morning Britain",
+        "upload_date": "20170413",
+        "source_audio_sha256": "65096de0fc9d6bebb7fd3c1554c1e0a97e9211aef58596ede9a3fba39184855f",
+        "source_metadata_sha256": "f4b2e20bf5a39ab2403a406c7fbb1d64d76cebb1d9559a0c06659782c0eff83c",
+        "source_basis": "Official ITV Good Morning Britain channel names Pearl Mackie; on-camera guest speaks selected answer, sourceframe42 has DoctorWhoReturns lower-third. Official DoctorWho cast credits Pearl Mackie as Bill.",
+        "role_credit_url": "https://www.doctorwho.tv/stories/the-lie-of-the-land",
+        "delivery_change": "Same intended actor, natural interview delivery replaces dramatic spliced scene performance.",
+        "source_frame": "qa/voice-reference-remediation/evidence/bill-potts-source-042.jpg"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/bill-potts-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bill-potts-result.json"
+    },
+    {
+      "wav": "galadriel-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "b1eee5a0e9fe18f1c71b7a1e00034610d5a8f3cc6019e71eee184b9a62ac2765",
+        "frames": 352256,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.677333333333333,
+        "peak": 0.9000244140625,
+        "rms": 0.06804791975482977,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "056c6cf8465b2a104c984774b474764c938b28b0a3f1e7fdd4a5d37c1f06d388",
+        "frames": 318843,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 7.23,
+        "peak": 0.6512451171875,
+        "rms": 0.08147210937193317,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 123.28225,
+        "source_end_s": 130.51225,
+        "source_start_frame": 5436747,
+        "source_end_frame_exclusive": 5755590,
+        "conversion": "Exact continuous decoded PCM16 publisher source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/galadriel-qwen3-06b.json",
+          "old_reference_text": "It began with the forging of the great rings. Three were given to the elves, immortal, wisest and fairest of all beings. Seven to the dwarf lords.",
+          "new_reference_text": "It's often the starting point for me when I'm thinking about a role or an atmosphere that you're stepping into as an actor.",
+          "old_segment_start_s": 38,
+          "new_segment_start_s": 123.28225
+        },
+        {
+          "path": "voices/galadriel.json",
+          "old_reference_text": "It began with the forging of the great rings. Three were given to the elves, immortal, wisest and fairest of all beings. Seven to the dwarf lords.",
+          "new_reference_text": "It's often the starting point for me when I'm thinking about a role or an atmosphere that you're stepping into as an actor.",
+          "old_segment_start_s": 38,
+          "new_segment_start_s": 123.28225
+        }
+      ],
+      "source_url": "https://www.bbc.co.uk/programmes/m001g30v",
+      "adjudication": "Original native reports continuous prominent orchestral score beneath narration; cannot recover isolated target by trimming. Initial public interview archiveFY8I_wIJtm4 selected100.35-107.58 passed full native69, but uploader explicitly describes extra music elsewhere, so prefer directly offered BBC publisher podcast download instead. Analysis-only8kHz mono cross-correlation locates equivalent utterance in publisher source at123.28225s with normalized correlation0.9846434; no source/production audio altered by that measurement. Exact publisher decoded PCM bounds in operation yield actual7.23s. Full exact native75 confirms one isolated voice, complete boundaries, no music/crowd/laughter/effects/change/splice and same literal transcript as independently heard archive69. Current native notes minor connected-speech that youre ambiguity; it explicitly renders that youre, agreed by archive native and publisher-source ASR. Root retains that youre rather than grammatical guess being youre. Complete varied statement, sensible level, no normalization, separation, denoising, padding or splice. Interview actor delivery differs from cinematic character narration, recorded explicitly. Fresh final corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false,
+        "replacement_sample_exact_source_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/galadriel-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.bbc.co.uk/programmes/m001g30v",
+        "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0dmjjtx.mp3",
+        "title": "Cate Blanchett, actor",
+        "publisher": "BBC Radio 4",
+        "interviewer": "Lauren Laverne",
+        "source_mp3_sha256": "7267418d8cb82b35ee572b4de92c9afe6441c3d4bce8b997899ecf629d1bc88d",
+        "source_audio_sha256": "cc13d841b7e94b56002b42d4db2c458a16f52aa1b59fc86f15dc69124628e0d1",
+        "source_metadata_sha256": "8ffac7641e5fd7c28b0010a20568d4db6894a0a48e33bbb1407e9f3ae820a9a2",
+        "source_basis": "Direct BBC podcast; programme credits guest, interviewer, and Galadriel role.",
+        "delivery_change": "Same intended actor; natural interview delivery replaces scored cinematic narration.",
+        "publisher_metadata": "qa/voice-reference-remediation/evidence/galadriel-publisher-source.json",
+        "source_matching_analysis": "qa/voice-reference-remediation/evidence/galadriel-publisher-correlation.json",
+        "prior_archive_trial": "qa/voice-reference-remediation/evidence/galadriel-archive-trial.json",
+        "prior_archive_source_url": "https://www.youtube.com/watch?v=FY8I_wIJtm4"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/galadriel-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/galadriel-result.json"
     }
   ],
   "exclusions": [
