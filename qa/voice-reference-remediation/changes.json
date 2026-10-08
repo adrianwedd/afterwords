@@ -303,14 +303,14 @@
       "profiles": [
         {
           "path": "voices/ace-qwen3-06b.json",
-          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
+          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although\u2014",
           "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
           "old_segment_start_s": 90,
           "new_segment_start_s": 152.98
         },
         {
           "path": "voices/ace.json",
-          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
+          "old_reference_text": "I think I might have slightly overestimated myself here, Professor. Although\u2014",
           "new_reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.",
           "old_segment_start_s": 90,
           "new_segment_start_s": 152.98
@@ -911,7 +911,7 @@
       "final_corpus_acceptance": "pending",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=n-Zm8H6G108",
-        "title": "Blackadder II's funniest and rudest put downs 😂 | Blackadder - BBC",
+        "title": "Blackadder II's funniest and rudest put downs \ud83d\ude02 | Blackadder - BBC",
         "uploader": "BBC",
         "source_audio_sha256": "1c4cec712ed0abbe5eee1240e3e31a73240a6629f5cd1e94bada5260dc1ad86e",
         "source_metadata_sha256": "c3639aa8e0c37b39b3b95a21a6aed7eb8edb7865201f608a040f9b0733b5c6ef",
@@ -2505,14 +2505,14 @@
       "profiles": [
         {
           "path": "voices/rod-serling-qwen3-06b.json",
-          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
+          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner \u2014 a strange intersection in a shadow land called the Twilight Zone.",
           "new_reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet.",
           "old_segment_start_s": 30,
           "new_segment_start_s": 63.22
         },
         {
           "path": "voices/rod-serling.json",
-          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
+          "old_reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner \u2014 a strange intersection in a shadow land called the Twilight Zone.",
           "new_reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet.",
           "old_segment_start_s": 30,
           "new_segment_start_s": 63.22
@@ -3008,7 +3008,8 @@
         "source_frame_s": 61
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/basil-fawlty-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/basil-fawlty-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/basil-fawlty-result.json",
+      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb"
     },
     {
       "wav": "bernard-black-ref.wav",
@@ -3079,7 +3080,8 @@
         "source_basis": "Public broadcaster-published interview explicitly credits intended speaker; retained complete answer excludes interviewer and audience responses."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bernard-black-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/bernard-black-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bernard-black-result.json",
+      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb"
     },
     {
       "wav": "eartha-ref.wav",
@@ -3150,7 +3152,8 @@
         "source_basis": "Public broadcaster-published interview explicitly credits intended speaker; retained complete answer excludes interviewer and audience responses."
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/eartha-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/eartha-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/eartha-result.json",
+      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb"
     },
     {
       "wav": "jim-royle-ref.wav",
@@ -3234,7 +3237,156 @@
         },
         "evidence": "qa/voice-reference-remediation/evidence/jim-royle-hesitations.json",
         "scope": "Literal hesitations in retained final3.56s only; full8.86s native acoustic acceptance separate."
-      }
+      },
+      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb"
+    },
+    {
+      "wav": "seven-of-nine-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "TRIM",
+      "original_audio": {
+        "sha256": "387fc5b4bd69e42da11b452f516c1727a99240030f03fd11fea3f8bf62ebcbbe",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10027881261909924,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "b83cdf51c9dbd8141f8bcb5907925ec4c8fd53a4b65d46a3d2d4ba20ef7efc71",
+        "frames": 685755,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 15.55,
+        "peak": 0.553314208984375,
+        "rms": 0.08810485352393398,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 33.4,
+        "source_end_s": 48.95,
+        "source_start_frame": 1472940,
+        "source_end_frame_exclusive": 2158695,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/seven-of-nine-qwen3-06b.json",
+          "old_reference_text": "Today, Ensign Kim and I will conduct a comprehensive diagnostic of the aft sensor array. I have allocated 3 hours 20 minutes for the task, and an additional 17 minutes for Ensign Kim's usual conversational digressions.",
+          "new_reference_text": "But yeah, it's, it's, it's nice to, um, finally get to talk about things like this guy being part of the show, Todd Stashwick, who's brilliant beyond words, and I cannot wait for everybody to see him in action, um, and to meet Captain Shaw.",
+          "old_segment_start_s": 24,
+          "new_segment_start_s": 33.4
+        },
+        {
+          "path": "voices/seven-of-nine.json",
+          "old_reference_text": "Today, Ensign Kim and I will conduct a comprehensive diagnostic of the aft sensor array. I have allocated 3 hours 20 minutes for the task, and an additional 17 minutes for Ensign Kim's usual conversational digressions.",
+          "new_reference_text": "But yeah, it's, it's, it's nice to, um, finally get to talk about things like this guy being part of the show, Todd Stashwick, who's brilliant beyond words, and I cannot wait for everybody to see him in action, um, and to meet Captain Shaw.",
+          "old_segment_start_s": 24,
+          "new_segment_start_s": 33.4
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=Ri2dUefObdY",
+      "adjudication": "Original native acoustic excerpt confirms continuous score and cutoffs; failed full quotation attempts not treated as transcript acceptance. Replaced with continuous15.55s Jeri Ryan answer from Collider2023 interview. Two independent blind full native hearings3.8 and3.1 agree on one isolated voice, complete boundaries and every literal word including its repeated three times and both um fillers, which ASR collapsed. No music/crowd/laughter/effects/splices or destructive room noise heard. This is the intended actor in conversational2023 interview delivery, not an assertion of original Voyager-era in-character performance; age/delivery shift explicit. No DSP cleanup or splicing. Fresh corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/seven-of-nine-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=Ri2dUefObdY",
+        "title": "Star Trek: Picard Season 3: Jeri Ryan & Todd Stashwick Discuss Final Season",
+        "uploader": "Collider Interviews",
+        "upload_date": "20230215",
+        "source_audio_sha256": "a7ae98de185c646f42231acd68be2074b0d3dd5f60aab5a2024cf4ed5836a687",
+        "source_metadata_sha256": "c227e345aec024e5f381bd60113f1c094bc5e427215aefc1889662941ed17012",
+        "source_basis": "Publisher-produced interview explicitly credits Jeri Ryan, the intended Seven performer, and Todd Stashwick; camera footage shows Ryan giving these answers, excluding male/interviewer turns.",
+        "source_frame_evidence": "qa/voice-reference-remediation/evidence/jeri-ryan-source-100.jpg",
+        "source_frame_s": 100
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-result.json",
+      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-result-secondary.json"
+    },
+    {
+      "wav": "seven-of-nine-picard-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "38058d06d7fd5724db6ec31c17ac04d080d25a8fbd10c21cae21510ee311bdb1",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08504917960006239,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe",
+        "frames": 635040,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 14.4,
+        "peak": 0.5560302734375,
+        "rms": 0.08264865944406123,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 94.65,
+        "source_end_s": 109.05,
+        "source_start_frame": 4174065,
+        "source_end_frame_exclusive": 4809105,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/seven-of-nine-picard-qwen3-06b.json",
+          "old_reference_text": "The USS Boyager, she made her name farther out than any of those other relics had ever gone. I was reborn there. She was my home.",
+          "new_reference_text": "I really believe that. I think that every part of this story is just, um, so beautifully done for all of these characters. The arcs for all of these characters, I think, is so respectfully and beautifully done.",
+          "old_segment_start_s": 10,
+          "new_segment_start_s": 94.65
+        },
+        {
+          "path": "voices/seven-of-nine-picard.json",
+          "old_reference_text": "The USS Boyager, she made her name farther out than any of those other relics had ever gone. I was reborn there. She was my home.",
+          "new_reference_text": "I really believe that. I think that every part of this story is just, um, so beautifully done for all of these characters. The arcs for all of these characters, I think, is so respectfully and beautifully done.",
+          "old_segment_start_s": 10,
+          "new_segment_start_s": 94.65
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=Ri2dUefObdY",
+      "adjudication": "Original full native hearing finds continuous synthesizer score throughout; prior KEEP hypothesis rejected. Replaced with continuous14.4s Jeri Ryan answer from Collider2023 Picard interview. Two independent full blind native hearings3.8 and3.1 confirm one isolated voice, complete boundaries, no music/crowd/laughter/effects/splices. Both hear every part of THIS story and the um filler, while ASR rendered THE story and omitted um. First native records slight this/the ambiguity; independent3.1 agrees this with low uncertainty, so keep native this and retain actual is rather than correcting grammar to are. Sentence punctuation varies without changing audible words. Publisher credits and speaking-camera context support intended actor; conversational interview rather than in-character performance is explicitly recorded. No DSP cleanup/splicing. Fresh corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/seven-of-nine-picard-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=Ri2dUefObdY",
+        "title": "Star Trek: Picard Season 3: Jeri Ryan & Todd Stashwick Discuss Final Season",
+        "uploader": "Collider Interviews",
+        "upload_date": "20230215",
+        "source_audio_sha256": "a7ae98de185c646f42231acd68be2074b0d3dd5f60aab5a2024cf4ed5836a687",
+        "source_metadata_sha256": "c227e345aec024e5f381bd60113f1c094bc5e427215aefc1889662941ed17012",
+        "source_basis": "Publisher-produced interview explicitly credits Jeri Ryan, the intended Seven performer, and Todd Stashwick; camera footage shows Ryan giving these answers, excluding male/interviewer turns.",
+        "source_frame_evidence": "qa/voice-reference-remediation/evidence/jeri-ryan-source-100.jpg",
+        "source_frame_s": 100
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-result.json",
+      "native_secondary_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-result-secondary.json"
     }
   ],
   "exclusions": [

@@ -1,0 +1,37 @@
+{
+  "wav": "seven-of-nine-picard-ref.wav",
+  "source_sha256": "38058d06d7fd5724db6ec31c17ac04d080d25a8fbd10c21cae21510ee311bdb1",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "79c6a4fc-bdc8-4221-8441-1f56486cd7ee",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "38058d06d7fd5724db6ec31c17ac04d080d25a8fbd10c21cae21510ee311bdb1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "38058d06d7fd5724db6ec31c17ac04d080d25a8fbd10c21cae21510ee311bdb1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "79c6a4fc-bdc8-4221-8441-1f56486cd7ee",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"The U.S.S. Voyager. She made her name farther out than any of those other relics had ever gone. I was reborn there. She was my home.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 1.8],\n    [2.3, 9.5],\n    [12.0, 16.8]\n  ],\n  \"uncertainty\": \"Perceptual timing boundaries carry an estimated uncertainty of \u00b10.3\u20130.5 seconds due to natural reverberant tail decay and soft speech onsets/offsets. Transcript uncertainty is minimal, though 'farther' could perceptually be 'further' due to subtle vowel reduction. A faint ambient musical/synth pad bed is present underneath the voice throughout the clip; while the vocal is dominant, dry, and clearly isolated with no overlapping speakers, this continuous background pad prevents raw unassisted conditioning without either music separation/filtering or acceptance of subtle background pad bleed. Noticeable long dramatic pauses occur at roughly 1.8s\u20132.3s, 5.5s\u20136.0s, and most prominently around 9.5s\u201312.0s.\"\n}\n```\n",
+    "duration_seconds": 40.452454,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20262,
+      "output_tokens": 3539,
+      "thinking_tokens": 3058,
+      "cache_read_tokens": 15973,
+      "total_tokens": 23801
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

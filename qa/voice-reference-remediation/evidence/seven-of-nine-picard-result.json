@@ -1,0 +1,38 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "1db9ed27-3165-496a-9ac0-7072427eca28",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "1db9ed27-3165-496a-9ac0-7072427eca28",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I really believe that. I think that every part of this story is just, um, so beautifully done. For all of these characters. The arcs for all of these characters, I think, is so respectfully and beautifully done.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.2],\n    [4.8, 13.5]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates with an uncertainty of approximately \u00b10.2 to 0.3 seconds. Minor ambiguity between 'this story' versus 'the story' around 2.8s\u20133.1s. The filler 'um' sits between approximately 4.2s and 4.8s; the remainder of the clip constitutes clean, isolated speech with complete conditioning phrases.\"\n}\n",
+    "duration_seconds": 50.496687,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20398,
+      "output_tokens": 2764,
+      "thinking_tokens": 2364,
+      "cache_read_tokens": 15988,
+      "total_tokens": 23162
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
