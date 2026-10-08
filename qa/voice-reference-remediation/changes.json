@@ -5154,7 +5154,8 @@
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-publisher-source.json",
       "source_decode_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-first240-decode.log",
       "prior_fragment_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-prior-fragment-rejected.json",
-      "transcript_only_rejected_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-text-layer-rejected.json"
+      "transcript_only_rejected_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-text-layer-rejected.json",
+      "delivery_commit": "13bf1dcea6566e38746de578000c7465d019115b"
     }
   ],
   "exclusions": [
