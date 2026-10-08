@@ -5395,7 +5395,8 @@
       "result_secondary_evidence": "qa/voice-reference-remediation/evidence/rimmer-result-secondary.json",
       "result_overlapping_evidence": "qa/voice-reference-remediation/evidence/rimmer-result-overlapping.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/rimmer-publisher-source.json",
-      "source_frame_evidence": "qa/voice-reference-remediation/evidence/rimmer-source-frame500.png"
+      "source_frame_evidence": "qa/voice-reference-remediation/evidence/rimmer-source-frame500.png",
+      "delivery_commit": "fe8767fdb26a898bc5c009becbb69ed7f661f920"
     }
   ],
   "exclusions": [
