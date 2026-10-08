@@ -70,6 +70,10 @@ def test_valid_json_cannot_override_reviewer_reporting_transcript_only_review():
         "Audio was interpreted through a text-based transcription layer "
         "rather than native acoustic signal analysis.")
     assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None
+    payload["uncertainty"] = (
+        "Exact boundary estimates are extrapolated from the text layout. "
+        "The presence of long pauses is inferred from significant line breaks.")
+    assert listener.parsed_observation({"status": "SUCCESS", "response": json.dumps(payload)}) is None
 
 
 def test_review_parser_accepts_single_fenced_result_without_ambiguous_multiple_results():

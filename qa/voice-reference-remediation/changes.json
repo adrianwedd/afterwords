@@ -3911,6 +3911,84 @@
         "intended_speaker_basis": "Source title/description identifies Frasier finale speech; frame2 shows intended character delivering opening passage. Frame9 is a reaction/ensemble shot and does not establish a different speaker. Retained original first two phrases avoid later acoustic-change hypothesis without claiming actor swap proven.",
         "speaker_frame": "qa/voice-reference-remediation/evidence/frasier-source-002.jpg",
         "reaction_frame": "qa/voice-reference-remediation/evidence/frasier-reaction-shot-009.jpg"
+      },
+      "delivery_commit": "541efe085e3ed63bbeeb931bbd72129c5f541815"
+    },
+    {
+      "wav": "bill-bailey-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "2f663eef98b06b64c9e7d84e94d7a948d1376185ff75f6adaea78254b2c5988a",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08143199932086137,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c",
+        "frames": 210357,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.77,
+        "peak": 0.63433837890625,
+        "rms": 0.07254071456346033,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 67.52,
+        "source_end_s": 72.29,
+        "source_start_frame": 2977632,
+        "source_end_frame_exclusive": 3187989,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/bill-bailey-qwen3-06b.json",
+          "old_reference_text": "Hello, I'm Bill Bailey, 1984, stars in their eyes meet low regional winner, and nearly got the Michael Bolton gig, but then he had his ear cut, so great to be here.",
+          "new_reference_text": "And, er, I had to go and get a wig put on me head, and, er, it was brilliant actually.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 67.52
+        },
+        {
+          "path": "voices/bill-bailey.json",
+          "old_reference_text": "Hello, I'm Bill Bailey, 1984, stars in their eyes meet low regional winner, and nearly got the Michael Bolton gig, but then he had his ear cut, so great to be here.",
+          "new_reference_text": "And, er, I had to go and get a wig put on me head, and, er, it was brilliant actually.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 67.52
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=HNSZ2j6_YVs",
+      "adjudication": "Original native hearing reports intrusive stage audience/laughter. Multiple longer interview trials retain host backchannels or unclear false starts and remain unadmitted. Trial55 has host Mm;57 still initial Mmm;59 shortened incorrectly, native3.1 flags boundaries despite3.8 not flagging. Source RMS quiet valley67.52 before conjunction onset67.54 and quiet72.25-72.31 before next voiced onset72.33 guide final67.52-72.29. Resulting full exact native3.8 hearing confirms one isolated voice, complete boundaries, no music/crowd/laughter/effects/acoustic change/splice. Final native hears two and-er fillers; independent3.1 hearing of containing59 also hears two and-uh fillers, while3.8 prior59 omits them; preserve fillers from new exact hearing and use er as orthography for uncertain uh/er. Dialectal me head heard by new native and all three prior readings, retained despite ASR my head. Actual4.77s contains complete connected clauses with useful phonetic variety; no padding or splice. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/bill-bailey-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=HNSZ2j6_YVs",
+        "title": "Bill Bailey: Interview",
+        "uploader": "Absolute Radio",
+        "upload_date": "20101213",
+        "source_audio_sha256": "670bafbb98fdca2012d2aa6a00f428b7dfa340184adfc380a2296b2c6a1304d5",
+        "source_metadata_sha256": "c2e705b936706ae66183527a0518d728b1653e370dd1561f0ec7febb6d74e4e8",
+        "source_basis": "Official Absolute Radio guest interview naming Bill Bailey; same camera-visible guest answers about acting and wigs. Sourceframe70 within selected passage shows guest at radio microphone. Conversational interview delivery replaces audience-heavy stage recording.",
+        "source_frame": "qa/voice-reference-remediation/evidence/bill-bailey-source-070.jpg"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/bill-bailey-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bill-bailey-result.json",
+      "prior_candidate_evidence": {
+        "operation": "Source67.6-72.43, superseded by admitted67.52-72.29; never production acceptance",
+        "native_3_1": "qa/voice-reference-remediation/evidence/bill-bailey-prior-boundary-3.1.json",
+        "native_3_8": "qa/voice-reference-remediation/evidence/bill-bailey-prior-boundary-3.8.json"
       }
     }
   ],

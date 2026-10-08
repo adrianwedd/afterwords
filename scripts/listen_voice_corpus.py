@@ -58,7 +58,8 @@ def parsed_observation(result):
     # valid, and do not scan literal speech (which may itself say "cannot hear").
     limitations = json.dumps({k: value.get(k) for k in ("uncertainty", "fatal_defect")})
     if re.search(r"text[- ]based (?:transcription|transcript)|"
-                 r"(?:cannot|can't|unable to) (?:hear|listen)|rather than native acoustic",
+                 r"(?:cannot|can't|unable to) (?:hear|listen)|rather than native acoustic|"
+                 r"(?:extrapolated|inferred) from (?:the |significant )?(?:text layout|line breaks)",
                  limitations, re.IGNORECASE):
         return None
     return value

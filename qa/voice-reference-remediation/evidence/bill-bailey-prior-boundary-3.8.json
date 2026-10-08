@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "02ac6bb20a92d5a4caa408a83f0d617bc6bcf867bbbeaced425943510586a41a",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c94b8093-ded1-4ab5-a2bb-d96cc0eb045d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "02ac6bb20a92d5a4caa408a83f0d617bc6bcf867bbbeaced425943510586a41a"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "02ac6bb20a92d5a4caa408a83f0d617bc6bcf867bbbeaced425943510586a41a"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c94b8093-ded1-4ab5-a2bb-d96cc0eb045d",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and I had to go and get a wig put on me head and it was brilliant actually\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.6]\n  ],\n  \"uncertainty\": \"Boundary intervals and total duration (~4.6s) are perceptual estimates. Slight phonetic ambiguity between dialectal 'me head' versus 'my head', perceived here as 'me head'. Vocal onset begins with the conjunction 'and' but is not cut off.\"\n}\n```\n",
+    "duration_seconds": 33.9789,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20669,
+      "output_tokens": 3294,
+      "thinking_tokens": 2955,
+      "cache_read_tokens": 16195,
+      "total_tokens": 23963
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
