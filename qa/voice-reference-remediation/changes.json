@@ -6797,7 +6797,8 @@
         "publisher_metadata_sha256": "353c3f302863f20a91242fbc15e1caa635bbca6893e5d4c8fbeca2b0107457dd"
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/aurora-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/aurora-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/aurora-result.json",
+      "delivery_commit": "269564ad1329c649065a667ca60d37250abf3813"
     }
   ],
   "exclusions": [
