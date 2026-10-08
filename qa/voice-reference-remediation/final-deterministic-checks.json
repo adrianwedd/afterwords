@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "production_commit": "835049e89cc36d70aec487dbcec4809da127658b",
+  "production_commit": "069fabba24744e594b9f993d070bbd54bc94e310",
   "scope_count": 104,
   "method": "PCM16 signed integer extrema count both -32768 and +32767. Historical inspect_audio samples_at_full_scale uses normalized abs>=1 and counts only the negative endpoint for PCM16. This addendum corrects that measurement limitation without rewriting historical baseline measurements.",
   "records": [

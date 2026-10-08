@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "production_commit": "f49f9f4cd03820ac453899f5b0e7bd1c9d745bc1",
+  "production_commit": "069fabba24744e594b9f993d070bbd54bc94e310",
   "known_baseline_count": 105,
   "production_count": 104,
   "excluded": [
@@ -11,7 +11,7 @@
     "tilda-ref.wav"
   ],
   "scope": "All tracked production WAVs and profiles; anonymous inputs verified byte-identical",
-  "final_corpus_acceptance": "pending fresh native listening and root adjudication",
+  "final_corpus_acceptance": "accepted",
   "records": [
     {
       "index": 1,
@@ -40,9 +40,9 @@
           "reference_text": "It meant scrambling over some rocks, and um, and getting into this little tiny gap in in the cave."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 2,
@@ -71,9 +71,9 @@
           "reference_text": "He, and occasionally she, is overwhelmed by the amount of stuff that has been written and the ground still to be covered. How shall I ever catch up?"
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 3,
@@ -102,9 +102,9 @@
           "reference_text": "We hear an awful lot of lefty whinging about the NHS waiting lists."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 4,
@@ -133,9 +133,9 @@
           "reference_text": "Yeah, I remember it very clearly because, um, I started thinking about all the people I admired on television, all the creative people I admired."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 5,
@@ -164,9 +164,9 @@
           "reference_text": "I expected the American people to rise up."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 6,
@@ -195,9 +195,9 @@
           "reference_text": "I guess the biggest challenge is the fact that I've become so accustomed to working with a camera and on a set and being able to do it again if it wasn't quite good enough or if I forgot my line."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 7,
@@ -226,9 +226,9 @@
           "reference_text": "It's a sloth. It's not exactly an enthusiastic leaf eater. A couple of half-hearted chews, and the leaves go straight down to its stomach."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 8,
@@ -257,9 +257,9 @@
           "reference_text": "And I can't leave my young son any longer because he has no nurse at the moment."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 9,
@@ -288,9 +288,9 @@
           "reference_text": "Well, I wrote melodies when I was six, but I didn't add words to them before I was nine."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 10,
@@ -319,9 +319,9 @@
           "reference_text": "I can proudly say that I have a feeling that we all did a good job on this series."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 11,
@@ -350,9 +350,9 @@
           "reference_text": "What's the most you ever lost on a coin toss?"
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 12,
@@ -381,9 +381,9 @@
           "reference_text": "First of all you have to sit round trying to get six people to agree on a script, which is crazy, absolutely crazy. You can't agree on a direction to go in so you keep writing, writing more and more and more and more material."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 13,
@@ -412,9 +412,9 @@
           "reference_text": "Uh, yeah, I think I was, I didn't get in any major trouble, you know, if that's what a good kid is."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 14,
@@ -443,9 +443,9 @@
           "reference_text": "And, er, I had to go and get a wig put on me head, and, er, it was brilliant actually."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 15,
@@ -474,9 +474,9 @@
           "reference_text": "Well, I think arguably there have been lots of gay characters on Doctor Who previously."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 16,
@@ -505,9 +505,9 @@
           "reference_text": "Only last year, my aunt came to me to beg for help in the ransom of my uncle Osric."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 17,
@@ -536,9 +536,9 @@
           "reference_text": "Seisan is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 18,
@@ -567,9 +567,9 @@
           "reference_text": "Seisan is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 19,
@@ -598,9 +598,9 @@
           "reference_text": "Tensho now, in contrast to Sanchin, which is the power kata, and getting everything centered into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 20,
@@ -629,9 +629,9 @@
           "reference_text": "And you start thinking, 'Oh, I better make the world around me miserable, then I won't mind leaving so much.'"
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 21,
@@ -660,9 +660,9 @@
           "reference_text": "See, Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?"
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 22,
@@ -691,9 +691,9 @@
           "reference_text": "And, uh, we were changing in, in '40 from losing the horses and becoming medium artillery."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 23,
@@ -722,9 +722,9 @@
           "reference_text": "Because the effects occupy more than a human generation, there is a, uh, tendency to, uh, say that they, uh, are not our problem. Uh, of course, then they are nobody's problem."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 24,
@@ -753,9 +753,9 @@
           "reference_text": "And then it was that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 25,
@@ -784,9 +784,9 @@
           "reference_text": "I love voice work because I can usually turn up without having bathed, except on days like this when there's cameras in the room."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 26,
@@ -815,9 +815,9 @@
           "reference_text": "There is, is there not, ladies and gentlemen of the jury, so much we can learn about ourselves."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 27,
@@ -846,9 +846,9 @@
           "reference_text": "Yeah, I did. I think down, you know, down through the years, uh, I always liked that character."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 28,
@@ -872,9 +872,9 @@
           "reference_text": "Uh, I usually describe my position since then, semi-retired position."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 29,
@@ -903,9 +903,9 @@
           "reference_text": "I have asked myself that many times, as I have struggled to be more human, until I realized, it is the struggle itself that is most important."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 30,
@@ -929,9 +929,9 @@
           "reference_text": "Also, this film got terrible reviews for the most part. More than 50 percent, 60 or 70 percent were terrible. And MGM was really worried that, um, they might have to pull it."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 31,
@@ -960,9 +960,9 @@
           "reference_text": "And then you announce that you've changed your mind about having a chavvy. And then you go late night shopping at Family Planning."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 32,
@@ -991,9 +991,9 @@
           "reference_text": "So if you're gonna shoot me, let's do it. I have plans."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 33,
@@ -1022,9 +1022,9 @@
           "reference_text": "Makes this one here a bit superfluous, really."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 34,
@@ -1053,9 +1053,9 @@
           "reference_text": "Um, I'm bringing the, uh, 'I'm a bovvered' character back, which, um, I did kill off before I knew I was going on tour."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 35,
@@ -1084,9 +1084,9 @@
           "reference_text": "Fine. I'm gonna go ahead and tell you how it ends."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 36,
@@ -1115,9 +1115,9 @@
           "reference_text": "Ah, being born on a cotton plantation in the South, you know, and being, uh, poor, uh, in that way, no, it was not very easy, because I remember, uh, times when we didn't have anything to eat for what seemed like an unsurmountable amount of time."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 37,
@@ -1146,9 +1146,9 @@
           "reference_text": "And so a friend of mine said, 'I know someone, and he's just trained and he's, he's like a life coach thing. And what his good thing is, he'll teach you what's stopping you moving forward.'"
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 38,
@@ -1177,9 +1177,9 @@
           "reference_text": "In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 39,
@@ -1208,9 +1208,9 @@
           "reference_text": "It may be the gulfs will wash us down. It may be we shall touch the Happy Isles."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 40,
@@ -1239,9 +1239,9 @@
           "reference_text": "It's often the starting point for me when I'm thinking about a role or an atmosphere that you're stepping into as an actor."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 41,
@@ -1270,9 +1270,9 @@
           "reference_text": "Something in my brain shifted and I suddenly understood, and now I'm a coin collector too."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 42,
@@ -1301,9 +1301,9 @@
           "reference_text": "Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 43,
@@ -1332,9 +1332,9 @@
           "reference_text": "Thank you very much for surprising me with that."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 44,
@@ -1358,9 +1358,9 @@
           "reference_text": "The 9000 series is the most reliable computer ever made."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 45,
@@ -1389,9 +1389,9 @@
           "reference_text": "Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful force controlling everything. There's no mystical energy field controls my destiny."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 46,
@@ -1420,9 +1420,9 @@
           "reference_text": "They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 47,
@@ -1451,9 +1451,9 @@
           "reference_text": "Thanks to compound interest, you now own 98% of all the world's wealth."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 48,
@@ -1482,9 +1482,9 @@
           "reference_text": "I wish to place a large order, a very important order. I have the new vicar calling this afternoon for tea and light refreshments. So how soon can you deliver? Yes, I know it's Saturday and I'm very happy that you're busy."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 49,
@@ -1513,9 +1513,9 @@
           "reference_text": "But uh I still think that comedy is a lens through which I see everything. And uh I think almost to to some extent, the better things go in your life, the more fearful you can become that they will cease to be that way."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 50,
@@ -1544,9 +1544,9 @@
           "reference_text": "Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 51,
@@ -1570,9 +1570,9 @@
           "reference_text": "Uh, and forgiveness and understanding is is urgent right now and so I wanted to make a film that was about that."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 52,
@@ -1601,9 +1601,9 @@
           "reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you what you know you've got no respect.' And I, and I, I stood up, you know."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 53,
@@ -1627,9 +1627,9 @@
           "reference_text": "But this thing is going to go on until springtime, so maybe we'll recalibrate and realize that we are all in it together, so who knows."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 54,
@@ -1653,9 +1653,9 @@
           "reference_text": "Okay, so I think, uh, I discovered that I'm really good, uh, with high kicks."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 55,
@@ -1679,9 +1679,9 @@
           "reference_text": "You give me a time and a place, I give you a five-minute window. Anything happens in that five minutes and I'm yours. No matter what. Anything happens a minute either side of that and you're on your own."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 56,
@@ -1710,9 +1710,9 @@
           "reference_text": "Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 57,
@@ -1741,9 +1741,9 @@
           "reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes, uh, a show."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 58,
@@ -1772,9 +1772,9 @@
           "reference_text": "For me, playing a three-million-year-old mechanoid is alarmingly familiar and close to my own experience."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 59,
@@ -1803,9 +1803,9 @@
           "reference_text": "Yeah, I wouldn't say necessarily for me specifically, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "Corrected specifically from three fresh hearings; reduced article remains unresolved.",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 60,
@@ -1834,9 +1834,9 @@
           "reference_text": "Speak plainly. I am your prisoner, and this is an interrogation."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 61,
@@ -1860,9 +1860,9 @@
           "reference_text": "And that, I didn't like that, cuz you have to live up to something there, and I forget what it is, but it wasn't something I was really focused on in that way."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 62,
@@ -1891,9 +1891,9 @@
           "reference_text": "Look, I'm not just gonna pick a religion that seems cool. I'm gonna pick one that's right for me."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 63,
@@ -1922,9 +1922,9 @@
           "reference_text": "The distress call, wonder why it's Mayday, it's only a bank holiday."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 64,
@@ -1953,9 +1953,9 @@
           "reference_text": "And then when I understood what was going on, I felt a physical sensation of excitement."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 65,
@@ -1984,9 +1984,9 @@
           "reference_text": "I'm not really high on drugs, so you can stop talking your nonsense on my time."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 66,
@@ -2015,9 +2015,9 @@
           "reference_text": "There's not really a formula. I just go somewhere and think there will be something funny in this place."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 67,
@@ -2046,9 +2046,9 @@
           "reference_text": "It's a bridesmaid's dress. Someone loved it intensely for one day."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 68,
@@ -2077,9 +2077,9 @@
           "reference_text": "I just thought, I would love a little part in that. It was just everything I wanted."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 69,
@@ -2103,9 +2103,9 @@
           "reference_text": "We can't really even imagine a world like that. Uh, there hasn't been a world like that since late Roman times. I mean the Roman hegemony was quite cohesive."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 70,
@@ -2134,9 +2134,9 @@
           "reference_text": "Well, I was extremely surprised in the latest film that we did that John probably had the single most uncomfortable role of anyone in the film."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 71,
@@ -2165,9 +2165,9 @@
           "reference_text": "Yeah, well, actually all my family are from Sligo. You know, my mother and father grew up there, and I was born in Sligo. Um, so I think I'm related to everyone in the town, um, as well. But when I was six months old, we moved to Galway, and that's where we've been ever since."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 72,
@@ -2196,9 +2196,9 @@
           "reference_text": "Yeah, in Finland I think I used more grayish, bluish, more dark."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 73,
@@ -2227,9 +2227,9 @@
           "reference_text": "It was the immensity of the universe, and how much we did not know. It was the not knowing that was the force of attraction for me."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 74,
@@ -2258,9 +2258,9 @@
           "reference_text": "So, I watched that completely fresh, and what you've both said was so apparent to me."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 75,
@@ -2289,9 +2289,9 @@
           "reference_text": "Incidentally, this is a time exposure taken with a fixed camera, which is why the stars appear drawn out into trails."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 76,
@@ -2320,9 +2320,9 @@
           "reference_text": "And age doesn't really matter to me. I mean people, um, people I think are much more exercised about your age than you really are. I mean I think it's just terribly funny to be able to muck around with age."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 77,
@@ -2351,9 +2351,9 @@
           "reference_text": "Unfortunately, everyone knows someone who's been affected by those cancers on that list."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 78,
@@ -2382,9 +2382,9 @@
           "reference_text": "It was in that we were in fairly exposed conditions most of the time, you know. It was, um, actually, we had finished principal photography by this time last year, but we were filming through late April, May, and June, and into July."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 79,
@@ -2413,9 +2413,9 @@
           "reference_text": "I'm just concerned about it because we're talking about an audience that is exceedingly on point about the show. They don't miss anything."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 80,
@@ -2444,9 +2444,9 @@
           "reference_text": "So, yeah, I think, um, I think the the friction is still there, and that's that's the petrol for for a lot of the comedy in Red Dwarf, you know?"
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 81,
@@ -2475,9 +2475,9 @@
           "reference_text": "But it feels like I was only here last week. That's the strange, um, the strange tricks that time plays on you."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 82,
@@ -2506,9 +2506,9 @@
           "reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 83,
@@ -2537,9 +2537,9 @@
           "reference_text": "It appeals to such a wide age range, it appeals to such a wide culture range. It's one of those quirky, odd programmes that somehow has managed to survive over time."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 84,
@@ -2568,9 +2568,9 @@
           "reference_text": "You know, using imagination rather than actually digging deep and, and writing from my soul."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 85,
@@ -2599,9 +2599,9 @@
           "reference_text": "We wanted to explore those things with real transparency."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 86,
@@ -2630,9 +2630,9 @@
           "reference_text": "and um it was so different than than the experience that I had had with him like a decade earlier."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 87,
@@ -2661,9 +2661,9 @@
           "reference_text": "Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you and found a life of my own."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 88,
@@ -2692,9 +2692,9 @@
           "reference_text": "I was just working on a multi-million dollar lawsuit for one of my clients."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 89,
@@ -2718,9 +2718,9 @@
           "reference_text": "Eight years later, I get a letter saying, I do want to thank you so much for what you did for me."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 90,
@@ -2749,9 +2749,9 @@
           "reference_text": "I really believe that. I think that every part of this story is just, um, so beautifully done for all of these characters. The arcs for all of these characters, I think, is so respectfully and beautifully done."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 91,
@@ -2780,9 +2780,9 @@
           "reference_text": "But yeah, it's, it's, it's nice to, um, finally get to talk about things like this guy being part of the show, Todd Stashwick, who's brilliant beyond words, and I cannot wait for everybody to see him in action, um, and to meet Captain Shaw."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 92,
@@ -2811,9 +2811,9 @@
           "reference_text": "So I came on set pretty bleary-eyed, but kind of high on the whole adventure that was about to take over my life."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 93,
@@ -2842,9 +2842,9 @@
           "reference_text": "There will be no foolish wand waving or silly incantations in this class."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 94,
@@ -2873,9 +2873,9 @@
           "reference_text": "Uh, I think a lot. I, I think that I was much more, uh, emotionally, uh, directed, rather than logically directed before I started playing the character."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 95,
@@ -2904,9 +2904,9 @@
           "reference_text": "You probably know the basic outline, that he was born in 1854, on October the 16th. I'm boring you with things you so know and don't need to be retold, so it is, in fact, just past his 160th birthday."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 96,
@@ -2935,9 +2935,9 @@
           "reference_text": "Well, um, Mum flew down from Cloncurry to have me actually, because, uh, my father, um, who who was a parasitologist, um, was based up in Cloncurry."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 97,
@@ -2966,9 +2966,9 @@
           "reference_text": "Some might say I'm a pretty shallow guy, but a shallow guy with a great ass."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 98,
@@ -2997,9 +2997,9 @@
           "reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain, er, favorable response. The figures are curiously higher than they've ever been."
         }
       ],
-      "native_listening": "fresh revision reviewed",
-      "transcript_verification": "root adjudicated fresh literal text",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 99,
@@ -3028,9 +3028,9 @@
           "reference_text": "How can you have lived for so long and still not get it, this self-obsession, the waste of living?"
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 100,
@@ -3059,9 +3059,9 @@
           "reference_text": "I knew I felt pretty rough and that if I was going to be x-rayed and checked over the sooner the better."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 101,
@@ -3090,9 +3090,9 @@
           "reference_text": "Now having just met you, I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine you think of women as disposable pleasures, rather than meaningful pursuits."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 102,
@@ -3121,9 +3121,9 @@
           "reference_text": "Yes, well, I just believe that the writer should be writing about today, just so that we, we know what's going on in the society we're living in. So I, I'm slightly against the, the classical, uh, playwrights in a way."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 103,
@@ -3152,9 +3152,9 @@
           "reference_text": "I don't want to pretend I don't enjoy it. I was really happy to be on the front page of the newspapers with my two BAFTAs."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     },
     {
       "index": 104,
@@ -3183,9 +3183,9 @@
           "reference_text": "A wise person once said to me, goodbyes only hurt because what came before was so special."
         }
       ],
-      "native_listening": "pending",
-      "transcript_verification": "pending",
-      "final_disposition": "pending"
+      "native_listening": "accepted from fresh current-hash native evidence and root adjudication",
+      "transcript_verification": "matched root-adjudicated literal words",
+      "final_disposition": "ACCEPTED"
     }
   ]
 }

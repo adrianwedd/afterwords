@@ -62,8 +62,9 @@
         "pcm_subtype_preserved": true
       },
       "delivery_commit_locator": "git log -- voices/alan-bennett-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
-      "delivery_commit": "33bf4c448ba9ae6fa0df180e4e2d2f7bf6f7190c"
+      "final_corpus_acceptance": "accepted",
+      "delivery_commit": "33bf4c448ba9ae6fa0df180e4e2d2f7bf6f7190c",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "alan-shore-ref.wav",
@@ -123,7 +124,7 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/alan-shore-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/alan-shore-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/final-evidence/005-ca4a85963742a4ae-revision-1.json",
       "delivery_commit": "835049e89cc36d70aec487dbcec4809da127658b",
@@ -205,7 +206,8 @@
           ],
           "delivery_commit": "835049e89cc36d70aec487dbcec4809da127658b"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "alan-bstard-ref.wav",
@@ -264,10 +266,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/alan-bstard-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/alan-bstard-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/alan-bstard-result.json",
-      "delivery_commit": "1fd0de66742310e7e3f9b51e6413c9b313367a6e"
+      "delivery_commit": "1fd0de66742310e7e3f9b51e6413c9b313367a6e",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "attenborough-ref.wav",
@@ -326,10 +329,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/attenborough-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/attenborough-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/attenborough-result.json",
-      "delivery_commit": "1fd0de66742310e7e3f9b51e6413c9b313367a6e"
+      "delivery_commit": "1fd0de66742310e7e3f9b51e6413c9b313367a6e",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "ace-ref.wav",
@@ -389,7 +393,7 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/ace-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=mIw6XAhcUbQ",
         "title": "POWER OF THE DOCTOR SECRETS! Sophie Aldred Returns to WHOC2C!",
@@ -500,7 +504,8 @@
           ],
           "delivery_commit": "cd813e7089498ed55de442d6dc2b7754bdc495d7"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "bardem-ref.wav",
@@ -559,10 +564,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/bardem-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bardem-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/bardem-result.json",
-      "delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383"
+      "delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "audrey-ref.wav",
@@ -621,10 +627,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/audrey-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/audrey-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/audrey-result.json",
-      "delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383"
+      "delivery_commit": "7f356d4153dcaf9d1bc4d7336c5a06b2d34d4383",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "data-ref.wav",
@@ -683,10 +690,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/data-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/data-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/data-result.json",
-      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "patrick-moore-ref.wav",
@@ -745,10 +753,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/patrick-moore-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/patrick-moore-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/patrick-moore-result.json",
-      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "cleaver-greene-ref.wav",
@@ -807,10 +816,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/cleaver-greene-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/cleaver-greene-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/cleaver-greene-result.json",
-      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "bob-jones-sanchin-tensho-ref.wav",
@@ -869,10 +879,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/bob-jones-sanchin-tensho-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-sanchin-tensho-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-sanchin-tensho-result.json",
-      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "bob-jones-ref.wav",
@@ -926,10 +937,11 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/bob-jones-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-result.json",
-      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "claudia-ref.wav",
@@ -988,10 +1000,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/claudia-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/claudia-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/claudia-result.json",
-      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "blackadder-ref.wav",
@@ -1064,7 +1077,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/blackadder-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=n-Zm8H6G108",
         "title": "Blackadder II's funniest and rudest put downs 😂 | Blackadder - BBC",
@@ -1078,7 +1091,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/blackadder-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/blackadder-result.json",
-      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "bob-jones-ibuki-ref.wav",
@@ -1133,7 +1147,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/bob-jones-ibuki-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=jAJ_KFKo8A0",
         "title": "WRATH OF THE PYTHON   3RD DEGREE FORM",
@@ -1148,7 +1162,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-jones-ibuki-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-jones-ibuki-result.json",
-      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed"
+      "delivery_commit": "ce6be35885e12034608b44a9bc87c06c77609aed",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "snape-ref.wav",
@@ -1207,10 +1222,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/snape-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/snape-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/snape-result.json",
-      "delivery_commit": "6fca1093af03dead117f339c173606847010c825"
+      "delivery_commit": "6fca1093af03dead117f339c173606847010c825",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "stephen-fry-ref.wav",
@@ -1269,10 +1285,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/stephen-fry-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/stephen-fry-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/stephen-fry-result.json",
-      "delivery_commit": "6fca1093af03dead117f339c173606847010c825"
+      "delivery_commit": "6fca1093af03dead117f339c173606847010c825",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "han-solo-ref.wav",
@@ -1326,10 +1343,11 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/han-solo-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/han-solo-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/han-solo-result.json",
-      "delivery_commit": "6fca1093af03dead117f339c173606847010c825"
+      "delivery_commit": "6fca1093af03dead117f339c173606847010c825",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "feynman-ref.wav",
@@ -1388,10 +1406,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/feynman-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/feynman-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/feynman-result.json",
-      "delivery_commit": "6fca1093af03dead117f339c173606847010c825"
+      "delivery_commit": "6fca1093af03dead117f339c173606847010c825",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "jackie-chiles-ref.wav",
@@ -1450,10 +1469,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/jackie-chiles-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/jackie-chiles-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/jackie-chiles-result.json",
-      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08"
+      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "geraldine-ref.wav",
@@ -1512,10 +1532,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/geraldine-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/geraldine-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/geraldine-result.json",
-      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08"
+      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "hal-9000-ref.wav",
@@ -1567,10 +1588,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/hal-9000-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/hal-9000-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/hal-9000-result.json",
-      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08"
+      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "gulley-ref.wav",
@@ -1629,10 +1651,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/gulley-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/gulley-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/gulley-result.json",
-      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08"
+      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "the-doctor-ref.wav",
@@ -1705,7 +1728,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/the-doctor-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=xszeU-yTSfg",
         "title": "1975: TOM BAKER on DOCTOR WHO | South Today | Classic Interviews | BBC Archive",
@@ -1796,7 +1819,8 @@
           "discovery_native_evidence": [],
           "delivery_commit": "2afaa179544a545a46d0d5aad3a44946577da14e"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "the-cat-ref.wav",
@@ -1869,7 +1893,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/the-cat-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=RfNJitORCVA",
         "title": "MCM: Red Dwarf - Cat Justifies His Existence",
@@ -1883,7 +1907,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/the-cat-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/the-cat-result.json",
-      "delivery_commit": "1dd8d6577944311497de122f5bc22c21bf8480a4"
+      "delivery_commit": "1dd8d6577944311497de122f5bc22c21bf8480a4",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "k9-ref.wav",
@@ -1942,10 +1967,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/k9-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/k9-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/k9-result.json",
-      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9"
+      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "leela-ref.wav",
@@ -2004,10 +2030,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/leela-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/leela-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/leela-result.json",
-      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9"
+      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "k-ref.wav",
@@ -2054,10 +2081,11 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/k-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/k-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/k-result.json",
-      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9"
+      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "yasmin-khan-ref.wav",
@@ -2116,10 +2144,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/yasmin-khan-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/yasmin-khan-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/yasmin-khan-result.json",
-      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9"
+      "delivery_commit": "0d2f9e1f974983f28a1124a4e33475cc6ac0a7f9",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "carl-sagan-ref.wav",
@@ -2192,7 +2221,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/carl-sagan-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=Wp-WiNXH6hI",
         "title": "Carl Sagan testifying before Congress in 1985 on climate change",
@@ -2282,7 +2311,8 @@
           "discovery_native_evidence": [],
           "delivery_commit": "fc37d8c7a2e4381f3dbaf2923206c06327526eb9"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "vesper-ref.wav",
@@ -2336,10 +2366,11 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/vesper-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/vesper-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/vesper-result.json",
-      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5"
+      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "brian-cox-ref.wav",
@@ -2393,10 +2424,10 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/brian-cox-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/brian-cox-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-revision-1.json",
-      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5",
+      "delivery_commit": "069fabba24744e594b9f993d070bbd54bc94e310",
       "post_remediation_revisions": [
         {
           "previous_delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5",
@@ -2463,9 +2494,11 @@
             },
             "rendered_sha256": "65ee8a1f24391035a65a3b0d84d301c2ab44a3fe61281a9d34914cc4ebd532cc",
             "scope": "Opening wording only; remaining corpus audio verified by complete native observation. Probe is not production audio."
-          }
+          },
+          "delivery_commit": "069fabba24744e594b9f993d070bbd54bc94e310"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "lister-ref.wav",
@@ -2524,10 +2557,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/lister-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/lister-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/lister-result.json",
-      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5"
+      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "mckenna-ref.wav",
@@ -2579,10 +2613,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/mckenna-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/mckenna-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/mckenna-result.json",
-      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5"
+      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "marla-ref.wav",
@@ -2641,10 +2676,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/marla-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/marla-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/marla-result.json",
-      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5"
+      "delivery_commit": "ad419f2bb82b142a38cfa9ec53068764118ac8b5",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "mark-corrigan-ref.wav",
@@ -2703,10 +2739,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/mark-corrigan-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/mark-corrigan-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/mark-corrigan-result.json",
-      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203"
+      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "holly-ref.wav",
@@ -2765,10 +2802,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/holly-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/holly-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/holly-result.json",
-      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203"
+      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "ronan-ref.wav",
@@ -2827,10 +2865,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/ronan-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/ronan-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/ronan-result.json",
-      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203"
+      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "rod-serling-ref.wav",
@@ -2890,7 +2929,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/rod-serling-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=TghYXxm3wq8",
         "title": "Rod Serling Talks to Bob Crane about \"The Shelter\"",
@@ -2903,7 +2942,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/rod-serling-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/rod-serling-result.json",
-      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203"
+      "delivery_commit": "d7a46f76f73cc77b36f67a18dee3a634326d1203",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "dr-cox-ref.wav",
@@ -2962,10 +3002,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/dr-cox-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/dr-cox-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/dr-cox-result.json",
-      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "del-boy-ref.wav",
@@ -3024,10 +3065,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/del-boy-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/del-boy-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/del-boy-result.json",
-      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "michael-palin-ref.wav",
@@ -3087,7 +3129,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/michael-palin-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=evEIeWbhd9c",
         "title": "1982: PALIN and CLEESE on THE MEANING OF LIFE | Film 82 | Classic Movie Interviews | BBC Archive",
@@ -3100,7 +3142,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/michael-palin-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/michael-palin-result.json",
-      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "depp-ref.wav",
@@ -3159,10 +3202,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/depp-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/depp-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/depp-result.json",
-      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "spock-ref.wav",
@@ -3222,7 +3266,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/spock-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=NsPiw1J7dYo",
         "title": "1989: LEONARD NIMOY on Spock and STAR TREK | Wogan | Classic Celebrity Interviews | BBC Archive",
@@ -3233,7 +3277,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/spock-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/spock-result.json",
-      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "sarah-jane-smith-ref.wav",
@@ -3292,7 +3337,7 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/sarah-jane-smith-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/sarah-jane-smith-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/sarah-jane-smith-result.json",
       "source_corroboration": {
@@ -3301,7 +3346,8 @@
         "source_alignment": "qa/voice-reference-remediation/evidence/sarah-jane-smith-source-correlation.json",
         "primary_cast_url": "https://www.doctorwho.tv/stories/school-reunion"
       },
-      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588"
+      "delivery_commit": "86d61e4116dce6373d35a9e21240946fe5cc7588",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "basil-fawlty-ref.wav",
@@ -3361,7 +3407,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/basil-fawlty-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=evEIeWbhd9c",
         "title": "1982: PALIN and CLEESE on THE MEANING OF LIFE | Film 82 | Classic Movie Interviews | BBC Archive",
@@ -3374,7 +3420,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/basil-fawlty-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/basil-fawlty-result.json",
-      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb"
+      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "bernard-black-ref.wav",
@@ -3434,7 +3481,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/bernard-black-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=yQUSCuHhX3M",
         "title": "Dylan Moran on sobriety, his childhood, and the internet | The Weekly | ABC TV + iview",
@@ -3509,7 +3556,8 @@
           "discovery_native_evidence": [],
           "delivery_commit": "2afaa179544a545a46d0d5aad3a44946577da14e"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "eartha-ref.wav",
@@ -3569,7 +3617,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/eartha-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=TEoAypCUdRI",
         "title": "1971: Emotional EARTHA KITT interview | Late Call | Classic Celebrity Interviews | BBC Archive",
@@ -3581,7 +3629,7 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/eartha-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-1.json",
-      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
+      "delivery_commit": "069fabba24744e594b9f993d070bbd54bc94e310",
       "post_remediation_revisions": [
         {
           "previous_delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
@@ -3642,9 +3690,11 @@
             "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-2.json",
             "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-3.json"
           ],
-          "discovery_native_evidence": []
+          "discovery_native_evidence": [],
+          "delivery_commit": "069fabba24744e594b9f993d070bbd54bc94e310"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "jim-royle-ref.wav",
@@ -3704,7 +3754,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/jim-royle-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=ctHvQ80KxCU",
         "title": "Ricky Tomlinson interview - Parkinson - BBC",
@@ -3715,7 +3765,7 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/jim-royle-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-revision-1.json",
-      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
+      "delivery_commit": "069fabba24744e594b9f993d070bbd54bc94e310",
       "post_remediation_revisions": [
         {
           "previous_delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
@@ -3790,9 +3840,11 @@
             },
             "evidence": "qa/voice-reference-remediation/evidence/jim-royle-hesitations.json",
             "scope": "Literal hesitations in retained final3.56s only; full8.86s native acoustic acceptance separate."
-          }
+          },
+          "delivery_commit": "069fabba24744e594b9f993d070bbd54bc94e310"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "seven-of-nine-ref.wav",
@@ -3852,7 +3904,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/seven-of-nine-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=Ri2dUefObdY",
         "title": "Star Trek: Picard Season 3: Jeri Ryan & Todd Stashwick Discuss Final Season",
@@ -3867,7 +3919,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-result.json",
       "native_secondary_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-result-secondary.json",
-      "delivery_commit": "3443a008781de7fead43954b64e183f2526f202f"
+      "delivery_commit": "3443a008781de7fead43954b64e183f2526f202f",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "seven-of-nine-picard-ref.wav",
@@ -3927,7 +3980,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/seven-of-nine-picard-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=Ri2dUefObdY",
         "title": "Star Trek: Picard Season 3: Jeri Ryan & Todd Stashwick Discuss Final Season",
@@ -3942,7 +3995,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-result.json",
       "native_secondary_evidence": "qa/voice-reference-remediation/evidence/seven-of-nine-picard-result-secondary.json",
-      "delivery_commit": "3443a008781de7fead43954b64e183f2526f202f"
+      "delivery_commit": "3443a008781de7fead43954b64e183f2526f202f",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "picard-ref.wav",
@@ -4016,7 +4070,7 @@
         }
       },
       "delivery_commit_locator": "git log -- voices/picard-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=9bavz335DQQ",
         "title": "Patrick Stewart on The Today Show talking about Moby Dick miniseries (1998)",
@@ -4031,7 +4085,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/picard-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/picard-result.json",
       "native_secondary_evidence": "qa/voice-reference-remediation/evidence/picard-result-secondary.json",
-      "delivery_commit": "81ddd253c94c31847341f44a770e3c8cd68af871"
+      "delivery_commit": "81ddd253c94c31847341f44a770e3c8cd68af871",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "captain-mainwaring-ref.wav",
@@ -4091,7 +4146,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/captain-mainwaring-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=dRtCsNhxO3o",
         "title": "Looks Familiar - Arthur Lowe, Bob Monkhouse, Noel Gordon 19.04.82 (Complete Episode)",
@@ -4105,7 +4160,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/captain-mainwaring-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/captain-mainwaring-result.json",
-      "delivery_commit": "81ddd253c94c31847341f44a770e3c8cd68af871"
+      "delivery_commit": "81ddd253c94c31847341f44a770e3c8cd68af871",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "edina-monsoon-ref.wav",
@@ -4165,7 +4221,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/edina-monsoon-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=cxilv-bZAkw",
         "title": "Jennifer Saunders On Fighting the Procrastination Demon Named Susan | Titting About Series 5",
@@ -4180,7 +4236,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-result.json",
       "native_secondary_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-result-secondary.json",
-      "delivery_commit": "81ddd253c94c31847341f44a770e3c8cd68af871"
+      "delivery_commit": "81ddd253c94c31847341f44a770e3c8cd68af871",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "denny-crane-ref.wav",
@@ -4239,10 +4296,11 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/denny-crane-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/denny-crane-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/denny-crane-result.json",
-      "delivery_commit": "4cfb66a22fec1859283813ee1a3ea39d685fa1f1"
+      "delivery_commit": "4cfb66a22fec1859283813ee1a3ea39d685fa1f1",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "columbo-ref.wav",
@@ -4302,7 +4360,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/columbo-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=ZtboufXPj2A",
         "title": "Interview with Peter Falk",
@@ -4318,7 +4376,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/columbo-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/columbo-result.json",
-      "delivery_commit": "3bf95c2090947d259a5a1e35ae42dcc31b1f104c"
+      "delivery_commit": "3bf95c2090947d259a5a1e35ae42dcc31b1f104c",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "bob-mortimer-ref.wav",
@@ -4378,7 +4437,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/bob-mortimer-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=RlfrOMtFlsM",
         "title": "Bob Mortimer on Taskmaster, Last One Laughing, WILTY and why his latest novel features his cat.",
@@ -4394,7 +4453,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-mortimer-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-mortimer-result.json",
-      "delivery_commit": "3628f6921f1d76477ab6a31620a8846ba049e890"
+      "delivery_commit": "3628f6921f1d76477ab6a31620a8846ba049e890",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "frasier-ref.wav",
@@ -4453,7 +4513,7 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/frasier-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/frasier-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/frasier-result.json",
       "source_context": {
@@ -4466,7 +4526,8 @@
         "speaker_frame": "qa/voice-reference-remediation/evidence/frasier-source-002.jpg",
         "reaction_frame": "qa/voice-reference-remediation/evidence/frasier-reaction-shot-009.jpg"
       },
-      "delivery_commit": "541efe085e3ed63bbeeb931bbd72129c5f541815"
+      "delivery_commit": "541efe085e3ed63bbeeb931bbd72129c5f541815",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "bill-bailey-ref.wav",
@@ -4527,7 +4588,7 @@
         "replacement_sample_exact_source_slice": true
       },
       "delivery_commit_locator": "git log -- voices/bill-bailey-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=HNSZ2j6_YVs",
         "title": "Bill Bailey: Interview",
@@ -4545,7 +4606,8 @@
         "native_3_1": "qa/voice-reference-remediation/evidence/bill-bailey-prior-boundary-3.1.json",
         "native_3_8": "qa/voice-reference-remediation/evidence/bill-bailey-prior-boundary-3.8.json"
       },
-      "delivery_commit": "7c1e49162100acdcf1f812eda4abc4c4218b9249"
+      "delivery_commit": "7c1e49162100acdcf1f812eda4abc4c4218b9249",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "saul-goodman-ref.wav",
@@ -4604,7 +4666,7 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/saul-goodman-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/saul-goodman-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/saul-goodman-result.json",
       "source_context": {
@@ -4616,7 +4678,8 @@
         "source_frame": "qa/voice-reference-remediation/evidence/saul-goodman-source-009.jpg",
         "speaker_basis": "Official amc+ named Saul Goodman webisode and camera-visible intended character delivering source passage; legacy source offset2 used for source-context frame, production trim remains exact original PCM."
       },
-      "delivery_commit": "ef9a0e11124696600cf075d4a1b97d37e3bc406b"
+      "delivery_commit": "ef9a0e11124696600cf075d4a1b97d37e3bc406b",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "scotty-ref.wav",
@@ -4670,7 +4733,7 @@
         "replacement_sample_exact_source_slice": true
       },
       "delivery_commit_locator": "git log -- voices/scotty-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=COJuF7n9gGA",
         "title": "James Doohan Discusses How He Helped A Suicidal Star Trek Fan",
@@ -4688,7 +4751,8 @@
       "native_secondary_evidence": "qa/voice-reference-remediation/evidence/scotty-result-secondary.json",
       "native_disagreement_evidence": "qa/voice-reference-remediation/evidence/scotty-faint-bed-disagreement.json",
       "rejected_non_native_evidence": "qa/voice-reference-remediation/evidence/scotty-text-layout-rejected.json",
-      "delivery_commit": "ef9a0e11124696600cf075d4a1b97d37e3bc406b"
+      "delivery_commit": "ef9a0e11124696600cf075d4a1b97d37e3bc406b",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "clara-oswald-ref.wav",
@@ -4749,7 +4813,7 @@
         "replacement_sample_exact_source_slice": true
       },
       "delivery_commit_locator": "git log -- voices/clara-oswald-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=4FqH8GvxVzA",
         "title": "\"A clockwork squirrel!?\" Jenna Coleman on what she took from Doctor Who",
@@ -4830,7 +4894,8 @@
           ],
           "delivery_commit": "835049e89cc36d70aec487dbcec4809da127658b"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "amy-pond-ref.wav",
@@ -4891,7 +4956,7 @@
         "replacement_sample_exact_source_slice": true
       },
       "delivery_commit_locator": "git log -- voices/amy-pond-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=He_qwkw0v7g",
         "title": "Karen Gillan Graham Norton Radio 2 (29 Oct 2011)",
@@ -4907,7 +4972,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/amy-pond-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/amy-pond-result.json",
       "native_secondary_evidence": "qa/voice-reference-remediation/evidence/amy-pond-result-secondary.json",
-      "delivery_commit": "f05322577b475b283f0709c6404e6b46e19ca862"
+      "delivery_commit": "f05322577b475b283f0709c6404e6b46e19ca862",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "bill-potts-ref.wav",
@@ -4968,7 +5034,7 @@
         "replacement_sample_exact_source_slice": true
       },
       "delivery_commit_locator": "git log -- voices/bill-potts-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=c9i7_Jcoa1s",
         "title": "Pearl Mackie on Playing the First Gay Doctor Who Companion | Good Morning Britain",
@@ -4983,7 +5049,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bill-potts-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/bill-potts-result.json",
-      "delivery_commit": "f05322577b475b283f0709c6404e6b46e19ca862"
+      "delivery_commit": "f05322577b475b283f0709c6404e6b46e19ca862",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "galadriel-ref.wav",
@@ -5044,7 +5111,7 @@
         "replacement_sample_exact_source_slice": true
       },
       "delivery_commit_locator": "git log -- voices/galadriel-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.bbc.co.uk/programmes/m001g30v",
         "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0dmjjtx.mp3",
@@ -5063,7 +5130,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/galadriel-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/galadriel-result.json",
-      "delivery_commit": "f05322577b475b283f0709c6404e6b46e19ca862"
+      "delivery_commit": "f05322577b475b283f0709c6404e6b46e19ca862",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "donna-noble-ref.wav",
@@ -5124,7 +5192,7 @@
         "replacement_sample_exact_source_slice": true
       },
       "delivery_commit_locator": "git log -- voices/donna-noble-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=gW_L4ZlAKco",
         "title": "Catherine Tate Grimmy BBC Radio 1 2016",
@@ -5203,7 +5271,8 @@
           "discovery_native_evidence": [],
           "delivery_commit": "f49f9f4cd03820ac453899f5b0e7bd1c9d745bc1"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "martha-jones-ref.wav",
@@ -5264,7 +5333,7 @@
         "replacement_sample_exact_source_slice": true
       },
       "delivery_commit_locator": "git log -- voices/martha-jones-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=MNIWA2RE_rQ",
         "title": "Freema Agyeman on Radio 5 Live 30th March 2007 (1 of 3)",
@@ -5278,7 +5347,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/martha-jones-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/martha-jones-result.json",
-      "delivery_commit": "ded164743f948d5a46d5dfe8b3ca83b7ec50de52"
+      "delivery_commit": "ded164743f948d5a46d5dfe8b3ca83b7ec50de52",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "rose-tyler-ref.wav",
@@ -5339,7 +5409,7 @@
         "replacement_source_frame_exact": true
       },
       "delivery_commit_locator": "git log -- voices/rose-tyler-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.bbc.co.uk/programmes/m000vy1j",
         "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p09gvdmn.mp3",
@@ -5357,7 +5427,8 @@
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-publisher-source.json",
       "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-secondary-result.json",
       "native_boundary_disagreement_evidence": "qa/voice-reference-remediation/evidence/rose-tyler-boundary-disagreement.json",
-      "delivery_commit": "e45839ac97427dac4b4d400e7adfb14275f88da5"
+      "delivery_commit": "e45839ac97427dac4b4d400e7adfb14275f88da5",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "river-song-ref.wav",
@@ -5418,7 +5489,7 @@
         "replacement_source_frame_exact": true
       },
       "delivery_commit_locator": "git log -- voices/river-song-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.bbc.co.uk/programmes/m001hnlk",
         "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0f0k099.mp3",
@@ -5439,7 +5510,8 @@
       "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/river-song-secondary-result.json",
       "native_tight_opening_disagreement_evidence": "qa/voice-reference-remediation/evidence/river-song-tight-opening-disagreement.json",
       "native_expanded_trial_rejected_evidence": "qa/voice-reference-remediation/evidence/river-song-expanded-trial-rejected.json",
-      "delivery_commit": "0da3843d47cb5b61bbd86af9b44a178868a34680"
+      "delivery_commit": "0da3843d47cb5b61bbd86af9b44a178868a34680",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "patsy-stone-ref.wav",
@@ -5500,7 +5572,7 @@
         "replacement_source_frame_exact": true
       },
       "delivery_commit_locator": "git log -- voices/patsy-stone-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.bbc.co.uk/programmes/b007gtsn",
         "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pp06f.mp3",
@@ -5519,7 +5591,8 @@
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/patsy-stone-publisher-source.json",
       "prior_boundary_evidence": "qa/voice-reference-remediation/evidence/patsy-stone-prior_boundary_evidence.json",
       "prior_wording_evidence": "qa/voice-reference-remediation/evidence/patsy-stone-prior_wording_evidence.json",
-      "delivery_commit": "466e98409bf4f7fa2776b32577f4da720b89dd00"
+      "delivery_commit": "466e98409bf4f7fa2776b32577f4da720b89dd00",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "victor-meldrew-ref.wav",
@@ -5580,7 +5653,7 @@
         "replacement_source_frame_exact": true
       },
       "delivery_commit_locator": "git log -- voices/victor-meldrew-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.bbc.co.uk/programmes/m000x6cj",
         "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p09lwkpy.mp3",
@@ -5599,7 +5672,8 @@
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/victor-meldrew-publisher-source.json",
       "native_secondary_result_evidence": "qa/voice-reference-remediation/evidence/victor-meldrew-native_secondary_result_evidence.json",
       "native_independent_result_evidence": "qa/voice-reference-remediation/evidence/victor-meldrew-native_independent_result_evidence.json",
-      "delivery_commit": "466e98409bf4f7fa2776b32577f4da720b89dd00"
+      "delivery_commit": "466e98409bf4f7fa2776b32577f4da720b89dd00",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "lee-mack-ref.wav",
@@ -5660,7 +5734,7 @@
         "replacement_source_frame_exact": true
       },
       "delivery_commit_locator": "git log -- voices/lee-mack-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.bbc.co.uk/programmes/b03bpxxq",
         "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pnyhj.mp3",
@@ -5744,7 +5818,8 @@
           ],
           "delivery_commit": "e71e7458bd899dcfe229f9aba356a3e25091ee49"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "mark-steel-ref.wav",
@@ -5805,7 +5880,7 @@
         "replacement_source_frame_exact": true
       },
       "delivery_commit_locator": "git log -- voices/mark-steel-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.bbc.co.uk/programmes/m0025l9s",
         "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0k8y4w1.mp3",
@@ -5822,7 +5897,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/mark-steel-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/mark-steel-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/mark-steel-publisher-source.json",
-      "delivery_commit": "4bd98896138c709a58233c7d4d3f2f223fa7bd11"
+      "delivery_commit": "4bd98896138c709a58233c7d4d3f2f223fa7bd11",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "victoria-wood-ref.wav",
@@ -5883,7 +5959,7 @@
         "replacement_source_frame_exact": true
       },
       "delivery_commit_locator": "git log -- voices/victoria-wood-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.bbc.co.uk/programmes/b008kkcg",
         "source_download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pp03b.mp3",
@@ -5904,7 +5980,8 @@
       "source_decode_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-first240-decode.log",
       "prior_fragment_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-prior-fragment-rejected.json",
       "transcript_only_rejected_evidence": "qa/voice-reference-remediation/evidence/victoria-wood-text-layer-rejected.json",
-      "delivery_commit": "13bf1dcea6566e38746de578000c7465d019115b"
+      "delivery_commit": "13bf1dcea6566e38746de578000c7465d019115b",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "jack-dee-ref.wav",
@@ -5965,7 +6042,7 @@
         "sample_exact_publisher_slice": true
       },
       "delivery_commit_locator": "git log -- voices/jack-dee-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "guest": "Jack Dee",
         "publisher": "BBC Radio 4",
@@ -5985,7 +6062,8 @@
       "native_result_evidence": "qa/voice-reference-remediation/evidence/jack-dee-result.json",
       "native_result_secondary_evidence": "qa/voice-reference-remediation/evidence/jack-dee-result-secondary.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/jack-dee-publisher-source.json",
-      "delivery_commit": "2d18f8f845a09244f18aae7cf8faac59be68876f"
+      "delivery_commit": "2d18f8f845a09244f18aae7cf8faac59be68876f",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "kryten-ref.wav",
@@ -6046,7 +6124,7 @@
         "sample_exact_publisher_slice": true
       },
       "delivery_commit_locator": "git log -- voices/kryten-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=3hFhUk6DbJ8",
         "publisher": "Comic-Con International",
@@ -6064,7 +6142,8 @@
       "native_result_evidence": "qa/voice-reference-remediation/evidence/kryten-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/kryten-publisher-source.json",
       "source_frame_evidence": "qa/voice-reference-remediation/evidence/kryten-source-frame612.png",
-      "delivery_commit": "2eba06dbbd2ff2672b880efd0843ebf0539f6c2b"
+      "delivery_commit": "2eba06dbbd2ff2672b880efd0843ebf0539f6c2b",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "rimmer-ref.wav",
@@ -6125,7 +6204,7 @@
         "sample_exact_publisher_slice": true
       },
       "delivery_commit_locator": "git log -- voices/rimmer-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=3hFhUk6DbJ8",
         "publisher": "Comic-Con International",
@@ -6145,7 +6224,8 @@
       "result_overlapping_evidence": "qa/voice-reference-remediation/evidence/rimmer-result-overlapping.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/rimmer-publisher-source.json",
       "source_frame_evidence": "qa/voice-reference-remediation/evidence/rimmer-source-frame500.png",
-      "delivery_commit": "fe8767fdb26a898bc5c009becbb69ed7f661f920"
+      "delivery_commit": "fe8767fdb26a898bc5c009becbb69ed7f661f920",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "gareth-keenan-ref.wav",
@@ -6206,7 +6286,7 @@
         "sample_exact_publisher_slice": true
       },
       "delivery_commit_locator": "git log -- voices/gareth-keenan-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "publisher": "BBC Radio4",
         "programme": "Screenshot: Archaeology",
@@ -6227,7 +6307,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/gareth-keenan-publisher-source.json",
-      "delivery_commit": "80eb126b7c777d04891459ebb6500eb07c5cc654"
+      "delivery_commit": "80eb126b7c777d04891459ebb6500eb07c5cc654",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "alan-partridge-ref.wav",
@@ -6288,7 +6369,7 @@
         "sample_exact_publisher_slice": true
       },
       "delivery_commit_locator": "git log -- voices/alan-partridge-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "publisher": "BBC Radio 4",
         "programme": "Desert Island Discs",
@@ -6309,7 +6390,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/alan-partridge-publisher-source.json",
-      "delivery_commit": "ed6e9d675dfbf293b43da76227af76953eac2c27"
+      "delivery_commit": "ed6e9d675dfbf293b43da76227af76953eac2c27",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "lisa-simpson-ref.wav",
@@ -6369,14 +6451,15 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/lisa-simpson-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "native_original_evidence": "qa/voice-reference-remediation/evidence/lisa-simpson-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/lisa-simpson-result.json",
       "native_result_secondary_evidence": "qa/voice-reference-remediation/evidence/lisa-simpson-result-secondary.json",
       "rejected_candidate_evidence": [
         "qa/voice-reference-remediation/evidence/lisa-simpson-first-phrase-rejected.json"
       ],
-      "delivery_commit": "e291e53d714c0f228502f7cbb6b10b12ffd4eae7"
+      "delivery_commit": "e291e53d714c0f228502f7cbb6b10b12ffd4eae7",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "q-tng-ref.wav",
@@ -6437,7 +6520,7 @@
         "sample_exact_publisher_slice": true
       },
       "delivery_commit_locator": "git log -- voices/q-tng-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=Te8vCFkFHg8",
         "publisher": "TrekMovie",
@@ -6458,7 +6541,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/q-tng-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/q-tng-result.json",
       "publisher_source_evidence": "qa/voice-reference-remediation/evidence/q-tng-publisher-source.json",
-      "delivery_commit": "644d40337442a32d0623474b35efb4a45fad4e37"
+      "delivery_commit": "644d40337442a32d0623474b35efb4a45fad4e37",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "sherlock-ref.wav",
@@ -6519,7 +6603,7 @@
         "sample_exact_publisher_slice": true
       },
       "delivery_commit_locator": "git log -- voices/sherlock-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://commons.wikimedia.org/wiki/File:Benedict_cumberbatch_in_front_row_b00wqfnd-crop.flac",
         "source_download_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Benedict_cumberbatch_in_front_row_b00wqfnd-crop.flac",
@@ -6548,7 +6632,8 @@
       "rejected_candidate_evidence": [
         "qa/voice-reference-remediation/evidence/sherlock-initial-cutoff-rejected.json"
       ],
-      "delivery_commit": "644d40337442a32d0623474b35efb4a45fad4e37"
+      "delivery_commit": "644d40337442a32d0623474b35efb4a45fad4e37",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "dalai-lama-ref.wav",
@@ -6601,7 +6686,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/dalai-lama-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://commons.wikimedia.org/wiki/File:VOA_Dalai_Lama_Interview_Part_1.webm",
         "original_source_url": "https://www.youtube.com/watch?v=5vmfpoxv5xw",
@@ -6655,7 +6740,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/dalai-lama-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/dalai-lama-result.json",
-      "delivery_commit": "01f1c94bb3ba97b871a337c3b4ee9ed96349de44"
+      "delivery_commit": "01f1c94bb3ba97b871a337c3b4ee9ed96349de44",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "john-sheppard-ref.wav",
@@ -6707,7 +6793,7 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/john-sheppard-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=ZvMMskY6AaU",
         "publisher": "Dial the Gate",
@@ -6731,7 +6817,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/john-sheppard-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/john-sheppard-result.json",
-      "delivery_commit": "b47cd2a8eea3cc138fb1022b467bceb20ea465b3"
+      "delivery_commit": "b47cd2a8eea3cc138fb1022b467bceb20ea465b3",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "harvey-specter-ref.wav",
@@ -6790,7 +6877,7 @@
         "sample_exact_slice": true
       },
       "delivery_commit_locator": "git log -- voices/harvey-specter-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=hacr7EI-1JA",
         "publisher": "Suits Official",
@@ -6818,7 +6905,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/harvey-specter-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/harvey-specter-result.json",
-      "delivery_commit": "da0c17d7268dd5c63e9f664a15c852a1d7b3e502"
+      "delivery_commit": "da0c17d7268dd5c63e9f664a15c852a1d7b3e502",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "loki-ref.wav",
@@ -6878,7 +6966,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/loki-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.bbc.co.uk/programmes/m002h9wp",
         "publisher": "BBC Radio4, Front Row",
@@ -6917,7 +7005,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/loki-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/loki-result.json",
-      "delivery_commit": "7af14e5d977a10d7d6ed482cf78b905cc33c6522"
+      "delivery_commit": "7af14e5d977a10d7d6ed482cf78b905cc33c6522",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "mrs-doyle-ref.wav",
@@ -6978,7 +7067,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/mrs-doyle-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://shows.acast.com/pjrchive/episodes/pauline-mclynn-actress-who-played-mrs-doyle-in-father-ted-in",
         "publisher": "The PJRchive, Peter Jonathan Robertson",
@@ -7021,7 +7110,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/mrs-doyle-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/mrs-doyle-result.json",
-      "delivery_commit": "d49af69c204ad1ea1f310802fdf35f72b40a7342"
+      "delivery_commit": "d49af69c204ad1ea1f310802fdf35f72b40a7342",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "avasarala-ref.wav",
@@ -7081,7 +7171,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/avasarala-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=fYWGwZjWvuU",
         "publisher": "LRM Online",
@@ -7127,7 +7217,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/avasarala-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/avasarala-result.json",
-      "delivery_commit": "ef261a7334b12f7da6577954db1263746220d6d1"
+      "delivery_commit": "ef261a7334b12f7da6577954db1263746220d6d1",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "kitt-ref.wav",
@@ -7187,7 +7278,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/kitt-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=S2-cnKDmB0w",
         "publisher": "FoundationINTERVIEWS",
@@ -7230,7 +7321,7 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/kitt-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-1.json",
-      "delivery_commit": "138e11dbae99fc333304e535d2fda080a316fa57",
+      "delivery_commit": "069fabba24744e594b9f993d070bbd54bc94e310",
       "post_remediation_revisions": [
         {
           "previous_delivery_commit": "138e11dbae99fc333304e535d2fda080a316fa57",
@@ -7292,9 +7383,11 @@
             "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-3.json",
             "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-4.json"
           ],
-          "discovery_native_evidence": []
+          "discovery_native_evidence": [],
+          "delivery_commit": "069fabba24744e594b9f993d070bbd54bc94e310"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "romana-ref.wav",
@@ -7354,7 +7447,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/romana-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=CPyv2UzVsuU",
         "publisher": "Flicks And The City",
@@ -7396,7 +7489,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/romana-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/romana-result.json",
-      "delivery_commit": "de5502a76ee870c7553a8aa15079d0d1144fdb6d"
+      "delivery_commit": "de5502a76ee870c7553a8aa15079d0d1144fdb6d",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "nyssa-of-traken-ref.wav",
@@ -7456,7 +7550,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/nyssa-of-traken-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=NSxsSf1RGhg",
         "publisher": "BFI / BFIEvents",
@@ -7500,7 +7594,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/nyssa-of-traken-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/nyssa-of-traken-result.json",
-      "delivery_commit": "8e1306c91b6ecd3f3b8e6202dcb490e5bb3a3c9a"
+      "delivery_commit": "8e1306c91b6ecd3f3b8e6202dcb490e5bb3a3c9a",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "aurora-ref.wav",
@@ -7560,7 +7655,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/aurora-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=db9gHZIoATk",
         "publisher": "CBC / Q with Tom Power",
@@ -7611,7 +7706,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/aurora-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/aurora-result.json",
-      "delivery_commit": "269564ad1329c649065a667ca60d37250abf3813"
+      "delivery_commit": "269564ad1329c649065a667ca60d37250abf3813",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "tegan-jovanka-ref.wav",
@@ -7671,7 +7767,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/tegan-jovanka-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "catalogue_api_url": "https://onesearch.slq.qld.gov.au/primaws/rest/pub/pnxs/L/alma99183376220102061?vid=61SLQ_INST:SLQ_NDE&lang=en",
         "catalogue_api_sha256": "c4192874a56cb1cc13e5cf6f38667ed0151778fcba8df9860acfdcfd91390954",
@@ -7731,7 +7827,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/tegan-jovanka-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/tegan-jovanka-result.json",
-      "delivery_commit": "a4028eb2a15f79646c370c898d42030d7719e468"
+      "delivery_commit": "a4028eb2a15f79646c370c898d42030d7719e468",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "joi-ref.wav",
@@ -7784,7 +7881,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/joi-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=MhuOBP7EkwM",
         "publisher": "Collider Interviews",
@@ -7825,7 +7922,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/joi-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/joi-result.json",
-      "delivery_commit": "44c4a6354086316223ae7619dd75f2caf735c2a5"
+      "delivery_commit": "44c4a6354086316223ae7619dd75f2caf735c2a5",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "jarvis-ref.wav",
@@ -7878,7 +7976,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/jarvis-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=VYCngMTg8MY",
         "publisher": "SAG-AFTRA Foundation",
@@ -7980,7 +8078,8 @@
           ],
           "delivery_commit": "10a8d650d924b77ab682f72d742dc3c6b5c7cba2"
         }
-      ]
+      ],
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "dave-bowman-ref.wav",
@@ -8033,7 +8132,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/dave-bowman-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=dr0c0FEfDkQ",
         "publisher": "thecoolidge",
@@ -8085,7 +8184,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/dave-bowman-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/dave-bowman-result.json",
-      "delivery_commit": "557b9369265d547275ca6e82c0a5b1d95cb6e582"
+      "delivery_commit": "557b9369265d547275ca6e82c0a5b1d95cb6e582",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "neil-degrasse-tyson-ref.wav",
@@ -8145,7 +8245,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/neil-degrasse-tyson-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.nasa.gov/podcasts/houston-we-have-a-podcast/cosmic-perspectives-with-neil-degrasse-tyson/",
         "source_audio_url": "https://www.nasa.gov/wp-content/uploads/2026/09/ep437-cosmic-perspectives.mp3",
@@ -8187,7 +8287,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/neil-degrasse-tyson-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/neil-degrasse-tyson-result.json",
-      "delivery_commit": "7922eee447ffe2011718fe988a35044f634e74f0"
+      "delivery_commit": "7922eee447ffe2011718fe988a35044f634e74f0",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "leia-organa-ref.wav",
@@ -8240,7 +8341,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/leia-organa-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=wuW7vNrgT_g",
         "publisher": "Star Wars",
@@ -8282,7 +8383,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/leia-organa-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/leia-organa-result.json",
-      "delivery_commit": "ce10313e189907f3260f0e87998c1e289ba35e6d"
+      "delivery_commit": "ce10313e189907f3260f0e87998c1e289ba35e6d",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "peter-kay-ref.wav",
@@ -8342,7 +8444,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/peter-kay-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=SLzfteKoARw",
         "publisher": "This Morning",
@@ -8382,7 +8484,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/peter-kay-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/peter-kay-result.json",
-      "delivery_commit": "444c03160461fe5c5df9a950c605616b7a9381a9"
+      "delivery_commit": "444c03160461fe5c5df9a950c605616b7a9381a9",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "samantha-ref.wav",
@@ -8442,7 +8545,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/samantha-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=ZKSzrJkHtVg",
         "publisher": "Variety",
@@ -8484,7 +8587,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/samantha-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/samantha-result.json",
-      "delivery_commit": "ebdc75c1f250129ebd891977cda60e1f6050105d"
+      "delivery_commit": "ebdc75c1f250129ebd891977cda60e1f6050105d",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "trigger-ref.wav",
@@ -8544,7 +8648,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/trigger-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=NHFvkBmhfOw",
         "publisher": "North Norfolk Labour Party",
@@ -8588,7 +8692,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/trigger-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/trigger-result.json",
-      "delivery_commit": "2ed0d5a1a8549a69b45332a3812f6659aa31ab58"
+      "delivery_commit": "2ed0d5a1a8549a69b45332a3812f6659aa31ab58",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     },
     {
       "wav": "nanna-ref.wav",
@@ -8648,7 +8753,7 @@
         "sample_exact_slice": false
       },
       "delivery_commit_locator": "git log -- voices/nanna-ref.wav qa/voice-reference-remediation/changes.json",
-      "final_corpus_acceptance": "pending",
+      "final_corpus_acceptance": "accepted",
       "replacement_provenance": {
         "source_url": "https://www.youtube.com/watch?v=xJN2D5mqjMc",
         "publisher": "Y-TV",
@@ -8690,7 +8795,8 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/nanna-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/nanna-result.json",
-      "delivery_commit": "1fc34c31ae8bf71222ec8bff451ffe046a74ccdd"
+      "delivery_commit": "1fc34c31ae8bf71222ec8bff451ffe046a74ccdd",
+      "final_acceptance_record": "qa/voice-reference-remediation/final-acceptance.json"
     }
   ],
   "exclusions": [

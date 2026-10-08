@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "snapshot": "qa/voice-reference-remediation/final-snapshot.json",
-  "production_commit": "f49f9f4cd03820ac453899f5b0e7bd1c9d745bc1",
-  "corpus_status": "pending",
+  "production_commit": "069fabba24744e594b9f993d070bbd54bc94e310",
+  "corpus_status": "accepted",
   "required_production_count": 104,
   "records": [
     {
@@ -402,7 +402,8 @@
         "audio_integrity": true,
         "production_hash_match": true,
         "profile_relationships_consistent": true,
-        "samples_at_full_scale": 0
+        "samples_at_full_scale": 0,
+        "production_and_git_hash_match": true
       }
     },
     {
@@ -684,7 +685,8 @@
         "audio_integrity": true,
         "production_hash_match": true,
         "profile_relationships_consistent": true,
-        "samples_at_full_scale": 0
+        "samples_at_full_scale": 0,
+        "production_and_git_hash_match": true
       }
     },
     {
@@ -981,7 +983,8 @@
         "audio_integrity": true,
         "production_hash_match": true,
         "profile_relationships_consistent": true,
-        "samples_at_full_scale": 0
+        "samples_at_full_scale": 0,
+        "production_and_git_hash_match": true
       }
     },
     {
@@ -1074,7 +1077,8 @@
         "audio_integrity": true,
         "production_hash_match": true,
         "profile_relationships_consistent": true,
-        "samples_at_full_scale": 0
+        "samples_at_full_scale": 0,
+        "production_and_git_hash_match": true
       }
     },
     {
@@ -1947,5 +1951,16 @@
         "samples_at_full_scale": 0
       }
     }
-  ]
+  ],
+  "verification": {
+    "repository_tests": {
+      "passed": 736,
+      "skipped": 2,
+      "exit_code": 0
+    },
+    "tracked_production_wavs": 104,
+    "tracked_profiles": 198,
+    "all_105_baseline_dispositions_accounted_for": true,
+    "production_and_delivery_git_bytes_verified": true
+  }
 }
