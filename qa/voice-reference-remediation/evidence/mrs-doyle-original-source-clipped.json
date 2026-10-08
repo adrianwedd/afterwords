@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "68399086a4d92943eada1a8b1e4d8f49bf820f86bfe5f43d6b3974d345bb5567",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "ef86b9fe-24a4-4755-bbdd-8f4b1e2009fd",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "68399086a4d92943eada1a8b1e4d8f49bf820f86bfe5f43d6b3974d345bb5567"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "68399086a4d92943eada1a8b1e4d8f49bf820f86bfe5f43d6b3974d345bb5567"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ef86b9fe-24a4-4755-bbdd-8f4b1e2009fd",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 1 (Female)\",\n      \"start\": 0.0,\n      \"end\": 2.4\n    },\n    {\n      \"speaker\": \"Speaker 2 (Male)\",\n      \"start\": 2.5,\n      \"end\": 6.4\n    },\n    {\n      \"speaker\": \"Speaker 1 (Female)\",\n      \"start\": 7.2,\n      \"end\": 8.2\n    },\n    {\n      \"speaker\": \"Speaker 2 (Male)\",\n      \"start\": 8.2,\n      \"end\": 9.8\n    },\n    {\n      \"speaker\": \"Speaker 1 (Female)\",\n      \"start\": 9.8,\n      \"end\": 13.0\n    },\n    {\n      \"speaker\": \"Speaker 2 (Male)\",\n      \"start\": 12.8,\n      \"end\": 14.0\n    },\n    {\n      \"speaker\": \"Speaker 1 (Female) & Speaker 2 (Male) overlapping\",\n      \"start\": 14.0,\n      \"end\": 16.5\n    },\n    {\n      \"speaker\": \"Speaker 1 (Female) with Speaker 2 interjections\",\n      \"start\": 16.5,\n      \"end\": 22.0\n    },\n    {\n      \"speaker\": \"Speaker 1 (Female)\",\n      \"start\": 22.0,\n      \"end\": 26.5\n    }\n  ],\n  \"literal_transcript\": \"Speaker 1: ...ty little drop, just a teeny-tiny bit.\\nSpeaker 2: The day a little bit of sherry hurts anyone is the day Ireland doesn't win the Eurovision Song Contest.\\n[Audience laughter]\\nSpeaker 1: Go on.\\nSpeaker 2: No, no, no, really, I shouldn't.\\nSpeaker 1: Ah, go on, go on, go on.\\nSpeaker 2: No, honestly...\\nSpeaker 1: Go on, go on...\\nSpeaker 2: Go on...\\nSpeaker 1: Go on, go on, go on, go on, go on, go on, go on...\\nSpeaker 2: No, seriously, I...\\nSpeaker 1: Go on, go on, go on, go on, go on, go on, go on, go on, go on, go on, go on, go on!\\n[Audience laughter and applause/cheers]\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Studio/sitcom interior acoustics with prominent live audience reactions; female speaker dynamics escalate dramatically from quiet cajoling to loud, shrill, rapid shouting.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Multiple speakers engaged in rapid dialogue and overlapping speech, accompanied by prominent studio audience laughter and applause throughout; initial syllable clipped; female speech devolves into rapid, highly stylized single-phrase repetition unsuitable for TTS conditioning.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations within +/- 0.3s. The initial syllable at 0.0s is clipped ('...ty little drop' versus 'just a little drop'). In the 13.0s-22.0s range, exact timestamps for male speaker interjections ('honestly', 'go on', 'seriously') have higher uncertainty due to masking by the female speaker's repetitive chanting and audience chuckles.\"\n}\n",
+    "duration_seconds": 74.443116,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20756,
+      "output_tokens": 4375,
+      "thinking_tokens": 3395,
+      "cache_read_tokens": 15588,
+      "total_tokens": 25131
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

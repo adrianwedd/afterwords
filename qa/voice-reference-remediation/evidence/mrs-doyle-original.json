@@ -1,0 +1,38 @@
+{
+  "wav": "mrs-doyle-ref.wav",
+  "source_sha256": "342f7f5ee3574df3d34f2e4fc75cf729e6652bc77e8c452b726e81f0e209f8b1",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "63964cb1-7324-4c0e-898c-5fafc17a1607",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "342f7f5ee3574df3d34f2e4fc75cf729e6652bc77e8c452b726e81f0e209f8b1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "342f7f5ee3574df3d34f2e4fc75cf729e6652bc77e8c452b726e81f0e209f8b1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "63964cb1-7324-4c0e-898c-5fafc17a1607",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 1 (female)\",\n      \"start_s\": 0.0,\n      \"end_s\": 2.7\n    },\n    {\n      \"speaker\": \"Speaker 2 (male)\",\n      \"start_s\": 2.7,\n      \"end_s\": 7.2\n    },\n    {\n      \"speaker\": \"Speaker 1 (female)\",\n      \"start_s\": 8.5,\n      \"end_s\": 9.5\n    },\n    {\n      \"speaker\": \"Speaker 2 (male)\",\n      \"start_s\": 9.6,\n      \"end_s\": 11.4\n    },\n    {\n      \"speaker\": \"Speaker 1 (female)\",\n      \"start_s\": 11.4,\n      \"end_s\": 13.8\n    }\n  ],\n  \"literal_transcript\": \"Speaker 1: Just a little drop, just a teeny-tiny bit.\\nSpeaker 2: The day that a bit of sherry hurts anyone is the day Ireland doesn't win the Eurovision Song Contest.\\n[Audience laughter]\\nSpeaker 1: Go on.\\nSpeaker 2: No, no, no, really, I shouldn't.\\nSpeaker 1: Ah, go on, go on, go on.\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Multi-speaker dialogue turn-taking and loud overlapping audience laughter across multiple utterances.\",\n  \"candidate_clean_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 1\",\n      \"start_s\": 0.0,\n      \"end_s\": 2.7,\n      \"phrase\": \"Just a little drop, just a teeny-tiny bit.\",\n      \"usable_for_conditioning\": true,\n      \"notes\": \"Solo female speech before Speaker 2 enters; completely isolated from crowd laughter, but relatively short (~2.7s) and stylistically high-pitched.\"\n    }\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates with an uncertainty margin of approximately \u00b10.2\u20130.3 seconds. There is minor perceptual uncertainty on the exact start of the background audience laughter erupting underneath the final words of Speaker 2's joke ('Eurovision Song Contest' around 6.8s\u20137.2s), whether residual laughter fully subsides during Speaker 2's 'really, I shouldn't' (around 10.0s\u201311.0s), and the exact number of repeated 'go on' tokens in Speaker 1's final vocal run.\"\n}\n```\n",
+    "duration_seconds": 57.338085,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20611,
+      "output_tokens": 6103,
+      "thinking_tokens": 5308,
+      "cache_read_tokens": 15980,
+      "total_tokens": 26714
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

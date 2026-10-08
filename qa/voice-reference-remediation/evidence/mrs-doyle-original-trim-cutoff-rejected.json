@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "bd5b041a6a3c0f9acd53f942bdc9b9ef11e7d28202331d138f95fc0bdf00b43e",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "b0703a97-a8ec-4b15-94a7-2dd3f9f014be",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "bd5b041a6a3c0f9acd53f942bdc9b9ef11e7d28202331d138f95fc0bdf00b43e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "bd5b041a6a3c0f9acd53f942bdc9b9ef11e7d28202331d138f95fc0bdf00b43e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b0703a97-a8ec-4b15-94a7-2dd3f9f014be",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"ti little draught, just a teeny tiny bit\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [1.4, 2.8]\n  ],\n  \"uncertainty\": \"First syllable is truncated at the onset (perceptually audible as 'ti-' or 'ty-', uncertain whether intended as 'teeny', 'tiny', or 'a tiny'). Timestamp boundaries are perceptual estimates with approximately \u00b10.2s margin of error: initial clipped word at 0.0s\u20130.3s, 'little draught' from ~0.3s\u20131.2s, followed by a brief pause, and 'just a teeny tiny bit' from ~1.4s\u20132.8s. The interval [1.4, 2.8] is clean and isolated to a single speaker, but conditioning utility is constrained by its short length (~1.4s).\"\n}\n```\n",
+    "duration_seconds": 39.307739,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20198,
+      "output_tokens": 4138,
+      "thinking_tokens": 3712,
+      "cache_read_tokens": 16226,
+      "total_tokens": 24336
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

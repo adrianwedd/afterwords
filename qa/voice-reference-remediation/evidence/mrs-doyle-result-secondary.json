@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d11bd37ea2c1630129084245c2c16c60a271d75f856746d2f080d1bc61fd1adb",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "35a07c5e-5455-4a20-a9ae-007717cd2f5f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d11bd37ea2c1630129084245c2c16c60a271d75f856746d2f080d1bc61fd1adb"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d11bd37ea2c1630129084245c2c16c60a271d75f856746d2f080d1bc61fd1adb"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "35a07c5e-5455-4a20-a9ae-007717cd2f5f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, well, actually all my family are from Sligo. You know, my mother and father grew up there, and I was born in Sligo. Um, so I think I'm related to everyone in the town, um, as well. But when I was six months old, we moved to Galway, and that's where we've been ever since.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 16.0]],\n  \"uncertainty\": \"Interval boundaries are rough estimates. Confidence is high that there is only one speaker and no background interference, making the entire clip usable.\"\n}\n```\n",
+    "duration_seconds": 30.559936,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12686,
+      "output_tokens": 2487,
+      "thinking_tokens": 2123,
+      "cache_read_tokens": 24037,
+      "total_tokens": 15173
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
