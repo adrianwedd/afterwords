@@ -1,0 +1,39 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=VYCngMTg8MY",
+  "publisher": "SAG-AFTRA Foundation",
+  "publisher_channel_url": "https://www.youtube.com/channel/UCYrsQFfYdzYVNsKS0gpH1mg",
+  "title": "Conversations with Paul Bettany of SHELTER",
+  "published_date": "20151124",
+  "source_info_sha256": "9793f2bb673ea0abc83cf9b5f9e216a91c7e3a923a9f9fbbd0b923b4531e8f3d",
+  "source_download_sha256": "dad64101dc51b833f9410527e66352cedd09c2433d924bdf395cf10b0f040045",
+  "source_audio_sha256": "cccabb74ef589d835a4280818c43cb3ad855106acf1fb46cc3b85fcea44d4963",
+  "identity_section_sha256": "14a1fbd37ae41e84f0119c96936fb54347e1a2e7a9c10a64d7e07bcbd46349e0",
+  "identity_frame_sha256": "b0c294b7905d521314e74c3ee56307203b8c79ce14ae0b02f4f2a74115a6fab2",
+  "related_program_page": "https://sagaftra.foundation/programs/5816/?form=SAFMembers",
+  "related_program_page_sha256": "f39c6c2d0b249da3eaf76559b464adc058bd5da25f90a08babb48cae47f5a609",
+  "source_basis": "Official SAG-AFTRA Foundation video title/description identify Paul Bettany discussing Shelter with Mark Peikert. Actual selected-range video frame132 shows the guest directly speaking on SAG-AFTRA Foundation / The New School stage. Related Foundation programme5816 independently credits a Bettany career Q&A with Peikert; it contains no video embed and is not asserted as an exact-event mapping.",
+  "role_credit_url": "https://www.marvel.com/articles/tv-shows/wandavision-paul-bettany-vision-goodbye?linkId=112916480",
+  "delivery_change": "Natural 2015 Paul Bettany interview delivery replaces dramatic processed JARVIS montage; intended actor retained, not a guarantee of robotic fictional performance.",
+  "decode": "Full ffmpeg decode to PCM16 preserving source rate/channels, exit0 and empty error log.",
+  "exact_edit": {
+    "start_s": 130.52,
+    "end_s": 139.72,
+    "sample_rate": 48000,
+    "start_frame": 6264960,
+    "end_frame_exclusive": 6706560,
+    "channel_index": null
+  },
+  "sample_exact_source_slice": true,
+  "candidate_audio": {
+    "sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc",
+    "frames": 441600,
+    "sample_rate": 48000,
+    "channels": 2,
+    "subtype": "PCM_16",
+    "duration_s": 9.2,
+    "peak": 0.245941162109375,
+    "rms": 0.020472758057504183,
+    "samples_at_full_scale": 0
+  },
+  "changes": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation."
+}

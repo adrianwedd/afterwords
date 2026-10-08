@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "3c0a413627c7844f9da956ea9259dfd05385b23f3dfe3607081194a16edfbd93",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "7a7daea1-9ffd-41df-aee3-589d380f0632",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3c0a413627c7844f9da956ea9259dfd05385b23f3dfe3607081194a16edfbd93"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3c0a413627c7844f9da956ea9259dfd05385b23f3dfe3607081194a16edfbd93"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7a7daea1-9ffd-41df-aee3-589d380f0632",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It is a it is a it is a world full of full of gray area. Uh and forgiveness and understanding is is urgent right now. And so I wanted to make a film that was about that.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [5.2, 12.8]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately +/- 0.3 seconds. Wording is clearly articulated; minor uncertainty pertains only to transcribing spoken stutters/false starts ('it is a', 'full of', 'is is') and British vs American spelling of 'gray/grey area'. The opening section contains natural hesitations, while 5.2s to 12.8s provides a continuous, clean conditioning phrase without acoustic defects.\"\n}\n```\n",
+    "duration_seconds": 54.797575,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20394,
+      "output_tokens": 3411,
+      "thinking_tokens": 3006,
+      "cache_read_tokens": 15990,
+      "total_tokens": 23805
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

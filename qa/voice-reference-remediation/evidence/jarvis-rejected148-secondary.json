@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "3c0a413627c7844f9da956ea9259dfd05385b23f3dfe3607081194a16edfbd93",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "3b7189da-8453-4568-896a-75918e5e252d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3c0a413627c7844f9da956ea9259dfd05385b23f3dfe3607081194a16edfbd93"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3c0a413627c7844f9da956ea9259dfd05385b23f3dfe3607081194a16edfbd93"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3b7189da-8453-4568-896a-75918e5e252d",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It is uh it is it is a world full of full of gray area uh and forgiveness and understanding is is urgent right now and so I wanted to make a film that was about that.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Frequent stutters, repetitions, and filler words ('uh', 'it is it is', 'full of full of', 'is is') throughout the first two-thirds of the clip.\",\n  \"candidate_clean_intervals_s\": [[8.0, 12.0]],\n  \"uncertainty\": \"Timing boundaries are rough estimates. Stutters and disfluencies make the raw reference unusable. The final phrase 'and so I wanted to make a film that was about that' is the primary candidate for a clean segment, though boundaries require manual tuning.\"\n}\n```\n",
+    "duration_seconds": 54.193148,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12554,
+      "output_tokens": 3913,
+      "thinking_tokens": 3522,
+      "cache_read_tokens": 24055,
+      "total_tokens": 16467
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

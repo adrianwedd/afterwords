@@ -1,0 +1,37 @@
+{
+  "wav": "jarvis-ref.wav",
+  "source_sha256": "acd48f4361a78264458a8b1831700041fb00328dabc00d44b1f4705ea1835870",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "e23967cb-7059-430f-be72-fbce9c970ec3",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "acd48f4361a78264458a8b1831700041fb00328dabc00d44b1f4705ea1835870"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "acd48f4361a78264458a8b1831700041fb00328dabc00d44b1f4705ea1835870"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e23967cb-7059-430f-be72-fbce9c970ec3",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [15.0, 15.8]\n  ],\n  \"literal_transcript\": \"[...down / ...done?] Compression in cylinder three appears to be low. For you, sir, always. Shall I store this on the Stark Industries central database? Working on a secret project, are we, sir? At your service, sir. [Speaker 2: Check.] Will do, sir. I have in\u2014 [cut off]\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": true,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Multiple speakers present (interjection of 'Check' by second speaker), abrupt start cutoff artifact, mid-word terminal truncation, background orchestral music swelling during portions of the clip, and montage-style splices across different scenes with shifting acoustic environments.\",\n  \"candidate_clean_intervals_s\": [\n    [0.4, 3.3],\n    [6.0, 9.8],\n    [10.3, 13.0]\n  ],\n  \"uncertainty\": \"All boundary timestamps are perceptual auditory estimates (+/- 0.2 to 0.3 seconds) without waveform visualization. The initial artifact at 0.0-0.3s is ambiguous\u2014it sounds like a clipped word ('down' or 'done') or transient impact. The final phrase at ~17.0-18.2s cuts off abruptly mid-word on 'in-' (uncertain whether the full word was 'indeed', 'indicated', etc.). The presence of music is unmistakable around 3.8-5.5s (prominent orchestral swelling) but very subtle/ambient under 6.0-9.8s and 10.3-13.0s.\"\n}\n```\n",
+    "duration_seconds": 64.300485,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 21127,
+      "output_tokens": 6422,
+      "thinking_tokens": 5854,
+      "cache_read_tokens": 15991,
+      "total_tokens": 27549
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
