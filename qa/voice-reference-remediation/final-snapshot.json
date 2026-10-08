@@ -1,0 +1,3191 @@
+{
+  "schema_version": 1,
+  "production_commit": "869b68affacad6cd7f314b9b72cdaa8f85d3f3ae",
+  "known_baseline_count": 105,
+  "production_count": 104,
+  "excluded": [
+    "vixen-ref.wav"
+  ],
+  "unchanged_audio": [
+    "hyacinth-ref.wav",
+    "tilda-ref.wav"
+  ],
+  "scope": "All tracked production WAVs and profiles; anonymous inputs verified byte-identical",
+  "final_corpus_acceptance": "pending fresh native listening and root adjudication",
+  "records": [
+    {
+      "index": 1,
+      "wav": "ace-ref.wav",
+      "anonymous_wav": "clip-001-ref.wav",
+      "audio": {
+        "sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6",
+        "frames": 320880,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.37,
+        "peak": 0.37835693359375,
+        "rms": 0.039614289571060224,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/ace-qwen3-06b.json",
+          "profile_sha256": "d438bc5a39bba4f38dd0eef0ea45bdc7a51b3e8049e1f38b0b5249373d8a5c43",
+          "reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave."
+        },
+        {
+          "path": "voices/ace.json",
+          "profile_sha256": "f0f87a277c358925b22359e51c3d2f2f1225bcdc26d4f9649dbe5943b1c27d9f",
+          "reference_text": "Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 2,
+      "wav": "alan-bennett-ref.wav",
+      "anonymous_wav": "clip-002-ref.wav",
+      "audio": {
+        "sha256": "80c47d9cd909b85e87638f599f54397938a85d765480a6a66a80fb442962c3e1",
+        "frames": 487305,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.05,
+        "peak": 0.9000244140625,
+        "rms": 0.06550375424076013,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/alan-bennett-qwen3-06b.json",
+          "profile_sha256": "97ae3d4c66956ba8cfd3ccc6d9ede17b0b7ae4544cfd08e8b363e7516636d778",
+          "reference_text": "He, and occasionally she, is overwhelmed by the amount of stuff that has been written and the ground still to be covered. How shall I ever catch up?"
+        },
+        {
+          "path": "voices/alan-bennett.json",
+          "profile_sha256": "ea52dcd7ad1c9441d0929213a8d8a547f51077437442a52f38ca62c840bda956",
+          "reference_text": "He, and occasionally she, is overwhelmed by the amount of stuff that has been written and the ground still to be covered. How shall I ever catch up?"
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 3,
+      "wav": "alan-bstard-ref.wav",
+      "anonymous_wav": "clip-003-ref.wav",
+      "audio": {
+        "sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e",
+        "frames": 231525,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 5.25,
+        "peak": 0.6763916015625,
+        "rms": 0.08005627645283217,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/alan-bstard-qwen3-06b.json",
+          "profile_sha256": "a67242e8970a54d1545185f2fa2e61a37b620c29c481d25d84e1ce234692c26c",
+          "reference_text": "We hear an awful lot of lefty whinging about the NHS waiting lists."
+        },
+        {
+          "path": "voices/alan-bstard.json",
+          "profile_sha256": "35894c6b9e11329ccbd433912864963ae5557ce9612b503fbe646445b67a5dec",
+          "reference_text": "We hear an awful lot of lefty whinging about the NHS waiting lists."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 4,
+      "wav": "alan-partridge-ref.wav",
+      "anonymous_wav": "clip-004-ref.wav",
+      "audio": {
+        "sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca",
+        "frames": 271215,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.15,
+        "peak": 0.533050537109375,
+        "rms": 0.0730938223590665,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/alan-partridge-qwen3-06b.json",
+          "profile_sha256": "d38b3df93c3fbe005523a3f28d1faefb7ac1b6bbba07a8e0e3b68918a1ab6dea",
+          "reference_text": "Yeah, I remember it very clearly because, um, I started thinking about all the people I admired on television, all the creative people I admired."
+        },
+        {
+          "path": "voices/alan-partridge.json",
+          "profile_sha256": "96819ebef96fa15c90b9064e8b656a88c2ac670da242df847a7516107ac40a08",
+          "reference_text": "Yeah, I remember it very clearly because, um, I started thinking about all the people I admired on television, all the creative people I admired."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 5,
+      "wav": "alan-shore-ref.wav",
+      "anonymous_wav": "clip-005-ref.wav",
+      "audio": {
+        "sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d",
+        "frames": 315315,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 7.15,
+        "peak": 0.9000244140625,
+        "rms": 0.10925076510370772,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/alan-shore-qwen3-06b.json",
+          "profile_sha256": "a94734e0db469ba7af52bc6d9b132b026dc117d2d91776715ac5b2066446b59b",
+          "reference_text": "They expected the American people to rise up. They didn't."
+        },
+        {
+          "path": "voices/alan-shore.json",
+          "profile_sha256": "38f22613eb36d6bb26b22a611cbae65868cec518e54c05df8f8382b8ecb8f41f",
+          "reference_text": "They expected the American people to rise up. They didn't."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 6,
+      "wav": "amy-pond-ref.wav",
+      "anonymous_wav": "clip-006-ref.wav",
+      "audio": {
+        "sha256": "18d9f5b8b14f2d1ddc78d9033874078e1e3e1aad88e1e3188a18e47e50a3c147",
+        "frames": 381906,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 8.66,
+        "peak": 0.54425048828125,
+        "rms": 0.08660175655471726,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/amy-pond-qwen3-06b.json",
+          "profile_sha256": "62db6da07137417004f022543cac47c8e547f35313db055fa6719a3893a39cdd",
+          "reference_text": "I guess the biggest challenge is the fact that I've become so accustomed to working with a camera and on a set and being able to do it again if it wasn't quite good enough or if I forgot my line."
+        },
+        {
+          "path": "voices/amy-pond.json",
+          "profile_sha256": "fcb6a473fed85d77093d970ccd09cc8e3d56a4934cbfc2b377d587dfe5798497",
+          "reference_text": "I guess the biggest challenge is the fact that I've become so accustomed to working with a camera and on a set and being able to do it again if it wasn't quite good enough or if I forgot my line."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 7,
+      "wav": "attenborough-ref.wav",
+      "anonymous_wav": "clip-007-ref.wav",
+      "audio": {
+        "sha256": "745f3e4e47f3b1f3fe9cf4160ae3b17dcaf716c60854af60177ca635aa1c068c",
+        "frames": 267600,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.15,
+        "peak": 0.9000244140625,
+        "rms": 0.09922732021099558,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/attenborough-qwen3-06b.json",
+          "profile_sha256": "9487d4d9cc8f873df00ba4b939355354e813a4a429fd89aa0243d891b4c609fb",
+          "reference_text": "It's a sloth. It's not exactly an enthusiastic leaf eater. A couple of half-hearted chews, and the leaves go straight down to its stomach."
+        },
+        {
+          "path": "voices/attenborough.json",
+          "profile_sha256": "082aae9cad5d86518a5f1d68836b5c34d9998e167ac040f140d2348bc308942e",
+          "reference_text": "It's a sloth. It's not exactly an enthusiastic leaf eater. A couple of half-hearted chews, and the leaves go straight down to its stomach."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 8,
+      "wav": "audrey-ref.wav",
+      "anonymous_wav": "clip-008-ref.wav",
+      "audio": {
+        "sha256": "e58ef59d1bb3155facc873614ffe5f899daedd372741af9948fec6cb06364480",
+        "frames": 103440,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.31,
+        "peak": 0.66021728515625,
+        "rms": 0.10924430789888029,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/audrey-qwen3-06b.json",
+          "profile_sha256": "e36f13cad87fd2d3769a1af460cc0f3243ea105b3bf5cd5b49b1352228bfa9f7",
+          "reference_text": "And I can't leave my young son any longer because he has no nurse at the moment."
+        },
+        {
+          "path": "voices/audrey.json",
+          "profile_sha256": "9b824887837a1c9a056528625831923affc92beaf77fa1f09ff84538e43d2421",
+          "reference_text": "And I can't leave my young son any longer because he has no nurse at the moment."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 9,
+      "wav": "aurora-ref.wav",
+      "anonymous_wav": "clip-009-ref.wav",
+      "audio": {
+        "sha256": "68053366e95bd08b8930dcddfb4b8f1dedd595192a1e838f6e61f634a8df841d",
+        "frames": 224640,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.68,
+        "peak": 0.465362548828125,
+        "rms": 0.04936000981197517,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/aurora-qwen3-06b.json",
+          "profile_sha256": "417ec3ee8be968711c8b43470cfa2aa478d0bc487f28ca45e2bd29cb93668f6c",
+          "reference_text": "Well, I wrote melodies when I was six, but I didn't add words to them before I was nine."
+        },
+        {
+          "path": "voices/aurora.json",
+          "profile_sha256": "155eb6151f174b7c8e6b6f0a37566e4dbdec345492054c7bb529abaa179efdd1",
+          "reference_text": "Well, I wrote melodies when I was six, but I didn't add words to them before I was nine."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 10,
+      "wav": "avasarala-ref.wav",
+      "anonymous_wav": "clip-010-ref.wav",
+      "audio": {
+        "sha256": "079bff8337fe21360862ed6ddf6c70fbe1b7b2b9eb7beecb6813532d588dabfa",
+        "frames": 239040,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.98,
+        "peak": 0.5274658203125,
+        "rms": 0.04941055353212144,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/avasarala-qwen3-06b.json",
+          "profile_sha256": "a4992990a6016eb4681119da577cbfa04581ca253289ad6f6216ab0afd4a5aed",
+          "reference_text": "I can proudly say that I have a feeling that we all did a good job on this series."
+        },
+        {
+          "path": "voices/avasarala.json",
+          "profile_sha256": "f8df792a2f4d4a2519260b19c588c6a844700dfef0f34ee067ce4aebcefd4f93",
+          "reference_text": "I can proudly say that I have a feeling that we all did a good job on this series."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 11,
+      "wav": "bardem-ref.wav",
+      "anonymous_wav": "clip-011-ref.wav",
+      "audio": {
+        "sha256": "563e1b247eb08f63a668a0a31c0a15c051ec1b0abeed6372fde0207436f617ff",
+        "frames": 149940,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.4,
+        "peak": 0.605133056640625,
+        "rms": 0.07243067300819549,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/bardem-qwen3-06b.json",
+          "profile_sha256": "3b4bf2fdbcd807f43e8f8ed028291571ed72390fb8c1330e5420be06697d6cb4",
+          "reference_text": "What's the most you ever lost on a coin toss?"
+        },
+        {
+          "path": "voices/bardem.json",
+          "profile_sha256": "c87b4b5a362beb8180d8b4b67897e84a4743c803c77d1bd4d3769f0b21be49a4",
+          "reference_text": "What's the most you ever lost on a coin toss?"
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 12,
+      "wav": "basil-fawlty-ref.wav",
+      "anonymous_wav": "clip-012-ref.wav",
+      "audio": {
+        "sha256": "a37f62fc52ef46b3be6e47ca51183b42cda0ff99df6fa179edf014f10f264bbc",
+        "frames": 516480,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 10.76,
+        "peak": 0.605804443359375,
+        "rms": 0.09869596047291379,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/basil-fawlty-qwen3-06b.json",
+          "profile_sha256": "19b346c09bbf86a24c0d4be84c9b975d845c2281247413827d20299cee045b56",
+          "reference_text": "First of all you have to sit round trying to get six people to agree on a script, which is crazy, absolutely crazy. You can't agree on a direction to go in so you keep writing, writing more and more and more and more material."
+        },
+        {
+          "path": "voices/basil-fawlty.json",
+          "profile_sha256": "1889f5e452c2f8980977cb9956230af1b3adfd599f968a9da1ad8baf99ed28a0",
+          "reference_text": "First of all you have to sit round trying to get six people to agree on a script, which is crazy, absolutely crazy. You can't agree on a direction to go in so you keep writing, writing more and more and more and more material."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 13,
+      "wav": "bernard-black-ref.wav",
+      "anonymous_wav": "clip-013-ref.wav",
+      "audio": {
+        "sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f",
+        "frames": 240000,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.0,
+        "peak": 0.221923828125,
+        "rms": 0.03910756159888425,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/bernard-black-qwen3-06b.json",
+          "profile_sha256": "f8eb214350bfe18e6e210dea3db12423e9daf027a6e84ec1d5761cabe3cde42a",
+          "reference_text": "Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is."
+        },
+        {
+          "path": "voices/bernard-black.json",
+          "profile_sha256": "6ee1a6d79c2166cef3ad0ea1d0c9d03f5f087f38c18e31ead153e55db26dea6f",
+          "reference_text": "Yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 14,
+      "wav": "bill-bailey-ref.wav",
+      "anonymous_wav": "clip-014-ref.wav",
+      "audio": {
+        "sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c",
+        "frames": 210357,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.77,
+        "peak": 0.63433837890625,
+        "rms": 0.07254071456346033,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/bill-bailey-qwen3-06b.json",
+          "profile_sha256": "9ecd2d632ddd62353114074239a9ddff8255ffd56640e90bab55610d3cad9f5e",
+          "reference_text": "And, er, I had to go and get a wig put on me head, and, er, it was brilliant actually."
+        },
+        {
+          "path": "voices/bill-bailey.json",
+          "profile_sha256": "a89c2f8ce5c7c2b3815ded526472061f1a51a784b1620ccff45f4c5cba6316c3",
+          "reference_text": "And, er, I had to go and get a wig put on me head, and, er, it was brilliant actually."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 15,
+      "wav": "bill-potts-ref.wav",
+      "anonymous_wav": "clip-015-ref.wav",
+      "audio": {
+        "sha256": "dbda10009b02730fdbb9dff2b9adea66432404a181090c5e6051311931304cf3",
+        "frames": 179928,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.08,
+        "peak": 0.121734619140625,
+        "rms": 0.01738206715707727,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/bill-potts-qwen3-06b.json",
+          "profile_sha256": "4296069038193bc4a029be672c9c20a4440253bf972777b5d95ae40ce4df57c0",
+          "reference_text": "Well, I think arguably there have been lots of gay characters on Doctor Who previously."
+        },
+        {
+          "path": "voices/bill-potts.json",
+          "profile_sha256": "f31ac0475321b0e66b7d7f56eac78ed3c1d4648f46220e60136bb6820cd2b784",
+          "reference_text": "Well, I think arguably there have been lots of gay characters on Doctor Who previously."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 16,
+      "wav": "blackadder-ref.wav",
+      "anonymous_wav": "clip-016-ref.wav",
+      "audio": {
+        "sha256": "5b36c48e78ce0aec3786af6b2644714262412508059a62f2f873e7199e4af587",
+        "frames": 121200,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 5.05,
+        "peak": 0.27862548828125,
+        "rms": 0.03541374339678983,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/blackadder-qwen3-06b.json",
+          "profile_sha256": "516074e19de9087f2d2340d85b06404cfbf3b6a8c1a21ca7bb1fac8618712f31",
+          "reference_text": "Only last year, my aunt came to me to beg for help in the ransom of my uncle Osric."
+        },
+        {
+          "path": "voices/blackadder.json",
+          "profile_sha256": "56f1c902517816e94410342e98c02e1cb81c444d6e76feaee35f2946fb0976af",
+          "reference_text": "Only last year, my aunt came to me to beg for help in the ransom of my uncle Osric."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 17,
+      "wav": "bob-jones-ibuki-ref.wav",
+      "anonymous_wav": "clip-017-ref.wav",
+      "audio": {
+        "sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.405548095703125,
+        "rms": 0.058742285991689944,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/bob-jones-ibuki-qwen3-06b.json",
+          "profile_sha256": "b810300b3f96edb95789778f18b6c1bb5c294e4177e4b2a38f183e7d6fcfb582",
+          "reference_text": "Seisan is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us."
+        },
+        {
+          "path": "voices/bob-jones-ibuki.json",
+          "profile_sha256": "4a02691674300c0ef12ee82dae573fcdfc1965fc2eb6030233e86e7d7e7171a8",
+          "reference_text": "Seisan is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 18,
+      "wav": "bob-jones-ref.wav",
+      "anonymous_wav": "clip-018-ref.wav",
+      "audio": {
+        "sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.405548095703125,
+        "rms": 0.058742285991689944,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/bob-jones-qwen3-06b.json",
+          "profile_sha256": "7cb42e20ea198b8c448ca0fa42d15585dad3106c31045b2199328677058743e2",
+          "reference_text": "Seisan is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us."
+        },
+        {
+          "path": "voices/bob-jones.json",
+          "profile_sha256": "1072e3542db61e4153f948df492594768ce5e486c0cf49322779d8c5c4304517",
+          "reference_text": "Seisan is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 19,
+      "wav": "bob-jones-sanchin-tensho-ref.wav",
+      "anonymous_wav": "clip-019-ref.wav",
+      "audio": {
+        "sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512",
+        "frames": 254400,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 10.6,
+        "peak": 1.0,
+        "rms": 0.218691873124855,
+        "samples_at_full_scale": 181
+      },
+      "profiles": [
+        {
+          "path": "voices/bob-jones-sanchin-qwen3-06b.json",
+          "profile_sha256": "ee0eb3d9ec0cf91e78cb2c565b08dbcea8962a746be36d0e30b19ce1b94b62cd",
+          "reference_text": "Tensho now, in contrast to Sanchin, which is the power kata, and getting everything centered into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision."
+        },
+        {
+          "path": "voices/bob-jones-sanchin.json",
+          "profile_sha256": "ed6ed5c75ca4bf629ca993ff5d3cce1b71f5271192e40519f8a265ee28c7ff8a",
+          "reference_text": "Tensho now, in contrast to Sanchin, which is the power kata, and getting everything centered into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 20,
+      "wav": "bob-mortimer-ref.wav",
+      "anonymous_wav": "clip-020-ref.wav",
+      "audio": {
+        "sha256": "a139863f8a4709104810ae3346804c47151cf10e4d129c24be775f9ae8a48230",
+        "frames": 201978,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.58,
+        "peak": 0.755706787109375,
+        "rms": 0.13352252077850846,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/bob-mortimer-qwen3-06b.json",
+          "profile_sha256": "52f4d5dfd4f7f3b03e858fe7a40f5d53f44ea02f55d022dd8a06fede351529f1",
+          "reference_text": "And you start thinking, 'Oh, I better make the world around me miserable, then I won't mind leaving so much.'"
+        },
+        {
+          "path": "voices/bob-mortimer.json",
+          "profile_sha256": "1fe3774aed165322348aa5ea85614cc13eb9538d354d1b88af70519b3003f3e4",
+          "reference_text": "And you start thinking, 'Oh, I better make the world around me miserable, then I won't mind leaving so much.'"
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 21,
+      "wav": "brian-cox-ref.wav",
+      "anonymous_wav": "clip-021-ref.wav",
+      "audio": {
+        "sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10278410763990728,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/brian-cox-qwen3-06b.json",
+          "profile_sha256": "6d2dff5a04c75eb13eb0bc5fbf3d3484131718b20c99c9ffd982ba85bb569fdb",
+          "reference_text": "Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?"
+        },
+        {
+          "path": "voices/brian-cox.json",
+          "profile_sha256": "624439a445140b67c90cc832122a67d34ca97867afb9cdc3414b0197053b987a",
+          "reference_text": "Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?"
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 22,
+      "wav": "captain-mainwaring-ref.wav",
+      "anonymous_wav": "clip-022-ref.wav",
+      "audio": {
+        "sha256": "1d2ff3aea18d0c8805efa37190304a365b24fd9b308f997731bbd7dbf3001556",
+        "frames": 381906,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 8.66,
+        "peak": 0.635101318359375,
+        "rms": 0.09115737651919321,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/captain-mainwaring-qwen3-06b.json",
+          "profile_sha256": "abbbfecc266533885459348c0cd0b34ba9c6a02e9c6a89914f4f085520fbd18f",
+          "reference_text": "And, uh, we were changing in, in '40 from losing the horses and becoming medium artillery."
+        },
+        {
+          "path": "voices/captain-mainwaring.json",
+          "profile_sha256": "04d11ac9b8d8a70f794945f468b4581315c2181f9557c8f8a374b359ed84e3b2",
+          "reference_text": "And, uh, we were changing in, in '40 from losing the horses and becoming medium artillery."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 23,
+      "wav": "carl-sagan-ref.wav",
+      "anonymous_wav": "clip-023-ref.wav",
+      "audio": {
+        "sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36",
+        "frames": 330000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.75,
+        "peak": 0.685089111328125,
+        "rms": 0.06615400180847875,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/carl-sagan-qwen3-06b.json",
+          "profile_sha256": "3ed860acc39c6121c65124431b3eea3af66b10efb02ef045b2ec2f4933b83d70",
+          "reference_text": "Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem."
+        },
+        {
+          "path": "voices/carl-sagan.json",
+          "profile_sha256": "7bee6c5d3ebdc236dd6c6ddca3dfeefa28e303f7d01b5708e4fa620dcb7a9bc9",
+          "reference_text": "Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 24,
+      "wav": "clara-oswald-ref.wav",
+      "anonymous_wav": "clip-024-ref.wav",
+      "audio": {
+        "sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf",
+        "frames": 398223,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 9.03,
+        "peak": 0.996673583984375,
+        "rms": 0.16385337289419266,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/clara-oswald-qwen3-06b.json",
+          "profile_sha256": "3465ed8ee6e80e0be5e7819c18cf399bd973d9774708e3b801b59349f5b93948",
+          "reference_text": "And then it's that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at."
+        },
+        {
+          "path": "voices/clara-oswald.json",
+          "profile_sha256": "31e50c359d234864efb186f81c7d15e8de2fff1e9f1d7ce146c3c52c37e59bc8",
+          "reference_text": "And then it's that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 25,
+      "wav": "claudia-ref.wav",
+      "anonymous_wav": "clip-025-ref.wav",
+      "audio": {
+        "sha256": "5610e40bd04258df426cce280e72554098ec6cea00712934f8986456edd70fd4",
+        "frames": 171600,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 7.15,
+        "peak": 0.899993896484375,
+        "rms": 0.08436073526457961,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/claudia-qwen3-06b.json",
+          "profile_sha256": "74ac293de98dd4c2acc080b5ccdb4ebe21e66dc9e4abb507f508f637f8a191d9",
+          "reference_text": "I love voice work because I can usually turn up without having bathed, except on days like this when there's cameras in the room."
+        },
+        {
+          "path": "voices/claudia.json",
+          "profile_sha256": "069a425428f26e85a57a2b1bf57fa17991c86f51759b60c7117f96f91ad7fcf2",
+          "reference_text": "I love voice work because I can usually turn up without having bathed, except on days like this when there's cameras in the room."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 26,
+      "wav": "cleaver-greene-ref.wav",
+      "anonymous_wav": "clip-026-ref.wav",
+      "audio": {
+        "sha256": "2659e75f3a0146fd700ebdfb6b421428c32929c8d60f778c3980ed02eda76aa5",
+        "frames": 325017,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 7.37,
+        "peak": 0.797882080078125,
+        "rms": 0.0798840568306418,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/cleaver-greene-qwen3-06b.json",
+          "profile_sha256": "c499dfd94e6fff9e3e5c7402a16c322d1ef777a473c64668bf1c1d5eff8da0fb",
+          "reference_text": "There is, is there not, ladies and gentlemen of the jury, so much we can learn about ourselves."
+        },
+        {
+          "path": "voices/cleaver-greene.json",
+          "profile_sha256": "7b355ee6279c3c7722e82ac987823e726cb6df3f8cc0596f4831ceeafba1ecf5",
+          "reference_text": "There is, is there not, ladies and gentlemen of the jury, so much we can learn about ourselves."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 27,
+      "wav": "columbo-ref.wav",
+      "anonymous_wav": "clip-027-ref.wav",
+      "audio": {
+        "sha256": "ccb43d59d1c13d6d7cab47a8b70a9bc3467c0ea39b0098512af3c2927b8da081",
+        "frames": 250488,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.68,
+        "peak": 0.1854248046875,
+        "rms": 0.023920086402685548,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/columbo-qwen3-06b.json",
+          "profile_sha256": "a61888b1832451af77828700bcd7d051a9ebb2297bdb69c22cb3e2d6220da5ca",
+          "reference_text": "Yeah, I did. I think down, you know, down through the years, uh, I always liked that character."
+        },
+        {
+          "path": "voices/columbo.json",
+          "profile_sha256": "6c61a84ce603d281b06214cf01b38d3eacce910d2ef3b3bb9b6997169b89d064",
+          "reference_text": "Yeah, I did. I think down, you know, down through the years, uh, I always liked that character."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 28,
+      "wav": "dalai-lama-ref.wav",
+      "anonymous_wav": "clip-028-ref.wav",
+      "audio": {
+        "sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293",
+        "frames": 319200,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.65,
+        "peak": 0.57635498046875,
+        "rms": 0.05914204847839107,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/dalai-lama.json",
+          "profile_sha256": "03b85b870b77b042054cba03ba2a474028d5972f016dc19ef476aa2be94a0de0",
+          "reference_text": "Uh, I usually describe my position since then, semi-retired position."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 29,
+      "wav": "data-ref.wav",
+      "anonymous_wav": "clip-029-ref.wav",
+      "audio": {
+        "sha256": "f745aedf7c04608e839c5a0f1523c822aa2a8a2e972585d9f3bfe64f9b42d6ae",
+        "frames": 207600,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.65,
+        "peak": 0.9000244140625,
+        "rms": 0.08314847163916805,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/data-qwen3-06b.json",
+          "profile_sha256": "6683f53be4d852a805b9ee9bf09f26825a77dd464f334cc326e58a13d5316314",
+          "reference_text": "I have asked myself that many times, as I have struggled to be more human, until I realized, it is the struggle itself that is most important."
+        },
+        {
+          "path": "voices/data.json",
+          "profile_sha256": "9254b830a108948e9d841f7ee810251987fb9d80007d2cb904822899fac8f6d5",
+          "reference_text": "I have asked myself that many times, as I have struggled to be more human, until I realized, it is the struggle itself that is most important."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 30,
+      "wav": "dave-bowman-ref.wav",
+      "anonymous_wav": "clip-030-ref.wav",
+      "audio": {
+        "sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896",
+        "frames": 636363,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 14.43,
+        "peak": 1.0,
+        "rms": 0.10356113054998306,
+        "samples_at_full_scale": 254
+      },
+      "profiles": [
+        {
+          "path": "voices/dave-bowman.json",
+          "profile_sha256": "c1027afcd073904eae55df06bf421652c889ca19680704518469dec4d072dfef",
+          "reference_text": "Also, this film got terrible reviews for the most part. More than 50 percent, 60 or 70 percent were terrible. And MGM was really worried that, um, they might have to pull it."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 31,
+      "wav": "del-boy-ref.wav",
+      "anonymous_wav": "clip-031-ref.wav",
+      "audio": {
+        "sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08",
+        "frames": 298557,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.77,
+        "peak": 0.899993896484375,
+        "rms": 0.10112630390648122,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/del-boy-qwen3-06b.json",
+          "profile_sha256": "99ba15b5dd8c7cf71be1f33b07cf0983dcd784b418c90706d5cd27a43d0269c0",
+          "reference_text": "And then you announce that you've changed your mind about having a chavvy. And then you go late night shopping at Family Planning."
+        },
+        {
+          "path": "voices/del-boy.json",
+          "profile_sha256": "a2c7ed6bf57e0db56eff06143acc607766a82512460e5f6a4d8811318c7eb637",
+          "reference_text": "And then you announce that you've changed your mind about having a chavvy. And then you go late night shopping at Family Planning."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 32,
+      "wav": "denny-crane-ref.wav",
+      "anonymous_wav": "clip-032-ref.wav",
+      "audio": {
+        "sha256": "cf5f9ced82e899dbdac52a9b6c74b893a6acccda6422d994a9560d662300517d",
+        "frames": 151263,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.43,
+        "peak": 0.9000244140625,
+        "rms": 0.09113741634713227,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/denny-crane-qwen3-06b.json",
+          "profile_sha256": "520ddbfd2cecc0f99d913521cd9934f4a54e97de7d92e989754c0dfdc9deb279",
+          "reference_text": "So if you're gonna shoot me, let's do it. I have plans."
+        },
+        {
+          "path": "voices/denny-crane.json",
+          "profile_sha256": "78a1cf98f571ff4566f1913d03531bfe493152a24068b670d3b3436fb434cbf2",
+          "reference_text": "So if you're gonna shoot me, let's do it. I have plans."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 33,
+      "wav": "depp-ref.wav",
+      "anonymous_wav": "clip-033-ref.wav",
+      "audio": {
+        "sha256": "40a7e37b646e0539ad6659df113fafc6e42ef29d14270cab6288f6e02c28a083",
+        "frames": 141120,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.2,
+        "peak": 0.580352783203125,
+        "rms": 0.03743688503411263,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/depp-qwen3-06b.json",
+          "profile_sha256": "7691d7a5c8851dc9fc5e1454578b322d8474ca990fc6c4aa2b200915bee7aed8",
+          "reference_text": "Makes this one here a bit superfluous, really."
+        },
+        {
+          "path": "voices/depp.json",
+          "profile_sha256": "add437660be1c76ce1be56b7f141a81db75460c8959e89784bf585bfebbe8538",
+          "reference_text": "Makes this one here a bit superfluous, really."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 34,
+      "wav": "donna-noble-ref.wav",
+      "anonymous_wav": "clip-034-ref.wav",
+      "audio": {
+        "sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2",
+        "frames": 286650,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.5,
+        "peak": 0.392547607421875,
+        "rms": 0.08689865623714411,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/donna-noble-qwen3-06b.json",
+          "profile_sha256": "76a5839b87698fb14527af61fb40708c25ae94a094692c286036ea60853a55fc",
+          "reference_text": "Um, I'm bringing the, uh, 'Am I bothered?' character back, which, um, I did kill off before I knew I was going on tour."
+        },
+        {
+          "path": "voices/donna-noble.json",
+          "profile_sha256": "0834d74fb6d270b07ce4feb489c4014875062ebfd6c8d9410d15a4abf72c09ca",
+          "reference_text": "Um, I'm bringing the, uh, 'Am I bothered?' character back, which, um, I did kill off before I knew I was going on tour."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 35,
+      "wav": "dr-cox-ref.wav",
+      "anonymous_wav": "clip-035-ref.wav",
+      "audio": {
+        "sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f",
+        "frames": 134505,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.05,
+        "peak": 0.785858154296875,
+        "rms": 0.07461380122462988,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/dr-cox-qwen3-06b.json",
+          "profile_sha256": "1a8afd3406684fb8a9fa1049a2b1a72bb90fd377417329ff09ca9d27e9b430f9",
+          "reference_text": "Fine. I'm gonna go ahead and tell you how it ends."
+        },
+        {
+          "path": "voices/dr-cox.json",
+          "profile_sha256": "c1ec1184894e354fb6ca8e4eb47a72c96ca532849c1ea1adc9ed72d596c9678b",
+          "reference_text": "Fine. I'm gonna go ahead and tell you how it ends."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 36,
+      "wav": "eartha-ref.wav",
+      "anonymous_wav": "clip-036-ref.wav",
+      "audio": {
+        "sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7",
+        "frames": 764160,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 15.92,
+        "peak": 0.36834716796875,
+        "rms": 0.037228153601407396,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/eartha-qwen3-06b.json",
+          "profile_sha256": "82150896972add6b35a7079ff0bc1a94a4ea2a883532aa185027ced158a90584",
+          "reference_text": "Well, being born on a cotton plantation in the South, you know, and being, uh, poor, in that way, no, it was not very easy, because I remember times when we didn't have anything to eat for what seemed like an insurmountable amount of time."
+        },
+        {
+          "path": "voices/eartha.json",
+          "profile_sha256": "108bfa6f417b95eae52ff708cbe343b0d0e7809ed0eb59c8194f0c3628a24c64",
+          "reference_text": "Well, being born on a cotton plantation in the South, you know, and being, uh, poor, in that way, no, it was not very easy, because I remember times when we didn't have anything to eat for what seemed like an insurmountable amount of time."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 37,
+      "wav": "edina-monsoon-ref.wav",
+      "anonymous_wav": "clip-037-ref.wav",
+      "audio": {
+        "sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d",
+        "frames": 480249,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 10.89,
+        "peak": 0.22100830078125,
+        "rms": 0.03362436093685624,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/edina-monsoon-qwen3-06b.json",
+          "profile_sha256": "b9a2ae09b8fddd8978d855893097463f2fa7a3e3831edbfa02fc1620842ea64a",
+          "reference_text": "And so a friend of mine said, 'I know someone, and he's just trained and he's, he's like a life coach thing. And what his good thing is, he'll teach you what's stopping you moving forward.'"
+        },
+        {
+          "path": "voices/edina-monsoon.json",
+          "profile_sha256": "896d83465ee70bf9cf5a675d861f8f9d48caf3e7e8e5fff08ae1ddce8306da4e",
+          "reference_text": "And so a friend of mine said, 'I know someone, and he's just trained and he's, he's like a life coach thing. And what his good thing is, he'll teach you what's stopping you moving forward.'"
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 38,
+      "wav": "feynman-ref.wav",
+      "anonymous_wav": "clip-038-ref.wav",
+      "audio": {
+        "sha256": "c49a1fac447d348fc7e8c338a628d2e24ec9e724ec2bc26388719e934f1cf47e",
+        "frames": 306495,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.95,
+        "peak": 0.9000244140625,
+        "rms": 0.06883143591866012,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/feynman-qwen3-06b.json",
+          "profile_sha256": "6a6c4d56c825714fcd4f446f10110b28744228297be68de7dca19442595ff7df",
+          "reference_text": "In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination."
+        },
+        {
+          "path": "voices/feynman.json",
+          "profile_sha256": "2fddc7ba03c72fc0385d2cc4affd587b324ccc5e5c09d17ffdf2367bbabb3aad",
+          "reference_text": "In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 39,
+      "wav": "frasier-ref.wav",
+      "anonymous_wav": "clip-039-ref.wav",
+      "audio": {
+        "sha256": "a5c6dd50a02cede822f1af01efec2b61a22d776a305edd21d6cce9b0a6015c4e",
+        "frames": 390285,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.85,
+        "peak": 0.899993896484375,
+        "rms": 0.09802838486430898,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/frasier-qwen3-06b.json",
+          "profile_sha256": "cf67c4052de2156ae23141905f5d333385ecab9e88be9a005bc2e16abb2830a6",
+          "reference_text": "It may be the gulfs will wash us down. It may be we shall touch the Happy Isles."
+        },
+        {
+          "path": "voices/frasier.json",
+          "profile_sha256": "caa9ddf543e5c0f777259783486e8095a100f5c68103dffc5fe3b89d70a999de",
+          "reference_text": "It may be the gulfs will wash us down. It may be we shall touch the Happy Isles."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 40,
+      "wav": "galadriel-ref.wav",
+      "anonymous_wav": "clip-040-ref.wav",
+      "audio": {
+        "sha256": "056c6cf8465b2a104c984774b474764c938b28b0a3f1e7fdd4a5d37c1f06d388",
+        "frames": 318843,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 7.23,
+        "peak": 0.6512451171875,
+        "rms": 0.08147210937193317,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/galadriel-qwen3-06b.json",
+          "profile_sha256": "916b7d338542c45217dfe81e46776571cb7becf27e98ce5e9f5c21aef24097d8",
+          "reference_text": "It's often the starting point for me when I'm thinking about a role or an atmosphere that you're stepping into as an actor."
+        },
+        {
+          "path": "voices/galadriel.json",
+          "profile_sha256": "724ab244503b9af032695c5f5a6a7913d27dab33cd852685fc1c3188320c06a3",
+          "reference_text": "It's often the starting point for me when I'm thinking about a role or an atmosphere that you're stepping into as an actor."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 41,
+      "wav": "gareth-keenan-ref.wav",
+      "anonymous_wav": "clip-041-ref.wav",
+      "audio": {
+        "sha256": "1516b7502f1b08442011e6b02229798c620080445718c48c797990478e430f94",
+        "frames": 237258,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.38,
+        "peak": 0.71112060546875,
+        "rms": 0.06435055500179661,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/gareth-keenan-qwen3-06b.json",
+          "profile_sha256": "662ef4d198d126f0d965723b7e2ccbaede23498be94007bb985c015112b5c4e3",
+          "reference_text": "Something in my brain shifted and I suddenly understood, and now I'm a coin collector too."
+        },
+        {
+          "path": "voices/gareth-keenan.json",
+          "profile_sha256": "0c4b6ee2082f936151a6e45d4bab30eaa709476b42144f5dde82cc55cdfa38c8",
+          "reference_text": "Something in my brain shifted and I suddenly understood, and now I'm a coin collector too."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 42,
+      "wav": "geraldine-ref.wav",
+      "anonymous_wav": "clip-042-ref.wav",
+      "audio": {
+        "sha256": "a2c472bce3832ec9bbfae1ec4df6da5d3390a1178bc6860d39f2d6f4e3990b12",
+        "frames": 290619,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.59,
+        "peak": 0.739105224609375,
+        "rms": 0.11196289457884218,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/geraldine-qwen3-06b.json",
+          "profile_sha256": "580e5839d1864e7c0d9b77fb498ae1a857efa0c927e21a3bd6694e28fb833e81",
+          "reference_text": "Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling."
+        },
+        {
+          "path": "voices/geraldine.json",
+          "profile_sha256": "ec52c5d351a8184293c6858ce7926c487cbc73a9c64e9842a2d8956a87339f86",
+          "reference_text": "Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 43,
+      "wav": "gulley-ref.wav",
+      "anonymous_wav": "clip-043-ref.wav",
+      "audio": {
+        "sha256": "66fe86e058819afcef8b9226b04be565fc20979bf6d28a24525df09443d29480",
+        "frames": 112800,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.7,
+        "peak": 0.823150634765625,
+        "rms": 0.09048373655781833,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/gulley-qwen3-06b.json",
+          "profile_sha256": "d24e316309229072b7eea681eac10f0aff5682aff8177259dd8839ce03e41ab9",
+          "reference_text": "Thank you very much for surprising me with that."
+        },
+        {
+          "path": "voices/gulley.json",
+          "profile_sha256": "d90bf60047f96d22da1dafe1368f117c921525a01b15a64921f0e32d6dd0de7f",
+          "reference_text": "Thank you very much for surprising me with that."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 44,
+      "wav": "hal-9000-ref.wav",
+      "anonymous_wav": "clip-044-ref.wav",
+      "audio": {
+        "sha256": "f85d9f1db3c15fee6698950fa70f21bc53874c099660b13b1ac62b44911059cf",
+        "frames": 191835,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.35,
+        "peak": 0.899993896484375,
+        "rms": 0.07667602894150696,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/hal-9000.json",
+          "profile_sha256": "87deb29851ffb549b97c385fe96e4ded1b3a4f770e99e041b0bde3ec8c1f0180",
+          "reference_text": "The 9000 series is the most reliable computer ever made."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 45,
+      "wav": "han-solo-ref.wav",
+      "anonymous_wav": "clip-045-ref.wav",
+      "audio": {
+        "sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13",
+        "frames": 608580,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.8,
+        "peak": 0.729827880859375,
+        "rms": 0.04668299379117787,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/han-solo-qwen3-06b.json",
+          "profile_sha256": "068a6fea31333db1ccbbb25360258d1c57f0da145c27454e07359c69db81ac4a",
+          "reference_text": "Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful force controlling everything. There's no mystical energy field controls my destiny."
+        },
+        {
+          "path": "voices/han-solo.json",
+          "profile_sha256": "403b9f074d4470adbbfa49fbc4b2584a8c64040b9e17e3896bf19782c56ac2d7",
+          "reference_text": "Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful force controlling everything. There's no mystical energy field controls my destiny."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 46,
+      "wav": "harvey-specter-ref.wav",
+      "anonymous_wav": "clip-046-ref.wav",
+      "audio": {
+        "sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979",
+        "frames": 377055,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.55,
+        "peak": 0.899993896484375,
+        "rms": 0.08941420418720267,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/harvey-specter-qwen3-06b.json",
+          "profile_sha256": "83591154c38da0673ce735236d3ebb0f6c4de13f8f39271fa91ba9f9819c16d1",
+          "reference_text": "They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story."
+        },
+        {
+          "path": "voices/harvey-specter.json",
+          "profile_sha256": "b7cd08d1d3e05c5c3671ec74a44f8b6c38d41c434a92a63727de6f37a3221c34",
+          "reference_text": "They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 47,
+      "wav": "holly-ref.wav",
+      "anonymous_wav": "clip-047-ref.wav",
+      "audio": {
+        "sha256": "b4668b3aac12ba7d4a37c5612d7d2c19c5594cf96f8c19ab19f26ffa31936b11",
+        "frames": 175077,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.97,
+        "peak": 0.21893310546875,
+        "rms": 0.033415748222596964,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/holly-qwen3-06b.json",
+          "profile_sha256": "6da4f2732a6db1468129803edcc36a31d9ba7ece38b4435149b76375e596c570",
+          "reference_text": "Thanks to compound interest, you now own 98% of all the world's wealth."
+        },
+        {
+          "path": "voices/holly.json",
+          "profile_sha256": "12fd325484df53e544acbf5c7c58c3da800a26b1088d78ccf622d1f0748551d4",
+          "reference_text": "Thanks to compound interest, you now own 98% of all the world's wealth."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 48,
+      "wav": "hyacinth-ref.wav",
+      "anonymous_wav": "clip-048-ref.wav",
+      "audio": {
+        "sha256": "94d5e48cd393650fd0ee67186ff88439e620b0b83f4dad3fe17918b04e8cb7e4",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08001636816937761,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/hyacinth-qwen3-06b.json",
+          "profile_sha256": "c2ad77b553c09a0acdb4a07fbc2472a812799dab27df87950764f53dd70f262a",
+          "reference_text": "I wish to place a large order, a very important order. I have the new vicar calling this afternoon for tea and light refreshments. So how soon can you deliver? Yes, I know it's Saturday and I'm very happy that you're busy."
+        },
+        {
+          "path": "voices/hyacinth.json",
+          "profile_sha256": "6ae7b48621966c63c38ec4337838cdf20c82e5a0502f541f47e57b3d95613ad8",
+          "reference_text": "I wish to place a large order, a very important order. I have the new vicar calling this afternoon for tea and light refreshments. So how soon can you deliver? Yes, I know it's Saturday and I'm very happy that you're busy."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 49,
+      "wav": "jack-dee-ref.wav",
+      "anonymous_wav": "clip-049-ref.wav",
+      "audio": {
+        "sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96",
+        "frames": 718830,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 16.3,
+        "peak": 0.415679931640625,
+        "rms": 0.04665983156186698,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/jack-dee-qwen3-06b.json",
+          "profile_sha256": "1f3f3a0fac20e8a5dc9fb766f3b163558563f117f6ab6edef8f43fa2001dda6d",
+          "reference_text": "But uh I still think that comedy is a lens through which I see everything. And uh I think almost to to some extent, the better things go in your life, the more fearful you can become that they will cease to be that way."
+        },
+        {
+          "path": "voices/jack-dee.json",
+          "profile_sha256": "129cf7084be6f024d4833122d0e7a390a3188996335d23d5abce746f50c65f36",
+          "reference_text": "But uh I still think that comedy is a lens through which I see everything. And uh I think almost to to some extent, the better things go in your life, the more fearful you can become that they will cease to be that way."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 50,
+      "wav": "jackie-chiles-ref.wav",
+      "anonymous_wav": "clip-050-ref.wav",
+      "audio": {
+        "sha256": "6d41ce5a2978fe30e8de1af4e6b7f7137078a6e27ad3f58e0db79e81820f6271",
+        "frames": 183015,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.15,
+        "peak": 0.9000244140625,
+        "rms": 0.10803155685425328,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/jackie-chiles-qwen3-06b.json",
+          "profile_sha256": "7fe79ef90510760a18ac2e6b18a0aeab66d28b0ac237df78500f246074bb22f4",
+          "reference_text": "Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it."
+        },
+        {
+          "path": "voices/jackie-chiles.json",
+          "profile_sha256": "763ab8aca3ed30462426a620badb7b082e3ce9259f8a8c74ea606ba1d493eb55",
+          "reference_text": "Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 51,
+      "wav": "jarvis-ref.wav",
+      "anonymous_wav": "clip-051-ref.wav",
+      "audio": {
+        "sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc",
+        "frames": 441600,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 9.2,
+        "peak": 0.245941162109375,
+        "rms": 0.020472758057504183,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/jarvis.json",
+          "profile_sha256": "cc96ef515f9b7e6b44d14bf8b8cc2cf0703782ea690421d984b7b11fa8d06e02",
+          "reference_text": "And forgiveness and understanding is is urgent right now and so I wanted to make a film that was about that."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 52,
+      "wav": "jim-royle-ref.wav",
+      "anonymous_wav": "clip-052-ref.wav",
+      "audio": {
+        "sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
+        "frames": 390726,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 8.86,
+        "peak": 0.399139404296875,
+        "rms": 0.02961440251998484,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/jim-royle-qwen3-06b.json",
+          "profile_sha256": "9696ba99a6aa85e3e2f665a248cc11f8aa29d27d1a0524499c1af7b54c7a4763",
+          "reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you, you know, you've got no respect.' And I, and I, and I stood up, you know."
+        },
+        {
+          "path": "voices/jim-royle.json",
+          "profile_sha256": "d4e4bb72e87fa19c16001c96d8b500b5af55d4e9c0af4e843e1a8fd9b4e55443",
+          "reference_text": "And he started winding me up and I didn't know, and he was saying, 'You don't know what it is to be hungry. You don't know what it is to be skint. You know, you, you know, you've got no respect.' And I, and I, and I stood up, you know."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 53,
+      "wav": "john-sheppard-ref.wav",
+      "anonymous_wav": "clip-053-ref.wav",
+      "audio": {
+        "sha256": "d8e2bba94794dfa32420186c1ea7805cad648224af496e3e4547c54d6a6c2691",
+        "frames": 331200,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.9,
+        "peak": 0.8509521484375,
+        "rms": 0.08588838575420533,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/john-sheppard.json",
+          "profile_sha256": "4efc81ca09eb611dc1004e3652ba1851907aec4dfb7619e4da0183162b35d44a",
+          "reference_text": "But this thing is going to go on until springtime, so maybe we'll recalibrate and realize that we are all in it together, so who knows."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 54,
+      "wav": "joi-ref.wav",
+      "anonymous_wav": "clip-054-ref.wav",
+      "audio": {
+        "sha256": "4b4879ce9fed55f81eeb91b6e28a720f6f676625dd4ed3ec013300793e805d84",
+        "frames": 335520,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.99,
+        "peak": 0.5428466796875,
+        "rms": 0.12324708034468182,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/joi.json",
+          "profile_sha256": "4a0ed38b8ac526f1f167fd86c8799cc6b6027a37b2571d4ef1a1c488c0bbe929",
+          "reference_text": "Okay, so I think, uh, I discovered that I'm really good, uh, with high kicks."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 55,
+      "wav": "k-ref.wav",
+      "anonymous_wav": "clip-055-ref.wav",
+      "audio": {
+        "sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e",
+        "frames": 714240,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.88,
+        "peak": 0.777008056640625,
+        "rms": 0.07498495537051476,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/k.json",
+          "profile_sha256": "344ae113f2025669a5dde6db9549c902f68bfe0568b9b8c58280ca6abbc95248",
+          "reference_text": "You give me a time and a place, I give you a five-minute window. Anything happens in that five minutes and I'm yours. No matter what. Anything happens a minute either side of that and you're on your own."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 56,
+      "wav": "k9-ref.wav",
+      "anonymous_wav": "clip-056-ref.wav",
+      "audio": {
+        "sha256": "71b4ae8d4d71716193ec4c119da64691fdb97d53d74ccaf4a38c5aecbd7927a4",
+        "frames": 277200,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.55,
+        "peak": 0.744781494140625,
+        "rms": 0.09257545975952836,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/k9-qwen3-06b.json",
+          "profile_sha256": "d7d8e7fec906fe1cc8a9f16ab0d8a31e9e6021281c9d2ceb8193012a21477cad",
+          "reference_text": "Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded."
+        },
+        {
+          "path": "voices/k9.json",
+          "profile_sha256": "67618660c6b1b0da6d3877da4783cf86a0202c3d3532ab4fc69b1ba2d733800d",
+          "reference_text": "Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 57,
+      "wav": "kitt-ref.wav",
+      "anonymous_wav": "clip-057-ref.wav",
+      "audio": {
+        "sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+        "frames": 391680,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 8.16,
+        "peak": 0.384918212890625,
+        "rms": 0.05200875648412544,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/kitt-qwen3-06b.json",
+          "profile_sha256": "feba4dc722a84d515df58d61c0216af14ec3cacc4e15e2c82f29c95e2b5ea333",
+          "reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show."
+        },
+        {
+          "path": "voices/kitt.json",
+          "profile_sha256": "0d786ec2d42cf6423354cdfe4ac8fc351a04b0bb513a35af14b3f17012b6e8ab",
+          "reference_text": "So that's what we did. And with that I'd I'd go in there and knock it off in maybe 50 minutes a a show."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 58,
+      "wav": "kryten-ref.wav",
+      "anonymous_wav": "clip-058-ref.wav",
+      "audio": {
+        "sha256": "abd923248878782c3ce582b478363ceb9e9d1998fb0403ea8f1c8564e0e8349f",
+        "frames": 312960,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.52,
+        "peak": 0.659210205078125,
+        "rms": 0.07604477442286627,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/kryten-qwen3-06b.json",
+          "profile_sha256": "8817d352fadb13dd9a0f598134693bf899ab7be86b1209491d819aed6b2f3577",
+          "reference_text": "For me, playing a three-million-year-old mechanoid is alarmingly familiar and close to my own experience."
+        },
+        {
+          "path": "voices/kryten.json",
+          "profile_sha256": "d2232d520ae911119d7ece69c2220465ce8b9bc30625a4b9b332ea240c479672",
+          "reference_text": "For me, playing a three-million-year-old mechanoid is alarmingly familiar and close to my own experience."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 59,
+      "wav": "lee-mack-ref.wav",
+      "anonymous_wav": "clip-059-ref.wav",
+      "audio": {
+        "sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68",
+        "frames": 399105,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 9.05,
+        "peak": 0.37847900390625,
+        "rms": 0.032032093363117194,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/lee-mack-qwen3-06b.json",
+          "profile_sha256": "8dc2b1c1dffa92c9fc2a9a0366d1d248806615f57b1f2520ee763cd0ba2406c9",
+          "reference_text": "Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world."
+        },
+        {
+          "path": "voices/lee-mack.json",
+          "profile_sha256": "bb0aac95d6269883652b89a878db9870aa21e29c89caedfdbda01f8b87370102",
+          "reference_text": "Yeah, I wouldn't say necessarily for me specific, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 60,
+      "wav": "leela-ref.wav",
+      "anonymous_wav": "clip-060-ref.wav",
+      "audio": {
+        "sha256": "e4663f99fb4c34e830d7c9a65950c338164b8602cfc608536ee3a00b3b539d72",
+        "frames": 161280,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.72,
+        "peak": 0.63616943359375,
+        "rms": 0.05592724840634294,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/leela-qwen3-06b.json",
+          "profile_sha256": "aa0abe7f69d1fe34217c75b56362bd40c48622fefec667a16f66ca3fc20e03cb",
+          "reference_text": "Speak plainly. I am your prisoner, and this is an interrogation."
+        },
+        {
+          "path": "voices/leela.json",
+          "profile_sha256": "1ffa864f2f0fdb61221d064ae969f58ffdc724bc091ecab76583460f1b76ab84",
+          "reference_text": "Speak plainly. I am your prisoner, and this is an interrogation."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 61,
+      "wav": "leia-organa-ref.wav",
+      "anonymous_wav": "clip-061-ref.wav",
+      "audio": {
+        "sha256": "879ea3d7ae13542c395a6f8a3a949f7d44eb55da66d33866a098f4cab18ed299",
+        "frames": 477600,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 9.95,
+        "peak": 0.23394775390625,
+        "rms": 0.025692236529999635,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/leia-organa.json",
+          "profile_sha256": "bb1705639591d8bef31af094b237a9ca850339024a808256a511b0a216c8f209",
+          "reference_text": "And that, I didn't like that, cuz you have to live up to something there, and I forget what it is, but it wasn't something I was really focused on in that way."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 62,
+      "wav": "lisa-simpson-ref.wav",
+      "anonymous_wav": "clip-062-ref.wav",
+      "audio": {
+        "sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6",
+        "frames": 271200,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 5.65,
+        "peak": 0.173431396484375,
+        "rms": 0.014898916178059777,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/lisa-simpson-qwen3-06b.json",
+          "profile_sha256": "2b9595b991b0a27b7bb36aaa7db9051169414ce23a01382f308bf6d7aff7a008",
+          "reference_text": "Look, I'm not just gonna pick a religion that seems cool. I'm gonna pick one that's right for me."
+        },
+        {
+          "path": "voices/lisa-simpson.json",
+          "profile_sha256": "44d4ce4a4ca30402b78a0ab0e98485eed12e05ee7751cdb9450d7f49d6b30119",
+          "reference_text": "Look, I'm not just gonna pick a religion that seems cool. I'm gonna pick one that's right for me."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 63,
+      "wav": "lister-ref.wav",
+      "anonymous_wav": "clip-063-ref.wav",
+      "audio": {
+        "sha256": "222c14364b896cc31ce3cfd742a7b4a5e368a683ca9a054defeb79a39068a9e5",
+        "frames": 138033,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.13,
+        "peak": 0.702728271484375,
+        "rms": 0.08473013638796498,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/lister-qwen3-06b.json",
+          "profile_sha256": "bf62b006e4d0075e08a1b4208463efdc4517b9d0afeb1586fec8969891244a4a",
+          "reference_text": "The distress call, wonder why it's Mayday, it's only a bank holiday."
+        },
+        {
+          "path": "voices/lister.json",
+          "profile_sha256": "ffe7a5e6e8176e95cd386c8b22be46172e7cb3e7ef6df446366ce38ddd99f993",
+          "reference_text": "The distress call, wonder why it's Mayday, it's only a bank holiday."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 64,
+      "wav": "loki-ref.wav",
+      "anonymous_wav": "clip-064-ref.wav",
+      "audio": {
+        "sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d",
+        "frames": 251811,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.71,
+        "peak": 0.551605224609375,
+        "rms": 0.07564929843031053,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/loki-qwen3-06b.json",
+          "profile_sha256": "639ed3c8f33c222dc07227ab72624e091fc067903f11579056e9ab3ba1f14cbd",
+          "reference_text": "And then when I understood what was going on, I felt a physical sensation of excitement."
+        },
+        {
+          "path": "voices/loki.json",
+          "profile_sha256": "1146ba8cb4d894fa903e1db4d2d9731f5e90c70a8faeabebb09a9b2c21cc5bd4",
+          "reference_text": "And then when I understood what was going on, I felt a physical sensation of excitement."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 65,
+      "wav": "mark-corrigan-ref.wav",
+      "anonymous_wav": "clip-065-ref.wav",
+      "audio": {
+        "sha256": "38bfa895ed8040510edd57f24e814176aa8e7af765edd6c350c6d763fb236fb7",
+        "frames": 168462,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.82,
+        "peak": 0.667633056640625,
+        "rms": 0.08224657629821623,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/mark-corrigan-qwen3-06b.json",
+          "profile_sha256": "60474cec83341fe6fcd784ace0b9713b03b65ef2c0d561d340066949d77ccd16",
+          "reference_text": "I'm not really high on drugs, so you can stop talking your nonsense on my time."
+        },
+        {
+          "path": "voices/mark-corrigan.json",
+          "profile_sha256": "4ddfd7063576adb67081fed36a6755709ac1705f87a7624f8b438495a36f736d",
+          "reference_text": "I'm not really high on drugs, so you can stop talking your nonsense on my time."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 66,
+      "wav": "mark-steel-ref.wav",
+      "anonymous_wav": "clip-066-ref.wav",
+      "audio": {
+        "sha256": "895e5d0826986ac969972f8ca2173ed2e66d2c0255fab324a53d57a0c4337330",
+        "frames": 330750,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 7.5,
+        "peak": 0.68353271484375,
+        "rms": 0.07203964891929208,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/mark-steel-qwen3-06b.json",
+          "profile_sha256": "8f6981675f9fbe707095222c18e9d85fd601f9aa6a9e6d06291ff7b1f4dba38e",
+          "reference_text": "There's not really a formula. I just go somewhere and think there will be something funny in this place."
+        },
+        {
+          "path": "voices/mark-steel.json",
+          "profile_sha256": "fd2f8a17f7c3aeece8bf72f7df3b7f4931d5dd62c89580a3e3682f0818b8c298",
+          "reference_text": "There's not really a formula. I just go somewhere and think there will be something funny in this place."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 67,
+      "wav": "marla-ref.wav",
+      "anonymous_wav": "clip-067-ref.wav",
+      "audio": {
+        "sha256": "e534d2b9f7fc0432e48888c57c41dbef5c5a754fed9c2809a4699503cd89277f",
+        "frames": 212400,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.85,
+        "peak": 0.899993896484375,
+        "rms": 0.0490581040303191,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/marla-qwen3-06b.json",
+          "profile_sha256": "07c925a9bdec3a1f67bf6a17db7b6f1c71c05ca0f5cde8a8675fcba80d2cfae2",
+          "reference_text": "It's a bridesmaid's dress. Someone loved it intensely for one day."
+        },
+        {
+          "path": "voices/marla.json",
+          "profile_sha256": "1c56147a150aa95bc8fed325ccc810cdc108cfedc17db536452deab0bcba0476",
+          "reference_text": "It's a bridesmaid's dress. Someone loved it intensely for one day."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 68,
+      "wav": "martha-jones-ref.wav",
+      "anonymous_wav": "clip-068-ref.wav",
+      "audio": {
+        "sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7",
+        "frames": 179928,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.08,
+        "peak": 0.245758056640625,
+        "rms": 0.037015355146711344,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/martha-jones-qwen3-06b.json",
+          "profile_sha256": "674ab8c685d74937f0d8a530bdb614c2ab5406993d9b69a05e3b7137a08b30a1",
+          "reference_text": "I just thought, I would love a little part in that. It was just everything I wanted."
+        },
+        {
+          "path": "voices/martha-jones.json",
+          "profile_sha256": "5f646122d585d20d5231f01c2e23cb1c1f442006f9d2b1feeb12a7f46356cd5d",
+          "reference_text": "I just thought, I would love a little part in that. It was just everything I wanted."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 69,
+      "wav": "mckenna-ref.wav",
+      "anonymous_wav": "clip-069-ref.wav",
+      "audio": {
+        "sha256": "c4bb559ee7a70685e0a77e0b8ddfcf11604d1374996270f3c0b1985ef5c42c6c",
+        "frames": 297120,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 12.38,
+        "peak": 0.850006103515625,
+        "rms": 0.09384590212728425,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/mckenna.json",
+          "profile_sha256": "360cb8f508288a8b0ca73b2673b2419b5b38ee7ac9ccc28b2acf4a09d441721b",
+          "reference_text": "We can't really even imagine a world like that. Uh, there hasn't been a world like that since late Roman times. I mean the Roman hegemony was quite cohesive."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 70,
+      "wav": "michael-palin-ref.wav",
+      "anonymous_wav": "clip-070-ref.wav",
+      "audio": {
+        "sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2",
+        "frames": 368160,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 7.67,
+        "peak": 0.570281982421875,
+        "rms": 0.08652852055033339,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/michael-palin-qwen3-06b.json",
+          "profile_sha256": "e6fc07eb4d649e937a005dbdb4a880f7e8562420fdd054bacfc5642563b7f209",
+          "reference_text": "Well, I was extremely surprised in the latest film that we did that John probably had the single most uncomfortable role of anyone in the film."
+        },
+        {
+          "path": "voices/michael-palin.json",
+          "profile_sha256": "509a5064d38ef98f0b03aee41632b0e55f33661c75cf22e26277531f6bc4611a",
+          "reference_text": "Well, I was extremely surprised in the latest film that we did that John probably had the single most uncomfortable role of anyone in the film."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 71,
+      "wav": "mrs-doyle-ref.wav",
+      "anonymous_wav": "clip-071-ref.wav",
+      "audio": {
+        "sha256": "d11bd37ea2c1630129084245c2c16c60a271d75f856746d2f080d1bc61fd1adb",
+        "frames": 672525,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.25,
+        "peak": 0.6478271484375,
+        "rms": 0.060849944126313595,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/mrs-doyle-qwen3-06b.json",
+          "profile_sha256": "99cfef5e5a9fd69bd595559109397774d264c2993be4ff7ded9b2a194c5c5478",
+          "reference_text": "Yeah, well, actually all my family are from Sligo. You know, my mother and father grew up there, and I was born in Sligo. Um, so I think I'm related to everyone in the town, um, as well. But when I was six months old, we moved to Galway, and that's where we've been ever since."
+        },
+        {
+          "path": "voices/mrs-doyle.json",
+          "profile_sha256": "2d410263f21c6c3375d4e37ce142b4ebc65c702493d756d45a0305154099bfa7",
+          "reference_text": "Yeah, well, actually all my family are from Sligo. You know, my mother and father grew up there, and I was born in Sligo. Um, so I think I'm related to everyone in the town, um, as well. But when I was six months old, we moved to Galway, and that's where we've been ever since."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 72,
+      "wav": "nanna-ref.wav",
+      "anonymous_wav": "clip-072-ref.wav",
+      "audio": {
+        "sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b",
+        "frames": 319200,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.65,
+        "peak": 0.077728271484375,
+        "rms": 0.012274148871442268,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/nanna-qwen3-06b.json",
+          "profile_sha256": "ec8b655428b3c44f97a6f9888e7ba24c85e00514a3c499ca1e85cdb0cc224729",
+          "reference_text": "Yeah, in Finland I think I used more grayish, bluish, more dark."
+        },
+        {
+          "path": "voices/nanna.json",
+          "profile_sha256": "8ec8d31cb897543bd07ae9ec4e44f1b9d30bf5e99fae0d4743e42f31d83a674f",
+          "reference_text": "Yeah, in Finland I think I used more grayish, bluish, more dark."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 73,
+      "wav": "neil-degrasse-tyson-ref.wav",
+      "anonymous_wav": "clip-073-ref.wav",
+      "audio": {
+        "sha256": "b5f6772b154c30488dd44adb8f6cd7d4e3a918688644234adf5bb0c031ba88eb",
+        "frames": 273600,
+        "sample_rate": 32000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 8.55,
+        "peak": 0.80145263671875,
+        "rms": 0.207207740878193,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/neil-degrasse-tyson-qwen3-06b.json",
+          "profile_sha256": "b2b4fb344fc8addb3c97d45c0fb980d0f4b1a6ea5e28dbb14f10b9fdd2212663",
+          "reference_text": "It was the immensity of the universe, and how much we did not know. It was the not knowing that was the force of attraction for me."
+        },
+        {
+          "path": "voices/neil-degrasse-tyson.json",
+          "profile_sha256": "b03f93e6d6497a01ea7392728c11aed6b1ab8397feb0c448ac548cebd6bd5ebe",
+          "reference_text": "It was the immensity of the universe, and how much we did not know. It was the not knowing that was the force of attraction for me."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 74,
+      "wav": "nyssa-of-traken-ref.wav",
+      "anonymous_wav": "clip-074-ref.wav",
+      "audio": {
+        "sha256": "d701fc8235200ef6a881f5cc1d3958aeff85d1c0e18180916d9901178548f48b",
+        "frames": 267600,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.575,
+        "peak": 0.257568359375,
+        "rms": 0.024710719729489725,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/nyssa-of-traken-qwen3-06b.json",
+          "profile_sha256": "614e66fd899e2fe628256d1f11ccf2fa51cac25126b93ad0691edc1a668d9215",
+          "reference_text": "So, I watched that completely fresh, and what you've both said was so apparent to me."
+        },
+        {
+          "path": "voices/nyssa-of-traken.json",
+          "profile_sha256": "a4163db03d8740327ac59cd3802041288a85149e3ccfa4f631980f9d47f6dd80",
+          "reference_text": "So, I watched that completely fresh, and what you've both said was so apparent to me."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 75,
+      "wav": "patrick-moore-ref.wav",
+      "anonymous_wav": "clip-075-ref.wav",
+      "audio": {
+        "sha256": "fc67f6b452f79a79f07d88c86e2bc5104a9cd47298d376f8d4f8d020fc1d1472",
+        "frames": 246078,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 5.58,
+        "peak": 0.5518798828125,
+        "rms": 0.04159656124050586,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/patrick-moore-qwen3-06b.json",
+          "profile_sha256": "7710898d38c257a52a0834158fbe08016c9220264afee3e3eb36af6c840b4b39",
+          "reference_text": "Incidentally, this is a time exposure taken with a fixed camera, which is why the stars appear drawn out into trails."
+        },
+        {
+          "path": "voices/patrick-moore.json",
+          "profile_sha256": "21cd4f6859cf3b2c0c600a272fc9f4fb8b2c54f4ba7f6da62390db44ecb496e6",
+          "reference_text": "Incidentally, this is a time exposure taken with a fixed camera, which is why the stars appear drawn out into trails."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 76,
+      "wav": "patsy-stone-ref.wav",
+      "anonymous_wav": "clip-076-ref.wav",
+      "audio": {
+        "sha256": "38d01bdd2f43b98eaa7e50716776cad04e71d14925ed669e1716a5439aab8fe1",
+        "frames": 428652,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 9.72,
+        "peak": 0.227447509765625,
+        "rms": 0.029400241646466166,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/patsy-stone-qwen3-06b.json",
+          "profile_sha256": "030cc57e68e5616b4c67267eb5af53f0cace67211be9a2025af694d6243d50fe",
+          "reference_text": "And age doesn't really matter to me. I mean people, um, people I think are much more exercised about your age than you really are. I mean I think it's just terribly funny to be able to muck around with age."
+        },
+        {
+          "path": "voices/patsy-stone.json",
+          "profile_sha256": "c5d2c45ccd698f753ff11e1c27ecfc6413bcddb3098805cfe26c811c0256122e",
+          "reference_text": "And age doesn't really matter to me. I mean people, um, people I think are much more exercised about your age than you really are. I mean I think it's just terribly funny to be able to muck around with age."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 77,
+      "wav": "peter-kay-ref.wav",
+      "anonymous_wav": "clip-077-ref.wav",
+      "audio": {
+        "sha256": "7809ed5cf3746d277eeb7977065f4c1a2cceeb10da49d46de3c877c397e2fe43",
+        "frames": 236160,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.92,
+        "peak": 0.380279541015625,
+        "rms": 0.05448064454783461,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/peter-kay-qwen3-06b.json",
+          "profile_sha256": "cb66a435344a1271c8f890fb823774b732cd25c27490916f2443cfc1ae1aa606",
+          "reference_text": "Unfortunately, everyone knows someone who's been affected by those cancers on that list."
+        },
+        {
+          "path": "voices/peter-kay.json",
+          "profile_sha256": "eb02834b0d85ee30410ce73490fc6c611209527641ad9aa94149f6fe63d9e1fe",
+          "reference_text": "Unfortunately, everyone knows someone who's been affected by those cancers on that list."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 78,
+      "wav": "picard-ref.wav",
+      "anonymous_wav": "clip-078-ref.wav",
+      "audio": {
+        "sha256": "26ee4fd08dad50320ebd4f71001dd3898ecfcfdf6f1a1c1d565d11f5972c53f5",
+        "frames": 642537,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 14.57,
+        "peak": 1.0,
+        "rms": 0.1798742430973439,
+        "samples_at_full_scale": 57
+      },
+      "profiles": [
+        {
+          "path": "voices/picard-qwen3-06b.json",
+          "profile_sha256": "cfdf1b8a63ead2dd33646dd89376b93f0bea913c27b2e0d33c61474658959c1f",
+          "reference_text": "It was in that we were in fairly exposed conditions most of the time, you know. It was, um, actually, we had finished principal photography by this time last year, but we were filming through late April, May, and June, and into July."
+        },
+        {
+          "path": "voices/picard.json",
+          "profile_sha256": "3148b9a843b94b55b9801608813323c9c74db20fbf3ec372953c2bc025fb1de4",
+          "reference_text": "It was in that we were in fairly exposed conditions most of the time, you know. It was, um, actually, we had finished principal photography by this time last year, but we were filming through late April, May, and June, and into July."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 79,
+      "wav": "q-tng-ref.wav",
+      "anonymous_wav": "clip-079-ref.wav",
+      "audio": {
+        "sha256": "8fa02b3a6fb6ffd06135e49ee193f474aff9cb30663df97c3694fe9d084768d2",
+        "frames": 562560,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 11.72,
+        "peak": 0.438812255859375,
+        "rms": 0.047204684726420316,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/q-tng-qwen3-06b.json",
+          "profile_sha256": "501a309ea8f705c90da08d499bcafbd8427edbf03043c8a990d11be526afb920",
+          "reference_text": "I'm just concerned about it because we're talking about an audience that is exceedingly on point about the show. They don't miss anything."
+        },
+        {
+          "path": "voices/q-tng.json",
+          "profile_sha256": "a8bcf7630414a9c632a3a6c124c11bedff62152f9ff9b9de6006098f3e763ce0",
+          "reference_text": "I'm just concerned about it because we're talking about an audience that is exceedingly on point about the show. They don't miss anything."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 80,
+      "wav": "rimmer-ref.wav",
+      "anonymous_wav": "clip-080-ref.wav",
+      "audio": {
+        "sha256": "b5ec1e9e30984307c10eb18cd80f888b7bf0786451658e98559c92ec4d08e52c",
+        "frames": 352800,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 7.35,
+        "peak": 0.6162109375,
+        "rms": 0.08774908357299556,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/rimmer-qwen3-06b.json",
+          "profile_sha256": "c4823652c5bda338ff2adf3c4cb92d87117b9e308a647e8868c2154bc31db6c2",
+          "reference_text": "So, yeah, I think, um, I think the the friction is still there, and that's that's the petrol for for a lot of the comedy in Red Dwarf, you know?"
+        },
+        {
+          "path": "voices/rimmer.json",
+          "profile_sha256": "df15d099a51f3fa8508c11078b74e0a398d9e260bb631c98767cd55effe11451",
+          "reference_text": "So, yeah, I think, um, I think the the friction is still there, and that's that's the petrol for for a lot of the comedy in Red Dwarf, you know?"
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 81,
+      "wav": "river-song-ref.wav",
+      "anonymous_wav": "clip-081-ref.wav",
+      "audio": {
+        "sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4",
+        "frames": 349272,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 7.92,
+        "peak": 0.517303466796875,
+        "rms": 0.06743212637012891,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/river-song-qwen3-06b.json",
+          "profile_sha256": "e5546a9b54d7aae38ff621e104bb99d749066daf57d572d888848886e03532a3",
+          "reference_text": "But it feels like I was only here last week. That's the strange, um, the strange tricks that time plays on you."
+        },
+        {
+          "path": "voices/river-song.json",
+          "profile_sha256": "ef475e852fef6c5399a0189ff1f6c99241186ccea24ecff47149d3c6047bd9db",
+          "reference_text": "But it feels like I was only here last week. That's the strange, um, the strange tricks that time plays on you."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 82,
+      "wav": "rod-serling-ref.wav",
+      "anonymous_wav": "clip-082-ref.wav",
+      "audio": {
+        "sha256": "07e61a13774f749a568f1bb9896d3f32f6ba9c89f584e2d52512f6bd49f4c05c",
+        "frames": 334080,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.96,
+        "peak": 0.428436279296875,
+        "rms": 0.06086239805043414,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/rod-serling-qwen3-06b.json",
+          "profile_sha256": "441cb11f640ac1262d56dbfdb4f439731d6f41414343b3d36528ba6f8f0ce69d",
+          "reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet."
+        },
+        {
+          "path": "voices/rod-serling.json",
+          "profile_sha256": "49027f7b11016617d997b21cf9205390f2b7c30e1b90728b73b56bfbcc513b62",
+          "reference_text": "Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 83,
+      "wav": "romana-ref.wav",
+      "anonymous_wav": "clip-083-ref.wav",
+      "audio": {
+        "sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b",
+        "frames": 561600,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 11.7,
+        "peak": 0.745941162109375,
+        "rms": 0.14808768844552983,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/romana-qwen3-06b.json",
+          "profile_sha256": "b4f4f4ea61aa82e60bb4496b504645f3fd67c1b532a49ea03d684144030135a2",
+          "reference_text": "It appeals to such a wide age range, it appeals to such a wide culture range. It's one of those quirky, odd programmes that somehow has managed to survive over time."
+        },
+        {
+          "path": "voices/romana.json",
+          "profile_sha256": "6ee6db975b14c2a856dc095499ec4beda891e3dc825f90dea838532297d74fd6",
+          "reference_text": "It appeals to such a wide age range, it appeals to such a wide culture range. It's one of those quirky, odd programmes that somehow has managed to survive over time."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 84,
+      "wav": "ronan-ref.wav",
+      "anonymous_wav": "clip-084-ref.wav",
+      "audio": {
+        "sha256": "7a95373c1c362b9ef50d6820c9f2a59f3c2508c93795b15da661840cebe3baa1",
+        "frames": 136800,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 5.7,
+        "peak": 0.544097900390625,
+        "rms": 0.04239386369682168,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/ronan-qwen3-06b.json",
+          "profile_sha256": "7bfb55921b141dbd9c37f8da5c5df5eb1d86e2a413f6b30e43e1d53fae019451",
+          "reference_text": "You know, using imagination rather than actually digging deep and, and writing from my soul."
+        },
+        {
+          "path": "voices/ronan.json",
+          "profile_sha256": "bd9120ee6f780d03069c68b5597304ca7212394862998dfc282fdac973b8b00a",
+          "reference_text": "You know, using imagination rather than actually digging deep and, and writing from my soul."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 85,
+      "wav": "rose-tyler-ref.wav",
+      "anonymous_wav": "clip-085-ref.wav",
+      "audio": {
+        "sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4",
+        "frames": 194040,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.4,
+        "peak": 0.526397705078125,
+        "rms": 0.08676628466259126,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/rose-tyler-qwen3-06b.json",
+          "profile_sha256": "4e35bfd350241c158e71bd10806db45c6d74c1970a098ac014706012df2d3681",
+          "reference_text": "We wanted to explore those things with real transparency."
+        },
+        {
+          "path": "voices/rose-tyler.json",
+          "profile_sha256": "f0106cb9e26581129a6c05e4336363afc0893f416a498139409361a2820cc1fd",
+          "reference_text": "We wanted to explore those things with real transparency."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 86,
+      "wav": "samantha-ref.wav",
+      "anonymous_wav": "clip-086-ref.wav",
+      "audio": {
+        "sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95",
+        "frames": 264480,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.51,
+        "peak": 0.251495361328125,
+        "rms": 0.029663696338522897,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/samantha-qwen3-06b.json",
+          "profile_sha256": "22efc6052b4909231ace9e505bc3ca28b4df9c87b16f05bc0b0f362bc217d175",
+          "reference_text": "and um it was so different than than the experience that I had had with him like a decade earlier."
+        },
+        {
+          "path": "voices/samantha.json",
+          "profile_sha256": "1a29474c8a20c5917f89687d689c745727290691ed7ba0bcfaf7a44afd5d67c7",
+          "reference_text": "and um it was so different than than the experience that I had had with him like a decade earlier."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 87,
+      "wav": "sarah-jane-smith-ref.wav",
+      "anonymous_wav": "clip-087-ref.wav",
+      "audio": {
+        "sha256": "941b3834f28e3db12434eaecd0b6a381ce24050ba9541eb0ad6a420efe8828f3",
+        "frames": 310080,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.46,
+        "peak": 0.07147216796875,
+        "rms": 0.006399739452474027,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/sarah-jane-smith-qwen3-06b.json",
+          "profile_sha256": "42f3c5acb4e9310d64b591449346b2e96f801a8f0363a539269096a95c9d3936",
+          "reference_text": "Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you and found a life of my own."
+        },
+        {
+          "path": "voices/sarah-jane-smith.json",
+          "profile_sha256": "65ddfec0ca77a5c0b2a7e31443cb4c3b8469081cfc4935fe287de06bbfc0c4b7",
+          "reference_text": "Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you and found a life of my own."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 88,
+      "wav": "saul-goodman-ref.wav",
+      "anonymous_wav": "clip-088-ref.wav",
+      "audio": {
+        "sha256": "d757105cf38d3da7d14e917a594cc9188810daac71933de41283decff87a7244",
+        "frames": 176400,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.0,
+        "peak": 0.754425048828125,
+        "rms": 0.07358441522226052,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/saul-goodman-qwen3-06b.json",
+          "profile_sha256": "3059b9e070a2e8feaa6d3f0116b19fce0e28385400cd3458a20e3989dcd7f65c",
+          "reference_text": "I was just working on a multi-million dollar lawsuit for one of my clients."
+        },
+        {
+          "path": "voices/saul-goodman.json",
+          "profile_sha256": "79f542a139d0b1f294344872fabd54d1075ce3ee9e0b86eb2497b7f457f2cc7b",
+          "reference_text": "I was just working on a multi-million dollar lawsuit for one of my clients."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 89,
+      "wav": "scotty-ref.wav",
+      "anonymous_wav": "clip-089-ref.wav",
+      "audio": {
+        "sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa",
+        "frames": 418950,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 9.5,
+        "peak": 0.6927490234375,
+        "rms": 0.04854964334603695,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/scotty.json",
+          "profile_sha256": "0d7fb3c84dd466460f38292c20716858781da3c7847c89e41e8a728630b76ec5",
+          "reference_text": "Eight years later, I get a letter saying, I do want to thank you so much for what you did for me."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 90,
+      "wav": "seven-of-nine-picard-ref.wav",
+      "anonymous_wav": "clip-090-ref.wav",
+      "audio": {
+        "sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe",
+        "frames": 635040,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 14.4,
+        "peak": 0.5560302734375,
+        "rms": 0.08264865944406123,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/seven-of-nine-picard-qwen3-06b.json",
+          "profile_sha256": "b81710802b9b981c82eb7b5bc4754af2f75352d0bed38ed7780aa0a90d596fba",
+          "reference_text": "I really believe that. I think that every part of this story is just, um, so beautifully done for all of these characters. The arcs for all of these characters, I think, is so respectfully and beautifully done."
+        },
+        {
+          "path": "voices/seven-of-nine-picard.json",
+          "profile_sha256": "7e06d6cdf13955189d1d19f03fab62e328f3f05532499d9b48904ce3ac442b3c",
+          "reference_text": "I really believe that. I think that every part of this story is just, um, so beautifully done for all of these characters. The arcs for all of these characters, I think, is so respectfully and beautifully done."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 91,
+      "wav": "seven-of-nine-ref.wav",
+      "anonymous_wav": "clip-091-ref.wav",
+      "audio": {
+        "sha256": "b83cdf51c9dbd8141f8bcb5907925ec4c8fd53a4b65d46a3d2d4ba20ef7efc71",
+        "frames": 685755,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 15.55,
+        "peak": 0.553314208984375,
+        "rms": 0.08810485352393398,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/seven-of-nine-qwen3-06b.json",
+          "profile_sha256": "a357fd7698643e5a1a82b2704abc3d47fd12c178eca09f6537c9940f1c45f0f0",
+          "reference_text": "But yeah, it's, it's, it's nice to, um, finally get to talk about things like this guy being part of the show, Todd Stashwick, who's brilliant beyond words, and I cannot wait for everybody to see him in action, um, and to meet Captain Shaw."
+        },
+        {
+          "path": "voices/seven-of-nine.json",
+          "profile_sha256": "b5666e4bf397fef7c301d488907ec57ba2d9c64b5423a3ced0d4c52c40c3e8b8",
+          "reference_text": "But yeah, it's, it's, it's nice to, um, finally get to talk about things like this guy being part of the show, Todd Stashwick, who's brilliant beyond words, and I cannot wait for everybody to see him in action, um, and to meet Captain Shaw."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 92,
+      "wav": "sherlock-ref.wav",
+      "anonymous_wav": "clip-092-ref.wav",
+      "audio": {
+        "sha256": "afeafac7d66cd1eb715da76500cae5ecc8a72486238bba0873a6b3d834676992",
+        "frames": 318511,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.635645833333333,
+        "peak": 0.555694580078125,
+        "rms": 0.09206829368869349,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/sherlock-qwen3-06b.json",
+          "profile_sha256": "f1d9966ec9f46fa940cb18b2e955b2dede31be6c06b94d918e88e96470d3402d",
+          "reference_text": "So I came on set pretty bleary-eyed, but kind of high on the whole adventure that was about to take over my life."
+        },
+        {
+          "path": "voices/sherlock.json",
+          "profile_sha256": "7d899a290b7d1e68e5e5426e86a228761757a43929a7bdabbf759f18234a9d7e",
+          "reference_text": "So I came on set pretty bleary-eyed, but kind of high on the whole adventure that was about to take over my life."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 93,
+      "wav": "snape-ref.wav",
+      "anonymous_wav": "clip-093-ref.wav",
+      "audio": {
+        "sha256": "08a2fe5f345bd8efe5bb66756f2091c3b2bc728c3e26d20cdd5df53354498e48",
+        "frames": 111600,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 4.65,
+        "peak": 0.482666015625,
+        "rms": 0.0713183851545345,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/snape-qwen3-06b.json",
+          "profile_sha256": "5010408dd1139e2d1e933a415e5d982550efcccde18ebf471a47a6a17176f778",
+          "reference_text": "There will be no foolish wand waving or silly incantations in this class."
+        },
+        {
+          "path": "voices/snape.json",
+          "profile_sha256": "d3c4f9433dee73f6e7656341885a1ca7ed45107c7b018a828e2c05a0051c0f0d",
+          "reference_text": "There will be no foolish wand waving or silly incantations in this class."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 94,
+      "wav": "spock-ref.wav",
+      "anonymous_wav": "clip-094-ref.wav",
+      "audio": {
+        "sha256": "dc8aca559d9cfb8088534de7a29858fc0dc9df7f01db29634598b44d9fbcb978",
+        "frames": 407520,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 8.49,
+        "peak": 0.226287841796875,
+        "rms": 0.02351571772481197,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/spock-qwen3-06b.json",
+          "profile_sha256": "b2d9cd515272d052ac5ff724664436a8ea71a03be80d4d1a442c04d53eda92c7",
+          "reference_text": "Uh, I think a lot. I, I think that I was much more, uh, emotionally, uh, directed, rather than logically directed before I started playing the character."
+        },
+        {
+          "path": "voices/spock.json",
+          "profile_sha256": "6381a946f5138db3e68ab5c6be7e323511038f2c41a7ca5b207320e7648c2b6f",
+          "reference_text": "Uh, I think a lot. I, I think that I was much more, uh, emotionally, uh, directed, rather than logically directed before I started playing the character."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 95,
+      "wav": "stephen-fry-ref.wav",
+      "anonymous_wav": "clip-095-ref.wav",
+      "audio": {
+        "sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685",
+        "frames": 584325,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.25,
+        "peak": 0.899993896484375,
+        "rms": 0.07105284441230669,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/stephen-fry-qwen3-06b.json",
+          "profile_sha256": "2995112e57a73d4b010f53092a38138a8c04baf3fafae8f7af1048d21bc25fce",
+          "reference_text": "You probably know the basic outline, that he was born in 1854, on October the 16th. I'm boring you with things you so know and don't need to be retold, so it is, in fact, just past his 160th birthday."
+        },
+        {
+          "path": "voices/stephen-fry.json",
+          "profile_sha256": "2b108966b733174b68a7e953f333a28ea885be0bff8f32f03505e13a71a20ba2",
+          "reference_text": "You probably know the basic outline, that he was born in 1854, on October the 16th. I'm boring you with things you so know and don't need to be retold, so it is, in fact, just past his 160th birthday."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 96,
+      "wav": "tegan-jovanka-ref.wav",
+      "anonymous_wav": "clip-096-ref.wav",
+      "audio": {
+        "sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453",
+        "frames": 614400,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 12.8,
+        "peak": 0.37359619140625,
+        "rms": 0.035486208037918375,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/tegan-jovanka-qwen3-06b.json",
+          "profile_sha256": "7409c9e63f71e6aef9e488cfb84fb5220b97111db0710779033e43f3d2504735",
+          "reference_text": "Well, um, Mum flew down from Cloncurry to have me actually, because, uh, my father, um, who who was a parasitologist, um, was based up in Cloncurry."
+        },
+        {
+          "path": "voices/tegan-jovanka.json",
+          "profile_sha256": "0872fff7fbb83c8bb1ab0312f32b85bcf8f111c0cf51cc0c64ffc68c45728f10",
+          "reference_text": "Well, um, Mum flew down from Cloncurry to have me actually, because, uh, my father, um, who who was a parasitologist, um, was based up in Cloncurry."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 97,
+      "wav": "the-cat-ref.wav",
+      "anonymous_wav": "clip-097-ref.wav",
+      "audio": {
+        "sha256": "53618673d42aa6fb60605a5c086cdba8331c9033266e55585e588d9a93f4a4d6",
+        "frames": 91920,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.83,
+        "peak": 0.35150146484375,
+        "rms": 0.05435642218026536,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/the-cat-qwen3-06b.json",
+          "profile_sha256": "31ce9559dbe7196389ec9d9677df8dad4a5cc2e18a275996565de700fedea713",
+          "reference_text": "Some might say I'm a pretty shallow guy, but a shallow guy with a great ass."
+        },
+        {
+          "path": "voices/the-cat.json",
+          "profile_sha256": "960b9115241f6a9baa882d5aace4872324be2df01a0d582b1d5f2b78b22a0945",
+          "reference_text": "Some might say I'm a pretty shallow guy, but a shallow guy with a great ass."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 98,
+      "wav": "the-doctor-ref.wav",
+      "anonymous_wav": "clip-098-ref.wav",
+      "audio": {
+        "sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b",
+        "frames": 352800,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.7,
+        "peak": 0.5377197265625,
+        "rms": 0.07521642958512037,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/the-doctor-qwen3-06b.json",
+          "profile_sha256": "2e9dad74e7d17e1c4e4eac799472fa0a05a87d2cd28d40919dd62541692b9651",
+          "reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been."
+        },
+        {
+          "path": "voices/the-doctor.json",
+          "profile_sha256": "ada00ceb66aeddeeaa37ec5f49fb264cfb55043157c6a2b89e19496a928a0326",
+          "reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 99,
+      "wav": "tilda-ref.wav",
+      "anonymous_wav": "clip-099-ref.wav",
+      "audio": {
+        "sha256": "e6fee022fd390f72ec5c7af62d057fc5a502e0769b2d0774d49c60550b67e5c7",
+        "frames": 268792,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.199666666666667,
+        "peak": 0.899993896484375,
+        "rms": 0.10969219544136459,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/tilda-qwen3-06b.json",
+          "profile_sha256": "d954429c44c20c4969d6597b4dbcc82319f7429278da70f574d715b522bd3b47",
+          "reference_text": "How can you have lived for so long and still not get it, this self-obsession, the waste of living?"
+        },
+        {
+          "path": "voices/tilda.json",
+          "profile_sha256": "4023ee9dc47c6b1f09278d79c90e1b5c10c816b8e73325fbe08ca55753f838f9",
+          "reference_text": "How can you have lived for so long and still not get it, this self-obsession, the waste of living?"
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 100,
+      "wav": "trigger-ref.wav",
+      "anonymous_wav": "clip-100-ref.wav",
+      "audio": {
+        "sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48",
+        "frames": 252000,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 5.25,
+        "peak": 0.389801025390625,
+        "rms": 0.03443572608951174,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/trigger-qwen3-06b.json",
+          "profile_sha256": "92e682b5973fff382fef90141753190e07cb6f007db5b690c8558e866bef1fbd",
+          "reference_text": "I knew I felt pretty rough and that if I was going to be x-rayed and checked over the sooner the better."
+        },
+        {
+          "path": "voices/trigger.json",
+          "profile_sha256": "edb7cef1338fa2146c8c2b9079e2c56ef45600873fba4d23be27eff0d771e783",
+          "reference_text": "I knew I felt pretty rough and that if I was going to be x-rayed and checked over the sooner the better."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 101,
+      "wav": "vesper-ref.wav",
+      "anonymous_wav": "clip-101-ref.wav",
+      "audio": {
+        "sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7",
+        "frames": 317440,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.226666666666667,
+        "peak": 0.9000244140625,
+        "rms": 0.10952653999182366,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/vesper-qwen3-06b.json",
+          "profile_sha256": "843d470a7d4db2b4c00ad0b63386099f83111ec19fc4518d4910f64ef774c00d",
+          "reference_text": "Now having just met you, I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine you think of women as disposable pleasures, rather than meaningful pursuits."
+        },
+        {
+          "path": "voices/vesper.json",
+          "profile_sha256": "a1796daac8079a6c405b518ae6337957c302b435b6fd73079856f8d4b1d2b3d4",
+          "reference_text": "Now having just met you, I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine you think of women as disposable pleasures, rather than meaningful pursuits."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 102,
+      "wav": "victor-meldrew-ref.wav",
+      "anonymous_wav": "clip-102-ref.wav",
+      "audio": {
+        "sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2",
+        "frames": 680022,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 15.42,
+        "peak": 0.657135009765625,
+        "rms": 0.0601023497008558,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/victor-meldrew-qwen3-06b.json",
+          "profile_sha256": "356c0d635fa5964434714a0b4ef71d0a1e933b4d2c8d91d13bc22b47909344b9",
+          "reference_text": "Yes, well, I just believe that the writer should be writing about today, just so that we, we know what's going on in the society we're living in. So I, I'm slightly against the, the classical, uh, playwrights in a way."
+        },
+        {
+          "path": "voices/victor-meldrew.json",
+          "profile_sha256": "4b03556278d6caefc3d852c0aac6b5a8d7cc5ca7677a66df9cad020652900889",
+          "reference_text": "Yes, well, I just believe that the writer should be writing about today, just so that we, we know what's going on in the society we're living in. So I, I'm slightly against the, the classical, uh, playwrights in a way."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 103,
+      "wav": "victoria-wood-ref.wav",
+      "anonymous_wav": "clip-103-ref.wav",
+      "audio": {
+        "sha256": "a569c765cebde2f0b98856fdbcf64bed903c49bb541d0528c5d17e85831e8895",
+        "frames": 249165,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 5.65,
+        "peak": 0.3309326171875,
+        "rms": 0.0561887813398363,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/victoria-wood-qwen3-06b.json",
+          "profile_sha256": "4685507848465f776edebc489a20103eac32bbe2615e0f7fd5272d3847368a31",
+          "reference_text": "I don't want to pretend I don't enjoy it. I was really happy to be on the front page of the newspapers with my two BAFTAs."
+        },
+        {
+          "path": "voices/victoria-wood.json",
+          "profile_sha256": "c452209a689fa8a886adf0017da4d924cfe02bac3f6063515b0434dcbc3501a8",
+          "reference_text": "I don't want to pretend I don't enjoy it. I was really happy to be on the front page of the newspapers with my two BAFTAs."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    },
+    {
+      "index": 104,
+      "wav": "yasmin-khan-ref.wav",
+      "anonymous_wav": "clip-104-ref.wav",
+      "audio": {
+        "sha256": "a4665f08d9b65f6b9ff51c1be8ec303f6aa487253c81c7f285b36cff8d0adcd9",
+        "frames": 408000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.5,
+        "peak": 0.2169189453125,
+        "rms": 0.01737700014977763,
+        "samples_at_full_scale": 0
+      },
+      "profiles": [
+        {
+          "path": "voices/yasmin-khan-qwen3-06b.json",
+          "profile_sha256": "de267be67020992544e044199347c3deefdd0fac7e2f0423d69a2fb3dc6d0a08",
+          "reference_text": "A wise person once said to me, goodbyes only hurt because what came before was so special."
+        },
+        {
+          "path": "voices/yasmin-khan.json",
+          "profile_sha256": "fb9d3c263a2416a19b0c670dfc39064eee2e65ca1b7f928b081e84c6ed924b9f",
+          "reference_text": "A wise person once said to me, goodbyes only hurt because what came before was so special."
+        }
+      ],
+      "native_listening": "pending",
+      "transcript_verification": "pending",
+      "final_disposition": "pending"
+    }
+  ]
+}
