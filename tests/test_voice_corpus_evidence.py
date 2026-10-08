@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import sqlite3
 import io
+import hashlib
 import subprocess
 
 import numpy as np
@@ -130,6 +131,19 @@ def test_every_changed_reference_has_hash_bound_provenance():
             assert current["reference_text"] == profile["new_reference_text"]
             assert current.get("segment_start_s") == profile["new_segment_start_s"]
         assert {p["path"] for p in change["profiles"]} == {p["path"] for p in record["profiles"]}
+        if resolution := change.get("transcript_resolution"):
+            evidence = json.loads((ROOT / resolution["evidence"]).read_text())
+            assert resolution["source_sha256"] == actual["sha256"]
+            assert evidence["native_audio_proven"] and evidence["result"]["status"] == "SUCCESS"
+            assert evidence["source_sha256"] == resolution["rendered_sha256"]
+            assert all(e["media_sha256"] == resolution["rendered_sha256"] for e in evidence["attachment_evidence"])
+            samples, rate = sf.read(path, dtype="int16", always_2d=True)
+            bounds = resolution["operation"]
+            assert bounds["type"] == "lossless_pcm_frame_slice" and bounds["sample_rate"] == rate
+            probe = io.BytesIO()
+            sf.write(probe, samples[bounds["start_frame"]:bounds["end_frame_exclusive"]],
+                     rate, format="WAV", subtype="PCM_16")
+            assert hashlib.sha256(probe.getvalue()).hexdigest() == resolution["rendered_sha256"]
         operation = change["operation"]
         if operation["type"] == "lossless_pcm_frame_slice":
             old_bytes = subprocess.check_output([

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "222c14364b896cc31ce3cfd742a7b4a5e368a683ca9a054defeb79a39068a9e5",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4478ef02-818c-4651-a1ce-5d1a95852e70",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "222c14364b896cc31ce3cfd742a7b4a5e368a683ca9a054defeb79a39068a9e5"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "222c14364b896cc31ce3cfd742a7b4a5e368a683ca9a054defeb79a39068a9e5"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4478ef02-818c-4651-a1ce-5d1a95852e70",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"The distress call, wonder why it's Mayday, it's only a bank holiday.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.2]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual with an uncertainty margin of approximately +/- 0.5s. Spoken wording is perceived with high confidence; minor uncertainty exists regarding exact punctuation and phrasing breaks.\"\n}\n",
+    "duration_seconds": 31.861566,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20287,
+      "output_tokens": 3357,
+      "thinking_tokens": 3039,
+      "cache_read_tokens": 16228,
+      "total_tokens": 23644
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

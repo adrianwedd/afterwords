@@ -1,0 +1,37 @@
+{
+  "wav": "vesper-ref.wav",
+  "source_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "a678913e-57d0-42d5-a85b-8ba04b6ff1f4",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "a678913e-57d0-42d5-a85b-8ba04b6ff1f4",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Now having just met you, I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine you think of women as disposable pleasures, rather than meaningful pursuits.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 13.5]\n  ],\n  \"uncertainty\": \"All boundary estimates are perceptual approximations based strictly on native listening without waveform or sample-level tools (~0.0s start to ~13.5s end, with a natural ~0.8s conversational pause around ~5.0s\u20135.8s). Auditory confidence in the transcribed wording is very high with negligible lexical uncertainty; audio is cleanly isolated solo speech suitable for conditioning.\"\n}\n```\n",
+    "duration_seconds": 33.447793,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36530,
+      "output_tokens": 3460,
+      "thinking_tokens": 3074,
+      "cache_read_tokens": 0,
+      "total_tokens": 39990
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

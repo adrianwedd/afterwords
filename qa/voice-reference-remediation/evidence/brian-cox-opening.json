@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "65ee8a1f24391035a65a3b0d84d301c2ab44a3fe61281a9d34914cc4ebd532cc",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "cd0049c9-12bb-4f66-8f45-1b90d09307f6",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "65ee8a1f24391035a65a3b0d84d301c2ab44a3fe61281a9d34914cc4ebd532cc"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "65ee8a1f24391035a65a3b0d84d301c2ab44a3fe61281a9d34914cc4ebd532cc"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "cd0049c9-12bb-4f66-8f45-1b90d09307f6",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Back in the nineteenth century, en-\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": true,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 2.1]\n  ],\n  \"uncertainty\": \"The final syllable is abruptly truncated mid-articulation at approximately 2.1 s (estimated boundary between 2.0 s and 2.2 s); the exact intended word is perceptually ambiguous ('en-', 'eng-', or 'and'). While the interval [0.0, 2.1] is acoustically clean and isolated to a single speaker, it constitutes only an incomplete introductory prepositional phrase fragment of ~2.1 s, lacking a complete usable grammatical phrase or sufficient duration for conditioning.\"\n}\n```\n",
+    "duration_seconds": 117.731491,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20739,
+      "output_tokens": 14315,
+      "thinking_tokens": 13934,
+      "cache_read_tokens": 16235,
+      "total_tokens": 35054
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "9d47e78a8b359e436a10a1bb474d7c660303ee20fb2a58409b4391aeda1d31dc",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "af108410-85c7-4827-97d3-ea19f98080c4",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "9d47e78a8b359e436a10a1bb474d7c660303ee20fb2a58409b4391aeda1d31dc"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "9d47e78a8b359e436a10a1bb474d7c660303ee20fb2a58409b4391aeda1d31dc"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "af108410-85c7-4827-97d3-ea19f98080c4",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"start_s\": 0.0,\n      \"end_s\": 2.1,\n      \"speaker\": 1\n    },\n    {\n      \"start_s\": 2.1,\n      \"end_s\": 5.1,\n      \"speaker\": 2\n    },\n    {\n      \"start_s\": 5.1,\n      \"end_s\": 5.9,\n      \"speaker\": 1\n    },\n    {\n      \"start_s\": 5.9,\n      \"end_s\": 14.5,\n      \"speaker\": 2\n    }\n  ],\n  \"literal_transcript\": \"Mayday! Mayday! Wonder why they call it Mayday? Eh? The distress call. Wonder why it's Mayday. It's only a bank holiday. Why not Shrove Tuesday, or...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Transitions from dry studio dialogue to loud audience laughter overlapping speech in the second half.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Multiple alternating speakers, loud overlapping audience laughter, and truncated final phrase.\",\n  \"candidate_clean_intervals_s\": [\n    {\n      \"start_s\": 2.1,\n      \"end_s\": 5.1,\n      \"speaker\": 2,\n      \"phrase\": \"Wonder why they call it Mayday?\"\n    },\n    {\n      \"start_s\": 5.9,\n      \"end_s\": 9.2,\n      \"speaker\": 2,\n      \"phrase\": \"The distress call. Wonder why it's Mayday.\"\n    }\n  ],\n  \"uncertainty\": \"Boundary times are perceptual estimates with approximately +/- 0.3s uncertainty. The onset of audience laughter overlapping the vocal track occurs between 9.2s and 9.8s. The phrase following 'Shrove Tuesday' is obscured by laughter and clipped mid-utterance.\"\n}\n",
+    "duration_seconds": 45.287259,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20267,
+      "output_tokens": 4407,
+      "thinking_tokens": 3769,
+      "cache_read_tokens": 15972,
+      "total_tokens": 24674
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

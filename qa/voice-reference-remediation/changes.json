@@ -1967,6 +1967,306 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/carl-sagan-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/carl-sagan-result.json"
+    },
+    {
+      "wav": "vesper-ref.wav",
+      "remediation": "KEEP WITH TEXT FIX",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7",
+        "frames": 317440,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.226666666666667,
+        "peak": 0.9000244140625,
+        "rms": 0.10952653999182366,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7",
+        "frames": 317440,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.226666666666667,
+        "peak": 0.9000244140625,
+        "rms": 0.10952653999182366,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "text_only"
+      },
+      "profiles": [
+        {
+          "path": "voices/vesper-qwen3-06b.json",
+          "old_reference_text": "Now, I haven't just met you. I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine. You think of women as disposable pleasures rather than meaningful pursuits.",
+          "new_reference_text": "Now having just met you, I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine you think of women as disposable pleasures, rather than meaningful pursuits.",
+          "old_segment_start_s": 197,
+          "new_segment_start_s": 197
+        },
+        {
+          "path": "voices/vesper.json",
+          "old_reference_text": "Now, I haven't just met you. I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine. You think of women as disposable pleasures rather than meaningful pursuits.",
+          "new_reference_text": "Now having just met you, I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine you think of women as disposable pleasures, rather than meaningful pursuits.",
+          "old_segment_start_s": 197,
+          "new_segment_start_s": 197
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=xuyoqS31Yug",
+      "adjudication": "Good audio preserved byte-identically. Audio-first native hearing confirms complete isolated intended-speaker speech, no music/crowd/effects/splices/cutoffs. Subsequent ASR agrees opening Now having just met you; old JSON incorrectly inserts negative I havent. Native clearly hears as far as calling; ASR elides it to as fast calling, rejected in favor of auditory wording. Remaining words agree across instruments. Punctuation follows continuous phrasing rather than old false sentence fragments. Natural cadence pause retained. Same native hearing supports unchanged original/result; fresh whole-corpus listening still mandatory. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/vesper-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/vesper-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/vesper-result.json"
+    },
+    {
+      "wav": "brian-cox-ref.wav",
+      "remediation": "KEEP WITH TEXT FIX",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10278410763990728,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10278410763990728,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "text_only"
+      },
+      "profiles": [
+        {
+          "path": "voices/brian-cox-qwen3-06b.json",
+          "old_reference_text": "We're back in the 19th century. Engineers were concerned with the efficiency of steam engines. How hot should the fire be? What substance should you boil in the steam engine? Should it be water? Should it be something else?",
+          "new_reference_text": "Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 0
+        },
+        {
+          "path": "voices/brian-cox.json",
+          "old_reference_text": "We're back in the 19th century. Engineers were concerned with the efficiency of steam engines. How hot should the fire be? What substance should you boil in the steam engine? Should it be water? Should it be something else?",
+          "new_reference_text": "Back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 0
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=uQSoaiubuA0",
+      "adjudication": "Audio preserved byte-identically. Complete audio-first native review finds one isolated speaker, complete phrases and no soundtrack, audience, effects, splices or cutoffs. The first particle If was explicitly uncertain; independent native review of an exact opening3-second slice hears Back in the nineteenth century, without leading particle, agreeing with ASR and contradicting old We're back. For the remaining wording, ASR omits You know and recasts the repeated final question as water or something else (or confidence0.45, something0.55). Complete native hearing explicitly hears You know and Should it be water, should it be something else with uncertainty restricted to opening, so these audible words are retained over ASR simplification. Most substantive words otherwise agree. Probe has a deliberate end cutoff and is not production audio or full-corpus acceptance. Failed provider second-transcript output not used. Scoped hash-bound resolution is recorded separately; fresh complete corpus native pass remains mandatory. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/brian-cox-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/brian-cox-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/brian-cox-result.json",
+      "transcript_resolution": {
+        "evidence": "qa/voice-reference-remediation/evidence/brian-cox-opening.json",
+        "source_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+        "operation": {
+          "type": "lossless_pcm_frame_slice",
+          "start_frame": 0,
+          "end_frame_exclusive": 132300,
+          "sample_rate": 44100
+        },
+        "rendered_sha256": "65ee8a1f24391035a65a3b0d84d301c2ab44a3fe61281a9d34914cc4ebd532cc",
+        "scope": "Opening wording only; remaining corpus audio verified by complete native observation. Probe is not production audio."
+      }
+    },
+    {
+      "wav": "lister-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP WITH TEXT FIX",
+      "original_audio": {
+        "sha256": "9d47e78a8b359e436a10a1bb474d7c660303ee20fb2a58409b4391aeda1d31dc",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.09518471213691862,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "222c14364b896cc31ce3cfd742a7b4a5e368a683ca9a054defeb79a39068a9e5",
+        "frames": 138033,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 3.13,
+        "peak": 0.702728271484375,
+        "rms": 0.08473013638796498,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 44100,
+        "start_frame": 261072,
+        "end_frame_exclusive": 399105,
+        "start_s": 5.92,
+        "end_s": 9.05
+      },
+      "profiles": [
+        {
+          "path": "voices/lister-qwen3-06b.json",
+          "old_reference_text": "Mayday, Mayday, I wonder why they call it Mayday. The distress court, wonder why it's Mayday, it's only a bank holiday. Why not Shrove Tuesday or a Saturday?",
+          "new_reference_text": "The distress call, wonder why it's Mayday, it's only a bank holiday.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 5.92
+        },
+        {
+          "path": "voices/lister.json",
+          "old_reference_text": "Mayday, Mayday, I wonder why they call it Mayday. The distress court, wonder why it's Mayday, it's only a bank holiday. Why not Shrove Tuesday or a Saturday?",
+          "new_reference_text": "The distress call, wonder why it's Mayday, it's only a bank holiday.",
+          "old_segment_start_s": 0,
+          "new_segment_start_s": 5.92
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=_aPF-Rui09Y",
+      "adjudication": "Keeps three complete short clauses from intended speaker at5.92-9.05s, excluding other speaker dialogue and later laugh-covered punchline. Native original/retry and rendered review all hear elliptical wonder why, while ASR inserts I before wonder; use native wording without invented subject. Candidate native review confirms one isolated speaker, no laughter/crowd/music/effects/splices or cutoffs. Actual3.13s is shorter than preferred but retains a coherent statement with useful phonetic variety; no padding/splicing/DSP added. Original prompt-echo response failed the parser and is not reused; clean successful retry supplies original evidence. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/lister-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/lister-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/lister-result.json"
+    },
+    {
+      "wav": "mckenna-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "a168d8130b9037e50e02ba7c58ca8834c7e671d9f600dba3b14a665c1b2bccf8",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.850006103515625,
+        "rms": 0.09387113619518608,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "c4bb559ee7a70685e0a77e0b8ddfcf11604d1374996270f3c0b1985ef5c42c6c",
+        "frames": 297120,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 12.38,
+        "peak": 0.850006103515625,
+        "rms": 0.09384590212728425,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 24000,
+        "start_frame": 42720,
+        "end_frame_exclusive": 339840,
+        "start_s": 1.78,
+        "end_s": 14.16
+      },
+      "profiles": [
+        {
+          "path": "voices/mckenna.json",
+          "old_reference_text": "monolithic institutions. We can't really even imagine a world like that. There hasn't been a world like that since late Roman times. I mean, the Roman hegemony was quite cohesive.",
+          "new_reference_text": "We can't really even imagine a world like that. Uh, there hasn't been a world like that since late Roman times. I mean the Roman hegemony was quite cohesive.",
+          "old_segment_start_s": 2355,
+          "new_segment_start_s": 2356.78
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=-dsgb7_ccPM",
+      "adjudication": "Retains continuous complete clauses from1.78-14.16s, excluding clipped opening and but you tail. Native original and edited hearings agree retained words including Uh omitted by ASR; preserve audible filler rather than simplifying. Rendered native review finds solo speaker, complete last cohesive phonemes, no score/crowd/effects/splices/cutoffs. Last clause has natural pause before omitted continuation; minor intonation uncertainty explicitly recorded. ASR corroborates all substantive retained words. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/mckenna-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/mckenna-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/mckenna-result.json"
+    },
+    {
+      "wav": "marla-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "c76a4b81ff470c4a120f15b3e52f655e8cd823dc9cd5c710e7641c6cee2eace7",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.046476846919329275,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "e534d2b9f7fc0432e48888c57c41dbef5c5a754fed9c2809a4699503cd89277f",
+        "frames": 212400,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.85,
+        "peak": 0.899993896484375,
+        "rms": 0.0490581040303191,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 24000,
+        "start_frame": 0,
+        "end_frame_exclusive": 212400,
+        "start_s": 0.0,
+        "end_s": 8.85
+      },
+      "profiles": [
+        {
+          "path": "voices/marla-qwen3-06b.json",
+          "old_reference_text": "It's a bridesmaid's dress. Someone loved it intensely for one day.  Then tossed it. Like a Christmas tree.",
+          "new_reference_text": "It's a bridesmaid's dress. Someone loved it intensely for one day.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        },
+        {
+          "path": "voices/marla.json",
+          "old_reference_text": "It's a bridesmaid's dress. Someone loved it intensely for one day.  Then tossed it. Like a Christmas tree.",
+          "new_reference_text": "It's a bridesmaid's dress. Someone loved it intensely for one day.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": null
+        }
+      ],
+      "source_url": null,
+      "adjudication": "Keeps complete first two sentences0-8.85s, removing fabric/prop Foley and the later disputed then/and tossed phrase. Original and rendered native hearings and ASR agree retained words. Native candidate review confirms one isolated speaker, complete words, no score/crowd/effects/splices or cutoffs. Breathy delivery makes possessive s subtle; both native transcriptions and ASR render bridesmaid's. Natural dramatic pause and inhale accepted; no silence splicing. Final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/marla-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/marla-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/marla-result.json"
     }
   ],
   "exclusions": [

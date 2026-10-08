@@ -1,0 +1,36 @@
+{
+  "wav": "brian-cox-ref.wav",
+  "source_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "aa348e39-bc33-4a35-a780-64b8357b4834",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "aa348e39-bc33-4a35-a780-64b8357b4834",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"If back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, should it be something else?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 15.0]\n  ],\n  \"uncertainty\": \"Wording uncertainty: The very first syllable is slightly indistinct and perceptually estimated as 'If', though it could be a vocalization or another short word. Boundary estimates are approximate perceptual judgments rather than exact millisecond timings, effectively covering the entire clip length. The speaker is completely isolated with no background interference, providing complete and highly usable phrases for conditioning.\"\n}\n```\n",
+    "duration_seconds": 37.230761,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12474,
+      "output_tokens": 3518,
+      "thinking_tokens": 3138,
+      "cache_read_tokens": 24039,
+      "total_tokens": 15992
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
