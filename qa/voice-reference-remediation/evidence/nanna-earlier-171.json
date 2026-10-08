@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "8c49050d5f5f5f22f6b37e669bd6ca2112d6a7e7d15c93c579fed379a3fc9c55",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "3608eadf-b099-49cf-aca3-5632f446dc80",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c49050d5f5f5f22f6b37e669bd6ca2112d6a7e7d15c93c579fed379a3fc9c55"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c49050d5f5f5f22f6b37e669bd6ca2112d6a7e7d15c93c579fed379a3fc9c55"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3608eadf-b099-49cf-aca3-5632f446dc80",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Some of the colors are uh different the the colors or color combinations I'm using are so different what I used to use in Finland, yes. And I use more bright colors like orange and yellow and yeah. In Finland I think I used more greyish, bluish, more dark...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [3.2, 7.9],\n    [8.3, 12.2],\n    [8.3, 17.5]\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual estimates with an estimated margin of error of +/- 0.3-0.5s. Wording is acoustically clear with minor uncertainty regarding exact grammatical prepositions in 'so different [from/than] what I used to use' (perceived as 'so different what I used to use') and the false start repetitions between 0.0s and 3.0s ('the the colors'). Speaker isolation is high with no background interference, but initial disfluencies and hesitations make raw unedited audio suboptimal for reference conditioning without trimming.\"\n}\n",
+    "duration_seconds": 61.199856,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20544,
+      "output_tokens": 4736,
+      "thinking_tokens": 4271,
+      "cache_read_tokens": 15887,
+      "total_tokens": 25280
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

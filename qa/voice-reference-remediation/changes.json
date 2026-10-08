@@ -7718,6 +7718,107 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/trigger-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/trigger-result.json",
       "delivery_commit": "2ed0d5a1a8549a69b45332a3812f6659aa31ab58"
+    },
+    {
+      "wav": "nanna-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "1f427ec3528bd3f430d48812674de9e18f5549fbe494daa4f3c881fbe54f317c",
+        "frames": 864000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 18.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10093022269486475,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b",
+        "frames": 319200,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.65,
+        "peak": 0.077728271484375,
+        "rms": 0.012274148871442268,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 87.75,
+        "source_end_s": 94.4,
+        "source_start_frame": 4212000,
+        "source_end_frame_exclusive": 4531200,
+        "conversion": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation."
+      },
+      "profiles": [
+        {
+          "path": "voices/nanna-qwen3-06b.json",
+          "old_reference_text": "I'm working on porcelain, coloured porcelain, and the technique is called nerikomi. The Japanese word meaning that you create patterns from different coloured clay.",
+          "new_reference_text": "Yeah, in Finland I think I used more grayish, bluish, more dark.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": 87.75
+        },
+        {
+          "path": "voices/nanna.json",
+          "old_reference_text": "I'm working on porcelain, coloured porcelain, and the technique is called nerikomi. The Japanese word meaning that you create patterns from different coloured clay.",
+          "new_reference_text": "Yeah, in Finland I think I used more grayish, bluish, more dark.",
+          "old_segment_start_s": null,
+          "new_segment_start_s": 87.75
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=xJN2D5mqjMc",
+      "adjudication": "Original native072 and new documentary163/170 report continuous music, no clean conditioning interval. Original source masters not located; SBS Finnish168 is music-free but English gallery replacement avoids changing reference language. Gallery host names intended Nanna Bayer; target responds, actual selected-range frame90 shows guest directly speaking.172 rejected native2speakers despite sourceASR omission of quiet interviewer interjections. Wider171 has no contaminants but later reduced phrase And now I/I now/And I remains uncertain; not admitted. Its initial171-pro explicitly reports text transcript rather than raw audio and is INVALID, frozen evidence retained/parser rejects. Final173 exact87.75–94.40s6.65s preserves complete natural colour-description statement, useful accented connected speech and native initial Yeah, without DSP or discarded partial word. Two independent full actual typedWAV native173/173-pro prove one speaker, allmusic/crowd/laugh/effect/acousticchanges/cuts/splicesfalse, rawusabletrue. Both hear initial Yeah and natural thinking pauses.173-pro appends colors after dark; three genuine wider171 hearings and full173 do not hear colors, and sourceASR aligns dark as final word before interviewer at94.78. Reject uncorroborated appended colors as phantom; no grammar completion. Grayish/greyish spelling variation only, choose grayish from resulting native173; preserve nonstandard more dark, no rewrite. Exact source PCM/frame equality and healthy level/zero full-scale verified. Natural pauses are accepted with rationale, not declared absent. Same real artist/natural English, different recording from documentary. Fresh whole resulting production acceptance mandatory.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/nanna-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=xJN2D5mqjMc",
+        "publisher": "Y-TV",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCc9MP7fTYitTqSsg035m5pQ",
+        "title": "Nanna Bayer and Judy Boydell   Nov 2017",
+        "published_date": "20171116",
+        "source_info_sha256": "71c7c2c07ed1af756dc45264f71deda9ad67218eb9c02759c987e0a2624912fe",
+        "source_download_sha256": "d7a5cbb60bb4bbeb4e493ca4781aa4ef97e5bd32a24bc8ed51847f1174e787d8",
+        "source_audio_sha256": "16d6aa6b2c68f9ea885b518491f604d982b613ac82fbb87d3c95a3ea8b2904cf",
+        "identity_section_sha256": "b5754485ce7768b909e11c2a210fa3948c1ffb94d52cb7c19a4ecfa69797b35e",
+        "identity_frame_sha256": "f2bacd5b688b7bca93cedc3b14132f20f6abaeefeca25a8067dee3178c62664e",
+        "corroborating_event_page": "https://www.sbs.com.au/language/finnish/en/podcast-episode/nanna-bayer-ceramic-artist/s4w5yh658",
+        "corroborating_event_page_sha256": "392cb71cb25dc6cbc203e584cbbb17afadd4f0cbd94f77f0883c887365400539",
+        "source_basis": "Y-TV publisher names Nanna Bayer and Judy Boydell at Mansfield Ceramics Gallery. Opening host10–60s welcomes Nanna, identifies her as Finnish artist now in Tasmania, and asks about her environmental response; target answers from60.9s. Actual selected-range frame90 shows that guest speaking directly into handheld microphone. SBS independently identifies Nanna Bayer Finnish-Tasmanian ceramic artist, Sydney Mansfield Ceramics exhibition with Judy Boydell. SBS event opening date10Nov differs video description10Oct; exact event date is not inferred from that discrepancy. Video publication20171116 is metadata, not necessarily recording date.",
+        "delivery_change": "Same intended real ceramic artist, natural English gallery interview; replaces music-backed Brand Tasmania documentary. English reference language retained.",
+        "decode": "Full ffmpeg decode to PCM16 preserving source rate/channels, exit0 and empty error log.",
+        "exact_edit": {
+          "start_s": 87.75,
+          "end_s": 94.4,
+          "sample_rate": 48000,
+          "start_frame": 4212000,
+          "end_frame_exclusive": 4531200,
+          "channel_index": null
+        },
+        "sample_exact_source_slice": true,
+        "candidate_audio": {
+          "sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b",
+          "frames": 319200,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 6.65,
+          "peak": 0.077728271484375,
+          "rms": 0.012274148871442268,
+          "samples_at_full_scale": 0
+        },
+        "changes": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation.",
+        "publisher_metadata_sha256": "548aa294dcb82eb92c118045778557cf830073debbc7ac8c60dab02bc6a1246b"
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/nanna-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/nanna-result.json"
     }
   ],
   "exclusions": [

@@ -2,7 +2,10 @@
   "name": "nanna",
   "description": "Nanna Bayer — Finnish-Tasmanian ceramic artist. Warm, measured Finnish-accented English. Speaks with quiet confidence, deliberate pacing, and soft Nordic vowels.",
   "reference_audio": "nanna-ref.wav",
-  "reference_text": "I'm working on porcelain, coloured porcelain, and the technique is called nerikomi. The Japanese word meaning that you create patterns from different coloured clay.",
-  "source": "Brand Tasmania documentary clips (brand-tasmania-process.mp4, brand-tasmania-studio.mp4)",
-  "language": "en"
+  "reference_text": "Yeah, in Finland I think I used more grayish, bluish, more dark.",
+  "source": "Y-TV: Nanna Bayer and Judy Boydell, Mansfield Ceramics Gallery interview, published20171116 (https://www.youtube.com/watch?v=xJN2D5mqjMc)",
+  "language": "en",
+  "segment_start_s": 87.75,
+  "source_url": "https://www.youtube.com/watch?v=xJN2D5mqjMc",
+  "notes": "Nanna Bayer natural English gallery interview, Y-TV, Mansfield Ceramics Gallery2017, with Judy Boydell. Exact87.75–94.40s continuous source slice without DSP. English reference retained. Provenance, natural pauses and literal disfluencies documented in qa/voice-reference-remediation/changes.json."
 }

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "5901291a-103c-42b4-9153-67453ac25069",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "5901291a-103c-42b4-9153-67453ac25069",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, in Finland I think I used more grayish, bluish, more dark\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.7, 3.1],\n    [3.8, 6.8]\n  ],\n  \"uncertainty\": \"Timings are perceptual estimates (+/- 0.2s). The final word 'dark' appears to end naturally without waveform clipping, but the thought trailing off leaves semantic completeness slightly uncertain. The initial 'Yeah' is separated by a brief pause (~0.4s-0.7s) and could optionally be excluded. There is a noticeable thinking pause between 'more' and 'grayish' around 3.1s-3.8s.\"\n}\n",
+    "duration_seconds": 28.136354,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20136,
+      "output_tokens": 2435,
+      "thinking_tokens": 2052,
+      "cache_read_tokens": 16150,
+      "total_tokens": 22571
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

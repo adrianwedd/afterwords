@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "b419c067cc8222960891ba1d3b6ecb81649cd2e0084ae17c990a064660e2a16e",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "ec588296-799c-453e-8b79-3c43ae1d2c09",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b419c067cc8222960891ba1d3b6ecb81649cd2e0084ae17c990a064660e2a16e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b419c067cc8222960891ba1d3b6ecb81649cd2e0084ae17c990a064660e2a16e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ec588296-799c-453e-8b79-3c43ae1d2c09",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I have met lots of artistic people, creative, and they are more moving from the mainland. Lots of creative people, but also lots of lovely coffee shops, restaurants, small farms, healthy lifestyle, yeah, sustainable lifestyle, I love it.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Continuous background music mixed throughout speech; speech ends around 20s leaving solo music track until the end of the clip.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"continuous background music throughout all spoken segments\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Boundary estimates are perceptual with +/- 0.5s uncertainty; minor perceptual ambiguity between 'more moving' and 'all moving' in the first sentence; background music persists under all vocal phrases, precluding clean reference conditioning via trimming alone.\"\n}\n```\n",
+    "duration_seconds": 74.139361,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 21412,
+      "output_tokens": 2405,
+      "thinking_tokens": 2025,
+      "cache_read_tokens": 15246,
+      "total_tokens": 23817
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

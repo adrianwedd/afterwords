@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "aa749423e1259c90d82d6a9e4c36816716c267655ff690f13bcc5969ed79a77b",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "25ac4acf-842d-44d0-9f6a-f781e70e309e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "aa749423e1259c90d82d6a9e4c36816716c267655ff690f13bcc5969ed79a77b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "aa749423e1259c90d82d6a9e4c36816716c267655ff690f13bcc5969ed79a77b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "25ac4acf-842d-44d0-9f6a-f781e70e309e",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"paljon pieni\u00e4 kahviloita ja ravintoloita yht\u00e4kki\u00e4 niinku tullut sinne ja t\u00e4nne ja tonne ja ja my\u00f6skin niinku terveellisempi ruoka kuin mit\u00e4 alun perin ollut fish and chips -kulttuuri. Se oli silloin alussa m\u00e4 aattelin, et voi apua, et m\u00e4 en kest\u00e4 n\u00e4it\u00e4 takeaway-rasvaisia paikkoja, kun m\u00e4 oon kuitenkin aika terveellis-\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.1, 9.1],\n    [10.2, 14.8]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately \u00b10.3 seconds. The opening word 'paljon' begins immediately at 0.0s without introductory context, suggesting a possible clause-level cutoff in the source edit although the initial phoneme is audible. The final word 'terveellis-' is cut off abruptly mid-utterance at ~17.0s. Laughter occurs between ~9.1s and ~10.1s as a brief self-chuckle/breath before the next sentence. Wording is colloquial Finnish transcribed entirely by ear.\"\n}\n",
+    "duration_seconds": 55.829862,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20984,
+      "output_tokens": 5739,
+      "thinking_tokens": 5248,
+      "cache_read_tokens": 15884,
+      "total_tokens": 26723
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

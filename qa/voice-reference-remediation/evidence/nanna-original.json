@@ -1,0 +1,38 @@
+{
+  "wav": "nanna-ref.wav",
+  "source_sha256": "1f427ec3528bd3f430d48812674de9e18f5549fbe494daa4f3c881fbe54f317c",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "985df4e5-afd3-47b9-888a-c7f496a1c71b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1f427ec3528bd3f430d48812674de9e18f5549fbe494daa4f3c881fbe54f317c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1f427ec3528bd3f430d48812674de9e18f5549fbe494daa4f3c881fbe54f317c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "985df4e5-afd3-47b9-888a-c7f496a1c71b",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I'm working on porcelain, colored porcelain, and the technique is called nerikomi. It's a Japanese word meaning that you create patterns from different colored clay.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": true,\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Perceptual boundary estimates have an uncertainty of approximately \u00b10.2 to \u00b10.3s. Transcript wording has high auditory clarity, with slight phonetic uncertainty regarding the exact romanization of the specialized Japanese term ('nerikomi'). Background music (acoustic guitar and light rhythm) plays continuously from 0.0s to the end of the recording across all spoken phrases, yielding zero clean intervals for single-speaker conditioning and constituting a fatal defect.\"\n}\n```\n",
+    "duration_seconds": 140.453875,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36275,
+      "output_tokens": 17230,
+      "thinking_tokens": 16858,
+      "cache_read_tokens": 0,
+      "total_tokens": 53505
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

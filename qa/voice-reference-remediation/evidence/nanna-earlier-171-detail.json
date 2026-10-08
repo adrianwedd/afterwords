@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "8c49050d5f5f5f22f6b37e669bd6ca2112d6a7e7d15c93c579fed379a3fc9c55",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "08c98f10-ffbd-433c-8582-2345727e7fec",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c49050d5f5f5f22f6b37e669bd6ca2112d6a7e7d15c93c579fed379a3fc9c55"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c49050d5f5f5f22f6b37e669bd6ca2112d6a7e7d15c93c579fed379a3fc9c55"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "08c98f10-ffbd-433c-8582-2345727e7fec",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Some of the colors are uh different the the colors or color combinations I'm using are so different what I used to use in Finland, yes. And now I use more bright colors like orange and yellow and yeah. In Finland I think I used more greyish, bluish, more dark\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [8.0, 15.5]\n  ],\n  \"uncertainty\": \"Perceptual timing boundary estimates carry an uncertainty margin of \u00b10.3 to \u00b10.5 s. In the literal transcript, the transition after 'Finland, yes' contains rapid reduction/elision where 'And now I use' could perceptually be 'I now use' or 'And now use'; the preposition in 'different what I used to use' is omitted by the speaker rather than elided; 'greyish' represents phonetic /\u02c8\u0261re\u026a\u026a\u0283/ (could be transcribed 'grayish'); the final phrase 'more dark' completes the consonant /k/ without acoustic truncation, but room decay is clipped at the file boundary and the phrase trails off semantically. The segment [8.0, 15.5] provides an isolated single-speaker phrase, with [8.0, 11.8] offering the cleanest grammatically complete sentence.\"\n}\n",
+    "duration_seconds": 81.88262,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20858,
+      "output_tokens": 7936,
+      "thinking_tokens": 7431,
+      "cache_read_tokens": 15894,
+      "total_tokens": 28794
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
