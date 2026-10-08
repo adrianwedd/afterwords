@@ -3839,7 +3839,8 @@
         "guest_introduction_frame_s": 12
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-mortimer-original.json",
-      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-mortimer-result.json"
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-mortimer-result.json",
+      "delivery_commit": "3628f6921f1d76477ab6a31620a8846ba049e890"
     }
   ],
   "exclusions": [
