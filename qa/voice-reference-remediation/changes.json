@@ -1640,7 +1640,7 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/the-doctor-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/final-evidence/098-97247a828be1aaeb-revision-1.json",
-      "delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08",
+      "delivery_commit": "2afaa179544a545a46d0d5aad3a44946577da14e",
       "post_remediation_revisions": [
         {
           "previous_delivery_commit": "00ec89755ad9e8fe0a257700c2804202e42ead08",
@@ -1713,7 +1713,8 @@
             "qa/voice-reference-remediation/final-evidence/098-97247a828be1aaeb-revision-1.json",
             "qa/voice-reference-remediation/final-evidence/098-97247a828be1aaeb-revision-2.json"
           ],
-          "discovery_native_evidence": []
+          "discovery_native_evidence": [],
+          "delivery_commit": "2afaa179544a545a46d0d5aad3a44946577da14e"
         }
       ]
     },
@@ -3308,7 +3309,7 @@
       },
       "native_original_evidence": "qa/voice-reference-remediation/evidence/bernard-black-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/final-evidence/013-0930c20cd609fdda-revision-1.json",
-      "delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
+      "delivery_commit": "2afaa179544a545a46d0d5aad3a44946577da14e",
       "post_remediation_revisions": [
         {
           "previous_delivery_commit": "5b0d405c67d58ccb15b2559a41ae30898c5dd1bb",
@@ -3368,7 +3369,8 @@
             "qa/voice-reference-remediation/final-evidence/013-0930c20cd609fdda-revision-1.json",
             "qa/voice-reference-remediation/final-evidence/013-0930c20cd609fdda-revision-2.json"
           ],
-          "discovery_native_evidence": []
+          "discovery_native_evidence": [],
+          "delivery_commit": "2afaa179544a545a46d0d5aad3a44946577da14e"
         }
       ]
     },
