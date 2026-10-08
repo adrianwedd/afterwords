@@ -5235,7 +5235,8 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/jack-dee-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/jack-dee-result.json",
       "native_result_secondary_evidence": "qa/voice-reference-remediation/evidence/jack-dee-result-secondary.json",
-      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/jack-dee-publisher-source.json"
+      "publisher_source_evidence": "qa/voice-reference-remediation/evidence/jack-dee-publisher-source.json",
+      "delivery_commit": "2d18f8f845a09244f18aae7cf8faac59be68876f"
     }
   ],
   "exclusions": [
