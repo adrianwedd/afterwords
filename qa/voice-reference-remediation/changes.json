@@ -3470,7 +3470,7 @@
         "upload_date": "20170502",
         "source_audio_sha256": "2985d20091e69129eeaa56e922c638ddee74d688c371197763516cf6a6580462",
         "source_metadata_sha256": "d065502a2b56e55abca6cffc026f6ac643083f305c06bc7f5502e6e02e2c6a2f",
-        "source_basis": "Public archive of Today1998 interview, presenter introduces Patrick Stewart by name and camera identifies the speaking interviewee. Dramatic MobyDick opening and presenter turns excluded.",
+        "source_basis": "Public archive of Today 1998 interview, presenter introduces Patrick Stewart by name and camera identifies the speaking interviewee. Dramatic MobyDick opening and presenter turns excluded.",
         "source_frame_evidence": "qa/voice-reference-remediation/evidence/picard-source-100.jpg",
         "source_frame_s": 100
       },
@@ -3531,7 +3531,7 @@
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=dRtCsNhxO3o",
-      "adjudication": "Original rapid two-speaker scene has prominent overlapping audience laughter and truncated boundaries; no usable continuous solo take. PebbleMill candidate trials were not admitted due to boundary/wording problems, pronounced stutters or opening-voice uncertainty. Re-sourced continuous8.66s complete clause from separate LooksFamiliar broadcast archive. Longer answer452.05-467.86 had indistinct preceding phrasing and pauses, not admitted. Revised459.2-467.86 retains just complete fluent final clause. Full native3.8 review confirms one voice, no music/crowd/laughter/effects/splices, complete beginnings/endings, mild nondestructive tape hiss. Natural0.5-1s hesitations retained without splicing. Retain audible uh and repeated in in forty, supported by earlier blind native hearing of longer answer; ASR normalizes to in1940 and omits filler, rejected. Spoken forty represented as 40, not invented nineteen. Intended ArthurLowe identity corroborated by introduction, addressed answer and camera. Interview delivery rather than original comedic scene explicitly sourced. Fresh final corpus pass pending.",
+      "adjudication": "Original rapid two-speaker scene has prominent overlapping audience laughter and truncated boundaries; no usable continuous solo take. PebbleMill candidate trials were not admitted due to boundary/wording problems, pronounced stutters or opening-voice uncertainty. Re-sourced continuous8.66s complete clause from separate Looks Familiar broadcast archive. Longer answer452.05-467.86 had indistinct preceding phrasing and pauses, not admitted. Revised459.2-467.86 retains just complete fluent final clause. Full native3.8 review confirms one voice, no music/crowd/laughter/effects/splices, complete beginnings/endings, mild nondestructive tape hiss. Natural0.5-1s hesitations retained without splicing. Retain audible uh and repeated in in forty, supported by earlier blind native hearing of longer answer; ASR normalizes to in1940 and omits filler, rejected. Spoken forty represented as 40, not invented nineteen. Intended Arthur Lowe identity corroborated by introduction, addressed answer and camera. Interview delivery rather than original comedic scene explicitly sourced. Fresh final corpus pass pending.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false
@@ -3545,7 +3545,7 @@
         "upload_date": "20231013",
         "source_audio_sha256": "07cd1411bbc883002167127d5baa254c2605e48909e5059f5256a18dea296cac",
         "source_metadata_sha256": "f56ca82052c946cef33b7979c647df96ea9f37c2d41c631268874a612d18f907",
-        "source_basis": "Public archive of LooksFamiliar episode credits Arthur Lowe. Presenter names him at introduction and addresses Arthur before this wartime-service answer; speaking-camera context identifies Lowe. Other panelists and presenter turns excluded.",
+        "source_basis": "Public archive of Looks Familiar episode credits Arthur Lowe. Presenter names him at introduction and addresses Arthur before this wartime-service answer; speaking-camera context identifies Lowe. Other panelists and presenter turns excluded.",
         "source_frame_evidence": "qa/voice-reference-remediation/evidence/captain-mainwaring-source-463.jpg",
         "source_frame_s": 463
       },
@@ -3605,7 +3605,7 @@
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=cxilv-bZAkw",
-      "adjudication": "Original KEEP hypothesis overturned: full native hearing finds long male video-essay narration then two other scene voices, with target not sufficiently isolated. Re-sourced continuous10.89s JenniferSaunders speech from AudibleUK2024 TittingAbout studio conversation. Initial100.1-113 candidate had an uncertain softer trailing Yeah, not admitted. Revised100.1-110.99 ends on complete moving forward phrase before trailing closure/backchannel. Two full blind native hearings3.8 and3.1 agree every word including hesitated hes hes and awkward his good thing is, with one voice, no music/crowd/laughter/effects/splices or clipped boundaries. Do not improve the wording to whole thing or correct reported speech grammar. ASR misrenders hes just trained as I just trained; two independent native hearings agree hes, so retain audio-based wording. Source camera and publisher credits corroborate intended JenniferSaunders. Conversational interview rather than Edina-character performance explicitly sourced. No cleanup/normalization/splicing. Fresh corpus pass pending.",
+      "adjudication": "Original KEEP hypothesis overturned: full native hearing finds long male video-essay narration then two other scene voices, with target not sufficiently isolated. Re-sourced continuous10.89s Jennifer Saunders speech from Audible UK2024 TittingAbout studio conversation. Initial100.1-113 candidate had an uncertain softer trailing Yeah, not admitted. Revised100.1-110.99 ends on complete moving forward phrase before trailing closure/backchannel. Two full blind native hearings3.8 and3.1 agree every word including hesitated hes hes and awkward his good thing is, with one voice, no music/crowd/laughter/effects/splices or clipped boundaries. Do not improve the wording to whole thing or correct reported speech grammar. ASR misrenders hes just trained as I just trained; two independent native hearings agree hes, so retain audio-based wording. Source camera and publisher credits corroborate intended Jennifer Saunders. Conversational interview rather than Edina-character performance explicitly sourced. No cleanup/normalization/splicing. Fresh corpus pass pending.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false
@@ -3619,7 +3619,7 @@
         "upload_date": "20240502",
         "source_audio_sha256": "72df55cfcc513d4b0e5a307f5dd250acf01487c73ca57413483e4bcdebc3d8a6",
         "source_metadata_sha256": "e66cad67c11e0063080cba7e20f4c79fdce2b7d89acf4c7b28e669499dce191b",
-        "source_basis": "Publisher AudibleUK interview explicitly credits Jennifer Saunders; camera identifies Saunders as the speaker in selected passage. DawnFrench turns/backchannels excluded.",
+        "source_basis": "Publisher Audible UK interview explicitly credits Jennifer Saunders; camera identifies Saunders as the speaker in selected passage. Dawn French turns/backchannels excluded.",
         "source_frame_evidence": "qa/voice-reference-remediation/evidence/edina-monsoon-source-100.jpg",
         "source_frame_s": 100
       },
@@ -3742,7 +3742,7 @@
         }
       ],
       "source_url": "https://www.youtube.com/watch?v=ZtboufXPj2A",
-      "adjudication": "Original full native hearing finds music underneath all speech plus abrupt boundaries; prior text-only hypothesis rejected. Earlier dog-story trial had disputed hesitations; makeup-story trials had conflicting final conjunctions and possible laughter, none admitted. Another answer226.2-234.6 had sharply conflicting last-word hearings (part of/polite versus ASR poor), so do not infer intended script or rewrite that unclear ending. Retain only its complete first statement226.2-231.88. Full revised native3.8 hearing confirms one isolated voice, no music/crowd/laughter/effects/splices or clipped words. Native hearing of both longer and resulting exact5.68s passage agrees Yeah I did, down you know down and uh before I always liked that character; ASR and native3.1 longer passage omit uh, so preserve the explicitly heard hesitation rather than normalize. Several seconds of complete multi-clause speech with useful phonetic variety, no padding or splicing. Interview introduction and directly answering guest context support intended PeterFalk; selected audio continues over illustrative B-roll, whose pictured dialogue is not audible in the reference. Do not mistake that B-roll for a camera view of this interview answer. Conversational interview rather than character scene explicitly sourced. Fresh final corpus pass pending.",
+      "adjudication": "Original full native hearing finds music underneath all speech plus abrupt boundaries; prior text-only hypothesis rejected. Earlier dog-story trial had disputed hesitations; makeup-story trials had conflicting final conjunctions and possible laughter, none admitted. Another answer226.2-234.6 had sharply conflicting last-word hearings (part of/polite versus ASR poor), so do not infer intended script or rewrite that unclear ending. Retain only its complete first statement226.2-231.88. Full revised native3.8 hearing confirms one isolated voice, no music/crowd/laughter/effects/splices or clipped words. Native hearing of both longer and resulting exact5.68s passage agrees Yeah I did, down you know down and uh before I always liked that character; ASR and native3.1 longer passage omit uh, so preserve the explicitly heard hesitation rather than normalize. Several seconds of complete multi-clause speech with useful phonetic variety, no padding or splicing. Interview introduction and directly answering guest context support intended Peter Falk; selected audio continues over illustrative B-roll, whose pictured dialogue is not audible in the reference. Do not mistake that B-roll for a camera view of this interview answer. Conversational interview rather than character scene explicitly sourced. Fresh final corpus pass pending.",
       "deterministic_qa": {
         "audio_integrity": true,
         "sample_exact_slice": false
@@ -3756,7 +3756,7 @@
         "upload_date": "20171123",
         "source_audio_sha256": "e8f31cb1ef24cc9665bb32d762644cef56ef9b7dc758755af33a5557b5a63fe4",
         "source_metadata_sha256": "71d51e1e738ee550dad8b115f6c59125ec9acc7f049ecad3617419abec04e4d5",
-        "source_basis": "Public broadcast interview archive explicitly credits PeterFalk in presenter introduction. Interview camera at120s shows the credited guest; selected answer follows interviewer question about personal contribution to the Columbo role and continues as guest voiceover while illustrative scene B-roll is shown. Native selected-audio observation finds one continuous voice with no pictured-scene dialogue or acoustic splice. The230s frame is B-roll, not proof of lip synchronization for the selected interview answer.",
+        "source_basis": "Public broadcast interview archive explicitly credits Peter Falk in presenter introduction. Interview camera at120s shows the credited guest; selected answer follows interviewer question about personal contribution to the Columbo role and continues as guest voiceover while illustrative scene B-roll is shown. Native selected-audio observation finds one continuous voice with no pictured-scene dialogue or acoustic splice. The230s frame is B-roll, not proof of lip synchronization for the selected interview answer.",
         "source_frame_evidence": "qa/voice-reference-remediation/evidence/columbo-interview-source-120.jpg",
         "source_frame_s": 120,
         "b_roll_frame_evidence": "qa/voice-reference-remediation/evidence/columbo-source-230.jpg",
@@ -3765,6 +3765,81 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/columbo-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/columbo-result.json",
       "delivery_commit": "3bf95c2090947d259a5a1e35ae42dcc31b1f104c"
+    },
+    {
+      "wav": "bob-mortimer-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "90ad3b3a78a6ec2189b00c45b0369b2539cdcd8d547608a6a26a8875bddb6384",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.12615344285907323,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "a139863f8a4709104810ae3346804c47151cf10e4d129c24be775f9ae8a48230",
+        "frames": 201978,
+        "sample_rate": 44100,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 4.58,
+        "peak": 0.755706787109375,
+        "rms": 0.13352252077850846,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 44100,
+        "source_start_s": 115.65,
+        "source_end_s": 120.23,
+        "source_start_frame": 5100165,
+        "source_end_frame_exclusive": 5302143,
+        "conversion": "Exact continuous decoded PCM16 source frame slice, preserves source rate/channels; no cleanup, normalization, separation or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/bob-mortimer-qwen3-06b.json",
+          "old_reference_text": "I know I'm that urine pine, I'm a bad dentist. No, because even very, very, very good dentists sometimes get someone else to do their teeth.",
+          "new_reference_text": "And you start thinking, 'Oh, I better make the world around me miserable, then I won't mind leaving so much.'",
+          "old_segment_start_s": 20,
+          "new_segment_start_s": 115.65
+        },
+        {
+          "path": "voices/bob-mortimer.json",
+          "old_reference_text": "I know I'm that urine pine, I'm a bad dentist. No, because even very, very, very good dentists sometimes get someone else to do their teeth.",
+          "new_reference_text": "And you start thinking, 'Oh, I better make the world around me miserable, then I won't mind leaving so much.'",
+          "old_segment_start_s": 20,
+          "new_segment_start_s": 115.65
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=RlfrOMtFlsM",
+      "adjudication": "Original audience/dialogue reference unsuitable; replaced with continuous guest speech from BBC Radio 2 interview. Initial111.36-121.92 had laughter/backchannel;113.48-120.23 and113.97-120.23 retained chuckled/false-start opening, so not admitted. One malformed113.97 response also claimed guitar; failed native gate preserved and not used as acceptance; two valid independent subsequent hearings of that exact audio report no music, but disagree on brief opening chuckle. Remove entire preceding chuckled You get you get old phrase rather than dispute its suitability. Source RMS quiet valley115.65 before And onset followed by complete clause through120.23. Full resulting native3.8 hearing confirms one voice, complete boundaries, no music/crowd/laughter/effects/splices. Two native reviews of the preceding wider passage, the resulting native review and ASR render I better; a weak elided d is possible, but do not grammatically improve audible I better to Id better. Actual4.58s contains a complete multi-clause utterance and useful variety, shorter than preferred but no padding/splicing. Guest mapping comes from source introduction and directly addressed Joel reply plus matching camera context, not actor identification supplied to reviewer. Conversational interview delivery explicitly sourced. Fresh final corpus pass pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/bob-mortimer-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=RlfrOMtFlsM",
+        "title": "Bob Mortimer on Taskmaster, Last One Laughing, WILTY and why his latest novel features his cat.",
+        "uploader": "BBC Radio 2",
+        "upload_date": "20260603",
+        "source_audio_sha256": "fd3268833e98c97b05f833bd3b3a2108e600ddd16efcd5fe9a226068708dd63d",
+        "source_metadata_sha256": "ceec1c9b00c362b7daf19232b85e2447acf6028cada35793e1491daca43fa509",
+        "source_basis": "Publisher BBC Radio 2 interview names Bob Mortimer in introduction. Guest answers Hi how are you Joel and camera shows the same guest at12s and117s; presenter Joel is distinct in100s shot. Selected passage is the guest answer about aging; host praise/backchannels excluded.",
+        "source_frame_evidence": "qa/voice-reference-remediation/evidence/bob-mortimer-source-117.jpg",
+        "source_frame_s": 117,
+        "guest_introduction_frame_evidence": "qa/voice-reference-remediation/evidence/bob-mortimer-source-introduction-012.jpg",
+        "guest_introduction_frame_s": 12
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/bob-mortimer-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/bob-mortimer-result.json"
     }
   ],
   "exclusions": [

@@ -1,0 +1,36 @@
+{
+  "wav": "bob-mortimer-ref.wav",
+  "source_sha256": "90ad3b3a78a6ec2189b00c45b0369b2539cdcd8d547608a6a26a8875bddb6384",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "cf0cd8dd-4adc-4d82-a795-c39f8b569f89",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "90ad3b3a78a6ec2189b00c45b0369b2539cdcd8d547608a6a26a8875bddb6384"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "90ad3b3a78a6ec2189b00c45b0369b2539cdcd8d547608a6a26a8875bddb6384"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "cf0cd8dd-4adc-4d82-a795-c39f8b569f89",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 4.5],\n    [4.5, 9.5],\n    [9.5, 11.0]\n  ],\n  \"literal_transcript\": \"[Laughter] I know, but that you're implying I'm a bad dentist. No, because even very, very, very good dentists sometimes get someone else to do their teeth. All right. [Laughter]\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Multiple speakers and prominent audience laughter.\",\n  \"candidate_clean_intervals_s\": [\n    [5.0, 9.0]\n  ],\n  \"uncertainty\": \"Boundary estimates are approximate perceptual estimates (\u00b10.5s). There is uncertainty in the exact wording of the first speaker's speech due to overlapping heavy background laughter.\"\n}\n```\n",
+    "duration_seconds": 33.773087,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 13033,
+      "output_tokens": 3210,
+      "thinking_tokens": 2823,
+      "cache_read_tokens": 24052,
+      "total_tokens": 16243
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
