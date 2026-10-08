@@ -5800,6 +5800,112 @@
         "qa/voice-reference-remediation/evidence/sherlock-initial-cutoff-rejected.json"
       ],
       "delivery_commit": "644d40337442a32d0623474b35efb4a45fad4e37"
+    },
+    {
+      "wav": "dalai-lama-ref.wav",
+      "remediation": "RE-SOURCE",
+      "old_disposition": "RE-SOURCE",
+      "original_audio": {
+        "sha256": "655900e8870e7c2eb7dba2b21e0197ffde53db2030d8a3d9f89b0ead553b287f",
+        "frames": 411600,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 17.15,
+        "peak": 0.8499755859375,
+        "rms": 0.049781916333418705,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293",
+        "frames": 319200,
+        "sample_rate": 48000,
+        "channels": 2,
+        "subtype": "PCM_16",
+        "duration_s": 6.65,
+        "peak": 0.57635498046875,
+        "rms": 0.05914204847839107,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "replacement",
+        "sample_rate": 48000,
+        "source_start_s": 38.4,
+        "source_end_s": 45.05,
+        "source_start_frame": 1843200,
+        "source_end_frame_exclusive": 2162400,
+        "conversion": "Exact continuous decoded source PCM16 frame slice preserving source rate/channels; no DSP, normalization, separation, padding or splicing"
+      },
+      "profiles": [
+        {
+          "path": "voices/dalai-lama.json",
+          "old_reference_text": "Now here is the environment. According to that reality, now no longer to emphasis my nation, my country, now we should think more of we humanity.",
+          "new_reference_text": "Uh, I usually describe my position since then, semi-retired position.",
+          "old_segment_start_s": 480,
+          "new_segment_start_s": 38.4
+        }
+      ],
+      "source_url": "https://commons.wikimedia.org/wiki/File:VOA_Dalai_Lama_Interview_Part_1.webm",
+      "adjudication": "Original native028 hears1voice/no contamination but long pauses; independent native113 hears unnatural pauses and possible gating/splices, judges unusable. Both literal hearings and original ASR establish phantom profile words after my nation. Acoustic disagreement is preserved rather than presented as confirmed splicing. Replaced with attributable VOA News interview, Commons CC BY3.0 and English retirement question/answer plus actual video frame40s corroborate target. Longer114 has long hesitation;116 end-cutoff flag and118 onset-cutoff flag/wording ambiguity rejected. Revised119 restores full Uh onset and extends phrase decay; actual-WAV native full review confirms1voice, no music/crowd/laughter/effects/acoustic change/splices/long pauses or either cutoff. Literal Uh, I usually describe... agrees longer114 and source ASR; isolated116 extra just unsupported by other native/source wording and rejected. Slight position/physician phonetic ambiguity noted119; source aligned wording and longer114 agree position, retained spoken nonstandard phrase and filler, no grammatical rewrite. Fullsource download46971393bytes, full decodeexit0 with empty errorlog. Exact source frames1843200:2162400 independently equal accepted candidate,6.65s healthy levels/no fullscale. Same target interview delivery, no claim of preserving original wording. Fresh whole resulting production corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": false
+      },
+      "delivery_commit_locator": "git log -- voices/dalai-lama-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:VOA_Dalai_Lama_Interview_Part_1.webm",
+        "original_source_url": "https://www.youtube.com/watch?v=5vmfpoxv5xw",
+        "title": "VOA Dalai Lama Interview Part 1",
+        "author": "VOA News",
+        "source_date": "2011-07-21",
+        "license": "CC BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/",
+        "file_page_revision": 1180790056,
+        "file_page_sha256": "015a724b4bacef3790ae53a845c953bf7d49824bb909f4684b45c07b36d7b79a",
+        "identity_basis": "File description names Dalai Lama interview with VOA Mandarin Service; English retirement question followed by autobiographical answer; source video frame at40s shows target speaking. Candidate is uninterrupted38.4-45.05 answer segment.",
+        "retrieved_utc": "2026-10-08T08:27:45.028572+00:00",
+        "source_download_sha256": "0877bb35af0aaf9c373897562ddf933dd2229ca88606b1eb810c13ed613e0b91",
+        "source_audio_sha256": "16088a15830258c6f4017afda13445bc86a92d1cfbef4235fbc0230c6d2ceaf5",
+        "source_audio": {
+          "sha256": "16088a15830258c6f4017afda13445bc86a92d1cfbef4235fbc0230c6d2ceaf5",
+          "frames": 36855084,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 767.81425,
+          "peak": 1.0,
+          "rms": 0.09154767722979643,
+          "samples_at_full_scale": 18
+        },
+        "source_file_size": 46971393,
+        "decode": "ffmpeg PCM16 preserving source48000Hz stereo; completed full decode exit0 and empty errorlog",
+        "exact_edit": {
+          "start_s": 38.4,
+          "end_s": 45.05,
+          "start_frame": 1843200,
+          "end_frame_exclusive": 2162400,
+          "sample_rate": 48000
+        },
+        "candidate_audio": {
+          "sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293",
+          "frames": 319200,
+          "sample_rate": 48000,
+          "channels": 2,
+          "subtype": "PCM_16",
+          "duration_s": 6.65,
+          "peak": 0.57635498046875,
+          "rms": 0.05914204847839107,
+          "samples_at_full_scale": 0
+        },
+        "sample_exact_source_slice": true,
+        "changes": "Decoded audio and selected one continuous answer phrase, no DSP, normalization, separation, concatenation or padding",
+        "delivery_change": "Same intended speaker in English interview delivery; replaces hesitant original reference without claiming original phrasing preserved.",
+        "publisher_metadata_sha256": "a6f4e93661a5a4133a331d1953792b5705d17595fb22c6f0ece74e87469a46a3",
+        "source_basis": "File description names Dalai Lama interview with VOA Mandarin Service; English retirement question followed by autobiographical answer; source video frame at40s shows target speaking. Candidate is uninterrupted38.4-45.05 answer segment."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/dalai-lama-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/dalai-lama-result.json"
     }
   ],
   "exclusions": [

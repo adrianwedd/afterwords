@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "655900e8870e7c2eb7dba2b21e0197ffde53db2030d8a3d9f89b0ead553b287f",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "d607e9c2-b308-49fc-9be7-a1b07283bfb1",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "655900e8870e7c2eb7dba2b21e0197ffde53db2030d8a3d9f89b0ead553b287f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "655900e8870e7c2eb7dba2b21e0197ffde53db2030d8a3d9f89b0ead553b287f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d607e9c2-b308-49fc-9be7-a1b07283bfb1",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Now here, this, uh, the environment, according to that reality, now no longer, uh, to emphasize my nation.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Frequent unnatural pauses and heavy noise gating/splicing between short fragments break prosodic continuity.\",\n  \"candidate_clean_intervals_s\": [\n    [2.8, 4.2],\n    [4.6, 7.0],\n    [7.4, 9.5],\n    [10.8, 13.5]\n  ],\n  \"uncertainty\": \"Interval estimates are approximate. It is difficult to distinguish heavy noise gating from artificial splicing. Transcript contains slight grammatical or pronunciation anomalies.\"\n}\n",
+    "duration_seconds": 33.306487,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20743,
+      "output_tokens": 3132,
+      "thinking_tokens": 2763,
+      "cache_read_tokens": 15874,
+      "total_tokens": 23875
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

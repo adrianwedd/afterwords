@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "960918dce9950a917d2a7bbfc9f4c0fb2b0576c46d40c68c5c1a6e0855530525",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4e38f9eb-d284-4f91-b23a-3db5a4e26f88",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "960918dce9950a917d2a7bbfc9f4c0fb2b0576c46d40c68c5c1a6e0855530525"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "960918dce9950a917d2a7bbfc9f4c0fb2b0576c46d40c68c5c1a6e0855530525"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4e38f9eb-d284-4f91-b23a-3db5a4e26f88",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So since then, uh, I usually describe my position since then, semi-retired position.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [2.1, 6.4]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates with an uncertainty of approximately +/- 0.2s. High confidence in transcript wording. Boundary between the initial hesitation/filler and the main clause is estimated at ~2.1s; speech finishes around 6.2s with room reverberation decay extending to ~6.4s.\"\n}\n```\n",
+    "duration_seconds": 94.441963,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20605,
+      "output_tokens": 9884,
+      "thinking_tokens": 9534,
+      "cache_read_tokens": 16124,
+      "total_tokens": 30489
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

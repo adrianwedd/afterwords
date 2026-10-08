@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "8c8862af-60a4-4c62-acc8-3027f857431a",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8c8862af-60a4-4c62-acc8-3027f857431a",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Uh, I usually describe my position since then, semi-retired position.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.5, 5.4]\n  ],\n  \"uncertainty\": \"Boundaries are perceptual estimates with +/- 0.3s uncertainty. The speaker speaks with a non-native accent; the repetition of 'position' at the end is perceptually favored, though phonetically it has slight ambiguity with 'physician'. The initial 'Uh' (0.0s\u20130.5s) can be trimmed for optimal conditioning reference.\"\n}\n",
+    "duration_seconds": 39.171272,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20248,
+      "output_tokens": 3470,
+      "thinking_tokens": 3118,
+      "cache_read_tokens": 16151,
+      "total_tokens": 23718
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
