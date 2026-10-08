@@ -5907,6 +5907,81 @@
       "native_original_evidence": "qa/voice-reference-remediation/evidence/dalai-lama-original.json",
       "native_result_evidence": "qa/voice-reference-remediation/evidence/dalai-lama-result.json",
       "delivery_commit": "01f1c94bb3ba97b871a337c3b4ee9ed96349de44"
+    },
+    {
+      "wav": "john-sheppard-ref.wav",
+      "remediation": "TRIM",
+      "old_disposition": "KEEP",
+      "original_audio": {
+        "sha256": "53e62aa6ef0389fcaaffe2ecc9990e49610ce77f42421ee7b471f80bf6bcd84f",
+        "frames": 712800,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.85,
+        "peak": 0.999969482421875,
+        "rms": 0.07519376097538538,
+        "samples_at_full_scale": 0
+      },
+      "resulting_audio": {
+        "sha256": "d8e2bba94794dfa32420186c1ea7805cad648224af496e3e4547c54d6a6c2691",
+        "frames": 331200,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 6.9,
+        "peak": 0.8509521484375,
+        "rms": 0.08588838575420533,
+        "samples_at_full_scale": 0
+      },
+      "operation": {
+        "type": "lossless_pcm_frame_slice",
+        "sample_rate": 48000,
+        "start_frame": 381600,
+        "end_frame_exclusive": 712800,
+        "start_s": 7.95,
+        "end_s": 14.85
+      },
+      "profiles": [
+        {
+          "path": "voices/john-sheppard.json",
+          "old_reference_text": "and realize it would be politicized, and everybody's gonna start questioning the science and stuff, so that's a little unfortunate. But this thing is gonna go on until springtime, so maybe we'll recalibrate and realize that we are all in it together, so who knows.",
+          "new_reference_text": "But this thing is going to go on until springtime, so maybe we'll recalibrate and realize that we are all in it together, so who knows.",
+          "old_segment_start_s": 300.0,
+          "new_segment_start_s": 307.95
+        }
+      ],
+      "source_url": "https://www.youtube.com/watch?v=ZvMMskY6AaU",
+      "adjudication": "Original native053 reports2voices with Yeah backchannels, truncated opening, no music/crowd/effects. Original ASR localizes words; independently located publisher Dial the Gate episode004, matching source wording300-314.8s and labeled video guestJoeFlanigan at309s support intended actor. Originalreference matches decodedsource at300.0s by downmixed downsampled PCM Pearson0.9465 correlation; source processing is not claimed reproduced. Candidate1207.35-end passedfirstnative but independent3.1 hears residualYeah atstart, rejects; preserved negative. Final1217.95-14.85 is exact originalPCM16 frame slice. Two independent native reviews of identical finalhash agree1voice, no contaminant/acoustic change/splice/long pauses or either cutoff, and identical literal wording including in it together. Earlier120secondary in this together rejected by both finalnativehearings and sourceASR. Finalnative going to agrees fullsourceASR; minor conversational reduction uncertainty notedfirst121, secondary agrees going to. Actual6.9s, nativeclock7.5s notedit authority. Exact source-relative307.95 derived originaloffset300 corroborated waveform matching, not metadata-only guess. Healthy levels/integrity checked independently. Fresh full resulting corpus acceptance pending.",
+      "deterministic_qa": {
+        "audio_integrity": true,
+        "sample_exact_slice": true
+      },
+      "delivery_commit_locator": "git log -- voices/john-sheppard-ref.wav qa/voice-reference-remediation/changes.json",
+      "final_corpus_acceptance": "pending",
+      "replacement_provenance": {
+        "source_url": "https://www.youtube.com/watch?v=ZvMMskY6AaU",
+        "publisher": "Dial the Gate",
+        "publisher_channel_url": "https://www.youtube.com/channel/UCy2h-ua3izNVwWQ8CYVSJqw",
+        "title": "004: Joe Flanigan, \"John Sheppard\" in Stargate Atlantis (Interview)",
+        "description": "Stargate Atlantis's Colonel John Sheppard joins David Read while in quarantine on Dial the Gate, where he will be discussing the colonel, his career and a little bit about his next project. He will also take your questions LIVE!\n\nLinks\nJoe Flanigan's Official Instagram ► https://www.instagram.com/joeflaniganofficial\nJoe Flanigan Autographs for RocktheVote ► https://www.cameo.com/flaniganjoe\n\nShare This Video ► https://youtu.be/ZvMMskY6AaU\n\nVisit DialtheGate ► http://www.dialthegate.com\non Facebook ► https://www.facebook.com/dialthegate\non Instagram ► https://instagram.com/dialthegateshow\non Twitter ► https://twitter.com/dial_the_gate\n\nSUBSCRIBE!\nhttps://youtube.com/dialthegate/\n\nTimecodes\n00:00 - Opening Credits\n00:27 - Welcome and Episode Outline\n01:38 - Guest Introduction\n05:17 - Tell us about \"See\" (season 2)\n09:54 - Tell us about your formative years\n20:50 - How Joe Found Stargate\n23:12 - Personal Heroes\n33:20 - Elon Musk\n34:31 - What was your impression to Stargate before being cast?\n37:22 - Filling the lead's shoes as John Sheppard\n41:30 - The first Comic-con (San Diego)\n43:13 - An Overwhelming First Season\n48:50 - Joe lived with Jason Momoa\n52:35 - Stargate and the Hero's Journey\n58:28 - Creating content that changes peoples' lives\n1:00:48 - Coffee or Tea?\n1:01:47 - Who do you wish Sheppard hooked up with?\n1:05:28 - SGA 4x15 \"Outcast\"\n1:07:24 - Call to Action\n1:08:12 - Would you like to come back to Stargate in any form?\n1:11:20 - Sheppard's wristband\n1:13:07 - How much ad-lib were you allowed to put in the show?\n1:17:33 - SG-1 and Atlantis crossovers\n1:23:01 - SGA 1x1 \"Rising\"\n1:24:41 - What do you think John is doing now?\n1:25:20 - What's it like being the lead and a supporting character?\n1:29:01 - What's your favorite adult beverage?\n1:29:52 - What was it like working with David Hewlett?\n1:35:05 - Guest Thanks\n1:37:02 - Post-Interview Housekeeping\n1:39:30 - End Credits\n\n***\n\n\"Stargate\" and all related materials are owned by MGM Studios and MGM Television.\n\n#Stargate\n#DialtheGate\n#TurtleTimeline",
+        "source_download_sha256": "d118d6c4f840cfd0adf897ebeedd8a2cc58b960be6178fad0638d91de1a598b7",
+        "source_audio_sha256": "2b3fe3516f5c662f693e0f35832249f115c60a928d6196d38486fcafc898938a",
+        "source_info_sha256": "3cd0d3f9764a662a57f90857a73e86fc2be5c582ad4fcdd77ac49561fcacbad1",
+        "identity_video_section_sha256": "d570155d8e5f0f232b787d60072fdc2d8cc55f18652db0b7553a17b6b5857913",
+        "identity_frame_sha256": "2ae05aa27c98ff06c6c9ef1e5f794136b94a62c2b0ffa22576e4df5bbeabde9e",
+        "identity_basis": "Publisher identifies interview guest Joe Flanigan as John Sheppard; section290-318s video labels David Read HOST and Joe Flanigan JOHN SHEPPARD, with guest delivering matching retirement/pandemic answer. Source ASR300-314.8 matches reference wording; original reference correlation to source verified below.",
+        "reference_source_correlation": {
+          "source_start_s": 300.0,
+          "pearson": 0.9464848645385185,
+          "method": "downmix and1-in10 downsample; full original matched against decoded source299-317s by FFT crosscorrelation; used for provenance/localization only, not acoustic acceptance"
+        },
+        "operation": "Production replacement is a lossless original-reference frame slice, not a new source decode; source download corroborates previously unlocated local source; original source processing not reconstructed.",
+        "publisher_metadata_sha256": "50b9ee9ddc1c5fdbc6d6fe414214b9114cb58a92450d5443c9705ed07c3ae881",
+        "source_basis": "Publisher identifies interview guest Joe Flanigan as John Sheppard; section290-318s video labels David Read HOST and Joe Flanigan JOHN SHEPPARD, with guest delivering matching retirement/pandemic answer. Source ASR300-314.8 matches reference wording; original reference correlation to source verified below."
+      },
+      "native_original_evidence": "qa/voice-reference-remediation/evidence/john-sheppard-original.json",
+      "native_result_evidence": "qa/voice-reference-remediation/evidence/john-sheppard-result.json"
     }
   ],
   "exclusions": [

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d8e2bba94794dfa32420186c1ea7805cad648224af496e3e4547c54d6a6c2691",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "479803ad-58f1-40bf-9daa-1b91b483d342",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d8e2bba94794dfa32420186c1ea7805cad648224af496e3e4547c54d6a6c2691"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d8e2bba94794dfa32420186c1ea7805cad648224af496e3e4547c54d6a6c2691"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "479803ad-58f1-40bf-9daa-1b91b483d342",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"But this thing is going to go on until springtime, so maybe we'll recalibrate and realize that we are all in it together, so who knows.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.5]\n  ],\n  \"uncertainty\": \"Audio duration and boundary timings are approximate. The speech appears clear with no overlapping audio or significant noise.\"\n}\n```\n",
+    "duration_seconds": 22.846562,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12353,
+      "output_tokens": 1816,
+      "thinking_tokens": 1497,
+      "cache_read_tokens": 24209,
+      "total_tokens": 14169
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
