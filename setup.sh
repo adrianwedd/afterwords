@@ -614,10 +614,16 @@ print('ATTEMPTS=' + shlex.quote(str(d.get('attempts', 0))))
     ARCHIVE_BASE="$ARCHIVE_DIR/${VOICE:-default}-${STAMP}"
 
     # Optional: compress long agent replies before TTS.
+    # Run even when no .afterwords exists so SPEAK_MODE=summarize in
+    # ~/.afterwords-server still applies.
     SPEAK_LINE="$LINE"
     SUMMARIZE_SCRIPT="$HOME/.claude/hooks/summarize-for-tts.py"
-    if [ -f "$SUMMARIZE_SCRIPT" ] && [ -n "${AW_FILE:-}" ]; then
-        SUMMARIZED=$(printf '%s' "$LINE" | python3 "$SUMMARIZE_SCRIPT" --agent "${AGENT:-claude}" --afterwords "$AW_FILE" 2>/dev/null || true)
+    if [ -f "$SUMMARIZE_SCRIPT" ]; then
+        if [ -n "${AW_FILE:-}" ]; then
+            SUMMARIZED=$(printf '%s' "$LINE" | python3 "$SUMMARIZE_SCRIPT" --agent "${AGENT:-claude}" --afterwords "$AW_FILE" 2>/dev/null || true)
+        else
+            SUMMARIZED=$(printf '%s' "$LINE" | python3 "$SUMMARIZE_SCRIPT" --agent "${AGENT:-claude}" 2>/dev/null || true)
+        fi
         [ -n "$SUMMARIZED" ] && SPEAK_LINE="$SUMMARIZED"
     fi
 

@@ -1446,6 +1446,21 @@ cmd_configure() {
                 ok "1.7B model disabled"
             fi
             ;;
+        --speak-full)
+            server_config_set SPEAK_MODE "full"
+            ok "Speech mode: full — long agent replies are spoken in full"
+            info "Takes effect on the next spoken reply (no server restart needed)"
+            ;;
+        --summarize)
+            server_config_set SPEAK_MODE "summarize"
+            ok "Speech mode: summarize — long agent replies are compressed before speech"
+            info "Takes effect on the next spoken reply (no server restart needed)"
+            ;;
+        --speak-default)
+            server_config_set SPEAK_MODE ""
+            ok "Speech mode: project default — .afterwords summarize keys apply"
+            info "Takes effect on the next spoken reply (no server restart needed)"
+            ;;
         "")
             echo
             echo -e "  ${BOLD}afterwords configure${NC}  ${DIM}— server settings${NC}"
@@ -1456,6 +1471,19 @@ cmd_configure() {
             else
                 echo -e "  1.7B model  ${DIM}disabled (default — 0.6B only)${NC}"
             fi
+            local speak_mode
+            speak_mode="$(server_config_get SPEAK_MODE)"
+            case "$speak_mode" in
+                full)
+                    echo -e "  Speech      ${GREEN}full${NC}  ${DIM}(long replies spoken in full)${NC}"
+                    ;;
+                summarize)
+                    echo -e "  Speech      ${CYAN}summarize${NC}  ${DIM}(long replies compressed before speech)${NC}"
+                    ;;
+                *)
+                    echo -e "  Speech      ${DIM}project default (.afterwords summarize keys)${NC}"
+                    ;;
+            esac
             local bind_display
             bind_display="$(server_host)"
             if [ -z "$bind_display" ]; then
@@ -1479,12 +1507,15 @@ cmd_configure() {
             echo
             echo -e "  ${DIM}afterwords configure --with-1.7b  # enable Qwen3-1.7B (higher fidelity)${NC}"
             echo -e "  ${DIM}afterwords configure --no-1.7b   # revert to 0.6B only${NC}"
+            echo -e "  ${DIM}afterwords configure --speak-full    # speak long replies in full${NC}"
+            echo -e "  ${DIM}afterwords configure --summarize     # compress long replies before speech${NC}"
+            echo -e "  ${DIM}afterwords configure --speak-default # revert to project .afterwords keys${NC}"
             echo -e "  ${DIM}afterwords configure --bind <addr>   # bind a LAN address (e.g. 0.0.0.0)${NC}"
             echo -e "  ${DIM}afterwords configure --bind loopback # revert to loopback-only${NC}"
             echo
             ;;
         *)
-            fail "Unknown option: ${flag}. Use --with-1.7b, --no-1.7b, or --bind <address|loopback>"
+            fail "Unknown option: ${flag}. Use --with-1.7b, --no-1.7b, --speak-full, --summarize, --speak-default, or --bind <address|loopback>"
             ;;
     esac
 }
@@ -1537,7 +1568,7 @@ cmd_help() {
     echo -e "    ${CYAN}codex-hook stop${NC}   Stop the Codex watcher"
     echo
     echo -e "  ${BOLD}Setup${NC}"
-    echo -e "    ${CYAN}configure${NC}         Show or change server settings (--with-1.7b, --bind)"
+    echo -e "    ${CYAN}configure${NC}         Show or change server settings (--with-1.7b, --speak-full, --speak-default, --bind)"
     echo -e "    ${CYAN}update${NC}            Pull latest commits, reinstall packages, reload voices"
     echo -e "    ${CYAN}uninstall${NC}         Remove service and optionally hooks"
     echo
