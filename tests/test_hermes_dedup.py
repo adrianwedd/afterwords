@@ -84,6 +84,8 @@ def hook_env(tmp_path):
     env["PATH"] = f"{bindir}:{env['PATH']}"
     env["HOME"] = str(home)
     env["STUB_LOG"] = str(log)
+    env["AFTERWORDS_PLAY_LOCK"] = str(tmp_path / "play.lock")
+    env["AFTERWORDS_PLAY_PID"] = str(tmp_path / "play.pid")
     # Fixture isolation: a desktop-app-launched session exports
     # _HERMES_GATEWAY=1 / HERMES_SESSION_SOURCE=desktop / HERMES_SPAWN; the
     # hook's scope guard keys off these, so tests must start from a neutral

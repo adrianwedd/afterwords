@@ -1,0 +1,15 @@
+{
+  "time": {
+    "created": 1,
+    "streamed": 2,
+    "completed": 3
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "A sanitized OpenCode answer."
+    }
+  ],
+  "finish": "stop",
+  "rawFinish": "end_turn"
+}

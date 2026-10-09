@@ -12,8 +12,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AFTERWORDS_URL="http://127.0.0.1:7860"
 
 MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
-PLAY_LOCK="/tmp/afterwords-play.lock"
-PLAY_PID="/tmp/afterwords-play.pid"
+PLAY_LOCK="${AFTERWORDS_PLAY_LOCK:-/tmp/afterwords-play.lock}"
+PLAY_PID="${AFTERWORDS_PLAY_PID:-/tmp/afterwords-play.pid}"
 acquire_play_lock() {
     local w=0
     while ! mkdir "$PLAY_LOCK" 2>/dev/null; do
