@@ -209,6 +209,22 @@ def test_cli_scope_skips_gateway_and_external_delivery(hook_env):
     assert not log.exists(), "out-of-scope hooks must not synthesize, play, or send"
 
 
+def test_cli_scope_speaks_desktop_spawned_turns(hook_env):
+    """Desktop-spawned hermes chat carries _HERMES_GATEWAY=1 but never reaches
+    the gateway agent:end native hook — the shell hook must speak those turns."""
+    env, log, workdir = hook_env
+    env["AFTERWORDS_SHELL_SCOPE"] = "cli"
+    env["_HERMES_GATEWAY"] = "1"
+    env["HERMES_SESSION_SOURCE"] = "desktop"
+    result = run_hook(env, workdir, unique_text(), platform="cli")
+    assert result.returncode == 0, result.stderr
+    # The CLI path's small-file fallback re-synthesizes a chunk when the stub's
+    # 20-byte response looks like a failed synthesis, so count >= 1 here.
+    calls = synth_calls(log)
+    assert calls, "desktop-sourced cli turns must synthesize and play"
+    assert len(set(calls)) == 1, "exactly one chunk text must be spoken (no duplicates)"
+
+
 def test_cli_scope_skips_gateway_local_mapped_to_cli(hook_env):
     env, log, workdir = hook_env
     env["AFTERWORDS_SHELL_SCOPE"] = "cli"
