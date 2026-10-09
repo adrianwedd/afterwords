@@ -19,8 +19,22 @@ evidence, deterministic results, and delivery commit references. Original WAVs
 remain reconstructable from the baseline Git commit. Private voice audio and
 profiles must not be included in public commits.
 
-The production corpus is not yet certified. Replacement, trim, transcript,
-orphan-resolution, final listening, regression and delivery gates remain open.
+All 104 production references, associated with 198 tracked profiles, are accepted
+as fit for conditioning after fresh Gemini native-audio review, root adjudication
+and deterministic checks. Vixen is excluded as a private unindexed orphan.
+The [final corpus report](final-corpus-report.md) records all 105 baseline
+dispositions and the accepted acoustic limits; [final acceptance](final-acceptance.json)
+binds the decisions to the accepted bytes. Perceptual acceptance remains a
+listening judgment, not a deterministic guarantee.
+
+## Preserving reconstruction history
+
+Merge this corpus-remediation branch with a merge commit. Do not squash or rebase
+it: the evidence manifests record original delivery commit IDs, and reconstruction
+tests read historical WAVs with `git show <commit>:voices/<reference>`. Rewriting
+the branch would remove those commits from the ancestry of the merged result;
+a fresh clone of the default branch would not reliably contain the required
+objects. CI uses `fetch-depth: 0` to retain the history required by these tests.
 
 ## Source attribution
 
