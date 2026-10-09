@@ -37,7 +37,10 @@ for a in "$@"; do
 done
 if [ -n "$out" ]; then
   code="${CURL_SYNTH_CODE:-200}"
-  [ "$code" = "200" ] && printf 'RIFF-fake-wav-payload' > "$out"
+  if [ "$code" = "200" ]; then
+    printf 'RIFF-fake-wav-payload' > "$out"
+    [ "${CURL_SYNTH_LARGE:-}" = "1" ] && printf '%2048s' '' >> "$out"
+  fi
   printf '%s' "$code"
 fi
 exit 0
@@ -84,6 +87,15 @@ def hook_env(tmp_path):
     env["PATH"] = f"{bindir}:{env['PATH']}"
     env["HOME"] = str(home)
     env["STUB_LOG"] = str(log)
+    env["AFTERWORDS_PLAY_LOCK"] = str(tmp_path / "play.lock")
+    env["AFTERWORDS_PLAY_PID"] = str(tmp_path / "play.pid")
+    # Fixture isolation: a desktop-app-launched session exports
+    # _HERMES_GATEWAY=1 / HERMES_SESSION_SOURCE=desktop / HERMES_SPAWN; the
+    # hook's scope guard keys off these, so tests must start from a neutral
+    # baseline and set them deliberately per-test.
+    for key in ("_HERMES_GATEWAY", "HERMES_SESSION_SOURCE", "HERMES_SPAWN",
+                "HERMES_GATEWAY_SESSION"):
+        env.pop(key, None)
 
     # Teardown: remove only the markers this test created — the dedup dir is
     # real shared state also used by the live Hermes hook on dev machines.
@@ -202,6 +214,22 @@ def test_cli_scope_skips_gateway_and_external_delivery(hook_env):
     assert not log.exists(), "out-of-scope hooks must not synthesize, play, or send"
 
 
+def test_cli_scope_speaks_desktop_spawned_turns(hook_env):
+    """Desktop-spawned hermes chat carries _HERMES_GATEWAY=1 but never reaches
+    the gateway agent:end native hook — the shell hook must speak those turns."""
+    env, log, workdir = hook_env
+    env["AFTERWORDS_SHELL_SCOPE"] = "cli"
+    env["_HERMES_GATEWAY"] = "1"
+    env["HERMES_SESSION_SOURCE"] = "desktop"
+    result = run_hook(env, workdir, unique_text(), platform="cli")
+    assert result.returncode == 0, result.stderr
+    # The CLI path's small-file fallback re-synthesizes a chunk when the stub's
+    # 20-byte response looks like a failed synthesis, so count >= 1 here.
+    calls = synth_calls(log)
+    assert calls, "desktop-sourced cli turns must synthesize and play"
+    assert len(set(calls)) == 1, "exactly one chunk text must be spoken (no duplicates)"
+
+
 def test_cli_scope_skips_gateway_local_mapped_to_cli(hook_env):
     env, log, workdir = hook_env
     env["AFTERWORDS_SHELL_SCOPE"] = "cli"
@@ -209,3 +237,19 @@ def test_cli_scope_skips_gateway_local_mapped_to_cli(hook_env):
     result = run_hook(env, workdir, unique_text(), platform="cli")
     assert result.returncode == 0
     assert not log.exists(), "gateway local turns are owned by the native hook"
+
+
+@pytest.mark.parametrize("gateway_marker", [False, True])
+def test_cli_scope_speaks_explicit_desktop_platform(hook_env, gateway_marker):
+    """Current Hermes desktop sends platform=desktop in post_llm_call."""
+    env, log, workdir = hook_env
+    env["AFTERWORDS_SHELL_SCOPE"] = "cli"
+    env["CURL_SYNTH_LARGE"] = "1"
+    if gateway_marker:
+        env["_HERMES_GATEWAY"] = "1"
+        env["HERMES_SESSION_SOURCE"] = "desktop"
+    result = run_hook(env, workdir, unique_text(), platform="desktop")
+    assert result.returncode == 0, result.stderr
+    assert synth_calls(log), "explicit desktop turns must reach synthesis"
+    assert any(line.startswith("afplay ") for line in log.read_text().splitlines())
+    assert not any(line.startswith("hermes send ") for line in log.read_text().splitlines())
