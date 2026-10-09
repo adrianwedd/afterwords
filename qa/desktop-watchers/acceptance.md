@@ -69,6 +69,24 @@ setup, reload, clone or server-configuration mutation was performed. Isolated
 acceptance watcher services were uninstalled after testing. Existing Studio
 watcher services were not restarted or reconfigured.
 
+## Follow-up: explicit Hermes desktop platform
+
+Live Hermes logs showed current turns use `platform=desktop`, while the shell
+hook's `cli` scope accepted only `platform=cli`. The earlier environment-marker
+regression therefore missed the actual platform payload. Two new cases failed
+before the repair; the scope now accepts desktop while retaining native-hook
+ownership of gateway-local CLI turns. Updated full suite: **756 passed, 2 skipped**.
+The earlier independent review applies to the preceding candidate, not this
+follow-up guard change.
+
+A synthetic nested `post_llm_call` desktop payload ran through the configured
+shell script against the existing server with voice `data`. It reached real
+`afplay`; a capture at the playback boundary produced a 2.40-second WAV. Cached
+local faster-whisper base.en recovered "The river flows beside the quiet garden."
+This proves synthesis, the playback invocation and ASR content for the hook probe;
+a new actual desktop response and physical audibility remain unverified. The live
+server remains PID 13632 with its 5 October start time. No hook config was edited.
+
 ## Privacy and remaining release gate
 
 The two branch-only commits introduce only four intended source/test paths.
@@ -82,9 +100,9 @@ already inherited from main remains a separate cleanup item and is not erased
 from repository history by this repair.
 
 Physical reboot acceptance has **not** been performed. RunAtLoad/KeepAlive
-registration and isolated cold bootstrap are verified. The user has been asked
-whether that fulfills the reboot gate under the instruction to keep the live
-server untouched; publishing awaits that answer.
+registration and isolated cold bootstrap are verified. On 9 October the user
+authorized pushing the branch and opening the PR with physical reboot acceptance
+deferred: "push and PR, I'll reboot later."
 
 Stable queue identities provide deduplicated acceptance across watcher retries.
 Exactly-once audible playback across termination is not promised: killing a
