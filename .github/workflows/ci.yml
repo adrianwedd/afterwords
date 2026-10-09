@@ -12,6 +12,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          # Evidence tests reconstruct reference audio from historical commits.
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v6
