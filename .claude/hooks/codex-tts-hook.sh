@@ -20,7 +20,15 @@ TEXT=$(printf '%s' "$INPUT" | python3 "${REPO_DIR}/codex_session_hook.py" --stri
 [ -z "$TEXT" ] && exit 0
 
 PROJECT_DIR="${PROJECT_DIR:-$PWD}"
-AGENT="${AGENT_TYPE:-}"
+AGENT="${AGENT_TYPE:-codex}"
+
+if [ -n "${AFTERWORDS_EVENT_ID:-}" ]; then
+    cd "$REPO_DIR"
+    printf '%s' "$TEXT" | "${AFTERWORDS_PYTHON:-python3}" -m watcher.queue --agent codex \
+        --session "$SESSION_ID" --event-id "$AFTERWORDS_EVENT_ID" --project "$PROJECT_DIR" \
+        --state-dir "${AFTERWORDS_WATCH_STATE:-$HOME/Library/Application Support/Afterwords/watchers}"
+    exit $?
+fi
 
 mkdir -p "$QUEUEDIR"
 # Timestamp: seconds + random suffix (date +%3N is GNU-only, not available on macOS bash 3.2)
