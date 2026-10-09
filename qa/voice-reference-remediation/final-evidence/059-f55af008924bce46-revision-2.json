@@ -1,0 +1,38 @@
+{
+  "wav": "clip-059-ref.wav",
+  "source_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "d28889a9-7702-44f4-b664-bfd45f1ea37d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d28889a9-7702-44f4-b664-bfd45f1ea37d",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, I wouldn't say necessary for me specifically. I think it's a struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [[0.0, 10.0]],\n  \"uncertainty\": \"Interval boundaries are rough perceptual estimates with high uncertainty due to the lack of an objective timeline or waveform analysis. Wording transcription is generally confident but carries slight uncertainty on 'necessary' vs 'necessarily' due to rapid, colloquial speech. Assessment of complete speaker isolation is confident based on perceptual listening, but subtle studio or room noise could exist.\"\n}\n",
+    "duration_seconds": 36.86468,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20493,
+      "output_tokens": 2981,
+      "thinking_tokens": 2602,
+      "cache_read_tokens": 16041,
+      "total_tokens": 23474
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

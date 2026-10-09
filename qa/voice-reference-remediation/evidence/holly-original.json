@@ -1,0 +1,37 @@
+{
+  "wav": "holly-ref.wav",
+  "source_sha256": "958473e1c5677ac4ee495a27f8f199e6738525e1d929811e1e682a2f3a63d194",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "8f195ace-4746-41c5-90ea-b7610e669e05",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "958473e1c5677ac4ee495a27f8f199e6738525e1d929811e1e682a2f3a63d194"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "958473e1c5677ac4ee495a27f8f199e6738525e1d929811e1e682a2f3a63d194"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8f195ace-4746-41c5-90ea-b7610e669e05",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"your sausages, Dave, now cover seven-eighths of the Earth's surface. Also, you left 17 pounds 50 pence in your bank account. Thanks to compound interest, you now own 98% of all the world's wealth. And because you hoarded it for 3 million years, nobody...\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent close-mic studio recording acoustics for the speaker, interrupted by two distinct bursts of studio audience laughter that significantly elevate the noise floor during pauses and syllable tails.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": [\n    [2.8, 4.7]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 2.7],\n    [5.0, 10.3]\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual estimates with an uncertainty of approximately \u00b10.2 to 0.3 seconds. The tail of the first audience laughter burst (~4.6s\u20134.9s) may slightly touch the onset of 'Also', while the second laughter burst begins swelling near the end of 'wealth' (~10.4s\u201310.7s). The final sentence truncates abruptly mid-thought on 'nobody...' at approximately 13.5s.\"\n}\n```\n",
+    "duration_seconds": 58.502817,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20308,
+      "output_tokens": 5018,
+      "thinking_tokens": 4532,
+      "cache_read_tokens": 15974,
+      "total_tokens": 25326
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

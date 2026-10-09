@@ -1,0 +1,38 @@
+{
+  "wav": "clip-099-ref.wav",
+  "source_sha256": "e6fee022fd390f72ec5c7af62d057fc5a502e0769b2d0774d49c60550b67e5c7",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "ee059b34-0abc-4884-bf0f-96904813d802",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e6fee022fd390f72ec5c7af62d057fc5a502e0769b2d0774d49c60550b67e5c7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e6fee022fd390f72ec5c7af62d057fc5a502e0769b2d0774d49c60550b67e5c7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ee059b34-0abc-4884-bf0f-96904813d802",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"How can you have lived for so long and still not get it? This self-obsession... the waste... of living.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.8]\n  ],\n  \"uncertainty\": \"Minimal uncertainty in wording. Boundary timing estimates are perceptual approximations. The single speaker is well-isolated with no overlapping noise.\"\n}\n```\n",
+    "duration_seconds": 36.887098,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12776,
+      "output_tokens": 4021,
+      "thinking_tokens": 3701,
+      "cache_read_tokens": 24124,
+      "total_tokens": 16797
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-021-ref.wav",
+  "source_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "b59be2cf-29b1-400c-98ed-bd7929e08ae0",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b59be2cf-29b1-400c-98ed-bd7929e08ae0",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"You back in the 19th century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water? Should it be something else?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 14.5]\n  ],\n  \"uncertainty\": \"Initial onset syllable is slightly reduced and phonetically ambiguous between 'You', 'Yeah', 'See', or 'Here' before 'back'. Temporal boundaries are perceptual estimates without visual waveform markers; total duration is estimated at approximately 14.5 seconds with an internal clause pause around 5.5 to 6.0 seconds. Confidence is high regarding single-speaker isolation, lack of music or crowd interference, acoustic consistency, and suitability for conditioning.\"\n}\n",
+    "duration_seconds": 63.892679,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36569,
+      "output_tokens": 7681,
+      "thinking_tokens": 7277,
+      "cache_read_tokens": 0,
+      "total_tokens": 44250
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

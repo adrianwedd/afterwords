@@ -1,0 +1,36 @@
+{
+  "wav": "bill-bailey-ref.wav",
+  "source_sha256": "2f663eef98b06b64c9e7d84e94d7a948d1376185ff75f6adaea78254b2c5988a",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "4a945741-2eee-4a3a-8b8d-af84ef0fa9ff",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f663eef98b06b64c9e7d84e94d7a948d1376185ff75f6adaea78254b2c5988a"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f663eef98b06b64c9e7d84e94d7a948d1376185ff75f6adaea78254b2c5988a"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4a945741-2eee-4a3a-8b8d-af84ef0fa9ff",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Hello, I'm Bill Bailey, uh, 1984, stars in their eyes, Meat Loaf regional winner. And uh... nearly got the Michael Bolton gig, but then he had his hair cut, so uh... Great to be here.\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Continuous live crowd noise, murmur, and loud reactive laughter that overlaps significantly with the speech. The speaker's voice is not isolated due to the audience bleed and live room reverberation.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"High uncertainty regarding exact timestamp boundaries (in seconds) as the audio was ingested natively without timecode metadata; therefore, interval arrays are empty. Wording transcription is confident based on perception, though exact clipping on the final 'here' is a perceptual estimate. Highly confident that no portion is clean enough for isolated voice conditioning.\"\n}\n```\n",
+    "duration_seconds": 33.398128,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12446,
+      "output_tokens": 2802,
+      "thinking_tokens": 2403,
+      "cache_read_tokens": 24038,
+      "total_tokens": 15248
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

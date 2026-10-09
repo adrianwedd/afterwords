@@ -1,0 +1,38 @@
+{
+  "wav": "mark-steel-ref.wav",
+  "source_sha256": "0fd0d119ea33013e37406d25999528796012e48aeae2412a5ad86fc58c2efee3",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "3373c6d3-a8cf-45fe-93fc-022bf58e82ab",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0fd0d119ea33013e37406d25999528796012e48aeae2412a5ad86fc58c2efee3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0fd0d119ea33013e37406d25999528796012e48aeae2412a5ad86fc58c2efee3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3373c6d3-a8cf-45fe-93fc-022bf58e82ab",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 3,\n  \"speaker_change_intervals_s\": [\n    {\n      \"interval\": [0.0, 1.2],\n      \"speaker\": \"Speaker 1 (Female)\"\n    },\n    {\n      \"interval\": [1.2, 2.7],\n      \"speaker\": \"Speaker 2 (Male)\"\n    },\n    {\n      \"interval\": [2.5, 4.3],\n      \"speaker\": \"Multiple / Overlap (Speaker 1, Speaker 2, possible Speaker 3)\"\n    },\n    {\n      \"interval\": [4.3, 6.0],\n      \"speaker\": \"Speaker 2 (Male)\"\n    },\n    {\n      \"interval\": [6.0, 8.2],\n      \"speaker\": \"Speaker 1 (Female)\"\n    },\n    {\n      \"interval\": [8.2, 10.6],\n      \"speaker\": \"Speaker 2 (Male)\"\n    },\n    {\n      \"interval\": [10.6, 11.5],\n      \"speaker\": \"Speaker 3 (Prompting Voice / Interlocutor)\"\n    },\n    {\n      \"interval\": [11.5, 13.5],\n      \"speaker\": \"Speaker 2 (Male)\"\n    }\n  ],\n  \"literal_transcript\": \"...there are no people [laughter]. The lady who did the unmade bed-- Tracey Emin. Tracey Emin. She's amazing. She's quality. We've got the Turner Contemporary. You got T.S. Eliot who wrote very famous poem. Wrote part of The Waste Land at the bandstand there. Dreamland. Dreamland, you can still see the big--\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Slight variation in mic distance and perspective across conversational turns; background room reflections and acoustic bleed during overlapping speech.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Multi-speaker cross-talk with rapid conversational turn-taking, overlapping utterances, truncated boundaries at start and finish, and no isolated single-speaker segment of sufficient duration (all isolated windows are under 2.5 seconds) for voice conditioning.\",\n  \"candidate_clean_intervals_s\": [\n    {\n      \"interval\": [4.3, 6.0],\n      \"speaker\": \"Speaker 2 (Male)\",\n      \"text\": \"We've got the Turner Contemporary\",\n      \"usable_phrase\": \"Short phrase only (~1.7s); insufficient length for standard TTS reference conditioning.\"\n    },\n    {\n      \"interval\": [6.0, 8.2],\n      \"speaker\": \"Speaker 1 (Female)\",\n      \"text\": \"You got T.S. Eliot who wrote very famous poem\",\n      \"usable_phrase\": \"Short phrase (~2.2s); slightly rushed conversational prosody tightly bounded by conversational turns.\"\n    },\n    {\n      \"interval\": [8.2, 10.6],\n      \"speaker\": \"Speaker 2 (Male)\",\n      \"text\": \"Wrote part of The Waste Land at the bandstand there\",\n      \"usable_phrase\": \"Short phrase (~2.4s); ends near overlapping interlocutor prompt.\"\n    }\n  ],\n  \"uncertainty\": \"Boundaries are perceptual time estimates subject to an uncertainty margin of approximately \u00b10.2 to 0.4 seconds. Speaker count is estimated between 3 and 4: there is ambiguity during the overlapping 'Tracey Emin' repetitions as to whether a second female speaker joins or if audio reflections/cross-talk coincide, and the prompt 'Dreamland' at ~10.6s is spoken by a distinct off-mic/interlocutor voice. Wording uncertainty exists at the clipped beginning ('[So] there are no people' vs 'There are no people') and the final syllable truncated mid-word ('big--' vs 'bigg[est]').\"\n}\n```\n",
+    "duration_seconds": 51.565082,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20459,
+      "output_tokens": 5262,
+      "thinking_tokens": 4212,
+      "cache_read_tokens": 15977,
+      "total_tokens": 25721
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

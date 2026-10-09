@@ -1,0 +1,37 @@
+{
+  "wav": "galadriel-ref.wav",
+  "source_sha256": "b1eee5a0e9fe18f1c71b7a1e00034610d5a8f3cc6019e71eee184b9a62ac2765",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "384f4885-c776-4162-ad25-748486e606c7",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b1eee5a0e9fe18f1c71b7a1e00034610d5a8f3cc6019e71eee184b9a62ac2765"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b1eee5a0e9fe18f1c71b7a1e00034610d5a8f3cc6019e71eee184b9a62ac2765"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "384f4885-c776-4162-ad25-748486e606c7",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It began with the forging of the Great Rings. Three were given to the Elves, immortal, wisest and fairest of all beings. Seven to the Dwarf-lords,\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent acoustic environment throughout; studio/cinematic vocal reverb with orchestral score dynamics swelling during pauses.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Prominent, continuous orchestral score / background music running underneath all vocal segments, preventing clean speaker isolation.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty of approximately +/- 0.3 s: phrase 1 (~0.4 s to 3.8 s), pause (~3.8 s to 5.5 s), phrase 2 (~5.5 s to 11.2 s), pause (~11.2 s to 12.8 s), phrase 3 (~12.8 s to 14.5 s). Wording confidence is high based on clean vocal articulation. Acoustically, the clip does not truncate mid-waveform (natural decay after 'Dwarf-lords'), though the thought is syntactically incomplete. Candidate clean intervals is set to empty because background music persists across the entire recording; trimming alone cannot yield an unpolluted conditioning reference.\"\n}\n```\n",
+    "duration_seconds": 45.47318,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20718,
+      "output_tokens": 4428,
+      "thinking_tokens": 3947,
+      "cache_read_tokens": 15989,
+      "total_tokens": 25146
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

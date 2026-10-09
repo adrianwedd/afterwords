@@ -1,0 +1,38 @@
+{
+  "wav": "clip-027-ref.wav",
+  "source_sha256": "ccb43d59d1c13d6d7cab47a8b70a9bc3467c0ea39b0098512af3c2927b8da081",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "47357a29-4b8c-4c87-aaab-c59de74feb8b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ccb43d59d1c13d6d7cab47a8b70a9bc3467c0ea39b0098512af3c2927b8da081"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ccb43d59d1c13d6d7cab47a8b70a9bc3467c0ea39b0098512af3c2927b8da081"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "47357a29-4b8c-4c87-aaab-c59de74feb8b",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, I did. I think down, you know, down through the years, uh, I always liked that character.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.4]\n  ],\n  \"uncertainty\": \"Boundaries and durations are perceptual estimates with an uncertainty margin of approximately \u00b10.3s. Wording is clear with high confidence, though natural conversational repetition ('down, you know, down') and a brief filler ('uh') are present. The final syllable of 'character' concludes fully, though room reverb decay terminates promptly at the clip boundary.\"\n}\n```\n",
+    "duration_seconds": 37.563668,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20253,
+      "output_tokens": 3158,
+      "thinking_tokens": 2797,
+      "cache_read_tokens": 16173,
+      "total_tokens": 23411
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

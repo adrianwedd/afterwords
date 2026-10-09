@@ -1,0 +1,38 @@
+{
+  "wav": "clip-023-ref.wav",
+  "source_sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "49cce20f-7328-44c5-9873-cad72f0dd0a2",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "49cce20f-7328-44c5-9873-cad72f0dd0a2",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"because the effects occupy more than a human generation, there is a uh tendency to uh say that they uh are not our problem. Uh of course then they are nobody's problem.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 13.5]\n  ],\n  \"uncertainty\": \"Interval estimates are perceptual and approximate. Audio appears to be a single, continuous, isolated speaker with no overlapping noise.\"\n}\n",
+    "duration_seconds": 22.973947,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20795,
+      "output_tokens": 1979,
+      "thinking_tokens": 1652,
+      "cache_read_tokens": 15947,
+      "total_tokens": 22774
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

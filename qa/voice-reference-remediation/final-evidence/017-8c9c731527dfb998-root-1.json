@@ -1,0 +1,38 @@
+{
+  "wav": "clip-017-ref.wav",
+  "source_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "a7a72c0d-5e5a-46f6-9798-86216eb784a1",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "a7a72c0d-5e5a-46f6-9798-86216eb784a1",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Seisan is a very interesting kata because it comes in at third degree, the teachers level. Also, it is a kata, through meditation, we get to understand when we're being attacked by several people, 5 to 8 people, that have actually got in close enough to grab hold of us.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent indoor acoustic with moderate room reverberation; steady ambient room tone with mild low-frequency background hum throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.0],\n    [6.5, 15.2]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates without timeline or waveform visualizers; phonetic rendering of the martial arts term 'Seisan' ('say-sahn') reflects acoustic pronunciation; punctuation ('teachers level' vs 'teacher's level') reflects phrasing interpretation rather than an authoritative text source.\"\n}\n",
+    "duration_seconds": 32.293131,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20548,
+      "output_tokens": 3063,
+      "thinking_tokens": 2646,
+      "cache_read_tokens": 15978,
+      "total_tokens": 23611
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "4b9d427e8c0b43f1bdaafcc55c8681b02268312839ff56bef2b81863fff0b8ce",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c0058dfb-5146-46a0-853d-3549b0918ca6",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4b9d427e8c0b43f1bdaafcc55c8681b02268312839ff56bef2b81863fff0b8ce"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4b9d427e8c0b43f1bdaafcc55c8681b02268312839ff56bef2b81863fff0b8ce"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c0058dfb-5146-46a0-853d-3549b0918ca6",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"...was like I felt that we he was he could he was writing for me and um it was so different than than the experience that I'd had with him like a decade earlier and so that's how...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [5.5, 11.5]\n  ],\n  \"uncertainty\": \"Timestamp boundaries are perceptual estimates with an uncertainty of approximately \u00b10.5 seconds. In the transcript, the onset is clipped directly into 'was like' with the preceding word lost, and the ending cuts off abruptly on 'how'. The middle section contains natural conversational hesitations and false starts ('we he was he could' and repeated 'than than'). The candidate clean interval corresponds to 'it was so different than than the experience that I'd had with him like a decade earlier', which is acoustically clean and isolated from the boundary cutoffs.\"\n}\n",
+    "duration_seconds": 58.067216,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20973,
+      "output_tokens": 4317,
+      "thinking_tokens": 3899,
+      "cache_read_tokens": 16073,
+      "total_tokens": 25290
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

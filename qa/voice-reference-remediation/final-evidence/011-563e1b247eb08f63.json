@@ -1,0 +1,38 @@
+{
+  "wav": "clip-011-ref.wav",
+  "source_sha256": "563e1b247eb08f63a668a0a31c0a15c051ec1b0abeed6372fde0207436f617ff",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "3d33d0f8-c8b4-46a0-9670-1677bfdadbff",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "563e1b247eb08f63a668a0a31c0a15c051ec1b0abeed6372fde0207436f617ff"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "563e1b247eb08f63a668a0a31c0a15c051ec1b0abeed6372fde0207436f617ff"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3d33d0f8-c8b4-46a0-9670-1677bfdadbff",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"What's the most you ever lost on a coin toss?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.8]\n  ],\n  \"uncertainty\": \"Boundary estimates and duration are perceptual with an uncertainty of approximately \u00b10.3 s (estimated total duration ~3.8 s). There is a natural dramatic pause of roughly 0.6\u20130.7 s between 'most' and 'you' which was not classified as an abnormal pause. Wording of the transcript is clear with high confidence.\"\n}\n",
+    "duration_seconds": 35.330771,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20153,
+      "output_tokens": 4070,
+      "thinking_tokens": 3726,
+      "cache_read_tokens": 16221,
+      "total_tokens": 24223
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

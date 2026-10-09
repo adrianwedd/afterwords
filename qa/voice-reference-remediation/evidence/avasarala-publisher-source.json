@@ -1,0 +1,42 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=fYWGwZjWvuU",
+  "publisher": "LRM Online",
+  "publisher_channel_url": "https://www.youtube.com/channel/UCS7fo8v5tr_-U0i3rlYfRWQ",
+  "title": "Shohreh Aghdashloo Interview for Amazon's The Expanse Season Six",
+  "description": "LRM Online's Gig Patta talked with actress Shohreh Aghdashloo for season six of Amazon's The Expanse.\n\nThe sixth and final season of The Expanse picks up with the solar system at war, as Marco Inaros and his Free Navy continue to launch devastating asteroid attacks on Earth and Mars. As the tensions of war and shared loss threaten to pull the crew of the Rocinante apart, Chrisjen Avasarala makes a bold move and sends former Martian Marine Bobbie Draper on a secret mission that could turn the tide of the conflict. Meanwhile, in the Belt, Drummer and what\u2019s left of her family are on the run after betraying Marco. And on a distant planet beyond the Rings, a new power begins to rise.\n\nSeries stars Steven Strait, Dominique Tipper, Wes Chatham, Shohreh Aghdashloo, Cara Gee, Frankie Adams, Keon Alexander, Nadine Nicole, and Jasai Chase Owens reunite for the most epic season yet.\n\nInterviewer: Gig Patta (@gigpatta on IG and Twitter)\nInterview Pitches: gig@lrmonline.com\n\n#shohrehaghdashloo #theexpanse #expanse #amazon",
+  "source_info_sha256": "b603626f2a07f18fef9b0bc71435298265c7d0dc9f18de2528f6db74e80e3bbb",
+  "source_download_sha256": "100de647c9ffab685d958e0333360bf246da28e79ec13c2bebd3ca45d4ea8191",
+  "publisher_page_url": "https://lrmonline.com/news/shohreh-aghdashloo-on-space-politics-and-saying-farewell-in-final-season-of-amazons-the-expanse-exclusive-interview/",
+  "publisher_page_sha256": "f38b5133529a2e5638195dabb52f66087add191ee7eaf6c3177d80b792566ce5",
+  "identity_section_sha256": "e95d2c2edff249a2f817a2c7dae6acdf71e1c2bfcd04a99cd278e0203c4700db",
+  "identity_frame_sha256": "97e27377900440a74102cec3e734fdb35b6ab3701afd61f169e10455fd3c4872",
+  "source_basis": "LRM Online publisher interview title/description and original article by Gig Patta identify Shohreh Aghdashloo discussing Chrisjen Avasarala. Interview begins with host asking about farewell to the series and guest first-person answer; selected33.8-38.78 is one complete sentence in that continuous guest answer. Video46-64 and frame51 show same guest continuing this answer opposite Gig Patta; video113-126/frame118 show her later character-decision answer. These frames support guest identity/context, not lip-synchronization at selected33.8-38.78.",
+  "delivery_change": "Same intended actor Shohreh Aghdashloo in interview delivery replaces dramatic Avasarala dialogue; character performance is not claimed preserved.",
+  "source_audio_sha256": "e509da3187ff4dfbc6cc86be1c269d36860c29112f6eeb7dc4b2f807bb75f33c",
+  "retrieved_utc": "2026-10-08T09:02:26.832070+00:00",
+  "decode": "Fullsource ffmpeg PCM16 preserving decoded rate/channels, exit0 with emptyerrorlog",
+  "exact_edit": {
+    "start_s": 33.8,
+    "end_s": 38.78,
+    "sample_rate": 48000,
+    "start_frame": 1622400,
+    "end_frame_exclusive": 1861440,
+    "channel_index": null
+  },
+  "candidate_audio": {
+    "sha256": "079bff8337fe21360862ed6ddf6c70fbe1b7b2b9eb7beecb6813532d588dabfa",
+    "frames": 239040,
+    "sample_rate": 48000,
+    "channels": 2,
+    "subtype": "PCM_16",
+    "duration_s": 4.98,
+    "peak": 0.5274658203125,
+    "rms": 0.04941055353212144,
+    "samples_at_full_scale": 0
+  },
+  "sample_exact_source_slice": true,
+  "changes": "Continuous decoded source PCM16 frame slice; no DSP, normalization, separation, padding or concatenation",
+  "boundary_localization": "Source word-alignedASR plus PCM locate firstI after earlier Butthis time hesitation and series before trailingand. Final actual4.98sWAV independently listened by137secondary3.8: full initialI/complete series, no residualand or cutoffs. ASR estimates alone are not authority.",
+  "answer_identity_section_sha256": "1ccfd8994001ea3c42231166d01aed66813ea1e19a418c2c80f0f51709be735f",
+  "answer_identity_frame_sha256": "e74cec365ad431c006d8e44e168635f0b0adb0bd96331fc2cf17399a4e575f44"
+}

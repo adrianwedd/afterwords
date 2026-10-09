@@ -1,0 +1,38 @@
+{
+  "wav": "clip-045-ref.wav",
+  "source_sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "47b68f95-86bf-41a7-be04-a50dd960fa97",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "47b68f95-86bf-41a7-be04-a50dd960fa97",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful force controlling everything. There's no mystical energy field controls my destiny.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 11.5]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately +/- 0.5 seconds. In the transcript, subtle elisions create slight uncertainty between 'I seen' vs 'I've seen' and 'I never seen' vs 'I've never seen', as well as whether a relative pronoun is lightly elided before 'controls'.\"\n}\n",
+    "duration_seconds": 34.472168,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20246,
+      "output_tokens": 3330,
+      "thinking_tokens": 2942,
+      "cache_read_tokens": 15998,
+      "total_tokens": 23576
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

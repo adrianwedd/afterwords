@@ -1,0 +1,38 @@
+{
+  "wav": "clip-059-ref.wav",
+  "source_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c6f039ac-766d-44bd-b5c7-0a7a2e88483e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c6f039ac-766d-44bd-b5c7-0a7a2e88483e",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, I wouldn't say necessarily for me specifically, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.\",\n  \"music\": \"None\",\n  \"crowd\": \"None\",\n  \"laughter\": \"None\",\n  \"sound_effects\": \"None\",\n  \"acoustic_changes\": \"None; uniform room tone and consistent close-mic studio/podcast acoustic profile throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"start_s\": 5.2,\n      \"end_s\": 6.0,\n      \"description\": \"Natural conversational breathing pause between the first thought ending in 'write' and the restart 'It's just the writing'.\"\n    }\n  ],\n  \"apparent_splices\": \"None detected; acoustic background and room decay remain continuous across pauses.\",\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.2],\n    [6.0, 11.5]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates carry an estimated margin of +/- 0.2 seconds. In the phrase 'I think it's struggle', the indefinite article 'a' is either elided or reduced to a near-inaudible weak vocalic transition into the sibilant of 'struggle'. The lead-in 'Yeah' begins immediately near 0.0s, but the initial onset phoneme is fully intact with no clipping.\"\n}\n",
+    "duration_seconds": 38.081963,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20470,
+      "output_tokens": 3588,
+      "thinking_tokens": 3071,
+      "cache_read_tokens": 16101,
+      "total_tokens": 24058
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

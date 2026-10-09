@@ -1,0 +1,38 @@
+{
+  "wav": "clip-007-ref.wav",
+  "source_sha256": "a4665f08d9b65f6b9ff51c1be8ec303f6aa487253c81c7f285b36cff8d0adcd9",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4f236ce2-0d7b-43a7-9022-36a32a652616",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a4665f08d9b65f6b9ff51c1be8ec303f6aa487253c81c7f285b36cff8d0adcd9"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a4665f08d9b65f6b9ff51c1be8ec303f6aa487253c81c7f285b36cff8d0adcd9"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4f236ce2-0d7b-43a7-9022-36a32a652616",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"A wise person once said to me, goodbyes only hurt because what came before was so special.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; uniform room ambience and close-mic acoustic profile throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"interval_s\": [2.4, 3.8],\n      \"description\": \"Natural reflective pause with an audible soft breath intake between 'said to me' and 'goodbyes'.\"\n    }\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 9.0]\n  ],\n  \"uncertainty\": \"Wording uncertainty is minimal to none; all spoken words are clearly articulated and intelligible. Timing intervals and overall clip duration (~9.0 seconds total) are perceptual estimates based solely on listening without waveform visualizer or timecoded markers (estimated error margin \u00b10.4 seconds).\"\n}\n```\n",
+    "duration_seconds": 29.579257,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20395,
+      "output_tokens": 2726,
+      "thinking_tokens": 2318,
+      "cache_read_tokens": 16114,
+      "total_tokens": 23121
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

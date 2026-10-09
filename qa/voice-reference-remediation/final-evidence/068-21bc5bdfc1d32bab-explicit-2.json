@@ -1,0 +1,38 @@
+{
+  "wav": "clip-068-ref.wav",
+  "source_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "aeb67f51-bca8-4523-9adf-4fe94b8072ac",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "aeb67f51-bca8-4523-9adf-4fe94b8072ac",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I just thought I would love a little part in that. It was just everything I wanted.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.5]\n  ],\n  \"uncertainty\": \"Exact interval seconds are estimates as precise audio duration and timing metadata are not natively exposed during ingestion. Transcript is based on perceptual listening. Words appear complete with no obvious clipping.\"\n}\n",
+    "duration_seconds": 21.870826,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12293,
+      "output_tokens": 1515,
+      "thinking_tokens": 1201,
+      "cache_read_tokens": 24270,
+      "total_tokens": 13808
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

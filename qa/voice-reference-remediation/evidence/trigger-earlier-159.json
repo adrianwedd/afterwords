@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "ab0843141b6f69fdb2910626cad601b817ca4f8eb5db232d08b1067459abb79b",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "ad4c1f4f-3c69-4568-afde-6a82600ae46e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ab0843141b6f69fdb2910626cad601b817ca4f8eb5db232d08b1067459abb79b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ab0843141b6f69fdb2910626cad601b817ca4f8eb5db232d08b1067459abb79b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ad4c1f4f-3c69-4568-afde-6a82600ae46e",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, it lives on in the work he's done, and I'm very sorry that he's not here with us to to continue to share it with us and uh write us more lovely stuff.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None observed; consistent hall/room reverberation throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [7.5, 9.7]\n  ],\n  \"apparent_splices\": [],\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.4],\n    [9.7, 12.0]\n  ],\n  \"uncertainty\": \"Timings and interval boundaries are perceptual estimates (+/- 0.5s). Speech transcription is high confidence, though the exact duration of the hesitation pause between 'and uh' and 'write us' carries slight boundary uncertainty.\"\n}\n",
+    "duration_seconds": 45.874522,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20531,
+      "output_tokens": 4078,
+      "thinking_tokens": 3692,
+      "cache_read_tokens": 16095,
+      "total_tokens": 24609
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

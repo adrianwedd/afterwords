@@ -1,0 +1,38 @@
+{
+  "wav": "clip-038-ref.wav",
+  "source_sha256": "c49a1fac447d348fc7e8c338a628d2e24ec9e724ec2bc26388719e934f1cf47e",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "ded23f74-b85c-4489-8bdb-a91243a93199",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c49a1fac447d348fc7e8c338a628d2e24ec9e724ec2bc26388719e934f1cf47e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c49a1fac447d348fc7e8c338a628d2e24ec9e724ec2bc26388719e934f1cf47e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ded23f74-b85c-4489-8bdb-a91243a93199",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.5]\n  ],\n  \"uncertainty\": \"Boundary interval (0.0 to ~7.5s) is a perceptual estimate based on auditory cadence without a visual waveform clock. Transcript wording is heard with high confidence; audio exhibits isolated clean speech with no background interference.\"\n}\n",
+    "duration_seconds": 26.132208,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20326,
+      "output_tokens": 2465,
+      "thinking_tokens": 2134,
+      "cache_read_tokens": 16146,
+      "total_tokens": 22791
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

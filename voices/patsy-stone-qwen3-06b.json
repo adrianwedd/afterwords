@@ -2,8 +2,8 @@
   "name": "patsy-stone-qwen3-06b",
   "backend": "qwen3-0.6b",
   "reference_audio": "patsy-stone-ref.wav",
-  "reference_text": "You're not in this get to you, eh? No, of course not. A little bit of bolly. Yeah, just a smidge. Oh! Oh, these are days. Yes, really. Anything in them? Not much, darling, no. MP in drug craze sex ro -",
+  "reference_text": "And age doesn't really matter to me. I mean people, um, people I think are much more exercised about your age than you really are. I mean I think it's just terribly funny to be able to muck around with age.",
   "family": "patsy-stone",
-  "source_url": "https://www.youtube.com/watch?v=ZtXDMXvD_xU",
-  "segment_start_s": 5
+  "source_url": "https://www.bbc.co.uk/programmes/b007gtsn",
+  "segment_start_s": 178.84
 }

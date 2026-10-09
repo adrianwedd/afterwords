@@ -1,0 +1,37 @@
+{
+  "wav": "victor-meldrew-ref.wav",
+  "source_sha256": "623f572cbfa515797551b45e07ced6f794d4fd73953014836fea78552b2f6042",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "d66834a1-ecce-4548-9780-2e563666e788",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "623f572cbfa515797551b45e07ced6f794d4fd73953014836fea78552b2f6042"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "623f572cbfa515797551b45e07ced6f794d4fd73953014836fea78552b2f6042"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d66834a1-ecce-4548-9780-2e563666e788",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 3,\n  \"speaker_change_intervals_s\": [\n    {\n      \"interval_s\": [0.0, 1.8],\n      \"speaker_id\": \"speaker_1\",\n      \"description\": \"High-pitched comedic voice delivering initial two exclamations (possible second voice for second exclamation)\"\n    },\n    {\n      \"interval_s\": [1.8, 3.2],\n      \"speaker_id\": \"speaker_2\",\n      \"description\": \"Deeper, gruff/exasperated voice\"\n    },\n    {\n      \"interval_s\": [3.2, 14.2],\n      \"speaker_id\": \"speaker_3\",\n      \"description\": \"Theatrical, posh/accented voice delivering sarcastic monologue\"\n    },\n    {\n      \"interval_s\": [14.0, 15.5],\n      \"speaker_id\": \"crowd\",\n      \"description\": \"Audience laugh track / laughter overlapping and trailing the final phrase\"\n    }\n  ],\n  \"literal_transcript\": \"Goody goody. Oh, goody. Is this some sort of joke? Well, this is spiffing fun, isn't it? Now that's all I need, the end to a perfect day. 72 hours of nonstop madness, misery, and mayhem beyond all belief. Thank you very much.\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Studio/soundstage environment with dialogue mixed centrally and a stereo studio audience laugh track emerging during/after the final punchline.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [3.2, 12.8]\n  ],\n  \"uncertainty\": {\n    \"boundary_estimates\": \"Timestamps are perceptual estimates within approximately \u00b10.3s.\",\n    \"speaker_separation\": \"The opening 'Goody goody. Oh, goody' could either be a single speaker changing pitch/inflection or two distinct high-pitched speakers in rapid succession.\",\n    \"wording\": \"Minor perceptual uncertainty between 'the end to a perfect day' versus 'the end of a perfect day', and 'Now that's all I need' versus 'And that's all I need'.\",\n    \"conditioning_suitability\": \"The raw file is completely unusable due to multi-speaker dialogue and audience laughter. The interval [3.2, 12.8] containing speaker 3 ('Well, this is spiffing fun, isn't it? Now that's all I need, the end to a perfect day. 72 hours of nonstop madness, misery, and mayhem beyond all belief.') offers clean single-speaker conditioning before the laugh track intrudes on 'Thank you very much'.\"\n  }\n}\n```\n",
+    "duration_seconds": 41.959072,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20688,
+      "output_tokens": 4017,
+      "thinking_tokens": 3218,
+      "cache_read_tokens": 15982,
+      "total_tokens": 24705
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

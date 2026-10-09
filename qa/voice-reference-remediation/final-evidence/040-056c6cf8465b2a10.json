@@ -1,0 +1,38 @@
+{
+  "wav": "clip-040-ref.wav",
+  "source_sha256": "056c6cf8465b2a104c984774b474764c938b28b0a3f1e7fdd4a5d37c1f06d388",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "e6ddec36-6957-46b2-b45e-2fc4ced52a3d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "056c6cf8465b2a104c984774b474764c938b28b0a3f1e7fdd4a5d37c1f06d388"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "056c6cf8465b2a104c984774b474764c938b28b0a3f1e7fdd4a5d37c1f06d388"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e6ddec36-6957-46b2-b45e-2fc4ced52a3d",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It's often the starting point for me when I'm thinking about a role or an atmosphere that you're stepping into as an actor.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None observed; consistent clean, dry acoustic environment throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 8.1]\n  ],\n  \"uncertainty\": \"Boundaries are perceptual time estimates with an uncertainty of approximately +/- 0.3 seconds. Low lexical uncertainty; the word 'that' in 'atmosphere that you're stepping into' is lightly articulated but clearly perceptible in context.\"\n}\n",
+    "duration_seconds": 28.69038,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 19981,
+      "output_tokens": 2199,
+      "thinking_tokens": 1851,
+      "cache_read_tokens": 16136,
+      "total_tokens": 22180
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "marla-ref.wav",
+  "source_sha256": "c76a4b81ff470c4a120f15b3e52f655e8cd823dc9cd5c710e7641c6cee2eace7",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "8325ef91-9103-4e2a-9ae7-58ef7f41368d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c76a4b81ff470c4a120f15b3e52f655e8cd823dc9cd5c710e7641c6cee2eace7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c76a4b81ff470c4a120f15b3e52f655e8cd823dc9cd5c710e7641c6cee2eace7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8325ef91-9103-4e2a-9ae7-58ef7f41368d",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It's a bridesmaid's dress. Someone loved it intensely for one day... then tossed it. Like a Christmas tree.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": \"Distinct foley / handling or fabric rustling sound between 'tossed it' and 'Like a Christmas tree' (~8.2s - 9.3s).\",\n  \"acoustic_changes\": \"Consistent quiet interior / close-mic studio acoustic profile throughout; vocal delivery remains quiet, contemplative, and somewhat breathy with uniform room tone.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"interval_s\": [1.8, 2.8],\n      \"description\": \"Dramatic pause between 'dress' and 'Someone'\"\n    },\n    {\n      \"interval_s\": [6.2, 7.0],\n      \"description\": \"Pause between 'one day' and 'then tossed it'\"\n    },\n    {\n      \"interval_s\": [8.2, 9.3],\n      \"description\": \"Pause occupied by prop / fabric rustle between 'tossed it' and 'Like a Christmas tree'\"\n    }\n  ],\n  \"apparent_splices\": \"None apparent; room tone appears continuous across pauses with no abrupt cuts, transient clicks, or phase cancellations.\",\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    {\n      \"interval_s\": [0.0, 1.8],\n      \"phrase\": \"It's a bridesmaid's dress.\"\n    },\n    {\n      \"interval_s\": [2.8, 6.2],\n      \"phrase\": \"Someone loved it intensely for one day\"\n    },\n    {\n      \"interval_s\": [2.8, 8.2],\n      \"phrase\": \"Someone loved it intensely for one day... then tossed it.\"\n    },\n    {\n      \"interval_s\": [9.3, 11.2],\n      \"phrase\": \"Like a Christmas tree.\"\n    }\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual estimates with an uncertainty of approximately \u00b10.4 seconds. In the transcript, 'then tossed it' has soft initial consonant articulation and could perceptually be 'and tossed it'. The rustle between 8.2s and 9.3s is perceptually consistent with fabric/clothing manipulation or prop handling. Raw reference is marked unusable solely due to the foley noise at 8.2s\u20139.3s and lengthy dramatic pauses; individual phrase intervals provide clean, well-isolated single-speaker vocal conditioning.\"\n}\n```\n",
+    "duration_seconds": 38.320653,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20313,
+      "output_tokens": 3815,
+      "thinking_tokens": 3061,
+      "cache_read_tokens": 15974,
+      "total_tokens": 24128
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

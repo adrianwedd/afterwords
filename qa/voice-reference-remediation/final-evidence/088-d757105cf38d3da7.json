@@ -1,0 +1,38 @@
+{
+  "wav": "clip-088-ref.wav",
+  "source_sha256": "d757105cf38d3da7d14e917a594cc9188810daac71933de41283decff87a7244",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "fedd488e-63c0-4f7d-a450-827037d6fa73",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d757105cf38d3da7d14e917a594cc9188810daac71933de41283decff87a7244"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d757105cf38d3da7d14e917a594cc9188810daac71933de41283decff87a7244"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "fedd488e-63c0-4f7d-a450-827037d6fa73",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I was just working on a multi-million dollar lawsuit for one of my clients\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.8]\n  ],\n  \"uncertainty\": \"Transcript wording has very high perceptual confidence with no ambiguous phonemes detected. Time boundary estimate for candidate clean interval has an estimated perceptual uncertainty of +/- 0.3s.\"\n}\n",
+    "duration_seconds": 29.802161,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20243,
+      "output_tokens": 3203,
+      "thinking_tokens": 2890,
+      "cache_read_tokens": 16209,
+      "total_tokens": 23446
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

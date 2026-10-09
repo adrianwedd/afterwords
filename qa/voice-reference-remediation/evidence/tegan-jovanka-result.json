@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "c221503b-f591-48ae-991d-8b0f6e02478f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c221503b-f591-48ae-991d-8b0f6e02478f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, um, Mum flew down from Cloncurry to have me actually, because, uh, my father, um, who who was a parasitologist, um, was based up in Cloncurry.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 12.0]\n  ],\n  \"uncertainty\": \"Exact timing boundaries and total duration are perceptual estimates as precise waveform timestamps are not available during native audio ingestion. The end cutoff is marked false due to natural sentence cadence completion, but the recording may stop immediately after the final word.\"\n}\n```\n",
+    "duration_seconds": 31.491429,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20618,
+      "output_tokens": 1563,
+      "thinking_tokens": 1209,
+      "cache_read_tokens": 15964,
+      "total_tokens": 22181
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

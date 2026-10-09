@@ -1,0 +1,38 @@
+{
+  "wav": "clip-095-ref.wav",
+  "source_sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "be426bad-9300-4212-a014-ad6834daed06",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "be426bad-9300-4212-a014-ad6834daed06",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"You probably know the basic outline, that he was born in 1854 on October the 16th. I'm boring you with things you so know and don't need to be retold, so it is in fact just past his 160th birthday.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent room ambience with moderate natural reverberation typical of a lecture hall or auditorium; no abrupt shifts in equalization, noise floor, or acoustic environment.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [3.7, 4.4],\n    [5.6, 6.4]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.6],\n    [6.4, 13.2],\n    [0.0, 13.2]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations (\u00b10.3s). In the transcript phrase 'things you so know', there is minor phonetic ambiguity between colloquial 'so know' versus an elided 'all know' or 'also know', though 'so know' is the most direct auditory perception. The full clip contains a single well-isolated voice with clear articulation and usable phrases suitable for conditioning across the entire duration.\"\n}\n```\n",
+    "duration_seconds": 31.459594,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20213,
+      "output_tokens": 2820,
+      "thinking_tokens": 2330,
+      "cache_read_tokens": 16008,
+      "total_tokens": 23033
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

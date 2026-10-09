@@ -1,0 +1,37 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "563e1b247eb08f63a668a0a31c0a15c051ec1b0abeed6372fde0207436f617ff",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "b21a7445-758c-44a7-9f69-d7f8288aa20c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "563e1b247eb08f63a668a0a31c0a15c051ec1b0abeed6372fde0207436f617ff"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "563e1b247eb08f63a668a0a31c0a15c051ec1b0abeed6372fde0207436f617ff"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b21a7445-758c-44a7-9f69-d7f8288aa20c",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"What's the most you ever lost on a coin toss?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 4.0]\n  ],\n  \"uncertainty\": \"Perceptual estimates without waveform alignment: speech begins at approximately 0.2-0.3s and concludes around 3.9-4.1s (estimated uncertainty \u00b10.3s). There is an audible dramatic pause of roughly 0.8s between 'most' and 'you' (~1.2s to ~2.0s), but the background tone remains steady throughout. High confidence in the literal transcript with no competing speakers or background interference.\"\n}\n```\n",
+    "duration_seconds": 34.214741,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20334,
+      "output_tokens": 3667,
+      "thinking_tokens": 3289,
+      "cache_read_tokens": 16223,
+      "total_tokens": 24001
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

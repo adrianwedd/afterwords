@@ -1,0 +1,37 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "7cbda1d5-98af-455e-9927-1cf9b23a43f7",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d64d81fb4c41a8d9cb28007e165dd0ccf8d7d019a3b75472682658c7daa7b3f6"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7cbda1d5-98af-455e-9927-1cf9b23a43f7",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, for the first bit of it, for my bit in the cave, um, it was actually, quite, it meant scrambling over some rocks, and, um, and getting into this little tiny gap in in the cave.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent clean interior interview/studio acoustic environment throughout with minimal room reverberation.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 2.7],\n    [3.8, 6.9],\n    [7.7, 10.2]\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual estimates (total duration estimated around 11.5 seconds) subject to roughly \u00b10.3s variance without waveform measurement. Wording around 'actually, quite, it meant' contains a mild self-correction stumble, and 'in in the cave' contains a repeated word; vocal isolation of the single speaker is otherwise clean and free of background interference.\"\n}\n```\n",
+    "duration_seconds": 32.652684,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 21042,
+      "output_tokens": 3160,
+      "thinking_tokens": 2730,
+      "cache_read_tokens": 16022,
+      "total_tokens": 24202
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

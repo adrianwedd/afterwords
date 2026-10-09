@@ -1,0 +1,38 @@
+{
+  "wav": "clip-046-ref.wav",
+  "source_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "32d53633-a4b1-4710-8891-7dd8d55353db",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "32d53633-a4b1-4710-8891-7dd8d55353db",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; consistent dry studio/interior acoustic environment and close-mic voice pickup throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [5.5, 6.8]\n  ],\n  \"apparent_splices\": [],\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.5],\n    [6.8, 9.4]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with approximately \u00b10.2\u20130.3s tolerance. Preceding 'they cut the check' (~6.8s), a low, quietly voiced lexical 'No' [no\u028a] is positively audible rather than 'Look'; however, because it coincides with an intake of breath, there is minor perceptual ambiguity between a quiet lexical 'No' and a nonlexical nasalized inhalation. Additionally, in 'They signed the paperwork', the dental stop /d/ assimilates into the voiced dental fricative /\u00f0/, making 'signed the' phonetically indistinguishable from 'sign the'. 'okay' has a reduced initial syllable leaning toward 'kay'.\"\n}\n```\n",
+    "duration_seconds": 46.86662,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20654,
+      "output_tokens": 5143,
+      "thinking_tokens": 4652,
+      "cache_read_tokens": 16114,
+      "total_tokens": 25797
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,15 @@
+{
+  "programme_url": "https://www.bbc.co.uk/programmes/m000x6cj",
+  "download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p09lwkpy.mp3",
+  "guest": "Richard Wilson",
+  "publisher": "BBC Radio 4",
+  "programme": "Desert Island Discs",
+  "interviewer": "Lauren Laverne",
+  "source_mp3_sha256": "8eba62f4571a9c648151476df25bdaf09b57696705b887f16c23ef4b0bb8e261",
+  "source_audio_sha256": "6db19d0eeb766ea526e8a2138b7be24e2f71c113028e4fbc93ee8d984cec7c32",
+  "programme_html_sha256": "b0d51eb4698204811da3a325e146fe546d61a6d7d688f6bac280e19fd7515645",
+  "decode": "ffmpeg to PCM16 WAV preserving decoded rate/channels, no cleanup/normalization",
+  "retrieved_utc": "2026-10-08T07:09:04.555643+00:00",
+  "identity_basis": "BBC publisher programme names Richard Wilson, interviewer and Victor Meldrew role; audible introduction followed by guest answer about new playwrights.",
+  "delivery_change": "Same intended actor in later-life natural interview delivery, differs from earlier sitcom character performance."
+}

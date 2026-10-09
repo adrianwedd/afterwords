@@ -1,0 +1,38 @@
+{
+  "wav": "clip-014-ref.wav",
+  "source_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "27ae3ebb-2f6e-418e-aa6a-624f5f4d7403",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "27ae3ebb-2f6e-418e-aa6a-624f5f4d7403",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and uh I had to go and get a wig put on me head and uh it was brilliant actually\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.5, 4.5]],\n  \"uncertainty\": \"Boundary estimates are approximate as precise timestamps are not provided. The clip begins abruptly mid-breath before 'and'. Transcript reflects spoken dialect ('me head').\"\n}\n```\n",
+    "duration_seconds": 25.805567,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12593,
+      "output_tokens": 2109,
+      "thinking_tokens": 1791,
+      "cache_read_tokens": 24257,
+      "total_tokens": 14702
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

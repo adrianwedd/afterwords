@@ -1,0 +1,37 @@
+{
+  "wav": "victoria-wood-ref.wav",
+  "source_sha256": "43bf0798214e7eb199eae5e4c98eafef3c32956f6c255efc5fb98cd68125d343",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "0aa5428b-9a40-4cca-8996-d9ad87836450",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "43bf0798214e7eb199eae5e4c98eafef3c32956f6c255efc5fb98cd68125d343"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "43bf0798214e7eb199eae5e4c98eafef3c32956f6c255efc5fb98cd68125d343"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0aa5428b-9a40-4cca-8996-d9ad87836450",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [5.7, 6.3]\n  ],\n  \"literal_transcript\": \"No, 'cause he's really, really tall, and he just pissed up as high as he could reach, man. I'd've waited for her outside, but there were that big dog sniffing up at me.\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Live studio audience reactions alter the ambient noise floor significantly between speech utterances; speech itself has consistent acoustic reverberation and mic placement.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [2.5, 5.7],\n    [9.5, 13.8]\n  ],\n  \"uncertainty\": \"Boundary timings are perceptual estimates within +/- 0.3 seconds. In the transcript, 'pissed up' could perceptually be 'peered up' or 'pushed up'; 'I'd've waited' might be 'I just waited'. There is a brief low interjection/grunt around 5.7-6.3s attributed to a secondary speaker or reaction between audience laughter waves. The first candidate interval (2.5-5.7s) has faint trailing residual laughter at the onset, whereas the second interval (9.5-13.8s) is the cleanest isolated phrase for conditioning (~4.3s).\"\n}\n```\n",
+    "duration_seconds": 41.160895,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20328,
+      "output_tokens": 3773,
+      "thinking_tokens": 3280,
+      "cache_read_tokens": 15974,
+      "total_tokens": 24101
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

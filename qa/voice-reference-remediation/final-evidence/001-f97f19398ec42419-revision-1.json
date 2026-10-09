@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "d601db74-4c54-4e99-b4d7-17ea86efdaf5",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d601db74-4c54-4e99-b4d7-17ea86efdaf5",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It meant scrambling over some rocks, and um, and getting into this little tiny gap in in the cave.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.5]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates without visual waveform alignment have an estimated uncertainty of \u00b10.3s. The total duration is approximately 6.5s. Start has very brief pre-roll silence (<0.1s) but the initial syllable 'It' appears acoustically intact. Wording is clear with minor natural disfluencies ('and um', repeated 'in in').\"\n}\n",
+    "duration_seconds": 25.61278,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20252,
+      "output_tokens": 2583,
+      "thinking_tokens": 2218,
+      "cache_read_tokens": 16131,
+      "total_tokens": 22835
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

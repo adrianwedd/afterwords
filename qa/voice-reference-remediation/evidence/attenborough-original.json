@@ -1,0 +1,36 @@
+{
+  "wav": "attenborough-ref.wav",
+  "source_sha256": "8d7a454843c485f8aeff7fa1947b2b98080e371c522ad41107848d97c9700428",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "f080e463-cf95-447b-b867-a44af3ef2f43",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8d7a454843c485f8aeff7fa1947b2b98080e371c522ad41107848d97c9700428"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8d7a454843c485f8aeff7fa1947b2b98080e371c522ad41107848d97c9700428"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f080e463-cf95-447b-b867-a44af3ef2f43",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It's a sloth. It's not exactly an enthusiastic leaf eater. A couple of half-hearted chews, and the leaves go straight down to its stomach. Leaves, however, are not easily digest-\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None. Consistent outdoor/nature ambient background throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 11.5]\n  ],\n  \"uncertainty\": \"The audio cuts off abruptly mid-word on 'digest'. Trimming after the word 'stomach' would provide a clean, isolated reference. Boundary estimates for the candidate clean interval are perceptual approximations. There is light nature ambiance and rustling/chewing in the background which might require denoising for optimal zero-shot cloning, though the speaker's voice is highly isolated and prominent.\"\n}\n```\n",
+    "duration_seconds": 22.934949,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12666,
+      "output_tokens": 1919,
+      "thinking_tokens": 1526,
+      "cache_read_tokens": 24043,
+      "total_tokens": 14585
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

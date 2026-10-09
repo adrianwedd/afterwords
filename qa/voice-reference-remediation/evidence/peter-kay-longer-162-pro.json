@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "923d3cce00cf5c85d254f3ee5511ee17a7d64162b86b9f4e537198d789e53c21",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "58f81408-899f-4b5f-8ff9-56feccbfdc7e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "923d3cce00cf5c85d254f3ee5511ee17a7d64162b86b9f4e537198d789e53c21"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "923d3cce00cf5c85d254f3ee5511ee17a7d64162b86b9f4e537198d789e53c21"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "58f81408-899f-4b5f-8ff9-56feccbfdc7e",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Unfortunately everyone knows someone who's been affected by those cancers on that list. I hope you can come to the show even if you don't like me... just come for a night out and support the charity.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 9.0]],\n  \"uncertainty\": \"Precise boundary estimates are approximate as absolute timestamps are not available from direct listening.\"\n}\n```\n",
+    "duration_seconds": 33.200635,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20630,
+      "output_tokens": 2151,
+      "thinking_tokens": 1830,
+      "cache_read_tokens": 15977,
+      "total_tokens": 22781
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

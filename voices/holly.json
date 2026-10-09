@@ -3,6 +3,6 @@
   "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=elZfflKkfxM",
   "reference_audio": "holly-ref.wav",
-  "reference_text": "all sausages Dave now cover seven eighths of the Earth's surface. Also you left 17 pounds 50 pets in your bank account thanks to compound interest you now owe 98 % of all the world's wealth. Because you hold it for three million years nobody",
-  "segment_start_s": 64
+  "reference_text": "Thanks to compound interest, you now own 98% of all the world's wealth.",
+  "segment_start_s": 72.15
 }

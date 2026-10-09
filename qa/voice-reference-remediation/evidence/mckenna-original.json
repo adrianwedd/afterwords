@@ -1,0 +1,38 @@
+{
+  "wav": "mckenna-ref.wav",
+  "source_sha256": "a168d8130b9037e50e02ba7c58ca8834c7e671d9f600dba3b14a665c1b2bccf8",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "fe33b512-0498-458f-92ca-7112c4017fd8",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a168d8130b9037e50e02ba7c58ca8834c7e671d9f600dba3b14a665c1b2bccf8"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a168d8130b9037e50e02ba7c58ca8834c7e671d9f600dba3b14a665c1b2bccf8"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "fe33b512-0498-458f-92ca-7112c4017fd8",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"...ted monolithic institutions. We can't really even imagine a world like that. Uh there hasn't been a world like that since late Roman times. I mean the Roman hegemony was quite cohesive, but you...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [2.4, 14.2]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates based on native listening without waveform inspection (estimated precision \u00b10.3s). The initial word is clipped mid-syllable (perceived as '...ted'). The audio cuts off abruptly on 'but you...' around ~14.5s. Trimming the interval to approximately [2.4, 14.2] yields complete, grammatically coherent phrases ('We can't really even imagine a world like that. Uh there hasn't been a world like that since late Roman times. I mean the Roman hegemony was quite cohesive') spoken by a single isolated speaker with clean room acoustics, suitable for conditioning.\"\n}\n```\n",
+    "duration_seconds": 33.686626,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20630,
+      "output_tokens": 3374,
+      "thinking_tokens": 2934,
+      "cache_read_tokens": 15981,
+      "total_tokens": 24004
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

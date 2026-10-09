@@ -1,0 +1,38 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "b6e64812-1b65-4f81-809b-5607855c7272",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b6e64812-1b65-4f81-809b-5607855c7272",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I really believe that. I think that every part of this story is just, um, so beautifully done. For all of these characters, the arcs for all of these characters, I think, is so respectfully and beautifully done.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 13.0]],\n  \"uncertainty\": \"Low uncertainty. Transcript and bounds are straightforward to perceive. Single isolated speaker.\"\n}\n```\n",
+    "duration_seconds": 26.672651,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12549,
+      "output_tokens": 1306,
+      "thinking_tokens": 985,
+      "cache_read_tokens": 24052,
+      "total_tokens": 13855
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

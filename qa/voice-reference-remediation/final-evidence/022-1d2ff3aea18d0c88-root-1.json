@@ -1,0 +1,38 @@
+{
+  "wav": "clip-022-ref.wav",
+  "source_sha256": "1d2ff3aea18d0c8805efa37190304a365b24fd9b308f997731bbd7dbf3001556",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "476f8958-ba76-4bb4-99ff-0fb733d3c149",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1d2ff3aea18d0c8805efa37190304a365b24fd9b308f997731bbd7dbf3001556"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1d2ff3aea18d0c8805efa37190304a365b24fd9b308f997731bbd7dbf3001556"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "476f8958-ba76-4bb4-99ff-0fb733d3c149",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And, uh, we were changing in, in forty from losing the horses and becoming... medium artillery.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None observed; consistent vintage room acoustic and tape floor throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [1.9, 5.6],\n    [7.4, 9.2]\n  ],\n  \"uncertainty\": \"Time boundaries are perceptual approximations with +/-0.5s tolerance. Transcription of 'forty' could represent shorthand for the year 1940 ('40). Hesitations and mid-sentence pauses occur between 'uh' and 'we were changing' (~1.2s to 1.9s) and between 'becoming' and 'medium artillery' (~6.6s to 7.4s).\"\n}\n```\n",
+    "duration_seconds": 40.36379,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20336,
+      "output_tokens": 2948,
+      "thinking_tokens": 2554,
+      "cache_read_tokens": 16109,
+      "total_tokens": 23284
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

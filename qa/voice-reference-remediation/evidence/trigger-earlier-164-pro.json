@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "bac475f1b1baeb5b6a7512c3fa91074b361dfc57a3d46e86e6fb09bf26651c65",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "bcbe233c-9190-427a-83df-c516b3627fb1",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "bac475f1b1baeb5b6a7512c3fa91074b361dfc57a3d46e86e6fb09bf26651c65"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "bac475f1b1baeb5b6a7512c3fa91074b361dfc57a3d46e86e6fb09bf26651c65"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "bcbe233c-9190-427a-83df-c516b3627fb1",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I knew I felt pretty rough and if I was going to be X-rayed and checked over the sooner the better. Um, and now I hear, uh, that they're planning to cut the service, I'm absolutely appalled.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.5],\n    [8.5, 12.0]\n  ],\n  \"uncertainty\": \"Exact boundary estimates in seconds are approximate perceptual estimates. The audio contains filler words ('Um', 'uh') between phrases, making the raw reference sub-optimal for conditioning, but clean usable phrases can be isolated by trimming.\"\n}\n```\n",
+    "duration_seconds": 37.641694,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12820,
+      "output_tokens": 2864,
+      "thinking_tokens": 2492,
+      "cache_read_tokens": 24097,
+      "total_tokens": 15684
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

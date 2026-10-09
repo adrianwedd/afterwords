@@ -1,9 +1,9 @@
 {
   "name": "ace",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=jC6HaSsf7p4",
+  "source_url": "https://www.youtube.com/watch?v=mIw6XAhcUbQ",
   "reference_audio": "ace-ref.wav",
-  "reference_text": "I think I might have slightly overestimated myself here, Professor. Although\u2014",
-  "segment_start_s": 90,
-  "notes": "Ace (Sophie Aldred) \u2014 Power of the Doctor 2022, volcano scene with Holo-Doctor. 8s of dense in-character solo speech (90-98s in source, 2s leading trimmed)."
+  "reference_text": "It meant scrambling over some rocks, and um, and getting into this little tiny gap in in the cave.",
+  "segment_start_s": 158.71,
+  "notes": "Sophie Aldred natural interview, intended actor for Ace. Fresh final QA retains complete source sentence at158.71–166.35s by losslessly slicing prior decoded/resampled reference at5.73–13.37s. Conversational um and in in retained; earlier uncertain false start excluded. Original source/render and intermediate delivery preserved in qa/voice-reference-remediation/changes.json."
 }

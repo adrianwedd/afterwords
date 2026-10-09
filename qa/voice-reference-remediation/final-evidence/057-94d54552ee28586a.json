@@ -1,0 +1,38 @@
+{
+  "wav": "clip-057-ref.wav",
+  "source_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "df0d0886-d425-4be2-8d20-7fbb0dc1d2eb",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "df0d0886-d425-4be2-8d20-7fbb0dc1d2eb",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So, that's what we did. And with that, I'd I'd go in there and knock it off and maybe 50 minutes of a show...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 1.8]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations (\u00b10.3s) without waveform alignment. Slight uncertainty in final word/phrase articulation ('of a show' vs 'of the show') and whether the clip ends due to an editorial cutoff or the speaker trailing off mid-thought. There is a spoken stutter/repetition ('I'd I'd') between approximately 3.4s and 4.0s, leaving [0.0, 1.8] ('So, that's what we did.') as the only fully clean complete phrase, though it is relatively brief for voice conditioning.\"\n}\n",
+    "duration_seconds": 42.91963,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20287,
+      "output_tokens": 4013,
+      "thinking_tokens": 3593,
+      "cache_read_tokens": 16120,
+      "total_tokens": 24300
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

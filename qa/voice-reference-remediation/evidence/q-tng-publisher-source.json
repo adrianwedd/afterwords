@@ -1,0 +1,15 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=Te8vCFkFHg8",
+  "publisher": "TrekMovie",
+  "publisher_channel_url": "https://www.youtube.com/channel/UCy_izLS7TgKhMlh7x8n-g5g",
+  "title": "PODCAST: John de Lancie Interview & Star Trek News Wrapup",
+  "description": "ews: Byron Allen\u2019s company is interested in buying Paramount, Michelle Yeoh\u2019s Section 31 co-stars have finally been announced, Dave Blass says the Picard spin-off is still not in the works, the TNG cast is set to receive a lifetime achievement award at the Saturns, Patrick Stewart stars in a new Super Bowl ad for Paramount Plus, Zoe Saldana thinks the Kelvin crew might get one last film together, and William Shatner\u2019s new biographical documentary has a trailer.\n\nAfter that, they chat with actor John de Lancie about FanFair, the company he and his son have to get digitally signed unique artwork to fans who can\u2019t make it to conventions. He also talks about some of his early choices as he played Q in the Next Gen series premiere and beyond, his conversations with Gene Roddenberry about how often Q would be on the show, his surprise at finding out Q would die in Picard season 2, and that post-credits finale scene in Picard season 3.\n\nThey wrap up with John Larroquette playing a Klingon again on Night Court, and a fun thread about \u201cThreshold\u201d salamander sex from The Vagina Museum.",
+  "guest": "John de Lancie",
+  "source_download_sha256": "c047a9a91ae78f7a8fc0fb2f8e9c7e91c8a9d2c56fc765ede51638748f6714b1",
+  "source_audio_sha256": "fe4f44260615e53d6bd28b22883bf30a762a9d278161ac1bfa61eb47a8a8dee9",
+  "source_info_sha256": "f50274a5b7e2cdee751e62bf3f7b458a5295f18f67460ea67827226efb03e1c0",
+  "retrieved_utc": "2026-10-08T08:10:34.867504+00:00",
+  "decode": "ffmpeg PCM16 preserving decoded rate/channels, no DSP",
+  "delivery_change": "Same intended actor John de Lancie in natural interview delivery replaces contaminated multi-person Q dialogue; character delivery is not claimed preserved.",
+  "identity_basis": "TrekMovie publisher title/description identifies guest John de Lancie; source host handoff1087.3-1090.52 and welcome1104.5-1114.72 explicitly name him, followed by guest autobiographical FanFair/son answers and discussion of his Q scenes/death in Picard. Selected continuous guest answer concerns audience noticing story inconsistencies."
+}

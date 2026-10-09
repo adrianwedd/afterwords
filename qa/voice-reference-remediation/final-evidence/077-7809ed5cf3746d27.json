@@ -1,0 +1,38 @@
+{
+  "wav": "clip-077-ref.wav",
+  "source_sha256": "7809ed5cf3746d277eeb7977065f4c1a2cceeb10da49d46de3c877c397e2fe43",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "2aef3ee9-b23c-4824-b3e8-4d5d3c457ca8",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7809ed5cf3746d277eeb7977065f4c1a2cceeb10da49d46de3c877c397e2fe43"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7809ed5cf3746d277eeb7977065f4c1a2cceeb10da49d46de3c877c397e2fe43"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "2aef3ee9-b23c-4824-b3e8-4d5d3c457ca8",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Unfortunately, everyone knows someone who's been affected by those cancers on that list.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.2]\n  ],\n  \"uncertainty\": \"Low uncertainty on transcript wording due to clear vocal articulation. Boundary timestamps are perceptual estimates with an uncertainty of approximately +/- 0.3 seconds.\"\n}\n",
+    "duration_seconds": 29.158698,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20333,
+      "output_tokens": 2534,
+      "thinking_tokens": 2227,
+      "cache_read_tokens": 16190,
+      "total_tokens": 22867
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

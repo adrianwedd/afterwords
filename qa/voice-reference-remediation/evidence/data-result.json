@@ -1,0 +1,37 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "f745aedf7c04608e839c5a0f1523c822aa2a8a2e972585d9f3bfe64f9b42d6ae",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "622aacff-f176-467f-827e-40cfb25ecff1",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f745aedf7c04608e839c5a0f1523c822aa2a8a2e972585d9f3bfe64f9b42d6ae"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f745aedf7c04608e839c5a0f1523c822aa2a8a2e972585d9f3bfe64f9b42d6ae"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "622aacff-f176-467f-827e-40cfb25ecff1",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I have asked myself that many times, as I have struggled to be more human, until I realized, it is the struggle itself that is most important.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None observed; uniform studio/dialogue acoustics with slight room ambience throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"interval_s\": [3.2, 4.0],\n      \"description\": \"Dramatic pause between 'many times' and 'as I have struggled'\"\n    },\n    {\n      \"interval_s\": [6.2, 7.1],\n      \"description\": \"Dramatic pause between 'more human' and 'until I realized'\"\n    },\n    {\n      \"interval_s\": [8.4, 9.2],\n      \"description\": \"Pause between 'until I realized' and 'it is the struggle itself'\"\n    }\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.4, 12.8]\n  ],\n  \"uncertainty\": \"Exact interval timestamps are perceptual approximations (+/- 0.5s) derived purely through auditory evaluation without visual waveform or absolute timeline inspection. Transcript wording is perceived clearly with very high acoustic confidence, though punctuation reflects rhetorical phrasing rather than guaranteed orthography. Room acoustics exhibit minimal background noise/tone with no discernible score or competing voices.\"\n}\n```\n",
+    "duration_seconds": 27.337128,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20384,
+      "output_tokens": 2838,
+      "thinking_tokens": 2331,
+      "cache_read_tokens": 16110,
+      "total_tokens": 23222
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

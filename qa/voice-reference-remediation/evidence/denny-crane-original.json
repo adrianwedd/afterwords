@@ -1,0 +1,38 @@
+{
+  "wav": "denny-crane-ref.wav",
+  "source_sha256": "1dd651241a6e9dd9e2ed48501db4307047fa98e6f9914008191706f972b4f698",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "f8f43da5-49ba-45a6-bc62-eb000b67ed87",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1dd651241a6e9dd9e2ed48501db4307047fa98e6f9914008191706f972b4f698"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1dd651241a6e9dd9e2ed48501db4307047fa98e6f9914008191706f972b4f698"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f8f43da5-49ba-45a6-bc62-eb000b67ed87",
+    "status": "SUCCESS",
+    "response": "\u5973```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"interval\": [0.0, 0.6],\n      \"speaker\": \"Speaker 1 or Unidentified vocalization\",\n      \"description\": \"Short grunt / groan sound\"\n    },\n    {\n      \"interval\": [1.8, 5.8],\n      \"speaker\": \"Speaker 1 (Primary - deep male voice)\",\n      \"description\": \"Main dialogue delivery\"\n    },\n    {\n      \"interval\": [6.3, 7.2],\n      \"speaker\": \"Speaker 2 (Female voice)\",\n      \"description\": \"Off-mic / more reverberant question\"\n    }\n  ],\n  \"literal_transcript\": \"[groan/grunt] ... I feel like a busy one. So if you're gonna shoot me, let's do it. I have plans. ... What happened?\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": true,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [1.8, 5.8],\n    [2.8, 5.8]\n  ],\n  \"uncertainty\": {\n    \"wording\": \"The initial phrase is perceptually heard as 'I feel like a busy one', though could possibly be 'I feel like a busy man' or preceded by an indistinct syllable. The second speaker distinctly says 'What happened?'. Informal reduction 'gonna' vs 'going to'.\",\n    \"boundaries\": \"Boundary timestamps are perceptual estimates (\u00b10.2-0.3s) based on listening without visual waveform / spectrogram rulers.\",\n    \"speaker_attribution\": \"The opening grunt/groan at ~0.0-0.5s may belong to the primary speaker reacting under strain or an additional character/actor prior to the dialogue.\",\n    \"audio_artifacts\": \"Low-frequency dramatic background drone/music and Foley noise (a metallic scrape/screech around 5.8s-6.2s) overlap parts of the audio, but the phrase between 2.8s and 5.8s ('So if you're gonna shoot me, let's do it. I have plans.') has minimal intrusion and good single-speaker conditioning isolation.\"\n  }\n}\n```\n",
+    "duration_seconds": 40.841411,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20443,
+      "output_tokens": 3825,
+      "thinking_tokens": 3136,
+      "cache_read_tokens": 15977,
+      "total_tokens": 24268
+    }
+  },
+  "acceptance": "pending orchestrator adjudication",
+  "format_revalidation": "Single valid fenced JSON result extracted despite stray prefix outside JSON; original raw response retained unchanged."
+}

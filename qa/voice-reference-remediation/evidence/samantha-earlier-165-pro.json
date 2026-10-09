@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "4e1b7619-eb39-4603-b9a2-30a75c13c452",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4e1b7619-eb39-4603-b9a2-30a75c13c452",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and um it was so different than then the experience that I had had with him like a decade earlier\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 5.0]],\n  \"uncertainty\": \"Exact duration and boundary estimates are approximate. Acoustic features were inferred from available representation rather than direct auditory waveform analysis.\"\n}\n",
+    "duration_seconds": 29.565915,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12392,
+      "output_tokens": 2662,
+      "thinking_tokens": 2365,
+      "cache_read_tokens": 24240,
+      "total_tokens": 15054
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

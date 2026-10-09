@@ -1,8 +1,8 @@
 {
   "name": "bernard-black",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=dK4r2GqbfXU",
+  "source_url": "https://www.youtube.com/watch?v=yQUSCuHhX3M",
   "reference_audio": "bernard-black-ref.wav",
-  "reference_text": "Now, you know, they teach you to have to become a person really, because, you know, children are very over-protected now in lots of ways, very nervous about them, you know, people go, oh, don't go outside!",
-  "segment_start_s": 0
+  "reference_text": "Uh, yeah, I think I was, I didn't get in any major trouble, you know, if that's what a good kid is.",
+  "segment_start_s": 178.94
 }

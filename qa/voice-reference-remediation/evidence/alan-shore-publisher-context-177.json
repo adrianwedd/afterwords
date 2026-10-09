@@ -1,0 +1,38 @@
+{
+  "wav": "clip-005-ref.wav",
+  "source_sha256": "2c68fb0db44e925e4c9015570cc3bdf4232589327d6c809bba63300f265e4a75",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "0bc320ec-49bb-4f06-9a89-9741cb793419",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2c68fb0db44e925e4c9015570cc3bdf4232589327d6c809bba63300f265e4a75"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2c68fb0db44e925e4c9015570cc3bdf4232589327d6c809bba63300f265e4a75"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0bc320ec-49bb-4f06-9a89-9741cb793419",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I expected the American people to rise up. Huh. They didn't.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.5],\n    [4.6, 5.8]\n  ],\n  \"uncertainty\": \"Boundaries are perceptual estimates with an uncertainty of approximately +/- 0.3s. The brief vocalization between the two statements (~3.6s to 4.5s) is perceptually a cynical scoff or breathy exhalation ('Huh.'), which could alternately be categorized as a mild chuckle rather than true laughter. The primary phrase [0.0, 3.5] constitutes an isolated, clean, and complete sentence well-suited for voice conditioning.\"\n}\n",
+    "duration_seconds": 51.668133,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20156,
+      "output_tokens": 5300,
+      "thinking_tokens": 4918,
+      "cache_read_tokens": 16132,
+      "total_tokens": 25456
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

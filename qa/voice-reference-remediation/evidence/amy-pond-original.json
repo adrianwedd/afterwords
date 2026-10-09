@@ -1,0 +1,36 @@
+{
+  "wav": "amy-pond-ref.wav",
+  "source_sha256": "f63f2ecf0b4d27a087b65daf24b4a9311be5febbf5e9bf99a1cca542679ee979",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "d116a151-81f2-4375-89a2-1d580367b93e",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f63f2ecf0b4d27a087b65daf24b4a9311be5febbf5e9bf99a1cca542679ee979"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f63f2ecf0b4d27a087b65daf24b4a9311be5febbf5e9bf99a1cca542679ee979"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d116a151-81f2-4375-89a2-1d580367b93e",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"[Sniffling/breath] That you'll be safe, cared for, and protected. [Sniffling/breath] But this isn't the time for lies. What you're gonna be, Melody, is...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"The audio is heavily characterized by emotional distress, including crying/sniffling artifacts and very breathy delivery. There are long, unnatural pauses for a standard voice reference, and the clip cuts off abruptly mid-sentence at the end. The heavy emotional bias makes it unsuitable for standard TTS conditioning.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Minor uncertainty in exact transcription of filler/breath noises and the final cutoff word due to the emotional delivery. Boundary estimates are approximate perceptual estimates.\"\n}\n```\n",
+    "duration_seconds": 20.48069,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12375,
+      "output_tokens": 1735,
+      "thinking_tokens": 1358,
+      "cache_read_tokens": 24169,
+      "total_tokens": 14110
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

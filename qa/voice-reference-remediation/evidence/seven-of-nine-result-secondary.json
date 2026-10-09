@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "b83cdf51c9dbd8141f8bcb5907925ec4c8fd53a4b65d46a3d2d4ba20ef7efc71",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "ab02d2ea-82bd-4ff6-9a58-73e8d1ca89a3",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b83cdf51c9dbd8141f8bcb5907925ec4c8fd53a4b65d46a3d2d4ba20ef7efc71"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b83cdf51c9dbd8141f8bcb5907925ec4c8fd53a4b65d46a3d2d4ba20ef7efc71"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ab02d2ea-82bd-4ff6-9a58-73e8d1ca89a3",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"But yeah, it's, it's, it's nice to, um, finally get to talk about things like this guy being part of the show, Todd Stashwick, who's brilliant beyond words, and I cannot wait for everybody to see him in action, um, and to meet Captain Shaw.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 12.0]\n  ],\n  \"uncertainty\": \"Timing boundaries are approximate estimates. Transcript might contain slight deviations in filler words (ums/uhs) or exact phrasing due to conversational pacing.\"\n}\n```\n",
+    "duration_seconds": 30.859407,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20521,
+      "output_tokens": 1644,
+      "thinking_tokens": 1285,
+      "cache_read_tokens": 15902,
+      "total_tokens": 22165
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

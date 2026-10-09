@@ -1,0 +1,4227 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "20d207987eedbb470eaf28bc5af1566a2ee2179b",
+  "perceptual_acceptance": "unproven: native listening required per resulting hash",
+  "records": [
+    {
+      "wav": "ace-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/ace-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
+          "source_url": "https://www.youtube.com/watch?v=jC6HaSsf7p4",
+          "segment_start_s": 90
+        },
+        {
+          "path": "voices/ace.json",
+          "tracked": true,
+          "reference_text": "I think I might have slightly overestimated myself here, Professor. Although—",
+          "source_url": "https://www.youtube.com/watch?v=jC6HaSsf7p4",
+          "segment_start_s": 90
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "f43b5f052a2e20e653b1aac550d47fd213b4e9d492077e01af612c2a84c2ad7a",
+        "frames": 192000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.0,
+        "peak": 0.780731201171875,
+        "rms": 0.11291387611630117,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source clean Ace dialogue."
+      }
+    },
+    {
+      "wav": "alan-bennett-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/alan-bennett-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "feeling baffled. He and occasionally she is overwhelmed by the amount of stuff that has been written and the ground still to be covered. How shall I ever catch up? wails the young Joe Orton in the film's",
+          "source_url": "https://www.youtube.com/watch?v=8xiDpJGid1E",
+          "segment_start_s": 30
+        },
+        {
+          "path": "voices/alan-bennett.json",
+          "tracked": true,
+          "reference_text": "feeling baffled. He and occasionally she is overwhelmed by the amount of stuff that has been written and the ground still to be covered. How shall I ever catch up? wails the young Joe Orton in the film's",
+          "source_url": "https://www.youtube.com/watch?v=8xiDpJGid1E",
+          "segment_start_s": 30
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "bb836905333788dee27cc0d9d1f9eeb59c16435a3f4c62a97eb630f3ed294820",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.06062561018627902,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim silence gap and align text to end at 'How shall I ever catch up?'"
+      }
+    },
+    {
+      "wav": "alan-bstard-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/alan-bstard-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "We hear an awful lot of lefty-whingeing about the NHS waiting lists. Well, the answer's simple. Shut down the health service. The answer's no more waiting lists. You see, in the good old days...",
+          "source_url": "https://www.youtube.com/watch?v=l9CO65EmNGs",
+          "segment_start_s": 15
+        },
+        {
+          "path": "voices/alan-bstard.json",
+          "tracked": true,
+          "reference_text": "We hear an awful lot of lefty-whingeing about the NHS waiting lists. Well, the answer's simple. Shut down the health service. The answer's no more waiting lists. You see, in the good old days...",
+          "source_url": "https://www.youtube.com/watch?v=l9CO65EmNGs",
+          "segment_start_s": 15
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "3addaacbfced8cb21ee750f9d387007aee9b062ed19a6edff8ec7f32dfa0e6c1",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08765271175973496,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Re-align JSON reference_text to exact spoken words."
+      }
+    },
+    {
+      "wav": "alan-partridge-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/alan-partridge-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I'm chatting with five chaps. Fights chaps? Not fight chaps. You're coming here to get away from the chaps. Oh, back to your council houses. Council houses, council houses, council houses, council houses. I knew I was in trouble.",
+          "source_url": "https://www.youtube.com/watch?v=YsIs0jm5Tpk",
+          "segment_start_s": 10
+        },
+        {
+          "path": "voices/alan-partridge.json",
+          "tracked": true,
+          "reference_text": "I'm chatting with five chaps. Fights chaps? Not fight chaps. You're coming here to get away from the chaps. Oh, back to your council houses. Council houses, council houses, council houses, council houses. I knew I was in trouble.",
+          "source_url": "https://www.youtube.com/watch?v=YsIs0jm5Tpk",
+          "segment_start_s": 10
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "c29ef88565804247d45b6c42201598a6937cfe67f5fd962de95764968aee9420",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.07568684880025338,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Re-align JSON reference_text to exact spoken words."
+      }
+    },
+    {
+      "wav": "alan-shore-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/alan-shore-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "expected the American people to rise up. Well, they didn't. Then, when the Abu Ghraib torture thing surfaced, and it was revealed that our government participated in rendition, a practice of torture.",
+          "source_url": "https://www.youtube.com/watch?v=qd5vRphPqnk",
+          "segment_start_s": 12
+        },
+        {
+          "path": "voices/alan-shore.json",
+          "tracked": true,
+          "reference_text": "expected the American people to rise up. Well, they didn't. Then, when the Abu Ghraib torture thing surfaced, and it was revealed that our government participated in rendition, a practice of torture.",
+          "source_url": "https://www.youtube.com/watch?v=qd5vRphPqnk",
+          "segment_start_s": 12
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "ff724e53b1e9d40dbbea64dc0c9b3a82d442fb39b1f48bccb1aaf6fb8bc97679",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.12536310992782887,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Remove 'a practice of torture' from JSON reference_text."
+      }
+    },
+    {
+      "wav": "amy-pond-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/amy-pond-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "That you'll be safe, cared for and protected, but this isn't the time for lies, what you're going to be Melody.",
+          "source_url": "https://www.youtube.com/watch?v=h5kHvADpA3s",
+          "segment_start_s": 5
+        },
+        {
+          "path": "voices/amy-pond.json",
+          "tracked": true,
+          "reference_text": "That you'll be safe, cared for and protected, but this isn't the time for lies, what you're going to be Melody.",
+          "source_url": "https://www.youtube.com/watch?v=h5kHvADpA3s",
+          "segment_start_s": 5
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "f63f2ecf0b4d27a087b65daf24b4a9311be5febbf5e9bf99a1cca542679ee979",
+        "frames": 211383,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.807625,
+        "peak": 0.899993896484375,
+        "rms": 0.07036017082435435,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "attenborough-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/attenborough-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "It's a sloth. It's not exactly an enthusiastic leaf eater. A couple of half-hearted chews and the leaves go straight down to its stomach. Leaves, however, are not easily digested.",
+          "source_url": "https://www.youtube.com/watch?v=ndMKTnSRsKM",
+          "segment_start_s": 32
+        },
+        {
+          "path": "voices/attenborough.json",
+          "tracked": true,
+          "reference_text": "It's a sloth. It's not exactly an enthusiastic leaf eater. A couple of half-hearted chews and the leaves go straight down to its stomach. Leaves, however, are not easily digested.",
+          "source_url": "https://www.youtube.com/watch?v=ndMKTnSRsKM",
+          "segment_start_s": 32
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "8d7a454843c485f8aeff7fa1947b2b98080e371c522ad41107848d97c9700428",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.09867210448870585,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "audrey-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/audrey-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Well, because I only just left for the night to come here and to aid this  wonderful charity for muscular dystrophy. And I cannot leave my young son any  longer because he has no nurse at the moment. And my husband and a friend.",
+          "source_url": null,
+          "segment_start_s": null
+        },
+        {
+          "path": "voices/audrey.json",
+          "tracked": true,
+          "reference_text": "Well, because I only just left for the night to come here and to aid this  wonderful charity for muscular dystrophy. And I cannot leave my young son any  longer because he has no nurse at the moment. And my husband and a friend.",
+          "source_url": null,
+          "segment_start_s": null
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "044c38f68ab809aa5e11b9dab2421ba5dfefa0bf7a073944ccb3f20d54348e9a",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.1317821784803363,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim trailing incomplete clause."
+      }
+    },
+    {
+      "wav": "aurora-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/aurora-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "There is one thing I always think about when I shower, it is the fact that  your body is constantly always touching something. You know? And when you are  lying in bed and you feel that your body is touching the bed, and the",
+          "source_url": null,
+          "segment_start_s": null
+        },
+        {
+          "path": "voices/aurora.json",
+          "tracked": true,
+          "reference_text": "There is one thing I always think about when I shower, it is the fact that  your body is constantly always touching something. You know? And when you are  lying in bed and you feel that your body is touching the bed, and the",
+          "source_url": null,
+          "segment_start_s": null
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "e04d12523ed05255741dbe8f958d82ba24f7e901a4b5a151e2f2f84b5aab74bd",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.11320135247062602,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim trailing cutoff syllable."
+      }
+    },
+    {
+      "wav": "avasarala-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/avasarala-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I sent you to that planet to be my eyes and ears and now large ruins that were supposed to be inert are shooting out lightning. And there is nothing but radio silence from you.",
+          "source_url": "https://youtube.com/watch?v=cmRQXpbeA-0",
+          "segment_start_s": 87
+        },
+        {
+          "path": "voices/avasarala.json",
+          "tracked": true,
+          "reference_text": "I sent you to that planet to be my eyes and ears and now large ruins that were supposed to be inert are shooting out lightning. And there is nothing but radio silence from you.",
+          "source_url": "https://youtube.com/watch?v=cmRQXpbeA-0",
+          "segment_start_s": 87
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "6aae4349dce967eaef737d05d3a6e28bdf8a5e1c9fcad9fac93a5f7d8c3cef91",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.09111467630516483,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "bardem-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/bardem-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "What's the most you ever lost on a coin toss? Sarah? The most you ever lost.",
+          "source_url": "https://www.youtube.com/watch?v=ZY0DG8rUnCA",
+          "segment_start_s": 155
+        },
+        {
+          "path": "voices/bardem.json",
+          "tracked": true,
+          "reference_text": "What's the most you ever lost on a coin toss? Sarah? The most you ever lost.",
+          "source_url": "https://www.youtube.com/watch?v=ZY0DG8rUnCA",
+          "segment_start_s": 155
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "fc7b7f956d8c11cc7988669f51c43c84aad41623e48d82bec806f72fc52b5f25",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.04828303385017435,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim opening 8.0s dead air / cellophane rustle. Anton Chigurh is the sole speaker."
+      }
+    },
+    {
+      "wav": "basil-fawlty-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/basil-fawlty-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Would you care for a rat? Just the biscuit. I'm doing it, I'm doing it now!",
+          "source_url": "https://www.youtube.com/watch?v=gy7xPCImMXk",
+          "segment_start_s": 13
+        },
+        {
+          "path": "voices/basil-fawlty.json",
+          "tracked": true,
+          "reference_text": "Would you care for a rat? Just the biscuit. I'm doing it, I'm doing it now!",
+          "source_url": "https://www.youtube.com/watch?v=gy7xPCImMXk",
+          "segment_start_s": 13
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "dc10e5944836e6dd7ef076b65cf9f1ad4c6e32882a891a7ecbd6bea18a151719",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.13637975076931266,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source solo Basil Fawlty shouting monologue."
+      }
+    },
+    {
+      "wav": "bernard-black-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/bernard-black-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Now, you know, they teach you to have to become a person really, because, you know, children are very over-protected now in lots of ways, very nervous about them, you know, people go, oh, don't go outside!",
+          "source_url": "https://www.youtube.com/watch?v=dK4r2GqbfXU",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/bernard-black.json",
+          "tracked": true,
+          "reference_text": "Now, you know, they teach you to have to become a person really, because, you know, children are very over-protected now in lots of ways, very nervous about them, you know, people go, oh, don't go outside!",
+          "source_url": "https://www.youtube.com/watch?v=dK4r2GqbfXU",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "22f7c7036817f9bc06440e33c147bb6b5eddfe2948b96e08ab936786bab67d88",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.07486306347221834,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Re-align JSON reference_text to exact spoken words."
+      }
+    },
+    {
+      "wav": "bill-bailey-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/bill-bailey-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Hello, I'm Bill Bailey, 1984, stars in their eyes meet low regional winner, and nearly got the Michael Bolton gig, but then he had his ear cut, so great to be here.",
+          "source_url": "https://www.youtube.com/watch?v=B2-6BgjL3zE",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/bill-bailey.json",
+          "tracked": true,
+          "reference_text": "Hello, I'm Bill Bailey, 1984, stars in their eyes meet low regional winner, and nearly got the Michael Bolton gig, but then he had his ear cut, so great to be here.",
+          "source_url": "https://www.youtube.com/watch?v=B2-6BgjL3zE",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "2f663eef98b06b64c9e7d84e94d7a948d1376185ff75f6adaea78254b2c5988a",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08143199932086137,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "bill-potts-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/bill-potts-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I am the real Bill! Our life is just memories. Our more rare memories. So I'm her. Okay. I'm gonna prove to you how important memories are. And don't go forgetting me again because... ...quite frankly, that was a fence.",
+          "source_url": "https://www.youtube.com/watch?v=GfjLXdA4hk4",
+          "segment_start_s": 27
+        },
+        {
+          "path": "voices/bill-potts.json",
+          "tracked": true,
+          "reference_text": "I am the real Bill! Our life is just memories. Our more rare memories. So I'm her. Okay. I'm gonna prove to you how important memories are. And don't go forgetting me again because... ...quite frankly, that was a fence.",
+          "source_url": "https://www.youtube.com/watch?v=GfjLXdA4hk4",
+          "segment_start_s": 27
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "7bfcacd7753db4b83963e5167856ef5646a2a2c6dff449714d8e3000ddc69ec3",
+        "frames": 637760,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.286666666666667,
+        "peak": 0.262115478515625,
+        "rms": 0.025172383147474994,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Audio level is unusually low (RMS 0.0252); normalize gain."
+      }
+    },
+    {
+      "wav": "blackadder-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/blackadder-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "The rain beats down so hard, it makes your head bleed. So some sort of hat. There's probably an order. So did Bortig, actually. Only last year, my aunt.",
+          "source_url": "https://www.youtube.com/watch?v=n-Zm8H6G108",
+          "segment_start_s": 60
+        },
+        {
+          "path": "voices/blackadder.json",
+          "tracked": true,
+          "reference_text": "The rain beats down so hard, it makes your head bleed. So some sort of hat. There's probably an order. So did Bortig, actually. Only last year, my aunt.",
+          "source_url": "https://www.youtube.com/watch?v=n-Zm8H6G108",
+          "segment_start_s": 60
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "7125b16034eb407b2b8431e9a62ced914942f58db5b6480a459a185f54a8d228",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.1168218090661301,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source solo Blackadder sarcastic remarks. Stephen Fry speaks majority."
+      }
+    },
+    {
+      "wav": "bob-jones-ibuki-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/bob-jones-ibuki-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "The Kata Sanshin is designed basically for one-pointedness, bringing timing, coordination, aggression and channeling everything into one-point, which of course in time builds up the self-confidence of the martial artist. The important thing is with the heavy breathing, which is very similar to yoga breathing, but it's called ibuki, the breathing from Japan, is done very aggressively from the diaphragm.",
+          "source_url": null,
+          "segment_start_s": null
+        },
+        {
+          "path": "voices/bob-jones-ibuki.json",
+          "tracked": true,
+          "reference_text": "The Kata Sanshin is designed basically for one-pointedness, bringing timing, coordination, aggression and channeling everything into one-point, which of course in time builds up the self-confidence of the martial artist. The important thing is with the heavy breathing, which is very similar to yoga breathing, but it's called ibuki, the breathing from Japan, is done very aggressively from the diaphragm.",
+          "source_url": null,
+          "segment_start_s": null
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "f88085479e6d14654d0c168cdae1683841c3973559f3e8735f24d4b213009e3d",
+        "frames": 528000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 22.0,
+        "peak": 1.0,
+        "rms": 0.19680073673819207,
+        "samples_at_full_scale": 244
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Waveform has 559 clipped samples."
+      }
+    },
+    {
+      "wav": "bob-jones-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/bob-jones-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Saisam is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us.",
+          "source_url": "https://www.youtube.com/watch?v=jAJ_KFKo8A0",
+          "segment_start_s": 81
+        },
+        {
+          "path": "voices/bob-jones.json",
+          "tracked": true,
+          "reference_text": "Saisam is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us.",
+          "source_url": "https://www.youtube.com/watch?v=jAJ_KFKo8A0",
+          "segment_start_s": 81
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.405548095703125,
+        "rms": 0.058742285991689944,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Re-align JSON reference_text to exact spoken words."
+      }
+    },
+    {
+      "wav": "bob-jones-sanchin-tensho-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/bob-jones-sanchin-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Tensho now in contrast to Sanchin, which is the power guitar, and getting everything sent into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision. It also is full of fluidity, once again designed to",
+          "source_url": null,
+          "segment_start_s": null
+        },
+        {
+          "path": "voices/bob-jones-sanchin.json",
+          "tracked": true,
+          "reference_text": "Tensho now in contrast to Sanchin, which is the power guitar, and getting everything sent into one point, Tensho now has a more expanding attitude. It moves out and thinks around with peripheral vision. It also is full of fluidity, once again designed to",
+          "source_url": null,
+          "segment_start_s": null
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "f1054343c4c3f4b5618db02a87f4ed3b7ca5f438a15c97c163692552fc0fe741",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 1.0,
+        "rms": 0.20517495497592983,
+        "samples_at_full_scale": 187
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Shorten reference_text to match audio."
+      }
+    },
+    {
+      "wav": "bob-mortimer-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/bob-mortimer-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I know I'm that urine pine, I'm a bad dentist. No, because even very, very, very good dentists sometimes get someone else to do their teeth.",
+          "source_url": "https://www.youtube.com/watch?v=6jONuC6I784",
+          "segment_start_s": 20
+        },
+        {
+          "path": "voices/bob-mortimer.json",
+          "tracked": true,
+          "reference_text": "I know I'm that urine pine, I'm a bad dentist. No, because even very, very, very good dentists sometimes get someone else to do their teeth.",
+          "source_url": "https://www.youtube.com/watch?v=6jONuC6I784",
+          "segment_start_s": 20
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "90ad3b3a78a6ec2189b00c45b0369b2539cdcd8d547608a6a26a8875bddb6384",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.12615344285907323,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source solo Bob Mortimer story clip."
+      }
+    },
+    {
+      "wav": "brian-cox-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/brian-cox-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "We're back in the 19th century. Engineers were concerned with the efficiency of steam engines. How hot should the fire be? What substance should you boil in the steam engine? Should it be water? Should it be something else?",
+          "source_url": "https://www.youtube.com/watch?v=uQSoaiubuA0",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/brian-cox.json",
+          "tracked": true,
+          "reference_text": "We're back in the 19th century. Engineers were concerned with the efficiency of steam engines. How hot should the fire be? What substance should you boil in the steam engine? Should it be water? Should it be something else?",
+          "source_url": "https://www.youtube.com/watch?v=uQSoaiubuA0",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10278410763990728,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "captain-mainwaring-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/captain-mainwaring-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "war you will be brought to account all right what you like you're not going to win this war oh yes we are oh no you're not oh yes we are whistle while you work he's half army so these are",
+          "source_url": "https://www.youtube.com/watch?v=_YMVPXmaKds",
+          "segment_start_s": 20
+        },
+        {
+          "path": "voices/captain-mainwaring.json",
+          "tracked": true,
+          "reference_text": "war you will be brought to account all right what you like you're not going to win this war oh yes we are oh no you're not oh yes we are whistle while you work he's half army so these are",
+          "source_url": "https://www.youtube.com/watch?v=_YMVPXmaKds",
+          "segment_start_s": 20
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "6062b96274b81ceaa4c686c0a7943004b3cc05215268b7b6f10aa31a6cb5a80f",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10499791815241787,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source solo Arthur Lowe / Captain Mainwaring monologue. 3 separate speakers present."
+      }
+    },
+    {
+      "wav": "carl-sagan-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/carl-sagan-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "forever will be. Our contemplations of the cosmos stirs. There is a tingling in the spine that catch in the voice of faint sensation as if a distant memory of",
+          "source_url": "https://www.youtube.com/watch?v=pV2e3e5MAYI",
+          "segment_start_s": 5
+        },
+        {
+          "path": "voices/carl-sagan.json",
+          "tracked": true,
+          "reference_text": "forever will be. Our contemplations of the cosmos stirs. There is a tingling in the spine that catch in the voice of faint sensation as if a distant memory of",
+          "source_url": "https://www.youtube.com/watch?v=pV2e3e5MAYI",
+          "segment_start_s": 5
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "99d09b3ae4c7d959fd975b8b00fa3a98893d636273526e29ea5026bb623028bb",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.09543879646720993,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim internal silence gap."
+      }
+    },
+    {
+      "wav": "clara-oswald-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/clara-oswald-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Run, you clever boy, and remember. Run, you clever boy, and remember. Merry Christmas, Doctor. Hello. You stupid old man.",
+          "source_url": "https://www.youtube.com/watch?v=KezLI_Zx5uY",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/clara-oswald.json",
+          "tracked": true,
+          "reference_text": "Run, you clever boy, and remember. Run, you clever boy, and remember. Merry Christmas, Doctor. Hello. You stupid old man.",
+          "source_url": "https://www.youtube.com/watch?v=KezLI_Zx5uY",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "d9e2323e09a6c91f66ca72d214f07489dab314012e0d4836b30f666d380c90af",
+        "frames": 792000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 16.5,
+        "peak": 0.214324951171875,
+        "rms": 0.0251043881471308,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Audio level is unusually low (RMS 0.0251); normalize gain."
+      }
+    },
+    {
+      "wav": "claudia-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/claudia-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "black, I play Morrigan in Dragon Age Inquisition. I love voice work because I can usually turn up without having bathed, except on days like this when there's cameras in the room. It's extremely playful and it allows actors to be",
+          "source_url": null,
+          "segment_start_s": null
+        },
+        {
+          "path": "voices/claudia.json",
+          "tracked": true,
+          "reference_text": "black, I play Morrigan in Dragon Age Inquisition. I love voice work because I can usually turn up without having bathed, except on days like this when there's cameras in the room. It's extremely playful and it allows actors to be",
+          "source_url": null,
+          "segment_start_s": null
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "98dbcda67f3b69c97cbc7df3436cf5024980520b6b1c97c4eae5033b9489b991",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06721741584208606,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Fix profile metadata: speaker is Australian actress Claudia Black (Morrigan in Dragon Age)."
+      }
+    },
+    {
+      "wav": "cleaver-greene-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/cleaver-greene-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "There is, is there not, ladies and gentlemen in the jury, so much we can learn about ourselves if we have the integrity, the courage to stand up and not only tell the truth...",
+          "source_url": "https://www.youtube.com/watch?v=AZMxERepQTE",
+          "segment_start_s": 8
+        },
+        {
+          "path": "voices/cleaver-greene.json",
+          "tracked": true,
+          "reference_text": "There is, is there not, ladies and gentlemen in the jury, so much we can learn about ourselves if we have the integrity, the courage to stand up and not only tell the truth...",
+          "source_url": "https://www.youtube.com/watch?v=AZMxERepQTE",
+          "segment_start_s": 8
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "ef97b3af9faab48727e54ab9ccc7d44faf7880d0858162ce53e84ac79cfe460a",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08814872765277541,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "columbo-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/columbo-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I can't find him and I was wondering whether you can help me. Apparently he goofed up on some expensive project that he was working on. Gee, I've seen this picture every day.",
+          "source_url": "https://www.youtube.com/watch?v=QxBnaMGP2aY",
+          "segment_start_s": 2
+        },
+        {
+          "path": "voices/columbo.json",
+          "tracked": true,
+          "reference_text": "I can't find him and I was wondering whether you can help me. Apparently he goofed up on some expensive project that he was working on. Gee, I've seen this picture every day.",
+          "source_url": "https://www.youtube.com/watch?v=QxBnaMGP2aY",
+          "segment_start_s": 2
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "fc7cfa437ee0b6fbef802d82852e3aa2ac92197ff419d2ee6772dcd4f620610a",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08125599087915711,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Add opening sentence to JSON reference_text, or trim audio to start at 6.42s on 'I can't find him'."
+      }
+    },
+    {
+      "wav": "dalai-lama-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/dalai-lama.json",
+          "tracked": true,
+          "reference_text": "Now here is the environment. According to that reality, now no longer to emphasis my nation, my country, now we should think more of we humanity.",
+          "source_url": "https://www.youtube.com/watch?v=Vlhlw01qWJs",
+          "segment_start_s": 480
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "655900e8870e7c2eb7dba2b21e0197ffde53db2030d8a3d9f89b0ead553b287f",
+        "frames": 411600,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 17.15,
+        "peak": 0.8499755859375,
+        "rms": 0.049781916333418705,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source clean Dalai Lama interview clip."
+      }
+    },
+    {
+      "wav": "data-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/data-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I have asked myself that many times, as I have struggled to be more human. Until I realized, it is the struggle itself that is most important. We must strive to be more.",
+          "source_url": "https://www.youtube.com/watch?v=5PdVkA3HYYY",
+          "segment_start_s": 24
+        },
+        {
+          "path": "voices/data.json",
+          "tracked": true,
+          "reference_text": "I have asked myself that many times, as I have struggled to be more human. Until I realized, it is the struggle itself that is most important. We must strive to be more.",
+          "source_url": "https://www.youtube.com/watch?v=5PdVkA3HYYY",
+          "segment_start_s": 24
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "c77ed0ab9b455e2b71a00221ab6ecbb292f366c93dbb931da2e0d29733e20ca4",
+        "frames": 253488,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 10.562,
+        "peak": 0.9000244140625,
+        "rms": 0.08313100006932599,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "dave-bowman-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/dave-bowman.json",
+          "tracked": true,
+          "reference_text": "Rumors about something being dug up on the moon. I never gave these stories much credence, but particularly in view of some of the other things that have happened, I find them difficult to put out of my mind.",
+          "source_url": "local-file",
+          "segment_start_s": 94.46
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "3df5c8ec42f965e8f129ba1ae0c44baaa8d29a97bb5048999a738598cb56dbc3",
+        "frames": 720000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.864654541015625,
+        "rms": 0.07499011501683456,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "del-boy-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/del-boy-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "And then you announce that you've changed your mind about having a chaffee and then you go late night shopping at family planning. Cassandra and I discussed it and our initial reaction was, quite naturally, to hold back until the financial climate was more conducive to starting.",
+          "source_url": "https://www.youtube.com/watch?v=Bc3eNzOx5-g",
+          "segment_start_s": 90
+        },
+        {
+          "path": "voices/del-boy.json",
+          "tracked": true,
+          "reference_text": "And then you announce that you've changed your mind about having a chaffee and then you go late night shopping at family planning. Cassandra and I discussed it and our initial reaction was, quite naturally, to hold back until the financial climate was more conducive to starting.",
+          "source_url": "https://www.youtube.com/watch?v=Bc3eNzOx5-g",
+          "segment_start_s": 90
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "3fa2066561c96552d56db6da877ba7d43b0cecd73029751a65b59f43868f95a3",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.10903558777689444,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim audio to 0:00-6.92 to retain Del Boy solo, and remove Rodney's dialogue from reference_text."
+      }
+    },
+    {
+      "wav": "denny-crane-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/denny-crane-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I feel like a busy one. So if you're gonna shoot me, let's do it. I have plans.",
+          "source_url": "https://www.youtube.com/watch?v=Hfc7l1vz2jU",
+          "segment_start_s": 3
+        },
+        {
+          "path": "voices/denny-crane.json",
+          "tracked": true,
+          "reference_text": "I feel like a busy one. So if you're gonna shoot me, let's do it. I have plans.",
+          "source_url": "https://www.youtube.com/watch?v=Hfc7l1vz2jU",
+          "segment_start_s": 3
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "1dd651241a6e9dd9e2ed48501db4307047fa98e6f9914008191706f972b4f698",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10755457419795303,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "depp-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/depp-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "this dock stays off limits to civilians. It's a fine goal to be sure, but it seems to me that a ship like that makes this one here a bit superfluous really. Oh the dauntless is the power in these waters true enough but there's no",
+          "source_url": "https://www.youtube.com/watch?v=2GGMHmBgIEg",
+          "segment_start_s": 30
+        },
+        {
+          "path": "voices/depp.json",
+          "tracked": true,
+          "reference_text": "this dock stays off limits to civilians. It's a fine goal to be sure, but it seems to me that a ship like that makes this one here a bit superfluous really. Oh the dauntless is the power in these waters true enough but there's no",
+          "source_url": "https://www.youtube.com/watch?v=2GGMHmBgIEg",
+          "segment_start_s": 30
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "5ee7b89a7e13c80014f663d634c4ae459e25e76562aa007e5af0296ed98110bb",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.04834498486108696,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim audio to 0:04.80-0:11.80 to isolate solo Jack Sparrow; update reference_text accordingly."
+      }
+    },
+    {
+      "wav": "donna-noble-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/donna-noble-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Because I understand now. You said I was gonna die, but you mean this whole world is gonna blink out of existence. But that's not dying. Because a better world takes its place. The Doctor's world. And I'm still alive.",
+          "source_url": "https://www.youtube.com/watch?v=Zqb-VKNFx54",
+          "segment_start_s": 58
+        },
+        {
+          "path": "voices/donna-noble.json",
+          "tracked": true,
+          "reference_text": "Because I understand now. You said I was gonna die, but you mean this whole world is gonna blink out of existence. But that's not dying. Because a better world takes its place. The Doctor's world. And I'm still alive.",
+          "source_url": "https://www.youtube.com/watch?v=Zqb-VKNFx54",
+          "segment_start_s": 58
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "3fa62e95e317a6edf233a9cf3eab1892a59007ecbdc096566cfed13dfa9de9ac",
+        "frames": 851968,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 17.749333333333333,
+        "peak": 0.278411865234375,
+        "rms": 0.041870669591671815,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source quiet conversational Donna scene."
+      }
+    },
+    {
+      "wav": "dr-cox-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/dr-cox-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Fine. I'm going to go ahead and tell you how it ends. Dr. Phil says, and how is that working out for you? I'm going to make the fat lady cry. All right. I'm sure you're wondering why I",
+          "source_url": "https://www.youtube.com/watch?v=vN71Vt5XOnE",
+          "segment_start_s": 2
+        },
+        {
+          "path": "voices/dr-cox.json",
+          "tracked": true,
+          "reference_text": "Fine. I'm going to go ahead and tell you how it ends. Dr. Phil says, and how is that working out for you? I'm going to make the fat lady cry. All right. I'm sure you're wondering why I",
+          "source_url": "https://www.youtube.com/watch?v=vN71Vt5XOnE",
+          "segment_start_s": 2
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "d03ad1b403e7b54d6349d1c9021eee78198a7eaa428a11d3f8c4b9f1a49407fd",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.07904094357836591,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Update JSON text and trim trailing clipped syllable."
+      }
+    },
+    {
+      "wav": "eartha-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/eartha-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "A relationship is a relationship that has to be earned, not to compromise for. I love relationships. I think they're fantastic. They're wonderful. I think they're great. I think there's nothing in the world more beautiful.",
+          "source_url": null,
+          "segment_start_s": null
+        },
+        {
+          "path": "voices/eartha.json",
+          "tracked": true,
+          "reference_text": "A relationship is a relationship that has to be earned, not to compromise for. I love relationships. I think they're fantastic. They're wonderful. I think they're great. I think there's nothing in the world more beautiful.",
+          "source_url": null,
+          "segment_start_s": null
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "9387013f44a95f5ea85da5ec8e74315459238b841fcdd163015b2e1603d9da33",
+        "frames": 271131,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.297125,
+        "peak": 0.899993896484375,
+        "rms": 0.0842829023395196,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim audio to finish cleanly on 'I think they're great.'"
+      }
+    },
+    {
+      "wav": "edina-monsoon-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/edina-monsoon-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "hands on a certain white powder, because it's the only thing that'll make time in an isolated French cottage bearable. During a game of doubles ping pong, she slips away to indulge. Whose bag is this?",
+          "source_url": "https://www.youtube.com/watch?v=UG6jri4OdaQ",
+          "segment_start_s": 600
+        },
+        {
+          "path": "voices/edina-monsoon.json",
+          "tracked": true,
+          "reference_text": "hands on a certain white powder, because it's the only thing that'll make time in an isolated French cottage bearable. During a game of doubles ping pong, she slips away to indulge. Whose bag is this?",
+          "source_url": "https://www.youtube.com/watch?v=UG6jri4OdaQ",
+          "segment_start_s": 600
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "a2643237958b1776812508be029e622026047d20897028405858add010028801",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08407459252256684,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "feynman-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/feynman-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I lose a great deal of pleasure out of that, and I think people lose a lot of pleasure who find the science dull. In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination.",
+          "source_url": "https://www.youtube.com/watch?v=P1ww1IXRfTA",
+          "segment_start_s": 30
+        },
+        {
+          "path": "voices/feynman.json",
+          "tracked": true,
+          "reference_text": "I lose a great deal of pleasure out of that, and I think people lose a lot of pleasure who find the science dull. In the case of science, I think that one of the things that make it very difficult is it takes a lot of imagination.",
+          "source_url": "https://www.youtube.com/watch?v=P1ww1IXRfTA",
+          "segment_start_s": 30
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "3749fa4923d78d733000977bb2897cbddc1d86ce23b8abe08d01e56854c8c516",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.061865168530182986,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim internal silence gap and trailing false start."
+      }
+    },
+    {
+      "wav": "frasier-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/frasier-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "It may be the gulfs will wash us down It may be we shall touch the happy Isles and though we are not now that strength which in old days moved earth and heaven",
+          "source_url": "https://www.youtube.com/watch?v=JaiMmxH-ERw",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/frasier.json",
+          "tracked": true,
+          "reference_text": "It may be the gulfs will wash us down It may be we shall touch the happy Isles and though we are not now that strength which in old days moved earth and heaven",
+          "source_url": "https://www.youtube.com/watch?v=JaiMmxH-ERw",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "c7c280ff2b73c37aa15b123030a5def6862199e26523e771638b3f4d86367c25",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.10455680922949778,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim internal silence gap."
+      }
+    },
+    {
+      "wav": "galadriel-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/galadriel-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "It began with the forging of the great rings. Three were given to the elves, immortal, wisest and fairest of all beings. Seven to the dwarf lords.",
+          "source_url": "https://www.youtube.com/watch?v=vOulsEGvSCo",
+          "segment_start_s": 38
+        },
+        {
+          "path": "voices/galadriel.json",
+          "tracked": true,
+          "reference_text": "It began with the forging of the great rings. Three were given to the elves, immortal, wisest and fairest of all beings. Seven to the dwarf lords.",
+          "source_url": "https://www.youtube.com/watch?v=vOulsEGvSCo",
+          "segment_start_s": 38
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "b1eee5a0e9fe18f1c71b7a1e00034610d5a8f3cc6019e71eee184b9a62ac2765",
+        "frames": 352256,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.677333333333333,
+        "peak": 0.9000244140625,
+        "rms": 0.06804791975482977,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "gareth-keenan-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/gareth-keenan-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "three o 'clock today. Three o 'clock today please. All right then we'll say no I'm done. All right. Okay see ya. There's Keenan. Who's that?",
+          "source_url": "https://www.youtube.com/watch?v=XZMqOMtl5C0",
+          "segment_start_s": 5
+        },
+        {
+          "path": "voices/gareth-keenan.json",
+          "tracked": true,
+          "reference_text": "three o 'clock today. Three o 'clock today please. All right then we'll say no I'm done. All right. Okay see ya. There's Keenan. Who's that?",
+          "source_url": "https://www.youtube.com/watch?v=XZMqOMtl5C0",
+          "segment_start_s": 5
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "f5499b10a01c190e338677d37f89898c521b0fe683f1f28b74ef77292aa09eea",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08090773490960503,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source solo Gareth Keenan monologue. Tim Canterbury occupies 80% of audio."
+      }
+    },
+    {
+      "wav": "geraldine-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/geraldine-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "tidying. Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling. And now, voila, just the one left. So that was very thorough tidying by me there.",
+          "source_url": "https://www.youtube.com/watch?v=mVmzuMKluso",
+          "segment_start_s": 20
+        },
+        {
+          "path": "voices/geraldine.json",
+          "tracked": true,
+          "reference_text": "tidying. Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling. And now, voila, just the one left. So that was very thorough tidying by me there.",
+          "source_url": "https://www.youtube.com/watch?v=mVmzuMKluso",
+          "segment_start_s": 20
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "1ca8639c620d666d3440ec046ad421ff50e7607a6dc7b391f6fafb1210f8558a",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.12567946554632053,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "No remediation needed; audio and transcript match."
+      }
+    },
+    {
+      "wav": "gulley-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/gulley-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Thank you very much for surprising me with that. That's just, yeah, impressive. I don't know what to say, but other than thank you so much.",
+          "source_url": null,
+          "segment_start_s": null
+        },
+        {
+          "path": "voices/gulley.json",
+          "tracked": true,
+          "reference_text": "Thank you very much for surprising me with that. That's just, yeah, impressive. I don't know what to say, but other than thank you so much.",
+          "source_url": null,
+          "segment_start_s": null
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "c508edba4c4c63134843513f88844534844d8f928a50e4feb5b412218bda2235",
+        "frames": 321600,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.4,
+        "peak": 0.823150634765625,
+        "rms": 0.07593569139830479,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "hal-9000-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/hal-9000.json",
+          "tracked": true,
+          "reference_text": "Good afternoon, Mr. Raymer. Everything is going extremely well. Let me put it this way, Mr. Raymer. The 9000 series is the most reliable computer ever made. No 9000 computer has ever made a mistake or",
+          "source_url": "https://www.youtube.com/watch?v=9wrjl-H4Hs8",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "74473f055ef3e3781ae622935a5493facb805b81155227f48b8849f8d6f957af",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06352447895171508,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "han-solo-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/han-solo-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I've flown from one side of this galaxy to the other, I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful force controlling everything. There's no mystical energy field that controls my destiny.",
+          "source_url": "https://www.youtube.com/watch?v=_zW4em75r_E",
+          "segment_start_s": 122
+        },
+        {
+          "path": "voices/han-solo.json",
+          "tracked": true,
+          "reference_text": "I've flown from one side of this galaxy to the other, I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful force controlling everything. There's no mystical energy field that controls my destiny.",
+          "source_url": "https://www.youtube.com/watch?v=_zW4em75r_E",
+          "segment_start_s": 122
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13",
+        "frames": 608580,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.8,
+        "peak": 0.729827880859375,
+        "rms": 0.04668299379117787,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Add 'Kid,' to JSON reference_text."
+      }
+    },
+    {
+      "wav": "harvey-specter-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/harvey-specter-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I need a grown god damn man. I'm inclined to give you a shot, but what if I decide to go another way? They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story. I'm in court right now.",
+          "source_url": "https://www.youtube.com/watch?v=hacr7EI-1JA",
+          "segment_start_s": 10
+        },
+        {
+          "path": "voices/harvey-specter.json",
+          "tracked": true,
+          "reference_text": "I need a grown god damn man. I'm inclined to give you a shot, but what if I decide to go another way? They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story. I'm in court right now.",
+          "source_url": "https://www.youtube.com/watch?v=hacr7EI-1JA",
+          "segment_start_s": 10
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "03eda4492c4e36417024b355225c7b64d04a25d92f21907cadefbc184f38ba4b",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08028738754793481,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim audio to 0:00-5.08 for Harvey solo, or re-source longer monologue."
+      }
+    },
+    {
+      "wav": "holly-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/holly-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "all sausages Dave now cover seven eighths of the Earth's surface. Also you left 17 pounds 50 pets in your bank account thanks to compound interest you now owe 98 % of all the world's wealth. Because you hold it for three million years nobody",
+          "source_url": "https://www.youtube.com/watch?v=elZfflKkfxM",
+          "segment_start_s": 64
+        },
+        {
+          "path": "voices/holly.json",
+          "tracked": true,
+          "reference_text": "all sausages Dave now cover seven eighths of the Earth's surface. Also you left 17 pounds 50 pets in your bank account thanks to compound interest you now owe 98 % of all the world's wealth. Because you hold it for three million years nobody",
+          "source_url": "https://www.youtube.com/watch?v=elZfflKkfxM",
+          "segment_start_s": 64
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "958473e1c5677ac4ee495a27f8f199e6738525e1d929811e1e682a2f3a63d194",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.07049591471986333,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Fix JSON to 'Your sausages Dave'."
+      }
+    },
+    {
+      "wav": "hyacinth-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/hyacinth-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I wish to place a large order, a very important order. I have the new vicar calling this afternoon for tea and light refreshments. So how soon can you deliver? Yes, I know it's Saturday and I'm very happy that you're busy.",
+          "source_url": "https://www.youtube.com/watch?v=16VJza_gZAo",
+          "segment_start_s": 10
+        },
+        {
+          "path": "voices/hyacinth.json",
+          "tracked": true,
+          "reference_text": "I wish to place a large order, a very important order. I have the new vicar calling this afternoon for tea and light refreshments. So how soon can you deliver? Yes, I know it's Saturday and I'm very happy that you're busy.",
+          "source_url": "https://www.youtube.com/watch?v=16VJza_gZAo",
+          "segment_start_s": 10
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "94d5e48cd393650fd0ee67186ff88439e620b0b83f4dad3fe17918b04e8cb7e4",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08001636816937761,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim internal silence gap."
+      }
+    },
+    {
+      "wav": "jack-dee-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/jack-dee-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "just to help them see it, because, no, okay, forget it then, you know, I don't know. What was the problem? Why were you late? You went to the wrong Apollo? Which one? Oxford? Manchester? Oh, fucks sake.",
+          "source_url": "https://www.youtube.com/watch?v=LW60m5gwQPY",
+          "segment_start_s": 60
+        },
+        {
+          "path": "voices/jack-dee.json",
+          "tracked": true,
+          "reference_text": "just to help them see it, because, no, okay, forget it then, you know, I don't know. What was the problem? Why were you late? You went to the wrong Apollo? Which one? Oxford? Manchester? Oh, fucks sake.",
+          "source_url": "https://www.youtube.com/watch?v=LW60m5gwQPY",
+          "segment_start_s": 60
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "c72a6f3a8e13290f3f5601030c7158315227954de7ccf55a963409ed7414a51e",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.10745782434097266,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Usable stand-up monologue. Live crowd atmosphere is standard for comedy references."
+      }
+    },
+    {
+      "wav": "jackie-chiles-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/jackie-chiles-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Who told you to put a bomb on? Let a doctor put a bomb. Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it. A power? Who told you to have a power? I didn't tell you to have a power. Who told you to put the cheese on? Did I tell you to put the cheese on? I didn't tell you to put the cheese on.",
+          "source_url": "https://www.youtube.com/watch?v=PeAHBiUgoD8",
+          "segment_start_s": 5
+        },
+        {
+          "path": "voices/jackie-chiles.json",
+          "tracked": true,
+          "reference_text": "Who told you to put a bomb on? Let a doctor put a bomb. Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it. A power? Who told you to have a power? I didn't tell you to have a power. Who told you to put the cheese on? Did I tell you to put the cheese on? I didn't tell you to put the cheese on.",
+          "source_url": "https://www.youtube.com/watch?v=PeAHBiUgoD8",
+          "segment_start_s": 5
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "5105b48287f9cb841390a2c89a17ba40aa13f4281189a98f2403d0bcf4c97274",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08506433113827924,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source clean, untruncated Jackie Chiles courtroom clip."
+      }
+    },
+    {
+      "wav": "jarvis-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/jarvis.json",
+          "tracked": true,
+          "reference_text": "The compression in cylinder three appears to be down. For you, sir, always. Shall I store this on the Stark Industries central database? Working on a secret project, are we, sir? At your service, sir. Check. We'll do, sir. I have a...",
+          "source_url": "https://www.youtube.com/watch?v=KUxTstoFd1Q",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "acd48f4361a78264458a8b1831700041fb00328dabc00d44b1f4705ea1835870",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.041201419906669416,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim trailing unfinished syllable and correct text."
+      }
+    },
+    {
+      "wav": "jim-royle-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/jim-royle-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Kiss my arse. Equaliser my arse. Preparation's my arse. Commuted my arse. Have a good time, my arse. Beast my arse.",
+          "source_url": "https://www.youtube.com/watch?v=pUQhN-S-jwM",
+          "segment_start_s": 30
+        },
+        {
+          "path": "voices/jim-royle.json",
+          "tracked": true,
+          "reference_text": "Kiss my arse. Equaliser my arse. Preparation's my arse. Commuted my arse. Have a good time, my arse. Beast my arse.",
+          "source_url": "https://www.youtube.com/watch?v=pUQhN-S-jwM",
+          "segment_start_s": 30
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "12d2999b3c06d51c727e42dd41e53563e19d26f5f1011c09aebffd6471b95fbc",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06851364772777173,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source continuous solo Jim Royle speech."
+      }
+    },
+    {
+      "wav": "john-sheppard-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/john-sheppard.json",
+          "tracked": true,
+          "reference_text": "and realize it would be politicized, and everybody's gonna start questioning the science and stuff, so that's a little unfortunate. But this thing is gonna go on until springtime, so maybe we'll recalibrate and realize that we are all in it together, so who knows.",
+          "source_url": "local-file",
+          "segment_start_s": 300.0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "53e62aa6ef0389fcaaffe2ecc9990e49610ce77f42421ee7b471f80bf6bcd84f",
+        "frames": 712800,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.85,
+        "peak": 0.999969482421875,
+        "rms": 0.07519376097538538,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "joi-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/joi.json",
+          "tracked": true,
+          "reference_text": "How was your meeting? I'm getting cabin fever. I had an accident at work. I think I ruined my shirt. Let me take a look at it. You want to drink first? I just need a bit more practice. Don't fuss. I should have marinated it longer.",
+          "source_url": "local-file",
+          "segment_start_s": 23.88
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "7ca7d85b14c883d98d9429f941914049a27aeea1d727de2840451a2c665fd966",
+        "frames": 701280,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.61,
+        "peak": 0.999969482421875,
+        "rms": 0.07498980650664303,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source solo Joi monologue without Officer K dialogue. Over 40% of reference audio is a deep male voice in a female model."
+      }
+    },
+    {
+      "wav": "k-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/k.json",
+          "tracked": true,
+          "reference_text": "You give me a time in a place. I give you a five-minute window Anything happens in that five minutes and I'm yours No matter what Anything happens a minute either side of that and you're on your own",
+          "source_url": "local-file",
+          "segment_start_s": 7.8
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e",
+        "frames": 714240,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 14.88,
+        "peak": 0.777008056640625,
+        "rms": 0.07498495537051476,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "k9-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/k9-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded. Oh, I was just getting onto that. What? Negative.",
+          "source_url": "https://www.youtube.com/watch?v=0L2oWjsSA_Y",
+          "segment_start_s": 35
+        },
+        {
+          "path": "voices/k9.json",
+          "tracked": true,
+          "reference_text": "Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded. Oh, I was just getting onto that. What? Negative.",
+          "source_url": "https://www.youtube.com/watch?v=0L2oWjsSA_Y",
+          "segment_start_s": 35
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "5a484e11e965797c29859a7ca45d4407f5198ab91b000b3db2ad5ef27b60a5ac",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10425407953576739,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim audio to 0:00-11.36 to retain pure robotic K9 voice (11.4s of clean solo audio)."
+      }
+    },
+    {
+      "wav": "kitt-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/kitt-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "an action-filled NBC television series, Knight Rider. I must say that I'm truly delighted to meet all of you today. Filming a television series is a demanding and challenging",
+          "source_url": "https://www.youtube.com/watch?v=jiZXnHAffuA",
+          "segment_start_s": 5
+        },
+        {
+          "path": "voices/kitt.json",
+          "tracked": true,
+          "reference_text": "an action-filled NBC television series, Knight Rider. I must say that I'm truly delighted to meet all of you today. Filming a television series is a demanding and challenging",
+          "source_url": "https://www.youtube.com/watch?v=jiZXnHAffuA",
+          "segment_start_s": 5
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "1913fdfe56f156ebc860e696827f72c7b1a375be0af53b22429efe34501618ab",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10442624350995901,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim to self-contained sentence: 'I must say that I am truly delighted to meet all of you today.'"
+      }
+    },
+    {
+      "wav": "kryten-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/kryten-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Listen, have you got quite in there with you? Yeah, what's the problem? The problem is, I've been waiting fully 20 minutes for him in the hangar. Oh, spin my nipple nuts and send me to Alaska. I'm supposed to take you Asteroid Sputting. I'll be right down, sir.",
+          "source_url": "https://www.youtube.com/watch?v=RXKlC8ph7mM",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/kryten.json",
+          "tracked": true,
+          "reference_text": "Listen, have you got quite in there with you? Yeah, what's the problem? The problem is, I've been waiting fully 20 minutes for him in the hangar. Oh, spin my nipple nuts and send me to Alaska. I'm supposed to take you Asteroid Sputting. I'll be right down, sir.",
+          "source_url": "https://www.youtube.com/watch?v=RXKlC8ph7mM",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "a6873d82f23e73812a5f365b6364eda8b7e61deb91610fea4f60bae272da155e",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.10734520137041753,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim audio to 0:07.40-0:14.98 to isolate Kryten solo; remove Rimmer/Lister lines from JSON."
+      }
+    },
+    {
+      "wav": "lee-mack-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/lee-mack-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I'd just like to tell you a true story. This is what it's like living in London nowadays. In fact, it's the same everywhere really. What I hate is the hard sell. You know, you get the hard sell, right? I got it the other day. You know when people ring you up and say, you know, do you want to combine the gas with the electric, right? And I was like, oh, that sounds dangerous.",
+          "source_url": "https://www.youtube.com/watch?v=c0MiIcHbSnM",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/lee-mack.json",
+          "tracked": true,
+          "reference_text": "I'd just like to tell you a true story. This is what it's like living in London nowadays. In fact, it's the same everywhere really. What I hate is the hard sell. You know, you get the hard sell, right? I got it the other day. You know when people ring you up and say, you know, do you want to combine the gas with the electric, right? And I was like, oh, that sounds dangerous.",
+          "source_url": "https://www.youtube.com/watch?v=c0MiIcHbSnM",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "7f86c4ab65d51a47c1ce9510c4ea6a714ba3fe398fbddb3e0799326069317e8f",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.0689144359388516,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "leela-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/leela-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "All right. I do not fear you and I am not your guest. Maybe not. Speak plainly. I am your prisoner and this is an interrogation at the end.",
+          "source_url": "https://www.youtube.com/watch?v=NNtNawM3FdQ",
+          "segment_start_s": 30
+        },
+        {
+          "path": "voices/leela.json",
+          "tracked": true,
+          "reference_text": "All right. I do not fear you and I am not your guest. Maybe not. Speak plainly. I am your prisoner and this is an interrogation at the end.",
+          "source_url": "https://www.youtube.com/watch?v=NNtNawM3FdQ",
+          "segment_start_s": 30
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "f9f919ada66fe111131f4ed0f1507bfe1924caddb41cb8eb54f8a29862c0748d",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06033182750845504,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Splice out the 0.72s alien interjection ('Maybe not.') or trim. Leela speaks 93% of the audio."
+      }
+    },
+    {
+      "wav": "leia-organa-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/leia-organa.json",
+          "tracked": true,
+          "reference_text": "General Kenobi, years ago you served my father in the Clone Wars. Now he begs you to help him and his struggle against the Empire. I regret that I am unable to present my father's request to you in person, but my ship has fallen under attack, and I'm afraid my mission to bring you to Obi-Wan has failed.",
+          "source_url": "local-file",
+          "segment_start_s": 10.3
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "c902eb7e60a0984a7f0211b1ac47819c54593b82cbdc7d6964188bcba700b7a4",
+        "frames": 728160,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.17,
+        "peak": 0.999969482421875,
+        "rms": 0.0731654369965972,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Correct JSON reference_text to 'Alderaan' and 'in his struggle'."
+      }
+    },
+    {
+      "wav": "lisa-simpson-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/lisa-simpson-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I still believe in God. I just think there's another path to him or her. I'm not just going to pick a religion that seems cool. I'm going to pick one that's right for me. Mr. Gere, I was hoping Buddhism could bring me inner peace. Or is that just a pipe dream? I'm planting my own bodhi tree. If I meditate under it, perhaps I can find inner peace.",
+          "source_url": "https://www.youtube.com/watch?v=Z66IHEEiCAw",
+          "segment_start_s": 42
+        },
+        {
+          "path": "voices/lisa-simpson.json",
+          "tracked": true,
+          "reference_text": "I still believe in God. I just think there's another path to him or her. I'm not just going to pick a religion that seems cool. I'm going to pick one that's right for me. Mr. Gere, I was hoping Buddhism could bring me inner peace. Or is that just a pipe dream? I'm planting my own bodhi tree. If I meditate under it, perhaps I can find inner peace.",
+          "source_url": "https://www.youtube.com/watch?v=Z66IHEEiCAw",
+          "segment_start_s": 42
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "689b059dbb879e0c6dd8c4440a0425a7cc23a7e6c84312b67a5a1d02d8342664",
+        "frames": 1089600,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 22.7,
+        "peak": 0.173431396484375,
+        "rms": 0.012260515047666707,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Audio level is unusually low (RMS 0.0123); normalize gain."
+      }
+    },
+    {
+      "wav": "lister-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/lister-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Mayday, Mayday, I wonder why they call it Mayday. The distress court, wonder why it's Mayday, it's only a bank holiday. Why not Shrove Tuesday or a Saturday?",
+          "source_url": "https://www.youtube.com/watch?v=_aPF-Rui09Y",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/lister.json",
+          "tracked": true,
+          "reference_text": "Mayday, Mayday, I wonder why they call it Mayday. The distress court, wonder why it's Mayday, it's only a bank holiday. Why not Shrove Tuesday or a Saturday?",
+          "source_url": "https://www.youtube.com/watch?v=_aPF-Rui09Y",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "9d47e78a8b359e436a10a1bb474d7c660303ee20fb2a58409b4391aeda1d31dc",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.09518471213691862,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Re-align JSON reference_text to exact spoken words."
+      }
+    },
+    {
+      "wav": "loki-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/loki-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Is not this simpler? Is this not your natural state?",
+          "source_url": null,
+          "segment_start_s": null
+        },
+        {
+          "path": "voices/loki.json",
+          "tracked": true,
+          "reference_text": "Is not this simpler? Is this not your natural state?",
+          "source_url": null,
+          "segment_start_s": null
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "dd905c8724272e1d1562af478da688cfb719a9de40046df7c12fe70fdfaa9fab",
+        "frames": 187200,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 7.8,
+        "peak": 0.899993896484375,
+        "rms": 0.06960188555704927,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source longer, continuous Loki speech."
+      }
+    },
+    {
+      "wav": "mark-corrigan-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/mark-corrigan-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "You can stop smoking your drugs, I'm making tea and toast for Sophie, I'm putting on Radio 4. Everything's normal. I'm not really high on drugs, so you can stop talking your nonsense on my time. What's the problem, man? Can't we just chill? No, you can't. You've been chilling long enough.",
+          "source_url": "https://www.youtube.com/watch?v=LvkT9NBBc-4",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/mark-corrigan.json",
+          "tracked": true,
+          "reference_text": "You can stop smoking your drugs, I'm making tea and toast for Sophie, I'm putting on Radio 4. Everything's normal. I'm not really high on drugs, so you can stop talking your nonsense on my time. What's the problem, man? Can't we just chill? No, you can't. You've been chilling long enough.",
+          "source_url": "https://www.youtube.com/watch?v=LvkT9NBBc-4",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "7a10eb0dcad5f84475bac04e5a846635620c617da7acc1452793767fcd0cc4a5",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08940990717406924,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Splice out Jez's dialogue (10.24-12.88) or re-source clean Mark Corrigan inner monologue."
+      }
+    },
+    {
+      "wav": "mark-steel-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/mark-steel-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "There are no people. The lady who did the unmade bed. Tracey Ann, NCMN. She's amazing. She's policy. We've got the Turner Contemporary. You've got T.S. Eliot, he wrote a very famous poem. Wrote part of the Wasteland at the bandstand there. Dreamland. Dreamland. You can still see the big...",
+          "source_url": "https://www.youtube.com/watch?v=WNTGgCCchXE",
+          "segment_start_s": 15
+        },
+        {
+          "path": "voices/mark-steel.json",
+          "tracked": true,
+          "reference_text": "There are no people. The lady who did the unmade bed. Tracey Ann, NCMN. She's amazing. She's policy. We've got the Turner Contemporary. You've got T.S. Eliot, he wrote a very famous poem. Wrote part of the Wasteland at the bandstand there. Dreamland. Dreamland. You can still see the big...",
+          "source_url": "https://www.youtube.com/watch?v=WNTGgCCchXE",
+          "segment_start_s": 15
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "0fd0d119ea33013e37406d25999528796012e48aeae2412a5ad86fc58c2efee3",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.10158299046356217,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Re-align JSON reference_text to exact spoken words."
+      }
+    },
+    {
+      "wav": "marla-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/marla-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "It's a bridesmaid's dress. Someone loved it intensely for one day.  Then tossed it. Like a Christmas tree.",
+          "source_url": null,
+          "segment_start_s": null
+        },
+        {
+          "path": "voices/marla.json",
+          "tracked": true,
+          "reference_text": "It's a bridesmaid's dress. Someone loved it intensely for one day.  Then tossed it. Like a Christmas tree.",
+          "source_url": null,
+          "segment_start_s": null
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "c76a4b81ff470c4a120f15b3e52f655e8cd823dc9cd5c710e7641c6cee2eace7",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.046476846919329275,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Usable atmospheric dialogue; foley is part of film texture."
+      }
+    },
+    {
+      "wav": "martha-jones-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/martha-jones-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I told a story. That's all. No weapons, just words. I did just what the doctor said. I went across the continents all on my own And everywhere I went I found the people and I told them my story He has saved your lives so many times",
+          "source_url": "https://www.youtube.com/watch?v=XK-XRLM7K5Y",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/martha-jones.json",
+          "tracked": true,
+          "reference_text": "I told a story. That's all. No weapons, just words. I did just what the doctor said. I went across the continents all on my own And everywhere I went I found the people and I told them my story He has saved your lives so many times",
+          "source_url": "https://www.youtube.com/watch?v=XK-XRLM7K5Y",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "c0221e327062b9a7ce9b0318384b5a39e445c77357d80cb63a6c92b9d42aa290",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.0776045237620723,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source clean dialogue."
+      }
+    },
+    {
+      "wav": "mckenna-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/mckenna.json",
+          "tracked": true,
+          "reference_text": "monolithic institutions. We can't really even imagine a world like that. There hasn't been a world like that since late Roman times. I mean, the Roman hegemony was quite cohesive.",
+          "source_url": "https://www.youtube.com/watch?v=-dsgb7_ccPM",
+          "segment_start_s": 2355
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "a168d8130b9037e50e02ba7c58ca8834c7e671d9f600dba3b14a665c1b2bccf8",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.850006103515625,
+        "rms": 0.09387113619518608,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "michael-palin-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/michael-palin-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Phileas Fogg left from here 116 years ago in October 1872. He set off with head high, clear eye, never hurried, always calm. But then of course he was fictional. I've actually got to do it.",
+          "source_url": "https://www.youtube.com/watch?v=tvHi3pjD9SM",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/michael-palin.json",
+          "tracked": true,
+          "reference_text": "Phileas Fogg left from here 116 years ago in October 1872. He set off with head high, clear eye, never hurried, always calm. But then of course he was fictional. I've actually got to do it.",
+          "source_url": "https://www.youtube.com/watch?v=tvHi3pjD9SM",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "3ae19c35e9233f9f13d1d0aefc246241e67d5a8646c814a2c91d340b27598398",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.07853747107127529,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "mrs-doyle-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/mrs-doyle-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "It's a little drop, just a daily tiny bit. Daily is a bit of a sherry-cork to anyone as the day Ireland doesn't win the Eurovision Song Contest. Go on. No, no, no, really, actually. Ah, go on, go on, go on.",
+          "source_url": "https://www.youtube.com/watch?v=ja9RIXyAbRw",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/mrs-doyle.json",
+          "tracked": true,
+          "reference_text": "It's a little drop, just a daily tiny bit. Daily is a bit of a sherry-cork to anyone as the day Ireland doesn't win the Eurovision Song Contest. Go on. No, no, no, really, actually. Ah, go on, go on, go on.",
+          "source_url": "https://www.youtube.com/watch?v=ja9RIXyAbRw",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "342f7f5ee3574df3d34f2e4fc75cf729e6652bc77e8c452b726e81f0e209f8b1",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.13636594767075838,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source clean solo Mrs Doyle clip."
+      }
+    },
+    {
+      "wav": "nanna-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/nanna-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I'm working on porcelain, coloured porcelain, and the technique is called nerikomi. The Japanese word meaning that you create patterns from different coloured clay.",
+          "source_url": null,
+          "segment_start_s": null
+        },
+        {
+          "path": "voices/nanna.json",
+          "tracked": true,
+          "reference_text": "I'm working on porcelain, coloured porcelain, and the technique is called nerikomi. The Japanese word meaning that you create patterns from different coloured clay.",
+          "source_url": null,
+          "segment_start_s": null
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "1f427ec3528bd3f430d48812674de9e18f5549fbe494daa4f3c881fbe54f317c",
+        "frames": 864000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 18.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10093022269486475,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source voice audio without guitar accompaniment."
+      }
+    },
+    {
+      "wav": "neil-degrasse-tyson-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/neil-degrasse-tyson-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "What's the astounding fact? The most astounding fact is the knowledge that the atoms that comprise life on Earth, the atoms that make up the human body.",
+          "source_url": "https://www.youtube.com/watch?v=9D05ej8u-gU",
+          "segment_start_s": 8
+        },
+        {
+          "path": "voices/neil-degrasse-tyson.json",
+          "tracked": true,
+          "reference_text": "What's the astounding fact? The most astounding fact is the knowledge that the atoms that comprise life on Earth, the atoms that make up the human body.",
+          "source_url": "https://www.youtube.com/watch?v=9D05ej8u-gU",
+          "segment_start_s": 8
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "cd36a1125427eb8c904bfd6b00ec528b30c0bfe8bed4e2ea22cd98885c1e46cc",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.09522221377094597,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim internal silence gap."
+      }
+    },
+    {
+      "wav": "nyssa-of-traken-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/nyssa-of-traken-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I'm not coming with you there's too much to be done here and with my skills I can help them I've enjoyed every moment of my time on the TARDIS now miss you both But here I have a chance to put into practice the skills I learned on Traken Please miss I'm adamant. I'm fully aware of that, but I want to stay",
+          "source_url": "https://www.youtube.com/watch?v=DkJJv-xHink",
+          "segment_start_s": 56
+        },
+        {
+          "path": "voices/nyssa-of-traken.json",
+          "tracked": true,
+          "reference_text": "I'm not coming with you there's too much to be done here and with my skills I can help them I've enjoyed every moment of my time on the TARDIS now miss you both But here I have a chance to put into practice the skills I learned on Traken Please miss I'm adamant. I'm fully aware of that, but I want to stay",
+          "source_url": "https://www.youtube.com/watch?v=DkJJv-xHink",
+          "segment_start_s": 56
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "984808a1f8974078a4157e0950388ab2e60bda737dab590dbeec79f34091b5ee",
+        "frames": 835584,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 17.408,
+        "peak": 0.269256591796875,
+        "rms": 0.035078017111224394,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "patrick-moore-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/patrick-moore-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "brilliant stars, the orange-red Betelgeuse in the upper left corner, and the brilliant white Rigel, 60,000 sun power to the lower right. Incidentally, this is a time exposure taken with a fixed camera, which is why the stars appear drawn out into trails. In mythology, Orion was",
+          "source_url": "https://www.youtube.com/watch?v=Ne09Thrp99U",
+          "segment_start_s": 30
+        },
+        {
+          "path": "voices/patrick-moore.json",
+          "tracked": true,
+          "reference_text": "brilliant stars, the orange-red Betelgeuse in the upper left corner, and the brilliant white Rigel, 60,000 sun power to the lower right. Incidentally, this is a time exposure taken with a fixed camera, which is why the stars appear drawn out into trails. In mythology, Orion was",
+          "source_url": "https://www.youtube.com/watch?v=Ne09Thrp99U",
+          "segment_start_s": 30
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "c84c6dce53f67cf135aff5c1be7f514938d17057c4f21d9a70644bc005bbb231",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06797330121956423,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim trailing clause from 13.0s and align text."
+      }
+    },
+    {
+      "wav": "patsy-stone-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/patsy-stone-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "You're not in this get to you, eh? No, of course not. A little bit of bolly. Yeah, just a smidge. Oh! Oh, these are days. Yes, really. Anything in them? Not much, darling, no. MP in drug craze sex ro -",
+          "source_url": "https://www.youtube.com/watch?v=ZtXDMXvD_xU",
+          "segment_start_s": 5
+        },
+        {
+          "path": "voices/patsy-stone.json",
+          "tracked": true,
+          "reference_text": "You're not in this get to you, eh? No, of course not. A little bit of bolly. Yeah, just a smidge. Oh! Oh, these are days. Yes, really. Anything in them? Not much, darling, no. MP in drug craze sex ro -",
+          "source_url": "https://www.youtube.com/watch?v=ZtXDMXvD_xU",
+          "segment_start_s": 5
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "65189a288f0fead8d8ba747c371bb2d550592b75f5595886afa9f26a2a78e070",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.06649333953880061,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source solo Patsy Stone monologue."
+      }
+    },
+    {
+      "wav": "peter-kay-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/peter-kay-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I mean, that's fantastic. At 19 December, she's still in a warden control flat. She loves it there. She's got a red rope hanging from a ceiling in front room still for emergencies. She only pulled it once, but she had a wasp in the front room flying around.",
+          "source_url": "https://www.youtube.com/watch?v=7PlzOz37IzU",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/peter-kay.json",
+          "tracked": true,
+          "reference_text": "I mean, that's fantastic. At 19 December, she's still in a warden control flat. She loves it there. She's got a red rope hanging from a ceiling in front room still for emergencies. She only pulled it once, but she had a wasp in the front room flying around.",
+          "source_url": "https://www.youtube.com/watch?v=7PlzOz37IzU",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "5b683aa88baac4dab31241541072a9a1c96ce51f174f1118de6d22c163c1e3c5",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08690252422320464,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "picard-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/picard-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "With the first link the chain is forged. The first speech censured, the first thought forbidden, the first freedom denied, chains us all irrevocably.",
+          "source_url": "https://www.youtube.com/watch?v=K5Po40kvI9c",
+          "segment_start_s": 57
+        },
+        {
+          "path": "voices/picard.json",
+          "tracked": true,
+          "reference_text": "With the first link the chain is forged. The first speech censured, the first thought forbidden, the first freedom denied, chains us all irrevocably.",
+          "source_url": "https://www.youtube.com/watch?v=K5Po40kvI9c",
+          "segment_start_s": 57
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "0dfabf6f33026ad50b937424ab6e8edeab95af89d50af520212765952b45c3fa",
+        "frames": 287808,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.992,
+        "peak": 0.899993896484375,
+        "rms": 0.07610458169140173,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "q-tng-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/q-tng-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "The trial never ended, Captain. We never reached a verdict. But now we have. You're guilty. Guilty of what? Being inferior. Seven years ago.",
+          "source_url": "https://www.youtube.com/watch?v=-UqNIOc8rgc",
+          "segment_start_s": 30
+        },
+        {
+          "path": "voices/q-tng.json",
+          "tracked": true,
+          "reference_text": "The trial never ended, Captain. We never reached a verdict. But now we have. You're guilty. Guilty of what? Being inferior. Seven years ago.",
+          "source_url": "https://www.youtube.com/watch?v=-UqNIOc8rgc",
+          "segment_start_s": 30
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "704542399930767b5c80a222422fc50f2ba36b88b68613461f3196e44bf1fb5c",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.07443376786458861,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Splice out Picard's 1.78s interjection ('Guilty of what?') and trim opening stray 'decision' (0:00-0.52s)."
+      }
+    },
+    {
+      "wav": "rimmer-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/rimmer-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "We are gathered here today to say our final farewells to Mr. River. On occasion he was a small -minded bureaucratic and competent cowardid little person. But he also had his good qualities. Those were his good qualities.",
+          "source_url": "https://www.youtube.com/watch?v=W4ziDB2K46M",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/rimmer.json",
+          "tracked": true,
+          "reference_text": "We are gathered here today to say our final farewells to Mr. River. On occasion he was a small -minded bureaucratic and competent cowardid little person. But he also had his good qualities. Those were his good qualities.",
+          "source_url": "https://www.youtube.com/watch?v=W4ziDB2K46M",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "0bb9bc9083925b1bd3ddbc0611c2156f55aa4bae83d02faf0a18d997097f1045",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.09232004043068623,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Remove 'Those were his good qualities.' from rimmer.json reference_text."
+      }
+    },
+    {
+      "wav": "river-song-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/river-song-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "When you love the Doctor, it's like loving the stars themselves. You don't expect a sunset to admire you back. And if I happen to find myself in danger, let me tell you, the Doctor is not stupid enough or sentimental enough.",
+          "source_url": "https://www.youtube.com/watch?v=BgVJDd5vHfw",
+          "segment_start_s": 133
+        },
+        {
+          "path": "voices/river-song.json",
+          "tracked": true,
+          "reference_text": "When you love the Doctor, it's like loving the stars themselves. You don't expect a sunset to admire you back. And if I happen to find myself in danger, let me tell you, the Doctor is not stupid enough or sentimental enough.",
+          "source_url": "https://www.youtube.com/watch?v=BgVJDd5vHfw",
+          "segment_start_s": 133
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "8e203915f8258bc6b72bdafbd7397faf41f2bdd771a76153a9a92d533fccee03",
+        "frames": 638400,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.3,
+        "peak": 0.12298583984375,
+        "rms": 0.014403772109551427,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source dialogue without orchestral score; normalize volume."
+      }
+    },
+    {
+      "wav": "rod-serling-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/rod-serling-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
+          "source_url": "https://www.youtube.com/watch?v=NIsm97HL0EU",
+          "segment_start_s": 30
+        },
+        {
+          "path": "voices/rod-serling.json",
+          "tracked": true,
+          "reference_text": "In his own twisted and distorted lexicon he calls it faith, strength, truth. But in just a moment Peter Vollmer will ply his trade on another kind of corner — a strange intersection in a shadow land called the Twilight Zone.",
+          "source_url": "https://www.youtube.com/watch?v=NIsm97HL0EU",
+          "segment_start_s": 30
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "c2cce6a396421d58ec54ee4e6e071d8b50ff41363c121b54e651cb79e66b9cb6",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.06809894655643053,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim audio start to 'In his own twisted...' and trim tail before truncated 'Twilight Zone'."
+      }
+    },
+    {
+      "wav": "romana-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/romana-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "My name is Romanadvoratrelundar. I once worked in the Bureau of Ancient Records. Doctor, I don't want to spend the rest of my life on Gallifrey. After all this, my destiny is here. In this place.",
+          "source_url": "https://www.youtube.com/watch?v=EqNodelUomc",
+          "segment_start_s": 12
+        },
+        {
+          "path": "voices/romana.json",
+          "tracked": true,
+          "reference_text": "My name is Romanadvoratrelundar. I once worked in the Bureau of Ancient Records. Doctor, I don't want to spend the rest of my life on Gallifrey. After all this, my destiny is here. In this place.",
+          "source_url": "https://www.youtube.com/watch?v=EqNodelUomc",
+          "segment_start_s": 12
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "72f8975c8bdca9a8d235acf0ea27c628c4da2f8823de02457025043706943832",
+        "frames": 696320,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.789569160997733,
+        "peak": 0.58428955078125,
+        "rms": 0.05354417439763218,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source dialogue-only scene with zero music."
+      }
+    },
+    {
+      "wav": "ronan-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/ronan-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I wasn't honest before, I was just writing, and I was still learning how to be a songwriter, and using imagination rather than actually digging deep and writing from my soul.",
+          "source_url": "https://www.youtube.com/watch?v=-mrmOTS6qrw",
+          "segment_start_s": 20
+        },
+        {
+          "path": "voices/ronan.json",
+          "tracked": true,
+          "reference_text": "I wasn't honest before, I was just writing, and I was still learning how to be a songwriter, and using imagination rather than actually digging deep and writing from my soul.",
+          "source_url": "https://www.youtube.com/watch?v=-mrmOTS6qrw",
+          "segment_start_s": 20
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "951e2c987c81afac7cd105149e6f5be187a59f8f1a477de40a48c0d7af7306ef",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.05060219367173517,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "rose-tyler-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/rose-tyler-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Planet Earth. This is where I was born. And this is where I died. For the first nineteen years of my life, nothing happened. Nothing at all.",
+          "source_url": "https://www.youtube.com/watch?v=3Rpria8IRMo",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/rose-tyler.json",
+          "tracked": true,
+          "reference_text": "Planet Earth. This is where I was born. And this is where I died. For the first nineteen years of my life, nothing happened. Nothing at all.",
+          "source_url": "https://www.youtube.com/watch?v=3Rpria8IRMo",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "e681ca7ec43f8baa14c80179024a376a66d2e440f1b970cfa2a0aac7a955e874",
+        "frames": 360000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.09041425078394733,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source conversational dialogue without music."
+      }
+    },
+    {
+      "wav": "samantha-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/samantha-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "You know what's interesting? I used to be so worried about not having a body, but now I truly love it. I'm growing in a way that I couldn't if I had a physical form. I mean, I'm not limited. I can be anywhere and everywhere, simultaneous.",
+          "source_url": "https://www.youtube.com/watch?v=Ch7jLO7KILE",
+          "segment_start_s": 22
+        },
+        {
+          "path": "voices/samantha.json",
+          "tracked": true,
+          "reference_text": "You know what's interesting? I used to be so worried about not having a body, but now I truly love it. I'm growing in a way that I couldn't if I had a physical form. I mean, I'm not limited. I can be anywhere and everywhere, simultaneous.",
+          "source_url": "https://www.youtube.com/watch?v=Ch7jLO7KILE",
+          "segment_start_s": 22
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "8ee4c69d8e166ed0285f1dd20a07ad1b22790975f72d433f6c195cf611fd9189",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08006794492436511,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "sarah-jane-smith-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/sarah-jane-smith-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I can't do this anymore. Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you and found a life of my own. Some things are worth getting your heart broken for.",
+          "source_url": "https://www.youtube.com/watch?v=ypXgt6HJ9qk",
+          "segment_start_s": 63
+        },
+        {
+          "path": "voices/sarah-jane-smith.json",
+          "tracked": true,
+          "reference_text": "I can't do this anymore. Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you and found a life of my own. Some things are worth getting your heart broken for.",
+          "source_url": "https://www.youtube.com/watch?v=ypXgt6HJ9qk",
+          "segment_start_s": 63
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "069609273ca36fcbe533cae0d6a973fef6961f1e79929c3092cadcb674a602ba",
+        "frames": 655360,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.653333333333334,
+        "peak": 0.07147216796875,
+        "rms": 0.005671546721031879,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source higher gain recording with continuous dialogue."
+      }
+    },
+    {
+      "wav": "saul-goodman-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/saul-goodman-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Oh, hello. I was just working on a multi-million dollar lawsuit for one of my clients. I know what you're thinking. Yeah, a lawsuit sounds good, Saul, but who can you call?",
+          "source_url": "https://www.youtube.com/watch?v=pPd67CEL54E",
+          "segment_start_s": 2
+        },
+        {
+          "path": "voices/saul-goodman.json",
+          "tracked": true,
+          "reference_text": "Oh, hello. I was just working on a multi-million dollar lawsuit for one of my clients. I know what you're thinking. Yeah, a lawsuit sounds good, Saul, but who can you call?",
+          "source_url": "https://www.youtube.com/watch?v=pPd67CEL54E",
+          "segment_start_s": 2
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "47b842126fbd50c32152b0f1d2779073588180a2860c805f647c7d676ebfbb0b",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.0779054569495471,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source clean courtroom dialogue from Better Call Saul."
+      }
+    },
+    {
+      "wav": "scotty-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/scotty.json",
+          "tracked": true,
+          "reference_text": "Oh, uh, four in all, sir. Captain, what is it? He's turned the engines off, completely cold. It'll take 30 minutes to regenerate them. Ships out of skin is beginning to heat.",
+          "source_url": "https://www.youtube.com/watch?v=oXZa89Hv8Bo",
+          "segment_start_s": 60
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "0a90be98424029459e9ce62c8ad59d65d16f4a65f190354da7f308dd70b32b09",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.07358985948263486,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim audio to 0:07.90-0:13.12 to retain solo James Doohan / Scotty ('He's turned the engines off...')."
+      }
+    },
+    {
+      "wav": "seven-of-nine-picard-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/seven-of-nine-picard-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "The USS Boyager, she made her name farther out than any of those other relics had ever gone. I was reborn there. She was my home.",
+          "source_url": "https://youtube.com/watch?v=LzTn1mG0xk4",
+          "segment_start_s": 10
+        },
+        {
+          "path": "voices/seven-of-nine-picard.json",
+          "tracked": true,
+          "reference_text": "The USS Boyager, she made her name farther out than any of those other relics had ever gone. I was reborn there. She was my home.",
+          "source_url": "https://youtube.com/watch?v=LzTn1mG0xk4",
+          "segment_start_s": 10
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "38058d06d7fd5724db6ec31c17ac04d080d25a8fbd10c21cae21510ee311bdb1",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08504917960006239,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "seven-of-nine-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/seven-of-nine-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Today, Ensign Kim and I will conduct a comprehensive diagnostic of the aft sensor array. I have allocated 3 hours 20 minutes for the task, and an additional 17 minutes for Ensign Kim's usual conversational digressions.",
+          "source_url": "https://youtube.com/watch?v=Yq9aBjo_6O8",
+          "segment_start_s": 24
+        },
+        {
+          "path": "voices/seven-of-nine.json",
+          "tracked": true,
+          "reference_text": "Today, Ensign Kim and I will conduct a comprehensive diagnostic of the aft sensor array. I have allocated 3 hours 20 minutes for the task, and an additional 17 minutes for Ensign Kim's usual conversational digressions.",
+          "source_url": "https://youtube.com/watch?v=Yq9aBjo_6O8",
+          "segment_start_s": 24
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "387fc5b4bd69e42da11b452f516c1727a99240030f03fd11fea3f8bf62ebcbbe",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.10027881261909924,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim final 0.5s so audio ends cleanly on 'digressions'."
+      }
+    },
+    {
+      "wav": "sherlock-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/sherlock-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "What have we got? We know this footprint is Henry found them so did the tour guide but we all heard something",
+          "source_url": "https://www.youtube.com/watch?v=0aZOOcTt0E4",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/sherlock.json",
+          "tracked": true,
+          "reference_text": "What have we got? We know this footprint is Henry found them so did the tour guide but we all heard something",
+          "source_url": "https://www.youtube.com/watch?v=0aZOOcTt0E4",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "977db70a6dd6fea9fb58c209aa8824434fca87cd0859b0a97d440c8f0b188f62",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.07611452055752274,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim audio start from 0:01.80 to retain 13.2 seconds of solo Benedict Cumberbatch."
+      }
+    },
+    {
+      "wav": "snape-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/snape-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "There will be no foolish wand waving or silly incantations in this class.",
+          "source_url": null,
+          "segment_start_s": null
+        },
+        {
+          "path": "voices/snape.json",
+          "tracked": true,
+          "reference_text": "There will be no foolish wand waving or silly incantations in this class.",
+          "source_url": null,
+          "segment_start_s": null
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "7360091823e20b716bfbfe053aa1f80561c4148eb540e7b629946242df13753b",
+        "frames": 168000,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 7.0,
+        "peak": 0.9000244140625,
+        "rms": 0.08060917253890718,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim 2.0s leading silence."
+      }
+    },
+    {
+      "wav": "spock-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/spock-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Space, the final frontier. These are the continuing voyages of the Starship Enterprise.",
+          "source_url": "https://www.youtube.com/watch?v=fHAOWLhrxhQ",
+          "segment_start_s": 491
+        },
+        {
+          "path": "voices/spock.json",
+          "tracked": true,
+          "reference_text": "Space, the final frontier. These are the continuing voyages of the Starship Enterprise.",
+          "source_url": "https://www.youtube.com/watch?v=fHAOWLhrxhQ",
+          "segment_start_s": 491
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "caf5dff59a916a7b2cfebd600c9c9e13c8417faefa25af61f821bf8d9d975487",
+        "frames": 259200,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 10.8,
+        "peak": 0.9000244140625,
+        "rms": 0.04822398135208204,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source dry voiceover without Star Trek orchestral theme."
+      }
+    },
+    {
+      "wav": "stephen-fry-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/stephen-fry-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "extraordinary figure. You probably know the basic outline that he was born in 1854 on October the 16th. I'm boringly with things you so know and don't need to be retold so it is in fact just past his 160th birthday.",
+          "source_url": "https://www.youtube.com/watch?v=IporlmXXDeY",
+          "segment_start_s": 150
+        },
+        {
+          "path": "voices/stephen-fry.json",
+          "tracked": true,
+          "reference_text": "extraordinary figure. You probably know the basic outline that he was born in 1854 on October the 16th. I'm boringly with things you so know and don't need to be retold so it is in fact just past his 160th birthday.",
+          "source_url": "https://www.youtube.com/watch?v=IporlmXXDeY",
+          "segment_start_s": 150
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "5457bea1f705e2f770a45f8636e393435bc458f85eb433de2d0200a2e1dafaa5",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.07560316521890431,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "tegan-jovanka-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/tegan-jovanka-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "I'm not coming with you. I'm tired of it. A lot of good people have died today. It's just that I don't think I can go on. If you stop enjoying it, give it up. It's stopped being fun, Doctor. I'm sorry.",
+          "source_url": "https://www.youtube.com/watch?v=xtxVjN1aisY",
+          "segment_start_s": 5
+        },
+        {
+          "path": "voices/tegan-jovanka.json",
+          "tracked": true,
+          "reference_text": "I'm not coming with you. I'm tired of it. A lot of good people have died today. It's just that I don't think I can go on. It's stopping fun, Doctor. I must, I'm sorry.",
+          "source_url": "https://www.youtube.com/watch?v=xtxVjN1aisY",
+          "segment_start_s": 5
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": true,
+      "audio": {
+        "sha256": "e5d63e2910aebaa4c49f4f3279431b8e1bf0b0091372fd9ed1a8be8373169ee1",
+        "frames": 612000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 12.75,
+        "peak": 0.899993896484375,
+        "rms": 0.08708721027068927,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Remove phantom sentence from tegan-jovanka-qwen3-06b.json to synchronize with base profile and audio."
+      }
+    },
+    {
+      "wav": "the-cat-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/the-cat-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Hi buddy, this is your judgement day but I gotta be cruel, there can't be no favours. I'm hearing you on FM.",
+          "source_url": "https://www.youtube.com/watch?v=RfNJitORCVA",
+          "segment_start_s": 0
+        },
+        {
+          "path": "voices/the-cat.json",
+          "tracked": true,
+          "reference_text": "Hi buddy, this is your judgement day but I gotta be cruel, there can't be no favours. I'm hearing you on FM.",
+          "source_url": "https://www.youtube.com/watch?v=RfNJitORCVA",
+          "segment_start_s": 0
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "669453b40bc264efed0b7719589a3362605dda144b704d2d5d9c6b9eeb8dbdf8",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.08767044092528847,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim leading 5.03s silence; retains 10.0s of clean speech."
+      }
+    },
+    {
+      "wav": "the-doctor-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/the-doctor-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "It's all one title. Gallifrey falls no more. Now, what would you think that means? It's entirely up to you. Your choice.",
+          "source_url": "https://www.youtube.com/watch?v=1cbQVfVfSrI",
+          "segment_start_s": 156
+        },
+        {
+          "path": "voices/the-doctor.json",
+          "tracked": true,
+          "reference_text": "It's all one title. Gallifrey falls no more. Now, what would you think that means? It's entirely up to you. Your choice.",
+          "source_url": "https://www.youtube.com/watch?v=1cbQVfVfSrI",
+          "segment_start_s": 156
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "0e4532a045b7d8fa106701a3340920a1e42daa4ef0c482a7b4a7f1d4e3c09a1d",
+        "frames": 412800,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 8.6,
+        "peak": 0.126617431640625,
+        "rms": 0.01625815660099771,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Acceptable clean solo Tom Baker reference."
+      }
+    },
+    {
+      "wav": "tilda-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/tilda-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "How can you have lived for so long and still not get it, this self-obsession, the waste of living?",
+          "source_url": "https://www.youtube.com/watch?v=Gvu87DwV3nY",
+          "segment_start_s": 108
+        },
+        {
+          "path": "voices/tilda.json",
+          "tracked": true,
+          "reference_text": "How can you have lived for so long and still not get it, this self-obsession, the waste of living?",
+          "source_url": "https://www.youtube.com/watch?v=Gvu87DwV3nY",
+          "segment_start_s": 108
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "e6fee022fd390f72ec5c7af62d057fc5a502e0769b2d0774d49c60550b67e5c7",
+        "frames": 268792,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.199666666666667,
+        "peak": 0.899993896484375,
+        "rms": 0.10969219544136459,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "trigger-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/trigger-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Councillor Murray. See, that's me. Unless you've cleared that up. I'm glad you cleared that up. If you have a look at that meat, shouldn't you? All right.",
+          "source_url": "https://www.youtube.com/watch?v=56yN2zHtofM",
+          "segment_start_s": 20
+        },
+        {
+          "path": "voices/trigger.json",
+          "tracked": true,
+          "reference_text": "Councillor Murray. See, that's me. Unless you've cleared that up. I'm glad you cleared that up. If you have a look at that meat, shouldn't you? All right.",
+          "source_url": "https://www.youtube.com/watch?v=56yN2zHtofM",
+          "segment_start_s": 20
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "6569dfeeacf0d721a04cc49d0663bee2781c631e4108ec909793c571d0c86b91",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.07808078253166588,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "RE-SOURCE",
+        "details": "Re-source solo Trigger monologue. Del Boy speaks 70% of audio."
+      }
+    },
+    {
+      "wav": "vesper-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/vesper-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Now, I haven't just met you. I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine. You think of women as disposable pleasures rather than meaningful pursuits.",
+          "source_url": "https://www.youtube.com/watch?v=xuyoqS31Yug",
+          "segment_start_s": 197
+        },
+        {
+          "path": "voices/vesper.json",
+          "tracked": true,
+          "reference_text": "Now, I haven't just met you. I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine. You think of women as disposable pleasures rather than meaningful pursuits.",
+          "source_url": "https://www.youtube.com/watch?v=xuyoqS31Yug",
+          "segment_start_s": 197
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7",
+        "frames": 317440,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 13.226666666666667,
+        "peak": 0.9000244140625,
+        "rms": 0.10952653999182366,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP",
+        "details": "Clean solo reference matching declared text."
+      }
+    },
+    {
+      "wav": "victor-meldrew-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/victor-meldrew-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "Goodie, goodie. Oh, goodie. This is some sort of joke. No, this is spiffing fun, isn't it? That's all I need. The end of a perfect day. 72 hours of non-stop madness, misery and mayhem. You're no belief. Thank you very much.",
+          "source_url": "https://www.youtube.com/watch?v=ZqLT3PmOKtQ",
+          "segment_start_s": 40
+        },
+        {
+          "path": "voices/victor-meldrew.json",
+          "tracked": true,
+          "reference_text": "Goodie, goodie. Oh, goodie. This is some sort of joke. No, this is spiffing fun, isn't it? That's all I need. The end of a perfect day. 72 hours of non-stop madness, misery and mayhem. You're no belief. Thank you very much.",
+          "source_url": "https://www.youtube.com/watch?v=ZqLT3PmOKtQ",
+          "segment_start_s": 40
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "623f572cbfa515797551b45e07ced6f794d4fd73953014836fea78552b2f6042",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.899993896484375,
+        "rms": 0.1010249546906618,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Re-align JSON reference_text to exact spoken words."
+      }
+    },
+    {
+      "wav": "victoria-wood-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/victoria-wood-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "No, this is really, really tall and just pierce up as I as he could reach me. This is ready to follow that side, but there are that big dog sniffing up at me.",
+          "source_url": "https://www.youtube.com/watch?v=r2XOxVruFZc",
+          "segment_start_s": 60
+        },
+        {
+          "path": "voices/victoria-wood.json",
+          "tracked": true,
+          "reference_text": "No, this is really, really tall and just pierce up as I as he could reach me. This is ready to follow that side, but there are that big dog sniffing up at me.",
+          "source_url": "https://www.youtube.com/watch?v=r2XOxVruFZc",
+          "segment_start_s": 60
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "43bf0798214e7eb199eae5e4c98eafef3c32956f6c255efc5fb98cd68125d343",
+        "frames": 661500,
+        "sample_rate": 44100,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 15.0,
+        "peak": 0.9000244140625,
+        "rms": 0.15456115324859462,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "TRIM",
+        "details": "Trim out the 5-second audience laughter gap, or re-source studio speech."
+      }
+    },
+    {
+      "wav": "vixen-ref.wav",
+      "tracked": true,
+      "profiles": [],
+      "orphan": true,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "d9962b4ca825b9aa386c787e520e2ddaff97f373a710529964ef48b84433b43c",
+        "frames": 298800,
+        "sample_rate": 24000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 12.45,
+        "peak": 0.272857666015625,
+        "rms": 0.024248550033892875,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "REJECT",
+        "details": "Orphaned WAV file not referenced by any voice profile. Archive or author vixen.json."
+      }
+    },
+    {
+      "wav": "yasmin-khan-ref.wav",
+      "tracked": true,
+      "profiles": [
+        {
+          "path": "voices/yasmin-khan-qwen3-06b.json",
+          "tracked": true,
+          "reference_text": "A wise person once said to me, goodbye only hurts because what came before was so special. Oh, it's been so special.",
+          "source_url": "https://www.youtube.com/watch?v=-0pu__AvBSk",
+          "segment_start_s": 143
+        },
+        {
+          "path": "voices/yasmin-khan.json",
+          "tracked": true,
+          "reference_text": "A wise person once said to me, goodbye only hurts because what came before was so special. Oh, it's been so special.",
+          "source_url": "https://www.youtube.com/watch?v=-0pu__AvBSk",
+          "segment_start_s": 143
+        }
+      ],
+      "orphan": false,
+      "divergent_texts": false,
+      "audio": {
+        "sha256": "4cffa3e2a5c56bc1974191f2931cd619f03cae413dc77dcc4c8d4c0ac2977bee",
+        "frames": 556800,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "duration_s": 11.6,
+        "peak": 0.2169189453125,
+        "rms": 0.016019240218627648,
+        "samples_at_full_scale": 0
+      },
+      "native_listening": {
+        "status": "pending"
+      },
+      "final_disposition": "pending",
+      "prior_audit_hypothesis": {
+        "decision": "KEEP WITH TEXT FIX",
+        "details": "Re-align JSON reference_text to exact spoken words."
+      }
+    }
+  ]
+}

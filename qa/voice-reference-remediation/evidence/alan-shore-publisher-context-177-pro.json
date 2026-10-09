@@ -1,0 +1,38 @@
+{
+  "wav": "clip-005-ref.wav",
+  "source_sha256": "2c68fb0db44e925e4c9015570cc3bdf4232589327d6c809bba63300f265e4a75",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "629954e3-de00-46a2-a9e3-09cd2342be1c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2c68fb0db44e925e4c9015570cc3bdf4232589327d6c809bba63300f265e4a75"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2c68fb0db44e925e4c9015570cc3bdf4232589327d6c809bba63300f265e4a75"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "629954e3-de00-46a2-a9e3-09cd2342be1c",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I expected the American people to rise up. [short laugh/scoff] They didn't.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    \"0.0-3.0\",\n    \"4.5-5.5\"\n  ],\n  \"uncertainty\": \"Interval timestamps are approximate perceptual estimates. The exact wording of the laugh/scoff is non-lexical. The middle pause/laugh separates two clean phrases.\"\n}\n```\n",
+    "duration_seconds": 29.544904,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12619,
+      "output_tokens": 2404,
+      "thinking_tokens": 2073,
+      "cache_read_tokens": 24201,
+      "total_tokens": 15023
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

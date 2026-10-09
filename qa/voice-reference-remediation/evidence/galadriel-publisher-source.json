@@ -1,0 +1,11 @@
+{
+  "programme_url": "https://www.bbc.co.uk/programmes/m001g30v",
+  "download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0dmjjtx.mp3",
+  "title": "Cate Blanchett, actor",
+  "publisher": "BBC Radio 4",
+  "interviewer": "Lauren Laverne",
+  "source_mp3_sha256": "7267418d8cb82b35ee572b4de92c9afe6441c3d4bce8b997899ecf629d1bc88d",
+  "source_audio_sha256": "cc13d841b7e94b56002b42d4db2c458a16f52aa1b59fc86f15dc69124628e0d1",
+  "decode": "ffmpeg to PCM16 WAV, preserves decoded source rate/channels; no cleanup or normalization",
+  "retrieved_utc": "2026-10-08T06:36:35.284544+00:00"
+}

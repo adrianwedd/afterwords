@@ -1,8 +1,8 @@
 {
   "name": "the-doctor",
-  "source_url": "https://www.youtube.com/watch?v=1cbQVfVfSrI",
+  "source_url": "https://www.youtube.com/watch?v=xszeU-yTSfg",
   "reference_audio": "the-doctor-ref.wav",
-  "reference_text": "It's all one title. Gallifrey falls no more. Now, what would you think that means? It's entirely up to you. Your choice.",
-  "segment_start_s": 156,
-  "notes": "silence-spliced: 1.6s gap at 1.5-3.1s and 2.6s gap at 6.1-8.7s removed; three speech segments retained (8.6s total) [WONTFIX v1.0.0: trim-threshold sweep deferred 2026-05-16 — current state acceptable for ship; revisit in Phase 4 with per-voice threshold tuning if listen-tests surface issues]"
+  "reference_text": "Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain, er, favorable response. The figures are curiously higher than they've ever been.",
+  "segment_start_s": 64.45,
+  "notes": "Reference remediated; see qa/voice-reference-remediation/changes.json for provenance and native listening evidence."
 }

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "dbda10009b02730fdbb9dff2b9adea66432404a181090c5e6051311931304cf3",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "7c63dfd8-c3cd-4da1-9dc8-6cf355a14fd4",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dbda10009b02730fdbb9dff2b9adea66432404a181090c5e6051311931304cf3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dbda10009b02730fdbb9dff2b9adea66432404a181090c5e6051311931304cf3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7c63dfd8-c3cd-4da1-9dc8-6cf355a14fd4",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, I think arguably there have been lots of gay characters on Doctor Who previously.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.2]\n  ],\n  \"uncertainty\": \"Perceptual boundary estimates have an uncertainty of approximately \u00b10.2 seconds. High confidence in literal transcript wording with no perceived masking or ambiguity; speaker isolation is complete throughout with clean acoustic consistency.\"\n}\n",
+    "duration_seconds": 36.72026,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20341,
+      "output_tokens": 3483,
+      "thinking_tokens": 3164,
+      "cache_read_tokens": 16208,
+      "total_tokens": 23824
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

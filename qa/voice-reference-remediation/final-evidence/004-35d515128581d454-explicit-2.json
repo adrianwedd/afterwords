@@ -1,0 +1,38 @@
+{
+  "wav": "clip-004-ref.wav",
+  "source_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "da265bd0-bb59-40a9-a3e3-fdd2ee6c351a",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "da265bd0-bb59-40a9-a3e3-fdd2ee6c351a",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, I remember it very clearly because um, I start thinking about all the people I admired on television, all the creative people I admired.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": null,\n  \"sound_effects\": false,\n  \"acoustic_changes\": null,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"start_s\": 2.5,\n      \"end_s\": 3.3,\n      \"description\": \"Hesitation pause between 'um' and 'I start thinking'\"\n    }\n  ],\n  \"apparent_splices\": [],\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 10.5]\n  ],\n  \"uncertainty\": \"Boundary timings are perceptual estimates (+/- 0.3s to 0.5s). In the transcript, 'start thinking' may be an elided 'started thinking', but phonetically 'start' is heard.\"\n}\n",
+    "duration_seconds": 33.660924,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20458,
+      "output_tokens": 3511,
+      "thinking_tokens": 3120,
+      "cache_read_tokens": 16164,
+      "total_tokens": 23969
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

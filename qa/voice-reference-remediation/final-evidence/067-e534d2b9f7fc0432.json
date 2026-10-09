@@ -1,0 +1,38 @@
+{
+  "wav": "clip-067-ref.wav",
+  "source_sha256": "e534d2b9f7fc0432e48888c57c41dbef5c5a754fed9c2809a4699503cd89277f",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "a7d1fc13-4273-4f0e-96bb-35501c63fd1b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e534d2b9f7fc0432e48888c57c41dbef5c5a754fed9c2809a4699503cd89277f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e534d2b9f7fc0432e48888c57c41dbef5c5a754fed9c2809a4699503cd89277f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "a7d1fc13-4273-4f0e-96bb-35501c63fd1b",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It's a bridesmaid's dress. Someone loved it intensely for one day.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.4, 2.2],\n    [3.8, 6.9]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations with an estimated margin of +/- 0.2 to 0.3 seconds. Wording confidence is high with no ambiguous phonemes detected. The single speaker is fully isolated with no overlapping dialogue, background music, or crowd interference. The inter-sentence pause (~2.2s to 3.8s) includes an audible breath/exhalation; trimming this pause yields two distinct, clean phrases fully suitable for voice conditioning.\"\n}\n",
+    "duration_seconds": 35.750524,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20233,
+      "output_tokens": 3741,
+      "thinking_tokens": 3358,
+      "cache_read_tokens": 16104,
+      "total_tokens": 23974
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

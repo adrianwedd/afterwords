@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "85681355-40b8-4b23-9b39-21ecd18c7c0f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "85681355-40b8-4b23-9b39-21ecd18c7c0f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"We wanted to explore those things with real transparency\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.5]\n  ],\n  \"uncertainty\": \"Low uncertainty on transcript wording; audio is clear and fully isolated. Timestamp bounds ([0.0, 3.5] s) are perceptual estimates without waveform ruler access.\"\n}\n```\n",
+    "duration_seconds": 27.147069,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20170,
+      "output_tokens": 2126,
+      "thinking_tokens": 1815,
+      "cache_read_tokens": 16200,
+      "total_tokens": 22296
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

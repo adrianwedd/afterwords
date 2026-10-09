@@ -1,0 +1,37 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "4e0e790d-79ff-46a3-85ea-b8c24577af2f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4e0e790d-79ff-46a3-85ea-b8c24577af2f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"You probably know the basic outline, that he was born in 1854, on October the 16th. I'm boring you with things you so know and don't need to be retold, so it is, in fact, just past his 160th birthday.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [4.8, 5.6],\n    [7.2, 8.2]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.4, 4.8],\n    [5.6, 7.2],\n    [8.2, 15.5]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty of approximately \u00b10.3s. Wording is clearly audible overall, with minor ambiguity around 'things you so know' (which phonetically could be heard as 'so know', 'sure know', or 'sir know'). Acoustic environment shows consistent mild room resonance/hall acoustics, but speech is completely isolated with no overlapping talkers, music, or audience noise.\"\n}\n```\n",
+    "duration_seconds": 33.798563,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20290,
+      "output_tokens": 2976,
+      "thinking_tokens": 2512,
+      "cache_read_tokens": 16010,
+      "total_tokens": 23266
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

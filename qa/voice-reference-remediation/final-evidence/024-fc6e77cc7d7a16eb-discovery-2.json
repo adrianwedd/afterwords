@@ -1,0 +1,38 @@
+{
+  "wav": "clip-024-ref.wav",
+  "source_sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "302611ad-729d-467c-8093-1ad5d033d452",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "302611ad-729d-467c-8093-1ad5d033d452",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And then it's that weird thing of being like ultra paranoid that people are looking, and not quite understanding why you're being stared at.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"none; uniform room acoustics and close-mic studio profile throughout\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 7.3]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty of approximately \u00b10.2 seconds. Boundary onset of initial 'And' is estimated at ~0.2s and final decay of 'stared at' trailing off around ~7.3s. Wording is clearly audible with high confidence across all phonemic boundaries; no background music or competing voices detected.\"\n}\n",
+    "duration_seconds": 31.907209,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20557,
+      "output_tokens": 2759,
+      "thinking_tokens": 2380,
+      "cache_read_tokens": 16103,
+      "total_tokens": 23316
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

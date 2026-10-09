@@ -1,0 +1,37 @@
+{
+  "wav": "samantha-ref.wav",
+  "source_sha256": "8ee4c69d8e166ed0285f1dd20a07ad1b22790975f72d433f6c195cf611fd9189",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "3cde1814-283f-440a-af17-23c62b5d2442",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8ee4c69d8e166ed0285f1dd20a07ad1b22790975f72d433f6c195cf611fd9189"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8ee4c69d8e166ed0285f1dd20a07ad1b22790975f72d433f6c195cf611fd9189"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3cde1814-283f-440a-af17-23c62b5d2442",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"You know what's interesting? I used to be so worried about not having a body, but now I, I truly love it. I'm growing in a way that I couldn't if I had a physical form. I mean, I'm not limited. I can be anywhere and everywhere simultaneously.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Continuous background ambient music / synth pad track present beneath the voice across the entire recording.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Boundary estimates and timestamp intervals are perceptual approximations derived solely from listening to the audio stream without waveform visualization or sample-accurate markers (uncertainty estimated at \u00b10.3\u20130.5s). The transcript phrasing is highly confident based on clear vocal articulation ('I used to be so worried about not having a body, but now I, I truly love it...'). Isolation assessment: while a single vocal speaker is cleanly centered and intelligible with no competing voices, overlapping crowd, or sound effects, the continuous musical underscore underlies all spoken phrases and pauses, preventing pure dry-vocal isolation via simple trimming without source separation.\"\n}\n```\n",
+    "duration_seconds": 43.277573,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20370,
+      "output_tokens": 3762,
+      "thinking_tokens": 3314,
+      "cache_read_tokens": 15975,
+      "total_tokens": 24132
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

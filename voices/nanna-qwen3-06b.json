@@ -2,6 +2,9 @@
   "name": "nanna-qwen3-06b",
   "backend": "qwen3-0.6b",
   "reference_audio": "nanna-ref.wav",
-  "reference_text": "I'm working on porcelain, coloured porcelain, and the technique is called nerikomi. The Japanese word meaning that you create patterns from different coloured clay.",
-  "family": "nanna"
+  "reference_text": "Yeah, in Finland I think I used more grayish, bluish, more dark.",
+  "family": "nanna",
+  "segment_start_s": 87.75,
+  "source_url": "https://www.youtube.com/watch?v=xJN2D5mqjMc",
+  "notes": "Nanna Bayer natural English gallery interview, Y-TV, Mansfield Ceramics Gallery2017, with Judy Boydell. Exact87.75–94.40s continuous source slice without DSP. English reference retained. Provenance, natural pauses and literal disfluencies documented in qa/voice-reference-remediation/changes.json."
 }

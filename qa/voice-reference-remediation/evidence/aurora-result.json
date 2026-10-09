@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "68053366e95bd08b8930dcddfb4b8f1dedd595192a1e838f6e61f634a8df841d",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "77065468-0f3a-4a43-b524-236f16a9cef8",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "68053366e95bd08b8930dcddfb4b8f1dedd595192a1e838f6e61f634a8df841d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "68053366e95bd08b8930dcddfb4b8f1dedd595192a1e838f6e61f634a8df841d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "77065468-0f3a-4a43-b524-236f16a9cef8",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, I wrote melodies when I was six, but I didn't add words to them before I was nine.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None detected; consistent near-field vocal acoustic with natural dry room presence.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.5]\n  ],\n  \"uncertainty\": \"Wording uncertainty is very low as speech is clear and unmasked. Interval boundaries are perceptual estimates with an uncertainty of approximately +/- 0.3 seconds.\"\n}\n```\n",
+    "duration_seconds": 22.720804,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20165,
+      "output_tokens": 1866,
+      "thinking_tokens": 1530,
+      "cache_read_tokens": 16194,
+      "total_tokens": 22031
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

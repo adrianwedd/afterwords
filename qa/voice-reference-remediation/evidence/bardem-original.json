@@ -1,0 +1,36 @@
+{
+  "wav": "bardem-ref.wav",
+  "source_sha256": "fc7b7f956d8c11cc7988669f51c43c84aad41623e48d82bec806f72fc52b5f25",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "f8d1a5fa-166d-4302-a692-c248f254a680",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc7b7f956d8c11cc7988669f51c43c84aad41623e48d82bec806f72fc52b5f25"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc7b7f956d8c11cc7988669f51c43c84aad41623e48d82bec806f72fc52b5f25"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f8d1a5fa-166d-4302-a692-c248f254a680",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [13.5, 15.5]\n  ],\n  \"literal_transcript\": \"What's the most you ever lost on a coin toss? Sir? The most you ever lost on a coin toss.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": true,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Multiple speakers and prominent non-speech audio (wrapper crinkling and heavy breathing) in the first 10 seconds.\",\n  \"candidate_clean_intervals_s\": [\n    [10.0, 13.5],\n    [15.5, 19.5]\n  ],\n  \"uncertainty\": \"Timestamp boundaries are approximate perceptual estimates. The wording is literal but may miss subtle phonetic reductions. The initial crinkling sound effect might slightly overlap the start of the first phrase. The candidate intervals isolate a single speaker and contain complete, usable phrases for conditioning, provided the second speaker and initial noise are trimmed.\"\n}\n```\n",
+    "duration_seconds": 46.111439,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12519,
+      "output_tokens": 4768,
+      "thinking_tokens": 4367,
+      "cache_read_tokens": 24040,
+      "total_tokens": 17287
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,48 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=dr0c0FEfDkQ",
+  "publisher": "thecoolidge",
+  "publisher_channel_url": "https://www.youtube.com/channel/UCcGBt26HbLeBzsB8pCVR1PA",
+  "title": "Keir Dullea on 2001: A Space Odyssey | Full Q&A [HD] | Coolidge Corner Theatre",
+  "published_date": "20180717",
+  "source_info_sha256": "d67c40fad5dc332297ea8e44e6d31e3fa42d8036eaf190ccbc1eba4ead89f8c2",
+  "source_download_sha256": "6fb921ae1bd90c9b50c0f4f904f23422f47a5e1d9405a00da48c542320d62786",
+  "source_audio_sha256": "54374d34d32e597364141160a0eb2c9f91513b7c8654b8ccbdb67595ce3e829a",
+  "identity_section_sha256": "982c1aca8dd494d5fd11aadb465912fc86c5aa78c8169ef277be64654bbbe94c",
+  "identity_frame_sha256": "fb67c486661d41fb8db448238b44825abb49cd938366506d06d8157363b8e232",
+  "publisher_page": "https://coolidge.org/about-us/news-media/watch-full-qa-keir-dullea-now-available",
+  "publisher_page_sha256": "13608f5eea19331ea61d2888b55dd87e36ee2ffc9a601b18ae0f4f938d9f3e4f",
+  "source_basis": "Coolidge Corner Theatre primary page directly embeds dr0c0FEfDkQ and names Keir Dullea at its June23 2018 2001 screening/Q&A. Continuous source introduction brings the named guest down to speak, followed by his film introduction; actual selected-range frame185 shows that guest speaking alone into microphone. BFI film page credits David Bowman to Keir Dullea.",
+  "role_credit_url": "https://www.bfi.org.uk/film/cefccdb2-b558-5623-9c17-72b4be7bd4c1/2001-a-space-odyssey",
+  "delivery_change": "Natural 2018 older Keir Dullea film-introduction register differs the 1968 dramatic David Bowman role. Replacement establishes an attributed intended-actor reference; original identity was unverified, not proven wrong by dialogue memory or voice comparison.",
+  "decode": "Public233 HLS audio fallback fully downloaded after251HTTP403; all450fragments complete. Full ffmpeg decode to PCM16 preserving decoded rate/channels, exit0 and empty error log.",
+  "exact_edit": {
+    "start_s": 179.85,
+    "end_s": 194.28,
+    "sample_rate": 44100,
+    "start_frame": 7931385,
+    "end_frame_exclusive": 8567748,
+    "channel_index": null
+  },
+  "sample_exact_source_slice": true,
+  "candidate_audio": {
+    "sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896",
+    "frames": 636363,
+    "sample_rate": 44100,
+    "channels": 2,
+    "subtype": "PCM_16",
+    "duration_s": 14.43,
+    "peak": 1.0,
+    "rms": 0.10356113054998306,
+    "samples_at_full_scale": 254
+  },
+  "changes": "Exact continuous decoded source PCM16 frame slice; no DSP, mixing, gain, padding, splicing or concatenation.",
+  "full_scale_extrema": {
+    "positive_or_negative_count": 450,
+    "fraction_of_channel_samples": 0.0003535717821432107,
+    "longest_run_frames": 15,
+    "longest_run_ms": 0.3401360544217687,
+    "first_position_s": 2.8234920634920635,
+    "last_position_s": 2.8667120181405896,
+    "adjudication": "Sparse extrema only in a 44ms region of the first sentence, longest plateau0.340ms. Both native hearings report clean acoustics and no defect; no severe/perceptibly damaged clipping established. Accepted explicitly, not a zero-clipping claim; verify again in fresh corpus listening."
+  }
+}

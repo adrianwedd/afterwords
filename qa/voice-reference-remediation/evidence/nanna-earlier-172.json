@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "ef78f9b209bc262f429612548bd1929ae52852ca670c6a61b256cb1c65900e3f",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "e362f96d-83d8-45ee-8166-e33228306559",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ef78f9b209bc262f429612548bd1929ae52852ca670c6a61b256cb1c65900e3f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ef78f9b209bc262f429612548bd1929ae52852ca670c6a61b256cb1c65900e3f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e362f96d-83d8-45ee-8166-e33228306559",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 0.5],\n    [4.8, 5.4],\n    [11.8, 12.4]\n  ],\n  \"literal_transcript\": \"Yes. I like the contrast of rough sur- uh outer surface because I don't glaze [Yes] the outer surface and there is tiny little texture left from from the uh fabric when I roll the slabs [Mm-hmm] they are all hand-built I mean.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent indoor acoustic with moderate room reverberation; secondary conversational partner sounds slightly more distant/off-axis than the primary speaker.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"multiple_speakers_with_overlapping_dialogue\",\n  \"candidate_clean_intervals_s\": [\n    [0.6, 4.7],\n    [5.5, 11.7]\n  ],\n  \"uncertainty\": \"Boundary estimates carry an uncertainty of approximately \u00b10.2 to \u00b10.3 seconds due to room reverberation and conversational cross-talk overlap. Minor uncertainty in the exact phonetic start of the false start 'sur-' vs 'so-' around 1.8s.\"\n}\n",
+    "duration_seconds": 47.161176,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20397,
+      "output_tokens": 3162,
+      "thinking_tokens": 2701,
+      "cache_read_tokens": 15896,
+      "total_tokens": 23559
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

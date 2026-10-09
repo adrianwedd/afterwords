@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "c1dab588-838d-4d3e-b017-c25824b77c50",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c1dab588-838d-4d3e-b017-c25824b77c50",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Um, I'm bringing the, uh, 'Am I bothered?' character back, which, um, I did kill off before I knew I was going on tour.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; consistent indoor close-microphone acoustic environment throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.5, 7.0]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual approximations (+/- 0.3s). Filler vocables perceived as 'um' and 'uh'/'er' carry slight phonetic transcription ambiguity, and natural trailing room decay after 'tour' places the perceived end between 6.8s and 7.2s.\"\n}\n```\n",
+    "duration_seconds": 34.574024,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20322,
+      "output_tokens": 2694,
+      "thinking_tokens": 2319,
+      "cache_read_tokens": 16156,
+      "total_tokens": 23016
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

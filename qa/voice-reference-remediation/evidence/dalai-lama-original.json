@@ -1,0 +1,37 @@
+{
+  "wav": "dalai-lama-ref.wav",
+  "source_sha256": "655900e8870e7c2eb7dba2b21e0197ffde53db2030d8a3d9f89b0ead553b287f",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "3f49f835-34d5-48f3-9788-68d8f06b3ce4",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "655900e8870e7c2eb7dba2b21e0197ffde53db2030d8a3d9f89b0ead553b287f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "655900e8870e7c2eb7dba2b21e0197ffde53db2030d8a3d9f89b0ead553b287f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3f49f835-34d5-48f3-9788-68d8f06b3ce4",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Now here, this, uh, the environment, according that reality, now no longer, uh, to emphasis my nation.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 14.5]\n  ],\n  \"uncertainty\": \"Transcript wording has minor uncertainty due to the speaker's accent and non-standard grammar (e.g., 'according that' instead of 'according to that', 'emphasis' instead of 'emphasize'). Boundary estimates are approximate, but the entire clip represents a single continuous, acoustically clean take of an isolated speaker. The speech is highly hesitant with natural long pauses, but contains complete usable phrases for conditioning without requiring trimming.\"\n}\n```\n",
+    "duration_seconds": 29.824555,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12798,
+      "output_tokens": 2829,
+      "thinking_tokens": 2455,
+      "cache_read_tokens": 24001,
+      "total_tokens": 15627
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,37 @@
+{
+  "wav": "edina-monsoon-ref.wav",
+  "source_sha256": "a2643237958b1776812508be029e622026047d20897028405858add010028801",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "051e7851-ccf2-4f62-8c61-e0750c89d50e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a2643237958b1776812508be029e622026047d20897028405858add010028801"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a2643237958b1776812508be029e622026047d20897028405858add010028801"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "051e7851-ccf2-4f62-8c61-e0750c89d50e",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 3,\n  \"speaker_change_intervals_s\": [\n    {\n      \"start_s\": 0.0,\n      \"end_s\": 10.3,\n      \"speaker_label\": \"Speaker 1 (male, narration/voiceover style)\"\n    },\n    {\n      \"start_s\": 10.8,\n      \"end_s\": 12.0,\n      \"speaker_label\": \"Speaker 2 (male, dramatic scene dialogue)\"\n    },\n    {\n      \"start_s\": 12.4,\n      \"end_s\": 13.5,\n      \"speaker_label\": \"Speaker 3 (female, soft/hesitant scene dialogue)\"\n    }\n  ],\n  \"literal_transcript\": \"...hands on a certain white powder, because it's the only thing that'll make time in an isolated French cottage bearable. During a game of doubles ping-pong, she slips away to indulge. Whose bag is this? It's mine.\",\n  \"music\": \"None detected or negligible low-level background bed underneath the voiceover.\",\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": \"None clearly audible (no distinct ping-pong sound effects or foley).\",\n  \"acoustic_changes\": \"Sharp acoustic shift around 10.3s\u201310.8s: transitions abruptly from close-mic dry narration/commentary to dramatic film/TV scene dialogue with room reverberation and distant mic perspective.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": \"Brief pause of approximately 0.5s between the end of the voiceover (~10.3s) and the first dramatic dialogue line (~10.8s).\",\n  \"apparent_splices\": \"Obvious edit/splice point around 10.4s joining commentary narration directly into dramatic scene audio; start at 0.0s also appears spliced mid-clause.\",\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Raw clip contains 3 distinct speakers across two completely different acoustic environments, has an abrupt mid-clause onset cutoff, and terminates abruptly.\",\n  \"candidate_clean_intervals_s\": [\n    {\n      \"start_s\": 6.2,\n      \"end_s\": 10.3,\n      \"speaker_label\": \"Speaker 1\",\n      \"transcript_segment\": \"During a game of doubles ping-pong, she slips away to indulge.\",\n      \"notes\": \"Single speaker, isolated, complete grammatical sentence, clean voiceover conditioning phrase (~4.1s).\"\n    },\n    {\n      \"start_s\": 2.0,\n      \"end_s\": 10.3,\n      \"speaker_label\": \"Speaker 1\",\n      \"transcript_segment\": \"because it's the only thing that'll make time in an isolated French cottage bearable. During a game of doubles ping-pong, she slips away to indulge.\",\n      \"notes\": \"Longer segment (~8.3s) discarding the clipped initial words, though starting on a conjunction.\"\n    }\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates accurate within approximately \u00b10.2\u20130.3s. The very first syllable at 0.0s is cut off ('...hands'), with preceding words missing. Speaker 3's final line ('It's mine') is delivered softly/whispered and cuts off immediately without natural reverberation decay. Whether a very subtle musical pad exists beneath the Speaker 1 voiceover cannot be conclusively confirmed without spectral isolation, though voiceover dominates.\"\n}\n```\n",
+    "duration_seconds": 48.001901,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20365,
+      "output_tokens": 4683,
+      "thinking_tokens": 3755,
+      "cache_read_tokens": 15975,
+      "total_tokens": 25048
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

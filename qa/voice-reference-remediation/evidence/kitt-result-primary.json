@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4d13838c-b0b7-4d5f-b41c-bbd07ece5d42",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4d13838c-b0b7-4d5f-b41c-bbd07ece5d42",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So, that's what we did. And with that, I'd I'd go in there and knock it off and maybe 50 minutes a a show.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 8.8]\n  ],\n  \"uncertainty\": \"Timestamps and interval boundaries are perceptual estimates with an uncertainty of approximately +/- 0.5s. Minor wording ambiguity between 'and maybe' versus 'in maybe 50 minutes', and perceptual repetition on 'I'd I'd' and 'a a show'.\"\n}\n",
+    "duration_seconds": 48.046966,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20374,
+      "output_tokens": 3098,
+      "thinking_tokens": 2743,
+      "cache_read_tokens": 16121,
+      "total_tokens": 23472
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

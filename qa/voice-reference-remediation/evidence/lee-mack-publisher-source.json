@@ -1,0 +1,16 @@
+{
+  "programme_url": "https://www.bbc.co.uk/programmes/b03bpxxq",
+  "download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p02pnyhj.mp3",
+  "guest": "Lee Mack",
+  "publisher": "BBC Radio 4",
+  "programme": "Desert Island Discs",
+  "interviewer": "Kirsty Young",
+  "broadcast_date": "2013-09-29",
+  "source_mp3_sha256": "6c8fd7bb799658c0576df961fa581e9df32c24970fc799ff7ef8211112fef304",
+  "source_audio_sha256": "08cf836cf0d95799cd5eacff5672fd7761aa29df266afa4c47cbe987bbf93ed3",
+  "programme_html_sha256": "2226af946e45025594364c19bb412d4a56f26fd51d37761f4ec5a1aa9eac7ea0",
+  "decode": "ffmpeg to PCM16 WAV preserving decoded source rate/channels, no cleanup or normalization",
+  "retrieved_utc": "2026-10-08T07:14:35.041898+00:00",
+  "identity_basis": "Direct BBC publisher podcast names guest Lee Mack and interviewer; audible introduction and question-answer context attribute selected solo answer to guest.",
+  "delivery_change": "Same intended comedian in natural interview delivery replaces live audience stage comedy."
+}

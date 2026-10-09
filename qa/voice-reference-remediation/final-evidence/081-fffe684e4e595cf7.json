@@ -1,0 +1,38 @@
+{
+  "wav": "clip-081-ref.wav",
+  "source_sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "1dcf156d-8448-4e05-8468-d3a4d23b039c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "1dcf156d-8448-4e05-8468-d3a4d23b039c",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"but it feels like I was only here last week. That's the strange... um, the strange tricks that time plays on you.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.8],\n    [7.2, 9.8]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates with an uncertainty of approximately \u00b10.3 seconds. Spoken wording is clearly audible; minor uncertainty is limited to punctuation and transcription of the vocalized hesitation ('strange... um, the strange').\"\n}\n```\n",
+    "duration_seconds": 46.29587,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20386,
+      "output_tokens": 4130,
+      "thinking_tokens": 3779,
+      "cache_read_tokens": 16126,
+      "total_tokens": 24516
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

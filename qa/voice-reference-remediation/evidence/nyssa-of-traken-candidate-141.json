@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "97e2fea0d135b459b51cb08f13dead25353ab39d61ee7691ac37da70130f10ea",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "efae0b04-4a01-48b9-b7f1-e3cf1d7c5253",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "97e2fea0d135b459b51cb08f13dead25353ab39d61ee7691ac37da70130f10ea"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "97e2fea0d135b459b51cb08f13dead25353ab39d61ee7691ac37da70130f10ea"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "efae0b04-4a01-48b9-b7f1-e3cf1d7c5253",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [7.2, 8.9]\n  ],\n  \"literal_transcript\": \"So, I watched that completely fresh and what you both said was so apparent to me. It looked so different from anything that I had done. [Speaker 2: Connects to Doctor Who] It had a completely different feel to it.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Primary speaker is captured close-mic with mild room reflection; secondary speaker is noticeably off-mic, lower in amplitude, and more reverberant.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [7.1, 8.9]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.2],\n    [8.9, 11.8]\n  ],\n  \"uncertainty\": \"Timestamp boundaries are perceptual estimates with an uncertainty of approximately +/- 0.3 seconds. Exact phrasing of the secondary speaker's lead-in preceding 'Doctor Who' (e.g. 'Connects to' vs 'Next to') is uncertain due to low volume and off-axis capture.\"\n}\n",
+    "duration_seconds": 53.353644,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20448,
+      "output_tokens": 3886,
+      "thinking_tokens": 3445,
+      "cache_read_tokens": 16019,
+      "total_tokens": 24334
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

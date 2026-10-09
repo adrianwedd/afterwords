@@ -1,0 +1,38 @@
+{
+  "wav": "clip-037-ref.wav",
+  "source_sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "23153df2-9f34-4978-9fe5-a2dc20dd2e92",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "23153df2-9f34-4978-9fe5-a2dc20dd2e92",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And so a friend of mine said, I know someone, and he's just trained and he's he's like a life coach thing, and what his good thing is he'll teach you what's stopping you moving forward.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 8.6]\n  ],\n  \"uncertainty\": \"Low lexical uncertainty; words are clearly enunciated with high intelligibility. Boundary timestamps are perceptual estimates with an uncertainty of approximately \u00b10.3s.\"\n}\n```\n",
+    "duration_seconds": 30.905372,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20245,
+      "output_tokens": 2330,
+      "thinking_tokens": 1984,
+      "cache_read_tokens": 16060,
+      "total_tokens": 22575
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

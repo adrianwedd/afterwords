@@ -1,0 +1,38 @@
+{
+  "wav": "clip-014-ref.wav",
+  "source_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "98046265-7335-47e8-99a1-6dacd58337f6",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "98046265-7335-47e8-99a1-6dacd58337f6",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and er I had to go and get a wig put on me head, and er it was brilliant actually\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [],\n  \"apparent_splices\": [],\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.7, 2.8],\n    [3.9, 5.4]\n  ],\n  \"uncertainty\": \"Boundary estimates are perceptual with an uncertainty of approximately \u00b10.2 seconds. In literal transcript wording, hesitation fillers could be transcribed phonetically as 'er' or 'uh'; the northern English colloquial possessive pronoun is audibly 'me' (/mi\u02d0/) rather than 'my'; initial conjunction and fillers represent natural conversational restarts without mid-phoneme clipping.\"\n}\n",
+    "duration_seconds": 51.33008,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20620,
+      "output_tokens": 5522,
+      "thinking_tokens": 5147,
+      "cache_read_tokens": 16195,
+      "total_tokens": 26142
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

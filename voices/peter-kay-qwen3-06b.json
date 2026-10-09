@@ -2,8 +2,9 @@
   "name": "peter-kay-qwen3-06b",
   "backend": "qwen3-0.6b",
   "reference_audio": "peter-kay-ref.wav",
-  "reference_text": "I mean, that's fantastic. At 19 December, she's still in a warden control flat. She loves it there. She's got a red rope hanging from a ceiling in front room still for emergencies. She only pulled it once, but she had a wasp in the front room flying around.",
+  "reference_text": "Unfortunately, everyone knows someone who's been affected by those cancers on that list.",
   "family": "peter-kay",
-  "source_url": "https://www.youtube.com/watch?v=7PlzOz37IzU",
-  "segment_start_s": 0
+  "source_url": "https://www.youtube.com/watch?v=SLzfteKoARw",
+  "segment_start_s": 273.2,
+  "notes": "Peter Kay natural studio interview, official ITV This Morning. Exact273.20–278.12s continuous decoded source slice; no DSP. Different delivery from stand-up routine. See qa/voice-reference-remediation/changes.json for provenance and native evidence."
 }

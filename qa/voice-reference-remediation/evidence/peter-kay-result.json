@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "7809ed5cf3746d277eeb7977065f4c1a2cceeb10da49d46de3c877c397e2fe43",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "e00c8f6b-568a-40ab-8c7e-83a12a8314ed",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7809ed5cf3746d277eeb7977065f4c1a2cceeb10da49d46de3c877c397e2fe43"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7809ed5cf3746d277eeb7977065f4c1a2cceeb10da49d46de3c877c397e2fe43"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e00c8f6b-568a-40ab-8c7e-83a12a8314ed",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Unfortunately, everyone knows someone who's been affected by those cancers on that list.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.8]\n  ],\n  \"uncertainty\": \"Low overall uncertainty. Perceptual duration estimated at approximately 5.8 seconds. Minor acoustic uncertainty regarding whether 'who has been' is spoken vs. the contracted 'who's been'.\"\n}\n```\n",
+    "duration_seconds": 27.838375,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20063,
+      "output_tokens": 2373,
+      "thinking_tokens": 2049,
+      "cache_read_tokens": 16187,
+      "total_tokens": 22436
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-084-ref.wav",
+  "source_sha256": "7a95373c1c362b9ef50d6820c9f2a59f3c2508c93795b15da661840cebe3baa1",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "fce9e558-ca8d-4629-8a74-1f4976f603f3",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7a95373c1c362b9ef50d6820c9f2a59f3c2508c93795b15da661840cebe3baa1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7a95373c1c362b9ef50d6820c9f2a59f3c2508c93795b15da661840cebe3baa1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "fce9e558-ca8d-4629-8a74-1f4976f603f3",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"you know, using imagination rather than actually digging deep and, and writing from my soul\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.2]\n  ],\n  \"uncertainty\": \"Exact clip duration and interval boundary estimates are perceptual approximations (+/- 0.4s). Low wording uncertainty: speech is clear and uninterrupted, with a minor hesitation/repetition on 'and, and'.\"\n}\n",
+    "duration_seconds": 26.838086,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20103,
+      "output_tokens": 2197,
+      "thinking_tokens": 1874,
+      "cache_read_tokens": 16170,
+      "total_tokens": 22300
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,37 @@
+{
+  "wav": "kryten-ref.wav",
+  "source_sha256": "a6873d82f23e73812a5f365b6364eda8b7e61deb91610fea4f60bae272da155e",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "149e9134-adeb-4174-a26a-8fd4c78f27fe",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a6873d82f23e73812a5f365b6364eda8b7e61deb91610fea4f60bae272da155e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a6873d82f23e73812a5f365b6364eda8b7e61deb91610fea4f60bae272da155e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "149e9134-adeb-4174-a26a-8fd4c78f27fe",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 1\",\n      \"start_s\": 0.0,\n      \"end_s\": 2.1\n    },\n    {\n      \"speaker\": \"Speaker 2\",\n      \"start_s\": 2.1,\n      \"end_s\": 3.8\n    },\n    {\n      \"speaker\": \"Speaker 1\",\n      \"start_s\": 3.8,\n      \"end_s\": 7.5\n    },\n    {\n      \"speaker\": \"Speaker 2\",\n      \"start_s\": 7.5,\n      \"end_s\": 15.5\n    }\n  ],\n  \"literal_transcript\": \"Speaker 1: Lister, have you got Cat in there with you?\\nSpeaker 2: Yeah, what's the prob?\\nSpeaker 1: The problem is I've been waiting fully 20 minutes for him in the hangar.\\nSpeaker 2: Oh, spin my nipple nuts and send me to Alaska! [laughter] I'm supposed to take him asteroid spotting. I'll be right down, sir.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Transition between two distinct speakers with slightly different microphone/room presence; sudden onset of loud studio audience laughter from approximately 9.5s to 12.5s decaying into the final utterance.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Multiple alternating speakers in conversation and intrusive audience laughter overlapping the audio.\",\n  \"candidate_clean_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 1\",\n      \"start_s\": 3.8,\n      \"end_s\": 7.5,\n      \"phrase\": \"The problem is I've been waiting fully 20 minutes for him in the hangar.\",\n      \"duration_s\": 3.7\n    },\n    {\n      \"speaker\": \"Speaker 2\",\n      \"start_s\": 12.5,\n      \"end_s\": 15.5,\n      \"phrase\": \"I'm supposed to take him asteroid spotting. I'll be right down, sir.\",\n      \"duration_s\": 3.0\n    }\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates based purely on listening (estimated margin of error: \u00b10.3s). In the transcript, 'Cat' could phonetically be interpreted as another proper noun or monosyllable. In Speaker 2's final section, faint residual audience laughter decay may slightly overlap the start of the 12.5s window. Speaker 2's delivery changes from relaxed to animated, but vocal timbre suggests the same speaker across turns.\"\n}\n```\n",
+    "duration_seconds": 55.373721,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20979,
+      "output_tokens": 5493,
+      "thinking_tokens": 4691,
+      "cache_read_tokens": 15988,
+      "total_tokens": 26472
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

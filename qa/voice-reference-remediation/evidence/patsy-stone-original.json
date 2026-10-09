@@ -1,0 +1,37 @@
+{
+  "wav": "patsy-stone-ref.wav",
+  "source_sha256": "65189a288f0fead8d8ba747c371bb2d550592b75f5595886afa9f26a2a78e070",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "11e54ecd-e4bd-4df8-9dfa-184ab6a27815",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "65189a288f0fead8d8ba747c371bb2d550592b75f5595886afa9f26a2a78e070"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "65189a288f0fead8d8ba747c371bb2d550592b75f5595886afa9f26a2a78e070"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "11e54ecd-e4bd-4df8-9dfa-184ab6a27815",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [1.2, 2.8],\n    [2.8, 3.7],\n    [3.7, 4.6],\n    [4.6, 6.0],\n    [6.0, 8.0],\n    [8.0, 8.6],\n    [8.6, 9.7],\n    [9.7, 11.5],\n    [11.5, 15.0]\n  ],\n  \"literal_transcript\": \"[laughter] You don't think this sketch you... No of course not. Little bit of bolly? Yeah just a smidge. Oh. [laughter] Are these today's? Yes sweetie. Anything in them? Not much darling no. MP in drug craze sex... [laughter]\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": true,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Constant loud audience laughter overlapping with speech, two speakers rapidly alternating, and background prop noises. No clean, isolated speech segments of a single speaker exist.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"High uncertainty in the literal transcript wording due to rapid speech, accents, and heavy overlapping laughter. Boundary estimates are approximate because speech and laughter continuously blend and the two speakers have very little separation.\"\n}\n```\n",
+    "duration_seconds": 40.379907,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12423,
+      "output_tokens": 4353,
+      "thinking_tokens": 3867,
+      "cache_read_tokens": 24038,
+      "total_tokens": 16776
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

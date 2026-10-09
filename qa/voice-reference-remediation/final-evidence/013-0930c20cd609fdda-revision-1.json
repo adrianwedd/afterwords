@@ -1,0 +1,38 @@
+{
+  "wav": "clip-013-ref.wav",
+  "source_sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "8e9c1aa7-e212-4c1f-b0fc-9c1aea20ccbe",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8e9c1aa7-e212-4c1f-b0fc-9c1aea20ccbe",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Uh yeah, I think I was. I didn't get in any major trouble, you know, if that's what a good kid is.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.5]\n  ],\n  \"uncertainty\": \"Wording uncertainty is minimal; speech articulation is clear and fully intelligible. Temporal boundaries are perceptual estimates with an estimated margin of +/- 0.5s due to lack of visual waveform timecodes. The entire phrase represents a well-isolated single speaker in a dry acoustic environment suitable for voice conditioning.\"\n}\n",
+    "duration_seconds": 38.505606,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20283,
+      "output_tokens": 3580,
+      "thinking_tokens": 3230,
+      "cache_read_tokens": 16188,
+      "total_tokens": 23863
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

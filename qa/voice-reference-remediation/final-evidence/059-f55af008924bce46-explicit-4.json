@@ -1,0 +1,38 @@
+{
+  "wav": "clip-059-ref.wav",
+  "source_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "3a80c5a8-ad1f-48e5-904b-370b55c95def",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3a80c5a8-ad1f-48e5-904b-370b55c95def",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 5.2],\n    [5.5, 11.8]\n  ],\n  \"literal_transcript\": \"Yeah, I wouldn't say necessarily for me specifically, I think it's struggle for all comics to write. It's just the writing, I always think the writing is God's way of punishing you for having the best job in the world.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Change in acoustic profile, vocal timbre, and microphone channel/pickup between Speaker 1 (0.0-5.2s) and Speaker 2 (5.5-11.8s).\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.2],\n    [5.5, 11.8]\n  ],\n  \"uncertainty\": \"Phonetic inspection of the phrase 'I think it's struggle...': No distinct reduced article vowel (/\u0259/) is audible following 'it's'; the alveolar fricative /s/ transitions directly into the /st/ onset of 'struggle' with no perceptible intervening vowel segment. Therefore, the reduced article 'a' is not transcribed. There is minor perceptual ambiguity on Speaker 2's opening phrase between 'It's just the writing' and 'Is this the writing', though 'It's just the writing' / 'It's this, the writing' appears most consistent phonetically with the speaker's accent. Timestamp boundaries are perceptual estimates with an uncertainty margin of approximately \u00b10.2 seconds.\"\n}\n",
+    "duration_seconds": 49.360308,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20825,
+      "output_tokens": 5521,
+      "thinking_tokens": 4970,
+      "cache_read_tokens": 16106,
+      "total_tokens": 26346
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

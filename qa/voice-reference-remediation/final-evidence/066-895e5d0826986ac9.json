@@ -1,0 +1,38 @@
+{
+  "wav": "clip-066-ref.wav",
+  "source_sha256": "895e5d0826986ac969972f8ca2173ed2e66d2c0255fab324a53d57a0c4337330",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "2bdaae10-7711-49a5-b9c2-16ccf2c2ac72",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "895e5d0826986ac969972f8ca2173ed2e66d2c0255fab324a53d57a0c4337330"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "895e5d0826986ac969972f8ca2173ed2e66d2c0255fab324a53d57a0c4337330"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "2bdaae10-7711-49a5-b9c2-16ccf2c2ac72",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"There's not really a formula. I just go somewhere and think there will be something funny in this place.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.0]\n  ],\n  \"uncertainty\": \"Transcript wording has very high confidence. Boundary and duration estimates are perceptual with an uncertainty margin of approximately \u00b10.3 seconds.\"\n}\n",
+    "duration_seconds": 28.823514,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20093,
+      "output_tokens": 2289,
+      "thinking_tokens": 1979,
+      "cache_read_tokens": 16131,
+      "total_tokens": 22382
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

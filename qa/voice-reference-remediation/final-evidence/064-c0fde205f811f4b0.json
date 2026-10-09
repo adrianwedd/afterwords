@@ -1,0 +1,38 @@
+{
+  "wav": "clip-064-ref.wav",
+  "source_sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "b35709e8-3b6d-41cb-a912-2368b5f33c87",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b35709e8-3b6d-41cb-a912-2368b5f33c87",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And then when I understood what was going on, I felt a physical sensation of excitement.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": null,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.2]\n  ],\n  \"uncertainty\": \"Low transcript uncertainty; wording is clear and distinctly articulated. Boundary estimates are perceptual approximations (estimated total clip duration ~5.0\u20135.5s) without direct waveform timeline markers.\"\n}\n",
+    "duration_seconds": 28.15239,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 22762,
+      "output_tokens": 1790,
+      "thinking_tokens": 1474,
+      "cache_read_tokens": 32337,
+      "total_tokens": 24552
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

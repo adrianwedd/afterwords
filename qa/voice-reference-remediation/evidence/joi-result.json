@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "4b4879ce9fed55f81eeb91b6e28a720f6f676625dd4ed3ec013300793e805d84",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4df261d3-c9aa-459a-88ce-07b7f6c93297",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4b4879ce9fed55f81eeb91b6e28a720f6f676625dd4ed3ec013300793e805d84"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4b4879ce9fed55f81eeb91b6e28a720f6f676625dd4ed3ec013300793e805d84"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4df261d3-c9aa-459a-88ce-07b7f6c93297",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Okay, so I think, uh, I discovered that I'm really good, uh, with high kicks.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.2]\n  ],\n  \"uncertainty\": \"Perceptual boundary estimates have an uncertainty of roughly +/- 0.3 seconds due to auditory-only assessment without waveform visualization. Speech wording confidence is high; mild conversational hesitations ('uh') are clearly audible. The speaker is completely isolated with no background audio or competing signals.\"\n}\n",
+    "duration_seconds": 37.441748,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20534,
+      "output_tokens": 3357,
+      "thinking_tokens": 3016,
+      "cache_read_tokens": 16148,
+      "total_tokens": 23891
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

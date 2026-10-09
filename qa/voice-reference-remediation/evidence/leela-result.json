@@ -1,0 +1,38 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "e4663f99fb4c34e830d7c9a65950c338164b8602cfc608536ee3a00b3b539d72",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "77dbf4b5-522c-46f6-b904-4ae4c1cfdf1d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e4663f99fb4c34e830d7c9a65950c338164b8602cfc608536ee3a00b3b539d72"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e4663f99fb4c34e830d7c9a65950c338164b8602cfc608536ee3a00b3b539d72"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "77dbf4b5-522c-46f6-b904-4ae4c1cfdf1d",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Speak plainly. I am your prisoner, and this is an interrogation.\",\n  \"music\": \"None clearly audible; faint low-frequency atmospheric room tone / background hum present but no distinct musical instrumentation or melodic score.\",\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.3, 1.8],\n    [2.8, 7.6]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates (+/- 0.2s) derived without waveform visualization. The low-frequency background ambience is very subtle and may be acoustic room resonance/mic hum rather than an engineered drone. High confidence in transcript wording with no perceived speech ambiguity.\"\n}\n```\n",
+    "duration_seconds": 34.560742,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20771,
+      "output_tokens": 3409,
+      "thinking_tokens": 3039,
+      "cache_read_tokens": 16157,
+      "total_tokens": 24180
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

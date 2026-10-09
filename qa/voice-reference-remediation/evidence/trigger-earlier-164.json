@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "bac475f1b1baeb5b6a7512c3fa91074b361dfc57a3d46e86e6fb09bf26651c65",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "6d8df844-6898-424a-bae4-5cbf6097241e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "bac475f1b1baeb5b6a7512c3fa91074b361dfc57a3d46e86e6fb09bf26651c65"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "bac475f1b1baeb5b6a7512c3fa91074b361dfc57a3d46e86e6fb09bf26651c65"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "6d8df844-6898-424a-bae4-5cbf6097241e",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I knew I felt pretty rough, and if I was going to be x-rayed and checked over, the sooner the better. Um, and now I hear, er, that they're planning to cut the services, I'm absolutely appalled.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.8],\n    [7.2, 12.8]\n  ],\n  \"uncertainty\": \"Boundaries are perceptual time estimates within approximately \u00b10.5 seconds due to lack of visual waveform analysis. Hesitation tokens ('Um', 'er') represent perceptual auditory transcription.\"\n}\n",
+    "duration_seconds": 38.547774,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20360,
+      "output_tokens": 2718,
+      "thinking_tokens": 2361,
+      "cache_read_tokens": 16026,
+      "total_tokens": 23078
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "38bfa895ed8040510edd57f24e814176aa8e7af765edd6c350c6d763fb236fb7",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "4b820760-3504-4c68-8136-17d61bb3b40f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "38bfa895ed8040510edd57f24e814176aa8e7af765edd6c350c6d763fb236fb7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "38bfa895ed8040510edd57f24e814176aa8e7af765edd6c350c6d763fb236fb7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4b820760-3504-4c68-8136-17d61bb3b40f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I'm not really high on drugs, so you can stop talking your nonsense on my time.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.8]\n  ],\n  \"uncertainty\": \"Low uncertainty in wording and boundaries. The audio consists of a single clear phrase from a single speaker with no overlapping noise, making the entire clip a usable clean interval. Timings are approximate perceptual estimates.\"\n}\n```\n",
+    "duration_seconds": 18.734888,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20497,
+      "output_tokens": 1551,
+      "thinking_tokens": 1226,
+      "cache_read_tokens": 16154,
+      "total_tokens": 22048
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

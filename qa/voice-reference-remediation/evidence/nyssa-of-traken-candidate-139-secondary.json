@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "83fda7102fb1b1967b77b91e091a449c1e207559684ced39d0c2742652a27eac",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "254939f2-6ea9-4c81-8920-24ff87f62483",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "83fda7102fb1b1967b77b91e091a449c1e207559684ced39d0c2742652a27eac"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "83fda7102fb1b1967b77b91e091a449c1e207559684ced39d0c2742652a27eac"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "254939f2-6ea9-4c81-8920-24ff87f62483",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"so I watched that completely fresh and what you've both said was so apparent to me it looked so different from anything that I had done connected up to it had a completely different feel to it it it looked like it had moved on leaps and bounds the whole thing since I'd left and it wasn't really that long but it I thought it looked great\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 18.0]\n  ],\n  \"uncertainty\": \"Boundary estimates are perceptual and approximate, assuming the full duration of the clip since there are no background noises, secondary speakers, or fatal defects. The entire clip appears clean. There is slight uncertainty on the exact wording of 'connected up to it' due to rapid articulation, but the phrase is completely usable for conditioning.\"\n}\n```\n",
+    "duration_seconds": 45.583303,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20708,
+      "output_tokens": 2744,
+      "thinking_tokens": 2340,
+      "cache_read_tokens": 15767,
+      "total_tokens": 23452
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

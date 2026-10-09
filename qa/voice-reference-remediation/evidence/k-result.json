@@ -1,0 +1,37 @@
+{
+  "wav": "k-ref.wav",
+  "source_sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "c8e8750b-b23c-4308-ac0e-2f115b20ed78",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c8e8750b-b23c-4308-ac0e-2f115b20ed78",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"You give me a time and a place, I give you a five-minute window. Anything happens in that five minutes and I'm yours. No matter what. Anything happens a minute either side of that and you're on your own.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.5, 4.5],\n    [5.5, 9.5],\n    [10.5, 12.0],\n    [13.0, 18.2]\n  ],\n  \"uncertainty\": \"Time boundaries are perceptual auditory estimates based on single-pass playback (~18.5 seconds total duration) with an uncertainty of approximately \u00b10.5 seconds per interval boundary. Wording confidence is very high due to clear, close-mic delivery with no background masking, though subtle punctuation/sentence break boundaries are subject to interpretation. Long pauses between distinct complete phrases are prominent (roughly 1.0 to 1.5 seconds each), making both individual segments and the full recording clean and usable for conditioning.\"\n}\n```\n",
+    "duration_seconds": 40.32262,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20881,
+      "output_tokens": 3984,
+      "thinking_tokens": 3531,
+      "cache_read_tokens": 15988,
+      "total_tokens": 24865
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

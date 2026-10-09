@@ -2,8 +2,8 @@
   "name": "bill-potts-qwen3-06b",
   "backend": "qwen3-0.6b",
   "reference_audio": "bill-potts-ref.wav",
-  "reference_text": "I am the real Bill! Our life is just memories. Our more rare memories. So I'm her. Okay. I'm gonna prove to you how important memories are. And don't go forgetting me again because... ...quite frankly, that was a fence.",
+  "reference_text": "Well, I think arguably there have been lots of gay characters on Doctor Who previously.",
   "family": "bill-potts",
-  "source_url": "https://www.youtube.com/watch?v=GfjLXdA4hk4",
-  "segment_start_s": 27
+  "source_url": "https://www.youtube.com/watch?v=c9i7_Jcoa1s",
+  "segment_start_s": 40.5
 }

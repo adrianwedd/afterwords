@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "b5ec1e9e30984307c10eb18cd80f888b7bf0786451658e98559c92ec4d08e52c",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "c214d88d-0cc3-495f-a531-5c27236a5918",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b5ec1e9e30984307c10eb18cd80f888b7bf0786451658e98559c92ec4d08e52c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b5ec1e9e30984307c10eb18cd80f888b7bf0786451658e98559c92ec4d08e52c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c214d88d-0cc3-495f-a531-5c27236a5918",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So, yeah, I think, um, I think the the the friction is still there and that's that's the petrol for for a lot of the comedy in Red Dwarf, you know?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 10.0]\n  ],\n  \"uncertainty\": \"Timing boundaries are perceptual estimates and may not be exact. Clip duration is estimated at 10 seconds based on word count and pacing. The literal transcript includes repeated words reflecting the speaker's natural stutters.\"\n}\n",
+    "duration_seconds": 30.418639,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12474,
+      "output_tokens": 2449,
+      "thinking_tokens": 2104,
+      "cache_read_tokens": 24202,
+      "total_tokens": 14923
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

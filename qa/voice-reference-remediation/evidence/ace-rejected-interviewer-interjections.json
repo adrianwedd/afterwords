@@ -1,0 +1,37 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "5f764a599228218f2efb3c39682bec76edf866b191a87642e5ff008ba711f0e0",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "97ab58c9-d967-4e18-b04d-09afaaa7403f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5f764a599228218f2efb3c39682bec76edf866b191a87642e5ff008ba711f0e0"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5f764a599228218f2efb3c39682bec76edf866b191a87642e5ff008ba711f0e0"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "97ab58c9-d967-4e18-b04d-09afaaa7403f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [2.5, 3.3],\n    [11.8, 14.0]\n  ],\n  \"literal_transcript\": \"And there's no way Sylvester would have managed to [Speaker 2: Yeah] get up there these days. So, um, I did that on my own and there was literally only room for me and the cameraman and the lens was just like right here in my face. [Speaker 2: In your face, haha] Yeah. And it was great. It was very intimate, very, um, very lovely to do. And-\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [3.4, 11.5],\n    [14.1, 18.2]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual auditory estimates without visual waveform alignment. There is minor boundary uncertainty at [2.5, 3.3]s where the second speaker's interjection ('Yeah') partially bleeds into the primary speaker's phrasing, and at [11.8, 14.0]s where the second speaker speaks ('In your face') and chuckles before the primary speaker responds ('Yeah'). The abrupt ending cutoff occurs on or immediately following the word 'And' around ~18.5s.\"\n}\n```\n",
+    "duration_seconds": 38.631865,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20785,
+      "output_tokens": 3911,
+      "thinking_tokens": 3399,
+      "cache_read_tokens": 15902,
+      "total_tokens": 24696
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

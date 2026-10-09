@@ -1,0 +1,38 @@
+{
+  "wav": "clip-021-ref.wav",
+  "source_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "8f62a9c7-84b2-48d2-b436-3c0f43d5e74c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8f62a9c7-84b2-48d2-b436-3c0f43d5e74c",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Back in the nineteenth century, engineers were concerned with the efficiency of steam engines. You know, how hot should the fire be? What substance should you boil in the steam engine? Should it be water, or should it be something else?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 4.5],\n    [5.2, 12.8]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates (+/- 0.3s). The transition/filler word at ~5.2s is perceptually 'You know' / 'Y'know', though could conceivably be heard as 'Yeah'. A conversational pause of ~0.7s occurs between 4.5s and 5.2s. Low-frequency background sound is consistent with ambient room air / exterior tone rather than musical instrumentation.\"\n}\n",
+    "duration_seconds": 74.625856,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20618,
+      "output_tokens": 8385,
+      "thinking_tokens": 7969,
+      "cache_read_tokens": 15977,
+      "total_tokens": 29003
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

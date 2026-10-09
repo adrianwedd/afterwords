@@ -1,0 +1,38 @@
+{
+  "wav": "clip-056-ref.wav",
+  "source_sha256": "71b4ae8d4d71716193ec4c119da64691fdb97d53d74ccaf4a38c5aecbd7927a4",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "64996650-0826-440b-9dcb-1b189fa91c45",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "71b4ae8d4d71716193ec4c119da64691fdb97d53d74ccaf4a38c5aecbd7927a4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "71b4ae8d4d71716193ec4c119da64691fdb97d53d74ccaf4a38c5aecbd7927a4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "64996650-0826-440b-9dcb-1b189fa91c45",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 5.0],\n    [5.8, 13.5]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates subject to \u00b10.3-0.5s variance. Transcript wording has very low uncertainty; 'planet history' is heard distinctly rather than 'planetary history'.\"\n}\n",
+    "duration_seconds": 26.531704,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20166,
+      "output_tokens": 2420,
+      "thinking_tokens": 2080,
+      "cache_read_tokens": 16044,
+      "total_tokens": 22586
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-083-ref.wav",
+  "source_sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "7b996d2c-270e-4846-bdaf-ef7463216d6a",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7b996d2c-270e-4846-bdaf-ef7463216d6a",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It appeals to such a wide age range, it appeals to such a wide culture range, it's one of those quirky, odd programs that somehow has managed to survive over time.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 10.5]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations (+/- 0.5s). Word at ~3.5s could be 'culture range' or 'cultural range'.\"\n}\n",
+    "duration_seconds": 35.895432,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20223,
+      "output_tokens": 2623,
+      "thinking_tokens": 2293,
+      "cache_read_tokens": 16042,
+      "total_tokens": 22846
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

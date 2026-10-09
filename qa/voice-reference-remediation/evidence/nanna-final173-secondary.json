@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "8975d74a-4c3d-49fa-a31c-6b191cdc6e66",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8975d74a-4c3d-49fa-a31c-6b191cdc6e66",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, in Finland I think I used more grayish, bluish, more dark colors.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 7.5]],\n  \"uncertainty\": \"Low uncertainty. Transcript and boundary timing are perceptual estimates. The clip features a single isolated speaker with clean audio, but contains noticeable natural pauses as the speaker searches for words.\"\n}\n```\n",
+    "duration_seconds": 27.45046,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20684,
+      "output_tokens": 1981,
+      "thinking_tokens": 1670,
+      "cache_read_tokens": 16096,
+      "total_tokens": 22665
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

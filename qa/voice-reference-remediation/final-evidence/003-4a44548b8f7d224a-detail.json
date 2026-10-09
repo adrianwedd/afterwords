@@ -1,0 +1,38 @@
+{
+  "wav": "clip-003-ref.wav",
+  "source_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "22d7ad2a-3599-47bb-a01f-28824dc810f0",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "22d7ad2a-3599-47bb-a01f-28824dc810f0",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"We hear an awful lot of lefty whinging about the NHS waiting lists\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; consistent close-microphone recording with slight room acoustics throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [],\n  \"apparent_splices\": [],\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.6]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations with an estimated margin of +/- 0.3 seconds. The transcript wording has very high certainty with all phonemes distinctly audible; no background music or crowd laughter is perceptible.\"\n}\n",
+    "duration_seconds": 34.006134,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20632,
+      "output_tokens": 3280,
+      "thinking_tokens": 2948,
+      "cache_read_tokens": 16185,
+      "total_tokens": 23912
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,37 @@
+{
+  "wav": "clip-004-ref.wav",
+  "source_sha256": "fc67f6b452f79a79f07d88c86e2bc5104a9cd47298d376f8d4f8d020fc1d1472",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "e131fdfe-9c3e-46d2-84d7-a3511277732d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc67f6b452f79a79f07d88c86e2bc5104a9cd47298d376f8d4f8d020fc1d1472"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc67f6b452f79a79f07d88c86e2bc5104a9cd47298d376f8d4f8d020fc1d1472"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e131fdfe-9c3e-46d2-84d7-a3511277732d",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Incidentally, this is a time exposure, taken with a fixed camera, which is why the stars appear drawn out into trails.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None detected; uniform room/studio acoustic with dry, consistent vocal resonance throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.8]\n  ],\n  \"uncertainty\": \"Wording uncertainty is very low (<5%); enunciation is exceptionally articulate and clear. Boundary estimates are perceptual with an uncertainty margin of approximately \u00b10.4 seconds across intervals due to the absence of explicit timecode markers in native playback.\"\n}\n```\n",
+    "duration_seconds": 26.318928,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20223,
+      "output_tokens": 2593,
+      "thinking_tokens": 2238,
+      "cache_read_tokens": 16174,
+      "total_tokens": 22816
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "7be068ee4cb299d31fc63ba69f7ee5a7da274f4c5de08795bc6811f76f637c8b",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "be181303-403d-40e4-b549-14c6b57cc7ed",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7be068ee4cb299d31fc63ba69f7ee5a7da274f4c5de08795bc6811f76f637c8b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7be068ee4cb299d31fc63ba69f7ee5a7da274f4c5de08795bc6811f76f637c8b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "be181303-403d-40e4-b549-14c6b57cc7ed",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and and so I I was so surprised when he called me ten years later or more fifteen years later um to meet and talk about something\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 8.5]],\n  \"uncertainty\": \"Exact duration and bounds of clean intervals are approximate perceptual estimates. The transcript contains initial stuttering and filler words.\"\n}\n```\n",
+    "duration_seconds": 24.416792,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12351,
+      "output_tokens": 1337,
+      "thinking_tokens": 1028,
+      "cache_read_tokens": 24139,
+      "total_tokens": 13688
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

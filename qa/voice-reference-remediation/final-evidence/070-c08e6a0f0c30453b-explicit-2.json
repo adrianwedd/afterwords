@@ -1,0 +1,38 @@
+{
+  "wav": "clip-070-ref.wav",
+  "source_sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "3766c71f-afd7-4927-a316-8c358bb024a6",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3766c71f-afd7-4927-a316-8c358bb024a6",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, I was extremely surprised in the latest film that we did that John probably had the single most uncomfortable role of anyone in the film\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 8.0]],\n  \"uncertainty\": \"Boundary estimates and cutoffs are highly uncertain as exact timing information was not exposed in the audio ingestion format.\"\n}\n```\n",
+    "duration_seconds": 50.320084,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 15621,
+      "output_tokens": 3395,
+      "thinking_tokens": 3079,
+      "cache_read_tokens": 41094,
+      "total_tokens": 19016
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

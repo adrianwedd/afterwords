@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "63bc6feeee34862b0045ccfec1e1e4700a43ec7fd79fbb8f55ec320485d3fb18",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "0c3f47d1-1627-470c-97a2-1439c4ffb63c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "63bc6feeee34862b0045ccfec1e1e4700a43ec7fd79fbb8f55ec320485d3fb18"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "63bc6feeee34862b0045ccfec1e1e4700a43ec7fd79fbb8f55ec320485d3fb18"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0c3f47d1-1627-470c-97a2-1439c4ffb63c",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I'm a workaholic. Work is important, but I think not the end product as much as the process. After 20, more than 20 years, I'm still always excited to open the kiln.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"continuous background music\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Boundary and timestamp estimates are perceptual with an uncertainty margin of \u00b10.2\u20130.5s. It is uncertain whether the pause and rephrase at 'After 20, more than 20 years' represents an edit/splice cut or a natural spoken hesitation/self-correction. The final word is transcribed as 'kiln' based on phonetic cues and thematic context, though the terminal nasal consonant is somewhat soft. Continuous acoustic instrumental music persists across the entire recording, precluding any clean, music-free intervals for conditioning.\"\n}\n```\n",
+    "duration_seconds": 112.608897,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20634,
+      "output_tokens": 12322,
+      "thinking_tokens": 11915,
+      "cache_read_tokens": 16001,
+      "total_tokens": 32956
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

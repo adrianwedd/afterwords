@@ -1,0 +1,36 @@
+{
+  "wav": "bernard-black-ref.wav",
+  "source_sha256": "22f7c7036817f9bc06440e33c147bb6b5eddfe2948b96e08ab936786bab67d88",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "baecc86b-b51f-4334-901c-166d073f00a9",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "22f7c7036817f9bc06440e33c147bb6b5eddfe2948b96e08ab936786bab67d88"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "22f7c7036817f9bc06440e33c147bb6b5eddfe2948b96e08ab936786bab67d88"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "baecc86b-b51f-4334-901c-166d073f00a9",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Now if you an you know they they teach you how to become a person really because you know children are very overprotected now in in lots of ways very nervous about them um you know people go oh don't go outside or\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Live setting with audience laughter overlapping the speaker's voice (especially at the start and end); the audio cuts off abruptly mid-phrase.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Transcription of the initial stutters ('an you know they they') is somewhat ambiguous. It is difficult to determine precisely if the middle section is completely free of background audience murmur without specialized tools.\"\n}\n```\n",
+    "duration_seconds": 39.979877,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12763,
+      "output_tokens": 3959,
+      "thinking_tokens": 3601,
+      "cache_read_tokens": 24046,
+      "total_tokens": 16722
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

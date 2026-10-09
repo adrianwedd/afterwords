@@ -1,0 +1,38 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "c2cce6a396421d58ec54ee4e6e071d8b50ff41363c121b54e651cb79e66b9cb6",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "excerpt",
+  "conversation_id": "ef542a44-7f5b-4c87-b9d2-7158aad071ea",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c2cce6a396421d58ec54ee4e6e071d8b50ff41363c121b54e651cb79e66b9cb6"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c2cce6a396421d58ec54ee4e6e071d8b50ff41363c121b54e651cb79e66b9cb6"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ef542a44-7f5b-4c87-b9d2-7158aad071ea",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"in a sewer. In his own twisted and distorted\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent studio acoustic environment and microphone presence throughout; background orchestral music dynamic level swells slightly in the latter half.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Persistent background music score underlying speech across the entire clip, beginning fragment starting mid-thought, and hard cutoff mid-word at the conclusion.\",\n  \"candidate_clean_intervals_s\": [\n    [2.0, 7.8],\n    [8.8, 14.1]\n  ],\n  \"uncertainty\": \"Boundary times are perceptual estimates with an uncertainty of approximately \u00b10.3 to \u00b10.5 seconds. While speech articulation within candidate intervals is complete and spoken by a single voice, background music is present throughout, meaning intervals are clean of speech overlap/cutoffs but not isolated from accompaniment.\"\n}\n```\n",
+    "duration_seconds": 45.433608,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20645,
+      "output_tokens": 4159,
+      "thinking_tokens": 3762,
+      "cache_read_tokens": 15980,
+      "total_tokens": 24804
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

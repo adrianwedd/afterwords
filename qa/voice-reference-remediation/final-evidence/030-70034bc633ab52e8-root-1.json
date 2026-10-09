@@ -1,0 +1,38 @@
+{
+  "wav": "clip-030-ref.wav",
+  "source_sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "403258e5-5597-4e95-bb35-31d8b8e12ba2",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "403258e5-5597-4e95-bb35-31d8b8e12ba2",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Also, this film got terrible reviews for the most part. More than 50%\u201460 or 70% were terrible, and MGM was really worried that, um, they might have to pull it.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 12.5]\n  ],\n  \"uncertainty\": \"Interval boundaries and duration are perceptual estimates with an uncertainty of approximately +/- 0.5 seconds. Punctuation and exact formatting of the speaker's hesitation/correction around percentages ('50%... 60 or 70%') are subjective interpretations of spontaneous conversational speech.\"\n}\n",
+    "duration_seconds": 36.984212,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20522,
+      "output_tokens": 2836,
+      "thinking_tokens": 2470,
+      "cache_read_tokens": 15990,
+      "total_tokens": 23358
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

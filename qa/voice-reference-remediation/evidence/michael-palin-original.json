@@ -1,0 +1,38 @@
+{
+  "wav": "michael-palin-ref.wav",
+  "source_sha256": "3ae19c35e9233f9f13d1d0aefc246241e67d5a8646c814a2c91d340b27598398",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "11b9fed9-e3a8-4b36-97d2-4e8039fa1963",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3ae19c35e9233f9f13d1d0aefc246241e67d5a8646c814a2c91d340b27598398"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3ae19c35e9233f9f13d1d0aefc246241e67d5a8646c814a2c91d340b27598398"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "11b9fed9-e3a8-4b36-97d2-4e8039fa1963",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Phileas Fogg left from here 116 years ago, in October 1872. He set off with head high, clear eye, never hurried, always calm. But then of course, he was fictional. I've actually got to do it.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent vocal acoustics and close narration mic environment, but background orchestral music dynamically swells and changes intensity across the recording.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [6.2, 7.1],\n    [11.2, 11.8],\n    [14.1, 14.8]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Pervasive orchestral background music present continuously behind the entire vocal track.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Timings are perceptual estimates with an uncertainty of approximately +/- 0.4 seconds. Transcript wording is perceived with high confidence, with the initial proper noun rendered phonetically from speech. There is zero uncertainty regarding the presence of background music, which affects 100% of the speech.\"\n}\n```\n",
+    "duration_seconds": 39.609703,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20769,
+      "output_tokens": 3658,
+      "thinking_tokens": 3217,
+      "cache_read_tokens": 15984,
+      "total_tokens": 24427
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

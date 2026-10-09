@@ -1,0 +1,38 @@
+{
+  "wav": "clip-036-ref.wav",
+  "source_sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "04717bf5-c23c-4efc-a2bf-eb4de7b9b4cf",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "04717bf5-c23c-4efc-a2bf-eb4de7b9b4cf",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Ah [unresolved alternative: Well], being born on a cotton plantation in the South, you know, and being uh... uh... poor, uh in that way, no, it was not very easy, because I remember uh [unresolved alternative: a] times when we didn't have anything to eat, for what seemed like an unsurmountable amount of time.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"none\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [5.3, 7.0],\n    [7.6, 8.3],\n    [11.2, 11.8],\n    [15.6, 16.2]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.7, 3.8],\n    [11.8, 15.6],\n    [16.2, 20.1]\n  ],\n  \"uncertainty\": \"Initial interjection is positively heard as an open vocalic onset [\u0251\u02d0]/[\u028c] ('Ah'/'Uh'); 'Well' is noted as an unresolved alternative if an initial labiovelar glide was weakened or vocalized. Fillers at ~5.4s, ~6.7s, and ~8.4s are central vowels [\u0259]/[\u028c] ('uh'). The syllable preceding 'times' (~13.1s) is an unstressed schwa [\u0259], phonetically ambiguous between a hesitation filler ('uh') and the article ('a'). In the long adjective at ~17.5s, the initial prefix vowel is positively heard as central/back-central [\u028c] ('un-') yielding 'unsurmountable', not near-close front [\u026a] ('in-'). Time boundaries are perceptual estimates with an uncertainty margin of \u00b10.2\u20130.3s.\"\n}\n",
+    "duration_seconds": 89.712599,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20836,
+      "output_tokens": 7488,
+      "thinking_tokens": 6872,
+      "cache_read_tokens": 15961,
+      "total_tokens": 28324
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

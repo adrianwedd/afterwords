@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "71b4ae8d4d71716193ec4c119da64691fdb97d53d74ccaf4a38c5aecbd7927a4",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "54bf673e-7c42-4e9c-a39d-c186d5137a3a",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "71b4ae8d4d71716193ec4c119da64691fdb97d53d74ccaf4a38c5aecbd7927a4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "71b4ae8d4d71716193ec4c119da64691fdb97d53d74ccaf4a38c5aecbd7927a4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "54bf673e-7c42-4e9c-a39d-c186d5137a3a",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None observed; uniform close-mic studio acoustic with consistent electronic vocal processing/filter across the duration.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.0],\n    [5.6, 13.8]\n  ],\n  \"uncertainty\": \"Boundary timings are perceptual estimates with an uncertainty of approximately \u00b10.3s. Pauses between sentences (~5.0s to ~5.6s) are natural conversational breaks. Low uncertainty on wording; transcript is clearly enunciated despite the synthetic/vocoded delivery timbre.\"\n}\n```\n",
+    "duration_seconds": 24.885669,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20367,
+      "output_tokens": 2354,
+      "thinking_tokens": 1966,
+      "cache_read_tokens": 16048,
+      "total_tokens": 22721
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

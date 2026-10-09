@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "3a7f0b2cebc03906cdcc8d418d9216f450a172ae3fcc7b1839c9de0524848c26",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4add7646-15b7-4a9f-b07e-c11f8e06468b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3a7f0b2cebc03906cdcc8d418d9216f450a172ae3fcc7b1839c9de0524848c26"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3a7f0b2cebc03906cdcc8d418d9216f450a172ae3fcc7b1839c9de0524848c26"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4add7646-15b7-4a9f-b07e-c11f8e06468b",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"You know, you, you know, you've got no respect, and I, and I, and I stood up, you know.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [1.2, 2.3],\n    [2.8, 4.0]\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual estimates based solely on listening without waveform inspection or timeline instrumentation; total duration estimated at roughly 4.0s. Wording includes repeated verbal hesitations/false starts ('you, you know' and 'and I, and I, and I') with minor uncertainty regarding exact word-boundary cutoffs in rapid speech.\"\n}\n",
+    "duration_seconds": 78.586955,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20279,
+      "output_tokens": 5666,
+      "thinking_tokens": 5292,
+      "cache_read_tokens": 16219,
+      "total_tokens": 25945
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

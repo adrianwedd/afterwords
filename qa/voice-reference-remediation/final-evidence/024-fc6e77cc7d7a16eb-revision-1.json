@@ -1,0 +1,38 @@
+{
+  "wav": "clip-024-ref.wav",
+  "source_sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "322b4e1f-c4a9-44ed-a8fd-f380164230d2",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "322b4e1f-c4a9-44ed-a8fd-f380164230d2",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and then it was that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 7.5]],\n  \"uncertainty\": \"Precise interval boundaries are visual estimates. Minor uncertainty regarding the very start of the clip which begins abruptly on 'and then'.\"\n}\n```\n",
+    "duration_seconds": 26.888642,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12690,
+      "output_tokens": 1673,
+      "thinking_tokens": 1355,
+      "cache_read_tokens": 24168,
+      "total_tokens": 14363
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

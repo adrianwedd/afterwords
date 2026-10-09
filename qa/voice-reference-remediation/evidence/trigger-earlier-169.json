@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "40107aeaea0cb5648b5757dea39d544aec52ee4d859d64ef6e0f3774fd83675a",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "7b3efe92-2b65-454f-ae1e-a15eed716699",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "40107aeaea0cb5648b5757dea39d544aec52ee4d859d64ef6e0f3774fd83675a"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "40107aeaea0cb5648b5757dea39d544aec52ee4d859d64ef6e0f3774fd83675a"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7b3efe92-2b65-454f-ae1e-a15eed716699",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I felt pretty rough, I knew I was going to be x-rayed and\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"abrupt ending cutoff on trailing conjunction 'and'\",\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.1]\n  ],\n  \"uncertainty\": \"Boundary between 'x-rayed' and the trailing 'and' is estimated at approximately 3.0-3.2 seconds. Total clip duration is estimated at ~3.5 seconds. The transcript wording is perceptually clear, though the presence of an elided 'and' between 'rough' and 'I knew' is subtly ambiguous.\"\n}\n",
+    "duration_seconds": 31.214664,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20478,
+      "output_tokens": 3276,
+      "thinking_tokens": 2922,
+      "cache_read_tokens": 16231,
+      "total_tokens": 23754
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

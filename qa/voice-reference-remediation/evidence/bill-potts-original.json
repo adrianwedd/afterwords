@@ -1,0 +1,36 @@
+{
+  "wav": "bill-potts-ref.wav",
+  "source_sha256": "7bfcacd7753db4b83963e5167856ef5646a2a2c6dff449714d8e3000ddc69ec3",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "30ee891b-b3a5-4e3a-b3c6-4fc096a65079",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7bfcacd7753db4b83963e5167856ef5646a2a2c6dff449714d8e3000ddc69ec3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7bfcacd7753db4b83963e5167856ef5646a2a2c6dff449714d8e3000ddc69ec3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "30ee891b-b3a5-4e3a-b3c6-4fc096a65079",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I am the real Bill. And life is just memories. I'm all her memories. So I'm her. Okay, I'm going to prove to you how important memories are. And don't go forgetting me again because... Quite frankly that was offensive.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": true,\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"High confidence in the transcript wording. Constant background music is present throughout the entire clip. Splice boundaries (around 3.8s and 8.1s) are abrupt and perceptual. Background tone jumps noticeably at each splice.\"\n}\n```\n",
+    "duration_seconds": 30.688636,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12518,
+      "output_tokens": 2647,
+      "thinking_tokens": 2302,
+      "cache_read_tokens": 24076,
+      "total_tokens": 15165
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

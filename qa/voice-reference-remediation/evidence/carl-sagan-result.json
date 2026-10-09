@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "2ecec1d6-f34b-4ea1-963c-8b3ace71e5ab",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "2ecec1d6-f34b-4ea1-963c-8b3ace71e5ab",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Because the effects occupy more than a human generation, there is a tendency to say that they are not our problem. Of course, then they are nobody's problem.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"none; room acoustics and reverberation profile remain consistent throughout\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [3.8, 4.4],\n    [8.2, 9.0]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 11.8]\n  ],\n  \"uncertainty\": \"All boundary timestamps are perceptual estimates subject to \u00b10.3s variance due to speech decay and pause transitions. Wording and speech clarity are high with low lexical uncertainty; minor ambiguity exists only around subtle intra-phrase breath pauses and micro-hesitations before 'tendency' and 'are'.\"\n}\n",
+    "duration_seconds": 32.776268,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20403,
+      "output_tokens": 3164,
+      "thinking_tokens": 2768,
+      "cache_read_tokens": 16002,
+      "total_tokens": 23567
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

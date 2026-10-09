@@ -1,0 +1,37 @@
+{
+  "wav": "jack-dee-ref.wav",
+  "source_sha256": "c72a6f3a8e13290f3f5601030c7158315227954de7ccf55a963409ed7414a51e",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "dd06f58a-1169-408d-9ddf-7a1363c9e482",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c72a6f3a8e13290f3f5601030c7158315227954de7ccf55a963409ed7414a51e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c72a6f3a8e13290f3f5601030c7158315227954de7ccf55a963409ed7414a51e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "dd06f58a-1169-408d-9ddf-7a1363c9e482",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"start\": 0.0,\n      \"end\": 5.4,\n      \"speaker\": \"Speaker 1 (Primary, on-mic)\"\n    },\n    {\n      \"start\": 5.4,\n      \"end\": 6.4,\n      \"speaker\": \"Speaker 2 (Audience member / off-mic shout)\"\n    },\n    {\n      \"start\": 6.4,\n      \"end\": 12.0,\n      \"speaker\": \"Speaker 1 (Primary, on-mic)\"\n    }\n  ],\n  \"literal_transcript\": \"...just to help them see, cuz... No? Okay, forget it then. Yeah. Fucking hell. What was the problem? Why were you late? Was you have a... [off-mic audience shout: indistinct / 'wrong Apollo'] You went to the wrong Apollo? Which one, Oxford, Manchester? For fuck's sake.\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Live auditorium/theater PA acoustics with noticeable room reverberation, microphone handling/breath artifacts, and a distinct spatial shift at ~5.4s\u20136.4s to a distant, reverberant off-mic audience shout.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Incomplete opening sentence truncation, audible off-mic secondary speaker interrupting/interacting, pervasive crowd reactions (chuckles, distinct laughter bursts), live PA coloration/reverberation, and fragmented conversational phrasing lacking a sufficiently long (>3s) clean conditioning window.\",\n  \"candidate_clean_intervals_s\": [\n    {\n      \"start\": 3.5,\n      \"end\": 5.2,\n      \"description\": \"Short query ('What was the problem? Why were you late?') with relatively lower crowd interference, though still carrying live hall reverberation and abruptly interrupted.\"\n    }\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty margin of approximately \u00b10.3s. The truncated initial syllable before 'help them see' is cut off and perceptually ambiguous. The distant audience shout between ~5.4s and 6.4s is muffled by hall acoustics and only partially intelligible from context. The muttered phrase around ~2.8s ('Fucking hell') is delivered low and breathy against ambient noise.\"\n}\n```\n",
+    "duration_seconds": 36.061516,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20396,
+      "output_tokens": 3061,
+      "thinking_tokens": 2363,
+      "cache_read_tokens": 15975,
+      "total_tokens": 23457
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

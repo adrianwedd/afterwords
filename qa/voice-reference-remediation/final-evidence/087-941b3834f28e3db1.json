@@ -1,0 +1,38 @@
+{
+  "wav": "clip-087-ref.wav",
+  "source_sha256": "941b3834f28e3db12434eaecd0b6a381ce24050ba9541eb0ad6a420efe8828f3",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "58dd8c8e-97eb-4485-b04a-68cbe29cbb5d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "941b3834f28e3db12434eaecd0b6a381ce24050ba9541eb0ad6a420efe8828f3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "941b3834f28e3db12434eaecd0b6a381ce24050ba9541eb0ad6a420efe8828f3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "58dd8c8e-97eb-4485-b04a-68cbe29cbb5d",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Besides, I've got a much bigger adventure ahead. Time I stopped waiting for you, and found a life of my own.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.6]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately +/- 0.3s. A natural conversational pause of ~0.7s occurs between 'ahead' (~2.9s) and 'Time' (~3.6s), but it does not represent dead air or an abnormal pause; the entire clip or either sub-interval ([0.0, 2.9], [3.6, 7.6]) contains complete, fully conditioned speech. Transcript wording has very low uncertainty.\"\n}\n",
+    "duration_seconds": 42.391871,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20573,
+      "output_tokens": 4696,
+      "thinking_tokens": 4306,
+      "cache_read_tokens": 16160,
+      "total_tokens": 25269
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "ae652defeed7bc2889b28f9d5f169ff5a12528a9b8850a4e6bfef0f71f7c489a",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "b6804e06-39bf-47bf-9eb9-09bd3e0420af",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ae652defeed7bc2889b28f9d5f169ff5a12528a9b8850a4e6bfef0f71f7c489a"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ae652defeed7bc2889b28f9d5f169ff5a12528a9b8850a4e6bfef0f71f7c489a"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b6804e06-39bf-47bf-9eb9-09bd3e0420af",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"The age doesn't really matter to me. I mean, people, um, people I think are much more exercised about your age than you really are. I mean, I think it's just terribly funny to be able to muck around with age.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 13.0]\n  ],\n  \"uncertainty\": \"Low uncertainty. Single clear speaker with no background noise. The estimated duration is roughly 13 seconds based on speech rate.\"\n}\n```\n",
+    "duration_seconds": 22.242002,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12354,
+      "output_tokens": 1473,
+      "thinking_tokens": 1134,
+      "cache_read_tokens": 24153,
+      "total_tokens": 13827
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

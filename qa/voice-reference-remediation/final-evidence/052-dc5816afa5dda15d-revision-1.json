@@ -1,0 +1,38 @@
+{
+  "wav": "clip-052-ref.wav",
+  "source_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "efa461b8-3918-41ab-a24d-56e96615940c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "efa461b8-3918-41ab-a24d-56e96615940c",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And he started winding me up and I didn't know and he was saying you don't know what it is to be hungry, you don't know what it is to be skint, you know you what you know you've got no respect, and I and I I stood up you know.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 11.5]\n  ],\n  \"uncertainty\": \"Interval boundaries and total duration are perceptual estimates (+/- 0.5s) derived from native audio listening without timecode tooling. Minor perceptual uncertainty between 'didn't know' and 'don't know', and exact count of stuttered repetitions ('and I and I I'). Single speaker isolation is clear throughout with no overlapping speech or acoustic defects.\"\n}\n",
+    "duration_seconds": 77.667229,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20565,
+      "output_tokens": 8237,
+      "thinking_tokens": 7844,
+      "cache_read_tokens": 16109,
+      "total_tokens": 28802
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

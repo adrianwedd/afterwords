@@ -1,0 +1,38 @@
+{
+  "wav": "clip-101-ref.wav",
+  "source_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "358ae53a-e7c1-4896-8913-95c9678409c4",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "358ae53a-e7c1-4896-8913-95c9678409c4",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Now having just met you I wouldn't go as far as calling you a cold-hearted bastard. But it wouldn't be a stretch to imagine you think of women as disposable pleasures rather than meaningful pursuits.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.5, 6.0],\n    [6.5, 13.5]\n  ],\n  \"uncertainty\": \"Timing boundaries are perceptual and approximate. A low-level ambient rumble is present but does not interfere with vocal clarity.\"\n}\n```\n",
+    "duration_seconds": 32.794824,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12650,
+      "output_tokens": 3225,
+      "thinking_tokens": 2875,
+      "cache_read_tokens": 24077,
+      "total_tokens": 15875
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

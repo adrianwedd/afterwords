@@ -1,0 +1,38 @@
+{
+  "wav": "clip-035-ref.wav",
+  "source_sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "78a7ca11-479d-4c07-be28-1eb5b0bd82ef",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "78a7ca11-479d-4c07-be28-1eb5b0bd82ef",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.7, 1.2]\n  ],\n  \"literal_transcript\": \"Speaker 1: Fine. Speaker 2: I'm going to go ahead and tell you how it ends.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Noticeable acoustic shift between Speaker 1 (slightly more distant/reverberant delivery of 'Fine') and Speaker 2 (closer, drier, lower-pitched vocal presence).\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [1.2, 3.9]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates with an estimated margin of error of +/- 0.2s. Minor uncertainty in the initial syllable of Speaker 2's phrase ('I'm going to' vs contracted 'I'm gonna').\"\n}\n",
+    "duration_seconds": 28.714137,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20044,
+      "output_tokens": 2993,
+      "thinking_tokens": 2610,
+      "cache_read_tokens": 16228,
+      "total_tokens": 23037
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

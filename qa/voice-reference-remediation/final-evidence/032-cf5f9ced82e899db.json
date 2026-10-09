@@ -1,0 +1,38 @@
+{
+  "wav": "clip-032-ref.wav",
+  "source_sha256": "cf5f9ced82e899dbdac52a9b6c74b893a6acccda6422d994a9560d662300517d",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "6efe4759-70f5-4499-8f52-0cfebc608007",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "cf5f9ced82e899dbdac52a9b6c74b893a6acccda6422d994a9560d662300517d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "cf5f9ced82e899dbdac52a9b6c74b893a6acccda6422d994a9560d662300517d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "6efe4759-70f5-4499-8f52-0cfebc608007",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So if you're gonna shoot me, let's do it. I have plans.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.8]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations with an uncertainty of approximately +/- 0.2 seconds across an estimated total clip length of ~4.8 seconds. High confidence in literal transcript wording, with colloquial 'gonna' clearly articulated. Excellent single-speaker vocal isolation with no detected background music, noise, or competing acoustics; phrases are fully intact and usable for voice conditioning.\"\n}\n",
+    "duration_seconds": 35.718429,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20286,
+      "output_tokens": 4021,
+      "thinking_tokens": 3672,
+      "cache_read_tokens": 16222,
+      "total_tokens": 24307
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

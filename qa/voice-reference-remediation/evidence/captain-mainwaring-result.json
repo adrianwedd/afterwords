@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "1d2ff3aea18d0c8805efa37190304a365b24fd9b308f997731bbd7dbf3001556",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "313917c0-e468-40ec-9091-ccd33b57347c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1d2ff3aea18d0c8805efa37190304a365b24fd9b308f997731bbd7dbf3001556"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1d2ff3aea18d0c8805efa37190304a365b24fd9b308f997731bbd7dbf3001556"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "313917c0-e468-40ec-9091-ccd33b57347c",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And, uh, we were changing in, in '40 from losing the horses, and becoming medium artillery.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Consistent acoustic environment throughout; steady low-level room tone and minor analog tape hiss with no abrupt reverberation or EQ shifts.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": \"Natural conversational hesitations: approximately 0.5\u20130.8s pause after 'And, uh', and approximately 0.6\u20131.0s pause between 'becoming' and 'medium artillery'.\",\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 8.2],\n    [1.5, 8.2]\n  ],\n  \"uncertainty\": \"Timing boundaries are perceptual estimates without visual waveform markers and carry an estimated uncertainty of \u00b10.3 seconds. In the transcript, 'in, in '40' sounds like a mild stammer/repetition ('in, in forty') rather than 'in nineteen forty', and 'medium artillery' is spoken with a slight drop in volume.\"\n}\n",
+    "duration_seconds": 36.394481999999996,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20521,
+      "output_tokens": 2639,
+      "thinking_tokens": 2204,
+      "cache_read_tokens": 16112,
+      "total_tokens": 23160
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "mark-corrigan-ref.wav",
+  "source_sha256": "7a10eb0dcad5f84475bac04e5a846635620c617da7acc1452793767fcd0cc4a5",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4c1d9e39-d48d-45d0-8178-137f5020c80e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7a10eb0dcad5f84475bac04e5a846635620c617da7acc1452793767fcd0cc4a5"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7a10eb0dcad5f84475bac04e5a846635620c617da7acc1452793767fcd0cc4a5"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4c1d9e39-d48d-45d0-8178-137f5020c80e",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 1\",\n      \"start\": 0.0,\n      \"end\": 7.8\n    },\n    {\n      \"speaker\": \"Speaker 2\",\n      \"start\": 7.8,\n      \"end\": 9.8\n    },\n    {\n      \"speaker\": \"Speaker 1\",\n      \"start\": 9.8,\n      \"end\": 11.5\n    }\n  ],\n  \"literal_transcript\": \"Speaker 1: You can stop smoking your drugs. I'm making tea and toast for Sophie, I'm putting on Radio 4, everything's normal. I'm not really high on drugs, so you can stop talking your nonsense on my time.\\nSpeaker 2: What... what's the problem, man? Can't we just chill...\\nSpeaker 1: No, you can't. You've been chilling long enough.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": \"Faint background radio broadcast audio / indistinct dialogue audible under speech around 3.2s\u20134.6s.\",\n  \"acoustic_changes\": \"Mild background acoustic bleed (radio murmur) entering around 3.2s\u20134.6s. Speaker 2 at ~7.8s has different vocal proximity and room acoustics compared to Speaker 1. Clean return to Speaker 1 acoustics at ~9.8s.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.6],\n    [0.0, 3.2],\n    [4.8, 7.6]\n  ],\n  \"uncertainty\": \"Perceptual timing boundary estimates have an uncertainty of approximately \u00b10.2\u20130.3s. The start of Speaker 2 is estimated around 7.8s (range 7.6s\u20138.0s), and Speaker 1's interruption is estimated at ~9.8s (range 9.6s\u201310.0s). In the background radio murmur between 3.2s and 4.6s, the exact background words are unintelligible. The candidate interval [0.0, 7.6] offers continuous complete phrases for Speaker 1, though splitting into [0.0, 3.2] and [4.8, 7.6] provides cleaner isolation if the background radio bleed needs to be avoided.\"\n}\n```\n",
+    "duration_seconds": 42.710239,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20537,
+      "output_tokens": 3958,
+      "thinking_tokens": 3226,
+      "cache_read_tokens": 15979,
+      "total_tokens": 24495
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

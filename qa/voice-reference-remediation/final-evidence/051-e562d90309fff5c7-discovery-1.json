@@ -1,0 +1,38 @@
+{
+  "wav": "clip-051-ref.wav",
+  "source_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "1330fa15-1611-4074-898e-e351f0ef1046",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "1330fa15-1611-4074-898e-e351f0ef1046",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"...er, and forgiveness and understanding is, is urgent right now, and so I wanted to make a film that was about that.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.7, 7.8],\n    [4.2, 7.8]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately +/- 0.3s. The initial vocalization is an abrupt cut-in on a filler syllable ('er' or 'uh') from 0.0s to ~0.4s. The repetition 'is, is' around 2.5s to 3.0s is perceived as a natural conversational hesitation rather than an edit or splice artifact. Usability of the raw reference is assessed as false due to the initial cutoff and hesitations, but the speech is cleanly isolated without background interference and readily salvageable by trimming.\"\n}\n",
+    "duration_seconds": 46.487808,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20434,
+      "output_tokens": 4376,
+      "thinking_tokens": 3956,
+      "cache_read_tokens": 16100,
+      "total_tokens": 24810
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

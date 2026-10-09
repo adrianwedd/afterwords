@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "8e709410-307c-427d-88ce-b8d9b2d62fca",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8e709410-307c-427d-88ce-b8d9b2d62fca",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Eight years later, I get a letter, saying I do want to thank you so much for what you did for me.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [4.8, 9.8]\n  ],\n  \"uncertainty\": \"Perceptual boundary estimates have an uncertainty of approximately +/- 0.2 s. The literal transcript wording has high confidence. Notable dramatic pauses occur between 1.7-2.6 s (~0.9 s) and 3.9-4.8 s (~0.9 s). A subtle, low-level ambient underscore/pad is audible beneath the speech. Raw reference is evaluated as unusable as-is due to the long pauses and background bed, but highly salvageable by trimming to the primary unbroken phrase at [4.8, 9.8] ('saying I do want to thank you so much for what you did for me'); shorter clean fragments exist at [0.2, 1.7] and [2.6, 3.9].\"\n}\n",
+    "duration_seconds": 79.937865,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20298,
+      "output_tokens": 8140,
+      "thinking_tokens": 7691,
+      "cache_read_tokens": 16091,
+      "total_tokens": 28438
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

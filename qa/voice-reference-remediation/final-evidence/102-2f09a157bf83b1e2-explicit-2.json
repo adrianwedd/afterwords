@@ -1,0 +1,38 @@
+{
+  "wav": "clip-102-ref.wav",
+  "source_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "fc135b83-34aa-42c2-888f-874c3c4070f7",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "fc135b83-34aa-42c2-888f-874c3c4070f7",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [13.0, 14.5]\n  ],\n  \"literal_transcript\": \"Yes, well, I just believe that the writer should be writing about today, just so that we we know what's going on in the society we're living in. So I I'm slightly against the the classical uh playwrights in a way. Yeah, I\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 13.0]\n  ],\n  \"uncertainty\": \"Precise timing boundaries are estimated due to lack of explicit timestamp metadata in native audio ingestion. The second speaker at the very end ('Yeah, I') may overlap slightly with the end of the first speaker's sentence.\"\n}\n```\n",
+    "duration_seconds": 57.283202,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12733,
+      "output_tokens": 5315,
+      "thinking_tokens": 4924,
+      "cache_read_tokens": 24032,
+      "total_tokens": 18048
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "martha-jones-ref.wav",
+  "source_sha256": "c0221e327062b9a7ce9b0318384b5a39e445c77357d80cb63a6c92b9d42aa290",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "8d7d6712-742f-4550-9b4a-68c28398b863",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c0221e327062b9a7ce9b0318384b5a39e445c77357d80cb63a6c92b9d42aa290"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c0221e327062b9a7ce9b0318384b5a39e445c77357d80cb63a6c92b9d42aa290"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8d7d6712-742f-4550-9b4a-68c28398b863",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 0.5],\n    [0.5, 17.5]\n  ],\n  \"literal_transcript\": \"...me. I told a story. That's all. No weapons, just words. I did just what the Doctor said. I went across the continents all on my own. And everywhere I went, I found the people, and I told them my story. He has saved your lives so many times...\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": true,\n  \"acoustic_changes\": \"Clear shift at approximately 14.8s where the primary speaker transitions from an intimate, quiet, close-mic conversational tone to a loud, projected, reverberant public-address style.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": [\n    [9.5, 10.8]\n  ],\n  \"apparent_splices\": [\n    [14.5, 14.8]\n  ],\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.5, 9.5],\n    [10.8, 14.5]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual approximations (+/- 0.3s). The initial word at 0.0s is truncated, perceived as '...me' (possibly the tail end of 'Tell me'). At 9.5s-10.8s there is a prominent breath/sigh within the pause. It is perceptually ambiguous whether the loud delivery beginning at ~14.8s ('He has saved your lives...') is the same individual switching performance registers via a scene splice or a separate speaker with similar vocal timbre. Faint musical underscore is audible beneath the speech throughout the entire clip.\"\n}\n```\n",
+    "duration_seconds": 54.112671,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20436,
+      "output_tokens": 5073,
+      "thinking_tokens": 4517,
+      "cache_read_tokens": 15976,
+      "total_tokens": 25509
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

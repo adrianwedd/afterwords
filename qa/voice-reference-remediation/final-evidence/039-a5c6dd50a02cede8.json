@@ -1,0 +1,38 @@
+{
+  "wav": "clip-039-ref.wav",
+  "source_sha256": "a5c6dd50a02cede822f1af01efec2b61a22d776a305edd21d6cce9b0a6015c4e",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "63c48727-8c8a-4985-a1af-6c37fc0ef5d8",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a5c6dd50a02cede822f1af01efec2b61a22d776a305edd21d6cce9b0a6015c4e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a5c6dd50a02cede822f1af01efec2b61a22d776a305edd21d6cce9b0a6015c4e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "63c48727-8c8a-4985-a1af-6c37fc0ef5d8",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It may be the gulfs will wash us down. It may be we shall touch the Happy Isles.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.8, 5.8],\n    [7.5, 12.2]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates subject to \u00b10.3s variance. Punctuation reflects cadence. High confidence in single-speaker isolation, verbal clarity, and absence of background interference.\"\n}\n",
+    "duration_seconds": 32.751421,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20193,
+      "output_tokens": 3179,
+      "thinking_tokens": 2849,
+      "cache_read_tokens": 16103,
+      "total_tokens": 23372
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

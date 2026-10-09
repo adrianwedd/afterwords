@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "d8eb746e2e7994478a1f9038033fb4ebc8e28aaa1ea59f2188d871435918fae9",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "1f661e16-0f06-46f6-bda6-927ddcf3b9bb",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d8eb746e2e7994478a1f9038033fb4ebc8e28aaa1ea59f2188d871435918fae9"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "d8eb746e2e7994478a1f9038033fb4ebc8e28aaa1ea59f2188d871435918fae9"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "1f661e16-0f06-46f6-bda6-927ddcf3b9bb",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"This is a genuine decision that she is making, and she totally believes in it.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.2]\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual approximations (~0.0s to ~5.2s) estimated solely via listening without timeline metadata. Minor acoustic ambiguity on 'totally' versus 'thoroughly' due to speaker cadence and accent, though 'totally' is heard most clearly. Complete phrase with isolated single speaker and clean acoustics throughout.\"\n}\n```\n",
+    "duration_seconds": 54.317355,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20430,
+      "output_tokens": 2958,
+      "thinking_tokens": 2606,
+      "cache_read_tokens": 16166,
+      "total_tokens": 23388
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

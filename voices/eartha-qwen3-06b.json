@@ -2,7 +2,9 @@
   "name": "eartha-qwen3-06b",
   "backend": "qwen3-0.6b",
   "reference_audio": "eartha-ref.wav",
-  "reference_text": "A relationship is a relationship that has to be earned, not to compromise for. I love relationships. I think they're fantastic. They're wonderful. I think they're great. I think there's nothing in the world more beautiful.",
+  "reference_text": "Ah, being born on a cotton plantation in the South, you know, and being, uh, poor, uh, in that way, no, it was not very easy, because I remember, uh, times when we didn't have anything to eat for what seemed like an unsurmountable amount of time.",
   "family": "eartha",
-  "notes": "Reference re-trimmed via ffmpeg silenceremove (now 11.3s dense). Transcript refreshed from Whisper."
+  "notes": "Reference remediated; see qa/voice-reference-remediation/changes.json for provenance and native listening evidence.",
+  "segment_start_s": 9.42,
+  "source_url": "https://www.youtube.com/watch?v=TEoAypCUdRI"
 }

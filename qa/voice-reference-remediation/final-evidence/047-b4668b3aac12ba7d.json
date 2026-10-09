@@ -1,0 +1,38 @@
+{
+  "wav": "clip-047-ref.wav",
+  "source_sha256": "b4668b3aac12ba7d4a37c5612d7d2c19c5594cf96f8c19ab19f26ffa31936b11",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "bca47965-d481-46df-b2a4-49191f54154f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b4668b3aac12ba7d4a37c5612d7d2c19c5594cf96f8c19ab19f26ffa31936b11"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "b4668b3aac12ba7d4a37c5612d7d2c19c5594cf96f8c19ab19f26ffa31936b11"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "bca47965-d481-46df-b2a4-49191f54154f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Thanks to compound interest, you now own 98% of all the world's wealth.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.0]\n  ],\n  \"uncertainty\": \"Boundary timing carries a perceptual uncertainty of approximately \u00b10.5 s as leading and trailing silence cannot be measured via waveform inspection. Wording uncertainty is minimal, with minor ambiguity solely regarding numerical transcription ('98%' vs. 'ninety-eight percent'). The speaker is fully isolated with no background music, noise, or secondary speakers, providing a clean, complete utterance suitable for conditioning.\"\n}\n```\n",
+    "duration_seconds": 63.039754,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36418,
+      "output_tokens": 7349,
+      "thinking_tokens": 6989,
+      "cache_read_tokens": 0,
+      "total_tokens": 43767
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

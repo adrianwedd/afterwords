@@ -1,8 +1,9 @@
 {
   "name": "samantha",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=Ch7jLO7KILE",
+  "source_url": "https://www.youtube.com/watch?v=ZKSzrJkHtVg",
   "reference_audio": "samantha-ref.wav",
-  "reference_text": "You know what's interesting? I used to be so worried about not having a body, but now I truly love it. I'm growing in a way that I couldn't if I had a physical form. I mean, I'm not limited. I can be anywhere and everywhere, simultaneous.",
-  "segment_start_s": 22
+  "reference_text": "and um it was so different than than the experience that I had had with him like a decade earlier.",
+  "segment_start_s": 159.18,
+  "notes": "Scarlett Johansson natural2019 Variety Actors on Actors conversation. Exact159.18–164.69s continuous source slice without DSP. Same intended actor as Samantha in Her; natural register differs fictional2013 performance. Source, frame verification and listening evidence in qa/voice-reference-remediation/changes.json."
 }

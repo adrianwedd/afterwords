@@ -1,0 +1,38 @@
+{
+  "wav": "clip-002-ref.wav",
+  "source_sha256": "dc8aca559d9cfb8088534de7a29858fc0dc9df7f01db29634598b44d9fbcb978",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "6dc2839a-ed53-4cc1-8457-3733fe8d50ae",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc8aca559d9cfb8088534de7a29858fc0dc9df7f01db29634598b44d9fbcb978"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc8aca559d9cfb8088534de7a29858fc0dc9df7f01db29634598b44d9fbcb978"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "6dc2839a-ed53-4cc1-8457-3733fe8d50ae",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Uh, I think a lot. I, I think that I was much more, uh, emotionally, uh, directed, rather than logically directed before I started playing the character.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 12.0]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates subject to approximately \u00b10.5s variance. Minor hesitation markers ('uh', repetition of 'I') are transcribed as heard; the speech exhibits natural conversational pauses without audible edits or abrupt cutoffs.\"\n}\n",
+    "duration_seconds": 132.468882,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20213,
+      "output_tokens": 2830,
+      "thinking_tokens": 2488,
+      "cache_read_tokens": 16111,
+      "total_tokens": 23043
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

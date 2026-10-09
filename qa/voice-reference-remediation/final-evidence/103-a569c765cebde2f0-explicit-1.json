@@ -1,0 +1,38 @@
+{
+  "wav": "clip-103-ref.wav",
+  "source_sha256": "a569c765cebde2f0b98856fdbcf64bed903c49bb541d0528c5d17e85831e8895",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "d304dd66-6901-4a93-a592-4e67f892bfbf",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a569c765cebde2f0b98856fdbcf64bed903c49bb541d0528c5d17e85831e8895"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a569c765cebde2f0b98856fdbcf64bed903c49bb541d0528c5d17e85831e8895"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d304dd66-6901-4a93-a592-4e67f892bfbf",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I don't want to pretend like I don't enjoy it. I was really happy to be on the front page of the newspapers with my two BAFTAs.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"none\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.0]\n  ],\n  \"uncertainty\": \"Slight uncertainty in the first clause between 'pretend like I don't' versus 'pretend that I don't' due to connected speech elision. Interval boundaries are perceptual estimates with an uncertainty margin of approximately \u00b10.4 seconds.\"\n}\n",
+    "duration_seconds": 28.248817,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20130,
+      "output_tokens": 2924,
+      "thinking_tokens": 2577,
+      "cache_read_tokens": 16172,
+      "total_tokens": 23054
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

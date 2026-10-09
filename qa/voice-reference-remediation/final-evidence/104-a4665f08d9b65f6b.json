@@ -1,0 +1,38 @@
+{
+  "wav": "clip-104-ref.wav",
+  "source_sha256": "a4665f08d9b65f6b9ff51c1be8ec303f6aa487253c81c7f285b36cff8d0adcd9",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "1fafbcba-6f55-4be2-b1c4-0a6de805672a",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a4665f08d9b65f6b9ff51c1be8ec303f6aa487253c81c7f285b36cff8d0adcd9"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a4665f08d9b65f6b9ff51c1be8ec303f6aa487253c81c7f285b36cff8d0adcd9"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "1fafbcba-6f55-4be2-b1c4-0a6de805672a",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"A wise person once said to me. Goodbyes only hurt, because what came before was so special.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 2.6],\n    [3.7, 5.4],\n    [6.1, 8.6]\n  ],\n  \"uncertainty\": \"Low uncertainty on transcript wording; speech is clearly articulated and isolated. Moderate uncertainty on absolute temporal boundaries (estimated margin of +/- 0.3s) as these are perceptual auditory estimates without visual waveform alignment. Pauses between clauses (~1.0-1.2s each) are deliberate and dramatic but cleanly silent.\"\n}\n```\n",
+    "duration_seconds": 29.875835,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20082,
+      "output_tokens": 2662,
+      "thinking_tokens": 2286,
+      "cache_read_tokens": 16109,
+      "total_tokens": 22744
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-023-ref.wav",
+  "source_sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "683833e1-8fce-4f66-b338-a7ded1c79551",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "683833e1-8fce-4f66-b338-a7ded1c79551",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Because the effects occupy more than a human generation, there is a, uh, tendency to, uh, say that they, uh, are not our problem. Uh, of course, then they are nobody's problem.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None detected; acoustic environment is consistent throughout with stable room tone and mild natural room reverberation.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"interval_s\": [3.6, 4.2],\n      \"description\": \"Mid-sentence hesitation pause before 'there is a'\"\n    },\n    {\n      \"interval_s\": [10.2, 11.2],\n      \"description\": \"Inter-sentence pause between 'our problem' and 'Uh, of course'\"\n    }\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.6],\n    [4.2, 10.2],\n    [11.2, 14.5]\n  ],\n  \"uncertainty\": \"Exact boundary timestamps are perceptual estimates with an uncertainty of approximately \u00b10.3 to 0.5 seconds. Minor uncertainty in whether the final clause is contracted ('they're') or enunciated ('they are'), though perceptual audition favors 'they are'. Placement and presence of subtle hesitation fillers ('uh') are based on perceptual listening without waveform/spectrographic alignment.\"\n}\n",
+    "duration_seconds": 29.446057,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20362,
+      "output_tokens": 2938,
+      "thinking_tokens": 2423,
+      "cache_read_tokens": 16001,
+      "total_tokens": 23300
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

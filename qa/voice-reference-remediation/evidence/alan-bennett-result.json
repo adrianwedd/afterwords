@@ -1,0 +1,36 @@
+{
+  "wav": "clip-ref.wav",
+  "source_sha256": "80c47d9cd909b85e87638f599f54397938a85d765480a6a66a80fb442962c3e1",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "8faa31c3-9559-4f9a-8064-70ab24260bab",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "80c47d9cd909b85e87638f599f54397938a85d765480a6a66a80fb442962c3e1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "80c47d9cd909b85e87638f599f54397938a85d765480a6a66a80fb442962c3e1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8faa31c3-9559-4f9a-8064-70ab24260bab",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"He and occasionally she is overwhelmed by the amount of stuff that has been written and the ground still to be covered. How shall I ever catch up?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.5],\n    [8.5, 11.0]\n  ],\n  \"uncertainty\": \"Interval boundaries are rough perceptual estimates; exact timestamp values in seconds are highly uncertain. A distinct pause is audible between the two sentences, which I have treated as a break between candidate clean intervals. Transcript confidence is high, though exact punctuation (such as commas around 'and occasionally she') is inferred from prosody. The audio exhibits a single, clear, isolated speaker with complete usable phrases.\"\n}\n```\n",
+    "duration_seconds": 29.713335,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12658,
+      "output_tokens": 2734,
+      "thinking_tokens": 2349,
+      "cache_read_tokens": 24126,
+      "total_tokens": 15392
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

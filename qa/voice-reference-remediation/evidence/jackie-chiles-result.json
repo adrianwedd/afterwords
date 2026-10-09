@@ -1,0 +1,37 @@
+{
+  "wav": "clip-004-ref.wav",
+  "source_sha256": "6d41ce5a2978fe30e8de1af4e6b7f7137078a6e27ad3f58e0db79e81820f6271",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "07596509-04dc-4b76-aa3a-8a6a0e4ba797",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6d41ce5a2978fe30e8de1af4e6b7f7137078a6e27ad3f58e0db79e81820f6271"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6d41ce5a2978fe30e8de1af4e6b7f7137078a6e27ad3f58e0db79e81820f6271"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "07596509-04dc-4b76-aa3a-8a6a0e4ba797",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.6]\n  ],\n  \"uncertainty\": \"Interval boundaries are perceptual estimates with an uncertainty margin of approximately +/- 0.3s. Transcript wording is high confidence; 'maestro' is distinctly enunciated. The brief interjection 'No' matches the primary speaker's timbre, volume, and close-mic acoustic space, indicating a self-answered rhetorical question rather than an interlocutor, though conversational turn-taking ambiguity remains theoretically possible. Audio exhibits moderate indoor room reverberation throughout, but no background music, noise, or competing sound sources.\"\n}\n```\n",
+    "duration_seconds": 39.105413,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20016,
+      "output_tokens": 3721,
+      "thinking_tokens": 3323,
+      "cache_read_tokens": 16204,
+      "total_tokens": 23737
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

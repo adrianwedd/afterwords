@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "07e61a13774f749a568f1bb9896d3f32f6ba9c89f584e2d52512f6bd49f4c05c",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "0230ed8f-f4c8-4796-869b-975eb0af88d7",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "07e61a13774f749a568f1bb9896d3f32f6ba9c89f584e2d52512f6bd49f4c05c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "07e61a13774f749a568f1bb9896d3f32f6ba9c89f584e2d52512f6bd49f4c05c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0230ed8f-f4c8-4796-869b-975eb0af88d7",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, that was the problem. I I can't answer it. I don't know what is the ethical rightness and justice of this. I I haven't figured it out yet.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 9.0]\n  ],\n  \"uncertainty\": \"Timing boundaries are rough perceptual estimates. 'I I' repetitions are genuine speaker hesitations. The audio is well-isolated with complete usable phrases for conditioning.\"\n}\n```\n",
+    "duration_seconds": 39.768895,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12561,
+      "output_tokens": 3595,
+      "thinking_tokens": 3257,
+      "cache_read_tokens": 24212,
+      "total_tokens": 16156
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

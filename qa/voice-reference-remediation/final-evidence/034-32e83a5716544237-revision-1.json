@@ -1,0 +1,38 @@
+{
+  "wav": "clip-034-ref.wav",
+  "source_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "e03605ab-2951-4042-9d48-909d38ed5fa8",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e03605ab-2951-4042-9d48-909d38ed5fa8",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Um, I'm bringing the, er, 'Am I bovvered' character back, which, um, I did kill off before I knew I was going on tour.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.5]\n  ],\n  \"uncertainty\": \"Timestamps and duration (~7.5s total) are perceptual estimates with an uncertainty margin of approximately +/- 0.5s. Wording uncertainty includes filler vocalizations ('er' vs 'uh') and phonetic transcription of the colloquial catchphrase ('bovvered' vs 'bothered'). Vocal isolation is high with an isolated single speaker throughout, consistent studio/dry acoustics, no background interference, and intact phrasing suitable for TTS conditioning.\"\n}\n",
+    "duration_seconds": 39.929624,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20367,
+      "output_tokens": 3881,
+      "thinking_tokens": 3493,
+      "cache_read_tokens": 16156,
+      "total_tokens": 24248
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

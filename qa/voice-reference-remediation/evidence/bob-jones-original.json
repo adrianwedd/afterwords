@@ -1,0 +1,36 @@
+{
+  "wav": "bob-jones-ref.wav",
+  "source_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "3011af1c-d8b0-4721-9a7c-eed3b630e856",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3011af1c-d8b0-4721-9a7c-eed3b630e856",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Saisan is a very interesting kata because it comes in at third degree, the teacher's level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 15.0]],\n  \"uncertainty\": \"Interval boundaries and total duration are rough perceptual estimates. 'Saisan' may be a phonetic spelling of 'Seisan'.\"\n}\n```\n",
+    "duration_seconds": 31.336239,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12434,
+      "output_tokens": 3028,
+      "thinking_tokens": 2687,
+      "cache_read_tokens": 24038,
+      "total_tokens": 15462
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

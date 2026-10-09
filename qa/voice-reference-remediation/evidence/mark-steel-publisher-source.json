@@ -1,0 +1,15 @@
+{
+  "programme_url": "https://www.bbc.co.uk/programmes/m0025l9s",
+  "download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0k8y4w1.mp3",
+  "guest": "Mark Steel",
+  "publisher": "BBC Radio 4",
+  "programme": "Desert Island Discs",
+  "interviewer": "Lauren Laverne",
+  "source_mp3_sha256": "d4beb95068dc2b7ac6a0f9d07315d9cc424d651b1ce036c6337ca02bf45a2fc9",
+  "source_audio_sha256": "e59001b21d02ba09373b36f987e2b6974b57c61aebce405d81ea968aaae9c727",
+  "programme_html_sha256": "f7b2cb3d442d48806341fbb02e4d702c795f3c2007dee074637777c0fcf04498",
+  "decode": "ffmpeg to PCM16 WAV preserving decoded rate/channels, no cleanup or normalization",
+  "retrieved_utc": "2026-10-08T07:19:59.150557+00:00",
+  "identity_basis": "BBC publisher programme and audible introduction identify Mark Steel and interviewer; selected continuous guest answer describes his method for writing comedy about places.",
+  "delivery_change": "Same intended comedian in natural interview delivery replaces multi-person location conversation."
+}

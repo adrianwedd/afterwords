@@ -1,0 +1,37 @@
+{
+  "wav": "spock-ref.wav",
+  "source_sha256": "caf5dff59a916a7b2cfebd600c9c9e13c8417faefa25af61f821bf8d9d975487",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "2e5865e4-8bc8-4db5-8fbf-d3a0888e8c42",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "caf5dff59a916a7b2cfebd600c9c9e13c8417faefa25af61f821bf8d9d975487"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "caf5dff59a916a7b2cfebd600c9c9e13c8417faefa25af61f821bf8d9d975487"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "2e5865e4-8bc8-4db5-8fbf-d3a0888e8c42",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Space, the final frontier. These are the continuing voyages of the starship Enterprise.\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None detected; acoustic environment is consistent with a reverberant studio voiceover setup throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Persistent background music / orchestral accompaniment present beneath the voice across all spoken phrases.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations (estimated uncertainty of \u00b10.5 to 1.0 seconds) based strictly on auditory playback without visual waveform or spectral analysis tools. The spoken phrasing and words are clearly audible and transcribed as heard without relying on remembered external scripts, though punctuation represents interpretive cadence. The background accompaniment is consistently present beneath all vocal segments, preventing isolation of any clean, music-free intervals solely through temporal trimming.\"\n}\n```\n",
+    "duration_seconds": 35.549266,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20314,
+      "output_tokens": 3443,
+      "thinking_tokens": 3067,
+      "cache_read_tokens": 16064,
+      "total_tokens": 23757
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

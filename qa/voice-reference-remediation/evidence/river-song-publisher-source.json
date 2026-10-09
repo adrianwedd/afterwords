@@ -1,0 +1,15 @@
+{
+  "programme_url": "https://www.bbc.co.uk/programmes/m001hnlk",
+  "download_url": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/p0f0k099.mp3",
+  "guest": "Alex Kingston",
+  "publisher": "BBC Radio 4",
+  "programme": "Womans Hour",
+  "interviewer": "Anita Rani",
+  "broadcast_date": "2023-02-02",
+  "source_mp3_sha256": "ac1cee9bebe5fd7891a073bcb60cc9a7f16e5589d64601c64164864c32eb19b3",
+  "source_audio_sha256": "07225e177ed061c71ea70abf2c71a0370f5ef2d1ab5e43a087d8c101841c0002",
+  "programme_html_sha256": "1798f389de230b3d9aed7693e8224271fbeabb7beb18c6ea4303e11c3f36f1a6",
+  "decode": "ffmpeg to PCM16 WAV preserving decoded source rate/channels; no cleanup or normalization",
+  "retrieved_utc": "2026-10-08T06:55:44.227883+00:00",
+  "identity_basis": "Publisher programme names Alex Kingston and credits River Song role; solo guest answer follows introduction and questions about her Prospero portrayal."
+}

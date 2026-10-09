@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "9dedd7a3c249410436debef3bdd0466892257e34066522431cafd28f74161505",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "b97c4177-d95a-4768-bc5e-1f631abd998b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "9dedd7a3c249410436debef3bdd0466892257e34066522431cafd28f74161505"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "9dedd7a3c249410436debef3bdd0466892257e34066522431cafd28f74161505"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b97c4177-d95a-4768-bc5e-1f631abd998b",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"He called man said Bill I I'm gonna take uh a uh few pages to New York to pitch for a show and I wonder if you'd do me a favor and come over to Universal and and put it down on tape and I can take that with me\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Pervasive stammers and hesitations make it impossible to extract a clean, contiguous phrase of sufficient length for a quality TTS reference.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"The exact boundaries of the dysfluencies are difficult to pinpoint precisely, but they are frequent enough to render the entire clip functionally unusable.\"\n}\n```\n",
+    "duration_seconds": 92.819694,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20721,
+      "output_tokens": 10951,
+      "thinking_tokens": 10590,
+      "cache_read_tokens": 15876,
+      "total_tokens": 31672
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

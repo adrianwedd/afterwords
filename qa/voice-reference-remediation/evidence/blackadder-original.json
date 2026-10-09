@@ -1,0 +1,36 @@
+{
+  "wav": "blackadder-ref.wav",
+  "source_sha256": "7125b16034eb407b2b8431e9a62ced914942f58db5b6480a459a185f54a8d228",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "f918d233-cfa5-40ba-8fc5-46d80433ee21",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7125b16034eb407b2b8431e9a62ced914942f58db5b6480a459a185f54a8d228"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7125b16034eb407b2b8431e9a62ced914942f58db5b6480a459a185f54a8d228"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f918d233-cfa5-40ba-8fc5-46d80433ee21",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [[4.5, 6.5], [8.0, 10.0]],\n  \"literal_transcript\": \"The rain beats down so hard, it makes your head bleed. So some sort of hat is probably in order. [laughter] Sounded boring actually. [laughter] Only last year my aunt...\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 4.5]],\n  \"uncertainty\": \"Timings for intervals are rough perceptual estimates as no timeline or waveform is available. There is uncertainty regarding the number of speakers; the middle phrase ('Sounded boring actually' or similar) may be a second speaker responding, or the same speaker changing tone. Exact wording of the middle phrase is slightly uncertain due to the preceding audience laughter. The final phrase ('Only last year my aunt...') is abruptly cut off. Loud audience laughter dominates the pauses between speech.\"\n}\n```\n",
+    "duration_seconds": 44.199435,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12636,
+      "output_tokens": 4529,
+      "thinking_tokens": 4124,
+      "cache_read_tokens": 24043,
+      "total_tokens": 17165
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

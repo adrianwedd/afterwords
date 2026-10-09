@@ -1,0 +1,36 @@
+{
+  "wav": "alan-shore-ref.wav",
+  "source_sha256": "ff724e53b1e9d40dbbea64dc0c9b3a82d442fb39b1f48bccb1aaf6fb8bc97679",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "9fcd17a4-10b1-40fa-9f81-65b3eb391051",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ff724e53b1e9d40dbbea64dc0c9b3a82d442fb39b1f48bccb1aaf6fb8bc97679"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ff724e53b1e9d40dbbea64dc0c9b3a82d442fb39b1f48bccb1aaf6fb8bc97679"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "9fcd17a4-10b1-40fa-9f81-65b3eb391051",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"They expected the American people to rise up. They didn't. Then, when the Abu Ghraib torture thing surfaced, and it was revealed that our government participated in rendition, a practice\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.5]\n  ],\n  \"uncertainty\": \"I do not have access to exact audio duration or a precise waveform timeline, so timestamps for candidate clean intervals are rough perceptual estimates based on speech pacing. The literal transcript is transcribed by ear and may have minor variances. The audio clearly cuts off mid-phrase at the end, making the raw file sub-optimal for conditioning without trimming.\"\n}\n```\n",
+    "duration_seconds": 29.19692,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12482,
+      "output_tokens": 2476,
+      "thinking_tokens": 2110,
+      "cache_read_tokens": 24039,
+      "total_tokens": 14958
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

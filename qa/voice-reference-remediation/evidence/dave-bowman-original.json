@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "3df5c8ec42f965e8f129ba1ae0c44baaa8d29a97bb5048999a738598cb56dbc3",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "7c706f4a-fdef-4fd5-8aaa-914eeb4e8350",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3df5c8ec42f965e8f129ba1ae0c44baaa8d29a97bb5048999a738598cb56dbc3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3df5c8ec42f965e8f129ba1ae0c44baaa8d29a97bb5048999a738598cb56dbc3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7c706f4a-fdef-4fd5-8aaa-914eeb4e8350",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Rumors about something being dug up on the Moon. I never gave these stories much credence. But particularly in view of some of the other things that have happened, I find them difficult to put out of my mind.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None detected; uniform room acoustic and microphone distance throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 14.8]\n  ],\n  \"uncertainty\": \"Wording clarity is high with very low lexical uncertainty. Timestamp boundary estimates are perceptual with an uncertainty margin of approximately \u00b10.2 seconds.\"\n}\n```\n",
+    "duration_seconds": 34.099833,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20572,
+      "output_tokens": 2864,
+      "thinking_tokens": 2516,
+      "cache_read_tokens": 15979,
+      "total_tokens": 23436
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

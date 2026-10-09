@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "a5c6dd50a02cede822f1af01efec2b61a22d776a305edd21d6cce9b0a6015c4e",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "fbc81174-a3a6-4742-aa98-de51359265f8",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a5c6dd50a02cede822f1af01efec2b61a22d776a305edd21d6cce9b0a6015c4e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a5c6dd50a02cede822f1af01efec2b61a22d776a305edd21d6cce9b0a6015c4e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "fbc81174-a3a6-4742-aa98-de51359265f8",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It may be the gulfs will wash us down. It may be we shall touch the Happy Isles.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.0]\n  ],\n  \"uncertainty\": \"Interval timings are rough perceptual estimates as precise duration metadata is unavailable. Transcript wording is highly certain. A single speaker is well-isolated throughout, providing complete usable phrases for conditioning.\"\n}\n",
+    "duration_seconds": 28.562899,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20671,
+      "output_tokens": 2499,
+      "thinking_tokens": 2186,
+      "cache_read_tokens": 16049,
+      "total_tokens": 23170
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

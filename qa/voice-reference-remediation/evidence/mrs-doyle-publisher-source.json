@@ -1,0 +1,39 @@
+{
+  "source_url": "https://shows.acast.com/pjrchive/episodes/pauline-mclynn-actress-who-played-mrs-doyle-in-father-ted-in",
+  "publisher": "The PJRchive, Peter Jonathan Robertson",
+  "title": "PAULINE McLYNN, actress who played Mrs Doyle in Father Ted, interview",
+  "description": "Phone interview by Peter Jonathan Robertson in 2002<hr><p style='color:grey; font-size:0.75em;'> Hosted on Acast. See <a style='color:grey;' target='_blank' rel='noopener noreferrer' href='https://acast.com/privacy'>acast.com/privacy</a> for more information.</p>",
+  "published_date": "Thu, 28 Apr 2022 16:20:08 GMT",
+  "source_download_url": "https://sphinx.acast.com/p/open/s/602e9c1efe05b17b92a087f7/e/626abeb6c86d490012514316/media.mp3",
+  "source_download_sha256": "4afd9cba8a60309bc84fc7b6b18af4aa0952485dd91ebfede21a25a35defa3e4",
+  "publisher_feed_url": "https://feeds.acast.com/public/shows/pjrchive",
+  "publisher_feed_sha256": "4a5aba766d20b24b1f8bfc5495a315469bfc14a639c7979b1c7bf3d32103df4d",
+  "copyright": "Peter Robertson",
+  "source_basis": "Publisher RSS episode145 identifies phone interview with Pauline McLynn by Peter Jonathan Robertson in2002; opening narrator0-50s credits actor/author and Mrs Doyle role, then host asks about birthplace. Selected55.1-70.35 is guest firstperson reply identifying Sligo family and moving to Galway as infant, before nexthostquestion.",
+  "channel_selection": "Source has two distinct channels after intro; select decoded right channel(index1) exactly, no filtering/remixing. Host laterquestion remains onchannel so speaker isolation relies on actual native reviewed boundaries, not channel assumption.",
+  "delivery_change": "Same intended actor Pauline McLynn in telephone interview delivery replaces contaminated sitcom scene; dramatic character register and fullband studio timbre are not claimed preserved.",
+  "source_audio_sha256": "8dd3f4f0e062f47672add39d73fe925f8c4e39369027086734d2315dd0feec68",
+  "retrieved_utc": "2026-10-08T09:02:27.009138+00:00",
+  "decode": "Fullsource ffmpeg PCM16 preserving decoded rate/channels, exit0 with emptyerrorlog",
+  "exact_edit": {
+    "start_s": 55.1,
+    "end_s": 70.35,
+    "sample_rate": 44100,
+    "start_frame": 2429910,
+    "end_frame_exclusive": 3102435,
+    "channel_index": 1
+  },
+  "candidate_audio": {
+    "sha256": "d11bd37ea2c1630129084245c2c16c60a271d75f856746d2f080d1bc61fd1adb",
+    "frames": 672525,
+    "sample_rate": 44100,
+    "channels": 1,
+    "subtype": "PCM_16",
+    "duration_s": 15.25,
+    "peak": 0.6478271484375,
+    "rms": 0.060849944126313595,
+    "samples_at_full_scale": 0
+  },
+  "sample_exact_source_slice": true,
+  "changes": "Continuous decoded source PCM16 frame slice plus lossless rightchannel selection; no DSP, normalization, separation, padding or concatenation"
+}

@@ -1,0 +1,37 @@
+{
+  "wav": "han-solo-ref.wav",
+  "source_sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "e6df2aa5-bb63-436f-ab61-0ccdd223b0dc",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e6df2aa5-bb63-436f-ab61-0ccdd223b0dc",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful force controlling everything. There's no mystical energy field controls my destiny.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [10.2, 11.0]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 13.5]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately \u00b10.3 to 0.5 seconds. In the transcript, the onset of 'I've seen a lot of strange stuff' features a heavily reduced contraction that could perceptually be transcribed as 'I seen' or 'I've seen'. The phrase 'mystical energy field controls my destiny' omits any relative pronoun ('that'), which was verified perceptually but noted for grammatical ambiguity. The initial consonant of 'Kid' begins very close to 0.0s but shows no clipping or truncation.\"\n}\n```\n",
+    "duration_seconds": 45.058176,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36343,
+      "output_tokens": 3894,
+      "thinking_tokens": 3441,
+      "cache_read_tokens": 0,
+      "total_tokens": 40237
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

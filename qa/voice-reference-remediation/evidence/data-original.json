@@ -1,0 +1,37 @@
+{
+  "wav": "data-ref.wav",
+  "source_sha256": "c77ed0ab9b455e2b71a00221ab6ecbb292f366c93dbb931da2e0d29733e20ca4",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "b115773e-7cac-42f9-afc2-c5a54ff470ed",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c77ed0ab9b455e2b71a00221ab6ecbb292f366c93dbb931da2e0d29733e20ca4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c77ed0ab9b455e2b71a00221ab6ecbb292f366c93dbb931da2e0d29733e20ca4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b115773e-7cac-42f9-afc2-c5a54ff470ed",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I have asked myself that, many times. As I have struggled to be more human. Until I realized, it is the struggle itself that is most important. We must strive to be more t-\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 9.5]\n  ],\n  \"uncertainty\": \"The final word is abruptly cut off on a 't' sound ('We must strive to be more t-'). The literal transcript punctuation is inferred from the speaker's pacing. The candidate_clean_intervals_s upper bound of ~9.5s is a perceptual estimate intended to capture the audio up through the end of the word 'important.', completely excluding the final broken phrase. Precise millisecond timestamps are not available without waveform inspection.\"\n}\n```\n",
+    "duration_seconds": 26.797203,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12681,
+      "output_tokens": 2456,
+      "thinking_tokens": 2064,
+      "cache_read_tokens": 24137,
+      "total_tokens": 15137
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

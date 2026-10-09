@@ -1,0 +1,38 @@
+{
+  "source_url": "https://www.nasa.gov/podcasts/houston-we-have-a-podcast/cosmic-perspectives-with-neil-degrasse-tyson/",
+  "source_audio_url": "https://www.nasa.gov/wp-content/uploads/2026/09/ep437-cosmic-perspectives.mp3",
+  "publisher": "NASA Johnson Space Center",
+  "title": "Houston We Have a Podcast, Episode437: Cosmic Perspectives with Neil deGrasse Tyson",
+  "published_date": "2026-09-18",
+  "recorded_date": "2026-09-01",
+  "source_publisher_page_sha256": "a9e82d6f93443c53cd518222d9a212213edad5f5ae9aa6eede4451dba4a28121",
+  "source_download_sha256": "0f9be1c22b7e94e54e0e0ae901fdebe4a61dec503b64e152c1741176eb384000",
+  "source_audio_sha256": "79885f1862536e02a78fcd6e3cfbfb182cb89540c740a226162bd7fa1f377a3a",
+  "source_basis": "NASA original episode page introduces astrophysicist Neil deGrasse Tyson, astronaut Chris Williams and host Gary Jordan, provides direct MP3 and speaker-labelled transcript. Host addresses Neil about his childhood inspiration at410\u2013420s, followed by his continuous answer including selected504.80\u2013513.35s passage. Publisher attribution and continuous turn support identity; transcript checked only after native observation and is secondary wording evidence. No video/lip-sync claim for an audio podcast.",
+  "delivery_change": "Same real astrophysicist in a natural2026 interview; replaces earlier score-backed montage including another speaker. Not an actor/character proxy.",
+  "usage_guidelines_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+  "usage_guidelines_sha256": "d106b4e4636fbc5db2f50ef26a389db7d3c71f7c5fd859a90f50d034e6c44f39",
+  "usage_basis": "NASA media guidelines generally permit educational/informational factual use with source acknowledgment and no implied endorsement. This original NASA podcast passage has no identified third-party copyright notice. NASA is credited; no endorsement or rights over Tyson likeness implied. The AMNH video4KRZQQ_eICo was not admitted because its own description expressly prohibits reproduction/distribution/derivatives without prior written consent.",
+  "decode": "Full downloaded MP3 decoded with ffmpeg to PCM16, preserving decoded32000Hz stereo, exit0 and empty error log.",
+  "exact_edit": {
+    "start_s": 504.8,
+    "end_s": 513.35,
+    "sample_rate": 32000,
+    "start_frame": 16153600,
+    "end_frame_exclusive": 16427200,
+    "channel_index": null
+  },
+  "sample_exact_source_slice": true,
+  "candidate_audio": {
+    "sha256": "b5f6772b154c30488dd44adb8f6cd7d4e3a918688644234adf5bb0c031ba88eb",
+    "frames": 273600,
+    "sample_rate": 32000,
+    "channels": 2,
+    "subtype": "PCM_16",
+    "duration_s": 8.55,
+    "peak": 0.80145263671875,
+    "rms": 0.207207740878193,
+    "samples_at_full_scale": 0
+  },
+  "changes": "One exact continuous decoded-source PCM16 frame slice. No DSP, gain, mixing, normalization, padding, splicing or concatenation."
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-094-ref.wav",
+  "source_sha256": "dc8aca559d9cfb8088534de7a29858fc0dc9df7f01db29634598b44d9fbcb978",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "9b7d3267-80f7-4851-b21c-80e14c2a733c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc8aca559d9cfb8088534de7a29858fc0dc9df7f01db29634598b44d9fbcb978"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc8aca559d9cfb8088534de7a29858fc0dc9df7f01db29634598b44d9fbcb978"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "9b7d3267-80f7-4851-b21c-80e14c2a733c",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Uh, I think a lot. I, I think that I was much more, uh, emotionally, uh, directed, rather than logically directed before I started playing the character.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [1.8, 10.5]\n  ],\n  \"uncertainty\": \"Boundary estimates are perceptual approximations subject to an uncertainty of roughly +/- 0.5 s due to absence of waveform timecodes during native playback. Exact wording contains natural conversational hesitations ('uh', repetition of 'I') with high acoustic clarity, though conversational filler boundaries carry minor perceptual uncertainty.\"\n}\n",
+    "duration_seconds": 32.179338,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20217,
+      "output_tokens": 2654,
+      "thinking_tokens": 2301,
+      "cache_read_tokens": 16111,
+      "total_tokens": 22871
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

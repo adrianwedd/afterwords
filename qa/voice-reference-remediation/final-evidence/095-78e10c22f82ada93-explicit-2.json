@@ -1,0 +1,38 @@
+{
+  "wav": "clip-095-ref.wav",
+  "source_sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "f73c10ea-bad9-439f-9fb2-0a2aef2546f9",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f73c10ea-bad9-439f-9fb2-0a2aef2546f9",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"You probably know the basic outline that he was born in 1854 on October the 16th. I'm boring you with things you so know and don't need to be retold. So it is in fact just past his 160th birthday.\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Audience laughter occurs immediately after the final word.\",\n  \"candidate_clean_intervals_s\": [\n    [0.0, 10.9]\n  ],\n  \"uncertainty\": \"Phonetically, the speaker appears to say 'so know' around 5.8s, though it may be a slurred 'should know' or 'certainly know'. The speaker's initial phoneme 'Y' in 'You' starts almost exactly at 0.0s but is not audibly clipped. The audience laughter is distinct but confined entirely to the final 0.6 seconds.\"\n}\n```\n",
+    "duration_seconds": 43.067321,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12859,
+      "output_tokens": 3761,
+      "thinking_tokens": 3337,
+      "cache_read_tokens": 24081,
+      "total_tokens": 16620
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

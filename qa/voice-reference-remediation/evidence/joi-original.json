@@ -1,0 +1,37 @@
+{
+  "wav": "joi-ref.wav",
+  "source_sha256": "7ca7d85b14c883d98d9429f941914049a27aeea1d727de2840451a2c665fd966",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "4eb699f5-0733-42da-b9da-f8574d32b881",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7ca7d85b14c883d98d9429f941914049a27aeea1d727de2840451a2c665fd966"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "7ca7d85b14c883d98d9429f941914049a27aeea1d727de2840451a2c665fd966"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4eb699f5-0733-42da-b9da-f8574d32b881",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [1.3, 1.9],\n    [3.5, 4.0],\n    [7.8, 8.0],\n    [9.4, 9.6],\n    [11.0, 11.2],\n    [13.0, 13.3],\n    [14.3, 14.5]\n  ],\n  \"literal_transcript\": \"How was your meeting? [unclear fragment: some / someone] I'm getting cabin fever. I had an accident at work. I think I ruined my shirt. Let me take a look at it. Do you want to drink first? I just need a bit more practice. Don't [touch it / bother]. Should have marinated it longer.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Distinct acoustic room-tone shifts and noticeable noise floor changes between cuts/takes, indicating spliced dialogue segments rather than a continuous single-take acoustic space.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"multiple_speakers\",\n  \"candidate_clean_intervals_s\": [\n    [0.0, 1.3],\n    [1.9, 3.5],\n    [4.0, 7.8],\n    [8.0, 9.4],\n    [9.6, 11.0],\n    [11.2, 13.0],\n    [14.5, 16.5]\n  ],\n  \"uncertainty\": \"Boundary timing estimates carry an auditory margin of error of approximately \u00b10.2 seconds due to perceptual listening resolution. Wording uncertainty exists at ~1.4\u20131.8s where a clipped background vocal fragment ('some...' or 'someone...') is partially cut off, and at ~13.3\u201314.3s where the male utterance ('Don't touch it' vs. 'Don't bother' / 'Don't fuss') is low-volume and slightly muffled. While individual clean phrases exist for both the female speaker (e.g., [11.2, 13.0] or [14.5, 16.5]) and the male speaker (e.g., [4.0, 7.8]), the raw reference is unusable due to frequent speaker alternation.\"\n}\n```\n",
+    "duration_seconds": 68.21608,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20737,
+      "output_tokens": 7507,
+      "thinking_tokens": 6798,
+      "cache_read_tokens": 15990,
+      "total_tokens": 28244
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

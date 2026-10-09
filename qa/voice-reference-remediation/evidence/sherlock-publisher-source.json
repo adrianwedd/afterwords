@@ -1,0 +1,20 @@
+{
+  "source_url": "https://commons.wikimedia.org/wiki/File:Benedict_cumberbatch_in_front_row_b00wqfnd-crop.flac",
+  "source_download_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Benedict_cumberbatch_in_front_row_b00wqfnd-crop.flac",
+  "publisher": "BBC via Wikimedia Commons BBC voice project",
+  "author": "BBC",
+  "guest": "Benedict Cumberbatch",
+  "programme": "Front Row",
+  "programme_url": "https://www.bbc.co.uk/programmes/b00wqfnd",
+  "source_flac_sha256": "f664eac13d7e00eda8937f7257bb78b388dc05e4aed2f76d2e32479f72972d4c",
+  "source_audio_sha256": "d8dc9ddef35d88dae674e5fb351b8015044a85b206e8aee6d3c7aae9f212e33d",
+  "source_metadata_sha256": "5d245afefc15266c766f3b8cb6631a9220b2501049f30f90d8f13103e5dd905a",
+  "retrieved_utc": "2026-10-08T08:11:11.650603+00:00",
+  "license": "Creative Commons Attribution 3.0 Unported",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "license_basis": "Commons file page credits BBC and says excerpt explicitly released through BBC voice project; full BBC programme copyright is separate. License applies to this Commons FLAC excerpt, not assumed for whole podcast.",
+  "attribution": "BBC, Benedict cumberbatch in front row b00wqfnd-crop.flac, via Wikimedia Commons BBC voice project, CC BY 3.0. Changed by trimming decoded audio to36.2-42.83564583333333s; no endorsement implied.",
+  "decode": "ffmpeg to PCM16 preserving decoded source rate/channels; no cleanup or normalization",
+  "delivery_change": "Same intended actor Benedict Cumberbatch in natural interview delivery replaces contaminated multi-person Sherlock dialogue; character register is not claimed preserved.",
+  "identity_basis": "Commons file explicitly identifies speaking voice of Benedict Cumberbatch, credits BBC, and links originating Front Row programme b00wqfnd whose primary BBC title also lists him as guest."
+}

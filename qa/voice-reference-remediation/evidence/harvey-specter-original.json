@@ -1,0 +1,37 @@
+{
+  "wav": "harvey-specter-ref.wav",
+  "source_sha256": "03eda4492c4e36417024b355225c7b64d04a25d92f21907cadefbc184f38ba4b",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "8678ad96-946b-4b7f-a341-1cfc39cc3300",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "03eda4492c4e36417024b355225c7b64d04a25d92f21907cadefbc184f38ba4b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "03eda4492c4e36417024b355225c7b64d04a25d92f21907cadefbc184f38ba4b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8678ad96-946b-4b7f-a341-1cfc39cc3300",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 6.5],\n    [6.5, 15.5]\n  ],\n  \"literal_transcript\": \"Speaker 1: ...ture, I need a grown goddamn man. I'm inclined to give you a shot, but what if I decide to go another way? Speaker 2: They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? They cut the check. End of story. I'm at court right now...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": \"none detected (only subtle room tone and breath sounds)\",\n  \"acoustic_changes\": \"Distinct shift between speakers at ~6.5s: Speaker 1 is recorded in a dry, intimate, low-reverb interior room; Speaker 2 has higher ambient room presence, brighter coloration, and slightly more reverberant/open acoustics.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Multiple speakers present in a single clip, combined with truncated phrase boundaries at both start and end.\",\n  \"candidate_clean_intervals_s\": [\n    [0.8, 6.2],\n    [6.8, 13.5]\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual estimates with an uncertainty of approximately \u00b10.4 seconds. Initial phoneme/syllable at 0.0s is truncated and uncertain (perceived as '-ture' / 'shur', likely the tail of 'nature', 'future', or 'picture'). Brief vocalization or intake around ~11.0s before 'They cut the check' has minor ambiguity (perceived as a subtle breath or 'No,').\"\n}\n```\n",
+    "duration_seconds": 41.983531,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20174,
+      "output_tokens": 3636,
+      "thinking_tokens": 3083,
+      "cache_read_tokens": 15971,
+      "total_tokens": 23810
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

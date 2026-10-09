@@ -1,0 +1,37 @@
+{
+  "wav": "john-sheppard-ref.wav",
+  "source_sha256": "53e62aa6ef0389fcaaffe2ecc9990e49610ce77f42421ee7b471f80bf6bcd84f",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "b64581a0-2a0a-4376-8699-58d007444ee9",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "53e62aa6ef0389fcaaffe2ecc9990e49610ce77f42421ee7b471f80bf6bcd84f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "53e62aa6ef0389fcaaffe2ecc9990e49610ce77f42421ee7b471f80bf6bcd84f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b64581a0-2a0a-4376-8699-58d007444ee9",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [2.6, 3.2],\n    [6.4, 7.2]\n  ],\n  \"literal_transcript\": \"didn't realize it would be politicized [Speaker 2: Yeah] and everybody's going to start questioning the science and stuff, so that's a little unfortunate. [Speaker 2: Yeah] And uh, but this thing is going to go on until springtime, so maybe we'll recalibrate and realize that we are all in it together, so who knows.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Dry, clean indoor/podcast recording environment throughout. Primary speaker is close-mic'd with consistent timbre and room acoustics; secondary speaker interjections are quieter and acoustically slightly distinct, consistent with a separate channel or conversational partner.\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [3.2, 6.2],\n    [7.2, 13.5]\n  ],\n  \"uncertainty\": \"Perceptual timing boundary estimates carry an uncertainty of approximately \u00b10.3s. The initial word ('didn't') onset is truncated mid-consonant or missing an initial subject pronoun ('I'). Phrasing around 'going to' vs 'gonna' exhibits conversational reduction. The second speaker's interjections ('Yeah') occur as conversational backchannels overlapping or directly adjacent to conversational pauses.\"\n}\n```\n",
+    "duration_seconds": 42.560772,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20439,
+      "output_tokens": 3788,
+      "thinking_tokens": 3281,
+      "cache_read_tokens": 15979,
+      "total_tokens": 24227
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

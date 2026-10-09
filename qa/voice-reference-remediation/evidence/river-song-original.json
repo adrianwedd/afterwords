@@ -1,0 +1,37 @@
+{
+  "wav": "river-song-ref.wav",
+  "source_sha256": "8e203915f8258bc6b72bdafbd7397faf41f2bdd771a76153a9a92d533fccee03",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "dd290e76-972f-4c6d-8afc-80455b483c65",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8e203915f8258bc6b72bdafbd7397faf41f2bdd771a76153a9a92d533fccee03"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8e203915f8258bc6b72bdafbd7397faf41f2bdd771a76153a9a92d533fccee03"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "dd290e76-972f-4c6d-8afc-80455b483c65",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"when you love the doctor it's like loving the stars themselves you don't expect a sunset to admire you back and if I happen to find myself in danger let me tell you the doctor is not stupid enough or sentimental enough\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"background music\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Continuous background music makes it difficult to guarantee completely clean intervals. Start and end cutoffs are perceptual estimates, and lack of punctuation in transcript reflects the continuous, dramatic delivery style.\"\n}\n```\n",
+    "duration_seconds": 38.419777,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12911,
+      "output_tokens": 3753,
+      "thinking_tokens": 3425,
+      "cache_read_tokens": 24084,
+      "total_tokens": 16664
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "ae652defeed7bc2889b28f9d5f169ff5a12528a9b8850a4e6bfef0f71f7c489a",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "f63631bb-40f2-41af-bbb3-e9f7d067c97e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ae652defeed7bc2889b28f9d5f169ff5a12528a9b8850a4e6bfef0f71f7c489a"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ae652defeed7bc2889b28f9d5f169ff5a12528a9b8850a4e6bfef0f71f7c489a"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f63631bb-40f2-41af-bbb3-e9f7d067c97e",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And age doesn't really matter to me. I mean people, um, people I think are much more exercised about your age than you really are. I mean I think it's just terribly funny to be able to muck around with age.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"none; uniform room acoustic and microphone response throughout\",\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [2.4, 3.7]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 2.3],\n    [3.7, 12.8]\n  ],\n  \"uncertainty\": \"Boundary times are perceptual estimates within \u00b10.3s. The opening word has a clipped onset ('nd' vs full 'And'). Conversational hesitation occurs between 2.4s and 3.7s ('people, um, people') before settling into a fluid, clean conditioning phrase from ~3.7s to the end.\"\n}\n",
+    "duration_seconds": 35.056501,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20179,
+      "output_tokens": 2975,
+      "thinking_tokens": 2563,
+      "cache_read_tokens": 16088,
+      "total_tokens": 23154
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

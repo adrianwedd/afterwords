@@ -1,0 +1,38 @@
+{
+  "wav": "clip-052-ref.wav",
+  "source_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "10d37653-2a28-4481-83cf-647f1006c456",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "10d37653-2a28-4481-83cf-647f1006c456",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And he starts to wind me up and I didn't know when he was saying you don't know what it is to be hungry, you don't know what it is to be skint. You know, you what you know you've got no respect. And I and I I stood up, you know.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [2.4, 4.6],\n    [4.7, 6.8]\n  ],\n  \"uncertainty\": \"Perceptual phonetic analysis: At the disputed transition before 'when he was saying', the acoustic evidence indicates 'didn't know' rather than 'don't know', characterized by an initial voiced alveolar stop followed by a brief front lax vowel [\u026a] and alveolar/glottalized nasal tap [d\u026adnt / d\u026a\u0294n] rather than the rounded back diphthong [o\u028a / \u0259\u028a] expected in 'don't'. However, due to rapid conversational reduction and vowel centralisation, an alternative hearing of 'don't know' remains a minor phonetic possibility. At the initial clause, rapid articulation produces elision between 'starts to wind me up' and 'started winding me up'; phonetically [st\u0251\u02d0ts t\u0259 wa\u026and] is heard. For the conversational false start near the end, three iterations of the first-person pronoun are distinctly audible: two iterations of 'and I' followed by a solitary 'I' before 'stood up' ('and I and I I stood up'). Boundary intervals are perceptual estimates with \u00b10.2s margin of error.\"\n}\n",
+    "duration_seconds": 54.480583,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20666,
+      "output_tokens": 5515,
+      "thinking_tokens": 4946,
+      "cache_read_tokens": 16108,
+      "total_tokens": 26181
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

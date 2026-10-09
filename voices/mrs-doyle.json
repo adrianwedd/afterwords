@@ -1,8 +1,8 @@
 {
   "name": "mrs-doyle",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=ja9RIXyAbRw",
+  "source_url": "https://shows.acast.com/pjrchive/episodes/pauline-mclynn-actress-who-played-mrs-doyle-in-father-ted-in",
   "reference_audio": "mrs-doyle-ref.wav",
-  "reference_text": "It's a little drop, just a daily tiny bit. Daily is a bit of a sherry-cork to anyone as the day Ireland doesn't win the Eurovision Song Contest. Go on. No, no, no, really, actually. Ah, go on, go on, go on.",
-  "segment_start_s": 0
+  "reference_text": "Yeah, well, actually all my family are from Sligo. You know, my mother and father grew up there, and I was born in Sligo. Um, so I think I'm related to everyone in the town, um, as well. But when I was six months old, we moved to Galway, and that's where we've been ever since.",
+  "segment_start_s": 55.1
 }

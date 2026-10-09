@@ -1,0 +1,38 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=xJN2D5mqjMc",
+  "publisher": "Y-TV",
+  "publisher_channel_url": "https://www.youtube.com/channel/UCc9MP7fTYitTqSsg035m5pQ",
+  "title": "Nanna Bayer and Judy Boydell   Nov 2017",
+  "published_date": "20171116",
+  "source_info_sha256": "71c7c2c07ed1af756dc45264f71deda9ad67218eb9c02759c987e0a2624912fe",
+  "source_download_sha256": "d7a5cbb60bb4bbeb4e493ca4781aa4ef97e5bd32a24bc8ed51847f1174e787d8",
+  "source_audio_sha256": "16d6aa6b2c68f9ea885b518491f604d982b613ac82fbb87d3c95a3ea8b2904cf",
+  "identity_section_sha256": "b5754485ce7768b909e11c2a210fa3948c1ffb94d52cb7c19a4ecfa69797b35e",
+  "identity_frame_sha256": "f2bacd5b688b7bca93cedc3b14132f20f6abaeefeca25a8067dee3178c62664e",
+  "corroborating_event_page": "https://www.sbs.com.au/language/finnish/en/podcast-episode/nanna-bayer-ceramic-artist/s4w5yh658",
+  "corroborating_event_page_sha256": "392cb71cb25dc6cbc203e584cbbb17afadd4f0cbd94f77f0883c887365400539",
+  "source_basis": "Y-TV publisher names Nanna Bayer and Judy Boydell at Mansfield Ceramics Gallery. Opening host10\u201360s welcomes Nanna, identifies her as Finnish artist now in Tasmania, and asks about her environmental response; target answers from60.9s. Actual selected-range frame90 shows that guest speaking directly into handheld microphone. SBS independently identifies Nanna Bayer Finnish-Tasmanian ceramic artist, Sydney Mansfield Ceramics exhibition with Judy Boydell. SBS event opening date10Nov differs video description10Oct; exact event date is not inferred from that discrepancy. Video publication20171116 is metadata, not necessarily recording date.",
+  "delivery_change": "Same intended real ceramic artist, natural English gallery interview; replaces music-backed Brand Tasmania documentary. English reference language retained.",
+  "decode": "Full ffmpeg decode to PCM16 preserving source rate/channels, exit0 and empty error log.",
+  "exact_edit": {
+    "start_s": 87.75,
+    "end_s": 94.4,
+    "sample_rate": 48000,
+    "start_frame": 4212000,
+    "end_frame_exclusive": 4531200,
+    "channel_index": null
+  },
+  "sample_exact_source_slice": true,
+  "candidate_audio": {
+    "sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b",
+    "frames": 319200,
+    "sample_rate": 48000,
+    "channels": 2,
+    "subtype": "PCM_16",
+    "duration_s": 6.65,
+    "peak": 0.077728271484375,
+    "rms": 0.012274148871442268,
+    "samples_at_full_scale": 0
+  },
+  "changes": "One exact continuous decoded-source PCM16 frame slice. No DSP, normalization, mixing, padding, splicing or concatenation."
+}

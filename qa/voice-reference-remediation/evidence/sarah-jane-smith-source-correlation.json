@@ -1,0 +1,21 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=ypXgt6HJ9qk",
+  "source_audio_sha256": "d62758344269811bcbfe6c029ad4717fff073e239a0ca084108bbc0ada80a09e",
+  "method": "Decode/downmix source, scipy.signal.resample_poly to gallery reference rate; FFT cross-correlation of two independent existing-reference PCM windows against full source interval65-75s. Correlation corroborates source association and historical timebase; not perceptual QA.",
+  "matches": [
+    {
+      "local_template_start_s": 3.75,
+      "local_template_end_s": 4.65,
+      "matched_source_start_s": 67.10360416666667,
+      "source_minus_local_offset_s": 63.35360416666667,
+      "normalized_correlation": 0.9530431117897741
+    },
+    {
+      "local_template_start_s": 8.2,
+      "local_template_end_s": 9.0,
+      "matched_source_start_s": 71.553625,
+      "source_minus_local_offset_s": 63.353624999999994,
+      "normalized_correlation": 0.9804196522846839
+    }
+  ]
+}

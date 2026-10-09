@@ -1,0 +1,49 @@
+{
+  "source_url": "https://commons.wikimedia.org/wiki/File:VOA_Dalai_Lama_Interview_Part_1.webm",
+  "original_source_url": "https://www.youtube.com/watch?v=5vmfpoxv5xw",
+  "title": "VOA Dalai Lama Interview Part 1",
+  "author": "VOA News",
+  "source_date": "2011-07-21",
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "file_page_revision": 1180790056,
+  "file_page_sha256": "015a724b4bacef3790ae53a845c953bf7d49824bb909f4684b45c07b36d7b79a",
+  "identity_basis": "File description names Dalai Lama interview with VOA Mandarin Service; English retirement question followed by autobiographical answer; source video frame at40s shows target speaking. Candidate is uninterrupted38.4-45.05 answer segment.",
+  "retrieved_utc": "2026-10-08T08:27:45.028572+00:00",
+  "source_download_sha256": "0877bb35af0aaf9c373897562ddf933dd2229ca88606b1eb810c13ed613e0b91",
+  "source_audio_sha256": "16088a15830258c6f4017afda13445bc86a92d1cfbef4235fbc0230c6d2ceaf5",
+  "source_audio": {
+    "sha256": "16088a15830258c6f4017afda13445bc86a92d1cfbef4235fbc0230c6d2ceaf5",
+    "frames": 36855084,
+    "sample_rate": 48000,
+    "channels": 2,
+    "subtype": "PCM_16",
+    "duration_s": 767.81425,
+    "peak": 1.0,
+    "rms": 0.09154767722979643,
+    "samples_at_full_scale": 18
+  },
+  "source_file_size": 46971393,
+  "decode": "ffmpeg PCM16 preserving source48000Hz stereo; completed full decode exit0 and empty errorlog",
+  "exact_edit": {
+    "start_s": 38.4,
+    "end_s": 45.05,
+    "start_frame": 1843200,
+    "end_frame_exclusive": 2162400,
+    "sample_rate": 48000
+  },
+  "candidate_audio": {
+    "sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293",
+    "frames": 319200,
+    "sample_rate": 48000,
+    "channels": 2,
+    "subtype": "PCM_16",
+    "duration_s": 6.65,
+    "peak": 0.57635498046875,
+    "rms": 0.05914204847839107,
+    "samples_at_full_scale": 0
+  },
+  "sample_exact_source_slice": true,
+  "changes": "Decoded audio and selected one continuous answer phrase, no DSP, normalization, separation, concatenation or padding",
+  "delivery_change": "Same intended speaker in English interview delivery; replaces hesitant original reference without claiming original phrasing preserved."
+}

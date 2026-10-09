@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "879ea3d7ae13542c395a6f8a3a949f7d44eb55da66d33866a098f4cab18ed299",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "0847cd8c-3aba-433a-a75e-89e698e9bc19",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "879ea3d7ae13542c395a6f8a3a949f7d44eb55da66d33866a098f4cab18ed299"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "879ea3d7ae13542c395a6f8a3a949f7d44eb55da66d33866a098f4cab18ed299"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0847cd8c-3aba-433a-a75e-89e698e9bc19",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And that, I didn't like that, cuz you have to live up to something there, and I forget what it is, but it wasn't something I was really focused on in that way.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 8.5]\n  ],\n  \"uncertainty\": \"Timing boundaries are perceptual estimates with an uncertainty of approximately \u00b10.3\u20130.5 seconds. Wording is high confidence with minor phonetic ambiguity between 'cuz' and ''cause'.\"\n}\n",
+    "duration_seconds": 38.660449,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20473,
+      "output_tokens": 3005,
+      "thinking_tokens": 2665,
+      "cache_read_tokens": 16084,
+      "total_tokens": 23478
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "loki-ref.wav",
+  "source_sha256": "dd905c8724272e1d1562af478da688cfb719a9de40046df7c12fe70fdfaa9fab",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "3ac680c9-2da4-49ae-b4a3-7b706e2f8439",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dd905c8724272e1d1562af478da688cfb719a9de40046df7c12fe70fdfaa9fab"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "dd905c8724272e1d1562af478da688cfb719a9de40046df7c12fe70fdfaa9fab"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3ac680c9-2da4-49ae-b4a3-7b706e2f8439",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Is not this simpler? Is this not your natural state?\",\n  \"music\": \"Faint low-frequency ambient drone or cinematic underscore bed underneath dialogue, but no prominent melodic music.\",\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": \"Subtle low ambient rumble / atmospheric room tone; no distinct foreground sound effects.\",\n  \"acoustic_changes\": \"Consistent throughout; moderately live acoustic space with mild natural reverberation characteristic of an open hall or outdoor plaza.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.5, 2.8],\n    [3.8, 6.5]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations with an uncertainty of approximately \u00b10.3s. Wording is highly distinct with high perceptual confidence ('Is not this simpler? Is this not your natural state?'). Background drone could be either low-level cinematic score/pad or low-frequency environmental/room ambience.\"\n}\n```\n",
+    "duration_seconds": 35.270275,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20874,
+      "output_tokens": 3494,
+      "thinking_tokens": 3092,
+      "cache_read_tokens": 16136,
+      "total_tokens": 24368
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

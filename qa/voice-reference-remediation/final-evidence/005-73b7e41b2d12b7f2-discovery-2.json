@@ -1,0 +1,38 @@
+{
+  "wav": "clip-005-ref.wav",
+  "source_sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "41ab446c-e8d6-4d29-b6b1-673a45ce3c32",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "73b7e41b2d12b7f2a24f948b66fad85e096a57c68f456c3a8d213e4b02f9843d"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "41ab446c-e8d6-4d29-b6b1-673a45ce3c32",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"ey expected the American people to rise up. They didn't.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.5, 3.0], [4.0, 5.0]],\n  \"uncertainty\": \"Timing boundaries are rough perceptual estimates as no visual waveform is available. The literal transcript begins mid-syllable ('ey'), suggesting a clipping of the first word. The pause between phrases contains a subtle breath or vocalization that may slightly affect isolation.\"\n}\n```\n",
+    "duration_seconds": 32.771741,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12527,
+      "output_tokens": 3202,
+      "thinking_tokens": 2858,
+      "cache_read_tokens": 24205,
+      "total_tokens": 15729
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

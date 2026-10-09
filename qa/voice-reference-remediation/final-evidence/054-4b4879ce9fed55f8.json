@@ -1,0 +1,38 @@
+{
+  "wav": "clip-054-ref.wav",
+  "source_sha256": "4b4879ce9fed55f81eeb91b6e28a720f6f676625dd4ed3ec013300793e805d84",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "9a8293a5-ddc6-4641-b075-0ae428825752",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4b4879ce9fed55f81eeb91b6e28a720f6f676625dd4ed3ec013300793e805d84"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "4b4879ce9fed55f81eeb91b6e28a720f6f676625dd4ed3ec013300793e805d84"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "9a8293a5-ddc6-4641-b075-0ae428825752",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Okay, so I think uh I discovered that I'm really good uh with high kicks\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.8]\n  ],\n  \"uncertainty\": \"Boundary timing is a perceptual estimate (+/- 0.3s) derived entirely from auditory evaluation without visual waveform rulers. Speech clarity is high; wording has minimal uncertainty with two brief conversational 'uh' fillers.\"\n}\n",
+    "duration_seconds": 31.952518,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20331,
+      "output_tokens": 2792,
+      "thinking_tokens": 2471,
+      "cache_read_tokens": 16146,
+      "total_tokens": 23123
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

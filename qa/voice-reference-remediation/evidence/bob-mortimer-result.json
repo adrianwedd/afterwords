@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "a139863f8a4709104810ae3346804c47151cf10e4d129c24be775f9ae8a48230",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "376c0bf1-a971-4421-81bd-70889311e57b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a139863f8a4709104810ae3346804c47151cf10e4d129c24be775f9ae8a48230"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a139863f8a4709104810ae3346804c47151cf10e4d129c24be775f9ae8a48230"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "376c0bf1-a971-4421-81bd-70889311e57b",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And you start thinking, 'Oh, I better make the world around me miserable, then I won't mind leaving so much.'\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.5]\n  ],\n  \"uncertainty\": \"Timestamps and duration (~6.5s) are perceptual estimates without visual waveform inspection. Minor ambiguity between 'I better' and a lightly contracted 'I'd better' due to rapid speech elision.\"\n}\n",
+    "duration_seconds": 44.615975,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20181,
+      "output_tokens": 4787,
+      "thinking_tokens": 4455,
+      "cache_read_tokens": 16196,
+      "total_tokens": 24968
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

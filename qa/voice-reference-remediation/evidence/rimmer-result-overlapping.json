@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "fc0f22c8b310f81d890220d9b64ab2ddfd5c56ed3e0cd1042db1dc01b38fdfde",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "ec42f2b7-bbb3-4f20-b934-8868cadfc11d",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc0f22c8b310f81d890220d9b64ab2ddfd5c56ed3e0cd1042db1dc01b38fdfde"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc0f22c8b310f81d890220d9b64ab2ddfd5c56ed3e0cd1042db1dc01b38fdfde"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ec42f2b7-bbb3-4f20-b934-8868cadfc11d",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"that Rimmer is completely against some of those notions and uh and he lets him know about it. So yeah I think um I think the the friction is still there and that's that's the petrol for for a lot of the comedy in Red Dwarf, you know.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.5, 14.5]\n  ],\n  \"uncertainty\": \"Low uncertainty. Time intervals are broad perceptual estimates. The audio begins mid-sentence but contains a continuous, usable single-speaker phrase.\"\n}\n",
+    "duration_seconds": 33.209491,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20877,
+      "output_tokens": 2192,
+      "thinking_tokens": 1845,
+      "cache_read_tokens": 15994,
+      "total_tokens": 23069
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

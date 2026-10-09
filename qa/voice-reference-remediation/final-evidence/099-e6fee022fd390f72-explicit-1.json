@@ -1,0 +1,38 @@
+{
+  "wav": "clip-099-ref.wav",
+  "source_sha256": "e6fee022fd390f72ec5c7af62d057fc5a502e0769b2d0774d49c60550b67e5c7",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "3e77d58b-082a-41b7-a1ef-2d4e6f9ff189",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e6fee022fd390f72ec5c7af62d057fc5a502e0769b2d0774d49c60550b67e5c7"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e6fee022fd390f72ec5c7af62d057fc5a502e0769b2d0774d49c60550b67e5c7"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "3e77d58b-082a-41b7-a1ef-2d4e6f9ff189",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"How can you have lived for so long and still not get it? This self-obsession, the waste of living.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 11.2]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual approximations (+/- 0.3s). Spoken audio spans approximately 0.2s to 11.2s with notable dramatic pauses between phrases (roughly 2.8s-3.4s, 5.0s-5.6s, and 7.5s-8.2s). Continuous clean phrase intervals without long internal pauses are approximately [0.2, 5.0] and [5.6, 11.2]. Minor wording uncertainty on whether 'the waste' has an unstressed preceding copula ('is the waste' vs 'the waste') due to quiet breathy onset.\"\n}\n",
+    "duration_seconds": 41.31446,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20246,
+      "output_tokens": 4686,
+      "thinking_tokens": 4264,
+      "cache_read_tokens": 16054,
+      "total_tokens": 24932
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

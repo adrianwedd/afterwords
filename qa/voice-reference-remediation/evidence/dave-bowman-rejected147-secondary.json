@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "a4b32d50ce456624cc9d4eef1b8afbf6b5085f683d3258a472985978953a5edb",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "eceb80e8-6485-4f70-b31c-1ff3c257aeca",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a4b32d50ce456624cc9d4eef1b8afbf6b5085f683d3258a472985978953a5edb"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a4b32d50ce456624cc9d4eef1b8afbf6b5085f683d3258a472985978953a5edb"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "eceb80e8-6485-4f70-b31c-1ff3c257aeca",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Also, this film got terrible reviews for the most part. More than 50%... 60 or 70% were terrible, and MGM was really worried that, um, they might have to pull it.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 12.0]\n  ],\n  \"uncertainty\": \"Timestamps are rough perceptual estimates. 'Also' at the very beginning feels slightly clipped, but the remainder of the clip is a clean, isolated vocal performance suitable for conditioning.\"\n}\n```\n",
+    "duration_seconds": 40.100186,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20872,
+      "output_tokens": 2650,
+      "thinking_tokens": 2299,
+      "cache_read_tokens": 15938,
+      "total_tokens": 23522
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

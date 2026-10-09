@@ -1,0 +1,38 @@
+{
+  "wav": "clip-003-ref.wav",
+  "source_sha256": "387fc5b4bd69e42da11b452f516c1727a99240030f03fd11fea3f8bf62ebcbbe",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "excerpt",
+  "conversation_id": "797950de-94d7-4553-a63f-212153982d74",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "387fc5b4bd69e42da11b452f516c1727a99240030f03fd11fea3f8bf62ebcbbe"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "387fc5b4bd69e42da11b452f516c1727a99240030f03fd11fea3f8bf62ebcbbe"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "797950de-94d7-4553-a63f-212153982d74",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Today Ensign Kim and I will conduct a comprehensive diagnostic\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Continuous background music/score throughout the entire recording prevents clean vocal isolation; abrupt cutoff mid-phrase at the end.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"Boundary timing estimates carry perceptual uncertainty of approximately \u00b10.5 s. The opening transcript excerpt is heard with high confidence. While the first two sentences represent complete spoken phrases (ending at approximately 14.5 s before an unfinished third phrase cuts off at roughly 16.8 s), candidate_clean_intervals_s is marked empty because background instrumental music is continuously present beneath the voice across the entire duration, preventing clean voice isolation for conditioning.\"\n}\n```\n",
+    "duration_seconds": 52.418351,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20448,
+      "output_tokens": 4955,
+      "thinking_tokens": 4581,
+      "cache_read_tokens": 15975,
+      "total_tokens": 25403
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

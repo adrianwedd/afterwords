@@ -1,0 +1,38 @@
+{
+  "wav": "clip-098-ref.wav",
+  "source_sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "a32adfc9-a0e3-49d9-91ee-5b9f04e55f6c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "a32adfc9-a0e3-49d9-91ee-5b9f04e55f6c",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, uh, I get a certain, uh, favorable response. The figures are, curiously, higher than they've ever been.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; consistent studio/room acoustics and microphone proximity throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 14.5]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual approximations (+/- 0.5s) based on auditory playback without waveform inspection. Wording is clear and fully intelligible, with natural conversational hesitations ('uh'). Complete isolation of single speaker throughout.\"\n}\n",
+    "duration_seconds": 28.909582,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20537,
+      "output_tokens": 2972,
+      "thinking_tokens": 2595,
+      "cache_read_tokens": 15984,
+      "total_tokens": 23509
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

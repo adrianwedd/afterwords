@@ -1,0 +1,38 @@
+{
+  "wav": "clip-035-ref.wav",
+  "source_sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "a8f74ec2-4b3a-416e-ab0a-193da3a5e8b1",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "a8f74ec2-4b3a-416e-ab0a-193da3a5e8b1",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Fine. Gonna go ahead and tell you how it ends.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.8]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately \u00b10.2 seconds. Wording uncertainty exists at the onset of the second utterance: the initial syllable is weakly articulated and phonetically reduced, perceivable as 'Gonna go ahead', a swallowed 'I'm gonna go ahead', or 'Go ahead'.\"\n}\n",
+    "duration_seconds": 27.098214,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36401,
+      "output_tokens": 2714,
+      "thinking_tokens": 2372,
+      "cache_read_tokens": 0,
+      "total_tokens": 39115
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

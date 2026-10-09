@@ -1,0 +1,38 @@
+{
+  "wav": "clip-078-ref.wav",
+  "source_sha256": "26ee4fd08dad50320ebd4f71001dd3898ecfcfdf6f1a1c1d565d11f5972c53f5",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "dbe03e74-cfe9-4359-8011-d06c98e75438",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "26ee4fd08dad50320ebd4f71001dd3898ecfcfdf6f1a1c1d565d11f5972c53f5"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "26ee4fd08dad50320ebd4f71001dd3898ecfcfdf6f1a1c1d565d11f5972c53f5"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "dbe03e74-cfe9-4359-8011-d06c98e75438",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It was in that we were in fairly exposed conditions most of the time, you know, it was, um, actually we had finished principal photography by this time last year, but we were filming through late April, May, and June, and into July.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [1.2, 5.0],\n    [7.0, 16.5]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations with an estimated uncertainty of \u00b10.5 seconds. Wording is transcribed with high certainty.\"\n}\n",
+    "duration_seconds": 42.770912,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20473,
+      "output_tokens": 3556,
+      "thinking_tokens": 3206,
+      "cache_read_tokens": 15985,
+      "total_tokens": 24029
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

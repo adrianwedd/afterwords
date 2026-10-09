@@ -1,0 +1,37 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "5b36c48e78ce0aec3786af6b2644714262412508059a62f2f873e7199e4af587",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "0736825c-b4d1-4dfa-9394-047476da721b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5b36c48e78ce0aec3786af6b2644714262412508059a62f2f873e7199e4af587"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5b36c48e78ce0aec3786af6b2644714262412508059a62f2f873e7199e4af587"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0736825c-b4d1-4dfa-9394-047476da721b",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Only last year, my aunt came to me to beg for help in the ransom of my uncle Osric.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 7.6]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual with an uncertainty margin of approximately \u00b10.3 s. The spoken words are clearly enunciated with high confidence; minor orthographic uncertainty exists for the proper name 'Osric' (phonetically /\u02c8\u0252zr\u026ak/, alternatively Osrick or Ozric).\"\n}\n```\n",
+    "duration_seconds": 46.372986,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20315,
+      "output_tokens": 3123,
+      "thinking_tokens": 2778,
+      "cache_read_tokens": 16187,
+      "total_tokens": 23438
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

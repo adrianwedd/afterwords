@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "87c1caaf-ac76-4797-aa3f-7dba7367a8ca",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "87c1caaf-ac76-4797-aa3f-7dba7367a8ca",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? Look, they cut the check. End of story.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 8.2]\n  ],\n  \"uncertainty\": \"Boundary timing estimates carry an estimated uncertainty of \u00b10.3s. Slight phonetic uncertainty on the lead-in to 'they cut the check' ('Look' vs. 'No').\"\n}\n```\n",
+    "duration_seconds": 35.311615,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20411,
+      "output_tokens": 3413,
+      "thinking_tokens": 3072,
+      "cache_read_tokens": 16113,
+      "total_tokens": 23824
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

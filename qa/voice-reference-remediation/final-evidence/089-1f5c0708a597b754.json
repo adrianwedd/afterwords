@@ -1,0 +1,38 @@
+{
+  "wav": "clip-089-ref.wav",
+  "source_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "2f7b7727-0af0-44e4-aa82-53b0337be68b",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "2f7b7727-0af0-44e4-aa82-53b0337be68b",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Eight years later, I get a letter saying I do want to thank you so much for what you did for me.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.8]\n  ],\n  \"uncertainty\": \"High confidence in literal transcript wording. Perceptual boundary estimates carry an uncertainty margin of approximately \u00b10.2 to 0.3 seconds. Pauses between phrases (~1.4s\u20132.1s and ~3.2s\u20133.8s) reflect natural dramatic cadence rather than dead air or defects. Single speaker is fully isolated with clean acoustics across the entire duration.\"\n}\n",
+    "duration_seconds": 53.648766,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20573,
+      "output_tokens": 5053,
+      "thinking_tokens": 4688,
+      "cache_read_tokens": 16095,
+      "total_tokens": 25626
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

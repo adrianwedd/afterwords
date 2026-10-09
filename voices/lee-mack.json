@@ -1,8 +1,8 @@
 {
   "name": "lee-mack",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=c0MiIcHbSnM",
+  "source_url": "https://www.bbc.co.uk/programmes/b03bpxxq",
   "reference_audio": "lee-mack-ref.wav",
-  "reference_text": "I'd just like to tell you a true story. This is what it's like living in London nowadays. In fact, it's the same everywhere really. What I hate is the hard sell. You know, you get the hard sell, right? I got it the other day. You know when people ring you up and say, you know, do you want to combine the gas with the electric, right? And I was like, oh, that sounds dangerous.",
-  "segment_start_s": 0
+  "reference_text": "Yeah, I wouldn't say necessarily for me specifically, I think it's struggle for all comics to write. It's just the writing. I always think the writing is God's way of punishing you for having the best job in the world.",
+  "segment_start_s": 99.9
 }

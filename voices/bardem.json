@@ -3,6 +3,6 @@
   "backend": "qwen3-0.6b",
   "source_url": "https://www.youtube.com/watch?v=ZY0DG8rUnCA",
   "reference_audio": "bardem-ref.wav",
-  "reference_text": "What's the most you ever lost on a coin toss? Sarah? The most you ever lost.",
-  "segment_start_s": 155
+  "reference_text": "What's the most you ever lost on a coin toss?",
+  "segment_start_s": 162.75
 }

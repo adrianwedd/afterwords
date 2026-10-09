@@ -1,0 +1,36 @@
+{
+  "wav": "alan-bstard-ref.wav",
+  "source_sha256": "3addaacbfced8cb21ee750f9d387007aee9b062ed19a6edff8ec7f32dfa0e6c1",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "d3f991fa-b49a-4e02-965e-fe5e09806023",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3addaacbfced8cb21ee750f9d387007aee9b062ed19a6edff8ec7f32dfa0e6c1"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3addaacbfced8cb21ee750f9d387007aee9b062ed19a6edff8ec7f32dfa0e6c1"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "d3f991fa-b49a-4e02-965e-fe5e09806023",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"We hear an awful lot of lefty whinging about the NHS waiting lists. Well, the answer's simple: shut down the health service! Result? No more waiting lists. You see, in the good old days...\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.5]\n  ],\n  \"uncertainty\": \"Boundary estimates are perceptual and approximate. The literal transcript may have minor inaccuracies (e.g. 'whinging' or exact punctuation). Laughter heavily overlaps the speech starting around 7.5s. The audio prior to 7.5s is mostly clean, but there may be faint background room noise or early crowd murmur. The clean segment is relatively short (~7.5 seconds) which may not meet the optimal 15s reference length, though it contains complete usable phrases.\"\n}\n```\n",
+    "duration_seconds": 39.668155,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12808,
+      "output_tokens": 3444,
+      "thinking_tokens": 3048,
+      "cache_read_tokens": 24046,
+      "total_tokens": 16252
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

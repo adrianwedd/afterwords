@@ -1,0 +1,36 @@
+{
+  "wav": "alan-bennett-ref.wav",
+  "source_sha256": "bb836905333788dee27cc0d9d1f9eeb59c16435a3f4c62a97eb630f3ed294820",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "bd6407e9-fefa-4075-9e35-273cd1c146bc",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "bb836905333788dee27cc0d9d1f9eeb59c16435a3f4c62a97eb630f3ed294820"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "bb836905333788dee27cc0d9d1f9eeb59c16435a3f4c62a97eb630f3ed294820"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "bd6407e9-fefa-4075-9e35-273cd1c146bc",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"feeling baffled. He, and occasionally she, is overwhelmed by the amount of stuff that has been written and the ground still to be covered. 'How shall I ever catch up?' wails the young Joe Orton in the film.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[1.5, 13.5]],\n  \"uncertainty\": \"High certainty on transcript wording. Moderate uncertainty on exact second-boundary estimates for the candidate clean interval due to auditory-only estimation without a visual waveform. The beginning is noticeably cut off mid-thought ('feeling baffled'), and the ending cuts off very quickly after the word 'film', leaving very little room for trailing silence. Trimming the initial fragmented phrase ('feeling baffled') would yield a clean reference starting at 'He, and occasionally she...'.\"\n}\n```\n",
+    "duration_seconds": 25.256013,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12519,
+      "output_tokens": 1730,
+      "thinking_tokens": 1340,
+      "cache_read_tokens": 24040,
+      "total_tokens": 14249
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-012-ref.wav",
+  "source_sha256": "a37f62fc52ef46b3be6e47ca51183b42cda0ff99df6fa179edf014f10f264bbc",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "f77f104b-8261-4275-b14f-45bd6e3232aa",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a37f62fc52ef46b3be6e47ca51183b42cda0ff99df6fa179edf014f10f264bbc"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a37f62fc52ef46b3be6e47ca51183b42cda0ff99df6fa179edf014f10f264bbc"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f77f104b-8261-4275-b14f-45bd6e3232aa",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"First of all you have to sit round trying to get six people to agree on a script, which is crazy, absolutely crazy. You can't agree on a direction to go in, so you keep writing, writing more and more and more and more material.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"none detected; acoustic environment is consistent dry room reverberation throughout\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 12.5]\n  ],\n  \"uncertainty\": \"All time intervals and boundaries are perceptual estimates subject to approximately \u00b10.5s uncertainty. Spoken wording is highly intelligible; minor perceptual uncertainty between 'sit round' versus 'sit around' ('sit round' strongly favored perceptually).\"\n}\n",
+    "duration_seconds": 32.864272,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20374,
+      "output_tokens": 2483,
+      "thinking_tokens": 2112,
+      "cache_read_tokens": 16065,
+      "total_tokens": 22857
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "128834b4-96b3-4c40-84d3-18ee17e13561",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "128834b4-96b3-4c40-84d3-18ee17e13561",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, um, mum flew down from Cloncurry to have me, actually, because, uh, my father, um, who who was a parasitologist, um, was based up in Cloncurry.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [1.0, 4.4],\n    [5.8, 10.8]\n  ],\n  \"uncertainty\": \"Perceptual timing estimates carry an uncertainty of approximately \u00b10.5 seconds. Transcript phrasing is highly confident, with slight auditory ambiguity on the exact phonetic onset of 'who who' vs 'who' due to a brief dysfluency.\"\n}\n",
+    "duration_seconds": 52.58682,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20383,
+      "output_tokens": 3110,
+      "thinking_tokens": 2744,
+      "cache_read_tokens": 16022,
+      "total_tokens": 23493
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

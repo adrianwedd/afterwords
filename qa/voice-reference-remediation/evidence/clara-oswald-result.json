@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "e8de966f-d1a2-43f1-8c69-2e0adc8620c5",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e8de966f-d1a2-43f1-8c69-2e0adc8620c5",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and then it's that weird thing of being like ultra paranoid that people are looking and not quite understanding why you're being stared at\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.8]\n  ],\n  \"uncertainty\": \"Boundary interval (0.0 to 7.8s) is a perceptual duration estimate with an uncertainty margin of approximately \u00b10.5s. Spoken wording is highly intelligible and clear, with minor uncertainty limited to spelling/hyphenation convention ('ultra paranoid' vs 'ultra-paranoid').\"\n}\n",
+    "duration_seconds": 35.694103,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20508,
+      "output_tokens": 2765,
+      "thinking_tokens": 2412,
+      "cache_read_tokens": 16104,
+      "total_tokens": 23273
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

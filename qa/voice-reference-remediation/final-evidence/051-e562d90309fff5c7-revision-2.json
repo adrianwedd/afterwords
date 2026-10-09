@@ -1,0 +1,38 @@
+{
+  "wav": "clip-051-ref.wav",
+  "source_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "5342816f-3060-4e16-837a-773474ca486e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "5342816f-3060-4e16-837a-773474ca486e",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"uh and forgiveness and understanding is is urgent right now and so I wanted to make a film that was about that\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [4.6, 7.8]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual approximations (+/- 0.3s) based on native audio playback without waveform timecode displays. The initial vocal filler may be heard as 'uh' or 'er', and the repeated copula 'is is' is conversational disfluency rather than an edit splice. The cleanest continuous segment for reference conditioning is the second clause ('and so I wanted to make a film that was about that').\"\n}\n",
+    "duration_seconds": 38.097831,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36699,
+      "output_tokens": 3177,
+      "thinking_tokens": 2801,
+      "cache_read_tokens": 0,
+      "total_tokens": 39876
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

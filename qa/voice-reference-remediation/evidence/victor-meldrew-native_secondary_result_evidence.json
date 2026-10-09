@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "c19d40a5-9978-46b1-b168-13d75db64ed5",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "c19d40a5-9978-46b1-b168-13d75db64ed5",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yes, well, I just believe that the writer should be writing about today, just so that we, we know what's going on in the society we're living in. So I'm, I'm slightly against the, the classical, uh, playwrights in a way.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 14.0]\n  ],\n  \"uncertainty\": \"Exact duration boundaries for clean intervals are approximate. Transcript may have minor discrepancies regarding exact filler words (e.g., 'uh' vs 'er').\"\n}\n```\n",
+    "duration_seconds": 36.792601,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12499,
+      "output_tokens": 2466,
+      "thinking_tokens": 2108,
+      "cache_read_tokens": 24029,
+      "total_tokens": 14965
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

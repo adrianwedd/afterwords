@@ -1,0 +1,38 @@
+{
+  "wav": "clip-018-ref.wav",
+  "source_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "4410eb05-4c45-4a3a-a660-9e3afb9a17cd",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4410eb05-4c45-4a3a-a660-9e3afb9a17cd",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Seisan is a very interesting kata because it comes in at third degree, the teachers level. Also, it is a kata through meditation we get to understand when we're being attacked by several people, five to eight people, that have actually got in close enough to grab hold of us.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None detected; uniform room acoustics and vocal presence throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 15.5]\n  ],\n  \"uncertainty\": \"Spelling of martial arts terms ('Seisan', 'kata') is inferred phonetically from context. Timestamps and clip boundaries are perceptual estimates with an uncertainty of approximately +/- 0.5 s.\"\n}\n",
+    "duration_seconds": 24.525228,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20400,
+      "output_tokens": 2444,
+      "thinking_tokens": 2072,
+      "cache_read_tokens": 15975,
+      "total_tokens": 22844
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

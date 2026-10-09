@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "5dda8ca6b455a272313025e0ae1feb8bbdcb4e867195f2f81d7a50ac988026ed",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "7098246b-5c50-40b7-84f6-94ad8b584395",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5dda8ca6b455a272313025e0ae1feb8bbdcb4e867195f2f81d7a50ac988026ed"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5dda8ca6b455a272313025e0ae1feb8bbdcb4e867195f2f81d7a50ac988026ed"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "7098246b-5c50-40b7-84f6-94ad8b584395",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I looked at that costume when he showed it to me and I thought, A, he's joking\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.6]\n  ],\n  \"uncertainty\": \"Boundary estimates are perceptual and subject to an uncertainty of approximately \u00b10.3s. Transcript ambiguity: 'A' could represent the letter 'A' introducing a list or an interjection/hesitation ('eh' / 'uh'). The ending cuts off syntactically mid-thought immediately after 'joking', though phonetically the final word is not clipped. A conservative trim to [0.0, 2.6] ('I looked at that costume when he showed it to me') provides a fully self-contained clause if strict grammatical completeness is required.\"\n}\n```\n",
+    "duration_seconds": 47.768241,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36330,
+      "output_tokens": 4624,
+      "thinking_tokens": 4222,
+      "cache_read_tokens": 0,
+      "total_tokens": 40954
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

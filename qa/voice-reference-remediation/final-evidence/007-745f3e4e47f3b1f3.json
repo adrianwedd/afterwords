@@ -1,0 +1,38 @@
+{
+  "wav": "clip-007-ref.wav",
+  "source_sha256": "745f3e4e47f3b1f3fe9cf4160ae3b17dcaf716c60854af60177ca635aa1c068c",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "37016ecd-c29e-4973-a6b0-586c7ba86fb6",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "745f3e4e47f3b1f3fe9cf4160ae3b17dcaf716c60854af60177ca635aa1c068c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "745f3e4e47f3b1f3fe9cf4160ae3b17dcaf716c60854af60177ca635aa1c068c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "37016ecd-c29e-4973-a6b0-586c7ba86fb6",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It's a sloth. It's not exactly an enthusiastic leaf eater. A couple of half-hearted chews, and the leaves go straight down to its stomach.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": \"Faint natural background ambience/room tone; no intrusive sound effects\",\n  \"acoustic_changes\": \"None; consistent dry voiceover acoustic profile throughout\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    [1.5, 2.2],\n    [5.4, 6.0],\n    [8.1, 8.7]\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 11.5]\n  ],\n  \"uncertainty\": \"Boundary timestamps and pause intervals are perceptual estimates with an uncertainty of approximately +/- 0.3 seconds. Wording is clear and highly intelligible with negligible uncertainty. Speaker is well-isolated with no competing voices or music.\"\n}\n",
+    "duration_seconds": 35.648657,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20252,
+      "output_tokens": 3097,
+      "thinking_tokens": 2694,
+      "cache_read_tokens": 16055,
+      "total_tokens": 23349
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "a589d48baeed06a90acc0cb99146d724d0d8f19d6a5878b82f3fa7ec0b2582d5",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "85f7d1f9-0ae8-40fe-86f2-261f63f22e6e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a589d48baeed06a90acc0cb99146d724d0d8f19d6a5878b82f3fa7ec0b2582d5"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "a589d48baeed06a90acc0cb99146d724d0d8f19d6a5878b82f3fa7ec0b2582d5"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "85f7d1f9-0ae8-40fe-86f2-261f63f22e6e",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 0.9],\n    [0.9, 8.4]\n  ],\n  \"literal_transcript\": \"Yeah. And uh, but this thing is gonna go on until springtime, so maybe we'll recalibrate and realize that we are all in this together, so who knows.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [1.0, 8.4]\n  ],\n  \"uncertainty\": \"Low uncertainty on the wording. Boundary estimates are perceptual and approximate to within 0.1s. The initial 'Yeah' from a secondary speaker slightly precedes the primary speaker's intake of breath, allowing a clean trim around 1.0s to isolate the primary speaker.\"\n}\n```\n",
+    "duration_seconds": 25.016632,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12457,
+      "output_tokens": 2100,
+      "thinking_tokens": 1715,
+      "cache_read_tokens": 24198,
+      "total_tokens": 14557
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

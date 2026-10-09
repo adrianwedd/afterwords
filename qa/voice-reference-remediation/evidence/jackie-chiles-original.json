@@ -1,0 +1,37 @@
+{
+  "wav": "jackie-chiles-ref.wav",
+  "source_sha256": "5105b48287f9cb841390a2c89a17ba40aa13f4281189a98f2403d0bcf4c97274",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "f4adc044-3788-4fca-8f99-c8f6ec972567",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5105b48287f9cb841390a2c89a17ba40aa13f4281189a98f2403d0bcf4c97274"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5105b48287f9cb841390a2c89a17ba40aa13f4281189a98f2403d0bcf4c97274"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f4adc044-3788-4fca-8f99-c8f6ec972567",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"...to put a balm on, let a doctor put a balm [on]. Who told you to take it? Did I tell you to take it? No. I know the maestro didn't tell you to take it. A powwow. Who told you to have a powwow? I didn't tell you to have a powwow. Who told you to put the cheese on? Did I tell you to put the cheese on? I didn't tell you to put the cheese on. ch-\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [1.8, 7.0],\n    [7.4, 11.6],\n    [11.9, 16.8]\n  ],\n  \"uncertainty\": {\n    \"boundary_estimates\": \"Timestamps are perceptual estimates with an uncertainty margin of approximately \u00b10.3 to 0.5 seconds.\",\n    \"wording_and_phonetics\": \"The first phrase starts mid-utterance with '[who told you] to put a balm/bomb on'. 'Balm' and 'bomb' are phonetically ambiguous. The preposition 'on' in the second repetition is minimally articulated. The final cut at the end cuts off on an uncompleted consonant/syllable cluster resembling 'ch-'.\",\n    \"acoustic_and_edits\": \"The audio consists of three separate stitched takes of the same speaker separated by hard splices at approximately 7.2s and 11.8s, each possessing distinct room reverberation and gain profiles. While the speaker is isolated without background music or crowd interference, the raw composite cannot be used without trimming due to the start/end truncations and discontinuous splice points.\"\n  }\n}\n```\n",
+    "duration_seconds": 65.192852,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20880,
+      "output_tokens": 6800,
+      "thinking_tokens": 6206,
+      "cache_read_tokens": 15986,
+      "total_tokens": 27680
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

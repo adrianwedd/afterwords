@@ -1,0 +1,38 @@
+{
+  "wav": "clip-046-ref.wav",
+  "source_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "e390f35f-3089-416f-98be-1404891e490f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e390f35f-3089-416f-98be-1404891e490f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"They signed the paperwork, Wyatt. They can't pull out. The patent dispute is not an issue, okay? No, they cut the check. End of story.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.2, 7.8]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an estimated margin of error of +/- 0.2s. Minor uncertainty remains regarding whether the sound preceding 'they cut the check' (~5.2s-5.4s) is a quietly articulated 'No' or a sharp vocalic inhalation/glottal onset, and whether 'okay' is articulated fully as [o\u028a\u02c8ke\u026a] or reduced to ''kay' [ke\u026a]. Audio contains no background music or room reverb changes, leaving isolated single-speaker speech suitable for conditioning.\"\n}\n```\n",
+    "duration_seconds": 41.669218,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20619,
+      "output_tokens": 4644,
+      "thinking_tokens": 4226,
+      "cache_read_tokens": 16114,
+      "total_tokens": 25263
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-004-ref.wav",
+  "source_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "630c7d3e-3291-4316-83a5-ac3c8ceeb58e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "630c7d3e-3291-4316-83a5-ac3c8ceeb58e",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, I remember it very clearly because, um, I started thinking about all the people I admired on television. All the creative people I admired...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 5.8]\n  ],\n  \"uncertainty\": \"Timings are perceptual estimates subject to +/- 0.3s uncertainty. The speech transcript itself is clear and audible with high confidence. The final phrase 'all the creative people I admired' terminates abruptly with an apparent cut mid-thought, making the raw clip suboptimal without trimming. Trimming to [0.0, 5.8] isolates a complete, clean, self-contained clause ending at 'television'.\"\n}\n",
+    "duration_seconds": 38.519927,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20080,
+      "output_tokens": 3947,
+      "thinking_tokens": 3573,
+      "cache_read_tokens": 16161,
+      "total_tokens": 24027
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

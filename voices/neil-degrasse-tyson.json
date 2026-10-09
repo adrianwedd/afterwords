@@ -1,8 +1,9 @@
 {
   "name": "neil-degrasse-tyson",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=9D05ej8u-gU",
+  "source_url": "https://www.nasa.gov/podcasts/houston-we-have-a-podcast/cosmic-perspectives-with-neil-degrasse-tyson/",
   "reference_audio": "neil-degrasse-tyson-ref.wav",
-  "reference_text": "What's the astounding fact? The most astounding fact is the knowledge that the atoms that comprise life on Earth, the atoms that make up the human body.",
-  "segment_start_s": 8
+  "reference_text": "It was the immensity of the universe, and how much we did not know. It was the not knowing that was the force of attraction for me.",
+  "segment_start_s": 504.8,
+  "notes": "Neil deGrasse Tyson, NASA Johnson Space Center, Houston We Have a Podcast episode437, Cosmic Perspectives (published2026-09-18; recorded2026-09-01). Exact504.80–513.35s source edit; no DSP. NASA source acknowledged; no NASA or speaker endorsement implied. See qa/voice-reference-remediation/changes.json for provenance/native evidence."
 }

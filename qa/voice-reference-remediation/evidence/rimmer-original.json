@@ -1,0 +1,37 @@
+{
+  "wav": "rimmer-ref.wav",
+  "source_sha256": "0bb9bc9083925b1bd3ddbc0611c2156f55aa4bae83d02faf0a18d997097f1045",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "acd7803e-163b-438e-ac21-8d76179b826f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0bb9bc9083925b1bd3ddbc0611c2156f55aa4bae83d02faf0a18d997097f1045"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0bb9bc9083925b1bd3ddbc0611c2156f55aa4bae83d02faf0a18d997097f1045"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "acd7803e-163b-438e-ac21-8d76179b826f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [10.0, 12.0]\n  ],\n  \"literal_transcript\": \"We are gathered here today to say our final farewells to Mr. River. On occasion he was a small-minded, bureaucratic, incompetent, cowardly little... But he also had his good qualities. What good qualities?\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Loud audience laughter overlays a significant portion of the speech, and a second speaker interjects at the end, leaving insufficient clean audio for a 15-second reference.\",\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.5]\n  ],\n  \"uncertainty\": \"Timing boundaries are perceptual estimates based on auditory review. The exact wording at the onset of laughter ('little... person') and the exact phrasing of the second speaker ('What good qualities?' vs 'Oh sure, his good qualities.') are partially obscured by the crowd noise.\"\n}\n```\n",
+    "duration_seconds": 46.359728,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12654,
+      "output_tokens": 4519,
+      "thinking_tokens": 4111,
+      "cache_read_tokens": 24043,
+      "total_tokens": 17173
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

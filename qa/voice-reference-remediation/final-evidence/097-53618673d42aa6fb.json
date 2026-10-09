@@ -1,0 +1,38 @@
+{
+  "wav": "clip-097-ref.wav",
+  "source_sha256": "53618673d42aa6fb60605a5c086cdba8331c9033266e55585e588d9a93f4a4d6",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "a56c4a13-3748-4101-bcfe-cb2988ed62b5",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "53618673d42aa6fb60605a5c086cdba8331c9033266e55585e588d9a93f4a4d6"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "53618673d42aa6fb60605a5c086cdba8331c9033266e55585e588d9a93f4a4d6"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "a56c4a13-3748-4101-bcfe-cb2988ed62b5",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Some might say I'm a pretty shallow guy, but a shallow guy with a great ass.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.1, 4.5]\n  ],\n  \"uncertainty\": \"High confidence in literal transcript wording. Perceptual time boundaries are estimated with approximately +/- 0.3s uncertainty. Mid-utterance conversational pause between clauses occurs around 2.0s to 2.4s but does not constitute a defect.\"\n}\n",
+    "duration_seconds": 26.962513,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20307,
+      "output_tokens": 3112,
+      "thinking_tokens": 2776,
+      "cache_read_tokens": 16213,
+      "total_tokens": 23419
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

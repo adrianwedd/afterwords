@@ -1,0 +1,37 @@
+{
+  "wav": "gulley-ref.wav",
+  "source_sha256": "c508edba4c4c63134843513f88844534844d8f928a50e4feb5b412218bda2235",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "b779347f-6681-406d-bce4-332a24de909f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c508edba4c4c63134843513f88844534844d8f928a50e4feb5b412218bda2235"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c508edba4c4c63134843513f88844534844d8f928a50e4feb5b412218bda2235"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b779347f-6681-406d-bce4-332a24de909f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Thank you very much for... surprising me with that. Um, that's just, yeah, impressive. Um, I don't know what to say, but other than thank you so much. Um...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.2],\n    [4.2, 6.2],\n    [7.4, 10.4]\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual estimates with an uncertainty of approximately \u00b10.4 seconds due to absence of visual waveform analysis. Word boundaries around fillers ('Um', hesitation before 'surprising') contain minor perceptual ambiguity in exact start/stop timestamps. The final vocalization ('Um...') is cut off abruptly at clip termination.\"\n}\n```\n",
+    "duration_seconds": 29.728881,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20181,
+      "output_tokens": 2523,
+      "thinking_tokens": 2132,
+      "cache_read_tokens": 16005,
+      "total_tokens": 22704
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

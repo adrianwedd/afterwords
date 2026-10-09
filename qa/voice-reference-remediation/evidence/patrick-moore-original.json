@@ -1,0 +1,37 @@
+{
+  "wav": "patrick-moore-ref.wav",
+  "source_sha256": "c84c6dce53f67cf135aff5c1be7f514938d17057c4f21d9a70644bc005bbb231",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "82a12087-16e3-4d8c-bd69-5fa052f17a0f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c84c6dce53f67cf135aff5c1be7f514938d17057c4f21d9a70644bc005bbb231"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c84c6dce53f67cf135aff5c1be7f514938d17057c4f21d9a70644bc005bbb231"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "82a12087-16e3-4d8c-bd69-5fa052f17a0f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"brilliant stars, the orange-red Betelgeuse in the upper left corner, and the brilliant white Rigel, sixty thousand sun power to the lower right. Incidentally, this is a time exposure taken with a fixed camera, which is why the stars appear drawn out into trails. In mythology, Orion...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [1.5, 17.5]\n  ],\n  \"uncertainty\": \"Boundary estimates for candidate intervals are perceptual approximations. The transcript wording is a perceptual estimate and may contain minor inaccuracies. The start ('brilliant stars') and end ('In mythology, Orion') are cut off mid-phrase, so the candidate clean interval excludes these boundaries.\"\n}\n```\n",
+    "duration_seconds": 36.906817,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12664,
+      "output_tokens": 3400,
+      "thinking_tokens": 3025,
+      "cache_read_tokens": 24043,
+      "total_tokens": 16064
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

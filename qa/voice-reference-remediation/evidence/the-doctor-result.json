@@ -1,0 +1,37 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "ee0df0aa-0ac5-4c2c-9328-7343b4597a38",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "ee0df0aa-0ac5-4c2c-9328-7343b4597a38",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, I don't think I can really comment sensibly on how I do it. It's really up to you to comment on how I do it. I know that, er, I get a certain favorable response. The figures are curiously higher than they've ever been.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"none detected; consistent close-mic studio/interior room acoustic throughout\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": \"minor natural hesitation around 7.8s - 8.8s ('that, er...'), but no unnatural or excessive pauses\",\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.2],\n    [8.8, 14.5]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual approximations within +/- 0.5s without waveform ruler alignment. The filler at ~8.1s is perceptually transcribed as 'er' (could be rendered as 'uh'). Overall clip duration is approximately 14.5s. The entire clip is clean and isolated solo speech; candidate clean intervals isolate the two primary continuous fluent sentences excluding the mid-utterance hesitation.\"\n}\n```\n",
+    "duration_seconds": 32.791165,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36605,
+      "output_tokens": 3375,
+      "thinking_tokens": 2918,
+      "cache_read_tokens": 0,
+      "total_tokens": 39980
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "3035f36de7a988e1be049cc8046e2184a1d2d67f1b20a9cb30a1aed3130c9303",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "f0bdd51d-eef6-4721-a78a-00f0f88ab863",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3035f36de7a988e1be049cc8046e2184a1d2d67f1b20a9cb30a1aed3130c9303"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3035f36de7a988e1be049cc8046e2184a1d2d67f1b20a9cb30a1aed3130c9303"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f0bdd51d-eef6-4721-a78a-00f0f88ab863",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"listen I don't want to pretend I don't enjoy it I was really happy to be on the front page of the newspapers with my two BAFTAs\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 6.5]],\n  \"uncertainty\": \"Acoustic properties, overlap, and timing boundaries are highly uncertain as the ingestion tool provided a textual transcript rather than granular auditory features or timestamps.\"\n}\n",
+    "duration_seconds": 19.748739,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12298,
+      "output_tokens": 1496,
+      "thinking_tokens": 1179,
+      "cache_read_tokens": 24231,
+      "total_tokens": 13794
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

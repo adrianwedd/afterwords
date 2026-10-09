@@ -1,0 +1,37 @@
+{
+  "wav": "geraldine-ref.wav",
+  "source_sha256": "1ca8639c620d666d3440ec046ad421ff50e7607a6dc7b391f6fafb1210f8558a",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "12874a57-d022-4bc1-b4ce-a72e6d1b5091",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1ca8639c620d666d3440ec046ad421ff50e7607a6dc7b391f6fafb1210f8558a"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "1ca8639c620d666d3440ec046ad421ff50e7607a6dc7b391f6fafb1210f8558a"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "12874a57-d022-4bc1-b4ce-a72e6d1b5091",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"...tidying. Those of you who were with me last Sunday will know that this room was crammed with Easter eggs from the floor to the ceiling. And now, voil\u00e0! Just the one left. So, that was very... thorough tidying by me there, hmm?\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [1.9, 7.5]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately +/- 0.3 seconds. There is minor uncertainty regarding whether the initial word 'tidying' was preceded by an unvoiced consonant/vowel or was truncated mid-phrase due to an abrupt start at 0.0s. Mid-clip laughter/amusement is embedded in the delivery between 7.8s and 13.5s, making the first complete sentence [1.9s, 7.5s] the primary clean candidate for conditioning.\"\n}\n```\n",
+    "duration_seconds": 43.503854,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20539,
+      "output_tokens": 4245,
+      "thinking_tokens": 3822,
+      "cache_read_tokens": 15979,
+      "total_tokens": 24784
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

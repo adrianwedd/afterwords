@@ -1,0 +1,37 @@
+{
+  "wav": "k9-ref.wav",
+  "source_sha256": "5a484e11e965797c29859a7ca45d4407f5198ab91b000b3db2ad5ef27b60a5ac",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "f620df10-588e-4179-a372-b0c65a2f654a",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5a484e11e965797c29859a7ca45d4407f5198ab91b000b3db2ad5ef27b60a5ac"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "5a484e11e965797c29859a7ca45d4407f5198ab91b000b3db2ad5ef27b60a5ac"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f620df10-588e-4179-a372-b0c65a2f654a",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 1\",\n      \"interval\": [0.0, 9.3]\n    },\n    {\n      \"speaker\": \"Speaker 2\",\n      \"interval\": [9.4, 11.8]\n    },\n    {\n      \"speaker\": \"Speaker 1\",\n      \"interval\": [11.9, 12.6]\n    },\n    {\n      \"speaker\": \"Speaker 2\",\n      \"interval\": [12.6, 13.1]\n    },\n    {\n      \"speaker\": \"Speaker 1\",\n      \"interval\": [13.2, 13.9]\n    }\n  ],\n  \"literal_transcript\": \"Speaker 1: \\\"Information regarding percentage of population destroyed was understood. This unit requires specific information regarding manner of their destruction if complete record of planet history is to be recorded.\\\" Speaker 2: \\\"[exhale / sigh] Oh, I was just getting on to that.\\\" Speaker 1: \\\"Negative.\\\" Speaker 2: \\\"What?\\\" Speaker 1: \\\"Negative.\\\"\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": \"Speaker 1 has audible electronic vocoding/ring-modulation processing; subtle room tone/ambience present, but no loud discrete sound effects.\",\n  \"acoustic_changes\": \"Acoustic characteristics change distinctly across speaker turns: Speaker 1 has synthetic, dry, band-limited electronic modulation, while Speaker 2 has a natural, warm, reverberant studio acoustic.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"interval\": [4.0, 4.6],\n      \"duration_s\": 0.6,\n      \"description\": \"Natural pause between sentences for Speaker 1\"\n    }\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Multiple speakers in dialogue turn-taking render the full raw clip unusable without trimming.\",\n  \"candidate_clean_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 1\",\n      \"interval\": [0.0, 9.3],\n      \"duration_s\": 9.3,\n      \"notes\": \"Continuous, isolated delivery of complete, grammatically intact sentences with no overlapping secondary speaker.\"\n    },\n    {\n      \"speaker\": \"Speaker 2\",\n      \"interval\": [9.7, 11.8],\n      \"duration_s\": 2.1,\n      \"notes\": \"Isolated sentence 'Oh, I was just getting on to that', excluding initial breath/sigh from 9.4-9.7s; however, interval is short for conditioning.\"\n    }\n  ],\n  \"uncertainty\": \"Boundary timestamps carry an estimated perceptual uncertainty of \u00b10.15s. In the literal transcript, the transition into Speaker 2's first line begins with a heavy breath/sigh that blends into an onset word ('Oh' vs. an audible exasperated intake before 'I was...'). Initial word onset at 0.0s is tight but phonemically intact ('Information'). The tail of 'Negative' at ~13.9s resolves before the file ends without truncation.\"\n}\n```\n",
+    "duration_seconds": 41.585233,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20451,
+      "output_tokens": 3599,
+      "thinking_tokens": 2718,
+      "cache_read_tokens": 15977,
+      "total_tokens": 24050
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

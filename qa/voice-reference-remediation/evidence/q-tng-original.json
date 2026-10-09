@@ -1,0 +1,37 @@
+{
+  "wav": "q-tng-ref.wav",
+  "source_sha256": "704542399930767b5c80a222422fc50f2ba36b88b68613461f3196e44bf1fb5c",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "4df9e013-56a8-4351-a8d4-a3316a3501ce",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "704542399930767b5c80a222422fc50f2ba36b88b68613461f3196e44bf1fb5c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "704542399930767b5c80a222422fc50f2ba36b88b68613461f3196e44bf1fb5c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "4df9e013-56a8-4351-a8d4-a3316a3501ce",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [8.5, 9.5],\n    [10.0, 11.0]\n  ],\n  \"literal_transcript\": \"...decision. The trial never ended, Captain. We never reached a verdict. But now we have. You're guilty. Guilty of what? Being inferior. Seven years ago...\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"File contains multiple speakers exchanging dialogue and background crowd/laughter overlapping the speech.\",\n  \"candidate_clean_intervals_s\": [\n    [1.0, 8.0]\n  ],\n  \"uncertainty\": \"Timing boundaries are perceptual estimates with +/- 0.5s margin of error. The very first word is cut off and uncertain (sounds like the end of 'decision'). It is uncertain whether the background crowd murmur and laughter completely isolate from the ends of the primary speaker's phrases, which could affect the cleanliness of the candidate intervals for conditioning. The exact boundary of the second speaker's interruption is estimated.\"\n}\n```\n",
+    "duration_seconds": 33.501105,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12728,
+      "output_tokens": 3044,
+      "thinking_tokens": 2623,
+      "cache_read_tokens": 24045,
+      "total_tokens": 15772
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

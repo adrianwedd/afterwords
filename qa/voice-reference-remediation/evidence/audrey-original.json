@@ -1,0 +1,36 @@
+{
+  "wav": "audrey-ref.wav",
+  "source_sha256": "044c38f68ab809aa5e11b9dab2421ba5dfefa0bf7a073944ccb3f20d54348e9a",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "bfb85055-d713-4612-9bf4-c525a22e8950",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "044c38f68ab809aa5e11b9dab2421ba5dfefa0bf7a073944ccb3f20d54348e9a"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "044c38f68ab809aa5e11b9dab2421ba5dfefa0bf7a073944ccb3f20d54348e9a"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "bfb85055-d713-4612-9bf4-c525a22e8950",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well because I only just left for the night and to come here and to aid this wonderful charity for Muscular Dystrophy and I can't leave my young son any longer because he has no nurse at the moment and my husband and a friend\",\n  \"music\": false,\n  \"crowd\": true,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 15.0]],\n  \"uncertainty\": \"Interval estimates are approximations. Background crowd/room noise is estimated based on context. Beginning and ending are abruptly cut off, but the main speech is contiguous and isolated enough for conditioning.\"\n}\n```\n",
+    "duration_seconds": 24.755945,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12649,
+      "output_tokens": 2172,
+      "thinking_tokens": 1830,
+      "cache_read_tokens": 24043,
+      "total_tokens": 14821
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

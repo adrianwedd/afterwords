@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "e1153e7f-5968-4e27-ac9c-db1a4ace2435",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "e1153e7f-5968-4e27-ac9c-db1a4ace2435",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, I was extremely surprised in the latest film that we did that John probably had the single most uncomfortable role of anyone in the film.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 8.0]\n  ],\n  \"uncertainty\": \"Boundary estimates are perceptual approximations (+/- 0.5s) without direct waveform timecode alignment, with total duration estimated at approximately 8.0s. High confidence in literal transcript wording with minor perceptual uncertainty regarding exact comma pauses between clauses. High confidence in complete vocal isolation of a single speaker with no background music, crowd, or sound effects, providing a complete usable phrase for conditioning.\"\n}\n",
+    "duration_seconds": 121.268658,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20325,
+      "output_tokens": 5831,
+      "thinking_tokens": 5459,
+      "cache_read_tokens": 16131,
+      "total_tokens": 26156
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

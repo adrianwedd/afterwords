@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "6679d4df-e3a9-4932-8977-fab05a6643dd",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "6679d4df-e3a9-4932-8977-fab05a6643dd",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"And then you announce that you've changed your mind about having a chavi. And then you go late night shopping at Family Planning.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.8]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an estimated margin of error of \u00b10.3s. Slight lexical uncertainty regarding the slang term transcribed as 'chavi' (alternatively spelled 'chavvy' or 'chavvie', British/Romany slang for baby/child).\"\n}\n",
+    "duration_seconds": 46.073121,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20400,
+      "output_tokens": 3135,
+      "thinking_tokens": 2791,
+      "cache_read_tokens": 16151,
+      "total_tokens": 23535
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

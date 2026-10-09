@@ -1,0 +1,37 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "08a2fe5f345bd8efe5bb66756f2091c3b2bc728c3e26d20cdd5df53354498e48",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "16e182d7-651e-4cac-a415-6ec461ab7bf6",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "08a2fe5f345bd8efe5bb66756f2091c3b2bc728c3e26d20cdd5df53354498e48"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "08a2fe5f345bd8efe5bb66756f2091c3b2bc728c3e26d20cdd5df53354498e48"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "16e182d7-651e-4cac-a415-6ec461ab7bf6",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"There will be no foolish wand-waving or silly incantations in this class.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.4, 7.1]\n  ],\n  \"uncertainty\": \"Wording confidence is very high; every syllable is articulated cleanly without competing noise or masking. Timestamp boundaries are perceptual estimates based on native playback timing (speech onset estimated at ~0.4s and final consonant decay ending at ~7.1s, within a ~7.5s total clip length).\"\n}\n```\n",
+    "duration_seconds": 30.003469,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20697,
+      "output_tokens": 2977,
+      "thinking_tokens": 2633,
+      "cache_read_tokens": 16199,
+      "total_tokens": 23674
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

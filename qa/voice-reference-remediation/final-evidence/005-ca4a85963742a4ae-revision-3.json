@@ -1,0 +1,38 @@
+{
+  "wav": "clip-005-ref.wav",
+  "source_sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "65ad306d-7a5e-4ff9-a455-502643b6de39",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "65ad306d-7a5e-4ff9-a455-502643b6de39",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I expected the American people to rise up.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.8]\n  ],\n  \"uncertainty\": \"Low uncertainty on transcript and isolation. First-person pronoun 'I' is cleanly articulated at the onset, and final stop consonant 'p' in 'up' is fully closed and audible without cutoff. No instrumental or melodic/rhythmic music is present; continuous background presence is low room air tone. Start and end boundary estimates (~0.0s to 3.8s) are perceptual approximations.\"\n}\n",
+    "duration_seconds": 42.018026,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20643,
+      "output_tokens": 4465,
+      "thinking_tokens": 4112,
+      "cache_read_tokens": 16208,
+      "total_tokens": 25108
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

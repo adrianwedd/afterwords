@@ -1,0 +1,37 @@
+{
+  "wav": "cleaver-greene-ref.wav",
+  "source_sha256": "ef97b3af9faab48727e54ab9ccc7d44faf7880d0858162ce53e84ac79cfe460a",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "1698f004-2ce0-46e5-9128-4cf5345bafd0",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ef97b3af9faab48727e54ab9ccc7d44faf7880d0858162ce53e84ac79cfe460a"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "ef97b3af9faab48727e54ab9ccc7d44faf7880d0858162ce53e84ac79cfe460a"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "1698f004-2ce0-46e5-9128-4cf5345bafd0",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"There is... is there not ladies and gentlemen of the jury, so much we can learn about ourselves if we have the integrity, the courage... to stand up and not only tell the truth...\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [2.5, 9.5]\n  ],\n  \"uncertainty\": \"Timestamp boundaries for candidate_clean_intervals_s are rough perceptual estimates and require waveform verification. Exact wording may differ slightly due to interpretation. The abrupt ending on the word 'truth' and the dramatic silences between phrases render the raw clip unsuitable for conditioning without trimming. The middle phrases provide a clean, continuous segment of isolated speech.\"\n}\n```\n",
+    "duration_seconds": 32.445129,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12535,
+      "output_tokens": 2923,
+      "thinking_tokens": 2558,
+      "cache_read_tokens": 24040,
+      "total_tokens": 15458
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

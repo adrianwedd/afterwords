@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "6cffc64c554319d868053c5da0ed30bfa7383a2c8a39bf5a863ead9155bddba8",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "f280f16e-fabf-4a66-b3d9-604d7eea4e05",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6cffc64c554319d868053c5da0ed30bfa7383a2c8a39bf5a863ead9155bddba8"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "6cffc64c554319d868053c5da0ed30bfa7383a2c8a39bf5a863ead9155bddba8"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "f280f16e-fabf-4a66-b3d9-604d7eea4e05",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"I usually just describe my position since then semi-retired position\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.2]\n  ],\n  \"uncertainty\": \"Timing boundaries are approximate perceptual estimates. There is a continuous low-frequency background hum/noise throughout the clip, but the speech remains intelligible and isolated.\"\n}\n```\n",
+    "duration_seconds": 22.897568,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12279,
+      "output_tokens": 1585,
+      "thinking_tokens": 1276,
+      "cache_read_tokens": 24241,
+      "total_tokens": 13864
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "566d6a45-ed43-494f-b725-50d1ebd60285",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "566d6a45-ed43-494f-b725-50d1ebd60285",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and forgiveness and understanding is is urgent right now and so I wanted to make a film that was about that\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.6]\n  ],\n  \"uncertainty\": \"Exact temporal boundaries are perceptual estimates within +/- 0.3s. Transcript confidence is high; the speaker stammers briefly with repeated 'is is'.\"\n}\n",
+    "duration_seconds": 32.993704,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20514,
+      "output_tokens": 2295,
+      "thinking_tokens": 1982,
+      "cache_read_tokens": 16101,
+      "total_tokens": 22809
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "511868b9a3f9fe8cd909aca57990319fcfdc54998c97b918207cd078818052fa",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "8206a065-9681-41fa-9315-8b54d976862f",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "511868b9a3f9fe8cd909aca57990319fcfdc54998c97b918207cd078818052fa"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "511868b9a3f9fe8cd909aca57990319fcfdc54998c97b918207cd078818052fa"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8206a065-9681-41fa-9315-8b54d976862f",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [10.0, 11.5],\n    [15.0, 17.0]\n  ],\n  \"literal_transcript\": \"happening. When I was growing up there, which would have been, you know, the 60s and the 70s. I mean, we were a very much poorer country and basically there was... well, there were two cinemas, I was going to lie and say there was only one. One was so far away that we couldn't get to it, but there was one in town and one in the suburbs, a more affluent suburb, and that was it. That was all\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.8, 9.8]\n  ],\n  \"uncertainty\": \"Interviewer backchannel overlapping locations and durations are perceptual estimates due to very low volume relative to the primary speaker. Primary speaker has slight vocal fry/chuckle during the middle section.\"\n}\n```\n",
+    "duration_seconds": 50.64811,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12700,
+      "output_tokens": 3729,
+      "thinking_tokens": 3291,
+      "cache_read_tokens": 23925,
+      "total_tokens": 16429
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

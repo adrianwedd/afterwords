@@ -1,0 +1,37 @@
+{
+  "wav": "del-boy-ref.wav",
+  "source_sha256": "3fa2066561c96552d56db6da877ba7d43b0cecd73029751a65b59f43868f95a3",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "b48b4908-2ffe-4224-a288-445686c95949",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3fa2066561c96552d56db6da877ba7d43b0cecd73029751a65b59f43868f95a3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "3fa2066561c96552d56db6da877ba7d43b0cecd73029751a65b59f43868f95a3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b48b4908-2ffe-4224-a288-445686c95949",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 1\",\n      \"start_s\": 0.0,\n      \"end_s\": 5.6\n    },\n    {\n      \"speaker\": \"Speaker 2\",\n      \"start_s\": 5.9,\n      \"end_s\": 13.8\n    }\n  ],\n  \"literal_transcript\": \"Speaker 1: And then you announce that you've changed your mind about having a chavvy, and then you go late night shopping at family planning. Speaker 2: Cassandra and I discussed it, and our initial reaction was, quite naturally, to hold back until the financial climate was more conducive to start a--\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"Acoustic environment is dry dialogue studio / interior acoustics, but vocal timbre, accent, pitch, and mic perspective shift sharply between Speaker 1 (closer, brighter, cockney accent) and Speaker 2 (measured, formal RP accent) across the dialogue transition at ~5.6s - 5.9s.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Multiple speakers across a conversational exchange; clip cuts off abruptly mid-utterance at the end of Speaker 2's turn.\",\n  \"candidate_clean_intervals_s\": [\n    {\n      \"speaker\": \"Speaker 1\",\n      \"interval_s\": [0.0, 5.5],\n      \"usable_phrase\": \"And then you announce that you've changed your mind about having a chavvy, and then you go late night shopping at family planning.\"\n    },\n    {\n      \"speaker\": \"Speaker 2\",\n      \"interval_s\": [5.9, 12.3],\n      \"usable_phrase\": \"Cassandra and I discussed it, and our initial reaction was, quite naturally, to hold back until the financial climate was more conducive\"\n    }\n  ],\n  \"uncertainty\": \"Boundary timing estimates carry an estimated perceptual uncertainty of +/- 0.2s. In Speaker 1's transcript, 'chavvy' is phonetically clear as /'t\u0283\u00e6vi/ (slang for baby/child), though spelling variant could be 'chavi' or 'chavvy'. At the tail of Speaker 2's utterance (~13.6s - 13.8s), speech terminates mid-phoneme on 'to start a' / 'to starting', with the final word abruptly truncated.\"\n}\n```\n",
+    "duration_seconds": 32.680519,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20329,
+      "output_tokens": 3120,
+      "thinking_tokens": 2382,
+      "cache_read_tokens": 15974,
+      "total_tokens": 23449
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

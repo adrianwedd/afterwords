@@ -1,0 +1,37 @@
+{
+  "wav": "frasier-ref.wav",
+  "source_sha256": "c7c280ff2b73c37aa15b123030a5def6862199e26523e771638b3f4d86367c25",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "0ea05030-89be-45fb-bf13-dc6be1882e32",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c7c280ff2b73c37aa15b123030a5def6862199e26523e771638b3f4d86367c25"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "c7c280ff2b73c37aa15b123030a5def6862199e26523e771638b3f4d86367c25"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "0ea05030-89be-45fb-bf13-dc6be1882e32",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [0.0, 6.8],\n    [7.2, 13.7]\n  ],\n  \"literal_transcript\": \"It may be the gulfs will wash us down. It may be we shall touch the Happy Isles. And though we are not now that strength which in old days moved earth and heaven.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": \"Multiple distinct speakers present within the reference clip, joined by an audible splice transition.\",\n  \"candidate_clean_intervals_s\": [\n    [0.0, 6.8],\n    [7.2, 13.7]\n  ],\n  \"uncertainty\": \"Boundary estimates have an estimated perceptual uncertainty of +/- 0.3 seconds (the transition splice occurs between approximately 6.8s and 7.2s). The two sections clearly exhibit distinct vocal characteristics (Speaker 1: lighter baritone/tenor, closer mic; Speaker 2: deeper, gravelled/resonant timbre with different room acoustics). Wording in the transcript is clear with high confidence.\"\n}\n```\n",
+    "duration_seconds": 35.800819,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20426,
+      "output_tokens": 3244,
+      "thinking_tokens": 2807,
+      "cache_read_tokens": 15976,
+      "total_tokens": 23670
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

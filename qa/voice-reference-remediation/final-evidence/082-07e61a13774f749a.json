@@ -1,0 +1,38 @@
+{
+  "wav": "clip-082-ref.wav",
+  "source_sha256": "07e61a13774f749a568f1bb9896d3f32f6ba9c89f584e2d52512f6bd49f4c05c",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "b4404bd5-4118-4604-9aaf-f28fc6d944bb",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "07e61a13774f749a568f1bb9896d3f32f6ba9c89f584e2d52512f6bd49f4c05c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "07e61a13774f749a568f1bb9896d3f32f6ba9c89f584e2d52512f6bd49f4c05c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b4404bd5-4118-4604-9aaf-f28fc6d944bb",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Well, that was the problem. I, I can't answer it. I don't know what is the ethical rightness and justice of this. I, I haven't figured it out yet.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; acoustic ambiance and mic placement remain consistent throughout the recording.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.3, 11.3]\n  ],\n  \"uncertainty\": \"Boundary timestamps are perceptual estimates with an uncertainty of approximately \u00b10.3 seconds. High confidence in transcribed text; minor hesitations on 'I, I' are natural speech pauses rather than audio edits or artifacts.\"\n}\n```\n",
+    "duration_seconds": 35.743781,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20376,
+      "output_tokens": 3145,
+      "thinking_tokens": 2780,
+      "cache_read_tokens": 16147,
+      "total_tokens": 23521
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

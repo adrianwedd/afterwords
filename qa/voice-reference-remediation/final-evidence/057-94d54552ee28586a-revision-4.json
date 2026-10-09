@@ -1,0 +1,38 @@
+{
+  "wav": "clip-057-ref.wav",
+  "source_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "afb7757f-7c27-427d-a595-771b6a6226c7",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "afb7757f-7c27-427d-a595-771b6a6226c7",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"So, that's what we did, and with that I'd I'd go in there and knock it off in maybe 50 minutes uh a show.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"None; uniform close studio acoustic and consistent room tone throughout.\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 1.7],\n    [2.3, 4.8]\n  ],\n  \"uncertainty\": \"Disputed phonetic items: 1) First-person repetition: audible as 'I'd I'd' [a\u026ad\u031a a\u026ad], where the first token has an unreleased/glottalized alveolar closure [d\u031a/\u0294], leaving 'I'd I'd' vs 'I I'd' phonetically unresolved; 2) Function word before 'maybe': pronounced as a reduced nasal [\u026an / \u0259n / n\u0329], perceptually closest to the preposition 'in' with weak vowel centralization, but phonetically ambiguous with a reduced conjunction 'and' ('n'); 3) Vowels before 'show': exactly two distinct central/schwa-quality vowel pulses are heard ('uh' followed by 'a' [\u028c/\u0259 \u0259]) separated by a brief glottal pause. Boundary estimates carry ~0.1-0.2s perceptual uncertainty due to coarticulation and soft vocal onsets/offsets.\"\n}\n",
+    "duration_seconds": 42.734598,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36842,
+      "output_tokens": 3535,
+      "thinking_tokens": 3010,
+      "cache_read_tokens": 0,
+      "total_tokens": 40377
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

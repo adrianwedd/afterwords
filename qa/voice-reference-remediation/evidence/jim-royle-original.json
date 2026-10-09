@@ -1,0 +1,37 @@
+{
+  "wav": "jim-royle-ref.wav",
+  "source_sha256": "12d2999b3c06d51c727e42dd41e53563e19d26f5f1011c09aebffd6471b95fbc",
+  "model": "gemini-3.8-flash-high",
+  "conversation_id": "a90d677a-c0ac-4bd8-bdb6-5107dd7eed6c",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "12d2999b3c06d51c727e42dd41e53563e19d26f5f1011c09aebffd6471b95fbc"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "12d2999b3c06d51c727e42dd41e53563e19d26f5f1011c09aebffd6471b95fbc"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "a90d677a-c0ac-4bd8-bdb6-5107dd7eed6c",
+    "status": "SUCCESS",
+    "response": "Far-reaching my ass.What legacy?Having a good time, my ass.Feast, my ass.```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    [8.0, 9.2]\n  ],\n  \"literal_transcript\": \"Kiss my arse. Equaliser, my arse. Reparations, my arse. Far-reaching, my arse. [Speaker 2]: What legacy? [Speaker 1]: Legacy, my arse. Having a good time, my arse. Feast, my arse. [laughter]\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": true,\n  \"sound_effects\": false,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"Montage/supercut composed of multiple short scene splices with inconsistent room acoustics, secondary speaker dialogue interruption (~8.0s-9.2s), trailing laughter (~14.2s-15.5s), and no contiguous single-speaker phrase longer than ~2.4 seconds for voice conditioning.\",\n  \"candidate_clean_intervals_s\": [\n    [0.0, 1.5],\n    [1.6, 3.7],\n    [3.8, 6.0],\n    [6.2, 7.9],\n    [9.2, 10.3],\n    [10.4, 12.7],\n    [12.8, 14.1]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates with an uncertainty margin of approximately +/- 0.15s. The word pronounced colloquially as 'arse' [\u0251\u02d0s] could be transcribed as 'ass' depending on dialectal convention. While the primary voice across the separate cuts shares consistent raspy/gravelly timbre and British regional accent features, hard scene splices and differing room acoustics prevent absolute certainty that all male utterances originate from the exact same recording session or individual without external metadata. Individual candidate intervals are isolated single-speaker utterances, but none are long enough on their own to provide a complete, continuous conditioning phrase.\"\n}\n```\n",
+    "duration_seconds": 61.125351,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20985,
+      "output_tokens": 6401,
+      "thinking_tokens": 5773,
+      "cache_read_tokens": 15988,
+      "total_tokens": 27386
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

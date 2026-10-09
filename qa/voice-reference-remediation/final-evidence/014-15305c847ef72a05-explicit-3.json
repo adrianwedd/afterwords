@@ -1,0 +1,38 @@
+{
+  "wav": "clip-014-ref.wav",
+  "source_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "87eddb3e-8a6c-4082-b469-afd846c61ff0",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "87eddb3e-8a6c-4082-b469-afd846c61ff0",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and I had to go and get a wig put on me head, and, uh, it was brilliant actually\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.8]\n  ],\n  \"uncertainty\": \"Duration and boundary timestamps are perceptual estimates (~0.0s to ~4.8s). Minor uncertainty on whether the connective between clauses is an elongated 'and' with glottal reset or an explicit 'and, uh'.\"\n}\n",
+    "duration_seconds": 32.897964,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20417,
+      "output_tokens": 2990,
+      "thinking_tokens": 2653,
+      "cache_read_tokens": 16193,
+      "total_tokens": 23407
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-004-ref.wav",
+  "source_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca",
+  "model": "gemini-3.1-pro-high",
+  "transcript_scope": "full",
+  "conversation_id": "872b2f2b-283a-4e77-bd52-1e461ad416c4",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "872b2f2b-283a-4e77-bd52-1e461ad416c4",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"Yeah, I remember it very clearly because um I started thinking about all the people I admired on television. All the creative people I admired and\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [[0.0, 6.0]],\n  \"uncertainty\": \"Timestamps are rough perceptual estimates as exact duration was not explicitly available. The literal transcript ends abruptly at 'and', confirming an ending cutoff, but the exact phonetic cutoff point is uncertain. The clip isolates a single speaker clearly and provides a complete usable phrase in the first sentence ('Yeah, I remember it very clearly because um I started thinking about all the people I admired on television.'), but requires trimming the final incomplete phrase for optimal conditioning.\"\n}\n```\n",
+    "duration_seconds": 37.319003,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20963,
+      "output_tokens": 3747,
+      "thinking_tokens": 3363,
+      "cache_read_tokens": 16109,
+      "total_tokens": 24710
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

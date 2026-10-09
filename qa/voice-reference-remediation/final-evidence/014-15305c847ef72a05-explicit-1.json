@@ -1,0 +1,38 @@
+{
+  "wav": "clip-014-ref.wav",
+  "source_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "46db4538-acd1-44c6-a893-cdd5f1bc9bab",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "46db4538-acd1-44c6-a893-cdd5f1bc9bab",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"and I had to go and get a wig put on me head and er it was brilliant actually\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": \"none; consistent close-mic studio/interview acoustics and steady room tone throughout\",\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": [\n    {\n      \"interval_s\": [2.2, 2.8],\n      \"description\": \"brief hesitation and filler ('and er') between clauses\"\n    }\n  ],\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 4.8],\n    [0.3, 2.2],\n    [2.8, 4.8]\n  ],\n  \"uncertainty\": \"All time boundaries are perceptual estimates based solely on listening without visual waveform displays, assuming an estimated total duration of ~4.8 seconds. Wording is acoustically distinct: 'me head' is heard with colloquial /mi\u02d0/ rather than standard /ma\u026a/, and the filler particle between clauses is perceived as British 'er' /\u025c\u02d0/ rather than 'uh'. The initial conjunction 'and' is soft and low-energy but shows no signs of acoustic truncation.\"\n}\n",
+    "duration_seconds": 35.053215,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20283,
+      "output_tokens": 3845,
+      "thinking_tokens": 3386,
+      "cache_read_tokens": 16192,
+      "total_tokens": 24128
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

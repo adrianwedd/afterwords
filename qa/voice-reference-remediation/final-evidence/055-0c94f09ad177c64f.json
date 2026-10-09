@@ -1,0 +1,38 @@
+{
+  "wav": "clip-055-ref.wav",
+  "source_sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "cd6d5120-597d-45a4-b1fb-2f60f0b0f82a",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "cd6d5120-597d-45a4-b1fb-2f60f0b0f82a",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"You give me a time and a place, I give you a five minute window. Anything happens in that five minutes, and I'm yours. No matter what. Anything happens a minute either side of that, and you're on your own.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.7, 6.6],\n    [8.4, 15.0],\n    [16.5, 22.8]\n  ],\n  \"uncertainty\": \"Boundary estimates are perceptual with an uncertainty margin of approximately +/- 0.3 seconds. Spoken wording is highly intelligible with low uncertainty. Audible respiration occurs during pauses between lines but does not overlap or corrupt speech phrases.\"\n}\n",
+    "duration_seconds": 49.684947,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 21043,
+      "output_tokens": 5140,
+      "thinking_tokens": 4758,
+      "cache_read_tokens": 15991,
+      "total_tokens": 26183
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

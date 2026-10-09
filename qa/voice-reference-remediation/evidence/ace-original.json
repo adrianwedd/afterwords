@@ -1,0 +1,36 @@
+{
+  "wav": "ace-ref.wav",
+  "source_sha256": "f43b5f052a2e20e653b1aac550d47fd213b4e9d492077e01af612c2a84c2ad7a",
+  "model": "gemini-3.1-pro-high",
+  "conversation_id": "b6ee32c0-71ef-4097-bca9-b7d7004e48e4",
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f43b5f052a2e20e653b1aac550d47fd213b4e9d492077e01af612c2a84c2ad7a"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "f43b5f052a2e20e653b1aac550d47fd213b4e9d492077e01af612c2a84c2ad7a"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "b6ee32c0-71ef-4097-bca9-b7d7004e48e4",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 2,\n  \"speaker_change_intervals_s\": [\n    {\"speaker\": \"Speaker 1\", \"start\": 0.0, \"end\": 1.2},\n    {\"speaker\": \"Speaker 2\", \"start\": 1.2, \"end\": 5.0}\n  ],\n  \"literal_transcript\": \"[Speaker 1] ...condition! [Speaker 2] I think I might have slightly overestimated myself here, professor. Although...\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": true,\n  \"acoustic_changes\": true,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": false,\n  \"fatal_defect\": \"The clip contains multiple speakers with heavy background music and sound effects (notably a loud echo/reverb on the first speaker). Neither speaker provides a fully clean, isolated phrase due to the background audio and abrupt cutoffs at both the beginning and the end of the file.\",\n  \"candidate_clean_intervals_s\": [],\n  \"uncertainty\": \"All time boundaries are approximate perceptual estimates. The first speaker's speech is cut off at the very beginning and heavily distorted by echo, making the exact transcription preceding 'condition!' completely uncertain. The presence of background music makes it difficult to guarantee any entirely clean vocal isolation.\"\n}\n```\n",
+    "duration_seconds": 38.595448,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 12587,
+      "output_tokens": 4313,
+      "thinking_tokens": 3879,
+      "cache_read_tokens": 24191,
+      "total_tokens": 16900
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

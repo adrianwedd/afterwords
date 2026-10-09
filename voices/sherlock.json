@@ -1,8 +1,8 @@
 {
   "name": "sherlock",
   "backend": "qwen3-0.6b",
-  "source_url": "https://www.youtube.com/watch?v=0aZOOcTt0E4",
+  "source_url": "https://commons.wikimedia.org/wiki/File:Benedict_cumberbatch_in_front_row_b00wqfnd-crop.flac",
   "reference_audio": "sherlock-ref.wav",
-  "reference_text": "What have we got? We know this footprint is Henry found them so did the tour guide but we all heard something",
-  "segment_start_s": 0
+  "reference_text": "So I came on set pretty bleary-eyed, but kind of high on the whole adventure that was about to take over my life.",
+  "segment_start_s": 36.2
 }

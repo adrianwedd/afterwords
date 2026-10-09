@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "056c6cf8465b2a104c984774b474764c938b28b0a3f1e7fdd4a5d37c1f06d388",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "8efd07d4-26e5-44e3-b0b6-474c1dcbde8e",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "056c6cf8465b2a104c984774b474764c938b28b0a3f1e7fdd4a5d37c1f06d388"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "056c6cf8465b2a104c984774b474764c938b28b0a3f1e7fdd4a5d37c1f06d388"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "8efd07d4-26e5-44e3-b0b6-474c1dcbde8e",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"It's often the starting point for me when I'm thinking about a role or an atmosphere that you're stepping into as an actor.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": false,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": null,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 7.8]\n  ],\n  \"uncertainty\": \"Boundary timing estimates are perceptual approximations within \u00b10.5s. Minor phonetic ambiguity between 'that you're' and 'being you're' due to unstressed connected speech around 'atmosphere'.\"\n}\n",
+    "duration_seconds": 38.844057,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20501,
+      "output_tokens": 3748,
+      "thinking_tokens": 3412,
+      "cache_read_tokens": 16142,
+      "total_tokens": 24249
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

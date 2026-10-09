@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "99d09b3ae4c7d959fd975b8b00fa3a98893d636273526e29ea5026bb623028bb",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "excerpt",
+  "conversation_id": "67e2e912-1836-4e86-b9f5-6222f2438b32",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "99d09b3ae4c7d959fd975b8b00fa3a98893d636273526e29ea5026bb623028bb"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "99d09b3ae4c7d959fd975b8b00fa3a98893d636273526e29ea5026bb623028bb"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "67e2e912-1836-4e86-b9f5-6222f2438b32",
+    "status": "SUCCESS",
+    "response": "```json\n{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"or ever will be. Our contemplations of the cosmos\",\n  \"music\": true,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": true,\n  \"ending_cutoff\": true,\n  \"long_pauses\": true,\n  \"apparent_splices\": true,\n  \"raw_reference_usable\": false,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [2.7, 5.8]\n  ],\n  \"uncertainty\": \"Timestamps are perceptual estimates with an uncertainty margin of approximately \u00b10.3 to 0.5 seconds. Background music consists of a quiet ambient synthesizer pad audible underneath speech and during pauses. The clip begins mid-sentence with leading words cut off and terminates abruptly on an incomplete clause at the end. The interval [2.7, 5.8] contains the only fully formed, grammatically complete standalone sentence; the subsequent segment (~7.0 to 14.5s) is clear and isolated to the single speaker but cuts off before completing its concluding thought.\"\n}\n```\n",
+    "duration_seconds": 52.5059,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20740,
+      "output_tokens": 5015,
+      "thinking_tokens": 4618,
+      "cache_read_tokens": 15982,
+      "total_tokens": 25755
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}

@@ -1,0 +1,38 @@
+{
+  "wav": "clip-001-ref.wav",
+  "source_sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4",
+  "model": "gemini-3.8-flash-high",
+  "transcript_scope": "full",
+  "conversation_id": "df0ada27-d5a0-4660-a5ed-dc3996ba9397",
+  "waveform_attachment_proven": true,
+  "native_audio_proven": true,
+  "audio_first_protocol": true,
+  "attachment_evidence": [
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4"
+    },
+    {
+      "step_index": 2,
+      "mime": "audio/wav",
+      "media_sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4"
+    }
+  ],
+  "exit_code": 0,
+  "result": {
+    "conversation_id": "df0ada27-d5a0-4660-a5ed-dc3996ba9397",
+    "status": "SUCCESS",
+    "response": "{\n  \"speaker_count\": 1,\n  \"speaker_change_intervals_s\": [],\n  \"literal_transcript\": \"but it feels like I was only here last week. That's the strange, um, the strange tricks that time plays on you.\",\n  \"music\": false,\n  \"crowd\": false,\n  \"laughter\": false,\n  \"sound_effects\": false,\n  \"acoustic_changes\": false,\n  \"beginning_cutoff\": false,\n  \"ending_cutoff\": false,\n  \"long_pauses\": true,\n  \"apparent_splices\": false,\n  \"raw_reference_usable\": true,\n  \"salvageable_by_trim\": true,\n  \"fatal_defect\": false,\n  \"candidate_clean_intervals_s\": [\n    [0.0, 3.2],\n    [4.8, 7.8]\n  ],\n  \"uncertainty\": \"Exact interval timestamps are perceptual estimates (+/- 0.3s). The transcript wording is heard with high confidence; the speaker hesitates mid-sentence with an audible 'um' and self-repair between approximately 3.2s and 4.8s. Both surrounding clauses provide clean, well-isolated conditioning phrases.\"\n}\n",
+    "duration_seconds": 34.166505,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 20156,
+      "output_tokens": 2932,
+      "thinking_tokens": 2565,
+      "cache_read_tokens": 16123,
+      "total_tokens": 23088
+    }
+  },
+  "acceptance": "pending orchestrator adjudication"
+}
