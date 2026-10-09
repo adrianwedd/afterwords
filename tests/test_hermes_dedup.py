@@ -84,6 +84,13 @@ def hook_env(tmp_path):
     env["PATH"] = f"{bindir}:{env['PATH']}"
     env["HOME"] = str(home)
     env["STUB_LOG"] = str(log)
+    # Fixture isolation: a desktop-app-launched session exports
+    # _HERMES_GATEWAY=1 / HERMES_SESSION_SOURCE=desktop / HERMES_SPAWN; the
+    # hook's scope guard keys off these, so tests must start from a neutral
+    # baseline and set them deliberately per-test.
+    for key in ("_HERMES_GATEWAY", "HERMES_SESSION_SOURCE", "HERMES_SPAWN",
+                "HERMES_GATEWAY_SESSION"):
+        env.pop(key, None)
 
     # Teardown: remove only the markers this test created — the dedup dir is
     # real shared state also used by the live Hermes hook on dev machines.
