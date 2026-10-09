@@ -37,7 +37,10 @@ for a in "$@"; do
 done
 if [ -n "$out" ]; then
   code="${CURL_SYNTH_CODE:-200}"
-  [ "$code" = "200" ] && printf 'RIFF-fake-wav-payload' > "$out"
+  if [ "$code" = "200" ]; then
+    printf 'RIFF-fake-wav-payload' > "$out"
+    [ "${CURL_SYNTH_LARGE:-}" = "1" ] && printf '%2048s' '' >> "$out"
+  fi
   printf '%s' "$code"
 fi
 exit 0
@@ -234,3 +237,19 @@ def test_cli_scope_skips_gateway_local_mapped_to_cli(hook_env):
     result = run_hook(env, workdir, unique_text(), platform="cli")
     assert result.returncode == 0
     assert not log.exists(), "gateway local turns are owned by the native hook"
+
+
+@pytest.mark.parametrize("gateway_marker", [False, True])
+def test_cli_scope_speaks_explicit_desktop_platform(hook_env, gateway_marker):
+    """Current Hermes desktop sends platform=desktop in post_llm_call."""
+    env, log, workdir = hook_env
+    env["AFTERWORDS_SHELL_SCOPE"] = "cli"
+    env["CURL_SYNTH_LARGE"] = "1"
+    if gateway_marker:
+        env["_HERMES_GATEWAY"] = "1"
+        env["HERMES_SESSION_SOURCE"] = "desktop"
+    result = run_hook(env, workdir, unique_text(), platform="desktop")
+    assert result.returncode == 0, result.stderr
+    assert synth_calls(log), "explicit desktop turns must reach synthesis"
+    assert any(line.startswith("afplay ") for line in log.read_text().splitlines())
+    assert not any(line.startswith("hermes send ") for line in log.read_text().splitlines())

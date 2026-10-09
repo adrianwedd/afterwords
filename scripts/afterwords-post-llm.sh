@@ -75,9 +75,9 @@ print(d.get('chat_id', '') or d.get('extra', {}).get('chat_id', ''))
 case "${AFTERWORDS_SHELL_SCOPE:-all}" in
     all) ;;
     cli)
-        # cli scope owns only platform=cli turns (all others exit — parity with
-        # the pre-desktop support guard below).
-        [ "$PLATFORM" = "cli" ] || exit 0
+        # Desktop now reports its own platform instead of cli. Both direct
+        # CLI and desktop turns belong to this shell hook.
+        case "$PLATFORM" in cli|desktop) ;; *) exit 0 ;; esac
         # Hermes maps gateway LOCAL to cli for agent hooks. Its process marker
         # distinguishes those turns from direct CLI, which owns shell speech.
         # The desktop app ALSO sets _HERMES_GATEWAY=1 on serve-spawned `hermes
@@ -86,7 +86,7 @@ case "${AFTERWORDS_SHELL_SCOPE:-all}" in
         # gateway run_turn), so skipping here left desktop turns permanently
         # silent. Speak them: only bare gateway-multiplexed CLI turns
         # (no session source) actually have the native hook as backup.
-        [ "${_HERMES_GATEWAY:-}" != "1" ] || [ "${HERMES_SESSION_SOURCE:-}" = "desktop" ] || exit 0
+        [ "$PLATFORM" = "desktop" ] || [ "${_HERMES_GATEWAY:-}" != "1" ] || [ "${HERMES_SESSION_SOURCE:-}" = "desktop" ] || exit 0
         ;;
     *) echo "afterwords: invalid AFTERWORDS_SHELL_SCOPE" >&2; exit 1 ;;
 esac
