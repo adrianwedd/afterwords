@@ -112,7 +112,14 @@ while true; do
     TEXT=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('text',''))" "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
     ATTEMPTS=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('attempts',0))" "$ITEM" 2>/dev/null) || true
     if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
-        : # Receipt commits only after complete synthesis and archiving.
+        # Cap retries: a permanently failing event must not loop forever
+        # (2026-10-10 wedge). 3 strikes -> park as .failed for inspection.
+        if [ "${ATTEMPTS:-0}" -ge 3 ]; then
+            echo "afterwords: parking codex TTS item as .failed after $ATTEMPTS attempts" >&2
+            mv "$ITEM" "${ITEM%.claimed}.failed" 2>/dev/null || rm -f "$ITEM"
+            continue
+        fi
+        : # Otherwise receipt commits only after complete synthesis and archiving.
     else
         rm -f "$ITEM"
     fi
@@ -286,7 +293,25 @@ print(json.dumps({
     rm -rf "$CHUNK_DIR"
     release_play_lock
     if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
-        [ "$DELIVERY_OK" = "1" ] && [ "$NCHUNKS" -gt 0 ] && [ "$DELIVERED_CHUNKS" -eq "$NCHUNKS" ] || exit 1
-        mv "$ITEM" "${ITEM%.claimed}.done" || exit 1
+        if [ "$DELIVERY_OK" = "1" ] && [ "$NCHUNKS" -gt 0 ] && [ "$DELIVERED_CHUNKS" -eq "$NCHUNKS" ]; then
+            mv "$ITEM" "${ITEM%.claimed}.done" || exit 1
+        else
+            # Persist the attempt count into the event so the retry cap can fire
+            # (drain recovers .claimed -> .json, preserving this content).
+            python3 -c "
+import json, sys
+p = sys.argv[1]
+try:
+    d = json.load(open(p))
+except Exception:
+    sys.exit(0)
+d['attempts'] = int(d.get('attempts', 0)) + 1
+tmp = p + '.tmp'
+json.dump(d, open(tmp, 'w'))
+import os
+os.replace(tmp, p)
+" "$ITEM" 2>/dev/null
+            exit 1
+        fi
     fi
 done
