@@ -19,12 +19,19 @@ evidence, deterministic results, and delivery commit references. Original WAVs
 remain reconstructable from the baseline Git commit. Private voice audio and
 profiles must not be included in public commits.
 
-The local replacement-source archive is retained outside Git. Its file names,
-sizes, and SHA-256 hashes are recorded in
-[`source-archive-manifest.json`](source-archive-manifest.json); the corresponding
-media files are intentionally not part of this repository. The manifest records
-the archive contents before the manifest itself was added and can be used to
-check the retained local copy.
+The replacement-source archive is retained locally under
+`evidence/source-archive/` for review. Its file names, sizes, and SHA-256 hashes are recorded in
+[`source-archive-manifest.json`](source-archive-manifest.json). The archive
+directory is excluded from Git because it contains full source media; the
+manifest is committed and verifies the 336 files present before the manifest
+itself was added.
+
+Retained review runs, benchmark clips, and their working logs are stored locally
+under `evidence/analysis-archive/`. Their paths, sizes, and SHA-256 hashes are
+recorded in [`analysis-archive-manifest.json`](analysis-archive-manifest.json).
+This archive is also excluded from Git because it contains audio; its manifest
+tracks the 3,551 files present when the inventory was created. The accepted
+review evidence remains in the tracked files under this `evidence/` directory.
 
 All 104 production references, associated with 198 tracked profiles, are accepted
 as fit for conditioning after fresh Gemini native-audio review, root adjudication

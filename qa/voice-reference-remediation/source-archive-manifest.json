@@ -2,7 +2,7 @@
   "schema_version": 1,
   "created_utc": "2026-10-11T12:16:21.753251+00:00",
   "scope": "All files present before this manifest was written; manifest does not hash itself.",
-  "root": "scratch/voice-replacement-sources",
+  "root": "qa/voice-reference-remediation/evidence/source-archive",
   "file_count": 336,
   "entries": [
     {
