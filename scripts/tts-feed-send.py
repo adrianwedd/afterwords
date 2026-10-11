@@ -11,6 +11,7 @@ Keeps state in ~/.hermes/tts-feed-seen.json to avoid re-sending.
 Usage:
     python3 scripts/tts-feed-send.py [--once] [--dry-run]
 """
+import fcntl
 import json
 import os
 import subprocess
@@ -95,6 +96,23 @@ def load_seen() -> set:
         except (json.JSONDecodeError, OSError):
             return set()
     return set()
+
+
+LOCK_FILE = Path.home() / ".hermes" / "tts-feed-send.lock"
+
+
+def acquire_lock() -> int:
+    """Exclusive flock on a lock file. Returns the fd (caller must KEEP it open
+    for the life of the run — closing releases the lock). Raises BlockingIOError
+    if another instance holds it. Without this, a hung instance + a periodic
+    relauncher (launchd StartInterval) spawns overlapping senders that each see
+    the same 'unseen' archive files and re-deliver them — the 2026-10-10 flood."""
+    LOCK_FILE.parent.mkdir(parents=True, exist_ok=True)
+    fd = os.open(LOCK_FILE, os.O_CREAT | os.O_RDWR)
+    fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    os.truncate(fd, 0)
+    os.write(fd, f"{os.getpid()}\n".encode())
+    return fd
 
 
 def save_seen(seen: set) -> None:
@@ -294,6 +312,16 @@ def main():
     args = parser.parse_args()
 
     AUDIO_CACHE.mkdir(parents=True, exist_ok=True)
+    try:
+        _lock_fd = acquire_lock()
+    except BlockingIOError:
+        holder = ""
+        try:
+            holder = LOCK_FILE.read_text().strip()
+        except OSError:
+            pass
+        print(f"Another tts-feed-send instance holds the lock ({holder or 'pid unknown'}) — exiting without sending.")
+        return
     seen = load_seen()
     print(f"Loaded {len(seen)} previously sent items")
     
