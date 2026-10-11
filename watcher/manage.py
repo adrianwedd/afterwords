@@ -13,7 +13,9 @@ REPO = Path(__file__).resolve().parents[1]
 FILES = ('watcher/__init__.py', 'watcher/state.py', 'watcher/queue.py', 'watcher/drain.py',
          'codex/afterwords-codex-watch.py', 'opencode/afterwords-opencode-watch.py',
          'opencode/tts-hook-opencode.sh', '.claude/hooks/codex-tts-hook.sh',
-         '.claude/hooks/codex-tts-worker.sh', 'codex_session_hook.py',
+         '.claude/hooks/codex-tts-worker.sh', '.claude/hooks/claude-tts-hook.sh',
+         '.claude/hooks/agy-tts-hook.sh', 'claude_session_hook.py', 'agy_session_hook.py',
+         'codex_session_hook.py',
          'strip_markdown.py', 'chunk_text.py')
 
 
@@ -28,7 +30,7 @@ def unload(domain, label, plist):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=('install', 'restart', 'status', 'uninstall'))
+    parser.add_argument('action', choices=('stage', 'install', 'restart', 'status', 'uninstall'))
     parser.add_argument('agent', choices=('codex', 'opencode', 'all'))
     parser.add_argument('--home', type=Path, default=Path.home(), help='Isolated acceptance HOME')
     parser.add_argument('--label-prefix', default='au.wedd.afterwords', help='Isolated acceptance labels')
@@ -49,7 +51,7 @@ def main(argv=None):
                 pass
             else:
                 raise SystemExit('Stop the per-session Codex watcher before installing global coverage.')
-    if args.action == 'install':
+    if args.action in ('stage', 'install'):
         root.mkdir(parents=True, exist_ok=True, mode=0o700)
         root.chmod(0o700)
         staged = root / 'runtime.new'
@@ -75,7 +77,7 @@ def main(argv=None):
             runtime.rename(old)
         staged.rename(runtime)
         for agent, plist in installed:
-            if agent not in agents:
+            if args.action == 'stage' or agent not in agents:
                 control('bootstrap', domain, str(plist))
         if old.exists():
             shutil.rmtree(old)
@@ -113,12 +115,10 @@ def main(argv=None):
             unload(domain, f'{args.label_prefix}-{agent}-watch', plist)
             plist.unlink(missing_ok=True)
             # Retain private offsets/receipts/archive on uninstall so reinstall
-            # does not replay old messages. Source runtime is removed when last
-            # watcher is removed; state can be manually deleted when inactive.
-    if args.action == 'uninstall' and not any(
-        (home / 'Library/LaunchAgents' / f'{args.label_prefix}-{a}-watch.plist').exists()
-        for a in ('codex', 'opencode')):
-        shutil.rmtree(runtime, ignore_errors=True)
+            # does not replay old messages. Shared runtime can also serve hooks.
+    # The private runtime is shared with Claude/AGY hooks, which may still
+    # target it after the last desktop watcher is removed. Keep it in place;
+    # uninstalling one integration must not silently disable another.
     return 0
 
 
