@@ -16,6 +16,7 @@
 #   pull         Pull a cloud voice to local voices/
 #   setup-cloud  Configure cloud API key and URL
 #   codex-hook   Manage the repo-local Codex CLI watcher
+#   integrations  Check detected agent integration configuration and runtime
 #   uninstall    Remove the launchd service and optionally Claude Code hooks
 #
 set -uo pipefail
@@ -1534,8 +1535,10 @@ cmd_help() {
     echo
     echo -e "  ${BOLD}Integrations${NC}"
     echo -e "    ${CYAN}mute${NC}              Toggle playback on/off (synthesis and archiving continue)"
-    echo -e "    ${CYAN}watchers install codex|opencode|all${NC}  Install login watchers (TTS server unchanged)"
+    echo -e "    ${CYAN}watchers stage|install all${NC}  Refresh private runtime or install login watchers"
+    echo -e "    ${CYAN}watchers install codex|opencode|all${NC}  Install selected login watchers (TTS server unchanged)"
     echo -e "    ${CYAN}watchers restart|status|uninstall <agent>${NC}  Manage login watchers"
+    echo -e "    ${CYAN}integrations${NC}  Check detected agent hook and watcher installation"
     echo -e "    ${CYAN}codex-hook start${NC}  Speak Codex CLI responses (run inside Codex)"
     echo -e "    ${CYAN}codex-hook stop${NC}   Stop the Codex watcher"
     echo
@@ -1593,6 +1596,7 @@ case "$COMMAND" in
     update)      cmd_update "$@" ;;
     mute)        cmd_mute "$@" ;;
     watchers)    "${AFTERWORDS_PYTHON:-python3}" "$REPO_DIR/watcher/manage.py" "$@" ;;
+    integrations) "${AFTERWORDS_PYTHON:-python3}" "$REPO_DIR/scripts/integrations-status.py" ;;
     codex-hook)  cmd_codex_hook "$@" ;;
     configure)   cmd_configure "$@" ;;
     uninstall)   cmd_uninstall "$@" ;;

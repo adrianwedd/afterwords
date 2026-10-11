@@ -76,6 +76,9 @@ def test_sessions_separate_identical_answers_and_queue_receipts(tmp_path):
         target.with_suffix('.claimed').rename(target.with_suffix('.done'))
         enqueue(tmp_path, 'codex', *event)
         assert not target.exists()
+        target.with_suffix('.done').rename(target.with_suffix('.failed'))
+        enqueue(tmp_path, 'codex', *event)
+        assert not target.exists()
 
 
 def test_enqueue_failure_does_not_advance_and_crash_retry_is_idempotent(tmp_path):
@@ -174,7 +177,8 @@ def test_installer_lifecycle_isolated_home_and_boot_registration(tmp_path, monke
     assert not (root / 'runtime/.afterwords').exists()
     save(root / 'codex.json', {'private-progress': 12})
     assert manage.main(['uninstall', *options]) == 0
-    assert not (root / 'runtime').exists()
+    assert (root / 'runtime/.claude/hooks/claude-tts-hook.sh').is_file()
+    assert (root / 'runtime/.claude/hooks/agy-tts-hook.sh').is_file()
     assert load(root / 'codex.json') == {'private-progress': 12}
     assert manage.main(['uninstall', *options]) == 0
     assert all('tts-server' not in ' '.join(call) for call in calls)
@@ -261,14 +265,15 @@ def test_worker_failure_retains_claim_for_retry_then_commits_receipt(tmp_path):
     assert len(list((tmp_path / 'archive').glob('*.mp3'))) == 1
 
 
-def test_worker_encoder_failure_does_not_commit_done(tmp_path):
+def test_worker_encoder_failure_does_not_replay_successful_playback(tmp_path):
     env, queue, bindir = worker_stubs(tmp_path)
     (bindir / 'lame').write_text('#!/bin/bash\nexit 1\n')
     result = subprocess.run(['bash', str(REPO / '.claude/hooks/codex-tts-worker.sh')],
                             env=env, capture_output=True, text=True)
-    assert result.returncode != 0
-    assert (queue / 'event-test.claimed').exists()
-    assert not (queue / 'event-test.done').exists()
+    assert result.returncode == 0
+    assert (queue / 'event-test.done').exists()
+    assert not (queue / 'event-test.claimed').exists()
+    assert 'speech played; MP3 archive incomplete' in result.stderr
 
 
 def test_actual_watcher_termination_between_writer_chunks(tmp_path):

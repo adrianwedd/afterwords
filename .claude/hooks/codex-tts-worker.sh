@@ -15,6 +15,12 @@ LOCKDIR="/tmp/codex-tts-worker-${SESSION_ID}.lock"
 TTS_URL="http://127.0.0.1:7860/synthesize"
 ARCHIVE_DIR="${AFTERWORDS_ARCHIVE_DIR:-$HOME/.codex/tts-archive}"
 MAX_QUEUE=25
+LAME_BIN="$(command -v lame 2>/dev/null || true)"
+if [ -z "$LAME_BIN" ]; then
+    for CANDIDATE in /opt/homebrew/bin/lame /usr/local/bin/lame; do
+        if [ -x "$CANDIDATE" ]; then LAME_BIN="$CANDIDATE"; break; fi
+    done
+fi
 
 MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
 PLAY_LOCK="${AFTERWORDS_PLAY_LOCK:-/tmp/afterwords-play.lock}"
@@ -112,7 +118,14 @@ while true; do
     TEXT=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('text',''))" "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
     ATTEMPTS=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('attempts',0))" "$ITEM" 2>/dev/null) || true
     if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
-        : # Receipt commits only after complete synthesis and archiving.
+        # Cap retries: a permanently failing event must not loop forever
+        # (2026-10-10 wedge). 3 strikes -> park as .failed for inspection.
+        if [ "${ATTEMPTS:-0}" -ge 3 ]; then
+            echo "afterwords: parking codex TTS item as .failed after $ATTEMPTS attempts" >&2
+            mv "$ITEM" "${ITEM%.claimed}.failed" 2>/dev/null || rm -f "$ITEM"
+            continue
+        fi
+        : # Otherwise receipt commits only after complete synthesis and archiving.
     else
         rm -f "$ITEM"
     fi
@@ -207,7 +220,8 @@ print(json.dumps({
         fi
     }
 
-    DELIVERY_OK=1
+    PLAYBACK_OK=1
+    ARCHIVE_OK=1
     DELIVERED_CHUNKS=0
     PREV_WAV=""
     PREV_TEXT=""
@@ -232,11 +246,15 @@ print(json.dumps({
             fi
             if [ "$FILESIZE" -gt 1000 ]; then
                 DELIVERED_CHUNKS=$((DELIVERED_CHUNKS + 1))
-                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || DELIVERY_OK=0
+                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || PLAYBACK_OK=0
                 if [ -n "$PREV_ARCH" ]; then
                     if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
-                        lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null || DELIVERY_OK=0
-                        [ -s "$PREV_ARCH" ] || DELIVERY_OK=0
+                        if [ -n "$LAME_BIN" ]; then
+                            "$LAME_BIN" --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null || ARCHIVE_OK=0
+                        else
+                            ARCHIVE_OK=0
+                        fi
+                        [ -s "$PREV_ARCH" ] || ARCHIVE_OK=0
                     else
                         (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
                     fi
@@ -244,7 +262,7 @@ print(json.dumps({
                     rm -f "$PREV_WAV"
                 fi
             else
-                DELIVERY_OK=0
+                PLAYBACK_OK=0
                 rm -f "$PREV_WAV"
             fi
         fi
@@ -264,20 +282,23 @@ print(json.dumps({
         fi
         if [ "$FILESIZE" -gt 1000 ]; then
             DELIVERED_CHUNKS=$((DELIVERED_CHUNKS + 1))
-            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || DELIVERY_OK=0
+            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || PLAYBACK_OK=0
             if [ -n "$PREV_ARCH" ]; then
                 if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
-                    lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null || DELIVERY_OK=0
-                    [ -s "$PREV_ARCH" ] || DELIVERY_OK=0
+                    if [ -n "$LAME_BIN" ]; then
+                        "$LAME_BIN" --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null || ARCHIVE_OK=0
+                    else
+                        ARCHIVE_OK=0
+                    fi
+                    [ -s "$PREV_ARCH" ] || ARCHIVE_OK=0
                 else
                     (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
                 fi
             else
-                DELIVERY_OK=0
                 rm -f "$PREV_WAV"
             fi
         else
-            DELIVERY_OK=0
+            PLAYBACK_OK=0
             rm -f "$PREV_WAV"
         fi
     fi
@@ -286,7 +307,28 @@ print(json.dumps({
     rm -rf "$CHUNK_DIR"
     release_play_lock
     if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
-        [ "$DELIVERY_OK" = "1" ] && [ "$NCHUNKS" -gt 0 ] && [ "$DELIVERED_CHUNKS" -eq "$NCHUNKS" ] || exit 1
-        mv "$ITEM" "${ITEM%.claimed}.done" || exit 1
+        # Playback is the delivery. A failed archive must not replay audio that
+        # has already been spoken when the queue retries this item.
+        if [ "$PLAYBACK_OK" = "1" ] && [ "$NCHUNKS" -gt 0 ] && [ "$DELIVERED_CHUNKS" -eq "$NCHUNKS" ]; then
+            [ "$ARCHIVE_OK" = "1" ] || echo "afterwords: speech played; MP3 archive incomplete for this item" >&2
+            mv "$ITEM" "${ITEM%.claimed}.done" || exit 1
+        else
+            # Persist the attempt count into the event so the retry cap can fire
+            # (drain recovers .claimed -> .json, preserving this content).
+            python3 -c "
+import json, sys
+p = sys.argv[1]
+try:
+    d = json.load(open(p))
+except Exception:
+    sys.exit(0)
+d['attempts'] = int(d.get('attempts', 0)) + 1
+tmp = p + '.tmp'
+json.dump(d, open(tmp, 'w'))
+import os
+os.replace(tmp, p)
+" "$ITEM" 2>/dev/null
+            exit 1
+        fi
     fi
 done
