@@ -369,6 +369,33 @@ HAS_CURSOR=false
 if [ -d "/Applications/Cursor.app" ] || command -v cursor &>/dev/null || [ -d "$HOME/.cursor" ]; then
     HAS_CURSOR=true
 fi
+HAS_CODEX=false
+command -v codex &>/dev/null && HAS_CODEX=true
+HAS_OPENCODE=false
+if command -v opencode &>/dev/null || [ -f "$HOME/.local/share/opencode/opencode.db" ]; then
+    HAS_OPENCODE=true
+fi
+
+# Prepare the private runtime used by durable Claude/AGY hooks and desktop
+# watchers before any external config points at it. The explicit file list in
+# watcher/manage.py keeps this runtime isolated from repo scratch and evidence.
+if ! $SERVER_ONLY && { $HAS_CLAUDE || $HAS_CURSOR || command -v gemini &>/dev/null \
+        || command -v agy &>/dev/null || $HAS_CODEX || $HAS_OPENCODE; }; then
+    info "Preparing managed agent integration runtime..."
+    if $HAS_CODEX && $HAS_OPENCODE; then
+        "$SCRIPT_DIR/.venv/bin/python3" "$SCRIPT_DIR/watcher/manage.py" install all \
+            || fail "Could not install the Codex and OpenCode watchers."
+    elif $HAS_CODEX; then
+        "$SCRIPT_DIR/.venv/bin/python3" "$SCRIPT_DIR/watcher/manage.py" install codex \
+            || fail "Could not install the Codex watcher."
+    elif $HAS_OPENCODE; then
+        "$SCRIPT_DIR/.venv/bin/python3" "$SCRIPT_DIR/watcher/manage.py" install opencode \
+            || fail "Could not install the OpenCode watcher."
+    else
+        "$SCRIPT_DIR/.venv/bin/python3" "$SCRIPT_DIR/watcher/manage.py" stage all \
+            || fail "Could not prepare the managed agent integration runtime."
+    fi
+fi
 
 # Shared hook installation (every queue-based integration needs these helpers).
 if ! $SERVER_ONLY && { $HAS_CLAUDE || $HAS_CURSOR || command -v gemini &>/dev/null || command -v agy &>/dev/null; }; then
@@ -748,70 +775,42 @@ if $HAS_CLAUDE; then
 SETTINGS="$HOME/.claude/settings.json"
 mkdir -p "$HOME/.claude"
 
-HOOK_CMD="bash ~/.claude/hooks/tts-hook.sh"
+HOOK_CMD="AFTERWORDS_PYTHON=\"$SCRIPT_DIR/.venv/bin/python3\" bash \"$HOME/Library/Application Support/Afterwords/watchers/runtime/.claude/hooks/claude-tts-hook.sh\""
 
-HOOK_ENTRY="{\"type\": \"command\", \"command\": \"$HOOK_CMD\", \"timeout\": 120, \"async\": true}"
-HOOK_GROUP="{\"hooks\": [$HOOK_ENTRY]}"
+HOOK_ENTRY=$(jq -n --arg command "$HOOK_CMD" \
+    '{"type":"command", "command":$command, "timeout":120, "async":true}')
 
 # Register the TTS hook on BOTH Stop (main conversation) and SubagentStop
 # (subagent completion) so per-agent .afterwords mappings actually fire.
 register_hook_event() {
     local EVT="$1"
-    if jq -e ".hooks.${EVT}[]?.hooks[]? | select(.command == \"$HOOK_CMD\")" "$SETTINGS" &>/dev/null; then
-        ok "TTS hook already configured for ${EVT}"
-    elif jq -e ".hooks.${EVT} | type == \"array\" and length > 0 and .[0].hooks" "$SETTINGS" &>/dev/null; then
-        info "Appending TTS hook to existing ${EVT} hooks..."
-        TMPF=$(mktemp)
-        TMPFILES+=("$TMPF")
-        jq ".hooks.${EVT}[0].hooks += [$HOOK_ENTRY]" "$SETTINGS" > "$TMPF" \
-            && mv "$TMPF" "$SETTINGS"
-        ok "TTS hook appended to existing ${EVT} hooks"
-    elif jq -e '.hooks' "$SETTINGS" &>/dev/null; then
-        info "Adding ${EVT} hook group to settings.json..."
-        TMPF=$(mktemp)
-        TMPFILES+=("$TMPF")
-        jq ".hooks.${EVT} = [$HOOK_GROUP]" "$SETTINGS" > "$TMPF" \
-            && mv "$TMPF" "$SETTINGS"
-        ok "${EVT} hook added"
-    else
-        info "Adding hooks to settings.json..."
-        TMPF=$(mktemp)
-        TMPFILES+=("$TMPF")
-        jq ". + {\"hooks\": {\"${EVT}\": [$HOOK_GROUP]}}" "$SETTINGS" > "$TMPF" \
-            && mv "$TMPF" "$SETTINGS"
-        ok "${EVT} hook added"
-    fi
+    local TMPF
+    TMPF=$(mktemp)
+    TMPFILES+=("$TMPF")
+    jq --arg command "$HOOK_CMD" --argjson entry "$HOOK_ENTRY" --arg event "$EVT" '
+      .hooks = (.hooks // {}) |
+      .hooks[$event] = ((.hooks[$event] // []) | map(
+        if (.hooks | type) == "array" then
+          .hooks |= map(select(
+            ((.command // "") != $command) and
+            ((.command // "") != "bash ~/.claude/hooks/tts-hook.sh") and
+            (((.command // "") | contains("claude-tts-hook.sh")) | not)
+          )) |
+          select((.hooks | length) > 0)
+        else
+          select(((.command // "") != $command) and
+                 ((.command // "") != "bash ~/.claude/hooks/tts-hook.sh") and
+                 (((.command // "") | contains("claude-tts-hook.sh")) | not))
+        end
+      ) + [{"hooks": [$entry]}])
+    ' "$SETTINGS" > "$TMPF" || fail "Could not update Claude ${EVT} hooks."
+    mv "$TMPF" "$SETTINGS"
+    ok "managed Afterwords hook configured for ${EVT}"
 }
 
-if [ -f "$SETTINGS" ]; then
-    register_hook_event Stop
-    register_hook_event SubagentStop
-else
-    info "Creating settings.json with Stop + SubagentStop hooks..."
-    cat > "$SETTINGS" <<SETTINGSEOF
-{
-  "hooks": {
-    "Stop": [{
-      "hooks": [{
-        "type": "command",
-        "command": "$HOOK_CMD",
-        "timeout": 120,
-        "async": true
-      }]
-    }],
-    "SubagentStop": [{
-      "hooks": [{
-        "type": "command",
-        "command": "$HOOK_CMD",
-        "timeout": 120,
-        "async": true
-      }]
-    }]
-  }
-}
-SETTINGSEOF
-    ok "settings.json created"
-fi
+[ -f "$SETTINGS" ] || printf '{}\n' > "$SETTINGS"
+register_hook_event Stop
+register_hook_event SubagentStop
 echo
 fi  # end Claude settings block
 fi  # end shared hooks block
@@ -984,28 +983,25 @@ echo -e "  ${DIM}│${NC} Clone https://github.com/adrianwedd/afterwords and run
 echo -e "  ${DIM}│${NC} Run preflight, install bundled voices, then verify synthesized speech. ${DIM}│${NC}"
 echo -e "  ${DIM}└────────────────────────────────────────────────────────────────────────┘${NC}"
 
-# ── Codex CLI discovery (optional, per-session) ─────────────────
-if command -v codex &>/dev/null; then
+# ── Codex CLI discovery (managed login watcher) ─────────────────
+if ! $SERVER_ONLY && $HAS_CODEX; then
     echo
     rule
     echo
     echo -e "  ${BOLD}Codex CLI detected.${NC}"
-    echo -e "  Afterwords ships a watcher that speaks final Codex responses."
-    echo -e "  ${DIM}Run it from an interactive Codex CLI terminal; hosted/non-interactive sessions may stop background watchers.${NC}"
-    echo
-    if [ -n "${CODEX_THREAD_ID:-}" ]; then
-        echo -e "  Inside this Codex session, run:"
-        echo -e "    ${CYAN}afterwords codex-hook start${NC}"
-    else
-        echo -e "  Inside an interactive Codex session (where ${DIM}\$CODEX_THREAD_ID${NC} is set), run:"
-        echo -e "    ${CYAN}afterwords codex-hook start${NC}"
-        echo -e "  Then ${CYAN}afterwords codex-hook status${NC} to verify, ${CYAN}stop${NC} to quiet."
-    fi
+    echo -e "  The managed login watcher is installed for Codex. Verify it with:"
+    echo -e "    ${CYAN}afterwords watchers status codex${NC}"
     # Validate Codex-specific dependency: ripgrep
     if ! command -v rg &>/dev/null; then
         echo
         warn "ripgrep (rg) not found — required by the Codex watcher. Install via ${CYAN}brew install ripgrep${NC}."
     fi
+fi
+
+if ! $SERVER_ONLY && $HAS_OPENCODE; then
+    echo
+    echo -e "  ${BOLD}OpenCode detected.${NC} The managed login watcher is installed."
+    echo -e "    ${CYAN}afterwords watchers status opencode${NC}"
 fi
 
 # ── Gemini CLI discovery (manual config; gemini hooks migrate is buggy) ────
@@ -1049,40 +1045,28 @@ fi
 
 # ── Antigravity CLI discovery (agy) ──────────────────────────────────────
 if ! $SERVER_ONLY && command -v agy &>/dev/null; then
-    AGY_HOOK_DEST="$HOME/.claude/hooks/agy-tts-hook.sh"
-    AGY_PYTHON_DEST="$HOME/.claude/hooks/agy-session-hook.py"
     AGY_CONFIG_DIR="$HOME/.gemini/config"
     AGY_HOOKS_FILE="$AGY_CONFIG_DIR/hooks.json"
+    AGY_HOOK_CMD="AFTERWORDS_PYTHON=\"$SCRIPT_DIR/.venv/bin/python3\" bash \"$HOME/Library/Application Support/Afterwords/watchers/runtime/.claude/hooks/agy-tts-hook.sh\""
     echo
     rule
     echo
     echo -e "  ${BOLD}Antigravity CLI (agy) detected.${NC}"
-    if [ ! -f "$AGY_HOOK_DEST" ]; then
-        cp "$SCRIPT_DIR/.claude/hooks/agy-tts-hook.sh" "$AGY_HOOK_DEST" 2>/dev/null && \
-            chmod +x "$AGY_HOOK_DEST" 2>/dev/null
-        ok "installed agy-tts-hook.sh adapter to ~/.claude/hooks/"
-    fi
-    if [ ! -f "$AGY_PYTHON_DEST" ]; then
-        cp "$SCRIPT_DIR/agy_session_hook.py" "$AGY_PYTHON_DEST" 2>/dev/null
-        ok "installed agy-session-hook.py helper to ~/.claude/hooks/"
-    fi
-
-    # Auto-update ~/.gemini/config/hooks.json
+    # Merge the Afterwords Stop hook without discarding unrelated hook owners.
     mkdir -p "$AGY_CONFIG_DIR"
-    if [ -f "$AGY_HOOKS_FILE" ]; then
-        if jq -e '."afterwords-tts".Stop[]? | select(.command == "bash ~/.claude/hooks/agy-tts-hook.sh")' "$AGY_HOOKS_FILE" &>/dev/null; then
-            ok "Afterwords hook already registered in ~/.gemini/config/hooks.json"
-        else
-            info "Registering/updating Afterwords hook in ~/.gemini/config/hooks.json..."
-            jq '."afterwords-tts" = {"Stop": [{"type": "command", "command": "bash ~/.claude/hooks/agy-tts-hook.sh", "timeout": 120000}]}' "$AGY_HOOKS_FILE" > "$AGY_HOOKS_FILE.tmp" && \
-                mv "$AGY_HOOKS_FILE.tmp" "$AGY_HOOKS_FILE"
-            ok "added/updated Afterwords hook in ~/.gemini/config/hooks.json"
-        fi
-    else
-        info "Creating ~/.gemini/config/hooks.json with Afterwords hook..."
-        echo '{"afterwords-tts": {"Stop": [{"type": "command", "command": "bash ~/.claude/hooks/agy-tts-hook.sh", "timeout": 120000}]}}' > "$AGY_HOOKS_FILE"
-        ok "created ~/.gemini/config/hooks.json"
-    fi
+    [ -f "$AGY_HOOKS_FILE" ] || printf '{}\n' > "$AGY_HOOKS_FILE"
+    TMPF=$(mktemp)
+    TMPFILES+=("$TMPF")
+    jq --arg command "$AGY_HOOK_CMD" '
+      .["afterwords-tts"] = (.["afterwords-tts"] // {}) |
+      .["afterwords-tts"].Stop = ((.["afterwords-tts"].Stop // []) |
+        map(select((.command // "") != $command and
+                   (.command // "") != "bash ~/.claude/hooks/agy-tts-hook.sh" and
+                   (((.command // "") | contains("agy-tts-hook.sh")) | not))) +
+        [{"type":"command", "command":$command, "timeout":120000}])
+    ' "$AGY_HOOKS_FILE" > "$TMPF" || fail "Could not update Antigravity hooks."
+    mv "$TMPF" "$AGY_HOOKS_FILE"
+    ok "managed Afterwords hook configured for Antigravity Stop"
     echo
     echo -e "  Test: ${CYAN}agy --print \"say hi\"${NC} — should speak the response via afterwords."
 fi
@@ -1167,6 +1151,18 @@ if ! $SERVER_ONLY && [ ! -d "/Applications/Afterwords.app" ]; then
         echo -e "  Get it from: ${CYAN}https://github.com/adrianwedd/afterwords-app${NC}"
         echo -e "  ${DIM}git clone https://github.com/adrianwedd/afterwords-app.git ~/repos/afterwords-app${NC}"
         echo -e "  ${DIM}cd ~/repos/afterwords-app && make build${NC}"
+    fi
+fi
+
+if ! $SERVER_ONLY; then
+    echo
+    rule
+    echo
+    echo -e "  ${BOLD}Integration installation check${NC}"
+    if afterwords integrations; then
+        ok "detected integration configuration is present"
+    else
+        warn "an installed integration needs attention; run afterwords integrations"
     fi
 fi
 

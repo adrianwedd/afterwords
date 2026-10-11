@@ -4,15 +4,15 @@ Use ONBOARDING.md to accept bundled-voice foreground speech first. Integrations 
 
 | Integration | Prerequisites | Config destination and installation | Helpers | Live acceptance |
 |---|---|---|---|---|
-| Claude Code | Installed `claude`, Python, curl, jq; ffmpeg/lame for archives | Integration setup merges Stop and SubagentStop into `~/.claude/settings.json` | Shared `~/.claude/hooks/tts-hook.sh`, `tts-worker.sh`, strip/chunk/summarization helpers | One final response speaks once; MP3 appears in `~/.claude/tts-archive/` |
+| Claude Code | Installed `claude`; setup-managed Python runtime; curl, jq; Homebrew `lame` for archives | `bash setup.sh --integrations` merges Stop and SubagentStop into `~/.claude/settings.json`, pointing both at the private managed runtime | Stable transcript-event adapter and durable queue under `~/Library/Application Support/Afterwords/watchers/` | `afterwords integrations` confirms config/runtime; one real final response speaks once and archives under `~/.claude/tts-archive/` |
 | Gemini CLI | Installed `gemini`, same queue-worker prerequisites | Setup installs adapter and prints a snippet to manually merge into `~/.gemini/settings.json`; it does not edit those settings | `gemini-tts-hook.sh` plus shared worker/helpers | `gemini -p "say hi"` speaks once; Claude archive receives audio |
-| Antigravity (AGy) | Installed `agy`, same queue-worker prerequisites | Integration setup merges `afterwords-tts` Stop registration into `~/.gemini/config/hooks.json` | `agy-tts-hook.sh`, `agy-session-hook.py`, shared worker/helpers | `agy --print "say hi"` speaks once; Claude archive receives audio |
+| Antigravity (AGy) | Installed `agy`; setup-managed Python runtime; curl and Homebrew `lame` for archives | `bash setup.sh --integrations` merges `afterwords-tts` Stop registration into `~/.gemini/config/hooks.json`, preserving unrelated hooks | Stable transcript-event adapter and durable queue under `~/Library/Application Support/Afterwords/watchers/` | `afterwords integrations` confirms config/runtime; one real final response speaks once and archives under `~/.claude/tts-archive/` |
 | Cursor | Cursor application, command, or `~/.cursor`; same queue-worker prerequisites | Integration setup merges `afterAgentResponse` into `~/.cursor/hooks.json` | `cursor-tts-hook.sh`, shared worker/helpers | One Cursor agent final reply speaks once; Claude archive receives audio |
-| Codex CLI | Interactive CLI session with `CODEX_THREAD_ID`, Python, curl, ripgrep; audio/archive tools | Run `bash setup-codex.sh` in that session; watcher follows the matching rollout. No global Stop config | Repo `.claude/hooks/codex-tts-watch.sh`, `codex-tts-worker.sh`, session parser and repository helpers | Watcher status is healthy; one final answer speaks once and archives under `~/.codex/tts-archive/` |
-| OpenCode v2 desktop/CLI | OpenCode v2 SQLite `session_v2`/`session_message` schema; Python, curl, afplay/lame | `afterwords watchers install opencode` installs a private runtime and a login LaunchAgent; no OpenCode plugin or Claude settings changes | Included `opencode/tts-hook-opencode.sh`, durable message ledger, shared speech worker | New completed real turn queues once, produces an MP3+txt under `~/.opencode/tts-archive/`, and restart does not replay it |
+| Codex CLI | Installed `codex`; Python, ripgrep, curl, audio/archive tools | `bash setup.sh --integrations` installs a login LaunchAgent that follows Codex sessions globally; no Stop hook | Private managed runtime under `~/Library/Application Support/Afterwords/watchers/` | `afterwords watchers status codex`; one real final answer speaks once and archives under `~/.codex/tts-archive/` |
+| OpenCode v2 desktop/CLI | Installed `opencode` using the v2 SQLite `session_v2`/`session_message` schema; Python, curl, `afplay`, Homebrew `lame` | `bash setup.sh --integrations` detects it and installs a private runtime and login LaunchAgent; no OpenCode plugin or Claude settings changes | Private managed runtime under `~/Library/Application Support/Afterwords/watchers/` | `afterwords watchers status opencode`; one real final answer queues once, speaks once, and archives under `~/.opencode/tts-archive/` |
 | Hermes | Installed Hermes; Python/aiohttp for native hook; curl and audio/archive tools for shell paths | Separate explicit setup in `docs/hermes-integration.md`; baseline/integration setup does not configure Hermes | Native `handler.py`, shell post-LLM hook, or command provider; choose the intended path | One local final response speaks once; expected archive under `~/.hermes/tts-archive/`; command provider returns complete real audio |
 
-The four queue-based agents install shared helpers even when detected alone. Installing those helpers under `~/.claude/hooks` does not imply Claude hook registration: Claude settings are changed only when Claude is selected. Gemini and AGy deliberately have different config destinations and event payloads.
+`bash setup.sh --integrations` stages the managed runtime before writing Claude or AGy hook settings, then installs login watchers for detected Codex and OpenCode CLIs. It merges only Afterwords-owned hook entries and preserves unrelated hook owners. `afterwords integrations` checks hook registration, source/runtime agreement, watcher state and Homebrew `PATH`. Gemini CLI and Hermes retain their separate setup paths described above.
 
 Every automatic playback path honors `/tmp/afterwords-muted`; synthesis and archives continue. All integrations share `/tmp/afterwords-play.lock` and `/tmp/afterwords-play.pid`. Foreground user-requested playback remains audible when automatic speech is muted. Project `.afterwords` mappings use `claude` subagent types or `codex`, `gemini`, `agy`, `cursor`, and `hermes`, with `default` fallback.
 
@@ -47,10 +47,13 @@ copy voices, project preferences, credentials, transcripts or scratch files.
 The LaunchAgents `au.wedd.afterwords-codex-watch` and
 `au.wedd.afterwords-opencode-watch` use RunAtLoad and KeepAlive. Manage only
 these services with `afterwords watchers status|restart|uninstall <agent>`.
+`afterwords watchers stage all` refreshes the shared private runtime without
+installing a new LaunchAgent.
 Reinstall updates the runtime and reloads installed sibling watchers safely.
-Uninstall stops the selected watcher, removes its plist, and removes source
-runtime after the last watcher is removed. Private progress and queue receipts
-are retained to prevent old answers replaying on reinstall; archives remain.
+Uninstall stops the selected watcher and removes its plist. The shared source
+runtime and private progress/queue receipts are retained because Claude or AGY
+hooks may still use them and so reinstall does not replay old answers; archives
+remain.
 
 Global Codex coverage and `codex-hook start` have mutually exclusive ownership:
 stop the per-session watcher before installing global coverage, and uninstall

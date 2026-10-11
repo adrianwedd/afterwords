@@ -15,6 +15,12 @@ LOCKDIR="/tmp/codex-tts-worker-${SESSION_ID}.lock"
 TTS_URL="http://127.0.0.1:7860/synthesize"
 ARCHIVE_DIR="${AFTERWORDS_ARCHIVE_DIR:-$HOME/.codex/tts-archive}"
 MAX_QUEUE=25
+LAME_BIN="$(command -v lame 2>/dev/null || true)"
+if [ -z "$LAME_BIN" ]; then
+    for CANDIDATE in /opt/homebrew/bin/lame /usr/local/bin/lame; do
+        if [ -x "$CANDIDATE" ]; then LAME_BIN="$CANDIDATE"; break; fi
+    done
+fi
 
 MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
 PLAY_LOCK="${AFTERWORDS_PLAY_LOCK:-/tmp/afterwords-play.lock}"
@@ -214,7 +220,8 @@ print(json.dumps({
         fi
     }
 
-    DELIVERY_OK=1
+    PLAYBACK_OK=1
+    ARCHIVE_OK=1
     DELIVERED_CHUNKS=0
     PREV_WAV=""
     PREV_TEXT=""
@@ -239,11 +246,15 @@ print(json.dumps({
             fi
             if [ "$FILESIZE" -gt 1000 ]; then
                 DELIVERED_CHUNKS=$((DELIVERED_CHUNKS + 1))
-                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || DELIVERY_OK=0
+                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || PLAYBACK_OK=0
                 if [ -n "$PREV_ARCH" ]; then
                     if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
-                        lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null || DELIVERY_OK=0
-                        [ -s "$PREV_ARCH" ] || DELIVERY_OK=0
+                        if [ -n "$LAME_BIN" ]; then
+                            "$LAME_BIN" --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null || ARCHIVE_OK=0
+                        else
+                            ARCHIVE_OK=0
+                        fi
+                        [ -s "$PREV_ARCH" ] || ARCHIVE_OK=0
                     else
                         (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
                     fi
@@ -251,7 +262,7 @@ print(json.dumps({
                     rm -f "$PREV_WAV"
                 fi
             else
-                DELIVERY_OK=0
+                PLAYBACK_OK=0
                 rm -f "$PREV_WAV"
             fi
         fi
@@ -271,20 +282,23 @@ print(json.dumps({
         fi
         if [ "$FILESIZE" -gt 1000 ]; then
             DELIVERED_CHUNKS=$((DELIVERED_CHUNKS + 1))
-            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || DELIVERY_OK=0
+            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || PLAYBACK_OK=0
             if [ -n "$PREV_ARCH" ]; then
                 if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
-                    lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null || DELIVERY_OK=0
-                    [ -s "$PREV_ARCH" ] || DELIVERY_OK=0
+                    if [ -n "$LAME_BIN" ]; then
+                        "$LAME_BIN" --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null || ARCHIVE_OK=0
+                    else
+                        ARCHIVE_OK=0
+                    fi
+                    [ -s "$PREV_ARCH" ] || ARCHIVE_OK=0
                 else
                     (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
                 fi
             else
-                DELIVERY_OK=0
                 rm -f "$PREV_WAV"
             fi
         else
-            DELIVERY_OK=0
+            PLAYBACK_OK=0
             rm -f "$PREV_WAV"
         fi
     fi
@@ -293,7 +307,10 @@ print(json.dumps({
     rm -rf "$CHUNK_DIR"
     release_play_lock
     if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
-        if [ "$DELIVERY_OK" = "1" ] && [ "$NCHUNKS" -gt 0 ] && [ "$DELIVERED_CHUNKS" -eq "$NCHUNKS" ]; then
+        # Playback is the delivery. A failed archive must not replay audio that
+        # has already been spoken when the queue retries this item.
+        if [ "$PLAYBACK_OK" = "1" ] && [ "$NCHUNKS" -gt 0 ] && [ "$DELIVERED_CHUNKS" -eq "$NCHUNKS" ]; then
+            [ "$ARCHIVE_OK" = "1" ] || echo "afterwords: speech played; MP3 archive incomplete for this item" >&2
             mv "$ITEM" "${ITEM%.claimed}.done" || exit 1
         else
             # Persist the attempt count into the event so the retry cap can fire
