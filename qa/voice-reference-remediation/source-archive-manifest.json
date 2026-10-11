@@ -1,0 +1,1689 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-11T12:16:21.753251+00:00",
+  "scope": "All files present before this manifest was written; manifest does not hash itself.",
+  "root": "scratch/voice-replacement-sources",
+  "file_count": 336,
+  "entries": [
+    {
+      "path": "ace-alignment.json",
+      "size_bytes": 29951,
+      "sha256": "1ca9efa4e3090c7d5e008f1d2e34967c1b2a49c4590eaaa471f4b3f3cbc80f97"
+    },
+    {
+      "path": "ace-asr.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ace-conversation-alignment.json",
+      "size_bytes": 79006,
+      "sha256": "d6a41be3dfe8b2146661de71b3268b2f139ed2db88bf6473530eb464d55fc747"
+    },
+    {
+      "path": "ace-conversation-asr.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ace-conversation-download.log",
+      "size_bytes": 6710,
+      "sha256": "ebf067da244788d51d19c52aa4812dde6ac0d8c67c9fd70bfde75acc0ac5311d"
+    },
+    {
+      "path": "ace-conversation.info.json",
+      "size_bytes": 517412,
+      "sha256": "61a901242b8aad3ad101b2c696c4a6f5ac95188bc37726ecb1a3300daed99286"
+    },
+    {
+      "path": "ace-conversation.wav",
+      "size_bytes": 930432950,
+      "sha256": "42f1b78f77f46ab1499fb8077d7c1fe2e0b3bd9a9c6591593db7674fa82bfe7a"
+    },
+    {
+      "path": "ace-download.log",
+      "size_bytes": 1775,
+      "sha256": "d188c798a56186268342f772db08b3126418e3d4bb4484495d02543b8ccc9e99"
+    },
+    {
+      "path": "ace-interview-alignment.json",
+      "size_bytes": 11203,
+      "sha256": "2b9c929c2a82916d843c94820acb181f4a9e7e1e781f977114a0d4b6bdbc9ef5"
+    },
+    {
+      "path": "ace-interview-asr.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ace-interview-download.log",
+      "size_bytes": 1618,
+      "sha256": "dddd33767090795acac74d3647825ffab5c83392e61b2a985901343734890e00"
+    },
+    {
+      "path": "ace-interview.info.json",
+      "size_bytes": 525194,
+      "sha256": "a756628eae7876710a3193b4400d47d15375ecd88bafcc5a846c131d241a5489"
+    },
+    {
+      "path": "ace-interview.wav",
+      "size_bytes": 13762638,
+      "sha256": "8d2ec9344d4abfb8550b7bc77b6e87d0216b0b60e5798515d5915e9b9d30851a"
+    },
+    {
+      "path": "ace.info.json",
+      "size_bytes": 597382,
+      "sha256": "207df1f24fa777bcacbea81e47e7a3a1f081a42a8a591d9ee3d491be79bdbf8c"
+    },
+    {
+      "path": "ace.wav",
+      "size_bytes": 37166126,
+      "sha256": "c8b13b4a8dd39b8e6fdd8edf5fc39fc19ec58d25c55030f117554d757cb2e861"
+    },
+    {
+      "path": "aghdashloo-lrm-answer-identity.mp4",
+      "size_bytes": 138271,
+      "sha256": "1ccfd8994001ea3c42231166d01aed66813ea1e19a418c2c80f0f51709be735f"
+    },
+    {
+      "path": "aghdashloo-lrm-identity.mp4",
+      "size_bytes": 95010,
+      "sha256": "e95d2c2edff249a2f817a2c7dae6acdf71e1c2bfcd04a99cd278e0203c4700db"
+    },
+    {
+      "path": "aghdashloo-lrm.info.json",
+      "size_bytes": 509737,
+      "sha256": "b603626f2a07f18fef9b0bc71435298265c7d0dc9f18de2528f6db74e80e3bbb"
+    },
+    {
+      "path": "aghdashloo-lrm.wav",
+      "size_bytes": 54410562,
+      "sha256": "e509da3187ff4dfbc6cc86be1c269d36860c29112f6eeb7dc4b2f807bb75f33c"
+    },
+    {
+      "path": "aghdashloo-lrm.webm",
+      "size_bytes": 4031763,
+      "sha256": "100de647c9ffab685d958e0333360bf246da28e79ec13c2bebd3ca45d4ea8191"
+    },
+    {
+      "path": "agyeman-radio1.info.json",
+      "size_bytes": 515304,
+      "sha256": "ce2f4e2f4aa83d6d836927d60d13315cbb4c36dfd01d3f1b86ddd09a5e2f2ee3"
+    },
+    {
+      "path": "agyeman-radio1.wav",
+      "size_bytes": 33763406,
+      "sha256": "3c87c76218561227aae2acc933f2fc8b0918d587dc29e51a1c56dada3b1771f5"
+    },
+    {
+      "path": "agyeman-radio5.info.json",
+      "size_bytes": 498507,
+      "sha256": "edb29c72c8a251ec955e3212889ceb1f486abff15694578b75ce4ea294b4be29"
+    },
+    {
+      "path": "agyeman-radio5.wav",
+      "size_bytes": 103854158,
+      "sha256": "b0a07d05be99df80a4d36903ce7df0a06420473ca8460de32beb460a6a92d411"
+    },
+    {
+      "path": "alan-shore-download.log",
+      "size_bytes": 1562,
+      "sha256": "491b7f020dd2969781a8b492a56ea387bba88d79b095ea7e281c784cce6bb6c2"
+    },
+    {
+      "path": "alan-shore-full.m4a",
+      "size_bytes": 3830314,
+      "sha256": "c2a114b709b3076d2a431f9afca74d342dae0dc2768ee2aa03d3095b1689836a"
+    },
+    {
+      "path": "alan-shore-full.wav",
+      "size_bytes": 42434638,
+      "sha256": "3eec365c2632e7463ba3558d8ba05e372bf2b71145653b2e26c4614713e22d33"
+    },
+    {
+      "path": "armas-collider-identity.info.json",
+      "size_bytes": 520128,
+      "sha256": "f55f56a74e629f73d50fca9d986e52f21221feb40cc9e739da2088984a8e9cce"
+    },
+    {
+      "path": "armas-collider-identity.mp4",
+      "size_bytes": 2068369,
+      "sha256": "fef3ef4dc3678ad65b0febee46942fdfd8c52988a397e3dbdd5563e04fdd2183"
+    },
+    {
+      "path": "armas-collider.info.json",
+      "size_bytes": 519082,
+      "sha256": "d1d775b83adeeb7bb5dbf8148f3b475ca3c8ffb88101d76291a49c67a2eb3583"
+    },
+    {
+      "path": "armas-collider.wav",
+      "size_bytes": 55353422,
+      "sha256": "c7a09495d6af23d6674a640005cbfab0967edda100e047c663d5f790da2795c0"
+    },
+    {
+      "path": "armas-collider.webm",
+      "size_bytes": 4162654,
+      "sha256": "48b74ed115527661cbec238a3be46b6bca7d9311d7eb43c457027ca44b16e96a"
+    },
+    {
+      "path": "arthur-looksfamiliar-video.mp4",
+      "size_bytes": 12423779,
+      "sha256": "62c55e68f07337eddd46a35f6ecdb5e654cf7c2a879c05579c37e6436ebde043"
+    },
+    {
+      "path": "arthur-looksfamiliar.info.json",
+      "size_bytes": 4081463,
+      "sha256": "f56ca82052c946cef33b7979c647df96ea9f37c2d41c631268874a612d18f907"
+    },
+    {
+      "path": "arthur-looksfamiliar.wav",
+      "size_bytes": 257912910,
+      "sha256": "07cd1411bbc883002167127d5baa254c2605e48909e5059f5256a18dea296cac"
+    },
+    {
+      "path": "arthur-pebblemill-video.mp4",
+      "size_bytes": 4040199,
+      "sha256": "e9f3c27e7c35c3f9f3c1ac98e5371eb0b891bd1a8f25811c4653889192d4642b"
+    },
+    {
+      "path": "arthur-pebblemill.info.json",
+      "size_bytes": 517063,
+      "sha256": "8e8e6335e3ac8a03ae85d52781a11eff83a0a21dd76e5acc584a3c1f25b58e18"
+    },
+    {
+      "path": "arthur-pebblemill.wav",
+      "size_bytes": 52887630,
+      "sha256": "74f0f0145c4e5155ead92651cb1535b16df01e1e07805913fabafae648a5e0bd"
+    },
+    {
+      "path": "aurora-cbc-q-identity.info.json",
+      "size_bytes": 527566,
+      "sha256": "961bf05778157ad187ecb2e3381eb06402c0b7e685c409a82bfe68da0d33ef0b"
+    },
+    {
+      "path": "aurora-cbc-q-identity.mp4",
+      "size_bytes": 48347,
+      "sha256": "0c30eebaf8903ccb86e2495fa084453faa9e95fdbef3f7a25ef7b8dd5f746702"
+    },
+    {
+      "path": "aurora-cbc-q.info.json",
+      "size_bytes": 526353,
+      "sha256": "028001d4b4dc005535bf3c6b545566a23f1521286776dc35666c054d9d681ad8"
+    },
+    {
+      "path": "aurora-cbc-q.wav",
+      "size_bytes": 179468410,
+      "sha256": "c1c78c90a7436433dd30726c02ac56330464361c4b8231d186fed9925472c488"
+    },
+    {
+      "path": "aurora-cbc-q.webm",
+      "size_bytes": 14084443,
+      "sha256": "7410987df43643ea2609c2ea6b83fef77ce0192abaa814475c9134fd0ea791f0"
+    },
+    {
+      "path": "aurora-iheart-shower.info.json",
+      "size_bytes": 590227,
+      "sha256": "e4b9aa38f65a8bc405ab692b69ac268b95220278b49dcb4333638fc25becdf06"
+    },
+    {
+      "path": "aurora-iheart-shower.wav",
+      "size_bytes": 21864526,
+      "sha256": "cb1920239b1e42d05970b9f6e92c6f4d5e273869dbe692de8b495d947a82ed54"
+    },
+    {
+      "path": "aurora-iheart-shower.webm",
+      "size_bytes": 1549785,
+      "sha256": "3f80ade172093ba84f04bb99992bb98251af54b9f9d5fd0f42724ae21709132b"
+    },
+    {
+      "path": "batch-016-provenance-metadata.log",
+      "size_bytes": 257,
+      "sha256": "a4003edb2dfc1c64868f273f32daa6c53a37b2b61d5aad0905143532fd2c167d"
+    },
+    {
+      "path": "bettany-sagaftra-identity.info.json",
+      "size_bytes": 520544,
+      "sha256": "8004e36ae7ed47fcf2c95db122be76e323e9705456fd65ca2c34d7eb151c98c6"
+    },
+    {
+      "path": "bettany-sagaftra-identity.mp4",
+      "size_bytes": 231497,
+      "sha256": "14a1fbd37ae41e84f0119c96936fb54347e1a2e7a9c10a64d7e07bcbd46349e0"
+    },
+    {
+      "path": "bettany-sagaftra.info.json",
+      "size_bytes": 518922,
+      "sha256": "9793f2bb673ea0abc83cf9b5f9e216a91c7e3a923a9f9fbbd0b923b4531e8f3d"
+    },
+    {
+      "path": "bettany-sagaftra.wav",
+      "size_bytes": 274518094,
+      "sha256": "cccabb74ef589d835a4280818c43cb3ad855106acf1fb46cc3b85fcea44d4963"
+    },
+    {
+      "path": "bettany-sagaftra.webm",
+      "size_bytes": 21440935,
+      "sha256": "dad64101dc51b833f9410527e66352cedd09c2433d924bdf395cf10b0f040045"
+    },
+    {
+      "path": "bill-bailey-absolute-video.mp4",
+      "size_bytes": 7549339,
+      "sha256": "eceab4b854c4aaf50a9bcc5eccf336e73e9e834ced60c37009a93d49bd77bac0"
+    },
+    {
+      "path": "bill-bailey-absolute.info.json",
+      "size_bytes": 44487,
+      "sha256": "c2e705b936706ae66183527a0518d728b1653e370dd1561f0ec7febb6d74e4e8"
+    },
+    {
+      "path": "bill-bailey-absolute.wav",
+      "size_bytes": 114372686,
+      "sha256": "670bafbb98fdca2012d2aa6a00f428b7dfa340184adfc380a2296b2c6a1304d5"
+    },
+    {
+      "path": "blackadder-alignment.json",
+      "size_bytes": 70888,
+      "sha256": "eb444d06079fd42e4215a3c89c18cd4b4cfddf5b2d30f882022b3d285298f975"
+    },
+    {
+      "path": "blackadder-asr.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "blackadder-download.log",
+      "size_bytes": 1722,
+      "sha256": "4f65cda056a1a1b3e1209f3b7f0bf9719caa2a41fa166079976d76373164c2ac"
+    },
+    {
+      "path": "blackadder-frame-076.jpg",
+      "size_bytes": 6255,
+      "sha256": "a00d99568b39ba46e8a58f7e328c68031098a34820ced7fc66cba5bd60694138"
+    },
+    {
+      "path": "blackadder-source.mp4",
+      "size_bytes": 1133301,
+      "sha256": "0c4a50d5c1d63b76dc6c7d8a7cde1bcd5c166510f9192211e31ae996749cc784"
+    },
+    {
+      "path": "blackadder-video-download.log",
+      "size_bytes": 23480,
+      "sha256": "19a18f85630b58eb1ec00bba412d2f624bdb420b10388695f63c064c9c6008ff"
+    },
+    {
+      "path": "blackadder.info.json",
+      "size_bytes": 586825,
+      "sha256": "c3639aa8e0c37b39b3b95a21a6aed7eb8edb7865201f608a040f9b0733b5c6ef"
+    },
+    {
+      "path": "blackadder.wav",
+      "size_bytes": 48108854,
+      "sha256": "1c4cec712ed0abbe5eee1240e3e31a73240a6629f5cd1e94bada5260dc1ad86e"
+    },
+    {
+      "path": "blanchett-desert-island-bbc.mp3",
+      "size_bytes": 36735302,
+      "sha256": "7267418d8cb82b35ee572b4de92c9afe6441c3d4bce8b997899ecf629d1bc88d"
+    },
+    {
+      "path": "blanchett-desert-island-bbc.wav",
+      "size_bytes": 403152740,
+      "sha256": "cc13d841b7e94b56002b42d4db2c458a16f52aa1b59fc86f15dc69124628e0d1"
+    },
+    {
+      "path": "blanchett-desert-island.info.json",
+      "size_bytes": 518184,
+      "sha256": "9fb5bf3b7e004a33feec1e4241d714de1bac0e36d9d7a1861a5ca6e1d76c9365"
+    },
+    {
+      "path": "blanchett-desert-island.wav",
+      "size_bytes": 488296526,
+      "sha256": "a1c4677eeaf66cddee6da619868174d81f4059a94cae5fce9bf45d69770e344a"
+    },
+    {
+      "path": "bob-jones-metadata.log",
+      "size_bytes": 354,
+      "sha256": "fb7d131a5abfc45d225c710b558243492b0cc1c170ec46c93741bb5c71a530e8"
+    },
+    {
+      "path": "bob-jones-source.info.json",
+      "size_bytes": 550391,
+      "sha256": "8c06e0fb8d979321011445a58feeb1781e88c656419f90d3bb4a25e1b34be6ef"
+    },
+    {
+      "path": "bob-mortimer-bbc2-video.mp4",
+      "size_bytes": 4130473,
+      "sha256": "f9c800446173a07d09da575e7e3ad792206c24d6046bcbc3b75bf017ef716c74"
+    },
+    {
+      "path": "bob-mortimer-bbc2.info.json",
+      "size_bytes": 726622,
+      "sha256": "ceec1c9b00c362b7daf19232b85e2447acf6028cada35793e1491daca43fa509"
+    },
+    {
+      "path": "bob-mortimer-bbc2.wav",
+      "size_bytes": 215973966,
+      "sha256": "fd3268833e98c97b05f833bd3b3a2108e600ddd16efcd5fe9a226068708dd63d"
+    },
+    {
+      "path": "carl-sagan-download.log",
+      "size_bytes": 14800,
+      "sha256": "0b01aedc4ca7a4828e1e86a9e9d1de48990751dff38427ed8b704e39c6cfb59f"
+    },
+    {
+      "path": "carl-sagan-full-download.log",
+      "size_bytes": 2613,
+      "sha256": "cb17f46e35c9bca5a80272946a6e5ceb862c9449e3ae2d41d39281cfb0197497"
+    },
+    {
+      "path": "carl-sagan-testimony-extract.info.json",
+      "size_bytes": 872125,
+      "sha256": "cf9152bc490b708bf148e1f42949743a4d2c8595a4e0c5f9fe5852e10a35fe3f"
+    },
+    {
+      "path": "carl-sagan-testimony-extract.wav",
+      "size_bytes": 24958830,
+      "sha256": "650d965312ee401a5fcc6b0cd3dd23305f46931a6689c415d020780051115938"
+    },
+    {
+      "path": "carl-sagan-testimony-full.info.json",
+      "size_bytes": 872919,
+      "sha256": "21f9275db353d45124a3412ac8e25f5152cf50439514bb6041df5893bee5b078"
+    },
+    {
+      "path": "carl-sagan-testimony-full.wav",
+      "size_bytes": 194575126,
+      "sha256": "36699270df0cbb140e9a24fb17df172567112bc6efd42894d5b84beee2c668cb"
+    },
+    {
+      "path": "cleese-frame-061.jpg",
+      "size_bytes": 5023,
+      "sha256": "45647804d649422c89651b90723e9b32301cb5b8deb86c9122b50b9b63dff512"
+    },
+    {
+      "path": "coleman-radio1-video.mp4",
+      "size_bytes": 4145760,
+      "sha256": "9d1633a243696eb44ce4ccda053bb6d0c585c17a91332e50918610b4215b1824"
+    },
+    {
+      "path": "coleman-radio1.info.json",
+      "size_bytes": 639922,
+      "sha256": "afa3abb8643a285ae2ef1af89e8e4a36818352d476c3858b8d557d5c83ef96c1"
+    },
+    {
+      "path": "coleman-radio1.wav",
+      "size_bytes": 120549454,
+      "sha256": "238604b8cee6e0a7a0d0430feba28d375c613ea3a37c415ab507044ec4a21248"
+    },
+    {
+      "path": "coogan-desert-island-bbc.mp3",
+      "size_bytes": 17139840,
+      "sha256": "a63c68ef7b1a49b98efd29656433737204752d441a2b239901c21e63f720a00e"
+    },
+    {
+      "path": "coogan-desert-island-bbc.wav",
+      "size_bytes": 188960532,
+      "sha256": "396f7b9b284019e48de126e253c373a0d1230ca3c1b42b047c734aa15610cce0"
+    },
+    {
+      "path": "crook-screenshot-bbc.mp3",
+      "size_bytes": 41099224,
+      "sha256": "77f62059b81cfb568852e0b03312aa6f85536ae60fa98cc95c87f16b2fde7625"
+    },
+    {
+      "path": "crook-screenshot-bbc.wav",
+      "size_bytes": 451955248,
+      "sha256": "ee45b90f770a9682595f704765882efd87c68a967a58b34aad30f52e807613ad"
+    },
+    {
+      "path": "cumberbatch-commons-frontrow.flac",
+      "size_bytes": 3986250,
+      "sha256": "f664eac13d7e00eda8937f7257bb78b388dc05e4aed2f76d2e32479f72972d4c"
+    },
+    {
+      "path": "cumberbatch-commons-frontrow.wav",
+      "size_bytes": 8224576,
+      "sha256": "d8dc9ddef35d88dae674e5fb351b8015044a85b206e8aee6d3c7aae9f212e33d"
+    },
+    {
+      "path": "cumberbatch-frontrow-bbc.mp3",
+      "size_bytes": 13873352,
+      "sha256": "c2a2b4e1974aeaad5b9132f54c3b9f887803a477e573bd8dd135131ee25a60da"
+    },
+    {
+      "path": "cumberbatch-frontrow-bbc.wav",
+      "size_bytes": 152442294,
+      "sha256": "d484d4426344ece5f9b940ccdf94b2502291789556b4b7677907b9ac16cdd49f"
+    },
+    {
+      "path": "dalai-voa-commons.wav",
+      "size_bytes": 147420414,
+      "sha256": "16088a15830258c6f4017afda13445bc86a92d1cfbef4235fbc0230c6d2ceaf5"
+    },
+    {
+      "path": "dalai-voa-commons.webm",
+      "size_bytes": 46971393,
+      "sha256": "0877bb35af0aaf9c373897562ddf933dd2229ca88606b1eb810c13ed613e0b91"
+    },
+    {
+      "path": "dalai-voa-preview-2.wav",
+      "size_bytes": 19298670,
+      "sha256": "5799a48c8289fb2f3a0c3ad7e94e864ac45c6cdb30c465f46531d2518ac44dff"
+    },
+    {
+      "path": "dalai-voa-preview.wav",
+      "size_bytes": 5927790,
+      "sha256": "59ef53b56d61e62fe339814d3eb4f1e9fa5224f889e1b564af3934620b748c4f"
+    },
+    {
+      "path": "daniels-academy-identity.info.json",
+      "size_bytes": 8686425,
+      "sha256": "98aab3dd4304f7a25010191161570d50536dbf1061d567403188dbad9cde6a11"
+    },
+    {
+      "path": "daniels-academy-identity.mp4",
+      "size_bytes": 208968,
+      "sha256": "00d281a82e1d51a5c8e27f05386e6fc9f254d790452fc853cb8e20e3818a8502"
+    },
+    {
+      "path": "daniels-academy-selected-identity.info.json",
+      "size_bytes": 8687874,
+      "sha256": "07a40cabe128e11213a3af39b96210d90f509c2a7f192a13590d7e46b796aa12"
+    },
+    {
+      "path": "daniels-academy-selected-identity.mp4",
+      "size_bytes": 66691,
+      "sha256": "4310fc1192fe8e17abe41c3465c9212598e03e46a656bfad4e6003f156ab66b8"
+    },
+    {
+      "path": "daniels-academy.info.json",
+      "size_bytes": 8688000,
+      "sha256": "0140a4976125b3c2f221e64b05b2303253a7c17286d4707106a8ae752e2d0dab"
+    },
+    {
+      "path": "daniels-academy.wav",
+      "size_bytes": 22753358,
+      "sha256": "08f495e77479f3e5755b4c6e5495da9a82a111fc6952a47ba12384dcb2fac76a"
+    },
+    {
+      "path": "daniels-academy.webm",
+      "size_bytes": 1375484,
+      "sha256": "0d09f15ccceaecbad657d06b59b71203f07f11bb8732be4f5bbf3618666fbbce"
+    },
+    {
+      "path": "dee-desert-island-bbc.mp3",
+      "size_bytes": 33427186,
+      "sha256": "a4d55cb2011037cb3c688b60534489bc0634585f7d379e51749ac2c5bb9c96af"
+    },
+    {
+      "path": "dee-desert-island-bbc.wav",
+      "size_bytes": 367575854,
+      "sha256": "8f227dd61a2166aa99a4d9aac32c86b74c953ab756392cba1a0716aa848539ad"
+    },
+    {
+      "path": "delancie-trekmovie-interview.info.json",
+      "size_bytes": 6118411,
+      "sha256": "f50274a5b7e2cdee751e62bf3f7b458a5295f18f67460ea67827226efb03e1c0"
+    },
+    {
+      "path": "delancie-trekmovie-interview.wav",
+      "size_bytes": 853347902,
+      "sha256": "fe4f44260615e53d6bd28b22883bf30a762a9d278161ac1bfa61eb47a8a8dee9"
+    },
+    {
+      "path": "delancie-trekmovie-interview.webm",
+      "size_bytes": 63801464,
+      "sha256": "c047a9a91ae78f7a8fc0fb2f8e9c7e91c8a9d2c56fc765ede51638748f6714b1"
+    },
+    {
+      "path": "doctor-who-bfi-caves-identity-hd.info.json",
+      "size_bytes": 518791,
+      "sha256": "e472f0913fc081275671f14883f55b12aea757ee410ad6068bfe42e8eebc4d52"
+    },
+    {
+      "path": "doctor-who-bfi-caves-identity-hd.mp4",
+      "size_bytes": 6116563,
+      "sha256": "a951f59dbf59bac1d3ab72efcff3fe73afc4dd2e0c5df5242a8acd9b7b6604e2"
+    },
+    {
+      "path": "doctor-who-bfi-caves-identity.info.json",
+      "size_bytes": 519394,
+      "sha256": "0e068100bb020d8f7602318f1b01d7a947413ef8fb14a426c7c2cdce300030e3"
+    },
+    {
+      "path": "doctor-who-bfi-caves-identity.mp4",
+      "size_bytes": 650924,
+      "sha256": "3574b722838c1f77e75871c4fe7763b86dcae513799a46ca6e895120fb756eba"
+    },
+    {
+      "path": "doctor-who-bfi-caves.info.json",
+      "size_bytes": 518154,
+      "sha256": "93edb485cdecc2a7f77a343cf9423e03bc31f2a83ab96a35976d8e645e69ce4e"
+    },
+    {
+      "path": "doctor-who-bfi-caves.wav",
+      "size_bytes": 207859790,
+      "sha256": "6de25489ab1b1f9de70cb2f23ce69a8ecc7c858374df380774c4f133c7230278"
+    },
+    {
+      "path": "doctor-who-bfi-caves.webm",
+      "size_bytes": 13655713,
+      "sha256": "a9a062cef378632527443cc4813b8be6666febbea744867f9ca9fc4a8bed10b9"
+    },
+    {
+      "path": "doohan-forsche-video.mp4",
+      "size_bytes": 362025,
+      "sha256": "ac36835633bfa0abb5ef390257a556aacf7ff7fb38b63a1ed223c3d08ed9772f"
+    },
+    {
+      "path": "doohan-forsche.info.json",
+      "size_bytes": 572939,
+      "sha256": "e0eea8e26b65938e5d142d86cb36e11b342571c5dfca40d2fda047799564d43c"
+    },
+    {
+      "path": "doohan-forsche.wav",
+      "size_bytes": 21528654,
+      "sha256": "9b25486fd8da16917cb9b2998b34cd2843c88ca90ae0de88570dc6810bc6a74a"
+    },
+    {
+      "path": "dullea-coolidge-identity.info.json",
+      "size_bytes": 518001,
+      "sha256": "eb681f04acc6e73fd97e1d0e3e0e6e5c9f031421df8a65011fe5f55558b8077a"
+    },
+    {
+      "path": "dullea-coolidge-identity.mp4",
+      "size_bytes": 95678,
+      "sha256": "982c1aca8dd494d5fd11aadb465912fc86c5aa78c8169ef277be64654bbbe94c"
+    },
+    {
+      "path": "dullea-coolidge.info.json",
+      "size_bytes": 517934,
+      "sha256": "d67c40fad5dc332297ea8e44e6d31e3fa42d8036eaf190ccbc1eba4ead89f8c2"
+    },
+    {
+      "path": "dullea-coolidge.mp4",
+      "size_bytes": 14803266,
+      "sha256": "6fb921ae1bd90c9b50c0f4f904f23422f47a5e1d9405a00da48c542320d62786"
+    },
+    {
+      "path": "dullea-coolidge.wav",
+      "size_bytes": 423608398,
+      "sha256": "54374d34d32e597364141160a0eb2c9f91513b7c8654b8ccbdb67595ce3e829a"
+    },
+    {
+      "path": "dwarf-comiccon-2020-video.mp4",
+      "size_bytes": 19136797,
+      "sha256": "07011392d662fc070a7203c12cf713732a06ad746ac5962c74d5affb63ca0c8a"
+    },
+    {
+      "path": "dwarf-comiccon-2020.info.json",
+      "size_bytes": 515717,
+      "sha256": "7a73679ab7946425358d31df9dfa128a773c84a2fe300c563b16d8d41c5c39e9"
+    },
+    {
+      "path": "dwarf-comiccon-2020.wav",
+      "size_bytes": 524513222,
+      "sha256": "d4ae541ebea0428a670190f62de1f11d1e3a1dce0af4e03d28a50f6f43b38c80"
+    },
+    {
+      "path": "dwarf-comiccon-2020.webm",
+      "size_bytes": 37206458,
+      "sha256": "281c6b9c2c843cd2376e2d089cf33c62e9a5a7c03676ff9a776b77bd516dffc5"
+    },
+    {
+      "path": "dylan-abc-download.log",
+      "size_bytes": 1450,
+      "sha256": "80abf562f95a1fb1eacf752699be5f8c1be6cc39b5e6d3889005b947037a8ddf"
+    },
+    {
+      "path": "dylan-abc-weekly.info.json",
+      "size_bytes": 521704,
+      "sha256": "1cb683aa4ba702dd62a3731bdd9a8a29d143b6f33e15a21b088e18b3a69b5efc"
+    },
+    {
+      "path": "dylan-abc-weekly.wav",
+      "size_bytes": 58097522,
+      "sha256": "fb8310bc12bdf2e32da44396efd36b7763fba2282270aa5422a1766106096a6c"
+    },
+    {
+      "path": "eartha-bbc-download.log",
+      "size_bytes": 2276,
+      "sha256": "e50218af80fab0085b34cf54e36fa8c6ca80eb243975060ad85d2bafb18c8ff8"
+    },
+    {
+      "path": "eartha-bbc-latecall.info.json",
+      "size_bytes": 616044,
+      "sha256": "efb407d7060d09e649d6aff89ea569dee0506cfd83862285456dbd8a6e2a5935"
+    },
+    {
+      "path": "eartha-bbc-latecall.wav",
+      "size_bytes": 132235342,
+      "sha256": "35ea24fb008c8ee84474013924ff53770f6777e4624c072306c0dbdcf1656b6d"
+    },
+    {
+      "path": "falk-cooley-video.mp4",
+      "size_bytes": 24802195,
+      "sha256": "9ac5e106512f7b770e2dcf4111e51c3c28d1c3859826556255d224948f662a54"
+    },
+    {
+      "path": "falk-cooley.info.json",
+      "size_bytes": 504164,
+      "sha256": "71d51e1e738ee550dad8b115f6c59125ec9acc7f049ecad3617419abec04e4d5"
+    },
+    {
+      "path": "falk-cooley.wav",
+      "size_bytes": 384393294,
+      "sha256": "e8f31cb1ef24cc9665bb32d762644cef56ef9b7dc758755af33a5557b5a63fe4"
+    },
+    {
+      "path": "fielding-slq.mp3",
+      "size_bytes": 180591405,
+      "sha256": "59bdad66566ece2b6813afa82826acb00f06d1562e7b98aa59926077ab6fa134"
+    },
+    {
+      "path": "fielding-slq.wav",
+      "size_bytes": 1083539022,
+      "sha256": "e7095d11fbd8c68aaa0942b959443ccd74d7817f9805adc8ff4b1d95b2fa9140"
+    },
+    {
+      "path": "fisher-starwars-identity.info.json",
+      "size_bytes": 527166,
+      "sha256": "63f3fbdba97d12a80d12f5b645aabebf70b6e1492dce8015006eaca859b2a0c6"
+    },
+    {
+      "path": "fisher-starwars-identity.mp4",
+      "size_bytes": 248447,
+      "sha256": "84c3eedc022c8c20de8f118df1d8fd20f86e2255ec55bd9139aca9c76e83358e"
+    },
+    {
+      "path": "fisher-starwars-identity154.info.json",
+      "size_bytes": 526894,
+      "sha256": "e32df7f1d3b22e06970daaf7ff4fb26a43144fb95e4cf3d8fa235d9d3df39dc4"
+    },
+    {
+      "path": "fisher-starwars-identity154.mp4",
+      "size_bytes": 218810,
+      "sha256": "9508f8ca70ee6302359c1e480767e4407977147c9c54c2ccde9aa55af9407bee"
+    },
+    {
+      "path": "fisher-starwars-identity156.info.json",
+      "size_bytes": 526918,
+      "sha256": "5af06aa1b091cf64de99308ed81d11a6d72eacb3df52c2034c1ee5bcf2952759"
+    },
+    {
+      "path": "fisher-starwars-identity156.mp4",
+      "size_bytes": 211272,
+      "sha256": "c51b7497458ce089a63d41f297920a300e611ce4ace78d5acfa441718aca0fea"
+    },
+    {
+      "path": "fisher-starwars.info.json",
+      "size_bytes": 525624,
+      "sha256": "0e7822fadd047e8e5acbcc508852a28e22bc3ea037dfd663a4bbc040e1cb6057"
+    },
+    {
+      "path": "fisher-starwars.wav",
+      "size_bytes": 51911726,
+      "sha256": "637c85e83e87fc91565f4e6b808ee649199293fe444b3919c06d7a918c669eaf"
+    },
+    {
+      "path": "fisher-starwars.webm",
+      "size_bytes": 3526269,
+      "sha256": "9516c0e832782ad3c18394a1a881416c3a1c957006b69e2b9b500f14f2434c08"
+    },
+    {
+      "path": "flanigan-dial-the-gate.info.json",
+      "size_bytes": 779536,
+      "sha256": "3cd0d3f9764a662a57f90857a73e86fc2be5c582ad4fcdd77ac49561fcacbad1"
+    },
+    {
+      "path": "flanigan-dial-the-gate.wav",
+      "size_bytes": 1160704078,
+      "sha256": "2b3fe3516f5c662f693e0f35832249f115c60a928d6196d38486fcafc898938a"
+    },
+    {
+      "path": "flanigan-dial-the-gate.webm",
+      "size_bytes": 84300571,
+      "sha256": "d118d6c4f840cfd0adf897ebeedd8a2cc58b960be6178fad0638d91de1a598b7"
+    },
+    {
+      "path": "flanigan-identity-section.mp4",
+      "size_bytes": 93159,
+      "sha256": "d570155d8e5f0f232b787d60072fdc2d8cc55f18652db0b7553a17b6b5857913"
+    },
+    {
+      "path": "frasier-original-source-video.mp4",
+      "size_bytes": 679841,
+      "sha256": "4254ca58f03875e554c5a7ac1bbc885a0abb0f79aa2d3ebca186bc675b3caeb2"
+    },
+    {
+      "path": "frasier-original-source.info.json",
+      "size_bytes": 48598,
+      "sha256": "2e938236aad8215519cf6da074673b400e495ac4e2609f34331eb48ebd08f56a"
+    },
+    {
+      "path": "frasier-original-source.wav",
+      "size_bytes": 16543822,
+      "sha256": "7e30270bcf94f42c0a5676074acd20bda83587da6250c4456efee98b5384a906"
+    },
+    {
+      "path": "gillan-radio1.info.json",
+      "size_bytes": 508077,
+      "sha256": "951ce4fbcbee6f64296c106dd53665e1cebb0299927d0d117d972868656c8914"
+    },
+    {
+      "path": "gillan-radio1.wav",
+      "size_bytes": 129011790,
+      "sha256": "d6af4bf183ec35a0fc97a5c173a08928a7a57d0085745a1964d4cbc2c0a02563"
+    },
+    {
+      "path": "gillan-radio2.info.json",
+      "size_bytes": 506696,
+      "sha256": "007afcc03cf36115acab3877cdd8e0444bcf6008e0afdabeb710b3b3b4a20234"
+    },
+    {
+      "path": "gillan-radio2.wav",
+      "size_bytes": 179265614,
+      "sha256": "09a372ba185c24d9b1ee41d1816367593557cbaca1d0f45c012f8698e2721bdf"
+    },
+    {
+      "path": "harvey-original-audio.info.json",
+      "size_bytes": 520788,
+      "sha256": "e3288ab9030c4fb57b54e3a71e54d0aae691125fcff14bba7b01656e049615a6"
+    },
+    {
+      "path": "harvey-original-audio.wav",
+      "size_bytes": 12710498,
+      "sha256": "2d0f17e2763b70427ce9b720c2f73dae8ea0d0ccd59a73b6790f237e6b87661a"
+    },
+    {
+      "path": "harvey-original-audio.webm",
+      "size_bytes": 870112,
+      "sha256": "5b67a210816599bfd58f4d09f8e38dff897ee21c2d2773ffb29c69d830f5d639"
+    },
+    {
+      "path": "harvey-original-video.info.json",
+      "size_bytes": 521860,
+      "sha256": "c81d5ae7839a58c24e5735a3dd4ccef03daa4727b1dd2ede666ba2a3428d8d44"
+    },
+    {
+      "path": "harvey-original-video.mp4",
+      "size_bytes": 331093,
+      "sha256": "900065e0ed36cc9ca92948e3186da7af7839d460b4fec719da4d80b0eed97c06"
+    },
+    {
+      "path": "hiddleston-frontrow-bbc.mp3",
+      "size_bytes": 40908301,
+      "sha256": "12eaa6962a1fb600f193790c5d534b0fad958bf84dfab651318d21d5577139b9"
+    },
+    {
+      "path": "hiddleston-frontrow-bbc.wav",
+      "size_bytes": 450327028,
+      "sha256": "ab74c389465ca2ed12f6765e8bfb0e11698b155bc013936e5bdaa43d92161ac8"
+    },
+    {
+      "path": "jeri-collider-download.log",
+      "size_bytes": 1567,
+      "sha256": "fbeaef41988880f929040f68aa28b1a5300e2ac1990e8beb79ecf9c8eb07c090"
+    },
+    {
+      "path": "jeri-collider-picard3.info.json",
+      "size_bytes": 3082832,
+      "sha256": "c227e345aec024e5f381bd60113f1c094bc5e427215aefc1889662941ed17012"
+    },
+    {
+      "path": "jeri-collider-picard3.wav",
+      "size_bytes": 48877646,
+      "sha256": "a7ae98de185c646f42231acd68be2074b0d3dd5f60aab5a2024cf4ed5836a687"
+    },
+    {
+      "path": "jeri-collider-video-download.log",
+      "size_bytes": 26875,
+      "sha256": "a1ba702a54aadcbef478848c5dc48161026ed41e6876f8fc8eba210246c8897c"
+    },
+    {
+      "path": "jeri-collider-video.mp4",
+      "size_bytes": 1973319,
+      "sha256": "79daba0f52087b033c53fa0c45419e00afd55b1d8350ef8b5ccbc8ca0509ce9c"
+    },
+    {
+      "path": "jeri-interview-search-005.log",
+      "size_bytes": 609,
+      "sha256": "8a0b4187177a6ca0d6a1ece76974682c521263531bfe9c78b10659b5cfd52c67"
+    },
+    {
+      "path": "jeri-interview-search-006.log",
+      "size_bytes": 683,
+      "sha256": "3fa07ccb87e2a8058905297f1f4628ffc574f4db9e12822eb38178236b712803"
+    },
+    {
+      "path": "jeri-ryan-2022-download.log",
+      "size_bytes": 575,
+      "sha256": "a90b589be78812a53b284d77c21c3ce945afa132cbb5e214154cb89c6a989614"
+    },
+    {
+      "path": "jeri-ryan-download.log",
+      "size_bytes": 575,
+      "sha256": "451adb9932c152c213748c28e7ac33395e7ced54b9850783f04f7868c1d5c110"
+    },
+    {
+      "path": "jeri-ryan-tabletop.info.json",
+      "size_bytes": 827095,
+      "sha256": "5d1707046a3361895bd21dae3147334242a26a55d557e463c505c3b540515ba2"
+    },
+    {
+      "path": "jeri-ryan-tabletop.wav",
+      "size_bytes": 16740738,
+      "sha256": "78a5a27baa945f84e3910024f14ffef26b05ee357b80d7cc558633c340c60aaa"
+    },
+    {
+      "path": "jeri-tabletop-download.log",
+      "size_bytes": 1345,
+      "sha256": "8a023a1c1d3553c3291aca5a635320caed612abc74d0e09c845df5ddaadbb0bf"
+    },
+    {
+      "path": "jeri-uinterview-download.log",
+      "size_bytes": 1365,
+      "sha256": "f7f88ced2f516192f136ed6f33445a6738c7407b0396730a693a4ac0b508365a"
+    },
+    {
+      "path": "jeri-uinterview.info.json",
+      "size_bytes": 512987,
+      "sha256": "9b4b16cc18a4986fad25872aaf7a4f8cff566bff9e6e2d55788c33265681ce93"
+    },
+    {
+      "path": "jeri-uinterview.wav",
+      "size_bytes": 6684750,
+      "sha256": "6823109736567319780baa21b0bbaa11b14e7fcf563d2f5e974c04972e9089b5"
+    },
+    {
+      "path": "johansson-spyscape-identity.info.json",
+      "size_bytes": 569379,
+      "sha256": "67ac94b360ebeb636a718a96e5908d9f1911a40b8f2f17395621c4f28a63485b"
+    },
+    {
+      "path": "johansson-spyscape-identity.mp4",
+      "size_bytes": 63587,
+      "sha256": "dcefc38145f8e2a15986754a19ac64ac14e025a20cf8ff25965fff8478651e38"
+    },
+    {
+      "path": "johansson-spyscape.info.json",
+      "size_bytes": 568797,
+      "sha256": "a4e90f2ab49aca06b59f16643f22a50a7160484914db583c77d431d4b98ac63a"
+    },
+    {
+      "path": "johansson-spyscape.mp4",
+      "size_bytes": 1187042,
+      "sha256": "4865b00f6c7e1909e704bd63912f14d7071bd76ffc7c428d9a225756f9382ca4"
+    },
+    {
+      "path": "johansson-spyscape.wav",
+      "size_bytes": 33939534,
+      "sha256": "ffea11b19739cebcc866608116320dee86f11f16e749fb5a2beda0874880186e"
+    },
+    {
+      "path": "johansson-variety-identity.info.json",
+      "size_bytes": 10792098,
+      "sha256": "d1630b1b1cf2cc22dafb8b770e1f2ecbbfa7a5ee285c4481781c9d13b136b7ef"
+    },
+    {
+      "path": "johansson-variety-identity.mp4",
+      "size_bytes": 48219,
+      "sha256": "7220e8b46c2918a1a90a88eb1ef7b1fb8dab093f98da9561dbecdd35e9f66620"
+    },
+    {
+      "path": "johansson-variety-identity161.info.json",
+      "size_bytes": 10791263,
+      "sha256": "e053e4525c7e2c1624897075256815c8a2970ae6e277997a26d52d70f7cc388a"
+    },
+    {
+      "path": "johansson-variety-identity161.mp4",
+      "size_bytes": 55031,
+      "sha256": "70118663de86943d904bbeadbb72d1b75c45e3dbee8ee2b5d29b899cc8408e06"
+    },
+    {
+      "path": "johansson-variety.info.json",
+      "size_bytes": 10792468,
+      "sha256": "1d1f751caf44dda52c6ad6f34b031cf91828c4b6624ca6e4631cb272ddd38892"
+    },
+    {
+      "path": "johansson-variety.wav",
+      "size_bytes": 467017806,
+      "sha256": "5c75fd47c187660bf107414570f5128435f51eb3805767314fb8e67f604a5914"
+    },
+    {
+      "path": "johansson-variety.webm",
+      "size_bytes": 37121883,
+      "sha256": "b3beb1b2c0429985fccd6333b6c88d4c7cb4ea523d093bdf44156db90e7bcca3"
+    },
+    {
+      "path": "kay-thismorning-identity.info.json",
+      "size_bytes": 603992,
+      "sha256": "8a412e793ea5088fc86eba7596ad72637c2d2701a9dd9df61766b718bc4d7f74"
+    },
+    {
+      "path": "kay-thismorning-identity.mp4",
+      "size_bytes": 62815,
+      "sha256": "c8fdb19094706e75e465fa45e867b610969b1c1637133186404645978b8c289b"
+    },
+    {
+      "path": "kay-thismorning.info.json",
+      "size_bytes": 602712,
+      "sha256": "c0f41c30a78782cb7d009032b38bf12d8783b20d30b06b0dff6c5ed8f7b8d965"
+    },
+    {
+      "path": "kay-thismorning.wav",
+      "size_bytes": 105662390,
+      "sha256": "a9d0f528589ce9e59664345fbe13d321b8299d905c9cffa5feafdb9c43ecbc76"
+    },
+    {
+      "path": "kay-thismorning.webm",
+      "size_bytes": 7878941,
+      "sha256": "aeb97c62bd8644d82ff56ba8e1dc22bf57d982b31c6a0affc0042d4488fc6e07"
+    },
+    {
+      "path": "kingston-womanshour-bbc.mp3",
+      "size_bytes": 55168725,
+      "sha256": "ac1cee9bebe5fd7891a073bcb60cc9a7f16e5589d64601c64164864c32eb19b3"
+    },
+    {
+      "path": "kingston-womanshour-bbc.wav",
+      "size_bytes": 607387042,
+      "sha256": "07225e177ed061c71ea70abf2c71a0370f5ef2d1ab5e43a087d8c101841c0002"
+    },
+    {
+      "path": "known-source-availability-control.log",
+      "size_bytes": 82,
+      "sha256": "60dfa38a64d1b36cad51fca5e17abc8126be7257769294489b710cf4074191f7"
+    },
+    {
+      "path": "lloyd-pack-ifilm-identity.info.json",
+      "size_bytes": 514658,
+      "sha256": "e75dfc78daef60b961f9913e96c650f47e0dc01d6d6665711cfaf90f547fee0e"
+    },
+    {
+      "path": "lloyd-pack-ifilm-identity.mp4",
+      "size_bytes": 227971,
+      "sha256": "3843df8ed8bcc9fd26422f1ed31d39b5d6f9f0bae7d369da477cd31983c0fc49"
+    },
+    {
+      "path": "lloyd-pack-ifilm.info.json",
+      "size_bytes": 513185,
+      "sha256": "71183539268a4c4024e4e393ead727708c03e21e855ee9fb9b2b6edd7fded95a"
+    },
+    {
+      "path": "lloyd-pack-ifilm.wav",
+      "size_bytes": 27690154,
+      "sha256": "8d8f17074168b1f1c0c16565059747dfb63b0eeb9c03c09deabde33da990bea0"
+    },
+    {
+      "path": "lloyd-pack-ifilm.webm",
+      "size_bytes": 2338259,
+      "sha256": "6485e15969c5ecf7f13a3f972c89318329c6439cd95abf296c24e5c192905c60"
+    },
+    {
+      "path": "lloyd-pack-norfolk-identity.info.json",
+      "size_bytes": 504246,
+      "sha256": "c4f2430723782986de179c2fdc0cc21511130b1a5315ed6f2d1c6c23a211fa17"
+    },
+    {
+      "path": "lloyd-pack-norfolk-identity.mp4",
+      "size_bytes": 123773,
+      "sha256": "f3c0b438350639990d8bc3470c286201f652508f80d4568ae01065a0af023e27"
+    },
+    {
+      "path": "lloyd-pack-norfolk.info.json",
+      "size_bytes": 502903,
+      "sha256": "fefe9ff7899df77050822f959ac738dc163934062a28783e86d129df9890c6bd"
+    },
+    {
+      "path": "lloyd-pack-norfolk.wav",
+      "size_bytes": 20095558,
+      "sha256": "4fa8cd261424512a19812ac5745f43c056316b1e023e1ab28ff03f5367296919"
+    },
+    {
+      "path": "lloyd-pack-norfolk.webm",
+      "size_bytes": 1173941,
+      "sha256": "dea9390e852a7317d4c9c492c38d2e0e2140179b79de0822539964e104572479"
+    },
+    {
+      "path": "lumley-2007-desert-island-bbc.mp3",
+      "size_bytes": 17617024,
+      "sha256": "318a0e61ceef4532c22dc248d4b9b80b39d7f619e39a492e34f3904cb737b9d6"
+    },
+    {
+      "path": "lumley-2007-desert-island-bbc.wav",
+      "size_bytes": 194209044,
+      "sha256": "9c99878dc3eef139f16d0946a3e7679ebacef495cb03544e029d0076dee2801d"
+    },
+    {
+      "path": "lumley-desert-island-bbc.mp3",
+      "size_bytes": 17239588,
+      "sha256": "ea9350f6b7fc590676b9ad8c107f05e3db72a7d34681b962a420e05976bdfc52"
+    },
+    {
+      "path": "lumley-desert-island-bbc.wav",
+      "size_bytes": 189458186,
+      "sha256": "30b0e859142d8aa032568926d421aee5a850f9c14bd78f1cfe620a83a5f7449b"
+    },
+    {
+      "path": "mack-desert-island-bbc.mp3",
+      "size_bytes": 33235670,
+      "sha256": "6c8fd7bb799658c0576df961fa581e9df32c24970fc799ff7ef8211112fef304"
+    },
+    {
+      "path": "mack-desert-island-bbc.wav",
+      "size_bytes": 365465360,
+      "sha256": "08cf836cf0d95799cd5eacff5672fd7761aa29df266afa4c47cbe987bbf93ed3"
+    },
+    {
+      "path": "mackie-gmb-video.mp4",
+      "size_bytes": 419750,
+      "sha256": "24e24b6d5ae237a972aeb84d4d07adab5e734af7cf664326e448e927659ecddb"
+    },
+    {
+      "path": "mackie-gmb.info.json",
+      "size_bytes": 511620,
+      "sha256": "f4b2e20bf5a39ab2403a406c7fbb1d64d76cebb1d9559a0c06659782c0eff83c"
+    },
+    {
+      "path": "mackie-gmb.wav",
+      "size_bytes": 13176910,
+      "sha256": "65096de0fc9d6bebb7fd3c1554c1e0a97e9211aef58596ede9a3fba39184855f"
+    },
+    {
+      "path": "mclynn-pjrchive-right.wav",
+      "size_bytes": 172383020,
+      "sha256": "c75f689cbeb16a124d28dc2ccfd203e4612252bd003e415c2fa724397e9da8e0"
+    },
+    {
+      "path": "mclynn-pjrchive.mp3",
+      "size_bytes": 31271474,
+      "sha256": "4afd9cba8a60309bc84fc7b6b18af4aa0952485dd91ebfede21a25a35defa3e4"
+    },
+    {
+      "path": "mclynn-pjrchive.wav",
+      "size_bytes": 344766130,
+      "sha256": "8dd3f4f0e062f47672add39d73fe925f8c4e39369027086734d2315dd0feec68"
+    },
+    {
+      "path": "mclynn-robins-video.mp4",
+      "size_bytes": 316464,
+      "sha256": "472bdf10c5ae8b990713725ae848634ce4828b4090621a66251742a9cd5d2c11"
+    },
+    {
+      "path": "mclynn-robins.info.json",
+      "size_bytes": 514117,
+      "sha256": "2fce648556a374e0e00fa08a3d5e58d6b56401627cad8d11fd302485b16a67ba"
+    },
+    {
+      "path": "mclynn-robins.wav",
+      "size_bytes": 4306730,
+      "sha256": "49dffef52b51de85d4c9a2535255c7b7bc033b2354eac69973293016b5babc66"
+    },
+    {
+      "path": "mclynn-robins.webm",
+      "size_bytes": 258573,
+      "sha256": "ed48299bf15b2b6f00dc6614f52ef50a956a895d0bcac80c6344a68e0c48e5da"
+    },
+    {
+      "path": "mrs-doyle-original-audio.info.json",
+      "size_bytes": 40927,
+      "sha256": "439d9608428cfa546abf640dec1a621442120f40c8fe32c3dd1679bb0d7b1288"
+    },
+    {
+      "path": "mrs-doyle-original-audio.wav",
+      "size_bytes": 6504638,
+      "sha256": "68399086a4d92943eada1a8b1e4d8f49bf820f86bfe5f43d6b3974d345bb5567"
+    },
+    {
+      "path": "mrs-doyle-original-audio.webm",
+      "size_bytes": 407779,
+      "sha256": "87b865ff7127916e44dc741cf2d6316eeccdf569b54d2eab945493c87ca128fd"
+    },
+    {
+      "path": "mrs-doyle-original-identity.info.json",
+      "size_bytes": 42231,
+      "sha256": "3e3a983a01edf0daa4d9b04a51e67d749ddae3cac507894194b60d4c0f988fd3"
+    },
+    {
+      "path": "mrs-doyle-original-identity.mp4",
+      "size_bytes": 82512,
+      "sha256": "6817bea54c840e919ace5c73fe9fc07ec9115a7cb15c1e1db6e0a0a1501ec796"
+    },
+    {
+      "path": "nanna-brand.info.json",
+      "size_bytes": 50900,
+      "sha256": "ae91d0f8a57338f65613aae15b727dbb1e215c0a046aa3755befe1d8cd5ac4cb"
+    },
+    {
+      "path": "nanna-brand.wav",
+      "size_bytes": 56131442,
+      "sha256": "c196fe192d04f50e119dec3643d9d3a63c9f7df939367c01064eb0775c149c93"
+    },
+    {
+      "path": "nanna-brand.webm",
+      "size_bytes": 4698297,
+      "sha256": "d09f788d2fdb037590e0b45ec998e934e6e595c28367c02e618adedf052ca3c3"
+    },
+    {
+      "path": "nanna-gallery-identity.mp4",
+      "size_bytes": 132947,
+      "sha256": "b5754485ce7768b909e11c2a210fa3948c1ffb94d52cb7c19a4ecfa69797b35e"
+    },
+    {
+      "path": "nanna-gallery.info.json",
+      "size_bytes": 506570,
+      "sha256": "71c7c2c07ed1af756dc45264f71deda9ad67218eb9c02759c987e0a2624912fe"
+    },
+    {
+      "path": "nanna-gallery.wav",
+      "size_bytes": 184744726,
+      "sha256": "16d6aa6b2c68f9ea885b518491f604d982b613ac82fbb87d3c95a3ea8b2904cf"
+    },
+    {
+      "path": "nanna-gallery.webm",
+      "size_bytes": 12294062,
+      "sha256": "d7a5cbb60bb4bbeb4e493ca4781aa4ef97e5bd32a24bc8ed51847f1174e787d8"
+    },
+    {
+      "path": "nanna-huon.info.json",
+      "size_bytes": 517746,
+      "sha256": "3977d95d2bce984c832a4e0d000b765babc6c11bc728f9a9138b39392aab302f"
+    },
+    {
+      "path": "nanna-huon.wav",
+      "size_bytes": 52832350,
+      "sha256": "43099e8f6ab1b0b5436c633e8b57e6c002bb34c7a54fadd32c5da63c00d232f2"
+    },
+    {
+      "path": "nanna-huon.webm",
+      "size_bytes": 4315573,
+      "sha256": "e496624a89aa15fa3f48544179e98a8fa3d29e4fd7d72edca969a3b03a4385d1"
+    },
+    {
+      "path": "nanna-sbs-finnish.mp3",
+      "size_bytes": 5100285,
+      "sha256": "2f5c6a435b1020e4038b2231fc426114b8ec93eda9b925e686d1cc27476cd0fc"
+    },
+    {
+      "path": "nanna-sbs-finnish.wav",
+      "size_bytes": 40801628,
+      "sha256": "0c002a5cfea9430aead009cedb9a1e0f1cde001814416e3345a663b58eea20e3"
+    },
+    {
+      "path": "nimoy-bbc-download.log",
+      "size_bytes": 1446,
+      "sha256": "3138a844d7da0724ee301ac0c97905b4ff67186406ab9bf0880725d62a7dc79f"
+    },
+    {
+      "path": "nimoy-bbc-wogan.info.json",
+      "size_bytes": 513833,
+      "sha256": "d8274598d9ab07755b26fe16373747db630a944b448c4e7151357bc2a5d51466"
+    },
+    {
+      "path": "nimoy-bbc-wogan.wav",
+      "size_bytes": 68759630,
+      "sha256": "0c874d7aa9d1b83eedaf9255dbdf0ac093e3b7089f76ea9b438e3a63b62dc4bf"
+    },
+    {
+      "path": "nimoy-cbs-download.log",
+      "size_bytes": 575,
+      "sha256": "225f6923452ee459d38b792523d9c96a6af0f4e32cb8f45803809bb7da759d33"
+    },
+    {
+      "path": "nimoy-cbs-node-probe.log",
+      "size_bytes": 139,
+      "sha256": "afff2e5e9eabb09bdbdf1f2bb561a53b3779385cabf699006ec543ef71985455"
+    },
+    {
+      "path": "nimoy-cbs-web-probe.log",
+      "size_bytes": 48,
+      "sha256": "23188c94cade7255a5a2d84d083544943c8238afcece4bd0ca04940c54a825a1"
+    },
+    {
+      "path": "palin-bbc-download.log",
+      "size_bytes": 1450,
+      "sha256": "0de15469254770fb06740adfe18bd878a025a8151448daa2aefa5260d4a9dc0f"
+    },
+    {
+      "path": "palin-bbc-film82.info.json",
+      "size_bytes": 576550,
+      "sha256": "553b8b0bc9ac7f4b274c76982cd41d7260512444cbf0b04af48434fda9e4807d"
+    },
+    {
+      "path": "palin-bbc-film82.wav",
+      "size_bytes": 88522830,
+      "sha256": "f52bcdfcfe12e0ec7e79e27332a78213fad74a74da556b745eb6b00c9ce70ce9"
+    },
+    {
+      "path": "palin-bbc-video-download.log",
+      "size_bytes": 38198,
+      "sha256": "27b9acefaa24e3ed1f0d2be67ff198ff4b1a9f92b89fc0372aedffaf7e6f37a8"
+    },
+    {
+      "path": "palin-bbc-video.info.json",
+      "size_bytes": 577576,
+      "sha256": "02f6082466cf49040b3feaa04f9425fb7b3270c4a01c8435cf72e16b34370f68"
+    },
+    {
+      "path": "palin-bbc-video.mp4",
+      "size_bytes": 1613728,
+      "sha256": "1f1fede6b103bb4fc01a2eb1b2ad566bbe87a6ec74fbe8e4a93911c1008e601c"
+    },
+    {
+      "path": "palin-frame-126.jpg",
+      "size_bytes": 5576,
+      "sha256": "0dab5e4e7c414e7b7b3745e9ee9c147454cff64504615c0108c199fa283122d8"
+    },
+    {
+      "path": "patrick-stewart-today-video.mp4",
+      "size_bytes": 4487100,
+      "sha256": "b65a56d3598c11d77ccce9f03313fce5a0b5e2a1240f34d2836b7aeb98f6fb13"
+    },
+    {
+      "path": "patrick-stewart-today.info.json",
+      "size_bytes": 507399,
+      "sha256": "d065502a2b56e55abca6cffc026f6ac643083f305c06bc7f5502e6e02e2c6a2f"
+    },
+    {
+      "path": "patrick-stewart-today.wav",
+      "size_bytes": 77426766,
+      "sha256": "2985d20091e69129eeaa56e922c638ddee74d688c371197763516cf6a6580462"
+    },
+    {
+      "path": "piper-desert-island-bbc.mp3",
+      "size_bytes": 35122798,
+      "sha256": "3003e6ab59f06847651d5958593227c238dc45dc6420bc88b0648bf05077a07c"
+    },
+    {
+      "path": "piper-desert-island-bbc.wav",
+      "size_bytes": 385080964,
+      "sha256": "32c72f7c048b2d35be825e66f19939f9b4e6f42a116039d6e8cc179d11915191"
+    },
+    {
+      "path": "q-tng-metadata.log",
+      "size_bytes": 354,
+      "sha256": "fb7d131a5abfc45d225c710b558243492b0cc1c170ec46c93741bb5c71a530e8"
+    },
+    {
+      "path": "q-tng-original-source.info.json",
+      "size_bytes": 45656,
+      "sha256": "327dc04122539ff41a464f88d1298941a81027eac60c55989d2fb8ad180eac4f"
+    },
+    {
+      "path": "replacement-interview-search-002.log",
+      "size_bytes": 1129,
+      "sha256": "889e8065b5879bc3148ce5882d31b2f228ed979b1a42680e59b5e80f760386bc"
+    },
+    {
+      "path": "replacement-interview-search-003.log",
+      "size_bytes": 1182,
+      "sha256": "42da20dfdda14f2b3f59781ea5b003a3c320300f939565f74dcb433d1b76baa8"
+    },
+    {
+      "path": "replacement-interview-search-004.log",
+      "size_bytes": 611,
+      "sha256": "babb78f5b9d6ac3ad0bc6a76fc8516b720f45ac8340fec9f0c6d43a25d5e91fa"
+    },
+    {
+      "path": "ricky-bbc-download.log",
+      "size_bytes": 444,
+      "sha256": "f42a378a22f4388305d9ce77fedaea181ff5b8c9a3dbeb463761ebff44072cc1"
+    },
+    {
+      "path": "ricky-bbc-m4a-download.log",
+      "size_bytes": 1497,
+      "sha256": "227d214ee4e56a9f80b3c2c7222bf6ad9908a2fa7d58ca9d98da9c251a2136fd"
+    },
+    {
+      "path": "ricky-bbc-parkinson.info.json",
+      "size_bytes": 505804,
+      "sha256": "0567023370d260af6b00d9ec1756500a6608b9b3a6944b41914f9e41dcc44d70"
+    },
+    {
+      "path": "ricky-bbc-parkinson.wav",
+      "size_bytes": 40996942,
+      "sha256": "be2879a9031a1e14dcfb83b40bf3c1c4b3218c323600515234a6f6c7796a8be8"
+    },
+    {
+      "path": "ricky-wch-source.html",
+      "size_bytes": 239154,
+      "sha256": "21f8dc40e6e2d9272f614fb3964b668abfe848a287e1a5eb727358943dc184ff"
+    },
+    {
+      "path": "rod-serling-bob-crane.info.json",
+      "size_bytes": 511935,
+      "sha256": "6536b08d9bbe1e5127f7372577deda67fd69ce2692e077b52670b013f75f8962"
+    },
+    {
+      "path": "rod-serling-bob-crane.wav",
+      "size_bytes": 42014450,
+      "sha256": "0baf64ca00561f030d921a729a1f3564d06122d26b597079b561ea72286c1dd6"
+    },
+    {
+      "path": "rod-serling-crane-download.log",
+      "size_bytes": 1776,
+      "sha256": "7cd5a62805b315d68b0e8e97084c9b66f8dfce7b09f77d113fae6e051d7c572b"
+    },
+    {
+      "path": "rod-serling-foundation-download.log",
+      "size_bytes": 554,
+      "sha256": "f8ff63d561064d35b434b194febe1cb3e8aaf3d985a887e3f73f50b66da91ccd"
+    },
+    {
+      "path": "rod-serling-foundation.html",
+      "size_bytes": 108546,
+      "sha256": "3c1d1837463662edea905a34c328f51fe89182830d557727ada195cd12605ccd"
+    },
+    {
+      "path": "rod-serling-loc-download.log",
+      "size_bytes": 366,
+      "sha256": "c6ddafd0cf0b32fc8e065f8c5f66a619727313e4ad9cd5e01e7a746eab73b550"
+    },
+    {
+      "path": "sarah-480-download.log",
+      "size_bytes": 30579,
+      "sha256": "bf8be58304e72b30690d704c9d2e3a1169420b4b6ac0a449a82f3e76db13dd9c"
+    },
+    {
+      "path": "sarah-audio-download.log",
+      "size_bytes": 452,
+      "sha256": "7e450f702fe9d2c7d80f36e42aa997731020a07a98c07a45fb0a7887e669ae0b"
+    },
+    {
+      "path": "sarah-audio-m4a-download.log",
+      "size_bytes": 1547,
+      "sha256": "fbf270e91cdea5626fee0647b006234305d2d38a1ff997abe68fcb5efb93ab79"
+    },
+    {
+      "path": "sarah-frame-064.jpg",
+      "size_bytes": 5189,
+      "sha256": "8b5e2654cb566baa6769d7e908a3c68d2671c296338dc80ba239fe8632c4d9ec"
+    },
+    {
+      "path": "sarah-frame-066.jpg",
+      "size_bytes": 4460,
+      "sha256": "2786b754ddd82b9f234ca49fc04714b369351d945fb2828d841cbd4d4fe2f5ec"
+    },
+    {
+      "path": "sarah-frame-068.jpg",
+      "size_bytes": 7205,
+      "sha256": "eda20bdca2ce15e7cd673e9b7e084413495939788865b84385b69c6e1bcfaa8d"
+    },
+    {
+      "path": "sarah-frame-075.jpg",
+      "size_bytes": 6990,
+      "sha256": "92d4f1898cb66f71979d09c4c7fb4e2d55c8ab9f635b8d69ae50d18d8158055c"
+    },
+    {
+      "path": "sarah-frame-080.jpg",
+      "size_bytes": 6913,
+      "sha256": "7a85f1f9f4736445a45729bdbe9f07ad55560d944d45b6c17611ced0ff98badf"
+    },
+    {
+      "path": "sarah-original-480.mp4",
+      "size_bytes": 8603263,
+      "sha256": "859e3642d9826c4648d6e4af880c0e355fa9976633d9af88f59440e006cf4948"
+    },
+    {
+      "path": "sarah-original-source-audio.info.json",
+      "size_bytes": 513393,
+      "sha256": "3f36622a805ae547d47d8ebb20b7a325b0bbaa3d16ba98959c1342c9d06b1502"
+    },
+    {
+      "path": "sarah-original-source-audio.wav",
+      "size_bytes": 43778126,
+      "sha256": "d62758344269811bcbfe6c029ad4717fff073e239a0ca084108bbc0ada80a09e"
+    },
+    {
+      "path": "sarah-original-source.info.json",
+      "size_bytes": 514898,
+      "sha256": "fadd44fa8b1dc2554ec56b689bfe4d85e79a5a6c66441e5fb6b34a4b7ab7a6f8"
+    },
+    {
+      "path": "sarah-original-source.mp4",
+      "size_bytes": 2641376,
+      "sha256": "614b8f3be5fdaa5549c7b9cf7b61ace4d2c538c0dbc7797e0114cd0d2d5a0ad5"
+    },
+    {
+      "path": "sarah-video-download.log",
+      "size_bytes": 26931,
+      "sha256": "f8db427d306315a499283b9af39a53e7a288bcb7fb2f55941e6d4807706b2602"
+    },
+    {
+      "path": "saul-original-source-video.info.json",
+      "size_bytes": 76620,
+      "sha256": "2152000ae0b260d100c3d1970c2cc909135d73c6abd303c3c52999acfe329567"
+    },
+    {
+      "path": "saul-original-source-video.mp4",
+      "size_bytes": 354836,
+      "sha256": "caf3523ce1305f3d5dd13787b02a76e208f8375e60746121806275a7c0eae7a4"
+    },
+    {
+      "path": "saunders-audible-video.mp4",
+      "size_bytes": 1798850,
+      "sha256": "13395c2f2be95fbd9a0e2ff8bfd00437306d686f5e87eee5f2e755a2043aa8a7"
+    },
+    {
+      "path": "saunders-audible.info.json",
+      "size_bytes": 529698,
+      "sha256": "e66cad67c11e0063080cba7e20f4c79fdce2b7d89acf4c7b28e669499dce191b"
+    },
+    {
+      "path": "saunders-audible.wav",
+      "size_bytes": 45477966,
+      "sha256": "72df55cfcc513d4b0e5a307f5dd250acf01487c73ca57413483e4bcdebc3d8a6"
+    },
+    {
+      "path": "shatner-emmy-video.mp4",
+      "size_bytes": 420872,
+      "sha256": "527a3dcafa3acac29d5916aa7cb8a8d7ba5dbfb3229793d504795d27d33115fb"
+    },
+    {
+      "path": "shatner-emmy.info.json",
+      "size_bytes": 783359,
+      "sha256": "58c6c93414fd594b5e6d2bd8932e3ad21c41362dd99296ba771a02ffe7c21663"
+    },
+    {
+      "path": "shatner-emmy.wav",
+      "size_bytes": 11239502,
+      "sha256": "cec74ffeed5b04fb335bc42a09a542a0e83b86188ac4a6a01b505099fcd6d7e7"
+    },
+    {
+      "path": "steel-desert-island-bbc.mp3",
+      "size_bytes": 48446563,
+      "sha256": "d4beb95068dc2b7ac6a0f9d07315d9cc424d651b1ce036c6337ca02bf45a2fc9"
+    },
+    {
+      "path": "steel-desert-island-bbc.wav",
+      "size_bytes": 532268556,
+      "sha256": "e59001b21d02ba09373b36f987e2b6974b57c61aebce405d81ea968aaae9c727"
+    },
+    {
+      "path": "tate-bbc-news.info.json",
+      "size_bytes": 574749,
+      "sha256": "051ee785c073be056308d8eaf9688c3c7fb25feb87d3f0e362e5996a59857add"
+    },
+    {
+      "path": "tate-bbc-news.wav",
+      "size_bytes": 4771918,
+      "sha256": "b34adcdd140d2c4693d768e468f5beb2bcc673e1c52e311728e628545d83dc2b"
+    },
+    {
+      "path": "tate-radio1-video.mp4",
+      "size_bytes": 11476198,
+      "sha256": "37411d271f44b0f228b75d4a5941e2769bc132c96bfd66cbb0c6ca26cccc8c46"
+    },
+    {
+      "path": "tate-radio1.info.json",
+      "size_bytes": 529997,
+      "sha256": "1288e4a54c785942857ec381da6f3414f15e6a40d33749dd5c6e94e8c7d995e7"
+    },
+    {
+      "path": "tate-radio1.wav",
+      "size_bytes": 143446094,
+      "sha256": "54fd56e70ec94584600b996f94a6665cf82b8cad5433ad149937ac0ebbe6cd8a"
+    },
+    {
+      "path": "the-cat-audio-download.log",
+      "size_bytes": 1710,
+      "sha256": "0536ae21204c7036b516155cf6b47847937872f665e99c15c30a50bc6e0d21e5"
+    },
+    {
+      "path": "the-cat-source-010.jpg",
+      "size_bytes": 5231,
+      "sha256": "2578ecc3905f3fca78f26a2bbda50993209586c31b6caa2c2e1b1a86d0c51e92"
+    },
+    {
+      "path": "the-cat-source-030.jpg",
+      "size_bytes": 5002,
+      "sha256": "aba995b70ea4cd9ded95b79cc5fad4fb6da9bcdc9e6fbc2455a0a2532578dc2e"
+    },
+    {
+      "path": "the-cat-source-038.jpg",
+      "size_bytes": 5122,
+      "sha256": "e7256abf76d4e0c161ffc74bf12033fcbea983744bc363210c52d5a8c118d688"
+    },
+    {
+      "path": "the-cat-source-video.info.json",
+      "size_bytes": 511655,
+      "sha256": "97c5a59cb8df51b97ee5d2f4d66f7acb0cf3ae7aaba48b2b2d7e906ccbd6ddfa"
+    },
+    {
+      "path": "the-cat-source-video.mp4",
+      "size_bytes": 367945,
+      "sha256": "ba972ef5e027d7722a31871dc1ece02eeb948bc96833be1eaf5f908cdb88f112"
+    },
+    {
+      "path": "the-cat-source.info.json",
+      "size_bytes": 510576,
+      "sha256": "357e9ae0f0784ac866432446c7dd53aff4f9903b711908073ca29d973d47609b"
+    },
+    {
+      "path": "the-cat-source.wav",
+      "size_bytes": 8523854,
+      "sha256": "24f618028431af8af594bca51a37d2a568ee054fadee42e4590a22759fa3f0b2"
+    },
+    {
+      "path": "the-cat-video-download.log",
+      "size_bytes": 5716,
+      "sha256": "130241c512d2620a3aaf24a9e82b7b7c5d41a3d04788f245bb2574536fd910d9"
+    },
+    {
+      "path": "the-doctor-metadata.log",
+      "size_bytes": 354,
+      "sha256": "fb7d131a5abfc45d225c710b558243492b0cc1c170ec46c93741bb5c71a530e8"
+    },
+    {
+      "path": "the-doctor-original-source.info.json",
+      "size_bytes": 750728,
+      "sha256": "6424b0465faf0ee337f82f45b7db8deacdb0910116b462eb6e805a256b319912"
+    },
+    {
+      "path": "tom-baker-bbc.info.json",
+      "size_bytes": 517306,
+      "sha256": "0e71b6782778fa40e84208d2a7cb7b2600828bb563154f99ea823458fb8c7b51"
+    },
+    {
+      "path": "tom-baker-bbc.wav",
+      "size_bytes": 37744718,
+      "sha256": "bbe690b3fdddee5948d01f04c64b649b6d2a51df4507c4c118d44230fbf2da76"
+    },
+    {
+      "path": "tom-baker-download.log",
+      "size_bytes": 1742,
+      "sha256": "66ff02b5b31f289930915750ac76c816ae60284f6de73048ed21420e9efa18b3"
+    },
+    {
+      "path": "tyson-amnh.info.json",
+      "size_bytes": 589494,
+      "sha256": "196c9ee93c3751e1e431db763fe9b5a55f86176820541268a7f7c68ee91c22b3"
+    },
+    {
+      "path": "tyson-amnh.wav",
+      "size_bytes": 1018917698,
+      "sha256": "78554ebe1808ef846ee33961f7580cbc9016c3fc0de41777da9b65ad1b3df9a8"
+    },
+    {
+      "path": "tyson-amnh.webm",
+      "size_bytes": 75851723,
+      "sha256": "be885b9fca509dde590b75855756d7f14b778ee5d9b9225064b063286ab00968"
+    },
+    {
+      "path": "tyson-nasa.mp3",
+      "size_bytes": 38539280,
+      "sha256": "0f9be1c22b7e94e54e0e0ae901fdebe4a61dec503b64e152c1741176eb384000"
+    },
+    {
+      "path": "tyson-nasa.wav",
+      "size_bytes": 411084428,
+      "sha256": "79885f1862536e02a78fcd6e3cfbfb182cb89540c740a226162bd7fa1f377a3a"
+    },
+    {
+      "path": "victor-meldrew-metadata.log",
+      "size_bytes": 354,
+      "sha256": "fb7d131a5abfc45d225c710b558243492b0cc1c170ec46c93741bb5c71a530e8"
+    },
+    {
+      "path": "victor-meldrew-original-source.info.json",
+      "size_bytes": 631568,
+      "sha256": "f060dd106cff738ae96c63db6b330bd0248f45a0e0803814c58a13a4085b4927"
+    },
+    {
+      "path": "victoria-wood-metadata.log",
+      "size_bytes": 354,
+      "sha256": "fb7d131a5abfc45d225c710b558243492b0cc1c170ec46c93741bb5c71a530e8"
+    },
+    {
+      "path": "victoria-wood-original-source.info.json",
+      "size_bytes": 608566,
+      "sha256": "eb69bedb7333be5be15607f5ba610f6381d4afcf91330b9779e543905a257b16"
+    },
+    {
+      "path": "ward-flickscity-identity.info.json",
+      "size_bytes": 4094405,
+      "sha256": "510e9094437bc9e25a2b40602a00fb4c8c0c79e4647199bfe2f7251a3312ceaa"
+    },
+    {
+      "path": "ward-flickscity-identity.mp4",
+      "size_bytes": 55082,
+      "sha256": "f22a0202d13014db66dc93534ad4aa7d308f8e430dd7b4dc12a66c1b0cd9593d"
+    },
+    {
+      "path": "ward-flickscity.info.json",
+      "size_bytes": 4093184,
+      "sha256": "d29114aa0a40f1a6cd13bc9a7ef7a569ce7eeccb6cf8f82de7d125515b47b570"
+    },
+    {
+      "path": "ward-flickscity.wav",
+      "size_bytes": 104910926,
+      "sha256": "ef4e77817d2621e6f623a316b4df1528dde8ef203b832eea1013898f81716730"
+    },
+    {
+      "path": "ward-flickscity.webm",
+      "size_bytes": 7153074,
+      "sha256": "546979d4041ba80166cc738b7d105c5dfa445f2608669078e89eda2ca8e82929"
+    },
+    {
+      "path": "wilson-desert-island-bbc.mp3",
+      "size_bytes": 36025427,
+      "sha256": "8eba62f4571a9c648151476df25bdaf09b57696705b887f16c23ef4b0bb8e261"
+    },
+    {
+      "path": "wilson-desert-island-bbc.wav",
+      "size_bytes": 395003292,
+      "sha256": "6db19d0eeb766ea526e8a2138b7be24e2f71c113028e4fbc93ee8d984cec7c32"
+    },
+    {
+      "path": "wood-desert-island-bbc.mp3",
+      "size_bytes": 17078400,
+      "sha256": "35e9dd9c5bbf76285a702a32fc752d3173318e180cc8929aa1f365e5441a9dba"
+    },
+    {
+      "path": "wood-desert-island-bbc.wav",
+      "size_bytes": 188278550,
+      "sha256": "8d4453ee337111838224edcf35536d3b3e3647b917af185a41df8c993a8055cc"
+    }
+  ]
+}

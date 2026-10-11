@@ -19,6 +19,13 @@ evidence, deterministic results, and delivery commit references. Original WAVs
 remain reconstructable from the baseline Git commit. Private voice audio and
 profiles must not be included in public commits.
 
+The local replacement-source archive is retained outside Git. Its file names,
+sizes, and SHA-256 hashes are recorded in
+[`source-archive-manifest.json`](source-archive-manifest.json); the corresponding
+media files are intentionally not part of this repository. The manifest records
+the archive contents before the manifest itself was added and can be used to
+check the retained local copy.
+
 All 104 production references, associated with 198 tracked profiles, are accepted
 as fit for conditioning after fresh Gemini native-audio review, root adjudication
 and deterministic checks. Vixen is excluded as a private unindexed orphan.
