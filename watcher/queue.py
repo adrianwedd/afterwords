@@ -1,8 +1,8 @@
 """Idempotent publication into the existing speech worker queue.
 
-Event files retain their identity as .json -> .claimed -> .done. This guarantees
-one queue publication across watcher restarts, not exactly-once audible output
-(an external playback side effect cannot be atomically committed).
+Event files retain their identity as .json -> .claimed -> .playing ->
+.done/.failed. The durable .playing receipt prevents retries after playback
+may have started, including worker crashes during audio playback.
 """
 from __future__ import annotations
 
@@ -32,7 +32,7 @@ def enqueue(root: Path, agent: str, session: str, event_id: str,
     # every duplicate hook callback. A deliberate retry must use a new event
     # identity (or explicitly remove the failed receipt).
     if not any((queue / (name + ext)).exists()
-               for ext in ('.json', '.claimed', '.done', '.failed')):
+               for ext in ('.json', '.claimed', '.playing', '.done', '.failed')):
         fd, tmp = tempfile.mkstemp(dir=queue, prefix='.pending-')
         try:
             with os.fdopen(fd, 'w') as stream:
