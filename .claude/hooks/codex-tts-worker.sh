@@ -22,7 +22,7 @@ if [ -z "$LAME_BIN" ]; then
     done
 fi
 
-MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
+MUTE_FILE="${AFTERWORDS_MUTE_FILE:-/tmp/afterwords-muted}"   # `afterwords mute` toggles this; skip local playback when present
 PLAY_LOCK="${AFTERWORDS_PLAY_LOCK:-/tmp/afterwords-play.lock}"
 PLAY_PID="${AFTERWORDS_PLAY_PID:-/tmp/afterwords-play.pid}"
 acquire_play_lock() {
@@ -111,6 +111,7 @@ while true; do
         done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
     fi
     [ -z "$ITEM" ] && break
+    ITEM_BASE="${ITEM%.claimed}"
 
     # Parse JSON item fields directly — avoids eval on queue content.
     PROJECT_DIR=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('project_dir',''))" "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
@@ -122,7 +123,7 @@ while true; do
         # (2026-10-10 wedge). 3 strikes -> park as .failed for inspection.
         if [ "${ATTEMPTS:-0}" -ge 3 ]; then
             echo "afterwords: parking codex TTS item as .failed after $ATTEMPTS attempts" >&2
-            mv "$ITEM" "${ITEM%.claimed}.failed" 2>/dev/null || rm -f "$ITEM"
+            mv "$ITEM" "${ITEM_BASE}.failed" 2>/dev/null || rm -f "$ITEM"
             continue
         fi
         : # Otherwise receipt commits only after complete synthesis and archiving.
@@ -220,9 +221,21 @@ print(json.dumps({
         fi
     }
 
+    begin_playback() {
+        [ "$PLAYBACK_ATTEMPTED" = "1" ] && return 0
+        # Commit the uncertain audio side effect before invoking afplay. If
+        # the worker dies during playback, drain must not replay this event.
+        if ! mv "$ITEM" "${ITEM_BASE}.playing"; then
+            return 1
+        fi
+        ITEM="${ITEM_BASE}.playing"
+        PLAYBACK_ATTEMPTED=1
+    }
+
     PLAYBACK_OK=1
     ARCHIVE_OK=1
     DELIVERED_CHUNKS=0
+    PLAYBACK_ATTEMPTED=0
     PREV_WAV=""
     PREV_TEXT=""
     PREV_ARCH=""
@@ -246,7 +259,12 @@ print(json.dumps({
             fi
             if [ "$FILESIZE" -gt 1000 ]; then
                 DELIVERED_CHUNKS=$((DELIVERED_CHUNKS + 1))
-                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || PLAYBACK_OK=0
+                if begin_playback; then
+                    # afplay may return nonzero after audio has reached speakers.
+                    [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || PLAYBACK_OK=0
+                else
+                    PLAYBACK_OK=0
+                fi
                 if [ -n "$PREV_ARCH" ]; then
                     if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
                         if [ -n "$LAME_BIN" ]; then
@@ -282,7 +300,11 @@ print(json.dumps({
         fi
         if [ "$FILESIZE" -gt 1000 ]; then
             DELIVERED_CHUNKS=$((DELIVERED_CHUNKS + 1))
-            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || PLAYBACK_OK=0
+            if begin_playback; then
+                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || PLAYBACK_OK=0
+            else
+                PLAYBACK_OK=0
+            fi
             if [ -n "$PREV_ARCH" ]; then
                 if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
                     if [ -n "$LAME_BIN" ]; then
@@ -307,11 +329,14 @@ print(json.dumps({
     rm -rf "$CHUNK_DIR"
     release_play_lock
     if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
-        # Playback is the delivery. A failed archive must not replay audio that
-        # has already been spoken when the queue retries this item.
+        # Once audio might have reached the speakers, never retry the event.
+        # Archive failure is diagnostic; partial playback is terminal .failed.
         if [ "$PLAYBACK_OK" = "1" ] && [ "$NCHUNKS" -gt 0 ] && [ "$DELIVERED_CHUNKS" -eq "$NCHUNKS" ]; then
             [ "$ARCHIVE_OK" = "1" ] || echo "afterwords: speech played; MP3 archive incomplete for this item" >&2
-            mv "$ITEM" "${ITEM%.claimed}.done" || exit 1
+            mv "$ITEM" "${ITEM_BASE}.done" || exit 1
+        elif [ "$PLAYBACK_ATTEMPTED" = "1" ]; then
+            echo "afterwords: partial Codex speech delivery; parked without replay" >&2
+            mv "$ITEM" "${ITEM_BASE}.failed" || exit 1
         else
             # Persist the attempt count into the event so the retry cap can fire
             # (drain recovers .claimed -> .json, preserving this content).

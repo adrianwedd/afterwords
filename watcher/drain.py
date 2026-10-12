@@ -13,8 +13,9 @@ def main():
             fcntl.flock(ownership, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
             return 0
-        # A killed worker can leave a claimed event. No other worker owns this
-        # queue now, so recover it before draining. Done receipts never replay.
+        # A killed worker can leave a claimed event before playback, so recover
+        # it before draining. A .playing receipt is terminal because audio may
+        # already have reached the speakers.
         for path in queue.glob('*.claimed'):
             path.rename(path.with_suffix('.json'))
         return subprocess.run(['bash', str(worker)], pass_fds=(ownership.fileno(),),
