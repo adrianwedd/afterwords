@@ -343,9 +343,12 @@ async def handle(event_type: str, context: dict) -> None:
 
     log.info("Hook fired: platform=%s, cwd=%s, response_len=%d", platform, _get_cwd(context), len(response))
 
-    # Messaging platforms: skip — audio delivery is handled by the cron feed watcher
+    # Local playback belongs to this machine's surfaces; messaging platforms
+    # get voice notes per-response from the post_llm_call shell hook instead.
     if platform not in LOCAL_PLATFORMS:
-        log.info("Skipping TTS for messaging platform %s (use tts-audio-feed cron)", platform)
+        log.info("Skipping local playback for messaging platform %s", platform)
+        return
+
         return
 
     # Native synth+playback needs aiohttp; messaging-only installs omit it. Bail

@@ -75,6 +75,11 @@ if ! AVAILABLE_BACKENDS=$(python3 -m backends list 2>/dev/null); then
 fi
 MAX_SR=$(python3 -m backends max-sample-rate 2>/dev/null || echo 24000)
 
+# Reference segment length in seconds. Override with CLONE_SECONDS for longer
+# references (e.g. CLONE_SECONDS=25) — 15s is the historical default.
+SEG_LEN="${CLONE_SECONDS:-15}"
+[[ "$SEG_LEN" =~ ^[0-9]+$ ]] && [ "$SEG_LEN" -ge 5 ] || { echo "CLONE_SECONDS must be an integer >= 5"; exit 1; }
+
 # Default backend
 [ -z "$BACKEND_NAME" ] && BACKEND_NAME="qwen3-0.6b"
 
@@ -236,9 +241,9 @@ fi
 if [ -z "$START_S" ]; then
     echo
     if [[ "$DURATION" == "unknown" ]]; then
-        echo -e "  We need a 15-second segment."
+        echo -e "  We need a ${SEG_LEN}-second segment."
     else
-        echo -e "  Clip is ${BOLD}${DURATION}s${NC} long. We need a 15-second segment."
+        echo -e "  Clip is ${BOLD}${DURATION}s${NC} long. We need a ${SEG_LEN}-second segment."
     fi
     echo -e "  Choose a section with ${BOLD}clear speech from one person${NC}."
     echo
@@ -249,10 +254,10 @@ START_S="${START_S:-0}"
 [[ "$START_S" =~ ^[0-9]+$ ]] || fail "Start time must be a number"
 
 # Extract + denoise
-info "Extracting ${START_S}s → $((START_S + 15))s..."
+info "Extracting ${START_S}s → $((START_S + SEG_LEN))s..."
 TMP_SEG="/tmp/clone-segment-$$.wav"
 TMPFILES+=("$TMP_SEG")
-ffmpeg -y -i "$TMP_SRC" -ss "$START_S" -t 15 -ar "$MAX_SR" -ac 1 "$TMP_SEG" 2>/dev/null
+ffmpeg -y -i "$TMP_SRC" -ss "$START_S" -t "$SEG_LEN" -ar "$MAX_SR" -ac 1 "$TMP_SEG" 2>/dev/null
 
 info "Denoising..."
 mkdir -p voices

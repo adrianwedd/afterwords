@@ -82,6 +82,11 @@ case "${AFTERWORDS_SHELL_SCOPE:-all}" in
     *) echo "afterwords: invalid AFTERWORDS_SHELL_SCOPE" >&2; exit 1 ;;
 esac
 
+PROFILE=$(printf '%s' "$PAYLOAD" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+print(d.get('profile', '') or d.get('extra', {}).get('profile', ''))
+" 2>/dev/null || true)
 # ── Platform routing ──────────────────────────────────────────────────────
 # CLI/local: play audio locally via afplay
 # Messaging platforms: synthesize full audio, send as attachment via hermes send
@@ -128,6 +133,7 @@ if [ -z "$CHUNK_SCRIPT" ] && [ -f "$HOME/.claude/hooks/chunk-text.py" ]; then
     CHUNK_SCRIPT="$HOME/.claude/hooks/chunk-text.py"
 fi
 HOOK_LOG="${TMPDIR:-/tmp}/afterwords-hermes-hook.log"
+[ -f /tmp/aw-debug-on ] && exec 2>>/tmp/aw-hook-trace.log && set -x
 if [ -z "$STRIP_SCRIPT" ] || [ -z "$CHUNK_SCRIPT" ]; then
     printf '%s strip/chunk helper unresolved (repo=%s) — skipping TTS\n' \
         "$(date '+%Y-%m-%d %H:%M:%S')" "${AFTERWORDS_REPO_ROOT:-none}" >> "$HOOK_LOG" 2>/dev/null || true
@@ -151,7 +157,13 @@ fi
 # ── Resolve voice ──────────────────────────────────────────────────────────
 # Priority: project .afterwords (agent key → default:) → global ~/.afterwords (agent key → default:) → server default
 resolve_voice() {
-    local agent="hermes"
+# Voice key follows the firing profile (payload "profile", resolved by the
+# gateway at fire time). The default profile speaks as the "hermes" agent;
+# named profiles (vixen, ...) use their own key, falling back to hermes.
+    local agent="$PROFILE"
+    case "$agent" in ""|"default"|"hermes") agent="hermes" ;;
+    esac
+
     local voice=""
     local aw_file=""
 
@@ -241,96 +253,103 @@ print(hashlib.sha256(sys.stdin.read().encode()).hexdigest()[:16])
         fi
     fi
 
-    # Concatenate all chunks into one text for single synthesize call
-    SINGLE_WAV=$(mktemp /tmp/afterwords-msg-XXXXXX.wav)
-    ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$CLEAN" 2>/dev/null || true)
-    [ -z "$ENC" ] && exit 0
-
-    HTTP_CODE=$(curl -s -w "%{http_code}" -o "$SINGLE_WAV" "${TTS_ENDPOINT}?text=${ENC}${VOICE_PARAM}" 2>/dev/null || echo "000")
-
-    if [ "$HTTP_CODE" = "200" ] && [ -s "$SINGLE_WAV" ]; then
-        # Archive as MP3 — filename derived from spoken text
-        STAMP=$(date +%Y%m%d-%H%M%S)
-        SLUG=$(printf '%s' "$CLEAN" | python3 -c "
+    # Messaging delivery runs DETACHED: the hook returns instantly (inside the
+# reply-turn budget) and a background job does the synth+send with no turn
+# timeout above it. A wedged server delays voice notes; it can no longer
+# blackhole them, block the turn, or die mid-send to the 30s callback cap.
+    STAMP_ID="$$-$(date +%s)"
+    STAMP=$(date +%Y%m%d-%H%M%S)
+    SLUG=$(printf '%s' "$CLEAN" | python3 -c "
 import sys, re
 t = sys.stdin.read().strip().lower()
 t = re.sub(r'[^a-z0-9]+', '-', t)
 t = t.strip('-')[:60]
 print(t or 'voice')
 " 2>/dev/null || echo "voice")
-        ARCHIVE_DIR="$HOME/.hermes/tts-archive"
-        mkdir -p "$ARCHIVE_DIR"
-        ARCHIVE_MP3="${ARCHIVE_DIR}/${SLUG}-${STAMP}.mp3"
-        lame --quiet -V 2 "$SINGLE_WAV" "$ARCHIVE_MP3" 2>/dev/null || true
-        printf '%s\n' "$CLEAN" > "${ARCHIVE_MP3%.mp3}.txt" 2>/dev/null || true
-
-        # Pre-seed the feed watcher's seen-set so it does NOT re-send this
-        # archived file. The watcher keys hermes-archive files by bare filename
-        # (see tts-feed-send.py: `name in new_seen`). We add that marker here so
-        # the inline send below is the single delivery for this response.
-        SEEN_FILE="$HOME/.hermes/tts-feed-seen.json"
-        python3 -c "
-import json, sys
-from pathlib import Path
-p = Path(sys.argv[1])
-marker = sys.argv[2]
-try:
-    seen = set(json.loads(p.read_text())) if p.exists() else set()
-except Exception:
-    seen = set()
-seen.add(marker)
-p.parent.mkdir(parents=True, exist_ok=True)
-# Atomic swap: temp file in the SAME dir, then os.replace() so a crash
-# mid-write cannot truncate tts-feed-seen.json (which would make the
-# watcher re-send the entire backlog on its next load_seen()).
-import os
-tmp = p.with_suffix(p.suffix + '.tmp')
-tmp.write_text(json.dumps(sorted(seen), indent=2))
-os.replace(tmp, p)
-" "$SEEN_FILE" "${SLUG}-${STAMP}.mp3" 2>/dev/null || true
-
-        # Convert to OGG for Telegram voice message
-        OGG_FILE="${SINGLE_WAV%.wav}.ogg"
-        ffmpeg -y -i "$SINGLE_WAV" -c:a libopus -b:a 64k "$OGG_FILE" 2>/dev/null || true
-
-        # Copy to audio_cache (MEDIA: allowed dir) for delivery
-        AUDIO_CACHE_DIR="$HOME/.hermes/audio_cache"
-        mkdir -p "$AUDIO_CACHE_DIR"
-
-        # Reply into the ORIGINATING chat when we know it: hermes send supports
-        # `platform:chat_id`. Fall back to the platform home channel otherwise.
-        if [ -n "$CHAT_ID" ]; then
-            SEND_TARGET="${PLATFORM}:${CHAT_ID}"
-        else
-            SEND_TARGET="${PLATFORM}"
-        fi
-
-        # Send to the originating platform using MEDIA: tag for proper attachment delivery
-        case "$PLATFORM" in
-            telegram)
-                OGG_CACHE="$AUDIO_CACHE_DIR/${SLUG}-${STAMP}.ogg"
-                cp "$OGG_FILE" "$OGG_CACHE" 2>/dev/null || true
-                hermes send -t "$SEND_TARGET" "MEDIA:$OGG_CACHE" 2>/dev/null \
-                    || rm -f ${DEDUP_FILE:+"$DEDUP_FILE"}  # failed send: allow retry
-                ;;
-            discord)
-                MP3_CACHE="$AUDIO_CACHE_DIR/${SLUG}-${STAMP}.mp3"
-                cp "$ARCHIVE_MP3" "$MP3_CACHE" 2>/dev/null || true
-                hermes send -t "$SEND_TARGET" "MEDIA:$MP3_CACHE" 2>/dev/null \
-                    || rm -f ${DEDUP_FILE:+"$DEDUP_FILE"}  # failed send: allow retry
-                ;;
-        esac
-
-        rm -f "$SINGLE_WAV" "$OGG_FILE"
+    ARCHIVE_DIR="$HOME/.hermes/tts-archive"
+    AUDIO_CACHE_DIR="$HOME/.hermes/audio_cache"
+    mkdir -p "$ARCHIVE_DIR" "$AUDIO_CACHE_DIR"
+    if [ -n "$CHAT_ID" ]; then
+        SEND_TARGET="${PLATFORM}:${CHAT_ID}"
     else
-        rm -f "$SINGLE_WAV"
-        # Failed synthesis: release the dedup marker so a legitimate retry
-        # of the same text within the window is not swallowed.
-        rm -f ${DEDUP_FILE:+"$DEDUP_FILE"}
+        SEND_TARGET="$PLATFORM"
     fi
+    JOB_DIR="$HOME/.hermes/cache/aw-jobs"
+    mkdir -p "$JOB_DIR"
+    JOB_SCRIPT="$JOB_DIR/aw-send-$STAMP_ID.sh"
+    CHLIST="$JOB_DIR/chunks-$STAMP_ID.txt"
+    printf '%s' "$CLEAN" | python3 -c "
+import sys, re
+t = sys.stdin.read().strip()
+parts, buf = [], ''
+for para in re.split(r'(?<=[.!?]) +|\n+', t):
+    if buf and len(buf) + 1 + len(para) > 380:
+        parts.append(buf); buf = para
+    else:
+        buf = (buf + ' ' + para).strip()
+if buf: parts.append(buf)
+for p_ in parts[:6]:
+    print(p_.replace('\n', ' '))
+" > "$CHLIST" 2>/dev/null || true
+    [ -s "$CHLIST" ] || printf '%s' "$CLEAN" | head -c 380 > "$CHLIST"
+
+    # Hand the job its parameters as exported env: with set -u active in the
+    # parent, an UNQUOTED heredoc expands $JOB_LOG at write time and dies
+    # unbound — leaving an EMPTY job file (the exact silent-vixen bug). A
+    # quoted heredoc plus env passing has no runtime expansion at all.
+    export AW_JOB_ID="$STAMP_ID" AW_SLUG="$SLUG" AW_STAMP="$STAMP" \
+        AW_ARCHIVE="$ARCHIVE_DIR" AW_CACHE="$AUDIO_CACHE_DIR" \
+        AW_TARGET="$SEND_TARGET" AW_ENDPOINT="$TTS_ENDPOINT" \
+        AW_VOICE="$VOICE_PARAM" AW_DEDUP="${DEDUP_FILE:-}" AW_CHLIST="$CHLIST"
+
+    cat > "$JOB_SCRIPT" <<'JOBEOF'
+#!/bin/bash
+# Detached afterwords delivery job (spawned by afterwords-post-llm.sh)
+JOB_LOG="$HOME/.hermes/cache/aw-jobs/job-$AW_JOB_ID.log"
+echo "$(date '+%H:%M:%S') job $AW_JOB_ID start target=$AW_TARGET" >> "$JOB_LOG"
+MSG_WORKDIR=$(mktemp -d /tmp/afterwords-msg.XXXXXX)
+CHUNK_N=0
+while IFS= read -r CHUNK; do
+    [ -z "$CHUNK" ] && continue
+    CHUNK_ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$CHUNK" 2>/dev/null || true)
+    [ -z "$CHUNK_ENC" ] && continue
+    CHUNK_WAV="$MSG_WORKDIR/chunk-$CHUNK_N.wav"
+    CHUNK_OGG="$AW_CACHE/${AW_SLUG}-${AW_STAMP}-c${CHUNK_N}.ogg"
+    HTTP=$(curl -s --max-time 120 -w "%{http_code}" -o "$CHUNK_WAV" "${AW_ENDPOINT}?text=${CHUNK_ENC}${AW_VOICE}" 2>/dev/null || echo "000")
+    if [ "$HTTP" = "200" ] && [ -s "$CHUNK_WAV" ]; then
+        ffmpeg -y -i "$CHUNK_WAV" -c:a libopus -b:a 64k "$CHUNK_OGG" 2>/dev/null || true
+        lame --quiet -V 2 "$CHUNK_WAV" "${AW_ARCHIVE}/${AW_SLUG}-${AW_STAMP}-c${CHUNK_N}.mp3" 2>/dev/null || true
+        printf '%s\n' "$CHUNK" > "${AW_ARCHIVE}/${AW_SLUG}-${AW_STAMP}-c${CHUNK_N}.txt" 2>/dev/null || true
+        SEND_OK=false
+        for ATTEMPT in 1 2 3; do
+            if hermes send -t "$AW_TARGET" "MEDIA:$CHUNK_OGG" >>"$JOB_LOG" 2>&1; then
+                SEND_OK=true; break
+            fi
+            echo "$(date '+%H:%M:%S') chunk$CHUNK_N send attempt $ATTEMPT failed" >> "$JOB_LOG"
+            sleep 15
+        done
+        if $SEND_OK; then
+            echo "$(date '+%H:%M:%S') chunk$CHUNK_N sent" >> "$JOB_LOG"
+        else
+            echo "$(date '+%H:%M:%S') chunk$CHUNK_N PERMANENT send failure" >> "$JOB_LOG"
+            [ -n "$AW_DEDUP" ] && rm -f "$AW_DEDUP"
+        fi
+    fi
+    CHUNK_N=$((CHUNK_N + 1))
+done < "$AW_CHLIST"
+rm -rf "$MSG_WORKDIR"
+grep -q "PERMANENT" "$JOB_LOG" 2>/dev/null || rm -f "$AW_CHLIST" "$0"
+JOBEOF
+    chmod +x "$JOB_SCRIPT"
+    nohup bash "$JOB_SCRIPT" >/dev/null 2>&1 &
+    disown || true
     exit 0
 fi
 
+# ── CLI: Chunked pipelinefi
+
+# ── CLI: Chunked pipeline
+# ── CLI: Chunked pipeline
 # ── CLI: Chunked pipeline: synth N+1 while playing N ────────────────────
 acquire_play_lock || exit 0
 CHUNK_DIR=$(mktemp -d "/tmp/hermes-tts-chunks-XXXXXX")

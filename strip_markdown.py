@@ -82,6 +82,22 @@ def _structural_lines(text: str) -> list[str]:
     # Drop fenced code entirely (not speakable).
     text = re.sub(r'```[\s\S]*?```', '\n\n', text)
 
+    # Delivery/attachment plumbing is never speakable: gateway MEDIA: tags,
+    # platform [[audio as voice]] wrappers, orphaned MEDI* residue (the
+    # marker survives partial upstream stripping), and bare media filenames.
+    text = re.sub(r'\[\[[^\]]*\]\]', ' ', text)
+    text = re.sub(r'\bMEDIA:\S*', ' ', text, flags=re.I)
+    text = re.sub(
+        r'\b[\w./:-]*\.(?:jpg|jpeg|png|webp|gif|mp3|ogg|oga|wav|opus|m4a|flac)\b',
+        ' ', text, flags=re.I)
+    text = re.sub(
+        r'\bMEDI(?=[\w.-]*\.(?:jpg|jpeg|png|webp|gif|mp3|ogg|oga|wav|opus|m4a|flac)\b)\S*',
+        ' ', text, flags=re.I)
+    text = re.sub(r'\s{2,}', ' ', text)
+    # Orphaned colon left by removed markers → sentence punctuation.
+    text = re.sub(r'\s*[:;]\s*\.', '.', text)
+    text = re.sub(r'\s*:\s*,', ', ', text)
+
     spoken: list[str] = []
     for raw in text.splitlines():
         line = raw.rstrip()

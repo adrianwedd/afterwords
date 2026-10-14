@@ -1,5 +1,5 @@
 default: holly
-hermes: data
+hermes: seven-of-nine
 codex: seven-of-nine
 agy: samantha
 gemini: marla
@@ -8,3 +8,4 @@ feature-dev:code-architect: picard
 feature-dev:code-explorer: attenborough
 superpowers:code-reviewer: spock
 natalie-ws25: vixen
+vixen: seydoux
