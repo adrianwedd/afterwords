@@ -86,6 +86,8 @@ def _structural_lines(text: str) -> list[str]:
     # platform [[audio as voice]] wrappers, orphaned MEDI* residue (the
     # marker survives partial upstream stripping), and bare media filenames.
     text = re.sub(r'\[\[[^\]]*\]\]', ' ', text)
+    # Platform delivery annotations, e.g. "[Sent audio attachment]".
+    text = re.sub(r'\[(?:Sent [^\]]*|Edited[^\]]*)\]', ' ', text, flags=re.I)
     text = re.sub(r'\bMEDIA:\S*', ' ', text, flags=re.I)
     text = re.sub(
         r'\b[\w./:-]*\.(?:jpg|jpeg|png|webp|gif|mp3|ogg|oga|wav|opus|m4a|flac)\b',
