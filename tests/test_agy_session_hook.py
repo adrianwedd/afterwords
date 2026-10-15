@@ -93,3 +93,23 @@ def test_shell_hook_invokes_helper_without_unknown_flag():
     assert "--strip-markdown" not in hook
     assert 'agy-session-hook.py" "$TRANSCRIPT_PATH"' in hook
 
+
+
+def test_unattended_audio_audit_optout_exits_before_hook_synthesis(tmp_path):
+    import subprocess
+    hook = Path(".claude/hooks/agy-tts-hook.sh").resolve()
+    content = hook.read_text(encoding="utf-8")
+    assert "AFTERWORDS_SKIP_AGY_TTS" in content
+    assert content.index("AFTERWORDS_SKIP_AGY_TTS") < content.index("INPUT=$(cat)")
+    # The real Stop hook accepts the environment inherited from its AGy child.
+    # This test never constructs a queue item or calls the installed TTS worker.
+    result = subprocess.run(
+        ["bash", str(hook)],
+        input='{"transcriptPath":"/definitely/missing","workspacePaths":["/tmp"]}',
+        text=True, capture_output=True, cwd=tmp_path,
+        env={**os.environ, "AFTERWORDS_SKIP_AGY_TTS": "1"},
+        timeout=5,
+    )
+    assert result.returncode == 0
+    assert result.stdout == ""
+    assert result.stderr == ""

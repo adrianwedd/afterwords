@@ -7,6 +7,10 @@
 #
 set -uo pipefail
 
+# Unattended native-audio audits save their report as private JSON, not spoken TTS.
+# Opt-out applies ONLY to the review subprocess; normal AGy replies are unchanged.
+[ "${AFTERWORDS_SKIP_AGY_TTS:-0}" = "1" ] && exit 0
+
 QUEUEDIR="/tmp/claude-tts-queue"
 WORKER_PID="/tmp/claude-tts-worker.pid"
 WORKER="$HOME/.claude/hooks/tts-worker.sh"
