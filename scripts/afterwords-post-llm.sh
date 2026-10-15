@@ -100,10 +100,14 @@ if '/profiles/' in home:
 fi
 # ── Platform routing ──────────────────────────────────────────────────────
 # CLI/local: play audio locally via afplay
-# Messaging platforms: synthesize full audio, send as attachment via hermes send
+# Messaging platforms: DELIVERED NATIVELY by the gateway's voice mode
+#   (/voice tts per chat, persisted in $HERMES_HOME/gateway_voice_mode.json;
+#   TTS provider = tts.providers.afterwords with voice_compatible: true).
+# The hook must NOT also synthesize/send for chats on voice mode — that is
+# the dual-send bug (2026-10-15): duplicate notes, wrong bot, wrong chat.
 MSG_PLATFORM=false
 case "$PLATFORM" in
-    telegram|discord) MSG_PLATFORM=true ;;
+    telegram|discord) exit 0 ;;   # gateway voice mode owns delivery
     slack|signal|matrix|whatsapp|email|sms|feishu|wecom|yuanbao) exit 0 ;;
 esac
 
