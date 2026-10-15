@@ -102,8 +102,10 @@ def world(tmp_path):
             sys.stdout.write(str(status))
         PY
         """))
-    for tool in ("afplay", "lame", "ffmpeg", "hermes"):
+    for tool in ("lame", "ffmpeg", "hermes"):
         _write_exe(bindir / tool, "#!/usr/bin/env bash\nexit 0\n")
+    plays = tmp_path / "afplay.log"
+    _write_exe(bindir / "afplay", f'#!/usr/bin/env bash\necho "$@" >> {str(plays)!r}\n')
 
     provider = tmp_path / "provider.sh"
     source = COMMAND_SCRIPT.read_text()
@@ -112,18 +114,21 @@ def world(tmp_path):
     provider.write_text(source)
 
     return {"tmp": tmp_path, "home": home, "homes": homes, "bindir": bindir,
-            "requests": requests, "provider": provider, "workdir": workdir}
+            "requests": requests, "provider": provider, "workdir": workdir, "plays": plays}
 
 
 def _run(world, profile: str, text: str, voice: str | None = None,
-         platform: str | None = "telegram", tag: str = "x"):
+         platform: str | None = "telegram", tag: str = "x", gateway: bool = False):
     voice = VOICES.get(profile, "") if voice is None else voice
     env = dict(os.environ)
     env.update(PATH=f"{world['bindir']}:{env['PATH']}", HOME=str(world["home"]),
                HERMES_HOME=str(world["homes"][profile]), AFTERWORDS_REPO=str(REPO))
     env.pop("HERMES_SESSION_PLATFORM", None)
+    env.pop("_HERMES_GATEWAY", None)
     if platform:
         env["HERMES_SESSION_PLATFORM"] = platform
+    if gateway:
+        env["_HERMES_GATEWAY"] = "1"
     text_path = world["tmp"] / f"in-{tag}.txt"
     text_path.write_text(text)
     out = world["tmp"] / f"out-{tag}.wav"
@@ -218,6 +223,27 @@ def test_gateway_delivered_audio_is_never_relayed_by_the_default_bot(world):
         assert list(kept.glob("*.txt")), f"{profile} lost its delivery record"
 
 
+def test_voice_input_reply_is_a_gateway_delivery_even_without_a_platform(world):
+    """The gateway clears HERMES_SESSION_PLATFORM before answering voice input.
+
+    Seen live 2026-10-15 18:22: the default bot's reply to a voice note ran in
+    CLI mode, landed in the relayed archive and the feed poller sent it a second
+    time. The gateway process marker must route it as a gateway delivery: no
+    local playback, nothing for the feed to relay — for either profile.
+    """
+    for profile in ("default", "vixen"):
+        result, out = _run(world, profile, f"{profile} answers a voice note.", platform=None,
+                           gateway=True, tag=f"{profile}-vn")
+        assert result.returncode == 0, result.stderr
+        assert out.stat().st_size > 1000
+        lines = _evidence(world, profile)
+        assert lines and "platform=/gateway " in lines[-1] and f"voice={VOICES[profile]} " in lines[-1]
+    assert not world["plays"].exists(), "a gateway reply was played on this Mac"
+    relay = world["homes"]["default"] / "tts-archive"
+    assert not list(relay.glob("*.mp3")) and not list(relay.glob("*.txt"))
+    assert _relayed(world) == []
+
+
 def test_cli_archives_stay_in_the_speaking_profiles_scope(world):
     """Only default-profile CLI speech lands where the default bot relays from."""
     for profile in ("default", "vixen"):
@@ -285,7 +311,9 @@ def _hermes_call(world, runtime, profile, entry, text, tag):
     driver.write_text(_HERMES_DRIVER)
     env = {k: v for k, v in os.environ.items() if not k.startswith(("HERMES_", "PYTHON"))}
     env.update(HOME=str(world["home"]), HERMES_HOME=str(world["homes"][profile]),
-               HERMES_SESSION_PLATFORM="telegram")
+               _HERMES_GATEWAY="1")
+    if entry != "voice_input":  # cleared before the post-handler voice-input auto-TTS
+        env["HERMES_SESSION_PLATFORM"] = "telegram"
     out = world["tmp"] / f"h-{tag}.ogg"
     return subprocess.run([str(py), "-I", str(driver), str(HERMES_SRC), str(sp), entry, text, str(out)],
                           capture_output=True, text=True, env=env, cwd=world["workdir"], timeout=180)
@@ -316,6 +344,10 @@ def test_real_hermes_paths_keep_each_profile_voice_across_restarts(world):
         profile = r["text"].split()[0]
         assert r["voice"] == VOICES[profile], f"{profile} spoke as {r['voice']}: {r}"
         assert r["hermes_home"] == str(world["homes"][profile]), r
+    assert not world["plays"].exists(), "a gateway reply was played on this Mac"
+    relay = world["homes"]["default"] / "tts-archive"
+    assert not list(relay.glob("*.mp3")) and not list(relay.glob("*.txt")), \
+        "a gateway reply landed where the default bot's feed relays from"
 
 
 def test_real_hermes_profile_without_voice_fails_instead_of_borrowing(world):

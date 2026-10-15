@@ -213,6 +213,11 @@ Both paths:
   ```
 - The profile comes from `$HERMES_HOME` (`~/.hermes` → `default`, `~/.hermes/profiles/<name>` → `<name>`).
   Every request appends `profile= voice= platform= sha= outcome=` to `$HERMES_HOME/logs/afterwords-command.log`.
+- Delivery is classified once: a turn inside a gateway process (`_HERMES_GATEWAY=1`, inherited by the
+  command) or with a messaging `HERMES_SESSION_PLATFORM` is a **gateway delivery** (synchronous
+  artifact, no local playback); only a direct CLI turn plays locally. The gateway clears
+  `HERMES_SESSION_PLATFORM` before answering voice-message input, so the marker is what keeps those
+  replies from being treated as CLI.
 - Archive MP3 + text sidecar (best-effort) into the serving profile's scope: CLI turns to
   `$HERMES_HOME/tts-archive/`; messaging turns (already delivered by that profile's own bot) to
   `$HERMES_HOME/tts-archive/gateway-delivered/`, which `tts-feed-send.py` does not relay. Only

@@ -70,6 +70,24 @@ fi
 # (voice requirement, archive location, evidence log) keys off it.
 PROFILE_HOME="${HERMES_HOME:-$HOME/.hermes}"
 PROFILE_HOME="${PROFILE_HOME%/}"
+
+# ── Who delivers this artifact ────────────────────────────────────────
+# A gateway turn's audio is delivered by that gateway, with the serving
+# profile's own bot; only a direct CLI turn is spoken (and relayed) from here.
+# HERMES_SESSION_PLATFORM alone cannot tell them apart: the gateway clears it
+# before the post-handler auto-TTS that answers voice-message input, so those
+# replies arrived looking like CLI — played on this Mac and re-relayed by the
+# feed poller. The gateway process marker (_HERMES_GATEWAY=1, inherited by this
+# command) is the reliable signal; the platform name is kept for messaging
+# contexts outside a gateway process.
+DELIVERY="cli"
+if [ "${_HERMES_GATEWAY:-}" = "1" ]; then
+    DELIVERY="gateway"
+fi
+case "${HERMES_SESSION_PLATFORM:-}" in
+    ""|cli|local) ;;
+    *) DELIVERY="gateway" ;;
+esac
 case "$PROFILE_HOME" in
     */profiles/*) PROFILE="${PROFILE_HOME##*/}" ;;
     *) PROFILE="default" ;;
@@ -87,7 +105,7 @@ if [ -z "$VOICE" ]; then
         "$PROFILE" "$PROFILE_HOME/config.yaml" >&2
     mkdir -p "$PROFILE_HOME/logs" 2>/dev/null || true
     printf '%s profile=%s voice= platform=%s outcome=failed:no-voice-configured pid=%s\n' \
-        "$(date '+%Y-%m-%d %H:%M:%S')" "$PROFILE" "${HERMES_SESSION_PLATFORM:-cli}" "$$" \
+        "$(date '+%Y-%m-%d %H:%M:%S')" "$PROFILE" "${HERMES_SESSION_PLATFORM:-}/$DELIVERY" "$$" \
         >> "$PROFILE_HOME/logs/afterwords-command.log" 2>/dev/null || true
     exit 2
 fi
@@ -206,7 +224,7 @@ log_evidence() {
     # $1 = outcome (ok / partial / failed:<reason>), $2 = artifact bytes
     mkdir -p "${EVIDENCE_LOG%/*}" 2>/dev/null || true
     printf '%s profile=%s voice=%s platform=%s chars=%s sha=%s outcome=%s bytes=%s pid=%s\n' \
-        "$(date '+%Y-%m-%d %H:%M:%S')" "$PROFILE" "$VOICE" "${HERMES_SESSION_PLATFORM:-cli}" \
+        "$(date '+%Y-%m-%d %H:%M:%S')" "$PROFILE" "$VOICE" "${HERMES_SESSION_PLATFORM:-}/$DELIVERY" \
         "${#CLEANED}" "${TEXT_SHA:-?}" "$1" "${2:-0}" "$$" >> "$EVIDENCE_LOG" 2>/dev/null || true
 }
 
@@ -220,10 +238,9 @@ log_evidence() {
 #     feed poller send it a second time with the default bot (Vixen's voice
 #     arriving from the Hermes bot). Those are kept in a non-relayed subdir.
 ARCHIVE_DIR="$PROFILE_HOME/tts-archive"
-case "${HERMES_SESSION_PLATFORM:-}" in
-    ""|cli|local) ;;
-    *) ARCHIVE_DIR="$PROFILE_HOME/tts-archive/gateway-delivered" ;;
-esac
+if [ "$DELIVERY" = "gateway" ]; then
+    ARCHIVE_DIR="$PROFILE_HOME/tts-archive/gateway-delivered"
+fi
 
 archive_mp3_sidecar() {
     # $1 = the WAV actually delivered. Archive MP3 + text sidecar of spoken text.
@@ -244,10 +261,9 @@ print(t or 'voice')
 }
 
 # ── Platform detection ────────────────────────────────────────────────
-# HERMES_SESSION_PLATFORM is set by the gateway on messaging platforms.
-# If unset or "cli"/"local", we're on CLI — chunked local synthesis + playback.
+# Direct CLI → chunked local synthesis + playback. Gateway → synchronous artifact.
 ASYNC=false
-if [ -z "${HERMES_SESSION_PLATFORM:-}" ] || [ "$HERMES_SESSION_PLATFORM" = "cli" ] || [ "$HERMES_SESSION_PLATFORM" = "local" ]; then
+if [ "$DELIVERY" = "cli" ]; then
     ASYNC=true
 fi
 
