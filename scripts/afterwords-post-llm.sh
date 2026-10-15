@@ -87,6 +87,17 @@ import sys, json
 d = json.load(sys.stdin)
 print(d.get('profile', '') or d.get('extra', {}).get('profile', ''))
 " 2>/dev/null || true)
+# Payload profile is not always present on every fire type. HERMES_HOME
+# follows the routed profile (agent/shell_hooks.py builds hook-child env from
+# it), so an empty payload falls back to the profile the gateway launched with.
+if [ -z "$PROFILE" ]; then
+    PROFILE=$(python3 -c "
+import os
+home = os.environ.get('HERMES_HOME', '').rstrip('/')
+if '/profiles/' in home:
+    print(home.rsplit('/', 1)[-1])
+" 2>/dev/null || true)
+fi
 # ── Platform routing ──────────────────────────────────────────────────────
 # CLI/local: play audio locally via afplay
 # Messaging platforms: synthesize full audio, send as attachment via hermes send
