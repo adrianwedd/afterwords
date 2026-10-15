@@ -196,8 +196,28 @@ bash afterwords-tts-command.sh <input_path> <output_path> [voice]
 
 Both paths:
 - Use repository strip/chunk helpers when available (see the script for fallback behavior)
-- Resolve voice: config arg → project `.afterwords` (`hermes` key → `default:`) → global `~/.afterwords`
-- Archive MP3 + text sidecar to `~/.hermes/tts-archive/` (best-effort)
+- Voice is the serving profile's `tts.providers.afterwords.voice`, passed as `{voice}` — the one
+  authoritative setting per profile. There is **no fallback**: an empty `{voice}` exits 2 naming the
+  profile, and an unknown voice surfaces the server's HTTP 400. (`.afterwords` files only steer the
+  local-playback hooks, never this provider.) Each Hermes profile that speaks must set its own:
+  ```yaml
+  tts:
+    provider: afterwords
+    providers:
+      afterwords:
+        type: command
+        command: 'bash ~/repos/afterwords/scripts/afterwords-tts-command.sh {input_path} {output_path} {voice}'
+        output_format: wav
+        voice: seydoux          # this profile's voice
+        voice_compatible: true
+  ```
+- The profile comes from `$HERMES_HOME` (`~/.hermes` → `default`, `~/.hermes/profiles/<name>` → `<name>`).
+  Every request appends `profile= voice= platform= sha= outcome=` to `$HERMES_HOME/logs/afterwords-command.log`.
+- Archive MP3 + text sidecar (best-effort) into the serving profile's scope: CLI turns to
+  `$HERMES_HOME/tts-archive/`; messaging turns (already delivered by that profile's own bot) to
+  `$HERMES_HOME/tts-archive/gateway-delivered/`, which `tts-feed-send.py` does not relay. Only
+  default-profile CLI speech reaches `~/.hermes/tts-archive/`, the directory the feed relays with the
+  default profile's bot.
 - Exit zero only on complete speech delivery. The CLI preserves surviving chunks on partial failure and exits nonzero; total failure removes the output artifact. Local playback is separate from artifact delivery.
 
 ---
@@ -294,7 +314,7 @@ The inbound inline path archives to `~/.hermes/tts-archive`, which the watcher a
 |---------|-------|
 | No voice on CLI | `afterwords status` — is server running? |
 | No voice on Telegram | Check Hermes TTS provider config (`tts.provider: afterwords`) and platform delivery; the native hook intentionally skips messaging platforms |
-| Wrong voice | Check project `.afterwords` then `~/.afterwords` — first match wins |
+| Wrong voice | Hermes TTS (tool, `/voice`, voice-input replies): the profile's `tts.providers.afterwords.voice`; check `$HERMES_HOME/logs/afterwords-command.log`. Local hooks: project `.afterwords` then `~/.afterwords` — first match wins |
 | Hook not loading | Ensure `HOOK.yaml` + `handler.py` in `~/.hermes/hooks/afterwords-tts/` |
 | Native hook not updated | Restart gateway: `kill $(pgrep -f 'hermes.*gateway.*run')` then reconnect — hooks load at startup |
 | Audio plays but first chunk delayed | Old un-chunked hook — both `afterwords-post-llm.sh` and `handler.py` should split text into ~400-char chunks |

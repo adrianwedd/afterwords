@@ -3,7 +3,7 @@
 # afterwords-tts-command.sh — Command provider for Hermes TTS
 #
 # Called by Hermes's command-type TTS provider system.
-# Reads text from {input_path}, resolves voice from .afterwords files,
+# Reads text from {input_path}, speaks it in the voice Hermes passes as {voice},
 # synthesizes via the Afterwords server, and writes the REAL synthesized
 # artifact to {output_path}.
 #
@@ -43,7 +43,7 @@
 # Placeholders provided by Hermes:
 #   {input_path}  / {text_path} — temp file containing the text to speak
 #   {output_path} — path where the audio file must be written
-#   {voice}       — voice name from config (may be empty)
+#   {voice}       — tts.providers.afterwords.voice of the serving profile (REQUIRED)
 #   {format}      — output format (wav, mp3, etc.)
 #
 set -euo pipefail
@@ -63,43 +63,33 @@ if [ -z "$TEXT" ]; then
     exit 1
 fi
 
-# Resolve voice: config voice → project .afterwords (agent key → default:) → global ~/.afterwords (agent key → default:) → server default
+# ── Speaking profile ──────────────────────────────────────────────────
+# Hermes runs this command with HERMES_HOME set to the profile it is serving
+# (~/.hermes for the default profile, ~/.hermes/profiles/<name> otherwise). It is
+# the only identity this process receives, so everything profile-specific below
+# (voice requirement, archive location, evidence log) keys off it.
+PROFILE_HOME="${HERMES_HOME:-$HOME/.hermes}"
+PROFILE_HOME="${PROFILE_HOME%/}"
+case "$PROFILE_HOME" in
+    */profiles/*) PROFILE="${PROFILE_HOME##*/}" ;;
+    *) PROFILE="default" ;;
+esac
+
+# ── Voice: the profile's tts.providers.afterwords.voice, passed as {voice} ──
+# There is exactly one authoritative setting per profile and NO fallback. This
+# used to fall back to .afterwords under the hardcoded "hermes" agent key, then
+# to the server default — so a profile whose provider block lacked `voice:`
+# silently spoke with the default profile's voice (Vixen as seven-of-nine,
+# 2026-10-15). An unresolved voice is a configuration error and fails visibly.
 VOICE="$CONFIG_VOICE"
-
 if [ -z "$VOICE" ]; then
-    # Try project .afterwords
-    AW_FILE=""
-    CWD="$(pwd)"
-    if [ -f "$CWD/.afterwords" ]; then
-        AW_FILE="$CWD/.afterwords"
-    elif [ -f "$HOME/.afterwords" ]; then
-        AW_FILE="$HOME/.afterwords"
-    fi
-
-    if [ -n "$AW_FILE" ]; then
-        if grep -q ':' "$AW_FILE" 2>/dev/null; then
-            # Mapping mode. Split on the final colon so keys may contain colons.
-            VOICE=$(awk -v agent="hermes" '
-                function trim(s) { gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s }
-                /^[[:space:]]*#/ || /^[[:space:]]*$/ { next }
-                {
-                    pos = 0
-                    for (i = 1; i <= length($0); i++) {
-                        if (substr($0, i, 1) == ":") pos = i
-                    }
-                    if (!pos) next
-                    key = trim(substr($0, 1, pos - 1))
-                    val = trim(substr($0, pos + 1))
-                    if (key == agent) { print val; found = 1; exit }
-                    if (key == "default" && fallback == "") fallback = val
-                }
-                END { if (!found && fallback != "") print fallback }
-            ' "$AW_FILE" 2>/dev/null)
-        else
-            # Simple mode: first non-empty non-comment line
-            VOICE=$(grep -v '^[[:space:]]*$\|^[[:space:]]*#' "$AW_FILE" | head -1 | tr -d '[:space:]' 2>/dev/null || true)
-        fi
-    fi
+    printf 'afterwords: no voice configured for Hermes profile "%s" (%s): set tts.providers.afterwords.voice and keep {voice} in the command template — refusing to fall back to another voice\n' \
+        "$PROFILE" "$PROFILE_HOME/config.yaml" >&2
+    mkdir -p "$PROFILE_HOME/logs" 2>/dev/null || true
+    printf '%s profile=%s voice= platform=%s outcome=failed:no-voice-configured pid=%s\n' \
+        "$(date '+%Y-%m-%d %H:%M:%S')" "$PROFILE" "${HERMES_SESSION_PLATFORM:-cli}" "$$" \
+        >> "$PROFILE_HOME/logs/afterwords-command.log" 2>/dev/null || true
+    exit 2
 fi
 
 # ── Canonical strip + chunk helpers ────────────────────────────────────
@@ -208,11 +198,38 @@ if [ -n "$VOICE" ]; then
     URL="${URL}&voice=${VOICE_ENCODED}"
 fi
 
+# Per-request evidence: which profile asked for which voice, and what came back.
+# Lives in the speaking profile's own logs so each bot's record is separable.
+EVIDENCE_LOG="$PROFILE_HOME/logs/afterwords-command.log"
+TEXT_SHA=$(printf '%s' "$CLEANED" | shasum -a 256 2>/dev/null | cut -c1-12)
+log_evidence() {
+    # $1 = outcome (ok / partial / failed:<reason>), $2 = artifact bytes
+    mkdir -p "${EVIDENCE_LOG%/*}" 2>/dev/null || true
+    printf '%s profile=%s voice=%s platform=%s chars=%s sha=%s outcome=%s bytes=%s pid=%s\n' \
+        "$(date '+%Y-%m-%d %H:%M:%S')" "$PROFILE" "$VOICE" "${HERMES_SESSION_PLATFORM:-cli}" \
+        "${#CLEANED}" "${TEXT_SHA:-?}" "$1" "${2:-0}" "$$" >> "$EVIDENCE_LOG" 2>/dev/null || true
+}
+
+# Archive location is scoped to the speaking profile, and to who delivers.
+#   * CLI turns: $PROFILE_HOME/tts-archive. For the default profile that is
+#     ~/.hermes/tts-archive, which tts-feed-send.py relays with the DEFAULT
+#     profile's bot — correct only for default-profile speech, so a named
+#     profile never writes there.
+#   * Messaging turns: the gateway already delivered this artifact with the
+#     serving profile's own bot. Writing it into the relayed directory made the
+#     feed poller send it a second time with the default bot (Vixen's voice
+#     arriving from the Hermes bot). Those are kept in a non-relayed subdir.
+ARCHIVE_DIR="$PROFILE_HOME/tts-archive"
+case "${HERMES_SESSION_PLATFORM:-}" in
+    ""|cli|local) ;;
+    *) ARCHIVE_DIR="$PROFILE_HOME/tts-archive/gateway-delivered" ;;
+esac
+
 archive_mp3_sidecar() {
     # $1 = the WAV actually delivered. Archive MP3 + text sidecar of spoken text.
     local src="$1" stamp archive_dir slug archive_mp3
     stamp=$(date +%Y%m%d-%H%M%S)
-    archive_dir="$HOME/.hermes/tts-archive"
+    archive_dir="$ARCHIVE_DIR"
     mkdir -p "$archive_dir" 2>/dev/null || true
     slug=$(printf '%s' "$CLEANED" | python3 -c "
 import sys, re
@@ -389,6 +406,7 @@ if $ASYNC; then
                 "${#NONEMPTY[@]}" "$NCHUNKS" >&2
         else
             rm -f "$OUTPUT_PATH"
+            log_evidence "failed:no-usable-chunk" 0
             exit 1
         fi
     fi
@@ -396,7 +414,11 @@ if $ASYNC; then
     archive_mp3_sidecar "$OUTPUT_PATH"
     printf 'afterwords: delivered %s bytes to %s (%d chunk(s))\n' \
         "$(file_size "$OUTPUT_PATH")" "$OUTPUT_PATH" "$NCHUNKS" >&2
-    $PARTIAL && exit 1
+    if $PARTIAL; then
+        log_evidence "partial" "$(file_size "$OUTPUT_PATH")"
+        exit 1
+    fi
+    log_evidence "ok" "$(file_size "$OUTPUT_PATH")"
     exit 0
 fi
 
@@ -405,15 +427,20 @@ fi
 HTTP_CODE=$(curl -s -w "%{http_code}" -o "$OUTPUT_PATH" "$URL" 2>/dev/null || echo "000")
 
 if [ "$HTTP_CODE" != "200" ]; then
-    echo "Afterwords TTS failed (HTTP $HTTP_CODE)" >&2
+    # Surface the server's reason (e.g. `unknown voice: <name>`) — never retry
+    # with a different voice.
+    echo "Afterwords TTS failed (HTTP $HTTP_CODE, profile=$PROFILE, voice=$VOICE): $(head -c 200 "$OUTPUT_PATH" 2>/dev/null)" >&2
     rm -f "$OUTPUT_PATH"
+    log_evidence "failed:http-$HTTP_CODE" 0
     exit 1
 fi
 
 # Verify output
 if [ ! -s "$OUTPUT_PATH" ]; then
     echo "Afterwords TTS produced empty output" >&2
+    log_evidence "failed:empty" 0
     exit 1
 fi
 
 archive_mp3_sidecar "$OUTPUT_PATH"
+log_evidence "ok" "$(file_size "$OUTPUT_PATH")"
