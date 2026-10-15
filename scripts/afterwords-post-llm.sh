@@ -274,6 +274,13 @@ print(t or 'voice')
     else
         SEND_TARGET="$PLATFORM"
     fi
+    # Dual-send guard: a reply that already carries an audio-delivery marker
+    # (agent-managed voice notes) must not ALSO be auto-synthesized here.
+    # Tested against the RAW PAYLOAD — the stripper consumes markers from CLEAN.
+    case "$PAYLOAD" in
+        *"[[audio_as_voice]]"*|*"MEDIA:"*) exit 0 ;;
+    esac
+
     JOB_DIR="$HOME/.hermes/cache/aw-jobs"
     mkdir -p "$JOB_DIR"
     JOB_SCRIPT="$JOB_DIR/aw-send-$STAMP_ID.sh"
@@ -297,6 +304,7 @@ for p_ in parts[:6]:
     # parent, an UNQUOTED heredoc expands $JOB_LOG at write time and dies
     # unbound — leaving an EMPTY job file (the exact silent-vixen bug). A
     # quoted heredoc plus env passing has no runtime expansion at all.
+    export AW_PROFILE="${PROFILE:-}"
     export AW_JOB_ID="$STAMP_ID" AW_SLUG="$SLUG" AW_STAMP="$STAMP" \
         AW_ARCHIVE="$ARCHIVE_DIR" AW_CACHE="$AUDIO_CACHE_DIR" \
         AW_TARGET="$SEND_TARGET" AW_ENDPOINT="$TTS_ENDPOINT" \
@@ -322,7 +330,12 @@ while IFS= read -r CHUNK; do
         printf '%s\n' "$CHUNK" > "${AW_ARCHIVE}/${AW_SLUG}-${AW_STAMP}-c${CHUNK_N}.txt" 2>/dev/null || true
         SEND_OK=false
         for ATTEMPT in 1 2 3; do
-            if hermes send -t "$AW_TARGET" "MEDIA:$CHUNK_OGG" >>"$JOB_LOG" 2>&1; then
+            if [ -n "$AW_PROFILE" ] && [ "$AW_PROFILE" != "default" ]; then
+                HERMES_SEND=(hermes -p "$AW_PROFILE" send)
+            else
+                HERMES_SEND=(hermes send)
+            fi
+            if "${HERMES_SEND[@]}" -t "$AW_TARGET" "MEDIA:$CHUNK_OGG" >>"$JOB_LOG" 2>&1; then
                 SEND_OK=true; break
             fi
             echo "$(date '+%H:%M:%S') chunk$CHUNK_N send attempt $ATTEMPT failed" >> "$JOB_LOG"
