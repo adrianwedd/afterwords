@@ -327,6 +327,26 @@ def test_historical_1802_char_case_writes_the_full_speech_payload(tmp_path):
 # Hermes's own file contract
 # --------------------------------------------------------------------------
 
+@pytest.mark.parametrize('platform', ['telegram', 'discord'])
+def test_messaging_long_reply_chunks_without_local_playback(tmp_path, platform):
+    result, ctx = _run_provider(tmp_path, LONG_REPLY, platform=platform)
+    assert result.returncode == 0, result.stderr
+    sent = ctx['requests'].read_text().splitlines()
+    assert len(sent) >= 4
+    assert all(len(chunk) <= 400 for chunk in sent)
+    data = ctx['out'].read_bytes()
+    for chunk in sent:
+        assert chunk.encode() in data
+    assert not ctx['playback'].exists() or not ctx['playback'].read_text()
+
+
+def test_messaging_missing_chunk_is_not_success(tmp_path):
+    result, ctx = _run_provider(tmp_path, LONG_REPLY, platform='telegram', fail_from_chunk=2)
+    assert result.returncode != 0
+    assert 'incomplete audio' in result.stderr
+    assert not ctx['playback'].exists() or not ctx['playback'].read_text()
+
+
 def test_hermes_accepts_the_artifact_under_its_file_contract(tmp_path, monkeypatch):
     """Drive `_generate_command_tts` against the real provider and a stub server.
 
