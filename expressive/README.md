@@ -419,3 +419,19 @@ The existing Qwen 0.6B baseline also failed the single-call 391-word public
 Hugo response: it returned a 96-second WAV ending mid-sentence, with 114 ASR
 edits (29.16%) and a substantial missing ending. HTTP success alone does not
 qualify long-response completeness for either backend.
+
+That single-call result is a backend-limit probe, not a test of the established
+Qwen delivery workflow. Normal long speech uses the canonical `chunks.py`
+sentence chunker. Compare that path with:
+
+```sh
+.venv/bin/python scripts/benchmark-afterwords-http.py \
+  --voice VOICE --case CASE --suite SUITE.json --port 7862 \
+  --chunked --out NEW_ATTEMPT_DIRECTORY
+```
+
+This uses 400-character chunks, saves each request text and returned WAV, and
+concatenates every PCM sample in order. It refuses incompatible sample rates
+or truncated payloads. It does not strip Markdown, change words, play audio,
+or retry failed requests. The receipt records the first completed chunk and
+the complete artifact latency separately; neither proves audible playback.

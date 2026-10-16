@@ -13,11 +13,37 @@ import time
 import urllib.parse
 import urllib.request
 import wave
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from chunks import chunk_text
 
 
 def sha(raw): return hashlib.sha256(raw).hexdigest()
+
+
+def combine_wavs(parts):
+    frames = []
+    rate = None
+    for raw in parts:
+        with wave.open(io.BytesIO(raw)) as audio:
+            if audio.getnchannels() != 1 or audio.getsampwidth() != 2 or not audio.getnframes():
+                raise ValueError('invalid PCM16 mono chunk')
+            if rate is not None and rate != audio.getframerate():
+                raise ValueError('chunk sample rates differ')
+            rate = audio.getframerate()
+            data = audio.readframes(audio.getnframes())
+            if len(data) != audio.getnframes()*2:
+                raise ValueError('truncated PCM chunk')
+            frames.append(data)
+    if not frames:
+        raise ValueError('no audio chunks')
+    output = io.BytesIO()
+    with wave.open(output, 'wb') as audio:
+        audio.setnchannels(1); audio.setsampwidth(2); audio.setframerate(rate)
+        audio.writeframes(b''.join(frames))
+    return output.getvalue()
 
 
 def main():
@@ -26,6 +52,7 @@ def main():
     parser.add_argument('--case', action='append', required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--port', type=int, default=7860)
+    parser.add_argument('--chunked', action='store_true', help='Use canonical 400-character sentence chunks; retain each request and concatenate PCM without editing')
     parser.add_argument('--suite', type=Path, default=ROOT/'qa/expressive-voice/cases/suite.v1.json')
     args = parser.parse_args()
     if not 1 <= args.port <= 65535: parser.error('invalid loopback port')
@@ -45,6 +72,7 @@ def main():
     args.out.mkdir(parents=True,exist_ok=True)
     run = {'voice':args.voice,'endpoint':base,'suite_sha256':sha(args.suite.read_bytes()),
            'health_before':health,'status':'incomplete','cases':[],
+           'chunking':'canonical chunks.chunk_text, 400 characters' if args.chunked else 'single request',
            'limitations':['Native TTFA and peak model memory are not observable through this full-file API.',
                           'Delivery controls are not applied: this measures the selected voice defaults.',
                           'Generation and ASR do not certify acoustic quality.']}
@@ -58,15 +86,36 @@ def main():
                      'acoustic_acceptance':'unverified'}
             run['cases'].append(receipt);record()
             (args.out/(name+'.txt')).write_text(text)
-            url=base+'/synthesize?'+urllib.parse.urlencode({'voice':args.voice,'text':text,'lang':'en'})
             start=time.perf_counter()
-            with opener.open(url,timeout=180) as response:
-                receipt['response_headers_seconds']=time.perf_counter()-start
-                receipt['headers']=dict(response.headers)
-                if response.headers.get_content_type()!='audio/wav':raise ValueError('expected WAV response')
-                raw=response.read(50*1024**2+1)
+            segments = chunk_text(text, max_chars=400) if args.chunked else [text]
+            parts = []
+            receipt['chunks'] = []
+            for index, segment in enumerate(segments, 1):
+                chunk = {'index':index, 'text':segment, 'text_sha256':sha(segment.encode()), 'status':'incomplete'}
+                receipt['chunks'].append(chunk); record()
+                url=base+'/synthesize?'+urllib.parse.urlencode({'voice':args.voice,'text':segment,'lang':'en'})
+                chunk_start=time.perf_counter()
+                with opener.open(url,timeout=180) as response:
+                    chunk['response_headers_seconds']=time.perf_counter()-chunk_start
+                    chunk['headers']=dict(response.headers)
+                    if response.headers.get_content_type()!='audio/wav':raise ValueError('expected WAV response')
+                    raw=response.read(50*1024**2+1)
+                if len(raw)>50*1024**2:raise ValueError('oversized response')
+                combine_wavs([raw])  # Validate before retaining a completed chunk.
+                parts.append(raw)
+                chunk.update(status='generated_not_listening_verified', audio_sha256=sha(raw), full_audio_seconds=time.perf_counter()-chunk_start)
+                if args.chunked:
+                    stem=args.out/f'{name}-chunk-{index:03d}'
+                    stem.with_suffix('.wav').write_bytes(raw)
+                    stem.with_suffix('.txt').write_text(segment)
+                if index == 1:
+                    receipt['first_complete_chunk_seconds']=time.perf_counter()-start
+                    receipt['response_headers_seconds']=chunk['response_headers_seconds']
+                    receipt['headers']=chunk['headers']
+                record()
+                print(f'{name}: chunk {index}/{len(segments)} complete',flush=True)
+            raw=combine_wavs(parts) if args.chunked else parts[0]
             elapsed=time.perf_counter()-start
-            if len(raw)>50*1024**2:raise ValueError('oversized response')
             with wave.open(io.BytesIO(raw)) as audio:
                 rate=audio.getframerate();frames=audio.getnframes()
                 if frames==0 or audio.getnchannels()!=1 or audio.getsampwidth()!=2:raise ValueError('invalid PCM16 mono audio')
