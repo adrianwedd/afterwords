@@ -20,14 +20,14 @@ import tempfile
 import threading
 import time
 import warnings
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, contextmanager
 
 import numpy as np
 import soundfile as sf
 from fastapi import FastAPI, File, Form, Query, UploadFile
 from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from types import MappingProxyType
 from typing import Mapping
 
@@ -221,6 +221,27 @@ DEFAULT_VOICE = "galadriel"
 # Locks for thread-safe VOICES access and serialised synthesis.
 _model_lock = threading.Lock()
 _synth_lock = threading.Lock()  # serialise synthesis — MLX/Metal is not thread-safe
+_expressive_slots = threading.BoundedSemaphore(4)
+
+
+@contextmanager
+def _synthesis_admission(backend_name):
+    if backend_name != "fish-drama3":
+        with _synth_lock:
+            yield
+        return
+    if not _expressive_slots.acquire(blocking=False):
+        raise TimeoutError("expressive request queue full")
+    acquired = False
+    try:
+        acquired = _synth_lock.acquire(timeout=180)
+        if not acquired:
+            raise TimeoutError("expressive request queue deadline exceeded")
+        yield
+    finally:
+        if acquired:
+            _synth_lock.release()
+        _expressive_slots.release()
 _ready = threading.Event()
 _backend_states: dict[str, dict] = {}
 # Dedicated single thread for all MLX/Metal operations.
@@ -431,6 +452,13 @@ def health():
             "display_name": b.display_name,
             "supported_langs": list(b.supported_langs),
         }
+        if bname == "fish-drama3":
+            # Adapter load cannot prove a model is resident in another process.
+            adapter_ready = loaded_backends[bname]["loaded"]
+            loaded_backends[bname].update(
+                loaded=None, adapter_ready=adapter_ready,
+                state="adapter-ready" if adapter_ready else "registered",
+                model_residency="query-sidecar-health")
 
     default_backend_name = default_profile.backend if default_profile else "qwen3-0.6b"
     try:
@@ -453,7 +481,7 @@ def health():
     }
 
 
-def _synthesize_audio(text: str, profile: VoiceProfile, lang: str) -> Response:
+def _synthesize_audio(text: str, profile: VoiceProfile, lang: str, performance: dict | None = None) -> Response:
     """Core synthesis — dispatches to the voice's pinned backend.
     If the voice's backend doesn't support `lang`, attempts cross-backend
     family routing (see `_route_for_lang`)."""
@@ -491,8 +519,16 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str) -> Response:
 
     t0 = time.time()
     try:
-        with _synth_lock:
-            data, sr = _run_in_ml_thread(backend.synthesize, text, profile.prepared, lang)
+        prepared = profile.prepared
+        if performance is not None:
+            if profile.backend != "fish-drama3":
+                raise ValueError("performance controls require a fish-drama3 voice")
+            extras = {**prepared.extras, **performance}
+            backend.validate_extras(extras)
+            prepared = replace(prepared, extras=extras)
+        with _synthesis_admission(profile.backend):
+            data, sr = _run_in_ml_thread(backend.synthesize, text, prepared, lang)
+            delivered_backend = getattr(backend, "last_delivery_backend", profile.backend)
     except ValueError as exc:
         return JSONResponse(
             {"error": str(exc),
@@ -500,6 +536,8 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str) -> Response:
              "supported_langs": list(backend.supported_langs)},
             status_code=400,
         )
+    except TimeoutError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=503)
     except Exception as exc:
         log.error("synthesis failed: %s", exc, exc_info=True)
         return JSONResponse({"error": "synthesis failed"}, status_code=500)
@@ -521,7 +559,8 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str) -> Response:
             "X-Synthesis-Time": f"{elapsed:.3f}",
             "X-Duration": f"{duration:.3f}",
             "X-Sample-Rate": str(sr),
-            "X-Backend": profile.backend,
+            "X-Backend": delivered_backend,
+            "X-Requested-Backend": profile.backend,
         },
     )
 
@@ -531,6 +570,7 @@ def synthesize(
     text: str = Query(..., description="Text to speak"),
     voice: str = Query(DEFAULT_VOICE, description="Voice name"),
     lang: str = Query("en", description="BCP-47 language code; must be supported by the voice's backend"),
+    performance: str | None = Query(None, description="Optional JSON controls for expressive voices"),
 ):
     """Generate speech from text using cloned voice, return WAV audio."""
     if not text.strip():
@@ -547,7 +587,13 @@ def synthesize(
             {"error": f"unknown voice: {voice}", "available": sorted(VOICES.keys())},
             status_code=400)
 
-    return _synthesize_audio(text, profile, lang)
+    try:
+        controls = json.loads(performance) if performance is not None else None
+        if controls is not None and not isinstance(controls, dict):
+            raise ValueError("performance must be a JSON object")
+    except ValueError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=400)
+    return _synthesize_audio(text, profile, lang, controls)
 
 
 class SynthesizeRequest(BaseModel):
@@ -555,6 +601,7 @@ class SynthesizeRequest(BaseModel):
     voice: str
     emotion: str | None = None
     lang: str = "en"
+    performance: dict | None = None
 
 
 @app.post("/synthesize")
@@ -575,7 +622,7 @@ def synthesize_post(body: SynthesizeRequest):
             {"error": f"unknown voice: {body.voice}", "available": sorted(VOICES.keys())},
             status_code=400)
 
-    return _synthesize_audio(body.text, profile, body.lang)
+    return _synthesize_audio(body.text, profile, body.lang, body.performance)
 
 
 @app.post("/clone")

@@ -29,7 +29,7 @@ def test_register_all_with_17b_includes_large_model():
         "qwen3-0.6b", "qwen3-1.7b", "voxtral",
         "openvoice-v2", "f5-tts", "cosyvoice2", "gpt-sovits", "xtts-v2",
         "indextts-2", "neutts-air", "spark-tts", "dia2", "yourtts",
-        "firered-tts-2", "sv2tts", "mockingbird", "soprotts",
+        "firered-tts-2", "sv2tts", "mockingbird", "soprotts", "fish-drama3",
     }
 
 

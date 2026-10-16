@@ -1,0 +1,10 @@
+{
+  "mlx_audio": "dad2087f790dfe96b07d5aac1405db4b578b411f",
+  "models": {
+    "fishaudio/drama-3": "e0a9218aa48888270f06ef1ed9ea67622c0e17d2",
+    "mlx-community/fish-audio-drama-3-4bit": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+    "mlx-community/fish-audio-drama-3-3bit": "7120e8b11630aa6ae614224074457ef9bb4f48c0",
+    "mlx-community/fish-audio-drama-3-bf16": "0980952ff1bcb52140ef39876cd0d6c789d825bb"
+  },
+  "qualified": false
+}
