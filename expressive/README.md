@@ -394,3 +394,12 @@ omitted passages and a garbled ending. It is rejected. Instructions such as
 `excited`, `sad`, `angry`, `whispering` and `laughing` were passed separately
 from the exact target text; their acoustic effectiveness remains unverified.
 Native multi-speaker generation was not tested by this single-reference probe.
+
+A controlled six-paragraph version of that same 302-word long response retained
+all prose in the CPU transcript audit: its three raw edits were only number
+formatting (`seventeen`/`17`, `eleven fifteen`/`1115`). The complete artifact is
+130.68 s; six separate model processes took 32.01 s including their loads.
+Every paragraph used the same original reference and seed. No silence was
+trimmed or inserted and no crossfade was applied. This is application-level
+segmentation, not native model streaming or a general long-text qualification;
+boundary timing and acoustic quality still require review.
