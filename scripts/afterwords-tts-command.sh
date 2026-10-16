@@ -52,6 +52,13 @@ TEXT_PATH="${1:?Usage: afterwords-tts-command.sh <input_path> <output_path> [voi
 OUTPUT_PATH="${2:?Missing output_path}"
 CONFIG_VOICE="${3:-}"
 
+# Hermes native /voice owns playback of its returned sentence artifacts.
+PLAYBACK_OWNER="${AFTERWORDS_PLAYBACK_OWNER:-provider}"
+case "$PLAYBACK_OWNER" in
+    provider|hermes) ;;
+    *) echo "Error: AFTERWORDS_PLAYBACK_OWNER must be provider or hermes" >&2; exit 2 ;;
+esac
+
 # Opt-in profile-local loopback port; existing default remains unchanged.
 PORT="${AFTERWORDS_PORT:-7860}"
 case "$PORT" in
@@ -249,6 +256,8 @@ log_evidence() {
 ARCHIVE_DIR="$PROFILE_HOME/tts-archive"
 if [ "$DELIVERY" = "gateway" ]; then
     ARCHIVE_DIR="$PROFILE_HOME/tts-archive/gateway-delivered"
+elif [ "$PLAYBACK_OWNER" = "hermes" ]; then
+    ARCHIVE_DIR="$PROFILE_HOME/tts-archive/consumer-delivered"
 fi
 
 archive_mp3_sidecar() {
@@ -364,7 +373,7 @@ if $ASYNC; then
                     PREV_SIZE=$(file_size "$PREV_WAV")
                 fi
                 if [ "$PREV_SIZE" -gt 1000 ] && $PLAY_OK; then
-                    [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+                    [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
                 fi
             fi
         fi
@@ -377,7 +386,7 @@ if $ASYNC; then
     LAST_WAV="${CHUNK_DIR}/${IDX}.wav"
     if [ -f "$LAST_WAV" ] && $PLAY_OK; then
         if [ "$(file_size "$LAST_WAV")" -gt 1000 ]; then
-            [ -f "$MUTE_FILE" ] || afplay "$LAST_WAV" 2>/dev/null
+            [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$LAST_WAV" 2>/dev/null
         fi
     fi
 

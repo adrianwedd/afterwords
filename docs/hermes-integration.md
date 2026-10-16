@@ -339,3 +339,18 @@ process marker to skip those turns. Other platforms are skipped, so this
 configuration neither duplicates local speech nor sends external audio. The
 installer installs both the manifest and stamped handler. The default installer
 retains the documented CLI/local/empty native scope for standalone use.
+
+
+## Native Hermes sentence playback
+
+When Hermes native `/voice` consumes command-provider artifacts, use
+`env AFTERWORDS_PLAYBACK_OWNER=hermes bash /path/to/afterwords-tts-command.sh
+{input_path} {output_path} voice-name` in that profile's command. Hermes plays
+returned sentences; the provider must not also play them. The default owner
+`provider` retains ordinary CLI command-tool playback. This is full-file
+synthesis per sentence, overlapped by Hermes, not native model streaming.
+
+Consumer-owned CLI archives go in the profile's `tts-archive/consumer-delivered`
+subdirectory, outside the feed relay's top-level scan. Gateway contexts retain
+their existing artifact-only routing and `gateway-delivered` archives. This
+setting alone does not select a voice or change any profile configuration.
