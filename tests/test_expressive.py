@@ -299,6 +299,39 @@ def test_http_disconnect_waits_for_adapter_cancellation(monkeypatch):
     assert stopped.is_set()
 
 
+@pytest.mark.parametrize('method', ['GET', 'POST'])
+def test_disconnect_through_real_http_middleware(monkeypatch, method):
+    import threading
+    import server
+    started = threading.Event()
+    stopped = threading.Event()
+    def synth(text, profile, lang, performance, cancelled):
+        started.set()
+        if cancelled.wait(2):
+            stopped.set()
+        return server.Response(status_code=499)
+    monkeypatch.setattr(server, '_synthesize_audio', synth)
+    monkeypatch.setattr(server, '_ready', SimpleNamespace(is_set=lambda: True))
+    monkeypatch.setattr(server, '_clone_enabled', True)
+    monkeypatch.setattr(server, '_resolve_voice', lambda name, **kw: SimpleNamespace(backend='fish-drama3'))
+    async def run():
+        incoming = asyncio.Queue()
+        body = json.dumps({'text': 'Hello.', 'voice': 'test'}).encode() if method == 'POST' else b''
+        await incoming.put({'type': 'http.request', 'body': body, 'more_body': False})
+        scope = {'type': 'http', 'asgi': {'version': '3.0'}, 'http_version': '1.1',
+                 'method': method, 'scheme': 'http', 'path': '/synthesize',
+                 'raw_path': b'/synthesize', 'query_string': b'text=Hello.&voice=test',
+                 'headers': [(b'host', b'127.0.0.1'), (b'content-type', b'application/json')],
+                 'client': ('127.0.0.1', 1234), 'server': ('127.0.0.1', 7862)}
+        async def send(message): pass
+        task = asyncio.create_task(server.app(scope, incoming.get, send))
+        assert await asyncio.to_thread(started.wait, 1)
+        await incoming.put({'type': 'http.disconnect'})
+        await asyncio.wait_for(task, 3)
+    asyncio.run(run())
+    assert stopped.is_set(), 'middleware must deliver disconnect to the synthesis owner'
+
+
 def test_cancel_during_main_queue_wait_does_not_take_active_lock():
     import concurrent.futures
     import threading

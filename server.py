@@ -100,27 +100,34 @@ async def lifespan(app):
 app = FastAPI(title="Afterwords TTS", lifespan=lifespan)
 
 
-@app.middleware("http")
-async def _validate_host(request, call_next):
-    if _enforce_host_check and not _host_allowed(request.headers.get("host", "")):
-        return JSONResponse({"error": "invalid host header"}, status_code=403)
-    return await call_next(request)
+class _RequestGuards:
+    """Header guards that preserve the raw ASGI disconnect receive channel."""
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope['type'] == 'http':
+            from starlette.datastructures import Headers
+            headers = Headers(scope=scope)
+            # Reject oversized uploads before multipart parsing spools to disk.
+            # Missing/lying lengths still hit the existing in-handler read cap.
+            if scope['path'] == '/clone' and scope['method'] == 'POST':
+                length = headers.get('content-length', '')
+                if length.isdigit() and int(length) > MAX_CLONE_UPLOAD_BYTES:
+                    response = JSONResponse(
+                        {"error": f"audio exceeds {MAX_CLONE_UPLOAD_BYTES // (1024*1024)}MB limit"},
+                        status_code=413)
+                    await response(scope, receive, send)
+                    return
+            if _enforce_host_check and not _host_allowed(headers.get('host', '')):
+                await JSONResponse({"error": "invalid host header"}, status_code=403)(scope, receive, send)
+                return
+        await self.app(scope, receive, send)
 
 
-@app.middleware("http")
-async def _limit_clone_body(request, call_next):
-    # Reject oversized /clone uploads by Content-Length BEFORE multipart parsing
-    # spools the body to a temp file (audit follow-up: the in-handler read() cap
-    # bounds RAM but the parser had already spooled to disk). A lying/absent
-    # Content-Length still falls through to the in-handler read(MAX+1) cap.
-    if request.url.path == "/clone" and request.method == "POST":
-        cl = request.headers.get("content-length", "")
-        if cl.isdigit() and int(cl) > MAX_CLONE_UPLOAD_BYTES:
-            return JSONResponse(
-                {"error": f"audio exceeds {MAX_CLONE_UPLOAD_BYTES // (1024*1024)}MB limit"},
-                status_code=413,
-            )
-    return await call_next(request)
+# BaseHTTPMiddleware's receive wrapper checkpoints before reading. That defeats
+# Request.is_disconnected's nonblocking poll and lets abandoned synthesis run.
+app.add_middleware(_RequestGuards)
 
 
 _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")

@@ -130,10 +130,14 @@ hashes and TTFA/RTF/memory, and treats upstream frame exhaustion as failure.
 Its timeout is cooperative; production hard cancellation belongs to the
 sidecar. A successful WAV remains `generated_not_listening_verified`.
 
-Rollback: stop the separately launched sidecar and remove its opt-in routing.
-Existing Qwen service remains usable. Restore only configuration files changed
-for activation, from their recorded pre-activation copies. Vixen now selects the isolated experimental route; the default profile and
-7860 service remain separate.
+Rollback: restore the profile's previous speech routing before stopping the
+experimental services. Compare the current configuration with the recorded
+pre-activation copy and restore only the TTS provider and speech-hook fields
+changed by activation. Do not replace the whole configuration: unrelated
+profile edits may have occurred since that copy was taken. Reconcile the native
+hook's accepted configuration when changing its command. Vixen selects the
+isolated experimental route; the default profile and 7860 service remain
+separate.
 
 The Hermes command provider accepts `AFTERWORDS_PORT` for a profile-local
 loopback route, for example `env AFTERWORDS_PORT=7862 bash
