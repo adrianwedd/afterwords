@@ -165,3 +165,15 @@ def test_controls_reject_ordinary_backend_and_invalid_json(client, sample_voice)
     for value in ['{"temperature":0.8}', '[]', '{broken']:
         response = client.get('/synthesize', params={'text':'Hello.', 'voice':sample_voice,'performance':value})
         assert response.status_code == 400
+
+
+def test_original_reference_generator_preserves_prior_attempts(tmp_path):
+    import subprocess
+    from pathlib import Path
+    path = tmp_path/'cast-aster.json'
+    path.write_text('{"status":"failed prior attempt"}')
+    script = Path(__file__).resolve().parents[1]/'scripts/generate-original-references.py'
+    result = subprocess.run([sys.executable,str(script),'--name','cast-aster:101','--out',str(tmp_path)],capture_output=True,text=True)
+    assert result.returncode == 2
+    assert 'preserve previous attempts' in result.stderr
+    assert path.read_text() == '{"status":"failed prior attempt"}'

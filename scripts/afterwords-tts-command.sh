@@ -52,7 +52,17 @@ TEXT_PATH="${1:?Usage: afterwords-tts-command.sh <input_path> <output_path> [voi
 OUTPUT_PATH="${2:?Missing output_path}"
 CONFIG_VOICE="${3:-}"
 
-PORT=7860
+# A profile may select a separate local server/SSH forward without changing
+# the default service or sending reference/text data to an arbitrary host.
+PORT="${AFTERWORDS_PORT:-7860}"
+case "$PORT" in
+    ''|*[!0-9]*) echo "Error: AFTERWORDS_PORT must be a local TCP port" >&2; exit 2 ;;
+esac
+if [ "${#PORT}" -gt 5 ] || (( 10#$PORT < 1 || 10#$PORT > 65535 )); then
+    echo "Error: AFTERWORDS_PORT must be between 1 and 65535" >&2
+    exit 2
+fi
+PORT=$((10#$PORT))
 AFTERWORDS_URL="http://127.0.0.1:${PORT}"
 TTS_ENDPOINT="${AFTERWORDS_URL}/synthesize"
 

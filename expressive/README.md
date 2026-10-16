@@ -94,3 +94,21 @@ Rollback: stop the separately launched sidecar and remove its opt-in routing.
 Existing Qwen service remains usable. Restore only configuration files changed
 for activation, from their recorded pre-activation copies. No live routing or
 activation has been performed at this checkpoint.
+
+The Hermes command provider accepts `AFTERWORDS_PORT` for a profile-local
+loopback route, for example `env AFTERWORDS_PORT=7862 bash
+/path/to/afterwords-tts-command.sh {input_path} {output_path} voice-name`.
+It defaults to 7860 and rejects invalid ports before synthesis. A remote profile
+can use an independently verified SSH loopback forward; this setting does not
+permit arbitrary remote URLs or change the default Hermes profile. Actual
+Vixen configuration is on M5; do not create a replacement profile on Studio.
+
+Original voice candidates can be generated without any human reference:
+
+```sh
+.venv-drama3/bin/python scripts/generate-original-references.py --name cast-aster:101 --name stage-manager:100
+```
+
+Candidates and receipts remain under QA until transcript and acoustic review.
+The generator preserves every attempt, records unconditioned provenance and
+pins, and never promotes a generated file directly to a public reference.

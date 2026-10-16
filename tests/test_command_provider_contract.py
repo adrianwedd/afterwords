@@ -171,7 +171,7 @@ def _make_tts_payload(text: str, header: bytes = b"RIFF") -> bytes:
 
 def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
                   voice: str = "seven-of-nine", stub_text_key: bool = True,
-                  fail_from_chunk: int = 0):
+                  fail_from_chunk: int = 0, port: str | None = None):
     """Run the provider with a stubbed curl/afplay/lame/hermes; return (result, ctx).
 
     The curl stub writes a text-derived payload for `-o <path>` and logs the
@@ -183,6 +183,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     bindir.mkdir()
     requests = tmp_path / "requests.txt"
     counter = tmp_path / "calls.txt"
+    curl_args = tmp_path / "curl-args.txt"
     home = tmp_path / "home"
     (home / ".hermes").mkdir(parents=True, exist_ok=True)
     out = tmp_path / "out.wav"
@@ -190,6 +191,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     _write_exe(
         bindir / "curl",
         "#!/usr/bin/env bash\n"
+        f'printf "%s\\n" "$*" >> {shlex.quote(str(curl_args))}\n'
         'out=""; prev=""; text=""; want_text=0\n'
         'for a in "$@"; do\n'
         '  if [ "$prev" = "-o" ]; then out="$a"; fi\n'
@@ -248,6 +250,9 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     if platform:
         env["HERMES_SESSION_PLATFORM"] = platform
     env["AFTERWORDS_REPO"] = str(REPO)
+    env.pop("AFTERWORDS_PORT", None)
+    if port is not None:
+        env["AFTERWORDS_PORT"] = port
 
     # Exercise the real provider logic with private lock paths. Sharing the
     # user's live playback lock makes a stubbed short-turn test wait behind
@@ -264,7 +269,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
         capture_output=True, text=True, env=env, timeout=300,
     )
     return result, {
-        "out": out, "requests": requests, "home": home, "text_path": text_path,
+        "out": out, "requests": requests, "home": home, "text_path": text_path, "curl_args": curl_args,
     }
 
 
@@ -455,3 +460,19 @@ def test_hermes_refuses_a_partial_artifact(tmp_path, monkeypatch):
     monkeypatch.setenv("AFTERWORDS_REPO", str(REPO))
     with pytest.raises(RuntimeError):
         _generate_command_tts(LONG_REPLY, str(out), "afterwords", config, {})
+
+
+def test_profile_port_override_stays_on_loopback(tmp_path):
+    result, ctx = _run_provider(tmp_path, SHORT_REPLY, port="7862")
+    assert result.returncode == 0, result.stderr
+    args = ctx["curl_args"].read_text()
+    assert "http://127.0.0.1:7862/synthesize" in args
+    assert "127.0.0.1:7860" not in args
+
+
+@pytest.mark.parametrize("port", ["0", "65536", "-1", "https://example.com", "7862/path", "999999999999999999"])
+def test_invalid_profile_port_never_starts_synthesis(tmp_path, port):
+    result, ctx = _run_provider(tmp_path, SHORT_REPLY, port=port)
+    assert result.returncode == 2
+    assert not ctx["curl_args"].exists()
+    assert not ctx["out"].exists()
