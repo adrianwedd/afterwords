@@ -65,6 +65,8 @@ cross-paragraph history from influencing generation, but may change prosody
 at joins. It is a candidate strategy for literal narration, not a transcript
 guarantee: qualify the resulting audio before release. An empty paragraph
 generation aborts the whole buffered request instead of dropping that text.
+Its first full 4bit Collection response failed the frame/EOS limit. It remains
+an experimental qualification option, not an accepted remedy for missing words.
 
 Per-request controls override voice defaults via the optional GET `performance`
 JSON parameter, or POST `performance` object on the existing clone-enabled POST
