@@ -37,7 +37,7 @@ class WorkerPool:
     async def _run(self, payload):
         if self.process is None or self.process.returncode is not None:
             import psutil
-            if psutil.virtual_memory().available < 32 * 1024**3:
+            if psutil.virtual_memory().available < 64 * 1024**3:
                 raise RuntimeError('insufficient memory headroom for Drama 3 worker')
             self.process = await asyncio.create_subprocess_exec(
                 *self.command, stdin=asyncio.subprocess.PIPE, stdout=asyncio.subprocess.PIPE,
@@ -111,6 +111,20 @@ async def health():
                 source_revision=SOURCE_REVISION, pending=pool.pending, capacity=pool.capacity,
                 worker_alive=pool.process is not None and pool.process.returncode is None,
                 contract='complete-wav', native_model_streaming=True)
+
+
+@app.post('/release')
+async def release(request: Request):
+    if request.client and request.client.host not in ('127.0.0.1', '::1', 'testclient'):
+        raise HTTPException(403, 'local service only')
+    if pool.pending:
+        raise HTTPException(409, 'requests active; refusing to interrupt synthesis')
+    async with pool.lock:
+        # Recheck after acquiring the lock: admission may have changed.
+        if pool.pending:
+            raise HTTPException(409, 'requests active; refusing to interrupt synthesis')
+        await pool.stop()
+    return {'released': True}
 
 
 @app.post('/synthesize')

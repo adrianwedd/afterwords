@@ -31,7 +31,7 @@ It caches up to four reference files/conditioning contexts. Admission is bounded
 to four requests including active work; queue plus generation deadline is 180s.
 A timeout or disconnected client kills the worker before admitting the next
 request. Failed requests return no partial audio. The child has a 40 GiB MLX
-allocation limit and 2 GiB cache limit; startup requires 32 GiB available host
+allocation limit and 2 GiB cache limit; startup requires 64 GiB available host
 memory. This is admission control, not proof that concurrent inference has no
 latency impact. Measure that separately.
 
@@ -112,3 +112,36 @@ Original voice candidates can be generated without any human reference:
 Candidates and receipts remain under QA until transcript and acoustic review.
 The generator preserves every attempt, records unconditioned provenance and
 pins, and never promotes a generated file directly to a public reference.
+
+## Resource ownership and qualification
+
+The worker, original-reference generator and benchmark tools share a kernel
+process lock. Only one expressive model may be resident through these tools at
+a time. `POST http://127.0.0.1:7861/release` unloads an idle worker; it returns
+409 if requests are pending. The lock does not coordinate unrelated Hermes
+inference, so admission still reserves 24 GiB beyond the model allocation cap.
+The suite budgets 40 GiB for 4-bit, 56 GiB for 8-bit and 88 GiB for BF16; these
+are limits, not measured peak usage. The pinned 8-bit candidate is recorded in
+`qa/expressive-voice/pins.json` and remains unqualified.
+
+Reference WAVs may be mono or stereo, 1–30 seconds, at most 4 MiB and 192 kHz.
+Stereo conditioning uses the arithmetic channel mean and PCM16 conversion;
+receipts bind both original and conditioning hashes. Qwen fallback retains the
+original reference bytes. Downmixing compatibility does not establish voice
+identity fidelity.
+
+`qualify-expressive-suite.py` runs the fixed cases in
+`qa/expressive-voice/cases/suite.v1.json` against a pinned model. Supply
+`--references-json` containing a `references` array of objects with `path`,
+`text`, and `sha256`; dialogue needs two references. Choose a new `--out`
+directory per attempt. It records first model chunk, completed generation RTF,
+load time, Metal peak, and host memory. First model chunk is distinct from
+first playable audio through the full-file HTTP contract. Failed attempts stay
+incomplete and are retained. The script's deadline is cooperative.
+
+`audit-expressive-audio.py --audio FILE --text-file TEXT --out RECEIPT
+--whisper-snapshot LOCAL_DIRECTORY` runs offline CPU Whisper and waveform
+measurements. It records exact hashes, ASR words/timestamps, word-edit alignment,
+silence and clipping. ASR disagreement requires listening review; zero word
+error does not certify acting, identity, pronunciation or timing. No script
+promotes an audio candidate to accepted merely because generation succeeded.

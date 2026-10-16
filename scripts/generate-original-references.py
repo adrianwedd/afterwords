@@ -39,7 +39,7 @@ def main():
             p.error('duplicate candidate name')
         candidates.append((name,seed))
     import psutil
-    if psutil.virtual_memory().available<32*1024**3:
+    if psutil.virtual_memory().available<64*1024**3:
         raise RuntimeError('insufficient memory headroom')
     import mlx.core as mx
     import numpy as np
@@ -47,6 +47,8 @@ def main():
     from huggingface_hub import snapshot_download
     from mlx_audio.tts.utils import load_model
     mx.set_memory_limit(40*1024**3);mx.set_cache_limit(2*1024**3)
+    from expressive.resources import acquire_model_lease
+    acquire_model_lease()
     started=time.perf_counter()
     model=load_model(snapshot_download(MODEL,revision=REVISION,local_files_only=True))
     load=time.perf_counter()-started

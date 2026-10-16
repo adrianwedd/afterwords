@@ -40,20 +40,14 @@ def main():
                 options = validate_options(request.get('performance', {}))
                 text = directed_text(request['text'], options)
                 raw = base64.b64decode(request['reference_wav'], validate=True)
-                if not 1 <= len(raw) <= 4 * 1024**2:
-                    raise ValueError('reference exceeds 4 MiB')
-                info = sf.info(io.BytesIO(raw))
-                if info.channels != 1 or not 1 <= info.duration <= 30 or info.samplerate > 192000:
-                    raise ValueError('invalid reference dimensions')
-                ref, rate = sf.read(io.BytesIO(raw), dtype='float32')
-                if ref.ndim != 1 or not np.isfinite(ref).all() or not 1 <= len(ref)/rate <= 30:
-                    raise ValueError('reference must be finite mono audio, 1–30 seconds')
+                from expressive.reference import normalize_reference
+                conditioning, conversion = normalize_reference(raw)
                 if not request.get('reference_text', '').strip():
                     raise ValueError('reference transcript required')
                 digest = hashlib.sha256(raw).hexdigest()
                 if digest not in references:
                     path = Path(folder) / (digest + '.wav')
-                    path.write_bytes(raw)
+                    path.write_bytes(conditioning)
                     references[digest] = path
                     if len(references) > 4:
                         _, old = references.popitem(last=False)
@@ -61,6 +55,8 @@ def main():
                 references.move_to_end(digest)
                 load_started = time.perf_counter()
                 if model is None:
+                    from expressive.resources import acquire_model_lease
+                    acquire_model_lease()
                     model = load_model(snapshot_download(MODEL, revision=REVISION, local_files_only=True))
                 load_seconds = time.perf_counter() - load_started
                 original_frames = model._frames
@@ -99,7 +95,10 @@ def main():
                     raise RuntimeError('model generated no audio')
                 elapsed = time.perf_counter() - generation_started
                 emit(dict(kind='done', samples=count, sample_rate=model.sample_rate, model=MODEL,
-                          revision=REVISION, ttfa_seconds=ttfa, generation_seconds=elapsed,
+                          revision=REVISION, reference_sha256=digest,
+                          reference_conversion=conversion,
+                          conditioning_sha256=hashlib.sha256(references[digest].read_bytes()).hexdigest(),
+                          ttfa_seconds=ttfa, generation_seconds=elapsed,
                           load_seconds=load_seconds, wall_seconds=time.perf_counter()-started,
                           rtf=elapsed/(count/model.sample_rate), peak_metal_bytes=mx.get_peak_memory()))
             except Exception as exc:

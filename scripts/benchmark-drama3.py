@@ -4,7 +4,9 @@ import argparse
 import hashlib
 import json
 import time
+import sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 
 def main():
@@ -23,7 +25,13 @@ def main():
         p.error('reference and reference-text must be supplied together')
     if a.output.exists() or a.output.with_suffix('.json').exists():
         p.error('output exists; preserve previous attempts')
+    import psutil
+    cap = 56 if a.model.endswith('8bit') else 88 if a.model.endswith('bf16') else 40
+    if psutil.virtual_memory().available < (cap + 24) * 1024**3:
+        p.error('insufficient memory headroom for this benchmark')
     import mlx.core as mx
+    mx.set_memory_limit(cap * 1024**3)
+    mx.set_cache_limit(2 * 1024**3)
     import numpy as np
     import soundfile as sf
     from mlx_audio.tts.utils import load_model
@@ -38,6 +46,8 @@ def main():
         receipt['reference_text'] = a.reference_text
     start = time.perf_counter()
     try:
+        from expressive.resources import acquire_model_lease
+        acquire_model_lease()
         path = snapshot_download(a.model, revision=a.revision, local_files_only=True)
         mx.random.seed(a.seed)
         model = load_model(path)

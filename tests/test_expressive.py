@@ -177,3 +177,45 @@ def test_original_reference_generator_preserves_prior_attempts(tmp_path):
     assert result.returncode == 2
     assert 'preserve previous attempts' in result.stderr
     assert path.read_text() == '{"status":"failed prior attempt"}'
+
+
+def test_model_lease_excludes_concurrent_processes_and_releases_on_exit(tmp_path):
+    import os
+    import subprocess
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[1]
+    env = {**os.environ,'HOME':str(tmp_path),'PYTHONPATH':str(root)}
+    code = 'from expressive.resources import acquire_model_lease; acquire_model_lease()'
+    first = subprocess.Popen([sys.executable,'-u','-c',code+'; print("leased",flush=True); input()'],
+                             stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env)
+    try:
+        assert first.stdout.readline().strip()==b'leased'
+        second = subprocess.run([sys.executable,'-c',code],capture_output=True,text=True,env=env,timeout=5)
+        assert second.returncode != 0
+        assert 'another expressive model is resident' in second.stderr
+    finally:
+        first.terminate();first.wait(timeout=5)
+    third = subprocess.run([sys.executable,'-c',code],capture_output=True,text=True,env=env,timeout=5)
+    assert third.returncode == 0, third.stderr
+
+
+def test_release_refuses_active_requests(monkeypatch):
+    from expressive import sidecar
+    from starlette.testclient import TestClient
+    monkeypatch.setattr(sidecar.pool,'pending',1)
+    response=TestClient(sidecar.app).post('/release')
+    assert response.status_code==409
+
+
+def test_stereo_reference_downmix_is_explicit_and_fallback_bytes_unchanged(tmp_path):
+    from expressive.reference import normalize_reference
+    ref=tmp_path/'stereo.wav'
+    stereo=np.column_stack([np.full(44100,.2),np.full(44100,.6)])
+    sf.write(ref,stereo,44100,subtype='PCM_16')
+    raw=ref.read_bytes()
+    normalized,conversion=normalize_reference(raw)
+    audio,rate=sf.read(io.BytesIO(normalized))
+    assert conversion=='stereo-mean-to-mono' and rate==44100 and audio.ndim==1
+    np.testing.assert_allclose(audio,.4,atol=2/32768)
+    prepared=FishDrama3Backend().prepare_voice(str(ref),'Reference text.',{})
+    assert prepared.data==raw

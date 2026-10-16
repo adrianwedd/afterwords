@@ -45,14 +45,8 @@ class FishDrama3Backend(BackendBase):
             raise ValueError('Drama 3 requires a reference transcript')
         with open(ref_audio_path, 'rb') as stream:
             raw = stream.read(4 * 1024**2 + 1)
-        if len(raw) > 4 * 1024**2:
-            raise ValueError('reference exceeds 4 MiB')
-        info = sf.info(io.BytesIO(raw))
-        if info.channels != 1 or not 1 <= info.duration <= 30 or info.samplerate > 192000:
-            raise ValueError('invalid reference dimensions')
-        audio, rate = sf.read(io.BytesIO(raw), dtype='float32')
-        if audio.ndim != 1 or not np.isfinite(audio).all() or not 1 <= len(audio)/rate <= 30:
-            raise ValueError('reference must be finite mono audio, 1–30 seconds')
+        from expressive.reference import normalize_reference
+        normalize_reference(raw)  # validation; retain original bytes for Qwen fallback
         return PreparedVoice(ref_audio_path, ref_text, extras, data=raw)
 
     def synthesize(self, text, prepared, lang):
