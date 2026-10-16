@@ -21,6 +21,13 @@ def file_hash(path):
     return h.hexdigest()
 
 
+def reserve_receipt(path, receipt):
+    """Claim a receipt atomically before transcription; never share an attempt."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open('x') as stream:
+        stream.write(json.dumps({**receipt, 'status': 'incomplete'}, indent=2)+'\n')
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--audio',type=Path,required=True)
@@ -47,6 +54,7 @@ def main():
                             'No judgement of character identity, emotional intent, pronunciation or comic timing is implied.'],
              'transcriber':{'snapshot':str(args.whisper_snapshot.resolve()),'device':'cpu','compute_type':'int8','cpu_threads':4,'faster_whisper_version':version('faster-whisper'),
                             'ctranslate2_version':version('ctranslate2'),'weights_sha256':file_hash(args.whisper_snapshot/'model.bin')}}
+    reserve_receipt(args.out, receipt)
     start=time.perf_counter()
     try:
         model=WhisperModel(str(args.whisper_snapshot),device='cpu',compute_type='int8',cpu_threads=4,num_workers=1,local_files_only=True)
