@@ -295,9 +295,37 @@ Private evidence directories (not distributed with the repository):
 
 The idle-worker release left about 98 GiB available: enough for the 80 GiB
 8-bit admission threshold, below the 112 GiB BF16 threshold. BF16 was therefore
-not loaded; unrelated workloads were not stopped to force capacity. Eight-bit
-contention with Hermes inference remains unmeasured. These results do not
-qualify an 8-bit serving switch or a public audio release.
+not loaded; unrelated workloads were not stopped to force capacity. These results
+do not qualify an 8-bit serving switch or a public audio release.
+
+A subsequent bounded 8-bit contention sequence used the already loaded
+`Qwen3.8-Flash-Next-UD-Q4_K_XL` model configured for Vixen. Two earlier admission
+attempts refused active work before loading or inference; the completed attempt
+waited for idle, released only the idle expressive worker, and retained 8-bit in
+memory for both baselines. The live voice configuration remained 4-bit.
+
+| Synthetic 512-token inference | Before | During 8-bit synthesis | After |
+| --- | ---: | ---: | ---: |
+| Decode tokens/second | 36.80 | 33.63 | 46.73 |
+| Request wall seconds | 14.87 | 15.50 | 11.15 |
+
+Actual synthesis/inference overlap was 15.44 seconds, 99.6% of the middle
+request. Its decode rate was 19.5% below the mean of the two baselines, but their
+wide spread prevents a general slowdown estimate from this single sequence.
+Polling observed at most one processing slot and no live speech requests;
+brief intervening traffic could be missed. These are model-server measurements,
+not complete Hermes agent-turn latency, and use a different TTS sample from the
+prior 4-bit contention run.
+
+The 8-bit model loaded in 4.90 seconds. Its first internal audio chunk arrived
+2.48 seconds after generation started; 25.54 seconds of audio took 17.92 seconds
+to generate, with 44.27 GB peak Metal allocation. The WAV was byte-identical to
+the previously retained first canonical long-response chunk. CPU ASR found only
+`ten`/`10` and `cancelled`/`canceled`; longest near-silence was 1.84 seconds, with
+no clipped samples. Listening acceptance remains unverified. Private evidence,
+including the bounded harness, timings and audio audit, is in
+`var/expressive-voice/hermes-contention-8bit-3`. The child exited normally and
+Vixen's configuration hash remained unchanged.
 
 The Hermes command provider writes new MP3/text archives under
 `${HERMES_HOME:-$HOME/.hermes}/tts-archive`. The default profile retains its
