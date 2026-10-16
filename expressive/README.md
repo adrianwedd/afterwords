@@ -159,3 +159,26 @@ active profile home and the CLI/Telegram platform into command subprocesses.
 Messaging delivery therefore uses the artifact-only branch; local sentence
 playback is reserved for CLI/local. Actual end-to-end playback still requires a
 separate execution receipt after activation.
+
+## Private listening showcase
+
+Build a self-contained static page from completed audio evidence:
+
+```sh
+.venv/bin/python scripts/build-expressive-showcase.py --manifest INPUT.json --out NEW_DIRECTORY
+python3 -m http.server 8769 --bind 127.0.0.1 --directory NEW_DIRECTORY
+```
+
+The input is an object with a `clips` array. Each clip has unique `id`, `part`
+(1–5 for backend comparison, emotions, Vixen, cast, exchange), `label`, `backend`,
+`audio` and `text` file paths relative to the input JSON, and exact `audio_sha256`
+and `text_sha256`. Optional `acoustic_acceptance` and `permission` record the
+actual review state. Exchange clips play in input order. The builder validates
+all hashes and PCM16 mono WAVs before creating the page, copies only those WAVs,
+and refuses to overwrite prior builds. Serve only this output directory on
+loopback; do not serve the broader QA directory or publish private comparisons.
+
+Playback is explicit, one clip at a time, with pause, mute, replay and exact
+transcripts. The five required demonstrations remain visible when recordings
+are missing. Availability counts never certify identity, emotion, end-to-end
+Vixen delivery, distinct casting or acoustic acceptance.
