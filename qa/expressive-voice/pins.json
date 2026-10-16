@@ -7,5 +7,15 @@
     "mlx-community/fish-audio-drama-3-bf16": "0980952ff1bcb52140ef39876cd0d6c789d825bb",
     "mlx-community/fish-audio-drama-3-8bit": "fedc7cc92bab5a180709cbaae6208d10b390bb97"
   },
-  "qualified": false
+  "qualified": false,
+  "evaluation_models": {
+    "speaker_encoder": {
+      "model": "speechbrain/spkrec-ecapa-voxceleb",
+      "revision": "0f99f2d0ebe89ac095bcc5903c4dd8f72b367286"
+    },
+    "audio_observer": {
+      "model": "mlx-community/Qwen2-Audio-7B-Instruct-4bit",
+      "revision": "c65570002626f41b4dc08b7b54f42f99f3e82e7f"
+    }
+  }
 }

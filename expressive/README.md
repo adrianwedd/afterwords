@@ -195,3 +195,32 @@ hashes, full-file latency and end-to-end RTF. It does not restart the service,
 apply experimental controls, retry failed cases, or measure native model TTFA.
 Use original/consented voices for public assets; existing identifiable voices
 are private comparison material unless separately cleared.
+
+## Local acoustic measurements
+
+The CPU speaker-embedding audit has its own pinned environment:
+
+```sh
+uv venv --python 3.12 .venv-audio-audit
+uv pip install --python .venv-audio-audit/bin/python -r requirements-audio-audit.txt
+hf download speechbrain/spkrec-ecapa-voxceleb --revision 0f99f2d0ebe89ac095bcc5903c4dd8f72b367286
+.venv-audio-audit/bin/python scripts/audit-voice-identity.py --snapshot PINNED_SNAPSHOT --reference REFERENCE.wav --reference NEGATIVE_CONTROL.wav --audio SAMPLE.wav --out NEW_RECEIPT.json
+```
+
+This runs ECAPA-TDNN on four CPU threads, downmixes/resamples explicitly to16kHz,
+compares every10-second output window against each supplied reference, and records
+hashes and package/model pins. Sub-second tails are explicitly unmeasured. A
+cosine score is comparative evidence, not a calibrated identity-quality grade.
+The initial Qwen baseline was actually measured with this tool; no subjective
+listening acceptance is inferred.
+
+`assess-expressive-delivery.py --audio SAMPLE.wav --out NEW_RECEIPT.json` uses
+the existing Drama environment with a separately pinned Qwen2-Audio model to
+record automated delivery observations. That evaluator remains unqualified
+until its model finishes downloading and actual audio tests run. It takes the
+shared model lease, requires40GiB host headroom, caps MLX allocations at16GiB,
+and processes the entire input in20-second segments because the upstream
+implementation truncates individual inputs at30seconds. It never supplies the
+intended emotion to the observer. Its observations may still be wrong or depend
+on lexical content; they remain separate from human listening acceptance.
+Evaluation model revisions are in `qa/expressive-voice/pins.json`.
