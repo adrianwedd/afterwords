@@ -354,3 +354,13 @@ Consumer-owned CLI archives go in the profile's `tts-archive/consumer-delivered`
 subdirectory, outside the feed relay's top-level scan. Gateway contexts retain
 their existing artifact-only routing and `gateway-delivered` archives. This
 setting alone does not select a voice or change any profile configuration.
+
+
+A repeatable native sentence smoke test is available as
+`scripts/verify-hermes-sentence-route.py`. Run it using the installed Hermes
+Python, with `HERMES_HOME` pointing to the existing profile, `--hermes-root`
+pointing to its installed source, and `--out` a new private evidence directory.
+It captures real command-TTS artifacts and native playback calls without speaker
+playback, decodes Hermes' returned container, and records the unchanged config
+hash. It does not exercise an agent reply or an independent legacy post-LLM
+hook. Its process-only playback-owner override does not activate profile config.
