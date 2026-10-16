@@ -403,3 +403,19 @@ Every paragraph used the same original reference and seed. No silence was
 trimmed or inserted and no crossfade was applied. This is application-level
 segmentation, not native model streaming or a general long-text qualification;
 boundary timing and acoustic quality still require review.
+
+For an original synthetic reference candidate, explicitly pass `--original`
+instead of either reference argument. This mode rejects supplied reference
+conditioning and records its absence in the receipt. Use comma-separated
+attributes for `--direction`, such as `female, young adult, high pitch,
+british accent`, following the upstream
+[voice-design vocabulary](https://github.com/k2-fsa/OmniVoice/blob/master/docs/voice-design.md).
+Free-form acting descriptions are not qualified: four of six initial original
+candidates spoke fragments of their direction strings. Those candidates are
+rejected and retained. A successful generation remains a candidate requiring
+transcript and listening review, not an accepted cast reference.
+
+The existing Qwen 0.6B baseline also failed the single-call 391-word public
+Hugo response: it returned a 96-second WAV ending mid-sentence, with 114 ASR
+edits (29.16%) and a substantial missing ending. HTTP success alone does not
+qualify long-response completeness for either backend.

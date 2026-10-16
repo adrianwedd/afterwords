@@ -27,8 +27,9 @@ def sha(raw):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--text-file', type=Path, required=True)
-    parser.add_argument('--reference', type=Path, required=True)
-    parser.add_argument('--reference-text-file', type=Path, required=True)
+    parser.add_argument('--reference', type=Path)
+    parser.add_argument('--reference-text-file', type=Path)
+    parser.add_argument('--original', action='store_true', help='Generate an original synthetic candidate without a person reference')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--steps', type=int, choices=(32, 64), default=64)
     parser.add_argument('--direction', default='None')
@@ -36,6 +37,11 @@ def main():
     parser.add_argument('--timeout', type=float, default=300)
     parser.add_argument('--worker', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
+    if args.original:
+        if args.reference or args.reference_text_file:
+            parser.error('original generation cannot include reference conditioning')
+    elif not (args.reference and args.reference_text_file):
+        parser.error('reference audio and transcript are both required unless --original is explicit')
     receipt_path = args.output.with_suffix('.json')
     if args.output.exists() or receipt_path.exists():
         parser.error('preserve previous attempts; output already exists')
@@ -58,15 +64,16 @@ def main():
 
     from expressive.contracts import SOURCE_REVISION
     text = args.text_file.read_text()
-    reference_text = args.reference_text_file.read_text()
-    raw_reference = args.reference.read_bytes()
-    if not text.strip() or not reference_text.strip():
+    reference_text = args.reference_text_file.read_text() if args.reference_text_file else None
+    raw_reference = args.reference.read_bytes() if args.reference else None
+    if not text.strip() or (not args.original and not reference_text.strip()):
         parser.error('nonempty target and reference transcripts required')
     args.output.parent.mkdir(parents=True, exist_ok=True)
     receipt = dict(status='incomplete', model=MODEL, revision=REVISION,
                    implementation_revision=SOURCE_REVISION,
                    text=text, text_sha256=sha(text.encode()),
-                   reference_sha256=sha(raw_reference), reference_text=reference_text,
+                   reference_sha256=sha(raw_reference) if raw_reference else None, reference_text=reference_text,
+                   reference_conditioning='none-original-synthetic' if args.original else 'supplied-reference',
                    steps=args.steps, direction=args.direction, seed=args.seed,
                    acoustic_acceptance='unverified', memory_cap_gib=24,
                    limitations=['First audio is the complete waveform; no native streaming.',
@@ -89,8 +96,10 @@ def main():
         acquire_model_lease()
         mx.set_memory_limit(24 * 1024**3)
         mx.set_cache_limit(2 * 1024**3)
-        conditioning, conversion = normalize_reference(raw_reference)
-        receipt.update(reference_conversion=conversion, conditioning_sha256=sha(conditioning))
+        conditioning = None
+        if raw_reference is not None:
+            conditioning, conversion = normalize_reference(raw_reference)
+            receipt.update(reference_conversion=conversion, conditioning_sha256=sha(conditioning))
         load_started = time.perf_counter()
         model = load_model(snapshot_download(MODEL, revision=REVISION, local_files_only=True))
         receipt['load_seconds'] = time.perf_counter() - load_started
@@ -101,11 +110,12 @@ def main():
         mx.reset_peak_memory()
         with tempfile.TemporaryDirectory(prefix='afterwords-omnivoice-') as temporary:
             reference = Path(temporary)/'reference.wav'
-            reference.write_bytes(conditioning)
+            if conditioning is not None:
+                reference.write_bytes(conditioning)
             generation_started = time.perf_counter()
             pieces, arrivals = [], []
             for result in model.generate(text=text, language='en', instruct=args.direction,
-                    ref_audio=str(reference), ref_text=reference_text,
+                    ref_audio=str(reference) if conditioning is not None else None, ref_text=reference_text,
                     ref_audio_max_duration_s=30, num_steps=args.steps):
                 audio = np.asarray(result.audio, dtype=np.float32)
                 if audio.ndim != 1 or not len(audio) or not np.isfinite(audio).all():

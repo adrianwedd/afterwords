@@ -27,3 +27,23 @@ def test_hard_deadline_stops_a_stalled_dependency_before_model_load(tmp_path):
     assert receipt['status'] == 'incomplete'
     assert receipt['worker_reaped'] is True
     assert not output.exists()
+
+
+def test_original_generation_refuses_reference_conditioning(tmp_path):
+    result = subprocess.run(
+        [sys.executable, str(SCRIPT), '--original', '--text-file', str(tmp_path/'text'),
+         '--reference', str(tmp_path/'voice'), '--output', str(tmp_path/'out.wav')],
+        capture_output=True, text=True, timeout=5,
+    )
+    assert result.returncode == 2
+    assert 'cannot include reference' in result.stderr
+    assert not (tmp_path/'out.json').exists()
+
+
+def test_reference_mode_cannot_silently_become_original(tmp_path):
+    result = subprocess.run(
+        [sys.executable, str(SCRIPT), '--text-file', str(tmp_path/'text'),
+         '--output', str(tmp_path/'out.wav')], capture_output=True, text=True, timeout=5,
+    )
+    assert result.returncode == 2
+    assert 'both required' in result.stderr
