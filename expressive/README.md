@@ -73,6 +73,11 @@ format when a reply mixes Drama and fallback. Direct Qwen requests remain
 Invalid requests are not disguised as
 availability failures.
 
+When fallback is disabled, an ordinary sidecar failure reaches the main API's
+existing generic synthesis-error response (HTTP 500, no audio). Queue admission
+and lock deadlines use HTTP 503. Clients must check status and content type;
+they must not treat every failure as a WAV or assume all unavailability is 503.
+
 The main server admits at most four expressive requests waiting for its shared
 MLX lock, with a 180s lock deadline. Qwen's existing serialization remains.
 The sidecar deadline starts when its request arrives, so the two stages have
