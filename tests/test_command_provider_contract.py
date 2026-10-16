@@ -171,7 +171,8 @@ def _make_tts_payload(text: str, header: bytes = b"RIFF") -> bytes:
 
 def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
                   voice: str = "seven-of-nine", stub_text_key: bool = True,
-                  fail_from_chunk: int = 0, port: str | None = None):
+                  fail_from_chunk: int = 0, port: str | None = None,
+                  hermes_home: Path | None = None):
     """Run the provider with a stubbed curl/afplay/lame/hermes; return (result, ctx).
 
     The curl stub writes a text-derived payload for `-o <path>` and logs the
@@ -246,6 +247,9 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     env = dict(os.environ)
     env["PATH"] = f"{bindir}:{env['PATH']}"
     env["HOME"] = str(home)
+    env.pop("HERMES_HOME", None)
+    if hermes_home is not None:
+        env["HERMES_HOME"] = str(hermes_home)
     env.pop("HERMES_SESSION_PLATFORM", None)
     if platform:
         env["HERMES_SESSION_PLATFORM"] = platform
@@ -476,3 +480,16 @@ def test_invalid_profile_port_never_starts_synthesis(tmp_path, port):
     assert result.returncode == 2
     assert not ctx["curl_args"].exists()
     assert not ctx["out"].exists()
+
+
+@pytest.mark.parametrize("profile_specific", [False, True])
+def test_archives_follow_active_profile_without_changing_default(tmp_path, profile_specific):
+    profile = tmp_path / "vixen-profile" if profile_specific else None
+    result, ctx = _run_provider(tmp_path, "Archive this exact reply.", hermes_home=profile)
+    assert result.returncode == 0, result.stderr
+    expected = (profile if profile_specific else ctx["home"] / ".hermes") / "tts-archive"
+    transcripts = list(expected.glob("*.txt"))
+    assert len(transcripts) == 1
+    assert transcripts[0].read_text().strip() == "Archive this exact reply."
+    if profile_specific:
+        assert not (ctx["home"] / ".hermes" / "tts-archive").exists()

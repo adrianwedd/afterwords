@@ -222,7 +222,7 @@ archive_mp3_sidecar() {
     # $1 = the WAV actually delivered. Archive MP3 + text sidecar of spoken text.
     local src="$1" stamp archive_dir slug archive_mp3
     stamp=$(date +%Y%m%d-%H%M%S)
-    archive_dir="$HOME/.hermes/tts-archive"
+    archive_dir="${HERMES_HOME:-$HOME/.hermes}/tts-archive"
     mkdir -p "$archive_dir" 2>/dev/null || true
     slug=$(printf '%s' "$CLEANED" | python3 -c "
 import sys, re

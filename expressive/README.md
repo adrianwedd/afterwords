@@ -150,3 +150,12 @@ measurements. It records exact hashes, ASR words/timestamps, word-edit alignment
 silence and clipping. ASR disagreement requires listening review; zero word
 error does not certify acting, identity, pronunciation or timing. No script
 promotes an audio candidate to accepted merely because generation succeeded.
+
+The Hermes command provider writes new MP3/text archives under
+`${HERMES_HOME:-$HOME/.hermes}/tts-archive`. The default profile retains its
+existing destination; Vixen's files stay in her active profile. Existing archive
+files are never moved. Installed Hermes on M5 was verified to pass both the
+active profile home and the CLI/Telegram platform into command subprocesses.
+Messaging delivery therefore uses the artifact-only branch; local sentence
+playback is reserved for CLI/local. Actual end-to-end playback still requires a
+separate execution receipt after activation.
