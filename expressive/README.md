@@ -318,3 +318,35 @@ That establishes generated audio and captured playback calls, not acting or
 physical audibility. The live profile uses an original synthetic reference and
 Qwen fallback on the separate experimental server. Its SSH transport remains
 temporary; persistent startup and gateway acceptance are still outstanding.
+
+### Persistent experimental services
+
+Prepare launchd definitions without loading them:
+
+```sh
+.venv/bin/python scripts/prepare-expressive-services.py \
+  --out var/expressive-voice/service-plists-1 \
+  --peer m5-tb --tailscale-ip CURRENT_M5_TAILSCALE_IPV4
+plutil -lint var/expressive-voice/service-plists-1/*.plist
+```
+
+Read the current infrastructure runbook before selecting peer addresses. The
+three `net.afterwords.expressive.{sidecar,api,m5}` user jobs run the isolated
+7861 sidecar, the private 7862 API/gallery, and the reverse SSH forward to M5
+loopback 17862. They do not manage the default 7860 service. Logs go under
+`var/expressive-voice/services/`. Create that log directory, copy the plists to
+`~/Library/LaunchAgents/`, and bootstrap them in the user's GUI domain after
+gracefully retiring any task-owned foreground instances on these ports.
+
+The SSH alias must have a pinned `HostKeyAlias`. The tunnel first probes the
+direct alias and falls back to the supplied Tailscale address while preserving
+the same identity/key pin. All forwards bind explicitly to loopback. launchd
+restarts a disconnected tunnel, selecting the available route anew; this is
+reconnection, not seamless migration of an in-flight HTTP request. A diagnostic
+`--route tailscale --remote-port 17863` tests the alternate path separately.
+
+Rollback these three jobs with `launchctl bootout gui/$(id -u)/LABEL`, then
+remove only their three launchd plists. Restore only Vixen's speech fields from
+the recorded pre-activation config if retiring its experimental route; preserve
+subsequent unrelated config changes. No `setup.sh`, global routing edit, or
+restart of the default Afterwords service is needed.
