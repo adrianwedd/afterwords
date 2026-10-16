@@ -290,3 +290,31 @@ implementation truncates individual inputs at30seconds. It never supplies the
 intended emotion to the observer. Its observations may still be wrong or depend
 on lexical content; they remain separate from human listening acceptance.
 Evaluation model revisions are in `qa/expressive-voice/pins.json`.
+
+### Real Vixen reply probe
+
+`verify-hermes-sentence-route.py --agent-prompt 'Your prompt' --deadline 360`
+adds a real `HermesCLI.chat` turn to the same native sentence capture. It keeps
+the configured model/tools/personality, applies a $0.50 run budget, enables
+native TTS for that probe, observes the actual post-LLM ownership field, and
+checks one returned artifact per spoken sentence. The configured command must
+already contain `AFTERWORDS_PLAYBACK_OWNER=hermes`; this mode does not inject
+that provider override. The probe captures local playback; it does not invoke a
+messaging send or establish physical audibility.
+Each attempt needs a new output directory, including failed attempts. The
+parent enforces a process-group deadline and retains an incomplete receipt on
+timeout. An existing automatic mute flag is preserved.
+
+On M5, the existing `local-studio` Keychain credential command returned exit 36
+under SSH but succeeded in a fresh GUI launchd worker without credential
+changes. Run the probe in that working user context. Do not replace the model,
+print credentials, or treat an authentication error message as a generated
+Vixen reply. The one-shot GUI worker must be unloaded after its bounded run.
+
+Private acceptance evidence now includes one real configured Vixen reply:
+two native sentence artifacts, no provider playback, 30.95 seconds from probe
+start through delivery, 18.30 seconds of audio, and zero CPU Whisper word errors.
+That establishes generated audio and captured playback calls, not acting or
+physical audibility. The live profile uses an original synthetic reference and
+Qwen fallback on the separate experimental server. Its SSH transport remains
+temporary; persistent startup and gateway acceptance are still outstanding.
