@@ -10,6 +10,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import asyncio
 import concurrent.futures
 import glob
 import io
@@ -24,8 +25,9 @@ from contextlib import asynccontextmanager, contextmanager
 
 import numpy as np
 import soundfile as sf
-from fastapi import FastAPI, File, Form, Query, UploadFile
+from fastapi import FastAPI, File, Form, Query, UploadFile, Request
 from fastapi.responses import JSONResponse, Response
+from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from dataclasses import dataclass, replace
 from types import MappingProxyType
@@ -33,6 +35,7 @@ from typing import Mapping
 
 import backends
 from backends.base import PreparedVoice, RefTextPolicy, _read_only
+from expressive.transport import SynthesisCancelled
 
 
 @dataclass(frozen=True)
@@ -222,10 +225,11 @@ DEFAULT_VOICE = "galadriel"
 _model_lock = threading.Lock()
 _synth_lock = threading.Lock()  # serialise synthesis — MLX/Metal is not thread-safe
 _expressive_slots = threading.BoundedSemaphore(4)
+_expressive_http_slots = threading.BoundedSemaphore(4)
 
 
 @contextmanager
-def _synthesis_admission(backend_name):
+def _synthesis_admission(backend_name, cancel_event=None):
     if backend_name != "fish-drama3":
         with _synth_lock:
             yield
@@ -234,7 +238,11 @@ def _synthesis_admission(backend_name):
         raise TimeoutError("expressive request queue full")
     acquired = False
     try:
-        acquired = _synth_lock.acquire(timeout=180)
+        deadline = time.monotonic() + 180
+        while not acquired and time.monotonic() < deadline:
+            if cancel_event is not None and cancel_event.is_set():
+                raise SynthesisCancelled()
+            acquired = _synth_lock.acquire(timeout=.1)
         if not acquired:
             raise TimeoutError("expressive request queue deadline exceeded")
         yield
@@ -481,7 +489,7 @@ def health():
     }
 
 
-def _synthesize_audio(text: str, profile: VoiceProfile, lang: str, performance: dict | None = None) -> Response:
+def _synthesize_audio(text: str, profile: VoiceProfile, lang: str, performance: dict | None = None, cancel_event=None) -> Response:
     """Core synthesis — dispatches to the voice's pinned backend.
     If the voice's backend doesn't support `lang`, attempts cross-backend
     family routing (see `_route_for_lang`)."""
@@ -526,7 +534,9 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str, performance: 
             extras = {**prepared.extras, **performance}
             backend.validate_extras(extras)
             prepared = replace(prepared, extras=extras)
-        with _synthesis_admission(profile.backend):
+        if cancel_event is not None and profile.backend == "fish-drama3":
+            prepared = replace(prepared, cancel_event=cancel_event)
+        with _synthesis_admission(profile.backend, cancel_event):
             data, sr = _run_in_ml_thread(backend.synthesize, text, prepared, lang)
             delivered_backend = getattr(backend, "last_delivery_backend", profile.backend)
     except ValueError as exc:
@@ -536,6 +546,8 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str, performance: 
              "supported_langs": list(backend.supported_langs)},
             status_code=400,
         )
+    except SynthesisCancelled:
+        return Response(status_code=499)
     except TimeoutError as exc:
         return JSONResponse({"error": str(exc)}, status_code=503)
     except Exception as exc:
@@ -565,8 +577,35 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str, performance: 
     )
 
 
+async def _synthesize_for_request(request, text, profile, lang, performance):
+    if profile.backend != "fish-drama3":
+        return await run_in_threadpool(_synthesize_audio, text, profile, lang, performance)
+    if not _expressive_http_slots.acquire(blocking=False):
+        return JSONResponse({"error": "expressive request queue full"}, status_code=503)
+    cancelled = threading.Event()
+    task = asyncio.create_task(asyncio.to_thread(
+        _synthesize_audio, text, profile, lang, performance, cancelled))
+    try:
+        while not task.done():
+            await asyncio.wait({task}, timeout=.1)
+            if not task.done() and await request.is_disconnected():
+                cancelled.set()
+                await asyncio.shield(task)
+                return Response(status_code=499)
+        return await task
+    finally:
+        try:
+            if not task.done():
+                cancelled.set()
+                # Retain ownership until the socket closes and the MLX lock is freed.
+                await asyncio.shield(task)
+        finally:
+            _expressive_http_slots.release()
+
+
 @app.get("/synthesize")
-def synthesize(
+async def synthesize(
+    request: Request,
     text: str = Query(..., description="Text to speak"),
     voice: str = Query(DEFAULT_VOICE, description="Voice name"),
     lang: str = Query("en", description="BCP-47 language code; must be supported by the voice's backend"),
@@ -593,7 +632,7 @@ def synthesize(
             raise ValueError("performance must be a JSON object")
     except ValueError as exc:
         return JSONResponse({"error": str(exc)}, status_code=400)
-    return _synthesize_audio(text, profile, lang, controls)
+    return await _synthesize_for_request(request, text, profile, lang, controls)
 
 
 class SynthesizeRequest(BaseModel):
@@ -605,7 +644,7 @@ class SynthesizeRequest(BaseModel):
 
 
 @app.post("/synthesize")
-def synthesize_post(body: SynthesizeRequest):
+async def synthesize_post(body: SynthesizeRequest, request: Request):
     """POST version of /synthesize — accepts JSON body for sensitive text."""
     if not _clone_enabled:
         return JSONResponse({"error": "clone not enabled (start with --allow-clone)"}, status_code=404)
@@ -622,7 +661,7 @@ def synthesize_post(body: SynthesizeRequest):
             {"error": f"unknown voice: {body.voice}", "available": sorted(VOICES.keys())},
             status_code=400)
 
-    return _synthesize_audio(body.text, profile, body.lang, body.performance)
+    return await _synthesize_for_request(request, body.text, profile, body.lang, body.performance)
 
 
 @app.post("/clone")

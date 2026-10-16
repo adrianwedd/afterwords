@@ -219,3 +219,128 @@ def test_stereo_reference_downmix_is_explicit_and_fallback_bytes_unchanged(tmp_p
     np.testing.assert_allclose(audio,.4,atol=2/32768)
     prepared=FishDrama3Backend().prepare_voice(str(ref),'Reference text.',{})
     assert prepared.data==raw
+
+
+def test_adapter_cancellation_closes_real_socket_without_fallback(tmp_path, monkeypatch):
+    import concurrent.futures
+    import http.client
+    import socket
+    import threading
+    from dataclasses import replace
+    from expressive import transport
+    ref = tmp_path/'ref.wav'
+    sf.write(ref, np.zeros(24000), 24000)
+    backend = FishDrama3Backend()
+    cancelled = threading.Event()
+    prepared = replace(backend.prepare_voice(str(ref), 'Words.', {}), cancel_event=cancelled)
+    listener = socket.socket()
+    listener.bind(('127.0.0.1', 0));listener.listen(1);listener.settimeout(5)
+    port = listener.getsockname()[1]
+    original = http.client.HTTPConnection
+    monkeypatch.setattr(transport.http.client, 'HTTPConnection',
+                        lambda host, ignored, timeout: original(host, port, timeout=timeout))
+    import backends
+    fallback = Mock()
+    monkeypatch.setattr(backends, 'get', fallback)
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future = executor.submit(backend.synthesize, 'Actual words.', prepared, 'en')
+        connection, _ = listener.accept()
+        try:
+            connection.settimeout(2)
+            assert connection.recv(65536)
+            cancelled.set()
+            with pytest.raises(transport.SynthesisCancelled):
+                future.result(timeout=3)
+            # Drain any request body already sent; peer must close without a reply.
+            while connection.recv(65536):
+                pass
+            fallback.assert_not_called()
+        finally:
+            connection.close();listener.close()
+
+
+def test_http_disconnect_waits_for_adapter_cancellation(monkeypatch):
+    import threading
+    import server
+    from expressive.transport import SynthesisCancelled
+    stopped = threading.Event()
+    def synth(text, profile, lang, performance, cancelled):
+        assert cancelled.wait(2)
+        stopped.set()
+        return server.Response(status_code=499)
+    monkeypatch.setattr(server, '_synthesize_audio', synth)
+    class Disconnected:
+        async def is_disconnected(self): return True
+    response = asyncio.run(server._synthesize_for_request(
+        Disconnected(), 'Hello.', SimpleNamespace(backend='fish-drama3'), 'en', None))
+    assert response.status_code == 499
+    assert stopped.is_set()
+
+
+def test_cancel_during_main_queue_wait_does_not_take_active_lock():
+    import concurrent.futures
+    import threading
+    import server
+    from expressive.transport import SynthesisCancelled
+    cancelled = threading.Event()
+    def queued():
+        with server._synthesis_admission('fish-drama3', cancelled):
+            pytest.fail('cancelled request entered synthesis')
+    with server._synth_lock:
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            future = executor.submit(queued)
+            cancelled.set()
+            with pytest.raises(SynthesisCancelled):
+                future.result(timeout=2)
+        assert server._synth_lock.locked()
+
+
+@pytest.mark.parametrize('status', [200, 400, 503])
+def test_cancellable_transport_preserves_audio_and_http_errors(monkeypatch, status):
+    import http.client
+    import http.server
+    import threading
+    import urllib.error
+    from expressive import transport
+    wav = io.BytesIO()
+    sf.write(wav, np.full(4410, .2), 44100, format='WAV', subtype='PCM_16')
+    payload = wav.getvalue()
+    seen = []
+    class Handler(http.server.BaseHTTPRequestHandler):
+        def do_POST(self):
+            seen.append(self.rfile.read(int(self.headers['Content-Length'])))
+            self.send_response(status)
+            self.send_header('Content-Type', 'audio/wav')
+            self.send_header('Content-Length', str(len(payload)))
+            self.end_headers();self.wfile.write(payload)
+        def log_message(self, *args): pass
+    httpd = http.server.HTTPServer(('127.0.0.1', 0), Handler)
+    thread = threading.Thread(target=httpd.handle_request)
+    thread.start()
+    original = http.client.HTTPConnection
+    monkeypatch.setattr(transport.http.client, 'HTTPConnection',
+                        lambda host, ignored, timeout: original(host, httpd.server_port, timeout=timeout))
+    try:
+        if status == 200:
+            assert transport.request_wav(b'{"text":"Hello"}', threading.Event()) == payload
+        else:
+            with pytest.raises(urllib.error.HTTPError) as error:
+                transport.request_wav(b'{"text":"Hello"}', threading.Event())
+            assert error.value.code == status
+        assert seen == [b'{"text":"Hello"}']
+    finally:
+        thread.join(timeout=3);httpd.server_close()
+
+
+def test_http_admission_rejects_before_thread_submission(monkeypatch):
+    import threading
+    import server
+    slots = threading.BoundedSemaphore(1)
+    slots.acquire()
+    monkeypatch.setattr(server, '_expressive_http_slots', slots)
+    worker = Mock(side_effect=AssertionError('must not enqueue synthesis'))
+    monkeypatch.setattr(server, '_synthesize_audio', worker)
+    result = asyncio.run(server._synthesize_for_request(
+        None, 'Hello.', SimpleNamespace(backend='fish-drama3'), 'en', None))
+    assert result.status_code == 503
+    worker.assert_not_called()

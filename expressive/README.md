@@ -66,8 +66,13 @@ availability failures.
 The main server admits at most four expressive requests waiting for its shared
 MLX lock, with a 180s lock deadline. Qwen's existing serialization remains.
 The sidecar deadline starts when its request arrives, so the two stages have
-separate budgets. Cancelling the sidecar request cancels synthesis; cancellation
-of an existing synchronous Afterwords consumer still needs integration testing.
+separate budgets. Expressive GET/POST requests monitor client disconnects. A per-request cancellation
+event interrupts queue waits and shuts down the adapter's sidecar socket, allowing
+the sidecar to kill its active worker. Explicit cancellation never starts Qwen
+fallback. The main request retains its synthesis lock until adapter cleanup has
+finished. Existing Qwen inference is not made interruptible by this change;
+a fallback already executing in Qwen completes under its existing lock. Actual
+model-loaded cancellation still needs qualification.
 
 ## References and release
 

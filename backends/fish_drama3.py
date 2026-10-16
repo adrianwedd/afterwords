@@ -2,6 +2,7 @@
 from __future__ import annotations
 import base64
 import io
+import http.client
 import json
 import logging
 import urllib.error
@@ -58,25 +59,32 @@ class FishDrama3Backend(BackendBase):
         directed_text(text, options)
         payload = dict(text=text, reference_text=prepared.ref_text, performance=options,
                        reference_wav=base64.b64encode(prepared.data).decode())
-        request = urllib.request.Request(self.endpoint, data=json.dumps(payload).encode(),
-                                         headers={'Content-Type': 'application/json'})
-        # Ignore proxy environment variables: reference audio never leaves loopback.
-        opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
         try:
-            with opener.open(request, timeout=185) as response:
-                if response.headers.get_content_type() != 'audio/wav':
-                    raise RuntimeError('sidecar returned a non-WAV response')
-                raw = response.read(44100 * 300 * 2 + 65537)
-                if len(raw) > 44100 * 300 * 2 + 65536:
-                    raise RuntimeError('sidecar output exceeds duration limit')
+            if prepared.cancel_event is not None:
+                from expressive.transport import request_wav
+                raw = request_wav(json.dumps(payload).encode(), prepared.cancel_event)
+            else:
+                request = urllib.request.Request(self.endpoint, data=json.dumps(payload).encode(),
+                                                 headers={'Content-Type': 'application/json'})
+                # Ignore proxy environment variables: reference audio never leaves loopback.
+                opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+                with opener.open(request, timeout=185) as response:
+                    if response.headers.get_content_type() != 'audio/wav':
+                        raise RuntimeError('sidecar returned a non-WAV response')
+                    raw = response.read(44100 * 300 * 2 + 65537)
+                    if len(raw) > 44100 * 300 * 2 + 65536:
+                        raise RuntimeError('sidecar output exceeds duration limit')
             audio, rate = sf.read(io.BytesIO(raw), dtype='float32')
             if rate != self.sample_rate or audio.ndim != 1 or not len(audio) or not np.isfinite(audio).all():
                 raise RuntimeError('invalid sidecar output')
             self.last_delivery_backend = self.name
             return audio, rate
-        except (OSError, ValueError, RuntimeError) as exc:
+        except (OSError, ValueError, RuntimeError, http.client.HTTPException) as exc:
             if isinstance(exc, urllib.error.HTTPError) and exc.code in (400, 413):
                 raise ValueError('sidecar rejected synthesis input') from exc
+            if prepared.cancel_event is not None and prepared.cancel_event.is_set():
+                from expressive.transport import SynthesisCancelled
+                raise SynthesisCancelled() from None
             if not fallback:
                 raise RuntimeError('expressive backend unavailable; fallback disabled') from exc
             log.warning('Drama 3 failed (%s); delivering Qwen fallback with original transcript', exc)
