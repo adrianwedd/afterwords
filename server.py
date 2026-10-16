@@ -1031,6 +1031,7 @@ def main():
     parser = argparse.ArgumentParser(description="Afterwords TTS server (MLX)")
     parser.add_argument("--port", type=int, default=7860)
     parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--voices-dir", help="Use an existing isolated voice directory instead of the bundled gallery")
     parser.add_argument("--allow-reload", action="store_true",
                         help="Enable local gallery reload without upload cloning (loopback only)")
     parser.add_argument("--no-warmup", action="store_true", help="Skip warmup synthesis")
@@ -1052,7 +1053,12 @@ def main():
     )
     args = parser.parse_args()
 
-    global DEFAULT_VOICE, _clone_enabled, _reload_enabled, _ml_executor, _enforce_host_check
+    global DEFAULT_VOICE, _clone_enabled, _reload_enabled, _ml_executor, _enforce_host_check, _VOICES_DIR
+    if args.voices_dir is not None:
+        voice_dir = os.path.realpath(os.path.expanduser(args.voices_dir))
+        if not os.path.isdir(voice_dir):
+            parser.error('--voices-dir must name an existing directory')
+        _VOICES_DIR = voice_dir
     _clone_enabled = args.allow_clone
     _reload_enabled = args.allow_reload
     args.host = _resolve_bind_host(

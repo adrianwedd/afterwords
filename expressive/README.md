@@ -42,6 +42,13 @@ voice uses the existing `backend: "fish-drama3"` metadata plus `synthesis_extras
 Enable it through the existing `AFTERWORDS_BACKENDS` mechanism only after local
 qualification. Existing Qwen defaults and voice profiles need no change.
 
+An independent Afterwords instance can use `--port 7862 --voices-dir PRIVATE_DIR`
+with `AFTERWORDS_BACKENDS=qwen3-0.6b,fish-drama3`. That existing directory must
+contain its own profile JSON and reference WAV files; reference paths stay
+confined to it. Startup, reload and clone storage all use the selected directory.
+Omitting the flag retains the bundled gallery. This allows experimental voices
+to remain separate from the in-use server's gallery and reload operations.
+
 Supported controls: `temperature` (0.1–1.5), `top_p` (0.1–1), `top_k` (1–100),
 `max_frames` (16–4000 per text chunk), `seed`, and `cues`, e.g.
 `[{"offset": 0, "cue": "whispers"}]`. Cues are separate from the authoritative
