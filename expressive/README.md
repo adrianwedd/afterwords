@@ -4,9 +4,10 @@ Built with Fish Audio. This implementation uses the Fish Audio Community License
 v1.0 model and an unofficial MLX conversion. Model code and weight pins are in
 `contracts.py`. No experimental packages are installed in Afterwords' main venv.
 
-Current status: source failure-path tests pass; real synthesis and listening
-qualification are pending. Do not interpret adapter registration/readiness as
-model residency or acoustic acceptance.
+Current status: real local synthesis, cancellation and Qwen fallback have been
+measured. Both 4-bit and 8-bit qualification retain delivery failures; listening
+qualification remains incomplete. Do not interpret adapter registration/readiness
+as model residency or acoustic acceptance.
 
 ## Run locally
 
@@ -233,6 +234,70 @@ measurements. It records exact hashes, ASR words/timestamps, word-edit alignment
 silence and clipping. ASR disagreement requires listening review; zero word
 error does not certify acting, identity, pronunciation or timing. No script
 promotes an audio candidate to accepted merely because generation succeeded.
+
+### Measured 4-bit and 8-bit comparison (2026-10-17)
+
+The pinned 8-bit snapshot is
+`mlx-community/fish-audio-drama-3-8bit@fedc7cc92bab5a180709cbaae6208d10b390bb97`.
+All 42,177,609,321 bytes have the expected file sizes, and every supplied upstream
+LFS SHA-256 matches. The comparison uses the same normalized reference bytes,
+seed 20261016, text, cue-bearing model inputs and shared generation controls as
+the 4-bit baseline. These identifiable-person references are private comparison
+material, not public-use cast assets. The newer receipt additionally records
+`context_mode=continuous`; the earlier receipt omitted that metadata field.
+
+| Measurement, ten short/dialogue cases | 4-bit | 8-bit |
+| --- | ---: | ---: |
+| Model load, seconds | 1.64 | 5.88 |
+| Warm single-speaker first internal chunk, seconds | 0.122–0.131 | 0.127–0.185 |
+| Maximum generation Metal allocation, decimal GB | 26.32 | 44.71 |
+
+These are individual local runs, not confidence intervals. Internal chunks do
+not establish first audible playback. Defective audio must not count as useful
+throughput. The 8-bit suite completed all ten generation calls, but only eight
+had zero CPU Whisper word edits. Dry humour had 27.75 seconds of near-silence
+and an omitted second sentence in ASR. Interruption omitted “Let me start again”
+in ASR despite passing the silence guard. Silence rejection cannot establish
+transcript completeness. Acting, pronunciation and listening quality remain
+unverified, including for zero-edit cases.
+
+The separate canonical six-chunk long response failed on both variants. The
+4-bit run produced chunks with 26.34, 16.36 and 16.28 seconds of near-silence.
+The 8-bit run retained five completed chunks, including a 12.96-second silent
+gap and 28 ASR deletions in chunk 2, then exhausted the 1600-frame budget on
+chunk 6 without verified EOS. It has no complete-response WAV. Neither attempt
+was retried or promoted by increasing its limits.
+
+The live 4-bit HTTP route replaced its three rejected chunks with Qwen and
+assembled all six returned chunks byte-exactly. The resulting 126.62-second WAV
+had no ASR deletions, five number/spelling substitutions and one possible extra
+“network”. Its 298.07-second wall time includes five interleaved live Vixen
+requests and shared-lock waiting; it is not isolated synthesis throughput.
+Rejection also kills the Fish worker, so subsequent Fish requests reload it.
+Exact queue/reload attribution was not retained. Backend transitions and the
+possible extra word still require listening.
+
+CPU ECAPA comparison of the nine single-speaker cases placed the intended
+reference above the other reference in 8/8 retained 4-bit windows and 10/10
+retained 8-bit windows. Windows with at least 50% near-silent RMS frames were
+excluded from that summary; this is not speech VAD. Original scores remain in
+the receipt. These uncalibrated similarities do not prove recognisability or
+superior acting, and failed outputs remain failed.
+
+Private evidence directories (not distributed with the repository):
+
+- `qa/expressive-voice/drama4-existing-suite-1`
+- `qa/expressive-voice/drama{4,8}-canonical-long-1`
+- `qa/expressive-voice/drama8-expressive-suite-1`
+- `var/expressive-voice/drama4-canonical-long-http-1`
+- `var/expressive-voice/drama48-identity-1`
+- `var/expressive-voice/drama8-comparison-preflight-1`
+
+The idle-worker release left about 98 GiB available: enough for the 80 GiB
+8-bit admission threshold, below the 112 GiB BF16 threshold. BF16 was therefore
+not loaded; unrelated workloads were not stopped to force capacity. Eight-bit
+contention with Hermes inference remains unmeasured. These results do not
+qualify an 8-bit serving switch or a public audio release.
 
 The Hermes command provider writes new MP3/text archives under
 `${HERMES_HOME:-$HOME/.hermes}/tts-archive`. The default profile retains its
