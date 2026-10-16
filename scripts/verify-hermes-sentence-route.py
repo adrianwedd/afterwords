@@ -2,8 +2,9 @@
 """Capture a real configured Hermes command-TTS sentence route without speaker playback.
 
 Run inside the installed Hermes Python environment with HERMES_HOME explicitly
-set. This checks artifact delivery and playback ownership, not a generated agent
-reply, audibility, acting or the separate post-LLM hook.
+set. Fixed text checks the configured sentence route. --agent-prompt generates a real
+reply and observes its post-LLM ownership hook. Neither mode certifies audibility
+or acting; physical playback is captured and the automatic mute flag is preserved.
 """
 import argparse
 import hashlib
@@ -12,6 +13,8 @@ import os
 from pathlib import Path
 import queue
 import shutil
+import shlex
+import signal
 import subprocess
 import sys
 import tempfile
@@ -25,13 +28,38 @@ def main():
     p.add_argument('--hermes-root',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True)
     p.add_argument('--text',default='The committee has reached a decision. We have decided to order more coffee.')
+    p.add_argument('--agent-prompt', help='Generate a real reply through HermesCLI.chat and its native TTS pipeline')
+    p.add_argument('--deadline', type=int, default=360, help='Hard process deadline for an agent reply (seconds, 1–600)')
+    p.add_argument('--worker', action='store_true', help=argparse.SUPPRESS)
     a=p.parse_args()
     if a.out.exists():p.error('preserve previous attempts; output exists')
+    if not 1 <= a.deadline <= 600:p.error('deadline must be 1–600 seconds')
+    if a.agent_prompt and not a.worker:
+        child=subprocess.Popen([sys.executable, str(Path(__file__).resolve()),
+                                *sys.argv[1:], '--worker'], start_new_session=True)
+        try:
+            raise SystemExit(child.wait(timeout=a.deadline))
+        except subprocess.TimeoutExpired:
+            os.killpg(child.pid, signal.SIGTERM)
+            try:child.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                os.killpg(child.pid, signal.SIGKILL);child.wait()
+            a.out.mkdir(parents=True, exist_ok=True)
+            receipt_path=a.out/'receipt.json'
+            receipt=json.loads(receipt_path.read_text()) if receipt_path.exists() else {}
+            receipt.update(status='incomplete', error='hard process deadline exceeded',
+                           deadline_seconds=a.deadline, worker_reaped=True)
+            receipt_path.write_text(json.dumps(receipt,indent=2)+'\n')
+            raise SystemExit(124)
     home=os.environ.get('HERMES_HOME')
     if not home:p.error('set HERMES_HOME to the intended existing profile')
     config=Path(home)/'config.yaml'
     if not config.is_file():p.error('profile configuration does not exist')
     sys.path.insert(0,str(a.hermes_root.resolve()))
+    # CLI bootstrap may re-exec in its managed environment; do that before
+    # reserving an output directory or installing capture hooks.
+    if a.agent_prompt:
+        from cli import HermesCLI
     from tools import tts_tool, voice_mode
     from tools.tts_tool_speaker import stream_tts_to_speaker
     c=tts_tool._load_tts_config()
@@ -39,13 +67,15 @@ def main():
     provider=c.get('providers',{}).get(selected,{})
     if selected!='afterwords' or provider.get('type')!='command':
         p.error('this smoke test requires the configured Afterwords command provider')
+    if a.agent_prompt and 'AFTERWORDS_PLAYBACK_OWNER=hermes' not in shlex.split(provider.get('command', '')):
+        p.error('real reply requires native playback ownership in the configured command')
     a.out.mkdir(parents=True)
     out=a.out.resolve()
     before=hashlib.sha256(config.read_bytes()).hexdigest()
     receipt={'status':'incomplete','profile_home':str(Path(home).resolve()),
              'profile_config_sha256':before,'provider':selected,'voice':provider.get('voice'),
              'text':a.text,'text_sha256':hashlib.sha256(a.text.encode()).hexdigest(),
-             'playback_owner_override':'hermes','physical_playback':False,
+             'playback_owner_override':None if a.agent_prompt else 'hermes','physical_playback':False,
              'automatic_mute_flag_present':Path('/tmp/afterwords-muted').exists(),
              'scope':'native sentence pipeline with fixed test text; not an agent reply or post-LLM-hook test',
              'artifacts':[],'sentences':[]}
@@ -79,14 +109,58 @@ def main():
             probe.chmod(0o700)
             os.environ['PATH']=str(probe.parent)+os.pathsep+original_path
             os.environ['AFTERWORDS_PLAYBACK_PROBE_LOG']=str(out/'provider-playback.log')
-            os.environ['AFTERWORDS_PLAYBACK_OWNER']='hermes'
+            if not a.agent_prompt:
+                os.environ['AFTERWORDS_PLAYBACK_OWNER']='hermes'
             voice_mode.play_audio_file=capture
-            q=queue.Queue();q.put(a.text);q.put(None)
-            stop=threading.Event();done=threading.Event()
-            stream_tts_to_speaker(q,stop,done,display_callback=receipt['sentences'].append)
-            receipt['done_event']=done.is_set()
+            if a.agent_prompt:
+                from agent import turn_finalizer
+                from tools import tts_tool_speaker
+                receipt['scope']='real Hermes CLI reply with native sentence playback capture'
+                receipt['prompt']=a.agent_prompt
+                receipt['hook_owners']=[]
+                original_hook=turn_finalizer._invoke_hook_safely
+                def observe_hook(name, logger, **data):
+                    if name=='post_llm_call':
+                        receipt['hook_owners'].append(data.get('tts_playback_owner'))
+                    return original_hook(name, logger, **data)
+                turn_finalizer._invoke_hook_safely=observe_hook
+                original_stream=tts_tool_speaker.stream_tts_to_speaker
+                def observe_stream(*args, **kwargs):
+                    display=kwargs.get('display_callback')
+                    def observe_sentence(text):
+                        receipt['sentences'].append(text)
+                        if display:
+                            display(text)
+                    kwargs['display_callback']=observe_sentence
+                    return original_stream(*args, **kwargs)
+                tts_tool_speaker.stream_tts_to_speaker=observe_stream
+                cli=HermesCLI(run_budget=0.50)
+                cli._voice_tts=True
+                receipt['gateway_process_marker']=os.environ.get('_HERMES_GATEWAY')
+                try:
+                    if not cli._claim_active_session():
+                        raise RuntimeError('Hermes refused the active session slot')
+                    reply=cli.chat(a.agent_prompt)
+                    if not reply:
+                        raise RuntimeError('Hermes did not return a reply')
+                    receipt['response']=reply
+                    receipt['text']=reply
+                    receipt['text_sha256']=hashlib.sha256(reply.encode()).hexdigest()
+                    receipt['done_event']=cli._voice_tts_done.wait(180)
+                    receipt['session_id']=cli.session_id
+                    receipt['model']=cli.model
+                    assert receipt['hook_owners']==['native'], 'missing or repeated native ownership hook'
+                finally:
+                    cli._release_active_session()
+                    turn_finalizer._invoke_hook_safely=original_hook
+                    tts_tool_speaker.stream_tts_to_speaker=original_stream
+            else:
+                q=queue.Queue();q.put(a.text);q.put(None)
+                stop=threading.Event();done=threading.Event()
+                stream_tts_to_speaker(q,stop,done,display_callback=receipt['sentences'].append)
+                receipt['done_event']=done.is_set()
             receipt['provider_playback_calls']=len((out/'provider-playback.log').read_text().splitlines()) if (out/'provider-playback.log').exists() else 0
-            assert done.is_set() and receipt['sentences']
+            assert receipt['done_event'] and receipt['sentences']
             assert len(receipt['artifacts'])==len(receipt['sentences']), 'missing or duplicated native playback calls'
             assert receipt['provider_playback_calls']==0, 'provider played a native-owned artifact'
             assert hashlib.sha256(config.read_bytes()).hexdigest()==before, 'profile configuration changed during test'

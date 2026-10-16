@@ -29,3 +29,12 @@ owned by native voice mode; the shell hook must not send another message.
 A profile hook may set `AFTERWORDS_PORT` (loopback only, 1–65535, default 7860)
 and `AFTERWORDS_VOICE` (overrides project/global mappings). Use the same route
 and voice in that profile's command provider; no global routing change is needed.
+
+The native route probe supports `--agent-prompt 'Your prompt' --deadline 360`
+for a real Hermes CLI reply with captured sentence playback. It preserves the
+configured model/tools/personality and automatic mute flag, requires native
+ownership in the configured command, and records incomplete attempts on a hard
+process deadline. Use a fresh output directory. Keychain-backed model access on
+this M5 succeeds in a fresh GUI launchd worker but returns exit 36 under SSH;
+use the working context without changing credentials. Capture is not physical
+playback or acoustic acceptance. The current expressive transport is temporary.
