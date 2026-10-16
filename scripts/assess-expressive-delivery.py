@@ -49,7 +49,9 @@ def main():
              'source_duration_seconds':len(source)/rate,'source_sample_rate':rate,
              'source_channels':source.shape[1],'prompt':PROMPT,'temperature':0,'max_tokens':192,
              'status':'incomplete','segments':[],'human_listening':'not performed',
+             'observer_qualification':'failed_all_zero_silence_control; judgments unsuitable for acceptance',
              'acoustic_acceptance':'unverified','limitations':[
+                 'This pinned model/prompt reported speech and artifacts in all-zero PCM; delivery claims are untrusted.',
                  'Automated audio-model observations can be wrong or influenced by lexical content.',
                  'Segment boundaries limit assessment of timing across sentences and the whole performance.',
                  'This is not human listening acceptance or a calibrated quality score.']}

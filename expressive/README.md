@@ -248,7 +248,10 @@ the existing Drama environment with a separately pinned Qwen2-Audio model to
 record automated delivery observations. The pinned environment includes Jinja2
 for the model's chat template. Actual short and 92.56-second Qwen inputs have
 run successfully; this establishes execution and full-input coverage, not the
-accuracy of subjective judgments. It takes the
+accuracy of subjective judgments. **This model/prompt failed an all-zero-silence
+control**, describing speech, sighs/gasps and clicks in silent PCM. Its delivery
+judgments are unsuitable for acceptance and must not serve as listening evidence.
+The script retains exploratory outputs with this qualification recorded. It takes the
 shared model lease, requires40GiB host headroom, caps MLX allocations at16GiB,
 and processes the entire input in20-second segments because the upstream
 implementation truncates individual inputs at30seconds. It never supplies the
