@@ -223,3 +223,24 @@ def test_native_playback_owner_skips_all_shell_speech(hook_env, nested):
     )
     assert result.returncode == 0, result.stderr
     assert not log.exists(), "native-owned turns must not synthesize, archive or play twice"
+
+
+@pytest.mark.parametrize("port", ["0", "65536", "localhost:123", "-1"])
+def test_shell_profile_port_rejects_invalid_target(hook_env, port):
+    env, log, workdir = hook_env
+    result = run_hook(dict(env, AFTERWORDS_PORT=port), workdir, unique_text(), platform="cli")
+    assert result.returncode == 2
+    assert not log.exists()
+
+
+def test_shell_profile_route_uses_explicit_loopback_port_and_voice(hook_env):
+    env, log, workdir = hook_env
+    curl = Path(env["PATH"].split(os.pathsep)[0]) / "curl"
+    curl.write_text(curl.read_text().replace("RIFF-fake-wav-payload", "RIFF" + "x" * 4096))
+    result = run_hook(dict(env, AFTERWORDS_PORT="17862", AFTERWORDS_VOICE="vixen-original-r1"),
+                      workdir, unique_text(), platform="cli")
+    assert result.returncode == 0, result.stderr
+    calls = synth_calls(log)
+    assert len(calls) == 1
+    assert "http://127.0.0.1:17862/synthesize" in calls[0]
+    assert "voice=vixen-original-r1" in calls[0]

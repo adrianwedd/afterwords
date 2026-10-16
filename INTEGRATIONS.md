@@ -28,3 +28,9 @@ absent. The native command provider must also use
 `AFTERWORDS_PLAYBACK_OWNER=hermes` so Hermes alone plays its returned artifact.
 The hook field requires a compatible Hermes producer; adding this consumer
 alone does not establish exactly-once playback in a running profile.
+
+A profile-specific shell hook can select a separate loopback service with
+`AFTERWORDS_PORT` (1–65535; default 7860) and an explicit `AFTERWORDS_VOICE`.
+The explicit voice takes precedence over `.afterwords` mappings. These settings
+belong in that profile's hook command, alongside its native command-provider
+route; they do not change the default server or other profiles.
