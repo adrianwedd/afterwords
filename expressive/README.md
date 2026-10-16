@@ -182,3 +182,16 @@ Playback is explicit, one clip at a time, with pause, mute, replay and exact
 transcripts. The five required demonstrations remain visible when recordings
 are missing. Availability counts never certify identity, emotion, end-to-end
 Vixen delivery, distinct casting or acoustic acceptance.
+
+A baseline against the existing running service is reproducible with:
+
+```sh
+.venv/bin/python scripts/benchmark-afterwords-http.py --voice galadriel --case interruption --case pronunciation --case long-response --out NEW_PRIVATE_DIRECTORY
+```
+
+This sends one request at a time to loopback, preserves every attempted case,
+checks complete PCM16 mono WAV payloads, and records response headers, exact
+hashes, full-file latency and end-to-end RTF. It does not restart the service,
+apply experimental controls, retry failed cases, or measure native model TTFA.
+Use original/consented voices for public assets; existing identifiable voices
+are private comparison material unless separately cleared.
