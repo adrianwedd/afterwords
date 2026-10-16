@@ -9,7 +9,16 @@
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-AFTERWORDS_URL="http://127.0.0.1:7860"
+PORT="${AFTERWORDS_PORT:-7860}"
+case "$PORT" in
+    ''|*[!0-9]*) echo "Error: AFTERWORDS_PORT must be a local TCP port" >&2; exit 2 ;;
+esac
+if [ "${#PORT}" -gt 5 ] || (( 10#$PORT < 1 || 10#$PORT > 65535 )); then
+    echo "Error: AFTERWORDS_PORT must be between 1 and 65535" >&2
+    exit 2
+fi
+PORT=$((10#$PORT))
+AFTERWORDS_URL="http://127.0.0.1:${PORT}"
 
 MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
 PLAY_LOCK="/tmp/afterwords-play.lock"
@@ -46,6 +55,14 @@ file_size() {
 
 # ── Read payload ──────────────────────────────────────────────────────────
 PAYLOAD=$(cat)
+# Native sentence/full-response playback owns this turn. Defer before any
+# synthesis or archive work; older Hermes versions omit this optional field.
+PLAYBACK_OWNER=$(printf '%s' "$PAYLOAD" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+print(d.get('tts_playback_owner') or d.get('extra', {}).get('tts_playback_owner', ''))
+" 2>/dev/null || true)
+[ "$PLAYBACK_OWNER" = "native" ] && exit 0
 # Gateway emits flat: {"platform":"discord","response":"...","session_id":"..."}
 # CLI emits nested: {"extra":{"assistant_response":"...","platform":"..."}}
 TEXT=$(printf '%s' "$PAYLOAD" | python3 -c "
@@ -214,7 +231,7 @@ resolve_voice() {
     echo "${voice}"
 }
 
-VOICE=$(resolve_voice)
+VOICE="${AFTERWORDS_VOICE:-$(resolve_voice)}"
 VOICE_PARAM=""
 if [ -n "$VOICE" ]; then
     VOICE_ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$VOICE" 2>/dev/null || echo "")

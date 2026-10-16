@@ -16,3 +16,16 @@ The four queue-based agents install shared helpers even when detected alone. Ins
 Every automatic playback path honors `/tmp/afterwords-muted`; synthesis and archives continue. All integrations share `/tmp/afterwords-play.lock` and `/tmp/afterwords-play.pid`. Foreground user-requested playback remains audible when automatic speech is muted. Project `.afterwords` mappings use `claude` subagent types or `codex`, `gemini`, `agy`, `cursor`, and `hermes`, with `default` fallback.
 
 Repository tests exercise each queue-based shared-helper install in a disposable HOME, verify no Claude settings are written for other agents, and cover Hermes delivery failure contracts. These checks do not prove live third-party hook execution, audible speech, or exactly-once archives. Complete the per-integration live acceptance above before claiming that integration works on a fresh Mac.
+
+### Profile-specific native speech ownership
+
+The shell hook defers before synthesis, archiving and playback when Hermes
+supplies `tts_playback_owner: "native"` (flat or under `extra`). A compatible
+Hermes producer is required. Native command providers also use
+`AFTERWORDS_PLAYBACK_OWNER=hermes` so the artifact is played only by Hermes.
+Ordinary CLI hooks without an owner continue to speak. Gateway delivery stays
+owned by native voice mode; the shell hook must not send another message.
+
+A profile hook may set `AFTERWORDS_PORT` (loopback only, 1–65535, default 7860)
+and `AFTERWORDS_VOICE` (overrides project/global mappings). Use the same route
+and voice in that profile's command provider; no global routing change is needed.
