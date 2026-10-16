@@ -106,8 +106,16 @@ event interrupts queue waits and shuts down the adapter's sidecar socket, allowi
 the sidecar to kill its active worker. Explicit cancellation never starts Qwen
 fallback. The main request retains its synthesis lock until adapter cleanup has
 finished. Existing Qwen inference is not made interruptible by this change;
-a fallback already executing in Qwen completes under its existing lock. Actual
-model-loaded cancellation still needs qualification.
+a fallback already executing in Qwen completes under its existing lock.
+
+The header guards use ASGI middleware that preserves the receive channel.
+The prior `BaseHTTPMiddleware` wrappers hid disconnects from the nonblocking
+poll: a live abandoned request continued generating for139seconds. After the
+fix, the same loaded-model GET request through7862 reaped its worker in0.54s,
+with no fallback warning; the following request delivered6.83s of Fish audio.
+Private before/after receipts are in `var/expressive-voice/live-cancel-{1,2}`.
+GET and POST disconnects also pass full-app middleware regression tests. This
+does not make already-running Qwen fallback interruptible or certify audio quality.
 
 ## References and release
 
