@@ -225,6 +225,7 @@ def test_hermes_handler_afplay_is_mute_guarded():
 # here with a rationale.
 _PY_KNOWN_AFPLAY = {
     "hermes/hooks/afterwords-tts/handler.py",  # guard verified by test_hermes_handler_afplay_is_mute_guarded
+    "scripts/verify-hermes-sentence-route.py",  # installs a fake afplay to detect/suppress calls; never plays audio
 }
 
 

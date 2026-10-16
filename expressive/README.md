@@ -119,6 +119,24 @@ feed poller's top-level scan. The default `provider` owner preserves ordinary
 CLI command-tool playback. This setting does not turn full-file synthesis into
 native model streaming; Hermes overlaps sentence synthesis and playback.
 
+To capture the installed native sentence route without speaker playback, run
+the following on the host owning the existing Hermes profile, using its own
+Hermes environment. Use a new output directory for every attempt:
+
+```sh
+HERMES_HOME="$HOME/.hermes/profiles/vixen" \
+  "$HOME/.hermes/hermes-agent/venv/bin/python" scripts/verify-hermes-sentence-route.py \
+  --hermes-root "$HOME/.hermes/hermes-agent" --out var/native-sentence-smoke-1
+```
+
+The smoke test uses real configured synthesis, captures native playback calls,
+detects provider playback, decodes the returned artifacts (including Hermes'
+Opus conversion), and verifies the profile file remained unchanged. It sets the
+playback owner only in its own process environment. It does not generate an
+agent reply, exercise the independent legacy post-LLM hook, or certify audible
+playback/voice quality. A configured legacy speech hook must also be reconciled
+before claiming exactly-once playback of a real agent turn.
+
 Original voice candidates can be generated without any human reference:
 
 ```sh
