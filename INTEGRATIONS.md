@@ -16,3 +16,15 @@ The four queue-based agents install shared helpers even when detected alone. Ins
 Every automatic playback path honors `/tmp/afterwords-muted`; synthesis and archives continue. All integrations share `/tmp/afterwords-play.lock` and `/tmp/afterwords-play.pid`. Foreground user-requested playback remains audible when automatic speech is muted. Project `.afterwords` mappings use `claude` subagent types or `codex`, `gemini`, `agy`, `cursor`, and `hermes`, with `default` fallback.
 
 Repository tests exercise each queue-based shared-helper install in a disposable HOME, verify no Claude settings are written for other agents, and cover Hermes delivery failure contracts. These checks do not prove live third-party hook execution, audible speech, or exactly-once archives. Complete the per-integration live acceptance above before claiming that integration works on a fresh Mac.
+
+### Native Hermes playback ownership
+
+When Hermes supplies `tts_playback_owner: "native"` in a `post_llm_call`
+payload (flat or under `extra`), the shell hook defers before synthesis,
+archiving or playback. This lets native sentence playback or its full-response
+fallback own the turn without a second shell-hook rendition. Ordinary hooks
+from older Hermes versions retain their existing behavior when the field is
+absent. The native command provider must also use
+`AFTERWORDS_PLAYBACK_OWNER=hermes` so Hermes alone plays its returned artifact.
+The hook field requires a compatible Hermes producer; adding this consumer
+alone does not establish exactly-once playback in a running profile.

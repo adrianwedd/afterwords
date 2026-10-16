@@ -46,6 +46,14 @@ file_size() {
 
 # ── Read payload ──────────────────────────────────────────────────────────
 PAYLOAD=$(cat)
+# Native sentence/full-response playback owns this turn. Defer before any
+# synthesis or archive work; older Hermes versions omit this optional field.
+PLAYBACK_OWNER=$(printf '%s' "$PAYLOAD" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+print(d.get('tts_playback_owner') or d.get('extra', {}).get('tts_playback_owner', ''))
+" 2>/dev/null || true)
+[ "$PLAYBACK_OWNER" = "native" ] && exit 0
 # Gateway emits flat: {"platform":"discord","response":"...","session_id":"..."}
 # CLI emits nested: {"extra":{"assistant_response":"...","platform":"..."}}
 TEXT=$(printf '%s' "$PAYLOAD" | python3 -c "

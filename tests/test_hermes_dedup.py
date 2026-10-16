@@ -209,3 +209,17 @@ def test_cli_scope_skips_gateway_local_mapped_to_cli(hook_env):
     result = run_hook(env, workdir, unique_text(), platform="cli")
     assert result.returncode == 0
     assert not log.exists(), "gateway local turns are owned by the native hook"
+
+
+@pytest.mark.parametrize("nested", [False, True])
+def test_native_playback_owner_skips_all_shell_speech(hook_env, nested):
+    env, log, workdir = hook_env
+    payload = {"platform": "cli", "response": unique_text()}
+    owner = {"tts_playback_owner": "native"}
+    payload.update({"extra": owner} if nested else owner)
+    result = subprocess.run(
+        ["bash", str(SCRIPT)], input=json.dumps(payload), capture_output=True,
+        text=True, env=env, cwd=workdir, timeout=30,
+    )
+    assert result.returncode == 0, result.stderr
+    assert not log.exists(), "native-owned turns must not synthesize, archive or play twice"
