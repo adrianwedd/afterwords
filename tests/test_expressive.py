@@ -40,6 +40,22 @@ def child(code):
     return [sys.executable, '-u', '-c', code]
 
 
+def test_sustained_silence_across_chunks_rejects_entire_delivery(memory_headroom):
+    # Valid protocol completion must not turn a silent model failure into audio.
+    async def run():
+        # Send compact generated events rather than an oversized command line.
+        code = ('import sys,json,base64\nsys.stdin.readline()\n'
+                "e={'kind':'chunk','audio':base64.b64encode(bytes(44100*6*4)).decode(),'sample_rate':44100}\n"
+                "print(json.dumps(e),flush=True)\nprint(json.dumps(e),flush=True)\n"
+                "print(json.dumps({'kind':'done','samples':44100*12,'sample_rate':44100}),flush=True)\n")
+        pool = WorkerPool(child(code))
+        with pytest.raises(RuntimeError, match='sustained silence'):
+            await pool.synthesize({})
+        assert pool.process is None
+        assert pool.pending == 0
+    asyncio.run(run())
+
+
 def test_deadline_kills_real_worker_and_releases_capacity(memory_headroom):
     async def run():
         pool = WorkerPool(child('import time; time.sleep(30)'), timeout=0.1)

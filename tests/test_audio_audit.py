@@ -1,6 +1,13 @@
 import numpy as np
 import pytest
-from expressive.audio_audit import waveform,word_errors
+from expressive.audio_audit import waveform,word_errors,validate_delivery
+
+
+def test_dramatic_pauses_are_preserved_without_claiming_word_integrity():
+    audio=np.concatenate([np.full(1000,.1),np.zeros(5000),np.full(1000,.1)])
+    measured=validate_delivery(audio,1000)
+    assert measured['longest_silence_seconds']==5
+    assert measured['samples']==7000
 
 
 @pytest.mark.parametrize('expected,heard,operation',[

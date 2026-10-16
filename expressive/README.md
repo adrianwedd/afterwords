@@ -70,6 +70,14 @@ The expressive adapter resamples Qwen fallback to 44.1 kHz with a polyphase
 filter, preserving duration and pitch so sentence chunks keep a consistent
 format when a reply mixes Drama and fallback. Direct Qwen requests remain
 24 kHz. Consumers must still read WAV metadata. Logs identify fallback.
+
+The sidecar rejects complete outputs containing ten or more consecutive seconds
+below -50 dBFS (20 ms RMS windows). Actual 4bit qualification produced 68 seconds
+of silence on a laughter prompt and a 19-second gap in a long response, despite
+normal model completion. Rejection discards the entire buffered output and uses
+the configured fallback policy; it never trims damaged speech into a success.
+This conservative guard also rejects deliberately requested pauses that long.
+It does not detect every missing word or certify transcript or acting quality.
 Invalid requests are not disguised as
 availability failures.
 

@@ -68,8 +68,12 @@ class WorkerPool:
             elif event['kind'] == 'done':
                 if not samples or event['samples'] != samples or event['sample_rate'] != 44100:
                     raise RuntimeError('incomplete audio output')
+                from expressive.audio_audit import validate_delivery
+                audio = np.concatenate(chunks)
+                measurement = validate_delivery(audio, 44100)
+                event['longest_silence_seconds'] = measurement['longest_silence_seconds']
                 output = io.BytesIO()
-                sf.write(output, np.concatenate(chunks), 44100, format='WAV', subtype='PCM_16')
+                sf.write(output, audio, 44100, format='WAV', subtype='PCM_16')
                 return output.getvalue(), event
             else:
                 raise RuntimeError('unexpected worker event')

@@ -3,6 +3,19 @@ import re
 import numpy as np
 
 
+def validate_delivery(audio, rate):
+    """Reject observed catastrophic silence; this is not transcript verification.
+
+    Ten seconds permits ordinary dramatic pauses while rejecting the measured
+    19s and 68s silent failures. Never trim silence and present damaged text as
+    complete speech. The caller must discard the full output on rejection.
+    """
+    measurement = waveform(audio, rate)
+    if measurement['longest_silence_seconds'] >= 10:
+        raise RuntimeError('generated audio contains at least ten seconds of sustained silence')
+    return measurement
+
+
 def words(text):
     return re.findall(r"[\w]+(?:['’][\w]+)*", text.casefold().replace('’',"'"),flags=re.UNICODE)
 
