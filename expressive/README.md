@@ -217,6 +217,16 @@ load time, Metal peak, and host memory. First model chunk is distinct from
 first playable audio through the full-file HTTP contract. Failed attempts stay
 incomplete and are retained. The script's deadline is cooperative.
 
+Use `--case long-response --chunked-long` for the production-shaped long-text
+comparison. It uses the canonical 400-character sentence chunker, repeats the
+same reference and seed for each independent call, saves every chunk WAV and
+transcript, and assembles all audio in order. A failed or empty chunk leaves the
+attempt incomplete; completed earlier chunks remain available for diagnosis.
+Directed or multi-speaker long cases are rejected rather than dropping their
+controls. The default single-call mode is retained as an explicitly labelled
+diagnostic for comparison with historical measurements. Compare quantisations
+using the same mode; neither mode establishes listening acceptance.
+
 `audit-expressive-audio.py --audio FILE --text-file TEXT --out RECEIPT
 --whisper-snapshot LOCAL_DIRECTORY` runs offline CPU Whisper and waveform
 measurements. It records exact hashes, ASR words/timestamps, word-edit alignment,
