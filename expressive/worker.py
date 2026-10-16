@@ -10,6 +10,7 @@ from collections import OrderedDict
 from pathlib import Path
 
 from expressive.contracts import MODEL, REVISION, validate_options, directed_text
+from expressive.generation import generate_with_context
 
 
 def emit(value):
@@ -68,16 +69,13 @@ def main():
                     if count >= options['max_frames']:
                         raise RuntimeError('frame limit reached without verified EOS')
                 model._frames = checked_frames
-                mx.random.seed(options['seed'])
                 mx.reset_peak_memory()
                 generation_started = time.perf_counter()
                 count = 0
                 ttfa = None
                 try:
-                    for result in model.generate(text=text, ref_audio=str(references[digest]),
-                            ref_text=request['reference_text'], stream=True, first_chunk_frames=4,
-                            max_tokens=options['max_frames'], temperature=options['temperature'],
-                            top_p=options['top_p'], top_k=options['top_k']):
+                    for result in generate_with_context(model, text, str(references[digest]),
+                            request['reference_text'], options, mx.random.seed):
                         audio = np.asarray(result.audio, dtype='<f4')
                         if audio.ndim != 1 or not np.isfinite(audio).all():
                             raise RuntimeError('invalid generated audio')
@@ -95,6 +93,7 @@ def main():
                     raise RuntimeError('model generated no audio')
                 elapsed = time.perf_counter() - generation_started
                 emit(dict(kind='done', samples=count, sample_rate=model.sample_rate, model=MODEL,
+                          context_mode=options['context_mode'],
                           revision=REVISION, reference_sha256=digest,
                           reference_conversion=conversion,
                           conditioning_sha256=hashlib.sha256(references[digest].read_bytes()).hexdigest(),

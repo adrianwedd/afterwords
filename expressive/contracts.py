@@ -5,7 +5,8 @@ MODEL = 'mlx-community/fish-audio-drama-3-4bit'
 REVISION = 'cc639e27aba7edb73429d3e3806f471dcd79d316'
 SOURCE_REVISION = 'dad2087f790dfe96b07d5aac1405db4b578b411f'
 CUES = frozenset({'whispers', 'laughs', 'sighs', 'chuckles', 'gasps', 'excited', 'sad', 'angry', 'calm'})
-DEFAULTS = dict(temperature=0.7, top_p=0.7, top_k=30, max_frames=1600, seed=20261016)
+DEFAULTS = dict(temperature=0.7, top_p=0.7, top_k=30, max_frames=1600, seed=20261016,
+                context_mode='continuous')
 
 
 def validate_options(options):
@@ -15,6 +16,8 @@ def validate_options(options):
     if unknown:
         raise ValueError(f'unsupported performance controls: {sorted(unknown)}')
     out = {**DEFAULTS, **options}
+    if out['context_mode'] not in ('continuous', 'paragraphs'):
+        raise ValueError('context_mode must be continuous or paragraphs')
     for key, low, high, integer in [('temperature', 0.1, 1.5, False), ('top_p', 0.1, 1, False),
                                     ('top_k', 1, 100, True), ('max_frames', 16, 4000, True),
                                     ('seed', 0, 2**32-1, True)]:

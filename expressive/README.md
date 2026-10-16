@@ -56,6 +56,16 @@ transcript and inserted at character offsets at word boundaries. Allowed names
 are in `contracts.py`; acceptance of a cue is not proof of expressive effect.
 Free-form `instruct`, speed changes, revision and infilling are not supported.
 
+`context_mode` defaults to `continuous` (the upstream generation strategy).
+The opt-in `paragraphs` mode makes a separate model call at each blank-line
+paragraph, using the same reference and resetting the seed for each call.
+It preserves every input character, attaches punctuation-only separators to
+nearby prose, and inserts no artificial silence or crossfade. This prevents
+cross-paragraph history from influencing generation, but may change prosody
+at joins. It is a candidate strategy for literal narration, not a transcript
+guarantee: qualify the resulting audio before release. An empty paragraph
+generation aborts the whole buffered request instead of dropping that text.
+
 Per-request controls override voice defaults via the optional GET `performance`
 JSON parameter, or POST `performance` object on the existing clone-enabled POST
 route. They never mutate the prepared voice. Controls on other backends fail
