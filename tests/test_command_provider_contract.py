@@ -172,7 +172,7 @@ def _make_tts_payload(text: str, header: bytes = b"RIFF") -> bytes:
 def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
                   voice: str = "seven-of-nine", stub_text_key: bool = True,
                   fail_from_chunk: int = 0, port: str | None = None,
-                  hermes_home: Path | None = None):
+                  hermes_home: Path | None = None, playback_owner: str | None = None):
     """Run the provider with a stubbed curl/afplay/lame/hermes; return (result, ctx).
 
     The curl stub writes a text-derived payload for `-o <path>` and logs the
@@ -239,6 +239,9 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     )
     for tool in ("afplay", "lame", "ffmpeg"):
         _write_exe(bindir / tool, "#!/usr/bin/env bash\nexit 0\n")
+    playback_log = tmp_path / 'playback.txt'
+    _write_exe(bindir / 'afplay', '#!/usr/bin/env bash\n'
+               f'printf "%s\\n" "$*" >> {shlex.quote(str(playback_log))}\n')
     _write_exe(bindir / "hermes", "#!/usr/bin/env bash\nexit 0\n")
 
     text_path = tmp_path / "input.txt"
@@ -255,6 +258,9 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
         env["HERMES_SESSION_PLATFORM"] = platform
     env["AFTERWORDS_REPO"] = str(REPO)
     env.pop("AFTERWORDS_PORT", None)
+    env.pop("AFTERWORDS_PLAYBACK_OWNER", None)
+    if playback_owner is not None:
+        env['AFTERWORDS_PLAYBACK_OWNER'] = playback_owner
     if port is not None:
         env["AFTERWORDS_PORT"] = port
 
@@ -264,7 +270,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     # Static source-contract tests above still inspect COMMAND_SCRIPT itself.
     provider = tmp_path / "provider.sh"
     source = COMMAND_SCRIPT.read_text()
-    for filename in ("afterwords-play.lock", "afterwords-play.pid"):
+    for filename in ("afterwords-play.lock", "afterwords-play.pid", "afterwords-muted"):
         source = source.replace(f'"/tmp/{filename}"', shlex.quote(str(tmp_path / filename)))
     provider.write_text(source)
 
@@ -274,7 +280,27 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     )
     return result, {
         "out": out, "requests": requests, "home": home, "text_path": text_path, "curl_args": curl_args,
+        "playback": playback_log,
     }
+
+
+@pytest.mark.parametrize('owner,plays', [('provider', 1), ('hermes', 0)])
+def test_exactly_one_playback_owner(tmp_path, owner, plays):
+    result, ctx = _run_provider(tmp_path, SHORT_REPLY, playback_owner=owner)
+    assert result.returncode == 0, result.stderr
+    assert ctx['out'].stat().st_size > 1000
+    actual = ctx['playback'].read_text().splitlines() if ctx['playback'].exists() else []
+    assert len(actual) == plays
+    archive = ctx['home'] / '.hermes' / 'tts-archive'
+    if owner == 'hermes':
+        assert not list(archive.glob('*.txt'))
+        assert len(list((archive / 'consumer-delivered').glob('*.txt'))) == 1
+
+
+def test_invalid_playback_owner_fails_before_synthesis(tmp_path):
+    result, ctx = _run_provider(tmp_path, SHORT_REPLY, playback_owner='both')
+    assert result.returncode == 2
+    assert not ctx['out'].exists()
 
 
 def test_short_turn_writes_real_audio_not_silence(tmp_path):

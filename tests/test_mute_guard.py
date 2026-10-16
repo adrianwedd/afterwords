@@ -134,7 +134,8 @@ def _py_afplay_is_guarded(lines: list[str], idx: int) -> bool:
     return False
 
 
-_SKIP_DIR_PARTS = {".git", "node_modules", ".venv", "venv", "__pycache__"}
+_SKIP_DIR_PARTS = {".git", "node_modules", ".venv", ".venv-drama3",
+                   ".venv-audio-audit", "venv", "__pycache__"}
 
 
 def _shell_scripts() -> list[Path]:
@@ -231,6 +232,7 @@ def _python_files() -> list[Path]:
     return [
         p for p in sorted(REPO.rglob("*.py"))
         if not (_SKIP_DIR_PARTS | {"tests"}) & set(p.parts)
+        and p.is_file()  # downloaded model metadata can contain dangling optional links
     ]
 
 

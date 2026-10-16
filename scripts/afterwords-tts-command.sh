@@ -52,6 +52,14 @@ TEXT_PATH="${1:?Usage: afterwords-tts-command.sh <input_path> <output_path> [voi
 OUTPUT_PATH="${2:?Missing output_path}"
 CONFIG_VOICE="${3:-}"
 
+# Hermes /voice plays each returned sentence itself. Select one playback owner
+# explicitly; ordinary command-tool callers retain provider-owned playback.
+PLAYBACK_OWNER="${AFTERWORDS_PLAYBACK_OWNER:-provider}"
+case "$PLAYBACK_OWNER" in
+    provider|hermes) ;;
+    *) echo "Error: AFTERWORDS_PLAYBACK_OWNER must be provider or hermes" >&2; exit 2 ;;
+esac
+
 # A profile may select a separate local server/SSH forward without changing
 # the default service or sending reference/text data to an arbitrary host.
 PORT="${AFTERWORDS_PORT:-7860}"
@@ -223,6 +231,9 @@ archive_mp3_sidecar() {
     local src="$1" stamp archive_dir slug archive_mp3
     stamp=$(date +%Y%m%d-%H%M%S)
     archive_dir="${HERMES_HOME:-$HOME/.hermes}/tts-archive"
+    if [ "$PLAYBACK_OWNER" = "hermes" ]; then
+        archive_dir="$archive_dir/consumer-delivered"
+    fi
     mkdir -p "$archive_dir" 2>/dev/null || true
     slug=$(printf '%s' "$CLEANED" | python3 -c "
 import sys, re
@@ -332,7 +343,7 @@ if $ASYNC; then
                     PREV_SIZE=$(file_size "$PREV_WAV")
                 fi
                 if [ "$PREV_SIZE" -gt 1000 ] && $PLAY_OK; then
-                    [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+                    [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
                 fi
             fi
         fi
@@ -345,7 +356,7 @@ if $ASYNC; then
     LAST_WAV="${CHUNK_DIR}/${IDX}.wav"
     if [ -f "$LAST_WAV" ] && $PLAY_OK; then
         if [ "$(file_size "$LAST_WAV")" -gt 1000 ]; then
-            [ -f "$MUTE_FILE" ] || afplay "$LAST_WAV" 2>/dev/null
+            [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$LAST_WAV" 2>/dev/null
         fi
     fi
 

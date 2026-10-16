@@ -92,6 +92,19 @@ class FishDrama3Backend(BackendBase):
             qwen = get('qwen3-0.6b')
             qwen.load()
             reference = PreparedVoice(prepared.ref_audio_path, prepared.ref_text, {}, data=prepared.data)
-            result = qwen.synthesize(text, reference, lang)
+            audio, rate = qwen.synthesize(text, reference, lang)
+            audio = np.asarray(audio, dtype=np.float32)
+            if (audio.ndim != 1 or not len(audio) or not np.isfinite(audio).all()
+                    or type(rate) is not int or rate <= 0):
+                raise RuntimeError('invalid Qwen fallback output')
+            if rate != self.sample_rate:
+                from math import gcd
+                from scipy.signal import resample_poly
+                divisor = gcd(rate, self.sample_rate)
+                # Keep one format across sentence chunks even if only some
+                # requests fall back. Polyphase filtering preserves duration
+                # and pitch; relabelling or concatenating PCM cannot do this.
+                audio = resample_poly(audio, self.sample_rate // divisor,
+                                      rate // divisor).astype(np.float32)
             self.last_delivery_backend = qwen.name
-            return result
+            return audio, self.sample_rate

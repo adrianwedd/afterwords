@@ -59,8 +59,11 @@ is unavailable, full-text Qwen fallback is enabled by default; set per-voice or
 per-request `qwen_fallback: false` to fail instead. Fallback uses the original
 transcript, not delivery tags. `X-Backend` names the backend that actually
 produced the WAV and `X-Requested-Backend` names the selected voice backend.
-A fallback may therefore return Qwen's 24 kHz audio; consumers must read WAV
-metadata. Logs also identify fallback. Invalid requests are not disguised as
+The expressive adapter resamples Qwen fallback to 44.1 kHz with a polyphase
+filter, preserving duration and pitch so sentence chunks keep a consistent
+format when a reply mixes Drama and fallback. Direct Qwen requests remain
+24 kHz. Consumers must still read WAV metadata. Logs identify fallback.
+Invalid requests are not disguised as
 availability failures.
 
 The main server admits at most four expressive requests waiting for its shared
@@ -107,6 +110,14 @@ It defaults to 7860 and rejects invalid ports before synthesis. A remote profile
 can use an independently verified SSH loopback forward; this setting does not
 permit arbitrary remote URLs or change the default Hermes profile. Actual
 Vixen configuration is on M5; do not create a replacement profile on Studio.
+
+For Hermes native `/voice` sentence playback, add
+`AFTERWORDS_PLAYBACK_OWNER=hermes` to that profile's command. Hermes then owns
+playback of each returned artifact, and the provider does not play it again.
+These artifacts archive under `tts-archive/consumer-delivered`, outside the
+feed poller's top-level scan. The default `provider` owner preserves ordinary
+CLI command-tool playback. This setting does not turn full-file synthesis into
+native model streaming; Hermes overlaps sentence synthesis and playback.
 
 Original voice candidates can be generated without any human reference:
 

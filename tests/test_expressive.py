@@ -112,11 +112,17 @@ def test_fallback_receives_original_text_and_buffered_reference(tmp_path, monkey
     monkeypatch.setattr(urllib.request, 'build_opener', lambda *args: opener)
     qwen = Mock(name='Qwen')
     qwen.name = 'qwen3-0.6b'
-    qwen.synthesize.return_value = (np.ones(3),24000)
+    # A known tone checks actual conversion, rather than a changed WAV label.
+    source = .5 * np.sin(2 * np.pi * 440 * np.arange(24000) / 24000)
+    qwen.synthesize.return_value = (source, 24000)
     import backends
     monkeypatch.setattr(backends, 'get', lambda name: qwen)
-    _, rate = backend.synthesize('Actual answer.', prepared, 'en')
-    assert rate == 24000
+    audio, rate = backend.synthesize('Actual answer.', prepared, 'en')
+    assert rate == 44100 and len(audio) == 44100
+    assert audio.dtype == np.float32 and np.isfinite(audio).all()
+    peak_hz = np.argmax(abs(np.fft.rfft(audio))) * rate / len(audio)
+    assert peak_hz == 440
+    assert np.sqrt(np.mean(audio[100:-100] ** 2)) == pytest.approx(.5 / np.sqrt(2), abs=.002)
     text, voice, lang = qwen.synthesize.call_args.args
     assert text == 'Actual answer.' and voice.data == prepared.data and lang == 'en'
     assert backend.last_delivery_backend == 'qwen3-0.6b'
