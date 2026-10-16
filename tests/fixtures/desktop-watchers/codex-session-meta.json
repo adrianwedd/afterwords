@@ -1,0 +1,22 @@
+{
+  "type": "session_meta",
+  "timestamp": "2026-01-01T00:00:00.000Z",
+  "payload": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "cwd": "/test/project",
+    "originator": "codex-tui",
+    "cli_version": "sanitized",
+    "source": {
+      "subagent": {
+        "thread_spawn": {
+          "parent_thread_id": "00000000-0000-4000-8000-000000000002",
+          "depth": 1,
+          "agent_path": "/test/agent",
+          "agent_nickname": "Fixture",
+          "agent_role": null
+        }
+      }
+    },
+    "model_provider": "sanitized"
+  }
+}

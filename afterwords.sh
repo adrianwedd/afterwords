@@ -1011,6 +1011,7 @@ cmd_codex_hook() {
                 return $?
             fi
             [ -z "$diagnose" ] || fail "Unknown codex-hook start option: ${diagnose}. Use --diagnose."
+            [ ! -f "$HOME/Library/LaunchAgents/au.wedd.afterwords-codex-watch.plist" ] || fail "Global Codex watcher owns speech. Use watchers status codex or uninstall it first."
             [ -n "${CODEX_THREAD_ID:-}" ] || fail "CODEX_THREAD_ID is not set. Run inside Codex CLI or export it first."
 
             if [ -f "$CODEX_WATCH_PID" ]; then
@@ -1533,6 +1534,8 @@ cmd_help() {
     echo
     echo -e "  ${BOLD}Integrations${NC}"
     echo -e "    ${CYAN}mute${NC}              Toggle playback on/off (synthesis and archiving continue)"
+    echo -e "    ${CYAN}watchers install codex|opencode|all${NC}  Install login watchers (TTS server unchanged)"
+    echo -e "    ${CYAN}watchers restart|status|uninstall <agent>${NC}  Manage login watchers"
     echo -e "    ${CYAN}codex-hook start${NC}  Speak Codex CLI responses (run inside Codex)"
     echo -e "    ${CYAN}codex-hook stop${NC}   Stop the Codex watcher"
     echo
@@ -1589,6 +1592,7 @@ case "$COMMAND" in
     refine)      cmd_refine "$@" ;;
     update)      cmd_update "$@" ;;
     mute)        cmd_mute "$@" ;;
+    watchers)    "${AFTERWORDS_PYTHON:-python3}" "$REPO_DIR/watcher/manage.py" "$@" ;;
     codex-hook)  cmd_codex_hook "$@" ;;
     configure)   cmd_configure "$@" ;;
     uninstall)   cmd_uninstall "$@" ;;

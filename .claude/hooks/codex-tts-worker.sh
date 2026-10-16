@@ -9,16 +9,16 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 SESSION_ID="${CODEX_THREAD_ID:-global}"
-QUEUEDIR="/tmp/codex-tts-queue-${SESSION_ID}"
+QUEUEDIR="${AFTERWORDS_QUEUE_DIR:-/tmp/codex-tts-queue-${SESSION_ID}}"
 PIDFILE="/tmp/codex-tts-worker-${SESSION_ID}.pid"
 LOCKDIR="/tmp/codex-tts-worker-${SESSION_ID}.lock"
 TTS_URL="http://127.0.0.1:7860/synthesize"
-ARCHIVE_DIR="$HOME/.codex/tts-archive"
+ARCHIVE_DIR="${AFTERWORDS_ARCHIVE_DIR:-$HOME/.codex/tts-archive}"
 MAX_QUEUE=25
 
 MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
-PLAY_LOCK="/tmp/afterwords-play.lock"
-PLAY_PID="/tmp/afterwords-play.pid"
+PLAY_LOCK="${AFTERWORDS_PLAY_LOCK:-/tmp/afterwords-play.lock}"
+PLAY_PID="${AFTERWORDS_PLAY_PID:-/tmp/afterwords-play.pid}"
 acquire_play_lock() {
     local w=0
     while ! mkdir "$PLAY_LOCK" 2>/dev/null; do
@@ -46,6 +46,7 @@ if [ ! -d "$QUEUEDIR" ] || [ "$(stat -f%u "$QUEUEDIR" 2>/dev/null)" != "$(id -u)
   exit 1
 fi
 
+if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" != "1" ]; then
 if ! mkdir "$LOCKDIR" 2>/dev/null; then
     if [ -f "$PIDFILE" ]; then
         HOLDER=$(cat "$PIDFILE" 2>/dev/null)
@@ -61,10 +62,12 @@ fi
 
 echo $$ > "$PIDFILE"
 trap 'rm -f "$PIDFILE"; rm -rf "$LOCKDIR"' EXIT
+fi
 
 while true; do
     # Coalesce backlog: keep only the newest pending item so TTS stays current.
     NEWEST=""
+    if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" != "1" ]; then
     COUNT=0
     while IFS= read -r CAND; do
         COUNT=$((COUNT + 1))
@@ -80,6 +83,8 @@ while true; do
             EXTRA=$((EXTRA + 1))
             [ "$EXTRA" -gt "$MAX_QUEUE" ] && rm -f "$EXCESS"
         done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
+    fi
+
     fi
 
     # Claim the remaining (newest) item atomically via mv.
@@ -106,7 +111,11 @@ while true; do
     AGENT=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('agent',''))" "$ITEM" 2>/dev/null) || true
     TEXT=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('text',''))" "$ITEM" 2>/dev/null) || { rm -f "$ITEM"; continue; }
     ATTEMPTS=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('attempts',0))" "$ITEM" 2>/dev/null) || true
-    rm -f "$ITEM"
+    if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
+        : # Receipt commits only after complete synthesis and archiving.
+    else
+        rm -f "$ITEM"
+    fi
     [ -z "${TEXT:-}" ] && continue
     ATTEMPTS=${ATTEMPTS:-0}
 
@@ -153,6 +162,7 @@ while true; do
     # Never silently drop speech if another agent holds the play lock —
     # re-queue and retry after a brief backoff (capped to avoid wedged locks).
     if ! acquire_play_lock; then
+        [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" != "1" ] || exit 1
         NEXT_ATTEMPTS=$((ATTEMPTS + 1))
         if [ "$NEXT_ATTEMPTS" -ge 3 ]; then
             echo "afterwords: dropping codex TTS item after $NEXT_ATTEMPTS lock waits" >&2
@@ -197,6 +207,8 @@ print(json.dumps({
         fi
     }
 
+    DELIVERY_OK=1
+    DELIVERED_CHUNKS=0
     PREV_WAV=""
     PREV_TEXT=""
     PREV_ARCH=""
@@ -219,13 +231,20 @@ print(json.dumps({
                 FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
             fi
             if [ "$FILESIZE" -gt 1000 ]; then
-                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+                DELIVERED_CHUNKS=$((DELIVERED_CHUNKS + 1))
+                [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || DELIVERY_OK=0
                 if [ -n "$PREV_ARCH" ]; then
-                    (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
+                    if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
+                        lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null || DELIVERY_OK=0
+                        [ -s "$PREV_ARCH" ] || DELIVERY_OK=0
+                    else
+                        (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
+                    fi
                 else
                     rm -f "$PREV_WAV"
                 fi
             else
+                DELIVERY_OK=0
                 rm -f "$PREV_WAV"
             fi
         fi
@@ -244,13 +263,21 @@ print(json.dumps({
             FILESIZE=$(stat -f%z "$PREV_WAV" 2>/dev/null || echo 0)
         fi
         if [ "$FILESIZE" -gt 1000 ]; then
-            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+            DELIVERED_CHUNKS=$((DELIVERED_CHUNKS + 1))
+            [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || DELIVERY_OK=0
             if [ -n "$PREV_ARCH" ]; then
-                (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
+                if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
+                    lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null || DELIVERY_OK=0
+                    [ -s "$PREV_ARCH" ] || DELIVERY_OK=0
+                else
+                    (lame --quiet -V 2 "$PREV_WAV" "$PREV_ARCH" 2>/dev/null; rm -f "$PREV_WAV") &
+                fi
             else
+                DELIVERY_OK=0
                 rm -f "$PREV_WAV"
             fi
         else
+            DELIVERY_OK=0
             rm -f "$PREV_WAV"
         fi
     fi
@@ -258,4 +285,8 @@ print(json.dumps({
     wait 2>/dev/null || true
     rm -rf "$CHUNK_DIR"
     release_play_lock
+    if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
+        [ "$DELIVERY_OK" = "1" ] && [ "$NCHUNKS" -gt 0 ] && [ "$DELIVERED_CHUNKS" -eq "$NCHUNKS" ] || exit 1
+        mv "$ITEM" "${ITEM%.claimed}.done" || exit 1
+    fi
 done
