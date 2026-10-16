@@ -363,3 +363,34 @@ Opus handoff, verifies the native-tool dedup rule, and checks that an absent
 Vixen adapter cannot fall back to the default bot. This proves the bounded
 adapter handoff, not live Telegram receipt. Existing gateway health is a
 separate check; it is not audio delivery evidence.
+
+### Pinned OmniVoice comparison
+
+The alternative probe is `scripts/benchmark-omnivoice.py`, using the existing
+isolated `.venv-drama3` environment and the same reference normalization and
+exclusive model lease. It loads only the cached
+`mlx-community/OmniVoice@defe4bdce0decb321d17e96a4774417be08022ea` snapshot,
+requires 48 GiB of available memory, caps Metal allocations at 24 GiB, and
+reaps a timed-out worker. It does not change serving routes. Example:
+
+```sh
+.venv-drama3/bin/python scripts/benchmark-omnivoice.py \
+  --text-file TEXT.txt --reference REFERENCE.wav \
+  --reference-text-file REFERENCE.txt --output NEW_ATTEMPT.wav \
+  --steps 64 --timeout 300
+```
+
+The observed parameters are float32. The first dry-humour sample took 1.45 s
+to load and 3.41 s to generate 7.88 s of audio (RTF 0.432), with a measured
+generation Metal peak of 4.35 GB. CPU transcription found zero word errors.
+The API produces a complete waveform, not native streaming audio. Reference
+conditioning uses the full normalized clip (up to 30 s), rather than silently
+clipping its audio while retaining a longer transcript.
+
+The fixed short-case cohort had zero transcript errors except `touch` versus
+`touched` in the excitement case. That disagreement still needs listening.
+The 302-word single-call long response failed: 126 ASR edits (41.72%), including
+omitted passages and a garbled ending. It is rejected. Instructions such as
+`excited`, `sad`, `angry`, `whispering` and `laughing` were passed separately
+from the exact target text; their acoustic effectiveness remains unverified.
+Native multi-speaker generation was not tested by this single-reference probe.
