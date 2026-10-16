@@ -255,186 +255,170 @@ if [ -z "${HERMES_SESSION_PLATFORM:-}" ] || [ "$HERMES_SESSION_PLATFORM" = "cli"
     ASYNC=true
 fi
 
-if $ASYNC; then
-    # ── CLI mode: synthesize the real artifact, play locally as it lands ──
-    MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
-    PLAY_LOCK="/tmp/afterwords-play.lock"
-    PLAY_PID="/tmp/afterwords-play.pid"
-    PLAY_OK=true
+# All platforms assemble every chunk. Only CLI may play locally.
+MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
+PLAY_LOCK="/tmp/afterwords-play.lock"
+PLAY_PID="/tmp/afterwords-play.pid"
+PLAY_OK=$ASYNC
+PLAY_LOCK_OWNED=false
 
-    # Acquire the shared play lock (mkdir-based for atomicity). Failing to get it
-    # costs local playback only — never the artifact.
-    WAITED=0
-    while ! mkdir "$PLAY_LOCK" 2>/dev/null; do
-        HOLDER=$(cat "$PLAY_PID" 2>/dev/null || true)
-        if [ -z "$HOLDER" ]; then sleep 0.05; HOLDER=$(cat "$PLAY_PID" 2>/dev/null || true); fi
-        if [ -z "$HOLDER" ] || ! kill -0 "$HOLDER" 2>/dev/null; then
-            rm -rf "$PLAY_LOCK" "$PLAY_PID"
-            continue
-        fi
-        WAITED=$((WAITED + 1))
-        if [ "$WAITED" -ge 200 ]; then
-            PLAY_OK=false
-            printf 'afterwords: play lock held for ~60s — skipping local playback\n' >&2
-            break
-        fi
-        sleep 0.3
-    done
-    if $PLAY_OK; then
-        bash -c 'echo $PPID' > "$PLAY_PID" 2>/dev/null || true
+# Acquire the shared play lock (mkdir-based for atomicity). Failing to get it
+# costs local playback only — never the artifact.
+WAITED=0
+while $PLAY_OK && ! mkdir "$PLAY_LOCK" 2>/dev/null; do
+    HOLDER=$(cat "$PLAY_PID" 2>/dev/null || true)
+    if [ -z "$HOLDER" ]; then sleep 0.05; HOLDER=$(cat "$PLAY_PID" 2>/dev/null || true); fi
+    if [ -z "$HOLDER" ] || ! kill -0 "$HOLDER" 2>/dev/null; then
+        rm -rf "$PLAY_LOCK" "$PLAY_PID"
+        continue
     fi
+    WAITED=$((WAITED + 1))
+    if [ "$WAITED" -ge 200 ]; then
+        PLAY_OK=false
+        printf 'afterwords: play lock held for ~60s — skipping local playback\n' >&2
+        break
+    fi
+    sleep 0.3
+done
+if $PLAY_OK; then
+    PLAY_LOCK_OWNED=true
+    bash -c 'echo $PPID' > "$PLAY_PID" 2>/dev/null || true
+fi
 
-    CHUNK_DIR=$(mktemp -d "/tmp/afterwords-cmd-XXXXXX")
-    release_play_lock() {
+CHUNK_DIR=$(mktemp -d "/tmp/afterwords-cmd-XXXXXX")
+release_play_lock() {
+    if $PLAY_LOCK_OWNED; then
         rm -f "$PLAY_PID"
         rm -rf "$PLAY_LOCK"
-        rm -rf "$CHUNK_DIR"
-    }
-    trap release_play_lock EXIT
-
-    # Split into ~400-char sentence chunks via the canonical chunker. If it is
-    # unreachable, speak the whole reply as one chunk rather than a weaker splitter.
-    CHUNKS=()
-    if [ -n "$CHUNK_SCRIPT" ] && [ -f "$CHUNK_SCRIPT" ]; then
-        while IFS= read -r CHUNK_LINE; do
-            [ -z "$CHUNK_LINE" ] && continue
-            CHUNKS+=("$CHUNK_LINE")
-        done < <(printf '%s' "$CLEANED" | python3 "$CHUNK_SCRIPT" 2>/dev/null || true)
     fi
-    if [ "${#CHUNKS[@]}" -eq 0 ]; then
-        printf '%s command-provider chunk helper unresolved (%s); speaking as one chunk\n' \
-            "$(date '+%Y-%m-%d %H:%M:%S')" "${CHUNK_SCRIPT:-none}" \
-            >> "${TMPDIR:-/tmp}/afterwords-hermes-hook.log" 2>/dev/null || true
-        CHUNKS=("$CLEANED")
+    rm -rf "$CHUNK_DIR"
+}
+trap release_play_lock EXIT
+
+# Split into ~400-char sentence chunks via the canonical chunker. If it is
+# unreachable, speak the whole reply as one chunk rather than a weaker splitter.
+CHUNKS=()
+if [ -n "$CHUNK_SCRIPT" ] && [ -f "$CHUNK_SCRIPT" ]; then
+    while IFS= read -r CHUNK_LINE; do
+        [ -z "$CHUNK_LINE" ] && continue
+        CHUNKS+=("$CHUNK_LINE")
+    done < <(printf '%s' "$CLEANED" | python3 "$CHUNK_SCRIPT" 2>/dev/null || true)
+fi
+if [ "${#CHUNKS[@]}" -eq 0 ]; then
+    printf '%s command-provider chunk helper unresolved (%s); speaking as one chunk\n' \
+        "$(date '+%Y-%m-%d %H:%M:%S')" "${CHUNK_SCRIPT:-none}" \
+        >> "${TMPDIR:-/tmp}/afterwords-hermes-hook.log" 2>/dev/null || true
+    CHUNKS=("$CLEANED")
+fi
+NCHUNKS=${#CHUNKS[@]}
+
+synth_chunk() {
+    # $1 = destination WAV, $2 = text. The timeout must cover SYNTHESIS: the
+    # server serialises it (single-GPU) and requests queue behind each other.
+    local out="$1" text="$2"
+    local t="${AFTERWORDS_TTS_TIMEOUT:-180}"
+    if [ -n "${VOICE:-}" ]; then
+        curl -s --max-time "$t" -G --data-urlencode "text=${text}" --data-urlencode "voice=${VOICE}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+    else
+        curl -s --max-time "$t" -G --data-urlencode "text=${text}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
     fi
-    NCHUNKS=${#CHUNKS[@]}
+}
 
-    synth_chunk() {
-        # $1 = destination WAV, $2 = text. The timeout must cover SYNTHESIS: the
-        # server serialises it (single-GPU) and requests queue behind each other.
-        local out="$1" text="$2"
-        local t="${AFTERWORDS_TTS_TIMEOUT:-180}"
-        if [ -n "${VOICE:-}" ]; then
-            curl -s --max-time "$t" -G --data-urlencode "text=${text}" --data-urlencode "voice=${VOICE}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
-        else
-            curl -s --max-time "$t" -G --data-urlencode "text=${text}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
-        fi
-    }
+WAVS=()
+IDX=0
+for CHUNK in "${CHUNKS[@]}"; do
+    IDX=$((IDX + 1))
+    CURR_WAV="${CHUNK_DIR}/${IDX}.wav"
+    WAVS+=("$CURR_WAV")
 
-    WAVS=()
-    IDX=0
-    for CHUNK in "${CHUNKS[@]}"; do
-        IDX=$((IDX + 1))
-        CURR_WAV="${CHUNK_DIR}/${IDX}.wav"
-        WAVS+=("$CURR_WAV")
+    # Current chunk synthesizes in the background...
+    synth_chunk "$CURR_WAV" "$CHUNK" &
+    CURR_PID=$!
 
-        # Current chunk synthesizes in the background...
-        synth_chunk "$CURR_WAV" "$CHUNK" &
-        CURR_PID=$!
-
-        # ...while the previous one plays: latency-to-first-audio is one chunk's
-        # synthesis, not the whole reply's.
-        if [ "$IDX" -gt 1 ]; then
-            PREV_WAV="${CHUNK_DIR}/$((IDX - 1)).wav"
-            if [ -f "$PREV_WAV" ]; then
+    # ...while the previous one plays: latency-to-first-audio is one chunk's
+    # synthesis, not the whole reply's.
+    if [ "$IDX" -gt 1 ]; then
+        PREV_WAV="${CHUNK_DIR}/$((IDX - 1)).wav"
+        if [ -f "$PREV_WAV" ]; then
+            PREV_SIZE=$(file_size "$PREV_WAV")
+            if [ "$PREV_SIZE" -le 1000 ]; then
+                synth_chunk "$PREV_WAV" "${CHUNKS[$((IDX - 2))]}"
                 PREV_SIZE=$(file_size "$PREV_WAV")
-                if [ "$PREV_SIZE" -le 1000 ]; then
-                    synth_chunk "$PREV_WAV" "${CHUNKS[$((IDX - 2))]}"
-                    PREV_SIZE=$(file_size "$PREV_WAV")
-                fi
-                if [ "$PREV_SIZE" -gt 1000 ] && $PLAY_OK; then
-                    [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
-                fi
+            fi
+            if [ "$PREV_SIZE" -gt 1000 ] && $PLAY_OK; then
+                [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
             fi
         fi
-        wait "$CURR_PID" 2>/dev/null || true
-        printf 'afterwords: synthesized chunk %d/%d (%s bytes)\n' \
-            "$IDX" "$NCHUNKS" "$(file_size "$CURR_WAV")" >&2
-    done
+    fi
+    wait "$CURR_PID" 2>/dev/null || true
+    printf 'afterwords: synthesized chunk %d/%d (%s bytes)\n' \
+        "$IDX" "$NCHUNKS" "$(file_size "$CURR_WAV")" >&2
+done
 
-    # The loop above only plays the chunk *before* each new one; play the last.
-    LAST_WAV="${CHUNK_DIR}/${IDX}.wav"
-    if [ -f "$LAST_WAV" ] && $PLAY_OK; then
-        if [ "$(file_size "$LAST_WAV")" -gt 1000 ]; then
-            [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$LAST_WAV" 2>/dev/null
+# The loop above only plays the chunk *before* each new one; play the last.
+LAST_WAV="${CHUNK_DIR}/${IDX}.wav"
+if [ -f "$LAST_WAV" ] && $PLAY_OK; then
+    if [ "$(file_size "$LAST_WAV")" -gt 1000 ]; then
+        [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$LAST_WAV" 2>/dev/null
+    fi
+fi
+
+# ── Deliver the real artifact to {output_path} ──────────────────────
+DELIVERED=""
+NONEMPTY=()
+for WAV in "${WAVS[@]}"; do
+    if [ -f "$WAV" ] && [ "$(file_size "$WAV")" -gt 1000 ]; then
+        NONEMPTY+=("$WAV")
+    fi
+done
+
+# Success requires ALL chunks: "the audio at {output_path} is the speech for
+# the input" only holds when none is missing. Comparing the usable count to
+# NCHUNKS — not merely testing whether the count is 1 — is what separates "a
+# one-chunk reply" from "1 of 5 chunks survived", two states that otherwise
+# take the same code path and report the same exit status.
+PARTIAL=false
+if [ "${#NONEMPTY[@]}" -eq "$NCHUNKS" ]; then
+    if [ "${#NONEMPTY[@]}" -eq 1 ]; then
+        cp "${NONEMPTY[0]}" "$OUTPUT_PATH"
+        DELIVERED="$OUTPUT_PATH"
+    elif concat_wavs "$OUTPUT_PATH" "${NONEMPTY[@]}"; then
+        DELIVERED="$OUTPUT_PATH"
+    elif command -v ffmpeg >/dev/null 2>&1; then
+        printf 'afterwords: stdlib concat failed — falling back to ffmpeg\n' >&2
+        CONCAT_LIST="${CHUNK_DIR}/concat.txt"
+        for WAV in "${NONEMPTY[@]}"; do
+            printf "file '%s'\n" "$WAV" >> "$CONCAT_LIST"
+        done
+        if ffmpeg -v error -f concat -safe 0 -i "$CONCAT_LIST" -c copy -y "$OUTPUT_PATH" 2>/dev/null \
+           && [ "$(file_size "$OUTPUT_PATH")" -gt 1000 ]; then
+            DELIVERED="$OUTPUT_PATH"
         fi
     fi
+fi
 
-    # ── Deliver the real artifact to {output_path} ──────────────────────
-    DELIVERED=""
-    NONEMPTY=()
-    for WAV in "${WAVS[@]}"; do
-        if [ -f "$WAV" ] && [ "$(file_size "$WAV")" -gt 1000 ]; then
-            NONEMPTY+=("$WAV")
-        fi
-    done
-
-    # Success requires ALL chunks: "the audio at {output_path} is the speech for
-    # the input" only holds when none is missing. Comparing the usable count to
-    # NCHUNKS — not merely testing whether the count is 1 — is what separates "a
-    # one-chunk reply" from "1 of 5 chunks survived", two states that otherwise
-    # take the same code path and report the same exit status.
-    PARTIAL=false
-    if [ "${#NONEMPTY[@]}" -eq "$NCHUNKS" ]; then
-        if [ "${#NONEMPTY[@]}" -eq 1 ]; then
+if [ -z "$DELIVERED" ]; then
+    # Short of the full speech. The artifact is still written when any chunk
+    # survived — forensics beat nothing — but the exit status must carry the
+    # failure: a caller that has no partial-result contract reads exit 0 as
+    # "this is the speech", which is the same lie the placeholder told.
+    PARTIAL=true
+    printf 'afterwords: incomplete audio (%d/%d chunks usable)\n' \
+        "${#NONEMPTY[@]}" "$NCHUNKS" >&2
+    if [ "${#NONEMPTY[@]}" -ge 1 ]; then
+        if [ "${#NONEMPTY[@]}" -eq 1 ] || ! concat_wavs "$OUTPUT_PATH" "${NONEMPTY[@]}"; then
             cp "${NONEMPTY[0]}" "$OUTPUT_PATH"
-            DELIVERED="$OUTPUT_PATH"
-        elif concat_wavs "$OUTPUT_PATH" "${NONEMPTY[@]}"; then
-            DELIVERED="$OUTPUT_PATH"
-        elif command -v ffmpeg >/dev/null 2>&1; then
-            printf 'afterwords: stdlib concat failed — falling back to ffmpeg\n' >&2
-            CONCAT_LIST="${CHUNK_DIR}/concat.txt"
-            for WAV in "${NONEMPTY[@]}"; do
-                printf "file '%s'\n" "$WAV" >> "$CONCAT_LIST"
-            done
-            if ffmpeg -v error -f concat -safe 0 -i "$CONCAT_LIST" -c copy -y "$OUTPUT_PATH" 2>/dev/null \
-               && [ "$(file_size "$OUTPUT_PATH")" -gt 1000 ]; then
-                DELIVERED="$OUTPUT_PATH"
-            fi
         fi
-    fi
-
-    if [ -z "$DELIVERED" ]; then
-        # Short of the full speech. The artifact is still written when any chunk
-        # survived — forensics beat nothing — but the exit status must carry the
-        # failure: a caller that has no partial-result contract reads exit 0 as
-        # "this is the speech", which is the same lie the placeholder told.
-        PARTIAL=true
-        printf 'afterwords: incomplete audio (%d/%d chunks usable)\n' \
+        printf 'afterwords: delivered PARTIAL audio (%d/%d chunks) — exiting non-zero\n' \
             "${#NONEMPTY[@]}" "$NCHUNKS" >&2
-        if [ "${#NONEMPTY[@]}" -ge 1 ]; then
-            if [ "${#NONEMPTY[@]}" -eq 1 ] || ! concat_wavs "$OUTPUT_PATH" "${NONEMPTY[@]}"; then
-                cp "${NONEMPTY[0]}" "$OUTPUT_PATH"
-            fi
-            printf 'afterwords: delivered PARTIAL audio (%d/%d chunks) — exiting non-zero\n' \
-                "${#NONEMPTY[@]}" "$NCHUNKS" >&2
-        else
-            rm -f "$OUTPUT_PATH"
-            exit 1
-        fi
+    else
+        rm -f "$OUTPUT_PATH"
+        exit 1
     fi
-
-    archive_mp3_sidecar "$OUTPUT_PATH"
-    printf 'afterwords: delivered %s bytes to %s (%d chunk(s))\n' \
-        "$(file_size "$OUTPUT_PATH")" "$OUTPUT_PATH" "$NCHUNKS" >&2
-    $PARTIAL && exit 1
-    exit 0
-fi
-
-# ── Non-CLI platforms (Telegram, Discord): synchronous single request ──
-# These platforms need the actual audio file for attachment delivery.
-HTTP_CODE=$(curl -s -w "%{http_code}" -o "$OUTPUT_PATH" "$URL" 2>/dev/null || echo "000")
-
-if [ "$HTTP_CODE" != "200" ]; then
-    echo "Afterwords TTS failed (HTTP $HTTP_CODE)" >&2
-    rm -f "$OUTPUT_PATH"
-    exit 1
-fi
-
-# Verify output
-if [ ! -s "$OUTPUT_PATH" ]; then
-    echo "Afterwords TTS produced empty output" >&2
-    exit 1
 fi
 
 archive_mp3_sidecar "$OUTPUT_PATH"
+printf 'afterwords: delivered %s bytes to %s (%d chunk(s))\n' \
+    "$(file_size "$OUTPUT_PATH")" "$OUTPUT_PATH" "$NCHUNKS" >&2
+$PARTIAL && exit 1
+exit 0

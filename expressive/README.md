@@ -435,3 +435,9 @@ concatenates every PCM sample in order. It refuses incompatible sample rates
 or truncated payloads. It does not strip Markdown, change words, play audio,
 or retry failed requests. The receipt records the first completed chunk and
 the complete artifact latency separately; neither proves audible playback.
+
+The Hermes command provider uses the same canonical chunking for CLI and
+messaging platforms. Telegram/Discord calls assemble all chunks into the
+returned artifact without local playback or acquiring the local play lock.
+A missing chunk returns nonzero, even when a partial diagnostic artifact
+survives. This does not itself prove an external messaging service received it.
