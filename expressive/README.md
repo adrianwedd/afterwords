@@ -441,3 +441,10 @@ messaging platforms. Telegram/Discord calls assemble all chunks into the
 returned artifact without local playback or acquiring the local play lock.
 A missing chunk returns nonzero, even when a partial diagnostic artifact
 survives. This does not itself prove an external messaging service received it.
+
+A fresh M5 capture after the messaging fix exercised the installed Vixen
+provider with a 499-character reply. The gateway handed one 32.09-second Opus
+artifact to the capture adapter in 34.46 seconds. CPU transcription matched
+the complete text; the native-tool deduplication and disconnected-profile
+checks passed. No external message was sent. This verifies the installed
+artifact path, not Telegram receipt or listening quality.
