@@ -132,8 +132,8 @@ sidecar. A successful WAV remains `generated_not_listening_verified`.
 
 Rollback: stop the separately launched sidecar and remove its opt-in routing.
 Existing Qwen service remains usable. Restore only configuration files changed
-for activation, from their recorded pre-activation copies. No live routing or
-activation has been performed at this checkpoint.
+for activation, from their recorded pre-activation copies. Vixen now selects the isolated experimental route; the default profile and
+7860 service remain separate.
 
 The Hermes command provider accepts `AFTERWORDS_PORT` for a profile-local
 loopback route, for example `env AFTERWORDS_PORT=7862 bash
@@ -316,8 +316,9 @@ two native sentence artifacts, no provider playback, 30.95 seconds from probe
 start through delivery, 18.30 seconds of audio, and zero CPU Whisper word errors.
 That establishes generated audio and captured playback calls, not acting or
 physical audibility. The live profile uses an original synthetic reference and
-Qwen fallback on the separate experimental server. Its SSH transport remains
-temporary; persistent startup and gateway acceptance are still outstanding.
+Qwen fallback on the separate experimental server. The experimental API, sidecar and SSH tunnel now run as separate user launchd
+jobs. Fresh-process synthesis and supervised tunnel reconnection are verified;
+reboot/cable-disconnect behavior and live gateway receipt remain unverified.
 
 ### Persistent experimental services
 
@@ -350,3 +351,15 @@ remove only their three launchd plists. Restore only Vixen's speech fields from
 the recorded pre-activation config if retiring its experimental route; preserve
 subsequent unrelated config changes. No `setup.sh`, global routing edit, or
 restart of the default Afterwords service is needed.
+
+### Gateway artifact handoff
+
+Run `scripts/verify-hermes-gateway-voice.py` in the installed Hermes environment
+with the intended `HERMES_HOME`, `--hermes-root` and a fresh `--out` directory.
+It invokes the installed gateway voice and profile-routing methods with the
+real configured command provider. A local capture adapter receives the output;
+no bot starts and no network message is sent. The probe requires one valid
+Opus handoff, verifies the native-tool dedup rule, and checks that an absent
+Vixen adapter cannot fall back to the default bot. This proves the bounded
+adapter handoff, not live Telegram receipt. Existing gateway health is a
+separate check; it is not audio delivery evidence.
