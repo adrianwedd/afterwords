@@ -1,0 +1,1142 @@
+{
+  "schema": "afterwords-fish-alias-manifest/1",
+  "alias_count": 104,
+  "reference_wav_copies_created": 0,
+  "fallback_enabled": false,
+  "aliases": [
+    {
+      "alias": "fish-ace",
+      "reference": "ace-ref.wav",
+      "reference_sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5",
+      "transcript_sha256": "d22591c52e1f5a7590f8bd50505443fe13efc86e85d1669fd731f45ab084755a",
+      "profiles": [
+        "ace-qwen3-06b.json",
+        "ace.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-alan-bennett",
+      "reference": "alan-bennett-ref.wav",
+      "reference_sha256": "80c47d9cd909b85e87638f599f54397938a85d765480a6a66a80fb442962c3e1",
+      "transcript_sha256": "b78f132c2fa2e70ae3f742fae498b98b3818f40d78fc246840f313cf5ba86a2b",
+      "profiles": [
+        "alan-bennett-qwen3-06b.json",
+        "alan-bennett.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-alan-bstard",
+      "reference": "alan-bstard-ref.wav",
+      "reference_sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e",
+      "transcript_sha256": "78cb820d3acafb37145ddb8c3514c4e53c12cf4d9fb4053bc53214ec92db3c15",
+      "profiles": [
+        "alan-bstard-qwen3-06b.json",
+        "alan-bstard.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-alan-partridge",
+      "reference": "alan-partridge-ref.wav",
+      "reference_sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca",
+      "transcript_sha256": "a3e21714c94a66f1b48270ac39e14116dd52208339863a6271c1ae0dd16b4bf1",
+      "profiles": [
+        "alan-partridge-qwen3-06b.json",
+        "alan-partridge.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-alan-shore",
+      "reference": "alan-shore-ref.wav",
+      "reference_sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2",
+      "transcript_sha256": "b589c1ba7fc727e1b9a5e250fa0dadd1577b73e35bdd988f0acfb0b1484eff76",
+      "profiles": [
+        "alan-shore-qwen3-06b.json",
+        "alan-shore.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-amy-pond",
+      "reference": "amy-pond-ref.wav",
+      "reference_sha256": "18d9f5b8b14f2d1ddc78d9033874078e1e3e1aad88e1e3188a18e47e50a3c147",
+      "transcript_sha256": "cdb8708506ac6cc567857072e66c1e7fca2dcce9508088010eca01c5ca2440de",
+      "profiles": [
+        "amy-pond-qwen3-06b.json",
+        "amy-pond.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-attenborough",
+      "reference": "attenborough-ref.wav",
+      "reference_sha256": "745f3e4e47f3b1f3fe9cf4160ae3b17dcaf716c60854af60177ca635aa1c068c",
+      "transcript_sha256": "748ef1b19a61aa467e401acc83219e92d3b1bc6c4ca5148e1c0225821ed8573f",
+      "profiles": [
+        "attenborough-qwen3-06b.json",
+        "attenborough.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-audrey",
+      "reference": "audrey-ref.wav",
+      "reference_sha256": "e58ef59d1bb3155facc873614ffe5f899daedd372741af9948fec6cb06364480",
+      "transcript_sha256": "45a991e5c1cbf58d910a0e34c6ac204c9b0d85cb12901ebe410f090d2a24f8db",
+      "profiles": [
+        "audrey-qwen3-06b.json",
+        "audrey.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-aurora",
+      "reference": "aurora-ref.wav",
+      "reference_sha256": "68053366e95bd08b8930dcddfb4b8f1dedd595192a1e838f6e61f634a8df841d",
+      "transcript_sha256": "6c485e1ddfd07af603e6df075a79e9eb29cb05c9259648cd85d3d7b75b062b82",
+      "profiles": [
+        "aurora-qwen3-06b.json",
+        "aurora.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-avasarala",
+      "reference": "avasarala-ref.wav",
+      "reference_sha256": "079bff8337fe21360862ed6ddf6c70fbe1b7b2b9eb7beecb6813532d588dabfa",
+      "transcript_sha256": "af307904f8f9534452624dac4de7375365132782b4e2941ab9d29d6a6aee55bf",
+      "profiles": [
+        "avasarala-qwen3-06b.json",
+        "avasarala.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-bardem",
+      "reference": "bardem-ref.wav",
+      "reference_sha256": "563e1b247eb08f63a668a0a31c0a15c051ec1b0abeed6372fde0207436f617ff",
+      "transcript_sha256": "9a1ece091c7a21583004be4965f284ee30c96ed6de36851ebf5eebf026d9fdb0",
+      "profiles": [
+        "bardem-qwen3-06b.json",
+        "bardem.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-basil-fawlty",
+      "reference": "basil-fawlty-ref.wav",
+      "reference_sha256": "a37f62fc52ef46b3be6e47ca51183b42cda0ff99df6fa179edf014f10f264bbc",
+      "transcript_sha256": "33d442ca1c9a09daea11dd0fa972471470aae4eee21ea742ae7ba74bb2e852ff",
+      "profiles": [
+        "basil-fawlty-qwen3-06b.json",
+        "basil-fawlty.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-bernard-black",
+      "reference": "bernard-black-ref.wav",
+      "reference_sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f",
+      "transcript_sha256": "38069c77a39b992ff833bf6134e161c5794ab48b9d3c308a109ad19f9a73946c",
+      "profiles": [
+        "bernard-black-qwen3-06b.json",
+        "bernard-black.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-bill-bailey",
+      "reference": "bill-bailey-ref.wav",
+      "reference_sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c",
+      "transcript_sha256": "7f9543927ba2190b0df078081ae94c860196c8c640ebb9781173104a3dd9d853",
+      "profiles": [
+        "bill-bailey-qwen3-06b.json",
+        "bill-bailey.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-bill-potts",
+      "reference": "bill-potts-ref.wav",
+      "reference_sha256": "dbda10009b02730fdbb9dff2b9adea66432404a181090c5e6051311931304cf3",
+      "transcript_sha256": "cfe32440a1900af274b79a40c517eb72e43feb4d8f23ed46efdb0c76236eab2a",
+      "profiles": [
+        "bill-potts-qwen3-06b.json",
+        "bill-potts.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-blackadder",
+      "reference": "blackadder-ref.wav",
+      "reference_sha256": "5b36c48e78ce0aec3786af6b2644714262412508059a62f2f873e7199e4af587",
+      "transcript_sha256": "ae59d4868e6ee29858e057cb93c260e49780ca809ea839706433420dde222d25",
+      "profiles": [
+        "blackadder-qwen3-06b.json",
+        "blackadder.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-bob-jones-ibuki",
+      "reference": "bob-jones-ibuki-ref.wav",
+      "reference_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+      "transcript_sha256": "edf2f9c0395ea196f2d233bd4e2db8e9a393ea3327eb017db64dc1b6d33d269a",
+      "profiles": [
+        "bob-jones-ibuki-qwen3-06b.json",
+        "bob-jones-ibuki.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-bob-jones",
+      "reference": "bob-jones-ref.wav",
+      "reference_sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+      "transcript_sha256": "edf2f9c0395ea196f2d233bd4e2db8e9a393ea3327eb017db64dc1b6d33d269a",
+      "profiles": [
+        "bob-jones-qwen3-06b.json",
+        "bob-jones.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-bob-jones-sanchin-tensho",
+      "reference": "bob-jones-sanchin-tensho-ref.wav",
+      "reference_sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512",
+      "transcript_sha256": "18f52502923bc8acae1dbd60dfb5424c08c0577c5c55dde852727173145bc56f",
+      "profiles": [
+        "bob-jones-sanchin-qwen3-06b.json",
+        "bob-jones-sanchin.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-bob-mortimer",
+      "reference": "bob-mortimer-ref.wav",
+      "reference_sha256": "a139863f8a4709104810ae3346804c47151cf10e4d129c24be775f9ae8a48230",
+      "transcript_sha256": "c579c5b844ee60a418fe0e549a2f487db025c676d1943f71d33c09f871a53fe4",
+      "profiles": [
+        "bob-mortimer-qwen3-06b.json",
+        "bob-mortimer.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-brian-cox",
+      "reference": "brian-cox-ref.wav",
+      "reference_sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+      "transcript_sha256": "4aba8413500e108abd2695089556b70955b32c2351baf1a60489b86ec7b27a98",
+      "profiles": [
+        "brian-cox-qwen3-06b.json",
+        "brian-cox.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-captain-mainwaring",
+      "reference": "captain-mainwaring-ref.wav",
+      "reference_sha256": "1d2ff3aea18d0c8805efa37190304a365b24fd9b308f997731bbd7dbf3001556",
+      "transcript_sha256": "ffc3b8b33716d24b3131a09ec87e58860b8b2a7578300f49dec4cd99de1e4c9f",
+      "profiles": [
+        "captain-mainwaring-qwen3-06b.json",
+        "captain-mainwaring.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-carl-sagan",
+      "reference": "carl-sagan-ref.wav",
+      "reference_sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36",
+      "transcript_sha256": "b35e18ac16b4b24192103b5f02dc0e53fe7a43ee78439184c07281ab67f68a2c",
+      "profiles": [
+        "carl-sagan-qwen3-06b.json",
+        "carl-sagan.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-clara-oswald",
+      "reference": "clara-oswald-ref.wav",
+      "reference_sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf",
+      "transcript_sha256": "8a6cdc7858654cc1aa9a09feac8e8e55e379403a948a8afdfbaf2d94f39f5722",
+      "profiles": [
+        "clara-oswald-qwen3-06b.json",
+        "clara-oswald.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-claudia",
+      "reference": "claudia-ref.wav",
+      "reference_sha256": "5610e40bd04258df426cce280e72554098ec6cea00712934f8986456edd70fd4",
+      "transcript_sha256": "7b49984c3dcfb8a096b140b3ccd71f551207f23643198159e23b0faeaecaf9ed",
+      "profiles": [
+        "claudia-qwen3-06b.json",
+        "claudia.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-cleaver-greene",
+      "reference": "cleaver-greene-ref.wav",
+      "reference_sha256": "2659e75f3a0146fd700ebdfb6b421428c32929c8d60f778c3980ed02eda76aa5",
+      "transcript_sha256": "c59327b7d13a6e9ca936a33275b6ffad74e38b89e3cacf86b7c0b490c98be51c",
+      "profiles": [
+        "cleaver-greene-qwen3-06b.json",
+        "cleaver-greene.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-columbo",
+      "reference": "columbo-ref.wav",
+      "reference_sha256": "ccb43d59d1c13d6d7cab47a8b70a9bc3467c0ea39b0098512af3c2927b8da081",
+      "transcript_sha256": "b03a347bb34b608cd4c25ff3f2f54d18f96ded5df73b093f20b104771dc30941",
+      "profiles": [
+        "columbo-qwen3-06b.json",
+        "columbo.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-dalai-lama",
+      "reference": "dalai-lama-ref.wav",
+      "reference_sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293",
+      "transcript_sha256": "680eb0b59702322ebc4431d65ee1bd0b37d2b020d5d050ee984874462a5bc7bf",
+      "profiles": [
+        "dalai-lama.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-data",
+      "reference": "data-ref.wav",
+      "reference_sha256": "f745aedf7c04608e839c5a0f1523c822aa2a8a2e972585d9f3bfe64f9b42d6ae",
+      "transcript_sha256": "ad184e4e0cd8b09c0aade58aeee0189156e3a94c26b24f346698258425f7d4ce",
+      "profiles": [
+        "data-qwen3-06b.json",
+        "data.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-dave-bowman",
+      "reference": "dave-bowman-ref.wav",
+      "reference_sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896",
+      "transcript_sha256": "13a7d5dcbd76dee9ad82ed3becf34493c69a7db27de601e82f938e9b070d7114",
+      "profiles": [
+        "dave-bowman.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-del-boy",
+      "reference": "del-boy-ref.wav",
+      "reference_sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08",
+      "transcript_sha256": "6b4503df50db44eb9ec9f1b63935b4c718944205251e0cf2bb3151b99ab55ece",
+      "profiles": [
+        "del-boy-qwen3-06b.json",
+        "del-boy.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-denny-crane",
+      "reference": "denny-crane-ref.wav",
+      "reference_sha256": "cf5f9ced82e899dbdac52a9b6c74b893a6acccda6422d994a9560d662300517d",
+      "transcript_sha256": "55703084e3d98668fabe63861e5f85a0f3a2f4b01469913d3bcef3ba9da3fc64",
+      "profiles": [
+        "denny-crane-qwen3-06b.json",
+        "denny-crane.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-depp",
+      "reference": "depp-ref.wav",
+      "reference_sha256": "40a7e37b646e0539ad6659df113fafc6e42ef29d14270cab6288f6e02c28a083",
+      "transcript_sha256": "47991d8b852cac4a14ac209e7b63d0660f747e7a4c4cbb4632045601bd87c9e6",
+      "profiles": [
+        "depp-qwen3-06b.json",
+        "depp.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-donna-noble",
+      "reference": "donna-noble-ref.wav",
+      "reference_sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2",
+      "transcript_sha256": "3e714fec6d01bb20c758a77adacb6a68eb80f1cfa6ce72bc511d3f5364ae20b6",
+      "profiles": [
+        "donna-noble-qwen3-06b.json",
+        "donna-noble.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-dr-cox",
+      "reference": "dr-cox-ref.wav",
+      "reference_sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f",
+      "transcript_sha256": "0a0aa8045feb67f9bd4abb8696a5dc4eb929fa5088d178e30d7d2d7a75b84f46",
+      "profiles": [
+        "dr-cox-qwen3-06b.json",
+        "dr-cox.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-eartha",
+      "reference": "eartha-ref.wav",
+      "reference_sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7",
+      "transcript_sha256": "bdfcb723d6d7c9b74d6cdf86dee317e9acfc48e17c991431e24551d77aa990e0",
+      "profiles": [
+        "eartha-qwen3-06b.json",
+        "eartha.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-edina-monsoon",
+      "reference": "edina-monsoon-ref.wav",
+      "reference_sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d",
+      "transcript_sha256": "7b9aad2c0e85a8f5a6845525294614197b7c81f7916271146537d37f27b8631c",
+      "profiles": [
+        "edina-monsoon-qwen3-06b.json",
+        "edina-monsoon.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-feynman",
+      "reference": "feynman-ref.wav",
+      "reference_sha256": "c49a1fac447d348fc7e8c338a628d2e24ec9e724ec2bc26388719e934f1cf47e",
+      "transcript_sha256": "0c803938509da1e7340d85f62f42bf0d08e6383453961f3e5452254ddf32f1eb",
+      "profiles": [
+        "feynman-qwen3-06b.json",
+        "feynman.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-frasier",
+      "reference": "frasier-ref.wav",
+      "reference_sha256": "a5c6dd50a02cede822f1af01efec2b61a22d776a305edd21d6cce9b0a6015c4e",
+      "transcript_sha256": "e867c207900d4c2a61dce7eb298f2fee2a1a1a002881e36e49157cb5b55c811c",
+      "profiles": [
+        "frasier-qwen3-06b.json",
+        "frasier.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-galadriel",
+      "reference": "galadriel-ref.wav",
+      "reference_sha256": "056c6cf8465b2a104c984774b474764c938b28b0a3f1e7fdd4a5d37c1f06d388",
+      "transcript_sha256": "ad58816d31709f58313599dc699b12e5c0e4b18650eabb5c26ce0785df352ce8",
+      "profiles": [
+        "galadriel-qwen3-06b.json",
+        "galadriel.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-gareth-keenan",
+      "reference": "gareth-keenan-ref.wav",
+      "reference_sha256": "1516b7502f1b08442011e6b02229798c620080445718c48c797990478e430f94",
+      "transcript_sha256": "067139dc41b9b862c36d3b30e714a8c68da6cd5929b0c7c0445604720fb7bd2c",
+      "profiles": [
+        "gareth-keenan-qwen3-06b.json",
+        "gareth-keenan.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-geraldine",
+      "reference": "geraldine-ref.wav",
+      "reference_sha256": "a2c472bce3832ec9bbfae1ec4df6da5d3390a1178bc6860d39f2d6f4e3990b12",
+      "transcript_sha256": "1f82b1aaa715bc4baee8553d50ed39a6760ef00888f8361ccaa78305f31761ec",
+      "profiles": [
+        "geraldine-qwen3-06b.json",
+        "geraldine.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-gulley",
+      "reference": "gulley-ref.wav",
+      "reference_sha256": "66fe86e058819afcef8b9226b04be565fc20979bf6d28a24525df09443d29480",
+      "transcript_sha256": "d77f3bd2a718c0faff357f0205b81c2824ad531352951bca38832b13e5d99a12",
+      "profiles": [
+        "gulley-qwen3-06b.json",
+        "gulley.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-hal-9000",
+      "reference": "hal-9000-ref.wav",
+      "reference_sha256": "f85d9f1db3c15fee6698950fa70f21bc53874c099660b13b1ac62b44911059cf",
+      "transcript_sha256": "a341ed4b8e9560d1398c1c80d8ea0b211fde8b6926b2bb860826bf0a9dc7fd1b",
+      "profiles": [
+        "hal-9000.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-han-solo",
+      "reference": "han-solo-ref.wav",
+      "reference_sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13",
+      "transcript_sha256": "3fc74316c1564c576bf815d40bc489a4b612faf7dae48e7552d4e2c708526896",
+      "profiles": [
+        "han-solo-qwen3-06b.json",
+        "han-solo.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-harvey-specter",
+      "reference": "harvey-specter-ref.wav",
+      "reference_sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979",
+      "transcript_sha256": "32df522a85f060895ea9b800d2a1624448b66d7caf27125fffa9651c8d30ed9a",
+      "profiles": [
+        "harvey-specter-qwen3-06b.json",
+        "harvey-specter.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-holly",
+      "reference": "holly-ref.wav",
+      "reference_sha256": "b4668b3aac12ba7d4a37c5612d7d2c19c5594cf96f8c19ab19f26ffa31936b11",
+      "transcript_sha256": "680e336e58a47cc7593e7e30413aa611ddc195b94af8d7f01b1ac55a09b9fee4",
+      "profiles": [
+        "holly-qwen3-06b.json",
+        "holly.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-hyacinth",
+      "reference": "hyacinth-ref.wav",
+      "reference_sha256": "94d5e48cd393650fd0ee67186ff88439e620b0b83f4dad3fe17918b04e8cb7e4",
+      "transcript_sha256": "b3ec43c376302afbd81fe6ec967909fe6c9c16dbf46045cdec2d445284d35770",
+      "profiles": [
+        "hyacinth-qwen3-06b.json",
+        "hyacinth.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-jack-dee",
+      "reference": "jack-dee-ref.wav",
+      "reference_sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96",
+      "transcript_sha256": "386479f9ca4610b431b74cf768bcef573e5cdac61968267ba8133b88c62a982d",
+      "profiles": [
+        "jack-dee-qwen3-06b.json",
+        "jack-dee.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-jackie-chiles",
+      "reference": "jackie-chiles-ref.wav",
+      "reference_sha256": "6d41ce5a2978fe30e8de1af4e6b7f7137078a6e27ad3f58e0db79e81820f6271",
+      "transcript_sha256": "22146bbe4fc48265e938106064bf285e22f7ea603dc85576fb5e9dd59dc9f173",
+      "profiles": [
+        "jackie-chiles-qwen3-06b.json",
+        "jackie-chiles.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-jarvis",
+      "reference": "jarvis-ref.wav",
+      "reference_sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc",
+      "transcript_sha256": "d345c5b685cbca1ac8305a7e45f9bab4ba747b840850dcd34df7a428d3f1f3a7",
+      "profiles": [
+        "jarvis.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-jim-royle",
+      "reference": "jim-royle-ref.wav",
+      "reference_sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
+      "transcript_sha256": "28c049dfa159705aeb6c6eab520e0714e5aec67bc439e00f83e6c898ddd74821",
+      "profiles": [
+        "jim-royle-qwen3-06b.json",
+        "jim-royle.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-john-sheppard",
+      "reference": "john-sheppard-ref.wav",
+      "reference_sha256": "d8e2bba94794dfa32420186c1ea7805cad648224af496e3e4547c54d6a6c2691",
+      "transcript_sha256": "233d1aa3cd5f1308f9d7a6b0f2a22c17bddb21e34406da5b8fcd3d1ef49c0216",
+      "profiles": [
+        "john-sheppard.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-joi",
+      "reference": "joi-ref.wav",
+      "reference_sha256": "4b4879ce9fed55f81eeb91b6e28a720f6f676625dd4ed3ec013300793e805d84",
+      "transcript_sha256": "cfa332dd6ab48b1a94f8766abf1a9a9489748c0c77e04b613a4d824dba90623f",
+      "profiles": [
+        "joi.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-k",
+      "reference": "k-ref.wav",
+      "reference_sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e",
+      "transcript_sha256": "06453320444b5701dce73113a1141076684b5d6dcf02d64c4a8765c26ecf6e14",
+      "profiles": [
+        "k.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-k9",
+      "reference": "k9-ref.wav",
+      "reference_sha256": "71b4ae8d4d71716193ec4c119da64691fdb97d53d74ccaf4a38c5aecbd7927a4",
+      "transcript_sha256": "3a3a1cb14bd39dc956dcaf6623b3f3a864e114a0a5f3479db99c4103bf5e0347",
+      "profiles": [
+        "k9-qwen3-06b.json",
+        "k9.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-kitt",
+      "reference": "kitt-ref.wav",
+      "reference_sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+      "transcript_sha256": "fa42b4755fbbb025a56f5e86c3d7d0dfd59b1b7b7d9650508ac21dca2182d7f3",
+      "profiles": [
+        "kitt-qwen3-06b.json",
+        "kitt.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-kryten",
+      "reference": "kryten-ref.wav",
+      "reference_sha256": "abd923248878782c3ce582b478363ceb9e9d1998fb0403ea8f1c8564e0e8349f",
+      "transcript_sha256": "880246d7bbece79507dad7beef113f1a6631c5d86efe5676771d2a01a59a7f9a",
+      "profiles": [
+        "kryten-qwen3-06b.json",
+        "kryten.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-lee-mack",
+      "reference": "lee-mack-ref.wav",
+      "reference_sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68",
+      "transcript_sha256": "2539b8c57ae65a7a8b11f6f685a0dd6df09185ac13127c59af197456b8507eda",
+      "profiles": [
+        "lee-mack-qwen3-06b.json",
+        "lee-mack.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-leela",
+      "reference": "leela-ref.wav",
+      "reference_sha256": "e4663f99fb4c34e830d7c9a65950c338164b8602cfc608536ee3a00b3b539d72",
+      "transcript_sha256": "0ded3179af2c2a02edba587a2a634a0cc0756705d8f8565baf49193074fbf00d",
+      "profiles": [
+        "leela-qwen3-06b.json",
+        "leela.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-leia-organa",
+      "reference": "leia-organa-ref.wav",
+      "reference_sha256": "879ea3d7ae13542c395a6f8a3a949f7d44eb55da66d33866a098f4cab18ed299",
+      "transcript_sha256": "8a2229f7b676e5feb5e97c44bbbab69cb90bfabf3bbe8e1fecef0089c839c47f",
+      "profiles": [
+        "leia-organa.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-lisa-simpson",
+      "reference": "lisa-simpson-ref.wav",
+      "reference_sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6",
+      "transcript_sha256": "72d3ea8124bf3bcdab09257d0496e1128a1a5ef3f59c9ca86fbb750076047693",
+      "profiles": [
+        "lisa-simpson-qwen3-06b.json",
+        "lisa-simpson.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-lister",
+      "reference": "lister-ref.wav",
+      "reference_sha256": "222c14364b896cc31ce3cfd742a7b4a5e368a683ca9a054defeb79a39068a9e5",
+      "transcript_sha256": "055c4803c9cde90d2c3337065b7ef357e7302f2b4399e3337af7df24eb3bad2f",
+      "profiles": [
+        "lister-qwen3-06b.json",
+        "lister.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-loki",
+      "reference": "loki-ref.wav",
+      "reference_sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d",
+      "transcript_sha256": "75ffc8b4add2f3721fa48495a25a01e6007dbf3fc7b3a544faf3d162ff5a5536",
+      "profiles": [
+        "loki-qwen3-06b.json",
+        "loki.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-mark-corrigan",
+      "reference": "mark-corrigan-ref.wav",
+      "reference_sha256": "38bfa895ed8040510edd57f24e814176aa8e7af765edd6c350c6d763fb236fb7",
+      "transcript_sha256": "d65367a059896d70c57da8df92d01586517901bda8b02732592448327f7d68d8",
+      "profiles": [
+        "mark-corrigan-qwen3-06b.json",
+        "mark-corrigan.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-mark-steel",
+      "reference": "mark-steel-ref.wav",
+      "reference_sha256": "895e5d0826986ac969972f8ca2173ed2e66d2c0255fab324a53d57a0c4337330",
+      "transcript_sha256": "0725d07c42e18f64cce8230d6633066dac453ec28013b403f798636a47537177",
+      "profiles": [
+        "mark-steel-qwen3-06b.json",
+        "mark-steel.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-marla",
+      "reference": "marla-ref.wav",
+      "reference_sha256": "e534d2b9f7fc0432e48888c57c41dbef5c5a754fed9c2809a4699503cd89277f",
+      "transcript_sha256": "ec278c3a1f4b06a29e06896773f6b79fb739bab2310054f1c63f564f2bf40231",
+      "profiles": [
+        "marla-qwen3-06b.json",
+        "marla.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-martha-jones",
+      "reference": "martha-jones-ref.wav",
+      "reference_sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7",
+      "transcript_sha256": "daf8c8642a12b4292619fdcc5e8fd615f57e33c3584a779e4459ca53f71a0d5d",
+      "profiles": [
+        "martha-jones-qwen3-06b.json",
+        "martha-jones.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-mckenna",
+      "reference": "mckenna-ref.wav",
+      "reference_sha256": "c4bb559ee7a70685e0a77e0b8ddfcf11604d1374996270f3c0b1985ef5c42c6c",
+      "transcript_sha256": "5877425a14e5a4ba704138a98354bccaa668784a73ffb068c686426092512bd9",
+      "profiles": [
+        "mckenna.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-michael-palin",
+      "reference": "michael-palin-ref.wav",
+      "reference_sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2",
+      "transcript_sha256": "f55394f23fdf60b1ea1671bbd37e1f8f62e38848649687d3398eb448e7c08444",
+      "profiles": [
+        "michael-palin-qwen3-06b.json",
+        "michael-palin.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-mrs-doyle",
+      "reference": "mrs-doyle-ref.wav",
+      "reference_sha256": "d11bd37ea2c1630129084245c2c16c60a271d75f856746d2f080d1bc61fd1adb",
+      "transcript_sha256": "5492dc50af956259f02f88a47d621cf97f6412f233968f2a77fa760e53691010",
+      "profiles": [
+        "mrs-doyle-qwen3-06b.json",
+        "mrs-doyle.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-nanna",
+      "reference": "nanna-ref.wav",
+      "reference_sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b",
+      "transcript_sha256": "1a65d24c2a8348d303e9e98acd376c6a5fef5cbf4b7a0c2ac3fda6e5c3c21c76",
+      "profiles": [
+        "nanna-qwen3-06b.json",
+        "nanna.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-neil-degrasse-tyson",
+      "reference": "neil-degrasse-tyson-ref.wav",
+      "reference_sha256": "b5f6772b154c30488dd44adb8f6cd7d4e3a918688644234adf5bb0c031ba88eb",
+      "transcript_sha256": "fb931ec90b1c4845f1b1a83a93ec3e4658f6c7999fd9101430ec2ae28f4b8aff",
+      "profiles": [
+        "neil-degrasse-tyson-qwen3-06b.json",
+        "neil-degrasse-tyson.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-nyssa-of-traken",
+      "reference": "nyssa-of-traken-ref.wav",
+      "reference_sha256": "d701fc8235200ef6a881f5cc1d3958aeff85d1c0e18180916d9901178548f48b",
+      "transcript_sha256": "5166b57d25eb45c5bb8344184975bf5cfaace5a1cf999a5bac18d943b47ac5de",
+      "profiles": [
+        "nyssa-of-traken-qwen3-06b.json",
+        "nyssa-of-traken.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-patrick-moore",
+      "reference": "patrick-moore-ref.wav",
+      "reference_sha256": "fc67f6b452f79a79f07d88c86e2bc5104a9cd47298d376f8d4f8d020fc1d1472",
+      "transcript_sha256": "775dccfa6b329afa2a9057d218c43eb937459cbbd99d52bae8c3419eb4bd2531",
+      "profiles": [
+        "patrick-moore-qwen3-06b.json",
+        "patrick-moore.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-patsy-stone",
+      "reference": "patsy-stone-ref.wav",
+      "reference_sha256": "38d01bdd2f43b98eaa7e50716776cad04e71d14925ed669e1716a5439aab8fe1",
+      "transcript_sha256": "1daf218391f6bbfc80e62ad8b78add5bc890cd9973e8dbd8b4ad4f62566cd77f",
+      "profiles": [
+        "patsy-stone-qwen3-06b.json",
+        "patsy-stone.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-peter-kay",
+      "reference": "peter-kay-ref.wav",
+      "reference_sha256": "7809ed5cf3746d277eeb7977065f4c1a2cceeb10da49d46de3c877c397e2fe43",
+      "transcript_sha256": "583df55f26ede6a1eb153a3b5f45b4cae80df9f3083ddb06d009d342405f4d1d",
+      "profiles": [
+        "peter-kay-qwen3-06b.json",
+        "peter-kay.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-picard",
+      "reference": "picard-ref.wav",
+      "reference_sha256": "26ee4fd08dad50320ebd4f71001dd3898ecfcfdf6f1a1c1d565d11f5972c53f5",
+      "transcript_sha256": "c27c0f72b472b64da123b98b190bf0141893e1e27fea3b062ba70cdcecabe288",
+      "profiles": [
+        "picard-qwen3-06b.json",
+        "picard.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-q-tng",
+      "reference": "q-tng-ref.wav",
+      "reference_sha256": "8fa02b3a6fb6ffd06135e49ee193f474aff9cb30663df97c3694fe9d084768d2",
+      "transcript_sha256": "46c51fc91143850e92b1ddc5399ba86c19c042347a0f6bba6771e6adae64b2ae",
+      "profiles": [
+        "q-tng-qwen3-06b.json",
+        "q-tng.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-rimmer",
+      "reference": "rimmer-ref.wav",
+      "reference_sha256": "b5ec1e9e30984307c10eb18cd80f888b7bf0786451658e98559c92ec4d08e52c",
+      "transcript_sha256": "0ed2784a2714b242f91c40fc41c07299dc138f4b9ed86aa690b0e5ff17b8b4d0",
+      "profiles": [
+        "rimmer-qwen3-06b.json",
+        "rimmer.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-river-song",
+      "reference": "river-song-ref.wav",
+      "reference_sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4",
+      "transcript_sha256": "fd1ebf20f9be94fef842a0ee395157761ad201d6b0a4d7eeaff85a6eeedb591e",
+      "profiles": [
+        "river-song-qwen3-06b.json",
+        "river-song.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-rod-serling",
+      "reference": "rod-serling-ref.wav",
+      "reference_sha256": "07e61a13774f749a568f1bb9896d3f32f6ba9c89f584e2d52512f6bd49f4c05c",
+      "transcript_sha256": "dacbe9047dc709fb70c288438ec6e9d51864c32e4cb3de3eb80192b7f3fd945e",
+      "profiles": [
+        "rod-serling-qwen3-06b.json",
+        "rod-serling.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-romana",
+      "reference": "romana-ref.wav",
+      "reference_sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b",
+      "transcript_sha256": "51e6632d34c7e2f9df0f6e954f2414a0ce645b40d6b6deb8b7754bae1acb6c30",
+      "profiles": [
+        "romana-qwen3-06b.json",
+        "romana.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-ronan",
+      "reference": "ronan-ref.wav",
+      "reference_sha256": "7a95373c1c362b9ef50d6820c9f2a59f3c2508c93795b15da661840cebe3baa1",
+      "transcript_sha256": "778cc5e81b73cd29a7c2bfa1ad802fd40635bed93fa884259ae9aed17a6137a0",
+      "profiles": [
+        "ronan-qwen3-06b.json",
+        "ronan.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-rose-tyler",
+      "reference": "rose-tyler-ref.wav",
+      "reference_sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4",
+      "transcript_sha256": "0150b38af44d10ced3a6ae5de3adf8029996384976a3c685379429ffc373b4ab",
+      "profiles": [
+        "rose-tyler-qwen3-06b.json",
+        "rose-tyler.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-samantha",
+      "reference": "samantha-ref.wav",
+      "reference_sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95",
+      "transcript_sha256": "5ed7c4cfab9d93803b70d25cde13508befb2c7048321baaf31fb33d9be95ab71",
+      "profiles": [
+        "samantha-qwen3-06b.json",
+        "samantha.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-sarah-jane-smith",
+      "reference": "sarah-jane-smith-ref.wav",
+      "reference_sha256": "941b3834f28e3db12434eaecd0b6a381ce24050ba9541eb0ad6a420efe8828f3",
+      "transcript_sha256": "b1058d55daee360a90a59b1cc14a66ea8b88dde7bd8f3bddaa3d65f1a6735f72",
+      "profiles": [
+        "sarah-jane-smith-qwen3-06b.json",
+        "sarah-jane-smith.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-saul-goodman",
+      "reference": "saul-goodman-ref.wav",
+      "reference_sha256": "d757105cf38d3da7d14e917a594cc9188810daac71933de41283decff87a7244",
+      "transcript_sha256": "69a52e5743987dbde65df459bda6ca6e2d87e01e424d696eaf95b163c32a98e1",
+      "profiles": [
+        "saul-goodman-qwen3-06b.json",
+        "saul-goodman.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-scotty",
+      "reference": "scotty-ref.wav",
+      "reference_sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa",
+      "transcript_sha256": "7c3987dcfd22e073d8cb70d6188074581124d351f567c9f8b12c5390bceef33f",
+      "profiles": [
+        "scotty.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-seven-of-nine-picard",
+      "reference": "seven-of-nine-picard-ref.wav",
+      "reference_sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe",
+      "transcript_sha256": "d35616912e9ababda30b6406230fdd14f2e7ab5253dadf453aebd7a2dd201409",
+      "profiles": [
+        "seven-of-nine-picard-qwen3-06b.json",
+        "seven-of-nine-picard.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-seven-of-nine",
+      "reference": "seven-of-nine-ref.wav",
+      "reference_sha256": "b83cdf51c9dbd8141f8bcb5907925ec4c8fd53a4b65d46a3d2d4ba20ef7efc71",
+      "transcript_sha256": "6370892857a0c8b4e02e743ff234cd41d8f34cc60eb75b0f3efc12584c06a1f4",
+      "profiles": [
+        "seven-of-nine-qwen3-06b.json",
+        "seven-of-nine.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-sherlock",
+      "reference": "sherlock-ref.wav",
+      "reference_sha256": "afeafac7d66cd1eb715da76500cae5ecc8a72486238bba0873a6b3d834676992",
+      "transcript_sha256": "d6eb871f76e5eeeda978e39ad0ec6502ba412766d5b23388eb1761647d496368",
+      "profiles": [
+        "sherlock-qwen3-06b.json",
+        "sherlock.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-snape",
+      "reference": "snape-ref.wav",
+      "reference_sha256": "08a2fe5f345bd8efe5bb66756f2091c3b2bc728c3e26d20cdd5df53354498e48",
+      "transcript_sha256": "042c33f35beedf823efa25b2a95598c2ffe00b18c1ef9c2a1c55722a729a13b2",
+      "profiles": [
+        "snape-qwen3-06b.json",
+        "snape.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-spock",
+      "reference": "spock-ref.wav",
+      "reference_sha256": "dc8aca559d9cfb8088534de7a29858fc0dc9df7f01db29634598b44d9fbcb978",
+      "transcript_sha256": "df4c8ef8dfb0d749fdb9a06d24fdf0daad5ffe9b4200cf11bd01b30f620e9058",
+      "profiles": [
+        "spock-qwen3-06b.json",
+        "spock.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-stephen-fry",
+      "reference": "stephen-fry-ref.wav",
+      "reference_sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685",
+      "transcript_sha256": "c2099deb7a07c2da476b46fbfcac2a0f92c5abe5ed68b3b121f48e8e1d2faa6e",
+      "profiles": [
+        "stephen-fry-qwen3-06b.json",
+        "stephen-fry.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-tegan-jovanka",
+      "reference": "tegan-jovanka-ref.wav",
+      "reference_sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453",
+      "transcript_sha256": "a654bdc68881ee93c5aaafbf576882e40ea3ac80e223c74521ed38e8bf8f6a57",
+      "profiles": [
+        "tegan-jovanka-qwen3-06b.json",
+        "tegan-jovanka.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-the-cat",
+      "reference": "the-cat-ref.wav",
+      "reference_sha256": "53618673d42aa6fb60605a5c086cdba8331c9033266e55585e588d9a93f4a4d6",
+      "transcript_sha256": "f2088b5a8ea28fd4c0e4264e3504fbd7f7ff3b769b9d68dad7701a2b257fcf85",
+      "profiles": [
+        "the-cat-qwen3-06b.json",
+        "the-cat.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-the-doctor",
+      "reference": "the-doctor-ref.wav",
+      "reference_sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b",
+      "transcript_sha256": "78c3c08430678434a64fd0d6ea5a3a19036dc7b0b2b794df37d39d0cbccef01f",
+      "profiles": [
+        "the-doctor-qwen3-06b.json",
+        "the-doctor.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-tilda",
+      "reference": "tilda-ref.wav",
+      "reference_sha256": "e6fee022fd390f72ec5c7af62d057fc5a502e0769b2d0774d49c60550b67e5c7",
+      "transcript_sha256": "a9c7834a3b722f3de44125598ae672baba7dc15407fa5b24087e6c68d9e98e0a",
+      "profiles": [
+        "tilda-qwen3-06b.json",
+        "tilda.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-trigger",
+      "reference": "trigger-ref.wav",
+      "reference_sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48",
+      "transcript_sha256": "d4c050af3967e84eb108c07a7dabdf96c2da65e05d3e99e529b6c7f70cf5ad7b",
+      "profiles": [
+        "trigger-qwen3-06b.json",
+        "trigger.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-vesper",
+      "reference": "vesper-ref.wav",
+      "reference_sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7",
+      "transcript_sha256": "92216491028e3487cf19821df5c4c9dec2420d9047832dd9884e065b4892692e",
+      "profiles": [
+        "vesper-qwen3-06b.json",
+        "vesper.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-victor-meldrew",
+      "reference": "victor-meldrew-ref.wav",
+      "reference_sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2",
+      "transcript_sha256": "dfcb804ecc058341ca044e88eed454c01589e8c70ffae9dceb79dd473e949dc9",
+      "profiles": [
+        "victor-meldrew-qwen3-06b.json",
+        "victor-meldrew.json"
+      ],
+      "conditioning_conversion": "stereo-mean-to-mono"
+    },
+    {
+      "alias": "fish-victoria-wood",
+      "reference": "victoria-wood-ref.wav",
+      "reference_sha256": "a569c765cebde2f0b98856fdbcf64bed903c49bb541d0528c5d17e85831e8895",
+      "transcript_sha256": "f3e649e47d8aad33ce544446e06e0fc19cb5d43ffae56d9c1fcd18556fc5f3e3",
+      "profiles": [
+        "victoria-wood-qwen3-06b.json",
+        "victoria-wood.json"
+      ],
+      "conditioning_conversion": "none"
+    },
+    {
+      "alias": "fish-yasmin-khan",
+      "reference": "yasmin-khan-ref.wav",
+      "reference_sha256": "a4665f08d9b65f6b9ff51c1be8ec303f6aa487253c81c7f285b36cff8d0adcd9",
+      "transcript_sha256": "acd6da82b71265e122a5a03530dd6135ad46749b766736c3f1af06e8542f2dd0",
+      "profiles": [
+        "yasmin-khan-qwen3-06b.json",
+        "yasmin-khan.json"
+      ],
+      "conditioning_conversion": "none"
+    }
+  ]
+}
