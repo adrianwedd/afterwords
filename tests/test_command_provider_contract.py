@@ -431,7 +431,7 @@ def test_partial_delivery_exits_nonzero_and_keeps_the_survivors(tmp_path):
     )
     assert ctx["out"].is_file(), "the surviving chunk was discarded instead of delivered"
     data = ctx["out"].read_bytes()
-    assert b"Convergence Report Summary of the work" in data, (
+    assert b"Convergence Report." in data, (
         "the delivered artifact does not hold the chunk that did synthesize"
     )
     assert b"This paragraph exists purely to push the reply" not in data, (

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import os
+import shlex
 import subprocess
 import time
 import uuid
@@ -80,10 +81,20 @@ def hook_env(tmp_path):
     workdir.mkdir()
     log = tmp_path / "stub.log"
 
+    # Private play lock: the real /tmp lock is held by live speech on dev
+    # machines, and a CLI turn waits up to ~60s for it.
+    hook = tmp_path / "afterwords-post-llm.sh"
+    source = SCRIPT.read_text()
+    for filename in ("afterwords-play.lock", "afterwords-play.pid"):
+        source = source.replace(f'"/tmp/{filename}"', shlex.quote(str(tmp_path / filename)))
+    hook.write_text(source)
+
     env = os.environ.copy()
     env["PATH"] = f"{bindir}:{env['PATH']}"
     env["HOME"] = str(home)
     env["STUB_LOG"] = str(log)
+    env["AFTERWORDS_REPO"] = str(REPO)
+    env["_TEST_HOOK"] = str(hook)
 
     # Teardown: remove only the markers this test created — the dedup dir is
     # real shared state also used by the live Hermes hook on dev machines.
@@ -100,7 +111,7 @@ def hook_env(tmp_path):
 def run_hook(env, workdir, text, platform="discord"):
     payload = json.dumps({"platform": platform, "response": text, "chat_id": "42"})
     return subprocess.run(
-        ["bash", str(SCRIPT)],
+        ["bash", env["_TEST_HOOK"]],
         input=payload,
         capture_output=True,
         text=True,
@@ -162,7 +173,7 @@ def test_native_playback_owner_skips_all_shell_speech(hook_env, nested):
     owner = {"tts_playback_owner": "native"}
     payload.update({"extra": owner} if nested else owner)
     result = subprocess.run(
-        ["bash", str(SCRIPT)], input=json.dumps(payload), capture_output=True,
+        ["bash", env["_TEST_HOOK"]], input=json.dumps(payload), capture_output=True,
         text=True, env=env, cwd=workdir, timeout=30,
     )
     assert result.returncode == 0, result.stderr

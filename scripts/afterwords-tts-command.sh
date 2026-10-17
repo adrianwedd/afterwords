@@ -346,12 +346,21 @@ synth_chunk() {
     # $1 = destination WAV, $2 = text. The timeout must cover SYNTHESIS: the
     # server serialises it (single-GPU) and requests queue behind each other.
     local out="$1" text="$2"
-    local t="${AFTERWORDS_TTS_TIMEOUT:-180}"
+    # The HTTP status lands beside the WAV ($out.status) so a server rejection
+    # (e.g. `unknown voice`) is reported as such, not as a missing chunk.
+    local t="${AFTERWORDS_TTS_TIMEOUT:-180}" code
     if [ -n "${VOICE:-}" ]; then
-        curl -s --max-time "$t" -G --data-urlencode "text=${text}" --data-urlencode "voice=${VOICE}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+        code=$(curl -s --max-time "$t" -w "%{http_code}" -G --data-urlencode "text=${text}" --data-urlencode "voice=${VOICE}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null) || true
     else
-        curl -s --max-time "$t" -G --data-urlencode "text=${text}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+        code=$(curl -s --max-time "$t" -w "%{http_code}" -G --data-urlencode "text=${text}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null) || true
     fi
+    printf '%s' "${code:-000}" > "${out}.status"
+}
+
+# 4xx is the server refusing the request itself; retrying cannot help.
+chunk_rejected() {
+    case "$(cat "${1}.status" 2>/dev/null)" in 4??) return 0 ;; esac
+    return 1
 }
 
 WAVS=()
@@ -371,7 +380,7 @@ for CHUNK in "${CHUNKS[@]}"; do
         PREV_WAV="${CHUNK_DIR}/$((IDX - 1)).wav"
         if [ -f "$PREV_WAV" ]; then
             PREV_SIZE=$(file_size "$PREV_WAV")
-            if [ "$PREV_SIZE" -le 1000 ]; then
+            if [ "$PREV_SIZE" -le 1000 ] && ! chunk_rejected "$PREV_WAV"; then
                 synth_chunk "$PREV_WAV" "${CHUNKS[$((IDX - 2))]}"
                 PREV_SIZE=$(file_size "$PREV_WAV")
             fi
@@ -394,6 +403,18 @@ if [ -f "$LAST_WAV" ] && $PLAY_OK; then
 fi
 
 # ── Deliver the real artifact to {output_path} ──────────────────────
+# A server rejection fails the whole request with the server's reason (e.g.
+# `unknown voice: <name>`) — never a retry with a different voice.
+for WAV in "${WAVS[@]}"; do
+    if chunk_rejected "$WAV"; then
+        HTTP_CODE=$(cat "${WAV}.status")
+        echo "Afterwords TTS failed (HTTP $HTTP_CODE, profile=$PROFILE, voice=$VOICE): $(head -c 200 "$WAV" 2>/dev/null)" >&2
+        rm -f "$OUTPUT_PATH"
+        log_evidence "failed:http-$HTTP_CODE" 0
+        exit 1
+    fi
+done
+
 DELIVERED=""
 NONEMPTY=()
 for WAV in "${WAVS[@]}"; do
