@@ -1,5 +1,9 @@
 # Expressive voice listening handoff — 2026-10-17
 
+Superseded by `CASTING_CORRECTION.md`: the operator rejected the synthetic
+Vixen candidate and did not accept the LulzBench cast. Use the new four-pair
+casting room; this older inventory and its form-based page are historical evidence.
+
 Open the single local listening entry point:
 `var/expressive-voice/acceptance-handoff-1/listen-2/index.html`.
 This is a private generated artifact, not a public site or a browser-access workaround.

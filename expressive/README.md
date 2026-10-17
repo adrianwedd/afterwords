@@ -429,9 +429,16 @@ Vixen reply. The one-shot GUI worker must be unloaded after its bounded run.
 Private acceptance evidence now includes one real configured Vixen reply:
 two native sentence artifacts, no provider playback, 30.95 seconds from probe
 start through delivery, 18.30 seconds of audio, and zero CPU Whisper word errors.
-That establishes generated audio and captured playback calls, not acting or
-physical audibility. The live profile uses an original synthetic reference and
-Qwen fallback on the separate experimental server. The experimental API, sidecar and SSH tunnel now run as separate user launchd
+That established generated audio and captured playback calls, not acting or
+physical audibility. **That synthetic Vixen candidate was subsequently rejected
+by the operator for sounding like a random man. It is not Vixen's voice.**
+The corrected live M5 profile explicitly uses `seydoux` through its existing
+Qwen service on port 7860, for both the native command provider and legacy speech
+hook. Do not replace her established identity with an unaccepted synthetic
+reference. A fresh real session and installed gateway handoff were captured on
+this corrected route; same-reference Drama remains an offline comparison.
+See `qa/expressive-voice/CASTING_CORRECTION.md`.
+The experimental API, sidecar and SSH tunnel run as separate user launchd
 jobs. Fresh-process synthesis and supervised tunnel reconnection are verified;
 reboot/cable-disconnect behavior and live gateway receipt remain unverified.
 

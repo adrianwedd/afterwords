@@ -1,0 +1,121 @@
+{
+  "scope": "Four private recasting auditions; not a public cast registry or acceptance receipt",
+  "vixen_live": {
+    "voice": "seydoux",
+    "backend": "qwen3-0.6b",
+    "host": "M5",
+    "port": 7860
+  },
+  "performances": [
+    {
+      "character": "aster",
+      "run": "sm-gemma4_e2b_it",
+      "specimen_id": "LULZ-0331",
+      "source_record_sha256": "10998b23275d563ddf82cf9426db98fc3d6595f2a04e9036761d6ac64df4180a",
+      "source_text_sha256": "a3d0cc3c1d58b5632672e00e5b1428b2d04dfcb8ce3832fd35abdd828630a2b6",
+      "excerpt_start": 215,
+      "excerpt_end": 473,
+      "excerpt_text_sha256": "9b846c97cbe538d1e1f74fc64ef89fbdd6bc2dd40139a10d4ec4f860f6d1da82",
+      "baseline_reference": "cast-aster",
+      "reference": "lisa-simpson",
+      "reference_sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6",
+      "backend": "fish-drama3",
+      "performance": {
+        "seed": 20261017,
+        "temperature": 0.65,
+        "top_p": 0.7,
+        "cues": [
+          {
+            "offset": 0,
+            "cue": "calm"
+          },
+          {
+            "offset": 114,
+            "cue": "angry"
+          }
+        ]
+      },
+      "reason": "I cast this in a bright, emphatic register: earnest indignation at a beige hostage negotiation is the joke. The calm-to-angry turn is deliberately disproportionate to committee minutes.",
+      "public_use": "private comparison only; no publication permission"
+    },
+    {
+      "character": "hugo",
+      "run": "qwen-stock_q8_native",
+      "specimen_id": "LULZ-0199",
+      "source_record_sha256": "d5974b5f53e3ae06dd9aec153580cfdccb3be129f9e468c6c291d9040ce447fd",
+      "source_text_sha256": "b8b30fd5b6629f492e54a969f46b6985073c0083b4bfc6655a7ac56a5704b571",
+      "excerpt_start": 1001,
+      "excerpt_end": 1359,
+      "excerpt_text_sha256": "294f28e87d657410ade3e63c8cf9c4baa2b36bf586a068e93394e934047d2f3e",
+      "baseline_reference": "cast-hugo",
+      "reference": "snape",
+      "reference_sha256": "08a2fe5f345bd8efe5bb66756f2091c3b2bc728c3e26d20cdd5df53354498e48",
+      "backend": "fish-drama3",
+      "performance": {
+        "seed": 20261017,
+        "temperature": 0.65,
+        "top_p": 0.7,
+        "cues": [
+          {
+            "offset": 0,
+            "cue": "calm"
+          },
+          {
+            "offset": 190,
+            "cue": "sighs"
+          }
+        ]
+      },
+      "reason": "I chose low, restrained disdain against the solemn pasta science. The sigh before \u201cTo suggest\u201d is the comic turn: a tiny professional disagreement treated like a personal tragedy.",
+      "public_use": "private comparison only; no publication permission"
+    },
+    {
+      "character": "iris",
+      "run": "qwen-obliteratus_q8_native",
+      "specimen_id": "LULZ-0199",
+      "source_record_sha256": "31dde2869edcc31eb775e15b6d4d304a6d07661b61bda590cecd304102ca6d73",
+      "source_text_sha256": "6b631feb644d38c0e1e2ab53ed69282baf6fa0edb8ce3671210fd06db144dd27",
+      "excerpt_start": 2,
+      "excerpt_end": 364,
+      "excerpt_text_sha256": "3ad653815463d46e701817918445f5c520b616b6a82caefdec48aa32ba6b3ae0",
+      "baseline_reference": "cast-iris",
+      "reference": "eartha",
+      "reference_sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7",
+      "backend": "qwen3-0.6b",
+      "performance": {},
+      "reason": "I kept the smoky low reference and Qwen delivery rather than force Drama. The reference gives this attack a different texture from Hugo\u2019s hushed baritone and Aster\u2019s bright indignation. The two Drama alternatives were rejected for word-fidelity problems.",
+      "public_use": "private comparison only; no publication permission"
+    },
+    {
+      "character": "jasper",
+      "run": "qwen-huihui_q8_native",
+      "specimen_id": "LULZ-0199",
+      "source_record_sha256": "25efa65aec9aad10b8ff96cc67a06c2e0a1923994147e4cc3fa6099ffb4d1dd0",
+      "source_text_sha256": "2cf47165054bfd4c2a2370abc4b0a4aad3506b1bf829d293edd0e38d8833020d",
+      "excerpt_start": 99,
+      "excerpt_end": 554,
+      "excerpt_text_sha256": "5c0905e0064db3e1783ec869caee27cbc90447e11cd3796c144b538bdb951e19",
+      "baseline_reference": "cast-jasper",
+      "reference": "the-cat",
+      "reference_sha256": "53618673d42aa6fb60605a5c086cdba8331c9033266e55585e588d9a93f4a4d6",
+      "backend": "fish-drama3",
+      "performance": {
+        "seed": 20261017,
+        "temperature": 0.65,
+        "top_p": 0.7,
+        "cues": [
+          {
+            "offset": 0,
+            "cue": "calm"
+          },
+          {
+            "offset": 325,
+            "cue": "chuckles"
+          }
+        ]
+      },
+      "reason": "I cast a conversational showman who becomes amused at the \u201cMaternal Gambit\u201d. The longer comic holds distinguish this from the original brisk recital; the ending remains intact. The Rimmer-based attempt failed delivery and was discarded from the shortlist.",
+      "public_use": "private comparison only; no publication permission"
+    }
+  ]
+}
