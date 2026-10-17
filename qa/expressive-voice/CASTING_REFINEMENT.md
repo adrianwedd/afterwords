@@ -1,9 +1,11 @@
 # Casting refinement — 2026-10-17
 
 Vixen's **Drama/Seydoux B** recording has positive operator listening feedback.
-Her local speech route is now promoted to that reference and engine. The broader
-LulzBench ensemble remains rejected; the two new reference candidates below are
-private auditions, not an accepted public cast.
+Her local speech route is now promoted to that reference and engine. The earlier
+synthetic LulzBench ensemble was rejected. Lisa and Blackadder
+remain provisional private auditions, neither approved nor rejected. Public
+casting is deferred editorial work; engineering is complete within its verified
+scope. See [the closeout](CLOSEOUT.md).
 
 Open `var/expressive-voice/casting-refinement-1/listen/index.html` for the short
 audition: Vixen's preserved comparison, then **Lisa** and **Blackadder** performing

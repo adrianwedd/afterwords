@@ -1,6 +1,7 @@
 # Casting correction — 2026-10-17
 
-Historical correction record. For the subsequent human feedback, Vixen's
+Historical correction record; see [CLOSEOUT.md](CLOSEOUT.md) for final engineering
+status. For the subsequent human feedback, Vixen's
 Drama/Seydoux promotion and the shorter matched audition, see
 [CASTING_REFINEMENT.md](CASTING_REFINEMENT.md). Statements below about the live
 Qwen route or missing feedback describe the earlier checkpoint.

@@ -4,10 +4,13 @@ Built with Fish Audio. This implementation uses the Fish Audio Community License
 v1.0 model and an unofficial MLX conversion. Model code and weight pins are in
 `contracts.py`. No experimental packages are installed in Afterwords' main venv.
 
-Current status: real local synthesis, cancellation and Qwen fallback have been
-measured. Both 4-bit and 8-bit qualification retain delivery failures; listening
-qualification remains incomplete. Do not interpret adapter registration/readiness
-as model residency or acoustic acceptance.
+Current status: expressive TTS engineering is complete within its verified scope.
+Vixen's reviewed Drama/Seydoux route is delivered, promoted and positively
+received. Preserve that configuration, rollback and evidence. Both 4-bit and
+8-bit qualification retain delivery failures; this is not general long-form or
+public-release qualification. LulzBench casting is deferred editorial work.
+See [the final closeout](../qa/expressive-voice/CLOSEOUT.md); missing human
+feedback must not restart the engineering acceptance loop.
 
 ## Run locally
 
@@ -432,12 +435,12 @@ start through delivery, 18.30 seconds of audio, and zero CPU Whisper word errors
 That established generated audio and captured playback calls, not acting or
 physical audibility. **That synthetic Vixen candidate was subsequently rejected
 by the operator for sounding like a random man. It is not Vixen's voice.**
-The corrected live M5 profile explicitly uses `seydoux` through its existing
-Qwen service on port 7860, for both the native command provider and legacy speech
-hook. Do not replace her established identity with an unaccepted synthetic
-reference. A fresh real session and installed gateway handoff were captured on
-this corrected route; same-reference Drama remains an offline comparison.
-See `qa/expressive-voice/CASTING_CORRECTION.md`.
+The initial correction restored Qwen/Seydoux. The subsequent reviewed promotion
+selects `vixen-seydoux-drama-reviewed` on M5 port 17862, forwarded to Studio's
+isolated expressive API on 7862. It retains Qwen fallback with the same reference.
+See `qa/expressive-voice/CASTING_REFINEMENT.md` for the promotion receipt, positive
+operator feedback, exact hashes and speech-fields-only rollback. The older
+correction record describes history, not the current promoted selection.
 The experimental API, sidecar and SSH tunnel run as separate user launchd
 jobs. Fresh-process synthesis and supervised tunnel reconnection are verified;
 reboot/cable-disconnect behavior and live gateway receipt remain unverified.
