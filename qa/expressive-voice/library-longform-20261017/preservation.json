@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-10-17T13:22:31.489223+00:00",
+  "audited_original_reference_hash_and_transcript_matches": 104,
+  "new_aliases_loaded": 104,
+  "created_recording_entries_are_original_hard_links": true,
+  "canonical_voice_files_modified": false,
+  "vixen_config_sha256": "9c14010e526ef8f7890464c9f9854bbb7dc7037172fdcd50ebbe4f1f212b5017",
+  "vixen_config_matches_retained_promotion": true,
+  "sidecar": {
+    "service": "afterwords-expressive",
+    "model": "mlx-community/fish-audio-drama-3-4bit",
+    "revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+    "source_revision": "dad2087f790dfe96b07d5aac1405db4b578b411f",
+    "pending": 0,
+    "capacity": 4,
+    "worker_alive": true,
+    "contract": "complete-wav",
+    "native_model_streaming": true
+  },
+  "source_tests": {
+    "passed": 843,
+    "skipped": 2,
+    "focused_final_passed": 8
+  },
+  "public_deployment": "none",
+  "existing_release_controls": "unchanged"
+}

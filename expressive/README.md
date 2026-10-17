@@ -573,3 +573,22 @@ artifact to the capture adapter in 34.46 seconds. CPU transcription matched
 the complete text; the native-tool deduplication and disconnected-profile
 checks passed. No external message was sent. This verifies the installed
 artifact path, not Telegram receipt or listening quality.
+
+## Audited Fish library and native long-form comparison — 2026-10-18
+
+The isolated expressive API now exposes 104 deterministic `fish-*` aliases for
+the audited Studio references, also visible through M5's existing tunnel. They
+reuse original WAV entries through hard links and exact verified transcripts;
+Qwen profiles and Vixen's existing selection remain unchanged. The builder is
+`scripts/build-fish-library.py`; new aliases explicitly disable Qwen fallback.
+
+The matched long-form pilot favoured one native MLX call with retained
+first/latest context: zero ASR deletions and a 2.98-second longest silence,
+versus seven deletions/18.50 seconds with external 400-character calls and
+102 deletions/18.30 seconds with paragraph isolation. Native still had five ASR
+edits, and this is one script/reference/seed, not universal qualification or
+human listening acceptance. No production chunking or Vixen route was changed.
+
+See [the library, exact comparison evidence and resource recommendations](../qa/expressive-voice/library-longform-20261017/README.md)
+for reproduction, additional M5 assets, frame-budget failures, mixed 4/8-bit
+module provenance, bounded resident-inference contention and admission guards.
