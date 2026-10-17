@@ -223,6 +223,7 @@ def test_hermes_handler_afplay_is_mute_guarded():
 # handler (its guard is verified by the dedicated test above) or be listed
 # here with a rationale.
 _PY_KNOWN_AFPLAY = {
+    "scripts/verify-hermes-sentence-route.py",  # fake afplay probe; no physical playback
     "hermes/hooks/afterwords-tts/handler.py",  # guard verified by test_hermes_handler_afplay_is_mute_guarded
 }
 
