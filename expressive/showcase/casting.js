@@ -17,6 +17,14 @@ async function play(audio, label) {
 for (const pair of [data.vixen, ...data.performances]) {
   const section = node('section'); section.append(node('h2', pair.title), node('p', pair.reason));
   section.append(node('p', pair.status));
+  section.append(node('p', `Text model: ${pair.model || 'Vixen’s configured Hermes model'}${pair.specimen_id ? ' · ' + pair.specimen_id : ''}`));
+  if (pair.reference_audio) {
+    const details = node('details'); details.append(node('summary', 'Hear the source reference'));
+    const source = node('audio'); source.controls = true; source.preload = 'none'; source.src = pair.reference_audio;
+    source.setAttribute('aria-label', `Source reference: ${pair.reference_name}`);
+    source.addEventListener('play', () => { queue = []; players.forEach(a => { if (a !== source) a.pause(); }); });
+    players.push(source); details.append(source, node('p', pair.reference_text)); section.append(details);
+  }
   const group = [];
   for (const key of ['baseline', 'candidate']) {
     const clip = pair[key], card = node('article'), audio = node('audio');
@@ -36,6 +44,7 @@ for (const pair of [data.vixen, ...data.performances]) {
         else status.textContent = 'Comparison finished.';
       }
     });
+    audio.addEventListener('error', () => { stop(); status.textContent = 'Playback unavailable. The transcript is still below.'; });
     const replay = node('button', `Play / replay ${key === 'baseline' ? 'A' : 'B'}`);
     replay.addEventListener('click', () => { stop(); audio.currentTime = 0; play(audio, clip.label); });
     card.append(audio, replay); section.append(card);

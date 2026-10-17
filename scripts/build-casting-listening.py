@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a simple private A/B listening page from a four-performance selection."""
+"""Build a short private A/B listening page, retaining every earlier page."""
 import argparse
 import hashlib
 import json
@@ -15,10 +15,14 @@ def build(selection, out):
     if out.exists():
         raise ValueError('preserve previous listening pages')
     data = json.loads(selection.read_text())
-    if len(data['performances']) != 4:
-        raise ValueError('present exactly four performances')
+    if not 1 <= len(data['performances']) <= 4:
+        raise ValueError('present one to four performances')
     assets = {}
     for pair in [data['vixen'], *data['performances']]:
+        if pair.get('comparison_kind') == 'matched-engine':
+            references = {pair[k].get('reference_sha256') for k in ('baseline', 'candidate')}
+            if references != {pair.get('reference_sha256')} or None in references:
+                raise ValueError('engine comparison must use identical reference bytes')
         for key in ('baseline', 'candidate'):
             clip = pair[key]
             if clip['text_sha256'] != hashlib.sha256(pair['text'].encode()).hexdigest():
@@ -33,6 +37,13 @@ def build(selection, out):
                 clip['duration_seconds'] = wav.getnframes()/wav.getframerate()
             assets[digest] = path
             clip['audio'] = f'audio/{digest}.wav'
+        if pair.get('reference_audio'):
+            path = Path(pair['reference_audio'])
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            if digest != pair['reference_sha256']:
+                raise ValueError('reference changed')
+            assets[digest] = path
+            pair['reference_audio'] = f'audio/{digest}.wav'
     out.mkdir(parents=True)
     (out/'audio').mkdir()
     for digest, path in assets.items():

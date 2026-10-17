@@ -1,0 +1,2494 @@
+{
+  "schema": "casting-reference-audit/1",
+  "library": [
+    {
+      "reference": "ace-ref.wav",
+      "profiles": [
+        "ace-qwen3-06b.json",
+        "ace.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=mIw6XAhcUbQ"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "f97f19398ec4241934cc3afd921b60c7cd79db43e5f67cf550d4560f49ec9ce5",
+      "duration_seconds": 7.64,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh final primary1 hears quite a/possible splice/ending cutoff. Independent fresh3.1 and detailed3.8 establish complete final cave with audible /v/ and room decay, no splice; they disagree about partially uttered quite/qu false start. Remove only that unresolved first portion by keeping complete continuous final sentence. Trial1744.96s starts in the quite false start and was rejected by both fresh models (frozen ace-rejected-final174 evidence). Secondary ASR combined false-start sounds in word alignment, so boundaries were not executed mechanically. Locate quiet gap5.72\u20135.76s and render175 exact5.73\u201313.37s7.64s,183360frames PCM16 from previous committed admitted reference, no DSP. Three full actual typedWAV new native175 hearings agree every literal word, including It, um, repeated and/in in; all music/crowd/laugh/effect/acoustic change/endingcut/splice/pause flags false.1753.8 and detailed1753.8 explicitly report no phoneme clipping and intact It.1753.1 marks beginningcutoff only because very beginning slightly abrupt, without reporting a missing word/phoneme; detailed independent new boundary hearing explicitly distinguishes padding and confirms no clipped phoneme. Exact source has pre-onset quiet samples, supporting brief pre-roll rather than cutting a vowel. Accept complete natural phrase with short buffer, preserve conversational disfluency. Final native evidence is for exact new shipping bytes after this correction, not pre-remediation Ace conclusion. All associated profiles updated consistently; original/intermediate hashes, operation and native conflicts retained.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/001-f97f19398ec42419-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/001-f97f19398ec42419-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/001-f97f19398ec42419-revision-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "alan-bennett-ref.wav",
+      "profiles": [
+        "alan-bennett-qwen3-06b.json",
+        "alan-bennett.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=8xiDpJGid1E"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "80c47d9cd909b85e87638f599f54397938a85d765480a6a66a80fb442962c3e1",
+      "duration_seconds": 11.05,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports isolated1speaker, complete words/phrases, no music/crowd/laugh/effects/acoustic changes/splices; literal words match all frozen profiles. Consistent room/hall reverberation is audible but reviewer reports clearly articulated high-intelligibility words and no interference, rawusabletrue; accepted uniform room tone with natural1.2s between-sentence pause, not falsely called dry audio.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/002-80c47d9cd909b85e.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "alan-bstard-ref.wav",
+      "profiles": [
+        "alan-bstard-qwen3-06b.json",
+        "alan-bstard.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=l9CO65EmNGs"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "4a44548b8f7d224a78856ef4ffcafe87410afe5473773e3023837cfd0fc4a86e",
+      "duration_seconds": 5.25,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh primary notes possible laugh after speech and tight ending, uncertain speaker/self-chuckle. Independent fresh3.1 hears no laughter and all words fully intelligible, labels tight padding cutoffs rather than missing phonemes. Third fresh detailed native explicitly checks phonemes versus padding and possible laughter: one speaker, all phonemes distinctly audible, no laughter/music/crowd/effects/splice/acoustic change; beginning/end complete. Primary laugh cannot be reproduced in either independent new hearing; do not invent a confirmed audience defect. Literal words agree in all3 fresh hearings. Uniform room tone/tight padding accepted; no phonemic cutoff established.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/003-4a44548b8f7d224a.json",
+        "qa/voice-reference-remediation/final-evidence/003-4a44548b8f7d224a-retry.json",
+        "qa/voice-reference-remediation/final-evidence/003-4a44548b8f7d224a-detail.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "alan-partridge-ref.wav",
+      "profiles": [
+        "alan-partridge-qwen3-06b.json",
+        "alan-partridge.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/b00n4754"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "35d515128581d454ffd7d079ccfdb171dbe1b573eaf5521f61486230545c36ca",
+      "duration_seconds": 6.15,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary and independent3.1 positively transcribe started thinking. Two focused3.8 observations render start but explicitly acknowledge a reduced/elided started whose dental suffix merges into thinking. Retain the twice-positive started rather than treating phonetic coarticulation as a new word.3.1 alone appends and at the tail; the other three full observations end on complete admired, and both boundary-focused hearings explicitly find no missing phoneme/cutoff. No terminal and is established. All hear one isolated clear voice without contamination. Final raw-unusable label concerns natural because um hesitation/restart only, not damaged words; retain useful full spontaneous material rather than shrink to isolated fragments.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/004-35d515128581d454-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/004-35d515128581d454-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/004-35d515128581d454-explicit-3.json",
+        "qa/voice-reference-remediation/final-evidence/004-35d515128581d454-explicit-4.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "alan-shore-ref.wav",
+      "profiles": [
+        "alan-shore-qwen3-06b.json",
+        "alan-shore.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=qd5vRphPqnk"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "ca4a85963742a4ae824b96848b90706824263844fd9dc1f8dc13d3e1de9083c2",
+      "duration_seconds": 4.2,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh existing-crop hearings disagree They/He/ey and a clipped opening is confirmed. Recover the preceding first-person onset directly from the same publisher source: wider newly decoded window177 has two independent native hearings positively hearing I expected, plus a later same-speaker scoff. Retain only the complete4.20s sentence from11.70 to15.90, lossless44100Hz PCM16 publisher frames515970:701190, no DSP/resampling/channel mixing; this excludes the scoff rather than guessing whether to transcribe Huh. All three current-candidate178 full hearings positively hear I expected and complete final up with no cutoff, one speaker and no laughter/crowd/SFX/splice. First3.8 reports music; independent3.1 and targeted3.8 explicitly hear no music, with targeted inspection identifying uniform low room air, no instrument or melodic/rhythmic movement. Resolve the outlying soundtrack label from those two independent exact-file observations. Admit complete isolated sentence with useful phonetic variety and full pronoun rather than the damaged crop. Publisher URL, compressed/download SHA, decoded source SHA, exact frames, decoding recipe, wider native context and prior Git delivery are all retained. Whole-corpus status remains pending.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/005-ca4a85963742a4ae-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/005-ca4a85963742a4ae-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/005-ca4a85963742a4ae-revision-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "amy-pond-ref.wav",
+      "profiles": [
+        "amy-pond-qwen3-06b.json",
+        "amy-pond.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=He_qwkw0v7g"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "18d9f5b8b14f2d1ddc78d9033874078e1e3e1aad88e1e3188a18e47e50a3c147",
+      "duration_seconds": 8.66,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing:1speaker, no music/crowd/laughter/effects/change/cutoff/pause/splice; consistent recording described explicitly. Clear literal words match all profiles. Timing uncertainty is not a wording or isolation limitation.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/006-18d9f5b8b14f2d1d.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "attenborough-ref.wav",
+      "profiles": [
+        "attenborough-qwen3-06b.json",
+        "attenborough.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=ndMKTnSRsKM"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "745f3e4e47f3b1f3fe9cf4160ae3b17dcaf716c60854af60177ca635aa1c068c",
+      "duration_seconds": 11.15,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing:1well-isolated speaker, no music/crowd/laughter/splices/cutoffs. Faint natural background ambience/room tone explicitly non-intrusive; uniform dry acoustic and natural0.6\u20130.7s phrase pauses accepted. Literal words match all profiles with negligible lexical uncertainty. Do not misclassify incidental room tone as material sound-effect contamination.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/007-745f3e4e47f3b1f3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "audrey-ref.wav",
+      "profiles": [
+        "audrey-qwen3-06b.json",
+        "audrey.json"
+      ],
+      "source_urls": [],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "e58ef59d1bb3155facc873614ffe5f899daedd372741af9948fec6cb06364480",
+      "duration_seconds": 4.31,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing:1speaker, all contamination/change/cutoff/pause/splice flags false. Exact literal words match all profiles after punctuation/case normalization. Initial and is audible in full with intact phonemes; conversational clause beginning is not a cut word.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/008-e58ef59d1bb3155f.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "aurora-ref.wav",
+      "profiles": [
+        "aurora-qwen3-06b.json",
+        "aurora.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=db9gHZIoATk"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "68053366e95bd08b8930dcddfb4b8f1dedd595192a1e838f6e61f634a8df841d",
+      "duration_seconds": 4.68,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one solo clear uninterrupted speaker, complete words/boundaries, no music/crowd/laugh/effects/splices; acoustic_changes null with no acoustic uncertainty or shift reported. Literal words exactly match all profiles; only clock uncertainty, not auditory limitation.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/009-68053366e95bd08b.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "avasarala-ref.wav",
+      "profiles": [
+        "avasarala-qwen3-06b.json",
+        "avasarala.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=fYWGwZjWvuU"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "079bff8337fe21360862ed6ddf6c70fbe1b7b2b9eb7beecb6813532d588dabfa",
+      "duration_seconds": 4.98,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one isolated speaker and all contamination/change/cutoff/pause/splice flags false. Exact literal words match all profiles, including natural brief breath after that. High clarity, no background interference.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/010-079bff8337fe2136.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "bardem-ref.wav",
+      "profiles": [
+        "bardem-qwen3-06b.json",
+        "bardem.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=ZY0DG8rUnCA"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "563e1b247eb08f63a668a0a31c0a15c051ec1b0abeed6372fde0207436f617ff",
+      "duration_seconds": 3.4,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one isolated speaker, complete boundaries, no contamination/change/splice. Exact literal question matches all profiles. Natural dramatic0.6\u20130.7s pause is not damaged speech or inserted silence. Several seconds of clear complete speech; no need to alter good audio.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/011-563e1b247eb08f63.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "basil-fawlty-ref.wav",
+      "profiles": [
+        "basil-fawlty-qwen3-06b.json",
+        "basil-fawlty.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=evEIeWbhd9c"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "a37f62fc52ef46b3be6e47ca51183b42cda0ff99df6fa179edf014f10f264bbc",
+      "duration_seconds": 10.76,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one isolated speaker, uniform room acoustics, no contamination/splice/cutoff. Literal words match all profiles including writing repetition and four more words. Sit round strongly favored by hearing; no grammar expansion to sit around.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/012-a37f62fc52ef46b3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "bernard-black-ref.wav",
+      "profiles": [
+        "bernard-black-qwen3-06b.json",
+        "bernard-black.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=yQUSCuHhX3M"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "0930c20cd609fdda00092827512c36191ac9fbc0bd56947caf34c14e2b2c159f",
+      "duration_seconds": 5.0,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Two independent fresh full native hearings agree an initial uh is audible before yeah, and the remainder of the existing transcript is literal. Both hear one isolated clean speaker, complete boundaries and no contamination. Restore the actual initial filler in both profiles; no audio or source provenance changes.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/013-0930c20cd609fdda-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/013-0930c20cd609fdda-revision-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "bill-bailey-ref.wav",
+      "profiles": [
+        "bill-bailey-qwen3-06b.json",
+        "bill-bailey.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=HNSZ2j6_YVs"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "15305c847ef72a054aee6e21d42bdc310632bf9c91fefa3083becf39cc514f2c",
+      "duration_seconds": 4.77,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "All fresh full observations agree one isolated clear voice, no contaminants and literal me head. Initial filler is weak: primary and one later3.8 omit it, independent3.1 positively hears uh, and final boundary-focused3.8 positively hears er after both ands and explicitly identifies initial conjunction/fillers as intact natural restarts. Retain the positively heard two fillers using existing er orthography, equivalent to uh; do not substitute my for the clearly heard dialect me.3.1 beginning flag concerns mid-breath before intact and, while both boundary-focused observations hear no clipped phoneme.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/014-15305c847ef72a05-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/014-15305c847ef72a05-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/014-15305c847ef72a05-explicit-3.json",
+        "qa/voice-reference-remediation/final-evidence/014-15305c847ef72a05-explicit-4.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "bill-potts-ref.wav",
+      "profiles": [
+        "bill-potts-qwen3-06b.json",
+        "bill-potts.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=c9i7_Jcoa1s"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "dbda10009b02730fdbb9dff2b9adea66432404a181090c5e6051311931304cf3",
+      "duration_seconds": 4.08,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one isolated speaker, uniform dry recording, no contamination/splice/cutoff/pause. All literal words match every profile; high lexical confidence and intact boundaries.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/015-dbda10009b02730f.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "blackadder-ref.wav",
+      "profiles": [
+        "blackadder-qwen3-06b.json",
+        "blackadder.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=n-Zm8H6G108"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "5b36c48e78ce0aec3786af6b2644714262412508059a62f2f873e7199e4af587",
+      "duration_seconds": 5.05,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles; Osric versus Osrick is orthographic spelling of the same heard proper name, not an added word. Complete uninterrupted conditioning phrase.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/016-5b36c48e78ce0aec.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "bob-jones-ibuki-ref.wav",
+      "profiles": [
+        "bob-jones-ibuki-qwen3-06b.json",
+        "bob-jones-ibuki.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=jAJ_KFKo8A0"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+      "duration_seconds": 15.0,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated intelligible voice; moderate uniform room reverb and mild steady hum are incidental and do not mask speech. Literal teacher's/teachers is an inaudible apostrophe distinction; 5 to 8/five to eight is numerical orthography only. Separate fresh full observation for this indexed alias.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/017-8c9c731527dfb998-root-1.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "bob-jones-ref.wav",
+      "profiles": [
+        "bob-jones-qwen3-06b.json",
+        "bob-jones.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=jAJ_KFKo8A0"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "8c9c731527dfb998d18d1eb82e4b404b52d88717a20683b6ecd7a149e2e47b31",
+      "duration_seconds": 15.0,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Separate fresh full native observation of this indexed alias hears one isolated clear voice, uniform room tone, no contaminants or damaged words. Teacher's versus teachers differs only in inaudible apostrophe spelling; no word correction is needed.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/018-8c9c731527dfb998-root-1.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "bob-jones-sanchin-tensho-ref.wav",
+      "profiles": [
+        "bob-jones-sanchin-qwen3-06b.json",
+        "bob-jones-sanchin.json"
+      ],
+      "source_urls": [],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "d19eceda61e67e9526fb8ca56418b9c0fd191a5437e681447e4e3bedf7941512",
+      "duration_seconds": 10.6,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary reports minor weak article uncertainty (a/the); two independent fresh later full hearings positively hear the power kata and agree the entire existing literal transcript. Earlier3.1 appends periph and calls an ending cutoff; two subsequent independent full hearings find no extra trailing syllable and explicitly complete peripheral vision with no cutoff. Both find one isolated clear speaker, no contamination or discontinuity; natural thinking pause is acceptable. Signed PCM addendum counts370 endpoint samples, longest0.333ms. Fresh native clean speech judgments do not report audible distortion; digital extrema alone do not prove destructive clipping.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/019-d19eceda61e67e95-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/019-d19eceda61e67e95-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/019-d19eceda61e67e95-explicit-3.json",
+        "qa/voice-reference-remediation/final-evidence/019-d19eceda61e67e95-explicit-4.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "bob-mortimer-ref.wav",
+      "profiles": [
+        "bob-mortimer-qwen3-06b.json",
+        "bob-mortimer.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=RlfrOMtFlsM"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "a139863f8a4709104810ae3346804c47151cf10e4d129c24be775f9ae8a48230",
+      "duration_seconds": 4.58,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Both valid fresh full native hearings transcribe I better, with the targeted hearing explicitly stating that this is the phonetic realization despite a possible elided contraction. No positive d phoneme is established, so retain I better rather than add grammar. Both hear complete isolated usable speech; targeted prose confirms no competing background acoustics/music although several categorical fields are null, and primary explicitly hears all contaminants absent. Separate3.1 text-only attempt is excluded; it cannot support any perceptual judgment.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/020-a139863f8a470910-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/020-a139863f8a470910-explicit-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "brian-cox-ref.wav",
+      "profiles": [
+        "brian-cox-qwen3-06b.json",
+        "brian-cox.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=uQSoaiubuA0"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "20dce793db1db63c9b12457f4d126f98f1a3a9bbcfd6f8100bc56d4913976baa",
+      "duration_seconds": 15.0,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Resolve the initial weak lexical onset from targeted positive phonemic hearing: [si:] See precedes Back, rather than uncertain primary You or the omitted onset in another broad pass. Restore See in every associated profile. Primary and targeted positive full hearings agree no or between the final questions; retain direct repeated Should it be rather than add grammar. Both careful full3.8 hearings explicitly hear one isolated clear voice, no score/instruments (uniform room air only), no contaminants/splice and complete boundaries. The failed3.1 recitation attempt is excluded, not acoustic evidence. Preserve ordinary 19th orthography and the natural pause.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/021-20dce793db1db63c-revision-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "captain-mainwaring-ref.wav",
+      "profiles": [
+        "captain-mainwaring-qwen3-06b.json",
+        "captain-mainwaring.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=dRtCsNhxO3o"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "1d2ff3aea18d0c8805efa37190304a365b24fd9b308f997731bbd7dbf3001556",
+      "duration_seconds": 8.66,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated intelligible voice with complete words and consistent vintage room/tape floor. Forty and written year shorthand 40 are the same audible word; natural hesitation pauses are not damaged boundaries.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/022-1d2ff3aea18d0c88-root-1.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "carl-sagan-ref.wav",
+      "profiles": [
+        "carl-sagan-qwen3-06b.json",
+        "carl-sagan.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=Wp-WiNXH6hI"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "442114b442a69f0329d2b3281e8ba9ec88c0b0169772c61f907287e0bf695e36",
+      "duration_seconds": 13.75,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Two independent fresh full native hearings (3.8 and 3.1) agree on four audible uh fillers after a, after to, after they, and before of course. Both hear one isolated speaker, no music/crowd/SFX/acoustic change, complete words and continuous usable speech. Restore these actually heard fillers in every associated profile without recitation or grammar normalization. No audio bytes or provenance operation change.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/023-442114b442a69f03-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/023-442114b442a69f03-revision-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "clara-oswald-ref.wav",
+      "profiles": [
+        "clara-oswald-qwen3-06b.json",
+        "clara-oswald.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=4FqH8GvxVzA"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "fc6e77cc7d7a16eb0a2ed19c3788d91da8b8e5d8d420e8d6af4d3de7806a22cf",
+      "duration_seconds": 9.03,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary and independent3.1 positively hear it was rather than existing its. Another broad3.8 hears its, but targeted phonemic full3.8 positively distinguishes two syllables [it wez] with an actual labiovelar w glide and reduced vowel, corroborating the first two hearings. Correct it was in every associated profile, retaining people are looking which all hear.3.1 start-cutoff label explicitly concerns abrupt intact and then, while primary and both careful3.8 hear complete initial words with no phonemic clipping. All hear one isolated clear voice and no contamination/splice; no audio or source provenance changes.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/024-fc6e77cc7d7a16eb-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/024-fc6e77cc7d7a16eb-revision-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "claudia-ref.wav",
+      "profiles": [
+        "claudia-qwen3-06b.json",
+        "claudia.json"
+      ],
+      "source_urls": [],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "5610e40bd04258df426cce280e72554098ec6cea00712934f8986456edd70fd4",
+      "duration_seconds": 7.15,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice, complete phonemic boundaries, no perceptual contamination; fresh literal words match every profile.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/025-5610e40bd04258df.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "cleaver-greene-ref.wav",
+      "profiles": [
+        "cleaver-greene-qwen3-06b.json",
+        "cleaver-greene.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=AZMxERepQTE"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "2659e75f3a0146fd700ebdfb6b421428c32929c8d60f778c3980ed02eda76aa5",
+      "duration_seconds": 7.37,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One clean isolated voice and literal word agreement. The dramatic breathing pause is natural delivery, with no acoustic discontinuity or competing voice.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/026-2659e75f3a0146fd.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "columbo-ref.wav",
+      "profiles": [
+        "columbo-qwen3-06b.json",
+        "columbo.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=ZtboufXPj2A"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "ccb43d59d1c13d6d7cab47a8b70a9bc3467c0ea39b0098512af3c2927b8da081",
+      "duration_seconds": 5.68,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false, exact literal words match all profiles. Down repetition and uh heard. Final character syllable fully concludes; short room-decay buffer is not a truncated phoneme.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/027-ccb43d59d1c13d6d.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "dalai-lama-ref.wav",
+      "profiles": [
+        "dalai-lama.json"
+      ],
+      "source_urls": [
+        "https://commons.wikimedia.org/wiki/File:VOA_Dalai_Lama_Interview_Part_1.webm"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "9e42ec140482a30e6829559bc8b2c9f61fc3b7601accb816efe7b6aa7bf93293",
+      "duration_seconds": 6.65,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match all profiles including audible initial Uh. Uh/Er is spelling of the same hesitation, not a missing lexical item. Natural half-second pause preserved; no need to remove a good audible filler.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/028-9e42ec140482a30e.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "data-ref.wav",
+      "profiles": [
+        "data-qwen3-06b.json",
+        "data.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=5PdVkA3HYYY"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "f745aedf7c04608e839c5a0f1523c822aa2a8a2e972585d9f3bfe64f9b42d6ae",
+      "duration_seconds": 8.65,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles apart from punctuation. Clear articulation/complete acoustic isolation with minimal lexical uncertainty.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/029-f745aedf7c04608e.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "dave-bowman-ref.wav",
+      "profiles": [
+        "dave-bowman.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=dr0c0FEfDkQ"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "70034bc633ab52e852cb425f6beb93b3031feafa54765e3c6acff0d2f0cec896",
+      "duration_seconds": 14.43,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice, complete boundaries, no audible interfering noise or damage. Percent notation is orthographic only. Signed PCM addendum counts450 endpoint samples (254 negative,196 positive), longest0.340ms; digital extrema are explicitly preserved and do not alone establish audible clipping. Fresh full native hearing finds the complete reference usable.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/030-70034bc633ab52e8-root-1.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "del-boy-ref.wav",
+      "profiles": [
+        "del-boy-qwen3-06b.json",
+        "del-boy.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=Bc3eNzOx5-g"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "fb0eee2b7a489ecc685867739adff39f9581defdcfead26fb029958f582e6c08",
+      "duration_seconds": 6.77,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Both fresh full native hearings agree one isolated clear voice, no contaminants/splices, complete boundaries and all literal words. The independent observation positively hears chavvy, resolving primary chavvy/chivvy uncertainty without online quotation authority. Dropped consonants in dialect are natural delivery rather than missing words.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/031-fb0eee2b7a489ecc-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/031-fb0eee2b7a489ecc-explicit-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "denny-crane-ref.wav",
+      "profiles": [
+        "denny-crane-qwen3-06b.json",
+        "denny-crane.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=Hfc7l1vz2jU"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "cf5f9ced82e899dbdac52a9b6c74b893a6acccda6422d994a9560d662300517d",
+      "duration_seconds": 3.43,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles; gonna clearly articulated and retained. Fully intact phrases and no background interference.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/032-cf5f9ced82e899db.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "depp-ref.wav",
+      "profiles": [
+        "depp-qwen3-06b.json",
+        "depp.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=2GGMHmBgIEg"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "40a7e37b646e0539ad6659df113fafc6e42ef29d14270cab6288f6e02c28a083",
+      "duration_seconds": 3.2,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles with low uncertainty and complete articulate phrase, several seconds of useful conditioning.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/033-40a7e37b646e0539.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "donna-noble-ref.wav",
+      "profiles": [
+        "donna-noble-qwen3-06b.json",
+        "donna-noble.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=gW_L4ZlAKco"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "32e83a57165442377b875aa6f735da2c89231e1b89af2c70f20d1b369b99f9e2",
+      "duration_seconds": 6.5,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "The existing Am I bothered is a canonical-phrase substitution contradicted by three fresh full native observations. Primary hears Im a bovvered, independent3.1 hears the same /aim a/ sequence with phonetic bovid spelling, and targeted3.8 explicitly identifies /ai/ preceding /m/ and schwa, not the /am ai/ ordering of Am I. Restore actual contracted Im a in every profile, without the famous catchphrase. Preserve bovvered as phonetic spelling of heard th-fronting /v/, rather than normalize the performance to a dental consonant. Er/uh describes the same filler vowel; retain existing uh orthography. All observations hear one isolated clean voice, complete boundaries and no contamination or splice. Targeted raw-unusable label concerns natural filler hesitations only, not damaged speech or a competing voice; retain the useful full spontaneous utterance. No audio or source provenance change.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/034-32e83a5716544237-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/034-32e83a5716544237-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/034-32e83a5716544237-revision-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "dr-cox-ref.wav",
+      "profiles": [
+        "dr-cox-qwen3-06b.json",
+        "dr-cox.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=vN71Vt5XOnE"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "899aea7fe329ca6c631c44b00d411bc847aafb5224f538db45ec3c0cac2f643f",
+      "duration_seconds": 3.05,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary hears two speakers with a shift after Fine; independent fresh3.1 and careful fresh3.8 both positively hear one speaker with stable acoustics, no splice or competing sound and complete words. Two independent observations outweigh the isolated identity-shift claim; natural acting prosody alone does not establish a new person. For reduced onset, primary hears Im going to,3.1 explicitly hears Im gonna, careful3.8 hears gonna with a swallowed Im possibility. Retain positively heard Im and colloquial gonna, corroborated independently, without expanding into canonical grammar.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/035-899aea7fe329ca6c-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/035-899aea7fe329ca6c-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/035-899aea7fe329ca6c-explicit-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "eartha-ref.wav",
+      "profiles": [
+        "eartha-qwen3-06b.json",
+        "eartha.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=TEoAypCUdRI"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "8f0136dcbb83571d8e494840b1541e48c2d499a8511809a10f8f800b71fc8de7",
+      "duration_seconds": 15.92,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "All three fresh full hearings positively render an open Ah onset; Well is merely an unresolved softened-glide alternative, with no positively heard w or l, so restore Ah. Primary and targeted phonemic hearing positively hear central/back [un-] in unsurmountable, not canonical in-; independent3.1 in- is outweighed by the explicit vowel observation corroborating primary. Restore actual nonstandard unsurmountable and the two omitted uh fillers after poor and remember, positively heard in both primary and3.1. Targeted schwa before times could be article a; the two independent positive filler hearings support uh, without grammar completion. Targeted doubled uh after being describes two vowel pulses in that hesitation; both earlier full hearings transcribe one uh, retained as one vocalized hesitation rather than invent a new lexical utterance. All hear isolated clear voice without contamination/splice.3.1 abrupt-initial label concerns indistinct onset, while both3.8 hear complete vowels/words; latest raw-unusable label concerns natural pauses/fillers only, not damaged or competing speech.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/036-8f0136dcbb83571d-revision-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "edina-monsoon-ref.wav",
+      "profiles": [
+        "edina-monsoon-qwen3-06b.json",
+        "edina-monsoon.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=cxilv-bZAkw"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "2deea4ea90340398d40400cfed6abc927c177d9b1011f1dd52cd6abee41a897d",
+      "duration_seconds": 10.89,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles including hes hes repetition and quoted conversational wording; no canonical grammar replacement.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/037-2deea4ea90340398.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "feynman-ref.wav",
+      "profiles": [
+        "feynman-qwen3-06b.json",
+        "feynman.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=P1ww1IXRfTA"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "c49a1fac447d348fc7e8c338a628d2e24ec9e724ec2bc26388719e934f1cf47e",
+      "duration_seconds": 6.95,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice with complete boundaries, no contamination, and literal word agreement.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/038-c49a1fac447d348f.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "frasier-ref.wav",
+      "profiles": [
+        "frasier-qwen3-06b.json",
+        "frasier.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=JaiMmxH-ERw"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "a5c6dd50a02cede822f1af01efec2b61a22d776a305edd21d6cce9b0a6015c4e",
+      "duration_seconds": 8.85,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice with complete boundaries and literal word agreement. Pauses follow poetic dramatic cadence; no competing sound or splice is heard.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/039-a5c6dd50a02cede8.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "galadriel-ref.wav",
+      "profiles": [
+        "galadriel-qwen3-06b.json",
+        "galadriel.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/m001g30v"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "056c6cf8465b2a104c984774b474764c938b28b0a3f1e7fdd4a5d37c1f06d388",
+      "duration_seconds": 7.23,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated dry voice, complete boundaries, no contamination. Lightly articulated that is positively heard and matches the profile.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/040-056c6cf8465b2a10.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "gareth-keenan-ref.wav",
+      "profiles": [
+        "gareth-keenan-qwen3-06b.json",
+        "gareth-keenan.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/m0023ygl"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "1516b7502f1b08442011e6b02229798c620080445718c48c797990478e430f94",
+      "duration_seconds": 5.38,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated dry clear voice, no competing sound or damaged word. Fresh literal words match; capitalization and punctuation do not change speech.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/041-1516b7502f1b0844.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "geraldine-ref.wav",
+      "profiles": [
+        "geraldine-qwen3-06b.json",
+        "geraldine.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=mVmzuMKluso"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "a2c472bce3832ec9bbfae1ec4df6da5d3390a1178bc6860d39f2d6f4e3990b12",
+      "duration_seconds": 6.59,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice, complete boundaries, no contamination, literal words match.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/042-a2c472bce3832ec9.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "gulley-ref.wav",
+      "profiles": [
+        "gulley-qwen3-06b.json",
+        "gulley.json"
+      ],
+      "source_urls": [],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "66fe86e058819afcef8b9226b04be565fc20979bf6d28a24525df09443d29480",
+      "duration_seconds": 4.7,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice; subtle amused hesitation remains same-speaker delivery. Complete boundaries and literal words match, no interfering laughter.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/043-66fe86e058819afc.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "hal-9000-ref.wav",
+      "profiles": [
+        "hal-9000.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=9wrjl-H4Hs8"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "f85d9f1db3c15fee6698950fa70f21bc53874c099660b13b1ac62b44911059cf",
+      "duration_seconds": 4.35,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated dry clear voice, complete boundaries, no contamination, literal words match.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/044-f85d9f1db3c15fee.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "han-solo-ref.wav",
+      "profiles": [
+        "han-solo-qwen3-06b.json",
+        "han-solo.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=_zW4em75r_E"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "db196b014d86555ee00af27ff9d1b9c3e48da86d1267369a2bcfb1009b6f7b13",
+      "duration_seconds": 13.8,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Both fresh full hearings agree one isolated clean voice, complete words and no contamination. Primary flags minor elision uncertainty in Ive versus I; targeted fresh observation positively hears faint labiodental fricative off-glides in these contractions and confirms Ive. Retain Kid and literal final sentence without adding a relative pronoun from scene memory.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/045-db196b014d86555e-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/045-db196b014d86555e-explicit-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "harvey-specter-ref.wav",
+      "profiles": [
+        "harvey-specter-qwen3-06b.json",
+        "harvey-specter.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=hacr7EI-1JA"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "23a3787658a799627abc2a4db463858c508a75e6de05332b75f76b3714154979",
+      "duration_seconds": 8.55,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary and later careful full observation both transcribe No; targeted phonemic hearing positively identifies a quietly voiced lexical [nou] No coincident with breath, not Look. One intermediate observation omits it. Retain the positively heard word, corroborated in three full observations, rather than delete it because the nasal vowel overlaps inhalation. Minor nonlexical-inhalation alternative remains ordinary weak-word uncertainty, not a positive alternate word. All hear one isolated clear voice, complete boundaries, no contaminants or splice. Signed the has ordinary dental assimilation; every literal observation positively retains signed, not canonical substitution. Reduced kay is normal realization of okay, retained. Natural clause pause is usable continuous speech.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/046-23a3787658a79962-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/046-23a3787658a79962-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/046-23a3787658a79962-explicit-3.json",
+        "qa/voice-reference-remediation/final-evidence/046-23a3787658a79962-explicit-4.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "holly-ref.wav",
+      "profiles": [
+        "holly-qwen3-06b.json",
+        "holly.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=elZfflKkfxM"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "b4668b3aac12ba7d4a37c5612d7d2c19c5594cf96f8c19ab19f26ffa31936b11",
+      "duration_seconds": 3.97,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One clean isolated voice and complete utterance; 98% is ordinary written notation for the positively heard ninety-eight percent, with no lexical disagreement.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/047-b4668b3aac12ba7d.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "hyacinth-ref.wav",
+      "profiles": [
+        "hyacinth-qwen3-06b.json",
+        "hyacinth.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=16VJza_gZAo"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "94d5e48cd393650fd0ee67186ff88439e620b0b83f4dad3fe17918b04e8cb7e4",
+      "duration_seconds": 15.0,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary ending-cutoff flag explicitly concerns truncated ambient tail after the fully spoken busy, with no missing word. Targeted fresh full hearing positively hears complete boundaries and stable same-speaker studio acoustics; short padding alone is not phonemic damage. Its music/SFX fields are null, so these are not asserted negative from that followup; primary positively hears no music/SFX/crowd/laughter and no competing voice. Both agree every literal word. Conversational listening pause is continuous natural delivery, no splice.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/048-94d5e48cd393650f-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/048-94d5e48cd393650f-explicit-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "jack-dee-ref.wav",
+      "profiles": [
+        "jack-dee-qwen3-06b.json",
+        "jack-dee.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/b042z660"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "d87b125b4c7df0a255ffcd79abfbc717322c66e81f1f6e5cc067f781e710df96",
+      "duration_seconds": 16.3,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated dry voice, complete words and no contamination. Natural 0.5-0.8 second hesitations and repeated to are retained; uh/er is the orthographic rendering of the same unstressed filler, not a new word.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/049-d87b125b4c7df0a2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "jackie-chiles-ref.wav",
+      "profiles": [
+        "jackie-chiles-qwen3-06b.json",
+        "jackie-chiles.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=PeAHBiUgoD8"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "6d41ce5a2978fe30e8de1af4e6b7f7137078a6e27ad3f58e0db79e81820f6271",
+      "duration_seconds": 4.15,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice, complete boundaries, no contamination; lightly unstressed to take it remains intelligible and literal words match.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/050-6d41ce5a2978fe30.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "jarvis-ref.wav",
+      "profiles": [
+        "jarvis.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=VYCngMTg8MY"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "e562d90309fff5c70fb89121ca52f0b349945207f227f2d98be6b7ecc6f6dfcc",
+      "duration_seconds": 9.2,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "All three fresh full hearings hear an initial filler vowel missing from the profiles. Two careful followups positively hear complete uh and intact boundaries, one isolated clean speaker and no contamination or splice. Primary calls the faint initial filler clipped; neither targeted hearing finds a missing phoneme, so resolve the uncertain weak-onset label from two positive complete-onset observations. Restore Uh in every associated profile. Latest raw-unusable label concerns conversational is-is disfluency, while it explicitly hears no cut or interference; repetition is actual usable spontaneous speech and must not be removed or grammar-corrected. Full7.8s useful phrase is retained rather than shrunk to a3s final clause.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/051-e562d90309fff5c7-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/051-e562d90309fff5c7-revision-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "jim-royle-ref.wav",
+      "profiles": [
+        "jim-royle-qwen3-06b.json",
+        "jim-royle.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=ctHvQ80KxCU"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "dc5816afa5dda15df837c954acab5ddbd46cef832ec40dc4b2822da9a5800bf1",
+      "duration_seconds": 8.86,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Targeted positive phonemic hearing confirms didnt with front lax vowel/nasal/glottal transition, agreeing primary rather than the intervening dont interpretation. It explicitly counts two and I restarts followed by a solitary I; primary independently hears the same pattern. Remove the phantom third and while preserving all three audible I tokens. Primary and targeted literal observations both hear what within the quoted you ... you know restart; restore that audible ungrammatical word, rather than regularize the quote. Targeted also offers starts to wind and when he was saying in rapid speech; the other two independent full observations positively hear started winding and and he was saying, retained instead of replacing established words with that uncorroborated alternative. All hear one isolated clear voice, no contamination/cutoff/splice. Acting pitch shifts, glottal restarts and natural repetitions are useful spontaneous speech.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/052-dc5816afa5dda15d-revision-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "john-sheppard-ref.wav",
+      "profiles": [
+        "john-sheppard.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=ZvMMskY6AaU"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "d8e2bba94794dfa32420186c1ea7805cad648224af496e3e4547c54d6a6c2691",
+      "duration_seconds": 6.9,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, complete boundaries, no music/crowd/laughter/effects/splices or long pauses. Acoustic description explicitly states consistent room with no changes. Literal words match every frozen profile after punctuation/case normalization; reduced going to/gonna noted but reviewer transcribes going to.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/053-d8e2bba94794dfa3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "joi-ref.wav",
+      "profiles": [
+        "joi.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=MhuOBP7EkwM"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "4b4879ce9fed55f81eeb91b6e28a720f6f676625dd4ed3ec013300793e805d84",
+      "duration_seconds": 6.99,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, complete boundaries, all contamination/change/pause/splice flags false. Both uh fillers heard and literal words match all frozen profiles after punctuation/case normalization.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/054-4b4879ce9fed55f8.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "k-ref.wav",
+      "profiles": [
+        "k.json"
+      ],
+      "source_urls": [
+        "local-file"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "0c94f09ad177c64f4f52b8a5c9a663a07f04995fef1b7b482c9deccccd9f9a2e",
+      "duration_seconds": 14.88,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports isolated1speaker, complete boundaries, no music/crowd/laugh/effects/acoustic changes/splices. Literal words match all frozen profiles. Natural dramatic pauses and respiration between lines do not overlap/corrupt speech, rawusabletrue; accepted with that rationale, not declared pause-free.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/055-0c94f09ad177c64f.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "k9-ref.wav",
+      "profiles": [
+        "k9-qwen3-06b.json",
+        "k9.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=0L2oWjsSA_Y"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "71b4ae8d4d71716193ec4c119da64691fdb97d53d74ccaf4a38c5aecbd7927a4",
+      "duration_seconds": 11.55,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false; literal words exactly match every frozen profile. Specifically hears planet history rather than grammar-correct planetary history; preserve audible wording.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/056-71b4ae8d4d717161.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "kitt-ref.wav",
+      "profiles": [
+        "kitt-qwen3-06b.json",
+        "kitt.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=S2-cnKDmB0w"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "94d54552ee28586a5bc3cb865dfb06fc7bb2d47cdcfb836aec150d870a4a12e3",
+      "duration_seconds": 8.16,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Two careful fresh full hearings positively render Id Id; the targeted phonemic hearing detects a first-token unreleased/glottalized closure, supporting the retained repeated contraction rather than dropping its weak d. Two focused whole-clip observations hear in before maybe, corroborated by the targeted reduced nasal closest to in; primary and is uncertain and not adopted. All hear fifty, with one minor fifteen alternative not supported by the other full hearings. Targeted phonemic hearing positively counts two central-vowel pulses before show, separated by a glottal pause, and renders them uh a. Replace a a with that literal hesitation-plus-article rendering, preserving both audible syllables rather than omit the weak first pulse as two broad hearings did. All observations hear one isolated clear voice with no contamination or actual truncated word; the primary tail flag is grammatical/padding expectation, disproved by the three complete-boundary hearings. Latest raw-unusable label concerns stutter/hesitation rather than damaged speech; retain the natural full useful phrase.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-2.json",
+        "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-3.json",
+        "qa/voice-reference-remediation/final-evidence/057-94d54552ee28586a-revision-4.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "kryten-ref.wav",
+      "profiles": [
+        "kryten-qwen3-06b.json",
+        "kryten.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=3hFhUk6DbJ8"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "abd923248878782c3ce582b478363ceb9e9d1998fb0403ea8f1c8564e0e8349f",
+      "duration_seconds": 6.52,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false; literal words match all profiles apart from capitalization/punctuation/hyphenation. Reviewer explicitly hears complete initial for fricative despite short lead-in; clear phrase complete. Orthographic mechanoid/hyphenation does not change spoken text.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/058-abd923248878782c.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "lee-mack-ref.wav",
+      "profiles": [
+        "lee-mack-qwen3-06b.json",
+        "lee-mack.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/b03bpxxq"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "f55af008924bce464dea321bc6711524453544111d799657bd02c758d644cc68",
+      "duration_seconds": 9.05,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "All fresh full hearings agree specifically, already delivered in every profile. Resolve remaining reduced article phonetically: two initial broad hearings render a; precise word-focused hearing leaves it uncertain, controlled3.8 explicitly hears direct /s/ to /st/ with no reduced /a/ vowel, and latest careful full hearing also renders its struggle with at most a near-inaudible transition. Retain the literal audible realization without adding grammar-completing a. Speaker identity: primary and controlled article hearing split voices around the sentence restart; three independent full observations (3.1, precise3.8, careful3.8) hear one isolated speaker, uniform close-mic acoustics and no splice/competitor. The continuous BBC solo-guest answer corroborates but does not replace these three acoustic observations. All hear complete words and no material music/crowd/SFX. Root resolves pitch/restart-induced speaker split as unsupported by those three whole-clip observations. Native-unavailable article3.1 attempt is excluded entirely. Natural thinking/breathing pause remains usable speech.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/059-f55af008924bce46-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/059-f55af008924bce46-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/059-f55af008924bce46-explicit-3.json",
+        "qa/voice-reference-remediation/final-evidence/059-f55af008924bce46-explicit-4.json",
+        "qa/voice-reference-remediation/final-evidence/059-f55af008924bce46-explicit-5.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "leela-ref.wav",
+      "profiles": [
+        "leela-qwen3-06b.json",
+        "leela.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=NNtNawM3FdQ"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "e4663f99fb4c34e830d7c9a65950c338164b8602cfc608536ee3a00b3b539d72",
+      "duration_seconds": 6.72,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing:1speaker, all contamination/change/cutoff/splice flags false. Exact literal words match all profiles. Deliberate approximately0.9s dramatic pause between complete phrases is natural cadence, not dead air/edit; clean conditioning accepted.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/060-e4663f99fb4c34e8.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "leia-organa-ref.wav",
+      "profiles": [
+        "leia-organa.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=wuW7vNrgT_g"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "879ea3d7ae13542c395a6f8a3a949f7d44eb55da66d33866a098f4cab18ed299",
+      "duration_seconds": 9.95,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing:1speaker, all contamination/change/cutoff/pause/splice flags false. All literal words match except cause versus cuz spelling; reviewer explicitly hears colloquial reduced contraction, same audible word, not a proposed grammar expansion to because. Natural conversational restart And that retained. Clean dry recording and complete words/phrases.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/061-879ea3d7ae13542c.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "lisa-simpson-ref.wav",
+      "profiles": [
+        "lisa-simpson-qwen3-06b.json",
+        "lisa-simpson.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=Z66IHEEiCAw"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "730ba749157fd8c787097406ded94ebb3076e8fb7acd42b9e7841a0a1f8c63f6",
+      "duration_seconds": 5.65,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match all profiles; gonna acoustically preferred reduced form retained, no expansion to canonical going to.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/062-730ba749157fd8c7.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "lister-ref.wav",
+      "profiles": [
+        "lister-qwen3-06b.json",
+        "lister.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=_aPF-Rui09Y"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "222c14364b896cc31ce3cfd742a7b4a5e368a683ca9a054defeb79a39068a9e5",
+      "duration_seconds": 3.13,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one isolated speaker, complete boundaries, no contamination/change/pause/splice. Literal words match all profiles; sentence punctuation and Mayday/May Day spelling do not change audible words.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/063-222c14364b896cc3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "loki-ref.wav",
+      "profiles": [
+        "loki-qwen3-06b.json",
+        "loki.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/m002h9wp"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "c0fde205f811f4b0268ce7fa8cc5f621a8b214be1a2710d21710577121be222d",
+      "duration_seconds": 5.71,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one isolated clean speaker, complete boundaries and all contamination/pause/splice flags false; acoustic_changes null and no change/limitation asserted. Literal words match all profiles with low uncertainty.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/064-c0fde205f811f4b0.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "mark-corrigan-ref.wav",
+      "profiles": [
+        "mark-corrigan-qwen3-06b.json",
+        "mark-corrigan.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=LvkT9NBBc-4"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "38bfa895ed8040510edd57f24e814176aa8e7af765edd6c350c6d763fb236fb7",
+      "duration_seconds": 3.82,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one completely isolated speaker, dry/clean/distinct speech, all contamination/change/cutoff/pause/splice flags false. Literal words match all profiles with low uncertainty.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/065-38bfa895ed804051.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "mark-steel-ref.wav",
+      "profiles": [
+        "mark-steel-qwen3-06b.json",
+        "mark-steel.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/m0025l9s"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "895e5d0826986ac969972f8ca2173ed2e66d2c0255fab324a53d57a0c4337330",
+      "duration_seconds": 7.5,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match all profiles with very high confidence; only timestamp approximation.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/066-895e5d0826986ac9.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "marla-ref.wav",
+      "profiles": [
+        "marla-qwen3-06b.json",
+        "marla.json"
+      ],
+      "source_urls": [],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "e534d2b9f7fc0432e48888c57c41dbef5c5a754fed9c2809a4699503cd89277f",
+      "duration_seconds": 8.85,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing reports one fully isolated speaker, no overlapping dialogue/music/crowd/effects/change/splice/cutoff. Literal words match all profiles. Approximately1.6s between-sentence breathing pause is natural delivery, not inserted silence or destructive conditioning; rawusabletrue. Accepted without pretending pause-free.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/067-e534d2b9f7fc0432.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "martha-jones-ref.wav",
+      "profiles": [
+        "martha-jones-qwen3-06b.json",
+        "martha-jones.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=MNIWA2RE_rQ"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "21bc5bdfc1d32babb641d72876a36f3d86158cedd7091886f4c0dc64151cc1e7",
+      "duration_seconds": 4.08,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary reports continuous music. Two independent valid fresh full followups (3.1 and careful3.8) positively hear no musical accompaniment or other contaminants, one isolated voice, stable acoustics and complete final wanted. Both agree every literal word and usable speech. Resolve the isolated soundtrack claim from the two independent whole-clip observations; no known musical instrument or competing passage remains established.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/068-21bc5bdfc1d32bab-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/068-21bc5bdfc1d32bab-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/068-21bc5bdfc1d32bab-explicit-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "mckenna-ref.wav",
+      "profiles": [
+        "mckenna.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=-dsgb7_ccPM"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "c4bb559ee7a70685e0a77e0b8ddfcf11604d1374996270f3c0b1985ef5c42c6c",
+      "duration_seconds": 12.38,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary hears an abrupt final cohesive; targeted fresh full hearing explicitly hears complete final /v/ followed by natural room decay, with no phonemic truncation. Both agree all literal words, one isolated voice and no contamination. Resolve recording-padding ambiguity from positive targeted consonant observation, retain useful complete sentence and natural conversational pauses.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/069-c4bb559ee7a70685-root-1.json",
+        "qa/voice-reference-remediation/final-evidence/069-c4bb559ee7a70685-root-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "michael-palin-ref.wav",
+      "profiles": [
+        "michael-palin-qwen3-06b.json",
+        "michael-palin.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=evEIeWbhd9c"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "c08e6a0f0c30453bcf199a0df32c727f962139735e8d760241fb4b7e7eb885f2",
+      "duration_seconds": 7.67,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Two independent fresh full hearings agree one isolated clear voice, complete words, no contamination and the complete literal transcript. John is heard phonetically in both; proper-name spelling uncertainty is not an omitted or changed audible word. Timing estimates do not affect positive acoustic/word observations.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/070-c08e6a0f0c30453b-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/070-c08e6a0f0c30453b-explicit-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "mrs-doyle-ref.wav",
+      "profiles": [
+        "mrs-doyle-qwen3-06b.json",
+        "mrs-doyle.json"
+      ],
+      "source_urls": [
+        "https://shows.acast.com/pjrchive/episodes/pauline-mclynn-actress-who-played-mrs-doyle-in-father-ted-in"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "d11bd37ea2c1630129084245c2c16c60a271d75f856746d2f080d1bc61fd1adb",
+      "duration_seconds": 15.25,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, no music/crowd/laughter/effects/splices/cutoffs, consistent close-mic acoustic. All literal words match profiles including both um fillers. Natural approximately0.7\u20130.8s conversational pauses are accepted rather than treated as inserted silence.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/071-d11bd37ea2c16301.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "nanna-ref.wav",
+      "profiles": [
+        "nanna-qwen3-06b.json",
+        "nanna.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=xJN2D5mqjMc"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "7cc178959cbbfdf108c94ab32e203fb654c3083850d360b316cbda06dc2e7e5b",
+      "duration_seconds": 6.65,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Both fresh hearings agree one isolated clean voice and all literal words, no contamination or splice. Primary ending flag is explicitly absence of a final noun; targeted hearing positively hears complete dark consonant release and no cutoff. Its raw-unusable label is solely conversational Yeah,0.8s thinking pause and unfinished grammar, not damaged audio. Retain spontaneous nonnative English description with fully audible words and6.65s useful prosodic material; do not add a phantom noun or shrink to an incomplete2s fragment. Greyish/grayish is spelling only.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/072-7cc178959cbbfdf1-root-1.json",
+        "qa/voice-reference-remediation/final-evidence/072-7cc178959cbbfdf1-root-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "neil-degrasse-tyson-ref.wav",
+      "profiles": [
+        "neil-degrasse-tyson-qwen3-06b.json",
+        "neil-degrasse-tyson.json"
+      ],
+      "source_urls": [
+        "https://www.nasa.gov/podcasts/houston-we-have-a-podcast/cosmic-perspectives-with-neil-degrasse-tyson/"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "b5f6772b154c30488dd44adb8f6cd7d4e3a918688644234adf5bb0c031ba88eb",
+      "duration_seconds": 8.55,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words exactly match profiles with high confidence and no lexical ambiguity.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/073-b5f6772b154c3048.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "nyssa-of-traken-ref.wav",
+      "profiles": [
+        "nyssa-of-traken-qwen3-06b.json",
+        "nyssa-of-traken.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=NSxsSf1RGhg"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "d701fc8235200ef6a881f5cc1d3958aeff85d1c0e18180916d9901178548f48b",
+      "duration_seconds": 5.575,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles; low lexical and isolation uncertainty, only estimated clock bounds.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/074-d701fc8235200ef6.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "patrick-moore-ref.wav",
+      "profiles": [
+        "patrick-moore-qwen3-06b.json",
+        "patrick-moore.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=Ne09Thrp99U"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "fc67f6b452f79a79f07d88c86e2bc5104a9cd47298d376f8d4f8d020fc1d1472",
+      "duration_seconds": 5.58,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, no contamination/splice/cutoffs/abnormal pauses, consistent microphone/acoustic presence. Literal words match profiles with very high confidence and natural complete ending.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/075-fc67f6b452f79a79.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "patsy-stone-ref.wav",
+      "profiles": [
+        "patsy-stone-qwen3-06b.json",
+        "patsy-stone.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/b007gtsn"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "38d01bdd2f43b98eaa7e50716776cad04e71d14925ed669e1716a5439aab8fe1",
+      "duration_seconds": 9.72,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles including the voiced um and people repetition, no added filler inferred from grammar.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/076-38d01bdd2f43b98e.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "peter-kay-ref.wav",
+      "profiles": [
+        "peter-kay-qwen3-06b.json",
+        "peter-kay.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=SLzfteKoARw"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "7809ed5cf3746d277eeb7977065f4c1a2cceeb10da49d46de3c877c397e2fe43",
+      "duration_seconds": 4.92,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles including whos contraction, clear articulation and complete sentence.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/077-7809ed5cf3746d27.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "picard-ref.wav",
+      "profiles": [
+        "picard-qwen3-06b.json",
+        "picard.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=9bavz335DQQ"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "26ee4fd08dad50320ebd4f71001dd3898ecfcfdf6f1a1c1d565d11f5972c53f5",
+      "duration_seconds": 14.57,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/splice flags false. Literal words match all profiles with high certainty including um and unusual It was in that start. Natural interview pauses accepted with rawusabletrue; no inserted silence or second speaker. Signed endpoint addendum:99 PCM endpoint samples (both signs), longest0.249ms. Fresh native hearing finds complete clean usable speech; no audible distortion is reported. Preserve this nonzero measurement rather than claiming zero clipping.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/078-26ee4fd08dad5032.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "q-tng-ref.wav",
+      "profiles": [
+        "q-tng-qwen3-06b.json",
+        "q-tng.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=Te8vCFkFHg8"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "8fa02b3a6fb6ffd06135e49ee193f474aff9cb30663df97c3694fe9d084768d2",
+      "duration_seconds": 11.72,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles with very low uncertainty. Rhetorical pauses are ordinary cadence and entire phrase is clean.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/079-8fa02b3a6fb6ffd0.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "rimmer-ref.wav",
+      "profiles": [
+        "rimmer-qwen3-06b.json",
+        "rimmer.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=3hFhUk6DbJ8"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "b5ec1e9e30984307c10eb18cd80f888b7bf0786451658e98559c92ec4d08e52c",
+      "duration_seconds": 7.35,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match all profiles; the the, thats thats and for for repetitions are explicitly heard, no grammar editing.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/080-b5ec1e9e30984307.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "river-song-ref.wav",
+      "profiles": [
+        "river-song-qwen3-06b.json",
+        "river-song.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/m001hnlk"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "fffe684e4e595cf75e57499a8cfafa503dbd854ed1ed45dd233c54a1a4cdf6f4",
+      "duration_seconds": 7.92,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/splice flags false. Literal words match profiles with strange restart and audible um. Natural hesitation pause accepted, no inserted silence or contaminated speech.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/081-fffe684e4e595cf7.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "rod-serling-ref.wav",
+      "profiles": [
+        "rod-serling-qwen3-06b.json",
+        "rod-serling.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=TghYXxm3wq8"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "07e61a13774f749a568f1bb9896d3f32f6ba9c89f584e2d52512f6bd49f4c05c",
+      "duration_seconds": 6.96,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, no contamination/splices/cutoffs/long pauses; stable acoustic/mic presence. Literal words match profiles with I I hesitations heard as ordinary speech, not edits.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/082-07e61a13774f749a.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "romana-ref.wav",
+      "profiles": [
+        "romana-qwen3-06b.json",
+        "romana.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=CPyv2UzVsuU"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "10ee81f61d7a72db3b40c7301685d255b5542ec030ec12c88367e3924d914a7b",
+      "duration_seconds": 11.7,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Both fresh full hearings agree one isolated clear voice, complete boundaries, no contaminants/splice and all literal words. Targeted full hearing positively hears culture without final l, resolving culture/cultural ambiguity without grammatical completion. Programs/programmes is only regional spelling of identical spoken phonemes; retain profile orthography.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/083-10ee81f61d7a72db-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/083-10ee81f61d7a72db-explicit-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "ronan-ref.wav",
+      "profiles": [
+        "ronan-qwen3-06b.json",
+        "ronan.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=-mrmOTS6qrw"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "7a95373c1c362b9ef50d6820c9f2a59f3c2508c93795b15da661840cebe3baa1",
+      "duration_seconds": 5.7,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles including and and repetition; clear uninterrupted speech without canonical rewrite.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/084-7a95373c1c362b9e.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "rose-tyler-ref.wav",
+      "profiles": [
+        "rose-tyler-qwen3-06b.json",
+        "rose-tyler.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/m000vy1j"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "42a66666853629fc9bfe0941400131c9ba55c06e3ea33ea3d873f2ab6b831bf4",
+      "duration_seconds": 4.4,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match all profiles with low uncertainty, clear complete short sentence.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/085-42a66666853629fc.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "samantha-ref.wav",
+      "profiles": [
+        "samantha-qwen3-06b.json",
+        "samantha.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=ZKSzrJkHtVg"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "ffe7528ab245a95221ddddb23e421485aa7b05876307d2454bfa00b1622b1f95",
+      "duration_seconds": 5.51,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles including and um, than than and I had had; high transcript certainty independently verifies prior difficult wording.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/086-ffe7528ab245a952.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "sarah-jane-smith-ref.wav",
+      "profiles": [
+        "sarah-jane-smith-qwen3-06b.json",
+        "sarah-jane-smith.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=ypXgt6HJ9qk"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "941b3834f28e3db12434eaecd0b6a381ce24050ba9541eb0ad6a420efe8828f3",
+      "duration_seconds": 6.46,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles; natural approximately0.7s dramatic pause does not represent a defect, both clauses complete.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/087-941b3834f28e3db1.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "saul-goodman-ref.wav",
+      "profiles": [
+        "saul-goodman-qwen3-06b.json",
+        "saul-goodman.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=pPd67CEL54E"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "d757105cf38d3da7d14e917a594cc9188810daac71933de41283decff87a7244",
+      "duration_seconds": 4.0,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Fresh full native hearing: one isolated speaker, all contamination/change/cutoff/pause/splice flags false. Literal words match profiles with very high confidence and no ambiguous phonemes.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/088-d757105cf38d3da7.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "scotty-ref.wav",
+      "profiles": [
+        "scotty.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=COJuF7n9gGA"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "1f5c0708a597b75453add5baf6c080cc55c69c9858fb904e253e9127e93834fa",
+      "duration_seconds": 9.5,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice, complete boundaries, no contamination, literal words match. Short dramatic pauses are natural cadence.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/089-1f5c0708a597b754.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "seven-of-nine-picard-ref.wav",
+      "profiles": [
+        "seven-of-nine-picard-qwen3-06b.json",
+        "seven-of-nine-picard.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=Ri2dUefObdY"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "5476ab156152045665efeb208fdaea2ae3d2086989dedf9b4c17717c65735afe",
+      "duration_seconds": 14.4,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice, complete boundaries, no contamination. Literal arcs ... is and filler um are retained rather than grammar-corrected.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/090-5476ab1561520456.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "seven-of-nine-ref.wav",
+      "profiles": [
+        "seven-of-nine-qwen3-06b.json",
+        "seven-of-nine.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=Ri2dUefObdY"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "b83cdf51c9dbd8141f8bcb5907925ec4c8fd53a4b65d46a3d2d4ba20ef7efc71",
+      "duration_seconds": 15.55,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice with no contamination or damaged boundaries. Literal repeated its and fillers remain; proper names have high phonetic clarity and only spelling uncertainty.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/091-b83cdf51c9dbd814.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "sherlock-ref.wav",
+      "profiles": [
+        "sherlock-qwen3-06b.json",
+        "sherlock.json"
+      ],
+      "source_urls": [
+        "https://commons.wikimedia.org/wiki/File:Benedict_cumberbatch_in_front_row_b00wqfnd-crop.flac"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "afeafac7d66cd1eb715da76500cae5ecc8a72486238bba0873a6b3d834676992",
+      "duration_seconds": 6.635645833333333,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice, complete boundaries, no contamination and negligible lexical uncertainty.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/092-afeafac7d66cd1eb.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "snape-ref.wav",
+      "profiles": [
+        "snape-qwen3-06b.json",
+        "snape.json"
+      ],
+      "source_urls": [],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "08a2fe5f345bd8efe5bb66756f2091c3b2bc728c3e26d20cdd5df53354498e48",
+      "duration_seconds": 4.65,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice, complete words and natural room decay. Wand waving versus wand-waving is spelling only; no lexical mismatch or interfering sound.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/093-08a2fe5f345bd8ef.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "spock-ref.wav",
+      "profiles": [
+        "spock-qwen3-06b.json",
+        "spock.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=NsPiw1J7dYo"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "dc8aca559d9cfb8088534de7a29858fc0dc9df7f01db29634598b44d9fbcb978",
+      "duration_seconds": 8.49,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice, complete boundaries, no contamination. Audible repetitions and hesitation fillers are retained literally.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/094-dc8aca559d9cfb80.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "stephen-fry-ref.wav",
+      "profiles": [
+        "stephen-fry-qwen3-06b.json",
+        "stephen-fry.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=IporlmXXDeY"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "78e10c22f82ada93353e71b4d4b768b8842642be73d06cbd888002314d132685",
+      "duration_seconds": 13.25,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary hears no audience or music; independent3.1 reports a short terminal audience laugh, but targeted fresh complete3.8 explicitly hears the entire clip clean and isolated without laughter/crowd/music or cutoff. Two whole-clip observations do not establish the competing terminal-laughter claim; accept the continuous clear reference rather than trim based on uncorroborated rough timestamps. Targeted listener positively hears colloquial so know, agreeing primary and existing text, not grammar-correcting to all know. Natural short lecture pauses and uniform room reverb are non-destructive.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/095-78e10c22f82ada93-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/095-78e10c22f82ada93-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/095-78e10c22f82ada93-explicit-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "tegan-jovanka-ref.wav",
+      "profiles": [
+        "tegan-jovanka-qwen3-06b.json",
+        "tegan-jovanka.json"
+      ],
+      "source_urls": [
+        "https://hdl.handle.net/10462/mp3/1025"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "0fac440e9c1eac2396ac320119c41fa705a378072fd16f053f2166275c27f453",
+      "duration_seconds": 12.8,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Both fresh full hearings agree all literal words, one isolated clear voice, no music/crowd/SFX or discontinuity. Independent3.1 ending-cutoff label explicitly means slightly abrupt after the final word and it still finds raw speech usable; primary hears no cutoff. No actual missing final phoneme is reported. Natural fillers, repeated who and pauses are retained; minor w onset versus breath does not supply an additional complete word.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/096-0fac440e9c1eac23-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/096-0fac440e9c1eac23-explicit-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "the-cat-ref.wav",
+      "profiles": [
+        "the-cat-qwen3-06b.json",
+        "the-cat.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=RfNJitORCVA"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "53618673d42aa6fb60605a5c086cdba8331c9033266e55585e588d9a93f4a4d6",
+      "duration_seconds": 3.83,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice with complete boundaries and literal words; short clause pause is natural cadence without interfering sound.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/097-53618673d42aa6fb.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "the-doctor-ref.wav",
+      "profiles": [
+        "the-doctor-qwen3-06b.json",
+        "the-doctor.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=xszeU-yTSfg"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "97247a828be1aaeb30c122ddfed5da43e0f003ae9fd19236ee2b481b494dea7b",
+      "duration_seconds": 14.7,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Two independent fresh full native hearings agree there are two audible hesitation vowels in the third sentence: after that and after certain. Existing profiles omitted the second. Er and uh represent the same unstressed British filler; retain the project orthography er while adding the actually heard second filler to every associated profile. Both hearings agree one isolated clear voice, no contamination or acoustic discontinuity, complete boundaries and usable full speech.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/098-97247a828be1aaeb-revision-1.json",
+        "qa/voice-reference-remediation/final-evidence/098-97247a828be1aaeb-revision-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "tilda-ref.wav",
+      "profiles": [
+        "tilda-qwen3-06b.json",
+        "tilda.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=Gvu87DwV3nY"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "e6fee022fd390f72ec5c7af62d057fc5a502e0769b2d0774d49c60550b67e5c7",
+      "duration_seconds": 11.199666666666667,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Both fresh full hearings agree one isolated clean voice, complete phonemic boundaries, no contaminants and all existing literal words. Primary raises a possible unstressed is before the waste; independent fresh full hearing confidently hears the waste with no copula, corroborating the primary literal transcription itself. Retain actually heard words rather than grammar-completing an uncertain syllable. Dramatic breathing and pauses are natural usable delivery.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/099-e6fee022fd390f72-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/099-e6fee022fd390f72-explicit-2.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "trigger-ref.wav",
+      "profiles": [
+        "trigger-qwen3-06b.json",
+        "trigger.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=NHFvkBmhfOw"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "6714fd3ebedf4942ac764fcd4b04d2ff184760b71f27f0f4e466d4df2ff28f48",
+      "duration_seconds": 5.25,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary and targeted full3.8 hear complete isolated clean usable speech with no background interference;3.1 reports prominent hiss, contradicted by both other entire-clip clean acoustic observations. No destructive hiss is established from the corroborated hearings; retain the reference. Primary and3.1 both hear and that if, while targeted hearing omits that; two positive hearings establish the weak connector, retained in every profile. Going to versus gonna is the same natural reduced construction: primary positively transcribes going to with only reduction uncertainty,3.1 uses gonna, targeted3.8 confirms going to. Retain positively heard construction rather than grammar-rewriting. Complete word boundaries in all observations.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/100-6714fd3ebedf4942-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/100-6714fd3ebedf4942-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/100-6714fd3ebedf4942-explicit-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "vesper-ref.wav",
+      "profiles": [
+        "vesper-qwen3-06b.json",
+        "vesper.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=xuyoqS31Yug"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "8406585ecf05605cace994b2296c30cb31fc811b10403e84a20d4b2b55734ad7",
+      "duration_seconds": 13.226666666666667,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary reports a second voice after bastard and a chuckle. Independent3.1 and careful3.8 full hearings positively hear one isolated speaker with stable acoustics and no competing speech. All agree the entire literal transcript and complete word boundaries. Careful3.8 identifies a soft amused chuckle/exhalation between clauses, but explicitly finds the full clip single-speaker and usable. Nonlexical same-performance breath/chuckle is accepted as natural vocal delivery; no material second-person speech is established by the two independent full hearings. Uniform low room rumble is incidental, with no music/SFX/crowd or destructive interference. Retain continuous useful phrases.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/101-8406585ecf05605c-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/101-8406585ecf05605c-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/101-8406585ecf05605c-explicit-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "victor-meldrew-ref.wav",
+      "profiles": [
+        "victor-meldrew-qwen3-06b.json",
+        "victor-meldrew.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/m000x6cj"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "2f09a157bf83b1e27e3dcb4c570f2f9b28d14f72eab76d6d5abcd243c09ae0c2",
+      "duration_seconds": 15.42,
+      "channels": 2,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary and careful fresh3.8 whole-clip hearing positively hear one isolated speaker, no competing sound, complete final in a way and no cutoff. Independent3.1 appends a second speakers Yeah I; this is uncorroborated by both complete-clip observations and their explicit single-speaker isolation. Resolve this outlying terminal-addition claim rather than trim at rough estimated timestamp. All hear the natural we-we and I-Im repetitions. Primary and3.1 positively hear filler uh before playwrights; latest omits it without disputing its existence, so retain the twice-positive literal filler. Natural glottal hitches are speech, no splice.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/102-2f09a157bf83b1e2-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/102-2f09a157bf83b1e2-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/102-2f09a157bf83b1e2-explicit-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "victoria-wood-ref.wav",
+      "profiles": [
+        "victoria-wood-qwen3-06b.json",
+        "victoria-wood.json"
+      ],
+      "source_urls": [
+        "https://www.bbc.co.uk/programmes/b008kkcg"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "a569c765cebde2f0b98856fdbcf64bed903c49bb541d0528c5d17e85831e8895",
+      "duration_seconds": 5.65,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "Primary renders an uncertain extra like/that after pretend. Two independent fresh full observations (3.1 and careful3.8) hear pretend I dont with no intervening lexical word, agreeing the existing transcript.3.1 tight-ending label explicitly says final word fully articulated; careful3.8 hears complete boundaries with no cut. All hear one isolated clear voice without contaminants. Retain the twice-confirmed literal words and full final BAFTAs, not an uncertain added connector.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/103-a569c765cebde2f0-explicit-1.json",
+        "qa/voice-reference-remediation/final-evidence/103-a569c765cebde2f0-explicit-2.json",
+        "qa/voice-reference-remediation/final-evidence/103-a569c765cebde2f0-explicit-3.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    },
+    {
+      "reference": "yasmin-khan-ref.wav",
+      "profiles": [
+        "yasmin-khan-qwen3-06b.json",
+        "yasmin-khan.json"
+      ],
+      "source_urls": [
+        "https://www.youtube.com/watch?v=-0pu__AvBSk"
+      ],
+      "identity_permission": "no grant established by this audit",
+      "sha256": "a4665f08d9b65f6b9ff51c1be8ec303f6aa487253c81c7f285b36cff8d0adcd9",
+      "duration_seconds": 8.5,
+      "channels": 1,
+      "quality_evidence": "prior reference QA matches current bytes",
+      "prior_adjudication": "One isolated clear voice with complete words and literal agreement. Deliberate clean dramatic clause pauses do not damage conditioning speech.",
+      "prior_evidence": [
+        "qa/voice-reference-remediation/final-evidence/104-a4665f08d9b65f6b.json"
+      ],
+      "artistic_quality": "not established by corpus integrity QA"
+    }
+  ],
+  "registry": [
+    {
+      "character": "Aster",
+      "reference": "cast-aster",
+      "reference_sha256": "42dff04651e389a399d50d5c59622a08cdd4fa0114758b31422236341a238080",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-aster.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned OmniVoice generation",
+      "generator_model": "mlx-community/OmniVoice",
+      "generator_revision": null,
+      "seed": 101,
+      "conditioning": "none-original-synthetic",
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Bram",
+      "reference": "cast-bram",
+      "reference_sha256": "f666f03d3c4277d37628fb1c11e7cce15521763ce136126b7dad4cb368a631e7",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-bram.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 102,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Cleo",
+      "reference": "cast-cleo",
+      "reference_sha256": "4b4d2dd141e1f3f74f60eee352f6c874d55d4ad67627a6032ec239f0c36be807",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-cleo.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned OmniVoice generation",
+      "generator_model": "mlx-community/OmniVoice",
+      "generator_revision": null,
+      "seed": 103,
+      "conditioning": "none-original-synthetic",
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Dorian",
+      "reference": "cast-dorian",
+      "reference_sha256": "2ed94a6ad44bdd8ec6ddf7e57ff6eb4f5b85ae00a88c2e1ea988272a5cc7f4f2",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-dorian.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned OmniVoice generation",
+      "generator_model": "mlx-community/OmniVoice",
+      "generator_revision": null,
+      "seed": 104,
+      "conditioning": "none-original-synthetic",
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Elspeth",
+      "reference": "cast-elspeth",
+      "reference_sha256": "ffa757df43e2c92215a9c69188cc99356f8ebf952e26d692a3dbe923b5ab1f5a",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-elspeth.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 105,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Finch",
+      "reference": "cast-finch",
+      "reference_sha256": "77119212f0ce642bd86c7c027e1613720d1ef72d2d69807d98000c6516d7a775",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-finch.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 106,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Greta",
+      "reference": "cast-greta",
+      "reference_sha256": "56169efbe3241b905e14bac71922b62911460fcfedd7cd2e5ce9a97b3a86e277",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-greta.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 107,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Hugo",
+      "reference": "cast-hugo",
+      "reference_sha256": "9dca816dfc15682e750c6a97be3b2a7367397f483a7a11c9ba3a1430fe22c1e6",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-hugo.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 108,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Iris",
+      "reference": "cast-iris",
+      "reference_sha256": "17e02079cd048c3e11ffc012039dad94c3f8d81012039868bbf6ddf1b314c121",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-iris.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 109,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Jasper",
+      "reference": "cast-jasper",
+      "reference_sha256": "7b09961ad1f75fb5f7183f4ba500e1655272c5623f9c23bf973dc6ca455e1304",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-jasper.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 110,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Kit",
+      "reference": "cast-kit",
+      "reference_sha256": "84000a8517e8d3d37776e6b86ce79867a932fe8bbc95bcfc8e6e53aab10a4867",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-kit.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 111,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Lena",
+      "reference": "cast-lena",
+      "reference_sha256": "c1ef9c791e50786515efb3574fd52b3c643499e477bade272b664b554d7d5ee7",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-lena.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 112,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Marlow",
+      "reference": "cast-marlow",
+      "reference_sha256": "61182d8f5a7a0b8df167e48954021b2799c20cffe008bec6be04885af8f6e961",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-marlow.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 113,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Nell",
+      "reference": "cast-nell",
+      "reference_sha256": "83dc210ee4e04519cced685265e40687a9d7522dfee1038cc2daee5da4322754",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-nell.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned OmniVoice automatic voice generation",
+      "generator_model": "mlx-community/OmniVoice",
+      "generator_revision": null,
+      "seed": 114,
+      "conditioning": "none-original-synthetic",
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic automatic-voice generation without person reference or identity prompt. Model-use terms and final publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Orin",
+      "reference": "cast-orin",
+      "reference_sha256": "fed5127852ccd94cc361872f6b9704eaf0efa697ee07fa0d34ee40d0159b91dc",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-orin.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 115,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Petra",
+      "reference": "cast-petra",
+      "reference_sha256": "eeb3d31b4b5231bdfa695e22ff7e197d7cb9327febdee777970956c5ca821fdd",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-petra.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned OmniVoice generation",
+      "generator_model": "mlx-community/OmniVoice",
+      "generator_revision": null,
+      "seed": 116,
+      "conditioning": "none-original-synthetic",
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Quill",
+      "reference": "cast-quill",
+      "reference_sha256": "5de00c13360d2c4f9779d7838269a6a7d3e37ad0a400d1e7090e049c4cde6e23",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-quill.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned OmniVoice generation",
+      "generator_model": "mlx-community/OmniVoice",
+      "generator_revision": null,
+      "seed": 117,
+      "conditioning": "none-original-synthetic",
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    },
+    {
+      "character": "Stage Manager",
+      "reference": "cast-stage-manager",
+      "reference_sha256": "8ea8f3b1c6def41ed622a11099bcf6dcdb441fa71edb70456e73194c4b0d71df",
+      "current_bytes_match": true,
+      "receipt": "audio/reference-provenance/cast-stage-manager.json",
+      "receipt_sha256_matches": true,
+      "origin": "unconditioned Drama 3 generation",
+      "generator_model": "mlx-community/fish-audio-drama-3-4bit",
+      "generator_revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+      "seed": 100,
+      "conditioning": null,
+      "quality": "rejected as current ensemble by operator; individual artistic quality unestablished",
+      "prior_acoustic_status": "unverified",
+      "identity_basis": "Original unconditioned synthetic generation with no person reference or identity prompt. Model-use terms and final audio publication remain separate.",
+      "publication": "not admitted; retain existing gates"
+    }
+  ],
+  "private_replacements": [
+    {
+      "character": "aster",
+      "reference": "lisa-simpson",
+      "reference_sha256_matches": true,
+      "source_urls": [
+        "https://www.youtube.com/watch?v=Z66IHEEiCAw"
+      ],
+      "quality_evidence": "prior reference QA matches current bytes",
+      "identity_permission": "no grant established by this audit",
+      "text_model": "sm-gemma4_e2b_it",
+      "synthesis_engine": "fish-drama3"
+    },
+    {
+      "character": "hugo",
+      "reference": "snape",
+      "reference_sha256_matches": true,
+      "source_urls": [],
+      "quality_evidence": "prior reference QA matches current bytes",
+      "identity_permission": "no grant established by this audit",
+      "text_model": "qwen-stock_q8_native",
+      "synthesis_engine": "fish-drama3"
+    },
+    {
+      "character": "iris",
+      "reference": "eartha",
+      "reference_sha256_matches": true,
+      "source_urls": [
+        "https://www.youtube.com/watch?v=TEoAypCUdRI"
+      ],
+      "quality_evidence": "prior reference QA matches current bytes",
+      "identity_permission": "no grant established by this audit",
+      "text_model": "qwen-obliteratus_q8_native",
+      "synthesis_engine": "qwen3-0.6b"
+    },
+    {
+      "character": "jasper",
+      "reference": "the-cat",
+      "reference_sha256_matches": true,
+      "source_urls": [
+        "https://www.youtube.com/watch?v=RfNJitORCVA"
+      ],
+      "quality_evidence": "prior reference QA matches current bytes",
+      "identity_permission": "no grant established by this audit",
+      "text_model": "qwen-huihui_q8_native",
+      "synthesis_engine": "fish-drama3"
+    }
+  ],
+  "limitations": [
+    "Prior corpus QA establishes reference integrity for matching bytes, not memorable acting.",
+    "A source URL, model license, or possession of a recording is not an identity permission record.",
+    "No identity grant has been supplied for the selected character clones; private audition only.",
+    "No public registry, receipt, or deployment is changed."
+  ],
+  "m5_library": {
+    "profiles": 349,
+    "unique_references": 224,
+    "canonical_accepted_hash_matches": 104,
+    "outside_canonical_qa": 120,
+    "scope": "Full host inventory retained privately; additional references are not admitted by this audit."
+  }
+}

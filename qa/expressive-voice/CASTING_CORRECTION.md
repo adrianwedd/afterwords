@@ -1,5 +1,10 @@
 # Casting correction — 2026-10-17
 
+Historical correction record. For the subsequent human feedback, Vixen's
+Drama/Seydoux promotion and the shorter matched audition, see
+[CASTING_REFINEMENT.md](CASTING_REFINEMENT.md). Statements below about the live
+Qwen route or missing feedback describe the earlier checkpoint.
+
 The operator rejected the synthetic Vixen candidate as a random male voice and
 did not accept the LulzBench cast. That conversational feedback is the current
 verdict; the previous handoff is superseded.
@@ -101,6 +106,29 @@ Directions and source/reference digests are retained in
 audits are private under `var/expressive-voice/casting-correction-1/`.
 The established character references are private audition material, not cleared
 public cast assets. No public registry or release manifest was replaced.
+
+## Operator listening feedback — 2026-10-17
+
+The operator subsequently reported: “B is better almost always. vixen is good,
+Hugo/defaults sound a bit more shit than the qwen cloned voices?” This supersedes
+the earlier statement that no listening feedback had arrived. It is a general
+preference for B, positive feedback on Vixen, and a remaining quality concern
+about Hugo/default voices; it does not identify every exception or approve every
+recording, pronunciation, or public release. The artistic outcome now has human
+listening evidence but remains only partially resolved.
+
+The page's backend mapping matters: Vixen A is Qwen/Seydoux and B is
+Drama/Seydoux; Aster B is Drama/Lisa; Hugo B is Drama/Snape; Iris B is
+Qwen/Eartha; Jasper B is Drama/Cat. All four cast A recordings use neutral Drama
+with the previous cast references. “Qwen stock” in Hugo's title identifies the
+text-generating model, not the speech backend. These pairs therefore do not
+establish a general Qwen-versus-Drama quality verdict: the cast comparisons also
+change reference and direction. Vixen's pair holds reference and reply constant.
+
+No new sample generation, live routing change, acoustic gate completion, or
+deployment is implied by this feedback. Vixen's documented live choice remains
+Qwen/Seydoux pending a specific decision to change it. Hugo remains an unresolved
+casting-quality concern.
 
 ## Verification and release boundary
 

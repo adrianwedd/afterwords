@@ -20,11 +20,13 @@ vm.runInNewContext(fs.readFileSync(path.join(out, 'casting.js'), 'utf8'), {
   document: {getElementById: id => ids.get(id), createElement: tag => new Element(tag)},
   window: {addEventListener: (k, fn) => { events[k] = fn; }},
 });
-const audio = nodes.filter(n => n.tag === 'audio');
+const allAudio = nodes.filter(n => n.tag === 'audio');
+const audio = allAudio.filter(n => !n.getAttribute('aria-label')?.startsWith('Source reference:'));
 const pairs = nodes.filter(n => n.tag === 'button' && n.textContent === 'Play A → B');
 const settle = () => new Promise(resolve => setImmediate(resolve));
 (async () => {
-  assert.equal(data.performances.length, 4); assert.equal(audio.length, 10); assert.equal(pairs.length, 5);
+  assert(data.performances.length >= 1 && data.performances.length <= 4);
+  assert.equal(audio.length, (data.performances.length + 1)*2); assert.equal(pairs.length, data.performances.length+1);
   assert(!nodes.some(n => ['input', 'select', 'textarea', 'form'].includes(n.tag)));
   assert(audio.every(a => a.paused && a.preload === 'none'));
   for (let i = 0; i < pairs.length; i++) {
@@ -40,5 +42,10 @@ const settle = () => new Promise(resolve => setImmediate(resolve));
   audio[0].reject = true; pairs[0].fire('click'); await settle();
   audio[0].fire('ended'); assert(audio.every(a => a.paused));
   assert(ids.get('status').textContent.includes('Playback unavailable'));
-  console.log('PASS: exactly four performance pairs plus Vixen; no forms; no autoplay; A/B order; one player; pause cancels continuation; mute; pagehide; media-error cancellation. Simulation only.');
+  for (const source of allAudio.filter(a => !audio.includes(a))) {
+    pairs[0].fire('click'); await settle(); await source.play();
+    assert(audio.every(a => a.paused));
+    ids.get('pause').fire('click'); assert(source.paused);
+  }
+  console.log(`PASS: ${data.performances.length} cast pairs plus Vixen; no forms; no autoplay; A/B order; exclusive source/performance playback; pause cancellation; mute; pagehide; media-error cancellation. Simulation only.`);
 })().catch(error => { console.error(error); process.exitCode = 1; });

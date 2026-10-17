@@ -21,6 +21,8 @@ def module(name):
 
 restore = module('restore-vixen-seydoux')
 audition = module('render-casting-auditions')
+promote = module('promote-vixen-drama')
+listening = module('build-casting-listening')
 
 
 def config():
@@ -46,6 +48,41 @@ def test_restore_preserves_every_field_except_explicit_speech_overrides():
     assert result == expected
     assert original == config()
     assert len(hooks) == 1
+
+
+def test_drama_promotion_round_trip_preserves_new_unrelated_work():
+    original, _ = restore.corrected(config())
+    result, rollback, hook = promote.transition(original)
+    assert original['tts']['providers']['afterwords']['voice'] == 'seydoux'
+    assert result['tts']['providers']['afterwords']['voice'] == promote.VOICE
+    assert 'AFTERWORDS_PORT=17862 ' in hook['command']
+    # Rollback restores speech fields, never an old whole profile.
+    result['unrelated']['new_work'] = 'keep this'
+    restored, _, _ = promote.transition(result, rollback)
+    expected = copy.deepcopy(original)
+    expected['unrelated']['new_work'] = 'keep this'
+    assert restored == expected
+
+
+def test_drama_promotion_refuses_unknown_route_and_ambiguous_hooks():
+    original, _ = restore.corrected(config())
+    original['tts']['providers']['afterwords']['voice'] = 'another-person'
+    with pytest.raises(ValueError):
+        promote.transition(original)
+    original, _ = restore.corrected(config())
+    original['hooks']['post_llm_call'].append(copy.deepcopy(original['hooks']['post_llm_call'][0]))
+    with pytest.raises(ValueError):
+        promote.transition(original)
+
+
+def test_listening_refuses_mismatched_references_before_writing(tmp_path):
+    pair = {'comparison_kind': 'matched-engine', 'reference_sha256': 'same',
+            'baseline': {'reference_sha256': 'same'}, 'candidate': {'reference_sha256': 'other'}}
+    selection = tmp_path/'selection.json'
+    selection.write_text(json.dumps({'vixen': pair, 'performances': [pair]}))
+    with pytest.raises(ValueError, match='identical reference'):
+        listening.build(selection, tmp_path/'output')
+    assert not (tmp_path/'output').exists()
 
 
 @pytest.mark.parametrize('change', ['provider', 'already-restored', 'unknown-hook'])
