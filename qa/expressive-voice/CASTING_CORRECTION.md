@@ -88,6 +88,14 @@ is claimed**. The available audio observer previously failed a silence control
 and was deliberately not used as an artistic judge. Natural feedback on these
 four performances is still needed before claiming the artistic goal achieved.
 
+A subsequent CPU reference screen compared every selected recording against all
+four chosen references. Its intended reference ranked first in all 11 measured
+windows (`cast-reference-screen-1.json`), supporting distinct speaker conditioning
+without establishing artistic quality. Jasper's match was weaker than the other
+three. A single same-reference Qwen alternative improved that match but introduced
+an unresolved ASR disagreement on “pasta”/“aposto”; it was not promoted. The original
+four-pair page stays unchanged and that alternative remains private evidence.
+
 Directions and source/reference digests are retained in
 `casting-directions.v2.json`. All attempts, reference copies, raw chunks and
 audits are private under `var/expressive-voice/casting-correction-1/`.
