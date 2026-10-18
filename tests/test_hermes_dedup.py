@@ -77,7 +77,7 @@ def hook_env(tmp_path):
     # machines, and a CLI turn waits up to ~60s for it.
     hook = tmp_path / "afterwords-post-llm.sh"
     source = SCRIPT.read_text()
-    for filename in ("afterwords-play.lock", "afterwords-play.pid"):
+    for filename in ("afterwords-play.lock", "afterwords-play.pid", "afterwords-muted"):
         source = source.replace(f'"${{AFTERWORDS_{"PLAY_LOCK" if filename.endswith(".lock") else "PLAY_PID"}:-/tmp/{filename}}}"', shlex.quote(str(tmp_path / filename)))
         source = source.replace(f'"/tmp/{filename}"', shlex.quote(str(tmp_path / filename)))
     source = source.replace("/tmp/afterwords-dedup", str(tmp_path / "dedup"))
@@ -240,7 +240,8 @@ def test_cli_scope_speaks_explicit_desktop_platform(hook_env, gateway_marker):
     """Current Hermes desktop sends platform=desktop in post_llm_call."""
     env, log, workdir = hook_env
     env["AFTERWORDS_SHELL_SCOPE"] = "cli"
-    env["CURL_SYNTH_LARGE"] = "1"
+    curl = Path(env["PATH"].split(os.pathsep)[0]) / "curl"
+    curl.write_text(curl.read_text().replace("RIFF-fake-wav-payload", "RIFF" + "x" * 4096))
     if gateway_marker:
         env["_HERMES_GATEWAY"] = "1"
         env["HERMES_SESSION_SOURCE"] = "desktop"
