@@ -36,7 +36,8 @@ def library_plan(source, snapshot, acceptance):
                 profile = json.loads(profile_path.read_text())
                 if profile.get('reference_audio', profile_path.stem + '-ref.wav') != name:
                     continue
-                if not profile.get('backend', 'qwen3-0.6b').startswith('qwen3-'):
+                backend = profile.get('backend') or 'qwen3-0.6b'
+                if not backend.startswith('qwen3-'):
                     continue
                 if profile.get('reference_text') != text:
                     raise ValueError(f'{profile_path.name}: transcript differs from accepted literal words')
