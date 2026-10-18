@@ -405,7 +405,7 @@ for CHUNK in "${CHUNKS[@]}"; do
                 PREV_SIZE=$(file_size "$PREV_WAV")
             fi
             if [ "$PREV_SIZE" -gt 1000 ] && $PLAY_OK; then
-                [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null
+                [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$PREV_WAV" 2>/dev/null || printf 'afterwords: local playback failed; retaining synthesized artifact\n' >&2
             fi
         fi
     fi
@@ -418,7 +418,7 @@ done
 LAST_WAV="${CHUNK_DIR}/${IDX}.wav"
 if [ -f "$LAST_WAV" ] && $PLAY_OK; then
     if [ "$(file_size "$LAST_WAV")" -gt 1000 ]; then
-        [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$LAST_WAV" 2>/dev/null
+        [ "$PLAYBACK_OWNER" = "hermes" ] || [ -f "$MUTE_FILE" ] || afplay "$LAST_WAV" 2>/dev/null || printf 'afterwords: local playback failed; retaining synthesized artifact\n' >&2
     fi
 fi
 

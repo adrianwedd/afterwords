@@ -171,7 +171,7 @@ def _make_tts_payload(text: str, header: bytes = b"RIFF") -> bytes:
 
 def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
                   voice: str = "seven-of-nine", stub_text_key: bool = True,
-                  fail_from_chunk: int = 0, port: str | None = None, playback_owner: str | None = None):
+                  fail_from_chunk: int = 0, port: str | None = None, playback_owner: str | None = None, playback_exit: int = 0):
     """Run the provider with a stubbed curl/afplay/lame/hermes; return (result, ctx).
 
     The curl stub writes a text-derived payload for `-o <path>` and logs the
@@ -240,7 +240,8 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
         _write_exe(bindir / tool, "#!/usr/bin/env bash\nexit 0\n")
     playback_log = tmp_path / 'playback.txt'
     _write_exe(bindir / 'afplay', '#!/usr/bin/env bash\n'
-               f'printf "%s\\n" "$*" >> {shlex.quote(str(playback_log))}\n')
+               f'printf "%s\\n" "$*" >> {shlex.quote(str(playback_log))}\n'
+               f'exit {playback_exit}\n')
     _write_exe(bindir / "hermes", "#!/usr/bin/env bash\nexit 0\n")
 
     text_path = tmp_path / "input.txt"
@@ -570,3 +571,17 @@ def test_expressive_provider_uses_private_header_file_not_bearer_argv(tmp_path, 
     assert sidecar_credentials['Authorization'] not in arguments
     headers = re.findall(r'@([^\s]+/auth\.headers)', arguments)
     assert headers and all(not Path(path).exists() for path in headers)
+
+
+@pytest.mark.parametrize('text', [SHORT_REPLY, LONG_REPLY], ids=['last-chunk', 'pipeline-and-last'])
+def test_playback_failure_preserves_complete_provider_artifact(tmp_path, text):
+    result, ctx = _run_provider(tmp_path, text, playback_exit=7)
+    assert result.returncode == 0, result.stderr
+    assert 'local playback failed; retaining synthesized artifact' in result.stderr
+    assert ctx['playback'].read_text().strip()
+    import wave
+    with wave.open(str(tmp_path/'out.wav'), 'rb') as audio:
+        frames = audio.readframes(audio.getnframes())
+    chunks = (tmp_path/'requests.txt').read_text().splitlines()
+    assert chunks
+    assert all(chunk.encode() in frames for chunk in chunks)
