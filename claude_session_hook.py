@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import json
 import sys
+import time
 import unicodedata
 from pathlib import Path
 
@@ -38,7 +39,6 @@ def event(payload: dict) -> dict | None:
     transcript = transcript or payload.get('transcript_path') or ''
     transcript_path = Path(transcript).expanduser() if transcript else None
     matched_uuid = ''
-    last_assistant_uuid = ''
     if transcript_path and transcript_path.is_file():
         try:
             with transcript_path.open(encoding='utf-8') as stream:
@@ -53,15 +53,18 @@ def event(payload: dict) -> dict | None:
                     record_text = _text_from_record(record)
                     if not record_text:
                         continue
-                    last_assistant_uuid = str(record.get('uuid') or '')
                     if _normal(record_text) == _normal(text):
-                        matched_uuid = last_assistant_uuid
+                        matched_uuid = str(record.get('uuid') or '')
                         break
         except OSError:
             pass
 
-    identity = matched_uuid or last_assistant_uuid or hashlib.sha256(
-        _normal(text).encode('utf-8')).hexdigest()
+    # Text identifies content, not an occurrence. Without a matching transcript
+    # UUID, defer rather than suppressing a later identical response or guessing
+    # an identity that could replay a duplicate callback.
+    if not matched_uuid:
+        return None
+    identity = matched_uuid
     content_hash = hashlib.sha256(_normal(text).encode('utf-8')).hexdigest()
     voice_agent = str(payload.get('agent_type') or 'claude')
     event_id = f'{hook}:{voice_agent}:{identity}:{content_hash}'
@@ -72,7 +75,13 @@ def event(payload: dict) -> dict | None:
 
 def main() -> int:
     try:
-        result = event(json.load(sys.stdin))
+        payload = json.load(sys.stdin)
+        result = event(payload)
+        for _ in range(3):
+            if result is not None:
+                break
+            time.sleep(0.05)
+            result = event(payload)
     except (json.JSONDecodeError, OSError):
         return 0
     if result:

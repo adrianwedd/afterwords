@@ -170,6 +170,7 @@ def test_installer_lifecycle_isolated_home_and_boot_registration(tmp_path, monke
         assert config['RunAtLoad'] and config['KeepAlive']
         assert config['EnvironmentVariables']['HOME'] == str(home)
         assert Path(config['ProgramArguments'][1]).is_file()
+    assert load(root / 'opencode.json')['installed_at_ms'] > 0
     assert (root / 'runtime/opencode/tts-hook-opencode.sh').is_file()
     assert not (home / '.claude/settings.json').exists()
     assert not (home / '.afterwords-server').exists()
@@ -467,3 +468,28 @@ def test_concurrent_publishers_do_not_recreate_claimed_event(tmp_path, monkeypat
     assert not target.exists()
     assert target.with_suffix('.claimed').exists()
     assert len(list(target.parent.glob('event-*'))) == 1
+
+
+@pytest.mark.parametrize('initial', ['absent', 'schema-pending'])
+def test_opencode_first_reply_survives_late_database_initialisation(tmp_path, initial):
+    opencode = module('opencode')
+    db = tmp_path/'late.sqlite'
+    if initial == 'schema-pending':
+        sqlite3.connect(db).close()
+    state = {'installed_at_ms': 1000}
+    with pytest.raises(sqlite3.Error):
+        opencode.poll(db, state, lambda *e: pytest.fail('unexpected delivery'))
+    statefile = tmp_path/'state.json'
+    save(statefile, state)
+    state = load(statefile)
+    con = database(db)
+    for mid, completed in [('old', 500), ('first', 1500)]:
+        data = json.dumps({'time': {'created': completed-100, 'completed': completed},
+                          'content': [{'type':'text', 'text':mid}]})
+        con.execute('INSERT INTO session_message VALUES (?, ?, ?, ?, ?)',
+                    (mid, 's', 'assistant', completed, data))
+    con.commit();con.close()
+    events = []
+    opencode.poll(db, state, lambda *e: events.append(e))
+    opencode.poll(db, state, lambda *e: events.append(e))
+    assert [(e[1],e[3]) for e in events] == [('first','first')]

@@ -8,6 +8,7 @@ import plistlib
 import shutil
 import subprocess
 import sys
+import time
 
 REPO = Path(__file__).resolve().parents[1]
 FILES = ('watcher/__init__.py', 'watcher/state.py', 'watcher/queue.py', 'watcher/drain.py',
@@ -37,6 +38,7 @@ def main(argv=None):
     parser.add_argument('--sessions', type=Path)
     parser.add_argument('--db', type=Path)
     args = parser.parse_args(argv)
+    installed_at_ms = int(time.time() * 1000)
     home = args.home.resolve()
     root = home / 'Library/Application Support/Afterwords/watchers'
     runtime = root / 'runtime'
@@ -103,6 +105,15 @@ def main(argv=None):
             unload(domain, f'{args.label_prefix}-{agent}-watch', plist)
             plist.write_bytes(plistlib.dumps(values))
             plist.chmod(0o600)
+            if agent == 'opencode':
+                sys.path.insert(0, str(REPO))
+                from watcher.state import load, lock, save
+                with lock(root / 'opencode.lock'):
+                    state_path = root / 'opencode.json'
+                    state = load(state_path)
+                    if 'seen' not in state:
+                        state.setdefault('installed_at_ms', installed_at_ms)
+                        save(state_path, state)
             control('bootstrap', domain, str(plist))
         elif args.action == 'restart':
             control('kickstart', '-k', f'{domain}/{label}')

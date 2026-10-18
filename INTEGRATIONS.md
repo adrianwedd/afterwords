@@ -106,3 +106,11 @@ watcher units, retaining unrelated hooks/settings. Declining leaves integrations
 in place and reports that choice explicitly. Runtime/helper code, offsets, queue
 receipts and archives remain for safe reinstall. Per-session Codex and manually
 configured Hermes/expressive services have separate lifecycle controls.
+
+
+Managed watcher identity boundaries: OpenCode retains its installation timestamp
+before login launch, including when its database/schema is not ready. The first
+successful poll baselines only replies completed before that boundary. Claude
+requires a matching transcript UUID for each occurrence; it retries transcript
+write lag briefly and publishes nothing if that identity remains unavailable.
+Identical text alone is never treated as a response occurrence.

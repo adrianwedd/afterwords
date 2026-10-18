@@ -43,7 +43,7 @@ def test_subagent_stop_uses_agent_transcript_and_agent_voice_key(tmp_path):
     assert result['project'] == '/project'
 
 
-def test_event_falls_back_to_content_identity_without_transcript(tmp_path):
+def test_event_defers_without_transcript_occurrence_identity(tmp_path):
     payload = {'hook_event_name': 'Stop', 'session_id': 'session-3',
                'cwd': '/project', 'transcript_path': str(tmp_path / 'missing.jsonl'),
                'last_assistant_message': 'A response.'}
@@ -51,8 +51,8 @@ def test_event_falls_back_to_content_identity_without_transcript(tmp_path):
     first = event(payload)
     second = event(payload)
 
-    assert first == second
-    assert first['event_id'].startswith('Stop:claude:')
+    assert first is None
+    assert second is None
 
 
 def test_event_ignores_empty_text_and_active_stop_hook():
@@ -65,3 +65,31 @@ def test_builtin_subagents_never_publish_speech():
     for agent in ('Explore', 'Plan', 'general-purpose'):
         assert event({'hook_event_name': 'SubagentStop', 'agent_type': agent,
                       'last_assistant_message': 'Internal result repeated by the parent.'}) is None
+
+
+def test_identical_claude_replies_have_distinct_occurrence_ids(tmp_path):
+    path = tmp_path/'session.jsonl'
+    payload = {'session_id': 'same-session', 'transcript_path': str(path),
+               'last_assistant_message': 'Done.'}
+    assert event(payload) is None
+    transcript(path, {'type': 'assistant', 'uuid': 'first', 'message': {'content': 'Done.'}})
+    first = event(payload)
+    assert event(payload) == first
+    transcript(path, {'type': 'assistant', 'uuid': 'second', 'message': {'content': 'Done.'}})
+    second = event(payload)
+    assert first['event_id'] != second['event_id']
+    assert event(payload) == second
+
+
+def test_hook_retries_transcript_write_lag(tmp_path, monkeypatch, capsys):
+    import io
+    import claude_session_hook as hook
+    path = tmp_path/'late.jsonl'
+    payload = {'session_id':'session', 'transcript_path':str(path),
+               'last_assistant_message':'Done.'}
+    monkeypatch.setattr(hook.sys, 'stdin', io.StringIO(json.dumps(payload)))
+    def flush_transcript(_):
+        transcript(path, {'type':'assistant', 'uuid':'late', 'message':{'content':'Done.'}})
+    monkeypatch.setattr(hook.time, 'sleep', flush_transcript)
+    assert hook.main() == 0
+    assert json.loads(capsys.readouterr().out)['event_id'].startswith('Stop:claude:late:')

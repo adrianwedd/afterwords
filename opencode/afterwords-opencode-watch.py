@@ -22,11 +22,14 @@ def poll(db: Path, state: dict, deliver) -> None:
             "FROM session_message m JOIN session_v2 s ON s.id=m.session_id "
             "WHERE m.type='assistant' ORDER BY m.rowid").fetchall()
     if 'seen' not in state:
-        # Historical completed messages are baselined, unfinished messages are
-        # retained so the first post-install completion is delivered.
+        # Installation can precede database/schema creation. Retain its time
+        # across polling errors so a first post-install completion is not history.
+        cutoff = state.get('installed_at_ms')
         state['seen'] = [mid for mid, _, raw, _ in rows
-                         if (json.loads(raw).get('time') or {}).get('completed')]
-        return
+            if (completed := (json.loads(raw).get('time') or {}).get('completed'))
+            and (cutoff is None or completed <= cutoff)]
+        if cutoff is None:
+            return
     seen = set(state['seen'])
     for mid, session, raw, cwd in rows:
         if mid in seen:
@@ -51,6 +54,9 @@ def main() -> int:
     ownership = lock(root / 'opencode.lock')
     state_path = root / 'opencode.json'
     state = load(state_path)
+    if 'seen' not in state:
+        state.setdefault('installed_at_ms', int(time.time() * 1000))
+        save(state_path, state)
     def deliver(session, mid, cwd, text):
         subprocess.run(['bash', str(REPO / 'opencode/tts-hook-opencode.sh'),
                         session, mid, cwd], input=text, text=True, check=True,
