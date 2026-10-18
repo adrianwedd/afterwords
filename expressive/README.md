@@ -614,3 +614,17 @@ sidecar, then reload those exact owners at an idle boundary. Retain the existing
 voice gallery, port routing, reviewed Vixen selection and same-reference fallback.
 Rollback restores prior code and leaves the protected credential in custody; no
 reference audio, profile or configuration identity is changed by this boundary.
+
+The private expressive API also requires this capability before accepting any
+non-health request. Its prepared service definition sets
+`AFTERWORDS_REQUIRE_EXPRESSIVE_AUTH=1`; apply that single environment field to
+the existing API plist during transition. The standard 7860 API is unchanged.
+Install the protected credential on both Studio (API/sidecar) and M5 (17862
+caller), using the same reviewed service-specific capability. Shell provider
+and hook requests to 7862/17862 use a private header file consumed by `curl -H
+@FILE`, never a bearer value in argv. The helper sends no credential to other
+ports. Python benchmark callers use the same scoped authentication helper.
+Manual private API calls must prepare a header file through `expressive/auth.py
+--port 7862 --curl-headers NEW_PRIVATE_HEADER_PATH`; keep it in a protected
+temporary directory and remove it after the call. Health is read-only and remains
+available without credentials.

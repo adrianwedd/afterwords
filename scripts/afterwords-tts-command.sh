@@ -355,6 +355,13 @@ if [ "${#CHUNKS[@]}" -eq 0 ]; then
 fi
 NCHUNKS=${#CHUNKS[@]}
 
+CURL_AUTH=()
+if [ -n "$AFTERWORDS_REPO_ROOT" ] && [ -f "$AFTERWORDS_REPO_ROOT/expressive/auth.py" ]; then
+    python3 "$AFTERWORDS_REPO_ROOT/expressive/auth.py" --port "$PORT" \
+        --curl-headers "$CHUNK_DIR/auth.headers" || exit 2
+    [ ! -f "$CHUNK_DIR/auth.headers" ] || CURL_AUTH=(-H "@$CHUNK_DIR/auth.headers")
+fi
+
 synth_chunk() {
     # $1 = destination WAV, $2 = text. The timeout must cover SYNTHESIS: the
     # server serialises it (single-GPU) and requests queue behind each other.
@@ -363,9 +370,9 @@ synth_chunk() {
     # (e.g. `unknown voice`) is reported as such, not as a missing chunk.
     local t="${AFTERWORDS_TTS_TIMEOUT:-180}" code
     if [ -n "${VOICE:-}" ]; then
-        code=$(curl -s --max-time "$t" -w "%{http_code}" -G --data-urlencode "text=${text}" --data-urlencode "voice=${VOICE}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null) || true
+        code=$(curl "${CURL_AUTH[@]}" -s --max-time "$t" -w "%{http_code}" -G --data-urlencode "text=${text}" --data-urlencode "voice=${VOICE}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null) || true
     else
-        code=$(curl -s --max-time "$t" -w "%{http_code}" -G --data-urlencode "text=${text}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null) || true
+        code=$(curl "${CURL_AUTH[@]}" -s --max-time "$t" -w "%{http_code}" -G --data-urlencode "text=${text}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null) || true
     fi
     printf '%s' "${code:-000}" > "${out}.status"
 }

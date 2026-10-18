@@ -6,7 +6,6 @@ The public contract remains complete WAV audio; internal chunks are not played.
 import asyncio
 import base64
 import io
-import hmac
 import json
 import os
 import sys
@@ -118,27 +117,10 @@ async def health():
                 contract='complete-wav', native_model_streaming=True)
 
 
-def authenticate_caller(request):
-    if not request.client or request.client.host not in ('127.0.0.1', '::1'):
-        raise HTTPException(403, 'local service only')
-    if request.headers.get('host', '').lower() not in {
-            '127.0.0.1:7861', 'localhost:7861', '[::1]:7861'}:
-        raise HTTPException(403, 'invalid service host')
-    if 'origin' in request.headers:
-        raise HTTPException(403, 'browser origins are not admitted')
-    try:
-        from expressive.auth import authorization_headers
-        expected = authorization_headers()['Authorization']
-    except (OSError, ValueError, UnicodeError):
-        raise HTTPException(503, 'sidecar authentication unavailable') from None
-    supplied = request.headers.get('authorization', '')
-    if not hmac.compare_digest(supplied.encode(), expected.encode()):
-        raise HTTPException(401, 'sidecar authentication required')
-
-
 @app.post('/release')
 async def release(request: Request):
-    authenticate_caller(request)
+    from expressive.auth import authenticate_request
+    authenticate_request(request)
     if pool.pending:
         raise HTTPException(409, 'requests active; refusing to interrupt synthesis')
     async with pool.lock:
@@ -151,7 +133,8 @@ async def release(request: Request):
 
 @app.post('/synthesize')
 async def synthesize(request: Request):
-    authenticate_caller(request)
+    from expressive.auth import authenticate_request
+    authenticate_request(request)
     body = bytearray()
     async for chunk in request.stream():
         body.extend(chunk)

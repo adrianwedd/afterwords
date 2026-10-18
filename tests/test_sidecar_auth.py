@@ -88,3 +88,51 @@ def test_plain_adapter_sends_private_auth(tmp_path, monkeypatch, sidecar_credent
     assert rate == 44100 and len(audio) == 4410
     request = opener.open.call_args.args[0]
     assert request.get_header('Authorization') == sidecar_credentials['Authorization']
+
+
+@pytest.mark.parametrize('method', ['GET', 'POST'])
+@pytest.mark.parametrize('attack', ['missing', 'wrong', 'origin', 'rebound-host', 'remote-client'])
+def test_expressive_api_rejects_requests_before_credentialed_proxy(monkeypatch, sidecar_credentials,
+                                                                  ready_server, sample_voice, method, attack):
+    import server
+    from unittest.mock import Mock
+    monkeypatch.setattr(server, '_require_expressive_auth', True)
+    proxy = Mock(side_effect=AssertionError('unauthorised credentialed proxy'))
+    monkeypatch.setattr(server, '_synthesize_for_request', proxy)
+    headers = dict(sidecar_credentials)
+    host, peer = 'http://127.0.0.1:7862', ('127.0.0.1',123)
+    if attack == 'missing': headers = {}
+    elif attack == 'wrong': headers['Authorization'] = 'Bearer wrong'
+    elif attack == 'origin': headers['Origin'] = 'https://attacker.invalid'
+    elif attack == 'rebound-host': host = 'http://attacker.invalid:7862'
+    elif attack == 'remote-client': peer = ('192.0.2.10',123)
+    response = TestClient(server.app, base_url=host, client=peer).request(
+        method, '/synthesize', headers=headers, params={'text':'Hello.', 'voice':sample_voice})
+    assert response.status_code in (401,403)
+    proxy.assert_not_called()
+
+
+@pytest.mark.parametrize('port', [7862,17862])
+def test_authenticated_api_routes_preserve_synthesis(monkeypatch, sidecar_credentials,
+                                                    ready_server, sample_voice, port):
+    import server
+    monkeypatch.setattr(server, '_require_expressive_auth', True)
+    client = TestClient(server.app, base_url=f'http://127.0.0.1:{port}', client=('127.0.0.1',123))
+    assert client.get('/health').status_code == 200
+    response = client.get('/synthesize', params={'text':'Hello.', 'voice':sample_voice}, headers=sidecar_credentials)
+    assert response.status_code == 200 and response.content.startswith(b'RIFF')
+
+
+def test_curl_header_file_is_private_and_never_contains_token_in_argv(tmp_path, sidecar_credentials):
+    import os,subprocess,sys
+    script = Path(__file__).resolve().parents[1]/'expressive/auth.py'
+    output = tmp_path/'curl.headers'
+    command = [sys.executable,str(script),'--port','17862','--curl-headers',str(output)]
+    result = subprocess.run(command,capture_output=True,text=True,check=True)
+    assert output.stat().st_mode & 0o777 == 0o600
+    assert output.read_text() == 'Authorization: '+sidecar_credentials['Authorization']+'\n'
+    assert not result.stdout and not result.stderr
+    assert sidecar_credentials['Authorization'] not in ' '.join(command)
+    other = tmp_path/'other.headers'
+    subprocess.run([sys.executable,str(script),'--port','7860','--curl-headers',str(other)],check=True)
+    assert not other.exists()

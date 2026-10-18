@@ -88,7 +88,11 @@ while true; do
         while IFS= read -r EXCESS; do
             EXTRA=$((EXTRA + 1))
             [ "$EXTRA" -gt "$MAX_QUEUE" ] && rm -f "$EXCESS"
-        done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
+        done < <(if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
+            ls -1tr "$QUEUEDIR"/*.json 2>/dev/null
+        else
+            ls -1t "$QUEUEDIR"/*.json 2>/dev/null
+        fi)
     fi
 
     fi
@@ -108,7 +112,11 @@ while true; do
                 ITEM="$CLAIMED"
                 break
             fi
-        done < <(ls -1t "$QUEUEDIR"/*.json 2>/dev/null)
+        done < <(if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" = "1" ]; then
+            ls -1tr "$QUEUEDIR"/*.json 2>/dev/null
+        else
+            ls -1t "$QUEUEDIR"/*.json 2>/dev/null
+        fi)
     fi
     [ -z "$ITEM" ] && break
     ITEM_BASE="${ITEM%.claimed}"
@@ -343,6 +351,8 @@ print(json.dumps({
             python3 -c "
 import json, sys
 p = sys.argv[1]
+import os
+original = os.stat(p)
 try:
     d = json.load(open(p))
 except Exception:
@@ -352,6 +362,7 @@ tmp = p + '.tmp'
 json.dump(d, open(tmp, 'w'))
 import os
 os.replace(tmp, p)
+os.utime(p, ns=(original.st_atime_ns, original.st_mtime_ns))
 " "$ITEM" 2>/dev/null
             exit 1
         fi

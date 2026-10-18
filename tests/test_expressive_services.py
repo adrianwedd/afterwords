@@ -58,3 +58,8 @@ def test_services_preserve_default_server_and_isolate_dependencies(tmp_path):
         assert config['KeepAlive'] is True
         assert config['ThrottleInterval'] == 10
         assert 'setup.sh' not in ' '.join(config['ProgramArguments'])
+
+
+def test_expressive_api_requires_caller_authentication():
+    plists = dict(load('prepare-expressive-services').service_plists(ROOT, 'm5-tb', '100.114.8.87'))
+    assert plists['net.afterwords.expressive.api']['EnvironmentVariables']['AFTERWORDS_REQUIRE_EXPRESSIVE_AUTH'] == '1'

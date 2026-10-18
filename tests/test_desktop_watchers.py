@@ -357,3 +357,78 @@ def test_initial_baseline_crash_does_not_replay_unscanned_history(tmp_path, monk
     assert codex.main() == 0
     assert not deliveries
     assert load(root / 'codex.json')['_initialized']
+
+
+def test_hook_only_supervisor_retries_preplay_failure_without_another_event(tmp_path):
+    env, queue, bindir = worker_stubs(tmp_path)
+    counter = tmp_path/'calls'
+    (bindir/'curl').write_text('#!/bin/bash\n'
+        f'echo call >> "{counter}"\n'
+        f'if [ "$(wc -l < "{counter}")" -le 2 ]; then exit 7; fi\n'
+        'while [ "$#" -gt 0 ]; do if [ "$1" = -o ]; then out="$2"; shift; fi; shift; done\n'
+        '[ -z "${out:-}" ] || head -c 2048 /dev/zero > "$out"\n')
+    result = subprocess.run([sys.executable, '-m', 'watcher.drain',
+        str(REPO/'.claude/hooks/codex-tts-worker.sh'), str(queue)], env=env, capture_output=True, text=True, timeout=15)
+    assert result.returncode == 0, result.stderr
+    assert (queue/'event-test.done').exists()
+    assert not list(queue.glob('*.claimed'))
+    assert len(counter.read_text().splitlines()) == 3
+
+
+def test_hook_only_supervisor_parks_exhausted_claims(tmp_path):
+    env, queue, bindir = worker_stubs(tmp_path)
+    (bindir/'curl').write_text('#!/bin/bash\nexit 7\n')
+    result = subprocess.run([sys.executable, '-m', 'watcher.drain',
+        str(REPO/'.claude/hooks/codex-tts-worker.sh'), str(queue)], env=env, capture_output=True, text=True, timeout=15)
+    assert result.returncode != 0
+    failed = queue/'event-test.failed'
+    assert failed.exists() and json.loads(failed.read_text())['attempts'] == 3
+    assert not list(queue.glob('*.json')) and not list(queue.glob('*.claimed'))
+
+
+def test_reliable_worker_speaks_backlog_oldest_first(tmp_path):
+    env, queue, bindir = worker_stubs(tmp_path)
+    import os
+    env['AFTERWORDS_MUTE_FILE'] = str(tmp_path/'muted')
+    (queue/'event-test.json').unlink()
+    for index in range(3):
+        path = queue/f'event-{index}.json'
+        path.write_text(json.dumps({'agent':'codex', 'project_dir':env['HOME'], 'text':f'Response {index}.'}))
+        os.utime(path, (100+index, 100+index))
+    order = tmp_path/'order'
+    (bindir/'curl').write_text('#!/bin/bash\n'
+        'while [ "$#" -gt 0 ]; do\n'
+        f'if [ "$1" = --data-urlencode ] && [[ "$2" = text=* ]]; then echo "$2" >> "{order}"; fi\n'
+        'if [ "$1" = -o ]; then out="$2"; fi; shift; done\n'
+        '[ -z "${out:-}" ] || head -c 2048 /dev/zero > "$out"\n')
+    result = subprocess.run(['bash', str(REPO/'.claude/hooks/codex-tts-worker.sh')],
+                             env=env, capture_output=True, text=True, timeout=15)
+    assert result.returncode == 0, result.stderr
+    assert order.read_text().splitlines() == ['text=Response 0.', 'text=Response 1.', 'text=Response 2.']
+
+
+def test_retry_budget_is_per_event_and_does_not_strand_later_responses(tmp_path):
+    env, queue, bindir = worker_stubs(tmp_path)
+    import os
+    env['AFTERWORDS_MUTE_FILE'] = str(tmp_path/'muted')
+    (queue/'event-test.json').unlink()
+    for index in range(3):
+        path = queue/f'event-{index}.json'
+        path.write_text(json.dumps({'agent':'codex', 'project_dir':env['HOME'], 'text':f'Response {index}.'}))
+        os.utime(path, (100+index, 100+index))
+    counter = tmp_path/'calls.json'
+    (bindir/'curl').write_text(f'#!{sys.executable}\n'
+        'import json,sys\nfrom pathlib import Path\n'
+        f'counter=Path({str(counter)!r})\n'
+        'args=sys.argv[1:]; out=args[args.index("-o")+1]\n'
+        'text=next(arg[5:] for arg in args if arg.startswith("text="))\n'
+        'counts=json.loads(counter.read_text()) if counter.exists() else {}\n'
+        'counts[text]=counts.get(text,0)+1;counter.write_text(json.dumps(counts))\n'
+        'if counts[text]==1:raise SystemExit(7)\n'
+        'Path(out).write_bytes(b"x"*2048)\n')
+    result = subprocess.run([sys.executable, '-m', 'watcher.drain',
+        str(REPO/'.claude/hooks/codex-tts-worker.sh'), str(queue)], env=env, capture_output=True, text=True, timeout=20)
+    assert result.returncode == 0, result.stderr
+    assert len(list(queue.glob('*.done'))) == 3
+    assert json.loads(counter.read_text()) == {f'Response {i}.':2 for i in range(3)}
+    assert not list(queue.glob('*.claimed')) and not list(queue.glob('*.failed'))

@@ -18,6 +18,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from chunks import chunk_text
+from expressive.auth import api_headers
 
 
 def sha(raw): return hashlib.sha256(raw).hexdigest()
@@ -95,7 +96,7 @@ def main():
                 receipt['chunks'].append(chunk); record()
                 url=base+'/synthesize?'+urllib.parse.urlencode({'voice':args.voice,'text':segment,'lang':'en'})
                 chunk_start=time.perf_counter()
-                with opener.open(url,timeout=180) as response:
+                with opener.open(urllib.request.Request(url, headers=api_headers(url)),timeout=180) as response:
                     chunk['response_headers_seconds']=time.perf_counter()-chunk_start
                     chunk['headers']=dict(response.headers)
                     if response.headers.get_content_type()!='audio/wav':raise ValueError('expected WAV response')

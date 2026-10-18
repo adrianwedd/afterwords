@@ -24,7 +24,7 @@ def corrected(config):
     provider['voice'] = 'seydoux'
     provider['command'] = ('env AFTERWORDS_PORT=7860 AFTERWORDS_PLAYBACK_OWNER=hermes '
                            'bash ~/repos/afterwords/scripts/afterwords-tts-command.sh '
-                           '{input_path} {output_path} seydoux')
+                           '{input_path} {output_path} {voice}')
     changed = []
     for hook in result.get('hooks', {}).get('post_llm_call', []):
         if 'afterwords-post-llm.sh' in hook.get('command', ''):

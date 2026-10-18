@@ -43,7 +43,7 @@ def test_restore_preserves_every_field_except_explicit_speech_overrides():
     p['voice'] = 'seydoux'
     p['command'] = ('env AFTERWORDS_PORT=7860 AFTERWORDS_PLAYBACK_OWNER=hermes '
                     'bash ~/repos/afterwords/scripts/afterwords-tts-command.sh '
-                    '{input_path} {output_path} seydoux')
+                    '{input_path} {output_path} {voice}')
     expected['hooks']['post_llm_call'][0]['command'] = 'env AFTERWORDS_PORT=7860 AFTERWORDS_VOICE=seydoux bash /existing/afterwords-post-llm.sh'
     assert result == expected
     assert original == config()
@@ -55,6 +55,7 @@ def test_drama_promotion_round_trip_preserves_new_unrelated_work():
     result, rollback, hook = promote.transition(original)
     assert original['tts']['providers']['afterwords']['voice'] == 'seydoux'
     assert result['tts']['providers']['afterwords']['voice'] == promote.VOICE
+    assert result['tts']['providers']['afterwords']['command'].endswith('{input_path} {output_path} {voice}')
     assert 'AFTERWORDS_PORT=17862 ' in hook['command']
     # Rollback restores speech fields, never an old whole profile.
     result['unrelated']['new_work'] = 'keep this'

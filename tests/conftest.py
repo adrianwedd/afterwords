@@ -252,7 +252,7 @@ def pytest_sessionstart(session):
     print(f"  {DIM}{'─' * 41}{NC}")
 
 
-@pytest.fixture
+@pytest.fixture(autouse=True)
 def sidecar_credentials(tmp_path, monkeypatch):
     from expressive.auth import authorization_headers
     path = tmp_path/'sidecar.token'

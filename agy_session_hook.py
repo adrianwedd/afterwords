@@ -44,7 +44,8 @@ def extract_final_event(transcript_path: str) -> dict | None:
     except Exception:
         return None
 
-    for line in reversed(lines):
+    for index in range(len(lines) - 1, -1, -1):
+        line = lines[index]
         try:
             event = json.loads(line)
         except json.JSONDecodeError:
@@ -59,7 +60,7 @@ def extract_final_event(transcript_path: str) -> dict | None:
         step = str(event.get("step_index", ""))
         created = str(event.get("created_at", ""))
         digest = hashlib.sha256(content.strip().encode("utf-8")).hexdigest()
-        return {"text": content.strip(), "event_id": f"{step}:{created}:{digest}"}
+        return {"text": content.strip(), "event_id": f"{index}:{step}:{created}:{digest}"}
     return None
 
 

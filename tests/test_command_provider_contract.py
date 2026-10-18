@@ -528,3 +528,14 @@ def test_invalid_playback_owner_fails_before_synthesis(tmp_path):
     result, ctx = _run_provider(tmp_path, SHORT_REPLY, playback_owner='both')
     assert result.returncode == 2
     assert not ctx['out'].exists()
+
+
+@pytest.mark.parametrize('port', ['7862', '17862'])
+def test_expressive_provider_uses_private_header_file_not_bearer_argv(tmp_path, sidecar_credentials, port):
+    import re
+    result, ctx = _run_provider(tmp_path, SHORT_REPLY, port=port)
+    assert result.returncode == 0, result.stderr
+    arguments = ctx['curl_args'].read_text()
+    assert sidecar_credentials['Authorization'] not in arguments
+    headers = re.findall(r'@([^\s]+/auth\.headers)', arguments)
+    assert headers and all(not Path(path).exists() for path in headers)

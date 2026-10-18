@@ -428,6 +428,13 @@ done < <(printf '%s' "$CLEAN" | python3 "$CHUNK_SCRIPT" 2>>"$HOOK_LOG" || true)
 NCHUNKS=${#CHUNKS[@]}
 [ "$NCHUNKS" -eq 0 ] && exit 0
 
+CURL_AUTH=()
+if [ -n "$AFTERWORDS_REPO_ROOT" ] && [ -f "$AFTERWORDS_REPO_ROOT/expressive/auth.py" ]; then
+    python3 "$AFTERWORDS_REPO_ROOT/expressive/auth.py" --port "$PORT" \
+        --curl-headers "$CHUNK_DIR/auth.headers" || exit 2
+    [ ! -f "$CHUNK_DIR/auth.headers" ] || CURL_AUTH=(-H "@$CHUNK_DIR/auth.headers")
+fi
+
 synth_chunk() {
     local out="$1" text="$2"
     # Timeout must cover SYNTHESIS, not just transfer. The server serialises
@@ -437,9 +444,9 @@ synth_chunk() {
     # AFTERWORDS_TTS_TIMEOUT (seconds).
     local t="${AFTERWORDS_TTS_TIMEOUT:-180}"
     if [ -n "${VOICE:-}" ]; then
-        curl -s --max-time "$t" -G             --data-urlencode "text=${text}"             --data-urlencode "voice=${VOICE}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+        curl "${CURL_AUTH[@]}" -s --max-time "$t" -G             --data-urlencode "text=${text}"             --data-urlencode "voice=${VOICE}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
     else
-        curl -s --max-time "$t" -G             --data-urlencode "text=${text}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+        curl "${CURL_AUTH[@]}" -s --max-time "$t" -G             --data-urlencode "text=${text}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
     fi
 }
 

@@ -12,13 +12,9 @@ import pytest
 import soundfile as sf
 
 from expressive.contracts import directed_text, validate_options
+from expressive.auth import authorization_headers
 from expressive.sidecar import WorkerPool
 from backends.fish_drama3 import FishDrama3Backend
-
-
-@pytest.fixture(autouse=True)
-def _private_sidecar_test_credential(sidecar_credentials):
-    pass
 
 
 @pytest.mark.parametrize('options', [{'temperature': float('nan')}, {'max_frames': True},
@@ -305,7 +301,8 @@ def test_http_disconnect_waits_for_adapter_cancellation(monkeypatch):
 
 
 @pytest.mark.parametrize('method', ['GET', 'POST'])
-def test_disconnect_through_real_http_middleware(monkeypatch, method):
+@pytest.mark.parametrize('authenticated', [False, True])
+def test_disconnect_through_real_http_middleware(monkeypatch, method, authenticated):
     import threading
     import server
     started = threading.Event()
@@ -318,6 +315,7 @@ def test_disconnect_through_real_http_middleware(monkeypatch, method):
     monkeypatch.setattr(server, '_synthesize_audio', synth)
     monkeypatch.setattr(server, '_ready', SimpleNamespace(is_set=lambda: True))
     monkeypatch.setattr(server, '_clone_enabled', True)
+    monkeypatch.setattr(server, '_require_expressive_auth', authenticated)
     monkeypatch.setattr(server, '_resolve_voice', lambda name, **kw: SimpleNamespace(backend='fish-drama3'))
     async def run():
         incoming = asyncio.Queue()
@@ -326,7 +324,8 @@ def test_disconnect_through_real_http_middleware(monkeypatch, method):
         scope = {'type': 'http', 'asgi': {'version': '3.0'}, 'http_version': '1.1',
                  'method': method, 'scheme': 'http', 'path': '/synthesize',
                  'raw_path': b'/synthesize', 'query_string': b'text=Hello.&voice=test',
-                 'headers': [(b'host', b'127.0.0.1'), (b'content-type', b'application/json')],
+                 'headers': [(b'host', b'127.0.0.1:7862'), (b'content-type', b'application/json')]
+                     + ([(b'authorization', authorization_headers()['Authorization'].encode())] if authenticated else []),
                  'client': ('127.0.0.1', 1234), 'server': ('127.0.0.1', 7862)}
         async def send(message): pass
         task = asyncio.create_task(server.app(scope, incoming.get, send))

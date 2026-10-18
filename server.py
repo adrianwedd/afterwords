@@ -97,6 +97,8 @@ async def lifespan(app):
     _cleanup_current_voices()
 
 
+_require_expressive_auth = os.environ.get("AFTERWORDS_REQUIRE_EXPRESSIVE_AUTH") == "1"
+
 app = FastAPI(title="Afterwords TTS", lifespan=lifespan)
 
 
@@ -109,6 +111,14 @@ class _RequestGuards:
         if scope['type'] == 'http':
             from starlette.datastructures import Headers
             headers = Headers(scope=scope)
+            if _require_expressive_auth and scope['path'] != '/health':
+                from expressive.auth import authenticate_request
+                from fastapi import HTTPException
+                try:
+                    authenticate_request(Request(scope, receive=receive), ports=(7862, 17862))
+                except HTTPException as exc:
+                    await JSONResponse({'error': exc.detail}, status_code=exc.status_code)(scope, receive, send)
+                    return
             # Reject oversized uploads before multipart parsing spools to disk.
             # Missing/lying lengths still hit the existing in-handler read cap.
             if scope['path'] == '/clone' and scope['method'] == 'POST':

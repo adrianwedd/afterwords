@@ -39,8 +39,11 @@ Rebuild/inspect the library:
 ```bash
 .venv/bin/python scripts/build-fish-library.py --out NEW_PLAN.json
 .venv/bin/python scripts/build-fish-library.py --apply --out NEW_INSTALL.json
-curl -fsS -X POST http://127.0.0.1:7862/reload
-curl -fG http://127.0.0.1:7862/synthesize \
+expressive_auth_dir=$(mktemp -d)
+trap 'rm -rf "$expressive_auth_dir"' EXIT
+.venv/bin/python expressive/auth.py --port 7862 --curl-headers "$expressive_auth_dir/headers"
+curl -fsS -H "@$expressive_auth_dir/headers" -X POST http://127.0.0.1:7862/reload
+curl -fG -H "@$expressive_auth_dir/headers" http://127.0.0.1:7862/synthesize \
   --data-urlencode 'text=The library is ready.' \
   --data-urlencode 'voice=fish-galadriel' -D NEW_HEADERS.txt -o NEW_TAKE.wav
 ```

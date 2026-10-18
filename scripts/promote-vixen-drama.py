@@ -41,7 +41,7 @@ def transition(config, restore=None):
         provider['voice'] = VOICE
         provider['command'] = ('env AFTERWORDS_PORT=17862 AFTERWORDS_PLAYBACK_OWNER=hermes '
                                'bash ~/repos/afterwords/scripts/afterwords-tts-command.sh '
-                               '{input_path} {output_path} ' + VOICE)
+                               '{input_path} {output_path} {voice}')
         hook['command'] = hook['command'].replace('AFTERWORDS_PORT=7860 ', 'AFTERWORDS_PORT=17862 ').replace(
             'AFTERWORDS_VOICE=seydoux ', f'AFTERWORDS_VOICE={VOICE} ')
     return result, old, hook
