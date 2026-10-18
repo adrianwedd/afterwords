@@ -253,9 +253,9 @@ def pytest_sessionstart(session):
 
 
 @pytest.fixture(autouse=True)
-def sidecar_credentials(tmp_path, monkeypatch):
+def sidecar_credentials(tmp_path_factory, monkeypatch):
     from expressive.auth import authorization_headers
-    path = tmp_path/'sidecar.token'
+    path = tmp_path_factory.mktemp('sidecar-credential')/'sidecar.token'
     path.write_text('test-sidecar-only-' + 'x'*32)
     path.chmod(0o600)
     monkeypatch.setenv('AFTERWORDS_SIDECAR_TOKEN_FILE', str(path))
