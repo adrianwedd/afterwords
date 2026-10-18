@@ -75,6 +75,18 @@ def test_codex_event_is_terminal_after_playback_failure_or_worker_crash(tmp_path
         "printf mp3 > \"$output\"\n",
     )
 
+    # Exercise the macOS worker on Linux CI with real filesystem metadata,
+    # rather than relying on GNU stat to accept BSD -f%u/-f%z flags.
+    _executable(
+        fakebin / "stat",
+        f"#!{sys.executable}\n"
+        "import os, sys\n"
+        "info = os.stat(sys.argv[-1])\n"
+        "if sys.argv[1] == '-f%u': print(info.st_uid)\n"
+        "elif sys.argv[1] == '-f%z': print(info.st_size)\n"
+        "else: raise SystemExit(2)\n",
+    )
+
     env = dict(os.environ)
     env.update(
         PATH=f"{fakebin}:{env['PATH']}",
