@@ -3,8 +3,8 @@
 Runs the real hook script via subprocess with stubbed external binaries
 (curl, lame, hermes, afplay, ffmpeg) on a prepended PATH. python3 stays real —
 the script shells out to it for JSON parsing, hashing, and markdown stripping.
-Each test uses uuid4 response text so the hardcoded /tmp/afterwords-dedup dir
-never collides across runs. CI-safe: no BSD-only tools in the tests themselves.
+Tests use private playback/dedup paths and captured output.
+CI-safe: no BSD-only tools in the tests themselves.
 """
 from __future__ import annotations
 
@@ -20,7 +20,6 @@ import pytest
 
 REPO = Path(__file__).resolve().parent.parent
 SCRIPT = REPO / "scripts" / "afterwords-post-llm.sh"
-DEDUP_DIR = Path("/tmp/afterwords-dedup")  # hardcoded in the script
 
 # Stubs log every invocation as "<name> <argv>" to $STUB_LOG so tests can
 # assert which external calls actually happened.
@@ -122,12 +121,6 @@ def synth_calls(log):
 
 def unique_text():
     return f"dedup regression check {uuid.uuid4().hex}"
-
-
-
-
-
-
 
 
 
