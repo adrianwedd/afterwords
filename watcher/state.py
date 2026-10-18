@@ -38,3 +38,24 @@ def lock(path: Path):
     stream = path.open('a')
     fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
     return stream
+
+
+def codex_baseline(sessions: Path) -> dict:
+    """Capture complete-record boundaries before launching a new watcher."""
+    result = {}
+    for path in sorted(sessions.glob('*/*/*/rollout-*.jsonl')):
+        with path.open('rb') as stream:
+            stat = os.fstat(stream.fileno())
+            position = stat.st_size
+            boundary = 0
+            while position:
+                start = max(0, position - 65536)
+                stream.seek(start)
+                data = stream.read(position-start)
+                newline = data.rfind(b'\n')
+                if newline >= 0:
+                    boundary = start+newline+1
+                    break
+                position = start
+        result[str(path)] = {'offset':boundary, 'inode':stat.st_ino}
+    return result

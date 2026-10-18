@@ -114,3 +114,9 @@ successful poll baselines only replies completed before that boundary. Claude
 requires a matching transcript UUID for each occurrence; it retries transcript
 write lag briefly and publishes nothing if that identity remains unavailable.
 Identical text alone is never treated as a response occurrence.
+
+Codex captures existing complete-record byte boundaries before its initial login
+launch, retaining a partial trailing record for completion. Delayed startup and
+failed initial delivery therefore retain post-install replies. Claude's bounded
+transcript retry also waits past UUIDs already represented by durable receipts;
+it never searches behind the latest user turn or a newer assistant response.

@@ -105,13 +105,16 @@ def main(argv=None):
             unload(domain, f'{args.label_prefix}-{agent}-watch', plist)
             plist.write_bytes(plistlib.dumps(values))
             plist.chmod(0o600)
-            if agent == 'opencode':
+            if agent in ('codex', 'opencode'):
                 sys.path.insert(0, str(REPO))
-                from watcher.state import load, lock, save
-                with lock(root / 'opencode.lock'):
-                    state_path = root / 'opencode.json'
+                from watcher.state import load, lock, save, codex_baseline
+                with lock(root / f'{agent}.lock'):
+                    state_path = root / f'{agent}.json'
                     state = load(state_path)
-                    if 'seen' not in state:
+                    if agent == 'codex' and not state:
+                        state['_baseline'] = codex_baseline(args.sessions.resolve() if args.sessions else home/'.codex/sessions')
+                        save(state_path, state)
+                    elif agent == 'opencode' and 'seen' not in state:
                         state.setdefault('installed_at_ms', installed_at_ms)
                         save(state_path, state)
             control('bootstrap', domain, str(plist))

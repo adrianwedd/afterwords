@@ -13,11 +13,11 @@ import time
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 from codex_session_hook import extract_final_text
-from watcher.state import load, lock, save, state_root
+from watcher.state import load, lock, save, state_root, codex_baseline
 from watcher.queue import resume
 
 
-def poll(path: Path, state: dict, deliver, *, fresh: bool = False) -> None:
+def poll(path: Path, state: dict, deliver, *, fresh: bool = False, skip_before: int = 0) -> None:
     """Consume only newline-terminated records; incomplete bytes stay on disk.
 
     First installation skips old history but retains a trailing partial record.
@@ -28,11 +28,11 @@ def poll(path: Path, state: dict, deliver, *, fresh: bool = False) -> None:
     entry = state.get(key)
     if entry is None:
         entry = {'offset': 0, 'session': '', 'cwd': '', 'inode': stat.st_ino,
-                 'generation': 0}
+                 'generation': 0, 'skip_before':skip_before}
         state[key] = entry
     if stat.st_ino != entry['inode'] or stat.st_size < entry['offset']:
         entry.update(offset=0, session='', cwd='', inode=stat.st_ino,
-                     generation=entry['generation'] + 1)
+                     generation=entry['generation'] + 1, skip_before=0)
     with path.open('rb') as stream:
         stream.seek(entry['offset'])
         while True:
@@ -46,7 +46,7 @@ def poll(path: Path, state: dict, deliver, *, fresh: bool = False) -> None:
                 entry['session'] = payload.get('id', '')
                 entry['cwd'] = payload.get('cwd', '')
             text = extract_final_text(line.decode('utf-8'))
-            if text and not fresh:
+            if text and not fresh and start >= entry.get('skip_before', 0):
                 if not entry['session']:
                     raise ValueError('final answer has no session_meta identity')
                 # Record identity distinguishes identical answers at different
@@ -66,6 +66,9 @@ def main() -> int:
     state_path = root / 'codex.json'
     state = load(state_path)
     initialized = state.pop('_initialized', False)
+    if not initialized and '_baseline' not in state:
+        state['_baseline'] = codex_baseline(args.sessions)
+        save(state_path, {**state, '_initialized':False})
     hook = REPO / '.claude/hooks/codex-tts-hook.sh'
     def deliver(session, event_id, cwd, text):
         env = dict(os.environ, CODEX_THREAD_ID=session, PROJECT_DIR=cwd,
@@ -80,7 +83,9 @@ def main() -> int:
         resume(root, 'codex')
         for path in sorted(args.sessions.glob('*/*/*/rollout-*.jsonl')):
             try:
-                poll(path, state, deliver, fresh=not initialized and str(path) not in state)
+                baseline = state.get('_baseline', {}).get(str(path), {})
+                boundary = baseline.get('offset', 0) if baseline.get('inode') == path.stat().st_ino else 0
+                poll(path, state, deliver, skip_before=boundary)
                 save(state_path, {**state, '_initialized': initialized})
             except (OSError, ValueError, subprocess.SubprocessError) as error:
                 print(f'codex watcher: {type(error).__name__}', file=sys.stderr, flush=True)

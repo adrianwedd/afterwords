@@ -16,6 +16,13 @@ import sys
 import tempfile
 
 
+def has_receipt(root: Path, agent: str, session: str, event_id: str) -> bool:
+    queue = root/'queues'/agent/hashlib.sha256(session.encode()).hexdigest()
+    name = 'event-'+hashlib.sha256(event_id.encode()).hexdigest()
+    return any((queue/(name+suffix)).exists()
+               for suffix in ('.json','.claimed','.playing','.done','.failed'))
+
+
 def enqueue(root: Path, agent: str, session: str, event_id: str,
             project: str, text: str, worker: Path | None = None,
             voice_agent: str | None = None) -> Path:

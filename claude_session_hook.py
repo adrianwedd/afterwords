@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sys
 import time
 import unicodedata
@@ -47,6 +48,8 @@ def event(payload: dict) -> dict | None:
                         record = json.loads(line)
                     except json.JSONDecodeError:
                         continue
+                    if record.get('type') == 'user':
+                        break
                     if record.get('type') != 'assistant':
                         continue
                     message = record.get('message') or {}
@@ -55,7 +58,7 @@ def event(payload: dict) -> dict | None:
                         continue
                     if _normal(record_text) == _normal(text):
                         matched_uuid = str(record.get('uuid') or '')
-                        break
+                    break
         except OSError:
             pass
 
@@ -76,12 +79,17 @@ def event(payload: dict) -> dict | None:
 def main() -> int:
     try:
         payload = json.load(sys.stdin)
-        result = event(payload)
-        for _ in range(3):
-            if result is not None:
+        from watcher.queue import has_receipt
+        root = Path(os.environ.get('AFTERWORDS_WATCH_STATE',
+            str(Path.home()/'Library/Application Support/Afterwords/watchers')))
+        result = None
+        for attempt in range(6):
+            candidate = event(payload)
+            if candidate and not has_receipt(root, 'claude', candidate['session'], candidate['event_id']):
+                result = candidate
                 break
-            time.sleep(0.05)
-            result = event(payload)
+            if attempt < 5:
+                time.sleep(0.05)
     except (json.JSONDecodeError, OSError):
         return 0
     if result:

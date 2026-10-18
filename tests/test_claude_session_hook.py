@@ -11,9 +11,9 @@ def transcript(path, *records):
 def test_stop_event_uses_matching_transcript_uuid_and_stable_identity(tmp_path):
     path = tmp_path / 'session.jsonl'
     transcript(path,
+        {'type': 'user', 'uuid': 'user-1', 'message': {'content': 'Prompt.'}},
         {'type': 'assistant', 'uuid': 'assistant-1',
          'message': {'content': [{'type': 'text', 'text': 'Final answer.'}]}},
-        {'type': 'user', 'uuid': 'user-1', 'message': {'content': 'ignored'}},
     )
     payload = {'hook_event_name': 'Stop', 'session_id': 'session-1',
                'transcript_path': str(path), 'cwd': '/project',
@@ -93,3 +93,36 @@ def test_hook_retries_transcript_write_lag(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(hook.time, 'sleep', flush_transcript)
     assert hook.main() == 0
     assert json.loads(capsys.readouterr().out)['event_id'].startswith('Stop:claude:late:')
+
+
+def test_old_identical_uuid_is_retried_until_current_reply_is_flushed(tmp_path,monkeypatch,capsys):
+    import io
+    import claude_session_hook as hook
+    from watcher.queue import enqueue
+    path = tmp_path/'session.jsonl'
+    old = {'type':'assistant','uuid':'old','message':{'content':'Done.'}}
+    transcript(path,old)
+    payload = {'session_id':'s','transcript_path':str(path),'last_assistant_message':'Done.'}
+    previous = event(payload)
+    target = enqueue(tmp_path,'claude','s',previous['event_id'],'/project','Done.')
+    target.rename(target.with_suffix('.done'))
+    monkeypatch.setenv('AFTERWORDS_WATCH_STATE',str(tmp_path))
+    monkeypatch.setattr(hook.sys,'stdin',io.StringIO(json.dumps(payload)))
+    def flush(_):
+        transcript(path,old,{'type':'assistant','uuid':'new','message':{'content':'Done.'}})
+    monkeypatch.setattr(hook.time,'sleep',flush)
+    assert hook.main() == 0
+    assert ':new:' in json.loads(capsys.readouterr().out)['event_id']
+    monkeypatch.setattr(hook.sys,'stdin',io.StringIO(json.dumps(payload)))
+    current = event(payload)
+    enqueue(tmp_path,'claude','s',current['event_id'],'/project','Done.')
+    assert hook.main() == 0
+    assert capsys.readouterr().out == ''
+
+
+def test_claude_does_not_match_identical_text_across_a_new_user_turn(tmp_path):
+    path = tmp_path/'session.jsonl'
+    transcript(path, {'type':'assistant','uuid':'old','message':{'content':'Done.'}},
+               {'type':'user','message':{'content':'Next task.'}})
+    assert event({'session_id':'s','transcript_path':str(path),
+                  'last_assistant_message':'Done.'}) is None

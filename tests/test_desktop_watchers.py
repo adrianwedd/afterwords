@@ -493,3 +493,28 @@ def test_opencode_first_reply_survives_late_database_initialisation(tmp_path, in
     opencode.poll(db, state, lambda *e: events.append(e))
     opencode.poll(db, state, lambda *e: events.append(e))
     assert [(e[1],e[3]) for e in events] == [('first','first')]
+
+
+def test_codex_install_boundary_preserves_reply_before_delayed_first_scan(tmp_path,monkeypatch):
+    from watcher import manage
+    codex = module('codex')
+    sessions = tmp_path/'sessions'
+    path = sessions/'2026/10/18/rollout-session.jsonl';path.parent.mkdir(parents=True)
+    pending = record('In progress at installation.')
+    path.write_bytes(meta('s','/project')+record('Historical.')+pending[:-1])
+    monkeypatch.setattr(manage,'control',lambda *args,**kwargs: subprocess.CompletedProcess(args,0,stdout='',stderr=''))
+    home = tmp_path/'isolated-home'
+    assert manage.main(['install','codex','--home',str(home),'--sessions',str(sessions),
+                        '--label-prefix','test.afterwords']) == 0
+    baseline = load(home/'Library/Application Support/Afterwords/watchers/codex.json')['_baseline']
+    with path.open('ab') as stream:
+        stream.write(b'\n'+record('Completed before watcher startup.'))
+    state = {};events = []
+    # A failed first scan must not move the captured installation boundary.
+    with pytest.raises(OSError):
+        codex.poll(path,state,lambda *e: (_ for _ in ()).throw(OSError('temporary hook failure')),
+                   skip_before=baseline[str(path)]['offset'])
+    saved = tmp_path/'state.json';save(saved,state);state=load(saved)
+    codex.poll(path,state,lambda *e: events.append(e),skip_before=baseline[str(path)]['offset'])
+    codex.poll(path,state,lambda *e: events.append(e))
+    assert [e[3] for e in events] == ['In progress at installation.','Completed before watcher startup.']
