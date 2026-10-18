@@ -96,3 +96,13 @@ process deadline. Use a fresh output directory. Keychain-backed model access on
 this M5 succeeds in a fresh GUI launchd worker but returns exit 36 under SSH;
 use the working context without changing credentials. Capture is not physical
 playback or acoustic acceptance. The current expressive transport is temporary.
+
+## Removing setup-managed integrations
+
+`afterwords uninstall` removes the standard server/CLI, then offers the existing
+opt-in removal choice for setup-managed hook registrations and Codex/OpenCode
+login watchers. Accepting removes only Afterwords registrations and those two
+watcher units, retaining unrelated hooks/settings. Declining leaves integrations
+in place and reports that choice explicitly. Runtime/helper code, offsets, queue
+receipts and archives remain for safe reinstall. Per-session Codex and manually
+configured Hermes/expressive services have separate lifecycle controls.

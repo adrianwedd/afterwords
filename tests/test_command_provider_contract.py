@@ -251,6 +251,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
         env.pop(key, None)
     env["PATH"] = f"{bindir}:{env['PATH']}"
     env["HOME"] = str(home)
+    env["HERMES_HOME"] = str(home / ".hermes")
     env.pop("HERMES_SESSION_PLATFORM", None)
     if platform:
         env["HERMES_SESSION_PLATFORM"] = platform
@@ -279,7 +280,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
         capture_output=True, text=True, env=env, timeout=300,
     )
     return result, {
-        "out": out, "requests": requests, "home": home, "text_path": text_path, "curl_args": curl_args, "playback": playback_log,
+        "out": out, "requests": requests, "home": home, "counter": counter, "text_path": text_path, "curl_args": curl_args, "playback": playback_log,
     }
 
 
@@ -351,6 +352,23 @@ def test_messaging_missing_chunk_is_not_success(tmp_path):
     assert not ctx['playback'].exists() or not ctx['playback'].read_text()
 
 
+def _installed_contract_command(tmp_path, bindir):
+    private = tmp_path / 'installed-consumer'
+    private.mkdir(exist_ok=True)
+    values = {
+        'PATH': str(bindir) + ':' + os.environ['PATH'],
+        'HERMES_HOME': str(private), 'HERMES_SESSION_PLATFORM': 'cli',
+        'HERMES_SESSION_SOURCE': 'cli', '_HERMES_GATEWAY': '0',
+        'AFTERWORDS_TTS_CALLER': 'tool', 'AFTERWORDS_PLAYBACK_OWNER': 'provider',
+        'AFTERWORDS_PLAY_LOCK': str(private/'play.lock'),
+        'AFTERWORDS_PLAY_PID': str(private/'play.pid'),
+        'AFTERWORDS_MUTE_FILE': str(private/'muted'), 'AFTERWORDS_REPO': str(REPO),
+    }
+    return ('env ' + ' '.join(shlex.quote(key+'='+value) for key,value in values.items())
+            + ' bash ' + shlex.quote(str(COMMAND_SCRIPT))
+            + ' {input_path} {output_path} {voice}')
+
+
 def test_hermes_accepts_the_artifact_under_its_file_contract(tmp_path, monkeypatch):
     """Drive `_generate_command_tts` against the real provider and a stub server.
 
@@ -379,15 +397,21 @@ def test_hermes_accepts_the_artifact_under_its_file_contract(tmp_path, monkeypat
     out = tmp_path / "hermes_out.wav"
     config = {
         "type": "command",
-        "command": f"env PATH={bindir}:$PATH bash {COMMAND_SCRIPT} {{input_path}} {{output_path}} {{voice}}",
+        "command": _installed_contract_command(tmp_path, bindir),
         "output_format": "wav",
         "voice": "seven-of-nine",
         "timeout": 120,
     }
     monkeypatch.setenv("PATH", f"{bindir}:{os.environ['PATH']}")
     monkeypatch.setenv("AFTERWORDS_REPO", str(REPO))
+    monkeypatch.setenv("HERMES_HOME", str(tmp_path/"forbidden-profile"))
     produced = _generate_command_tts(text, str(out), "afterwords", config, {})
 
+    assert not (tmp_path/"forbidden-profile/tts-archive").exists()
+    assert not (tmp_path/"forbidden-profile/logs/afterwords-command.log").exists()
+    assert list((tmp_path/"installed-consumer/tts-archive").glob("*.txt"))
+    assert (tmp_path/"installed-consumer/logs/afterwords-command.log").is_file()
+    assert not (tmp_path/"installed-consumer/play.lock").exists()
     assert Path(produced).is_file()
     data = Path(produced).read_bytes()
     assert data != SILENCE_PLACEHOLDER_WAV, (
@@ -481,15 +505,22 @@ def test_hermes_refuses_a_partial_artifact(tmp_path, monkeypatch):
     out = tmp_path / "hermes_partial.wav"
     config = {
         "type": "command",
-        "command": f"env PATH={bindir}:$PATH bash {COMMAND_SCRIPT} {{input_path}} {{output_path}} {{voice}}",
+        "command": _installed_contract_command(tmp_path, bindir),
         "output_format": "wav",
         "voice": "seven-of-nine",
         "timeout": 120,
     }
     monkeypatch.setenv("PATH", f"{bindir}:{os.environ['PATH']}")
     monkeypatch.setenv("AFTERWORDS_REPO", str(REPO))
+    monkeypatch.setenv("HERMES_HOME", str(tmp_path/"forbidden-profile"))
+    ctx["counter"].unlink(missing_ok=True)
     with pytest.raises(RuntimeError):
         _generate_command_tts(LONG_REPLY, str(out), "afterwords", config, {})
+    assert out.is_file() and out.stat().st_size > 1000, "the installed runner must reject a surviving partial artifact"
+    assert not (tmp_path/"forbidden-profile/tts-archive").exists()
+    assert not (tmp_path/"forbidden-profile/logs/afterwords-command.log").exists()
+    assert (tmp_path/"installed-consumer/logs/afterwords-command.log").is_file()
+    assert not (tmp_path/"installed-consumer/play.lock").exists()
 
 
 

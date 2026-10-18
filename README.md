@@ -624,7 +624,7 @@ afterwords voices      # list available voices
 afterwords reload      # pick up new voices without restarting (no synth interruption)
 afterwords mute        # toggle TTS playback on/off without stopping synthesis
 afterwords clone       # clone a new voice from YouTube
-afterwords uninstall   # remove service and optionally hooks
+afterwords uninstall   # remove service/CLI; optionally unregister integrations
 ```
 
 The `afterwords` command is added to your PATH during setup. It wraps launchd service management, health checks, and voice operations into a single interface.
