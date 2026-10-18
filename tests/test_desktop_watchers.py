@@ -432,3 +432,38 @@ def test_retry_budget_is_per_event_and_does_not_strand_later_responses(tmp_path)
     assert len(list(queue.glob('*.done'))) == 3
     assert json.loads(counter.read_text()) == {f'Response {i}.':2 for i in range(3)}
     assert not list(queue.glob('*.claimed')) and not list(queue.glob('*.failed'))
+
+
+def test_concurrent_publishers_do_not_recreate_claimed_event(tmp_path, monkeypatch):
+    """Force a second publisher to arrive before the first publication commits."""
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Event
+    import watcher.queue as queue_module
+
+    first_at_link, second_at_lock = Event(), Event()
+    real_link, real_flock = queue_module.os.link, queue_module.fcntl.flock
+    calls = []
+
+    def flock(fd, operation):
+        calls.append(fd.fileno())
+        if len(calls) == 2:
+            second_at_lock.set()
+        return real_flock(fd, operation)
+
+    def link(source, target):
+        first_at_link.set()
+        assert second_at_lock.wait(5), 'second publisher did not reach lock'
+        real_link(source, target)
+        target.rename(target.with_suffix('.claimed'))
+
+    monkeypatch.setattr(queue_module.fcntl, 'flock', flock)
+    monkeypatch.setattr(queue_module.os, 'link', link)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        first = pool.submit(enqueue, tmp_path, 'claude', 'session', 'event', '/project', 'Once.')
+        assert first_at_link.wait(5)
+        second = pool.submit(enqueue, tmp_path, 'claude', 'session', 'event', '/project', 'Once.')
+        target = first.result(timeout=10)
+        assert second.result(timeout=10) == target
+    assert not target.exists()
+    assert target.with_suffix('.claimed').exists()
+    assert len(list(target.parent.glob('event-*'))) == 1

@@ -6,6 +6,7 @@ may have started, including worker crashes during audio playback.
 """
 from __future__ import annotations
 
+import fcntl
 import hashlib
 import json
 import os
@@ -25,25 +26,25 @@ def enqueue(root: Path, agent: str, session: str, event_id: str,
     queue.chmod(0o700)
     name = 'event-' + hashlib.sha256(event_id.encode()).hexdigest()
     target = queue / (name + '.json')
-    # One watcher per agent, guarded by a process lock. Atomic names also make
-    # retries after enqueue-but-before-offset-save harmless.
-    # A terminal failure is still a receipt for this event. Re-enqueueing it
-    # just because the worker exhausted playback retries can replay speech on
-    # every duplicate hook callback. A deliberate retry must use a new event
-    # identity (or explicitly remove the failed receipt).
-    if not any((queue / (name + ext)).exists()
-               for ext in ('.json', '.claimed', '.playing', '.done', '.failed')):
-        fd, tmp = tempfile.mkstemp(dir=queue, prefix='.pending-')
-        try:
-            with os.fdopen(fd, 'w') as stream:
-                json.dump({'project_dir': project, 'agent': voice_agent or agent, 'text': text}, stream)
-                stream.flush()
-                os.fsync(stream.fileno())
-            os.link(tmp, target)
-        except FileExistsError:
-            pass
-        finally:
-            os.unlink(tmp)
+    # Publishers include concurrent hook processes, independently of the drain
+    # lock. Keep receipt inspection and publication in one process-safe section;
+    # a worker may rename .json to .claimed while another publisher is waiting.
+    # Retain the lock inode: unlinking it would split concurrent lock owners.
+    with (queue / '.publish.lock').open('a') as publication_lock:
+        fcntl.flock(publication_lock, fcntl.LOCK_EX)
+        if not any((queue / (name + ext)).exists()
+                   for ext in ('.json', '.claimed', '.playing', '.done', '.failed')):
+            fd, tmp = tempfile.mkstemp(dir=queue, prefix='.pending-')
+            try:
+                with os.fdopen(fd, 'w') as stream:
+                    json.dump({'project_dir': project, 'agent': voice_agent or agent, 'text': text}, stream)
+                    stream.flush()
+                    os.fsync(stream.fileno())
+                os.link(tmp, target)
+            except FileExistsError:
+                pass
+            finally:
+                os.unlink(tmp)
     if worker is not None:
         archive_agent = 'claude' if agent == 'agy' else agent
         env = dict(os.environ, CODEX_THREAD_ID=hashlib.sha256(session.encode()).hexdigest(),
