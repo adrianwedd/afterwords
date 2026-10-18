@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import importlib.util
 import hashlib
 import os
 from pathlib import Path
@@ -18,6 +19,10 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from watcher.manage import FILES as RUNTIME_FILES
+
+_ownership_spec = importlib.util.spec_from_file_location('integration_ownership', ROOT/'scripts/remove-integrations.py')
+_ownership = importlib.util.module_from_spec(_ownership_spec)
+_ownership_spec.loader.exec_module(_ownership)
 
 HOME = Path.home()
 RUNTIME = HOME / "Library/Application Support/Afterwords/watchers/runtime"
@@ -39,11 +44,16 @@ def json_file(path: Path) -> dict:
         return {}
 
 
+def hook_event(path: Path, event: str):
+    hooks = json_file(path).get('hooks')
+    return hooks.get(event, []) if isinstance(hooks, dict) else []
+
+
 def commands(node) -> list[str]:
     found: list[str] = []
     if isinstance(node, dict):
         command = node.get("command")
-        if isinstance(command, str):
+        if isinstance(command, str) and node.get("type", "command") == "command":
             found.append(command)
         for value in node.values():
             found.extend(commands(value))
@@ -75,11 +85,20 @@ def targets_managed_hook(command: str, expected: Path) -> bool:
         tokens.pop(0)
     if tokens and tokens[0] in ('bash', '/bin/bash', '/usr/bin/bash'):
         tokens.pop(0)
-    return len(tokens) == 1 and Path(tokens[0]).is_absolute() and Path(tokens[0]) == expected
+    if len(tokens) != 1:
+        return False
+    target = tokens[0]
+    for prefix in ('~/', '$HOME/', '${HOME}/'):
+        if target.startswith(prefix):
+            target = str(HOME/target[len(prefix):])
+            break
+    return Path(target).is_absolute() and Path(os.path.normpath(target)) == expected
 
 
 def managed_registration(node, expected: Path) -> bool:
-    owned = [command for command in commands(node) if expected.name in command]
+    names = (expected.name, 'tts-hook.sh') if expected.name == 'claude-tts-hook.sh' else (expected.name,)
+    owned = [command for command in commands(node)
+             if _ownership.owned_command(command, HOME, ROOT, names)]
     # A current entry alongside an obsolete entry would still speak twice.
     return len(owned) == 1 and targets_managed_hook(owned[0], expected)
 
@@ -138,9 +157,8 @@ def main() -> int:
 
     gemini_settings = HOME / ".gemini/settings.json"
     if shutil.which("gemini") or gemini_settings.exists():
-        registered = any("gemini-tts-hook.sh" in command
-                         for command in commands(json_file(gemini_settings)))
         adapter = HOME / ".claude/hooks/gemini-tts-hook.sh"
+        registered = managed_registration(hook_event(gemini_settings, 'AfterAgent'), adapter)
         if registered and adapter.is_file():
             report("Gemini CLI", "OK", "AfterAgent hook and adapter are present")
         elif adapter.is_file():
@@ -150,9 +168,8 @@ def main() -> int:
 
     cursor_settings = HOME / ".cursor/hooks.json"
     if shutil.which("cursor") or cursor_settings.exists() or (Path("/Applications/Cursor.app").exists()):
-        registered = any("cursor-tts-hook.sh" in command
-                         for command in commands(json_file(cursor_settings)))
         adapter = HOME / ".claude/hooks/cursor-tts-hook.sh"
+        registered = managed_registration(hook_event(cursor_settings, 'afterAgentResponse'), adapter)
         if registered and adapter.is_file():
             report("Cursor", "OK", "afterAgentResponse hook and adapter are present")
         else:

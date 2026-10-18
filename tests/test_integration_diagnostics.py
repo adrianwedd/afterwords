@@ -28,7 +28,7 @@ def status_module(tmp_path, monkeypatch):
 
 
 @pytest.mark.parametrize('agent', ['claude', 'agy'])
-@pytest.mark.parametrize('shape', ['managed', 'legacy', 'repository', 'mixed', 'echo', 'wrong-event', 'missing-chunker'])
+@pytest.mark.parametrize('shape', ['managed', 'managed-with-unrelated-mentions', 'legacy', 'repository', 'mixed', 'echo', 'wrong-event', 'missing-chunker'])
 def test_managed_hook_status_requires_actual_runtime_target(tmp_path, monkeypatch, agent, shape):
     module, runtime, reports = status_module(tmp_path, monkeypatch)
     filename = f'{agent}-tts-hook.sh'
@@ -37,6 +37,10 @@ def test_managed_hook_status_requires_actual_runtime_target(tmp_path, monkeypatc
     elif shape == 'repository': command = f'bash "{ROOT/".claude/hooks"/filename}"'
     elif shape == 'echo': command = 'echo '+command
     hooks = [{'type':'command','command':command}]
+    if shape == 'managed-with-unrelated-mentions':
+        hooks += [{'type':'command','command':f'echo {filename}'},
+                  {'type':'command','command':f'bash /separate/owner/{filename}'},
+                  {'type':'prompt','command':command}]
     if shape == 'mixed': hooks += [{'type':'command','command':f'bash ~/.claude/hooks/{filename}'}]
     if shape == 'missing-chunker': (runtime/'chunks.py').unlink()
     if agent == 'claude':
@@ -52,7 +56,7 @@ def test_managed_hook_status_requires_actual_runtime_target(tmp_path, monkeypatc
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data))
     module.main()
-    assert (name, 'OK' if shape=='managed' else 'MISSING') in reports
+    assert (name, 'OK' if shape in ('managed','managed-with-unrelated-mentions') else 'MISSING') in reports
 
 
 def test_unrelated_hooks_do_not_invalidate_the_managed_target(tmp_path, monkeypatch):
@@ -64,3 +68,23 @@ def test_unrelated_hooks_do_not_invalidate_the_managed_target(tmp_path, monkeypa
     path.write_text(json.dumps({'hooks':{'Stop':hooks,'SubagentStop':hooks}}))
     module.main()
     assert ('Claude Code','OK') in reports
+
+
+@pytest.mark.parametrize('agent,event_name,name', [
+    ('gemini','AfterAgent','Gemini CLI'), ('cursor','afterAgentResponse','Cursor')])
+@pytest.mark.parametrize('shape', ['valid-with-mentions','echo-only','wrong-event'])
+def test_adapter_status_uses_actual_target_on_correct_event(tmp_path,monkeypatch,agent,event_name,name,shape):
+    module,runtime,reports = status_module(tmp_path,monkeypatch)
+    adapter = tmp_path/f'.claude/hooks/{agent}-tts-hook.sh'
+    adapter.parent.mkdir(parents=True,exist_ok=True);adapter.write_text('fixture')
+    hooks = [{'type':'command','command':f'echo {adapter.name}'},
+             {'type':'command','command':f'bash /separate/owner/{adapter.name}'}]
+    if shape != 'echo-only':
+        hooks += [{'type':'command','command':f'bash ~/.claude/hooks/{adapter.name}'}]
+    event = 'OtherEvent' if shape == 'wrong-event' else event_name
+    path = tmp_path/('.gemini/settings.json' if agent=='gemini' else '.cursor/hooks.json')
+    path.parent.mkdir(parents=True,exist_ok=True)
+    path.write_text(json.dumps({'hooks':{event:hooks}}))
+    module.main()
+    expected = 'OK' if shape=='valid-with-mentions' else ('MANUAL' if agent=='gemini' else 'MISSING')
+    assert (name,expected) in reports
