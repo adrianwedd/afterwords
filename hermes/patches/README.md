@@ -35,3 +35,11 @@ lease, release on failure, per-call ownership and ordinary tool calls. They do
 not send messages or establish acoustic acceptance. The patch is maintained
 here as an explicit local compatibility dependency, not an upstream Hermes
 release claim. Applying it is part of the final runtime approval, not preparation.
+
+Studio uses a separately inspected source revision and the `--variant studio`
+patch/manifest. The default variant is M5. Neither variant updates the Hermes
+repository, discards its dirty changes or changes profile configuration. Stage
+against the exact target host and recheck all hashes at application. Studio's
+legacy command also needs `{voice}` plus an explicit provider voice before the
+Afterwords source transition; its currently effective global selection is
+`seven-of-nine`. Keep the standard 7860 route.

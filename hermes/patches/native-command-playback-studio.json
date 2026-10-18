@@ -1,0 +1,21 @@
+{
+  "installed_base": "b53c2f6f3249d28be8b910044e59173aec9bcab8",
+  "files": {
+    "tools/tts_command_provider.py": {
+      "before_sha256": "c9920d9e9f36e87a69fb7b7f091943107ded34d2ee3bbbb6656debe2a0906a14",
+      "after_sha256": "c5d79b268310974ee205cd875be69d910ab7ea442cf839c5269b4ee700da2c30"
+    },
+    "tools/tts_tool_speaker.py": {
+      "before_sha256": "12babb03fe2679f4d911badd9641d63d21f7b4f574fe8c403bd0eb22382097fe",
+      "after_sha256": "69898f4d923e466b19c20d75c16471b820fd5938114377b3c67bfad31cea01e6"
+    },
+    "hermes_cli/cli_voice_mixin.py": {
+      "before_sha256": "04840e456a7f2523e17bc966ddccc7988fdef372a68500bfe4a154ce82ba8cb5",
+      "after_sha256": "26332acc87a96a5bc6e662347bc7531c97bb12589b7ffce356499c72965bb8ba"
+    },
+    "hermes_cli/voice.py": {
+      "before_sha256": "d9897de94b6d25a727a9ccda32260030c6d319c8e81bc5a866db990935f7855a",
+      "after_sha256": "25257fba91d2dee2e24c372c6961698d25624a107ad27eb7b809764fb0e54d3d"
+    }
+  }
+}

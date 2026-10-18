@@ -99,3 +99,19 @@ print(json.dumps({'mode':mode,'syntheses':len(calls),'playback_calls':len(plays)
                             capture_output=True, text=True, timeout=30)
     assert result.returncode == 0, result.stderr
     assert json.loads(result.stdout.splitlines()[-1])['playback_calls'] == (2 if mode=='audible' else 0)
+
+
+@pytest.mark.parametrize('variant', ['m5', 'studio'])
+def test_preparation_refuses_source_drift_without_creating_output(tmp_path, variant):
+    root = tmp_path/'hermes'
+    (root/'tools').mkdir(parents=True)
+    source = root/'tools/tts_command_provider.py'
+    source.write_text('# unrelated or concurrently changed source\n')
+    output = tmp_path/'staged'
+    result = subprocess.run([sys.executable, str(REPO/'scripts/prepare-hermes-native.py'),
+                             '--variant', variant, '--hermes-root', str(root), '--out', str(output)],
+                            capture_output=True, text=True, timeout=10)
+    assert result.returncode == 2
+    assert 'installed source changed' in result.stderr
+    assert not output.exists()
+    assert source.read_text() == '# unrelated or concurrently changed source\n'
