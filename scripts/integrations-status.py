@@ -7,10 +7,17 @@ import hashlib
 import os
 from pathlib import Path
 import plistlib
+import re
+import shlex
+import sys
 import shutil
 import subprocess
 import sys
 
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from watcher.manage import FILES as RUNTIME_FILES
 
 HOME = Path.home()
 RUNTIME = HOME / "Library/Application Support/Afterwords/watchers/runtime"
@@ -55,6 +62,32 @@ def matches_source(relative: str) -> bool:
         return False
 
 
+def targets_managed_hook(command: str, expected: Path) -> bool:
+    # Validate the installed command shape without executing or expanding it.
+    # setup writes an absolute quoted target; basename mentions are not proof.
+    try:
+        tokens = shlex.split(command)
+    except ValueError:
+        return False
+    if tokens and tokens[0] == 'env':
+        tokens.pop(0)
+    while tokens and re.match(r'^[A-Za-z_]\w*=', tokens[0]):
+        tokens.pop(0)
+    if tokens and tokens[0] in ('bash', '/bin/bash', '/usr/bin/bash'):
+        tokens.pop(0)
+    return len(tokens) == 1 and Path(tokens[0]).is_absolute() and Path(tokens[0]) == expected
+
+
+def managed_registration(node, expected: Path) -> bool:
+    owned = [command for command in commands(node) if expected.name in command]
+    # A current entry alongside an obsolete entry would still speak twice.
+    return len(owned) == 1 and targets_managed_hook(owned[0], expected)
+
+
+def managed_runtime_matches() -> bool:
+    return all(matches_source(relative) for relative in RUNTIME_FILES)
+
+
 def watcher(agent: str) -> None:
     plist = HOME / "Library/LaunchAgents" / f"au.wedd.afterwords-{agent}-watch.plist"
     if not plist.exists():
@@ -64,9 +97,7 @@ def watcher(agent: str) -> None:
                             capture_output=True, text=True)
     running = result.returncode == 0 and "state = running" in result.stdout
     script = RUNTIME / agent / f"afterwords-{agent}-watch.py"
-    if not script.is_file() or not matches_source(f"{agent}/afterwords-{agent}-watch.py") \
-            or not matches_source("watcher/queue.py") \
-            or not matches_source(".claude/hooks/codex-tts-worker.sh"):
+    if not script.is_file() or not managed_runtime_matches():
         report(agent, "MISSING", "LaunchAgent points at an incomplete runtime")
     elif running:
         try:
@@ -85,13 +116,12 @@ def main() -> int:
     claude_settings = HOME / ".claude/settings.json"
     claude_hook = RUNTIME / ".claude/hooks/claude-tts-hook.sh"
     claude_events = json_file(claude_settings).get("hooks", {})
+    if not isinstance(claude_events, dict):
+        claude_events = {}
     if shutil.which("claude") or claude_settings.exists():
-        registered = all(any("claude-tts-hook.sh" in command
-                             for command in commands(claude_events.get(event, [])))
+        registered = all(managed_registration(claude_events.get(event, []), claude_hook)
                          for event in ("Stop", "SubagentStop"))
-        if registered and claude_hook.is_file() \
-                and matches_source(".claude/hooks/claude-tts-hook.sh") \
-                and matches_source("claude_session_hook.py"):
+        if registered and claude_hook.is_file() and managed_runtime_matches():
             report("Claude Code", "OK", "Stop and SubagentStop hook target exists")
         else:
             report("Claude Code", "MISSING", "rerun `bash setup.sh --integrations`")
@@ -99,10 +129,9 @@ def main() -> int:
     agy_hooks = HOME / ".gemini/config/hooks.json"
     agy_hook = RUNTIME / ".claude/hooks/agy-tts-hook.sh"
     if shutil.which("agy") or agy_hooks.exists():
-        registered = any("agy-tts-hook.sh" in command for command in commands(json_file(agy_hooks)))
-        if registered and agy_hook.is_file() \
-                and matches_source(".claude/hooks/agy-tts-hook.sh") \
-                and matches_source("agy_session_hook.py"):
+        owned = json_file(agy_hooks).get('afterwords-tts', {})
+        registered = isinstance(owned, dict) and managed_registration(owned.get('Stop', []), agy_hook)
+        if registered and agy_hook.is_file() and managed_runtime_matches():
             report("Antigravity", "OK", "Stop hook target exists")
         else:
             report("Antigravity", "MISSING", "rerun `bash setup.sh --integrations`")
