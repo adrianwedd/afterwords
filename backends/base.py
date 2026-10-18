@@ -61,6 +61,8 @@ class PreparedVoice:
     # to avoid re-reading ref_audio_path at synthesize() time, eliminating the TOCTOU
     # window with DELETE /session which removes the backing file.
     data: object = None
+    # Per-request cancellation, never stored on gallery voice instances.
+    cancel_event: threading.Event | None = None
 
     def __post_init__(self):
         # Enforce immutability contract — backends may pass dict, we wrap here.

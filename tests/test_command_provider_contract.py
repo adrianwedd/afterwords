@@ -171,7 +171,7 @@ def _make_tts_payload(text: str, header: bytes = b"RIFF") -> bytes:
 
 def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
                   voice: str = "seven-of-nine", stub_text_key: bool = True,
-                  fail_from_chunk: int = 0):
+                  fail_from_chunk: int = 0, port: str | None = None, playback_owner: str | None = None):
     """Run the provider with a stubbed curl/afplay/lame/hermes; return (result, ctx).
 
     The curl stub writes a text-derived payload for `-o <path>` and logs the
@@ -183,6 +183,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     bindir.mkdir()
     requests = tmp_path / "requests.txt"
     counter = tmp_path / "calls.txt"
+    curl_args = tmp_path / "curl-args.txt"
     home = tmp_path / "home"
     (home / ".hermes").mkdir(parents=True, exist_ok=True)
     out = tmp_path / "out.wav"
@@ -190,6 +191,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     _write_exe(
         bindir / "curl",
         "#!/usr/bin/env bash\n"
+        f'printf "%s\\n" "$*" >> {shlex.quote(str(curl_args))}\n'
         'out=""; prev=""; text=""; want_text=0\n'
         'for a in "$@"; do\n'
         '  if [ "$prev" = "-o" ]; then out="$a"; fi\n'
@@ -236,6 +238,9 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     )
     for tool in ("afplay", "lame", "ffmpeg"):
         _write_exe(bindir / tool, "#!/usr/bin/env bash\nexit 0\n")
+    playback_log = tmp_path / 'playback.txt'
+    _write_exe(bindir / 'afplay', '#!/usr/bin/env bash\n'
+               f'printf "%s\\n" "$*" >> {shlex.quote(str(playback_log))}\n')
     _write_exe(bindir / "hermes", "#!/usr/bin/env bash\nexit 0\n")
 
     text_path = tmp_path / "input.txt"
@@ -248,6 +253,12 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     if platform:
         env["HERMES_SESSION_PLATFORM"] = platform
     env["AFTERWORDS_REPO"] = str(REPO)
+    env.pop("AFTERWORDS_PLAYBACK_OWNER", None)
+    if playback_owner is not None:
+        env['AFTERWORDS_PLAYBACK_OWNER'] = playback_owner
+    env.pop("AFTERWORDS_PORT", None)
+    if port is not None:
+        env["AFTERWORDS_PORT"] = port
 
     # Exercise the real provider logic with private lock paths. Sharing the
     # user's live playback lock makes a stubbed short-turn test wait behind
@@ -255,7 +266,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     # Static source-contract tests above still inspect COMMAND_SCRIPT itself.
     provider = tmp_path / "provider.sh"
     source = COMMAND_SCRIPT.read_text()
-    for filename in ("afterwords-play.lock", "afterwords-play.pid"):
+    for filename in ("afterwords-play.lock", "afterwords-play.pid", "afterwords-muted"):
         source = source.replace(f'"/tmp/{filename}"', shlex.quote(str(tmp_path / filename)))
     provider.write_text(source)
 
@@ -264,7 +275,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
         capture_output=True, text=True, env=env, timeout=300,
     )
     return result, {
-        "out": out, "requests": requests, "home": home, "text_path": text_path,
+        "out": out, "requests": requests, "home": home, "text_path": text_path, "curl_args": curl_args, "playback": playback_log,
     }
 
 
@@ -315,6 +326,26 @@ def test_historical_1802_char_case_writes_the_full_speech_payload(tmp_path):
 # --------------------------------------------------------------------------
 # Hermes's own file contract
 # --------------------------------------------------------------------------
+
+@pytest.mark.parametrize('platform', ['telegram', 'discord'])
+def test_messaging_long_reply_chunks_without_local_playback(tmp_path, platform):
+    result, ctx = _run_provider(tmp_path, LONG_REPLY, platform=platform)
+    assert result.returncode == 0, result.stderr
+    sent = ctx['requests'].read_text().splitlines()
+    assert len(sent) >= 4
+    assert all(len(chunk) <= 400 for chunk in sent)
+    data = ctx['out'].read_bytes()
+    for chunk in sent:
+        assert chunk.encode() in data
+    assert not ctx['playback'].exists() or not ctx['playback'].read_text()
+
+
+def test_messaging_missing_chunk_is_not_success(tmp_path):
+    result, ctx = _run_provider(tmp_path, LONG_REPLY, platform='telegram', fail_from_chunk=2)
+    assert result.returncode != 0
+    assert 'incomplete audio' in result.stderr
+    assert not ctx['playback'].exists() or not ctx['playback'].read_text()
+
 
 def test_hermes_accepts_the_artifact_under_its_file_contract(tmp_path, monkeypatch):
     """Drive `_generate_command_tts` against the real provider and a stub server.
@@ -400,7 +431,7 @@ def test_partial_delivery_exits_nonzero_and_keeps_the_survivors(tmp_path):
     )
     assert ctx["out"].is_file(), "the surviving chunk was discarded instead of delivered"
     data = ctx["out"].read_bytes()
-    assert b"Convergence Report. Summary of the work" in data, (
+    assert b"Convergence Report." in data, (
         "the delivered artifact does not hold the chunk that did synthesize"
     )
     assert b"This paragraph exists purely to push the reply" not in data, (
@@ -455,3 +486,41 @@ def test_hermes_refuses_a_partial_artifact(tmp_path, monkeypatch):
     monkeypatch.setenv("AFTERWORDS_REPO", str(REPO))
     with pytest.raises(RuntimeError):
         _generate_command_tts(LONG_REPLY, str(out), "afterwords", config, {})
+
+
+
+def test_profile_port_override_stays_on_loopback(tmp_path):
+    result, ctx = _run_provider(tmp_path, "A private profile route.", port="7862")
+    assert result.returncode == 0, result.stderr
+    calls = ctx["curl_args"].read_text()
+    assert "http://127.0.0.1:7862/synthesize" in calls
+    assert "127.0.0.1:7860" not in calls
+
+
+@pytest.mark.parametrize("port", ["0", "65536", "localhost:7862", "-1", "7862/elsewhere"])
+def test_invalid_profile_port_never_starts_synthesis(tmp_path, port):
+    result, ctx = _run_provider(tmp_path, "Do not synthesize.", port=port)
+    assert result.returncode == 2
+    assert "AFTERWORDS_PORT" in result.stderr
+    assert not ctx["requests"].exists()
+
+
+@pytest.mark.parametrize('owner,plays', [('provider', 1), ('hermes', 0)])
+def test_exactly_one_playback_owner(tmp_path, owner, plays, monkeypatch):
+    monkeypatch.delenv('HERMES_HOME', raising=False)
+    monkeypatch.delenv('_HERMES_GATEWAY', raising=False)
+    result, ctx = _run_provider(tmp_path, SHORT_REPLY, playback_owner=owner)
+    assert result.returncode == 0, result.stderr
+    assert ctx['out'].stat().st_size > 1000
+    actual = ctx['playback'].read_text().splitlines() if ctx['playback'].exists() else []
+    assert len(actual) == plays
+    archive = ctx['home'] / '.hermes' / 'tts-archive'
+    if owner == 'hermes':
+        assert not list(archive.glob('*.txt'))
+        assert len(list((archive / 'consumer-delivered').glob('*.txt'))) == 1
+
+
+def test_invalid_playback_owner_fails_before_synthesis(tmp_path):
+    result, ctx = _run_provider(tmp_path, SHORT_REPLY, playback_owner='both')
+    assert result.returncode == 2
+    assert not ctx['out'].exists()

@@ -1,0 +1,106 @@
+{
+  "schema": "afterwords-expressive-cases/1",
+  "cases": [
+    {
+      "id": "dry-humour",
+      "text": "The committee has approved our plan. This is concerning, because the committee also approved the previous plan.",
+      "cues": []
+    },
+    {
+      "id": "excitement",
+      "text": "It worked! The whole thing worked. Nobody touch anything. I want to remember this exact moment.",
+      "cues": [
+        {
+          "offset": 0,
+          "cue": "excited"
+        }
+      ]
+    },
+    {
+      "id": "whispered-disbelief",
+      "text": "You put the production database on a laptop? Please tell me the laptop is not on that train.",
+      "cues": [
+        {
+          "offset": 0,
+          "cue": "whispers"
+        }
+      ]
+    },
+    {
+      "id": "interruption",
+      "text": "I was absolutely certain that we should go ahead. No, wait. That is the wrong spreadsheet. Let me start again.",
+      "cues": []
+    },
+    {
+      "id": "laughter",
+      "text": "Of course the backup was in the same folder. Where else would we put it?",
+      "cues": [
+        {
+          "offset": 0,
+          "cue": "laughs"
+        }
+      ]
+    },
+    {
+      "id": "emotion-excited",
+      "text": "I did not think you would come back. I am glad you are here.",
+      "cues": [
+        {
+          "offset": 0,
+          "cue": "excited"
+        }
+      ]
+    },
+    {
+      "id": "emotion-sad",
+      "text": "I did not think you would come back. I am glad you are here.",
+      "cues": [
+        {
+          "offset": 0,
+          "cue": "sad"
+        }
+      ]
+    },
+    {
+      "id": "emotion-angry",
+      "text": "I did not think you would come back. I am glad you are here.",
+      "cues": [
+        {
+          "offset": 0,
+          "cue": "angry"
+        }
+      ]
+    },
+    {
+      "id": "pronunciation",
+      "text": "On Wednesday, the Worcestershire delegation requested an asynchronous queue, three separate spreadsheets, and a very small espresso.",
+      "cues": []
+    },
+    {
+      "id": "two-character-dialogue",
+      "turns": [
+        {
+          "speaker": 0,
+          "text": "The budget has been approved."
+        },
+        {
+          "speaker": 1,
+          "text": "Then why are you whispering?"
+        },
+        {
+          "speaker": 0,
+          "text": "Because nobody has looked at the second page."
+        },
+        {
+          "speaker": 1,
+          "text": "Excellent. A suspense thriller with stationery."
+        }
+      ]
+    },
+    {
+      "id": "long-response",
+      "text": "Here is the complete incident report. At nine o'clock, the office coffee machine displayed a message asking us to reconsider our priorities. We assumed this was a routine software update. By ten, it had cancelled three meetings and sent everyone a link to a document called A More Reasonable Morning.\n\nThe first page was helpful. It suggested that an agenda should contain at least one question that someone actually wanted answered. The second page was less diplomatic. It contained a photograph of our whiteboard, with the phrase strategic alignment circled seventeen times. Nobody has admitted to taking that photograph.\n\nWe asked the technical team to investigate. They confirmed that the machine was connected to the network, which we already knew, and disconnected it from the network, which stopped the messages but also stopped the coffee. This was judged to be an unacceptable operational regression. The network cable was restored at eleven fifteen.\n\nAt lunchtime, the machine offered to facilitate a retrospective. We declined. It replied that declining a retrospective was itself a useful point for the retrospective. By this stage the printer had begun producing only blank pages, which several people described as its most thoughtful contribution in years.\n\nThere are three actions for tomorrow. First, we will put an actual person in charge of the meeting calendar. Second, we will make a backup that is stored somewhere other than beside the original. Third, we will ask the coffee machine whether it would accept a four-day working week.\n\nFor the avoidance of doubt, no data was lost. Several assumptions were damaged, but the assumptions were out of warranty. The final recommendation is to proceed carefully, write down what actually happened, and keep a kettle available. That is the end of the report. Thank you for staying to hear the last sentence.",
+      "cues": []
+    }
+  ]
+}

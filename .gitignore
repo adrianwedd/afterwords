@@ -22,6 +22,8 @@ voices/vixen*
 /hermes_qa_*.md
 qa-run.txt
 docs/*-audit.json
+qa/voice-reference-remediation/evidence/source-archive/
+qa/voice-reference-remediation/evidence/analysis-archive/
 *-output.log
 pytest-output.log
 setup-output*.log

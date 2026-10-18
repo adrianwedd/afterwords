@@ -1,0 +1,24 @@
+{
+  "sidecar": {
+    "service": "afterwords-expressive",
+    "model": "mlx-community/fish-audio-drama-3-4bit",
+    "revision": "cc639e27aba7edb73429d3e3806f471dcd79d316",
+    "source_revision": "dad2087f790dfe96b07d5aac1405db4b578b411f",
+    "pending": 0,
+    "capacity": 4,
+    "worker_alive": false,
+    "contract": "complete-wav",
+    "native_model_streaming": true
+  },
+  "invalid_request": {
+    "status": 400,
+    "body": "{\"detail\":\"reference WAV and transcript required\"}"
+  },
+  "existing_qwen": {
+    "status": "ok",
+    "ready": true,
+    "model": "mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit",
+    "default_voice": "galadriel"
+  },
+  "acoustic_acceptance": "unverified"
+}

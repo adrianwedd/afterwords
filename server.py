@@ -10,6 +10,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import asyncio
 import concurrent.futures
 import glob
 import io
@@ -20,19 +21,21 @@ import tempfile
 import threading
 import time
 import warnings
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, contextmanager
 
 import numpy as np
 import soundfile as sf
-from fastapi import FastAPI, File, Form, Query, UploadFile
+from fastapi import FastAPI, File, Form, Query, UploadFile, Request
 from fastapi.responses import JSONResponse, Response
+from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from types import MappingProxyType
 from typing import Mapping
 
 import backends
 from backends.base import PreparedVoice, RefTextPolicy, _read_only
+from expressive.transport import SynthesisCancelled
 
 
 @dataclass(frozen=True)
@@ -97,27 +100,34 @@ async def lifespan(app):
 app = FastAPI(title="Afterwords TTS", lifespan=lifespan)
 
 
-@app.middleware("http")
-async def _validate_host(request, call_next):
-    if _enforce_host_check and not _host_allowed(request.headers.get("host", "")):
-        return JSONResponse({"error": "invalid host header"}, status_code=403)
-    return await call_next(request)
+class _RequestGuards:
+    """Header guards that preserve the raw ASGI disconnect receive channel."""
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope['type'] == 'http':
+            from starlette.datastructures import Headers
+            headers = Headers(scope=scope)
+            # Reject oversized uploads before multipart parsing spools to disk.
+            # Missing/lying lengths still hit the existing in-handler read cap.
+            if scope['path'] == '/clone' and scope['method'] == 'POST':
+                length = headers.get('content-length', '')
+                if length.isdigit() and int(length) > MAX_CLONE_UPLOAD_BYTES:
+                    response = JSONResponse(
+                        {"error": f"audio exceeds {MAX_CLONE_UPLOAD_BYTES // (1024*1024)}MB limit"},
+                        status_code=413)
+                    await response(scope, receive, send)
+                    return
+            if _enforce_host_check and not _host_allowed(headers.get('host', '')):
+                await JSONResponse({"error": "invalid host header"}, status_code=403)(scope, receive, send)
+                return
+        await self.app(scope, receive, send)
 
 
-@app.middleware("http")
-async def _limit_clone_body(request, call_next):
-    # Reject oversized /clone uploads by Content-Length BEFORE multipart parsing
-    # spools the body to a temp file (audit follow-up: the in-handler read() cap
-    # bounds RAM but the parser had already spooled to disk). A lying/absent
-    # Content-Length still falls through to the in-handler read(MAX+1) cap.
-    if request.url.path == "/clone" and request.method == "POST":
-        cl = request.headers.get("content-length", "")
-        if cl.isdigit() and int(cl) > MAX_CLONE_UPLOAD_BYTES:
-            return JSONResponse(
-                {"error": f"audio exceeds {MAX_CLONE_UPLOAD_BYTES // (1024*1024)}MB limit"},
-                status_code=413,
-            )
-    return await call_next(request)
+# BaseHTTPMiddleware's receive wrapper checkpoints before reading. That defeats
+# Request.is_disconnected's nonblocking poll and lets abandoned synthesis run.
+app.add_middleware(_RequestGuards)
 
 
 _VOICES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voices")
@@ -221,6 +231,32 @@ DEFAULT_VOICE = "galadriel"
 # Locks for thread-safe VOICES access and serialised synthesis.
 _model_lock = threading.Lock()
 _synth_lock = threading.Lock()  # serialise synthesis — MLX/Metal is not thread-safe
+_expressive_slots = threading.BoundedSemaphore(4)
+_expressive_http_slots = threading.BoundedSemaphore(4)
+
+
+@contextmanager
+def _synthesis_admission(backend_name, cancel_event=None):
+    if backend_name != "fish-drama3":
+        with _synth_lock:
+            yield
+        return
+    if not _expressive_slots.acquire(blocking=False):
+        raise TimeoutError("expressive request queue full")
+    acquired = False
+    try:
+        deadline = time.monotonic() + 180
+        while not acquired and time.monotonic() < deadline:
+            if cancel_event is not None and cancel_event.is_set():
+                raise SynthesisCancelled()
+            acquired = _synth_lock.acquire(timeout=.1)
+        if not acquired:
+            raise TimeoutError("expressive request queue deadline exceeded")
+        yield
+    finally:
+        if acquired:
+            _synth_lock.release()
+        _expressive_slots.release()
 _ready = threading.Event()
 _backend_states: dict[str, dict] = {}
 # Dedicated single thread for all MLX/Metal operations.
@@ -431,6 +467,13 @@ def health():
             "display_name": b.display_name,
             "supported_langs": list(b.supported_langs),
         }
+        if bname == "fish-drama3":
+            # Adapter load cannot prove a model is resident in another process.
+            adapter_ready = loaded_backends[bname]["loaded"]
+            loaded_backends[bname].update(
+                loaded=None, adapter_ready=adapter_ready,
+                state="adapter-ready" if adapter_ready else "registered",
+                model_residency="query-sidecar-health")
 
     default_backend_name = default_profile.backend if default_profile else "qwen3-0.6b"
     try:
@@ -453,7 +496,7 @@ def health():
     }
 
 
-def _synthesize_audio(text: str, profile: VoiceProfile, lang: str) -> Response:
+def _synthesize_audio(text: str, profile: VoiceProfile, lang: str, performance: dict | None = None, cancel_event=None) -> Response:
     """Core synthesis — dispatches to the voice's pinned backend.
     If the voice's backend doesn't support `lang`, attempts cross-backend
     family routing (see `_route_for_lang`)."""
@@ -491,8 +534,18 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str) -> Response:
 
     t0 = time.time()
     try:
-        with _synth_lock:
-            data, sr = _run_in_ml_thread(backend.synthesize, text, profile.prepared, lang)
+        prepared = profile.prepared
+        if performance is not None:
+            if profile.backend != "fish-drama3":
+                raise ValueError("performance controls require a fish-drama3 voice")
+            extras = {**prepared.extras, **performance}
+            backend.validate_extras(extras)
+            prepared = replace(prepared, extras=extras)
+        if cancel_event is not None and profile.backend == "fish-drama3":
+            prepared = replace(prepared, cancel_event=cancel_event)
+        with _synthesis_admission(profile.backend, cancel_event):
+            data, sr = _run_in_ml_thread(backend.synthesize, text, prepared, lang)
+            delivered_backend = getattr(backend, "last_delivery_backend", profile.backend)
     except ValueError as exc:
         return JSONResponse(
             {"error": str(exc),
@@ -500,6 +553,10 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str) -> Response:
              "supported_langs": list(backend.supported_langs)},
             status_code=400,
         )
+    except SynthesisCancelled:
+        return Response(status_code=499)
+    except TimeoutError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=503)
     except Exception as exc:
         log.error("synthesis failed: %s", exc, exc_info=True)
         return JSONResponse({"error": "synthesis failed"}, status_code=500)
@@ -521,16 +578,45 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str) -> Response:
             "X-Synthesis-Time": f"{elapsed:.3f}",
             "X-Duration": f"{duration:.3f}",
             "X-Sample-Rate": str(sr),
-            "X-Backend": profile.backend,
+            "X-Backend": delivered_backend,
+            "X-Requested-Backend": profile.backend,
         },
     )
 
 
+async def _synthesize_for_request(request, text, profile, lang, performance):
+    if profile.backend != "fish-drama3":
+        return await run_in_threadpool(_synthesize_audio, text, profile, lang, performance)
+    if not _expressive_http_slots.acquire(blocking=False):
+        return JSONResponse({"error": "expressive request queue full"}, status_code=503)
+    cancelled = threading.Event()
+    task = asyncio.create_task(asyncio.to_thread(
+        _synthesize_audio, text, profile, lang, performance, cancelled))
+    try:
+        while not task.done():
+            await asyncio.wait({task}, timeout=.1)
+            if not task.done() and await request.is_disconnected():
+                cancelled.set()
+                await asyncio.shield(task)
+                return Response(status_code=499)
+        return await task
+    finally:
+        try:
+            if not task.done():
+                cancelled.set()
+                # Retain ownership until the socket closes and the MLX lock is freed.
+                await asyncio.shield(task)
+        finally:
+            _expressive_http_slots.release()
+
+
 @app.get("/synthesize")
-def synthesize(
+async def synthesize(
+    request: Request,
     text: str = Query(..., description="Text to speak"),
     voice: str = Query(DEFAULT_VOICE, description="Voice name"),
     lang: str = Query("en", description="BCP-47 language code; must be supported by the voice's backend"),
+    performance: str | None = Query(None, description="Optional JSON controls for expressive voices"),
 ):
     """Generate speech from text using cloned voice, return WAV audio."""
     if not text.strip():
@@ -547,7 +633,13 @@ def synthesize(
             {"error": f"unknown voice: {voice}", "available": sorted(VOICES.keys())},
             status_code=400)
 
-    return _synthesize_audio(text, profile, lang)
+    try:
+        controls = json.loads(performance) if performance is not None else None
+        if controls is not None and not isinstance(controls, dict):
+            raise ValueError("performance must be a JSON object")
+    except ValueError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=400)
+    return await _synthesize_for_request(request, text, profile, lang, controls)
 
 
 class SynthesizeRequest(BaseModel):
@@ -555,10 +647,11 @@ class SynthesizeRequest(BaseModel):
     voice: str
     emotion: str | None = None
     lang: str = "en"
+    performance: dict | None = None
 
 
 @app.post("/synthesize")
-def synthesize_post(body: SynthesizeRequest):
+async def synthesize_post(body: SynthesizeRequest, request: Request):
     """POST version of /synthesize — accepts JSON body for sensitive text."""
     if not _clone_enabled:
         return JSONResponse({"error": "clone not enabled (start with --allow-clone)"}, status_code=404)
@@ -575,7 +668,7 @@ def synthesize_post(body: SynthesizeRequest):
             {"error": f"unknown voice: {body.voice}", "available": sorted(VOICES.keys())},
             status_code=400)
 
-    return _synthesize_audio(body.text, profile, body.lang)
+    return await _synthesize_for_request(request, body.text, profile, body.lang, body.performance)
 
 
 @app.post("/clone")
@@ -945,6 +1038,7 @@ def main():
     parser = argparse.ArgumentParser(description="Afterwords TTS server (MLX)")
     parser.add_argument("--port", type=int, default=7860)
     parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--voices-dir", help="Use an existing isolated voice directory instead of the bundled gallery")
     parser.add_argument("--allow-reload", action="store_true",
                         help="Enable local gallery reload without upload cloning (loopback only)")
     parser.add_argument("--no-warmup", action="store_true", help="Skip warmup synthesis")
@@ -966,7 +1060,12 @@ def main():
     )
     args = parser.parse_args()
 
-    global DEFAULT_VOICE, _clone_enabled, _reload_enabled, _ml_executor, _enforce_host_check
+    global DEFAULT_VOICE, _clone_enabled, _reload_enabled, _ml_executor, _enforce_host_check, _VOICES_DIR
+    if args.voices_dir is not None:
+        voice_dir = os.path.realpath(os.path.expanduser(args.voices_dir))
+        if not os.path.isdir(voice_dir):
+            parser.error('--voices-dir must name an existing directory')
+        _VOICES_DIR = voice_dir
     _clone_enabled = args.allow_clone
     _reload_enabled = args.allow_reload
     args.host = _resolve_bind_host(

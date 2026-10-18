@@ -1,0 +1,432 @@
+{
+  "schema": "casting-refinement/1",
+  "deployment": "disabled",
+  "vixen": {
+    "promotion": {
+      "before_sha256": "be8804ab61eaf3ce0a9b31025297f4c538dacb46de0dd7920be89a223dd901eb",
+      "after_sha256": "9c14010e526ef8f7890464c9f9854bbb7dc7037172fdcd50ebbe4f1f212b5017",
+      "voice": "vixen-seydoux-drama-reviewed",
+      "port": 17862,
+      "reference_sha256": "a8bd5856cb6dfc1bc06dd0a49d9d146503fa9e7de25d308e0cae2cdacb438d44",
+      "operation": "promote",
+      "registered_changed_hooks": 1,
+      "service_restarted": false,
+      "changed_fields": [
+        "tts.providers.afterwords.voice",
+        "tts.providers.afterwords.command",
+        "hooks.post_llm_call[Afterwords].command"
+      ]
+    },
+    "route_probe": {
+      "headers": {
+        "date": "Sat, 17 Oct 2026 01:04:41 GMT",
+        "server": "uvicorn",
+        "x-synthesis-time": "2.822",
+        "x-duration": "3.019",
+        "x-sample-rate": "44100",
+        "x-backend": "fish-drama3",
+        "x-requested-backend": "fish-drama3",
+        "content-length": "266284",
+        "content-type": "audio/wav",
+        "Connection": "close"
+      },
+      "audio_sha256": "2315a215f924a9e0dedd583bac800216aa4d5b0d2497f0c2750f14236b6374b1",
+      "text": "The biscuits have cleared committee review."
+    },
+    "native_route": {
+      "status": "native_artifact_route_passed_not_acoustic_acceptance",
+      "profile_home": "/Users/adrian/.hermes/profiles/vixen",
+      "profile_config_sha256": "9c14010e526ef8f7890464c9f9854bbb7dc7037172fdcd50ebbe4f1f212b5017",
+      "provider": "afterwords",
+      "voice": "vixen-seydoux-drama-reviewed",
+      "text": "A committee that delegates biscuit selection is a committee that has given up on joy.",
+      "text_sha256": "1116a4e642affeb29210f94215beb2cafa2c40da52e5f508e78538b76dbc6b72",
+      "playback_owner_override": "hermes",
+      "physical_playback": false,
+      "automatic_mute_flag_present": true,
+      "scope": "native sentence pipeline with fixed test text; not an agent reply or post-LLM-hook test",
+      "artifacts": [
+        {
+          "path": "sentence-01.ogg",
+          "sha256": "2979f9bfe82d83322325d6ce6653cb3bf974b3b0bb6601e9339a0de7e4f44596",
+          "decoded_path": "sentence-01-decoded.wav",
+          "decoded_sha256": "b73b458c3b91baa01552bba8981b57869a861fbc88009c463175339dc1b931e2",
+          "playback_call_seconds": 24.018305500037968,
+          "sample_rate": 48000,
+          "frames": 240745,
+          "channels": 1,
+          "sample_width": 2
+        }
+      ],
+      "sentences": [
+        "A committee that delegates biscuit selection is a committee that has given up on joy."
+      ],
+      "done_event": true,
+      "provider_playback_calls": 0,
+      "wall_seconds": 24.01968179177493
+    },
+    "reviewed_recording_sha256": "2648f55148db602210bfd237d128ec7fd3a397308f8d0b5b516b787f4772e516",
+    "human_feedback": "Positive operator feedback for Drama/Seydoux; no new take acceptance inferred."
+  },
+  "audition_plan_sha256": "d981697faba6d09893472e819fe69f0c63c609a485a2b6768cb477b4a7603258",
+  "takes": [
+    {
+      "id": "eartha-qwen",
+      "audio_sha256": "1215294a75b320b5d6914f7578e75cdb7259ccb0dfe63521fada5990cb3e0711",
+      "transcript": "I must confess, I did not expect you to deploy the maternal gambit in year 4 of the pasta-geometric wars. It is a bold move.",
+      "word_comparison": {
+        "reference_words": 26,
+        "hypothesis_words": 26,
+        "edit_distance": 1,
+        "wer": 0.038461538461538464,
+        "edits": [
+          {
+            "operation": "substitution",
+            "expected": "four",
+            "heard": "4",
+            "expected_index": 15
+          }
+        ],
+        "normalization": "Unicode casefold; punctuation removed; contractions retained"
+      },
+      "waveform": {
+        "samples": 161280,
+        "sample_rate": 24000,
+        "duration_seconds": 6.72,
+        "peak_amplitude": 0.210968017578125,
+        "clipped_sample_fraction": 0.0,
+        "rms_amplitude": 0.026043586618383067,
+        "silence_threshold_dbfs": -50,
+        "analysis_frame_ms": 20,
+        "leading_silence_seconds": 0,
+        "trailing_silence_seconds": 0,
+        "silence_intervals_over_200ms": [],
+        "longest_silence_seconds": 0.020000000000000462
+      }
+    },
+    {
+      "id": "eartha-drama",
+      "audio_sha256": "9c961de77f101053496b228c830f1a84a64e0d914e4293f1734e32a5363d2e7b",
+      "transcript": "I must confess.",
+      "word_comparison": {
+        "reference_words": 26,
+        "hypothesis_words": 3,
+        "edit_distance": 23,
+        "wer": 0.8846153846153846,
+        "edits": [
+          {
+            "operation": "deletion",
+            "expected": "i",
+            "expected_index": 3
+          },
+          {
+            "operation": "deletion",
+            "expected": "did",
+            "expected_index": 4
+          },
+          {
+            "operation": "deletion",
+            "expected": "not",
+            "expected_index": 5
+          },
+          {
+            "operation": "deletion",
+            "expected": "expect",
+            "expected_index": 6
+          },
+          {
+            "operation": "deletion",
+            "expected": "you",
+            "expected_index": 7
+          },
+          {
+            "operation": "deletion",
+            "expected": "to",
+            "expected_index": 8
+          },
+          {
+            "operation": "deletion",
+            "expected": "deploy",
+            "expected_index": 9
+          },
+          {
+            "operation": "deletion",
+            "expected": "the",
+            "expected_index": 10
+          },
+          {
+            "operation": "deletion",
+            "expected": "maternal",
+            "expected_index": 11
+          },
+          {
+            "operation": "deletion",
+            "expected": "gambit",
+            "expected_index": 12
+          },
+          {
+            "operation": "deletion",
+            "expected": "in",
+            "expected_index": 13
+          },
+          {
+            "operation": "deletion",
+            "expected": "year",
+            "expected_index": 14
+          },
+          {
+            "operation": "deletion",
+            "expected": "four",
+            "expected_index": 15
+          },
+          {
+            "operation": "deletion",
+            "expected": "of",
+            "expected_index": 16
+          },
+          {
+            "operation": "deletion",
+            "expected": "the",
+            "expected_index": 17
+          },
+          {
+            "operation": "deletion",
+            "expected": "pasta",
+            "expected_index": 18
+          },
+          {
+            "operation": "deletion",
+            "expected": "geometric",
+            "expected_index": 19
+          },
+          {
+            "operation": "deletion",
+            "expected": "wars",
+            "expected_index": 20
+          },
+          {
+            "operation": "deletion",
+            "expected": "it",
+            "expected_index": 21
+          },
+          {
+            "operation": "deletion",
+            "expected": "is",
+            "expected_index": 22
+          },
+          {
+            "operation": "deletion",
+            "expected": "a",
+            "expected_index": 23
+          },
+          {
+            "operation": "deletion",
+            "expected": "bold",
+            "expected_index": 24
+          },
+          {
+            "operation": "deletion",
+            "expected": "move",
+            "expected_index": 25
+          }
+        ],
+        "normalization": "Unicode casefold; punctuation removed; contractions retained"
+      },
+      "waveform": {
+        "samples": 1124352,
+        "sample_rate": 44100,
+        "duration_seconds": 25.495510204081633,
+        "peak_amplitude": 0.16748046875,
+        "clipped_sample_fraction": 0.0,
+        "rms_amplitude": 0.015561371518779163,
+        "silence_threshold_dbfs": -50,
+        "analysis_frame_ms": 20,
+        "leading_silence_seconds": 0,
+        "trailing_silence_seconds": 0,
+        "silence_intervals_over_200ms": [],
+        "longest_silence_seconds": 0
+      },
+      "decision": "withheld: severe transcript disagreement; retained privately"
+    },
+    {
+      "id": "lisa-simpson-qwen",
+      "audio_sha256": "f7cfd7ad5828b3ea26d75e0e1f56a78e873118a097808f211752010cd90b1376",
+      "transcript": "I must confess, I did not expect you to deploy the maternal gambit in year 4 of the pasta geometric wars. It is a bold move!",
+      "word_comparison": {
+        "reference_words": 26,
+        "hypothesis_words": 26,
+        "edit_distance": 1,
+        "wer": 0.038461538461538464,
+        "edits": [
+          {
+            "operation": "substitution",
+            "expected": "four",
+            "heard": "4",
+            "expected_index": 15
+          }
+        ],
+        "normalization": "Unicode casefold; punctuation removed; contractions retained"
+      },
+      "waveform": {
+        "samples": 186240,
+        "sample_rate": 24000,
+        "duration_seconds": 7.76,
+        "peak_amplitude": 0.125823974609375,
+        "clipped_sample_fraction": 0.0,
+        "rms_amplitude": 0.01527389642275337,
+        "silence_threshold_dbfs": -50,
+        "analysis_frame_ms": 20,
+        "leading_silence_seconds": 0.26,
+        "trailing_silence_seconds": 0.21999999999999975,
+        "silence_intervals_over_200ms": [
+          {
+            "start_seconds": 0.0,
+            "end_seconds": 0.26
+          },
+          {
+            "start_seconds": 6.08,
+            "end_seconds": 6.4
+          },
+          {
+            "start_seconds": 7.54,
+            "end_seconds": 7.76
+          }
+        ],
+        "longest_silence_seconds": 0.3200000000000003
+      }
+    },
+    {
+      "id": "lisa-simpson-drama",
+      "audio_sha256": "f822a0ade63378b457012f57e5fcae6b327625c87872e4f7923684165e83ab4f",
+      "transcript": "I must confess, I did not expect you to deploy the maternal gambit in year 4 of the Pasta Geometric Wars. It is a bold move.",
+      "word_comparison": {
+        "reference_words": 26,
+        "hypothesis_words": 26,
+        "edit_distance": 1,
+        "wer": 0.038461538461538464,
+        "edits": [
+          {
+            "operation": "substitution",
+            "expected": "four",
+            "heard": "4",
+            "expected_index": 15
+          }
+        ],
+        "normalization": "Unicode casefold; punctuation removed; contractions retained"
+      },
+      "waveform": {
+        "samples": 415744,
+        "sample_rate": 44100,
+        "duration_seconds": 9.427301587301587,
+        "peak_amplitude": 0.086334228515625,
+        "clipped_sample_fraction": 0.0,
+        "rms_amplitude": 0.009143869293715936,
+        "silence_threshold_dbfs": -50,
+        "analysis_frame_ms": 20,
+        "leading_silence_seconds": 0.04,
+        "trailing_silence_seconds": 0.10730158730158657,
+        "silence_intervals_over_200ms": [
+          {
+            "start_seconds": 1.12,
+            "end_seconds": 1.48
+          },
+          {
+            "start_seconds": 2.4,
+            "end_seconds": 2.64
+          },
+          {
+            "start_seconds": 3.28,
+            "end_seconds": 3.48
+          },
+          {
+            "start_seconds": 7.62,
+            "end_seconds": 8.24
+          }
+        ],
+        "longest_silence_seconds": 0.6200000000000001
+      }
+    },
+    {
+      "id": "blackadder-qwen",
+      "audio_sha256": "be8f11e3e9911cf1f31c837c000ff90980a16928fa7b8b50026cd05d1890ae86",
+      "transcript": "I must confess I did not expect you to deploy the maternal gambit in year four of the pasta geometric wars. It is a bold move",
+      "word_comparison": {
+        "reference_words": 26,
+        "hypothesis_words": 26,
+        "edit_distance": 0,
+        "wer": 0.0,
+        "edits": [],
+        "normalization": "Unicode casefold; punctuation removed; contractions retained"
+      },
+      "waveform": {
+        "samples": 178560,
+        "sample_rate": 24000,
+        "duration_seconds": 7.44,
+        "peak_amplitude": 0.20452880859375,
+        "clipped_sample_fraction": 0.0,
+        "rms_amplitude": 0.026980508010948916,
+        "silence_threshold_dbfs": -50,
+        "analysis_frame_ms": 20,
+        "leading_silence_seconds": 0.26,
+        "trailing_silence_seconds": 0.1800000000000006,
+        "silence_intervals_over_200ms": [
+          {
+            "start_seconds": 0.0,
+            "end_seconds": 0.26
+          }
+        ],
+        "longest_silence_seconds": 0.26
+      }
+    },
+    {
+      "id": "blackadder-drama",
+      "audio_sha256": "f770d15bac00f6233abd62dbedb35601fa0909e20fe28f903c5d352539976e29",
+      "transcript": "I must confess, I did not expect you to deploy the maternal gambit in year 4 of the pasta geometric wars. It is a bold move.",
+      "word_comparison": {
+        "reference_words": 26,
+        "hypothesis_words": 26,
+        "edit_distance": 1,
+        "wer": 0.038461538461538464,
+        "edits": [
+          {
+            "operation": "substitution",
+            "expected": "four",
+            "heard": "4",
+            "expected_index": 15
+          }
+        ],
+        "normalization": "Unicode casefold; punctuation removed; contractions retained"
+      },
+      "waveform": {
+        "samples": 391168,
+        "sample_rate": 44100,
+        "duration_seconds": 8.870022675736962,
+        "peak_amplitude": 0.287811279296875,
+        "clipped_sample_fraction": 0.0,
+        "rms_amplitude": 0.017786153297361797,
+        "silence_threshold_dbfs": -50,
+        "analysis_frame_ms": 20,
+        "leading_silence_seconds": 0.02,
+        "trailing_silence_seconds": 0.0700226757369613,
+        "silence_intervals_over_200ms": [
+          {
+            "start_seconds": 1.14,
+            "end_seconds": 1.66
+          },
+          {
+            "start_seconds": 4.46,
+            "end_seconds": 4.76
+          },
+          {
+            "start_seconds": 7.3,
+            "end_seconds": 7.74
+          }
+        ],
+        "longest_silence_seconds": 0.52
+      }
+    }
+  ],
+  "independent_artistic_listening": "not performed",
+  "identity_publication_permission": "not established; private research only",
+  "reference_audit": "qa/expressive-voice/casting-reference-audit.v1.json"
+}

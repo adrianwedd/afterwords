@@ -134,7 +134,8 @@ def _py_afplay_is_guarded(lines: list[str], idx: int) -> bool:
     return False
 
 
-_SKIP_DIR_PARTS = {".git", "node_modules", ".venv", "venv", "__pycache__"}
+_SKIP_DIR_PARTS = {".git", "node_modules", ".venv", ".venv-drama3",
+                   ".venv-audio-audit", "venv", "__pycache__"}
 
 
 def _shell_scripts() -> list[Path]:
@@ -223,7 +224,9 @@ def test_hermes_handler_afplay_is_mute_guarded():
 # handler (its guard is verified by the dedicated test above) or be listed
 # here with a rationale.
 _PY_KNOWN_AFPLAY = {
+    "scripts/verify-hermes-sentence-route.py",  # fake afplay probe; no physical playback
     "hermes/hooks/afterwords-tts/handler.py",  # guard verified by test_hermes_handler_afplay_is_mute_guarded
+    "scripts/verify-hermes-sentence-route.py",  # installs a fake afplay to detect/suppress calls; never plays audio
 }
 
 
@@ -231,6 +234,7 @@ def _python_files() -> list[Path]:
     return [
         p for p in sorted(REPO.rglob("*.py"))
         if not (_SKIP_DIR_PARTS | {"tests"}) & set(p.parts)
+        and p.is_file()  # downloaded model metadata can contain dangling optional links
     ]
 
 
