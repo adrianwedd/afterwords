@@ -11,6 +11,8 @@ class SynthesisCancelled(Exception):
 
 
 def request_wav(payload, cancelled):
+    from expressive.auth import authorization_headers
+    headers = {'Content-Type': 'application/json', **authorization_headers()}
     connection = http.client.HTTPConnection('127.0.0.1', 7861, timeout=185)
     finished = threading.Event()
 
@@ -35,7 +37,7 @@ def request_wav(payload, cancelled):
         if cancelled.is_set():
             raise SynthesisCancelled()
         connection.request('POST', '/synthesize', body=payload,
-                           headers={'Content-Type': 'application/json'})
+                           headers=headers)
         response = connection.getresponse()
         if response.status != 200:
             raise urllib.error.HTTPError('http://127.0.0.1:7861/synthesize', response.status,

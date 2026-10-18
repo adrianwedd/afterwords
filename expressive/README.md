@@ -591,3 +591,26 @@ human listening acceptance. No production chunking or Vixen route was changed.
 See [the library, exact comparison evidence and resource recommendations](../qa/expressive-voice/library-longform-20261017/README.md)
 for reproduction, additional M5 assets, frame-budget failures, mixed 4/8-bit
 module provenance, bounded resident-inference contention and admission guards.
+
+### Sidecar caller authentication
+
+Both sidecar POST routes require a private file-based bearer credential, an
+approved loopback Host and a loopback peer. Browser Origin headers are rejected.
+Missing, unreadable or permissive credential files fail closed before model work.
+The default credential path is
+`~/.local/state/afterwords/expressive-sidecar.token`, optionally selected with
+`AFTERWORDS_SIDECAR_TOKEN_FILE` in both caller and sidecar environments. The file
+must be an owned regular file with no group/other permissions; symlinks are refused.
+
+Prepare a fresh private file with `scripts/prepare-expressive-auth.py --out
+ABSOLUTE_PRIVATE_STAGING_PATH`. It prints only the destination. Install it at the
+intended shared path under the approved runtime transition; never put its value
+in shell arguments, environment variables, logs, evidence receipts or commits.
+The adapter, cancellable transport and retained diagnostic callers read the file
+and add authentication internally. Health remains read-only without credentials.
+
+Transition must install the credential before loading the updated API and
+sidecar, then reload those exact owners at an idle boundary. Retain the existing
+voice gallery, port routing, reviewed Vixen selection and same-reference fallback.
+Rollback restores prior code and leaves the protected credential in custody; no
+reference audio, profile or configuration identity is changed by this boundary.

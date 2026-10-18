@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from chunks import chunk_text
 from expressive.contracts import validate_options, directed_text
+from expressive.auth import authorization_headers
 
 
 def sha(raw):
@@ -95,7 +96,7 @@ def render(plan_path, out):
                     request = urllib.request.Request('http://127.0.0.1:7860/synthesize?'+query)
                 else:
                     request = urllib.request.Request('http://127.0.0.1:7861/synthesize',
-                        data=json.dumps(payload).encode(), headers={'Content-Type':'application/json'})
+                        data=json.dumps(payload).encode(), headers={'Content-Type': 'application/json', **authorization_headers()})
                 with opener.open(request, timeout=185) as response:
                     raw = response.read()
                     headers = dict(response.headers)

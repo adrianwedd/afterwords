@@ -16,6 +16,7 @@ import time
 from urllib.request import Request, build_opener, ProxyHandler
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 
 
 def main():
@@ -100,7 +101,8 @@ def main():
                     save()
                     continue
                 if health['worker_alive']:
-                    request = Request('http://127.0.0.1:7861/release', data=b'', method='POST')
+                    from expressive.auth import authorization_headers
+                    request = Request('http://127.0.0.1:7861/release', data=b'', method='POST', headers=authorization_headers())
                     with opener.open(request, timeout=5) as response:
                         row['idle_release'] = json.load(response)
             except Exception as exc:

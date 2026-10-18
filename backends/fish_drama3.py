@@ -64,8 +64,9 @@ class FishDrama3Backend(BackendBase):
                 from expressive.transport import request_wav
                 raw = request_wav(json.dumps(payload).encode(), prepared.cancel_event)
             else:
+                from expressive.auth import authorization_headers
                 request = urllib.request.Request(self.endpoint, data=json.dumps(payload).encode(),
-                                                 headers={'Content-Type': 'application/json'})
+                                                 headers={'Content-Type': 'application/json', **authorization_headers()})
                 # Ignore proxy environment variables: reference audio never leaves loopback.
                 opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
                 with opener.open(request, timeout=185) as response:

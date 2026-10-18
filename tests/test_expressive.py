@@ -16,6 +16,11 @@ from expressive.sidecar import WorkerPool
 from backends.fish_drama3 import FishDrama3Backend
 
 
+@pytest.fixture(autouse=True)
+def _private_sidecar_test_credential(sidecar_credentials):
+    pass
+
+
 @pytest.mark.parametrize('options', [{'temperature': float('nan')}, {'max_frames': True},
     {'top_k': 2.5}, {'instruct': 'invented support'}, {'cues': [{'offset': 0, 'cue': 'unknown'}]}])
 def test_invalid_controls_rejected(options):
@@ -221,11 +226,11 @@ def test_model_lease_excludes_concurrent_processes_and_releases_on_exit(tmp_path
     assert third.returncode == 0, third.stderr
 
 
-def test_release_refuses_active_requests(monkeypatch):
+def test_release_refuses_active_requests(monkeypatch, sidecar_credentials):
     from expressive import sidecar
     from starlette.testclient import TestClient
     monkeypatch.setattr(sidecar.pool,'pending',1)
-    response=TestClient(sidecar.app).post('/release')
+    response=TestClient(sidecar.app, base_url='http://127.0.0.1:7861', client=('127.0.0.1', 123)).post('/release', headers=sidecar_credentials)
     assert response.status_code==409
 
 
@@ -363,6 +368,8 @@ def test_cancellable_transport_preserves_audio_and_http_errors(monkeypatch, stat
     seen = []
     class Handler(http.server.BaseHTTPRequestHandler):
         def do_POST(self):
+            from expressive.auth import authorization_headers
+            assert self.headers.get('Authorization') == authorization_headers()['Authorization']
             seen.append(self.rfile.read(int(self.headers['Content-Length'])))
             self.send_response(status)
             self.send_header('Content-Type', 'audio/wav')
