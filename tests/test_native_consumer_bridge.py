@@ -115,3 +115,25 @@ def test_preparation_refuses_source_drift_without_creating_output(tmp_path, vari
     assert 'installed source changed' in result.stderr
     assert not output.exists()
     assert source.read_text() == '# unrelated or concurrently changed source\n'
+
+
+@pytest.mark.parametrize('pid_file', [False, True])
+def test_empty_stale_lease_is_recovered_after_recheck(tmp_path, pid_file):
+    lock, pid = tmp_path/'lock', tmp_path/'pid'
+    lock.mkdir()
+    if pid_file:
+        pid.touch()
+    calls = []
+    bridge.native_playback(calls.append, 'speech', mute=tmp_path/'mute', lock=lock, pid=pid, timeout=.2)
+    assert calls == ['speech']
+    assert not lock.exists() and not pid.exists()
+
+
+def test_owner_publishing_pid_during_recheck_is_preserved(tmp_path, monkeypatch):
+    lock, pid = tmp_path/'lock', tmp_path/'pid'
+    lock.mkdir()
+    monkeypatch.setattr(bridge.time, 'sleep', lambda seconds: pid.write_text(str(os.getpid())))
+    calls = []
+    bridge.native_playback(calls.append, 'speech', mute=tmp_path/'mute', lock=lock, pid=pid, timeout=0)
+    assert not calls
+    assert lock.exists() and pid.read_text() == str(os.getpid())

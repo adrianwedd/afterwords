@@ -1058,3 +1058,23 @@ def test_resolve_bind_host_forces_loopback_with_clone():
     assert server._resolve_bind_host("0.0.0.0", allow_clone=True, bind_public=True) == "127.0.0.1"
 
 
+
+
+def test_backend_timeout_does_not_expose_internal_exception(client, sample_voice, monkeypatch):
+    def unavailable(*args, **kwargs):
+        raise TimeoutError('/private/model/path: worker diagnostic')
+    monkeypatch.setattr(server, '_run_in_ml_thread', unavailable)
+    response = client.get('/synthesize', params={'text': 'Hello.', 'voice': sample_voice})
+    assert response.status_code == 503
+    assert response.json() == {'error': 'synthesis temporarily unavailable'}
+
+
+@pytest.mark.parametrize('performance, message', [
+    ('{private-invalid-json', 'invalid performance JSON'),
+    ('[]', 'performance must be a JSON object'),
+])
+def test_performance_parse_errors_are_bounded(client, sample_voice, performance, message):
+    response = client.get('/synthesize', params={'text': 'Hello.', 'voice': sample_voice,
+                                                'performance': performance})
+    assert response.status_code == 400
+    assert response.json() == {'error': message}

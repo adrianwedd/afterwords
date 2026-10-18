@@ -35,11 +35,11 @@ def test_subagent_stop_uses_agent_transcript_and_agent_voice_key(tmp_path):
 
     result = event({'hook_event_name': 'SubagentStop', 'session_id': 'session-2',
                     'agent_transcript_path': str(path), 'transcript_path': 'ignored',
-                    'cwd': '/project', 'agent_type': 'Explore',
+                    'cwd': '/project', 'agent_type': 'feature-dev:code-architect',
                     'last_assistant_message': 'Subagent response.'})
 
-    assert result['event_id'].startswith('SubagentStop:Explore:agent-uuid:')
-    assert result['voice_agent'] == 'Explore'
+    assert result['event_id'].startswith('SubagentStop:feature-dev:code-architect:agent-uuid:')
+    assert result['voice_agent'] == 'feature-dev:code-architect'
     assert result['project'] == '/project'
 
 
@@ -59,3 +59,9 @@ def test_event_ignores_empty_text_and_active_stop_hook():
     assert event({'last_assistant_message': '  '}) is None
     assert event({'hook_event_name': 'Stop', 'stop_hook_active': True,
                   'last_assistant_message': 'Do not recurse.'}) is None
+
+
+def test_builtin_subagents_never_publish_speech():
+    for agent in ('Explore', 'Plan', 'general-purpose'):
+        assert event({'hook_event_name': 'SubagentStop', 'agent_type': agent,
+                      'last_assistant_message': 'Internal result repeated by the parent.'}) is None

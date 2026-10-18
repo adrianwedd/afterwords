@@ -71,7 +71,7 @@ def main() -> int:
     parser.add_argument('--state-dir', type=Path, required=True)
     args = parser.parse_args()
     import sys
-    text = strip_markdown(sys.stdin.read())
+    text = strip_markdown(sys.stdin.read(), max_chars=None)
     if text.strip():
         worker = Path(__file__).resolve().parents[1] / '.claude/hooks/codex-tts-worker.sh'
         enqueue(args.state_dir, args.agent, args.session, args.event_id,

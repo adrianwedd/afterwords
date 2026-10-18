@@ -43,23 +43,33 @@ def playback_lease(*, mute=None, lock=None, pid=None, timeout=60):
                 break
             except FileExistsError:
                 try:
-                    holder = pid.read_text().strip()
+                    lease = lock.stat()
+                    def read_holder():
+                        try:
+                            return pid.read_text().strip()
+                        except FileNotFoundError:
+                            return ''
+                    holder = read_holder()
                     if not holder:
                         time.sleep(.05)
-                        holder = pid.read_text().strip()
-                    if holder:
+                        holder = read_holder()
+                    if not holder:
+                        # Match the shared convention: recheck the empty PID
+                        # window, then clear only the same unchanged empty lease.
+                        current = lock.stat()
+                        if (current.st_dev, current.st_ino) == (lease.st_dev, lease.st_ino) and not read_holder():
+                            pid.unlink(missing_ok=True)
+                            lock.rmdir()
+                        continue
+                    try:
                         os.kill(int(holder), 0)
-                    else:
-                        # An owner may be between mkdir and PID write. Leave it
-                        # alone: skipping playback is safer than breaking a lease.
-                        holder = 'unknown'
-                except ProcessLookupError:
-                    # Remove only an unchanged stale receipt and empty lock.
-                    if pid.read_text().strip() == holder:
-                        pid.unlink(missing_ok=True)
-                        try: lock.rmdir()
-                        except FileNotFoundError: pass
-                    continue
+                    except ProcessLookupError:
+                        current = lock.stat()
+                        if ((current.st_dev, current.st_ino) == (lease.st_dev, lease.st_ino)
+                                and read_holder() == holder):
+                            pid.unlink(missing_ok=True)
+                            lock.rmdir()
+                        continue
                 except (OSError, ValueError):
                     pass
                 if time.monotonic() >= deadline:

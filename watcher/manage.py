@@ -16,7 +16,7 @@ FILES = ('watcher/__init__.py', 'watcher/state.py', 'watcher/queue.py', 'watcher
          '.claude/hooks/codex-tts-worker.sh', '.claude/hooks/claude-tts-hook.sh',
          '.claude/hooks/agy-tts-hook.sh', 'claude_session_hook.py', 'agy_session_hook.py',
          'codex_session_hook.py',
-         'strip_markdown.py', 'chunk_text.py')
+         'strip_markdown.py', 'chunk_text.py', 'chunks.py')
 
 
 def control(*args, check=True):

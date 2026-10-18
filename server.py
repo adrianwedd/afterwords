@@ -556,7 +556,8 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str, performance: 
     except SynthesisCancelled:
         return Response(status_code=499)
     except TimeoutError as exc:
-        return JSONResponse({"error": str(exc)}, status_code=503)
+        log.warning("synthesis unavailable: %s", exc)
+        return JSONResponse({"error": "synthesis temporarily unavailable"}, status_code=503)
     except Exception as exc:
         log.error("synthesis failed: %s", exc, exc_info=True)
         return JSONResponse({"error": "synthesis failed"}, status_code=500)
@@ -636,9 +637,9 @@ async def synthesize(
     try:
         controls = json.loads(performance) if performance is not None else None
         if controls is not None and not isinstance(controls, dict):
-            raise ValueError("performance must be a JSON object")
-    except ValueError as exc:
-        return JSONResponse({"error": str(exc)}, status_code=400)
+            return JSONResponse({"error": "performance must be a JSON object"}, status_code=400)
+    except ValueError:
+        return JSONResponse({"error": "invalid performance JSON"}, status_code=400)
     return await _synthesize_for_request(request, text, profile, lang, controls)
 
 

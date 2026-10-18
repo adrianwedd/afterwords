@@ -28,6 +28,8 @@ def event(payload: dict) -> dict | None:
     if not isinstance(text, str) or not text.strip():
         return None
     hook = payload.get('hook_event_name', 'Stop')
+    if hook == 'SubagentStop' and payload.get('agent_type') in {'Explore', 'Plan', 'general-purpose'}:
+        return None
     if hook == 'Stop' and payload.get('stop_hook_active'):
         return None
 
