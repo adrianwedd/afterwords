@@ -1,0 +1,99 @@
+"""Idempotent publication into the existing speech worker queue.
+
+Event files retain their identity as .json -> .claimed -> .playing ->
+.done/.failed. The durable .playing receipt prevents retries after playback
+may have started, including worker crashes during audio playback.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+
+
+def enqueue(root: Path, agent: str, session: str, event_id: str,
+            project: str, text: str, worker: Path | None = None,
+            voice_agent: str | None = None) -> Path:
+    root.mkdir(parents=True, exist_ok=True, mode=0o700)
+    root.chmod(0o700)
+    queue = root / 'queues' / agent / hashlib.sha256(session.encode()).hexdigest()
+    queue.mkdir(parents=True, exist_ok=True, mode=0o700)
+    queue.chmod(0o700)
+    name = 'event-' + hashlib.sha256(event_id.encode()).hexdigest()
+    target = queue / (name + '.json')
+    # One watcher per agent, guarded by a process lock. Atomic names also make
+    # retries after enqueue-but-before-offset-save harmless.
+    # A terminal failure is still a receipt for this event. Re-enqueueing it
+    # just because the worker exhausted playback retries can replay speech on
+    # every duplicate hook callback. A deliberate retry must use a new event
+    # identity (or explicitly remove the failed receipt).
+    if not any((queue / (name + ext)).exists()
+               for ext in ('.json', '.claimed', '.playing', '.done', '.failed')):
+        fd, tmp = tempfile.mkstemp(dir=queue, prefix='.pending-')
+        try:
+            with os.fdopen(fd, 'w') as stream:
+                json.dump({'project_dir': project, 'agent': voice_agent or agent, 'text': text}, stream)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.link(tmp, target)
+        except FileExistsError:
+            pass
+        finally:
+            os.unlink(tmp)
+    if worker is not None:
+        archive_agent = 'claude' if agent == 'agy' else agent
+        env = dict(os.environ, CODEX_THREAD_ID=hashlib.sha256(session.encode()).hexdigest(),
+                   AFTERWORDS_QUEUE_DIR=str(queue), AFTERWORDS_RELIABLE_QUEUE='1',
+                   AFTERWORDS_ARCHIVE_DIR=str(Path.home() / f'.{archive_agent}' / 'tts-archive'))
+        # Worker locking is shared with all launches for this queue. It drains
+        # independently; the durable event remains if this launch fails.
+        env['PYTHONPATH'] = str(Path(__file__).resolve().parents[1])
+        subprocess.Popen([os.environ.get('AFTERWORDS_PYTHON', sys.executable),
+                          '-m', 'watcher.drain', str(worker), str(queue)], env=env, stdin=subprocess.DEVNULL,
+                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                         start_new_session=False)
+    return target
+
+
+def main() -> int:
+    import argparse
+    from strip_markdown import strip_markdown
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--agent', required=True, choices=('codex', 'opencode', 'claude', 'agy'))
+    parser.add_argument('--session', required=True)
+    parser.add_argument('--event-id', required=True)
+    parser.add_argument('--project', default='')
+    parser.add_argument('--voice-agent', default='')
+    parser.add_argument('--state-dir', type=Path, required=True)
+    args = parser.parse_args()
+    import sys
+    text = strip_markdown(sys.stdin.read())
+    if text.strip():
+        worker = Path(__file__).resolve().parents[1] / '.claude/hooks/codex-tts-worker.sh'
+        enqueue(args.state_dir, args.agent, args.session, args.event_id,
+                args.project, text, worker, args.voice_agent or None)
+    return 0
+
+
+def resume(root: Path, agent: str) -> None:
+    worker = Path(__file__).resolve().parents[1] / '.claude/hooks/codex-tts-worker.sh'
+    for queue in (root / 'queues' / agent).glob('*'):
+        if not any(queue.glob('*.json')) and not any(queue.glob('*.claimed')):
+            continue
+        archive_agent = 'claude' if agent == 'agy' else agent
+        env = dict(os.environ, CODEX_THREAD_ID=queue.name,
+            AFTERWORDS_QUEUE_DIR=str(queue), AFTERWORDS_RELIABLE_QUEUE='1',
+            AFTERWORDS_ARCHIVE_DIR=str(Path.home() / f'.{archive_agent}' / 'tts-archive'),
+            PYTHONPATH=str(Path(__file__).resolve().parents[1]))
+        subprocess.Popen([os.environ.get('AFTERWORDS_PYTHON', sys.executable),
+            '-m', 'watcher.drain', str(worker), str(queue)], env=env,
+            stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL, start_new_session=False)
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

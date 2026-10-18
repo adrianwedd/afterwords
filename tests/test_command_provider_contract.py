@@ -247,6 +247,8 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     text_path.write_text(text)
 
     env = dict(os.environ)
+    for key in ("_HERMES_GATEWAY", "HERMES_SESSION_SOURCE", "AFTERWORDS_TTS_CALLER", "AFTERWORDS_PLAYBACK_OWNER"):
+        env.pop(key, None)
     env["PATH"] = f"{bindir}:{env['PATH']}"
     env["HOME"] = str(home)
     env.pop("HERMES_SESSION_PLATFORM", None)
@@ -256,6 +258,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     env.pop("AFTERWORDS_PLAYBACK_OWNER", None)
     if playback_owner is not None:
         env['AFTERWORDS_PLAYBACK_OWNER'] = playback_owner
+        if playback_owner == 'hermes': env['AFTERWORDS_TTS_CALLER'] = 'native'
     env.pop("AFTERWORDS_PORT", None)
     if port is not None:
         env["AFTERWORDS_PORT"] = port
@@ -267,6 +270,7 @@ def _run_provider(tmp_path: Path, text: str, platform: str = "cli",
     provider = tmp_path / "provider.sh"
     source = COMMAND_SCRIPT.read_text()
     for filename in ("afterwords-play.lock", "afterwords-play.pid", "afterwords-muted"):
+        source = source.replace(f'"${{AFTERWORDS_{"MUTE_FILE" if filename.endswith("muted") else "PLAY_LOCK" if filename.endswith(".lock") else "PLAY_PID"}:-/tmp/{filename}}}"', shlex.quote(str(tmp_path / filename)))
         source = source.replace(f'"/tmp/{filename}"', shlex.quote(str(tmp_path / filename)))
     provider.write_text(source)
 

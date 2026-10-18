@@ -125,6 +125,7 @@ def _run_shell_hook(tmp_path: Path, response: str, platform: str = "cli"):
     hook = hook_dir / SHELL_HOOK.name
     source = SHELL_HOOK.read_text()
     for filename in ("afterwords-play.lock", "afterwords-play.pid"):
+        source = source.replace(f'"${{AFTERWORDS_{"PLAY_LOCK" if filename.endswith(".lock") else "PLAY_PID"}:-/tmp/{filename}}}"', shlex.quote(str(tmp_path / filename)))
         source = source.replace(f'"/tmp/{filename}"', shlex.quote(str(tmp_path / filename)))
     hook.write_text(source)
 

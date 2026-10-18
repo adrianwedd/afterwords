@@ -45,7 +45,7 @@ def main():
     if config.get('provider') != 'afterwords' or provider.get('type') != 'command':
         parser.error('configured Afterwords command provider required')
     args.out.mkdir(parents=True)
-    profile = home.name
+    profile = home.name if home.parent.name == 'profiles' else 'default'
     receipt = {'status': 'incomplete', 'scope': 'installed gateway methods with captured adapter handoff',
                'external_messages_sent': 0, 'profile': profile, 'voice': provider.get('voice'),
                'text': args.text, 'text_sha256': hashlib.sha256(args.text.encode()).hexdigest(),
@@ -73,7 +73,7 @@ def main():
 
     class DefaultAdapter:
         async def send_voice(self, **kwargs):
-            raise AssertionError('Vixen audio must not use the default bot')
+            raise AssertionError('A non-default profile must not use the default bot')
 
     class Runner(GatewayVoiceMixin, GatewayAuthorizationMixin):
         _reply_anchor_for_event = staticmethod(reply_anchor)
@@ -81,7 +81,7 @@ def main():
 
     runner = Runner()
     adapter = CaptureAdapter()
-    runner.adapters = {Platform.TELEGRAM: DefaultAdapter()}
+    runner.adapters = {Platform.TELEGRAM: adapter if profile == 'default' else DefaultAdapter()}
     runner._profile_adapters = {profile: {Platform.TELEGRAM: adapter}}
     runner._primary_profile_name = 'default'
     runner.config = SimpleNamespace(multiplex_profiles=True, profile_routes=[])
@@ -97,6 +97,8 @@ def main():
         already_spoken = history + [{'role': 'assistant', 'tool_calls': [{'function': {'name': 'text_to_speech'}}]}]
         assert not runner._should_send_voice_reply(event, args.text, already_spoken)
         runner._profile_adapters[profile] = {}
+        if profile == 'default':
+            runner.adapters = {}
         assert runner._delivery_adapter_for(source) is None
         receipt.update(status='captured_gateway_handoff_passed_not_external_delivery',
                        native_tool_dedup=True, disconnected_profile_fails_closed=True)

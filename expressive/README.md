@@ -153,19 +153,19 @@ separate.
 
 The Hermes command provider accepts `AFTERWORDS_PORT` for a profile-local
 loopback route, for example `env AFTERWORDS_PORT=7862 bash
-/path/to/afterwords-tts-command.sh {input_path} {output_path} voice-name`.
+/path/to/afterwords-tts-command.sh {input_path} {output_path} {voice}`.
 It defaults to 7860 and rejects invalid ports before synthesis. A remote profile
 can use an independently verified SSH loopback forward; this setting does not
 permit arbitrary remote URLs or change the default Hermes profile. Actual
 Vixen configuration is on M5; do not create a replacement profile on Studio.
 
-For Hermes native `/voice` sentence playback, add
-`AFTERWORDS_PLAYBACK_OWNER=hermes` to that profile's command. Hermes then owns
-playback of each returned artifact, and the provider does not play it again.
-These artifacts archive under `tts-archive/consumer-delivered`, outside the
-feed poller's top-level scan. The default `provider` owner preserves ordinary
-CLI command-tool playback. This setting does not turn full-file synthesis into
-native model streaming; Hermes overlaps sentence synthesis and playback.
+Hermes native `/voice` sentence playback requires the caller-scoped consumer
+bridge in `hermes/patches/README.md`. It marks only native synthesis calls and
+honours mute/shared locking at actual playback. Ordinary CLI tools retain
+provider playback even when a legacy profile-wide owner setting remains.
+Consumer-owned artifacts archive under `tts-archive/consumer-delivered`, outside
+the feed poller's top-level scan. Hermes overlaps full-file sentence synthesis
+and playback; this does not make the model natively stream audio.
 
 To capture the installed native sentence route without speaker playback, run
 the following on the host owning the existing Hermes profile, using its own
@@ -415,9 +415,8 @@ Evaluation model revisions are in `qa/expressive-voice/pins.json`.
 adds a real `HermesCLI.chat` turn to the same native sentence capture. It keeps
 the configured model/tools/personality, applies a $0.50 run budget, enables
 native TTS for that probe, observes the actual post-LLM ownership field, and
-checks one returned artifact per spoken sentence. The configured command must
-already contain `AFTERWORDS_PLAYBACK_OWNER=hermes`; this mode does not inject
-that provider override. The probe captures local playback; it does not invoke a
+checks one returned artifact per spoken sentence. The caller-scoped native consumer bridge must already be installed; the probe
+does not replace caller identity with a profile-wide ownership override. The probe captures local playback; it does not invoke a
 messaging send or establish physical audibility.
 Each attempt needs a new output directory, including failed attempts. The
 parent enforces a process-group deadline and retains an incomplete receipt on

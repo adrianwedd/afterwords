@@ -67,15 +67,17 @@ def main():
     provider=c.get('providers',{}).get(selected,{})
     if selected!='afterwords' or provider.get('type')!='command':
         p.error('this smoke test requires the configured Afterwords command provider')
-    if a.agent_prompt and 'AFTERWORDS_PLAYBACK_OWNER=hermes' not in shlex.split(provider.get('command', '')):
-        p.error('real reply requires native playback ownership in the configured command')
+    try:
+        import afterwords_native
+    except ImportError:
+        p.error('native capture requires the caller-scoped native consumer bridge')
     a.out.mkdir(parents=True)
     out=a.out.resolve()
     before=hashlib.sha256(config.read_bytes()).hexdigest()
     receipt={'status':'incomplete','profile_home':str(Path(home).resolve()),
              'profile_config_sha256':before,'provider':selected,'voice':provider.get('voice'),
              'text':a.text,'text_sha256':hashlib.sha256(a.text.encode()).hexdigest(),
-             'playback_owner_override':None if a.agent_prompt else 'hermes','physical_playback':False,
+             'playback_owner_override':None,'physical_playback':False,
              'automatic_mute_flag_present':Path('/tmp/afterwords-muted').exists(),
              'scope':'native sentence pipeline with fixed test text; not an agent reply or post-LLM-hook test',
              'artifacts':[],'sentences':[]}
@@ -109,8 +111,6 @@ def main():
             probe.chmod(0o700)
             os.environ['PATH']=str(probe.parent)+os.pathsep+original_path
             os.environ['AFTERWORDS_PLAYBACK_PROBE_LOG']=str(out/'provider-playback.log')
-            if not a.agent_prompt:
-                os.environ['AFTERWORDS_PLAYBACK_OWNER']='hermes'
             voice_mode.play_audio_file=capture
             if a.agent_prompt:
                 from agent import turn_finalizer

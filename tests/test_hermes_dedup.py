@@ -59,13 +59,6 @@ exit "${HERMES_EXIT:-0}"
 @pytest.fixture
 def hook_env(tmp_path):
     """Stub PATH + isolated HOME + empty cwd (no .afterwords lookups hit the repo)."""
-    # The script disables dedup when the shared dir is symlinked or foreign-
-    # owned; on such a machine these tests would fail confusingly — skip loud.
-    if DEDUP_DIR.is_symlink() or (
-        DEDUP_DIR.exists() and DEDUP_DIR.stat().st_uid != os.getuid()
-    ):
-        pytest.skip("/tmp/afterwords-dedup is symlinked or foreign-owned; script disables dedup")
-
     bindir = tmp_path / "bin"
     bindir.mkdir()
     (bindir / "curl").write_text(CURL_STUB)
@@ -86,26 +79,21 @@ def hook_env(tmp_path):
     hook = tmp_path / "afterwords-post-llm.sh"
     source = SCRIPT.read_text()
     for filename in ("afterwords-play.lock", "afterwords-play.pid"):
+        source = source.replace(f'"${{AFTERWORDS_{"PLAY_LOCK" if filename.endswith(".lock") else "PLAY_PID"}:-/tmp/{filename}}}"', shlex.quote(str(tmp_path / filename)))
         source = source.replace(f'"/tmp/{filename}"', shlex.quote(str(tmp_path / filename)))
+    source = source.replace("/tmp/afterwords-dedup", str(tmp_path / "dedup"))
     hook.write_text(source)
 
     env = os.environ.copy()
+    for key in ("_HERMES_GATEWAY", "HERMES_SESSION_SOURCE", "AFTERWORDS_TTS_CALLER"):
+        env.pop(key, None)
     env["PATH"] = f"{bindir}:{env['PATH']}"
     env["HOME"] = str(home)
     env["STUB_LOG"] = str(log)
     env["AFTERWORDS_REPO"] = str(REPO)
     env["_TEST_HOOK"] = str(hook)
 
-    # Teardown: remove only the markers this test created — the dedup dir is
-    # real shared state also used by the live Hermes hook on dev machines.
-    before = set(DEDUP_DIR.iterdir()) if DEDUP_DIR.is_dir() else set()
     yield env, log, workdir
-    if DEDUP_DIR.is_dir():
-        for leftover in set(DEDUP_DIR.iterdir()) - before:
-            try:
-                leftover.unlink()
-            except OSError:
-                pass
 
 
 def run_hook(env, workdir, text, platform="discord"):
@@ -217,3 +205,54 @@ def test_gateway_delivery_is_owned_by_native_voice_mode(hook_env, platform):
     result = run_hook(env, workdir, unique_text(), platform=platform)
     assert result.returncode == 0, result.stderr
     assert not log.exists(), "shell hooks must not duplicate gateway delivery"
+
+
+@pytest.mark.parametrize("source", ["cli", "tui", "desktop"])
+def test_local_shell_with_inherited_gateway_marker_still_speaks(hook_env, source):
+    env, log, workdir = hook_env
+    env.update(_HERMES_GATEWAY="1", HERMES_SESSION_SOURCE=source)
+    curl = Path(env["PATH"].split(os.pathsep)[0]) / "curl"
+    curl.write_text(curl.read_text().replace("RIFF-fake-wav-payload", "RIFF" + "x" * 4096))
+    result = run_hook(env, workdir, unique_text(), platform="cli")
+    assert result.returncode == 0, result.stderr
+    assert len(synth_calls(log)) == 1
+
+
+def test_cleared_platform_gateway_shell_never_speaks(hook_env):
+    env, log, workdir = hook_env
+    env["_HERMES_GATEWAY"] = "1"
+    result = run_hook(env, workdir, unique_text(), platform="")
+    assert result.returncode == 0
+    assert not log.exists()
+
+
+def test_cli_scope_speaks_desktop_spawned_turns(hook_env):
+    """Desktop-spawned hermes chat carries _HERMES_GATEWAY=1 but never reaches
+    the gateway agent:end native hook — the shell hook must speak those turns."""
+    env, log, workdir = hook_env
+    env["AFTERWORDS_SHELL_SCOPE"] = "cli"
+    env["_HERMES_GATEWAY"] = "1"
+    env["HERMES_SESSION_SOURCE"] = "desktop"
+    result = run_hook(env, workdir, unique_text(), platform="cli")
+    assert result.returncode == 0, result.stderr
+    # The CLI path's small-file fallback re-synthesizes a chunk when the stub's
+    # 20-byte response looks like a failed synthesis, so count >= 1 here.
+    calls = synth_calls(log)
+    assert calls, "desktop-sourced cli turns must synthesize and play"
+    assert len(set(calls)) == 1, "exactly one chunk text must be spoken (no duplicates)"
+
+
+@pytest.mark.parametrize("gateway_marker", [False, True])
+def test_cli_scope_speaks_explicit_desktop_platform(hook_env, gateway_marker):
+    """Current Hermes desktop sends platform=desktop in post_llm_call."""
+    env, log, workdir = hook_env
+    env["AFTERWORDS_SHELL_SCOPE"] = "cli"
+    env["CURL_SYNTH_LARGE"] = "1"
+    if gateway_marker:
+        env["_HERMES_GATEWAY"] = "1"
+        env["HERMES_SESSION_SOURCE"] = "desktop"
+    result = run_hook(env, workdir, unique_text(), platform="desktop")
+    assert result.returncode == 0, result.stderr
+    assert synth_calls(log), "explicit desktop turns must reach synthesis"
+    assert any(line.startswith("afplay ") for line in log.read_text().splitlines())
+    assert not any(line.startswith("hermes send ") for line in log.read_text().splitlines())

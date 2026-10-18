@@ -58,7 +58,9 @@ command() {
         assert config['hooks']['afterAgentResponse'][0]['command'].endswith('cursor-tts-hook.sh')
     if agent == 'agy':
         config = json.loads((tmp_path / '.gemini/config/hooks.json').read_text())
-        assert config['afterwords-tts']['Stop'][0]['command'].endswith('agy-tts-hook.sh')
+        command = config['afterwords-tts']['Stop'][0]['command']
+        assert 'Afterwords/watchers/runtime/.claude/hooks/agy-tts-hook.sh' in command
+        assert 'AFTERWORDS_PYTHON=' in command
     if agent == 'gemini':
         assert not (tmp_path / '.gemini/settings.json').exists()
         assert 'AfterAgent' in result.stdout

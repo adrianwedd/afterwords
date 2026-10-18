@@ -35,7 +35,7 @@ afplay /tmp/afterwords-first-speech.wav
 
 Confirm the opening words, complete phrase, and absence of long internal silence. WAV validity does not prove fidelity. The leading-word/internal-silence defects reported in issue #122 remain unresolved by this onboarding work.
 
-Only after foreground speech passes, enable one integration using [the authoritative matrix](INTEGRATIONS.md). `bash setup.sh --integrations` performs interactive discovery; Codex uses `bash setup-codex.sh` inside an interactive session, while Hermes has separate instructions in `docs/hermes-integration.md`. Confirm one final response speaks once and produces its expected local archive. Integration acceptance has not been established by server unit tests.
+Only after foreground speech passes, enable integrations using [the authoritative matrix](INTEGRATIONS.md). `bash setup.sh --integrations` discovers installed agents, configures Claude and AGY hooks, and installs managed Codex/OpenCode login watchers when detected. Run `afterwords integrations` to check hook registration, installed source, and watcher health. Confirm a real final response speaks once and produces its expected local archive. Hermes has separate instructions in `docs/hermes-integration.md`; its live gateway is not changed by this installer.
 
 Exercise `afterwords mute` twice (mute/unmute), then operator-authorized stop/start and repeat synthesis. Mute suppresses automatic playback while synthesis and archives continue; foreground samples still play. Archives persist spoken text/audio under each agent's home directory. Optional cloud commands can upload voice data and use `~/.afterwords-cloud`; their privacy boundary differs from local inference.
 

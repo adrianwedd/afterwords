@@ -110,6 +110,7 @@ def world(tmp_path):
     provider = tmp_path / "provider.sh"
     source = COMMAND_SCRIPT.read_text()
     for filename in ("afterwords-play.lock", "afterwords-play.pid"):
+        source = source.replace(f'"${{AFTERWORDS_{"MUTE_FILE" if filename.endswith("muted") else "PLAY_LOCK" if filename.endswith(".lock") else "PLAY_PID"}:-/tmp/{filename}}}"', shlex.quote(str(tmp_path / filename)))
         source = source.replace(f'"/tmp/{filename}"', shlex.quote(str(tmp_path / filename)))
     provider.write_text(source)
 
@@ -118,15 +119,19 @@ def world(tmp_path):
 
 
 def _run(world, profile: str, text: str, voice: str | None = None,
-         platform: str | None = "telegram", tag: str = "x", gateway: bool = False):
+         platform: str | None = "telegram", tag: str = "x", gateway: bool = False, source: str = "", caller: str = "tool", legacy_owner: str = "provider"):
     voice = VOICES.get(profile, "") if voice is None else voice
     env = dict(os.environ)
+    for key in ("_HERMES_GATEWAY", "HERMES_SESSION_SOURCE", "AFTERWORDS_TTS_CALLER", "AFTERWORDS_PLAYBACK_OWNER"):
+        env.pop(key, None)
     env.update(PATH=f"{world['bindir']}:{env['PATH']}", HOME=str(world["home"]),
-               HERMES_HOME=str(world["homes"][profile]), AFTERWORDS_REPO=str(REPO))
+               HERMES_HOME=str(world["homes"][profile]), AFTERWORDS_REPO=str(REPO),
+               AFTERWORDS_MUTE_FILE=str(world["tmp"]/"muted"))
     env.pop("HERMES_SESSION_PLATFORM", None)
     env.pop("_HERMES_GATEWAY", None)
     if platform:
         env["HERMES_SESSION_PLATFORM"] = platform
+    env.update(HERMES_SESSION_SOURCE=source, AFTERWORDS_TTS_CALLER=caller, AFTERWORDS_PLAYBACK_OWNER=legacy_owner)
     if gateway:
         env["_HERMES_GATEWAY"] = "1"
     text_path = world["tmp"] / f"in-{tag}.txt"
@@ -361,3 +366,57 @@ def test_real_hermes_profile_without_voice_fails_instead_of_borrowing(world):
     assert payload.get("success") is False, payload
     assert "no voice configured" in payload.get("error", ""), payload
     assert _requests(world) == []
+
+
+@pytest.mark.parametrize("source", ["cli", "tui", "desktop"])
+def test_local_tool_with_inherited_gateway_marker_owns_playback(world, source):
+    result, out = _run(world, 'default', 'A local tool call.', platform='cli', gateway=True,
+                       source=source, legacy_owner='hermes')
+    assert result.returncode == 0, result.stderr
+    assert out.exists()
+    assert len(world['plays'].read_text().splitlines()) == 1
+    assert list((world['homes']['default']/'tts-archive').glob('*.txt'))
+
+
+def test_native_caller_does_not_take_provider_lock_or_relay(world):
+    lock = world['tmp']/'afterwords-play.lock'
+    lock.mkdir()
+    pid = world['tmp']/'afterwords-play.pid'
+    pid.write_text(str(os.getpid()))
+    result, out = _run(world, 'vixen', 'Native caller owns this artifact.', platform='cli', caller='native')
+    assert result.returncode == 0, result.stderr
+    assert out.exists() and lock.is_dir() and pid.read_text() == str(os.getpid())
+    assert not world['plays'].exists()
+    assert list((world['homes']['vixen']/'tts-archive/consumer-delivered').glob('*.txt'))
+
+
+@pytest.mark.parametrize("profile", ["default", "vixen"])
+def test_gateway_capture_probe_handles_default_and_named_profiles(world, profile):
+    import shutil
+    runtime = _hermes_runtime()
+    if runtime is None:
+        pytest.skip("installed Hermes runtime unavailable")
+    py, sp = runtime
+    _profile_config(world, profile, VOICES[profile])
+    # Conversion is real; only synthesis and network delivery are captured.
+    ffmpeg = shutil.which('ffmpeg')
+    if not ffmpeg:
+        pytest.skip('ffmpeg unavailable')
+    stub = world['bindir']/'ffmpeg'
+    stub.unlink()
+    stub.symlink_to(ffmpeg)
+    driver = world['tmp']/'capture-driver.py'
+    driver.write_text('import runpy,sys\nsys.path[:0]=sys.argv[1:3]\nsys.argv=sys.argv[3:]\nrunpy.run_path(sys.argv[0],run_name="__main__")\n')
+    output = world['tmp']/('capture-'+profile)
+    env = {k:v for k,v in os.environ.items() if not k.startswith(('HERMES_', 'PYTHON'))}
+    env.update(HOME=str(world['home']), HERMES_HOME=str(world['homes'][profile]),
+               PATH=f"{world['bindir']}:{env['PATH']}")
+    result = subprocess.run([str(py), '-I', str(driver), str(HERMES_SRC), str(sp),
+                             str(REPO/'scripts/verify-hermes-gateway-voice.py'),
+                             '--hermes-root', str(HERMES_SRC), '--out', str(output)],
+                            capture_output=True, text=True, env=env, timeout=30)
+    assert result.returncode == 0, result.stderr
+    receipt = json.loads((output/'receipt.json').read_text())
+    assert receipt['profile'] == profile
+    assert receipt['external_messages_sent'] == 0
+    assert len(receipt['artifacts']) == 1

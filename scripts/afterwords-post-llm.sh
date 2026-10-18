@@ -21,8 +21,8 @@ PORT=$((10#$PORT))
 AFTERWORDS_URL="http://127.0.0.1:${PORT}"
 
 MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
-PLAY_LOCK="/tmp/afterwords-play.lock"
-PLAY_PID="/tmp/afterwords-play.pid"
+PLAY_LOCK="${AFTERWORDS_PLAY_LOCK:-/tmp/afterwords-play.lock}"
+PLAY_PID="${AFTERWORDS_PLAY_PID:-/tmp/afterwords-play.pid}"
 acquire_play_lock() {
     local w=0
     while ! mkdir "$PLAY_LOCK" 2>/dev/null; do
@@ -92,9 +92,20 @@ print(d.get('chat_id', '') or d.get('extra', {}).get('chat_id', ''))
 case "${AFTERWORDS_SHELL_SCOPE:-all}" in
     all) ;;
     cli)
+        # Desktop now reports its own platform instead of cli. Both direct
+        # CLI and desktop turns belong to this shell hook.
+        case "$PLATFORM" in cli|desktop) ;; *) exit 0 ;; esac
         # Hermes maps gateway LOCAL to cli for agent hooks. Its process marker
         # distinguishes those turns from direct CLI, which owns shell speech.
-        [ "$PLATFORM" = "cli" ] && [ "${_HERMES_GATEWAY:-}" != "1" ] || exit 0
+        # The desktop app ALSO sets _HERMES_GATEWAY=1 on serve-spawned `hermes
+        # chat` children (HERMES_SESSION_SOURCE=desktop), but those turns never
+        # reach the gateway's agent:end native hooks (that path only runs inside
+        # gateway run_turn), so skipping here left desktop turns permanently
+        # silent. Speak them: only bare gateway-multiplexed CLI turns
+        # (no session source) actually have the native hook as backup.
+        if [ "${_HERMES_GATEWAY:-}" = "1" ] && [ "$PLATFORM" != "desktop" ]; then
+            case "${HERMES_SESSION_SOURCE:-}" in cli|tui|desktop|oneshot) ;; *) exit 0 ;; esac
+        fi
         ;;
     *) echo "afterwords: invalid AFTERWORDS_SHELL_SCOPE" >&2; exit 1 ;;
 esac
@@ -114,6 +125,13 @@ home = os.environ.get('HERMES_HOME', '').rstrip('/')
 if '/profiles/' in home:
     print(home.rsplit('/', 1)[-1])
 " 2>/dev/null || true)
+fi
+# A cleared platform after gateway handling must not become local speech.
+if [ "${_HERMES_GATEWAY:-}" = "1" ]; then
+    case "${HERMES_SESSION_SOURCE:-}" in
+        cli|tui|desktop|oneshot) ;;
+        *) case "$PLATFORM" in ""|cli|local) exit 0 ;; esac ;;
+    esac
 fi
 # ── Platform routing ──────────────────────────────────────────────────────
 # CLI/local: play audio locally via afplay

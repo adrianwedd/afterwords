@@ -54,3 +54,13 @@ def test_collision_preserves_assets_before_install(tmp_path):
         install_aliases(library_plan(source, snapshot, accepted), target)
     assert collision.read_text() == 'existing'
     assert not (target/'actor-ref.wav').exists()
+
+
+@pytest.mark.parametrize("backend", [None, "", "qwen3-0.6b"])
+def test_default_qwen_backend_accepts_literal_reference(tmp_path, backend):
+    source, snapshot, accepted = fixture(tmp_path)
+    profile = source / 'actor.json'
+    data = json.loads(profile.read_text())
+    data['backend'] = backend
+    profile.write_text(json.dumps(data))
+    assert library_plan(source, snapshot, accepted)['compatible'] == 1

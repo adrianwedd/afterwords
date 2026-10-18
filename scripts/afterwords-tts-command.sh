@@ -48,13 +48,21 @@
 #
 set -euo pipefail
 
-TEXT_PATH="${1:?Usage: afterwords-tts-command.sh <input_path> <output_path> [voice]}"
+TEXT_PATH="${1:?Usage: afterwords-tts-command.sh <input_path> <output_path> <voice>}"
 OUTPUT_PATH="${2:?Missing output_path}"
 CONFIG_VOICE="${3:-}"
 
 # Hermes native /voice owns playback of its returned sentence artifacts.
-PLAYBACK_OWNER="${AFTERWORDS_PLAYBACK_OWNER:-provider}"
-case "$PLAYBACK_OWNER" in
+# Caller-scoped ownership wins over the historical profile-wide setting.
+# A native consumer must identify this call, rather than silencing every tool.
+PLAYBACK_OWNER="provider"
+case "${AFTERWORDS_TTS_CALLER:-tool}" in
+    native) PLAYBACK_OWNER="hermes" ;;
+    tool|gateway) ;;
+    *) echo "Error: invalid AFTERWORDS_TTS_CALLER" >&2; exit 2 ;;
+esac
+LEGACY_PLAYBACK_OWNER="${AFTERWORDS_PLAYBACK_OWNER:-provider}"
+case "$LEGACY_PLAYBACK_OWNER" in
     provider|hermes) ;;
     *) echo "Error: AFTERWORDS_PLAYBACK_OWNER must be provider or hermes" >&2; exit 2 ;;
 esac
@@ -97,13 +105,17 @@ PROFILE_HOME="${PROFILE_HOME%/}"
 # command) is the reliable signal; the platform name is kept for messaging
 # contexts outside a gateway process.
 DELIVERY="cli"
-if [ "${_HERMES_GATEWAY:-}" = "1" ]; then
-    DELIVERY="gateway"
-fi
 case "${HERMES_SESSION_PLATFORM:-}" in
-    ""|cli|local) ;;
+    ""|cli|local|desktop) ;;
     *) DELIVERY="gateway" ;;
 esac
+if [ "$DELIVERY" = "cli" ] && [ "${_HERMES_GATEWAY:-}" = "1" ]; then
+    case "${HERMES_SESSION_SOURCE:-}" in
+        cli|tui|desktop|oneshot) ;;
+        *) DELIVERY="gateway" ;;
+    esac
+fi
+[ "${AFTERWORDS_TTS_CALLER:-}" != "gateway" ] || DELIVERY="gateway"
 case "$PROFILE_HOME" in
     */profiles/*) PROFILE="${PROFILE_HOME##*/}" ;;
     *) PROFILE="default" ;;
@@ -286,10 +298,11 @@ if [ "$DELIVERY" = "cli" ]; then
 fi
 
 # All platforms assemble every chunk. Only CLI may play locally.
-MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
-PLAY_LOCK="/tmp/afterwords-play.lock"
-PLAY_PID="/tmp/afterwords-play.pid"
-PLAY_OK=$ASYNC
+MUTE_FILE="${AFTERWORDS_MUTE_FILE:-/tmp/afterwords-muted}"   # `afterwords mute` toggles this; skip local playback when present
+PLAY_LOCK="${AFTERWORDS_PLAY_LOCK:-/tmp/afterwords-play.lock}"
+PLAY_PID="${AFTERWORDS_PLAY_PID:-/tmp/afterwords-play.pid}"
+PLAY_OK=false
+if $ASYNC && [ "$PLAYBACK_OWNER" = "provider" ]; then PLAY_OK=true; fi
 PLAY_LOCK_OWNED=false
 
 # Acquire the shared play lock (mkdir-based for atomicity). Failing to get it

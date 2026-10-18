@@ -91,7 +91,9 @@ def test_cli_accepts_transcript_path_without_strip_markdown(capsys):
 def test_shell_hook_invokes_helper_without_unknown_flag():
     hook = Path(".claude/hooks/agy-tts-hook.sh").read_text(encoding="utf-8")
     assert "--strip-markdown" not in hook
-    assert 'agy-session-hook.py" "$TRANSCRIPT_PATH"' in hook
+    assert 'agy_session_hook.py" --json "$TRANSCRIPT"' in hook
+    assert "--agent agy" in hook
+    assert "--event-id" in hook
 
 
 

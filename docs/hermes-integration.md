@@ -183,7 +183,7 @@ for explicit `/voice tts` calls, the `text_to_speech` tool, and messaging-platfo
 Usage:
 
 ```bash
-bash afterwords-tts-command.sh <input_path> <output_path> [voice]
+bash afterwords-tts-command.sh <input_path> <output_path> <voice>
 ```
 
 **CLI mode (default when `$HERMES_SESSION_PLATFORM` is unset/`cli`/`local`):**
@@ -343,12 +343,12 @@ retains the documented CLI/local/empty native scope for standalone use.
 
 ## Native Hermes sentence playback
 
-When Hermes native `/voice` consumes command-provider artifacts, use
-`env AFTERWORDS_PLAYBACK_OWNER=hermes bash /path/to/afterwords-tts-command.sh
-{input_path} {output_path} voice-name` in that profile's command. Hermes plays
-returned sentences; the provider must not also play them. The default owner
-`provider` retains ordinary CLI command-tool playback. This is full-file
-synthesis per sentence, overlapped by Hermes, not native model streaming.
+When Hermes native `/voice` consumes command-provider artifacts, install the
+caller-scoped bridge in `hermes/patches/README.md`. Keep the command template
+`bash /path/to/afterwords-tts-command.sh {input_path} {output_path} {voice}` and
+set the explicit profile voice. The native caller identifies its own synthesis
+calls; ordinary CLI tools retain provider playback. This is full-file synthesis
+per sentence, overlapped by Hermes, not native model streaming.
 
 Consumer-owned CLI archives go in the profile's `tts-archive/consumer-delivered`
 subdirectory, outside the feed relay's top-level scan. Gateway contexts retain
@@ -364,3 +364,19 @@ It captures real command-TTS artifacts and native playback calls without speaker
 playback, decodes Hermes' returned container, and records the unchanged config
 hash. It does not exercise an agent reply or an independent legacy post-LLM
 hook. Its process-only playback-owner override does not activate profile config.
+
+## Migrating existing command-provider profiles
+
+Every speaking profile must set `tts.providers.afterwords.voice` to its existing
+selected voice. Keep `{voice}` as the third command argument, including routes
+using `env AFTERWORDS_PORT=17862`. Missing voice exits 2; `.afterwords` and the
+server default cannot supply this identity. Preserve reviewed private selections.
+This does not migrate Qwen profiles into Fish aliases.
+
+Playback ownership is per invocation. Ordinary CLI tools retain provider playback
+even if a legacy profile command sets `AFTERWORDS_PLAYBACK_OWNER=hermes`. The native
+consumer supplies `AFTERWORDS_TTS_CALLER=native`, then honours mute and the shared
+lock at playback. Gateway replies retain native attachment ownership when the
+platform marker is cleared. Explicit CLI/TUI/desktop session source overrides an
+inherited gateway marker; an explicit messaging platform still takes precedence.
+See [consumer bridge preparation](../hermes/patches/README.md).
