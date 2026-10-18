@@ -777,40 +777,12 @@ mkdir -p "$HOME/.claude"
 
 HOOK_CMD="AFTERWORDS_PYTHON=\"$SCRIPT_DIR/.venv/bin/python3\" bash \"$HOME/Library/Application Support/Afterwords/watchers/runtime/.claude/hooks/claude-tts-hook.sh\""
 
-HOOK_ENTRY=$(jq -n --arg command "$HOOK_CMD" \
-    '{"type":"command", "command":$command, "timeout":120, "async":true}')
-
-# Register the TTS hook on BOTH Stop (main conversation) and SubagentStop
-# (subagent completion) so per-agent .afterwords mappings actually fire.
-register_hook_event() {
-    local EVT="$1"
-    local TMPF
-    TMPF=$(mktemp)
-    TMPFILES+=("$TMPF")
-    jq --arg command "$HOOK_CMD" --argjson entry "$HOOK_ENTRY" --arg event "$EVT" '
-      .hooks = (.hooks // {}) |
-      .hooks[$event] = ((.hooks[$event] // []) | map(
-        if (.hooks | type) == "array" then
-          .hooks |= map(select(
-            ((.command // "") != $command) and
-            ((.command // "") != "bash ~/.claude/hooks/tts-hook.sh") and
-            (((.command // "") | contains("claude-tts-hook.sh")) | not)
-          )) |
-          select((.hooks | length) > 0)
-        else
-          select(((.command // "") != $command) and
-                 ((.command // "") != "bash ~/.claude/hooks/tts-hook.sh") and
-                 (((.command // "") | contains("claude-tts-hook.sh")) | not))
-        end
-      ) + [{"hooks": [$entry]}])
-    ' "$SETTINGS" > "$TMPF" || fail "Could not update Claude ${EVT} hooks."
-    mv "$TMPF" "$SETTINGS"
-    ok "managed Afterwords hook configured for ${EVT}"
-}
-
+# Parse actual managed/legacy targets, preserving unrelated hook owners.
 [ -f "$SETTINGS" ] || printf '{}\n' > "$SETTINGS"
-register_hook_event Stop
-register_hook_event SubagentStop
+python3 "$SCRIPT_DIR/scripts/register-integrations.py" claude \
+    --settings "$SETTINGS" --home "$HOME" --repo "$SCRIPT_DIR" --command "$HOOK_CMD" \
+    || fail "Could not update managed Claude hooks."
+ok "managed Afterwords hooks configured for Stop and SubagentStop"
 echo
 fi  # end Claude settings block
 fi  # end shared hooks block
@@ -1055,17 +1027,9 @@ if ! $SERVER_ONLY && command -v agy &>/dev/null; then
     # Merge the Afterwords Stop hook without discarding unrelated hook owners.
     mkdir -p "$AGY_CONFIG_DIR"
     [ -f "$AGY_HOOKS_FILE" ] || printf '{}\n' > "$AGY_HOOKS_FILE"
-    TMPF=$(mktemp)
-    TMPFILES+=("$TMPF")
-    jq --arg command "$AGY_HOOK_CMD" '
-      .["afterwords-tts"] = (.["afterwords-tts"] // {}) |
-      .["afterwords-tts"].Stop = ((.["afterwords-tts"].Stop // []) |
-        map(select((.command // "") != $command and
-                   (.command // "") != "bash ~/.claude/hooks/agy-tts-hook.sh" and
-                   (((.command // "") | contains("agy-tts-hook.sh")) | not))) +
-        [{"type":"command", "command":$command, "timeout":120000}])
-    ' "$AGY_HOOKS_FILE" > "$TMPF" || fail "Could not update Antigravity hooks."
-    mv "$TMPF" "$AGY_HOOKS_FILE"
+    python3 "$SCRIPT_DIR/scripts/register-integrations.py" agy \
+        --settings "$AGY_HOOKS_FILE" --home "$HOME" --repo "$SCRIPT_DIR" --command "$AGY_HOOK_CMD" \
+        || fail "Could not update managed Antigravity hooks."
     ok "managed Afterwords hook configured for Antigravity Stop"
     echo
     echo -e "  Test: ${CYAN}agy --print \"say hi\"${NC} — should speak the response via afterwords."

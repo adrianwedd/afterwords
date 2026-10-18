@@ -13,7 +13,7 @@ NAMES = ('tts-hook.sh', 'claude-tts-hook.sh', 'agy-tts-hook.sh',
          'gemini-tts-hook.sh', 'cursor-tts-hook.sh')
 
 
-def owned_command(command, home, repo):
+def owned_command(command, home, repo, names=NAMES):
     if not isinstance(command, str):
         return False
     try:
@@ -31,21 +31,21 @@ def owned_command(command, home, repo):
             break
     allowed = {str(directory/name) for directory in (
         home/'.claude/hooks', repo/'.claude/hooks',
-        home/'Library/Application Support/Afterwords/watchers/runtime/.claude/hooks') for name in NAMES}
+        home/'Library/Application Support/Afterwords/watchers/runtime/.claude/hooks') for name in names}
     return os.path.normpath(target) in allowed
 
 
 DROP = object()
 
 
-def prune(node, home, repo):
+def prune(node, home, repo, names=NAMES):
     if isinstance(node, list):
-        items = [prune(item, home, repo) for item in node]
+        items = [prune(item, home, repo, names) for item in node]
         return [item for item in items if item is not DROP]
     if isinstance(node, dict):
-        if node.get('type', 'command') == 'command' and owned_command(node.get('command'), home, repo):
+        if node.get('type', 'command') == 'command' and owned_command(node.get('command'), home, repo, names):
             return DROP
-        result = {key:prune(value, home, repo) for key,value in node.items()}
+        result = {key:prune(value, home, repo, names) for key,value in node.items()}
         result = {key:value for key,value in result.items() if value is not DROP}
         if node.get('hooks') and result.get('hooks') == []:
             return DROP
