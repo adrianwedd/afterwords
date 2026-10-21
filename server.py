@@ -66,6 +66,42 @@ logging.basicConfig(
 )
 log = logging.getLogger("tts")
 
+
+# ---------------------------------------------------------------------------
+# Failure classification (evidence only)
+# ---------------------------------------------------------------------------
+# A synthesis exception used to leave this server as 500 {"error":"synthesis
+# failed"} regardless of cause. That single string is why 1,253 failures had to
+# be guessed at. The mapping names what the message actually says; anything
+# unrecognised stays upstream_error rather than being invented.
+_SYNTHESIS_ERROR_CLASSES: tuple[tuple[str, int, tuple[str, ...]], ...] = (
+    ("resource_exhaustion", 503,
+     ("insufficient memory headroom", "expressive request queue full",
+      "out of memory", "cannot allocate")),
+    ("invalid_reference", 400,
+     ("reference transcript", "reference wav", "reference audio", "unknown voice",
+      "voice not found")),
+    ("worker_crash", 503,
+     ("worker exited", "worker died", "sidecar exited", "worker unavailable")),
+    ("audio_validation", 503,
+     ("sustained silence", "nonfinite audio", "unexpected sample rate",
+      "incomplete audio output", "exceeds limit", "generated no audio")),
+    ("upstream_backend_error", 503,
+     ("expressive backend unavailable", "drama 3 failed")),
+    ("malformed_request", 400,
+     ("literal model control token", "invalid option", "does not support",
+      "unsupported")),
+)
+
+
+def classify_synthesis_error(message: str) -> tuple[str, int]:
+    """(class, http status) for a synthesis exception message."""
+    text = (message or "").lower()
+    for name, status, needles in _SYNTHESIS_ERROR_CLASSES:
+        if any(n in text for n in needles):
+            return name, status
+    return "upstream_error", 500
+
 # Suppress known harmless warnings from mlx-audio model loading
 warnings.filterwarnings("ignore", message=".*model of type.*qwen3_tts.*")
 warnings.filterwarnings("ignore", message=".*incorrect regex pattern.*")
@@ -558,8 +594,18 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str, performance: 
     except TimeoutError as exc:
         return JSONResponse({"error": str(exc)}, status_code=503)
     except Exception as exc:
-        log.error("synthesis failed: %s", exc, exc_info=True)
-        return JSONResponse({"error": "synthesis failed"}, status_code=500)
+        # Keep the evidence. A generic "synthesis failed" body made 1,253
+        # failures indistinguishable: the reason existed at the sidecar and was
+        # thrown away here. The reason is bounded and this service is
+        # loopback-only, so nothing leaves the machine.
+        detail = str(exc)[:200]
+        category, status = classify_synthesis_error(detail)
+        log.error("synthesis failed [%s]: %s", category, exc, exc_info=True)
+        return JSONResponse(
+            {"error": "synthesis failed", "reason": detail,
+             "error_class": category, "voice_backend": profile.backend},
+            status_code=status,
+        )
 
     elapsed = time.time() - t0
     duration = len(data) / sr if sr else 0
