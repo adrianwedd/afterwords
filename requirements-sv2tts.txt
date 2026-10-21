@@ -15,7 +15,7 @@
 # SV2TTS_SYNTHESIZER_PATH, SV2TTS_VOCODER_PATH, and SV2TTS_ENCODER_DEVICE.
 torch>=2.12.0
 librosa>=0.10
-soundfile>=0.12
+soundfile>=0.14.0
 numpy>=1.24
 scipy>=1.10
 matplotlib>=3.7
