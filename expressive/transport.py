@@ -38,8 +38,17 @@ def request_wav(payload, cancelled):
                            headers={'Content-Type': 'application/json'})
         response = connection.getresponse()
         if response.status != 200:
+            # Keep the sidecar's diagnostic body. It used to be replaced with an
+            # empty BytesIO, so every failure arrived upstream as "503:" with no
+            # reason — the last place the evidence was being thrown away.
+            detail = b''
+            try:
+                detail = response.read(2000)
+            except (OSError, http.client.HTTPException):
+                detail = b''
             raise urllib.error.HTTPError('http://127.0.0.1:7861/synthesize', response.status,
-                                         response.reason, response.headers, io.BytesIO())
+                                         response.reason, response.headers,
+                                         io.BytesIO(detail))
         if response.headers.get_content_type() != 'audio/wav':
             raise RuntimeError('sidecar returned a non-WAV response')
         limit = 44100 * 300 * 2 + 65536
