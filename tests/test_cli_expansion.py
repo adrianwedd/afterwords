@@ -342,3 +342,40 @@ def test_ac11_chunk_text_stays_in_scripts():
     """AC11: chunk-text.py must NOT move (has tests/test_chunk_text.py)."""
     assert (REPO / "scripts" / "chunk-text.py").exists()
     assert not (REPO / "scripts" / "internal" / "chunk-text.py").exists()
+
+
+def test_configure_speak_full_and_summarize(tmp_path: Path):
+    """afterwords configure --speak-full / --summarize write SPEAK_MODE."""
+    config = tmp_path / "server-config"
+    env = {"AFTERWORDS_SERVER_CONFIG": str(config)}
+
+    result = run_afterwords("configure", "--speak-full", env_override=env)
+    assert result.returncode == 0, result.stderr
+    assert "SPEAK_MODE=full" in config.read_text(encoding="utf-8")
+    assert "full" in result.stdout.lower()
+
+    result = run_afterwords("configure", "--summarize", env_override=env)
+    assert result.returncode == 0, result.stderr
+    assert "SPEAK_MODE=summarize" in config.read_text(encoding="utf-8")
+
+    result = run_afterwords("configure", env_override=env)
+    assert result.returncode == 0, result.stderr
+    assert "summarize" in result.stdout.lower()
+    assert "--speak-full" in result.stdout
+    assert "--summarize" in result.stdout
+    assert "--speak-default" in result.stdout
+
+    result = run_afterwords("configure", "--speak-default", env_override=env)
+    assert result.returncode == 0, result.stderr
+    assert "SPEAK_MODE=" not in config.read_text(encoding="utf-8")
+
+    result = run_afterwords("configure", env_override=env)
+    assert result.returncode == 0, result.stderr
+    assert "project default" in result.stdout.lower()
+
+
+def test_setup_worker_runs_summarizer_without_afterwords():
+    """Installed worker must honor SPEAK_MODE even with no .afterwords file."""
+    src = (REPO / "setup.sh").read_text(encoding="utf-8")
+    assert 'if [ -f "$SUMMARIZE_SCRIPT" ]; then' in src
+    assert 'if [ -f "$SUMMARIZE_SCRIPT" ] && [ -n "${AW_FILE:-}" ]; then' not in src

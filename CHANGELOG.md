@@ -6,6 +6,7 @@ All notable changes to Afterwords. Format follows [Keep a Changelog](https://kee
 
 ### Added
 
+- **`afterwords configure --speak-full` / `--summarize` / `--speak-default`** — user-level speech mode in `~/.afterwords-server` (`SPEAK_MODE=full|summarize`). Full speaks long agent replies without cutting them down; summarize forces compression even when no project `.afterwords` exists; `--speak-default` clears the override so project keys apply again. Takes effect on the next spoken reply.
 - **Optional long-reply TTS summarization** — `summarize_for_tts.py` (installed as `~/.claude/hooks/summarize-for-tts.py`) can compress long agent replies before speech via `.afterwords` keys such as `cursor_summarize: true` / `cursor_summarize_model: qwen2.5:3b`. Ollama is used when configured (8s timeout); otherwise a fast extractive first+last sentence fallback. Full reply text is still archived.
 - **`AFTERWORDS_BACKENDS` env filter** — comma-separated backend allowlist so launchd can preload only e.g. `qwen3-0.6b` instead of probing every registered backend.
 

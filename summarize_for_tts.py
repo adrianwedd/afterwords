@@ -2,10 +2,15 @@
 
 Uses Ollama when cursor_summarize_model (or summarize_model) is set in
 .afterwords; otherwise falls back to a fast extractive two-sentence clip.
+
+User-level override: SPEAK_MODE in ~/.afterwords-server (or an injectable
+path). `full` always speaks the whole reply; `summarize` always compresses
+long replies; unset keeps project .afterwords opt-in behavior.
 """
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import urllib.error
@@ -16,10 +21,28 @@ DEFAULT_MIN_CHARS = 400
 DEFAULT_SENTENCES = 2
 DEFAULT_MAX_CHARS = 350
 OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
+DEFAULT_SERVER_CONFIG = Path.home() / ".afterwords-server"
 
 
 def _trim(s: str) -> str:
     return s.strip()
+
+
+def parse_speak_mode(server_config_path: str | Path | None = None) -> str:
+    """Return SPEAK_MODE from the server config: 'full', 'summarize', or ''."""
+    path = Path(server_config_path) if server_config_path else DEFAULT_SERVER_CONFIG
+    if not path.is_file():
+        return ""
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("SPEAK_MODE="):
+            mode = _trim(line.split("=", 1)[1]).lower()
+            if mode in {"full", "summarize"}:
+                return mode
+            return ""
+    return ""
 
 
 def parse_afterwords_config(aw_path: str | Path | None, agent: str) -> dict:
@@ -165,13 +188,26 @@ def summarize_for_tts(
     *,
     agent: str = "cursor",
     afterwords_path: str | Path | None = None,
+    server_config_path: str | Path | None = None,
 ) -> str:
     """Return text unchanged, or a short spoken summary when configured."""
     clean = _trim(text)
     if not clean:
         return clean
 
+    # Prefer an explicit path; else AFTERWORDS_SERVER_CONFIG (tests/CLI); else home.
+    if server_config_path is None:
+        env_cfg = os.environ.get("AFTERWORDS_SERVER_CONFIG", "").strip()
+        server_config_path = env_cfg or None
+
+    speak_mode = parse_speak_mode(server_config_path)
+    if speak_mode == "full":
+        return clean
+
     cfg = parse_afterwords_config(afterwords_path, agent)
+    if speak_mode == "summarize":
+        cfg["enabled"] = True
+
     if not cfg["enabled"] or len(clean) < cfg["min_chars"]:
         return clean
 
@@ -199,7 +235,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Summarize agent text for TTS")
     parser.add_argument("--agent", default="cursor")
     parser.add_argument("--afterwords", default="")
+    parser.add_argument("--server-config", default="")
     args = parser.parse_args()
     src = sys.stdin.read()
     aw = args.afterwords or None
-    print(summarize_for_tts(src, agent=args.agent, afterwords_path=aw))
+    sc = args.server_config or None
+    print(
+        summarize_for_tts(
+            src,
+            agent=args.agent,
+            afterwords_path=aw,
+            server_config_path=sc,
+        )
+    )

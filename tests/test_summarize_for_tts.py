@@ -1,11 +1,22 @@
 """Tests for summarize_for_tts — extractive fallback and .afterwords config."""
 from pathlib import Path
 
+import pytest
+
 from summarize_for_tts import (
     extractive_summary,
     parse_afterwords_config,
+    parse_speak_mode,
     summarize_for_tts,
 )
+
+
+@pytest.fixture(autouse=True)
+def isolate_server_config(tmp_path, monkeypatch):
+    """Do not read the developer's ~/.afterwords-server (SPEAK_MODE=full)."""
+    monkeypatch.setenv(
+        "AFTERWORDS_SERVER_CONFIG", str(tmp_path / "no-such-server-config")
+    )
 
 
 def test_parse_cursor_summarize_config(tmp_path: Path):
@@ -119,3 +130,113 @@ def test_agent_keys_win_regardless_of_line_order(tmp_path: Path):
         encoding="utf-8",
     )
     assert parse_afterwords_config(aw, "cursor")["max_chars"] == 500
+
+
+def test_parse_speak_mode_full_and_summarize(tmp_path: Path):
+    cfg = tmp_path / "server"
+    assert parse_speak_mode(cfg) == ""
+    cfg.write_text("WITH_17B=true\nSPEAK_MODE=full\n", encoding="utf-8")
+    assert parse_speak_mode(cfg) == "full"
+    cfg.write_text("SPEAK_MODE=summarize\n", encoding="utf-8")
+    assert parse_speak_mode(cfg) == "summarize"
+    cfg.write_text("SPEAK_MODE=weird\n", encoding="utf-8")
+    assert parse_speak_mode(cfg) == ""
+
+
+def test_speak_mode_full_overrides_project_summarize(tmp_path: Path):
+    aw = tmp_path / ".afterwords"
+    aw.write_text(
+        "cursor_summarize: true\ncursor_summarize_min: 50\n",
+        encoding="utf-8",
+    )
+    server = tmp_path / "server"
+    server.write_text("SPEAK_MODE=full\n", encoding="utf-8")
+    text = (
+        "I cleared quarantine from the app bundle. "
+        "Then I re-signed the Sparkle framework and nested components. "
+        "Afterwords is now running and you can open it from Applications."
+    )
+    out = summarize_for_tts(
+        text,
+        agent="cursor",
+        afterwords_path=aw,
+        server_config_path=server,
+    )
+    assert out == text
+
+
+def test_speak_mode_summarize_forces_when_project_disabled(tmp_path: Path):
+    aw = tmp_path / ".afterwords"
+    aw.write_text(
+        "cursor_summarize: false\ncursor_summarize_min: 50\n",
+        encoding="utf-8",
+    )
+    server = tmp_path / "server"
+    server.write_text("SPEAK_MODE=summarize\n", encoding="utf-8")
+    text = (
+        "I cleared quarantine from the app bundle. "
+        "Then I re-signed the Sparkle framework and nested components. "
+        "Afterwords is now running and you can open it from Applications."
+    )
+    out = summarize_for_tts(
+        text,
+        agent="cursor",
+        afterwords_path=aw,
+        server_config_path=server,
+    )
+    assert len(out) < len(text)
+    assert "quarantine" in out
+
+
+def test_speak_mode_unset_keeps_project_opt_in(tmp_path: Path):
+    aw = tmp_path / ".afterwords"
+    aw.write_text("cursor_summarize: false\n", encoding="utf-8")
+    server = tmp_path / "server"
+    server.write_text("WITH_17B=true\n", encoding="utf-8")
+    text = "A" * 500
+    assert (
+        summarize_for_tts(
+            text,
+            agent="cursor",
+            afterwords_path=aw,
+            server_config_path=server,
+        )
+        == text
+    )
+
+
+def test_speak_mode_summarize_without_afterwords_file(tmp_path: Path):
+    """SPEAK_MODE=summarize must compress even with no project .afterwords."""
+    server = tmp_path / "server"
+    server.write_text("SPEAK_MODE=summarize\n", encoding="utf-8")
+    text = (
+        "I cleared quarantine from the app bundle. "
+        "Then I re-signed the Sparkle framework and nested components. "
+        "Afterwords is now running and you can open it from Applications. "
+        + ("More spoken detail about the launch and signing work. " * 12)
+    )
+    out = summarize_for_tts(
+        text,
+        agent="cursor",
+        afterwords_path=None,
+        server_config_path=server,
+    )
+    assert len(out) < len(text)
+    assert "quarantine" in out
+
+
+def test_env_server_config_used_when_path_omitted(tmp_path: Path, monkeypatch):
+    aw = tmp_path / ".afterwords"
+    aw.write_text(
+        "cursor_summarize: true\ncursor_summarize_min: 50\n",
+        encoding="utf-8",
+    )
+    server = tmp_path / "from-env"
+    server.write_text("SPEAK_MODE=full\n", encoding="utf-8")
+    monkeypatch.setenv("AFTERWORDS_SERVER_CONFIG", str(server))
+    text = (
+        "I cleared quarantine from the app bundle. "
+        "Then I re-signed the Sparkle framework and nested components. "
+        "Afterwords is now running and you can open it from Applications."
+    )
+    assert summarize_for_tts(text, agent="cursor", afterwords_path=aw) == text
