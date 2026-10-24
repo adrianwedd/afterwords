@@ -231,6 +231,12 @@ print(json.dumps({
 
     begin_playback() {
         [ "$PLAYBACK_ATTEMPTED" = "1" ] && return 0
+        # Legacy per-session queues already removed the item after parsing;
+        # there is no receipt to commit, so playback proceeds as before.
+        if [ "${AFTERWORDS_RELIABLE_QUEUE:-0}" != "1" ]; then
+            PLAYBACK_ATTEMPTED=1
+            return 0
+        fi
         # Commit the uncertain audio side effect before invoking afplay. If
         # the worker dies during playback, drain must not replay this event.
         if ! mv "$ITEM" "${ITEM_BASE}.playing"; then

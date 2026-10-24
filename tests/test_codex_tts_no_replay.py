@@ -178,3 +178,43 @@ def test_enqueue_treats_playing_receipt_as_terminal(tmp_path):
 
     assert target == queue / f"{name}.json"
     assert not target.exists()
+
+
+def test_legacy_session_queue_still_plays(tmp_path):
+    """The per-session watcher runs the worker without a reliable queue; its
+    item is removed after parsing, so playback must not wait on a receipt."""
+    queue = tmp_path / "queue"
+    queue.mkdir()
+    fakebin = tmp_path / "bin"
+    fakebin.mkdir()
+    project = tmp_path / "project"
+    project.mkdir()
+    (project / ".afterwords").write_text("codex: seven-of-nine\n")
+    calls = tmp_path / "afplay-calls"
+    _executable(fakebin / "curl",
+                "#!/bin/bash\nout=''\nwhile [ $# -gt 0 ]; do\n"
+                "  if [ \"$1\" = '-o' ]; then shift; out=$1; fi\n  shift\ndone\n"
+                "[ -n \"$out\" ] && dd if=/dev/zero of=\"$out\" bs=2048 count=1 2>/dev/null\nexit 0\n")
+    _executable(fakebin / "afplay", "#!/bin/bash\necho play >> \"$AFPLAY_CALLS\"\n")
+    _executable(fakebin / "lame", "#!/bin/bash\nfor output do :; done\nprintf mp3 > \"$output\"\n")
+    _executable(fakebin / "stat",
+                f"#!{sys.executable}\nimport os, sys\ninfo = os.stat(sys.argv[-1])\n"
+                "if sys.argv[1] == '-f%u': print(info.st_uid)\n"
+                "elif sys.argv[1] == '-f%z': print(info.st_size)\nelse: raise SystemExit(2)\n")
+    env = dict(os.environ)
+    env.pop("AFTERWORDS_RELIABLE_QUEUE", None)
+    env.update(
+        PATH=f"{fakebin}:{env['PATH']}", HOME=str(tmp_path / "home"), PYTHONPATH=str(REPO),
+        CODEX_THREAD_ID=f"pytest-{os.getpid()}-{time.monotonic_ns()}",
+        AFTERWORDS_QUEUE_DIR=str(queue), AFTERWORDS_ARCHIVE_DIR=str(tmp_path / "archive"),
+        AFTERWORDS_PLAY_LOCK=str(tmp_path / "play.lock"), AFTERWORDS_PLAY_PID=str(tmp_path / "play.pid"),
+        AFTERWORDS_MUTE_FILE=str(tmp_path / "muted"), AFTERWORDS_PYTHON=sys.executable,
+        AFPLAY_CALLS=str(calls),
+    )
+    (queue / "legacy.json").write_text(json.dumps({
+        "project_dir": str(project), "agent": "codex", "text": "A per-session Codex reply.",
+    }))
+    subprocess.run(["bash", str(WORKER)], cwd=REPO, env=env, check=True, timeout=30)
+    assert calls.read_text().splitlines() == ["play"]
+    assert not list(queue.glob("*.playing"))
+    assert not list(queue.glob("legacy.*"))
