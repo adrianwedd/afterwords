@@ -168,6 +168,11 @@ async def synthesize(request: Request):
     except TimeoutError as exc:
         raise HTTPException(504, 'expressive synthesis deadline exceeded') from exc
     except RuntimeError as exc:
+        # The reason must survive the trip: it used to exist only in the
+        # exception object, while every consumer saw HTTP 503 with a body it
+        # discarded. Log it here AND return it.
+        import logging
+        logging.getLogger("expressive.sidecar").warning("synthesis failed: %s", exc)
         raise HTTPException(503, str(exc)) from exc
     finally:
         if not task.done():

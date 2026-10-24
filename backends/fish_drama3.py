@@ -81,13 +81,26 @@ class FishDrama3Backend(BackendBase):
             self.last_delivery_backend = self.name
             return audio, rate
         except (OSError, ValueError, RuntimeError, http.client.HTTPException) as exc:
-            if isinstance(exc, urllib.error.HTTPError) and exc.code in (400, 413):
-                raise ValueError('sidecar rejected synthesis input') from exc
+            code = exc.code if isinstance(exc, urllib.error.HTTPError) else None
+            body = ''
+            if code is not None:
+                # The sidecar answers 503 with the actual reason in the body
+                # (memory headroom, worker exit, audio validation). Discarding
+                # it left every failure looking identical upstream.
+                try:
+                    body = exc.read()[:200].decode('utf-8', 'replace')
+                except Exception:
+                    body = ''
+            if code in (400, 413):
+                raise ValueError(
+                    f'sidecar rejected synthesis input: {code} {body}'.strip()) from exc
             if prepared.cancel_event is not None and prepared.cancel_event.is_set():
                 from expressive.transport import SynthesisCancelled
                 raise SynthesisCancelled() from None
+            reason = f'{code}: {body}'.strip() if code is not None else repr(exc)
             if not fallback:
-                raise RuntimeError('expressive backend unavailable; fallback disabled') from exc
+                raise RuntimeError(
+                    f'expressive backend unavailable; fallback disabled ({reason})') from exc
             log.warning('Drama 3 failed (%s); delivering Qwen fallback with original transcript', exc)
             from . import get
             qwen = get('qwen3-0.6b')

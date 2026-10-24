@@ -15,14 +15,27 @@ feedback must not restart the engineering acceptance loop.
 ## Run locally
 
 From the Afterwords repository, install the pinned MLX Audio source in
-`.venv-drama3`, download the pinned model, then run:
+`.venv-drama3`, install the pinned model, then run:
 
 ```sh
 uv venv --python 3.12 .venv-drama3
 uv pip install --python .venv-drama3/bin/python -r requirements-drama3.txt
-hf download mlx-community/fish-audio-drama-3-4bit --revision cc639e27aba7edb73429d3e3806f471dcd79d316
+.venv-drama3/bin/python -m expressive.install_model
 .venv-drama3/bin/python -m expressive.sidecar
 ```
+
+Weights are installed to `~/models/fish-audio-drama-3-4bit` (override the root
+with `AFTERWORDS_MODEL_DIR`), with an `afterwords-pin.json` recording the model
+and revision. The worker loads only from there and refuses a mismatched pin.
+The Hugging Face cache is not used at runtime and can be cleared freely; if it
+already holds the pinned snapshot, the installer hard-links it instead of
+downloading. Comparison scripts use the same root, e.g.
+`python -m expressive.install_model --model mlx-community/fish-audio-drama-3-8bit
+--revision fedc7cc92bab5a180709cbaae6208d10b390bb97`.
+The pinned QA models load the same way:
+`--model mlx-community/Qwen2-Audio-7B-Instruct-4bit --revision c65570002626f41b4dc08b7b54f42f99f3e82e7f`
+(`scripts/assess-expressive-delivery.py`) and `--model mlx-community/OmniVoice
+--revision defe4bdce0decb321d17e96a4774417be08022ea` (`scripts/benchmark-omnivoice.py`).
 
 This binds only `127.0.0.1:7861`. `/health` reports the worker process and queue;
 `POST /synthesize` accepts `text`, base64 `reference_wav`, `reference_text`, and

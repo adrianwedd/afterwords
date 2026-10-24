@@ -97,7 +97,11 @@ def test_real_runner_retains_stream_on_budget_failure(tmp_path, monkeypatch, fra
         setattr(core, name, lambda *a: None)
     core.random = SimpleNamespace(seed=lambda *a: None)
     core.get_peak_memory = lambda: 123
-    modules['huggingface_hub'].snapshot_download = lambda *a, **kw: 'offline-test-model'
+    installed = tmp_path/'models'/'fish-audio-drama-3-4bit'
+    installed.mkdir(parents=True)
+    (installed/'afterwords-pin.json').write_text(json.dumps(
+        {'model': 'mlx-community/fish-audio-drama-3-4bit', 'revision': 'cc639e27aba7edb73429d3e3806f471dcd79d316'}))
+    monkeypatch.setenv('AFTERWORDS_MODEL_DIR', str(tmp_path/'models'))
     modules['mlx_audio.tts.utils'].load_model = lambda *a: Model()
     implementation = modules['mlx_audio.tts.models.fish_drama3.drama3']
     implementation.__file__ = str(impl_file)

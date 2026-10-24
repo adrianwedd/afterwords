@@ -9,7 +9,7 @@ import time
 from collections import OrderedDict
 from pathlib import Path
 
-from expressive.contracts import MODEL, REVISION, validate_options, directed_text
+from expressive.contracts import MODEL, REVISION, installed_model, validate_options, directed_text
 from expressive.generation import generate_with_context
 
 
@@ -27,7 +27,6 @@ def main():
     import mlx.core as mx
     import numpy as np
     import soundfile as sf
-    from huggingface_hub import snapshot_download
     from mlx_audio.tts.utils import load_model
     mx.set_memory_limit(40 * 1024**3)
     mx.set_cache_limit(2 * 1024**3)
@@ -58,7 +57,7 @@ def main():
                 if model is None:
                     from expressive.resources import acquire_model_lease
                     acquire_model_lease()
-                    model = load_model(snapshot_download(MODEL, revision=REVISION, local_files_only=True))
+                    model = load_model(str(installed_model()))
                 load_seconds = time.perf_counter() - load_started
                 original_frames = model._frames
                 def checked_frames(*args, **kwargs):
