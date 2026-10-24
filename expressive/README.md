@@ -32,6 +32,10 @@ already holds the pinned snapshot, the installer hard-links it instead of
 downloading. Comparison scripts use the same root, e.g.
 `python -m expressive.install_model --model mlx-community/fish-audio-drama-3-8bit
 --revision fedc7cc92bab5a180709cbaae6208d10b390bb97`.
+The pinned QA models load the same way:
+`--model mlx-community/Qwen2-Audio-7B-Instruct-4bit --revision c65570002626f41b4dc08b7b54f42f99f3e82e7f`
+(`scripts/assess-expressive-delivery.py`) and `--model mlx-community/OmniVoice
+--revision defe4bdce0decb321d17e96a4774417be08022ea` (`scripts/benchmark-omnivoice.py`).
 
 This binds only `127.0.0.1:7861`. `/health` reports the worker process and queue;
 `POST /synthesize` accepts `text`, base64 `reference_wav`, `reference_text`, and

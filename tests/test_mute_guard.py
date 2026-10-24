@@ -134,8 +134,9 @@ def _py_afplay_is_guarded(lines: list[str], idx: int) -> bool:
     return False
 
 
+# var/ is untracked local run state and session evidence (copies of old scripts).
 _SKIP_DIR_PARTS = {".git", "node_modules", ".venv", ".venv-drama3",
-                   ".venv-audio-audit", "venv", "__pycache__"}
+                   ".venv-audio-audit", "venv", "__pycache__", "var"}
 
 
 def _shell_scripts() -> list[Path]:
