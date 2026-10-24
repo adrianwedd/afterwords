@@ -31,6 +31,9 @@ import urllib.request
 from difflib import SequenceMatcher
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from expressive.auth import api_headers  # noqa: E402
+
 DEFAULT_API = "http://127.0.0.1:7862"
 # Deterministic degenerate takes exist for specific (voice, phrasing) pairs: the
 # sidecar returns ~18 s of near-silent noise. Rotating the wording across
@@ -82,7 +85,8 @@ def list_fish(api: str) -> list[str]:
 
 def synthesize(api: str, alias: str, text: str, dest: Path, timeout: float) -> dict:
     qs = urllib.parse.urlencode({"text": text, "voice": alias})
-    req = urllib.request.Request(f"{api}/synthesize?{qs}")
+    url = f"{api}/synthesize?{qs}"
+    req = urllib.request.Request(url, headers=api_headers(url))
     t0 = time.time()
     with urllib.request.urlopen(req, timeout=timeout) as r:
         body = r.read()

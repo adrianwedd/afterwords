@@ -36,8 +36,10 @@ not send messages or establish acoustic acceptance. The patch is maintained
 here as an explicit local compatibility dependency, not an upstream Hermes
 release claim. Applying it is part of the final runtime approval, not preparation.
 
-Studio uses a separately inspected source revision and the `--variant studio`
-patch/manifest. The default variant is M5. Neither variant updates the Hermes
+The `--variant studio` patch/manifest targets Studio's earlier Hermes base
+(`b53c2f6`). The default variant targets the four files as they stand from
+Hermes `08a79ff`; when a host's files match its before-hashes, use the default
+variant there. Preparation refuses a mismatch either way. Neither variant updates the Hermes
 repository, discards its dirty changes or changes profile configuration. Stage
 against the exact target host and recheck all hashes at application. Studio's
 legacy command also needs `{voice}` plus an explicit provider voice before the
