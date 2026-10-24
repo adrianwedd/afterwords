@@ -44,12 +44,34 @@ def test_unknown_reason_is_not_invented():
     assert (kind, status) == ("upstream_error", 500)
 
 
-def test_known_failure_never_degrades_to_the_bare_generic_body():
-    """The handler must carry reason + error_class; this asserts the contract
-    the handler is written against, without booting the server."""
-    import inspect
+def _failing_synthesis(monkeypatch, loopback):
     import server
 
-    source = inspect.getsource(server._synthesize_audio)
-    assert '"reason": detail' in source
-    assert '"error_class": category' in source
+    class Exploding:
+        supported_langs = ("en",)
+
+        def synthesize(self, text, prepared, lang):
+            raise RuntimeError("insufficient memory headroom at /Users/someone/models")
+
+    monkeypatch.setattr(server, "_enforce_host_check", loopback)
+    monkeypatch.setattr(server.backends, "get", lambda name: Exploding())
+    monkeypatch.setattr(server, "_route_for_lang", lambda profile, lang: profile)
+    monkeypatch.setattr(server, "_run_in_ml_thread", lambda fn, *a: fn(*a))
+    profile = type("P", (), {"name": "v", "backend": "qwen3-0.6b", "prepared": None})()
+    response = server._synthesize_audio("hello", profile, "en")
+    import json
+    return response.status_code, json.loads(response.body)
+
+
+def test_known_failure_never_degrades_to_the_bare_generic_body(monkeypatch):
+    status, body = _failing_synthesis(monkeypatch, loopback=True)
+    assert status == 503
+    assert body["error_class"] == "resource_exhaustion"
+    assert "insufficient memory headroom" in body["reason"]
+
+
+def test_lan_bind_keeps_the_class_but_not_the_local_reason(monkeypatch):
+    status, body = _failing_synthesis(monkeypatch, loopback=False)
+    assert status == 503
+    assert body["error_class"] == "resource_exhaustion"
+    assert "reason" not in body
