@@ -370,9 +370,9 @@ synth_chunk() {
     # (e.g. `unknown voice`) is reported as such, not as a missing chunk.
     local t="${AFTERWORDS_TTS_TIMEOUT:-180}" code
     if [ -n "${VOICE:-}" ]; then
-        code=$(curl "${CURL_AUTH[@]}" -s --max-time "$t" -w "%{http_code}" -G --data-urlencode "text=${text}" --data-urlencode "voice=${VOICE}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null) || true
+        code=$(curl ${CURL_AUTH[@]+"${CURL_AUTH[@]}"} -s --max-time "$t" -w "%{http_code}" -G --data-urlencode "text=${text}" --data-urlencode "voice=${VOICE}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null) || true
     else
-        code=$(curl "${CURL_AUTH[@]}" -s --max-time "$t" -w "%{http_code}" -G --data-urlencode "text=${text}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null) || true
+        code=$(curl ${CURL_AUTH[@]+"${CURL_AUTH[@]}"} -s --max-time "$t" -w "%{http_code}" -G --data-urlencode "text=${text}" -o "$out" "$TTS_ENDPOINT" 2>/dev/null) || true
     fi
     printf '%s' "${code:-000}" > "${out}.status"
 }

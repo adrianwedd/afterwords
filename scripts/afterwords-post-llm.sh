@@ -444,9 +444,9 @@ synth_chunk() {
     # AFTERWORDS_TTS_TIMEOUT (seconds).
     local t="${AFTERWORDS_TTS_TIMEOUT:-180}"
     if [ -n "${VOICE:-}" ]; then
-        curl "${CURL_AUTH[@]}" -s --max-time "$t" -G             --data-urlencode "text=${text}"             --data-urlencode "voice=${VOICE}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+        curl ${CURL_AUTH[@]+"${CURL_AUTH[@]}"} -s --max-time "$t" -G             --data-urlencode "text=${text}"             --data-urlencode "voice=${VOICE}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
     else
-        curl "${CURL_AUTH[@]}" -s --max-time "$t" -G             --data-urlencode "text=${text}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+        curl ${CURL_AUTH[@]+"${CURL_AUTH[@]}"} -s --max-time "$t" -G             --data-urlencode "text=${text}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
     fi
 }
 
