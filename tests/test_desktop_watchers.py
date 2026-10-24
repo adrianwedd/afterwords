@@ -518,3 +518,35 @@ def test_codex_install_boundary_preserves_reply_before_delayed_first_scan(tmp_pa
     codex.poll(path,state,lambda *e: events.append(e),skip_before=baseline[str(path)]['offset'])
     codex.poll(path,state,lambda *e: events.append(e))
     assert [e[3] for e in events] == ['In progress at installation.','Completed before watcher startup.']
+
+
+def test_supervisor_drains_event_published_after_final_scan(tmp_path):
+    """A publisher whose drain lost the lock race must not strand its event."""
+    queue = tmp_path/'queue'
+    queue.mkdir()
+    (queue/'first.json').write_text('{}')
+    worker = tmp_path/'worker.sh'
+    worker.write_text('#!/bin/bash\n'
+        f'q="{queue}"\n'
+        'for f in "$q"/*.json; do [ -e "$f" ] && mv "$f" "${f%.json}.done"; done\n'
+        # First run: a reply lands after this worker's last scan.
+        '[ -e "$q/late.done" ] || [ -e "$q/late.json" ] || echo {} > "$q/late.json"\n')
+    result = subprocess.run([sys.executable, '-m', 'watcher.drain', str(worker), str(queue)],
+                            cwd=REPO, capture_output=True, text=True, timeout=15)
+    assert result.returncode == 0, result.stderr
+    assert (queue/'first.done').exists() and (queue/'late.done').exists()
+    assert not list(queue.glob('*.json'))
+
+
+def test_supervisor_does_not_spin_on_events_the_worker_left_pending(tmp_path):
+    queue = tmp_path/'queue'
+    queue.mkdir()
+    (queue/'stuck.json').write_text('{}')
+    worker = tmp_path/'worker.sh'
+    runs = tmp_path/'runs'
+    worker.write_text(f'#!/bin/bash\necho run >> "{runs}"\nexit 3\n')
+    result = subprocess.run([sys.executable, '-m', 'watcher.drain', str(worker), str(queue)],
+                            cwd=REPO, capture_output=True, text=True, timeout=15)
+    assert result.returncode == 3
+    assert runs.read_text().splitlines() == ['run']
+    assert (queue/'stuck.json').exists()
