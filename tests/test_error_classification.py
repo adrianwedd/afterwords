@@ -63,15 +63,20 @@ def _failing_synthesis(monkeypatch, loopback):
     return response.status_code, json.loads(response.body)
 
 
-def test_known_failure_never_degrades_to_the_bare_generic_body(monkeypatch):
-    status, body = _failing_synthesis(monkeypatch, loopback=True)
-    assert status == 503
-    assert body["error_class"] == "resource_exhaustion"
-    assert "insufficient memory headroom" in body["reason"]
+import pytest  # noqa: E402
 
 
-def test_lan_bind_keeps_the_class_but_not_the_local_reason(monkeypatch):
-    status, body = _failing_synthesis(monkeypatch, loopback=False)
+@pytest.mark.parametrize("loopback", [True, False])
+def test_known_failure_never_degrades_to_the_bare_generic_body(monkeypatch, loopback):
+    status, body = _failing_synthesis(monkeypatch, loopback)
     assert status == 503
     assert body["error_class"] == "resource_exhaustion"
-    assert "reason" not in body
+    assert body["voice_backend"] == "qwen3-0.6b"
+
+
+def test_reason_stays_in_the_log_not_the_response(monkeypatch, caplog):
+    with caplog.at_level("ERROR", logger="tts"):
+        status, body = _failing_synthesis(monkeypatch, loopback=True)
+    assert "reason" not in body and "/Users/someone" not in str(body)
+    assert "insufficient memory headroom" in caplog.text
+    assert "[resource_exhaustion]" in caplog.text

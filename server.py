@@ -608,16 +608,15 @@ def _synthesize_audio(text: str, profile: VoiceProfile, lang: str, performance: 
     except Exception as exc:
         # Keep the evidence. A generic "synthesis failed" body made 1,253
         # failures indistinguishable: the reason existed at the sidecar and was
-        # thrown away here. The bounded reason is returned only on a loopback
-        # bind; a LAN bind gets the class without local paths or internals.
-        detail = str(exc)[:200]
-        category, status = classify_synthesis_error(detail)
+        # thrown away here. Callers get the class; the reason itself can carry
+        # local paths and internals, so it stays in the server log.
+        category, status = classify_synthesis_error(str(exc)[:200])
         log.error("synthesis failed [%s]: %s", category, exc, exc_info=True)
-        body = {"error": "synthesis failed", "error_class": category,
-                "voice_backend": profile.backend}
-        if _enforce_host_check:
-            body["reason"] = detail
-        return JSONResponse(body, status_code=status)
+        return JSONResponse(
+            {"error": "synthesis failed", "error_class": category,
+             "voice_backend": profile.backend},
+            status_code=status,
+        )
 
     elapsed = time.time() - t0
     duration = len(data) / sr if sr else 0
