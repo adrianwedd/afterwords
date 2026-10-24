@@ -83,7 +83,7 @@ def main():
     import mlx.core as mx
     import numpy as np
     import soundfile as sf
-    from huggingface_hub import snapshot_download
+    from expressive.contracts import installed_model
     from mlx_audio.tts.utils import load_model
     mx.set_memory_limit(cap*1024**3);mx.set_cache_limit(2*1024**3)
     args.out.mkdir(parents=True,exist_ok=True)
@@ -98,7 +98,7 @@ def main():
     run_path.write_text(json.dumps(run,indent=2)+'\n')
     started=time.perf_counter()
     try:
-        model=load_model(snapshot_download(args.model,revision=args.revision,local_files_only=True))
+        model=load_model(str(installed_model(args.model,args.revision)))
         run.update(load_seconds=time.perf_counter()-started,load_peak_metal_bytes=mx.get_peak_memory())
         original=model._frames
         def checked(*a,**kw):

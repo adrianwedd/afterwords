@@ -35,7 +35,7 @@ def main():
     import numpy as np
     import soundfile as sf
     from mlx_audio.tts.utils import load_model
-    from huggingface_hub import snapshot_download
+    from expressive.contracts import installed_model
     a.output.parent.mkdir(parents=True, exist_ok=True)
     receipt = dict(model=a.model, revision=a.revision, text=a.text,
                    text_sha256=hashlib.sha256(a.text.encode()).hexdigest(), seed=a.seed,
@@ -48,7 +48,7 @@ def main():
     try:
         from expressive.resources import acquire_model_lease
         acquire_model_lease()
-        path = snapshot_download(a.model, revision=a.revision, local_files_only=True)
+        path = str(installed_model(a.model, a.revision))
         mx.random.seed(a.seed)
         model = load_model(path)
         receipt['load_seconds'] = time.perf_counter() - start

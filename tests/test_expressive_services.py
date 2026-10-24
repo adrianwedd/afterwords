@@ -54,6 +54,8 @@ def test_services_preserve_default_server_and_isolate_dependencies(tmp_path):
     assert '7860' not in api['ProgramArguments']
     assert sidecar['ProgramArguments'][0].endswith('.venv-drama3/bin/python')
     assert api['ProgramArguments'][0].endswith('.venv/bin/python')
+    # A cleared HF cache must cost a Qwen re-download, not a failed start.
+    assert 'HF_HUB_OFFLINE' not in api['EnvironmentVariables']
     for config in plists.values():
         assert config['KeepAlive'] is True
         assert config['ThrottleInterval'] == 10

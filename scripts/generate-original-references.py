@@ -12,7 +12,7 @@ import sys
 import time
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from expressive.contracts import MODEL, REVISION, SOURCE_REVISION
+from expressive.contracts import MODEL, REVISION, SOURCE_REVISION, installed_model
 
 TEXT = ('The committee has reviewed the situation. Apparently, the situation has also reviewed the committee. '
         'We are taking a short break while everyone considers what that means. Please keep your questions, '
@@ -44,13 +44,12 @@ def main():
     import mlx.core as mx
     import numpy as np
     import soundfile as sf
-    from huggingface_hub import snapshot_download
     from mlx_audio.tts.utils import load_model
     mx.set_memory_limit(40*1024**3);mx.set_cache_limit(2*1024**3)
     from expressive.resources import acquire_model_lease
     acquire_model_lease()
     started=time.perf_counter()
-    model=load_model(snapshot_download(MODEL,revision=REVISION,local_files_only=True))
+    model=load_model(str(installed_model()))
     load=time.perf_counter()-started
     original=model._frames
     def checked(*a,**kw):

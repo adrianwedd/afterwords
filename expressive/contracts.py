@@ -1,5 +1,8 @@
 """Shared wire contract. No MLX or web dependencies in the main server."""
+import json
 import math
+import os
+from pathlib import Path
 
 MODEL = 'mlx-community/fish-audio-drama-3-4bit'
 REVISION = 'cc639e27aba7edb73429d3e3806f471dcd79d316'
@@ -7,6 +10,24 @@ SOURCE_REVISION = 'dad2087f790dfe96b07d5aac1405db4b578b411f'
 CUES = frozenset({'whispers', 'laughs', 'sighs', 'chuckles', 'gasps', 'excited', 'sad', 'angry', 'calm'})
 DEFAULTS = dict(temperature=0.7, top_p=0.7, top_k=30, max_frames=1600, seed=20261016,
                 context_mode='continuous')
+PIN_FILE = 'afterwords-pin.json'
+
+
+def model_dir(model=MODEL):
+    # Installed weights live in one chosen root, never the disposable HF cache.
+    root = Path(os.environ.get('AFTERWORDS_MODEL_DIR') or Path.home() / 'models').expanduser()
+    return root / model.split('/')[-1]
+
+
+def installed_model(model=MODEL, revision=REVISION):
+    path = model_dir(model)
+    try:
+        recorded = json.loads((path / PIN_FILE).read_text())
+    except (OSError, ValueError):
+        raise RuntimeError(f'{model} is not installed at {path}; run python -m expressive.install_model') from None
+    if recorded != {'model': model, 'revision': revision}:
+        raise RuntimeError(f'{path} holds {recorded}, not {model}@{revision}')
+    return path
 
 
 def validate_options(options):

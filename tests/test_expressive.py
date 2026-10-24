@@ -11,7 +11,7 @@ import numpy as np
 import pytest
 import soundfile as sf
 
-from expressive.contracts import directed_text, validate_options
+from expressive.contracts import MODEL, REVISION, directed_text, installed_model, validate_options
 from expressive.sidecar import WorkerPool
 from backends.fish_drama3 import FishDrama3Backend
 
@@ -21,6 +21,19 @@ from backends.fish_drama3 import FishDrama3Backend
 def test_invalid_controls_rejected(options):
     with pytest.raises(ValueError):
         validate_options(options)
+
+
+def test_installed_model_requires_matching_pin_outside_hf_cache(tmp_path, monkeypatch):
+    monkeypatch.setenv('AFTERWORDS_MODEL_DIR', str(tmp_path))
+    with pytest.raises(RuntimeError, match='not installed'):
+        installed_model()
+    path = tmp_path / 'fish-audio-drama-3-4bit'
+    path.mkdir()
+    (path / 'afterwords-pin.json').write_text(json.dumps({'model': MODEL, 'revision': 'other'}))
+    with pytest.raises(RuntimeError, match='not ' + MODEL):
+        installed_model()
+    (path / 'afterwords-pin.json').write_text(json.dumps({'model': MODEL, 'revision': REVISION}))
+    assert installed_model() == path
 
 
 def test_direction_preserves_transcript_and_rejects_midword():

@@ -130,7 +130,7 @@ def main():
         import mlx.core as mx
         import numpy as np
         import soundfile as sf
-        from huggingface_hub import snapshot_download
+        from expressive.contracts import installed_model
         from mlx_audio.tts.utils import load_model
         import mlx_audio.tts.models.fish_drama3.drama3 as implementation
         impl_path = Path(implementation.__file__)
@@ -144,7 +144,7 @@ def main():
         load_start = time.perf_counter()
         receipt['status'] = 'loading'
         save()
-        snapshot = Path(snapshot_download(a.model, revision=a.revision, local_files_only=True))
+        snapshot = installed_model(a.model, a.revision)
         if (snapshot/'config.json').exists():
             config_raw = (snapshot/'config.json').read_bytes()
             quant = json.loads(config_raw).get('quantization', {})
