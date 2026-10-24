@@ -88,9 +88,9 @@ def main():
         import mlx.core as mx
         import numpy as np
         import soundfile as sf
-        from huggingface_hub import snapshot_download
         from mlx_audio.tts.utils import load_model
         from mlx.utils import tree_flatten
+        from expressive.contracts import installed_model
         from expressive.reference import normalize_reference
         from expressive.resources import acquire_model_lease
         acquire_model_lease()
@@ -101,7 +101,7 @@ def main():
             conditioning, conversion = normalize_reference(raw_reference)
             receipt.update(reference_conversion=conversion, conditioning_sha256=sha(conditioning))
         load_started = time.perf_counter()
-        model = load_model(snapshot_download(MODEL, revision=REVISION, local_files_only=True))
+        model = load_model(str(installed_model(MODEL, REVISION)))
         receipt['load_seconds'] = time.perf_counter() - load_started
         receipt['parameter_dtypes'] = sorted({str(value.dtype) for _, value in tree_flatten(model.parameters())})
         if model.audio_tokenizer is None or model.text_tokenizer is None:

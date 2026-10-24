@@ -1,9 +1,9 @@
-"""Install pinned Fish weights into the model root (default ~/models).
+"""Install pinned model weights (Fish by default) into the model root (default ~/models).
 
 Run: .venv-drama3/bin/python -m expressive.install_model [--model M --revision R]
 An existing HF cache snapshot is hard-linked (no extra disk); otherwise the
 pinned revision is downloaded straight into place. Afterwards the HF cache may
-be cleared without affecting the sidecar.
+be cleared without affecting the sidecar or the pinned QA scripts.
 """
 import argparse
 import json

@@ -38,8 +38,7 @@ def main():
     from scipy.signal import resample_poly
     import mlx.core as mx
     from mlx_audio.stt.utils import load_model
-    from huggingface_hub import snapshot_download
-    from expressive.contracts import SOURCE_REVISION
+    from expressive.contracts import SOURCE_REVISION, installed_model
     mx.set_memory_limit(16*1024**3);mx.set_cache_limit(1024**3)
     source,rate=sf.read(args.audio,dtype='float32',always_2d=True)
     if source.shape[1] not in (1,2) or not np.isfinite(source).all():parser.error('invalid audio')
@@ -59,7 +58,7 @@ def main():
     def record():args.out.write_text(json.dumps(receipt,indent=2)+'\n')
     record();started=time.perf_counter()
     try:
-        model=load_model(snapshot_download(MODEL,revision=REVISION,local_files_only=True))
+        model=load_model(str(installed_model(MODEL,REVISION)))
         receipt['load_seconds']=time.perf_counter()-started
         for start in range(0,len(source),20*rate):
             piece=source[start:start+20*rate].mean(axis=1)
