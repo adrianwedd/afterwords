@@ -62,6 +62,8 @@ def test_services_preserve_default_server_and_isolate_dependencies(tmp_path):
         assert 'setup.sh' not in ' '.join(config['ProgramArguments'])
 
 
-def test_expressive_api_requires_caller_authentication():
+def test_expressive_api_leaves_caller_authentication_off():
+    # The API is reachable only on loopback and the private network; callers
+    # such as lulzbench send no credential, so the gate stays opt-in.
     plists = dict(load('prepare-expressive-services').service_plists(ROOT, 'm5-tb', '100.114.8.87'))
-    assert plists['net.afterwords.expressive.api']['EnvironmentVariables']['AFTERWORDS_REQUIRE_EXPRESSIVE_AUTH'] == '1'
+    assert 'AFTERWORDS_REQUIRE_EXPRESSIVE_AUTH' not in plists['net.afterwords.expressive.api']['EnvironmentVariables']

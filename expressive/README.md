@@ -628,10 +628,11 @@ voice gallery, port routing, reviewed Vixen selection and same-reference fallbac
 Rollback restores prior code and leaves the protected credential in custody; no
 reference audio, profile or configuration identity is changed by this boundary.
 
-The private expressive API also requires this capability before accepting any
-non-health request. Its prepared service definition sets
-`AFTERWORDS_REQUIRE_EXPRESSIVE_AUTH=1`; apply that single environment field to
-the existing API plist during transition. The standard 7860 API is unchanged.
+The private expressive API can also require this capability before accepting
+any non-health request, but only when `AFTERWORDS_REQUIRE_EXPRESSIVE_AUTH=1` is
+set. The prepared service definition leaves it unset: the API is reachable only
+on loopback and the private network, and local callers send no credential. The
+standard 7860 API is unchanged.
 Install the protected credential on both Studio (API/sidecar) and M5 (17862
 caller), using the same reviewed service-specific capability. Shell provider
 and hook requests to 7862/17862 use a private header file consumed by `curl -H

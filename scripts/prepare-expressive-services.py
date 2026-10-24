@@ -23,7 +23,6 @@ def service_plists(root, peer, tailscale_ip):
         env = {'PATH': '/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin', 'HF_HUB_OFFLINE': '1'}
         if name == 'api':
             env['AFTERWORDS_BACKENDS'] = 'qwen3-0.6b,fish-drama3'
-            env['AFTERWORDS_REQUIRE_EXPRESSIVE_AUTH'] = '1'
             # Qwen loads from the HF cache; offline would make clearing it fatal.
             del env['HF_HUB_OFFLINE']
         yield label, {**common, 'Label': label, 'ProgramArguments': command,
