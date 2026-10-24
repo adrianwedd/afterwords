@@ -46,6 +46,7 @@ def register_all(with_17b: bool = False) -> None:
 
     # Experimental backends — each isolated.
     _experimental = (
+        ("fish_drama3", "FishDrama3Backend"),
         ("voxtral", "VoxtralBackend"),
         ("openvoice_v2", "OpenVoiceV2Backend"),
         ("f5_tts", "F5TTSBackend"),

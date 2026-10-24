@@ -1,0 +1,7 @@
+# Retained private task/process logs and inspection copies, not release artifacts.
+TASK.txt
+PROGRESS.md
+*.log
+environment-initial.txt
+upstream-drama3.py
+upstream-drama3.md

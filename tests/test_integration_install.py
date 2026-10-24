@@ -58,7 +58,9 @@ command() {
         assert config['hooks']['afterAgentResponse'][0]['command'].endswith('cursor-tts-hook.sh')
     if agent == 'agy':
         config = json.loads((tmp_path / '.gemini/config/hooks.json').read_text())
-        assert config['afterwords-tts']['Stop'][0]['command'].endswith('agy-tts-hook.sh')
+        command = config['afterwords-tts']['Stop'][0]['command']
+        assert 'Afterwords/watchers/runtime/.claude/hooks/agy-tts-hook.sh' in command
+        assert 'AFTERWORDS_PYTHON=' in command
     if agent == 'gemini':
         assert not (tmp_path / '.gemini/settings.json').exists()
         assert 'AfterAgent' in result.stdout
@@ -68,3 +70,46 @@ command() {
                             input='One sentence. Another sentence.', text=True, capture_output=True)
     assert result.returncode == 0, result.stderr
     assert 'One sentence.' in result.stdout
+
+
+@pytest.mark.parametrize('agent', ['claude', 'agy'])
+def test_registration_preserves_unrelated_mentions_and_adapter_paths(tmp_path, agent):
+    import sys
+    home = tmp_path/'home'; home.mkdir()
+    settings = home/'settings.json'
+    name = 'claude-tts-hook.sh' if agent == 'claude' else 'agy-tts-hook.sh'
+    unrelated = [
+        {'type':'command', 'command':f'echo {name}'},
+        {'type':'command', 'command':f'bash /separate/owner/{name}'},
+        {'type':'prompt', 'command':f'bash ~/.claude/hooks/{name}'},
+    ]
+    legacy = {'type':'command','command':f'bash ~/.claude/hooks/{name}'}
+    new_command = f'AFTERWORDS_PYTHON="/configured/python" bash "{home}/Library/Application Support/Afterwords/watchers/runtime/.claude/hooks/{name}"'
+    if agent == 'claude':
+        original = {'other':42,'hooks':{event:[{'matcher':'keep','hooks':[legacy,*unrelated]}]
+                                     for event in ('Stop','SubagentStop')}}
+    else:
+        original = {'other-owner':{'Stop':[legacy]},'afterwords-tts':{'Stop':[legacy,*unrelated]}}
+    settings.write_text(json.dumps(original));settings.chmod(0o600)
+    for _ in range(2):
+        result = subprocess.run([sys.executable,str(REPO/'scripts/register-integrations.py'),agent,
+            '--settings',str(settings),'--home',str(home),'--repo',str(REPO),'--command',new_command],
+            capture_output=True,text=True)
+        assert result.returncode == 0,result.stderr
+    current = json.loads(settings.read_text())
+    if agent == 'claude':
+        assert current['other'] == 42
+        groups = [current['hooks'][e] for e in ('Stop','SubagentStop')]
+        for entries in groups:
+            assert entries[0]['matcher'] == 'keep'
+            flattened = [hook for entry in entries for hook in entry['hooks']]
+            assert all(item in flattened for item in unrelated)
+            assert sum(item.get('command') == new_command for item in flattened) == 1
+            assert legacy not in flattened
+    else:
+        assert current['other-owner'] == original['other-owner']
+        entries = current['afterwords-tts']['Stop']
+        assert all(item in entries for item in unrelated)
+        assert sum(item.get('command') == new_command for item in entries) == 1
+        assert legacy not in entries
+    assert settings.stat().st_mode & 0o777 == 0o600

@@ -1,0 +1,643 @@
+# Expressive sidecar (experimental)
+
+Built with Fish Audio. This implementation uses the Fish Audio Community License
+v1.0 model and an unofficial MLX conversion. Model code and weight pins are in
+`contracts.py`. No experimental packages are installed in Afterwords' main venv.
+
+Current status: expressive TTS engineering is complete within its verified scope.
+Vixen's reviewed Drama/Seydoux route is delivered, promoted and positively
+received. Preserve that configuration, rollback and evidence. Both 4-bit and
+8-bit qualification retain delivery failures; this is not general long-form or
+public-release qualification. LulzBench casting is deferred editorial work.
+See [the final closeout](../qa/expressive-voice/CLOSEOUT.md); missing human
+feedback must not restart the engineering acceptance loop.
+
+## Run locally
+
+From the Afterwords repository, install the pinned MLX Audio source in
+`.venv-drama3`, install the pinned model, then run:
+
+```sh
+uv venv --python 3.12 .venv-drama3
+uv pip install --python .venv-drama3/bin/python -r requirements-drama3.txt
+.venv-drama3/bin/python -m expressive.install_model
+.venv-drama3/bin/python -m expressive.sidecar
+```
+
+Weights are installed to `~/models/fish-audio-drama-3-4bit` (override the root
+with `AFTERWORDS_MODEL_DIR`), with an `afterwords-pin.json` recording the model
+and revision. The worker loads only from there and refuses a mismatched pin.
+The Hugging Face cache is not used at runtime and can be cleared freely; if it
+already holds the pinned snapshot, the installer hard-links it instead of
+downloading. Comparison scripts use the same root, e.g.
+`python -m expressive.install_model --model mlx-community/fish-audio-drama-3-8bit
+--revision fedc7cc92bab5a180709cbaae6208d10b390bb97`.
+The pinned QA models load the same way:
+`--model mlx-community/Qwen2-Audio-7B-Instruct-4bit --revision c65570002626f41b4dc08b7b54f42f99f3e82e7f`
+(`scripts/assess-expressive-delivery.py`) and `--model mlx-community/OmniVoice
+--revision defe4bdce0decb321d17e96a4774417be08022ea` (`scripts/benchmark-omnivoice.py`).
+
+This binds only `127.0.0.1:7861`. `/health` reports the worker process and queue;
+`POST /synthesize` accepts `text`, base64 `reference_wav`, `reference_text`, and
+optional `performance`. It returns complete PCM16 mono 44.1 kHz WAV. The worker
+uses actual native generation chunks internally, but this HTTP endpoint returns
+only the finished file. It does not claim live playback or public streaming.
+
+The persistent child process loads weights only on first use and runs offline.
+It caches up to four reference files/conditioning contexts. Admission is bounded
+to four requests including active work; queue plus generation deadline is 180s.
+A timeout or disconnected client kills the worker before admitting the next
+request. Failed requests return no partial audio. The child has a 40 GiB MLX
+allocation limit and 2 GiB cache limit; startup requires 64 GiB available host
+memory. This is admission control, not proof that concurrent inference has no
+latency impact. Measure that separately.
+
+## Afterwords integration
+
+`fish-drama3` is registered but is not selected or loaded by default. An opt-in
+voice uses the existing `backend: "fish-drama3"` metadata plus `synthesis_extras`.
+Enable it through the existing `AFTERWORDS_BACKENDS` mechanism only after local
+qualification. Existing Qwen defaults and voice profiles need no change.
+
+An independent Afterwords instance can use `--port 7862 --voices-dir PRIVATE_DIR`
+with `AFTERWORDS_BACKENDS=qwen3-0.6b,fish-drama3`. That existing directory must
+contain its own profile JSON and reference WAV files; reference paths stay
+confined to it. Startup, reload and clone storage all use the selected directory.
+Omitting the flag retains the bundled gallery. This allows experimental voices
+to remain separate from the in-use server's gallery and reload operations.
+
+Supported controls: `temperature` (0.1–1.5), `top_p` (0.1–1), `top_k` (1–100),
+`max_frames` (16–4000 per text chunk), `seed`, and `cues`, e.g.
+`[{"offset": 0, "cue": "whispers"}]`. Cues are separate from the authoritative
+transcript and inserted at character offsets at word boundaries. Allowed names
+are in `contracts.py`; acceptance of a cue is not proof of expressive effect.
+Free-form `instruct`, speed changes, revision and infilling are not supported.
+
+`context_mode` defaults to `continuous` (the upstream generation strategy).
+The opt-in `paragraphs` mode makes a separate model call at each blank-line
+paragraph, using the same reference and resetting the seed for each call.
+It preserves every input character, attaches punctuation-only separators to
+nearby prose, and inserts no artificial silence or crossfade. This prevents
+cross-paragraph history from influencing generation, but may change prosody
+at joins. It is a candidate strategy for literal narration, not a transcript
+guarantee: qualify the resulting audio before release. An empty paragraph
+generation aborts the whole buffered request instead of dropping that text.
+Its first full 4bit Collection response failed the frame/EOS limit. It remains
+an experimental qualification option, not an accepted remedy for missing words.
+
+Per-request controls override voice defaults via the optional GET `performance`
+JSON parameter, or POST `performance` object on the existing clone-enabled POST
+route. They never mutate the prepared voice. Controls on other backends fail
+explicitly. GET retains its existing 5000-character input limit.
+
+The adapter uses a fixed loopback URL with HTTP proxies disabled. If the sidecar
+is unavailable, full-text Qwen fallback is enabled by default; set per-voice or
+per-request `qwen_fallback: false` to fail instead. Fallback uses the original
+transcript, not delivery tags. `X-Backend` names the backend that actually
+produced the WAV and `X-Requested-Backend` names the selected voice backend.
+The expressive adapter resamples Qwen fallback to 44.1 kHz with a polyphase
+filter, preserving duration and pitch so sentence chunks keep a consistent
+format when a reply mixes Drama and fallback. Direct Qwen requests remain
+24 kHz. Consumers must still read WAV metadata. Logs identify fallback.
+
+The sidecar rejects complete outputs containing ten or more consecutive seconds
+below -50 dBFS (20 ms RMS windows). Actual 4bit qualification produced 68 seconds
+of silence on a laughter prompt and a 19-second gap in a long response, despite
+normal model completion. Rejection discards the entire buffered output and uses
+the configured fallback policy; it never trims damaged speech into a success.
+This conservative guard also rejects deliberately requested pauses that long.
+It does not detect every missing word or certify transcript or acting quality.
+Invalid requests are not disguised as
+availability failures.
+
+When fallback is disabled, an ordinary sidecar failure reaches the main API's
+existing generic synthesis-error response (HTTP 500, no audio). Queue admission
+and lock deadlines use HTTP 503. Clients must check status and content type;
+they must not treat every failure as a WAV or assume all unavailability is 503.
+
+The main server admits at most four expressive requests waiting for its shared
+MLX lock, with a 180s lock deadline. Qwen's existing serialization remains.
+The sidecar deadline starts when its request arrives, so the two stages have
+separate budgets. Expressive GET/POST requests monitor client disconnects. A per-request cancellation
+event interrupts queue waits and shuts down the adapter's sidecar socket, allowing
+the sidecar to kill its active worker. Explicit cancellation never starts Qwen
+fallback. The main request retains its synthesis lock until adapter cleanup has
+finished. Existing Qwen inference is not made interruptible by this change;
+a fallback already executing in Qwen completes under its existing lock.
+
+The header guards use ASGI middleware that preserves the receive channel.
+The prior `BaseHTTPMiddleware` wrappers hid disconnects from the nonblocking
+poll: a live abandoned request continued generating for139seconds. After the
+fix, the same loaded-model GET request through7862 reaped its worker in0.54s,
+with no fallback warning; the following request delivered6.83s of Fish audio.
+Private before/after receipts are in `var/expressive-voice/live-cancel-{1,2}`.
+GET and POST disconnects also pass full-app middleware regression tests. This
+does not make already-running Qwen fallback interruptible or certify audio quality.
+
+## References and release
+
+Use original synthetic or explicitly consented reference voices. The existing
+identifiable-person voice library is not a public-use permission registry.
+Model-use permission, ownership of generated output and reference-voice rights
+are separate. Keep this service local; public sites receive reviewed static
+assets only. The model's license/attribution does not grant reference rights.
+See `qa/expressive-voice/FISH_AUDIO_LICENSE.txt` for the inspected license.
+
+## Verification and rollback
+
+```sh
+.venv/bin/python -m pytest tests/test_expressive.py tests/test_backends.py tests/test_server.py
+.venv-drama3/bin/python scripts/benchmark-drama3.py --text 'Well. That worked.' --output qa/expressive-voice/sample.wav
+```
+
+The probe refuses to overwrite attempts, records model/text/reference/audio
+hashes and TTFA/RTF/memory, and treats upstream frame exhaustion as failure.
+Its timeout is cooperative; production hard cancellation belongs to the
+sidecar. A successful WAV remains `generated_not_listening_verified`.
+
+Rollback: restore the profile's previous speech routing before stopping the
+experimental services. Compare the current configuration with the recorded
+pre-activation copy and restore only the TTS provider and speech-hook fields
+changed by activation. Do not replace the whole configuration: unrelated
+profile edits may have occurred since that copy was taken. Reconcile the native
+hook's accepted configuration when changing its command. Vixen selects the
+isolated experimental route; the default profile and 7860 service remain
+separate.
+
+The Hermes command provider accepts `AFTERWORDS_PORT` for a profile-local
+loopback route, for example `env AFTERWORDS_PORT=7862 bash
+/path/to/afterwords-tts-command.sh {input_path} {output_path} {voice}`.
+It defaults to 7860 and rejects invalid ports before synthesis. A remote profile
+can use an independently verified SSH loopback forward; this setting does not
+permit arbitrary remote URLs or change the default Hermes profile. Actual
+Vixen configuration is on M5; do not create a replacement profile on Studio.
+
+Hermes native `/voice` sentence playback requires the caller-scoped consumer
+bridge in `hermes/patches/README.md`. It marks only native synthesis calls and
+honours mute/shared locking at actual playback. Ordinary CLI tools retain
+provider playback even when a legacy profile-wide owner setting remains.
+Consumer-owned artifacts archive under `tts-archive/consumer-delivered`, outside
+the feed poller's top-level scan. Hermes overlaps full-file sentence synthesis
+and playback; this does not make the model natively stream audio.
+
+To capture the installed native sentence route without speaker playback, run
+the following on the host owning the existing Hermes profile, using its own
+Hermes environment. Use a new output directory for every attempt:
+
+```sh
+HERMES_HOME="$HOME/.hermes/profiles/vixen" \
+  "$HOME/.hermes/hermes-agent/venv/bin/python" scripts/verify-hermes-sentence-route.py \
+  --hermes-root "$HOME/.hermes/hermes-agent" --out var/native-sentence-smoke-1
+```
+
+The smoke test uses real configured synthesis, captures native playback calls,
+detects provider playback, decodes the returned artifacts (including Hermes'
+Opus conversion), and verifies the profile file remained unchanged. It sets the
+playback owner only in its own process environment. It does not generate an
+agent reply, exercise the independent legacy post-LLM hook, or certify audible
+playback/voice quality. A configured legacy speech hook must also be reconciled
+before claiming exactly-once playback of a real agent turn.
+
+Original voice candidates can be generated without any human reference:
+
+```sh
+.venv-drama3/bin/python scripts/generate-original-references.py --name cast-aster:101 --name stage-manager:100
+```
+
+Candidates and receipts remain under QA until transcript and acoustic review.
+The generator preserves every attempt, records unconditioned provenance and
+pins, and never promotes a generated file directly to a public reference.
+
+## Resource ownership and qualification
+
+The worker, original-reference generator and benchmark tools share a kernel
+process lock. Only one expressive model may be resident through these tools at
+a time. `POST http://127.0.0.1:7861/release` unloads an idle worker; it returns
+409 if requests are pending. The lock does not coordinate unrelated Hermes
+inference, so admission still reserves 24 GiB beyond the model allocation cap.
+The suite budgets 40 GiB for 4-bit, 56 GiB for 8-bit and 88 GiB for BF16; these
+are limits, not measured peak usage. The pinned 8-bit candidate is recorded in
+`qa/expressive-voice/pins.json` and remains unqualified.
+
+Reference WAVs may be mono or stereo, 1–30 seconds, at most 4 MiB and 192 kHz.
+Stereo conditioning uses the arithmetic channel mean and PCM16 conversion;
+receipts bind both original and conditioning hashes. Qwen fallback retains the
+original reference bytes. Downmixing compatibility does not establish voice
+identity fidelity.
+
+`qualify-expressive-suite.py` runs the fixed cases in
+`qa/expressive-voice/cases/suite.v1.json` against a pinned model. Supply
+`--references-json` containing a `references` array of objects with `path`,
+`text`, and `sha256`; dialogue needs two references. Choose a new `--out`
+directory per attempt. It records first model chunk, completed generation RTF,
+load time, Metal peak, and host memory. First model chunk is distinct from
+first playable audio through the full-file HTTP contract. Failed attempts stay
+incomplete and are retained. The script's deadline is cooperative.
+
+Use `--case long-response --chunked-long` for the production-shaped long-text
+comparison. It uses the canonical 400-character sentence chunker, repeats the
+same reference and seed for each independent call, saves every chunk WAV and
+transcript, and assembles all audio in order. A failed or empty chunk leaves the
+attempt incomplete; completed earlier chunks remain available for diagnosis.
+Directed or multi-speaker long cases are rejected rather than dropping their
+controls. The default single-call mode is retained as an explicitly labelled
+diagnostic for comparison with historical measurements. Compare quantisations
+using the same mode; neither mode establishes listening acceptance.
+
+`audit-expressive-audio.py --audio FILE --text-file TEXT --out RECEIPT
+--whisper-snapshot LOCAL_DIRECTORY` runs offline CPU Whisper and waveform
+measurements. It records exact hashes, ASR words/timestamps, word-edit alignment,
+silence and clipping. ASR disagreement requires listening review; zero word
+error does not certify acting, identity, pronunciation or timing. No script
+promotes an audio candidate to accepted merely because generation succeeded.
+
+### Measured 4-bit and 8-bit comparison (2026-10-17)
+
+The pinned 8-bit snapshot is
+`mlx-community/fish-audio-drama-3-8bit@fedc7cc92bab5a180709cbaae6208d10b390bb97`.
+All 42,177,609,321 bytes have the expected file sizes, and every supplied upstream
+LFS SHA-256 matches. The comparison uses the same normalized reference bytes,
+seed 20261016, text, cue-bearing model inputs and shared generation controls as
+the 4-bit baseline. These identifiable-person references are private comparison
+material, not public-use cast assets. The newer receipt additionally records
+`context_mode=continuous`; the earlier receipt omitted that metadata field.
+
+| Measurement, ten short/dialogue cases | 4-bit | 8-bit |
+| --- | ---: | ---: |
+| Model load, seconds | 1.64 | 5.88 |
+| Warm single-speaker first internal chunk, seconds | 0.122–0.131 | 0.127–0.185 |
+| Maximum generation Metal allocation, decimal GB | 26.32 | 44.71 |
+
+These are individual local runs, not confidence intervals. Internal chunks do
+not establish first audible playback. Defective audio must not count as useful
+throughput. The 8-bit suite completed all ten generation calls, but only eight
+had zero CPU Whisper word edits. Dry humour had 27.75 seconds of near-silence
+and an omitted second sentence in ASR. Interruption omitted “Let me start again”
+in ASR despite passing the silence guard. Silence rejection cannot establish
+transcript completeness. Acting, pronunciation and listening quality remain
+unverified, including for zero-edit cases.
+
+The separate canonical six-chunk long response failed on both variants. The
+4-bit run produced chunks with 26.34, 16.36 and 16.28 seconds of near-silence.
+The 8-bit run retained five completed chunks, including a 12.96-second silent
+gap and 28 ASR deletions in chunk 2, then exhausted the 1600-frame budget on
+chunk 6 without verified EOS. It has no complete-response WAV. Neither attempt
+was retried or promoted by increasing its limits.
+
+The live 4-bit HTTP route replaced its three rejected chunks with Qwen and
+assembled all six returned chunks byte-exactly. The resulting 126.62-second WAV
+had no ASR deletions, five number/spelling substitutions and one possible extra
+“network”. Its 298.07-second wall time includes five interleaved live Vixen
+requests and shared-lock waiting; it is not isolated synthesis throughput.
+Rejection also kills the Fish worker, so subsequent Fish requests reload it.
+Exact queue/reload attribution was not retained. Backend transitions and the
+possible extra word still require listening.
+
+CPU ECAPA comparison of the nine single-speaker cases placed the intended
+reference above the other reference in 8/8 retained 4-bit windows and 10/10
+retained 8-bit windows. Windows with at least 50% near-silent RMS frames were
+excluded from that summary; this is not speech VAD. Original scores remain in
+the receipt. These uncalibrated similarities do not prove recognisability or
+superior acting, and failed outputs remain failed.
+
+Private evidence directories (not distributed with the repository):
+
+- `qa/expressive-voice/drama4-existing-suite-1`
+- `qa/expressive-voice/drama{4,8}-canonical-long-1`
+- `qa/expressive-voice/drama8-expressive-suite-1`
+- `var/expressive-voice/drama4-canonical-long-http-1`
+- `var/expressive-voice/drama48-identity-1`
+- `var/expressive-voice/drama8-comparison-preflight-1`
+
+The idle-worker release left about 98 GiB available: enough for the 80 GiB
+8-bit admission threshold, below the 112 GiB BF16 threshold. BF16 was therefore
+not loaded; unrelated workloads were not stopped to force capacity. These results
+do not qualify an 8-bit serving switch or a public audio release.
+
+A subsequent bounded 8-bit contention sequence used the already loaded
+`Qwen3.8-Flash-Next-UD-Q4_K_XL` model configured for Vixen. Two earlier admission
+attempts refused active work before loading or inference; the completed attempt
+waited for idle, released only the idle expressive worker, and retained 8-bit in
+memory for both baselines. The live voice configuration remained 4-bit.
+
+| Synthetic 512-token inference | Before | During 8-bit synthesis | After |
+| --- | ---: | ---: | ---: |
+| Decode tokens/second | 36.80 | 33.63 | 46.73 |
+| Request wall seconds | 14.87 | 15.50 | 11.15 |
+
+Actual synthesis/inference overlap was 15.44 seconds, 99.6% of the middle
+request. Its decode rate was 19.5% below the mean of the two baselines, but their
+wide spread prevents a general slowdown estimate from this single sequence.
+Polling observed at most one processing slot and no live speech requests;
+brief intervening traffic could be missed. These are model-server measurements,
+not complete Hermes agent-turn latency, and use a different TTS sample from the
+prior 4-bit contention run.
+
+The 8-bit model loaded in 4.90 seconds. Its first internal audio chunk arrived
+2.48 seconds after generation started; 25.54 seconds of audio took 17.92 seconds
+to generate, with 44.27 GB peak Metal allocation. The WAV was byte-identical to
+the previously retained first canonical long-response chunk. CPU ASR found only
+`ten`/`10` and `cancelled`/`canceled`; longest near-silence was 1.84 seconds, with
+no clipped samples. Listening acceptance remains unverified. Private evidence,
+including the bounded harness, timings and audio audit, is in
+`var/expressive-voice/hermes-contention-8bit-3`. The child exited normally and
+Vixen's configuration hash remained unchanged.
+
+The Hermes command provider writes new MP3/text archives under
+`${HERMES_HOME:-$HOME/.hermes}/tts-archive`. The default profile retains its
+existing destination; Vixen's files stay in her active profile. Existing archive
+files are never moved. Installed Hermes on M5 was verified to pass both the
+active profile home and the CLI/Telegram platform into command subprocesses.
+Messaging delivery therefore uses the artifact-only branch; local sentence
+playback is reserved for CLI/local. Actual end-to-end playback still requires a
+separate execution receipt after activation.
+
+## Private listening showcase
+
+Build a self-contained static page from completed audio evidence:
+
+```sh
+.venv/bin/python scripts/build-expressive-showcase.py --manifest INPUT.json --out NEW_DIRECTORY
+python3 -m http.server 8769 --bind 127.0.0.1 --directory NEW_DIRECTORY
+```
+
+The input is an object with a `clips` array. Each clip has unique `id`, `part`
+(1–5 for backend comparison, emotions, Vixen, cast, exchange), `label`, `backend`,
+`audio` and `text` file paths relative to the input JSON, and exact `audio_sha256`
+and `text_sha256`. Optional `acoustic_acceptance` and `permission` record the
+actual review state. Exchange clips play in input order. The builder validates
+all hashes and PCM16 mono WAVs before creating the page, copies only those WAVs,
+and refuses to overwrite prior builds. Serve only this output directory on
+loopback; do not serve the broader QA directory or publish private comparisons.
+
+Playback is explicit, one clip at a time, with pause, mute, replay and exact
+transcripts. The five required demonstrations remain visible when recordings
+are missing. Availability counts never certify identity, emotion, end-to-end
+Vixen delivery, distinct casting or acoustic acceptance.
+
+A baseline against the existing running service is reproducible with:
+
+```sh
+.venv/bin/python scripts/benchmark-afterwords-http.py --voice galadriel --case interruption --case pronunciation --case long-response --out NEW_PRIVATE_DIRECTORY
+```
+
+This sends one request at a time to loopback, preserves every attempted case,
+checks complete PCM16 mono WAV payloads, and records response headers, exact
+hashes, full-file latency and end-to-end RTF. It does not restart the service,
+apply experimental controls, retry failed cases, or measure native model TTFA.
+Use original/consented voices for public assets; existing identifiable voices
+are private comparison material unless separately cleared.
+
+## Local acoustic measurements
+
+The CPU speaker-embedding audit has its own pinned environment:
+
+```sh
+uv venv --python 3.12 .venv-audio-audit
+uv pip install --python .venv-audio-audit/bin/python -r requirements-audio-audit.txt
+hf download speechbrain/spkrec-ecapa-voxceleb --revision 0f99f2d0ebe89ac095bcc5903c4dd8f72b367286
+.venv-audio-audit/bin/python scripts/audit-voice-identity.py --snapshot PINNED_SNAPSHOT --reference REFERENCE.wav --reference NEGATIVE_CONTROL.wav --audio SAMPLE.wav --out NEW_RECEIPT.json
+```
+
+This runs ECAPA-TDNN on four CPU threads, downmixes/resamples explicitly to16kHz,
+compares every10-second output window against each supplied reference, and records
+hashes and package/model pins. Sub-second tails are explicitly unmeasured. A
+cosine score is comparative evidence, not a calibrated identity-quality grade.
+The initial Qwen baseline was actually measured with this tool; no subjective
+listening acceptance is inferred.
+
+`assess-expressive-delivery.py --audio SAMPLE.wav --out NEW_RECEIPT.json` uses
+the existing Drama environment with a separately pinned Qwen2-Audio model to
+record automated delivery observations. The pinned environment includes Jinja2
+for the model's chat template. Actual short and 92.56-second Qwen inputs have
+run successfully; this establishes execution and full-input coverage, not the
+accuracy of subjective judgments. **This model/prompt failed an all-zero-silence
+control**, describing speech, sighs/gasps and clicks in silent PCM. Its delivery
+judgments are unsuitable for acceptance and must not serve as listening evidence.
+The script retains exploratory outputs with this qualification recorded. It takes the
+shared model lease, requires40GiB host headroom, caps MLX allocations at16GiB,
+and processes the entire input in20-second segments because the upstream
+implementation truncates individual inputs at30seconds. It never supplies the
+intended emotion to the observer. Its observations may still be wrong or depend
+on lexical content; they remain separate from human listening acceptance.
+Evaluation model revisions are in `qa/expressive-voice/pins.json`.
+
+### Real Vixen reply probe
+
+`verify-hermes-sentence-route.py --agent-prompt 'Your prompt' --deadline 360`
+adds a real `HermesCLI.chat` turn to the same native sentence capture. It keeps
+the configured model/tools/personality, applies a $0.50 run budget, enables
+native TTS for that probe, observes the actual post-LLM ownership field, and
+checks one returned artifact per spoken sentence. The caller-scoped native consumer bridge must already be installed; the probe
+does not replace caller identity with a profile-wide ownership override. The probe captures local playback; it does not invoke a
+messaging send or establish physical audibility.
+Each attempt needs a new output directory, including failed attempts. The
+parent enforces a process-group deadline and retains an incomplete receipt on
+timeout. An existing automatic mute flag is preserved.
+
+On M5, the existing `local-studio` Keychain credential command returned exit 36
+under SSH but succeeded in a fresh GUI launchd worker without credential
+changes. Run the probe in that working user context. Do not replace the model,
+print credentials, or treat an authentication error message as a generated
+Vixen reply. The one-shot GUI worker must be unloaded after its bounded run.
+
+Private acceptance evidence now includes one real configured Vixen reply:
+two native sentence artifacts, no provider playback, 30.95 seconds from probe
+start through delivery, 18.30 seconds of audio, and zero CPU Whisper word errors.
+That established generated audio and captured playback calls, not acting or
+physical audibility. **That synthetic Vixen candidate was subsequently rejected
+by the operator for sounding like a random man. It is not Vixen's voice.**
+The initial correction restored Qwen/Seydoux. The subsequent reviewed promotion
+selects `vixen-seydoux-drama-reviewed` on M5 port 17862, forwarded to Studio's
+isolated expressive API on 7862. It retains Qwen fallback with the same reference.
+See `qa/expressive-voice/CASTING_REFINEMENT.md` for the promotion receipt, positive
+operator feedback, exact hashes and speech-fields-only rollback. The older
+correction record describes history, not the current promoted selection.
+The experimental API, sidecar and SSH tunnel run as separate user launchd
+jobs. Fresh-process synthesis and supervised tunnel reconnection are verified;
+reboot/cable-disconnect behavior and live gateway receipt remain unverified.
+
+### Persistent experimental services
+
+Prepare launchd definitions without loading them:
+
+```sh
+.venv/bin/python scripts/prepare-expressive-services.py \
+  --out var/expressive-voice/service-plists-1 \
+  --peer m5-tb --tailscale-ip CURRENT_M5_TAILSCALE_IPV4
+plutil -lint var/expressive-voice/service-plists-1/*.plist
+```
+
+Read the current infrastructure runbook before selecting peer addresses. The
+three `net.afterwords.expressive.{sidecar,api,m5}` user jobs run the isolated
+7861 sidecar, the private 7862 API/gallery, and the reverse SSH forward to M5
+loopback 17862. They do not manage the default 7860 service. Logs go under
+`var/expressive-voice/services/`. Create that log directory, copy the plists to
+`~/Library/LaunchAgents/`, and bootstrap them in the user's GUI domain after
+gracefully retiring any task-owned foreground instances on these ports.
+
+The SSH alias must have a pinned `HostKeyAlias`. The tunnel first probes the
+direct alias and falls back to the supplied Tailscale address while preserving
+the same identity/key pin. All forwards bind explicitly to loopback. launchd
+restarts a disconnected tunnel, selecting the available route anew; this is
+reconnection, not seamless migration of an in-flight HTTP request. A diagnostic
+`--route tailscale --remote-port 17863` tests the alternate path separately.
+
+Rollback these three jobs with `launchctl bootout gui/$(id -u)/LABEL`, then
+remove only their three launchd plists. Restore only Vixen's speech fields from
+the recorded pre-activation config if retiring its experimental route; preserve
+subsequent unrelated config changes. No `setup.sh`, global routing edit, or
+restart of the default Afterwords service is needed.
+
+### Gateway artifact handoff
+
+Run `scripts/verify-hermes-gateway-voice.py` in the installed Hermes environment
+with the intended `HERMES_HOME`, `--hermes-root` and a fresh `--out` directory.
+It invokes the installed gateway voice and profile-routing methods with the
+real configured command provider. A local capture adapter receives the output;
+no bot starts and no network message is sent. The probe requires one valid
+Opus handoff, verifies the native-tool dedup rule, and checks that an absent
+Vixen adapter cannot fall back to the default bot. This proves the bounded
+adapter handoff, not live Telegram receipt. Existing gateway health is a
+separate check; it is not audio delivery evidence.
+
+### Pinned OmniVoice comparison
+
+The alternative probe is `scripts/benchmark-omnivoice.py`, using the existing
+isolated `.venv-drama3` environment and the same reference normalization and
+exclusive model lease. It loads only the cached
+`mlx-community/OmniVoice@defe4bdce0decb321d17e96a4774417be08022ea` snapshot,
+requires 48 GiB of available memory, caps Metal allocations at 24 GiB, and
+reaps a timed-out worker. It does not change serving routes. Example:
+
+```sh
+.venv-drama3/bin/python scripts/benchmark-omnivoice.py \
+  --text-file TEXT.txt --reference REFERENCE.wav \
+  --reference-text-file REFERENCE.txt --output NEW_ATTEMPT.wav \
+  --steps 64 --timeout 300
+```
+
+The observed parameters are float32. The first dry-humour sample took 1.45 s
+to load and 3.41 s to generate 7.88 s of audio (RTF 0.432), with a measured
+generation Metal peak of 4.35 GB. CPU transcription found zero word errors.
+The API produces a complete waveform, not native streaming audio. Reference
+conditioning uses the full normalized clip (up to 30 s), rather than silently
+clipping its audio while retaining a longer transcript.
+
+The fixed short-case cohort had zero transcript errors except `touch` versus
+`touched` in the excitement case. That disagreement still needs listening.
+The 302-word single-call long response failed: 126 ASR edits (41.72%), including
+omitted passages and a garbled ending. It is rejected. Instructions such as
+`excited`, `sad`, `angry`, `whispering` and `laughing` were passed separately
+from the exact target text; their acoustic effectiveness remains unverified.
+Native multi-speaker generation was not tested by this single-reference probe.
+
+A controlled six-paragraph version of that same 302-word long response retained
+all prose in the CPU transcript audit: its three raw edits were only number
+formatting (`seventeen`/`17`, `eleven fifteen`/`1115`). The complete artifact is
+130.68 s; six separate model processes took 32.01 s including their loads.
+Every paragraph used the same original reference and seed. No silence was
+trimmed or inserted and no crossfade was applied. This is application-level
+segmentation, not native model streaming or a general long-text qualification;
+boundary timing and acoustic quality still require review.
+
+For an original synthetic reference candidate, explicitly pass `--original`
+instead of either reference argument. This mode rejects supplied reference
+conditioning and records its absence in the receipt. Use comma-separated
+attributes for `--direction`, such as `female, young adult, high pitch,
+british accent`, following the upstream
+[voice-design vocabulary](https://github.com/k2-fsa/OmniVoice/blob/master/docs/voice-design.md).
+Free-form acting descriptions are not qualified: four of six initial original
+candidates spoke fragments of their direction strings. Those candidates are
+rejected and retained. A successful generation remains a candidate requiring
+transcript and listening review, not an accepted cast reference.
+
+The existing Qwen 0.6B baseline also failed the single-call 391-word public
+Hugo response: it returned a 96-second WAV ending mid-sentence, with 114 ASR
+edits (29.16%) and a substantial missing ending. HTTP success alone does not
+qualify long-response completeness for either backend.
+
+That single-call result is a backend-limit probe, not a test of the established
+Qwen delivery workflow. Normal long speech uses the canonical `chunks.py`
+sentence chunker. Compare that path with:
+
+```sh
+.venv/bin/python scripts/benchmark-afterwords-http.py \
+  --voice VOICE --case CASE --suite SUITE.json --port 7862 \
+  --chunked --out NEW_ATTEMPT_DIRECTORY
+```
+
+This uses 400-character chunks, saves each request text and returned WAV, and
+concatenates every PCM sample in order. It refuses incompatible sample rates
+or truncated payloads. It does not strip Markdown, change words, play audio,
+or retry failed requests. The receipt records the first completed chunk and
+the complete artifact latency separately; neither proves audible playback.
+
+The Hermes command provider uses the same canonical chunking for CLI and
+messaging platforms. Telegram/Discord calls assemble all chunks into the
+returned artifact without local playback or acquiring the local play lock.
+A missing chunk returns nonzero, even when a partial diagnostic artifact
+survives. This does not itself prove an external messaging service received it.
+
+A fresh M5 capture after the messaging fix exercised the installed Vixen
+provider with a 499-character reply. The gateway handed one 32.09-second Opus
+artifact to the capture adapter in 34.46 seconds. CPU transcription matched
+the complete text; the native-tool deduplication and disconnected-profile
+checks passed. No external message was sent. This verifies the installed
+artifact path, not Telegram receipt or listening quality.
+
+## Audited Fish library and native long-form comparison — 2026-10-18
+
+The isolated expressive API now exposes 104 deterministic `fish-*` aliases for
+the audited Studio references, also visible through M5's existing tunnel. They
+reuse original WAV entries through hard links and exact verified transcripts;
+Qwen profiles and Vixen's existing selection remain unchanged. The builder is
+`scripts/build-fish-library.py`; new aliases explicitly disable Qwen fallback.
+
+The matched long-form pilot favoured one native MLX call with retained
+first/latest context: zero ASR deletions and a 2.98-second longest silence,
+versus seven deletions/18.50 seconds with external 400-character calls and
+102 deletions/18.30 seconds with paragraph isolation. Native still had five ASR
+edits, and this is one script/reference/seed, not universal qualification or
+human listening acceptance. No production chunking or Vixen route was changed.
+
+See [the library, exact comparison evidence and resource recommendations](../qa/expressive-voice/library-longform-20261017/README.md)
+for reproduction, additional M5 assets, frame-budget failures, mixed 4/8-bit
+module provenance, bounded resident-inference contention and admission guards.
+
+### Sidecar caller authentication
+
+Both sidecar POST routes require a private file-based bearer credential, an
+approved loopback Host and a loopback peer. Browser Origin headers are rejected.
+Missing, unreadable or permissive credential files fail closed before model work.
+The default credential path is
+`~/.local/state/afterwords/expressive-sidecar.token`, optionally selected with
+`AFTERWORDS_SIDECAR_TOKEN_FILE` in both caller and sidecar environments. The file
+must be an owned regular file with no group/other permissions; symlinks are refused.
+
+Prepare a fresh private file with `scripts/prepare-expressive-auth.py --out
+ABSOLUTE_PRIVATE_STAGING_PATH`. It prints only the destination. Install it at the
+intended shared path under the approved runtime transition; never put its value
+in shell arguments, environment variables, logs, evidence receipts or commits.
+The adapter, cancellable transport and retained diagnostic callers read the file
+and add authentication internally. Health remains read-only without credentials.
+
+Transition must install the credential before loading the updated API and
+sidecar, then reload those exact owners at an idle boundary. Retain the existing
+voice gallery, port routing, reviewed Vixen selection and same-reference fallback.
+Rollback restores prior code and leaves the protected credential in custody; no
+reference audio, profile or configuration identity is changed by this boundary.
+
+The private expressive API also requires this capability before accepting any
+non-health request. Its prepared service definition sets
+`AFTERWORDS_REQUIRE_EXPRESSIVE_AUTH=1`; apply that single environment field to
+the existing API plist during transition. The standard 7860 API is unchanged.
+Install the protected credential on both Studio (API/sidecar) and M5 (17862
+caller), using the same reviewed service-specific capability. Shell provider
+and hook requests to 7862/17862 use a private header file consumed by `curl -H
+@FILE`, never a bearer value in argv. The helper sends no credential to other
+ports. Python benchmark callers use the same scoped authentication helper.
+Manual private API calls must prepare a header file through `expressive/auth.py
+--port 7862 --curl-headers NEW_PRIVATE_HEADER_PATH`; keep it in a protected
+temporary directory and remove it after the call. Health is read-only and remains
+available without credentials.

@@ -1,0 +1,31 @@
+{
+  "profiles": 349,
+  "reference_paths": 224,
+  "distinct_recording_hashes": 222,
+  "additional_reference_paths": 120,
+  "additional_distinct_recording_hashes": 119,
+  "canonical_matching_profiles": 198,
+  "missing_or_unsupported_profiles": [],
+  "metadata_incompatible": [
+    {
+      "profile": "optimus-prime.json",
+      "reference": "optimus-prime-ref.wav",
+      "reasons": [
+        "reference exceeds 4 MiB",
+        "duration outside 1\u201330 seconds"
+      ],
+      "duration_seconds": 46.27,
+      "bytes": 4441964
+    },
+    {
+      "profile": "robocop.json",
+      "reference": "robocop-ref.wav",
+      "reasons": [
+        "duration outside 1\u201330 seconds"
+      ],
+      "duration_seconds": 30.75,
+      "bytes": 2952044
+    }
+  ],
+  "additional_disposition": "Metadata compatibility alone does not establish verified literal transcripts or speaker isolation. Retain original assets; not automatically admitted."
+}

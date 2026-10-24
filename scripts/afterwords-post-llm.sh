@@ -9,11 +9,20 @@
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-AFTERWORDS_URL="http://127.0.0.1:7860"
+PORT="${AFTERWORDS_PORT:-7860}"
+case "$PORT" in
+    ''|*[!0-9]*) echo "Error: AFTERWORDS_PORT must be a local TCP port" >&2; exit 2 ;;
+esac
+if [ "${#PORT}" -gt 5 ] || (( 10#$PORT < 1 || 10#$PORT > 65535 )); then
+    echo "Error: AFTERWORDS_PORT must be between 1 and 65535" >&2
+    exit 2
+fi
+PORT=$((10#$PORT))
+AFTERWORDS_URL="http://127.0.0.1:${PORT}"
 
 MUTE_FILE="/tmp/afterwords-muted"   # `afterwords mute` toggles this; skip local playback when present
-PLAY_LOCK="/tmp/afterwords-play.lock"
-PLAY_PID="/tmp/afterwords-play.pid"
+PLAY_LOCK="${AFTERWORDS_PLAY_LOCK:-/tmp/afterwords-play.lock}"
+PLAY_PID="${AFTERWORDS_PLAY_PID:-/tmp/afterwords-play.pid}"
 acquire_play_lock() {
     local w=0
     while ! mkdir "$PLAY_LOCK" 2>/dev/null; do
@@ -46,6 +55,14 @@ file_size() {
 
 # ── Read payload ──────────────────────────────────────────────────────────
 PAYLOAD=$(cat)
+# Native sentence/full-response playback owns this turn. Defer before any
+# synthesis or archive work; older Hermes versions omit this optional field.
+PLAYBACK_OWNER=$(printf '%s' "$PAYLOAD" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+print(d.get('tts_playback_owner') or d.get('extra', {}).get('tts_playback_owner', ''))
+" 2>/dev/null || true)
+[ "$PLAYBACK_OWNER" = "native" ] && exit 0
 # Gateway emits flat: {"platform":"discord","response":"...","session_id":"..."}
 # CLI emits nested: {"extra":{"assistant_response":"...","platform":"..."}}
 TEXT=$(printf '%s' "$PAYLOAD" | python3 -c "
@@ -75,9 +92,20 @@ print(d.get('chat_id', '') or d.get('extra', {}).get('chat_id', ''))
 case "${AFTERWORDS_SHELL_SCOPE:-all}" in
     all) ;;
     cli)
+        # Desktop now reports its own platform instead of cli. Both direct
+        # CLI and desktop turns belong to this shell hook.
+        case "$PLATFORM" in cli|desktop) ;; *) exit 0 ;; esac
         # Hermes maps gateway LOCAL to cli for agent hooks. Its process marker
         # distinguishes those turns from direct CLI, which owns shell speech.
-        [ "$PLATFORM" = "cli" ] && [ "${_HERMES_GATEWAY:-}" != "1" ] || exit 0
+        # The desktop app ALSO sets _HERMES_GATEWAY=1 on serve-spawned `hermes
+        # chat` children (HERMES_SESSION_SOURCE=desktop), but those turns never
+        # reach the gateway's agent:end native hooks (that path only runs inside
+        # gateway run_turn), so skipping here left desktop turns permanently
+        # silent. Speak them: only bare gateway-multiplexed CLI turns
+        # (no session source) actually have the native hook as backup.
+        if [ "${_HERMES_GATEWAY:-}" = "1" ] && [ "$PLATFORM" != "desktop" ]; then
+            case "${HERMES_SESSION_SOURCE:-}" in cli|tui|desktop|oneshot) ;; *) exit 0 ;; esac
+        fi
         ;;
     *) echo "afterwords: invalid AFTERWORDS_SHELL_SCOPE" >&2; exit 1 ;;
 esac
@@ -97,6 +125,13 @@ home = os.environ.get('HERMES_HOME', '').rstrip('/')
 if '/profiles/' in home:
     print(home.rsplit('/', 1)[-1])
 " 2>/dev/null || true)
+fi
+# A cleared platform after gateway handling must not become local speech.
+if [ "${_HERMES_GATEWAY:-}" = "1" ]; then
+    case "${HERMES_SESSION_SOURCE:-}" in
+        cli|tui|desktop|oneshot) ;;
+        *) case "$PLATFORM" in ""|cli|local) exit 0 ;; esac ;;
+    esac
 fi
 # ── Platform routing ──────────────────────────────────────────────────────
 # CLI/local: play audio locally via afplay
@@ -214,7 +249,7 @@ resolve_voice() {
     echo "${voice}"
 }
 
-VOICE=$(resolve_voice)
+VOICE="${AFTERWORDS_VOICE:-$(resolve_voice)}"
 VOICE_PARAM=""
 if [ -n "$VOICE" ]; then
     VOICE_ENC=$(python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$VOICE" 2>/dev/null || echo "")
@@ -393,6 +428,13 @@ done < <(printf '%s' "$CLEAN" | python3 "$CHUNK_SCRIPT" 2>>"$HOOK_LOG" || true)
 NCHUNKS=${#CHUNKS[@]}
 [ "$NCHUNKS" -eq 0 ] && exit 0
 
+CURL_AUTH=()
+if [ -n "$AFTERWORDS_REPO_ROOT" ] && [ -f "$AFTERWORDS_REPO_ROOT/expressive/auth.py" ]; then
+    python3 "$AFTERWORDS_REPO_ROOT/expressive/auth.py" --port "$PORT" \
+        --curl-headers "$CHUNK_DIR/auth.headers" || exit 2
+    [ ! -f "$CHUNK_DIR/auth.headers" ] || CURL_AUTH=(-H "@$CHUNK_DIR/auth.headers")
+fi
+
 synth_chunk() {
     local out="$1" text="$2"
     # Timeout must cover SYNTHESIS, not just transfer. The server serialises
@@ -402,9 +444,9 @@ synth_chunk() {
     # AFTERWORDS_TTS_TIMEOUT (seconds).
     local t="${AFTERWORDS_TTS_TIMEOUT:-180}"
     if [ -n "${VOICE:-}" ]; then
-        curl -s --max-time "$t" -G             --data-urlencode "text=${text}"             --data-urlencode "voice=${VOICE}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+        curl ${CURL_AUTH[@]+"${CURL_AUTH[@]}"} -s --max-time "$t" -G             --data-urlencode "text=${text}"             --data-urlencode "voice=${VOICE}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
     else
-        curl -s --max-time "$t" -G             --data-urlencode "text=${text}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
+        curl ${CURL_AUTH[@]+"${CURL_AUTH[@]}"} -s --max-time "$t" -G             --data-urlencode "text=${text}"             -o "$out" "$TTS_ENDPOINT" 2>/dev/null || true
     fi
 }
 

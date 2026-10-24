@@ -1,0 +1,77 @@
+--- a/tools/tts_command_provider.py
++++ b/tools/tts_command_provider.py
+@@ -172,6 +172,8 @@
+         value = resolve_passthrough_value(key, os.environ.get(key))
+         if value is not None:
+             scrubbed[key] = value
++    from afterwords_native import command_environment
++    scrubbed.update(command_environment())
+     # Own process group so the whole tree can be signalled on idle timeout; on Windows the
+     # shared bundle also hides the console (shell=True spawns via cmd.exe, which otherwise
+     # flashes a window on windowless hosts). Lossy UTF-8 decode: locale-mismatched bytes
+--- a/tools/tts_tool_speaker.py
++++ b/tools/tts_tool_speaker.py
+@@ -130,7 +130,8 @@
+         try:
+             fd, tmp_path = tempfile.mkstemp(suffix=".mp3")
+             os.close(fd)
+-            raw = _origin().text_to_speech_tool(text=cleaned, output_path=tmp_path)
++            from afterwords_native import native_synthesis
++            raw = native_synthesis(_origin().text_to_speech_tool, text=cleaned, output_path=tmp_path)
+             written = _first_written_artifact(raw, tmp_path)
+             if os.path.abspath(written) != os.path.abspath(tmp_path):
+                 _unlink_quietly(tmp_path)  # provider wrote elsewhere: the placeholder is empty
+@@ -147,7 +148,8 @@
+                 tmp_path = future.result()
+                 if tmp_path and not self._stop.is_set() and os.path.isfile(tmp_path) and os.path.getsize(tmp_path) > 0:
+                     from tools.voice_mode import play_audio_file
+-                    play_audio_file(tmp_path)
++                    from afterwords_native import native_playback
++                    native_playback(play_audio_file, tmp_path)
+             except Exception as exc:
+                 logger.warning("Sync per-sentence TTS failed: %s", exc)
+             finally:
+--- a/hermes_cli/cli_voice_mixin.py
++++ b/hermes_cli/cli_voice_mixin.py
+@@ -320,7 +320,8 @@
+             os.makedirs(out_dir, exist_ok=True)
+             mp3_path = os.path.join(out_dir, f"tts_{time.strftime('%Y%m%d_%H%M%S')}.mp3")
+
+-            raw_result = text_to_speech_tool(text=tts_text, output_path=mp3_path)
++            from afterwords_native import native_synthesis
++            raw_result = native_synthesis(text_to_speech_tool, text=tts_text, output_path=mp3_path)
+             try:
+                 tts_result = json.loads(raw_result) if isinstance(raw_result, str) else {}
+             except Exception:
+@@ -329,7 +330,8 @@
+             play_paths = tts_result.get("file_paths") or [tts_result.get("file_path") or mp3_path]
+             for play_path in play_paths if tts_result.get("success") else []:
+                 if os.path.isfile(play_path) and os.path.getsize(play_path) > 0:
+-                    play_audio_file(play_path)
++                    from afterwords_native import native_playback
++                    native_playback(play_audio_file, play_path)
+             # Clean up all generated files (play_paths + mp3_path + ogg variant)
+             for path in set(play_paths + [mp3_path, mp3_path.rsplit(".", 1)[0] + ".ogg"]):
+                 _unlink_quietly(path)
+--- a/hermes_cli/voice.py
++++ b/hermes_cli/voice.py
+@@ -607,7 +607,8 @@
+     os.makedirs(os.path.join(tempfile.gettempdir(), "hermes_voice"), exist_ok=True)
+     mp3_path = os.path.join(tempfile.gettempdir(), "hermes_voice", f"tts_{time.strftime('%Y%m%d_%H%M%S')}.mp3")
+     _debug(f"speak_text: synthesizing {len(tts_text)} chars -> {mp3_path}")
+-    raw_result = text_to_speech_tool(text=tts_text, output_path=mp3_path)
++    from afterwords_native import native_synthesis
++    raw_result = native_synthesis(text_to_speech_tool, text=tts_text, output_path=mp3_path)
+     try:
+         tts_result = json.loads(raw_result) if isinstance(raw_result, str) else {}
+     except Exception:
+@@ -619,7 +620,8 @@
+     for play_path in play_paths if tts_result.get("success") else []:
+         if os.path.isfile(play_path) and os.path.getsize(play_path) > 0:
+             _debug(f"speak_text: playing {play_path} ({os.path.getsize(play_path)} bytes)")
+-            play_audio_file(play_path)
++            from afterwords_native import native_playback
++            native_playback(play_audio_file, play_path)
+             played_any = True
+     for path in set(play_paths + [mp3_path, mp3_path.rsplit(".", 1)[0] + ".ogg"]):
+         if os.path.isfile(path):

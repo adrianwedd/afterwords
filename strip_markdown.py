@@ -95,7 +95,7 @@ def _structural_lines(text: str) -> list[str]:
     text = re.sub(
         r'\bMEDI(?=[\w.-]*\.(?:jpg|jpeg|png|webp|gif|mp3|ogg|oga|wav|opus|m4a|flac)\b)\S*',
         ' ', text, flags=re.I)
-    text = re.sub(r'\s{2,}', ' ', text)
+    text = re.sub(r'[ \t]{2,}', ' ', text)
     # Orphaned colon left by removed markers → sentence punctuation.
     text = re.sub(r'\s*[:;]\s*\.', '.', text)
     text = re.sub(r'\s*:\s*,', ', ', text)

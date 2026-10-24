@@ -48,38 +48,21 @@ In `--integrations` mode, if Claude Code isn't installed, setup will offer to in
 
 ## With Codex CLI
 
-Codex CLI (`@openai/codex`) doesn't expose a Stop-hook event the way Claude Code does, so the integration uses a watcher instead: it polls the active session JSONL under `~/.codex/sessions`, extracts final assistant answers, and queues them for synthesis. Inside an interactive Codex session (where `$CODEX_THREAD_ID` is set):
+Codex CLI (`@openai/codex`) doesn't expose a Stop-hook event, so Afterwords follows its session JSONL files with a managed login watcher. During `bash setup.sh --integrations`, setup detects Codex and installs the watcher. Check the installed service with:
 
 ```bash
-afterwords codex-hook start    # daemon follows this session, speaks final answers
-afterwords codex-hook status   # check
-afterwords codex-hook stop
+afterwords watchers status codex
 ```
 
-The tested working configuration is:
-
-1. Start or verify the server:
-   ```bash
-   afterwords status
-   afterwords start
-   ```
-2. From the same interactive Codex CLI session you want spoken, start the watcher:
-   ```bash
-   afterwords codex-hook start
-   afterwords codex-hook status
-   ```
-3. Leave that Codex session running. The watcher process is detached under launchd's normal process tree (`PPID 1`) and follows only the current `$CODEX_THREAD_ID`.
-4. On each final assistant answer, the watcher reads the matching `~/.codex/sessions/.../rollout-*.jsonl`, extracts `phase=final_answer`, writes an item under `/tmp/codex-tts-queue-$CODEX_THREAD_ID/`, synthesizes through `localhost:7860/synthesize`, plays with `afplay`, and archives audio/text under `~/.codex/tts-archive/`.
-
-You can also run the session setup helper from inside Codex:
+Global and per-session watchers cannot own speech at the same time. For a one-session setup, stop the managed watcher first, then run:
 
 ```bash
+afterwords watchers uninstall codex
 bash setup-codex.sh
+afterwords codex-hook start
 ```
 
-That checks `$CODEX_THREAD_ID`, `python3`, `rg`, and `curl`; ensures the Codex hook scripts are executable; starts the server if needed; then runs `afterwords codex-hook start`.
-
-The watcher needs `ripgrep` (`brew install ripgrep`) to locate the session file. Setup auto-detects Codex and prints these commands when it finishes; you don't have to memorize them.
+The global watcher needs ripgrep (`brew install ripgrep`) to locate session files. Setup checks for it and prints a warning if missing.
 
 Voice routing uses the same `.afterwords` mapping format as Claude hooks. Codex session JSONL does not normally include an `agent_type`, so the watcher assigns the synthetic agent key `codex`. For example:
 
@@ -90,19 +73,18 @@ codex: spock
 
 If no `codex:` entry exists, it falls back to `default:`. If neither exists, it falls back to the server default voice from `/health`.
 
-For watcher debugging, run `afterwords codex-hook status`; it reports stale pid files and shows the tail of `/tmp/codex-tts-watch.log` when the watcher is not running. `afterwords codex-hook start --diagnose` prints the thread id, session file it would watch, hook path, and sample event detection without starting the daemon. The most common startup failures are `$CODEX_THREAD_ID` not being exported, or Codex not having created the first session event yet, so no `~/.codex/sessions/.../rollout-*.jsonl` file matches the thread id.
+For managed watcher diagnostics, run `afterwords watchers status codex` or `afterwords integrations`. The separate per-session mode offers `afterwords codex-hook status` and `afterwords codex-hook start --diagnose`; it depends on `$CODEX_THREAD_ID` and a matching rollout file.
 
 Useful checks:
 
 ```bash
 afterwords status
-afterwords codex-hook status
-tail -40 /tmp/codex-tts-watch.log
+afterwords watchers status codex
+afterwords integrations
 ls -lt ~/.codex/tts-archive | head
-ps -p "$(cat /tmp/codex-tts-watch.pid)" -o pid=,ppid=,stat=,command=
 ```
 
-Trade-offs vs Claude Code: this depends on Codex's local session file format and on `$CODEX_THREAD_ID` being exported, both undocumented contracts that may shift between Codex versions. API-hosted or non-interactive Codex environments may reap long-lived background watcher processes; use the watcher from a real interactive Codex CLI terminal. For non-interactive Codex (`codex exec`), prefer wrapping with `--output-last-message <FILE>` and feeding the file to `/synthesize` directly — cleaner and version-stable.
+The watcher depends on Codex's local session file format, which may shift between Codex versions. It only sees sessions written to this Mac; non-interactive or remote Codex environments may not create local session files.
 
 ## With Gemini CLI
 
@@ -141,9 +123,9 @@ Antigravity CLI (`agy`), the successor to Gemini CLI, supports hooks defined in 
 
 During execution, `agy` fires the `Stop` event when the reasoning loop terminates. It passes a JSON payload containing `transcriptPath` (the path to the conversation's `transcript.jsonl` file) on `stdin`.
 
-We process this with two files:
-1. `~/.claude/hooks/agy-session-hook.py` — reads the `transcript.jsonl` file backwards to extract the final model response content, filtering out intermediate tool execution logs.
-2. `~/.claude/hooks/agy-tts-hook.sh` — receives the hook payload, runs the python parser, pipes it through the markdown stripper, sets the agent to `agy`, and queues it.
+The managed runtime handles this through two files:
+1. `agy_session_hook.py` reads the transcript backwards to extract the final model response and a stable event identity.
+2. `agy-tts-hook.sh` queues that event once in the private Afterwords watcher runtime. `afterwords integrations` checks both the hook registration and installed source.
 
 ### Personalizing the Voice
 
@@ -642,7 +624,7 @@ afterwords voices      # list available voices
 afterwords reload      # pick up new voices without restarting (no synth interruption)
 afterwords mute        # toggle TTS playback on/off without stopping synthesis
 afterwords clone       # clone a new voice from YouTube
-afterwords uninstall   # remove service and optionally hooks
+afterwords uninstall   # remove service/CLI; optionally unregister integrations
 ```
 
 The `afterwords` command is added to your PATH during setup. It wraps launchd service management, health checks, and voice operations into a single interface.

@@ -18,6 +18,20 @@ from backends.qwen3 import Qwen3Backend
 REPO = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.parametrize('exists_as_file', [False, True])
+def test_invalid_voice_directory_fails_before_model_loading(tmp_path, monkeypatch, exists_as_file):
+    target = tmp_path / 'not-a-directory'
+    if exists_as_file:
+        target.write_text('not a gallery')
+    original = server._VOICES_DIR
+    monkeypatch.setattr(sys, 'argv', ['server.py', '--voices-dir', str(target)])
+    monkeypatch.setattr(backends, 'register_all', lambda **kw: pytest.fail('loaded backends before validating directory'))
+    with pytest.raises(SystemExit) as exc:
+        server.main()
+    assert exc.value.code == 2
+    assert server._VOICES_DIR == original
+
+
 def test_baseline_selection(monkeypatch):
     monkeypatch.delenv('AFTERWORDS_BACKENDS', raising=False)
     assert server._selected_backends(False) == {'qwen3-0.6b'}

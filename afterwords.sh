@@ -16,7 +16,8 @@
 #   pull         Pull a cloud voice to local voices/
 #   setup-cloud  Configure cloud API key and URL
 #   codex-hook   Manage the repo-local Codex CLI watcher
-#   uninstall    Remove the launchd service and optionally Claude Code hooks
+#   integrations  Check detected agent integration configuration and runtime
+#   uninstall    Remove the service/CLI and optionally setup-managed integrations
 #
 set -uo pipefail
 
@@ -1011,6 +1012,7 @@ cmd_codex_hook() {
                 return $?
             fi
             [ -z "$diagnose" ] || fail "Unknown codex-hook start option: ${diagnose}. Use --diagnose."
+            [ ! -f "$HOME/Library/LaunchAgents/au.wedd.afterwords-codex-watch.plist" ] || fail "Global Codex watcher owns speech. Use watchers status codex or uninstall it first."
             [ -n "${CODEX_THREAD_ID:-}" ] || fail "CODEX_THREAD_ID is not set. Run inside Codex CLI or export it first."
 
             if [ -f "$CODEX_WATCH_PID" ]; then
@@ -1086,6 +1088,18 @@ cmd_uninstall() {
     rule
     echo
 
+    local control_python="${AFTERWORDS_PYTHON:-python3}"
+    local integrations_present=false
+    if "$control_python" "$REPO_DIR/scripts/remove-integrations.py" detect --home "$HOME" >/dev/null; then
+        integrations_present=true
+    else
+        local detection_status=$?
+        if [ "$detection_status" -ne 1 ]; then
+            integrations_present=true
+            warn "Integration settings need inspection; they will be kept unless removal succeeds."
+        fi
+    fi
+
     # Stop server if running
     local pid
     pid=$(server_pid)
@@ -1103,6 +1117,24 @@ cmd_uninstall() {
         info "No launchd plist to remove"
     fi
 
+    # Registration and watcher removal shares the existing opt-in consent.
+    # Retain runtime helpers, archives, offsets and receipts for safe reinstall.
+    if $integrations_present; then
+        echo
+        echo -en "  ${BOLD}Remove setup-managed agent hooks and Codex/OpenCode login watchers? [y/N]:${NC} "
+        local remove_hooks=""
+        read -r remove_hooks
+        if [[ "$remove_hooks" =~ ^[Yy] ]]; then
+            "$control_python" "$REPO_DIR/scripts/remove-integrations.py" remove --home "$HOME" \
+                || fail "Could not remove hook registrations; retained source/data."
+            "$control_python" "$REPO_DIR/watcher/manage.py" uninstall all --home "$HOME" \
+                || fail "Could not stop/remove managed login watchers."
+            ok "Removed setup-managed hook registrations and login watchers"
+        else
+            info "Keeping setup-managed integrations by request"
+        fi
+    fi
+
     # Remove symlink
     local cli_link="${BASH_SOURCE[0]}"
     [ -L "$cli_link" ] || cli_link="$(command -v afterwords || true)"
@@ -1114,36 +1146,10 @@ sys.exit(os.path.realpath(sys.argv[1]) != os.path.realpath(sys.argv[2]))
         rm -f "$cli_link" 2>/dev/null || sudo rm -f "$cli_link"
     fi
 
-    # Offer to remove Claude Code hooks
-    echo
-    local hooks_dir="$HOME/.claude/hooks"
-    if [ -f "$hooks_dir/tts-hook.sh" ] || [ -f "$hooks_dir/tts-worker.sh" ]; then
-        echo -en "  ${BOLD}Remove Claude Code TTS hooks? [y/N]:${NC} "
-        read -r remove_hooks
-        if [[ "$remove_hooks" =~ ^[Yy] ]]; then
-            rm -f "$hooks_dir/tts-hook.sh" "$hooks_dir/tts-worker.sh" "$hooks_dir/strip-markdown.py"
-            rm -f "$hooks_dir/tts-hook.sh.bak" "$hooks_dir/tts-worker.sh.bak"
-            ok "Removed hook scripts"
-
-            # Remove Stop hook from settings.json
-            local settings="$HOME/.claude/settings.json"
-            if [ -f "$settings" ] && command -v jq &>/dev/null; then
-                local hook_cmd="bash ~/.claude/hooks/tts-hook.sh"
-                if jq -e ".hooks.Stop[]?.hooks[]? | select(.command == \"$hook_cmd\")" "$settings" &>/dev/null; then
-                    local tmpf
-                    tmpf=$(mktemp)
-                    jq "(.hooks.Stop[]?.hooks) |= [.[]? | select(.command != \"$hook_cmd\")]" "$settings" > "$tmpf" \
-                        && mv "$tmpf" "$settings"
-                    ok "Removed TTS hook from settings.json"
-                fi
-            fi
-        else
-            info "Keeping Claude Code hooks"
-        fi
-    fi
 
     echo
-    ok "Afterwords uninstalled"
+    ok "Afterwords server and CLI uninstalled"
+    info "Integration helper code, archives and delivery receipts are retained. Per-session Codex/Hermes setup is separate."
     info "Voice profiles and server code remain in ${DIM}${REPO_DIR}${NC}"
     info "To reinstall: ${CYAN}bash setup.sh${NC}"
     echo
@@ -1533,13 +1539,17 @@ cmd_help() {
     echo
     echo -e "  ${BOLD}Integrations${NC}"
     echo -e "    ${CYAN}mute${NC}              Toggle playback on/off (synthesis and archiving continue)"
+    echo -e "    ${CYAN}watchers stage|install all${NC}  Refresh private runtime or install login watchers"
+    echo -e "    ${CYAN}watchers install codex|opencode|all${NC}  Install selected login watchers (TTS server unchanged)"
+    echo -e "    ${CYAN}watchers restart|status|uninstall <agent>${NC}  Manage login watchers"
+    echo -e "    ${CYAN}integrations${NC}  Check detected agent hook and watcher installation"
     echo -e "    ${CYAN}codex-hook start${NC}  Speak Codex CLI responses (run inside Codex)"
     echo -e "    ${CYAN}codex-hook stop${NC}   Stop the Codex watcher"
     echo
     echo -e "  ${BOLD}Setup${NC}"
     echo -e "    ${CYAN}configure${NC}         Show or change server settings (--with-1.7b, --bind)"
     echo -e "    ${CYAN}update${NC}            Pull latest commits, reinstall packages, reload voices"
-    echo -e "    ${CYAN}uninstall${NC}         Remove service and optionally hooks"
+    echo -e "    ${CYAN}uninstall${NC}         Remove service/CLI; optionally unregister integrations"
     echo
     echo -e "  ${DIM}Examples:${NC}"
     echo -e "  ${DIM}  afterwords clone \"https://youtube.com/watch?v=xyz\" gandalf 45${NC}"
@@ -1589,6 +1599,8 @@ case "$COMMAND" in
     refine)      cmd_refine "$@" ;;
     update)      cmd_update "$@" ;;
     mute)        cmd_mute "$@" ;;
+    watchers)    "${AFTERWORDS_PYTHON:-python3}" "$REPO_DIR/watcher/manage.py" "$@" ;;
+    integrations) "${AFTERWORDS_PYTHON:-python3}" "$REPO_DIR/scripts/integrations-status.py" ;;
     codex-hook)  cmd_codex_hook "$@" ;;
     configure)   cmd_configure "$@" ;;
     uninstall)   cmd_uninstall "$@" ;;

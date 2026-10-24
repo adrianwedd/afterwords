@@ -91,7 +91,9 @@ def test_cli_accepts_transcript_path_without_strip_markdown(capsys):
 def test_shell_hook_invokes_helper_without_unknown_flag():
     hook = Path(".claude/hooks/agy-tts-hook.sh").read_text(encoding="utf-8")
     assert "--strip-markdown" not in hook
-    assert 'agy-session-hook.py" "$TRANSCRIPT_PATH"' in hook
+    assert 'agy_session_hook.py" --json "$TRANSCRIPT"' in hook
+    assert "--agent agy" in hook
+    assert "--event-id" in hook
 
 
 
@@ -113,3 +115,23 @@ def test_unattended_audio_audit_optout_exits_before_hook_synthesis(tmp_path):
     assert result.returncode == 0
     assert result.stdout == ""
     assert result.stderr == ""
+
+
+def test_identical_timestamp_free_replies_have_distinct_record_identity(tmp_path):
+    import json
+    from agy_session_hook import extract_final_event
+    from watcher.queue import enqueue
+    transcript = tmp_path/'session.jsonl'
+    record = json.dumps({'source':'MODEL', 'type':'PLANNER_RESPONSE', 'content':'Done.'})+'\n'
+    transcript.write_text(record)
+    first = extract_final_event(str(transcript))
+    assert extract_final_event(str(transcript)) == first
+    saved = enqueue(tmp_path/'state', 'agy', 'session', first['event_id'], '/project', first['text'])
+    saved.rename(saved.with_suffix('.done'))
+    with transcript.open('a') as stream:
+        stream.write(record)
+    second = extract_final_event(str(transcript))
+    assert second['text'] == first['text'] and second['event_id'] != first['event_id']
+    assert extract_final_event(str(transcript)) == second
+    queued = enqueue(tmp_path/'state', 'agy', 'session', second['event_id'], '/project', second['text'])
+    assert queued.exists() and saved.with_suffix('.done').exists()

@@ -250,3 +250,13 @@ def pytest_sessionstart(session):
     _start_time = time.time()
     print(f"\n  {BOLD}afterwords{NC}  {DIM}\u2014 test suite{NC}")
     print(f"  {DIM}{'─' * 41}{NC}")
+
+
+@pytest.fixture(autouse=True)
+def sidecar_credentials(tmp_path_factory, monkeypatch):
+    from expressive.auth import authorization_headers
+    path = tmp_path_factory.mktemp('sidecar-credential')/'sidecar.token'
+    path.write_text('test-sidecar-only-' + 'x'*32)
+    path.chmod(0o600)
+    monkeypatch.setenv('AFTERWORDS_SIDECAR_TOKEN_FILE', str(path))
+    return authorization_headers()
