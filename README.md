@@ -232,6 +232,12 @@ bash clone-voice.sh "https://youtube.com/watch?v=..." galadriel 30
 
 The script downloads the audio, extracts a 15-second segment, denoises it, transcribes with Whisper, and saves a voice profile. Each voice is just a 700 KB WAV file — adding voices costs zero extra memory.
 
+### Retaining source recordings
+
+For retained acquisition/curation work, use `scripts.acquire_voice_source.acquire_wav(query, requested_path)` and consume its returned path. It verifies and reuses a recorded query without downloading again; a different query producing identical WAV bytes reuses the existing recording. An optional `seconds=120` retains a bounded selection rather than both a full download and its excerpt.
+
+The requested filename is recorded in one `.acquisition.json` lineage file beside the actual WAV, together with the query, resolved source URL, selection and SHA-256. It does not create another full recording for an alias. Use the returned path for transcription and manual splicing; old hard-coded scratch filenames are not automatically redirected. Existing recordings, voice references and recovery archives are never replaced or removed by this helper. Acquisition still requires the operator's normal permission; this is not a background downloader.
+
 ### Auditing voice profiles
 
 If you hand-edit a `voices/*.json` `reference_text` after cloning (e.g. to correct Whisper mishearings), you can drift the transcript away from what the trimmed audio actually says — which degrades cloning fidelity. The audit tool re-transcribes every reference WAV and flags drift:
