@@ -1,77 +1,193 @@
---- a/tools/tts_command_provider.py
-+++ b/tools/tts_command_provider.py
-@@ -172,6 +172,8 @@
-         value = resolve_passthrough_value(key, os.environ.get(key))
-         if value is not None:
-             scrubbed[key] = value
-+    from afterwords_native import command_environment
-+    scrubbed.update(command_environment())
-     # Own process group so the whole tree can be signalled on idle timeout; on Windows the
-     # shared bundle also hides the console (shell=True spawns via cmd.exe, which otherwise
-     # flashes a window on windowless hosts). Lossy UTF-8 decode: locale-mismatched bytes
---- a/tools/tts_tool_speaker.py
-+++ b/tools/tts_tool_speaker.py
-@@ -130,7 +130,8 @@
-         try:
-             fd, tmp_path = tempfile.mkstemp(suffix=".mp3")
-             os.close(fd)
--            raw = _origin().text_to_speech_tool(text=cleaned, output_path=tmp_path)
-+            from afterwords_native import native_synthesis
-+            raw = native_synthesis(_origin().text_to_speech_tool, text=cleaned, output_path=tmp_path)
-             written = _first_written_artifact(raw, tmp_path)
-             if os.path.abspath(written) != os.path.abspath(tmp_path):
-                 _unlink_quietly(tmp_path)  # provider wrote elsewhere: the placeholder is empty
-@@ -147,7 +148,8 @@
-                 tmp_path = future.result()
-                 if tmp_path and not self._stop.is_set() and os.path.isfile(tmp_path) and os.path.getsize(tmp_path) > 0:
-                     from tools.voice_mode import play_audio_file
--                    play_audio_file(tmp_path)
-+                    from afterwords_native import native_playback
-+                    native_playback(play_audio_file, tmp_path)
-             except Exception as exc:
-                 logger.warning("Sync per-sentence TTS failed: %s", exc)
-             finally:
+diff --git a/hermes_cli/cli_voice_mixin.py b/hermes_cli/cli_voice_mixin.py
 --- a/hermes_cli/cli_voice_mixin.py
 +++ b/hermes_cli/cli_voice_mixin.py
-@@ -328,7 +328,8 @@
+@@ -19,6 +19,28 @@ from hermes_constants import is_termux as _is_termux_environment
+ from typing import Optional
+ 
+ 
++def _afterwords_bridge():
++    """Return the Afterwords native bridge, or fail before any audio work.
++
++    The bridge owns the mute flag and the shared playback lease. Stock playback bypasses
++    both, so a missing or incomplete bridge must fail loudly here instead of degrading to
++    unguarded audio: this dependency is deliberate and installation is hash-checked.
++    """
++    try:
++        import afterwords_native as bridge
++    except ImportError as exc:
++        raise RuntimeError(
++            "afterwords_native is not importable; reinstall the Afterwords native bridge "
++            "(afterwords/scripts/prepare-hermes-native.py). Refusing to synthesise or play "
++            "audio outside the shared playback lease.") from exc
++    missing = [name for name in ("native_synthesis", "native_playback", "command_environment")
++               if not callable(getattr(bridge, name, None))]
++    if missing:
++        raise RuntimeError(
++            "afterwords_native is missing %s; reinstall the Afterwords native bridge "
++            "(afterwords/scripts/prepare-hermes-native.py)." % ", ".join(missing))
++    return bridge
++
+ def _config_section(name: str) -> dict:
+     """``load_config()[name]`` coerced to a dict.
+ 
+@@ -328,7 +350,8 @@ class CLIVoiceMixin:
              os.makedirs(out_dir, exist_ok=True)
              mp3_path = os.path.join(out_dir, f"tts_{time.strftime('%Y%m%d_%H%M%S')}.mp3")
-
+ 
 -            raw_result = text_to_speech_tool(text=tts_text, output_path=mp3_path)
-+            from afterwords_native import native_synthesis
-+            raw_result = native_synthesis(text_to_speech_tool, text=tts_text, output_path=mp3_path)
++            raw_result = _afterwords_bridge().native_synthesis(
++                text_to_speech_tool, text=tts_text, output_path=mp3_path)
              try:
                  tts_result = json.loads(raw_result) if isinstance(raw_result, str) else {}
              except Exception:
-@@ -337,7 +338,8 @@
+@@ -337,7 +360,7 @@ class CLIVoiceMixin:
              play_paths = tts_result.get("file_paths") or [tts_result.get("file_path") or mp3_path]
              for play_path in play_paths if tts_result.get("success") else []:
                  if os.path.isfile(play_path) and os.path.getsize(play_path) > 0:
 -                    play_audio_file(play_path)
-+                    from afterwords_native import native_playback
-+                    native_playback(play_audio_file, play_path)
++                    _afterwords_bridge().native_playback(play_audio_file, play_path)
              # Clean up all generated files (play_paths + mp3_path + ogg variant)
              for path in set(play_paths + [mp3_path, mp3_path.rsplit(".", 1)[0] + ".ogg"]):
                  _unlink_quietly(path)
+diff --git a/hermes_cli/voice.py b/hermes_cli/voice.py
 --- a/hermes_cli/voice.py
 +++ b/hermes_cli/voice.py
-@@ -610,7 +610,8 @@
+@@ -115,6 +115,28 @@ from tools.voice_mode import create_audio_recorder, play_audio_file, transcribe_
+ logger = logging.getLogger(__name__)
+ 
+ 
++def _afterwords_bridge():
++    """Return the Afterwords native bridge, or fail before any audio work.
++
++    The bridge owns the mute flag and the shared playback lease. Stock playback bypasses
++    both, so a missing or incomplete bridge must fail loudly here instead of degrading to
++    unguarded audio: this dependency is deliberate and installation is hash-checked.
++    """
++    try:
++        import afterwords_native as bridge
++    except ImportError as exc:
++        raise RuntimeError(
++            "afterwords_native is not importable; reinstall the Afterwords native bridge "
++            "(afterwords/scripts/prepare-hermes-native.py). Refusing to synthesise or play "
++            "audio outside the shared playback lease.") from exc
++    missing = [name for name in ("native_synthesis", "native_playback", "command_environment")
++               if not callable(getattr(bridge, name, None))]
++    if missing:
++        raise RuntimeError(
++            "afterwords_native is missing %s; reinstall the Afterwords native bridge "
++            "(afterwords/scripts/prepare-hermes-native.py)." % ", ".join(missing))
++    return bridge
++
+ def _debug(msg: str) -> None:
+     """HERMES_VOICE_DEBUG=1 breadcrumb on stderr (the TUI gateway shows it as a gateway.stderr
+     Activity line). Broken pipes are swallowed: this fires from background threads where a dead
+@@ -610,7 +632,8 @@ def _speak_whole_file(text: str) -> None:
      os.makedirs(os.path.join(tempfile.gettempdir(), "hermes_voice"), exist_ok=True)
      mp3_path = os.path.join(tempfile.gettempdir(), "hermes_voice", f"tts_{time.strftime('%Y%m%d_%H%M%S')}.mp3")
      _debug(f"speak_text: synthesizing {len(tts_text)} chars -> {mp3_path}")
 -    raw_result = text_to_speech_tool(text=tts_text, output_path=mp3_path)
-+    from afterwords_native import native_synthesis
-+    raw_result = native_synthesis(text_to_speech_tool, text=tts_text, output_path=mp3_path)
++    raw_result = _afterwords_bridge().native_synthesis(
++        text_to_speech_tool, text=tts_text, output_path=mp3_path)
      try:
          tts_result = json.loads(raw_result) if isinstance(raw_result, str) else {}
      except Exception:
-@@ -622,7 +623,8 @@
+@@ -622,7 +645,7 @@ def _speak_whole_file(text: str) -> None:
      for play_path in play_paths if tts_result.get("success") else []:
          if os.path.isfile(play_path) and os.path.getsize(play_path) > 0:
              _debug(f"speak_text: playing {play_path} ({os.path.getsize(play_path)} bytes)")
 -            play_audio_file(play_path)
-+            from afterwords_native import native_playback
-+            native_playback(play_audio_file, play_path)
++            _afterwords_bridge().native_playback(play_audio_file, play_path)
              played_any = True
      for path in set(play_paths + [mp3_path, mp3_path.rsplit(".", 1)[0] + ".ogg"]):
          if os.path.isfile(path):
+diff --git a/tools/tts_command_provider.py b/tools/tts_command_provider.py
+--- a/tools/tts_command_provider.py
++++ b/tools/tts_command_provider.py
+@@ -26,6 +26,28 @@ from typing import Any, Dict, FrozenSet, Optional
+ from utils import is_truthy_value
+ 
+ 
++def _afterwords_bridge():
++    """Return the Afterwords native bridge, or fail before any audio work.
++
++    The bridge owns the mute flag and the shared playback lease. Stock playback bypasses
++    both, so a missing or incomplete bridge must fail loudly here instead of degrading to
++    unguarded audio: this dependency is deliberate and installation is hash-checked.
++    """
++    try:
++        import afterwords_native as bridge
++    except ImportError as exc:
++        raise RuntimeError(
++            "afterwords_native is not importable; reinstall the Afterwords native bridge "
++            "(afterwords/scripts/prepare-hermes-native.py). Refusing to synthesise or play "
++            "audio outside the shared playback lease.") from exc
++    missing = [name for name in ("native_synthesis", "native_playback", "command_environment")
++               if not callable(getattr(bridge, name, None))]
++    if missing:
++        raise RuntimeError(
++            "afterwords_native is missing %s; reinstall the Afterwords native bridge "
++            "(afterwords/scripts/prepare-hermes-native.py)." % ", ".join(missing))
++    return bridge
++
+ def shell_quote_context(command_template: str, position: int) -> Optional[str]:
+     """Return the shell quote char (``'``/``"``) active right before *position*, or None."""
+     quote: Optional[str] = None
+@@ -172,6 +194,7 @@ def run_command_provider(
+         value = resolve_passthrough_value(key, os.environ.get(key))
+         if value is not None:
+             scrubbed[key] = value
++    scrubbed.update(_afterwords_bridge().command_environment())
+     # Own process group so the whole tree can be signalled on idle timeout; on Windows the
+     # shared bundle also hides the console (shell=True spawns via cmd.exe, which otherwise
+     # flashes a window on windowless hosts). Lossy UTF-8 decode: locale-mismatched bytes
+diff --git a/tools/tts_tool_speaker.py b/tools/tts_tool_speaker.py
+--- a/tools/tts_tool_speaker.py
++++ b/tools/tts_tool_speaker.py
+@@ -27,6 +27,28 @@ from tools.tts_tool_delivery import _origin, _remove_quietly as _unlink_quietly
+ 
+ logger = logging.getLogger("tools.tts_tool")
+ 
++def _afterwords_bridge():
++    """Return the Afterwords native bridge, or fail before any audio work.
++
++    The bridge owns the mute flag and the shared playback lease. Stock playback bypasses
++    both, so a missing or incomplete bridge must fail loudly here instead of degrading to
++    unguarded audio: this dependency is deliberate and installation is hash-checked.
++    """
++    try:
++        import afterwords_native as bridge
++    except ImportError as exc:
++        raise RuntimeError(
++            "afterwords_native is not importable; reinstall the Afterwords native bridge "
++            "(afterwords/scripts/prepare-hermes-native.py). Refusing to synthesise or play "
++            "audio outside the shared playback lease.") from exc
++    missing = [name for name in ("native_synthesis", "native_playback", "command_environment")
++               if not callable(getattr(bridge, name, None))]
++    if missing:
++        raise RuntimeError(
++            "afterwords_native is missing %s; reinstall the Afterwords native bridge "
++            "(afterwords/scripts/prepare-hermes-native.py)." % ", ".join(missing))
++    return bridge
++
+ def _align_int16_chunks(chunks: Iterable[bytes], stop_evt: threading.Event, *, pad_tail: bool = True) -> Iterator[bytes]:
+     """Yield int16-aligned byte chunks; a dangling odd byte is padded at the end (or dropped)."""
+     leftover = b""
+@@ -130,7 +152,8 @@ class _SyncSentencePipeline:
+         try:
+             fd, tmp_path = tempfile.mkstemp(suffix=".mp3")
+             os.close(fd)
+-            raw = _origin().text_to_speech_tool(text=cleaned, output_path=tmp_path)
++            raw = _afterwords_bridge().native_synthesis(
++                _origin().text_to_speech_tool, text=cleaned, output_path=tmp_path)
+             written = _first_written_artifact(raw, tmp_path)
+             if os.path.abspath(written) != os.path.abspath(tmp_path):
+                 _unlink_quietly(tmp_path)  # provider wrote elsewhere: the placeholder is empty
+@@ -147,7 +170,7 @@ class _SyncSentencePipeline:
+                 tmp_path = future.result()
+                 if tmp_path and not self._stop.is_set() and os.path.isfile(tmp_path) and os.path.getsize(tmp_path) > 0:
+                     from tools.voice_mode import play_audio_file
+-                    play_audio_file(tmp_path)
++                    _afterwords_bridge().native_playback(play_audio_file, tmp_path)
+             except Exception as exc:
+                 logger.warning("Sync per-sentence TTS failed: %s", exc)
+             finally:

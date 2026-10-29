@@ -1,21 +1,34 @@
 {
   "installed_base": "08a79ffb9e3323903d967fff4c37fcaee4f5cb3e",
+  "revision": 2,
+  "verified_at": {
+    "hermes_commit": "cdac5365f9",
+    "date": "2026-10-30"
+  },
+  "helper": {
+    "path": "afterwords_native.py",
+    "sha256": "0127d4193240a831584188e6e143cbf47f027cde642f627b1f7ca85962c1497d"
+  },
   "files": {
     "tools/tts_command_provider.py": {
       "before_sha256": "a79804b09dbf2f1562422e055701aade9e13d403f4a2a6bd5b1edc60d8dd8688",
-      "after_sha256": "97593468488bcba6a44c2877704ef05270306bc39f81b3c62fc2f1a74028ad26"
+      "after_sha256": "85bae14b1ba843d39ac533c1a3daedf40d073a0a56ca2e1e5bd0558eddf63ec3",
+      "previous_after_sha256": "97593468488bcba6a44c2877704ef05270306bc39f81b3c62fc2f1a74028ad26"
     },
     "tools/tts_tool_speaker.py": {
       "before_sha256": "6a85668d5d3436860769cdce61cf917b9202f92c4deb357be4ee54ef189f95e1",
-      "after_sha256": "71daf245ebaa9ef701c44e815641b81cdbf4f9a97934808c8086613427d7fbbe"
+      "after_sha256": "00b9a1a6faeb7f55b5ba53f9a9ba1eb459d207589dd3d64c361df88b42ea2378",
+      "previous_after_sha256": "71daf245ebaa9ef701c44e815641b81cdbf4f9a97934808c8086613427d7fbbe"
     },
     "hermes_cli/cli_voice_mixin.py": {
       "before_sha256": "d36724d6b47a1c5c2249ede8e7204493fa21ace59e5e2484e3b05463ccbb5fa9",
-      "after_sha256": "bc29f07e5b7644b6cc563dc361fe4c12977ab93dfe78a6ee88b2bfb9568ab46b"
+      "after_sha256": "e3370bfd8865cd6ac40d0826d3957e649dbc9f6f656d29fb0d8119b053e24d2d",
+      "previous_after_sha256": "bc29f07e5b7644b6cc563dc361fe4c12977ab93dfe78a6ee88b2bfb9568ab46b"
     },
     "hermes_cli/voice.py": {
       "before_sha256": "5cee52e2bfc203de145b2741e50ebf6338eda7fe1c8f5294f61fc66cdfdfa323",
-      "after_sha256": "d83551b9b37a1f541a7660bd4c2ca72f4680548dcc830848f8770d97c1b16c65"
+      "after_sha256": "0c8867e3e9b5476ef8a8f780534e95ac1004f24cc27f9b423290ec38c1611d55",
+      "previous_after_sha256": "d83551b9b37a1f541a7660bd4c2ca72f4680548dcc830848f8770d97c1b16c65"
     }
   }
 }
