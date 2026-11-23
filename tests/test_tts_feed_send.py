@@ -7,6 +7,9 @@ send_to opt-in resolver, and the dry-run no-send guarantee.
 from __future__ import annotations
 
 import importlib.util
+import json
+import os
+import subprocess
 import sys
 from pathlib import Path
 from unittest import mock
@@ -274,3 +277,27 @@ def test_discard_backlog_is_auditable_and_never_sends(tmp_path, monkeypatch):
     assert receipt.read_text().endswith("\n")
     with pytest.raises(FileExistsError):
         tfs.discard_current_backlog(saved, receipt)
+
+
+def test_discard_backlog_cli_writes_complete_receipt(tmp_path):
+    home = tmp_path / "home"
+    archive = home / ".claude" / "tts-archive"
+    archive.mkdir(parents=True)
+    stem = "samantha-old"
+    (archive / f"{stem}.txt").write_text("old response")
+    (archive / f"{stem}-c1.mp3").write_bytes(b"a" * 256)
+    receipt = home / ".local" / "state" / "afterwords" / "discard.json"
+    env = {**os.environ, "HOME": str(home), "AFTERWORDS_SEND_TO": "discord,telegram"}
+
+    result = subprocess.run(
+        [sys.executable, str(SCRIPT), "--discard-current-backlog", "--receipt", str(receipt)],
+        env=env, capture_output=True, text=True, check=True,
+    )
+
+    row = json.loads(receipt.read_text())
+    assert row["status"] == "complete"
+    assert row["discarded_count"] == 1
+    assert row["external_messages_sent"] == 0
+    assert "Discarded 1 stale backlog items without delivery" in result.stdout
+    seen = set(json.loads((home / ".hermes" / "tts-feed-seen.json").read_text()))
+    assert f"claude:{stem}" in seen
