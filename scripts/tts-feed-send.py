@@ -244,25 +244,28 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
                     new_seen.add(marker)
                     continue
 
+                # A preview must not run ffmpeg or populate the delivery cache.
+                # Check source presence only; actual assembly belongs to the
+                # authorised delivery path.
+                if dry_run:
+                    has_audio = (
+                        any(archive_dir.glob(f"{base_stem}-c[0-9]*.mp3"))
+                        or (archive_dir / f"{base_stem}.mp3").is_file()
+                    )
+                    if has_audio:
+                        print(f"  [dry-run] Would send {base_stem} to {preview}")
+                    continue
+
                 # Merge chunks into single MP3
                 merged = merge_chunks(base_stem, archive_dir)
                 if merged is None:
                     # No chunks — check for single MP3 with this stem
                     single_mp3 = archive_dir / f"{base_stem}.mp3"
                     if single_mp3.exists():
-                        if dry_run:
-                            print(f"  [dry-run] Would send {base_stem} to {preview}")
-                            new_seen.add(marker)
-                            continue
                         merged = copy_to_cache(single_mp3)
                     else:
                         new_seen.add(marker)
                         continue
-
-                if dry_run:
-                    print(f"  [dry-run] Would send {base_stem} to {preview}")
-                    new_seen.add(marker)
-                    continue
 
                 print(f"  [{source}] {base_stem} -> {preview}")
                 _deliver(merged, send_to)

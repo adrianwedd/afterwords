@@ -139,6 +139,27 @@ def test_dry_run_makes_no_subprocess_calls(tmp_path, monkeypatch):
     run_mock.assert_not_called()
 
 
+def test_chunked_dry_run_does_not_merge_or_write_cache(tmp_path, monkeypatch, capsys):
+    claude_dir = tmp_path / "claude"
+    claude_dir.mkdir()
+    stem = "worf-20261111-135822-65368-27244"
+    (claude_dir / f"{stem}.txt").write_text("complete response")
+    (claude_dir / f"{stem}-c1.mp3").write_bytes(b"a" * 256)
+    (claude_dir / f"{stem}-c2.mp3").write_bytes(b"b" * 256)
+    cache = tmp_path / "cache"
+
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(claude_dir, "claude")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", cache)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "telegram,discord")
+
+    with mock.patch.object(tfs.subprocess, "run") as run_mock:
+        tfs.process_new_files(set(), dry_run=True)
+
+    run_mock.assert_not_called()
+    assert not cache.exists()
+    assert f"Would send {stem}" in capsys.readouterr().out
+
+
 # ── empty send_to: marks seen, sends nothing ───────────────────────
 
 def test_empty_send_to_marks_seen_but_sends_nothing(tmp_path, monkeypatch, capsys):
