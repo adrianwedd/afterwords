@@ -55,6 +55,7 @@ def test_installer_local_only_installs_manifest_and_scope(tmp_path):
     import os, subprocess
     env = os.environ.copy()
     env["HERMES_HOME"] = str(tmp_path)
+    env["AFTERWORDS_PYTHON"] = __import__("sys").executable
     result = subprocess.run(["bash", str(REPO / "scripts/install-hermes-hook.sh"), "--local-only"], env=env, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     hook = tmp_path / "hooks/afterwords-tts"

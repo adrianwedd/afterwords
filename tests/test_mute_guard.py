@@ -144,7 +144,7 @@ _SKIP_DIR_PARTS = {".git", "node_modules", ".venv", ".venv-drama3",
 def _shell_scripts() -> list[Path]:
     return [
         p for p in sorted(REPO.rglob("*.sh"))
-        if not _SKIP_DIR_PARTS & set(p.parts)
+        if not _SKIP_DIR_PARTS & set(p.relative_to(REPO).parts)
     ]
 
 
@@ -235,7 +235,7 @@ _PY_KNOWN_AFPLAY = {
 def _python_files() -> list[Path]:
     return [
         p for p in sorted(REPO.rglob("*.py"))
-        if not (_SKIP_DIR_PARTS | {"tests"}) & set(p.parts)
+        if not (_SKIP_DIR_PARTS | {"tests"}) & set(p.relative_to(REPO).parts)
         and p.is_file()  # downloaded model metadata can contain dangling optional links
     ]
 
