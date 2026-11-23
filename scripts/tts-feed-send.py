@@ -209,13 +209,16 @@ def parse_claude_stem(name: str) -> str | None:
     return stem
 
 
-def _deliver(merged: Path, send_to: set) -> None:
-    """Send a prepared MP3 to each enabled platform (discord MP3, telegram OGG)."""
-    if "discord" in send_to:
-        send_media("discord", merged)
+def _deliver(merged: Path, send_to: set) -> set:
+    """Send to each requested platform and return only confirmed successes."""
+    delivered = set()
+    if "discord" in send_to and send_media("discord", merged):
+        delivered.add("discord")
     if "telegram" in send_to:
         ogg = to_ogg(merged)
-        send_media("telegram", ogg if ogg else merged)
+        if send_media("telegram", ogg if ogg else merged):
+            delivered.add("telegram")
+    return delivered
 
 
 def process_new_files(seen: set, dry_run: bool = False) -> set:
@@ -244,6 +247,14 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
                     new_seen.add(marker)
                     continue
 
+                pending = {
+                    target for target in send_to
+                    if f"{marker}:{target}" not in new_seen
+                }
+                if not pending:
+                    new_seen.add(marker)
+                    continue
+
                 # A preview must not run ffmpeg or populate the delivery cache.
                 # Check source presence only; actual assembly belongs to the
                 # authorised delivery path.
@@ -253,7 +264,7 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
                         or (archive_dir / f"{base_stem}.mp3").is_file()
                     )
                     if has_audio:
-                        print(f"  [dry-run] Would send {base_stem} to {preview}")
+                        print(f"  [dry-run] Would send {base_stem} to {'+'.join(sorted(pending))}")
                     continue
 
                 # Merge chunks into single MP3
@@ -267,11 +278,12 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
                         new_seen.add(marker)
                         continue
 
-                print(f"  [{source}] {base_stem} -> {preview}")
-                _deliver(merged, send_to)
-
-                new_seen.add(marker)
-                sent_any = True
+                print(f"  [{source}] {base_stem} -> {'+'.join(sorted(pending))}")
+                delivered = _deliver(merged, pending)
+                new_seen.update(f"{marker}:{target}" for target in delivered)
+                if all(f"{marker}:{target}" in new_seen for target in send_to):
+                    new_seen.add(marker)
+                sent_any = sent_any or bool(delivered)
 
         else:
             # Hermes archive — send standalone MP3s (skip chunks)
@@ -291,17 +303,26 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
                     new_seen.add(name)
                     continue
 
-                if dry_run:
-                    print(f"  [dry-run] Would send {name} to {preview}")
+                marker = f"hermes:{name}"
+                pending = {
+                    target for target in send_to
+                    if f"{marker}:{target}" not in new_seen
+                }
+                if not pending:
                     new_seen.add(name)
                     continue
 
-                print(f"  [{source}] {name} -> {preview}")
-                cached = copy_to_cache(mp3_file)
-                _deliver(cached, send_to)
+                if dry_run:
+                    print(f"  [dry-run] Would send {name} to {'+'.join(sorted(pending))}")
+                    continue
 
-                new_seen.add(name)
-                sent_any = True
+                print(f"  [{source}] {name} -> {'+'.join(sorted(pending))}")
+                cached = copy_to_cache(mp3_file)
+                delivered = _deliver(cached, pending)
+                new_seen.update(f"{marker}:{target}" for target in delivered)
+                if all(f"{marker}:{target}" in new_seen for target in send_to):
+                    new_seen.add(name)
+                sent_any = sent_any or bool(delivered)
 
     if not sent_any and not dry_run:
         print("  No new files")

@@ -206,3 +206,37 @@ def test_telegram_only_send_to_skips_discord(tmp_path, monkeypatch):
 
     assert "telegram" in targets
     assert "discord" not in targets
+
+
+def test_partial_delivery_retries_only_failed_target(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "picard-20260504-000000.mp3"
+    (hermes_dir / name).write_bytes(b"\x00" * 256)
+
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "telegram,discord")
+    attempts = []
+    telegram_ok = False
+
+    def fake_send(target, _path):
+        attempts.append(target)
+        return target == "discord" or telegram_ok
+
+    monkeypatch.setattr(tfs, "send_media", fake_send)
+    monkeypatch.setattr(tfs, "to_ogg", lambda path: path)
+
+    first = tfs.process_new_files(set(), dry_run=False)
+    marker = f"hermes:{name}"
+    assert f"{marker}:discord" in first
+    assert f"{marker}:telegram" not in first
+    assert name not in first
+    assert attempts == ["discord", "telegram"]
+
+    attempts.clear()
+    telegram_ok = True
+    second = tfs.process_new_files(first, dry_run=False)
+    assert attempts == ["telegram"]
+    assert f"{marker}:telegram" in second
+    assert name in second
