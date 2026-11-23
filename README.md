@@ -170,7 +170,7 @@ tts:
 
 The command provider produces a real audio artifact synchronously on every platform. On CLI it pipelines local playback as chunks arrive. Complete delivery exits zero; partial CLI artifacts are preserved with a nonzero exit, and total failure removes the output.
 
-All three paths resolve voice from `.afterwords` files using `hermes` as the agent key and acquire the shared play lock (`/tmp/afterwords-play.lock`) to coordinate with Claude/Codex/AGy workers. The native hook (`handler.py`) and command provider archive MP3 + text sidecar to `~/.hermes/tts-archive/`; the shell hook (`afterwords-post-llm.sh`) is playback-only and does not archive.
+All three paths resolve voice from `.afterwords` files using `hermes` as the agent key and acquire the shared play lock (`/tmp/afterwords-play.lock`) to coordinate with Claude/Codex/AGy workers. The native hook (`handler.py`) and command provider archive MP3 + text sidecar to `~/.hermes/tts-archive/`; the native hook publishes the sidecar only after every chunk is archived, so partial output cannot masquerade as a completed response. The shell hook (`afterwords-post-llm.sh`) is playback-only and does not archive.
 
 ```
 hermes: data
@@ -231,6 +231,12 @@ bash clone-voice.sh "https://youtube.com/watch?v=..." galadriel 30
 ```
 
 The script downloads the audio, extracts a 15-second segment, denoises it, transcribes with Whisper, and saves a voice profile. Each voice is just a 700 KB WAV file — adding voices costs zero extra memory.
+
+### Retaining source recordings
+
+For retained acquisition/curation work, use `scripts.acquire_voice_source.acquire_wav(query, requested_path)` and consume its returned path. It verifies and reuses a recorded query without downloading again; a different query producing identical WAV bytes reuses the existing recording. An optional `seconds=120` retains a bounded selection rather than both a full download and its excerpt.
+
+The requested filename is recorded in one `.acquisition.json` lineage file beside the actual WAV, together with the query, resolved source URL, selection and SHA-256. It does not create another full recording for an alias. Use the returned path for transcription and manual splicing; old hard-coded scratch filenames are not automatically redirected. Existing recordings, voice references and recovery archives are never replaced or removed by this helper. Acquisition still requires the operator's normal permission; this is not a background downloader.
 
 ### Auditing voice profiles
 

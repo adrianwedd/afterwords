@@ -23,6 +23,18 @@ SRC="$REPO_ROOT/hermes/hooks/afterwords-tts/handler.py"
 HOOK_DIR="${HERMES_HOME:-$HOME/.hermes}/hooks/afterwords-tts"
 DST="$HOOK_DIR/handler.py"
 
+# This repository's supported Python is the authority.  macOS' ambient
+# /usr/bin/python3 can be older than the handler's syntax even when the project
+# venv is healthy, so never silently use it ahead of the venv.
+PYTHON_BIN="${AFTERWORDS_PYTHON:-$REPO_ROOT/.venv/bin/python}"
+if [ ! -x "$PYTHON_BIN" ]; then
+    PYTHON_BIN="$(command -v python3 2>/dev/null || true)"
+fi
+if [ -z "$PYTHON_BIN" ] || ! "$PYTHON_BIN" -c 'import sys; raise SystemExit(sys.version_info < (3, 11))'; then
+    echo "ERROR: Afterwords requires Python 3.11+ (set AFTERWORDS_PYTHON or create .venv)" >&2
+    exit 1
+fi
+
 for required in "$SRC" "$REPO_ROOT/strip_markdown.py" "$REPO_ROOT/chunks.py"; do
     if [ ! -f "$required" ]; then
         echo "ERROR: missing $required — is REPO_ROOT right? ($REPO_ROOT)" >&2
@@ -42,7 +54,7 @@ mkdir -p "$HOOK_DIR"
 
 # Stamp the repo path into the installed copy so resolution never falls back to
 # a stale ~/.claude/hooks helper.
-python3 - "$SRC" "$DST" "$REPO_ROOT" "$LOCAL_ONLY" <<'PYEOF'
+"$PYTHON_BIN" - "$SRC" "$DST" "$REPO_ROOT" "$LOCAL_ONLY" <<'PYEOF'
 import re, sys
 src_path, dst_path, repo, local_only = sys.argv[1:]
 src = open(src_path).read()
@@ -67,7 +79,7 @@ echo "installed: $DST"
 echo "stamped:   _REPO_HINT = $REPO_ROOT"
 
 # Prove the installed copy resolves the canonical modules from its real location.
-python3 - "$DST" <<'PYEOF'
+"$PYTHON_BIN" - "$DST" <<'PYEOF'
 import importlib.util, pathlib, sys
 path = pathlib.Path(sys.argv[1])
 spec = importlib.util.spec_from_file_location("aw_installed_check", path)

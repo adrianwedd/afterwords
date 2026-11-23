@@ -10,7 +10,7 @@ Use ONBOARDING.md to accept bundled-voice foreground speech first. Integrations 
 | Cursor | Cursor application, command, or `~/.cursor`; same queue-worker prerequisites | Integration setup merges `afterAgentResponse` into `~/.cursor/hooks.json` | `cursor-tts-hook.sh`, shared worker/helpers | One Cursor agent final reply speaks once; Claude archive receives audio |
 | Codex CLI | Installed `codex`; Python, ripgrep, curl, audio/archive tools | `bash setup.sh --integrations` installs a login LaunchAgent that follows Codex sessions globally; no Stop hook | Private managed runtime under `~/Library/Application Support/Afterwords/watchers/` | `afterwords watchers status codex`; one real final answer speaks once and archives under `~/.codex/tts-archive/` |
 | OpenCode v2 desktop/CLI | Installed `opencode` using the v2 SQLite `session_v2`/`session_message` schema; Python, curl, `afplay`, Homebrew `lame` | `bash setup.sh --integrations` detects it and installs a private runtime and login LaunchAgent; no OpenCode plugin or Claude settings changes | Private managed runtime under `~/Library/Application Support/Afterwords/watchers/` | `afterwords watchers status opencode`; one real final answer queues once, speaks once, and archives under `~/.opencode/tts-archive/` |
-| Hermes | Installed Hermes; Python/aiohttp for native hook; curl and audio/archive tools for shell paths | Separate explicit setup in `docs/hermes-integration.md`; baseline/integration setup does not configure Hermes | Native `handler.py`, shell post-LLM hook, or command provider; choose the intended path | One local final response speaks once; expected archive under `~/.hermes/tts-archive/`; command provider returns complete real audio |
+| Hermes | Installed Hermes; Python/aiohttp for native hook; curl and audio/archive tools for shell paths | Separate explicit setup in `docs/hermes-integration.md`; baseline/integration setup does not configure Hermes | Native `handler.py`, shell post-LLM hook, or command provider; choose the intended path. Project routing requires exact hook/session identity; missing identity keeps the configured profile voice | One local final response speaks once; expected archive under `~/.hermes/tts-archive/`; command provider returns complete real audio |
 
 `bash setup.sh --integrations` stages the managed runtime before writing Claude or AGy hook settings, then installs login watchers for detected Codex and OpenCode CLIs. It merges only Afterwords-owned hook entries and preserves unrelated hook owners. `afterwords integrations` checks hook registration, source/runtime agreement, watcher state and Homebrew `PATH`. Gemini CLI and Hermes retain their separate setup paths described above.
 
@@ -83,6 +83,12 @@ Hermes producer is required. The native consumer bridge supplies caller-scoped
 `AFTERWORDS_TTS_CALLER=native`, then guards actual playback with mute and the shared lock.
 Ordinary CLI hooks without an owner continue to speak. Gateway delivery stays
 owned by native voice mode; the shell hook must not send another message.
+
+The bridge also exports Hermes' task-local session ID and runtime cwd into the
+otherwise scrubbed command-provider child. `afterwords-project-voice.sh` may map
+that exact session to its project `.afterwords`; it must never select the newest
+global lease or recent session. When exact identity is unavailable it falls back
+to the profile's configured `{voice}` rather than borrowing another project.
 
 A profile hook may set `AFTERWORDS_PORT` (loopback only, 1–65535, default 7860)
 and `AFTERWORDS_VOICE` (overrides project/global mappings). Use the same route

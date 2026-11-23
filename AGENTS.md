@@ -88,7 +88,7 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
    ```
    Uses `cursor` as the agent key. `bash setup.sh --integrations` installs it when Cursor is detected.
 
-8. **Hermes Agent TTS** (`~/.hermes/hooks/afterwords-tts/` + `scripts/`) — separate setup; not changed by the coding-agent installer. Keep the live gateway untouched unless explicitly requested. (a) Shell hook (`afterwords-post-llm.sh`) fires on `post_llm_call`, strips markdown, chunks text (~400-char sentence boundaries), pipelines synthesis+playback, archives MP3+txt to `~/.hermes/tts-archive/`. (b) Native Python hook (`handler.py`) fires on `agent:end`, acquires shared `/tmp/afterwords-play.lock`, async chunked pipeline via `aiohttp`, archives MP3+txt to `~/.hermes/tts-archive/`; only speaks on CLI/local platforms. (c) Command provider (`afterwords-tts-command.sh`) synthesizes the real output artifact synchronously. Complete chunk delivery returns zero; partial output is preserved with a nonzero exit; total failure removes the output.
+8. **Hermes Agent TTS** (`~/.hermes/hooks/afterwords-tts/` + `scripts/`) — separate setup; not changed by the coding-agent installer. Keep the live gateway untouched unless explicitly requested. (a) Shell hook (`afterwords-post-llm.sh`) fires on `post_llm_call`, strips markdown, chunks text (~400-char sentence boundaries), pipelines synthesis+playback, archives MP3+txt to `~/.hermes/tts-archive/`. (b) Native Python hook (`handler.py`) fires on `agent:end`, acquires the shared play lock, runs cancellable async `afplay`, and publishes its text completion sidecar only after every requested chunk has a valid archived MP3. Partial chunks remain forensic evidence without a completion sidecar and are not feed-eligible. (c) Command provider (`afterwords-tts-command.sh`) synthesizes the real output artifact synchronously. Complete chunk delivery returns zero; partial output is preserved with a nonzero exit; total failure removes the output.
 
 8. **Voice profiles** (`voices/`) — Each voice is a `{name}-ref.wav` (15s reference clip, ~700KB) + `{name}.json` (metadata with transcript). Created by `clone-voice.sh` which downloads from YouTube, extracts a segment, denoises with noisereduce, and transcribes with faster-whisper.
 
@@ -116,6 +116,14 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
 | `hermes` | Hermes Agent (also checks global `~/.afterwords`) |
 
 Each hook falls back to `~/.afterwords` (global) before using the server's default voice.
+
+Hermes identity must be exact, not inferred from activity order. The `agent:end`
+hook uses the event's `session_id` to read that session's cwd. The native command
+bridge exports its task-local Hermes session ID and runtime cwd to
+`scripts/afterwords-project-voice.sh`; if neither exact identity nor an explicit
+invocation cwd is available, the wrapper keeps the configured profile voice.
+Never route from the globally newest lease or most recently active session: a
+multiplexed gateway can run unrelated conversations concurrently.
 
 The repo's own `.afterwords` is deliberately both git-tracked (it ships the default agent→voice mapping) and listed in `.gitignore` (so the entry documents intent, though gitignore does not silence tracked files). Local edits to it are personal preference: never commit `.afterwords` changes unless a task explicitly says so.
 

@@ -167,9 +167,13 @@ def test_every_changed_reference_has_hash_bound_provenance():
     changes = {c["wav"]: c for c in manifest["changes"]}
     exclusions = {c["wav"]: c for c in manifest.get("exclusions", [])}
     audio = load_script("voice_corpus")
+    tracked = set(subprocess.check_output(
+        ["git", "ls-files", "voices"], cwd=ROOT, text=True).splitlines())
     for record in baseline["records"]:
         path = ROOT / "voices" / record["wav"]
-        if not path.exists():
+        # A private file may deliberately share the historical excluded name;
+        # public provenance is determined by Git custody, not disk presence.
+        if f"voices/{record['wav']}" not in tracked:
             exclusion = exclusions[record["wav"]]
             assert exclusion["original_audio"] == record["audio"]
             assert exclusion["reason"].strip()
@@ -232,8 +236,9 @@ def test_every_changed_reference_has_hash_bound_provenance():
 
 def test_no_unexplained_production_orphan_or_missing_reference():
     inventory = load_script("voice_corpus").inventory(ROOT)
-    assert not [r["wav"] for r in inventory["records"] if r["orphan"]]
-    for record in inventory["records"]:
+    production = [r for r in inventory["records"] if r["tracked"]]
+    assert not [r["wav"] for r in production if r["orphan"]]
+    for record in production:
         assert record["audio"]["duration_s"] >= 3
         assert record["audio"]["rms"] > 0
 

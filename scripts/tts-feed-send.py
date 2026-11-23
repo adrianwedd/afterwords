@@ -11,13 +11,19 @@ Keeps state in ~/.hermes/tts-feed-seen.json to avoid re-sending.
 Usage:
     python3 scripts/tts-feed-send.py [--once] [--dry-run]
 """
+from __future__ import annotations
+
 import fcntl
+import hashlib
 import json
 import os
 import subprocess
 import sys
 import re
+import tempfile
+import time
 from pathlib import Path
+from datetime import datetime, timezone
 
 HERMES_ARCHIVE = Path.home() / ".hermes" / "tts-archive"
 CLAUDE_ARCHIVE = Path.home() / ".claude" / "tts-archive"
@@ -32,6 +38,7 @@ WATCH_DIRS = [
 
 # Only these platforms may ever be targeted by the watcher.
 KNOWN_PLATFORMS = ("telegram", "discord")
+BACKLOG_QUIESCENCE_SECONDS = 300
 
 
 def _parse_send_to_tokens(raw: str) -> set:
@@ -115,40 +122,106 @@ def acquire_lock() -> int:
     return fd
 
 
-def save_seen(seen: set) -> None:
+def _fsync_directory(path: Path) -> None:
+    """Make a completed create/replace durable across a host crash."""
+    fd = os.open(path, os.O_RDONLY)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def save_seen(seen: set, *, remove: set | None = None) -> None:
     SEEN_FILE.parent.mkdir(parents=True, exist_ok=True)
     # Read-merge-write: union with whatever is on disk right now so a marker
     # the hook pre-seeded during this pass survives our write (no clobber).
-    merged = set(seen) | load_seen()
+    merged = (set(seen) | load_seen()) - set(remove or ())
     # Atomic swap: write to a temp file in the SAME dir, then os.replace() so a
     # crash mid-write can never truncate the live tts-feed-seen.json.
-    tmp = SEEN_FILE.with_suffix(SEEN_FILE.suffix + ".tmp")
-    tmp.write_text(json.dumps(sorted(merged), indent=2))
-    os.replace(tmp, SEEN_FILE)
+    fd, tmp_name = tempfile.mkstemp(
+        prefix=f".{SEEN_FILE.name}.", suffix=".tmp", dir=SEEN_FILE.parent,
+    )
+    tmp = Path(tmp_name)
+    try:
+        with os.fdopen(fd, "w") as handle:
+            json.dump(sorted(merged), handle, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp, SEEN_FILE)
+        _fsync_directory(SEEN_FILE.parent)
+    finally:
+        tmp.unlink(missing_ok=True)
+
+
+def _attempts_file() -> Path:
+    return SEEN_FILE.with_name("tts-feed-attempts.json")
+
+
+def load_attempts() -> dict:
+    path = _attempts_file()
+    if not path.exists():
+        return {}
+    try:
+        value = json.loads(path.read_text())
+    except (json.JSONDecodeError, OSError) as exc:
+        raise RuntimeError(f"cannot read delivery attempt journal {path}: {exc}") from exc
+    if not isinstance(value, dict) or any(
+        not isinstance(key, str) or not isinstance(row, dict)
+        for key, row in value.items()
+    ):
+        raise RuntimeError(f"malformed delivery attempt journal: {path}")
+    for marker, row in value.items():
+        _validate_attempt_record(marker, row)
+    return value
+
+
+def save_attempts(attempts: dict) -> None:
+    path = _attempts_file()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp_name = tempfile.mkstemp(
+        prefix=f".{path.name}.", suffix=".tmp", dir=path.parent,
+    )
+    tmp = Path(tmp_name)
+    try:
+        with os.fdopen(fd, "w") as handle:
+            json.dump(attempts, handle, indent=2, sort_keys=True)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp, path)
+        _fsync_directory(path.parent)
+    finally:
+        tmp.unlink(missing_ok=True)
 
 
 def to_ogg(mp3_path: Path) -> Path | None:
+    AUDIO_CACHE.mkdir(parents=True, exist_ok=True)
     ogg_path = AUDIO_CACHE / f"{mp3_path.stem}.ogg"
-    if ogg_path.exists():
-        return ogg_path
     result = subprocess.run(
         ["ffmpeg", "-y", "-i", str(mp3_path), "-c:a", "libopus", "-b:a", "64k", str(ogg_path)],
         capture_output=True, timeout=30,
     )
-    return ogg_path if result.returncode == 0 else None
+    return (
+        ogg_path
+        if result.returncode == 0 and ogg_path.is_file() and ogg_path.stat().st_size > 0
+        else None
+    )
 
 
 def copy_to_cache(mp3_path: Path) -> Path:
     AUDIO_CACHE.mkdir(parents=True, exist_ok=True)
     dest = AUDIO_CACHE / mp3_path.name
-    if not dest.exists() or dest.stat().st_size != mp3_path.stat().st_size:
-        import shutil
-        shutil.copy2(str(mp3_path), str(dest))
+    # Size equality does not imply byte equality. Always refresh the delivery
+    # artifact so a deliberate retry is journalled and sent from current source.
+    import shutil
+    shutil.copy2(str(mp3_path), str(dest))
     return dest
 
 
 def merge_chunks(base_stem: str, archive_dir: Path) -> Path | None:
     """Merge chunked MP3 files (base-c1.mp3, base-c2.mp3, ...) into one file."""
+    AUDIO_CACHE.mkdir(parents=True, exist_ok=True)
     chunks = sorted(archive_dir.glob(f"{base_stem}-c[0-9]*.mp3"))
     if not chunks:
         return None
@@ -184,9 +257,19 @@ def merge_chunks(base_stem: str, archive_dir: Path) -> Path | None:
     return None
 
 
-def send_media(target: str, file_path: Path) -> bool:
+def send_media(target: str, file_path: Path) -> bool | None:
+    """Return True/False for confirmed outcomes, None when outcome is unknown."""
     cmd = ["hermes", "send", "-t", target, f"MEDIA:{file_path}"]
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+    except subprocess.TimeoutExpired:
+        # The remote service may have accepted the message before the local CLI
+        # timed out. Never turn that ambiguity into an automatic duplicate.
+        print(
+            f"  [UNKNOWN] hermes send {target} timed out; holding for reconciliation",
+            file=sys.stderr,
+        )
+        return None
     if result.returncode != 0:
         print(f"  [ERROR] hermes send {target}: {result.stderr.strip()}", file=sys.stderr)
         return False
@@ -207,16 +290,161 @@ def parse_claude_stem(name: str) -> str | None:
     return stem
 
 
-def _deliver(merged: Path, send_to: set) -> None:
-    """Send a prepared MP3 to each enabled platform (discord MP3, telegram OGG)."""
-    if "discord" in send_to:
-        send_media("discord", merged)
-    if "telegram" in send_to:
-        ogg = to_ogg(merged)
-        send_media("telegram", ogg if ogg else merged)
+def _deliver(
+    merged: Path,
+    send_to: set,
+    marker: str,
+    seen: set,
+    source_paths: list[Path],
+    *,
+    persist: bool,
+) -> set:
+    """Deliver targets with a durable per-target crash boundary.
+
+    Persist an in-flight marker before egress and a success marker immediately
+    after confirmation. Recovered in-flight attempts are ambiguous and held for
+    reconciliation rather than blindly retried without a remote idempotency key.
+    """
+    delivered = set()
+    for target in ("discord", "telegram"):
+        if target not in send_to:
+            continue
+        success_marker = f"{marker}:{target}"
+        inflight_marker = f"{success_marker}:inflight"
+        attempts = load_attempts() if persist else {}
+        existing_attempt = attempts.get(success_marker)
+        if existing_attempt and existing_attempt.get("status") not in {
+            "attempting", "cli_confirmed", "failed", "resolved_delivered", "resolved_retry",
+        }:
+            raise RuntimeError(f"invalid attempt state for {success_marker}")
+        if success_marker in seen:
+            continue
+        if existing_attempt and existing_attempt.get("status") in {
+            "cli_confirmed", "resolved_delivered",
+        }:
+            seen.add(success_marker)
+            seen.discard(inflight_marker)
+            if persist:
+                save_seen(seen, remove={inflight_marker})
+            continue
+        if existing_attempt and existing_attempt.get("status") in {"resolved_retry", "failed"}:
+            attempts.pop(success_marker, None)
+            save_attempts(attempts)
+            existing_attempt = None
+            seen.discard(inflight_marker)
+            save_seen(seen, remove={inflight_marker})
+        if existing_attempt and existing_attempt.get("status") == "attempting":
+            seen.add(inflight_marker)
+            save_seen(seen)
+            print(
+                f"  [hold] {marker} -> {target} has an indeterminate prior attempt; "
+                "reconcile before retrying",
+                file=sys.stderr,
+            )
+            continue
+        if inflight_marker in seen:
+            print(
+                f"  [hold] {marker} -> {target} has an unjournalled in-flight marker; "
+                "manual reconciliation required",
+                file=sys.stderr,
+            )
+            continue
+
+        media = merged
+        if target == "telegram":
+            ogg = to_ogg(merged)
+            media = ogg if ogg else merged
+        attempt = {
+            "schema_version": 1,
+            "status": "attempting",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "success_marker": success_marker,
+            "inflight_marker": inflight_marker,
+            "target": target,
+            "delivery_media": _asset_record(media),
+            "source_assets": [_asset_record(path) for path in source_paths],
+        }
+        # Apply the same custody policy at creation as at reconciliation. A
+        # symlink escape or malformed source must fail before journal, seen
+        # state or external egress exists.
+        _validate_attempt_record(success_marker, attempt)
+        attempts[success_marker] = attempt
+        if persist:
+            # The byte-bound journal is authoritative and must be durable before
+            # either the in-flight marker or external egress.
+            save_attempts(attempts)
+        seen.add(inflight_marker)
+        if persist:
+            save_seen(seen)
+
+        outcome = send_media(target, media)
+        if outcome is True:
+            delivered.add(target)
+            attempt["status"] = "cli_confirmed"
+            attempt["confirmed_at"] = datetime.now(timezone.utc).isoformat()
+            attempts[success_marker] = attempt
+            if persist:
+                save_attempts(attempts)
+            seen.add(success_marker)
+            seen.discard(inflight_marker)
+            if persist:
+                save_seen(seen, remove={inflight_marker})
+        elif outcome is False:
+            attempt["status"] = "failed"
+            attempt["failed_at"] = datetime.now(timezone.utc).isoformat()
+            attempts[success_marker] = attempt
+            if persist:
+                save_attempts(attempts)
+            seen.discard(inflight_marker)
+            if persist:
+                save_seen(seen, remove={inflight_marker})
+                attempts.pop(success_marker, None)
+                save_attempts(attempts)
+        # None deliberately retains the durable in-flight marker.
+    return delivered
 
 
-def process_new_files(seen: set, dry_run: bool = False) -> set:
+def _item_has_held_attempt(marker: str, seen: set, *, persist: bool) -> bool:
+    """Check before touching shared cache so unresolved media stays immutable."""
+    if not persist:
+        return False
+    attempts = load_attempts()
+    removed_inflight = set()
+    for success_marker, attempt in attempts.items():
+        if not success_marker.startswith(f"{marker}:"):
+            continue
+        inflight_marker = f"{success_marker}:inflight"
+        status = attempt.get("status")
+        if status in {"cli_confirmed", "resolved_delivered"}:
+            seen.add(success_marker)
+            seen.discard(inflight_marker)
+            removed_inflight.add(inflight_marker)
+        elif status in {"failed", "resolved_retry"}:
+            seen.discard(inflight_marker)
+            removed_inflight.add(inflight_marker)
+    if removed_inflight:
+        save_seen(seen, remove=removed_inflight)
+
+    held = {
+        success_marker.rsplit(":", 1)[-1]
+        for success_marker, attempt in attempts.items()
+        if success_marker.startswith(f"{marker}:") and attempt.get("status") == "attempting"
+    }
+    for target in KNOWN_PLATFORMS:
+        success_marker = f"{marker}:{target}"
+        if f"{success_marker}:inflight" in seen and success_marker not in seen:
+            held.add(target)
+    if held:
+        print(
+            f"  [hold] {marker} has unresolved target(s) {','.join(sorted(held))}; "
+            "cache left untouched",
+            file=sys.stderr,
+        )
+        return True
+    return False
+
+
+def process_new_files(seen: set, dry_run: bool = False, *, persist: bool = False) -> set:
     new_seen = set(seen)
     sent_any = False
     send_to = resolve_send_to()
@@ -242,31 +470,52 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
                     new_seen.add(marker)
                     continue
 
+                pending = {
+                    target for target in send_to
+                    if f"{marker}:{target}" not in new_seen
+                }
+                if not pending:
+                    new_seen.add(marker)
+                    continue
+
+                # A preview must not run ffmpeg or populate the delivery cache.
+                # Check source presence only; actual assembly belongs to the
+                # authorised delivery path.
+                if dry_run:
+                    has_audio = (
+                        any(archive_dir.glob(f"{base_stem}-c[0-9]*.mp3"))
+                        or (archive_dir / f"{base_stem}.mp3").is_file()
+                    )
+                    if has_audio:
+                        print(f"  [dry-run] Would send {base_stem} to {'+'.join(sorted(pending))}")
+                    continue
+
+                if _item_has_held_attempt(marker, new_seen, persist=persist):
+                    continue
+
                 # Merge chunks into single MP3
                 merged = merge_chunks(base_stem, archive_dir)
                 if merged is None:
                     # No chunks — check for single MP3 with this stem
                     single_mp3 = archive_dir / f"{base_stem}.mp3"
                     if single_mp3.exists():
-                        if dry_run:
-                            print(f"  [dry-run] Would send {base_stem} to {preview}")
-                            new_seen.add(marker)
-                            continue
                         merged = copy_to_cache(single_mp3)
                     else:
-                        new_seen.add(marker)
+                        print(f"  [defer] {base_stem} has a completion sidecar but no audio")
                         continue
 
-                if dry_run:
-                    print(f"  [dry-run] Would send {base_stem} to {preview}")
+                print(f"  [{source}] {base_stem} -> {'+'.join(sorted(pending))}")
+                source_paths = [txt_file]
+                source_paths.extend(sorted(archive_dir.glob(f"{base_stem}-c[0-9]*.mp3")))
+                source_single = archive_dir / f"{base_stem}.mp3"
+                if source_single.is_file():
+                    source_paths.append(source_single)
+                delivered = _deliver(
+                    merged, pending, marker, new_seen, source_paths, persist=persist,
+                )
+                if all(f"{marker}:{target}" in new_seen for target in send_to):
                     new_seen.add(marker)
-                    continue
-
-                print(f"  [{source}] {base_stem} -> {preview}")
-                _deliver(merged, send_to)
-
-                new_seen.add(marker)
-                sent_any = True
+                sent_any = sent_any or bool(delivered)
 
         else:
             # Hermes archive — send standalone MP3s (skip chunks)
@@ -286,17 +535,30 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
                     new_seen.add(name)
                     continue
 
-                if dry_run:
-                    print(f"  [dry-run] Would send {name} to {preview}")
+                marker = f"hermes:{name}"
+                pending = {
+                    target for target in send_to
+                    if f"{marker}:{target}" not in new_seen
+                }
+                if not pending:
                     new_seen.add(name)
                     continue
 
-                print(f"  [{source}] {name} -> {preview}")
-                cached = copy_to_cache(mp3_file)
-                _deliver(cached, send_to)
+                if dry_run:
+                    print(f"  [dry-run] Would send {name} to {'+'.join(sorted(pending))}")
+                    continue
 
-                new_seen.add(name)
-                sent_any = True
+                if _item_has_held_attempt(marker, new_seen, persist=persist):
+                    continue
+
+                print(f"  [{source}] {name} -> {'+'.join(sorted(pending))}")
+                cached = copy_to_cache(mp3_file)
+                delivered = _deliver(
+                    cached, pending, marker, new_seen, [mp3_file], persist=persist,
+                )
+                if all(f"{marker}:{target}" in new_seen for target in send_to):
+                    new_seen.add(name)
+                sent_any = sent_any or bool(delivered)
 
     if not sent_any and not dry_run:
         print("  No new files")
@@ -304,14 +566,489 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
     return new_seen
 
 
+def _asset_record(path: Path) -> dict:
+    stat = path.stat()
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return {
+        "path": str(path),
+        "size": stat.st_size,
+        "mtime_ns": stat.st_mtime_ns,
+        "sha256": digest.hexdigest(),
+    }
+
+
+def _valid_asset_record(record: object) -> bool:
+    return (
+        isinstance(record, dict)
+        and set(record) == {"path", "size", "mtime_ns", "sha256"}
+        and isinstance(record.get("path"), str)
+        and bool(record["path"])
+        and Path(record["path"]).is_absolute()
+        and isinstance(record.get("size"), int)
+        and record["size"] >= 0
+        and isinstance(record.get("mtime_ns"), int)
+        and record["mtime_ns"] >= 0
+        and isinstance(record.get("sha256"), str)
+        and re.fullmatch(r"[0-9a-f]{64}", record["sha256"]) is not None
+    )
+
+
+def _validate_attempt_record(success_marker: str, attempt: dict) -> None:
+    """Fail closed on forged/incomplete attempt custody."""
+    base_marker, separator, target = success_marker.rpartition(":")
+    source_assets = attempt.get("source_assets")
+    required_keys = {
+        "schema_version", "status", "created_at", "success_marker",
+        "inflight_marker", "target", "delivery_media", "source_assets",
+    }
+    allowed_keys = required_keys | {"confirmed_at", "failed_at", "resolved_at"}
+    if (
+        not required_keys.issubset(attempt)
+        or not set(attempt).issubset(allowed_keys)
+        or not separator
+        or target not in KNOWN_PLATFORMS
+        or attempt.get("schema_version") != 1
+        or attempt.get("success_marker") != success_marker
+        or attempt.get("inflight_marker") != f"{success_marker}:inflight"
+        or attempt.get("target") != target
+        or attempt.get("status") not in {
+            "attempting", "cli_confirmed", "failed", "resolved_delivered", "resolved_retry",
+        }
+        or not isinstance(attempt.get("created_at"), str)
+        or not _valid_asset_record(attempt.get("delivery_media"))
+        or not isinstance(source_assets, list)
+        or not source_assets
+        or not all(_valid_asset_record(asset) for asset in source_assets)
+    ):
+        raise RuntimeError(f"malformed frozen attempt journal for {success_marker}")
+
+    paths = [Path(asset["path"]).resolve() for asset in source_assets]
+    if len(set(paths)) != len(paths) or len({path.parent for path in paths}) != 1:
+        raise RuntimeError(f"inconsistent frozen attempt journal for {success_marker}")
+    names = [path.name for path in paths]
+    if base_marker.startswith("hermes:"):
+        expected = base_marker.removeprefix("hermes:")
+        roots = [path.resolve() for path, source in WATCH_DIRS if source == "hermes"]
+        expected_delivery_names = {
+            expected
+        } if target == "discord" else {
+            expected, f"{Path(expected).stem}.ogg"
+        }
+        valid_sources = (
+            len(roots) == 1
+            and paths[0].parent == roots[0]
+            and paths == [(roots[0] / expected).resolve()]
+            and expected.endswith(".mp3")
+        )
+    elif base_marker.startswith("claude:"):
+        stem = base_marker.removeprefix("claude:")
+        roots = [path.resolve() for path, source in WATCH_DIRS if source == "claude"]
+        expected_delivery_names = (
+            {f"{stem}.mp3", f"{stem}-merged.mp3"}
+            if target == "discord"
+            else {
+                f"{stem}.mp3", f"{stem}-merged.mp3",
+                f"{stem}.ogg", f"{stem}-merged.ogg",
+            }
+        )
+        valid_sources = (
+            len(roots) == 1
+            and all(path.parent == roots[0] for path in paths)
+            and names.count(f"{stem}.txt") == 1
+            and any(
+                name == f"{stem}.mp3" or re.fullmatch(re.escape(stem) + r"-c\d+\.mp3", name)
+                for name in names
+            )
+            and all(
+                name == f"{stem}.txt"
+                or name == f"{stem}.mp3"
+                or re.fullmatch(re.escape(stem) + r"-c\d+\.mp3", name)
+                for name in names
+            )
+        )
+    else:
+        valid_sources = False
+        expected_delivery_names = set()
+    delivery_path = Path(attempt["delivery_media"]["path"]).resolve()
+    if (
+        not valid_sources
+        or delivery_path.parent != AUDIO_CACHE.resolve()
+        or delivery_path.name not in expected_delivery_names
+        or delivery_path.suffix not in {".mp3", ".ogg"}
+    ):
+        raise RuntimeError(f"inconsistent frozen attempt journal for {success_marker}")
+
+
+def _attempt_custody(attempt: dict) -> dict:
+    return {
+        key: attempt.get(key)
+        for key in (
+            "schema_version", "created_at", "success_marker", "inflight_marker",
+            "target", "delivery_media", "source_assets",
+        )
+    }
+
+
+def _asset_content_matches(record: dict) -> bool:
+    path = Path(record["path"])
+    try:
+        current = _asset_record(path)
+    except OSError:
+        return False
+    return current["size"] == record["size"] and current["sha256"] == record["sha256"]
+
+
+def _item_assets_unchanged(item: dict) -> bool:
+    """Re-enumerate as well as re-hash: added/removed chunks invalidate a snapshot."""
+    try:
+        records = item.get("assets", [])
+        if not records:
+            return False
+        expected = {Path(record["path"]) for record in records}
+        if item.get("source") == "claude":
+            archive_dir = next(iter(expected)).parent
+            stem = item["item"]
+            actual = {archive_dir / f"{stem}.txt"}
+            actual.update(archive_dir.glob(f"{stem}-c[0-9]*.mp3"))
+            single = archive_dir / f"{stem}.mp3"
+            if single.is_file():
+                actual.add(single)
+        else:
+            actual = expected
+        return actual == expected and all(
+            _asset_record(Path(record["path"])) == record for record in records
+        )
+    except (OSError, KeyError, TypeError):
+        return False
+
+
+def _replace_receipt(receipt_path: Path, receipt: dict) -> None:
+    fd, complete_name = tempfile.mkstemp(
+        prefix=f".{receipt_path.name}.", suffix=".complete", dir=receipt_path.parent,
+    )
+    complete_path = Path(complete_name)
+    try:
+        os.fchmod(fd, 0o600)
+        with os.fdopen(fd, "w") as handle:
+            json.dump(receipt, handle, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(complete_path, receipt_path)
+        _fsync_directory(receipt_path.parent)
+    finally:
+        complete_path.unlink(missing_ok=True)
+
+
+def discard_current_backlog(
+    seen: set,
+    receipt_path: Path,
+    *,
+    quiescence_seconds: int = BACKLOG_QUIESCENCE_SECONDS,
+) -> dict:
+    """Mark the complete backlog seen without sending or assembling audio.
+
+    This is an explicit recovery operation for a long-disabled scheduler, not a
+    startup default. The caller already holds the feed lock. A receipt is
+    mandatory and exclusive so the disposition cannot be repeated or confused
+    with successful external delivery.
+    """
+    if receipt_path.exists():
+        raise FileExistsError(f"receipt already exists: {receipt_path}")
+    if quiescence_seconds < 0:
+        raise ValueError("quiescence_seconds must be non-negative")
+    before_bytes = SEEN_FILE.read_bytes() if SEEN_FILE.exists() else b""
+    cutoff_ns = time.time_ns()
+    settled_before_ns = cutoff_ns - quiescence_seconds * 1_000_000_000
+    discarded = []
+    deferred = []
+    updated = set(seen)
+    for archive_dir, source in WATCH_DIRS:
+        if not archive_dir.exists():
+            continue
+        if source == "claude":
+            for txt_file in sorted(archive_dir.glob("*.txt")):
+                stem = txt_file.stem
+                marker = f"claude:{stem}"
+                if marker in updated:
+                    continue
+                has_audio = (
+                    any(archive_dir.glob(f"{stem}-c[0-9]*.mp3"))
+                    or (archive_dir / f"{stem}.mp3").is_file()
+                )
+                if has_audio:
+                    assets = [txt_file]
+                    assets.extend(sorted(archive_dir.glob(f"{stem}-c[0-9]*.mp3")))
+                    single = archive_dir / f"{stem}.mp3"
+                    if single.is_file():
+                        assets.append(single)
+                    records = [_asset_record(path) for path in assets]
+                    if any(row["mtime_ns"] > settled_before_ns for row in records):
+                        deferred.append({"source": source, "item": stem, "reason": "not_quiescent"})
+                        continue
+                    updated.add(marker)
+                    discarded.append({
+                        "source": source, "item": stem, "marker": marker,
+                        "assets": records,
+                    })
+        else:
+            for mp3_file in sorted(archive_dir.glob("*.mp3")):
+                if re.search(r"-c\d+\.", mp3_file.name) or mp3_file.name in updated:
+                    continue
+                record = _asset_record(mp3_file)
+                if record["mtime_ns"] > settled_before_ns:
+                    deferred.append({
+                        "source": source, "item": mp3_file.name, "reason": "not_quiescent",
+                    })
+                    continue
+                updated.add(mp3_file.name)
+                discarded.append({
+                    "source": source, "item": mp3_file.name, "marker": mp3_file.name,
+                    "assets": [record],
+                })
+
+    receipt = {
+        "schema_version": 1,
+        "status": "prepared",
+        "action": "discard_current_backlog_as_stale_without_delivery",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "snapshot_cutoff_ns": cutoff_ns,
+        "quiescence_seconds": quiescence_seconds,
+        "external_messages_sent": 0,
+        "before_seen_sha256": hashlib.sha256(before_bytes).hexdigest(),
+        "discarded_count": len(discarded),
+        "discarded": discarded,
+        "deferred": deferred,
+        "recovery": "Use --recover-backlog-disposition with this receipt; original assets must still match their recorded SHA-256 values.",
+    }
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    fd = os.open(receipt_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, "w") as handle:
+        # Persist intent before the atomic seen-state swap. If the process dies,
+        # a `prepared` receipt exposes the incomplete disposition instead of
+        # leaving an unexplained state change.
+        json.dump(receipt, handle, indent=2)
+        handle.write("\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+    _fsync_directory(receipt_path.parent)
+
+    # Freeze the snapshot before changing delivery state. A producer that
+    # modifies any selected transcript/audio object causes an explicit abort.
+    if not all(_item_assets_unchanged(item) for item in discarded):
+        raise RuntimeError("backlog asset changed after snapshot; seen state not modified")
+
+    save_seen(updated)
+    if not all(_item_assets_unchanged(item) for item in discarded):
+        # A producer advanced an item during the seen-state swap. Reverse only
+        # this disposition's markers before returning an explicit failure.
+        markers = {item["marker"] for item in discarded}
+        save_seen(load_seen() - markers, remove=markers)
+        receipt["status"] = "aborted_asset_race"
+        receipt["aborted_at"] = datetime.now(timezone.utc).isoformat()
+        receipt["aborted_reason"] = "backlog asset set changed during seen-state swap"
+        receipt["recovered_markers"] = sorted(markers)
+        _replace_receipt(receipt_path, receipt)
+        raise RuntimeError(
+            "backlog asset changed during seen-state swap; disposition markers reversed"
+        )
+    after_bytes = SEEN_FILE.read_bytes()
+    receipt["status"] = "complete"
+    receipt["after_seen_sha256"] = hashlib.sha256(after_bytes).hexdigest()
+
+    # Never truncate the only prepared receipt after mutating seen-state.
+    # Failure while writing this separately-fsynced completion leaves the
+    # durable `prepared` receipt and exact marker inventory intact.
+    _replace_receipt(receipt_path, receipt)
+    return receipt
+
+
+def recover_backlog_disposition(receipt_path: Path) -> dict:
+    """Mechanically reverse only the markers added by a complete disposition."""
+    receipt = json.loads(receipt_path.read_text())
+    if receipt.get("action") != "discard_current_backlog_as_stale_without_delivery":
+        raise ValueError("receipt is not a backlog-disposition receipt")
+    if receipt.get("status") not in {"prepared", "complete", "recovered"}:
+        raise ValueError("unsupported backlog-disposition receipt status")
+    if receipt.get("status") == "recovered":
+        return receipt
+    changed_items = [
+        item.get("item", "<unknown>")
+        for item in receipt.get("discarded", [])
+        if not _item_assets_unchanged(item)
+    ]
+    if changed_items:
+        raise RuntimeError(
+            f"original backlog asset inventory changed or is missing: {changed_items}"
+        )
+    markers = {item["marker"] for item in receipt.get("discarded", [])}
+    before_bytes = SEEN_FILE.read_bytes() if SEEN_FILE.exists() else b""
+    current = load_seen()
+    if receipt.get("status") == "prepared":
+        current_hash = hashlib.sha256(before_bytes).hexdigest()
+        if current_hash == receipt.get("before_seen_sha256"):
+            receipt["status"] = "aborted_before_seen_mutation"
+            receipt["recovered_at"] = datetime.now(timezone.utc).isoformat()
+            receipt["recovered_markers"] = []
+            _replace_receipt(receipt_path, receipt)
+            return receipt
+        if not markers.issubset(current):
+            raise RuntimeError(
+                "prepared receipt does not match either before-state or applied markers; "
+                "manual reconciliation required"
+            )
+    save_seen(current - markers, remove=markers)
+    after_bytes = SEEN_FILE.read_bytes()
+    receipt["status"] = "recovered"
+    receipt["recovered_at"] = datetime.now(timezone.utc).isoformat()
+    receipt["recovery_before_seen_sha256"] = hashlib.sha256(before_bytes).hexdigest()
+    receipt["recovery_after_seen_sha256"] = hashlib.sha256(after_bytes).hexdigest()
+    receipt["recovered_markers"] = sorted(markers)
+    _replace_receipt(receipt_path, receipt)
+    return receipt
+
+
+def resolve_indeterminate_delivery(
+    success_marker: str,
+    resolution: str,
+    receipt_path: Path,
+) -> dict:
+    """Receipted operator transition for one ambiguous external attempt."""
+    if resolution not in {"delivered", "retry"}:
+        raise ValueError("resolution must be delivered or retry")
+    inflight_marker = f"{success_marker}:inflight"
+    attempts = load_attempts()
+    journalled_attempt = attempts.get(success_marker)
+    existing = None
+    if receipt_path.exists():
+        existing = json.loads(receipt_path.read_text())
+        if (
+            existing.get("action") != "resolve_indeterminate_external_delivery"
+            or existing.get("success_marker") != success_marker
+            or existing.get("resolution") != resolution
+        ):
+            raise FileExistsError(f"receipt belongs to another operation: {receipt_path}")
+        if existing.get("status") == "complete":
+            return existing
+        if existing.get("status") != "prepared":
+            raise ValueError("unsupported indeterminate-resolution receipt status")
+        target = existing["target"]
+        attempt = existing["attempt"]
+        _validate_attempt_record(success_marker, attempt)
+        if not journalled_attempt or _attempt_custody(journalled_attempt) != _attempt_custody(attempt):
+            raise RuntimeError("attempt receipt no longer matches the frozen attempt journal")
+    else:
+        if (
+            not isinstance(journalled_attempt, dict)
+            or journalled_attempt.get("status") != "attempting"
+            or journalled_attempt.get("success_marker") != success_marker
+            or journalled_attempt.get("inflight_marker") != inflight_marker
+            or not isinstance(journalled_attempt.get("delivery_media"), dict)
+            or not journalled_attempt.get("source_assets")
+        ):
+            raise ValueError("no valid frozen attempt journal for marker")
+        attempt = journalled_attempt
+        _validate_attempt_record(success_marker, attempt)
+        target = attempt["target"]
+        if target not in KNOWN_PLATFORMS:
+            raise ValueError("attempt journal has an invalid target")
+    current = load_seen()
+    desired_applied = (
+        inflight_marker not in current
+        and ((resolution == "delivered") == (success_marker in current))
+    )
+    if not desired_applied and (inflight_marker not in current or success_marker in current):
+        raise ValueError("marker is not an unresolved in-flight delivery")
+    before_bytes = SEEN_FILE.read_bytes() if SEEN_FILE.exists() else b""
+    if existing is None:
+        receipt = {
+            "schema_version": 1,
+            "status": "prepared",
+            "action": "resolve_indeterminate_external_delivery",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "success_marker": success_marker,
+            "inflight_marker": inflight_marker,
+            "target": target,
+            "attempt": attempt,
+            "resolution": resolution,
+            "external_messages_sent": 0,
+            "before_seen_sha256": hashlib.sha256(before_bytes).hexdigest(),
+        }
+        receipt_path.parent.mkdir(parents=True, exist_ok=True)
+        fd = os.open(receipt_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(fd, "w") as handle:
+            json.dump(receipt, handle, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        _fsync_directory(receipt_path.parent)
+    else:
+        receipt = existing
+    # Resolution is bound to the bytes journalled before egress, not a fresh
+    # discovery of whatever now occupies the archive path.
+    if not _asset_content_matches(attempt["delivery_media"]):
+        raise RuntimeError("attempted delivery media changed or is missing")
+
+    if not desired_applied:
+        attempt["status"] = f"resolved_{resolution}"
+        attempt["resolved_at"] = datetime.now(timezone.utc).isoformat()
+        attempts[success_marker] = attempt
+        save_attempts(attempts)
+        updated = set(current)
+        updated.discard(inflight_marker)
+        if resolution == "delivered":
+            updated.add(success_marker)
+        save_seen(updated, remove={inflight_marker})
+    receipt["status"] = "complete"
+    receipt["after_seen_sha256"] = hashlib.sha256(SEEN_FILE.read_bytes()).hexdigest()
+    _replace_receipt(receipt_path, receipt)
+    return receipt
+
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Send new TTS audio to Discord/Telegram")
     parser.add_argument("--once", action="store_true", help="Process once and exit")
     parser.add_argument("--dry-run", action="store_true", help="Preview without sending")
+    parser.add_argument(
+        "--discard-current-backlog", action="store_true",
+        help="mark the complete current backlog stale without sending (requires --receipt)",
+    )
+    parser.add_argument(
+        "--recover-backlog-disposition", action="store_true",
+        help="remove only markers added by a complete disposition receipt",
+    )
+    parser.add_argument(
+        "--resolve-indeterminate", metavar="SUCCESS_MARKER",
+        help="resolve one held :inflight attempt without sending",
+    )
+    parser.add_argument(
+        "--resolution", choices=("delivered", "retry"),
+        help="operator disposition after remote reconciliation",
+    )
+    parser.add_argument(
+        "--quiescence-seconds", type=int, default=BACKLOG_QUIESCENCE_SECONDS,
+        help="exclude backlog assets modified within this many seconds",
+    )
+    parser.add_argument("--receipt", type=Path, help="exclusive receipt for the state transition")
     args = parser.parse_args()
+    operation_count = (
+        int(args.discard_current_backlog)
+        + int(args.recover_backlog_disposition)
+        + int(bool(args.resolve_indeterminate))
+    )
+    if operation_count > 1:
+        parser.error("state-transition operations are mutually exclusive")
+    if bool(operation_count) != bool(args.receipt):
+        parser.error("a state-transition operation and --receipt are required together")
+    if operation_count and args.dry_run:
+        parser.error("state-transition operations and --dry-run are mutually exclusive")
+    if bool(args.resolve_indeterminate) != bool(args.resolution):
+        parser.error("--resolve-indeterminate and --resolution are required together")
 
-    AUDIO_CACHE.mkdir(parents=True, exist_ok=True)
     try:
         _lock_fd = acquire_lock()
     except BlockingIOError:
@@ -324,8 +1061,34 @@ def main():
         return
     seen = load_seen()
     print(f"Loaded {len(seen)} previously sent items")
+
+    if args.discard_current_backlog:
+        receipt = discard_current_backlog(
+            seen, args.receipt, quiescence_seconds=args.quiescence_seconds,
+        )
+        print(
+            f"Discarded {receipt['discarded_count']} stale backlog items without delivery; "
+            f"receipt: {args.receipt}"
+        )
+        return
+    if args.recover_backlog_disposition:
+        receipt = recover_backlog_disposition(args.receipt)
+        print(
+            f"Recovered {len(receipt.get('recovered_markers', []))} backlog markers; "
+            f"receipt: {args.receipt}"
+        )
+        return
+    if args.resolve_indeterminate:
+        receipt = resolve_indeterminate_delivery(
+            args.resolve_indeterminate, args.resolution, args.receipt,
+        )
+        print(
+            f"Resolved {receipt['success_marker']} as {receipt['resolution']} "
+            f"without sending; receipt: {args.receipt}"
+        )
+        return
     
-    seen = process_new_files(seen, args.dry_run)
+    seen = process_new_files(seen, args.dry_run, persist=not args.dry_run)
     if not args.dry_run:
         save_seen(seen)
 

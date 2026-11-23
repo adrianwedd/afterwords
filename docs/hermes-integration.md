@@ -249,7 +249,7 @@ afterwords reload     # rescan voices/ without restart
 
 ## 6. TTS Audio Delivery (external sends)
 
-Afterwords can deliver synthesized audio to messaging platforms (Telegram, Discord) in addition to local playback. Delivery is split by **direction** so each response is sent **exactly once per platform**, and **nothing leaves the machine unless you opt in**.
+Afterwords can deliver synthesized audio to messaging platforms (Telegram, Discord) in addition to local playback. Delivery has one owner per direction, durable per-target state, and **nothing leaves the machine unless you opt in**. Remote APIs expose no idempotency key, so a timed-out attempt is held for explicit reconciliation rather than falsely claimed as exactly-once.
 
 ### Opt-in: the `send_to:` directive
 
@@ -281,14 +281,31 @@ send_to: telegram, discord
 | `~/.claude/tts-archive/` | Claude Code chunked MP3s (`<stem>-c1.mp3`…) + `.txt` sidecar — watched |
 | `~/.hermes/audio_cache/` | `MEDIA:`-allowed delivery dir (MP3 for Discord, OGG/Opus for Telegram) |
 | `~/.hermes/tts-feed-seen.json` | JSON array of seen markers — prevents re-sends |
+| `~/.hermes/tts-feed-attempts.json` | Byte-bound per-target attempt journal written before egress |
 
 Seen markers: hermes-archive files are keyed by **bare filename** (`example-20260529-000000.mp3`); Claude responses are keyed by `claude:<base-stem>` (chunk suffix `-c\d+` stripped).
 
 ### De-dup mechanism
 
-The inbound inline path archives to `~/.hermes/tts-archive`, which the watcher also scans. To guarantee one delivery, the inline path **pre-seeds** `~/.hermes/tts-feed-seen.json` with the archived file's marker (`<slug>-<stamp>.mp3`) at send time, so the watcher treats it as already-delivered and skips it. Result: inbound is delivered once inline to the originating chat; the watcher only delivers genuinely outbound archive files to the home channel.
+The inbound inline path archives to `~/.hermes/tts-archive`, which the watcher also scans. It **pre-seeds** `~/.hermes/tts-feed-seen.json` with the archived file's marker (`<slug>-<stamp>.mp3`) at send time, so the watcher treats it as already owned and skips it. Result: inbound delivery is owned inline for the originating chat; the watcher only handles genuinely outbound archive files for the home channel.
 
 > `--dry-run` previews delivery without sending and without mutating `tts-feed-seen.json`. When `send_to` is empty, the watcher still marks files seen (so they don't accumulate) and prints `[skip] <name> (no send_to configured)`.
+
+The feed first persists a per-target attempt journal containing the exact
+delivery-media and source-object hashes, then an in-flight marker, before
+egress. It atomically replaces that state with a success marker after confirmed
+CLI acceptance. A recovered in-flight marker
+without success is held for operator reconciliation rather than automatically
+retried: the remote service may have accepted a send whose local command timed
+out. Backlog disposition is separately explicit, quiescence-gated, byte-bound
+to original archive objects and reversible from its private receipt; it never
+deletes or rewrites the source audio or transcript.
+
+After checking the remote service, resolve an indeterminate marker with
+`--resolve-indeterminate SUCCESS_MARKER --resolution delivered|retry --receipt
+PRIVATE_PATH`. This is a non-sending transition bound to the frozen attempt
+journal rather than freshly discovered archive bytes; choose
+`retry` only after confirming non-delivery.
 
 ---
 

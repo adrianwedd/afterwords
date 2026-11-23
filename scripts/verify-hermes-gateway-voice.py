@@ -94,7 +94,19 @@ def main():
         assert runner._should_send_voice_reply(event, args.text, history)
         asyncio.run(asyncio.wait_for(runner._send_voice_reply(event, args.text), timeout=180))
         assert len(receipt['artifacts']) == 1
-        already_spoken = history + [{'role': 'assistant', 'tool_calls': [{'function': {'name': 'text_to_speech'}}]}]
+        # Current Hermes records deferred tools through the generic tool_call
+        # bridge; dedup resolves the inner name by tool-call id.  Model the
+        # installed transcript shape rather than the pre-bridge direct call.
+        bridged = json.dumps({
+            'calls': [{'name': 'text_to_speech', 'arguments': {'text': args.text}}]
+        })
+        already_spoken = history + [
+            {'role': 'assistant', 'tool_calls': [
+                {'id': 'afterwords-probe',
+                 'function': {'name': 'tool_call', 'arguments': bridged}}]},
+            {'role': 'tool', 'tool_call_id': 'afterwords-probe',
+             'content': '[[audio_as_voice]]\nMEDIA:captured-probe.ogg'},
+        ]
         assert not runner._should_send_voice_reply(event, args.text, already_spoken)
         runner._profile_adapters[profile] = {}
         if profile == 'default':

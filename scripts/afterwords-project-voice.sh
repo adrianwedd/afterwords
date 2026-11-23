@@ -1,0 +1,166 @@
+#!/usr/bin/env bash
+# afterwords-project-voice.sh — resolve a PER-PROJECT voice for the Hermes
+# command-provider path, then hand off to the canonical command script.
+#
+# Why this exists: `text_to_speech` fills {voice} from
+# tts.providers.afterwords.voice, which is per-PROFILE (global), and the
+# canonical provider deliberately refuses to re-resolve .afterwords itself
+# (tests/test_hermes_profile_voice.py pins that: re-resolution under a
+# hardcoded `hermes` key made the vixen profile speak as seven-of-nine).
+# So project scope is resolved HERE, once, and an explicit voice is always
+# passed on — the canonical contract ("the serving profile's explicit voice
+# or fail visibly") is unchanged.
+#
+# Resolution: <project>/.afterwords (agent key -> default: -> simple name)
+#             -> the caller's configured voice.
+# The global ~/.afterwords is deliberately NOT consulted here: it belongs to
+# the default profile, and reading it would re-introduce the cross-profile
+# bleed the canonical script was fixed to eliminate. The configured {voice}
+# already carries the serving profile's global choice.
+#
+# Project dir: the exact $AFTERWORDS_PROJECT_DIR exported by the installed
+# bridge, else an exact $AFTERWORDS_SESSION_ID lookup in Hermes' state DB, else
+# $PWD for direct/manual invocation.  No newest-lease or recency fallback is
+# permitted: missing identity must keep the caller's configured profile voice.
+#
+# Usage:  afterwords-project-voice.sh <config_voice> <input_path> <output_path>
+#         afterwords-project-voice.sh --print      # resolved voice, no synthesis
+#
+# Agent key:   $AFTERWORDS_AGENT, else the HERMES_HOME profile name
+#              ("hermes" for the default profile).
+
+set -uo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CANONICAL="${AFTERWORDS_COMMAND_SCRIPT:-$SCRIPT_DIR/afterwords-tts-command.sh}"
+# bash 3.2 + `set -u`: never write "${VAR}/path" — it trips "unbound variable"
+# even when VAR is set. Build the default with a $name form instead.
+HOME_DIR="${HOME:-}"
+HERMES_ROOT="${HERMES_HOME:-}"
+[ -n "$HERMES_ROOT" ] || HERMES_ROOT="$HOME_DIR/.hermes"
+STATE_DB="${AFTERWORDS_STATE_DB:-}"
+[ -n "$STATE_DB" ] || STATE_DB="$HERMES_ROOT/state.db"
+
+resolve_agent() {
+    local agent="${AFTERWORDS_AGENT:-}"
+    if [ -n "$agent" ]; then
+        printf '%s' "$agent"
+        return 0
+    fi
+    local home="${HERMES_HOME:-}"
+    case "$home" in
+        */profiles/*) printf '%s' "${home##*/}" ;;
+        *) printf 'hermes' ;;
+    esac
+}
+
+# Resolve one explicit session id to its declared cwd.  Read-only; any failure
+# (no identity, no sqlite3, no DB, changed schema) yields an empty string.
+session_cwd() {
+    local session_id="${AFTERWORDS_SESSION_ID:-}"
+    [ -n "$session_id" ] || return 0
+    [ -f "$STATE_DB" ] || return 0
+    command -v sqlite3 >/dev/null 2>&1 || return 0
+    # Encode the id as a SQLite blob literal so shell or SQL metacharacters
+    # remain data.  Session ids are UTF-8 text in Hermes.
+    local session_hex
+    session_hex=$(printf '%s' "$session_id" | od -An -tx1 | tr -d ' \n')
+    [ -n "$session_hex" ] || return 0
+    sqlite3 -readonly "$STATE_DB" \
+        "select cwd from sessions where id = cast(X'$session_hex' as text) and cwd is not null and cwd <> '' limit 1" \
+        2>/dev/null || true
+}
+
+# First project directory that actually carries a .afterwords file.
+project_dir() {
+    local candidate="${AFTERWORDS_PROJECT_DIR:-}"
+    if [ -n "$candidate" ]; then
+        if [ -f "$candidate/.afterwords" ]; then
+            printf '%s' "$candidate"
+        fi
+        # An explicit invocation-scoped project is authoritative even when it
+        # has no mapping. Falling through could borrow the gateway process cwd.
+        return 0
+    fi
+
+    if [ -n "${AFTERWORDS_SESSION_ID:-}" ]; then
+        candidate="$(session_cwd)"
+        if [ -n "$candidate" ] && [ -f "$candidate/.afterwords" ]; then
+            printf '%s' "$candidate"
+        fi
+        # An expired or unknown exact session must retain CONFIG_VOICE.
+        return 0
+    fi
+
+    # $PWD is identity only for a direct/manual invocation. Native calls run
+    # inside a long-lived gateway whose cwd can belong to another project.
+    if [ "${AFTERWORDS_TTS_CALLER:-}" != "native" ] && [ -f "$PWD/.afterwords" ]; then
+        printf '%s' "$PWD"
+        return 0
+    fi
+    return 0
+}
+
+
+# Same mapping semantics as the tested resolver in
+# tests/test_afterwords_voice_mapping.py: last ':' on the line splits key/value,
+# so both "default:data" and "default: data" work, and compound keys such as
+# "feature-dev:code-reviewer" stay intact.
+resolve_voice() {
+    local file="$1"
+    local agent="$2"
+    local voice=""
+    [ -f "$file" ] || return 0
+    if grep -q ':' "$file" 2>/dev/null; then
+        voice=$(awk -v agent="$agent" '
+            function trim(s) { gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); return s }
+            /^[[:space:]]*#/ || /^[[:space:]]*$/ { next }
+            {
+                pos = 0
+                for (i = 1; i <= length($0); i++) {
+                    if (substr($0, i, 1) == ":") pos = i
+                }
+                if (!pos) next
+                key = trim(substr($0, 1, pos - 1))
+                val = trim(substr($0, pos + 1))
+                if (agent != "" && key == agent) { print val; found = 1; exit }
+                if (key == "default" && fallback == "") fallback = val
+            }
+            END { if (!found && fallback != "") print fallback }
+        ' "$file" 2>/dev/null)
+    else
+        voice=$(grep -v -e '^[[:space:]]*$' -e '^[[:space:]]*#' "$file" 2>/dev/null | head -1 | tr -d '[:space:]' || true)
+    fi
+    printf '%s' "$voice"
+}
+
+if [ "${1:-}" = "--print" ]; then
+    project="$(project_dir)"
+    if [ -z "$project" ]; then
+        printf '\n'
+        exit 0
+    fi
+    resolve_voice "$project/.afterwords" "$(resolve_agent)"
+    printf '\n'
+    exit 0
+fi
+
+CONFIG_VOICE="${1:?Usage: afterwords-project-voice.sh <config_voice> <input_path> <output_path>}"
+INPUT_PATH="${2:?Usage: afterwords-project-voice.sh <config_voice> <input_path> <output_path>}"
+OUTPUT_PATH="${3:?Usage: afterwords-project-voice.sh <config_voice> <input_path> <output_path>}"
+
+voice=""
+project="$(project_dir)"
+if [ -n "$project" ]; then
+    voice="$(resolve_voice "$project/.afterwords" "$(resolve_agent)")"
+fi
+if [ -z "$voice" ]; then
+    voice="$CONFIG_VOICE"
+fi
+
+if [ ! -f "$CANONICAL" ]; then
+    printf 'afterwords-project-voice: canonical command script not found: %s\n' "$CANONICAL" >&2
+    exit 1
+fi
+
+exec bash "$CANONICAL" "$INPUT_PATH" "$OUTPUT_PATH" "$voice"

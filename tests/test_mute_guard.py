@@ -105,16 +105,18 @@ def _afplay_line_is_guarded(line: str) -> bool:
     return bool(_GUARD_RE.search(line))
 
 
-# Python guard (Hermes native hook): `if not Path("/tmp/afterwords-muted").exists():`
+# Python guard (Hermes native hook): either the literal Path or the module's
+# tested MUTE_FILE constant.  Keeping the policy in the playback helper closes
+# the caller-check/play race and protects every caller.
 _PY_GUARD_RE = re.compile(
-    r'if\s+not\s+Path\(\s*["\']' + re.escape(MUTE_FILE_PATH) + r'["\']\s*\)\.exists\(\)\s*:'
+    r'if\s+not\s+(?:Path\(\s*["\']' + re.escape(MUTE_FILE_PATH)
+    + r'["\']\s*\)|MUTE_FILE)\.exists\(\)\s*:'
 )
 
 
 def _py_afplay_is_guarded(lines: list[str], idx: int) -> bool:
     """True iff the afplay subprocess call at line `idx` is genuinely enclosed by
-    a real mute guard — a non-commented `if not Path("/tmp/afterwords-muted")
-    .exists():` whose block actually contains the call.
+    a real mute guard whose block actually contains the call.
 
     Walking upward through the few lines above the call, we track the smallest
     indent of the intervening code lines. A candidate guard encloses the call
@@ -142,7 +144,7 @@ _SKIP_DIR_PARTS = {".git", "node_modules", ".venv", ".venv-drama3",
 def _shell_scripts() -> list[Path]:
     return [
         p for p in sorted(REPO.rglob("*.sh"))
-        if not _SKIP_DIR_PARTS & set(p.parts)
+        if not _SKIP_DIR_PARTS & set(p.relative_to(REPO).parts)
     ]
 
 
@@ -233,7 +235,7 @@ _PY_KNOWN_AFPLAY = {
 def _python_files() -> list[Path]:
     return [
         p for p in sorted(REPO.rglob("*.py"))
-        if not (_SKIP_DIR_PARTS | {"tests"}) & set(p.parts)
+        if not (_SKIP_DIR_PARTS | {"tests"}) & set(p.relative_to(REPO).parts)
         and p.is_file()  # downloaded model metadata can contain dangling optional links
     ]
 
