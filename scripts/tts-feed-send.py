@@ -589,6 +589,7 @@ def _validate_attempt_record(success_marker: str, attempt: dict) -> None:
         }
         valid_sources = (
             len(roots) == 1
+            and paths[0].parent == roots[0]
             and paths == [(roots[0] / expected).resolve()]
             and expected.endswith(".mp3")
         )

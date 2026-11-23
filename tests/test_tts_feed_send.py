@@ -586,6 +586,45 @@ def test_indeterminate_resolution_refuses_sources_outside_authoritative_archive(
     assert tfs.load_seen() == before
 
 
+def test_indeterminate_resolution_refuses_archive_symlink_escape(tmp_path, monkeypatch):
+    archive = tmp_path / "hermes"
+    wrong = tmp_path / "wrong"
+    cache = tmp_path / "cache"
+    archive.mkdir()
+    wrong.mkdir()
+    cache.mkdir()
+    outside = wrong / "item.mp3"
+    outside.write_bytes(b"outside")
+    linked = archive / "linked.mp3"
+    linked.symlink_to(outside)
+    delivery = cache / "linked.mp3"
+    delivery.write_bytes(b"delivery")
+    success = "hermes:linked.mp3:discord"
+    inflight = f"{success}:inflight"
+    seen_file = tmp_path / "seen.json"
+    seen_file.write_text(json.dumps([inflight]))
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", cache)
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(archive, "hermes")])
+    attempt = {
+        "schema_version": 1,
+        "status": "attempting",
+        "created_at": "2026-11-23T00:00:00+00:00",
+        "success_marker": success,
+        "inflight_marker": inflight,
+        "target": "discord",
+        "delivery_media": tfs._asset_record(delivery),
+        "source_assets": [tfs._asset_record(linked)],
+    }
+    tfs._attempts_file().write_text(json.dumps({success: attempt}))
+    receipt = tmp_path / "receipt.json"
+    before = tfs.load_seen()
+    with pytest.raises(RuntimeError, match="inconsistent frozen attempt journal"):
+        tfs.resolve_indeterminate_delivery(success, "delivered", receipt)
+    assert not receipt.exists()
+    assert tfs.load_seen() == before
+
+
 def test_malformed_attempt_journal_blocks_delivery_instead_of_resending(tmp_path, monkeypatch):
     hermes_dir = tmp_path / "hermes"
     hermes_dir.mkdir()
