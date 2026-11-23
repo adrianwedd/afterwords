@@ -302,6 +302,7 @@ def test_confirmed_failure_clears_inflight_and_remains_retryable(tmp_path, monke
     tfs.process_new_files(tfs.load_seen(), persist=True)
     assert calls == ["discord"]
     assert marker in tfs.load_seen()
+    assert f"{marker}:inflight" not in tfs.load_seen()
 
 
 def test_timeout_is_held_as_indeterminate_instead_of_retried(tmp_path, monkeypatch):
@@ -324,6 +325,72 @@ def test_timeout_is_held_as_indeterminate_instead_of_retried(tmp_path, monkeypat
     assert marker in tfs.load_seen()
     tfs.process_new_files(tfs.load_seen(), persist=True)
     assert tfs.subprocess.run.call_count == 1
+
+
+@pytest.mark.parametrize("resolution,delivered", [("delivered", True), ("retry", False)])
+def test_indeterminate_resolution_is_receipted_hash_bound_and_non_sending(
+    tmp_path, monkeypatch, resolution, delivered,
+):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "picard-ambiguous.mp3"
+    media = hermes_dir / name
+    media.write_bytes(b"original audio")
+    seen_file = tmp_path / "seen.json"
+    success = f"hermes:{name}:discord"
+    inflight = f"{success}:inflight"
+    seen_file.write_text(json.dumps([inflight]))
+    receipt = tmp_path / f"{resolution}.json"
+    monkeypatch.setattr(tfs, "HERMES_ARCHIVE", hermes_dir)
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+
+    with mock.patch.object(tfs.subprocess, "run") as run_mock:
+        row = tfs.resolve_indeterminate_delivery(success, resolution, receipt)
+
+    run_mock.assert_not_called()
+    durable = tfs.load_seen()
+    assert (success in durable) is delivered
+    assert inflight not in durable
+    assert row["status"] == "complete"
+    assert row["external_messages_sent"] == 0
+    assert row["source_assets"][0]["path"] == str(media)
+    assert row["source_assets"][0]["sha256"] == __import__("hashlib").sha256(
+        media.read_bytes()
+    ).hexdigest()
+    assert receipt.stat().st_mode & 0o777 == 0o600
+
+
+def test_indeterminate_resolution_resumes_after_completion_receipt_failure(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "picard-resume.mp3"
+    (hermes_dir / name).write_bytes(b"audio")
+    seen_file = tmp_path / "seen.json"
+    success = f"hermes:{name}:discord"
+    inflight = f"{success}:inflight"
+    seen_file.write_text(json.dumps([inflight]))
+    receipt = tmp_path / "resolution.json"
+    monkeypatch.setattr(tfs, "HERMES_ARCHIVE", hermes_dir)
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    real_replace = tfs._replace_receipt
+    calls = 0
+
+    def fail_once(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            raise OSError("simulated completion receipt failure")
+        return real_replace(*args, **kwargs)
+
+    monkeypatch.setattr(tfs, "_replace_receipt", fail_once)
+    with pytest.raises(OSError, match="simulated"):
+        tfs.resolve_indeterminate_delivery(success, "delivered", receipt)
+    assert success in tfs.load_seen() and inflight not in tfs.load_seen()
+    assert json.loads(receipt.read_text())["status"] == "prepared"
+
+    row = tfs.resolve_indeterminate_delivery(success, "delivered", receipt)
+    assert row["status"] == "complete"
+    assert json.loads(receipt.read_text())["status"] == "complete"
 
 
 def test_discard_backlog_is_auditable_and_never_sends(tmp_path, monkeypatch):
@@ -485,3 +552,34 @@ def test_discard_aborts_if_snapshot_gains_a_chunk_before_seen_mutation(tmp_path,
         tfs.discard_current_backlog(set(), receipt, quiescence_seconds=0)
     assert f"claude:{stem}" not in tfs.load_seen()
     assert json.loads(receipt.read_text())["status"] == "prepared"
+
+
+def test_discard_reverses_if_snapshot_gains_a_chunk_during_seen_swap(tmp_path, monkeypatch):
+    claude_dir = tmp_path / "claude"
+    claude_dir.mkdir()
+    stem = "racy"
+    (claude_dir / f"{stem}.txt").write_text("reply")
+    (claude_dir / f"{stem}-c1.mp3").write_bytes(b"one")
+    seen_file = tmp_path / "seen.json"
+    seen_file.write_text("[]")
+    receipt = tmp_path / "discard.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(claude_dir, "claude")])
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    real_save_seen = tfs.save_seen
+    calls = 0
+
+    def inject_during_swap(seen, **kwargs):
+        nonlocal calls
+        calls += 1
+        result = real_save_seen(seen, **kwargs)
+        if calls == 1:
+            (claude_dir / f"{stem}-c2.mp3").write_bytes(b"two")
+        return result
+
+    monkeypatch.setattr(tfs, "save_seen", inject_during_swap)
+    with pytest.raises(RuntimeError, match="markers reversed"):
+        tfs.discard_current_backlog(set(), receipt, quiescence_seconds=0)
+    assert f"claude:{stem}" not in tfs.load_seen()
+    row = json.loads(receipt.read_text())
+    assert row["status"] == "aborted_asset_race"
+    assert row["recovered_markers"] == [f"claude:{stem}"]

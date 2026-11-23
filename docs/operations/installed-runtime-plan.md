@@ -31,7 +31,16 @@ The candidate differs intentionally: exact-session project routing, playback
 off the gateway event loop, cancellation that terminates and waits for owned
 `afplay` before releasing the lease, mute enforcement beside the side effect,
 and a completion sidecar published only after every chunk is archived.
-Installation would replace only
+Generate and install the recorded hash with this exact ownership scope:
+
+```bash
+AFTERWORDS_PYTHON=/Users/adrian/repos/afterwords/.venv/bin/python \
+  bash scripts/install-hermes-hook.sh --local-only
+```
+
+The `--local-only` flag is material: the direct CLI remains owned by the shell
+hook, while the native handler owns only Hermes' `local` platform. Omitting it
+produces a different hash and competing CLI ownership. Installation would replace only
 `~/.hermes/hooks/afterwords-tts/{handler.py,HOOK.yaml}` using the existing
 installer. The gateway must remain unchanged until an idle restart is approved.
 
@@ -117,7 +126,18 @@ Each external target gets a durable in-flight marker before `hermes send` and a
 success marker immediately after confirmed CLI acceptance. A timeout is
 indeterminate: later scheduled runs hold that target instead of retrying it and
 risking a duplicate. Reconcile the remote service first; a zero CLI exit still
-does not prove remote receipt.
+does not prove remote receipt. Then make one non-sending, mode-0600 receipted
+transition bound to the source-media hashes:
+
+```bash
+scripts/tts-feed-send.py \
+  --resolve-indeterminate 'hermes:ITEM.mp3:discord' \
+  --resolution delivered \
+  --receipt PRIVATE_PATH
+```
+
+Use `--resolution retry` only after confirming the remote service did not
+receive it. Neither resolution sends a message.
 
 Rollback restores the exact prior plist bytes and label. It also restores the
 broken interpreter, so rollback is for unexpected side effects, not a successful

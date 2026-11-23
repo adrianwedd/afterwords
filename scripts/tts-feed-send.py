@@ -288,8 +288,9 @@ def _deliver(
         if outcome is True:
             delivered.add(target)
             seen.add(success_marker)
+            seen.discard(inflight_marker)
             if persist:
-                save_seen(seen)
+                save_seen(seen, remove={inflight_marker})
         elif outcome is False:
             seen.discard(inflight_marker)
             if persist:
@@ -570,6 +571,19 @@ def discard_current_backlog(
         raise RuntimeError("backlog asset changed after snapshot; seen state not modified")
 
     save_seen(updated)
+    if not all(_item_assets_unchanged(item) for item in discarded):
+        # A producer advanced an item during the seen-state swap. Reverse only
+        # this disposition's markers before returning an explicit failure.
+        markers = {item["marker"] for item in discarded}
+        save_seen(load_seen() - markers, remove=markers)
+        receipt["status"] = "aborted_asset_race"
+        receipt["aborted_at"] = datetime.now(timezone.utc).isoformat()
+        receipt["aborted_reason"] = "backlog asset set changed during seen-state swap"
+        receipt["recovered_markers"] = sorted(markers)
+        _replace_receipt(receipt_path, receipt)
+        raise RuntimeError(
+            "backlog asset changed during seen-state swap; disposition markers reversed"
+        )
     after_bytes = SEEN_FILE.read_bytes()
     receipt["status"] = "complete"
     receipt["after_seen_sha256"] = hashlib.sha256(after_bytes).hexdigest()
@@ -625,6 +639,100 @@ def recover_backlog_disposition(receipt_path: Path) -> dict:
     return receipt
 
 
+def _delivery_source_assets(success_marker: str) -> tuple[str, list[dict]]:
+    base_marker, separator, target = success_marker.rpartition(":")
+    if not separator or target not in KNOWN_PLATFORMS:
+        raise ValueError("marker must end in :discord or :telegram")
+    paths: list[Path]
+    if base_marker.startswith("hermes:"):
+        paths = [HERMES_ARCHIVE / base_marker.removeprefix("hermes:")]
+    elif base_marker.startswith("claude:"):
+        stem = base_marker.removeprefix("claude:")
+        paths = [CLAUDE_ARCHIVE / f"{stem}.txt"]
+        paths.extend(sorted(CLAUDE_ARCHIVE.glob(f"{stem}-c[0-9]*.mp3")))
+        single = CLAUDE_ARCHIVE / f"{stem}.mp3"
+        if single.is_file():
+            paths.append(single)
+    else:
+        raise ValueError("marker must identify a hermes or claude archive item")
+    if not paths or any(not path.is_file() for path in paths):
+        raise FileNotFoundError("source media for indeterminate marker is incomplete")
+    return target, [_asset_record(path) for path in paths]
+
+
+def resolve_indeterminate_delivery(
+    success_marker: str,
+    resolution: str,
+    receipt_path: Path,
+) -> dict:
+    """Receipted operator transition for one ambiguous external attempt."""
+    if resolution not in {"delivered", "retry"}:
+        raise ValueError("resolution must be delivered or retry")
+    inflight_marker = f"{success_marker}:inflight"
+    existing = None
+    if receipt_path.exists():
+        existing = json.loads(receipt_path.read_text())
+        if (
+            existing.get("action") != "resolve_indeterminate_external_delivery"
+            or existing.get("success_marker") != success_marker
+            or existing.get("resolution") != resolution
+        ):
+            raise FileExistsError(f"receipt belongs to another operation: {receipt_path}")
+        if existing.get("status") == "complete":
+            return existing
+        if existing.get("status") != "prepared":
+            raise ValueError("unsupported indeterminate-resolution receipt status")
+        target = existing["target"]
+        assets = existing["source_assets"]
+    else:
+        target, assets = _delivery_source_assets(success_marker)
+    current = load_seen()
+    desired_applied = (
+        inflight_marker not in current
+        and ((resolution == "delivered") == (success_marker in current))
+    )
+    if not desired_applied and (inflight_marker not in current or success_marker in current):
+        raise ValueError("marker is not an unresolved in-flight delivery")
+    before_bytes = SEEN_FILE.read_bytes() if SEEN_FILE.exists() else b""
+    if existing is None:
+        receipt = {
+            "schema_version": 1,
+            "status": "prepared",
+            "action": "resolve_indeterminate_external_delivery",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "success_marker": success_marker,
+            "inflight_marker": inflight_marker,
+            "target": target,
+            "source_assets": assets,
+            "resolution": resolution,
+            "external_messages_sent": 0,
+            "before_seen_sha256": hashlib.sha256(before_bytes).hexdigest(),
+        }
+        receipt_path.parent.mkdir(parents=True, exist_ok=True)
+        fd = os.open(receipt_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(fd, "w") as handle:
+            json.dump(receipt, handle, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        _fsync_directory(receipt_path.parent)
+    else:
+        receipt = existing
+    if not all(_asset_content_matches(asset) for asset in assets):
+        raise RuntimeError("source media changed before indeterminate resolution")
+
+    if not desired_applied:
+        updated = set(current)
+        updated.discard(inflight_marker)
+        if resolution == "delivered":
+            updated.add(success_marker)
+        save_seen(updated, remove={inflight_marker})
+    receipt["status"] = "complete"
+    receipt["after_seen_sha256"] = hashlib.sha256(SEEN_FILE.read_bytes()).hexdigest()
+    _replace_receipt(receipt_path, receipt)
+    return receipt
+
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Send new TTS audio to Discord/Telegram")
@@ -639,18 +747,32 @@ def main():
         help="remove only markers added by a complete disposition receipt",
     )
     parser.add_argument(
+        "--resolve-indeterminate", metavar="SUCCESS_MARKER",
+        help="resolve one held :inflight attempt without sending",
+    )
+    parser.add_argument(
+        "--resolution", choices=("delivered", "retry"),
+        help="operator disposition after remote reconciliation",
+    )
+    parser.add_argument(
         "--quiescence-seconds", type=int, default=BACKLOG_QUIESCENCE_SECONDS,
         help="exclude backlog assets modified within this many seconds",
     )
-    parser.add_argument("--receipt", type=Path, help="exclusive receipt for backlog discard")
+    parser.add_argument("--receipt", type=Path, help="exclusive receipt for the state transition")
     args = parser.parse_args()
-    operation_count = int(args.discard_current_backlog) + int(args.recover_backlog_disposition)
+    operation_count = (
+        int(args.discard_current_backlog)
+        + int(args.recover_backlog_disposition)
+        + int(bool(args.resolve_indeterminate))
+    )
     if operation_count > 1:
-        parser.error("backlog discard and recovery are mutually exclusive")
+        parser.error("state-transition operations are mutually exclusive")
     if bool(operation_count) != bool(args.receipt):
-        parser.error("a backlog discard or recovery operation and --receipt are required together")
+        parser.error("a state-transition operation and --receipt are required together")
     if operation_count and args.dry_run:
-        parser.error("backlog operations and --dry-run are mutually exclusive")
+        parser.error("state-transition operations and --dry-run are mutually exclusive")
+    if bool(args.resolve_indeterminate) != bool(args.resolution):
+        parser.error("--resolve-indeterminate and --resolution are required together")
 
     try:
         _lock_fd = acquire_lock()
@@ -679,6 +801,15 @@ def main():
         print(
             f"Recovered {len(receipt.get('recovered_markers', []))} backlog markers; "
             f"receipt: {args.receipt}"
+        )
+        return
+    if args.resolve_indeterminate:
+        receipt = resolve_indeterminate_delivery(
+            args.resolve_indeterminate, args.resolution, args.receipt,
+        )
+        print(
+            f"Resolved {receipt['success_marker']} as {receipt['resolution']} "
+            f"without sending; receipt: {args.receipt}"
         )
         return
     
