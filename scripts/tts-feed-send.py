@@ -154,24 +154,66 @@ def save_seen(seen: set, *, remove: set | None = None) -> None:
         tmp.unlink(missing_ok=True)
 
 
+def _attempts_file() -> Path:
+    return SEEN_FILE.with_name("tts-feed-attempts.json")
+
+
+def load_attempts() -> dict:
+    path = _attempts_file()
+    if not path.exists():
+        return {}
+    try:
+        value = json.loads(path.read_text())
+    except (json.JSONDecodeError, OSError) as exc:
+        raise RuntimeError(f"cannot read delivery attempt journal {path}: {exc}") from exc
+    if not isinstance(value, dict) or any(
+        not isinstance(key, str) or not isinstance(row, dict)
+        for key, row in value.items()
+    ):
+        raise RuntimeError(f"malformed delivery attempt journal: {path}")
+    return value
+
+
+def save_attempts(attempts: dict) -> None:
+    path = _attempts_file()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp_name = tempfile.mkstemp(
+        prefix=f".{path.name}.", suffix=".tmp", dir=path.parent,
+    )
+    tmp = Path(tmp_name)
+    try:
+        with os.fdopen(fd, "w") as handle:
+            json.dump(attempts, handle, indent=2, sort_keys=True)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp, path)
+        _fsync_directory(path.parent)
+    finally:
+        tmp.unlink(missing_ok=True)
+
+
 def to_ogg(mp3_path: Path) -> Path | None:
     AUDIO_CACHE.mkdir(parents=True, exist_ok=True)
     ogg_path = AUDIO_CACHE / f"{mp3_path.stem}.ogg"
-    if ogg_path.exists():
-        return ogg_path
     result = subprocess.run(
         ["ffmpeg", "-y", "-i", str(mp3_path), "-c:a", "libopus", "-b:a", "64k", str(ogg_path)],
         capture_output=True, timeout=30,
     )
-    return ogg_path if result.returncode == 0 else None
+    return (
+        ogg_path
+        if result.returncode == 0 and ogg_path.is_file() and ogg_path.stat().st_size > 0
+        else None
+    )
 
 
 def copy_to_cache(mp3_path: Path) -> Path:
     AUDIO_CACHE.mkdir(parents=True, exist_ok=True)
     dest = AUDIO_CACHE / mp3_path.name
-    if not dest.exists() or dest.stat().st_size != mp3_path.stat().st_size:
-        import shutil
-        shutil.copy2(str(mp3_path), str(dest))
+    # Size equality does not imply byte equality. Always refresh the delivery
+    # artifact so a deliberate retry is journalled and sent from current source.
+    import shutil
+    shutil.copy2(str(mp3_path), str(dest))
     return dest
 
 
@@ -251,6 +293,7 @@ def _deliver(
     send_to: set,
     marker: str,
     seen: set,
+    source_paths: list[Path],
     *,
     persist: bool,
 ) -> set:
@@ -266,35 +309,91 @@ def _deliver(
             continue
         success_marker = f"{marker}:{target}"
         inflight_marker = f"{success_marker}:inflight"
+        attempts = load_attempts() if persist else {}
+        existing_attempt = attempts.get(success_marker)
+        if existing_attempt and existing_attempt.get("status") not in {
+            "attempting", "cli_confirmed", "failed", "resolved_delivered", "resolved_retry",
+        }:
+            raise RuntimeError(f"invalid attempt state for {success_marker}")
         if success_marker in seen:
             continue
-        if inflight_marker in seen:
+        if existing_attempt and existing_attempt.get("status") in {
+            "cli_confirmed", "resolved_delivered",
+        }:
+            seen.add(success_marker)
+            seen.discard(inflight_marker)
+            if persist:
+                save_seen(seen, remove={inflight_marker})
+            continue
+        if existing_attempt and existing_attempt.get("status") in {"resolved_retry", "failed"}:
+            attempts.pop(success_marker, None)
+            save_attempts(attempts)
+            existing_attempt = None
+            seen.discard(inflight_marker)
+            save_seen(seen, remove={inflight_marker})
+        if existing_attempt and existing_attempt.get("status") == "attempting":
+            seen.add(inflight_marker)
+            save_seen(seen)
             print(
                 f"  [hold] {marker} -> {target} has an indeterminate prior attempt; "
                 "reconcile before retrying",
                 file=sys.stderr,
             )
             continue
-
-        seen.add(inflight_marker)
-        if persist:
-            save_seen(seen)
+        if inflight_marker in seen:
+            print(
+                f"  [hold] {marker} -> {target} has an unjournalled in-flight marker; "
+                "manual reconciliation required",
+                file=sys.stderr,
+            )
+            continue
 
         media = merged
         if target == "telegram":
             ogg = to_ogg(merged)
             media = ogg if ogg else merged
+        attempt = {
+            "schema_version": 1,
+            "status": "attempting",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "success_marker": success_marker,
+            "inflight_marker": inflight_marker,
+            "target": target,
+            "delivery_media": _asset_record(media),
+            "source_assets": [_asset_record(path) for path in source_paths],
+        }
+        attempts[success_marker] = attempt
+        if persist:
+            # The byte-bound journal is authoritative and must be durable before
+            # either the in-flight marker or external egress.
+            save_attempts(attempts)
+        seen.add(inflight_marker)
+        if persist:
+            save_seen(seen)
+
         outcome = send_media(target, media)
         if outcome is True:
             delivered.add(target)
+            attempt["status"] = "cli_confirmed"
+            attempt["confirmed_at"] = datetime.now(timezone.utc).isoformat()
+            attempts[success_marker] = attempt
+            if persist:
+                save_attempts(attempts)
             seen.add(success_marker)
             seen.discard(inflight_marker)
             if persist:
                 save_seen(seen, remove={inflight_marker})
         elif outcome is False:
+            attempt["status"] = "failed"
+            attempt["failed_at"] = datetime.now(timezone.utc).isoformat()
+            attempts[success_marker] = attempt
+            if persist:
+                save_attempts(attempts)
             seen.discard(inflight_marker)
             if persist:
                 save_seen(seen, remove={inflight_marker})
+                attempts.pop(success_marker, None)
+                save_attempts(attempts)
         # None deliberately retains the durable in-flight marker.
     return delivered
 
@@ -353,12 +452,17 @@ def process_new_files(seen: set, dry_run: bool = False, *, persist: bool = False
                     if single_mp3.exists():
                         merged = copy_to_cache(single_mp3)
                     else:
-                        new_seen.add(marker)
+                        print(f"  [defer] {base_stem} has a completion sidecar but no audio")
                         continue
 
                 print(f"  [{source}] {base_stem} -> {'+'.join(sorted(pending))}")
+                source_paths = [txt_file]
+                source_paths.extend(sorted(archive_dir.glob(f"{base_stem}-c[0-9]*.mp3")))
+                source_single = archive_dir / f"{base_stem}.mp3"
+                if source_single.is_file():
+                    source_paths.append(source_single)
                 delivered = _deliver(
-                    merged, pending, marker, new_seen, persist=persist,
+                    merged, pending, marker, new_seen, source_paths, persist=persist,
                 )
                 if all(f"{marker}:{target}" in new_seen for target in send_to):
                     new_seen.add(marker)
@@ -398,7 +502,7 @@ def process_new_files(seen: set, dry_run: bool = False, *, persist: bool = False
                 print(f"  [{source}] {name} -> {'+'.join(sorted(pending))}")
                 cached = copy_to_cache(mp3_file)
                 delivered = _deliver(
-                    cached, pending, marker, new_seen, persist=persist,
+                    cached, pending, marker, new_seen, [mp3_file], persist=persist,
                 )
                 if all(f"{marker}:{target}" in new_seen for target in send_to):
                     new_seen.add(name)
@@ -639,27 +743,6 @@ def recover_backlog_disposition(receipt_path: Path) -> dict:
     return receipt
 
 
-def _delivery_source_assets(success_marker: str) -> tuple[str, list[dict]]:
-    base_marker, separator, target = success_marker.rpartition(":")
-    if not separator or target not in KNOWN_PLATFORMS:
-        raise ValueError("marker must end in :discord or :telegram")
-    paths: list[Path]
-    if base_marker.startswith("hermes:"):
-        paths = [HERMES_ARCHIVE / base_marker.removeprefix("hermes:")]
-    elif base_marker.startswith("claude:"):
-        stem = base_marker.removeprefix("claude:")
-        paths = [CLAUDE_ARCHIVE / f"{stem}.txt"]
-        paths.extend(sorted(CLAUDE_ARCHIVE.glob(f"{stem}-c[0-9]*.mp3")))
-        single = CLAUDE_ARCHIVE / f"{stem}.mp3"
-        if single.is_file():
-            paths.append(single)
-    else:
-        raise ValueError("marker must identify a hermes or claude archive item")
-    if not paths or any(not path.is_file() for path in paths):
-        raise FileNotFoundError("source media for indeterminate marker is incomplete")
-    return target, [_asset_record(path) for path in paths]
-
-
 def resolve_indeterminate_delivery(
     success_marker: str,
     resolution: str,
@@ -669,6 +752,8 @@ def resolve_indeterminate_delivery(
     if resolution not in {"delivered", "retry"}:
         raise ValueError("resolution must be delivered or retry")
     inflight_marker = f"{success_marker}:inflight"
+    attempts = load_attempts()
+    journalled_attempt = attempts.get(success_marker)
     existing = None
     if receipt_path.exists():
         existing = json.loads(receipt_path.read_text())
@@ -683,9 +768,21 @@ def resolve_indeterminate_delivery(
         if existing.get("status") != "prepared":
             raise ValueError("unsupported indeterminate-resolution receipt status")
         target = existing["target"]
-        assets = existing["source_assets"]
+        attempt = existing["attempt"]
     else:
-        target, assets = _delivery_source_assets(success_marker)
+        if (
+            not isinstance(journalled_attempt, dict)
+            or journalled_attempt.get("status") != "attempting"
+            or journalled_attempt.get("success_marker") != success_marker
+            or journalled_attempt.get("inflight_marker") != inflight_marker
+            or not isinstance(journalled_attempt.get("delivery_media"), dict)
+            or not journalled_attempt.get("source_assets")
+        ):
+            raise ValueError("no valid frozen attempt journal for marker")
+        attempt = journalled_attempt
+        target = attempt["target"]
+        if target not in KNOWN_PLATFORMS:
+            raise ValueError("attempt journal has an invalid target")
     current = load_seen()
     desired_applied = (
         inflight_marker not in current
@@ -703,7 +800,7 @@ def resolve_indeterminate_delivery(
             "success_marker": success_marker,
             "inflight_marker": inflight_marker,
             "target": target,
-            "source_assets": assets,
+            "attempt": attempt,
             "resolution": resolution,
             "external_messages_sent": 0,
             "before_seen_sha256": hashlib.sha256(before_bytes).hexdigest(),
@@ -718,10 +815,16 @@ def resolve_indeterminate_delivery(
         _fsync_directory(receipt_path.parent)
     else:
         receipt = existing
-    if not all(_asset_content_matches(asset) for asset in assets):
-        raise RuntimeError("source media changed before indeterminate resolution")
+    # Resolution is bound to the bytes journalled before egress, not a fresh
+    # discovery of whatever now occupies the archive path.
+    if not _asset_content_matches(attempt["delivery_media"]):
+        raise RuntimeError("attempted delivery media changed or is missing")
 
     if not desired_applied:
+        attempt["status"] = f"resolved_{resolution}"
+        attempt["resolved_at"] = datetime.now(timezone.utc).isoformat()
+        attempts[success_marker] = attempt
+        save_attempts(attempts)
         updated = set(current)
         updated.discard(inflight_marker)
         if resolution == "delivered":

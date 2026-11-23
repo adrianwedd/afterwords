@@ -122,12 +122,14 @@ approval:
 7. Reconcile every previously named backlog item as sent, deliberately excluded,
    already seen or missing; do not infer delivery from disappearance.
 
-Each external target gets a durable in-flight marker before `hermes send` and a
-success marker immediately after confirmed CLI acceptance. A timeout is
-indeterminate: later scheduled runs hold that target instead of retrying it and
-risking a duplicate. Reconcile the remote service first; a zero CLI exit still
-does not prove remote receipt. Then make one non-sending, mode-0600 receipted
-transition bound to the source-media hashes:
+Each external target gets a durable, byte-bound attempt journal and in-flight
+marker before `hermes send`, then a success marker immediately after confirmed
+CLI acceptance. The journal freezes the exact delivery media and original
+source-object hashes; later archive edits cannot rewrite the attempt record. A
+timeout is indeterminate: later scheduled runs hold that target instead of
+retrying it and risking a duplicate. Reconcile the remote service first; a zero
+CLI exit still does not prove remote receipt. Then make one non-sending,
+mode-0600 receipted transition bound to the source-media hashes:
 
 ```bash
 scripts/tts-feed-send.py \

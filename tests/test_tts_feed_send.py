@@ -164,6 +164,17 @@ def test_chunked_dry_run_does_not_merge_or_write_cache(tmp_path, monkeypatch, ca
     assert f"Would send {stem}" in capsys.readouterr().out
 
 
+def test_transcript_without_audio_is_deferred_not_marked_seen(tmp_path, monkeypatch):
+    claude_dir = tmp_path / "claude"
+    claude_dir.mkdir()
+    stem = "still-missing-audio"
+    (claude_dir / f"{stem}.txt").write_text("reply")
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(claude_dir, "claude")])
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    new_seen = tfs.process_new_files(set())
+    assert f"claude:{stem}" not in new_seen
+
+
 # ── empty send_to: marks seen, sends nothing ───────────────────────
 
 def test_empty_send_to_marks_seen_but_sends_nothing(tmp_path, monkeypatch, capsys):
@@ -339,10 +350,15 @@ def test_indeterminate_resolution_is_receipted_hash_bound_and_non_sending(
     seen_file = tmp_path / "seen.json"
     success = f"hermes:{name}:discord"
     inflight = f"{success}:inflight"
-    seen_file.write_text(json.dumps([inflight]))
     receipt = tmp_path / f"{resolution}.json"
     monkeypatch.setattr(tfs, "HERMES_ARCHIVE", hermes_dir)
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
     monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    monkeypatch.setattr(tfs, "send_media", lambda *_a: None)
+    tfs.process_new_files(set(), persist=True)
+    assert inflight in tfs.load_seen()
 
     with mock.patch.object(tfs.subprocess, "run") as run_mock:
         row = tfs.resolve_indeterminate_delivery(success, resolution, receipt)
@@ -353,8 +369,8 @@ def test_indeterminate_resolution_is_receipted_hash_bound_and_non_sending(
     assert inflight not in durable
     assert row["status"] == "complete"
     assert row["external_messages_sent"] == 0
-    assert row["source_assets"][0]["path"] == str(media)
-    assert row["source_assets"][0]["sha256"] == __import__("hashlib").sha256(
+    assert row["attempt"]["source_assets"][0]["path"] == str(media)
+    assert row["attempt"]["source_assets"][0]["sha256"] == __import__("hashlib").sha256(
         media.read_bytes()
     ).hexdigest()
     assert receipt.stat().st_mode & 0o777 == 0o600
@@ -368,10 +384,14 @@ def test_indeterminate_resolution_resumes_after_completion_receipt_failure(tmp_p
     seen_file = tmp_path / "seen.json"
     success = f"hermes:{name}:discord"
     inflight = f"{success}:inflight"
-    seen_file.write_text(json.dumps([inflight]))
     receipt = tmp_path / "resolution.json"
     monkeypatch.setattr(tfs, "HERMES_ARCHIVE", hermes_dir)
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
     monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    monkeypatch.setattr(tfs, "send_media", lambda *_a: None)
+    tfs.process_new_files(set(), persist=True)
     real_replace = tfs._replace_receipt
     calls = 0
 
@@ -391,6 +411,95 @@ def test_indeterminate_resolution_resumes_after_completion_receipt_failure(tmp_p
     row = tfs.resolve_indeterminate_delivery(success, "delivered", receipt)
     assert row["status"] == "complete"
     assert json.loads(receipt.read_text())["status"] == "complete"
+
+
+def test_indeterminate_receipt_uses_attempt_time_bytes_after_source_changes(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "picard-mutated.mp3"
+    source = hermes_dir / name
+    source.write_bytes(b"OLD-AUDIO")
+    seen_file = tmp_path / "seen.json"
+    success = f"hermes:{name}:discord"
+    receipt = tmp_path / "resolution.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    attempted = []
+    monkeypatch.setattr(
+        tfs, "send_media", lambda _target, path: attempted.append(path.read_bytes()) or None,
+    )
+
+    tfs.process_new_files(set(), persist=True)
+    source.write_bytes(b"NEW-AUDIO")  # same length; archive no longer matches attempt
+    row = tfs.resolve_indeterminate_delivery(success, "delivered", receipt)
+
+    old_hash = __import__("hashlib").sha256(b"OLD-AUDIO").hexdigest()
+    new_hash = __import__("hashlib").sha256(b"NEW-AUDIO").hexdigest()
+    assert attempted == [b"OLD-AUDIO"]
+    assert row["attempt"]["delivery_media"]["sha256"] == old_hash
+    assert row["attempt"]["source_assets"][0]["sha256"] == old_hash
+    assert row["attempt"]["source_assets"][0]["sha256"] != new_hash
+
+
+def test_deliberate_retry_creates_a_new_attempt_bound_to_current_bytes(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "picard-retry.mp3"
+    source = hermes_dir / name
+    source.write_bytes(b"OLD-AUDIO")
+    seen_file = tmp_path / "seen.json"
+    success = f"hermes:{name}:discord"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    monkeypatch.setattr(tfs, "send_media", lambda *_a: None)
+
+    tfs.process_new_files(set(), persist=True)
+    source.write_bytes(b"NEW-AUDIO")
+    tfs.resolve_indeterminate_delivery(success, "retry", tmp_path / "retry.json")
+
+    attempted = []
+    monkeypatch.setattr(
+        tfs, "send_media", lambda _target, path: attempted.append(path.read_bytes()) or None,
+    )
+    tfs.process_new_files(tfs.load_seen(), persist=True)
+    new_hash = __import__("hashlib").sha256(b"NEW-AUDIO").hexdigest()
+    assert attempted == [b"NEW-AUDIO"]
+    assert tfs.load_attempts()[success]["source_assets"][0]["sha256"] == new_hash
+    assert tfs.load_attempts()[success]["delivery_media"]["sha256"] == new_hash
+
+
+def test_indeterminate_resolution_refuses_unjournalled_claude_transcript_only(tmp_path, monkeypatch):
+    claude_dir = tmp_path / "claude"
+    claude_dir.mkdir()
+    (claude_dir / "empty.txt").write_text("no audio")
+    seen_file = tmp_path / "seen.json"
+    success = "claude:empty:discord"
+    seen_file.write_text(json.dumps([f"{success}:inflight"]))
+    monkeypatch.setattr(tfs, "CLAUDE_ARCHIVE", claude_dir)
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    with pytest.raises(ValueError, match="frozen attempt journal"):
+        tfs.resolve_indeterminate_delivery(success, "delivered", tmp_path / "receipt.json")
+
+
+def test_malformed_attempt_journal_blocks_delivery_instead_of_resending(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    (hermes_dir / "picard.mp3").write_bytes(b"audio")
+    seen_file = tmp_path / "seen.json"
+    seen_file.write_text("[]")
+    seen_file.with_name("tts-feed-attempts.json").write_text("{not-json")
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    with mock.patch.object(tfs, "send_media") as send_mock:
+        with pytest.raises(RuntimeError, match="attempt journal"):
+            tfs.process_new_files(set(), persist=True)
+    send_mock.assert_not_called()
 
 
 def test_discard_backlog_is_auditable_and_never_sends(tmp_path, monkeypatch):
