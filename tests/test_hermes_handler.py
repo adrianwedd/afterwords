@@ -59,3 +59,49 @@ def test_installer_local_only_installs_manifest_and_scope(tmp_path):
     hook = tmp_path / "hooks/afterwords-tts"
     assert (hook / "HOOK.yaml").read_text() == (REPO / "hermes/hooks/afterwords-tts/HOOK.yaml").read_text()
     assert 'LOCAL_PLATFORMS = ("local",)' in (hook / "handler.py").read_text()
+
+
+def test_play_does_not_block_the_calling_event_loop(tmp_path):
+    """afplay must run off the loop: an inline call freezes the host gateway for the clip.
+
+    The gateway awaits hook handlers on its event loop, so an inline ``afplay`` (which blocks
+    for the whole audio) stalls keepalive pongs and every RPC for that duration -- the client
+    then drops a healthy socket with "1011 keepalive ping timeout". Measure loop schedulability
+    while a deliberately slow play "runs": the ticker must keep firing.
+    """
+    mod = _load_handler()
+    wav = tmp_path / "chunk.wav"
+    wav.write_bytes(b"RIFF" + b"\0" * 64)
+
+    calls = []
+
+    def slow_call(argv, **kwargs):
+        """Stand-in for afplay: blocks its thread for 0.5 s, as real playback would."""
+        calls.append(argv)
+        import time as _time
+        _time.sleep(0.5)
+        return 0
+
+    mod.subprocess.call = slow_call
+
+    async def scenario():
+        ticks = 0
+
+        async def ticker():
+            nonlocal ticks
+            while True:
+                await asyncio.sleep(0.02)
+                ticks += 1
+
+        task = asyncio.create_task(ticker())
+        await mod._play(wav)
+        ticks_during = ticks
+        task.cancel()
+        with __import__("contextlib").suppress(asyncio.CancelledError):
+            await task
+        return ticks_during
+
+    ticks = asyncio.run(scenario())
+    assert calls and calls[0][0] == "afplay", calls
+    # 0.5 s of playback on a 0.02 s ticker is ~25 ticks; inline it would be 0 (or 1).
+    assert ticks >= 10, f"event loop was starved for the whole clip (only {ticks} ticks in 0.5s)"

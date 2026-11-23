@@ -585,13 +585,13 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
                         wav_path.write_bytes(wav_bytes)
 
                         # Play first; archive in a thread so lame never delays
-                        # the next synth kickoff.
+                        # the next synth kickoff. Playback itself must also stay
+                        # OFF this thread: this coroutine runs on the host's
+                        # event loop, and afplay blocks until the audio ends, so
+                        # an inline call freezes the whole gateway (keepalive
+                        # pongs included) for the length of the clip.
                         if not Path("/tmp/afterwords-muted").exists():
-                            subprocess.call(
-                                ["afplay", str(wav_path)],
-                                stdout=subprocess.DEVNULL,
-                                stderr=subprocess.DEVNULL
-                            )
+                            await _play(wav_path)
 
                         # Keep a reference: an un-referenced task can be garbage
                         # collected mid-flight, dropping the archived MP3. Gathered
@@ -617,11 +617,7 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
                     wav_path.write_bytes(wav_bytes)
 
                     if not Path("/tmp/afterwords-muted").exists():
-                        subprocess.call(
-                            ["afplay", str(wav_path)],
-                            stdout=subprocess.DEVNULL,
-                            stderr=subprocess.DEVNULL
-                        )
+                        await _play(wav_path)
 
                     await asyncio.to_thread(
                         _archive_wav_and_cleanup,
@@ -643,6 +639,30 @@ def _ts() -> str:
     """ISO-like timestamp for archive filenames: YYYYMMDD-HHMMSS."""
     from datetime import datetime
     return datetime.now().strftime("%Y%m%d-%H%M%S")
+
+
+async def _play(wav_path: Path) -> None:
+    """Play one chunk to completion WITHOUT holding the host's event loop.
+
+    ``afplay`` runs for the length of the audio, and this coroutine is awaited
+    on the gateway's loop (``HookRegistry.emit`` awaits handlers inline). Inline,
+    a 25 s clip freezes the whole gateway for 25 s: every websocket keepalive
+    ping goes unanswered, so a client with the library's default 20 s ping
+    timeout drops a perfectly healthy connection with
+    ``sent 1011 (internal error) keepalive ping timeout`` -- and the subagent
+    monitor, status polling and every other RPC stall behind the audio.
+    Awaiting it in a worker thread keeps sequential chunk order while the loop
+    stays schedulable.
+    """
+    try:
+        await asyncio.to_thread(
+            subprocess.call,
+            ["afplay", str(wav_path)],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except Exception as exc:  # playback is a nice-to-have; never fail the turn
+        log.warning("TTS playback failed: %s", exc)
 
 
 def _archive_wav_and_cleanup(wav_path: Path, mp3_name: str, archive_dir: Path) -> None:
