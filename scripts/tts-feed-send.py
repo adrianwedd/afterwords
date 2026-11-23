@@ -400,21 +400,20 @@ def _deliver(
     return delivered
 
 
-def _item_has_held_attempt(marker: str, pending: set, seen: set, *, persist: bool) -> bool:
+def _item_has_held_attempt(marker: str, seen: set, *, persist: bool) -> bool:
     """Check before touching shared cache so unresolved media stays immutable."""
     if not persist:
         return False
     attempts = load_attempts()
-    held = []
-    for target in pending:
+    held = {
+        success_marker.rsplit(":", 1)[-1]
+        for success_marker, attempt in attempts.items()
+        if success_marker.startswith(f"{marker}:") and attempt.get("status") == "attempting"
+    }
+    for target in KNOWN_PLATFORMS:
         success_marker = f"{marker}:{target}"
-        inflight_marker = f"{success_marker}:inflight"
-        attempt = attempts.get(success_marker)
-        if (
-            (attempt and attempt.get("status") == "attempting")
-            or (inflight_marker in seen and success_marker not in seen)
-        ):
-            held.append(target)
+        if f"{success_marker}:inflight" in seen and success_marker not in seen:
+            held.add(target)
     if held:
         print(
             f"  [hold] {marker} has unresolved target(s) {','.join(sorted(held))}; "
@@ -471,7 +470,7 @@ def process_new_files(seen: set, dry_run: bool = False, *, persist: bool = False
                         print(f"  [dry-run] Would send {base_stem} to {'+'.join(sorted(pending))}")
                     continue
 
-                if _item_has_held_attempt(marker, pending, new_seen, persist=persist):
+                if _item_has_held_attempt(marker, new_seen, persist=persist):
                     continue
 
                 # Merge chunks into single MP3
@@ -529,7 +528,7 @@ def process_new_files(seen: set, dry_run: bool = False, *, persist: bool = False
                     print(f"  [dry-run] Would send {name} to {'+'.join(sorted(pending))}")
                     continue
 
-                if _item_has_held_attempt(marker, pending, new_seen, persist=persist):
+                if _item_has_held_attempt(marker, new_seen, persist=persist):
                     continue
 
                 print(f"  [{source}] {name} -> {'+'.join(sorted(pending))}")

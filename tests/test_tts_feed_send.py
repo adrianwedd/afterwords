@@ -504,6 +504,29 @@ def test_indeterminate_receipt_uses_attempt_time_bytes_after_source_changes(tmp_
     assert row["attempt"]["source_assets"][0]["sha256"] != new_hash
 
 
+def test_held_attempt_blocks_cross_target_cache_overwrite(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "cross-target.mp3"
+    source = hermes_dir / name
+    source.write_bytes(b"OLD-AUDIO")
+    seen_file = tmp_path / "seen.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    monkeypatch.setattr(tfs, "send_media", lambda *_a: None)
+    tfs.process_new_files(set(), persist=True)
+    assert (tmp_path / "cache" / name).read_bytes() == b"OLD-AUDIO"
+
+    source.write_bytes(b"NEW-AUDIO")
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "telegram")
+    with mock.patch.object(tfs, "send_media") as send_mock:
+        tfs.process_new_files(tfs.load_seen(), persist=True)
+    send_mock.assert_not_called()
+    assert (tmp_path / "cache" / name).read_bytes() == b"OLD-AUDIO"
+
+
 def test_deliberate_retry_creates_a_new_attempt_bound_to_current_bytes(tmp_path, monkeypatch):
     hermes_dir = tmp_path / "hermes"
     hermes_dir.mkdir()
