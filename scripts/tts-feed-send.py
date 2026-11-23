@@ -364,6 +364,10 @@ def _deliver(
             "delivery_media": _asset_record(media),
             "source_assets": [_asset_record(path) for path in source_paths],
         }
+        # Apply the same custody policy at creation as at reconciliation. A
+        # symlink escape or malformed source must fail before journal, seen
+        # state or external egress exists.
+        _validate_attempt_record(success_marker, attempt)
         attempts[success_marker] = attempt
         if persist:
             # The byte-bound journal is authoritative and must be durable before

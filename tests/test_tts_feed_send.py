@@ -709,6 +709,27 @@ def test_indeterminate_resolution_refuses_archive_symlink_escape(tmp_path, monke
     assert tfs.load_seen() == before
 
 
+def test_delivery_refuses_archive_symlink_escape_before_egress_state(tmp_path, monkeypatch):
+    archive = tmp_path / "hermes"
+    wrong = tmp_path / "wrong"
+    archive.mkdir()
+    wrong.mkdir()
+    outside = wrong / "outside.mp3"
+    outside.write_bytes(b"outside")
+    (archive / "linked.mp3").symlink_to(outside)
+    seen_file = tmp_path / "seen.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(archive, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    with mock.patch.object(tfs, "send_media") as send_mock:
+        with pytest.raises(RuntimeError, match="inconsistent frozen attempt journal"):
+            tfs.process_new_files(set(), persist=True)
+    send_mock.assert_not_called()
+    assert not tfs.load_seen()
+    assert not tfs._attempts_file().exists()
+
+
 def test_malformed_attempt_journal_blocks_delivery_instead_of_resending(tmp_path, monkeypatch):
     hermes_dir = tmp_path / "hermes"
     hermes_dir.mkdir()
