@@ -575,17 +575,38 @@ def _validate_attempt_record(success_marker: str, attempt: dict) -> None:
     ):
         raise RuntimeError(f"malformed frozen attempt journal for {success_marker}")
 
-    paths = [Path(asset["path"]) for asset in source_assets]
+    paths = [Path(asset["path"]).resolve() for asset in source_assets]
     if len(set(paths)) != len(paths) or len({path.parent for path in paths}) != 1:
         raise RuntimeError(f"inconsistent frozen attempt journal for {success_marker}")
     names = [path.name for path in paths]
     if base_marker.startswith("hermes:"):
         expected = base_marker.removeprefix("hermes:")
-        valid_sources = names == [expected] and expected.endswith(".mp3")
+        roots = [path.resolve() for path, source in WATCH_DIRS if source == "hermes"]
+        expected_delivery_names = {
+            expected
+        } if target == "discord" else {
+            expected, f"{Path(expected).stem}.ogg"
+        }
+        valid_sources = (
+            len(roots) == 1
+            and paths == [(roots[0] / expected).resolve()]
+            and expected.endswith(".mp3")
+        )
     elif base_marker.startswith("claude:"):
         stem = base_marker.removeprefix("claude:")
+        roots = [path.resolve() for path, source in WATCH_DIRS if source == "claude"]
+        expected_delivery_names = (
+            {f"{stem}.mp3", f"{stem}-merged.mp3"}
+            if target == "discord"
+            else {
+                f"{stem}.mp3", f"{stem}-merged.mp3",
+                f"{stem}.ogg", f"{stem}-merged.ogg",
+            }
+        )
         valid_sources = (
-            names.count(f"{stem}.txt") == 1
+            len(roots) == 1
+            and all(path.parent == roots[0] for path in paths)
+            and names.count(f"{stem}.txt") == 1
             and any(
                 name == f"{stem}.mp3" or re.fullmatch(re.escape(stem) + r"-c\d+\.mp3", name)
                 for name in names
@@ -599,7 +620,14 @@ def _validate_attempt_record(success_marker: str, attempt: dict) -> None:
         )
     else:
         valid_sources = False
-    if not valid_sources or Path(attempt["delivery_media"]["path"]).suffix not in {".mp3", ".ogg"}:
+        expected_delivery_names = set()
+    delivery_path = Path(attempt["delivery_media"]["path"]).resolve()
+    if (
+        not valid_sources
+        or delivery_path.parent != AUDIO_CACHE.resolve()
+        or delivery_path.name not in expected_delivery_names
+        or delivery_path.suffix not in {".mp3", ".ogg"}
+    ):
         raise RuntimeError(f"inconsistent frozen attempt journal for {success_marker}")
 
 

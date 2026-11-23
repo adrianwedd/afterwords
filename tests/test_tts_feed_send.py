@@ -540,6 +540,52 @@ def test_indeterminate_resolution_refuses_invalid_asset_hash_schema(tmp_path, mo
         tfs.resolve_indeterminate_delivery(success, "delivered", tmp_path / "receipt.json")
 
 
+@pytest.mark.parametrize("source", ["hermes", "claude"])
+def test_indeterminate_resolution_refuses_sources_outside_authoritative_archive(
+    tmp_path, monkeypatch, source,
+):
+    authoritative = tmp_path / f"authoritative-{source}"
+    wrong = tmp_path / "wrong"
+    cache = tmp_path / "cache"
+    authoritative.mkdir()
+    wrong.mkdir()
+    cache.mkdir()
+    if source == "hermes":
+        success = "hermes:item.mp3:discord"
+        source_paths = [wrong / "item.mp3"]
+        delivery = cache / "item.mp3"
+    else:
+        success = "claude:stem:discord"
+        source_paths = [wrong / "stem.txt", wrong / "stem-c1.mp3"]
+        delivery = cache / "stem-merged.mp3"
+    for path in source_paths:
+        path.write_bytes(b"source")
+    delivery.write_bytes(b"delivery")
+    inflight = f"{success}:inflight"
+    seen_file = tmp_path / "seen.json"
+    seen_file.write_text(json.dumps([inflight]))
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", cache)
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(authoritative, source)])
+    attempt = {
+        "schema_version": 1,
+        "status": "attempting",
+        "created_at": "2026-11-23T00:00:00+00:00",
+        "success_marker": success,
+        "inflight_marker": inflight,
+        "target": "discord",
+        "delivery_media": tfs._asset_record(delivery),
+        "source_assets": [tfs._asset_record(path) for path in source_paths],
+    }
+    tfs._attempts_file().write_text(json.dumps({success: attempt}))
+    receipt = tmp_path / "receipt.json"
+    before = tfs.load_seen()
+    with pytest.raises(RuntimeError, match="inconsistent frozen attempt journal"):
+        tfs.resolve_indeterminate_delivery(success, "delivered", receipt)
+    assert not receipt.exists()
+    assert tfs.load_seen() == before
+
+
 def test_malformed_attempt_journal_blocks_delivery_instead_of_resending(tmp_path, monkeypatch):
     hermes_dir = tmp_path / "hermes"
     hermes_dir.mkdir()
