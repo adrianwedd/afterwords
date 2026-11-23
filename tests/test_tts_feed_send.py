@@ -338,6 +338,25 @@ def test_timeout_is_held_as_indeterminate_instead_of_retried(tmp_path, monkeypat
     assert tfs.subprocess.run.call_count == 1
 
 
+def test_telegram_preparation_failure_never_creates_egress_state(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "picard-convert.mp3"
+    (hermes_dir / name).write_bytes(b"audio")
+    seen_file = tmp_path / "seen.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "telegram")
+    monkeypatch.setattr(tfs, "to_ogg", mock.Mock(side_effect=TimeoutError("ffmpeg")))
+    with mock.patch.object(tfs, "send_media") as send_mock:
+        with pytest.raises(TimeoutError, match="ffmpeg"):
+            tfs.process_new_files(set(), persist=True)
+    send_mock.assert_not_called()
+    assert not tfs.load_seen()
+    assert not tfs.load_attempts()
+
+
 @pytest.mark.parametrize("resolution,delivered", [("delivered", True), ("retry", False)])
 def test_indeterminate_resolution_is_receipted_hash_bound_and_non_sending(
     tmp_path, monkeypatch, resolution, delivered,
@@ -413,6 +432,45 @@ def test_indeterminate_resolution_resumes_after_completion_receipt_failure(tmp_p
     assert json.loads(receipt.read_text())["status"] == "complete"
 
 
+def test_stale_prepared_retry_receipt_cannot_clear_newer_attempt(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "picard-stale-receipt.mp3"
+    source = hermes_dir / name
+    source.write_bytes(b"OLD-AUDIO")
+    seen_file = tmp_path / "seen.json"
+    success = f"hermes:{name}:discord"
+    inflight = f"{success}:inflight"
+    receipt = tmp_path / "retry.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    monkeypatch.setattr(tfs, "send_media", lambda *_a: None)
+    tfs.process_new_files(set(), persist=True)
+
+    real_replace = tfs._replace_receipt
+    monkeypatch.setattr(
+        tfs, "_replace_receipt",
+        mock.Mock(side_effect=OSError("simulated completion receipt failure")),
+    )
+    with pytest.raises(OSError, match="simulated"):
+        tfs.resolve_indeterminate_delivery(success, "retry", receipt)
+    assert json.loads(receipt.read_text())["status"] == "prepared"
+
+    source.write_bytes(b"NEW-AUDIO")
+    monkeypatch.setattr(tfs, "_replace_receipt", real_replace)
+    tfs.process_new_files(tfs.load_seen(), persist=True)
+    new_attempt = json.loads(json.dumps(tfs.load_attempts()[success]))
+    assert new_attempt["status"] == "attempting"
+    assert inflight in tfs.load_seen()
+
+    with pytest.raises(RuntimeError, match="no longer matches"):
+        tfs.resolve_indeterminate_delivery(success, "retry", receipt)
+    assert tfs.load_attempts()[success] == new_attempt
+    assert inflight in tfs.load_seen()
+
+
 def test_indeterminate_receipt_uses_attempt_time_bytes_after_source_changes(tmp_path, monkeypatch):
     hermes_dir = tmp_path / "hermes"
     hermes_dir.mkdir()
@@ -433,6 +491,9 @@ def test_indeterminate_receipt_uses_attempt_time_bytes_after_source_changes(tmp_
 
     tfs.process_new_files(set(), persist=True)
     source.write_bytes(b"NEW-AUDIO")  # same length; archive no longer matches attempt
+    # A scheduled pass must notice the hold before refreshing the shared cache.
+    tfs.process_new_files(tfs.load_seen(), persist=True)
+    assert (tmp_path / "cache" / name).read_bytes() == b"OLD-AUDIO"
     row = tfs.resolve_indeterminate_delivery(success, "delivered", receipt)
 
     old_hash = __import__("hashlib").sha256(b"OLD-AUDIO").hexdigest()
@@ -718,6 +779,25 @@ def test_discard_finalization_failure_preserves_prepared_receipt(tmp_path, monke
     assert f"claude:{stem}" not in tfs.load_seen()
 
 
+def test_backlog_recovery_rejects_new_unrecorded_chunk(tmp_path, monkeypatch):
+    claude_dir = tmp_path / "claude"
+    claude_dir.mkdir()
+    stem = "reply"
+    (claude_dir / f"{stem}.txt").write_text("reply")
+    (claude_dir / f"{stem}-c1.mp3").write_bytes(b"one")
+    seen_file = tmp_path / "seen.json"
+    seen_file.write_text("[]")
+    receipt = tmp_path / "discard.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(claude_dir, "claude")])
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    tfs.discard_current_backlog(set(), receipt, quiescence_seconds=0)
+    (claude_dir / f"{stem}-c2.mp3").write_bytes(b"two")
+    before = seen_file.read_bytes()
+    with pytest.raises(RuntimeError, match="inventory changed"):
+        tfs.recover_backlog_disposition(receipt)
+    assert seen_file.read_bytes() == before
+
+
 def test_discard_backlog_cli_writes_complete_receipt(tmp_path):
     home = tmp_path / "home"
     archive = home / ".claude" / "tts-archive"
@@ -832,3 +912,33 @@ def test_discard_reverses_if_snapshot_gains_a_chunk_during_seen_swap(tmp_path, m
     row = json.loads(receipt.read_text())
     assert row["status"] == "aborted_asset_race"
     assert row["recovered_markers"] == [f"claude:{stem}"]
+
+
+def test_discard_reverses_if_asset_disappears_during_seen_swap(tmp_path, monkeypatch):
+    claude_dir = tmp_path / "claude"
+    claude_dir.mkdir()
+    stem = "vanishing"
+    transcript = claude_dir / f"{stem}.txt"
+    transcript.write_text("reply")
+    (claude_dir / f"{stem}-c1.mp3").write_bytes(b"one")
+    seen_file = tmp_path / "seen.json"
+    seen_file.write_text("[]")
+    receipt = tmp_path / "discard.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(claude_dir, "claude")])
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    real_save_seen = tfs.save_seen
+    calls = 0
+
+    def remove_during_swap(seen, **kwargs):
+        nonlocal calls
+        calls += 1
+        result = real_save_seen(seen, **kwargs)
+        if calls == 1:
+            transcript.unlink()
+        return result
+
+    monkeypatch.setattr(tfs, "save_seen", remove_during_swap)
+    with pytest.raises(RuntimeError, match="markers reversed"):
+        tfs.discard_current_backlog(set(), receipt, quiescence_seconds=0)
+    assert f"claude:{stem}" not in tfs.load_seen()
+    assert json.loads(receipt.read_text())["status"] == "aborted_asset_race"

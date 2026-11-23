@@ -400,6 +400,31 @@ def _deliver(
     return delivered
 
 
+def _item_has_held_attempt(marker: str, pending: set, seen: set, *, persist: bool) -> bool:
+    """Check before touching shared cache so unresolved media stays immutable."""
+    if not persist:
+        return False
+    attempts = load_attempts()
+    held = []
+    for target in pending:
+        success_marker = f"{marker}:{target}"
+        inflight_marker = f"{success_marker}:inflight"
+        attempt = attempts.get(success_marker)
+        if (
+            (attempt and attempt.get("status") == "attempting")
+            or (inflight_marker in seen and success_marker not in seen)
+        ):
+            held.append(target)
+    if held:
+        print(
+            f"  [hold] {marker} has unresolved target(s) {','.join(sorted(held))}; "
+            "cache left untouched",
+            file=sys.stderr,
+        )
+        return True
+    return False
+
+
 def process_new_files(seen: set, dry_run: bool = False, *, persist: bool = False) -> set:
     new_seen = set(seen)
     sent_any = False
@@ -444,6 +469,9 @@ def process_new_files(seen: set, dry_run: bool = False, *, persist: bool = False
                     )
                     if has_audio:
                         print(f"  [dry-run] Would send {base_stem} to {'+'.join(sorted(pending))}")
+                    continue
+
+                if _item_has_held_attempt(marker, pending, new_seen, persist=persist):
                     continue
 
                 # Merge chunks into single MP3
@@ -499,6 +527,9 @@ def process_new_files(seen: set, dry_run: bool = False, *, persist: bool = False
 
                 if dry_run:
                     print(f"  [dry-run] Would send {name} to {'+'.join(sorted(pending))}")
+                    continue
+
+                if _item_has_held_attempt(marker, pending, new_seen, persist=persist):
                     continue
 
                 print(f"  [{source}] {name} -> {'+'.join(sorted(pending))}")
@@ -653,23 +684,26 @@ def _asset_content_matches(record: dict) -> bool:
 
 def _item_assets_unchanged(item: dict) -> bool:
     """Re-enumerate as well as re-hash: added/removed chunks invalidate a snapshot."""
-    records = item.get("assets", [])
-    if not records:
+    try:
+        records = item.get("assets", [])
+        if not records:
+            return False
+        expected = {Path(record["path"]) for record in records}
+        if item.get("source") == "claude":
+            archive_dir = next(iter(expected)).parent
+            stem = item["item"]
+            actual = {archive_dir / f"{stem}.txt"}
+            actual.update(archive_dir.glob(f"{stem}-c[0-9]*.mp3"))
+            single = archive_dir / f"{stem}.mp3"
+            if single.is_file():
+                actual.add(single)
+        else:
+            actual = expected
+        return actual == expected and all(
+            _asset_record(Path(record["path"])) == record for record in records
+        )
+    except (OSError, KeyError, TypeError):
         return False
-    expected = {Path(record["path"]) for record in records}
-    if item.get("source") == "claude":
-        archive_dir = next(iter(expected)).parent
-        stem = item["item"]
-        actual = {archive_dir / f"{stem}.txt"}
-        actual.update(archive_dir.glob(f"{stem}-c[0-9]*.mp3"))
-        single = archive_dir / f"{stem}.mp3"
-        if single.is_file():
-            actual.add(single)
-    else:
-        actual = expected
-    return actual == expected and all(
-        _asset_record(Path(record["path"])) == record for record in records
-    )
 
 
 def _replace_receipt(receipt_path: Path, receipt: dict) -> None:
@@ -822,14 +856,15 @@ def recover_backlog_disposition(receipt_path: Path) -> dict:
         raise ValueError("unsupported backlog-disposition receipt status")
     if receipt.get("status") == "recovered":
         return receipt
-    mismatched = [
-        asset["path"]
+    changed_items = [
+        item.get("item", "<unknown>")
         for item in receipt.get("discarded", [])
-        for asset in item.get("assets", [])
-        if not _asset_content_matches(asset)
+        if not _item_assets_unchanged(item)
     ]
-    if mismatched:
-        raise RuntimeError(f"original backlog assets changed or are missing: {mismatched}")
+    if changed_items:
+        raise RuntimeError(
+            f"original backlog asset inventory changed or is missing: {changed_items}"
+        )
     markers = {item["marker"] for item in receipt.get("discarded", [])}
     before_bytes = SEEN_FILE.read_bytes() if SEEN_FILE.exists() else b""
     current = load_seen()

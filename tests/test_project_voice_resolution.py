@@ -143,6 +143,29 @@ def test_exact_session_id_selects_the_project_voice(tmp_path):
     assert _print_with_db(project, db, bare, "s1") == "worf"
 
 
+def test_named_profile_session_defaults_to_its_own_state_db(tmp_path):
+    project = _write_project(tmp_path, "vixen: seydoux\n")
+    bare = tmp_path / "bare"
+    bare.mkdir()
+    profile = tmp_path / ".hermes" / "profiles" / "vixen"
+    profile.mkdir(parents=True)
+    db = profile / "state.db"
+    with sqlite3.connect(db) as con:
+        con.execute("create table sessions (id text primary key, cwd text, last_activity_at real)")
+        con.execute("insert into sessions values ('profile-session', ?, 0)", (str(project),))
+    env = {
+        "PATH": os.environ["PATH"],
+        "HOME": str(tmp_path),
+        "HERMES_HOME": str(profile),
+        "AFTERWORDS_SESSION_ID": "profile-session",
+    }
+    result = subprocess.run(
+        ["bash", str(WRAPPER), "--print"], cwd=bare, env=env,
+        capture_output=True, text=True, check=True,
+    )
+    assert result.stdout.strip() == "seydoux"
+
+
 def test_concurrent_sessions_never_borrow_the_newest_project(tmp_path):
     project = _write_project(tmp_path, "hermes: worf\n")
     other = tmp_path / "other"

@@ -36,8 +36,10 @@ CANONICAL="${AFTERWORDS_COMMAND_SCRIPT:-$SCRIPT_DIR/afterwords-tts-command.sh}"
 # bash 3.2 + `set -u`: never write "${VAR}/path" — it trips "unbound variable"
 # even when VAR is set. Build the default with a $name form instead.
 HOME_DIR="${HOME:-}"
+HERMES_ROOT="${HERMES_HOME:-}"
+[ -n "$HERMES_ROOT" ] || HERMES_ROOT="$HOME_DIR/.hermes"
 STATE_DB="${AFTERWORDS_STATE_DB:-}"
-[ -n "$STATE_DB" ] || STATE_DB="$HOME_DIR/.hermes/state.db"
+[ -n "$STATE_DB" ] || STATE_DB="$HERMES_ROOT/state.db"
 
 resolve_agent() {
     local agent="${AFTERWORDS_AGENT:-}"
