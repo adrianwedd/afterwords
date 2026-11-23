@@ -171,6 +171,8 @@ def load_attempts() -> dict:
         for key, row in value.items()
     ):
         raise RuntimeError(f"malformed delivery attempt journal: {path}")
+    for marker, row in value.items():
+        _validate_attempt_record(marker, row)
     return value
 
 
@@ -528,6 +530,89 @@ def _asset_record(path: Path) -> dict:
     }
 
 
+def _valid_asset_record(record: object) -> bool:
+    return (
+        isinstance(record, dict)
+        and set(record) == {"path", "size", "mtime_ns", "sha256"}
+        and isinstance(record.get("path"), str)
+        and bool(record["path"])
+        and Path(record["path"]).is_absolute()
+        and isinstance(record.get("size"), int)
+        and record["size"] >= 0
+        and isinstance(record.get("mtime_ns"), int)
+        and record["mtime_ns"] >= 0
+        and isinstance(record.get("sha256"), str)
+        and re.fullmatch(r"[0-9a-f]{64}", record["sha256"]) is not None
+    )
+
+
+def _validate_attempt_record(success_marker: str, attempt: dict) -> None:
+    """Fail closed on forged/incomplete attempt custody."""
+    base_marker, separator, target = success_marker.rpartition(":")
+    source_assets = attempt.get("source_assets")
+    required_keys = {
+        "schema_version", "status", "created_at", "success_marker",
+        "inflight_marker", "target", "delivery_media", "source_assets",
+    }
+    allowed_keys = required_keys | {"confirmed_at", "failed_at", "resolved_at"}
+    if (
+        not required_keys.issubset(attempt)
+        or not set(attempt).issubset(allowed_keys)
+        or not separator
+        or target not in KNOWN_PLATFORMS
+        or attempt.get("schema_version") != 1
+        or attempt.get("success_marker") != success_marker
+        or attempt.get("inflight_marker") != f"{success_marker}:inflight"
+        or attempt.get("target") != target
+        or attempt.get("status") not in {
+            "attempting", "cli_confirmed", "failed", "resolved_delivered", "resolved_retry",
+        }
+        or not isinstance(attempt.get("created_at"), str)
+        or not _valid_asset_record(attempt.get("delivery_media"))
+        or not isinstance(source_assets, list)
+        or not source_assets
+        or not all(_valid_asset_record(asset) for asset in source_assets)
+    ):
+        raise RuntimeError(f"malformed frozen attempt journal for {success_marker}")
+
+    paths = [Path(asset["path"]) for asset in source_assets]
+    if len(set(paths)) != len(paths) or len({path.parent for path in paths}) != 1:
+        raise RuntimeError(f"inconsistent frozen attempt journal for {success_marker}")
+    names = [path.name for path in paths]
+    if base_marker.startswith("hermes:"):
+        expected = base_marker.removeprefix("hermes:")
+        valid_sources = names == [expected] and expected.endswith(".mp3")
+    elif base_marker.startswith("claude:"):
+        stem = base_marker.removeprefix("claude:")
+        valid_sources = (
+            names.count(f"{stem}.txt") == 1
+            and any(
+                name == f"{stem}.mp3" or re.fullmatch(re.escape(stem) + r"-c\d+\.mp3", name)
+                for name in names
+            )
+            and all(
+                name == f"{stem}.txt"
+                or name == f"{stem}.mp3"
+                or re.fullmatch(re.escape(stem) + r"-c\d+\.mp3", name)
+                for name in names
+            )
+        )
+    else:
+        valid_sources = False
+    if not valid_sources or Path(attempt["delivery_media"]["path"]).suffix not in {".mp3", ".ogg"}:
+        raise RuntimeError(f"inconsistent frozen attempt journal for {success_marker}")
+
+
+def _attempt_custody(attempt: dict) -> dict:
+    return {
+        key: attempt.get(key)
+        for key in (
+            "schema_version", "created_at", "success_marker", "inflight_marker",
+            "target", "delivery_media", "source_assets",
+        )
+    }
+
+
 def _asset_content_matches(record: dict) -> bool:
     path = Path(record["path"])
     try:
@@ -769,6 +854,9 @@ def resolve_indeterminate_delivery(
             raise ValueError("unsupported indeterminate-resolution receipt status")
         target = existing["target"]
         attempt = existing["attempt"]
+        _validate_attempt_record(success_marker, attempt)
+        if not journalled_attempt or _attempt_custody(journalled_attempt) != _attempt_custody(attempt):
+            raise RuntimeError("attempt receipt no longer matches the frozen attempt journal")
     else:
         if (
             not isinstance(journalled_attempt, dict)
@@ -780,6 +868,7 @@ def resolve_indeterminate_delivery(
         ):
             raise ValueError("no valid frozen attempt journal for marker")
         attempt = journalled_attempt
+        _validate_attempt_record(success_marker, attempt)
         target = attempt["target"]
         if target not in KNOWN_PLATFORMS:
             raise ValueError("attempt journal has an invalid target")

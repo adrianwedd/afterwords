@@ -485,6 +485,61 @@ def test_indeterminate_resolution_refuses_unjournalled_claude_transcript_only(tm
         tfs.resolve_indeterminate_delivery(success, "delivered", tmp_path / "receipt.json")
 
 
+def test_indeterminate_resolution_refuses_journalled_claude_transcript_only(tmp_path, monkeypatch):
+    claude_dir = tmp_path / "claude"
+    claude_dir.mkdir()
+    transcript = claude_dir / "empty.txt"
+    transcript.write_text("no audio")
+    delivery = tmp_path / "cache" / "empty.mp3"
+    delivery.parent.mkdir()
+    delivery.write_bytes(b"claimed delivery")
+    seen_file = tmp_path / "seen.json"
+    success = "claude:empty:discord"
+    inflight = f"{success}:inflight"
+    seen_file.write_text(json.dumps([inflight]))
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    attempt = {
+        "schema_version": 1,
+        "status": "attempting",
+        "created_at": "2026-11-23T00:00:00+00:00",
+        "success_marker": success,
+        "inflight_marker": inflight,
+        "target": "discord",
+        "delivery_media": tfs._asset_record(delivery),
+        "source_assets": [tfs._asset_record(transcript)],
+    }
+    tfs._attempts_file().write_text(json.dumps({success: attempt}))
+    with pytest.raises(RuntimeError, match="inconsistent frozen attempt journal"):
+        tfs.resolve_indeterminate_delivery(success, "delivered", tmp_path / "receipt.json")
+
+
+def test_indeterminate_resolution_refuses_invalid_asset_hash_schema(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    media = hermes_dir / "bad.mp3"
+    media.write_bytes(b"audio")
+    seen_file = tmp_path / "seen.json"
+    success = "hermes:bad.mp3:discord"
+    inflight = f"{success}:inflight"
+    seen_file.write_text(json.dumps([inflight]))
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    asset = tfs._asset_record(media)
+    asset["sha256"] = "not-a-sha256"
+    attempt = {
+        "schema_version": 1,
+        "status": "attempting",
+        "created_at": "2026-11-23T00:00:00+00:00",
+        "success_marker": success,
+        "inflight_marker": inflight,
+        "target": "discord",
+        "delivery_media": asset,
+        "source_assets": [asset],
+    }
+    tfs._attempts_file().write_text(json.dumps({success: attempt}))
+    with pytest.raises(RuntimeError, match="malformed frozen attempt journal"):
+        tfs.resolve_indeterminate_delivery(success, "delivered", tmp_path / "receipt.json")
+
+
 def test_malformed_attempt_journal_blocks_delivery_instead_of_resending(tmp_path, monkeypatch):
     hermes_dir = tmp_path / "hermes"
     hermes_dir.mkdir()
