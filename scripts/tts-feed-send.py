@@ -20,6 +20,8 @@ import os
 import subprocess
 import sys
 import re
+import tempfile
+import time
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -36,6 +38,7 @@ WATCH_DIRS = [
 
 # Only these platforms may ever be targeted by the watcher.
 KNOWN_PLATFORMS = ("telegram", "discord")
+BACKLOG_QUIESCENCE_SECONDS = 300
 
 
 def _parse_send_to_tokens(raw: str) -> set:
@@ -119,19 +122,40 @@ def acquire_lock() -> int:
     return fd
 
 
-def save_seen(seen: set) -> None:
+def _fsync_directory(path: Path) -> None:
+    """Make a completed create/replace durable across a host crash."""
+    fd = os.open(path, os.O_RDONLY)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def save_seen(seen: set, *, remove: set | None = None) -> None:
     SEEN_FILE.parent.mkdir(parents=True, exist_ok=True)
     # Read-merge-write: union with whatever is on disk right now so a marker
     # the hook pre-seeded during this pass survives our write (no clobber).
-    merged = set(seen) | load_seen()
+    merged = (set(seen) | load_seen()) - set(remove or ())
     # Atomic swap: write to a temp file in the SAME dir, then os.replace() so a
     # crash mid-write can never truncate the live tts-feed-seen.json.
-    tmp = SEEN_FILE.with_suffix(SEEN_FILE.suffix + ".tmp")
-    tmp.write_text(json.dumps(sorted(merged), indent=2))
-    os.replace(tmp, SEEN_FILE)
+    fd, tmp_name = tempfile.mkstemp(
+        prefix=f".{SEEN_FILE.name}.", suffix=".tmp", dir=SEEN_FILE.parent,
+    )
+    tmp = Path(tmp_name)
+    try:
+        with os.fdopen(fd, "w") as handle:
+            json.dump(sorted(merged), handle, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp, SEEN_FILE)
+        _fsync_directory(SEEN_FILE.parent)
+    finally:
+        tmp.unlink(missing_ok=True)
 
 
 def to_ogg(mp3_path: Path) -> Path | None:
+    AUDIO_CACHE.mkdir(parents=True, exist_ok=True)
     ogg_path = AUDIO_CACHE / f"{mp3_path.stem}.ogg"
     if ogg_path.exists():
         return ogg_path
@@ -153,6 +177,7 @@ def copy_to_cache(mp3_path: Path) -> Path:
 
 def merge_chunks(base_stem: str, archive_dir: Path) -> Path | None:
     """Merge chunked MP3 files (base-c1.mp3, base-c2.mp3, ...) into one file."""
+    AUDIO_CACHE.mkdir(parents=True, exist_ok=True)
     chunks = sorted(archive_dir.glob(f"{base_stem}-c[0-9]*.mp3"))
     if not chunks:
         return None
@@ -188,9 +213,19 @@ def merge_chunks(base_stem: str, archive_dir: Path) -> Path | None:
     return None
 
 
-def send_media(target: str, file_path: Path) -> bool:
+def send_media(target: str, file_path: Path) -> bool | None:
+    """Return True/False for confirmed outcomes, None when outcome is unknown."""
     cmd = ["hermes", "send", "-t", target, f"MEDIA:{file_path}"]
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+    except subprocess.TimeoutExpired:
+        # The remote service may have accepted the message before the local CLI
+        # timed out. Never turn that ambiguity into an automatic duplicate.
+        print(
+            f"  [UNKNOWN] hermes send {target} timed out; holding for reconciliation",
+            file=sys.stderr,
+        )
+        return None
     if result.returncode != 0:
         print(f"  [ERROR] hermes send {target}: {result.stderr.strip()}", file=sys.stderr)
         return False
@@ -211,19 +246,59 @@ def parse_claude_stem(name: str) -> str | None:
     return stem
 
 
-def _deliver(merged: Path, send_to: set) -> set:
-    """Send to each requested platform and return only confirmed successes."""
+def _deliver(
+    merged: Path,
+    send_to: set,
+    marker: str,
+    seen: set,
+    *,
+    persist: bool,
+) -> set:
+    """Deliver targets with a durable per-target crash boundary.
+
+    Persist an in-flight marker before egress and a success marker immediately
+    after confirmation. Recovered in-flight attempts are ambiguous and held for
+    reconciliation rather than blindly retried without a remote idempotency key.
+    """
     delivered = set()
-    if "discord" in send_to and send_media("discord", merged):
-        delivered.add("discord")
-    if "telegram" in send_to:
-        ogg = to_ogg(merged)
-        if send_media("telegram", ogg if ogg else merged):
-            delivered.add("telegram")
+    for target in ("discord", "telegram"):
+        if target not in send_to:
+            continue
+        success_marker = f"{marker}:{target}"
+        inflight_marker = f"{success_marker}:inflight"
+        if success_marker in seen:
+            continue
+        if inflight_marker in seen:
+            print(
+                f"  [hold] {marker} -> {target} has an indeterminate prior attempt; "
+                "reconcile before retrying",
+                file=sys.stderr,
+            )
+            continue
+
+        seen.add(inflight_marker)
+        if persist:
+            save_seen(seen)
+
+        media = merged
+        if target == "telegram":
+            ogg = to_ogg(merged)
+            media = ogg if ogg else merged
+        outcome = send_media(target, media)
+        if outcome is True:
+            delivered.add(target)
+            seen.add(success_marker)
+            if persist:
+                save_seen(seen)
+        elif outcome is False:
+            seen.discard(inflight_marker)
+            if persist:
+                save_seen(seen, remove={inflight_marker})
+        # None deliberately retains the durable in-flight marker.
     return delivered
 
 
-def process_new_files(seen: set, dry_run: bool = False) -> set:
+def process_new_files(seen: set, dry_run: bool = False, *, persist: bool = False) -> set:
     new_seen = set(seen)
     sent_any = False
     send_to = resolve_send_to()
@@ -281,8 +356,9 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
                         continue
 
                 print(f"  [{source}] {base_stem} -> {'+'.join(sorted(pending))}")
-                delivered = _deliver(merged, pending)
-                new_seen.update(f"{marker}:{target}" for target in delivered)
+                delivered = _deliver(
+                    merged, pending, marker, new_seen, persist=persist,
+                )
                 if all(f"{marker}:{target}" in new_seen for target in send_to):
                     new_seen.add(marker)
                 sent_any = sent_any or bool(delivered)
@@ -320,8 +396,9 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
 
                 print(f"  [{source}] {name} -> {'+'.join(sorted(pending))}")
                 cached = copy_to_cache(mp3_file)
-                delivered = _deliver(cached, pending)
-                new_seen.update(f"{marker}:{target}" for target in delivered)
+                delivered = _deliver(
+                    cached, pending, marker, new_seen, persist=persist,
+                )
                 if all(f"{marker}:{target}" in new_seen for target in send_to):
                     new_seen.add(name)
                 sent_any = sent_any or bool(delivered)
@@ -332,7 +409,74 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
     return new_seen
 
 
-def discard_current_backlog(seen: set, receipt_path: Path) -> dict:
+def _asset_record(path: Path) -> dict:
+    stat = path.stat()
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return {
+        "path": str(path),
+        "size": stat.st_size,
+        "mtime_ns": stat.st_mtime_ns,
+        "sha256": digest.hexdigest(),
+    }
+
+
+def _asset_content_matches(record: dict) -> bool:
+    path = Path(record["path"])
+    try:
+        current = _asset_record(path)
+    except OSError:
+        return False
+    return current["size"] == record["size"] and current["sha256"] == record["sha256"]
+
+
+def _item_assets_unchanged(item: dict) -> bool:
+    """Re-enumerate as well as re-hash: added/removed chunks invalidate a snapshot."""
+    records = item.get("assets", [])
+    if not records:
+        return False
+    expected = {Path(record["path"]) for record in records}
+    if item.get("source") == "claude":
+        archive_dir = next(iter(expected)).parent
+        stem = item["item"]
+        actual = {archive_dir / f"{stem}.txt"}
+        actual.update(archive_dir.glob(f"{stem}-c[0-9]*.mp3"))
+        single = archive_dir / f"{stem}.mp3"
+        if single.is_file():
+            actual.add(single)
+    else:
+        actual = expected
+    return actual == expected and all(
+        _asset_record(Path(record["path"])) == record for record in records
+    )
+
+
+def _replace_receipt(receipt_path: Path, receipt: dict) -> None:
+    fd, complete_name = tempfile.mkstemp(
+        prefix=f".{receipt_path.name}.", suffix=".complete", dir=receipt_path.parent,
+    )
+    complete_path = Path(complete_name)
+    try:
+        os.fchmod(fd, 0o600)
+        with os.fdopen(fd, "w") as handle:
+            json.dump(receipt, handle, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(complete_path, receipt_path)
+        _fsync_directory(receipt_path.parent)
+    finally:
+        complete_path.unlink(missing_ok=True)
+
+
+def discard_current_backlog(
+    seen: set,
+    receipt_path: Path,
+    *,
+    quiescence_seconds: int = BACKLOG_QUIESCENCE_SECONDS,
+) -> dict:
     """Mark the complete backlog seen without sending or assembling audio.
 
     This is an explicit recovery operation for a long-disabled scheduler, not a
@@ -342,8 +486,13 @@ def discard_current_backlog(seen: set, receipt_path: Path) -> dict:
     """
     if receipt_path.exists():
         raise FileExistsError(f"receipt already exists: {receipt_path}")
+    if quiescence_seconds < 0:
+        raise ValueError("quiescence_seconds must be non-negative")
     before_bytes = SEEN_FILE.read_bytes() if SEEN_FILE.exists() else b""
+    cutoff_ns = time.time_ns()
+    settled_before_ns = cutoff_ns - quiescence_seconds * 1_000_000_000
     discarded = []
+    deferred = []
     updated = set(seen)
     for archive_dir, source in WATCH_DIRS:
         if not archive_dir.exists():
@@ -359,15 +508,34 @@ def discard_current_backlog(seen: set, receipt_path: Path) -> dict:
                     or (archive_dir / f"{stem}.mp3").is_file()
                 )
                 if has_audio:
+                    assets = [txt_file]
+                    assets.extend(sorted(archive_dir.glob(f"{stem}-c[0-9]*.mp3")))
+                    single = archive_dir / f"{stem}.mp3"
+                    if single.is_file():
+                        assets.append(single)
+                    records = [_asset_record(path) for path in assets]
+                    if any(row["mtime_ns"] > settled_before_ns for row in records):
+                        deferred.append({"source": source, "item": stem, "reason": "not_quiescent"})
+                        continue
                     updated.add(marker)
-                    discarded.append({"source": source, "item": stem, "marker": marker})
+                    discarded.append({
+                        "source": source, "item": stem, "marker": marker,
+                        "assets": records,
+                    })
         else:
             for mp3_file in sorted(archive_dir.glob("*.mp3")):
                 if re.search(r"-c\d+\.", mp3_file.name) or mp3_file.name in updated:
                     continue
+                record = _asset_record(mp3_file)
+                if record["mtime_ns"] > settled_before_ns:
+                    deferred.append({
+                        "source": source, "item": mp3_file.name, "reason": "not_quiescent",
+                    })
+                    continue
                 updated.add(mp3_file.name)
                 discarded.append({
                     "source": source, "item": mp3_file.name, "marker": mp3_file.name,
+                    "assets": [record],
                 })
 
     receipt = {
@@ -375,10 +543,14 @@ def discard_current_backlog(seen: set, receipt_path: Path) -> dict:
         "status": "prepared",
         "action": "discard_current_backlog_as_stale_without_delivery",
         "created_at": datetime.now(timezone.utc).isoformat(),
+        "snapshot_cutoff_ns": cutoff_ns,
+        "quiescence_seconds": quiescence_seconds,
         "external_messages_sent": 0,
         "before_seen_sha256": hashlib.sha256(before_bytes).hexdigest(),
         "discarded_count": len(discarded),
         "discarded": discarded,
+        "deferred": deferred,
+        "recovery": "Use --recover-backlog-disposition with this receipt; original assets must still match their recorded SHA-256 values.",
     }
     receipt_path.parent.mkdir(parents=True, exist_ok=True)
     fd = os.open(receipt_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
@@ -390,16 +562,66 @@ def discard_current_backlog(seen: set, receipt_path: Path) -> dict:
         handle.write("\n")
         handle.flush()
         os.fsync(handle.fileno())
-        save_seen(updated)
-        after_bytes = SEEN_FILE.read_bytes()
-        receipt["status"] = "complete"
-        receipt["after_seen_sha256"] = hashlib.sha256(after_bytes).hexdigest()
-        handle.seek(0)
-        handle.truncate()
-        json.dump(receipt, handle, indent=2)
-        handle.write("\n")
-        handle.flush()
-        os.fsync(handle.fileno())
+    _fsync_directory(receipt_path.parent)
+
+    # Freeze the snapshot before changing delivery state. A producer that
+    # modifies any selected transcript/audio object causes an explicit abort.
+    if not all(_item_assets_unchanged(item) for item in discarded):
+        raise RuntimeError("backlog asset changed after snapshot; seen state not modified")
+
+    save_seen(updated)
+    after_bytes = SEEN_FILE.read_bytes()
+    receipt["status"] = "complete"
+    receipt["after_seen_sha256"] = hashlib.sha256(after_bytes).hexdigest()
+
+    # Never truncate the only prepared receipt after mutating seen-state.
+    # Failure while writing this separately-fsynced completion leaves the
+    # durable `prepared` receipt and exact marker inventory intact.
+    _replace_receipt(receipt_path, receipt)
+    return receipt
+
+
+def recover_backlog_disposition(receipt_path: Path) -> dict:
+    """Mechanically reverse only the markers added by a complete disposition."""
+    receipt = json.loads(receipt_path.read_text())
+    if receipt.get("action") != "discard_current_backlog_as_stale_without_delivery":
+        raise ValueError("receipt is not a backlog-disposition receipt")
+    if receipt.get("status") not in {"prepared", "complete", "recovered"}:
+        raise ValueError("unsupported backlog-disposition receipt status")
+    if receipt.get("status") == "recovered":
+        return receipt
+    mismatched = [
+        asset["path"]
+        for item in receipt.get("discarded", [])
+        for asset in item.get("assets", [])
+        if not _asset_content_matches(asset)
+    ]
+    if mismatched:
+        raise RuntimeError(f"original backlog assets changed or are missing: {mismatched}")
+    markers = {item["marker"] for item in receipt.get("discarded", [])}
+    before_bytes = SEEN_FILE.read_bytes() if SEEN_FILE.exists() else b""
+    current = load_seen()
+    if receipt.get("status") == "prepared":
+        current_hash = hashlib.sha256(before_bytes).hexdigest()
+        if current_hash == receipt.get("before_seen_sha256"):
+            receipt["status"] = "aborted_before_seen_mutation"
+            receipt["recovered_at"] = datetime.now(timezone.utc).isoformat()
+            receipt["recovered_markers"] = []
+            _replace_receipt(receipt_path, receipt)
+            return receipt
+        if not markers.issubset(current):
+            raise RuntimeError(
+                "prepared receipt does not match either before-state or applied markers; "
+                "manual reconciliation required"
+            )
+    save_seen(current - markers, remove=markers)
+    after_bytes = SEEN_FILE.read_bytes()
+    receipt["status"] = "recovered"
+    receipt["recovered_at"] = datetime.now(timezone.utc).isoformat()
+    receipt["recovery_before_seen_sha256"] = hashlib.sha256(before_bytes).hexdigest()
+    receipt["recovery_after_seen_sha256"] = hashlib.sha256(after_bytes).hexdigest()
+    receipt["recovered_markers"] = sorted(markers)
+    _replace_receipt(receipt_path, receipt)
     return receipt
 
 
@@ -412,14 +634,24 @@ def main():
         "--discard-current-backlog", action="store_true",
         help="mark the complete current backlog stale without sending (requires --receipt)",
     )
+    parser.add_argument(
+        "--recover-backlog-disposition", action="store_true",
+        help="remove only markers added by a complete disposition receipt",
+    )
+    parser.add_argument(
+        "--quiescence-seconds", type=int, default=BACKLOG_QUIESCENCE_SECONDS,
+        help="exclude backlog assets modified within this many seconds",
+    )
     parser.add_argument("--receipt", type=Path, help="exclusive receipt for backlog discard")
     args = parser.parse_args()
-    if args.discard_current_backlog != bool(args.receipt):
-        parser.error("--discard-current-backlog and --receipt are required together")
-    if args.discard_current_backlog and args.dry_run:
-        parser.error("backlog discard and --dry-run are mutually exclusive")
+    operation_count = int(args.discard_current_backlog) + int(args.recover_backlog_disposition)
+    if operation_count > 1:
+        parser.error("backlog discard and recovery are mutually exclusive")
+    if bool(operation_count) != bool(args.receipt):
+        parser.error("a backlog discard or recovery operation and --receipt are required together")
+    if operation_count and args.dry_run:
+        parser.error("backlog operations and --dry-run are mutually exclusive")
 
-    AUDIO_CACHE.mkdir(parents=True, exist_ok=True)
     try:
         _lock_fd = acquire_lock()
     except BlockingIOError:
@@ -434,14 +666,23 @@ def main():
     print(f"Loaded {len(seen)} previously sent items")
 
     if args.discard_current_backlog:
-        receipt = discard_current_backlog(seen, args.receipt)
+        receipt = discard_current_backlog(
+            seen, args.receipt, quiescence_seconds=args.quiescence_seconds,
+        )
         print(
             f"Discarded {receipt['discarded_count']} stale backlog items without delivery; "
             f"receipt: {args.receipt}"
         )
         return
+    if args.recover_backlog_disposition:
+        receipt = recover_backlog_disposition(args.receipt)
+        print(
+            f"Recovered {len(receipt.get('recovered_markers', []))} backlog markers; "
+            f"receipt: {args.receipt}"
+        )
+        return
     
-    seen = process_new_files(seen, args.dry_run)
+    seen = process_new_files(seen, args.dry_run, persist=not args.dry_run)
     if not args.dry_run:
         save_seen(seen)
 

@@ -170,7 +170,7 @@ tts:
 
 The command provider produces a real audio artifact synchronously on every platform. On CLI it pipelines local playback as chunks arrive. Complete delivery exits zero; partial CLI artifacts are preserved with a nonzero exit, and total failure removes the output.
 
-All three paths resolve voice from `.afterwords` files using `hermes` as the agent key and acquire the shared play lock (`/tmp/afterwords-play.lock`) to coordinate with Claude/Codex/AGy workers. The native hook (`handler.py`) and command provider archive MP3 + text sidecar to `~/.hermes/tts-archive/`; the shell hook (`afterwords-post-llm.sh`) is playback-only and does not archive.
+All three paths resolve voice from `.afterwords` files using `hermes` as the agent key and acquire the shared play lock (`/tmp/afterwords-play.lock`) to coordinate with Claude/Codex/AGy workers. The native hook (`handler.py`) and command provider archive MP3 + text sidecar to `~/.hermes/tts-archive/`; the native hook publishes the sidecar only after every chunk is archived, so partial output cannot masquerade as a completed response. The shell hook (`afterwords-post-llm.sh`) is playback-only and does not archive.
 
 ```
 hermes: data

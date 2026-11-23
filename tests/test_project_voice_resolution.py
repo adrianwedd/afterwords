@@ -178,6 +178,40 @@ def test_missing_state_db_falls_through_to_pwd(tmp_path):
     assert _print_with_db(bare, None, bare) == ""
 
 
+def test_native_unknown_session_never_falls_through_to_gateway_pwd(tmp_path):
+    wrong = _write_project(tmp_path, "hermes: wrong-conversation\n")
+    db = _state_db(tmp_path)
+    env = {
+        "PATH": os.environ["PATH"],
+        "HERMES_HOME": str(tmp_path / ".hermes"),
+        "AFTERWORDS_STATE_DB": str(db),
+        "AFTERWORDS_SESSION_ID": "expired-or-unknown",
+        "AFTERWORDS_TTS_CALLER": "native",
+    }
+    result = subprocess.run(
+        ["bash", str(WRAPPER), "--print"],
+        capture_output=True, text=True, env=env, cwd=str(wrong), check=True,
+    )
+    assert result.stdout.strip() == ""
+
+
+def test_native_explicit_bare_project_never_falls_through_to_gateway_pwd(tmp_path):
+    wrong = _write_project(tmp_path, "hermes: wrong-conversation\n")
+    bare = tmp_path / "bare"
+    bare.mkdir()
+    env = {
+        "PATH": os.environ["PATH"],
+        "HERMES_HOME": str(tmp_path / ".hermes"),
+        "AFTERWORDS_PROJECT_DIR": str(bare),
+        "AFTERWORDS_TTS_CALLER": "native",
+    }
+    result = subprocess.run(
+        ["bash", str(WRAPPER), "--print"],
+        capture_output=True, text=True, env=env, cwd=str(wrong), check=True,
+    )
+    assert result.stdout.strip() == ""
+
+
 def test_home_afterwords_is_never_treated_as_a_project(tmp_path):
     """~/.afterwords is the global fallback; it must not shadow the session."""
     bare = tmp_path / "bare"

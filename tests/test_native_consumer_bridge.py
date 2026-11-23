@@ -5,7 +5,9 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import threading
 import types
+from contextvars import ContextVar
 from concurrent.futures import ThreadPoolExecutor
 
 import pytest
@@ -46,6 +48,66 @@ def test_native_command_exports_task_local_session_identity(monkeypatch):
     assert row['AFTERWORDS_SESSION_ID'] == 'session-exact'
     assert row['AFTERWORDS_PROJECT_DIR'] == '/project/exact'
     assert row['AFTERWORDS_TTS_CALLER'] == 'native'
+
+
+def test_concurrent_task_local_identities_route_through_wrapper_without_bleed(tmp_path, monkeypatch):
+    """Exercise ContextVar identity -> bridge env -> project voice wrapper concurrently."""
+    session_var = ContextVar("test_hermes_session", default="")
+    cwd_var = ContextVar("test_hermes_cwd", default="")
+    gateway = types.ModuleType("gateway")
+    session_context = types.ModuleType("gateway.session_context")
+    session_context.get_session_env = lambda name, default="": (
+        session_var.get() if name == "HERMES_SESSION_ID" else default
+    )
+    agent = types.ModuleType("agent")
+    runtime_cwd = types.ModuleType("agent.runtime_cwd")
+    runtime_cwd.scoped_session_cwd = cwd_var.get
+    monkeypatch.setitem(sys.modules, "gateway", gateway)
+    monkeypatch.setitem(sys.modules, "gateway.session_context", session_context)
+    monkeypatch.setitem(sys.modules, "agent", agent)
+    monkeypatch.setitem(sys.modules, "agent.runtime_cwd", runtime_cwd)
+
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+    gateway_cwd = tmp_path / "gateway"
+    for path, voice in ((first, "worf"), (second, "galadriel"), (gateway_cwd, "wrong")):
+        path.mkdir()
+        (path / ".afterwords").write_text(f"hermes: {voice}\n")
+    wrapper = REPO / "scripts" / "afterwords-project-voice.sh"
+    barrier = threading.Barrier(2)
+
+    def resolve(session_id, project):
+        session_token = session_var.set(session_id)
+        cwd_token = cwd_var.set(str(project))
+        try:
+            barrier.wait(timeout=5)
+            exported = bridge.native_synthesis(bridge.command_environment)
+            result = subprocess.run(
+                ["bash", str(wrapper), "--print"],
+                cwd=gateway_cwd,
+                env={
+                    "PATH": os.environ["PATH"],
+                    "HOME": str(tmp_path),
+                    "HERMES_HOME": str(tmp_path / ".hermes"),
+                    **exported,
+                },
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            return exported, result.stdout.strip()
+        finally:
+            cwd_var.reset(cwd_token)
+            session_var.reset(session_token)
+
+    with ThreadPoolExecutor(2) as pool:
+        rows = list(pool.map(lambda args: resolve(*args), [
+            ("session-first", first), ("session-second", second),
+        ]))
+
+    assert rows[0][0]["AFTERWORDS_SESSION_ID"] == "session-first"
+    assert rows[1][0]["AFTERWORDS_SESSION_ID"] == "session-second"
+    assert [row[1] for row in rows] == ["worf", "galadriel"]
 
 
 def test_consumer_releases_lease_on_playback_error(tmp_path):

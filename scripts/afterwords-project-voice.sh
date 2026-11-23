@@ -72,16 +72,27 @@ session_cwd() {
 # First project directory that actually carries a .afterwords file.
 project_dir() {
     local candidate="${AFTERWORDS_PROJECT_DIR:-}"
-    if [ -n "$candidate" ] && [ -f "$candidate/.afterwords" ]; then
-        printf '%s' "$candidate"
+    if [ -n "$candidate" ]; then
+        if [ -f "$candidate/.afterwords" ]; then
+            printf '%s' "$candidate"
+        fi
+        # An explicit invocation-scoped project is authoritative even when it
+        # has no mapping. Falling through could borrow the gateway process cwd.
         return 0
     fi
-    candidate="$(session_cwd)"
-    if [ -n "$candidate" ] && [ -f "$candidate/.afterwords" ]; then
-        printf '%s' "$candidate"
+
+    if [ -n "${AFTERWORDS_SESSION_ID:-}" ]; then
+        candidate="$(session_cwd)"
+        if [ -n "$candidate" ] && [ -f "$candidate/.afterwords" ]; then
+            printf '%s' "$candidate"
+        fi
+        # An expired or unknown exact session must retain CONFIG_VOICE.
         return 0
     fi
-    if [ -f "$PWD/.afterwords" ]; then
+
+    # $PWD is identity only for a direct/manual invocation. Native calls run
+    # inside a long-lived gateway whose cwd can belong to another project.
+    if [ "${AFTERWORDS_TTS_CALLER:-}" != "native" ] && [ -f "$PWD/.afterwords" ]; then
         printf '%s' "$PWD"
         return 0
     fi

@@ -77,6 +77,8 @@ HERMES_AGENT = "hermes"
 # Global fallback config (read from home dir)
 GLOBAL_AFTERWORDS = Path.home() / ".afterwords"
 MUTE_FILE = Path(os.environ.get("AFTERWORDS_MUTE_FILE", "/tmp/afterwords-muted"))
+PLAY_LOCK = Path(os.environ.get("AFTERWORDS_PLAY_LOCK", "/tmp/afterwords-play.lock"))
+PLAY_PID = Path(os.environ.get("AFTERWORDS_PLAY_PID", "/tmp/afterwords-play.pid"))
 
 # Hermes' durable session record.  Gateway hooks carry the exact session id;
 # this database is used only to map that identity to its declared cwd.  Never
@@ -484,8 +486,8 @@ async def _speak_chunked(chunks: list[str], voice: str | None = None) -> None:
     Acquires the same /tmp/afterwords-play.lock as Claude/Codex/AGy workers
     so we don't overlap with other agents' audio playback.
     """
-    lock_dir = Path("/tmp/afterwords-play.lock")
-    pid_file = Path("/tmp/afterwords-play.pid")
+    lock_dir = PLAY_LOCK
+    pid_file = PLAY_PID
     waited = 0
     while True:
         try:
@@ -527,22 +529,18 @@ async def _speak_chunked(chunks: list[str], voice: str | None = None) -> None:
 
 
 async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, session_pool=None) -> None:
-    """Inner implementation: synthesize chunk N+1 while playing chunk N."""
+    """Synthesize/play all chunks; publish completion only after full archival."""
     tag = uuid.uuid4().hex[:8]
     archive_dir = Path.home() / ".hermes" / "tts-archive"
     stamp = f"{voice or 'default'}-{_ts()}"
     archive_base = archive_dir / stamp
-    # Write text sidecar (once)
+    archive_tasks: list[asyncio.Task] = []
+    synth_tasks: set[asyncio.Task] = set()
+    complete = True
+    archived = 0
     try:
         archive_dir.mkdir(parents=True, exist_ok=True)
-        archive_base.with_suffix(".txt").write_text("\n".join(chunks))
-    except OSError:
-        pass  # archiving is best-effort
-
-    archive_tasks: list[asyncio.Task] = []
-    try:
         async with aiohttp.ClientSession() as session:
-            prev_wav: Path | None = None
             prev_task: asyncio.Task | None = None
 
             for i, chunk in enumerate(chunks):
@@ -554,10 +552,12 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
 
                 # Start synthesizing current chunk
                 curr_task = asyncio.create_task(_fetch_audio(session, url))
+                synth_tasks.add(curr_task)
 
                 # Wait for previous synthesis + play it
                 if prev_task is not None:
                     wav_bytes = await prev_task
+                    synth_tasks.discard(prev_task)
                     prev_task = None
 
                     if wav_bytes and len(wav_bytes) > 1000:
@@ -571,7 +571,11 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
                         # event loop, and afplay blocks until the audio ends, so
                         # an inline call freezes the whole gateway (keepalive
                         # pongs included) for the length of the clip.
-                        await _play(wav_path)
+                        try:
+                            await _play(wav_path)
+                        except asyncio.CancelledError:
+                            wav_path.unlink(missing_ok=True)
+                            raise
 
                         # Keep a reference: an un-referenced task can be garbage
                         # collected mid-flight, dropping the archived MP3. Gathered
@@ -586,32 +590,70 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
                                 )
                             )
                         )
+                    else:
+                        complete = False
 
                 prev_task = curr_task
 
             # Play the last chunk
             if prev_task is not None:
                 wav_bytes = await prev_task
+                synth_tasks.discard(prev_task)
                 if wav_bytes and len(wav_bytes) > 1000:
                     wav_path = Path(f"/tmp/hermes-hook-tts-{tag}-last.wav")
                     wav_path.write_bytes(wav_bytes)
 
-                    await _play(wav_path)
+                    try:
+                        await _play(wav_path)
+                    except asyncio.CancelledError:
+                        wav_path.unlink(missing_ok=True)
+                        raise
 
-                    await asyncio.to_thread(
+                    if await asyncio.to_thread(
                         _archive_wav_and_cleanup,
                         wav_path,
                         f"{stamp}-c{len(chunks)-1}.mp3",
                         archive_dir,
-                    )
+                    ):
+                        archived += 1
+                    else:
+                        complete = False
+                else:
+                    complete = False
 
+    except asyncio.CancelledError:
+        raise
     except Exception as e:
         # Fail silently — TTS is a nice-to-have
+        complete = False
         log.warning("TTS playback error: %s", e)
     finally:
+        # Cancellation or an exception must not strand an in-flight request on
+        # the single-GPU server after this turn has relinquished ownership.
+        for task in synth_tasks:
+            task.cancel()
+        if synth_tasks:
+            await asyncio.gather(*synth_tasks, return_exceptions=True)
         # Let in-flight archive jobs finish before the loop can tear down.
         if archive_tasks:
-            await asyncio.gather(*archive_tasks, return_exceptions=True)
+            results = await asyncio.gather(*archive_tasks, return_exceptions=True)
+            archived += sum(result is True for result in results)
+            if any(result is not True for result in results):
+                complete = False
+
+    # The sidecar is the completion marker consumed by downstream archive
+    # tooling. Publish it atomically only when every requested chunk has a
+    # durable audio artifact; partial chunks remain evidence but are never
+    # represented as a complete reply.
+    if complete and archived == len(chunks):
+        sidecar = archive_base.with_suffix(".txt")
+        tmp = sidecar.with_suffix(".txt.tmp")
+        try:
+            tmp.write_text("\n".join(chunks))
+            os.replace(tmp, sidecar)
+        except OSError as exc:
+            tmp.unlink(missing_ok=True)
+            log.warning("TTS completion sidecar failed: %s", exc)
 
 
 def _ts() -> str:
@@ -630,40 +672,53 @@ async def _play(wav_path: Path) -> None:
     timeout drops a perfectly healthy connection with
     ``sent 1011 (internal error) keepalive ping timeout`` -- and the subagent
     monitor, status polling and every other RPC stall behind the audio.
-    Awaiting it in a worker thread keeps sequential chunk order while the loop
-    stays schedulable.
+    An owned asynchronous subprocess keeps the loop schedulable and lets
+    cancellation stop playback before the shared lease is released.
     """
     # Keep the policy next to the side effect.  Besides making every caller
     # safe, this closes the race where mute could be toggled after a caller's
     # check but before afplay starts.
     if not MUTE_FILE.exists():
+        process = None
         try:
-            await asyncio.to_thread(
-                subprocess.call,
-                ["afplay", str(wav_path)],
+            process = await asyncio.create_subprocess_exec(
+                "afplay", str(wav_path),
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
             )
+            await process.wait()
+        except asyncio.CancelledError:
+            if process is not None and process.returncode is None:
+                process.terminate()
+                try:
+                    await asyncio.wait_for(process.wait(), timeout=2)
+                except asyncio.TimeoutError:
+                    process.kill()
+                    await process.wait()
+            raise
         except Exception as exc:  # playback is a nice-to-have; never fail the turn
             log.warning("TTS playback failed: %s", exc)
 
 
-def _archive_wav_and_cleanup(wav_path: Path, mp3_name: str, archive_dir: Path) -> None:
-    _archive_wav(wav_path, mp3_name, archive_dir)
-    wav_path.unlink(missing_ok=True)
+def _archive_wav_and_cleanup(wav_path: Path, mp3_name: str, archive_dir: Path) -> bool:
+    try:
+        return _archive_wav(wav_path, mp3_name, archive_dir)
+    finally:
+        wav_path.unlink(missing_ok=True)
 
 
-def _archive_wav(wav_path: Path, mp3_name: str, archive_dir: Path) -> None:
+def _archive_wav(wav_path: Path, mp3_name: str, archive_dir: Path) -> bool:
     """Convert WAV to MP3 in archive dir. Best-effort — never raises."""
     try:
         mp3_path = archive_dir / mp3_name
-        subprocess.call(
+        result = subprocess.call(
             ["lame", "--quiet", "-V", "2", str(wav_path), str(mp3_path)],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )
+        return result == 0 and mp3_path.is_file() and mp3_path.stat().st_size > 0
     except Exception:
-        pass
+        return False
 
 
 async def _fetch_audio(session, url: str) -> bytes | None:

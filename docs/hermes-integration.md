@@ -290,6 +290,14 @@ The inbound inline path archives to `~/.hermes/tts-archive`, which the watcher a
 
 > `--dry-run` previews delivery without sending and without mutating `tts-feed-seen.json`. When `send_to` is empty, the watcher still marks files seen (so they don't accumulate) and prints `[skip] <name> (no send_to configured)`.
 
+The feed persists a per-target in-flight marker before egress and a success
+marker immediately after confirmed CLI acceptance. A recovered in-flight marker
+without success is held for operator reconciliation rather than automatically
+retried: the remote service may have accepted a send whose local command timed
+out. Backlog disposition is separately explicit, quiescence-gated, byte-bound
+to original archive objects and reversible from its private receipt; it never
+deletes or rewrites the source audio or transcript.
+
 ---
 
 ## 7. File Locations

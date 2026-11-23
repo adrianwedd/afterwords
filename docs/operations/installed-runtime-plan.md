@@ -3,9 +3,11 @@
 Status: prepared for review; **not installed**. Inspected and staged on
 23 November 2026.
 
-The private staged candidate is under
+The private staging root is under
 `~/.local/state/afterwords-reconciliation-20261123/`. It contains no credentials
-or private voice recordings.
+or private voice recordings. Its handler copy remains the pre-review candidate;
+the final reviewed handler must be regenerated into a fresh named staging
+directory rather than silently replacing that preserved variant.
 
 ## Hermes handler
 
@@ -15,15 +17,21 @@ Installed before hash:
 cd694fdc40493a9dc29c0f75805a9a16f803041818aa7e591a7f3e036317fcbc
 ```
 
-Staged candidate hash, including the stamped repository hint:
+Final source-derived candidate hash, including the stamped repository hint:
 
 ```text
-ee38b39e76540e0d85a12e11abd2e84c1383271a82f76e10158e1c018ab550c9
+3a438669cabb16a9afc892a3ca1fe69f4f24ac65bdbd86d8d5503f0dd6c11469
 ```
 
+The preserved pre-review staged handler is
+`ee38b39e76540e0d85a12e11abd2e84c1383271a82f76e10158e1c018ab550c9`;
+it is superseded evidence, not the install candidate.
+
 The candidate differs intentionally: exact-session project routing, playback
-off the gateway event loop, and mute enforcement beside the `afplay` side
-effect. Installation would replace only
+off the gateway event loop, cancellation that terminates and waits for owned
+`afplay` before releasing the lease, mute enforcement beside the side effect,
+and a completion sidecar published only after every chunk is archived.
+Installation would replace only
 `~/.hermes/hooks/afterwords-tts/{handler.py,HOOK.yaml}` using the existing
 installer. The gateway must remain unchanged until an idle restart is approved.
 
@@ -91,13 +99,25 @@ approval:
 2. Record the current seen-state hash and enumerate unseen items without sending.
 3. Under the feed lock, disposition the recorded stale set without delivery:
    `scripts/tts-feed-send.py --discard-current-backlog --receipt PRIVATE_PATH`.
-   Read back the mode-0600 receipt and seen-state hash before continuing.
+   The default five-minute quiescence window excludes active responses. The
+   mode-0600 receipt freezes the cutoff and records the path, size, mtime and
+   SHA-256 of every original transcript/audio object before the atomic
+   seen-state change. Read back the receipt and seen-state hash before
+   continuing. If the disposition must be reversed while those originals still
+   match, run `scripts/tts-feed-send.py --recover-backlog-disposition --receipt
+   PRIVATE_PATH`; this removes only the markers introduced by that receipt.
 4. Change only `ProgramArguments[0]`.
 5. Boot out and bootstrap the existing label once.
 6. Verify a scheduled run—not a manual invocation—has exit code zero and writes
    the configured log.
 7. Reconcile every previously named backlog item as sent, deliberately excluded,
    already seen or missing; do not infer delivery from disappearance.
+
+Each external target gets a durable in-flight marker before `hermes send` and a
+success marker immediately after confirmed CLI acceptance. A timeout is
+indeterminate: later scheduled runs hold that target instead of retrying it and
+risking a duplicate. Reconcile the remote service first; a zero CLI exit still
+does not prove remote receipt.
 
 Rollback restores the exact prior plist bytes and label. It also restores the
 broken interpreter, so rollback is for unexpected side effects, not a successful

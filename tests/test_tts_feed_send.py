@@ -246,6 +246,86 @@ def test_partial_delivery_retries_only_failed_target(tmp_path, monkeypatch):
     assert name in second
 
 
+def test_confirmed_target_is_durable_before_later_target_crashes(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "picard-20260504-000000.mp3"
+    (hermes_dir / name).write_bytes(b"\x00" * 256)
+    seen_file = tmp_path / "seen.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "telegram,discord")
+    monkeypatch.setattr(tfs, "to_ogg", lambda path: path)
+
+    calls = []
+    def crash_after_discord(target, _path):
+        calls.append(target)
+        if target == "discord":
+            return True
+        raise RuntimeError("simulated process failure before Telegram result")
+
+    monkeypatch.setattr(tfs, "send_media", crash_after_discord)
+    with pytest.raises(RuntimeError, match="simulated"):
+        tfs.process_new_files(set(), persist=True)
+
+    durable = tfs.load_seen()
+    marker = f"hermes:{name}"
+    assert f"{marker}:discord" in durable
+    assert f"{marker}:telegram:inflight" in durable
+
+    calls.clear()
+    monkeypatch.setattr(tfs, "send_media", lambda target, _path: calls.append(target) or True)
+    tfs.process_new_files(durable, persist=True)
+    assert calls == []  # confirmed Discord and indeterminate Telegram are held
+
+
+def test_confirmed_failure_clears_inflight_and_remains_retryable(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "picard-20260504-000000.mp3"
+    (hermes_dir / name).write_bytes(b"\x00" * 256)
+    seen_file = tmp_path / "seen.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    monkeypatch.setattr(tfs, "send_media", lambda *_a: False)
+
+    tfs.process_new_files(set(), persist=True)
+    marker = f"hermes:{name}:discord"
+    assert marker not in tfs.load_seen()
+    assert f"{marker}:inflight" not in tfs.load_seen()
+
+    calls = []
+    monkeypatch.setattr(tfs, "send_media", lambda target, _path: calls.append(target) or True)
+    tfs.process_new_files(tfs.load_seen(), persist=True)
+    assert calls == ["discord"]
+    assert marker in tfs.load_seen()
+
+
+def test_timeout_is_held_as_indeterminate_instead_of_retried(tmp_path, monkeypatch):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "picard-timeout.mp3"
+    (hermes_dir / name).write_bytes(b"\x00" * 256)
+    seen_file = tmp_path / "seen.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    monkeypatch.setattr(
+        tfs.subprocess, "run",
+        mock.Mock(side_effect=subprocess.TimeoutExpired(["hermes", "send"], 30)),
+    )
+
+    tfs.process_new_files(set(), persist=True)
+    marker = f"hermes:{name}:discord:inflight"
+    assert marker in tfs.load_seen()
+    tfs.process_new_files(tfs.load_seen(), persist=True)
+    assert tfs.subprocess.run.call_count == 1
+
+
 def test_discard_backlog_is_auditable_and_never_sends(tmp_path, monkeypatch):
     claude_dir = tmp_path / "claude"
     hermes_dir = tmp_path / "hermes"
@@ -263,20 +343,63 @@ def test_discard_backlog_is_auditable_and_never_sends(tmp_path, monkeypatch):
     monkeypatch.setattr(tfs, "WATCH_DIRS", [(claude_dir, "claude"), (hermes_dir, "hermes")])
     monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
     with mock.patch.object(tfs.subprocess, "run") as run_mock:
-        row = tfs.discard_current_backlog(set(), receipt)
+        row = tfs.discard_current_backlog(set(), receipt, quiescence_seconds=0)
 
     run_mock.assert_not_called()
     assert row["action"] == "discard_current_backlog_as_stale_without_delivery"
     assert row["status"] == "complete"
     assert row["external_messages_sent"] == 0
     assert row["discarded_count"] == 2
+    assert all(item["assets"] for item in row["discarded"])
+    assert all(
+        len(asset["sha256"]) == 64
+        for item in row["discarded"] for asset in item["assets"]
+    )
     assert receipt.stat().st_mode & 0o777 == 0o600
     saved = tfs.load_seen()
     assert f"claude:{stem}" in saved
     assert hermes_name in saved
     assert receipt.read_text().endswith("\n")
     with pytest.raises(FileExistsError):
-        tfs.discard_current_backlog(saved, receipt)
+        tfs.discard_current_backlog(saved, receipt, quiescence_seconds=0)
+
+
+def test_discard_finalization_failure_preserves_prepared_receipt(tmp_path, monkeypatch):
+    claude_dir = tmp_path / "claude"
+    claude_dir.mkdir()
+    stem = "worf-old"
+    (claude_dir / f"{stem}.txt").write_text("old response")
+    (claude_dir / f"{stem}-c1.mp3").write_bytes(b"a" * 256)
+    seen_file = tmp_path / "seen.json"
+    seen_file.write_text("[]")
+    receipt = tmp_path / "state" / "discard.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(claude_dir, "claude")])
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    real_dump = tfs.json.dump
+    calls = 0
+
+    def fail_complete_dump(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        if calls == 3:  # prepared receipt, seen-state, complete receipt
+            raise OSError("simulated completion write failure")
+        return real_dump(*args, **kwargs)
+
+    monkeypatch.setattr(tfs.json, "dump", fail_complete_dump)
+    with pytest.raises(OSError, match="simulated"):
+        tfs.discard_current_backlog(set(), receipt, quiescence_seconds=0)
+
+    prepared = json.loads(receipt.read_text())
+    assert prepared["status"] == "prepared"
+    assert len(prepared["discarded"]) == 1
+    assert prepared["discarded"][0]["marker"] == f"claude:{stem}"
+    assert {Path(asset["path"]).name for asset in prepared["discarded"][0]["assets"]} == {
+        f"{stem}.txt", f"{stem}-c1.mp3",
+    }
+    assert f"claude:{stem}" in tfs.load_seen()
+    recovered = tfs.recover_backlog_disposition(receipt)
+    assert recovered["status"] == "recovered"
+    assert f"claude:{stem}" not in tfs.load_seen()
 
 
 def test_discard_backlog_cli_writes_complete_receipt(tmp_path):
@@ -290,7 +413,8 @@ def test_discard_backlog_cli_writes_complete_receipt(tmp_path):
     env = {**os.environ, "HOME": str(home), "AFTERWORDS_SEND_TO": "discord,telegram"}
 
     result = subprocess.run(
-        [sys.executable, str(SCRIPT), "--discard-current-backlog", "--receipt", str(receipt)],
+        [sys.executable, str(SCRIPT), "--discard-current-backlog", "--receipt", str(receipt),
+         "--quiescence-seconds", "0"],
         env=env, capture_output=True, text=True, check=True,
     )
 
@@ -301,3 +425,63 @@ def test_discard_backlog_cli_writes_complete_receipt(tmp_path):
     assert "Discarded 1 stale backlog items without delivery" in result.stdout
     seen = set(json.loads((home / ".hermes" / "tts-feed-seen.json").read_text()))
     assert f"claude:{stem}" in seen
+
+    recovery = subprocess.run(
+        [sys.executable, str(SCRIPT), "--recover-backlog-disposition", "--receipt", str(receipt)],
+        env=env, capture_output=True, text=True, check=True,
+    )
+    assert "Recovered 1 backlog markers" in recovery.stdout
+    assert f"claude:{stem}" not in set(json.loads(
+        (home / ".hermes" / "tts-feed-seen.json").read_text()
+    ))
+    recovered = json.loads(receipt.read_text())
+    assert recovered["status"] == "recovered"
+    assert recovered["recovered_markers"] == [f"claude:{stem}"]
+
+
+def test_discard_defers_nonquiescent_in_progress_response(tmp_path, monkeypatch):
+    claude_dir = tmp_path / "claude"
+    claude_dir.mkdir()
+    stem = "still-producing"
+    (claude_dir / f"{stem}.txt").write_text("full intended reply")
+    (claude_dir / f"{stem}-c1.mp3").write_bytes(b"partial")
+    seen_file = tmp_path / "seen.json"
+    seen_file.write_text("[]")
+    receipt = tmp_path / "discard.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(claude_dir, "claude")])
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+
+    row = tfs.discard_current_backlog(set(), receipt, quiescence_seconds=300)
+    assert row["discarded_count"] == 0
+    assert row["deferred"] == [
+        {"source": "claude", "item": stem, "reason": "not_quiescent"}
+    ]
+    assert f"claude:{stem}" not in tfs.load_seen()
+
+
+def test_discard_aborts_if_snapshot_gains_a_chunk_before_seen_mutation(tmp_path, monkeypatch):
+    claude_dir = tmp_path / "claude"
+    claude_dir.mkdir()
+    stem = "changes-during-snapshot"
+    (claude_dir / f"{stem}.txt").write_text("reply")
+    (claude_dir / f"{stem}-c1.mp3").write_bytes(b"one")
+    seen_file = tmp_path / "seen.json"
+    seen_file.write_text("[]")
+    receipt = tmp_path / "discard.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(claude_dir, "claude")])
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    real_fsync_dir = tfs._fsync_directory
+    calls = 0
+
+    def inject_new_chunk(path):
+        nonlocal calls
+        calls += 1
+        real_fsync_dir(path)
+        if calls == 1:  # prepared receipt is durable; producer advances
+            (claude_dir / f"{stem}-c2.mp3").write_bytes(b"two")
+
+    monkeypatch.setattr(tfs, "_fsync_directory", inject_new_chunk)
+    with pytest.raises(RuntimeError, match="changed after snapshot"):
+        tfs.discard_current_backlog(set(), receipt, quiescence_seconds=0)
+    assert f"claude:{stem}" not in tfs.load_seen()
+    assert json.loads(receipt.read_text())["status"] == "prepared"
