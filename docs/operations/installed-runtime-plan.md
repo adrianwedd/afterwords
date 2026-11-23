@@ -89,11 +89,14 @@ approval:
 
 1. Re-read the plist hash and the venv interpreter identity.
 2. Record the current seen-state hash and enumerate unseen items without sending.
-3. Change only `ProgramArguments[0]`.
-4. Boot out and bootstrap the existing label once.
-5. Verify a scheduled run—not a manual invocation—has exit code zero and writes
+3. Under the feed lock, disposition the recorded stale set without delivery:
+   `scripts/tts-feed-send.py --discard-current-backlog --receipt PRIVATE_PATH`.
+   Read back the mode-0600 receipt and seen-state hash before continuing.
+4. Change only `ProgramArguments[0]`.
+5. Boot out and bootstrap the existing label once.
+6. Verify a scheduled run—not a manual invocation—has exit code zero and writes
    the configured log.
-6. Reconcile every previously named backlog item as sent, deliberately excluded,
+7. Reconcile every previously named backlog item as sent, deliberately excluded,
    already seen or missing; do not infer delivery from disappearance.
 
 Rollback restores the exact prior plist bytes and label. It also restores the

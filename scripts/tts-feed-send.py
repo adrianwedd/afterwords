@@ -14,12 +14,14 @@ Usage:
 from __future__ import annotations
 
 import fcntl
+import hashlib
 import json
 import os
 import subprocess
 import sys
 import re
 from pathlib import Path
+from datetime import datetime, timezone
 
 HERMES_ARCHIVE = Path.home() / ".hermes" / "tts-archive"
 CLAUDE_ARCHIVE = Path.home() / ".claude" / "tts-archive"
@@ -330,12 +332,92 @@ def process_new_files(seen: set, dry_run: bool = False) -> set:
     return new_seen
 
 
+def discard_current_backlog(seen: set, receipt_path: Path) -> dict:
+    """Mark the complete backlog seen without sending or assembling audio.
+
+    This is an explicit recovery operation for a long-disabled scheduler, not a
+    startup default. The caller already holds the feed lock. A receipt is
+    mandatory and exclusive so the disposition cannot be repeated or confused
+    with successful external delivery.
+    """
+    if receipt_path.exists():
+        raise FileExistsError(f"receipt already exists: {receipt_path}")
+    before_bytes = SEEN_FILE.read_bytes() if SEEN_FILE.exists() else b""
+    discarded = []
+    updated = set(seen)
+    for archive_dir, source in WATCH_DIRS:
+        if not archive_dir.exists():
+            continue
+        if source == "claude":
+            for txt_file in sorted(archive_dir.glob("*.txt")):
+                stem = txt_file.stem
+                marker = f"claude:{stem}"
+                if marker in updated:
+                    continue
+                has_audio = (
+                    any(archive_dir.glob(f"{stem}-c[0-9]*.mp3"))
+                    or (archive_dir / f"{stem}.mp3").is_file()
+                )
+                if has_audio:
+                    updated.add(marker)
+                    discarded.append({"source": source, "item": stem, "marker": marker})
+        else:
+            for mp3_file in sorted(archive_dir.glob("*.mp3")):
+                if re.search(r"-c\d+\.", mp3_file.name) or mp3_file.name in updated:
+                    continue
+                updated.add(mp3_file.name)
+                discarded.append({
+                    "source": source, "item": mp3_file.name, "marker": mp3_file.name,
+                })
+
+    receipt = {
+        "schema_version": 1,
+        "status": "prepared",
+        "action": "discard_current_backlog_as_stale_without_delivery",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "external_messages_sent": 0,
+        "before_seen_sha256": hashlib.sha256(before_bytes).hexdigest(),
+        "discarded_count": len(discarded),
+        "discarded": discarded,
+    }
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    fd = os.open(receipt_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, "w") as handle:
+        # Persist intent before the atomic seen-state swap. If the process dies,
+        # a `prepared` receipt exposes the incomplete disposition instead of
+        # leaving an unexplained state change.
+        json.dump(receipt, handle, indent=2)
+        handle.write("\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+        save_seen(updated)
+        after_bytes = SEEN_FILE.read_bytes()
+        receipt["status"] = "complete"
+        receipt["after_seen_sha256"] = hashlib.sha256(after_bytes).hexdigest()
+        handle.seek(0)
+        handle.truncate()
+        json.dump(receipt, handle, indent=2)
+        handle.write("\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+    return receipt
+
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Send new TTS audio to Discord/Telegram")
     parser.add_argument("--once", action="store_true", help="Process once and exit")
     parser.add_argument("--dry-run", action="store_true", help="Preview without sending")
+    parser.add_argument(
+        "--discard-current-backlog", action="store_true",
+        help="mark the complete current backlog stale without sending (requires --receipt)",
+    )
+    parser.add_argument("--receipt", type=Path, help="exclusive receipt for backlog discard")
     args = parser.parse_args()
+    if args.discard_current_backlog != bool(args.receipt):
+        parser.error("--discard-current-backlog and --receipt are required together")
+    if args.discard_current_backlog and args.dry_run:
+        parser.error("backlog discard and --dry-run are mutually exclusive")
 
     AUDIO_CACHE.mkdir(parents=True, exist_ok=True)
     try:
@@ -350,6 +432,14 @@ def main():
         return
     seen = load_seen()
     print(f"Loaded {len(seen)} previously sent items")
+
+    if args.discard_current_backlog:
+        receipt = discard_current_backlog(seen, args.receipt)
+        print(
+            f"Discarded {receipt['discarded_count']} stale backlog items without delivery; "
+            f"receipt: {args.receipt}"
+        )
+        return
     
     seen = process_new_files(seen, args.dry_run)
     if not args.dry_run:

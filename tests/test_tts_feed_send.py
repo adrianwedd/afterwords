@@ -11,6 +11,8 @@ import sys
 from pathlib import Path
 from unittest import mock
 
+import pytest
+
 
 SCRIPT = Path(__file__).resolve().parent.parent / "scripts" / "tts-feed-send.py"
 SPEC = importlib.util.spec_from_file_location("tts_feed_send", SCRIPT)
@@ -131,8 +133,7 @@ def test_dry_run_makes_no_subprocess_calls(tmp_path, monkeypatch):
     monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
     monkeypatch.setenv("AFTERWORDS_SEND_TO", "telegram,discord")
 
-    # dry-run intentionally mutates the in-memory seen set (markers added) but
-    # never persists it — save_seen() is skipped by main() when --dry-run.
+    # A preview neither sends nor persists/assembles delivery state.
     with mock.patch.object(tfs.subprocess, "run") as run_mock:
         tfs.process_new_files(set(), dry_run=True)
 
@@ -240,3 +241,36 @@ def test_partial_delivery_retries_only_failed_target(tmp_path, monkeypatch):
     assert attempts == ["telegram"]
     assert f"{marker}:telegram" in second
     assert name in second
+
+
+def test_discard_backlog_is_auditable_and_never_sends(tmp_path, monkeypatch):
+    claude_dir = tmp_path / "claude"
+    hermes_dir = tmp_path / "hermes"
+    claude_dir.mkdir()
+    hermes_dir.mkdir()
+    stem = "worf-20261111-135822-65368-27244"
+    (claude_dir / f"{stem}.txt").write_text("old response")
+    (claude_dir / f"{stem}-c1.mp3").write_bytes(b"a" * 256)
+    hermes_name = "picard-old.mp3"
+    (hermes_dir / hermes_name).write_bytes(b"b" * 256)
+    seen_file = tmp_path / "seen.json"
+    seen_file.write_text("[]")
+    receipt = tmp_path / "state" / "discard.json"
+
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(claude_dir, "claude"), (hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    with mock.patch.object(tfs.subprocess, "run") as run_mock:
+        row = tfs.discard_current_backlog(set(), receipt)
+
+    run_mock.assert_not_called()
+    assert row["action"] == "discard_current_backlog_as_stale_without_delivery"
+    assert row["status"] == "complete"
+    assert row["external_messages_sent"] == 0
+    assert row["discarded_count"] == 2
+    assert receipt.stat().st_mode & 0o777 == 0o600
+    saved = tfs.load_seen()
+    assert f"claude:{stem}" in saved
+    assert hermes_name in saved
+    assert receipt.read_text().endswith("\n")
+    with pytest.raises(FileExistsError):
+        tfs.discard_current_backlog(saved, receipt)
