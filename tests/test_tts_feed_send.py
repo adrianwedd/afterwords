@@ -316,6 +316,49 @@ def test_confirmed_failure_clears_inflight_and_remains_retryable(tmp_path, monke
     assert f"{marker}:inflight" not in tfs.load_seen()
 
 
+@pytest.mark.parametrize("first_outcome,expected_retry_calls", [(True, []), (False, ["discord"])])
+def test_terminal_journal_heals_inflight_marker_after_seen_write_crash(
+    tmp_path, monkeypatch, first_outcome, expected_retry_calls,
+):
+    hermes_dir = tmp_path / "hermes"
+    hermes_dir.mkdir()
+    name = "terminal-crash.mp3"
+    (hermes_dir / name).write_bytes(b"audio")
+    seen_file = tmp_path / "seen.json"
+    monkeypatch.setattr(tfs, "WATCH_DIRS", [(hermes_dir, "hermes")])
+    monkeypatch.setattr(tfs, "AUDIO_CACHE", tmp_path / "cache")
+    monkeypatch.setattr(tfs, "SEEN_FILE", seen_file)
+    monkeypatch.setenv("AFTERWORDS_SEND_TO", "discord")
+    monkeypatch.setattr(tfs, "send_media", lambda *_a: first_outcome)
+    real_save_seen = tfs.save_seen
+    calls = 0
+
+    def fail_terminal_seen_write(seen, **kwargs):
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            raise OSError("simulated terminal seen write crash")
+        return real_save_seen(seen, **kwargs)
+
+    monkeypatch.setattr(tfs, "save_seen", fail_terminal_seen_write)
+    with pytest.raises(OSError, match="terminal seen write crash"):
+        tfs.process_new_files(set(), persist=True)
+    success = f"hermes:{name}:discord"
+    assert f"{success}:inflight" in tfs.load_seen()
+    assert tfs.load_attempts()[success]["status"] == (
+        "cli_confirmed" if first_outcome else "failed"
+    )
+
+    monkeypatch.setattr(tfs, "save_seen", real_save_seen)
+    retry_calls = []
+    monkeypatch.setattr(
+        tfs, "send_media", lambda target, _path: retry_calls.append(target) or True,
+    )
+    tfs.process_new_files(tfs.load_seen(), persist=True)
+    assert retry_calls == expected_retry_calls
+    assert f"{success}:inflight" not in tfs.load_seen()
+    assert success in tfs.load_seen()
+
 def test_timeout_is_held_as_indeterminate_instead_of_retried(tmp_path, monkeypatch):
     hermes_dir = tmp_path / "hermes"
     hermes_dir.mkdir()

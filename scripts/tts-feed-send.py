@@ -409,6 +409,22 @@ def _item_has_held_attempt(marker: str, seen: set, *, persist: bool) -> bool:
     if not persist:
         return False
     attempts = load_attempts()
+    removed_inflight = set()
+    for success_marker, attempt in attempts.items():
+        if not success_marker.startswith(f"{marker}:"):
+            continue
+        inflight_marker = f"{success_marker}:inflight"
+        status = attempt.get("status")
+        if status in {"cli_confirmed", "resolved_delivered"}:
+            seen.add(success_marker)
+            seen.discard(inflight_marker)
+            removed_inflight.add(inflight_marker)
+        elif status in {"failed", "resolved_retry"}:
+            seen.discard(inflight_marker)
+            removed_inflight.add(inflight_marker)
+    if removed_inflight:
+        save_seen(seen, remove=removed_inflight)
+
     held = {
         success_marker.rsplit(":", 1)[-1]
         for success_marker, attempt in attempts.items()
