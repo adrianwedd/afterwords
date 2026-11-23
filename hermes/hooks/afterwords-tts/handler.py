@@ -23,6 +23,7 @@ import json
 import logging
 import os
 import re
+import sqlite3
 import subprocess
 import urllib.parse
 import uuid
@@ -75,6 +76,15 @@ HERMES_AGENT = "hermes"
 
 # Global fallback config (read from home dir)
 GLOBAL_AFTERWORDS = Path.home() / ".afterwords"
+
+# Hermes' own record of which session is in a turn and where it was launched.
+# The gateway hook receives no usable project identity: `context["cwd"]` comes
+# from TERMINAL_CWD, which is often "." and resolves against the gateway
+# process dir, so the live turn lease is the only trustworthy signal left.
+STATE_DB = Path(
+    os.environ.get("AFTERWORDS_STATE_DB")
+    or (Path(os.environ.get("HERMES_HOME") or Path.home() / ".hermes") / "state.db")
+)
 
 
 def strip_markdown(text: str) -> str:
@@ -254,19 +264,94 @@ def _local_chunk_text(text: str, max_chars: int) -> list[str]:
     return chunks
 
 
+# How recent a session's last activity must be to count as "the session this
+# hook is answering for" when no turn lease is held any more.
+SESSION_CWD_WINDOW = 3600
+
+
+def _session_cwd() -> str:
+    """cwd of the session this turn belongs to (read-only, best effort).
+
+    Two steps, because the two surfaces need different ones: the live turn
+    lease is exact while a turn is running (the `text_to_speech` path), and the
+    most recently active session covers `agent:end`, which can fire after the
+    lease has expired. Either answer is only ever *used* when the directory
+    actually contains `.afterwords`.
+    """
+    if not STATE_DB.is_file():
+        return ""
+    queries = (
+        "select s.cwd from session_turn_leases l"
+        " join sessions s on s.id = l.conversation_id"
+        " where l.expires_at > strftime('%s','now')"
+        "   and s.cwd is not null and s.cwd <> ''"
+        " order by l.acquired_at desc limit 1",
+        "select cwd from sessions"
+        " where cwd is not null and cwd <> ''"
+        "   and last_activity_at > strftime('%s','now') - "
+        + str(SESSION_CWD_WINDOW)
+        + " order by last_activity_at desc limit 1",
+    )
+    con = None
+    try:
+        con = sqlite3.connect(f"file:{STATE_DB}?mode=ro", uri=True, timeout=0.5)
+        for query in queries:
+            row = con.execute(query).fetchone()
+            if row and row[0]:
+                return row[0]
+    except sqlite3.Error:
+        return ""
+    finally:
+        if con is not None:
+            # A lingering read transaction leaves the DB locked for the next
+            # caller (the handler resolves twice per reply: log line + voice).
+            con.close()
+    return ""
+
+
 def _get_cwd(context: dict) -> str:
     """Resolve the working directory for .afterwords lookup."""
     return (
         context.get("cwd", "")
         or context.get("working_directory", "")
         or os.environ.get("TERMINAL_CWD", "")
+        or _session_cwd()
         or str(Path.home())
     )
 
 
+def _project_dir(context: dict) -> str:
+    """First candidate directory that actually carries a .afterwords file.
+
+    A candidate is adopted only when the file exists, so a wrong guess (a "."
+    cwd, a stale lease on another project) falls through instead of picking a
+    stray voice. Per-project voice then behaves exactly as the operator
+    configured it, and the global file stays the default-profile fallback.
+    """
+    # Order matters: TERMINAL_CWD is frequently the home dir or ".", and
+    # ~/.afterwords *is* the global file — offering it here would make the
+    # global fallback masquerade as a project file and shadow the session.
+    candidates = (
+        context.get("cwd", ""),
+        context.get("working_directory", ""),
+        _session_cwd(),
+        os.environ.get("TERMINAL_CWD", ""),
+    )
+    for raw in candidates:
+        if not raw:
+            continue
+        try:
+            candidate = Path(raw).expanduser()
+            if (candidate / ".afterwords").is_file():
+                return str(candidate)
+        except OSError:
+            continue
+    return _get_cwd(context)
+
+
 def resolve_voice(context: dict) -> str | None:
     """Resolve voice from .afterwords files."""
-    cwd = _get_cwd(context)
+    cwd = _project_dir(context)
     if cwd:
         project_aw = Path(cwd) / ".afterwords"
         voice = _read_afterwords(project_aw, HERMES_AGENT)
