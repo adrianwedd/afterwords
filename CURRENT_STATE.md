@@ -37,9 +37,10 @@ Use `git rev-parse HEAD` for its exact revision; do not substitute branch name
 for commit identity in a review or deployment receipt.
 
 The candidate deliberately does not contain private voice recordings, runtime
-receipts, credentials, local preferences, the untracked October findings note
-or `var/`. Those remain in their existing custody. A dirty canonical checkout
-is therefore not permission to clean it.
+receipts, credentials, local preferences or `var/`. Those remain in their
+existing custody. The October findings note was reconciled into `docs/history/`
+as dated evidence. A dirty canonical checkout is therefore not permission to
+clean it.
 
 ## Current installed state (inspected 23 November 2026)
 
