@@ -18,12 +18,10 @@
 # bleed the canonical script was fixed to eliminate. The configured {voice}
 # already carries the serving profile's global choice.
 #
-# Project dir: $AFTERWORDS_PROJECT_DIR, else the cwd of the session holding the
-# live turn lease (read-only from ~/.hermes/state.db, $AFTERWORDS_STATE_DB to
-# override), else $PWD. The DB step exists because Hermes runs this command
-# from the profile dir with a scrubbed environment — $PWD is ~/.hermes and no
-# session identity is passed — so the harness's own record is the only
-# trustworthy "which project is this" signal on this surface.
+# Project dir: the exact $AFTERWORDS_PROJECT_DIR exported by the installed
+# bridge, else an exact $AFTERWORDS_SESSION_ID lookup in Hermes' state DB, else
+# $PWD for direct/manual invocation.  No newest-lease or recency fallback is
+# permitted: missing identity must keep the caller's configured profile voice.
 #
 # Usage:  afterwords-project-voice.sh <config_voice> <input_path> <output_path>
 #         afterwords-project-voice.sh --print      # resolved voice, no synthesis
@@ -39,8 +37,6 @@ CANONICAL="${AFTERWORDS_COMMAND_SCRIPT:-$SCRIPT_DIR/afterwords-tts-command.sh}"
 # even when VAR is set. Build the default with a $name form instead.
 HOME_DIR="${HOME:-}"
 STATE_DB="${AFTERWORDS_STATE_DB:-}"
-# Recency window (seconds) for the "no live lease" fallback.
-SESSION_CWD_WINDOW="${AFTERWORDS_SESSION_WINDOW:-3600}"
 [ -n "$STATE_DB" ] || STATE_DB="$HOME_DIR/.hermes/state.db"
 
 resolve_agent() {
@@ -56,35 +52,21 @@ resolve_agent() {
     esac
 }
 
-# cwd of the session that holds the live turn lease — the closest thing this
-# surface has to "the project the operator is working in". Read-only; any
-# failure (no sqlite3, no DB, changed schema) just yields an empty string.
-live_session_cwd() {
+# Resolve one explicit session id to its declared cwd.  Read-only; any failure
+# (no identity, no sqlite3, no DB, changed schema) yields an empty string.
+session_cwd() {
+    local session_id="${AFTERWORDS_SESSION_ID:-}"
+    [ -n "$session_id" ] || return 0
     [ -f "$STATE_DB" ] || return 0
     command -v sqlite3 >/dev/null 2>&1 || return 0
-    local cwd
-    # 1. the live turn lease (exact while a turn is running)
-    cwd=$(sqlite3 -readonly "$STATE_DB" "
-        select s.cwd
-          from session_turn_leases l
-          join sessions s on s.id = l.conversation_id
-         where l.expires_at > strftime('%s','now')
-           and s.cwd is not null and s.cwd <> ''
-         order by l.acquired_at desc
-         limit 1
-    " 2>/dev/null || true)
-    if [ -n "$cwd" ]; then
-        printf '%s' "$cwd"
-        return 0
-    fi
-    # 2. the most recently active session, if recent (covers agent:end timing)
-    sqlite3 -readonly "$STATE_DB" "
-        select cwd from sessions
-         where cwd is not null and cwd <> ''
-           and last_activity_at > strftime('%s','now') - $SESSION_CWD_WINDOW
-         order by last_activity_at desc
-         limit 1
-    " 2>/dev/null || true
+    # Encode the id as a SQLite blob literal so shell or SQL metacharacters
+    # remain data.  Session ids are UTF-8 text in Hermes.
+    local session_hex
+    session_hex=$(printf '%s' "$session_id" | od -An -tx1 | tr -d ' \n')
+    [ -n "$session_hex" ] || return 0
+    sqlite3 -readonly "$STATE_DB" \
+        "select cwd from sessions where id = cast(X'$session_hex' as text) and cwd is not null and cwd <> '' limit 1" \
+        2>/dev/null || true
 }
 
 # First project directory that actually carries a .afterwords file.
@@ -94,7 +76,7 @@ project_dir() {
         printf '%s' "$candidate"
         return 0
     fi
-    candidate="$(live_session_cwd)"
+    candidate="$(session_cwd)"
     if [ -n "$candidate" ] && [ -f "$candidate/.afterwords" ]; then
         printf '%s' "$candidate"
         return 0

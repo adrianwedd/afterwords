@@ -11,6 +11,7 @@ from __future__ import annotations
 import asyncio
 import importlib.util
 import logging
+import sqlite3
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -70,6 +71,7 @@ def test_play_does_not_block_the_calling_event_loop(tmp_path):
     while a deliberately slow play "runs": the ticker must keep firing.
     """
     mod = _load_handler()
+    mod.MUTE_FILE = tmp_path / "not-muted"
     wav = tmp_path / "chunk.wav"
     wav.write_bytes(b"RIFF" + b"\0" * 64)
 
@@ -105,3 +107,37 @@ def test_play_does_not_block_the_calling_event_loop(tmp_path):
     assert calls and calls[0][0] == "afplay", calls
     # 0.5 s of playback on a 0.02 s ticker is ~25 ticks; inline it would be 0 (or 1).
     assert ticks >= 10, f"event loop was starved for the whole clip (only {ticks} ticks in 0.5s)"
+
+
+def test_play_checks_mute_at_the_side_effect(tmp_path, monkeypatch):
+    mod = _load_handler()
+    wav = tmp_path / "chunk.wav"
+    wav.write_bytes(b"RIFF" + b"\0" * 64)
+    muted = tmp_path / "afterwords-muted"
+    muted.write_text("")
+    monkeypatch.setattr(mod, "MUTE_FILE", muted)
+    calls = []
+    mod.subprocess.call = lambda *a, **kw: calls.append((a, kw))
+    asyncio.run(mod._play(wav))
+    assert calls == []
+
+
+def test_hook_session_identity_routes_concurrent_projects(tmp_path, monkeypatch):
+    mod = _load_handler()
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+    first.mkdir()
+    second.mkdir()
+    (first / ".afterwords").write_text("hermes: worf\n")
+    (second / ".afterwords").write_text("hermes: galadriel\n")
+    db = tmp_path / "state.db"
+    with sqlite3.connect(db) as con:
+        con.execute("create table sessions (id text primary key, cwd text, last_activity_at real)")
+        con.execute("insert into sessions values ('first-id', ?, 1)", (str(first),))
+        con.execute("insert into sessions values ('second-id', ?, 9999999999)", (str(second),))
+    monkeypatch.setattr(mod, "STATE_DB", db)
+    assert mod.resolve_voice({"session_id": "first-id"}) == "worf"
+    assert mod.resolve_voice({"session_id": "second-id"}) == "galadriel"
+    # No identity means no project guess, even though one session is newest.
+    monkeypatch.setattr(mod, "GLOBAL_AFTERWORDS", tmp_path / "absent")
+    assert mod.resolve_voice({}) is None

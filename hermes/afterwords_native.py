@@ -23,8 +23,27 @@ def native_synthesis(function, *args, **kwargs):
 def command_environment():
     if not _native.get():
         return {}
-    return {'AFTERWORDS_TTS_CALLER': 'native',
-            'HERMES_SESSION_PLATFORM': 'cli', 'HERMES_SESSION_SOURCE': 'cli'}
+    env = {'AFTERWORDS_TTS_CALLER': 'native',
+           'HERMES_SESSION_PLATFORM': 'cli', 'HERMES_SESSION_SOURCE': 'cli'}
+    # The command provider deliberately scrubs its child environment.  Export
+    # only the task-local identity already bound by Hermes; never read a
+    # process-global "most recent" session.  Imports are optional so this
+    # helper remains testable outside an installed Hermes tree.
+    try:
+        from gateway.session_context import get_session_env
+        session_id = get_session_env('HERMES_SESSION_ID', '')
+    except ImportError:
+        session_id = ''
+    try:
+        from agent.runtime_cwd import scoped_session_cwd
+        project_dir = scoped_session_cwd()
+    except ImportError:
+        project_dir = ''
+    if session_id:
+        env['AFTERWORDS_SESSION_ID'] = session_id
+    if project_dir:
+        env['AFTERWORDS_PROJECT_DIR'] = project_dir
+    return env
 
 
 @contextmanager

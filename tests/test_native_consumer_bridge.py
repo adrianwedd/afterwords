@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import types
 from concurrent.futures import ThreadPoolExecutor
 
 import pytest
@@ -26,6 +27,25 @@ def test_ownership_does_not_leak_between_callers():
         assert row == ({'AFTERWORDS_TTS_CALLER': 'native', 'HERMES_SESSION_PLATFORM': 'cli',
                         'HERMES_SESSION_SOURCE': 'cli'} if native else {})
     assert bridge.command_environment() == {}
+
+
+def test_native_command_exports_task_local_session_identity(monkeypatch):
+    gateway = types.ModuleType('gateway')
+    session_context = types.ModuleType('gateway.session_context')
+    session_context.get_session_env = lambda name, default='': (
+        'session-exact' if name == 'HERMES_SESSION_ID' else default)
+    agent = types.ModuleType('agent')
+    runtime_cwd = types.ModuleType('agent.runtime_cwd')
+    runtime_cwd.scoped_session_cwd = lambda: '/project/exact'
+    monkeypatch.setitem(sys.modules, 'gateway', gateway)
+    monkeypatch.setitem(sys.modules, 'gateway.session_context', session_context)
+    monkeypatch.setitem(sys.modules, 'agent', agent)
+    monkeypatch.setitem(sys.modules, 'agent.runtime_cwd', runtime_cwd)
+
+    row = bridge.native_synthesis(bridge.command_environment)
+    assert row['AFTERWORDS_SESSION_ID'] == 'session-exact'
+    assert row['AFTERWORDS_PROJECT_DIR'] == '/project/exact'
+    assert row['AFTERWORDS_TTS_CALLER'] == 'native'
 
 
 def test_consumer_releases_lease_on_playback_error(tmp_path):

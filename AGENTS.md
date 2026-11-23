@@ -117,6 +117,14 @@ The server (server.py) and voice cloning (clone-voice.sh) are fully independent 
 
 Each hook falls back to `~/.afterwords` (global) before using the server's default voice.
 
+Hermes identity must be exact, not inferred from activity order. The `agent:end`
+hook uses the event's `session_id` to read that session's cwd. The native command
+bridge exports its task-local Hermes session ID and runtime cwd to
+`scripts/afterwords-project-voice.sh`; if neither exact identity nor an explicit
+invocation cwd is available, the wrapper keeps the configured profile voice.
+Never route from the globally newest lease or most recently active session: a
+multiplexed gateway can run unrelated conversations concurrently.
+
 The repo's own `.afterwords` is deliberately both git-tracked (it ships the default agent→voice mapping) and listed in `.gitignore` (so the entry documents intent, though gitignore does not silence tracked files). Local edits to it are personal preference: never commit `.afterwords` changes unless a task explicitly says so.
 
 ## Backends

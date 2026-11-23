@@ -76,11 +76,12 @@ HERMES_AGENT = "hermes"
 
 # Global fallback config (read from home dir)
 GLOBAL_AFTERWORDS = Path.home() / ".afterwords"
+MUTE_FILE = Path(os.environ.get("AFTERWORDS_MUTE_FILE", "/tmp/afterwords-muted"))
 
-# Hermes' own record of which session is in a turn and where it was launched.
-# The gateway hook receives no usable project identity: `context["cwd"]` comes
-# from TERMINAL_CWD, which is often "." and resolves against the gateway
-# process dir, so the live turn lease is the only trustworthy signal left.
+# Hermes' durable session record.  Gateway hooks carry the exact session id;
+# this database is used only to map that identity to its declared cwd.  Never
+# infer identity from the newest lease or most recently active session: a
+# multiplexed gateway can run unrelated conversations concurrently.
 STATE_DB = Path(
     os.environ.get("AFTERWORDS_STATE_DB")
     or (Path(os.environ.get("HERMES_HOME") or Path.home() / ".hermes") / "state.db")
@@ -264,41 +265,23 @@ def _local_chunk_text(text: str, max_chars: int) -> list[str]:
     return chunks
 
 
-# How recent a session's last activity must be to count as "the session this
-# hook is answering for" when no turn lease is held any more.
-SESSION_CWD_WINDOW = 3600
+def _session_cwd(session_id: str) -> str:
+    """Return the cwd for *session_id* (read-only, best effort).
 
-
-def _session_cwd() -> str:
-    """cwd of the session this turn belongs to (read-only, best effort).
-
-    Two steps, because the two surfaces need different ones: the live turn
-    lease is exact while a turn is running (the `text_to_speech` path), and the
-    most recently active session covers `agent:end`, which can fire after the
-    lease has expired. Either answer is only ever *used* when the directory
-    actually contains `.afterwords`.
+    An absent or unknown identity deliberately yields no project.  The caller
+    then uses the configured profile/global voice instead of borrowing another
+    conversation's project.
     """
-    if not STATE_DB.is_file():
+    if not session_id or not STATE_DB.is_file():
         return ""
-    queries = (
-        "select s.cwd from session_turn_leases l"
-        " join sessions s on s.id = l.conversation_id"
-        " where l.expires_at > strftime('%s','now')"
-        "   and s.cwd is not null and s.cwd <> ''"
-        " order by l.acquired_at desc limit 1",
-        "select cwd from sessions"
-        " where cwd is not null and cwd <> ''"
-        "   and last_activity_at > strftime('%s','now') - "
-        + str(SESSION_CWD_WINDOW)
-        + " order by last_activity_at desc limit 1",
-    )
     con = None
     try:
         con = sqlite3.connect(f"file:{STATE_DB}?mode=ro", uri=True, timeout=0.5)
-        for query in queries:
-            row = con.execute(query).fetchone()
-            if row and row[0]:
-                return row[0]
+        row = con.execute(
+            "select cwd from sessions where id = ? and cwd is not null and cwd <> ''",
+            (session_id,),
+        ).fetchone()
+        return str(row[0]) if row and row[0] else ""
     except sqlite3.Error:
         return ""
     finally:
@@ -310,12 +293,11 @@ def _session_cwd() -> str:
 
 
 def _get_cwd(context: dict) -> str:
-    """Resolve the working directory for .afterwords lookup."""
+    """Resolve the exact working directory carried by this hook event."""
     return (
         context.get("cwd", "")
         or context.get("working_directory", "")
-        or os.environ.get("TERMINAL_CWD", "")
-        or _session_cwd()
+        or _session_cwd(str(context.get("session_id", "") or ""))
         or str(Path.home())
     )
 
@@ -328,14 +310,13 @@ def _project_dir(context: dict) -> str:
     stray voice. Per-project voice then behaves exactly as the operator
     configured it, and the global file stays the default-profile fallback.
     """
-    # Order matters: TERMINAL_CWD is frequently the home dir or ".", and
-    # ~/.afterwords *is* the global file — offering it here would make the
-    # global fallback masquerade as a project file and shadow the session.
+    # Only event-local values are authoritative under a multiplexed gateway.
+    # Process-global TERMINAL_CWD and "most recent session" guesses can belong
+    # to a different concurrent conversation and are intentionally excluded.
     candidates = (
         context.get("cwd", ""),
         context.get("working_directory", ""),
-        _session_cwd(),
-        os.environ.get("TERMINAL_CWD", ""),
+        _session_cwd(str(context.get("session_id", "") or "")),
     )
     for raw in candidates:
         if not raw:
@@ -346,7 +327,7 @@ def _project_dir(context: dict) -> str:
                 return str(candidate)
         except OSError:
             continue
-    return _get_cwd(context)
+    return ""
 
 
 def resolve_voice(context: dict) -> str | None:
@@ -590,8 +571,7 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
                         # event loop, and afplay blocks until the audio ends, so
                         # an inline call freezes the whole gateway (keepalive
                         # pongs included) for the length of the clip.
-                        if not Path("/tmp/afterwords-muted").exists():
-                            await _play(wav_path)
+                        await _play(wav_path)
 
                         # Keep a reference: an un-referenced task can be garbage
                         # collected mid-flight, dropping the archived MP3. Gathered
@@ -616,8 +596,7 @@ async def _speak_chunked_inner(chunks: list[str], voice: str | None = None, sess
                     wav_path = Path(f"/tmp/hermes-hook-tts-{tag}-last.wav")
                     wav_path.write_bytes(wav_bytes)
 
-                    if not Path("/tmp/afterwords-muted").exists():
-                        await _play(wav_path)
+                    await _play(wav_path)
 
                     await asyncio.to_thread(
                         _archive_wav_and_cleanup,
@@ -654,15 +633,19 @@ async def _play(wav_path: Path) -> None:
     Awaiting it in a worker thread keeps sequential chunk order while the loop
     stays schedulable.
     """
-    try:
-        await asyncio.to_thread(
-            subprocess.call,
-            ["afplay", str(wav_path)],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-    except Exception as exc:  # playback is a nice-to-have; never fail the turn
-        log.warning("TTS playback failed: %s", exc)
+    # Keep the policy next to the side effect.  Besides making every caller
+    # safe, this closes the race where mute could be toggled after a caller's
+    # check but before afplay starts.
+    if not MUTE_FILE.exists():
+        try:
+            await asyncio.to_thread(
+                subprocess.call,
+                ["afplay", str(wav_path)],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+        except Exception as exc:  # playback is a nice-to-have; never fail the turn
+            log.warning("TTS playback failed: %s", exc)
 
 
 def _archive_wav_and_cleanup(wav_path: Path, mp3_name: str, archive_dir: Path) -> None:

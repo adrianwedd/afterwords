@@ -11,6 +11,8 @@ Keeps state in ~/.hermes/tts-feed-seen.json to avoid re-sending.
 Usage:
     python3 scripts/tts-feed-send.py [--once] [--dry-run]
 """
+from __future__ import annotations
+
 import fcntl
 import json
 import os

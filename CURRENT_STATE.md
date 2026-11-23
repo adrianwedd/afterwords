@@ -1,25 +1,96 @@
-# Current onboarding work
+# Afterwords operational entrypoint
 
-Snapshot checked on 2026-10-05. Refresh GitHub metadata and runtime evidence before relying on these status statements later.
+This file is an entrypoint, not a promise that yesterday's process is still
+running. Re-run the commands below before making a source, installation or
+delivery claim.
 
-The onboarding work is on branch `fix/deterministic-baseline-onboarding`. Its reviewed checkpoint `55b25a6fc3f352b8a6a86ee26e8788d16cd9763b` was pushed to origin; subsequent fixes use the same branch. This work is not merged or deployed. Refresh branch, PR, release, and runtime state before relying on this snapshot; check `git ls-remote origin refs/heads/fix/deterministic-baseline-onboarding` for the current remote head. Deployment and live acceptance require separate evidence.
+## Supported baseline
 
-Start at [ONBOARDING.md](ONBOARDING.md). The intended baseline is bundled voices, Qwen 0.6B, ARM Python, loopback HTTP, and no hooks or cloning tools. The first useful remaining task is live baseline acceptance after owner approval, then one integration from [INTEGRATIONS.md](INTEGRATIONS.md).
+The dependable product is the local Qwen3 0.6B server plus explicit voice
+profiles. Agent integrations are optional clients. Fish Drama 3 is an isolated,
+resource-gated expressive experiment; it is not the default engine and is not
+qualified as a general long-form replacement.
 
-| Audit requirement | Repository result | Remaining proof or limitation |
-|---|---|---|
-| Honest backend readiness | Registered/unselected/loaded/failed state; unavailable Qwen and failed warmup abort startup | Real model startup and successful audible speech |
-| Baseline model only | Qwen 0.6B default; explicit experiment selection persisted in generated plists | Real launchd restart with the same selection |
-| Fresh installation destinations | Plist generator creates parent directories and escapes XML-sensitive paths; CLI directory created and PATH checked | Fresh macOS install, permissions and launchd behavior |
-| Process identity | CLI rejects foreign listeners; preflight verifies owning process plus HTTP identity, and rejects unknown ownership | Live start/stop/recovery |
-| Gallery reload | Separate local reload permission enabled by default for installed loopback service; HTTP failures exit nonzero | Live gallery rescan after startup |
-| Explicit install scope | Server-only default; opt-in cloning/integrations; read-only preflight; unknown flags rejected | Unattended install on a fresh Mac; explicit writable `--cli-dir` avoids sudo; system default may require sudo |
-| Integration isolation | Cursor-only shared helpers fixed; non-Claude agents no longer register Claude hooks; per-agent disposable-HOME install/config tests | One final reply speaks once and archives for the selected live integration |
-| Current documentation | Integration matrix, Hermes real-artifact contract, current chunk/queue budgets, baseline and privacy boundaries reconciled | Other historical documentation may need further cleanup |
-| Reproducibility/platform bounds | Hash-checked baseline locks for Python 3.11–3.14/ARM macOS 14+, immutable Qwen revisions; mlx-audio compatibility cap retained | Runtime qualification of new locks/revisions; optional dependency locks; tested macOS minimum and upper Python runtime bound |
+```bash
+git status --short --branch
+git fetch origin
+git rev-list --left-right --count HEAD...origin/main
+.venv/bin/python -m pytest -q
+curl -fsS --max-time 5 http://127.0.0.1:7860/health
+bash afterwords.sh status
+bash afterwords.sh integrations
+```
 
-Main includes the persistent-bind changes from PR #119, the real-artifact command-provider delivery contract from PR #121, and the bounded fidelity probe from PR #124. Git history and the corresponding current source verify those capabilities. The probe is diagnostic; it does not fix synthesis fidelity.
+Count the public corpus with Git, never the private on-disk directory:
 
-GitHub issue [#122](https://github.com/adrianwedd/afterwords/issues/122) remains open for leading-token loss and multi-second silence. PR [#123](https://github.com/adrianwedd/afterwords/pull/123) remains open and unmerged for `configure --speak-full`. Do not treat those proposed flags as available on main or claim acoustic acceptance of #122. These statuses were checked through GitHub's issue/pull API on the snapshot date.
+```bash
+git ls-files 'voices/*.json' | wc -l
+```
 
-Unit tests and disposable-HOME installer checks cover repository behavior. They do not establish a fresh installation, real MLX compatibility, audible output, live hook execution, or recovery. No installed hook configuration or live service has been changed by this work. STRATEGY.md requires owner approval before running setup against the in-use installation, restarting it, modifying installed hooks, or publishing to main.
+## Reconciliation candidate
+
+The current source candidate is the local branch
+`reconcile/trustworthy-voice-20261123`. It combines the local acquisition work,
+current remote `main`, nonblocking Hermes playback, deterministic project-voice
+routing and a bridge manifest rebased against the inspected M5 Hermes source.
+Use `git rev-parse HEAD` for its exact revision; do not substitute branch name
+for commit identity in a review or deployment receipt.
+
+The candidate deliberately does not contain private voice recordings, runtime
+receipts, credentials, local preferences, the untracked October findings note
+or `var/`. Those remain in their existing custody. A dirty canonical checkout
+is therefore not permission to clean it.
+
+## Current installed state (inspected 23 November 2026)
+
+- The launchd server was ready with Qwen3 0.6B and 349 on-disk profiles. This is
+  a health observation, not source identity, synthesis, playback or listening
+  acceptance.
+- Automatic playback was muted.
+- The Hermes profile referenced `scripts/afterwords-project-voice.sh`, which was
+  untracked at inspection and is tracked by the candidate.
+- The installed Hermes handler was a hybrid not equal to repository source.
+- The installed native bridge helper was from the preceding revision; the four
+  Hermes consumers were pristine at Hermes `ae2a81ccc00`.
+- Claude and AGy used legacy registered hooks and a legacy worker. Gemini had an
+  unregistered adapter. Cursor was absent. Codex and OpenCode managed watchers
+  were absent; the Codex per-session watcher was stopped.
+- `com.afterwords.tts-feed` was spawn-failed because its plist selected the
+  missing `/opt/homebrew/bin/python3`. See GitHub issue #143.
+
+The proposed Hermes installation and rollback are in
+[`docs/operations/installed-runtime-plan.md`](docs/operations/installed-runtime-plan.md).
+No installation or restart is implied by source preparation.
+
+## Acceptance layers
+
+Keep these claims separate:
+
+| Layer | Minimum evidence |
+| --- | --- |
+| Source | Exact commit, clean named diff and passing source tests |
+| Installed files | Exact before/after hashes read back from the installed paths |
+| Loaded runtime | Process start/reload receipt plus loaded source/config identity |
+| Synthesis | Real requested text produces a complete valid audio artifact |
+| Queueing | Stable event identity and terminal receipt without replay |
+| Playback | The intended playback owner invokes the complete artifact once |
+| Audible acceptance | A human actually hears and assesses it |
+| External delivery | The intended remote service receives the actual artifact |
+
+Captured adapters, fake players, ASR, identity embeddings and valid WAV files
+are useful evidence. None of them, alone, proves audible or external delivery.
+
+## Approval boundary
+
+`STRATEGY.md` remains authoritative. Get Adrian's approval before pushing or
+merging `main`, publishing, running setup against the live installation,
+restarting services, changing hook configurations, mutating the live server or
+altering tracked voice assets. Source-only work and isolated staging are not
+deployment.
+
+## Next direction
+
+See [`docs/afterwords-next-direction.md`](docs/afterwords-next-direction.md) for
+the bounded proposal: retain Qwen as the reliable engine, make identity and
+delivery one thin contract, and qualify Fish only against the failure specimens
+where expressive control is worth its cost.

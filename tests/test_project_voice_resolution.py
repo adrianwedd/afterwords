@@ -106,32 +106,24 @@ def test_global_afterwords_is_not_consulted(tmp_path):
 # ── live-session lookup from Hermes state.db ────────────────────────────────
 
 import sqlite3
-import time
-
-
-def _state_db(tmp_path: Path, leases: list[tuple[str, float, float]]) -> Path:
-    """Minimal copy of the two Hermes tables this path reads."""
+def _state_db(tmp_path: Path) -> Path:
+    """Minimal copy of the Hermes session table this path reads."""
     db = tmp_path / "state.db"
     con = sqlite3.connect(db)
-    con.executescript(
-        "create table sessions (id text primary key, cwd text, last_activity_at real);"
-        "create table session_turn_leases (conversation_id text, holder text,"
-        " acquired_at real, expires_at real);"
-    )
-    con.executemany(
-        "insert into session_turn_leases values (?, 'pid=1:turn=1', ?, ?)", leases
-    )
+    con.execute("create table sessions (id text primary key, cwd text, last_activity_at real)")
     con.commit()
     con.close()
     return db
 
 
-def _print_with_db(project: Path, db: Path | None, cwd: Path) -> str:
+def _print_with_db(project: Path, db: Path | None, cwd: Path, session_id: str = "") -> str:
     env = {"PATH": os.environ["PATH"], "HERMES_HOME": str(project.parent / ".hermes")}
     if db is not None:
         env["AFTERWORDS_STATE_DB"] = str(db)
     else:
         env["AFTERWORDS_STATE_DB"] = str(project.parent / "absent.db")
+    if session_id:
+        env["AFTERWORDS_SESSION_ID"] = session_id
     result = subprocess.run(
         ["bash", str(WRAPPER), "--print"],
         capture_output=True, text=True, env=env, cwd=str(cwd), check=True,
@@ -139,46 +131,42 @@ def _print_with_db(project: Path, db: Path | None, cwd: Path) -> str:
     return result.stdout.strip()
 
 
-def test_live_session_cwd_selects_the_project_voice(tmp_path):
-    """No env identity is passed to the TTS command, so the live lease is the signal."""
+def test_exact_session_id_selects_the_project_voice(tmp_path):
     project = _write_project(tmp_path, "hermes: worf\n")
     bare = tmp_path / "bare"
     bare.mkdir()
-    now = time.time()
-    db = _state_db(tmp_path, [])
+    db = _state_db(tmp_path)
     con = sqlite3.connect(db)
-    con.execute("insert into sessions values ('s1', ?, ?)", (str(project), now))
-    con.execute("insert into session_turn_leases values ('s1', 'h', ?, ?)", (now - 5, now + 600))
+    con.execute("insert into sessions values ('s1', ?, 0)", (str(project),))
     con.commit()
     con.close()
-    assert _print_with_db(project, db, bare) == "worf"
+    assert _print_with_db(project, db, bare, "s1") == "worf"
 
 
-def test_expired_lease_falls_back_to_recent_session(tmp_path):
-    """`agent:end` can fire after the lease expires; recency covers that gap."""
+def test_concurrent_sessions_never_borrow_the_newest_project(tmp_path):
     project = _write_project(tmp_path, "hermes: worf\n")
+    other = tmp_path / "other"
+    other.mkdir()
+    (other / ".afterwords").write_text("hermes: galadriel\n", encoding="utf-8")
     bare = tmp_path / "bare"
     bare.mkdir()
-    now = time.time()
-    db = _state_db(tmp_path, [])
+    db = _state_db(tmp_path)
     con = sqlite3.connect(db)
-    con.execute("insert into sessions values ('s1', ?, ?)", (str(project), now))
-    con.execute("insert into session_turn_leases values ('s1', 'h', ?, ?)", (now - 900, now - 600))
+    con.execute("insert into sessions values ('s1', ?, 1)", (str(project),))
+    con.execute("insert into sessions values ('s2', ?, 9999999999)", (str(other),))
     con.commit()
     con.close()
-    assert _print_with_db(project, db, bare) == "worf"
+    assert _print_with_db(project, db, bare, "s1") == "worf"
+    assert _print_with_db(project, db, bare, "s2") == "galadriel"
 
 
-def test_stale_session_is_ignored(tmp_path):
-    """A session idle for longer than the window is not the operator's project."""
+def test_missing_identity_does_not_borrow_a_recent_session(tmp_path):
     project = _write_project(tmp_path, "hermes: worf\n")
     bare = tmp_path / "bare"
     bare.mkdir()
-    now = time.time()
-    db = _state_db(tmp_path, [])
+    db = _state_db(tmp_path)
     con = sqlite3.connect(db)
-    con.execute("insert into sessions values ('s1', ?, ?)", (str(project), now - 7200))
-    con.execute("insert into session_turn_leases values ('s1', 'h', ?, ?)", (now - 9000, now - 8700))
+    con.execute("insert into sessions values ('s1', ?, 9999999999)", (str(project),))
     con.commit()
     con.close()
     assert _print_with_db(project, db, bare) == ""
@@ -197,15 +185,14 @@ def test_home_afterwords_is_never_treated_as_a_project(tmp_path):
     home = tmp_path / "home"
     (home / ".hermes").mkdir(parents=True)
     (home / ".afterwords").write_text("hermes: galadriel\n", encoding="utf-8")
-    now = time.time()
     project = _write_project(tmp_path, "hermes: worf\n")
-    db = _state_db(tmp_path, [])
+    db = _state_db(tmp_path)
     con = sqlite3.connect(db)
-    con.execute("insert into sessions values ('s1', ?, ?)", (str(project), now))
-    con.execute("insert into session_turn_leases values ('s1', 'h', ?, ?)", (now - 5, now + 600))
+    con.execute("insert into sessions values ('s1', ?, 0)", (str(project),))
     con.commit()
     con.close()
-    env = {"PATH": os.environ["PATH"], "HOME": str(home), "AFTERWORDS_STATE_DB": str(db)}
+    env = {"PATH": os.environ["PATH"], "HOME": str(home),
+           "AFTERWORDS_STATE_DB": str(db), "AFTERWORDS_SESSION_ID": "s1"}
     result = subprocess.run(["bash", str(WRAPPER), "--print"], capture_output=True,
                             text=True, env=env, cwd=str(home), check=True)
     assert result.stdout.strip() == "worf"
@@ -217,14 +204,12 @@ def test_project_without_afterwords_file_is_not_selected(tmp_path):
     empty_project.mkdir()
     bare = tmp_path / "bare"
     bare.mkdir()
-    now = time.time()
-    db = _state_db(tmp_path, [])
+    db = _state_db(tmp_path)
     con = sqlite3.connect(db)
-    con.execute("insert into sessions values ('s1', ?, ?)", (str(empty_project), now))
-    con.execute("insert into session_turn_leases values ('s1', 'h', ?, ?)", (now - 5, now + 600))
+    con.execute("insert into sessions values ('s1', ?, 0)", (str(empty_project),))
     con.commit()
     con.close()
-    assert _print_with_db(empty_project, db, bare) == ""
+    assert _print_with_db(empty_project, db, bare, "s1") == ""
 
 
 # ── hand-off to the canonical command script ───────────────────────────────
